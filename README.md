@@ -20,7 +20,10 @@ agents/
 ├── ocr-agent/
 │   ├── extraction-quality.md
 │   ├── layout-understanding.md
-│   └── document-classification.md
+│   ├── document-classification.md
+│   ├── multimodal-failures.md
+│   ├── agentic-failures.md
+│   └── production-pipeline-failures.md
 ├── code-agent/
 │   ├── code-generation.md
 │   ├── bug-fixing.md
@@ -140,6 +143,25 @@ Some failures appear across multiple agent types:
 - [AlterSquare: Document AI Fails](https://altersquare.io/enterprise-document-ai-fails-extraction-layer-not-model-layer/) - Extraction layer failures
 - [OCR vs IDP](https://forage.ai/blog/ocr-vs-idp/) - Why traditional OCR fails
 - [Why AI OCR Fails](https://parseur.com/blog/why-ai-ocr-fail) - Common OCR failure patterns
+- [Why OCR Alone Fails in Real-World Documents](https://dev.to/jakemiller/why-ocr-alone-fails-in-real-world-documents-5f86) - Production failure patterns
+- [Why OCR Is the Weakest Part of Document AI](https://medium.com/@manalisomani099/why-ocr-is-the-weakest-part-of-most-document-ai-systems-c9188381d1b9) - System-level analysis
+- [IDP Accuracy Reckoning 2026](https://idp-software.com/news/idp-accuracy-reckoning-2026/) - Practitioner perspectives on OCR, agents, tables
+- [IDP Challenges 2026](https://idp-software.com/guides/idp-challenges-2026/) - Table extraction as hardest unsolved problem
+
+#### Multimodal/VLM Document Processing
+- [Hallucination of Multimodal LLMs Survey](https://arxiv.org/html/2404.18930v2) - Object, attribute, relational hallucination types
+- [Mitigating OCR Hallucinations in MLLMs](https://arxiv.org/html/2506.20168v2) - NeurIPS 2025 research on visual degradation
+- [Why LLMs Hallucinate More on Enterprise Documents](https://www.adlibsoftware.com/news/why-llms-hallucinate-more-on-enterprise-documents) - Input quality gap analysis
+- [Evaluating Multimodal LLMs for Production](https://galileo.ai/blog/multimodal-llm-guide-evaluation) - Production reliability metrics
+- [VLMs for Spreadsheet Understanding](https://arxiv.org/html/2405.16234v1) - Cell omission and spatial perception issues
+- [Table Extraction Using LLMs](https://nanonets.com/blog/table-extraction-using-llms-unlocking-structured-data-from-documents/) - Merged cells, complex layouts
+
+#### Agentic Document Processing
+- [Why Frontier Agents Can't Read Documents](https://www.databricks.com/blog/why-frontier-agents-cant-read-documents-and-how-were-fixing-it) - OfficeQA benchmark, <50% accuracy
+- [AI Agents and Document Processing 2026](https://parsio.io/blog/ai-agents-document-processing-2026) - What's actually changing
+- [Agentic Document Processing](https://www.llamaindex.ai/blog/agentic-document-processing) - How AI agents automate workflows
+- [Document AI: Next Evolution of IDP](https://www.llamaindex.ai/blog/document-ai-the-next-evolution-of-intelligent-document-processing) - Agentic OCR and workflows
+- [Production-Ready AI Agent for Document Extraction](https://www.stackai.com/insights/how-to-build-a-production-ready-ai-agent-for-document-data-extraction) - Error handling, validation gates
 
 #### Tool/Workflow Agents
 - [AWS: 3 Agent Failure Modes](https://dev.to/aws/why-ai-agents-fail-3-failure-modes-that-cost-you-tokens-and-time-1flb) - Context overflow, timeouts, loops
@@ -160,6 +182,23 @@ Some failures appear across multiple agent types:
 | 50%+ of OCR data requires manual checking | Enterprise Survey |
 | Only 29% of developers trust AI output accuracy | Industry Survey |
 | 40% of agentic AI projects will be scrapped by 2027 | Gartner |
+
+### OCR/Document AI Statistics (2026)
+
+| Finding | Source |
+|---------|--------|
+| 88% of businesses report errors in automated data pipelines | Parseur 2026 Survey |
+| Frontier agents score <50% on enterprise document reasoning | Databricks OfficeQA |
+| 30% of invoice requests fail first iteration (templates) | Accenture |
+| Legacy OCR plateaus at 60-70% automation | Industry Analysis |
+| IDP reduces error rates by 52% vs OCR-only | Benchmark Study |
+| 40% of IDP implementations underperform ROI projections | Industry Analysis |
+| VLMs struggle with sparse tables, mismatching columns | VLM Research |
+| Long-document benchmarks: 66-69% on complex tables | Model Benchmarks |
+| $47,000 spent on single 11-day agent loop | DEV.to Incident |
+| 68% of businesses see errors on >1% of invoices | IOFM |
+| 3.6% manual data entry error rate | IOFM |
+| 5-10% GL miscoding rate in AP automation | APQC |
 
 ---
 
