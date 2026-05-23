@@ -15,66 +15,82 @@ Unlike academic failure taxonomies, this repository focuses on **real deployment
 
 ## Structure
 
+The repository follows a **goal-based hierarchy**:
+
 ```
 agents/
-├── ocr-agent/
-│   ├── extraction-quality.md
-│   ├── layout-understanding.md
-│   ├── document-classification.md
-│   ├── multimodal-failures.md
-│   ├── agentic-failures.md
-│   └── production-pipeline-failures.md
-├── code-agent/
-│   ├── code-generation.md
-│   ├── bug-fixing.md
-│   └── refactoring.md
-├── customer-service-agent/
-│   ├── intent-detection.md
-│   ├── response-accuracy.md
-│   └── escalation-handling.md
-├── rag-agent/
-│   ├── retrieval-quality.md
-│   ├── answer-synthesis.md
-│   └── citation-accuracy.md
-├── data-extraction-agent/
-│   ├── field-mapping.md
-│   ├── data-validation.md
-│   └── schema-handling.md
-└── workflow-agent/
-    ├── task-sequencing.md
-    ├── error-recovery.md
-    └── state-management.md
+└── <agent-type>/
+    ├── README.md                    # Agent overview
+    └── goals/
+        └── <business-or-technical-goal>/
+            ├── README.md            # Goal description
+            └── failures/
+                └── <failure-pattern>.md  # Individual failure pattern
+```
+
+### Example: OCR Agent
+
+```
+agents/
+└── ocr-agent/
+    ├── README.md
+    └── goals/
+        ├── accurate-text-extraction/
+        │   ├── README.md
+        │   └── failures/
+        │       ├── character-confusion.md
+        │       ├── punctuation-errors.md
+        │       ├── font-handling.md
+        │       └── ...
+        ├── layout-preservation/
+        │   └── failures/
+        │       ├── table-boundaries.md
+        │       └── ...
+        ├── document-classification/
+        ├── multimodal-reliability/
+        ├── agentic-orchestration/
+        └── production-reliability/
 ```
 
 ## Agent Types
 
-| Agent Type | Description | Common Use Cases |
-|------------|-------------|------------------|
-| [OCR Agent](agents/ocr-agent/) | Document text extraction and processing | Invoice processing, ID verification, form digitization |
-| [Code Agent](agents/code-agent/) | Code generation, review, and modification | IDE assistants, automated refactoring, bug fixing |
-| [Customer Service Agent](agents/customer-service-agent/) | Customer interaction and support | Chatbots, ticket routing, FAQ handling |
-| [RAG Agent](agents/rag-agent/) | Retrieval-augmented generation | Knowledge bases, document Q&A, search |
-| [Data Extraction Agent](agents/data-extraction-agent/) | Structured data extraction from unstructured sources | ETL pipelines, web scraping, document parsing |
-| [Workflow Agent](agents/workflow-agent/) | Multi-step task automation | Process automation, orchestration, scheduling |
+| Agent Type | Description | Goals | Failure Patterns |
+|------------|-------------|-------|------------------|
+| [Generic Agent](agents/generic-agent/) | **Cross-cutting failures for any agent** | 6 | 39 |
+| [OCR Agent](agents/ocr-agent/) | Document text extraction and processing | 6 | 48 |
+| [Code Agent](agents/code-agent/) | Code generation, review, and modification | 4 | Planned |
+| [Customer Service Agent](agents/customer-service-agent/) | Customer interaction and support | 4 | Planned |
+| [RAG Agent](agents/rag-agent/) | Retrieval-augmented generation | 4 | 26 |
+| [Data Extraction Agent](agents/data-extraction-agent/) | Structured data extraction from unstructured sources | 4 | Planned |
+| [Workflow Agent](agents/workflow-agent/) | Multi-step task automation | 4 | Planned |
 
 ## How to Use This Repo
 
-1. **Identify your agent type** - Find the category that matches your use case
-2. **Browse by goal** - Each agent has multiple goal categories
-3. **Review common issues** - Learn from documented failures
-4. **Apply mitigations** - Implement suggested fixes
+1. **Identify your agent type** - Find the category that matches your use case (e.g., `agents/ocr-agent/`)
+2. **Browse by goal** - Each agent has business/technical goals (e.g., `goals/accurate-text-extraction/`)
+3. **Review failure patterns** - Each goal contains documented failures (e.g., `failures/character-confusion.md`)
+4. **Apply mitigations** - Each failure includes root cause analysis and mitigation strategies
+
+### Navigation Path
+
+```
+Agent Type → Business/Technical Goal → Failure Pattern
+    ↓              ↓                        ↓
+OCR Agent → Accurate Text Extraction → Character Confusion
+```
 
 ## Quick Reference: Cross-Cutting Failure Patterns
 
-Some failures appear across multiple agent types:
+These failures appear across multiple agent types. See [Generic Agent](agents/generic-agent/) for full documentation.
 
-| Pattern | Affected Agents | Description |
-|---------|-----------------|-------------|
-| Context Window Overflow | All | Agent loses critical information when context exceeds limits |
-| Confidence Calibration | All | Agent is overconfident on wrong answers, underconfident on correct ones |
-| Instruction Drift | Long-running agents | Agent gradually deviates from original instructions |
-| Tool Argument Errors | Agents with tools | Incorrect parameter types, missing required fields |
-| Loop Detection Failure | Workflow agents | Agent gets stuck in infinite retry loops |
+| Pattern | Goal | Description |
+|---------|------|-------------|
+| [Infinite Loops](agents/generic-agent/goals/cost-efficiency/failures/infinite-loops.md) | Cost Efficiency | Agent gets stuck in retry loops, burns tokens |
+| [Parameter Mismatches](agents/generic-agent/goals/tool-reliability/failures/parameter-mismatches.md) | Tool Reliability | 37% of tool calls have silent parameter errors |
+| [Confident Fabrication](agents/generic-agent/goals/output-accuracy/failures/confident-fabrication.md) | Output Accuracy | Agent states false information with high confidence |
+| [Context Overflow](agents/generic-agent/goals/context-management/failures/context-overflow.md) | Context Management | Agent loses information when context exceeds limits |
+| [Prompt Injection](agents/generic-agent/goals/safety-security/failures/prompt-injection.md) | Safety & Security | Malicious input hijacks agent behavior |
+| [Goal Drift](agents/generic-agent/goals/reasoning-quality/failures/goal-drift.md) | Reasoning Quality | Agent loses focus on original objective |
 
 ## Research Sources & References
 
@@ -295,11 +311,12 @@ Some failures appear across multiple agent types:
 
 We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
-To add a new failure:
-1. Find or create the appropriate agent type folder
-2. Add to the relevant goal file (or create a new one)
-3. Follow the issue template format
-4. Submit a PR
+To add a new failure pattern:
+1. Navigate to the appropriate agent type (e.g., `agents/ocr-agent/`)
+2. Find or create the relevant goal folder (e.g., `goals/accurate-text-extraction/`)
+3. Add a new failure file in `failures/` (e.g., `failures/my-failure.md`)
+4. Update the goal's README.md to include your failure in the table
+5. Submit a PR
 
 ## Related Resources
 

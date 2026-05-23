@@ -4,14 +4,36 @@ OCR (Optical Character Recognition) Agents extract text and structured data from
 
 ## Goals
 
-| Goal | Description | Common Issues |
-|------|-------------|---------------|
-| [Extraction Quality](extraction-quality.md) | Accurate text extraction from documents | Character confusion, font handling, noise |
-| [Layout Understanding](layout-understanding.md) | Preserving document structure | Table detection, column ordering, headers |
-| [Document Classification](document-classification.md) | Identifying document types | Similar templates, multi-page handling |
-| [Multimodal Failures](multimodal-failures.md) | VLM and multimodal LLM-specific issues | Silent failures, hallucination, confidence calibration |
-| [Agentic Failures](agentic-failures.md) | AI agent orchestration failures | Tool calling, reasoning errors, infinite loops |
-| [Production Pipeline Failures](production-pipeline-failures.md) | System-level extraction failures | Template drift, integration errors, silent failures |
+| Goal | Description | Failure Patterns |
+|------|-------------|------------------|
+| [Accurate Text Extraction](goals/accurate-text-extraction/) | Extract text correctly from documents | 8 patterns |
+| [Layout Preservation](goals/layout-preservation/) | Preserve document structure and spatial relationships | 6 patterns |
+| [Document Classification](goals/document-classification/) | Correctly identify document types | 6 patterns |
+| [Multimodal Reliability](goals/multimodal-reliability/) | Handle VLM/MLLM-specific failure modes | 10 patterns |
+| [Agentic Orchestration](goals/agentic-orchestration/) | Orchestrate multi-tool document processing | 8 patterns |
+| [Production Reliability](goals/production-reliability/) | Operate reliably at scale | 10 patterns |
+
+## Structure
+
+```
+ocr-agent/
+├── README.md
+└── goals/
+    ├── accurate-text-extraction/
+    │   ├── README.md
+    │   └── failures/
+    │       ├── character-confusion.md
+    │       ├── punctuation-errors.md
+    │       └── ...
+    ├── layout-preservation/
+    │   ├── README.md
+    │   └── failures/
+    │       └── ...
+    ├── document-classification/
+    ├── multimodal-reliability/
+    ├── agentic-orchestration/
+    └── production-reliability/
+```
 
 ## Key Challenges
 
