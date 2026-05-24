@@ -165,6 +165,10 @@ These failures appear across multiple agent types. See [Base Agent](agents/base-
 - [AppInventiv: 8 Voice Agent Failures](https://appinventiv.com/blog/why-ai-voice-agents-fail/) - Why AI voice agents fail
 - [Bluejay: 7 Production Failures](https://getbluejay.ai/resources/voice-agent-production-failures) - Voice agents in production
 - [AssistYou: Mishearing Callers](https://www.assistyou.ai/blog/why-your-ai-voice-agent-mishears-callers) - ASR accuracy issues
+- [Stanford: Racial Disparities in ASR](https://www.pnas.org/doi/10.1073/pnas.1915768117) - Accent bias in speech recognition
+- [W3C SSML Specification](https://www.w3.org/TR/speech-synthesis11/) - Speech synthesis markup standard
+- [Google Cloud Speech: Custom Vocabulary](https://cloud.google.com/speech-to-text/docs/speech-adaptation) - ASR customization
+- [AWS Transcribe: Custom Vocabulary](https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html) - Domain term handling
 
 #### Code Agents
 - [Cursor vs Claude Code vs Copilot](https://levelup.gitconnected.com/cursor-vs-claude-code-vs-copilot-i-spent-500-testing-all-three-on-real-production-code-c57f97607d36) - Production testing comparison
@@ -199,6 +203,13 @@ These failures appear across multiple agent types. See [Base Agent](agents/base-
 - [MCP Tool Design](https://dev.to/aws-heroes/mcp-tool-design-why-your-ai-agent-is-failing-and-how-to-fix-it-40fc) - Why agents fail with MCP
 - [Silent Tool-Call Errors](https://www.roborhythms.com/fix-ai-agent-tool-call-errors/) - 37% of calls have parameter mismatches
 - [5 MCP Server Mistakes](https://dev.to/thedailyagent/5-mcp-server-mistakes-that-waste-your-ai-agents-time-and-how-to-fix-them-18m5) - Common MCP mistakes
+- [Circuit Breaker Pattern](https://martinfowler.com/bliki/CircuitBreaker.html) - Fault tolerance for tool calls
+- [MCP Protocol](https://modelcontextprotocol.io/) - Tool protocol standardization
+
+#### Multi-Agent Orchestration
+- [MAST Taxonomy](https://arxiv.org/abs/2503.13657) - Multi-agent failure modes (36.94% coordination failures)
+- [Redis: Multi-Agent Systems Fail](https://redis.io/blog/why-multi-agent-llm-systems-fail/) - Coordination patterns
+- [Augment Code: Multi-Agent Failures](https://www.augmentcode.com/guides/why-multi-agent-llm-systems-fail-and-how-to-fix-them) - 41-86.7% failure rates
 
 #### Agent Runtime Security
 - [OX Security: Mother of All AI Supply Chains](https://www.ox.security/blog/the-mother-of-all-ai-supply-chains-critical-systemic-vulnerability-at-the-core-of-the-mcp/) - Critical MCP vulnerability affecting 150M+ downloads
@@ -223,6 +234,19 @@ These failures appear across multiple agent types. See [Base Agent](agents/base-
 | 50%+ of OCR data requires manual checking | Enterprise Survey |
 | Only 29% of developers trust AI output accuracy | Industry Survey |
 | 40% of agentic AI projects will be scrapped by 2027 | Gartner |
+
+### Cost & Evaluation Statistics (2026)
+
+| Finding | Source |
+|---------|--------|
+| 70-80% of queries can use smaller models | Cost Analysis Research |
+| Semantic caching reduces costs 40-70% | Caching Research |
+| Batching reduces API costs 20-40% | Batch Processing Research |
+| Eval-production gap: 15-40% performance drop | MLOps Research |
+| 30-50% of golden datasets have label issues | Data Quality Research |
+| 83% of RAG systems fail on production despite benchmarks | RAGAS Study |
+| 25-35% of tasks routed to suboptimal agent | Routing Research |
+| Background noise increases ASR WER 15-40% | Voice AI Research |
 
 ### OCR/Document AI Statistics (2026)
 
@@ -282,6 +306,30 @@ These failures appear across multiple agent types. See [Base Agent](agents/base-
 - [LeanOps: Agents Burn 50x More Tokens](https://leanopstech.com/blog/agentic-ai-cost-runaway-token-budget-2026/) - Token cost analysis
 - [Portal26: Agentic Token Controls](https://siliconangle.com/2026/04/23/portal26-launches-agentic-token-controls-cap-runaway-ai-agent-spend/) - New cost control tools
 - [MindStudio: Token Budget Management](https://www.mindstudio.ai/blog/ai-agent-token-budget-management-claude-code) - Budget enforcement strategies
+
+#### Cost Efficiency & Model Selection
+- [OpenAI: Model Pricing](https://openai.com/api/pricing/) - Current model costs for routing decisions
+- [Anthropic: Claude Pricing](https://www.anthropic.com/pricing) - Claude model tier pricing
+- [GPTCache: Semantic Caching](https://github.com/zilliztech/GPTCache) - LLM response caching
+- [LangChain: Caching Patterns](https://python.langchain.com/docs/modules/model_io/llms/llm_caching) - Caching implementation
+- [OpenAI: Batch API](https://platform.openai.com/docs/guides/batch) - Native batch processing
+- [Anthropic: Message Batches](https://docs.anthropic.com/en/docs/build-with-claude/message-batches) - Claude batch API
+
+### Evaluation & Testing
+
+#### Golden Dataset & Benchmark Issues
+- [Contamination in Language Models](https://arxiv.org/abs/2310.10628) - Benchmark contamination study
+- [BERTScore](https://arxiv.org/abs/1904.09675) - Semantic similarity evaluation
+- [LLM-as-Judge](https://arxiv.org/abs/2306.05685) - Using LLMs for evaluation
+- [RAGAS](https://docs.ragas.io/) - RAG evaluation framework
+- [Confident Learning](https://arxiv.org/abs/1911.00068) - Finding label errors in datasets
+- [Data-centric AI](https://datacentricai.org/) - Label quality and data focus
+- [Arize: Data Drift Detection](https://arize.com/blog/data-drift-detection/) - Distribution monitoring
+
+#### Evaluation Research
+- [Databricks: OfficeQA Benchmark](https://www.databricks.com/blog/why-frontier-agents-cant-read-documents-and-how-were-fixing-it) - Real-world vs benchmark gap (<50% accuracy)
+- [RAGAS Fails 83%](https://medium.com/data-science-collective/air-canada-lost-a-lawsuit-because-their-rag-hallucinated-yours-will-too-b92b6b9a4d39) - Benchmark limitations
+- [Stanford Legal RAG Hallucinations](https://dho.stanford.edu/wp-content/uploads/Legal_RAG_Hallucinations.pdf) - 17-33% hallucination despite RAG
 
 ### Legal & Regulatory
 
