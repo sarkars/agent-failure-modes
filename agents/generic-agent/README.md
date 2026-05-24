@@ -15,6 +15,7 @@ Use this as a checklist when building or evaluating any agent system.
 | [Safety & Security](goals/safety-security/) | Prevent prompt injection, data leakage, and unauthorized actions | 19 patterns |
 | [Reasoning Quality](goals/reasoning-quality/) | Ensure sound planning, self-correction, and goal adherence | 12 patterns |
 | [Multi-Agent Coordination](goals/multi-agent-coordination/) | Ensure agents work together effectively | 5 patterns |
+| [Agent Runtime Security](goals/agent-runtime-security/) | Prevent exploitation during agent execution | 8 patterns |
 
 ## Structure
 
@@ -33,7 +34,8 @@ generic-agent/
     ├── context-management/
     ├── safety-security/
     ├── reasoning-quality/
-    └── multi-agent-coordination/
+    ├── multi-agent-coordination/
+    └── agent-runtime-security/
 ```
 
 ## Key Statistics (2026)
@@ -46,6 +48,8 @@ generic-agent/
 | 45% of AI-generated code has security vulnerabilities | Veracode 2026 |
 | 52% of enterprise AI responses contain fabrications | Enterprise Survey 2026 |
 | $47,000 spent on single 11-day agent loop | DEV.to incident report |
+| MCP vulnerability affects 200,000+ servers | OX Security April 2026 |
+| Three AI coding agents leaked secrets via single injection | VentureBeat 2026 |
 
 ## How to Use
 

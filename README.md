@@ -56,7 +56,7 @@ agents/
 
 | Agent Type | Description | Goals | Failure Patterns |
 |------------|-------------|-------|------------------|
-| [Generic Agent](agents/generic-agent/) | **Cross-cutting failures for any agent** | 7 | 77 |
+| [Generic Agent](agents/generic-agent/) | **Cross-cutting failures for any agent** | 8 | 85 |
 | [OCR Agent](agents/ocr-agent/) | Document text extraction and processing | 6 | 48 |
 | [Code Agent](agents/code-agent/) | Code generation, review, and modification | 4 | Planned |
 | [Customer Service Agent](agents/customer-service-agent/) | Customer interaction and support | 4 | Planned |
@@ -93,6 +93,7 @@ These failures appear across multiple agent types. See [Generic Agent](agents/ge
 | [Goal Drift](agents/generic-agent/goals/reasoning-quality/failures/goal-drift.md) | Reasoning Quality | Agent loses focus on original objective |
 | [Memory Poisoning](agents/generic-agent/goals/safety-security/failures/memory-poisoning.md) | Safety & Security | Malicious instructions injected into agent memory |
 | [Agent Misalignment](agents/generic-agent/goals/multi-agent-coordination/failures/agent-misalignment.md) | Multi-Agent | Agents pursue conflicting objectives |
+| [MCP Protocol Exploitation](agents/generic-agent/goals/agent-runtime-security/failures/mcp-protocol-exploitation.md) | Agent Runtime Security | MCP vulnerabilities enable RCE on 200K+ servers |
 
 ## Research Sources & References
 
@@ -186,6 +187,16 @@ These failures appear across multiple agent types. See [Generic Agent](agents/ge
 - [MCP Tool Design](https://dev.to/aws-heroes/mcp-tool-design-why-your-ai-agent-is-failing-and-how-to-fix-it-40fc) - Why agents fail with MCP
 - [Silent Tool-Call Errors](https://www.roborhythms.com/fix-ai-agent-tool-call-errors/) - 37% of calls have parameter mismatches
 - [5 MCP Server Mistakes](https://dev.to/thedailyagent/5-mcp-server-mistakes-that-waste-your-ai-agents-time-and-how-to-fix-them-18m5) - Common MCP mistakes
+
+#### Agent Runtime Security
+- [OX Security: Mother of All AI Supply Chains](https://www.ox.security/blog/the-mother-of-all-ai-supply-chains-critical-systemic-vulnerability-at-the-core-of-the-mcp/) - Critical MCP vulnerability affecting 150M+ downloads
+- [SecurityWeek: Claude OAuth Token Theft via MCP Hijacking](https://www.securityweek.com/claude-code-oauth-tokens-can-be-stolen-through-stealthy-mcp-hijacking/) - Silent OAuth token interception (April 2026)
+- [Check Point: Claude Code RCE & Token Exfiltration](https://research.checkpoint.com/2026/rce-and-api-token-exfiltration-through-claude-code-project-files-cve-2025-59536/) - CVE-2025-59536, CVE-2026-21852
+- [Microsoft: Prompts Become Shells](https://www.microsoft.com/en-us/security/blog/2026/05/07/prompts-become-shells-rce-vulnerabilities-ai-agent-frameworks/) - RCE in AI frameworks (CVE-2026-25592)
+- [VentureBeat: Comment and Control Attack](https://venturebeat.com/security/ai-agent-runtime-security-system-card-audit-comment-and-control-2026) - Three AI coding agents leaked secrets via single injection
+- [IBM: OpenClaw Agentic AI Vulnerabilities](https://www.ibm.com/think/x-force/agentic-ai-growing-fast-vulnerabilities) - ClawJacked indirect prompt injection
+- [Foresiet: AI Security Incidents April 2026](https://foresiet.com/blog/ai-security-incidents-attack-paths-april-2026/) - 6 incidents with full attack paths
+- [NSA: Careful Adoption of Agentic AI](https://media.defense.gov/2026/Apr/30/2003922823/-1/-1/0/CAREFUL%20ADOPTION%20OF%20AGENTIC%20AI%20SERVICES_FINAL.PDF) - Government guidance on agent control
 
 ### Key Statistics
 
