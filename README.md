@@ -69,6 +69,7 @@ agents/
 |------------|-------------|-------|------------------|
 | [OCR Agent](agents/ocr-agent/) | Document text extraction and processing | 6 | 48 |
 | [RAG Agent](agents/rag-agent/) | Retrieval-augmented generation | 4 | 31 |
+| [Voice Agent](agents/voice-agent/) | Speech recognition, synthesis, and conversation | 4 | 26 |
 | [Code Agent](agents/code-agent/) | Code generation, review, and modification | 4 | Planned |
 | [Customer Service Agent](agents/customer-service-agent/) | Customer interaction and support | 4 | Planned |
 | [Data Extraction Agent](agents/data-extraction-agent/) | Structured data extraction from unstructured sources | 4 | Planned |
