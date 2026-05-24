@@ -21,6 +21,9 @@ Minimize token usage and API costs while maintaining agent effectiveness. Runawa
 | [Resource Exhaustion](failures/resource-exhaustion.md) | Common | High |
 | [Step Repetition](failures/step-repetition.md) | Common | High |
 | [Cost-Quality Tradeoff](failures/cost-quality-tradeoff.md) | Common | High |
+| [Model Selection Waste](failures/model-selection-waste.md) | Very Common | High |
+| [Caching Failures](failures/caching-failures.md) | Common | Medium |
+| [Batch Optimization Failures](failures/batch-optimization-failures.md) | Common | Medium |
 
 ## Key Statistics
 
@@ -29,6 +32,9 @@ Minimize token usage and API costs while maintaining agent effectiveness. Runawa
 | $47,000 spent on single 11-day agent loop | DEV.to incident report |
 | $437 overnight from unchecked agent run | Developer report |
 | Agents burn 50x more tokens than expected | LeanOps analysis |
+| 70-80% of queries can use smaller models | Cost Analysis Research |
+| Semantic caching reduces costs 40-70% | Caching Research |
+| Batching reduces API costs 20-40% | Batch Processing Research |
 
 ## Key Metrics
 

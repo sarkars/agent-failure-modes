@@ -8,9 +8,9 @@ Use this as an operations checklist when deploying and maintaining agent systems
 
 | Goal | Description | Failure Patterns |
 |------|-------------|------------------|
-| [Tool Reliability](goals/tool-reliability/) | Ensure tools are called correctly and consistently | 14 patterns |
-| [Cost Efficiency](goals/cost-efficiency/) | Minimize token usage and API costs | 9 patterns |
-| [Multi-Agent Coordination](goals/multi-agent-coordination/) | Ensure agents work together effectively | 5 patterns |
+| [Tool Reliability](goals/tool-reliability/) | Ensure tools are called correctly and consistently | 17 patterns |
+| [Cost Efficiency](goals/cost-efficiency/) | Minimize token usage and API costs | 12 patterns |
+| [Multi-Agent Coordination](goals/multi-agent-coordination/) | Ensure agents work together effectively | 9 patterns |
 | [Traceability](goals/traceability/) | Enable auditing, debugging, and compliance | 8 patterns |
 | [Human Oversight Reliability](goals/human-oversight-reliability/) | Ensure human oversight mechanisms function correctly | 8 patterns |
 

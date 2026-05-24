@@ -27,6 +27,9 @@ Ensure tools are called correctly, consistently, and with proper error handling.
 | [Silent Type Coercion](failures/silent-type-coercion.md) | Very Common | High |
 | [Error Information Leakage](failures/error-information-leakage.md) | Common | Medium |
 | [Blocking Tool Operations](failures/blocking-tool-operations.md) | Common | High |
+| [Tool Capability Overestimation](failures/tool-capability-overestimation.md) | Common | High |
+| [Tool Availability Assumptions](failures/tool-availability-assumptions.md) | Common | High |
+| [Tool Version Incompatibility](failures/tool-version-incompatibility.md) | Occasional | High |
 
 ## Key Statistics
 
@@ -35,6 +38,9 @@ Ensure tools are called correctly, consistently, and with proper error handling.
 | 37% of tool calls have silent parameter mismatches | Developer Analysis |
 | Tool-calling is the #1 failure mode in multi-agent systems | MAST Taxonomy |
 | 5 MCP server mistakes waste agent time consistently | Developer report |
+| 45% of tool calls exceed actual tool capabilities | Tool Usage Research |
+| 23% of tool calls fail due to availability issues | Availability Research |
+| 34% of tool integrations use outdated schemas | API Versioning Research |
 
 ## Key Metrics
 
