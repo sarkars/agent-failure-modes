@@ -56,7 +56,7 @@ agents/
 
 | Agent Type | Description | Goals | Failure Patterns |
 |------------|-------------|-------|------------------|
-| [Generic Agent](agents/generic-agent/) | **Cross-cutting failures for any agent** | 8 | 85 |
+| [Generic Agent](agents/generic-agent/) | **Cross-cutting failures for any agent** | 9 | 93 |
 | [OCR Agent](agents/ocr-agent/) | Document text extraction and processing | 6 | 48 |
 | [Code Agent](agents/code-agent/) | Code generation, review, and modification | 4 | Planned |
 | [Customer Service Agent](agents/customer-service-agent/) | Customer interaction and support | 4 | Planned |
@@ -94,6 +94,7 @@ These failures appear across multiple agent types. See [Generic Agent](agents/ge
 | [Memory Poisoning](agents/generic-agent/goals/safety-security/failures/memory-poisoning.md) | Safety & Security | Malicious instructions injected into agent memory |
 | [Agent Misalignment](agents/generic-agent/goals/multi-agent-coordination/failures/agent-misalignment.md) | Multi-Agent | Agents pursue conflicting objectives |
 | [MCP Protocol Exploitation](agents/generic-agent/goals/agent-runtime-security/failures/mcp-protocol-exploitation.md) | Agent Runtime Security | MCP vulnerabilities enable RCE on 200K+ servers |
+| [Unverified Agent Output](agents/generic-agent/goals/agent-to-agent-trust/failures/unverified-agent-output.md) | Agent-to-Agent Trust | Agents accept other agents' outputs without verification |
 
 ## Research Sources & References
 

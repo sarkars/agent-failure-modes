@@ -16,6 +16,7 @@ Use this as a checklist when building or evaluating any agent system.
 | [Reasoning Quality](goals/reasoning-quality/) | Ensure sound planning, self-correction, and goal adherence | 12 patterns |
 | [Multi-Agent Coordination](goals/multi-agent-coordination/) | Ensure agents work together effectively | 5 patterns |
 | [Agent Runtime Security](goals/agent-runtime-security/) | Prevent exploitation during agent execution | 8 patterns |
+| [Agent-to-Agent Trust](goals/agent-to-agent-trust/) | Establish and verify trust between agents | 8 patterns |
 
 ## Structure
 
@@ -35,7 +36,8 @@ generic-agent/
     ├── safety-security/
     ├── reasoning-quality/
     ├── multi-agent-coordination/
-    └── agent-runtime-security/
+    ├── agent-runtime-security/
+    └── agent-to-agent-trust/
 ```
 
 ## Key Statistics (2026)
