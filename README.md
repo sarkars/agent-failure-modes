@@ -58,9 +58,9 @@ agents/
 
 | Agent Type | Description | Goals | Failure Patterns |
 |------------|-------------|-------|------------------|
-| [Base Agent](agents/base-agent/) | **All cross-cutting patterns** | 11 | 119 |
+| [Base Agent](agents/base-agent/) | **All cross-cutting patterns** | 12 | 127 |
 | ├─ [Security Agent](agents/base-agent/security-agent/) | Security, trust, runtime protection | 3 | 35 |
-| ├─ [Accuracy Agent](agents/base-agent/accuracy-agent/) | Output correctness, anti-hallucination | 3 | 30 |
+| ├─ [Accuracy Agent](agents/base-agent/accuracy-agent/) | Output correctness, anti-hallucination, evaluation | 4 | 38 |
 | └─ [Operations Agent](agents/base-agent/operations-agent/) | Tools, cost, coordination, traceability, human oversight | 5 | 54 |
 
 ### Domain-Specific Agents
