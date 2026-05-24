@@ -12,6 +12,7 @@ Use this as an operations checklist when deploying and maintaining agent systems
 | [Cost Efficiency](goals/cost-efficiency/) | Minimize token usage and API costs | 9 patterns |
 | [Multi-Agent Coordination](goals/multi-agent-coordination/) | Ensure agents work together effectively | 5 patterns |
 | [Traceability](goals/traceability/) | Enable auditing, debugging, and compliance | 8 patterns |
+| [Human Oversight Reliability](goals/human-oversight-reliability/) | Ensure human oversight mechanisms function correctly | 8 patterns |
 
 ## Structure
 
@@ -35,10 +36,15 @@ operations-agent/
     │       ├── agent-misalignment.md
     │       ├── communication-breakdown.md
     │       └── ...
-    └── traceability/
+    ├── traceability/
+    │   └── failures/
+    │       ├── missing-audit-trail.md
+    │       ├── non-reproducible-execution.md
+    │       └── ...
+    └── human-oversight-reliability/
         └── failures/
-            ├── missing-audit-trail.md
-            ├── non-reproducible-execution.md
+            ├── escalation-not-triggered.md
+            ├── approval-timeout-mishandling.md
             └── ...
 ```
 
