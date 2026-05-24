@@ -20,6 +20,10 @@ Generate accurate answers from retrieved content. Even with perfect retrieval, t
 | [Parametric Override](failures/parametric-override.md) | Common | High |
 | [Synthesis Errors](failures/synthesis-errors.md) | Common | Medium |
 | [Confidence Miscalibration](failures/confidence-miscalibration.md) | Very Common | High |
+| [Noise Corruption](failures/noise-corruption.md) | Common | High |
+| [Context Window Saturation](failures/context-window-saturation.md) | Common | High |
+| [Answer-Query Drift](failures/answer-query-drift.md) | Common | Medium |
+| [Compression Information Loss](failures/compression-information-loss.md) | Occasional | High |
 
 ## Key Statistics
 

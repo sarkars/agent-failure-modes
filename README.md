@@ -68,7 +68,7 @@ agents/
 | Agent Type | Description | Goals | Failure Patterns |
 |------------|-------------|-------|------------------|
 | [OCR Agent](agents/ocr-agent/) | Document text extraction and processing | 6 | 48 |
-| [RAG Agent](agents/rag-agent/) | Retrieval-augmented generation | 4 | 31 |
+| [RAG Agent](agents/rag-agent/) | Retrieval-augmented generation | 4 | 39 |
 | [Voice Agent](agents/voice-agent/) | Speech recognition, synthesis, and conversation | 4 | 26 |
 | [Code Agent](agents/code-agent/) | Code generation, review, and modification | 4 | Planned |
 | [Customer Service Agent](agents/customer-service-agent/) | Customer interaction and support | 4 | Planned |
@@ -159,6 +159,14 @@ These failures appear across multiple agent types. See [Base Agent](agents/base-
 - [Mindee: RAG Hallucinations Explained](https://www.mindee.com/blog/rag-hallucinations-explained) - Causes, risks, and fixes
 - [RAGAS Fails 83% of Time](https://medium.com/data-science-collective/air-canada-lost-a-lawsuit-because-their-rag-hallucinated-yours-will-too-b92b6b9a4d39) - Benchmark results
 - [Self-Healing RAG Layer](https://towardsdatascience.com/rag-hallucinates-i-built-a-self-healing-layer-that-fixes-it-in-real-time/) - Real-time hallucination fixes
+- [RAGAS Documentation](https://docs.ragas.io/) - RAG evaluation framework and metrics
+- [RAGAS Context Precision](https://docs.ragas.io/en/latest/concepts/metrics/context_precision.html) - Retrieval ranking quality metric
+- [RAGAS Noise Sensitivity](https://docs.ragas.io/en/latest/concepts/metrics/noise_sensitivity.html) - Irrelevant context impact measurement
+- [RAGAS Answer Relevancy](https://docs.ragas.io/en/latest/concepts/metrics/answer_relevance.html) - Query-answer alignment metric
+- [RAGAS Faithfulness](https://docs.ragas.io/en/latest/concepts/metrics/faithfulness.html) - Grounding verification metric
+- [Lost in the Middle](https://arxiv.org/abs/2307.03172) - Position attention bias in long context
+- [HyDE Paper](https://arxiv.org/abs/2212.10496) - Hypothetical document embedding risks
+- [LongLLMLingua](https://arxiv.org/abs/2310.06839) - Query-aware context compression
 
 #### Voice Agents
 - [BeConversive: Voice AI Challenges](https://www.beconversive.com/blog/voice-ai-challenges) - Common issues and fixes

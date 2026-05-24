@@ -23,6 +23,9 @@ Find relevant documents that contain the information needed to answer user queri
 | [Knowledge Base Poisoning](failures/knowledge-base-poisoning.md) | Emerging | Critical |
 | [Temporal Relevance Failure](failures/temporal-relevance.md) | Common | High |
 | [Jurisdictional Mismatch](failures/jurisdictional-mismatch.md) | Common | High |
+| [Reranking Degradation](failures/reranking-degradation.md) | Occasional | High |
+| [Retrieval Ranking Errors](failures/retrieval-ranking-errors.md) | Common | High |
+| [Query Expansion Noise](failures/query-expansion-noise.md) | Common | Medium |
 
 ## Key Statistics
 
