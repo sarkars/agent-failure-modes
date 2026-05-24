@@ -40,3 +40,7 @@ Result: User ships buggy code with false confidence
 - Monitor agreement rate vs. objective accuracy
 - Flag rapid opinion reversals
 - Compare agent conclusions to ground truth
+
+## References
+- [Atlan: LLM Hallucinations 2026](https://atlan.com/know/llm-hallucinations/) - Sycophantic behavior patterns
+- [Why AI Agents Fail (AREP Framework)](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6572478) - User agreement bias

@@ -39,3 +39,10 @@ Result: Fails with "project_id required" - agent doesn't know about new param
 - Track unknown parameter warnings
 - Alert on sudden increase in tool failures
 - Compare tool schemas across deployments
+
+---
+
+## References
+
+- [5 MCP Server Mistakes](https://dev.to/thedailyagent/5-mcp-server-mistakes-that-waste-your-ai-agents-time-and-how-to-fix-them-18m5) - How schema changes break MCP server integrations
+- [MCP Tool Design](https://dev.to/aws-heroes/mcp-tool-design-why-your-ai-agent-is-failing-and-how-to-fix-it-40fc) - Designing stable, versioned tool schemas

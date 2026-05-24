@@ -46,3 +46,8 @@ Result: Invoice lookup fails because ID doesn't exist
 - Monitor field validation failure rates by field type
 - Track "manual correction" rates in human review queues
 - A/B test extraction against ground truth samples
+
+## References
+
+- [Why AI OCR Fails](https://parseur.com/blog/why-ai-ocr-fail) - Character recognition issues
+- [Why OCR Alone Fails](https://dev.to/jakemiller/why-ocr-alone-fails-in-real-world-documents-5f86) - Real-world OCR failures

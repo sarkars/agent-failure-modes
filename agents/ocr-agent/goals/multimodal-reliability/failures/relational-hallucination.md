@@ -33,3 +33,9 @@ VLMs lack robust spatial perception because they need to infer the number of row
 1. **Table detection first**: Use specialized table detector before VLM extraction
 2. **Header alignment verification**: Cross-check extracted values match column semantics
 3. **Semantic type checking**: Quantities should be integers, prices should have currency
+
+## References
+
+- [Hallucination of Multimodal LLMs Survey](https://arxiv.org/html/2404.18930v2) - Relational hallucination analysis
+- [VLMs for Spreadsheet Understanding](https://arxiv.org/html/2405.16234v1) - Spatial perception limitations
+- [Table Extraction Using LLMs](https://nanonets.com/blog/table-extraction-using-llms-unlocking-structured-data-from-documents/) - Column alignment challenges

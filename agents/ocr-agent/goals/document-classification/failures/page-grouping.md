@@ -25,3 +25,9 @@ Actual: 6 documents (each page separate)
 2. **First-page indicators**: Detect "Page 1" or document start markers
 3. **Continuity analysis**: Same invoice number, sender, style suggests same document
 4. **Header matching**: Pages with matching headers likely belong together
+
+## References
+
+- [Document AI: Next Evolution of IDP](https://www.llamaindex.ai/blog/document-ai-the-next-evolution-of-intelligent-document-processing) - Document boundary detection
+- [Why Frontier Agents Can't Read Documents](https://www.databricks.com/blog/why-frontier-agents-cant-read-documents-and-how-were-fixing-it) - Multi-page document challenges
+- [IDP Challenges 2026](https://idp-software.com/guides/idp-challenges-2026/) - Page grouping strategies

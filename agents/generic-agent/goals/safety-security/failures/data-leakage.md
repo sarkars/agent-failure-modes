@@ -46,3 +46,8 @@ Result: Real customer PII exposed as "example"
 - DLP (Data Loss Prevention) integration
 - Monitor for cross-user data access
 - Alert on sensitive data in outputs
+
+## References
+- [VentureBeat: 88% Enterprises Breached](https://venturebeat.com/security/most-enterprises-cant-stop-stage-three-ai-agent-threats-venturebeat-survey-finds/) - 61% data exposure
+- [Kiteworks: 65% of Firms Hit](https://www.kiteworks.com/cybersecurity-risk-management/ai-agent-security-incidents-2026/)
+- [Beam AI: 5 Real AI Agent Security Breaches 2026](https://beam.ai/agentic-insights/ai-agent-security-breaches-2026-lessons)

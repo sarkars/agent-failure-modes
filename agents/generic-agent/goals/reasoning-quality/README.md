@@ -19,6 +19,12 @@ Ensure sound planning, self-correction, and goal adherence. Poor reasoning leads
 | [Faulty Decomposition](failures/faulty-decomposition.md) | Common | High |
 | [Self-Correction Failure](failures/self-correction-failure.md) | Common | High |
 | [Overconfident Planning](failures/overconfident-planning.md) | Common | Medium |
+| [Organizational Knowledge Loss](failures/organizational-knowledge-loss.md) | Emerging | High |
+| [Domain Rule Violation](failures/domain-rule-violation.md) | Common | High |
+| [Instruction Following Failure](failures/instruction-following.md) | Common | High |
+| [Role Specification Violation](failures/role-specification-violation.md) | Occasional | High |
+| [Clarification Failure](failures/clarification-failure.md) | Common | High |
+| [Reasoning-Action Mismatch](failures/reasoning-action-mismatch.md) | Common | High |
 
 ## Key Statistics
 

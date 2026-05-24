@@ -31,3 +31,8 @@ Extracted: "Invoice Number: 1234Date: 2024-01-15" (lines merged)
 - Track extraction patterns that suggest line merging (unusual field lengths)
 - Monitor document orientation metadata
 - Flag documents with detected rotation > threshold
+
+## References
+
+- [Why OCR Alone Fails](https://dev.to/jakemiller/why-ocr-alone-fails-in-real-world-documents-5f86) - Geometric distortion
+- [Why AI OCR Fails](https://parseur.com/blog/why-ai-ocr-fail) - Image preprocessing

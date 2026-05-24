@@ -43,3 +43,12 @@ Result: User calls wrong number, wastes time, loses trust
 - Random sampling with human verification
 - User feedback on incorrect information
 - Comparison against authoritative sources
+
+---
+
+## References
+
+- [Avianca Lawyers](https://www.cnn.com/2023/05/27/business/chat-gpt-avianca-mata-lawyers/index.html) - Fake cases cited by lawyers using ChatGPT
+- [Air Canada Chatbot Lawsuit](https://www.cbc.ca/news/canada/british-columbia/air-canada-chatbot-lawsuit-1.7116416) - Chatbot invented bereavement fare policy
+- [NYC MyCity Chatbot](https://www.cxtoday.com/contact-center/3-times-customer-chatbots-went-rogue-and-the-lessons-we-need-to-learn/) - Chatbot gave wrong legal advice to businesses
+- [Stanford Legal RAG Hallucinations](https://dho.stanford.edu/wp-content/uploads/Legal_RAG_Hallucinations.pdf) - Study showing 17-33% hallucination rates in legal AI

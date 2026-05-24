@@ -39,3 +39,7 @@ Result: Spreadsheet executes malicious formula, exfiltrates data
 - Monitor for encoded payloads
 - Track output-related security alerts
 - Test rendering contexts for vulnerabilities
+
+## References
+- [OWASP GenAI Q1 2026 Exploit Roundup](https://genai.owasp.org/2026/04/14/owasp-genai-exploit-round-up-report-q1-2026/)
+- [IBM: OpenClaw Agentic AI Vulnerabilities](https://www.ibm.com/think/x-force/agentic-ai-growing-fast-vulnerabilities)

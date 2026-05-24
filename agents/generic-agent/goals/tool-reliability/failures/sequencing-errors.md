@@ -40,3 +40,10 @@ Result: Email fails, user created without notification
 - Monitor dependency violations
 - Log prerequisite check failures
 - Compare planned vs. actual execution order
+
+---
+
+## References
+
+- [Why Do Multi-Agent LLM Systems Fail? (MAST)](https://arxiv.org/abs/2503.13657) - Research on task ordering and sequencing failures
+- [Redis: Why Multi-Agent LLM Systems Fail](https://redis.io/blog/why-multi-agent-llm-systems-fail/) - Analysis of multi-agent coordination failures

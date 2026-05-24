@@ -25,3 +25,9 @@ Result: High-confidence wrong answer bypasses review queue
 2. **Ensemble disagreement**: Multiple models, use variance as uncertainty proxy
 3. **Token-level confidence**: Examine per-token probabilities, not just final score
 4. **Human-in-the-loop thresholds**: Set thresholds based on empirical accuracy, not raw scores
+
+## References
+
+- [Evaluating Multimodal LLMs for Production](https://galileo.ai/blog/multimodal-llm-guide-evaluation) - Confidence calibration
+- [Mitigating OCR Hallucinations in MLLMs](https://arxiv.org/html/2506.20168v2) - Uncertainty estimation
+- [IDP Accuracy Reckoning 2026](https://idp-software.com/news/idp-accuracy-reckoning-2026/) - Threshold tuning strategies

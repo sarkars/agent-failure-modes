@@ -44,3 +44,10 @@ Result: 100,000 tokens used, 500 needed
 - Track task completion rate vs. context size
 - A/B test minimal vs. full context
 - Monitor which context sections are actually used
+
+---
+
+## References
+
+- [AWS: 3 Agent Failure Modes](https://dev.to/aws/why-ai-agents-fail-3-failure-modes-that-cost-you-tokens-and-time-1flb) - Common failure patterns including context overloading
+- [LeanOps: Agents Burn 50x More Tokens](https://leanopstech.com/blog/agentic-ai-cost-runaway-token-budget-2026/) - Analysis of token waste from context stuffing

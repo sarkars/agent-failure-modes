@@ -28,3 +28,9 @@ Downstream impact:
 2. **Soft deletes**: Keep original data recoverable
 3. **Batch boundaries**: Limit blast radius of errors
 4. **Rollback capabilities**: Enable reversal of bad data pushes
+
+## References
+
+- [AlterSquare: Document AI Fails](https://altersquare.io/enterprise-document-ai-fails-extraction-layer-not-model-layer/) - Downstream propagation
+- [Production-Ready AI Agent for Document Extraction](https://www.stackai.com/insights/how-to-build-a-production-ready-ai-agent-for-document-data-extraction) - Validation gates
+- [IDP Accuracy Reckoning 2026](https://idp-software.com/news/idp-accuracy-reckoning-2026/) - GL coding error impact

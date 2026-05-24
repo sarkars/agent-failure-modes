@@ -31,3 +31,7 @@ Actual: Footnote appended as regular text
 2. **Reference linking**: Match superscript numbers to footnote numbers
 3. **Structured output**: Output footnotes as separate linked elements
 4. **Exclusion option**: For some use cases, exclude footnotes entirely
+
+## References
+- [AlterSquare: Document AI Fails](https://altersquare.io/enterprise-document-ai-fails-extraction-layer-not-model-layer/) - Document structure
+- [Why OCR Alone Fails](https://dev.to/jakemiller/why-ocr-alone-fails-in-real-world-documents-5f86) - Content flow issues

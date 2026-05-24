@@ -20,6 +20,9 @@ Find relevant documents that contain the information needed to answer user queri
 | [Under-Retrieval](failures/under-retrieval.md) | Common | High |
 | [Embedding Model Drift](failures/embedding-drift.md) | Occasional | High |
 | [Metadata Filtering Errors](failures/metadata-filtering.md) | Common | Medium |
+| [Knowledge Base Poisoning](failures/knowledge-base-poisoning.md) | Emerging | Critical |
+| [Temporal Relevance Failure](failures/temporal-relevance.md) | Common | High |
+| [Jurisdictional Mismatch](failures/jurisdictional-mismatch.md) | Common | High |
 
 ## Key Statistics
 

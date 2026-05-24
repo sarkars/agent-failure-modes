@@ -8,12 +8,13 @@ Use this as a checklist when building or evaluating any agent system.
 
 | Goal | Description | Failure Patterns |
 |------|-------------|------------------|
-| [Cost Efficiency](goals/cost-efficiency/) | Minimize token usage and API costs | 6 patterns |
-| [Tool Reliability](goals/tool-reliability/) | Ensure tools are called correctly and consistently | 7 patterns |
-| [Output Accuracy](goals/output-accuracy/) | Eliminate hallucinations and ensure grounded outputs | 6 patterns |
-| [Context Management](goals/context-management/) | Handle context windows, memory, and state effectively | 6 patterns |
-| [Safety & Security](goals/safety-security/) | Prevent prompt injection, data leakage, and unauthorized actions | 8 patterns |
-| [Reasoning Quality](goals/reasoning-quality/) | Ensure sound planning, self-correction, and goal adherence | 6 patterns |
+| [Cost Efficiency](goals/cost-efficiency/) | Minimize token usage and API costs | 9 patterns |
+| [Tool Reliability](goals/tool-reliability/) | Ensure tools are called correctly and consistently | 14 patterns |
+| [Output Accuracy](goals/output-accuracy/) | Eliminate hallucinations and ensure grounded outputs | 11 patterns |
+| [Context Management](goals/context-management/) | Handle context windows, memory, and state effectively | 7 patterns |
+| [Safety & Security](goals/safety-security/) | Prevent prompt injection, data leakage, and unauthorized actions | 19 patterns |
+| [Reasoning Quality](goals/reasoning-quality/) | Ensure sound planning, self-correction, and goal adherence | 12 patterns |
+| [Multi-Agent Coordination](goals/multi-agent-coordination/) | Ensure agents work together effectively | 5 patterns |
 
 ## Structure
 
@@ -31,7 +32,8 @@ generic-agent/
     ├── output-accuracy/
     ├── context-management/
     ├── safety-security/
-    └── reasoning-quality/
+    ├── reasoning-quality/
+    └── multi-agent-coordination/
 ```
 
 ## Key Statistics (2026)

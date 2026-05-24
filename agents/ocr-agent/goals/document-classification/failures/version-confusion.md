@@ -26,3 +26,9 @@ Result: "Total" field moved in 2024, now extracting from wrong position
 2. **Date-based routing**: Use document date to select appropriate schema
 3. **Template fingerprinting**: Use layout hash to detect exact template
 4. **Fallback extraction**: When primary positions fail, try alternate known positions
+
+## References
+
+- [IDP Accuracy Reckoning 2026](https://idp-software.com/news/idp-accuracy-reckoning-2026/) - Template drift challenges
+- [Production-Ready AI Agent for Document Extraction](https://www.stackai.com/insights/how-to-build-a-production-ready-ai-agent-for-document-data-extraction) - Schema versioning strategies
+- [AI Agents and Document Processing 2026](https://parsio.io/blog/ai-agents-document-processing-2026) - Template evolution handling

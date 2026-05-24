@@ -46,3 +46,10 @@ Result: Agent reports wrong balance
 - Monitor user corrections of agent's tool interpretations
 - Log cases where agent re-queries for clarification
 - Compare agent's extracted values to raw output
+
+---
+
+## References
+
+- [Why Do Multi-Agent LLM Systems Fail? (MAST)](https://arxiv.org/abs/2503.13657) - Research on output parsing and interpretation failures
+- [Arize: Why AI Agents Break](https://arize.com/blog/common-ai-agent-failures/) - How agents misinterpret tool outputs

@@ -24,3 +24,7 @@ Actual: "100-VNI# ةروتاف" (reversed and jumbled)
 2. **Bidirectional algorithm**: Implement Unicode BiDi algorithm for mixed text
 3. **Segment-level processing**: Extract RTL and LTR segments separately, then combine
 4. **Field-level direction**: Use field type to determine expected direction
+
+## References
+- [Why AI OCR Fails](https://parseur.com/blog/why-ai-ocr-fail) - Multi-language challenges
+- [IDP Accuracy Reckoning 2026](https://idp-software.com/news/idp-accuracy-reckoning-2026/) - RTL text handling

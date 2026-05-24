@@ -42,3 +42,7 @@ Result: User can't access cited information
 - Track 404 rates on citations
 - Monitor user reports of broken links
 - Regular crawl of cited URLs
+
+## References
+- [CMARix: RAG & AI Trust Statistics 2026](https://www.cmarix.com/blog/rag-ai-statistics/) - Reference management
+- [Braintrust: Agent Observability Guide 2026](https://www.braintrust.dev/articles/agent-observability-complete-guide-2026) - Link monitoring

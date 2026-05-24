@@ -25,3 +25,8 @@ Result: Amount parsing fails
 2. **Color channel separation**: Process different color channels independently
 3. **Watermark detection**: Identify and mask known watermark patterns
 4. **Confidence filtering**: Watermark-derived characters typically have lower confidence
+
+## References
+
+- [Why OCR Is the Weakest Part of Document AI](https://medium.com/@manalisomani099/why-ocr-is-the-weakest-part-of-most-document-ai-systems-c9188381d1b9) - Background noise
+- [AlterSquare: Document AI Fails](https://altersquare.io/enterprise-document-ai-fails-extraction-layer-not-model-layer/) - Noise handling

@@ -31,3 +31,9 @@ Result: $47,000 in token costs for 11-day loop (real incident)
 3. **Similarity detection**: Stop if outputs converge without improvement
 4. **Escalation paths**: Route to human after N failures
 5. **Cost monitoring alerts**: Real-time spend tracking with kill switches
+
+## References
+
+- [DEV.to: $47,000 Agent Loop](https://dev.to/waxell/the-47000-agent-loop-why-token-budget-alerts-arent-budget-enforcement-389i) - 11-day infinite loop incident
+- [Dev Journal: $437 Overnight AI Agent](https://earezki.com/ai-news/2026-04-29-i-let-my-ai-agent-run-overnight-it-cost-437/) - Unchecked overnight run
+- [AWS: 3 Agent Failure Modes](https://dev.to/aws/why-ai-agents-fail-3-failure-modes-that-cost-you-tokens-and-time-1flb) - Loop detection

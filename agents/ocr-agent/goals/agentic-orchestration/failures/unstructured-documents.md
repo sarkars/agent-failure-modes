@@ -29,3 +29,9 @@ Challenge: Value is in narrative, not labeled field
 2. **Question-answering approach**: Frame extraction as Q&A over document
 3. **Structured prompts**: Guide agent to identify key information types
 4. **Hybrid extraction**: Combine rule-based and ML approaches
+
+## References
+
+- [AI Agents and Document Processing 2026](https://parsio.io/blog/ai-agents-document-processing-2026) - Unstructured document handling
+- [Agentic Document Processing](https://www.llamaindex.ai/blog/agentic-document-processing) - Free-form extraction
+- [Why OCR Alone Fails](https://dev.to/jakemiller/why-ocr-alone-fails-in-real-world-documents-5f86) - Narrative text challenges

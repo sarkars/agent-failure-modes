@@ -38,3 +38,10 @@ Result: Completely wrong information about wrong person
 - Monitor disambiguation query rates
 - Test with deliberately ambiguous entities
 - Compare entity attributes to authoritative sources
+
+---
+
+## References
+
+- [Atlan: LLM Hallucinations 2026](https://atlan.com/know/llm-hallucinations/) - Coverage of entity confusion patterns in LLM outputs
+- [Hallucination of Multimodal LLMs Survey](https://arxiv.org/html/2404.18930v2) - Academic survey on entity hallucinations in multimodal models

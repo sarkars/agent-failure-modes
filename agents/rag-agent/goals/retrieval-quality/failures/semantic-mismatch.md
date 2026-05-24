@@ -44,3 +44,8 @@ Result: Document not retrieved, user gets wrong answer or "I don't know"
 - Monitor retrieval scores distribution
 - Compare user language to document language
 - A/B test retrieval strategies
+
+## References
+
+- [Medium: 7 RAG Hallucination Root Causes](https://medium.com/@umesh382.kushwaha/why-your-rag-pipeline-hallucinates-7-root-causes-and-how-to-fix-them-1a04a84be7f5) - Query-document mismatch
+- [FloTorch: 2026 RAG Performance Landscape](https://www.flotorch.ai/blogs/the-2026-rag-performance-landscape-what-every-enterprise-leader-needs-to-know) - Retrieval challenges

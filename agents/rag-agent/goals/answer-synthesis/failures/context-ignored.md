@@ -46,3 +46,8 @@ Result: Generic unhelpful answer instead of specific policy
 - Compare answer to context overlap
 - Monitor generic vs. specific response rates
 - Flag answers without context references
+
+## References
+
+- [Medium: 7 RAG Hallucination Root Causes](https://medium.com/@umesh382.kushwaha/why-your-rag-pipeline-hallucinates-7-root-causes-and-how-to-fix-them-1a04a84be7f5) - Context utilization failures
+- [Self-Healing RAG Layer](https://towardsdatascience.com/rag-hallucinates-i-built-a-self-healing-layer-that-fixes-it-in-real-time/) - Fixing context issues

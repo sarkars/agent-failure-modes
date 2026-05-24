@@ -42,3 +42,8 @@ Result: User gets policy info instead of actionable instructions
 - Monitor user follow-ups indicating wrong response type
 - Classify queries and compare to response format
 - User satisfaction by intent category
+
+## References
+
+- [Mindee: RAG Hallucinations Explained](https://www.mindee.com/blog/rag-hallucinations-explained) - Intent recognition
+- [FloTorch: 2026 RAG Performance Landscape](https://www.flotorch.ai/blogs/the-2026-rag-performance-landscape-what-every-enterprise-leader-needs-to-know) - Query routing

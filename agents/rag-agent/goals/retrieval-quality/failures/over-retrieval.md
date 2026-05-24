@@ -48,3 +48,8 @@ Result: 2 relevant docs buried in 8 irrelevant/distracting ones
 - Monitor retrieval-to-answer ratio
 - Analyze diversity of retrieved documents
 - User feedback on answer quality vs. retrieval volume
+
+## References
+
+- [Mindee: RAG Hallucinations Explained](https://www.mindee.com/blog/rag-hallucinations-explained) - Over-retrieval problems
+- [FloTorch: 2026 RAG Performance Landscape](https://www.flotorch.ai/blogs/the-2026-rag-performance-landscape-what-every-enterprise-leader-needs-to-know) - Retrieval optimization

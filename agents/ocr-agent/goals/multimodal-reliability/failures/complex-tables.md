@@ -32,3 +32,9 @@ Result: Cannot programmatically determine which values belong to which quarter
 2. **Prompt chaining**: Decompose extraction into sequential tasks
 3. **Specialized benchmarks**: Train on complex table datasets (RD-TableBench)
 4. **Table Transformer**: Run table detection before VLM processing
+
+## References
+
+- [Table Extraction Using LLMs](https://nanonets.com/blog/table-extraction-using-llms-unlocking-structured-data-from-documents/) - Merged cells, complex layouts
+- [IDP Challenges 2026](https://idp-software.com/guides/idp-challenges-2026/) - Nested header handling
+- [VLMs for Spreadsheet Understanding](https://arxiv.org/html/2405.16234v1) - Hierarchical structure parsing

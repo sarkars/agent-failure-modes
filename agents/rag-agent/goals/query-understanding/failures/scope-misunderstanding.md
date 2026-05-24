@@ -41,3 +41,8 @@ Result: User looks for features that don't exist in their app
 - Monitor scope filter usage and accuracy
 - Compare query scope to answer scope
 - User feedback on relevance
+
+## References
+
+- [CMARix: RAG & AI Trust Statistics 2026](https://www.cmarix.com/blog/rag-ai-statistics/) - Scope detection challenges
+- [Medium: 7 RAG Hallucination Root Causes](https://medium.com/@umesh382.kushwaha/why-your-rag-pipeline-hallucinates-7-root-causes-and-how-to-fix-them-1a04a84be7f5) - Context boundaries

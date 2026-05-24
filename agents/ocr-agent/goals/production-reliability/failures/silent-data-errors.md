@@ -37,3 +37,9 @@ Result: Inventory system expects shipment that's actually backordered
 3. **Statistical monitoring**: Track distribution shifts in extracted values
 4. **Sample auditing**: Regularly verify random samples against source
 5. **Customer feedback loops**: Make it easy to report extraction errors
+
+## References
+
+- [AI Agents and Document Processing 2026](https://parsio.io/blog/ai-agents-document-processing-2026) - 88% pipeline error rate
+- [LinkedIn: Silent Failures of Production AI](https://www.linkedin.com/pulse/silent-failures-production-ai-why-most-llm-monitoring-praveen-juyal-iqgyc) - Silent failure patterns
+- [IDP Accuracy Reckoning 2026](https://idp-software.com/news/idp-accuracy-reckoning-2026/) - Correct-looking wrong data

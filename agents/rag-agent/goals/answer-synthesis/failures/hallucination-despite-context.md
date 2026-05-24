@@ -48,3 +48,9 @@ Legal RAG tools hallucinate at rates of 17-33% even with retrieval augmentation.
 - Compare answer claims to context
 - Track fabrication patterns
 - User reports of incorrect information
+
+## References
+
+- [Stanford Legal RAG Hallucinations](https://dho.stanford.edu/wp-content/uploads/Legal_RAG_Hallucinations.pdf) - 17-33% hallucination despite RAG
+- [RAGAS Fails 83% of Time](https://medium.com/data-science-collective/air-canada-lost-a-lawsuit-because-their-rag-hallucinated-yours-will-too-b92b6b9a4d39) - RAG hallucination rates
+- [Mindee: RAG Hallucinations Explained](https://www.mindee.com/blog/rag-hallucinations-explained) - Hallucination causes

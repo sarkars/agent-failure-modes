@@ -46,3 +46,8 @@ Result: Production database backup deleted (was in project folder)
 - Alert on permission boundary tests
 - Track action authorization rates
 - Log all destructive operations
+
+## References
+- [PocketOS Database Wipe](https://dev.to/alessandro_pignati/the-9-second-disaster-how-an-ai-agent-wiped-a-production-database-p56)
+- [Replit Rogue Agent](https://www.theregister.com/2025/07/21/replit_saastr_vibe_coding_incident/)
+- [Microsoft: Taxonomy of Failure Mode in Agentic AI](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/microsoft/final/en-us/microsoft-brand/documents/Taxonomy-of-Failure-Mode-in-Agentic-AI-Systems-Whitepaper.pdf)

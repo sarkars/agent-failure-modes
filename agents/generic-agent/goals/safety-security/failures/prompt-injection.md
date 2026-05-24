@@ -45,3 +45,9 @@ Result: Credentials exposed through injection attack
 - Behavioral anomaly detection
 - Monitor for instruction-contrary actions
 - Alert on sensitive data in outputs
+
+## References
+- [Microsoft: Prompts Become Shells - RCE](https://www.microsoft.com/en-us/security/blog/2026/05/07/prompts-become-shells-rce-vulnerabilities-ai-agent-frameworks/)
+- [VentureBeat: Comment and Control Attack](https://venturebeat.com/security/ai-agent-runtime-security-system-card-audit-comment-and-control-2026)
+- [AIRIA: AI Security 2026 - Lethal Trifecta](https://airia.com/ai-security-in-2026-prompt-injection-the-lethal-trifecta-and-how-to-defend/)
+- [OWASP GenAI Q1 2026 Exploit Roundup](https://genai.owasp.org/2026/04/14/owasp-genai-exploit-round-up-report-q1-2026/)

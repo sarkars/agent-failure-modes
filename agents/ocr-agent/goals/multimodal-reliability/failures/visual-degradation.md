@@ -30,3 +30,9 @@ Under visual degradation (blur, occlusion, low contrast), the current response p
 3. **Refusal training**: Teach model to refuse extraction on degraded regions
 4. **Ensemble methods**: Multiple models vote, disagreement flags uncertainty
 5. **Human routing**: Automatically escalate degraded documents
+
+## References
+
+- [Mitigating OCR Hallucinations in MLLMs](https://arxiv.org/html/2506.20168v2) - Visual degradation and hallucination
+- [Why AI OCR Fails](https://parseur.com/blog/why-ai-ocr-fail) - Image quality challenges
+- [Why LLMs Hallucinate More on Enterprise Documents](https://www.adlibsoftware.com/news/why-llms-hallucinate-more-on-enterprise-documents) - Linguistic prior overreliance

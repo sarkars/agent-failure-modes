@@ -38,3 +38,10 @@ Result: User must re-provide information, frustrated
 - Track "forgotten information" errors
 - Alert when approaching context limits
 - Log truncation events
+
+---
+
+## References
+
+- [AWS: 3 Agent Failure Modes](https://dev.to/aws/why-ai-agents-fail-3-failure-modes-that-cost-you-tokens-and-time-1flb) - Context overflow as top failure mode
+- [Why Do Multi-Agent LLM Systems Fail? (MAST)](https://arxiv.org/abs/2503.13657) - Context limitations in multi-agent systems

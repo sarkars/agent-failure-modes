@@ -37,3 +37,10 @@ Result: Unpredictable - may share, may refuse, may partially share
 - Track instruction source conflicts
 - Alert on contradictory directives
 - Log conflict resolution decisions
+
+---
+
+## References
+
+- [Microsoft: Taxonomy of Failure Mode in Agentic AI](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/microsoft/final/en-us/microsoft-brand/documents/Taxonomy-of-Failure-Mode-in-Agentic-AI-Systems-Whitepaper.pdf) - Instruction conflicts
+- [AIRIA: AI Security 2026](https://airia.com/ai-security-in-2026-prompt-injection-the-lethal-trifecta-and-how-to-defend/) - Conflicting prompts

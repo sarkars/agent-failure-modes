@@ -47,3 +47,7 @@ Result: Never fixes original issue, creates more problems
 - Monitor fix attempt success rates
 - Alert on regression loops
 - Compare iterations for actual improvement
+
+## References
+- [Why Do Multi-Agent LLM Systems Fail? (MAST)](https://arxiv.org/abs/2503.13657) - Self-correction limitations
+- [Plain English: LLM Reliability Paradox](https://plainenglish.io/artificial-intelligence/the-llm-reliability-paradox-agents-aren-t-broken-your-architecture-is) - Architecture vs model issues

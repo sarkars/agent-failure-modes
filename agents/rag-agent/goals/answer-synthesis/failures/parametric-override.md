@@ -42,3 +42,8 @@ Result: User given outdated location
 - Track context vs. parametric knowledge conflicts
 - Monitor outdated information in answers
 - Test with deliberately conflicting context
+
+## References
+
+- [Atlan: LLM Hallucinations 2026](https://atlan.com/know/llm-hallucinations/) - Parametric vs retrieved knowledge
+- [Medium: 7 RAG Hallucination Root Causes](https://medium.com/@umesh382.kushwaha/why-your-rag-pipeline-hallucinates-7-root-causes-and-how-to-fix-them-1a04a84be7f5) - Training data override

@@ -30,3 +30,9 @@ More than half of all the work AP does revolves around manual invoice data entry
 2. **Semantic understanding**: Map diverse labels to canonical fields
 3. **Tiered automation**: High automation for common formats, human assist for rare
 4. **Vendor onboarding process**: Collect sample documents, validate extraction before go-live
+
+## References
+
+- [IDP Challenges 2026](https://idp-software.com/guides/idp-challenges-2026/) - Format diversity challenges
+- [Why OCR Alone Fails](https://dev.to/jakemiller/why-ocr-alone-fails-in-real-world-documents-5f86) - Multi-format handling
+- [Document AI: Next Evolution of IDP](https://www.llamaindex.ai/blog/document-ai-the-next-evolution-of-intelligent-document-processing) - Semantic extraction

@@ -29,3 +29,8 @@ Actual: Do Smlte (or rejected entirely)
 **Detection**
 - Confidence score distributions by field type
 - Character-level entropy (garbled text has unusual character distributions)
+
+## References
+
+- [Why OCR Alone Fails](https://dev.to/jakemiller/why-ocr-alone-fails-in-real-world-documents-5f86) - Handwriting challenges
+- [IDP Challenges 2026](https://idp-software.com/guides/idp-challenges-2026/) - Handwritten form issues

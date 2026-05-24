@@ -50,3 +50,8 @@ Result: User only gets hardware info, misses software requirements
 - Monitor answer completeness scores
 - Analyze queries with high hallucination rates
 - Compare retrieved docs to known relevant docs
+
+## References
+
+- [Stanford Legal RAG Hallucinations](https://dho.stanford.edu/wp-content/uploads/Legal_RAG_Hallucinations.pdf) - Missing context leads to hallucination
+- [RAGAS Fails 83% of Time](https://medium.com/data-science-collective/air-canada-lost-a-lawsuit-because-their-rag-hallucinated-yours-will-too-b92b6b9a4d39) - Retrieval failures

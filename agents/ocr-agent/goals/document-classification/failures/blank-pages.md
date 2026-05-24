@@ -24,3 +24,9 @@ Result: Review queue flooded with blank pages
 2. **Blank detection**: Explicit "blank page" classifier
 3. **Auto-discard**: Skip pages below content threshold with logging
 4. **Signature-only detection**: Recognize pages that only contain signatures
+
+## References
+
+- [OCR vs IDP](https://forage.ai/blog/ocr-vs-idp/) - Preprocessing and filtering
+- [Why OCR Alone Fails](https://dev.to/jakemiller/why-ocr-alone-fails-in-real-world-documents-5f86) - Content detection challenges
+- [Production-Ready AI Agent for Document Extraction](https://www.stackai.com/insights/how-to-build-a-production-ready-ai-agent-for-document-data-extraction) - Quality thresholds

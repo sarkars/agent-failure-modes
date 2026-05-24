@@ -19,6 +19,11 @@ Eliminate hallucinations and ensure all outputs are grounded in available inform
 | [Entity Confusion](failures/entity-confusion.md) | Common | High |
 | [Extrapolation Beyond Data](failures/extrapolation.md) | Very Common | Medium |
 | [Inherited Errors](failures/inherited-errors.md) | Common | High |
+| [Bias Amplification](failures/bias-amplification.md) | Common | High |
+| [Verification Failure](failures/verification-failure.md) | Common | High |
+| [Domain Mismatch](failures/domain-mismatch.md) | Common | High |
+| [Algorithmic Discrimination](failures/algorithmic-discrimination.md) | Common | Critical |
+| [Content Fabrication](failures/content-fabrication.md) | Very Common | High |
 
 ## Key Statistics
 

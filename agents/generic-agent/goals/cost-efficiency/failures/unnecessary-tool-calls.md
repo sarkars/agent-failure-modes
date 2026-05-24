@@ -41,3 +41,10 @@ Result: Unnecessary API call, added latency and cost
 - Monitor cache hit rates
 - Identify repeated tool calls with same parameters
 - Compare tool usage across similar tasks
+
+---
+
+## References
+
+- [Silent Tool-Call Errors](https://www.roborhythms.com/fix-ai-agent-tool-call-errors/) - Guide to identifying and fixing tool call inefficiencies
+- [5 MCP Server Mistakes](https://dev.to/thedailyagent/5-mcp-server-mistakes-that-waste-your-ai-agents-time-and-how-to-fix-them-18m5) - Common mistakes that lead to unnecessary tool calls

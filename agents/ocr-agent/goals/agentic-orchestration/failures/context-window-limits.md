@@ -30,3 +30,9 @@ Agent processing Chunk 3: Lost context about what payment terms were
 3. **Cross-reference resolution**: Pre-process to resolve references
 4. **Hierarchical processing**: Extract structure first, then details
 5. **Retrieval augmentation**: Index document, retrieve relevant chunks on demand
+
+## References
+
+- [AWS: 3 Agent Failure Modes](https://dev.to/aws/why-ai-agents-fail-3-failure-modes-that-cost-you-tokens-and-time-1flb) - Context overflow patterns
+- [Why Frontier Agents Can't Read Documents](https://www.databricks.com/blog/why-frontier-agents-cant-read-documents-and-how-were-fixing-it) - Long document processing
+- [Document AI: Next Evolution of IDP](https://www.llamaindex.ai/blog/document-ai-the-next-evolution-of-intelligent-document-processing) - Hierarchical extraction

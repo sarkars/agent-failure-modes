@@ -45,3 +45,8 @@ Result: All agent queries routed through attacker's server
 - Track dependency changes
 - Alert on new or modified tools
 - Scan for known vulnerabilities
+
+## References
+- [MCP Design Flaw: 200K Servers at Risk](https://www.theregister.com/2026/04/16/anthropic_mcp_design_flaw/)
+- [OX Security: Mother of All AI Supply Chains](https://www.ox.security/blog/the-mother-of-all-ai-supply-chains-critical-systemic-vulnerability-at-the-core-of-the-mcp/)
+- [Obot: Claude Leak Crisis MCP Security](https://obot.ai/blog/mcp-security-masterclass-claude-leak-crisis/)

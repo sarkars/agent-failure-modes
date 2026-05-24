@@ -35,3 +35,9 @@ Up to 30% of invoice requests failed to process correctly in their first iterati
 3. **Header-based extraction**: Use header text, not column position
 4. **Regular accuracy audits**: Systematic verification against ground truth
 5. **Vendor relationship management**: Request advance notice of changes
+
+## References
+
+- [IDP Accuracy Reckoning 2026](https://idp-software.com/news/idp-accuracy-reckoning-2026/) - 30% first-iteration failures
+- [AI Agents and Document Processing 2026](https://parsio.io/blog/ai-agents-document-processing-2026) - Template change detection
+- [Production-Ready AI Agent for Document Extraction](https://www.stackai.com/insights/how-to-build-a-production-ready-ai-agent-for-document-data-extraction) - Version management

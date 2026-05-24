@@ -38,3 +38,10 @@ Result: User acts on outdated information
 - Track corrections related to outdated information
 - Monitor queries about recent events
 - Audit time-sensitive information regularly
+
+---
+
+## References
+
+- [Atlan: LLM Hallucinations 2026](https://atlan.com/know/llm-hallucinations/) - Overview of temporal hallucination patterns in LLMs
+- [Medium: 7 RAG Hallucination Root Causes](https://medium.com/@umesh382.kushwaha/why-your-rag-pipeline-hallucinates-7-root-causes-and-how-to-fix-them-1a04a84be7f5) - Analysis of time-related hallucination causes in RAG systems

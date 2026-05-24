@@ -42,3 +42,8 @@ Result: Employee violates current policy
 - Monitor update frequency vs. query accuracy
 - Alert on high-traffic stale documents
 - Compare retrieved docs to current source versions
+
+## References
+
+- [Medium: 7 RAG Hallucination Root Causes](https://medium.com/@umesh382.kushwaha/why-your-rag-pipeline-hallucinates-7-root-causes-and-how-to-fix-them-1a04a84be7f5) - Stale data issues
+- [CMARix: RAG & AI Trust Statistics 2026](https://www.cmarix.com/blog/rag-ai-statistics/) - Enterprise RAG challenges

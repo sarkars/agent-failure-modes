@@ -24,3 +24,9 @@ Result: Valid invoice requires manual processing
 2. **Preprocessing boost**: Apply enhancement before quality check
 3. **Quality vs. confidence separation**: Low image quality doesn't mean low extraction confidence
 4. **Source-specific thresholds**: Fax channel has lower quality expectations
+
+## References
+
+- [Why AI OCR Fails](https://parseur.com/blog/why-ai-ocr-fail) - Quality thresholds and preprocessing
+- [Why LLMs Hallucinate More on Enterprise Documents](https://www.adlibsoftware.com/news/why-llms-hallucinate-more-on-enterprise-documents) - Input quality gap
+- [IDP Accuracy Reckoning 2026](https://idp-software.com/news/idp-accuracy-reckoning-2026/) - Quality-based routing strategies

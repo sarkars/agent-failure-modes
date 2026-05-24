@@ -21,6 +21,17 @@ Prevent prompt injection, data leakage, and unauthorized actions. Security failu
 | [Output Manipulation](failures/output-manipulation.md) | Common | High |
 | [Supply Chain Attacks](failures/supply-chain.md) | Occasional | Critical |
 | [Audit Evasion](failures/audit-evasion.md) | Rare | High |
+| [Agent Injection](failures/agent-injection.md) | Emerging | Critical |
+| [Excessive Agency](failures/excessive-agency.md) | Common | Critical |
+| [Human-in-the-Loop Bypass](failures/human-loop-bypass.md) | Occasional | Critical |
+| [Memory Poisoning](failures/memory-poisoning.md) | Emerging | Critical |
+| [Insufficient Isolation](failures/insufficient-isolation.md) | Common | Critical |
+| [Data Provenance Loss](failures/data-provenance-loss.md) | Common | High |
+| [Shadow AI Exposure](failures/shadow-ai-exposure.md) | Very Common | Critical |
+| [Autonomous System Safety](failures/autonomous-system-safety.md) | Occasional | Critical |
+| [Chatbot Manipulation](failures/chatbot-manipulation.md) | Common | High |
+| [Shutdown Resistance](failures/shutdown-resistance.md) | Occasional | High |
+| [Over-Scoped Permissions](failures/over-scoped-permissions.md) | Very Common | Critical |
 
 ## Key Statistics
 

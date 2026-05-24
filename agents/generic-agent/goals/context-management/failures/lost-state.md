@@ -41,3 +41,10 @@ Result: User frustrated by repetition
 - Monitor for contradictions with earlier statements
 - Alert on state inconsistencies
 - Log state reconstruction attempts
+
+---
+
+## References
+
+- [Redis: Why Multi-Agent LLM Systems Fail](https://redis.io/blog/why-multi-agent-llm-systems-fail/) - State management failures
+- [Braintrust: Agent Observability Guide 2026](https://www.braintrust.dev/articles/agent-observability-complete-guide-2026) - Tracking conversation state

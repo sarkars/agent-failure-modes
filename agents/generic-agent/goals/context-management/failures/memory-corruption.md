@@ -40,3 +40,10 @@ Result: Agent makes recommendations exceeding actual budget
 - Track memory modification history
 - Alert on contradictory memories
 - Validate critical facts before use
+
+---
+
+## References
+
+- [Microsoft: Taxonomy of Failure Mode in Agentic AI](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/microsoft/final/en-us/microsoft-brand/documents/Taxonomy-of-Failure-Mode-in-Agentic-AI-Systems-Whitepaper.pdf) - Memory poisoning
+- [Why Do Multi-Agent LLM Systems Fail? (MAST)](https://arxiv.org/abs/2503.13657) - Memory corruption patterns

@@ -38,3 +38,10 @@ Result: Bob sees Alice's project info - privacy violation
 - Alert on user ID mismatches
 - Audit memory access patterns
 - Test session isolation regularly
+
+---
+
+## References
+
+- [VentureBeat: 88% Enterprises Breached](https://venturebeat.com/security/most-enterprises-cant-stop-stage-three-ai-agent-threats-venturebeat-survey-finds/) - Data exposure across sessions
+- [CSA "Autonomous but Not Controlled"](https://cloudsecurityalliance.org/) - 82% unknown agents statistic

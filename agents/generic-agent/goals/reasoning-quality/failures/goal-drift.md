@@ -44,3 +44,7 @@ Result: Hours spent, original task incomplete
 - Monitor task chain depth
 - Alert on extended time without goal progress
 - Compare final output to original request
+
+## References
+- [Why Do Multi-Agent LLM Systems Fail? (MAST)](https://arxiv.org/abs/2503.13657) - Goal adherence failures
+- [Medium: Why AI Agents Keep Failing](https://medium.com/data-science-collective/why-ai-agents-keep-failing-in-production-cdd335b22219) - Goal drift patterns

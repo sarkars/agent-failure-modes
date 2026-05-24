@@ -42,3 +42,8 @@ Result: Context lost, user frustrated by repetition
 - Monitor context-loss related clarifications
 - Measure answer quality degradation over turns
 - Identify topic continuity breaks
+
+## References
+
+- [Medium: 7 RAG Hallucination Root Causes](https://medium.com/@umesh382.kushwaha/why-your-rag-pipeline-hallucinates-7-root-causes-and-how-to-fix-them-1a04a84be7f5) - Conversation context
+- [Redis: Why Multi-Agent LLM Systems Fail](https://redis.io/blog/why-multi-agent-llm-systems-fail/) - State management in conversations

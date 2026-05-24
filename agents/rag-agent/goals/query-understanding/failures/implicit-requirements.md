@@ -43,3 +43,8 @@ Result: Multiple follow-ups needed for basic question
 - Monitor information completeness scores
 - Analyze query chains for implicit requirements
 - User feedback on answer completeness
+
+## References
+
+- [Atlan: LLM Hallucinations 2026](https://atlan.com/know/llm-hallucinations/) - Implicit expectations
+- [Mindee: RAG Hallucinations Explained](https://www.mindee.com/blog/rag-hallucinations-explained) - Completeness expectations

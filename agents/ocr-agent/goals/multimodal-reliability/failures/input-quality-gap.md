@@ -26,3 +26,9 @@ The gap between benchmark performance and production performance in enterprise d
 
 **Key Statistic**
 Databricks found that even highly capable frontier agents scored below 50% accuracy on real enterprise document reasoning tasks. The bottleneck wasn't reasoning - it was reading.
+
+## References
+
+- [Why Frontier Agents Can't Read Documents](https://www.databricks.com/blog/why-frontier-agents-cant-read-documents-and-how-were-fixing-it) - OfficeQA benchmark, <50% accuracy
+- [Why LLMs Hallucinate More on Enterprise Documents](https://www.adlibsoftware.com/news/why-llms-hallucinate-more-on-enterprise-documents) - Input quality gap analysis
+- [AlterSquare: Document AI Fails](https://altersquare.io/enterprise-document-ai-fails-extraction-layer-not-model-layer/) - Benchmark vs. production gap

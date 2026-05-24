@@ -40,3 +40,8 @@ Result: User misses meeting because they assumed Tuesday
 - Track confidence distributions by answer correctness
 - User feedback on overconfident wrong answers
 - Test with deliberately uncertain contexts
+
+## References
+
+- [Stanford Legal RAG Hallucinations](https://dho.stanford.edu/wp-content/uploads/Legal_RAG_Hallucinations.pdf) - Confidence without accuracy
+- [CMARix: RAG & AI Trust Statistics 2026](https://www.cmarix.com/blog/rag-ai-statistics/) - Trust calibration issues

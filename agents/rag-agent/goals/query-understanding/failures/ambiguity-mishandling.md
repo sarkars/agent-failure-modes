@@ -44,3 +44,8 @@ Result: Completely wrong topic addressed
 - Monitor user corrections after answers
 - Identify common ambiguous terms
 - Measure answer relevance for ambiguous queries
+
+## References
+
+- [Medium: 7 RAG Hallucination Root Causes](https://medium.com/@umesh382.kushwaha/why-your-rag-pipeline-hallucinates-7-root-causes-and-how-to-fix-them-1a04a84be7f5) - Query ambiguity issues
+- [Mindee: RAG Hallucinations Explained](https://www.mindee.com/blog/rag-hallucinations-explained) - Query interpretation

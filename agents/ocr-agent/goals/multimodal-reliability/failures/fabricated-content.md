@@ -26,3 +26,9 @@ Result: Package shipped to wrong address
 2. **Character-level alignment**: Map outputs back to image regions
 3. **Refusal training**: Fine-tune model to say "unclear" rather than guess
 4. **OCR fallback**: Use traditional OCR as cross-check
+
+## References
+
+- [Mitigating OCR Hallucinations in MLLMs](https://arxiv.org/html/2506.20168v2) - Fabrication under ambiguity
+- [Hallucination of Multimodal LLMs Survey](https://arxiv.org/html/2404.18930v2) - Content not grounded in input
+- [Why OCR Alone Fails](https://dev.to/jakemiller/why-ocr-alone-fails-in-real-world-documents-5f86) - Grounding verification

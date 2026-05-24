@@ -35,3 +35,7 @@ Actual: Flat list with hierarchy lost
 2. **Indentation detection**: Use leading whitespace/bullets to infer hierarchy
 3. **Post-processing rules**: Apply domain-specific rules to reconstruct hierarchy
 4. **Row grouping heuristics**: Empty cells often indicate continuation of previous row's value
+
+## References
+- [Table Extraction Using LLMs](https://nanonets.com/blog/table-extraction-using-llms-unlocking-structured-data-from-documents/) - Merged cell handling
+- [VLMs for Spreadsheet Understanding](https://arxiv.org/html/2405.16234v1) - Complex table structures

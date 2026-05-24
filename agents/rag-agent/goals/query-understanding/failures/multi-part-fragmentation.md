@@ -42,3 +42,8 @@ Result: User must ask two more times for complete answer
 - Compare query parts to answer coverage
 - Track follow-up queries for missing parts
 - Measure multi-part query completion rate
+
+## References
+
+- [FloTorch: 2026 RAG Performance Landscape](https://www.flotorch.ai/blogs/the-2026-rag-performance-landscape-what-every-enterprise-leader-needs-to-know) - Complex query handling
+- [Atlan: LLM Hallucinations 2026](https://atlan.com/know/llm-hallucinations/) - Query decomposition failures

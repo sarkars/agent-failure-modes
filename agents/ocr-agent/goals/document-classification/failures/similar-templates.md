@@ -43,3 +43,9 @@ Result: PO sent to AP workflow, fields misextracted (no "Amount Due" exists on P
 - Field extraction failures (expected field not found)
 - Downstream workflow errors (wrong process triggered)
 - User corrections in review interface
+
+## References
+
+- [AlterSquare: Document AI Fails](https://altersquare.io/enterprise-document-ai-fails-extraction-layer-not-model-layer/) - Template matching challenges
+- [IDP Challenges 2026](https://idp-software.com/guides/idp-challenges-2026/) - Document type confusion
+- [Why OCR Alone Fails](https://dev.to/jakemiller/why-ocr-alone-fails-in-real-world-documents-5f86) - Classification limitations

@@ -19,6 +19,7 @@ Handle context windows, memory, and state effectively. Context failures cause ag
 | [Conflicting Instructions](failures/conflicting-instructions.md) | Occasional | Medium |
 | [Memory Corruption](failures/memory-corruption.md) | Occasional | High |
 | [Cross-Session Confusion](failures/cross-session-confusion.md) | Occasional | Medium |
+| [State Awareness Failure](failures/state-awareness.md) | Common | High |
 
 ## Key Statistics
 

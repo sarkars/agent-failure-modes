@@ -39,3 +39,7 @@ Result: User references Q2 report but finds 12%, not 18%
 - Compare cited text to source content
 - Track citation accuracy by source count
 - User reports of wrong citations
+
+## References
+- [Stanford Legal RAG Hallucinations](https://dho.stanford.edu/wp-content/uploads/Legal_RAG_Hallucinations.pdf) - Citation accuracy issues
+- [Mindee: RAG Hallucinations Explained](https://www.mindee.com/blog/rag-hallucinations-explained) - Source attribution errors

@@ -31,3 +31,8 @@ Result: Line item description corrupted
 - Unusual field lengths or formats
 - Catalog/database lookup failures
 - Color analysis detecting overlapping layers
+
+## References
+
+- [IDP Challenges 2026](https://idp-software.com/guides/idp-challenges-2026/) - Overlay handling
+- [Why OCR Alone Fails](https://dev.to/jakemiller/why-ocr-alone-fails-in-real-world-documents-5f86) - Annotation interference

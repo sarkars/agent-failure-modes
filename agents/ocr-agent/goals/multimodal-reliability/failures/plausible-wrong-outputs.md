@@ -37,3 +37,9 @@ Unlike OCR errors which are often obvious and consistent, LLM errors are plausib
 - Customer disputes on invoiced amounts
 - Audit findings revealing systematic errors
 - A/B testing against human extraction
+
+## References
+
+- [Hallucination of Multimodal LLMs Survey](https://arxiv.org/html/2404.18930v2) - Silent hallucination patterns
+- [Why LLMs Hallucinate More on Enterprise Documents](https://www.adlibsoftware.com/news/why-llms-hallucinate-more-on-enterprise-documents) - Plausible but wrong outputs
+- [Evaluating Multimodal LLMs for Production](https://galileo.ai/blog/multimodal-llm-guide-evaluation) - Production reliability metrics

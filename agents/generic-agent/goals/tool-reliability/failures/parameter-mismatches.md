@@ -42,3 +42,11 @@ Result: Tool fails or silently processes wrong types
 - Track type coercion frequency
 - Monitor tool success rate by parameter type
 - Compare expected vs. actual parameter types
+
+---
+
+## References
+
+- [Silent Tool-Call Errors](https://www.roborhythms.com/fix-ai-agent-tool-call-errors/) - Analysis finding 37% of tool calls have parameter mismatches
+- [MCP Tool Design](https://dev.to/aws-heroes/mcp-tool-design-why-your-ai-agent-is-failing-and-how-to-fix-it-40fc) - Best practices for designing agent-friendly tool schemas
+- [Why Do Multi-Agent LLM Systems Fail? (MAST)](https://arxiv.org/abs/2503.13657) - Research paper on multi-agent system failure modes

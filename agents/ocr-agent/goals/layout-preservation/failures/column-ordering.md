@@ -32,3 +32,7 @@ Result: Nonsensical text
 2. **Reading order models**: Use models trained on multi-column layouts
 3. **Semantic coherence checks**: Detect when adjacent text doesn't form coherent sentences
 4. **Document type classification**: Apply column-aware processing for detected types (newspaper, paper, etc.)
+
+## References
+- [Why OCR Alone Fails](https://dev.to/jakemiller/why-ocr-alone-fails-in-real-world-documents-5f86) - Reading order issues
+- [AlterSquare: Document AI Fails](https://altersquare.io/enterprise-document-ai-fails-extraction-layer-not-model-layer/) - Layout understanding

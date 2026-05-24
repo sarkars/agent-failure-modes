@@ -19,6 +19,7 @@ Interpret user questions correctly to retrieve and synthesize appropriate answer
 | [Intent Misclassification](failures/intent-misclassification.md) | Common | High |
 | [Scope Misunderstanding](failures/scope-misunderstanding.md) | Common | Medium |
 | [Implicit Requirement Missing](failures/implicit-requirements.md) | Common | Medium |
+| [False Premise Acceptance](failures/false-premise-acceptance.md) | Common | High |
 
 ## Key Statistics
 

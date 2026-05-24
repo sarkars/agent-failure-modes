@@ -29,3 +29,9 @@ Result: Agent "corrected" good data to match bad extraction
 2. **Confidence weighting**: Only modify low-confidence extractions
 3. **Validation priority**: Some fields (line items) more reliable than others (totals)
 4. **Human review trigger**: Corrections above threshold require human approval
+
+## References
+
+- [Production-Ready AI Agent for Document Extraction](https://www.stackai.com/insights/how-to-build-a-production-ready-ai-agent-for-document-data-extraction) - Error handling strategies
+- [Why Do Multi-Agent LLM Systems Fail? (MAST)](https://arxiv.org/abs/2503.13657) - Recovery failure modes
+- [AlterSquare: Document AI Fails](https://altersquare.io/enterprise-document-ai-fails-extraction-layer-not-model-layer/) - Cascading correction errors

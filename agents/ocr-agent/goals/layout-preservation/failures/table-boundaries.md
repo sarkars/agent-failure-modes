@@ -36,3 +36,8 @@ Result: Cannot parse individual line items
 - Field count per document differs from expected
 - Values appear truncated or concatenated
 - Downstream parsing exceptions
+
+## References
+- [Table Extraction Using LLMs](https://nanonets.com/blog/table-extraction-using-llms-unlocking-structured-data-from-documents/) - Table detection challenges
+- [IDP Challenges 2026](https://idp-software.com/guides/idp-challenges-2026/) - Table extraction as hardest problem
+- [VLMs for Spreadsheet Understanding](https://arxiv.org/html/2405.16234v1) - Table structure recognition

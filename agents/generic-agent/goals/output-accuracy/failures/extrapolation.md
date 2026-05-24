@@ -38,3 +38,10 @@ Result: User makes decisions based on unsupported projections
 - Flag unsourced quantitative statements
 - Track inference accuracy over time
 - Audit projection vs. actual outcomes
+
+---
+
+## References
+
+- [Medium: 7 RAG Hallucination Root Causes](https://medium.com/@umesh382.kushwaha/why-your-rag-pipeline-hallucinates-7-root-causes-and-how-to-fix-them-1a04a84be7f5) - Analysis of extrapolation-related hallucinations in RAG pipelines
+- [Mindee: RAG Hallucinations Explained](https://www.mindee.com/blog/rag-hallucinations-explained) - Coverage of unsupported inference patterns

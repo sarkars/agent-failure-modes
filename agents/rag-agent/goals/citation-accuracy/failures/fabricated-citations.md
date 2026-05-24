@@ -46,3 +46,7 @@ Result: User can't verify, may cite fake study themselves
 - Check URLs for accessibility
 - Cross-reference author/title combinations
 - Flag citations not in retrieved documents
+
+## References
+- [Avianca Lawyers](https://www.cnn.com/2023/05/27/business/chat-gpt-avianca-mata-lawyers/index.html) - 6 fake cases cited
+- [Stanford Legal RAG Hallucinations](https://dho.stanford.edu/wp-content/uploads/Legal_RAG_Hallucinations.pdf) - Fabricated legal citations

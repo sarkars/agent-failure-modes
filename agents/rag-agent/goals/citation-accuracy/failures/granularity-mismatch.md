@@ -37,3 +37,7 @@ Better citation: "Technical Documentation, Section 4.2.3: Rate Limits"
 - Monitor citation specificity levels
 - User feedback on citation usefulness
 - Compare citation granularity to claim specificity
+
+## References
+- [Medium: 7 RAG Hallucination Root Causes](https://medium.com/@umesh382.kushwaha/why-your-rag-pipeline-hallucinates-7-root-causes-and-how-to-fix-them-1a04a84be7f5) - Chunking granularity
+- [FloTorch: 2026 RAG Performance Landscape](https://www.flotorch.ai/blogs/the-2026-rag-performance-landscape-what-every-enterprise-leader-needs-to-know) - Citation precision

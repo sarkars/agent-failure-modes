@@ -32,3 +32,8 @@ Result: Payment terms not correctly parsed
 - Track accuracy by document source/channel
 - Monitor image quality metrics (DPI, file size, noise levels) alongside accuracy
 - Alert on sudden quality drops from specific sources
+
+## References
+
+- [Mitigating OCR Hallucinations in MLLMs](https://arxiv.org/html/2506.20168v2) - Visual degradation
+- [Why LLMs Hallucinate More on Enterprise Documents](https://www.adlibsoftware.com/news/why-llms-hallucinate-more-on-enterprise-documents) - Input quality gap

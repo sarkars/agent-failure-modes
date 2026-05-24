@@ -44,3 +44,8 @@ Result: User not informed of risks and limitations
 - Track caveat/limitation inclusion rates
 - User feedback on incomplete answers
 - Measure answer comprehensiveness
+
+## References
+
+- [Stanford Legal RAG Hallucinations](https://dho.stanford.edu/wp-content/uploads/Legal_RAG_Hallucinations.pdf) - Selective evidence use
+- [Mindee: RAG Hallucinations Explained](https://www.mindee.com/blog/rag-hallucinations-explained) - Incomplete synthesis

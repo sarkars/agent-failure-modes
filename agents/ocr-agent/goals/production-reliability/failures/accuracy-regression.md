@@ -27,3 +27,9 @@ Result: Thousands of documents processed with degraded accuracy
 2. **Canary deployments**: Roll out changes gradually with accuracy comparison
 3. **Automated regression tests**: Run test suite on every deployment
 4. **Business metric correlation**: Track downstream metrics (disputes, corrections)
+
+## References
+
+- [Braintrust: Agent Observability Guide 2026](https://www.braintrust.dev/articles/agent-observability-complete-guide-2026) - Accuracy monitoring
+- [LinkedIn: Silent Failures of Production AI](https://www.linkedin.com/pulse/silent-failures-production-ai-why-most-llm-monitoring-praveen-juyal-iqgyc) - Regression detection gaps
+- [Evaluating Multimodal LLMs for Production](https://galileo.ai/blog/multimodal-llm-guide-evaluation) - Continuous evaluation

@@ -43,3 +43,8 @@ Result: User expects installation that won't be provided
 - Track entity-attribute assignment accuracy
 - Monitor multi-source synthesis errors
 - User reports of mixed-up information
+
+## References
+
+- [Mindee: RAG Hallucinations Explained](https://www.mindee.com/blog/rag-hallucinations-explained) - Synthesis failures
+- [FloTorch: 2026 RAG Performance Landscape](https://www.flotorch.ai/blogs/the-2026-rag-performance-landscape-what-every-enterprise-leader-needs-to-know) - Multi-source synthesis

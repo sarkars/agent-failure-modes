@@ -26,3 +26,7 @@ Result: Header content pollutes body text
 2. **Repetition detection**: Remove text that repeats at consistent positions across pages
 3. **Page number detection**: Identify and exclude page numbering patterns
 4. **First-page exception**: Headers on first page often differ - handle separately
+
+## References
+- [Why OCR Alone Fails](https://dev.to/jakemiller/why-ocr-alone-fails-in-real-world-documents-5f86) - Page element detection
+- [Document AI: Next Evolution of IDP](https://www.llamaindex.ai/blog/document-ai-the-next-evolution-of-intelligent-document-processing) - Structure preservation

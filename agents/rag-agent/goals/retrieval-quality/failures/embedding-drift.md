@@ -44,3 +44,8 @@ Result: Correct document no longer retrieved
 - Track embedding model version across index
 - Alert on retrieval score distribution shifts
 - A/B test model versions before full rollout
+
+## References
+
+- [FloTorch: 2026 RAG Performance Landscape](https://www.flotorch.ai/blogs/the-2026-rag-performance-landscape-what-every-enterprise-leader-needs-to-know) - Model versioning challenges
+- [Braintrust: Agent Observability Guide 2026](https://www.braintrust.dev/articles/agent-observability-complete-guide-2026) - Monitoring embedding quality

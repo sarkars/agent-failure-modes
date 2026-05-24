@@ -37,3 +37,10 @@ Result: User follows citation, finds different data, loses trust
 - Compare extracted quotes to source text
 - Track user reports of broken citations
 - Sample-based human review
+
+---
+
+## References
+
+- [Stanford Legal RAG Hallucinations](https://dho.stanford.edu/wp-content/uploads/Legal_RAG_Hallucinations.pdf) - Research on citation accuracy in legal RAG systems
+- [Mindee: RAG Hallucinations Explained](https://www.mindee.com/blog/rag-hallucinations-explained) - Analysis of source attribution failures in RAG pipelines

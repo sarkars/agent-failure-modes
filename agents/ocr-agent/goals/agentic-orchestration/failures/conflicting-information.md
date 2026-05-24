@@ -29,3 +29,9 @@ Result: Agent missed amendment, used superseded value
 2. **Recency heuristics**: Later pages often supersede earlier pages
 3. **Amendment detection**: Identify revision/amendment sections
 4. **Conflict flagging**: Report conflicts for human resolution
+
+## References
+
+- [Why Frontier Agents Can't Read Documents](https://www.databricks.com/blog/why-frontier-agents-cant-read-documents-and-how-were-fixing-it) - Long document challenges
+- [Document AI: Next Evolution of IDP](https://www.llamaindex.ai/blog/document-ai-the-next-evolution-of-intelligent-document-processing) - Multi-location extraction
+- [Production-Ready AI Agent for Document Extraction](https://www.stackai.com/insights/how-to-build-a-production-ready-ai-agent-for-document-data-extraction) - Conflict resolution

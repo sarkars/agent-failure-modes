@@ -42,3 +42,10 @@ Result: Quadratic growth instead of linear
 - Alert on growth rate exceeding threshold
 - Monitor context utilization percentage
 - Compare actual vs. expected token usage
+
+---
+
+## References
+
+- [LeanOps: Agents Burn 50x More Tokens](https://leanopstech.com/blog/agentic-ai-cost-runaway-token-budget-2026/) - Analysis of token consumption patterns in agentic AI
+- [AWS: 3 Agent Failure Modes](https://dev.to/aws/why-ai-agents-fail-3-failure-modes-that-cost-you-tokens-and-time-1flb) - Common failure patterns including token explosion

@@ -38,3 +38,7 @@ Result: User believes guarantee exists when it doesn't
 - Compare claim text to cited content
 - Track support verification failure rate
 - User reports of misleading citations
+
+## References
+- [Stanford Legal RAG Hallucinations](https://dho.stanford.edu/wp-content/uploads/Legal_RAG_Hallucinations.pdf) - Claims without support
+- [Self-Healing RAG Layer](https://towardsdatascience.com/rag-hallucinates-i-built-a-self-healing-layer-that-fixes-it-in-real-time/) - Citation verification

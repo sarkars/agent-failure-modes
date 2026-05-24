@@ -38,3 +38,10 @@ Result: Agent trusts tool over user, provides incorrect information
 - Monitor user corrections
 - Compare tool outputs to ground truth
 - Audit multi-step reasoning chains
+
+---
+
+## References
+
+- [Why Do Multi-Agent LLM Systems Fail? (MAST)](https://arxiv.org/abs/2503.13657) - Research on error propagation in multi-agent systems
+- [Arize: Why AI Agents Break](https://arize.com/blog/common-ai-agent-failures/) - Analysis of inherited error patterns in AI agent pipelines

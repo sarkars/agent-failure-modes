@@ -42,3 +42,10 @@ Result: User never receives notification, thinks it was sent
 - Monitor downstream confirmation rates
 - Alert on mismatches between tool response and reality
 - Log completion verification results
+
+---
+
+## References
+
+- [Silent Tool-Call Errors](https://www.roborhythms.com/fix-ai-agent-tool-call-errors/) - How silent errors go undetected in agent systems
+- [Arize: Why AI Agents Break](https://arize.com/blog/common-ai-agent-failures/) - Common agent failure patterns including silent failures

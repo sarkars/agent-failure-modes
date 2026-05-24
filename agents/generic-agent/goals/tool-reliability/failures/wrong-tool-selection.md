@@ -43,3 +43,10 @@ Result: File emptied but not deleted, takes up space
 - Monitor user corrections of tool selection
 - Log sequences where wrong tool preceded correct one
 - Compare tool selection across similar tasks
+
+---
+
+## References
+
+- [MCP Tool Design](https://dev.to/aws-heroes/mcp-tool-design-why-your-ai-agent-is-failing-and-how-to-fix-it-40fc) - How poor tool design leads to wrong tool selection
+- [Why Do Multi-Agent LLM Systems Fail? (MAST)](https://arxiv.org/abs/2503.13657) - Research on tool selection failures in multi-agent systems

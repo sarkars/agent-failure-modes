@@ -30,3 +30,9 @@ A single agent can use OCR for printed text, handwriting recognition for annotat
 2. **Region-level routing**: Different tools for different page regions
 3. **Tool capability descriptions**: Clear tool descriptions help agent selection
 4. **Fallback chains**: If primary tool fails, try alternatives
+
+## References
+
+- [MCP Tool Design](https://dev.to/aws-heroes/mcp-tool-design-why-your-ai-agent-is-failing-and-how-to-fix-it-40fc) - Tool selection challenges
+- [Agentic Document Processing](https://www.llamaindex.ai/blog/agentic-document-processing) - Tool orchestration patterns
+- [5 MCP Server Mistakes](https://dev.to/thedailyagent/5-mcp-server-mistakes-that-waste-your-ai-agents-time-and-how-to-fix-them-18m5) - Tool description importance

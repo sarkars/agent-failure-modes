@@ -43,3 +43,8 @@ Result: User can't upload files they should be able to
 - Monitor answer changes based on which source prioritized
 - User feedback on conflicting information
 - Automated conflict detection in retrieved sets
+
+## References
+
+- [Medium: 7 RAG Hallucination Root Causes](https://medium.com/@umesh382.kushwaha/why-your-rag-pipeline-hallucinates-7-root-causes-and-how-to-fix-them-1a04a84be7f5) - Conflicting sources
+- [Atlan: LLM Hallucinations 2026](https://atlan.com/know/llm-hallucinations/) - Source reconciliation

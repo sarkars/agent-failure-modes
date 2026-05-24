@@ -37,3 +37,10 @@ Result: Agent has drifted from formal style to casual
 - Monitor for constraint violations
 - Compare early vs. late behavior patterns
 - Alert on style/behavior drift
+
+---
+
+## References
+
+- [Why Do Multi-Agent LLM Systems Fail? (MAST)](https://arxiv.org/abs/2503.13657) - Instruction following degradation
+- [Arize: Why AI Agents Break](https://arize.com/blog/common-ai-agent-failures/) - Behavioral drift patterns

@@ -29,3 +29,9 @@ Legacy OCR pipelines often plateau around 60-70% automation because they break u
 2. **Multi-layer output**: Keep both text and spatial information
 3. **Structural validation**: Verify table structures match expected schemas
 4. **Document type-specific handling**: Different pipelines for different layouts
+
+## References
+
+- [OCR vs IDP](https://forage.ai/blog/ocr-vs-idp/) - Layout preservation importance
+- [Why OCR Is the Weakest Part of Document AI](https://medium.com/@manalisomani099/why-ocr-is-the-weakest-part-of-most-document-ai-systems-c9188381d1b9) - Structure loss
+- [IDP Challenges 2026](https://idp-software.com/guides/idp-challenges-2026/) - Layout variance challenges

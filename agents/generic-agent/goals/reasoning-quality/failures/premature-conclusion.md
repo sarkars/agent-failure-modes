@@ -49,3 +49,7 @@ Result: Incomplete, insecure authentication system
 - Track requirement coverage percentage
 - Monitor for missing standard components
 - Test edge cases and error handling
+
+## References
+- [Why Do Multi-Agent LLM Systems Fail? (MAST)](https://arxiv.org/abs/2503.13657) - Incomplete task completion
+- [Augment Code: Multi-Agent Coordination Failures](https://www.augmentcode.com/guides/why-multi-agent-llm-systems-fail-and-how-to-fix-them) - 41-86.7% failure rates

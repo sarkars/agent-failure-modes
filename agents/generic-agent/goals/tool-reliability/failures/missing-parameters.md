@@ -40,3 +40,10 @@ Result: Email not sent, user thinks message was delivered
 - Monitor which parameters are most often omitted
 - Alert on repeated missing parameter errors
 - Log parameter completeness rate
+
+---
+
+## References
+
+- [Silent Tool-Call Errors](https://www.roborhythms.com/fix-ai-agent-tool-call-errors/) - Common tool call errors including missing parameters
+- [5 MCP Server Mistakes](https://dev.to/thedailyagent/5-mcp-server-mistakes-that-waste-your-ai-agents-time-and-how-to-fix-them-18m5) - MCP server configuration mistakes that cause parameter issues

@@ -31,3 +31,8 @@ Result: Invoice processed for wrong amount
 - Unusual value distributions (many values < $1 when expecting larger amounts)
 - Parsing exceptions in downstream systems
 - Currency mismatch alerts
+
+## References
+
+- [Why OCR Is the Weakest Part of Document AI](https://medium.com/@manalisomani099/why-ocr-is-the-weakest-part-of-most-document-ai-systems-c9188381d1b9) - Punctuation issues
+- [IDP Accuracy Reckoning 2026](https://idp-software.com/news/idp-accuracy-reckoning-2026/) - OCR accuracy challenges

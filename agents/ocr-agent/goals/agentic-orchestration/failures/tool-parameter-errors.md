@@ -29,3 +29,9 @@ Result: Wrong table extracted, agent proceeds with incorrect data
 2. **Visual confirmation**: Agent verifies extraction region matches intent
 3. **Schema enforcement**: Strict parameter typing catches errors early
 4. **Error recovery**: Failed tool calls trigger retry with corrected parameters
+
+## References
+
+- [Silent Tool-Call Errors](https://www.roborhythms.com/fix-ai-agent-tool-call-errors/) - 37% parameter mismatch rate
+- [MCP Tool Design](https://dev.to/aws-heroes/mcp-tool-design-why-your-ai-agent-is-failing-and-how-to-fix-it-40fc) - Parameter validation
+- [AWS: 3 Agent Failure Modes](https://dev.to/aws/why-ai-agents-fail-3-failure-modes-that-cost-you-tokens-and-time-1flb) - Tool call error patterns

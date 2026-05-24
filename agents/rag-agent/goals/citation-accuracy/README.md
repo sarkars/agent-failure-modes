@@ -19,6 +19,7 @@ Correctly attribute information to sources. Citations build trust and enable ver
 | [Citation Doesn't Support Claim](failures/unsupported-claim.md) | Common | High |
 | [Granularity Mismatch](failures/granularity-mismatch.md) | Common | Medium |
 | [Broken References](failures/broken-references.md) | Occasional | Medium |
+| [Misgrounded Citation](failures/misgrounded-citation.md) | Common | High |
 
 ## Key Statistics
 

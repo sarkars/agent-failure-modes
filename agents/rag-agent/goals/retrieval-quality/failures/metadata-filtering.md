@@ -42,3 +42,8 @@ Result: Document filtered out despite being exactly what user wants
 - Monitor filter strictness vs. recall
 - Audit metadata consistency across corpus
 - Compare filtered vs. unfiltered retrieval
+
+## References
+
+- [Medium: 7 RAG Hallucination Root Causes](https://medium.com/@umesh382.kushwaha/why-your-rag-pipeline-hallucinates-7-root-causes-and-how-to-fix-them-1a04a84be7f5) - Metadata issues
+- [CMARix: RAG & AI Trust Statistics 2026](https://www.cmarix.com/blog/rag-ai-statistics/) - Enterprise filtering challenges

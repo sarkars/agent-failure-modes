@@ -6,10 +6,10 @@ RAG (Retrieval-Augmented Generation) Agents combine information retrieval with l
 
 | Goal | Description | Failure Patterns |
 |------|-------------|------------------|
-| [Retrieval Quality](goals/retrieval-quality/) | Find relevant documents for user queries | 7 patterns |
+| [Retrieval Quality](goals/retrieval-quality/) | Find relevant documents for user queries | 10 patterns |
 | [Answer Synthesis](goals/answer-synthesis/) | Generate accurate answers from retrieved content | 7 patterns |
-| [Citation Accuracy](goals/citation-accuracy/) | Correctly attribute information to sources | 6 patterns |
-| [Query Understanding](goals/query-understanding/) | Interpret user questions correctly | 6 patterns |
+| [Citation Accuracy](goals/citation-accuracy/) | Correctly attribute information to sources | 7 patterns |
+| [Query Understanding](goals/query-understanding/) | Interpret user questions correctly | 7 patterns |
 
 ## Structure
 

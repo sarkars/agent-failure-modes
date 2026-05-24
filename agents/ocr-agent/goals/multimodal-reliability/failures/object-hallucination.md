@@ -24,3 +24,9 @@ Result: Fake PO number causes ERP lookup failure or worse, matches wrong PO
 1. **Schema constraints**: Only extract fields visually confirmed
 2. **Bounding box validation**: Require spatial coordinates for each extraction
 3. **Negative sampling**: Train on documents missing common fields
+
+## References
+
+- [Hallucination of Multimodal LLMs Survey](https://arxiv.org/html/2404.18930v2) - Object hallucination taxonomy
+- [Mitigating OCR Hallucinations in MLLMs](https://arxiv.org/html/2506.20168v2) - Phantom element detection
+- [Evaluating Multimodal LLMs for Production](https://galileo.ai/blog/multimodal-llm-guide-evaluation) - Grounding validation

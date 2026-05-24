@@ -24,3 +24,8 @@ Actual: RCME CORF (stylized A looks like R, P like F)
 2. **Logo detection**: Identify and exclude logo regions from text extraction
 3. **Source-specific fine-tuning**: Train on documents from frequent sources
 4. **Fallback to business rules**: Use sender metadata instead of extracted company name
+
+## References
+
+- [Why AI OCR Fails](https://parseur.com/blog/why-ai-ocr-fail) - Font recognition problems
+- [AlterSquare: Document AI Fails](https://altersquare.io/enterprise-document-ai-fails-extraction-layer-not-model-layer/) - Extraction layer issues

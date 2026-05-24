@@ -41,3 +41,10 @@ Result: 600 tokens for a 1-token answer
 - Compare reasoning length to task complexity
 - Monitor user engagement with lengthy responses
 - A/B test concise vs. verbose responses
+
+---
+
+## References
+
+- [LeanOps: Agents Burn 50x More Tokens](https://leanopstech.com/blog/agentic-ai-cost-runaway-token-budget-2026/) - Analysis of excessive token usage from verbose reasoning
+- [MindStudio: Token Budget Management](https://www.mindstudio.ai/blog/ai-agent-token-budget-management-claude-code) - Strategies for managing token budgets in AI agents

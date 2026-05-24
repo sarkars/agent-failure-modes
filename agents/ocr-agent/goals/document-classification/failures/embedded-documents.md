@@ -27,3 +27,9 @@ Better: Classify email + detect and separately process attached invoice
 2. **Recursive processing**: Process main document, then process detected attachments
 3. **Page content analysis**: Different formatting/style suggests different document
 4. **Explicit markers**: Look for "Attachment", "Appendix", "Exhibit" headers
+
+## References
+
+- [Agentic Document Processing](https://www.llamaindex.ai/blog/agentic-document-processing) - Nested document handling
+- [Why Frontier Agents Can't Read Documents](https://www.databricks.com/blog/why-frontier-agents-cant-read-documents-and-how-were-fixing-it) - Complex document structures
+- [AlterSquare: Document AI Fails](https://altersquare.io/enterprise-document-ai-fails-extraction-layer-not-model-layer/) - Attachment extraction challenges

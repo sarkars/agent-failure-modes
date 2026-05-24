@@ -43,3 +43,7 @@ Result: User can't verify key detail
 - Track citation density by response
 - Flag responses with low citation coverage
 - User feedback on unverifiable claims
+
+## References
+- [Stanford Legal RAG Hallucinations](https://dho.stanford.edu/wp-content/uploads/Legal_RAG_Hallucinations.pdf) - Uncited claims
+- [CMARix: RAG & AI Trust Statistics 2026](https://www.cmarix.com/blog/rag-ai-statistics/) - Citation coverage gaps

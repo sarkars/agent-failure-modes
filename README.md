@@ -56,11 +56,11 @@ agents/
 
 | Agent Type | Description | Goals | Failure Patterns |
 |------------|-------------|-------|------------------|
-| [Generic Agent](agents/generic-agent/) | **Cross-cutting failures for any agent** | 6 | 39 |
+| [Generic Agent](agents/generic-agent/) | **Cross-cutting failures for any agent** | 7 | 77 |
 | [OCR Agent](agents/ocr-agent/) | Document text extraction and processing | 6 | 48 |
 | [Code Agent](agents/code-agent/) | Code generation, review, and modification | 4 | Planned |
 | [Customer Service Agent](agents/customer-service-agent/) | Customer interaction and support | 4 | Planned |
-| [RAG Agent](agents/rag-agent/) | Retrieval-augmented generation | 4 | 26 |
+| [RAG Agent](agents/rag-agent/) | Retrieval-augmented generation | 4 | 31 |
 | [Data Extraction Agent](agents/data-extraction-agent/) | Structured data extraction from unstructured sources | 4 | Planned |
 | [Workflow Agent](agents/workflow-agent/) | Multi-step task automation | 4 | Planned |
 
@@ -91,6 +91,8 @@ These failures appear across multiple agent types. See [Generic Agent](agents/ge
 | [Context Overflow](agents/generic-agent/goals/context-management/failures/context-overflow.md) | Context Management | Agent loses information when context exceeds limits |
 | [Prompt Injection](agents/generic-agent/goals/safety-security/failures/prompt-injection.md) | Safety & Security | Malicious input hijacks agent behavior |
 | [Goal Drift](agents/generic-agent/goals/reasoning-quality/failures/goal-drift.md) | Reasoning Quality | Agent loses focus on original objective |
+| [Memory Poisoning](agents/generic-agent/goals/safety-security/failures/memory-poisoning.md) | Safety & Security | Malicious instructions injected into agent memory |
+| [Agent Misalignment](agents/generic-agent/goals/multi-agent-coordination/failures/agent-misalignment.md) | Multi-Agent | Agents pursue conflicting objectives |
 
 ## Research Sources & References
 

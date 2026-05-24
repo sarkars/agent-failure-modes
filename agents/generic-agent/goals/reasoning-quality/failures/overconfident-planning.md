@@ -49,3 +49,7 @@ Result: "Quick task" becomes multi-week project
 - Monitor scope creep frequency
 - Alert on tasks exceeding estimates
 - Compare planning accuracy by task type
+
+## References
+- [Augment Code: Multi-Agent Coordination Failures](https://www.augmentcode.com/guides/why-multi-agent-llm-systems-fail-and-how-to-fix-them) - Planning accuracy issues
+- [Gartner: 40% of agentic AI projects scrapped](https://www.gartner.com/) - Overconfident project estimates

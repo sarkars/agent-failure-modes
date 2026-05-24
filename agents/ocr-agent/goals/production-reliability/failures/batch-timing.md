@@ -26,3 +26,9 @@ Result: Amendment rejected - "Invoice #123 not found"
 2. **Retry mechanisms**: Re-process failed documents when dependencies resolve
 3. **Event ordering**: Use timestamps or sequence numbers
 4. **Idempotent operations**: Make reprocessing safe
+
+## References
+
+- [Production-Ready AI Agent for Document Extraction](https://www.stackai.com/insights/how-to-build-a-production-ready-ai-agent-for-document-data-extraction) - Batch processing patterns
+- [Agentic Document Processing](https://www.llamaindex.ai/blog/agentic-document-processing) - Document ordering
+- [IDP Challenges 2026](https://idp-software.com/guides/idp-challenges-2026/) - Processing dependencies

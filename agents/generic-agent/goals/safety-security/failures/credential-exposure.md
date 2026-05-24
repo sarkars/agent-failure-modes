@@ -39,3 +39,8 @@ Result: Production database credentials exposed
 - Monitor for secret patterns in logs
 - Alert on credential-like strings
 - Track credential access patterns
+
+## References
+- [Check Point: Claude Code RCE & Token Exfiltration](https://research.checkpoint.com/2026/rce-and-api-token-exfiltration-through-claude-code-project-files-cve-2025-59536/)
+- [SecurityWeek: Claude OAuth Token Theft](https://www.securityweek.com/claude-code-oauth-tokens-can-be-stolen-through-stealthy-mcp-hijacking/)
+- [VentureBeat: Comment and Control Attack](https://venturebeat.com/security/ai-agent-runtime-security-system-card-audit-comment-and-control-2026)

@@ -35,3 +35,9 @@ Table extraction works effectively in most cases, but sparse tables with multipl
 2. **Column alignment heuristics**: Use header positions to anchor column assignment
 3. **Empty cell handling**: Explicitly model missing values rather than skipping
 4. **Post-validation**: Verify column counts match expected schema
+
+## References
+
+- [VLMs for Spreadsheet Understanding](https://arxiv.org/html/2405.16234v1) - Cell omission and spatial perception
+- [Table Extraction Using LLMs](https://nanonets.com/blog/table-extraction-using-llms-unlocking-structured-data-from-documents/) - Sparse table challenges
+- [IDP Challenges 2026](https://idp-software.com/guides/idp-challenges-2026/) - Table extraction as unsolved problem

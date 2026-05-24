@@ -18,6 +18,9 @@ Minimize token usage and API costs while maintaining agent effectiveness. Runawa
 | [Verbose Reasoning](failures/verbose-reasoning.md) | Very Common | Medium |
 | [Unnecessary Tool Calls](failures/unnecessary-tool-calls.md) | Common | Medium |
 | [Context Stuffing](failures/context-stuffing.md) | Common | Medium |
+| [Resource Exhaustion](failures/resource-exhaustion.md) | Common | High |
+| [Step Repetition](failures/step-repetition.md) | Common | High |
+| [Cost-Quality Tradeoff](failures/cost-quality-tradeoff.md) | Common | High |
 
 ## Key Statistics
 

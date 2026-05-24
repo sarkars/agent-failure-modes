@@ -48,3 +48,7 @@ Result: Deployment fails, data corrupted, no rollback
 - Track missing step discovery rate
 - Monitor task failures due to planning gaps
 - Analyze post-mortems for planning issues
+
+## References
+- [Why Do Multi-Agent LLM Systems Fail? (MAST)](https://arxiv.org/abs/2503.13657) - Task decomposition failures
+- [Arize: Why AI Agents Break](https://arize.com/blog/common-ai-agent-failures/) - Planning failures

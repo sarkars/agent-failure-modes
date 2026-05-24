@@ -31,3 +31,9 @@ Databricks' OfficeQA benchmark found frontier agents scored below 50% accuracy o
 2. **Extraction verification**: Agent checks extractions before reasoning
 3. **Confidence-aware reasoning**: Agent explicitly reasons about extraction uncertainty
 4. **Human validation gates**: Critical values require human confirmation before agent proceeds
+
+## References
+
+- [Why Frontier Agents Can't Read Documents](https://www.databricks.com/blog/why-frontier-agents-cant-read-documents-and-how-were-fixing-it) - OfficeQA benchmark, <50% accuracy
+- [Agentic Document Processing](https://www.llamaindex.ai/blog/agentic-document-processing) - Reading as primary bottleneck
+- [AI Agents and Document Processing 2026](https://parsio.io/blog/ai-agents-document-processing-2026) - Preprocessing importance

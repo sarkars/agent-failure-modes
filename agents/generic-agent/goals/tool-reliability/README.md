@@ -20,6 +20,13 @@ Ensure tools are called correctly, consistently, and with proper error handling.
 | [Tool Output Misinterpretation](failures/output-misinterpretation.md) | Common | High |
 | [Sequencing Errors](failures/sequencing-errors.md) | Common | Medium |
 | [Tool Schema Drift](failures/schema-drift.md) | Occasional | High |
+| [State-Space Navigation](failures/state-space-navigation.md) | Common | High |
+| [Output Processing Errors](failures/output-processing-errors.md) | Common | High |
+| [External System Failures](failures/external-system-failures.md) | Common | High |
+| [Vague Tool Descriptions](failures/vague-tool-descriptions.md) | Very Common | High |
+| [Silent Type Coercion](failures/silent-type-coercion.md) | Very Common | High |
+| [Error Information Leakage](failures/error-information-leakage.md) | Common | Medium |
+| [Blocking Tool Operations](failures/blocking-tool-operations.md) | Common | High |
 
 ## Key Statistics
 

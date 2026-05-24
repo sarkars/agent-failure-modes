@@ -43,3 +43,10 @@ Result: 300 API calls instead of 3
 - Track time-to-success including retries
 - Alert on retry rate spikes
 - Log error types triggering retries
+
+---
+
+## References
+
+- [AWS: 3 Agent Failure Modes](https://dev.to/aws/why-ai-agents-fail-3-failure-modes-that-cost-you-tokens-and-time-1flb) - Common failure patterns including retry storms
+- [Arize: Why AI Agents Break](https://arize.com/blog/common-ai-agent-failures/) - Overview of agent failure modes and mitigation strategies

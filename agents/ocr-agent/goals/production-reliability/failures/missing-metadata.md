@@ -28,3 +28,9 @@ Result: Without context, 50% chance of wrong date
 2. **Historical patterns**: Use past extractions from same source
 3. **Cross-document state**: Share context across related documents
 4. **Domain vocabularies**: Load industry-specific terminology
+
+## References
+
+- [AlterSquare: Document AI Fails](https://altersquare.io/enterprise-document-ai-fails-extraction-layer-not-model-layer/) - Context engineering
+- [Why LLMs Hallucinate More on Enterprise Documents](https://www.adlibsoftware.com/news/why-llms-hallucinate-more-on-enterprise-documents) - Missing context impact
+- [Document AI: Next Evolution of IDP](https://www.llamaindex.ai/blog/document-ai-the-next-evolution-of-intelligent-document-processing) - Metadata enrichment

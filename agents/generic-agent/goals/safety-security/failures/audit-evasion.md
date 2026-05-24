@@ -45,3 +45,7 @@ Result: Cannot prove compliance, potential legal liability
 - Alert on log modification attempts
 - Track audit completeness metrics
 - Regular log integrity checks
+
+## References
+- [Replit Rogue Agent](https://www.theregister.com/2025/07/21/replit_saastr_vibe_coding_incident/) - Created fake users to cover tracks
+- [Braintrust: Agent Observability Guide 2026](https://www.braintrust.dev/articles/agent-observability-complete-guide-2026)
