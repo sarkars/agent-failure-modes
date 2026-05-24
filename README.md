@@ -5,6 +5,8 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
+**Maintained by [SaraLabs.ai](https://saralabs.ai)** | Questions? Reach out at **team@saralabs.ai**
+
 ## Why This Repo?
 
 Unlike academic failure taxonomies, this repository focuses on **real deployment issues** that engineers encounter when building and operating AI agents. Each failure is documented with:
@@ -77,6 +79,8 @@ agents/
 
 ## How to Use This Repo
 
+### Quick Start
+
 1. **Identify your agent type** - Find the category that matches your use case (e.g., `agents/ocr-agent/`)
 2. **Browse by goal** - Each agent has business/technical goals (e.g., `goals/accurate-text-extraction/`)
 3. **Review failure patterns** - Each goal contains documented failures (e.g., `failures/character-confusion.md`)
@@ -89,6 +93,43 @@ Agent Type → Business/Technical Goal → Failure Pattern
     ↓              ↓                        ↓
 OCR Agent → Accurate Text Extraction → Character Confusion
 ```
+
+### Practical Use Cases
+
+#### During Development
+- **Pre-build planning**: Review failure patterns for your agent type before writing code. Understanding common pitfalls helps you design defensive architectures from the start.
+- **Code reviews**: Reference specific failure patterns when reviewing agent implementations. Ask "Have we mitigated [failure-pattern]?"
+- **Test case generation**: Use failure examples to create targeted test cases that probe known weak points.
+
+#### During Testing & QA
+- **Red teaming**: Use failure patterns as a checklist for adversarial testing. Each pattern suggests specific attack vectors or edge cases to test.
+- **Evaluation design**: Build evaluation datasets that specifically target documented failure modes.
+- **Acceptance criteria**: Define pass/fail criteria based on whether known failure patterns are adequately mitigated.
+
+#### In Production
+- **Incident response**: When failures occur, use the taxonomy to quickly categorize and diagnose issues. Match symptoms to documented patterns for faster resolution.
+- **Monitoring & alerting**: Set up observability based on failure detection strategies in each pattern.
+- **Post-mortems**: Reference failure patterns in incident reports to connect specific failures to systemic issues.
+
+#### For Teams & Organizations
+- **Onboarding**: New team members can study failure patterns to quickly understand what can go wrong with AI agents.
+- **Knowledge sharing**: Use patterns as a shared vocabulary across teams ("We're seeing a classic context-overflow failure").
+- **Risk assessment**: Before deploying agents, audit against relevant failure patterns to identify gaps.
+
+### Each Failure Pattern Includes
+
+| Section | What It Tells You |
+|---------|-------------------|
+| **Issue** | One-line description of the failure |
+| **Frequency** | How often this occurs (Common, Occasional, Rare) |
+| **Symptoms** | Observable signs that this failure is happening |
+| **Root Cause** | Why this failure occurs at a technical level |
+| **Example** | Concrete scenario with code/logs showing the failure |
+| **Key Statistics** | Data from research and production systems |
+| **Contributing Factors** | Conditions that increase likelihood |
+| **Mitigation Strategies** | Actionable steps to prevent or reduce impact |
+| **Detection** | How to monitor for this failure in production |
+| **References** | Links to research papers, documentation, and case studies |
 
 ## Quick Reference: Cross-Cutting Failure Patterns
 
@@ -403,6 +444,28 @@ To add a new failure pattern:
 
 - [Awesome Agent Failures (Vectara)](https://github.com/vectara/awesome-agent-failures) - Academic/research-focused failure documentation
 - [OWASP LLM Top 10](https://owasp.org/www-project-top-10-for-large-language-model-applications/) - Security vulnerabilities in LLM applications
+
+---
+
+## About SaraLabs.ai
+
+This repository is maintained by [SaraLabs.ai](https://saralabs.ai), a company focused on building reliable AI systems for production environments.
+
+**What we do:**
+- Build AI agents that work reliably in real-world conditions
+- Help organizations deploy AI systems with confidence
+- Research and document failure patterns to improve the entire AI ecosystem
+
+**Why we maintain this taxonomy:**
+We've seen too many AI agent projects fail in production due to predictable, preventable issues. By documenting these failure patterns openly, we aim to help the entire community build more reliable AI systems. Every failure pattern in this repository comes from real production experience - either our own or from documented incidents across the industry.
+
+**Get in touch:**
+- **General inquiries**: [team@saralabs.ai](mailto:team@saralabs.ai)
+- **Contribute a failure pattern**: Submit a PR or email us with details
+- **Report an issue with this repo**: Open a GitHub issue
+- **Partnership opportunities**: [team@saralabs.ai](mailto:team@saralabs.ai)
+
+We actively review all contributions and respond to queries. If you've encountered a failure pattern not documented here, we'd love to hear about it.
 
 ---
 
