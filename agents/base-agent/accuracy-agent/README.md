@@ -57,4 +57,4 @@ accuracy-agent/
 
 - [Security Agent](../security-agent/) - Security vulnerabilities
 - [Operations Agent](../operations-agent/) - Tool reliability and cost
-- [RAG Agent](../rag-agent/) - Retrieval-specific accuracy issues
+- [RAG Agent](../../rag-agent/) - Retrieval-specific accuracy issues

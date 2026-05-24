@@ -58,4 +58,4 @@ security-agent/
 
 - [Accuracy Agent](../accuracy-agent/) - Output correctness and reasoning
 - [Operations Agent](../operations-agent/) - Tool reliability and cost
-- [RAG Agent](../rag-agent/) - Retrieval-specific security concerns
+- [RAG Agent](../../rag-agent/) - Retrieval-specific security concerns

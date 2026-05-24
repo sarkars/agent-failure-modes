@@ -54,13 +54,14 @@ agents/
 
 ## Agent Types
 
-### Cross-Cutting Agents (Apply to All Agent Types)
+### Base Agent (Cross-Cutting - Apply to All Agent Types)
 
 | Agent Type | Description | Goals | Failure Patterns |
 |------------|-------------|-------|------------------|
-| [Security Agent](agents/security-agent/) | **Security, trust, runtime protection** | 3 | 35 |
-| [Accuracy Agent](agents/accuracy-agent/) | **Output correctness, anti-hallucination** | 3 | 30 |
-| [Operations Agent](agents/operations-agent/) | **Tools, cost, multi-agent coordination** | 3 | 28 |
+| [Base Agent](agents/base-agent/) | **All cross-cutting patterns** | 9 | 93 |
+| ├─ [Security Agent](agents/base-agent/security-agent/) | Security, trust, runtime protection | 3 | 35 |
+| ├─ [Accuracy Agent](agents/base-agent/accuracy-agent/) | Output correctness, anti-hallucination | 3 | 30 |
+| └─ [Operations Agent](agents/base-agent/operations-agent/) | Tools, cost, multi-agent coordination | 3 | 28 |
 
 ### Domain-Specific Agents
 
@@ -90,20 +91,20 @@ OCR Agent → Accurate Text Extraction → Character Confusion
 
 ## Quick Reference: Cross-Cutting Failure Patterns
 
-These failures appear across multiple agent types. See [Security Agent](agents/security-agent/), [Accuracy Agent](agents/accuracy-agent/), and [Operations Agent](agents/operations-agent/) for full documentation.
+These failures appear across multiple agent types. See [Base Agent](agents/base-agent/) for full documentation.
 
 | Pattern | Agent | Goal | Description |
 |---------|-------|------|-------------|
-| [Prompt Injection](agents/security-agent/goals/safety-security/failures/prompt-injection.md) | Security | Safety & Security | Malicious input hijacks agent behavior |
-| [Memory Poisoning](agents/security-agent/goals/safety-security/failures/memory-poisoning.md) | Security | Safety & Security | Malicious instructions injected into agent memory |
-| [MCP Protocol Exploitation](agents/security-agent/goals/runtime-security/failures/mcp-protocol-exploitation.md) | Security | Runtime Security | MCP vulnerabilities enable RCE on 200K+ servers |
-| [Unverified Agent Output](agents/security-agent/goals/agent-trust/failures/unverified-agent-output.md) | Security | Agent Trust | Agents accept other agents' outputs without verification |
-| [Confident Fabrication](agents/accuracy-agent/goals/output-accuracy/failures/confident-fabrication.md) | Accuracy | Output Accuracy | Agent states false information with high confidence |
-| [Goal Drift](agents/accuracy-agent/goals/reasoning-quality/failures/goal-drift.md) | Accuracy | Reasoning Quality | Agent loses focus on original objective |
-| [Context Overflow](agents/accuracy-agent/goals/context-management/failures/context-overflow.md) | Accuracy | Context Management | Agent loses information when context exceeds limits |
-| [Infinite Loops](agents/operations-agent/goals/cost-efficiency/failures/infinite-loops.md) | Operations | Cost Efficiency | Agent gets stuck in retry loops, burns tokens |
-| [Parameter Mismatches](agents/operations-agent/goals/tool-reliability/failures/parameter-mismatches.md) | Operations | Tool Reliability | 37% of tool calls have silent parameter errors |
-| [Agent Misalignment](agents/operations-agent/goals/multi-agent-coordination/failures/agent-misalignment.md) | Operations | Multi-Agent | Agents pursue conflicting objectives |
+| [Prompt Injection](agents/base-agent/security-agent/goals/safety-security/failures/prompt-injection.md) | Security | Safety & Security | Malicious input hijacks agent behavior |
+| [Memory Poisoning](agents/base-agent/security-agent/goals/safety-security/failures/memory-poisoning.md) | Security | Safety & Security | Malicious instructions injected into agent memory |
+| [MCP Protocol Exploitation](agents/base-agent/security-agent/goals/runtime-security/failures/mcp-protocol-exploitation.md) | Security | Runtime Security | MCP vulnerabilities enable RCE on 200K+ servers |
+| [Unverified Agent Output](agents/base-agent/security-agent/goals/agent-trust/failures/unverified-agent-output.md) | Security | Agent Trust | Agents accept other agents' outputs without verification |
+| [Confident Fabrication](agents/base-agent/accuracy-agent/goals/output-accuracy/failures/confident-fabrication.md) | Accuracy | Output Accuracy | Agent states false information with high confidence |
+| [Goal Drift](agents/base-agent/accuracy-agent/goals/reasoning-quality/failures/goal-drift.md) | Accuracy | Reasoning Quality | Agent loses focus on original objective |
+| [Context Overflow](agents/base-agent/accuracy-agent/goals/context-management/failures/context-overflow.md) | Accuracy | Context Management | Agent loses information when context exceeds limits |
+| [Infinite Loops](agents/base-agent/operations-agent/goals/cost-efficiency/failures/infinite-loops.md) | Operations | Cost Efficiency | Agent gets stuck in retry loops, burns tokens |
+| [Parameter Mismatches](agents/base-agent/operations-agent/goals/tool-reliability/failures/parameter-mismatches.md) | Operations | Tool Reliability | 37% of tool calls have silent parameter errors |
+| [Agent Misalignment](agents/base-agent/operations-agent/goals/multi-agent-coordination/failures/agent-misalignment.md) | Operations | Multi-Agent | Agents pursue conflicting objectives |
 
 ## Research Sources & References
 

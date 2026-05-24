@@ -57,4 +57,4 @@ operations-agent/
 
 - [Security Agent](../security-agent/) - Security vulnerabilities
 - [Accuracy Agent](../accuracy-agent/) - Output correctness
-- [RAG Agent](../rag-agent/) - Retrieval operations
+- [RAG Agent](../../rag-agent/) - Retrieval operations
