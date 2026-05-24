@@ -11,6 +11,7 @@ Use this as an operations checklist when deploying and maintaining agent systems
 | [Tool Reliability](goals/tool-reliability/) | Ensure tools are called correctly and consistently | 14 patterns |
 | [Cost Efficiency](goals/cost-efficiency/) | Minimize token usage and API costs | 9 patterns |
 | [Multi-Agent Coordination](goals/multi-agent-coordination/) | Ensure agents work together effectively | 5 patterns |
+| [Traceability](goals/traceability/) | Enable auditing, debugging, and compliance | 8 patterns |
 
 ## Structure
 
@@ -29,10 +30,15 @@ operations-agent/
     │       ├── infinite-loops.md
     │       ├── token-explosion.md
     │       └── ...
-    └── multi-agent-coordination/
+    ├── multi-agent-coordination/
+    │   └── failures/
+    │       ├── agent-misalignment.md
+    │       ├── communication-breakdown.md
+    │       └── ...
+    └── traceability/
         └── failures/
-            ├── agent-misalignment.md
-            ├── communication-breakdown.md
+            ├── missing-audit-trail.md
+            ├── non-reproducible-execution.md
             └── ...
 ```
 
@@ -45,6 +51,7 @@ operations-agent/
 | Multi-agent systems fail at 41-86.7% rates | MAST Taxonomy |
 | 36.94% of failures from coordination issues | MAST Analysis |
 | Tool-calling is #1 failure mode in multi-agent systems | MAST Taxonomy |
+| 88% of enterprises lack AI agent state monitoring | VentureBeat 2026 |
 
 ## How to Use
 
