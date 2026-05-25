@@ -1,28 +1,22 @@
-# Customer Service Agent
+# Customer Support Agent
 
-Customer Service Agents handle customer interactions, answer questions, route requests, and resolve issues. They're deployed as chatbots, ticket handlers, and support automation.
+Agents that handle customer conversations and support requests
 
 ## Goals
 
-| Goal | Description | Status |
-|------|-------------|--------|
-| [Intent Detection](intent-detection.md) | Understanding what the customer wants | Planned |
-| [Response Accuracy](response-accuracy.md) | Providing correct information | Planned |
-| [Escalation Handling](escalation-handling.md) | Knowing when to involve humans | Planned |
-| [Tone Management](tone-management.md) | Appropriate emotional responses | Planned |
+| Goal | Description | Patterns |
+|------|-------------|----------|
+| [Conversation Resolution](goals/conversation-resolution/) | Resolve user conversations safely and helpfully | 11 |
 
-## Key Challenges
+**Total: 11 patterns across 1 goals**
 
-1. **Ambiguous Requests**: Customers often don't know the right terminology
-2. **Emotional Context**: Frustrated customers need different handling
-3. **Policy Complexity**: Business rules change frequently
-4. **Escalation Judgment**: When to hand off vs. continue trying
-5. **Multi-Turn Context**: Maintaining conversation history
+## How to Use
 
-## Common Evaluation Metrics
+1. **Identify applicable goals** - Review which goals apply to your agent
+2. **Check failure patterns** - See if your agent exhibits these issues
+3. **Implement mitigations** - Apply prevention and detection strategies
+4. **Monitor in production** - Track the metrics and alerts defined
 
-- First contact resolution rate
-- Customer satisfaction (CSAT)
-- Escalation rate
-- Average handle time
-- Accuracy of information provided
+## Cross-References
+
+See [Base Agent](../base-agent/) for foundational patterns that apply to all agents.

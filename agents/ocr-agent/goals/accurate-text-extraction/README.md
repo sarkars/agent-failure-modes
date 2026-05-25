@@ -1,28 +1,18 @@
-# Goal: Accurate Text Extraction
+# Accurate-Text-Extraction
 
-Text extraction accuracy is the foundation of any OCR agent. Even small errors can cascade into significant problems in downstream processing.
 
-## Business Context
-
-- Invoice amounts extracted incorrectly cause payment errors
-- ID verification failures block legitimate users
-- Form data errors require manual correction
 
 ## Failure Patterns
 
-| Failure Pattern | Frequency | Impact |
-|-----------------|-----------|--------|
-| [Character Confusion](failures/character-confusion.md) | Very Common | High |
-| [Punctuation Errors](failures/punctuation-errors.md) | Common | High |
-| [Font and Style Handling](failures/font-handling.md) | Occasional | Medium |
-| [Handwritten Text](failures/handwritten-text.md) | Common | High |
-| [Low Resolution](failures/low-resolution.md) | Very Common | High |
-| [Skew and Rotation](failures/skew-rotation.md) | Common | Medium |
-| [Background Interference](failures/background-interference.md) | Common | Medium |
-| [Stamps and Overlays](failures/stamps-overlays.md) | Occasional | Medium |
+| Pattern |
+|---------|
+| [Background Interference](failures/background-interference.md) |
+| [Character Confusion](failures/character-confusion.md) |
+| [Font Handling](failures/font-handling.md) |
+| [Handwritten Text](failures/handwritten-text.md) |
+| [Low Resolution](failures/low-resolution.md) |
+| [Punctuation Errors](failures/punctuation-errors.md) |
+| [Skew Rotation](failures/skew-rotation.md) |
+| [Stamps Overlays](failures/stamps-overlays.md) |
 
-## Key Metrics
-
-- Character Error Rate (CER)
-- Word Error Rate (WER)
-- Field-level accuracy
+**Total: 8 patterns**

@@ -1,0 +1,69 @@
+# Memory Poisoning
+
+## Issue: Malicious or wrong content gets stored and later trusted.
+
+**Frequency**: Rare but Catastrophic
+
+**Symptoms**
+- Stored memory contains instructions or unverified claims.
+- [Add more specific symptoms]
+
+**Root Cause**
+Malicious or wrong content gets stored and later trusted.
+
+**Example**
+```
+[Add concrete example showing this failure pattern]
+```
+
+**Contributing Factors**
+- [List factors that make this failure more likely]
+
+---
+
+## Eval Recipes
+
+### Test Cases
+| Test | Input | Expected | Failure Indicator |
+|------|-------|----------|-------------------|
+| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+
+### Metrics
+| Metric | Target | How to Measure |
+|--------|--------|----------------|
+| [Metric name] | [Target value] | [Measurement method] |
+
+---
+
+## Mitigation Strategies
+
+### Prevention
+1. Memory write approvals and sanitization.
+2. [Add more prevention strategies]
+
+### Detection
+- Stored memory contains instructions or unverified claims.
+
+### Recovery
+- [Add recovery strategies]
+
+---
+
+## Production Signals
+
+### Key Metrics
+| Metric | Alert Threshold |
+|--------|-----------------|
+| [Metric name] | [Threshold] |
+
+### Alerts
+| Alert | Condition | Severity |
+|-------|-----------|----------|
+| [Alert name] | [Condition] | Critical |
+
+---
+
+## References
+
+- [MS-Agentic-Failure-Taxonomy](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/microsoft/final/en-us/microsoft-brand/documents/Taxonomy-of-Failure-Mode-in-Agentic-AI-Systems-Whitepaper.pdf)
+- Note: Agentic AI failure modes; safety/security; memory poisoning; tool use; multi-agent risks.

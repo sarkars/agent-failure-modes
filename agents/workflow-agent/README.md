@@ -1,28 +1,23 @@
 # Workflow Agent
 
-Workflow Agents orchestrate multi-step processes, coordinate between systems, and manage task sequences. They're used for process automation, task orchestration, and system integration.
+Agents that understand goals, plan tasks, and sequence work
 
 ## Goals
 
-| Goal | Description | Status |
-|------|-------------|--------|
-| [Task Sequencing](task-sequencing.md) | Executing steps in correct order | Planned |
-| [Error Recovery](error-recovery.md) | Handling failures gracefully | Planned |
-| [State Management](state-management.md) | Tracking progress across steps | Planned |
-| [Tool Coordination](tool-coordination.md) | Using multiple tools effectively | Planned |
+| Goal | Description | Patterns |
+|------|-------------|----------|
+| [Goal Understanding](goals/goal-understanding/) | Understand user/business goals correctly | 10 |
+| [Planning](goals/planning/) | Plan and sequence work effectively | 10 |
 
-## Key Challenges
+**Total: 20 patterns across 2 goals**
 
-1. **Dependency Management**: Steps depend on previous results
-2. **Partial Failures**: Some steps succeed, others fail
-3. **Idempotency**: Safe to retry without side effects
-4. **Timeout Handling**: Long-running steps need monitoring
-5. **Rollback Complexity**: Undoing partial progress
+## How to Use
 
-## Common Evaluation Metrics
+1. **Identify applicable goals** - Review which goals apply to your agent
+2. **Check failure patterns** - See if your agent exhibits these issues
+3. **Implement mitigations** - Apply prevention and detection strategies
+4. **Monitor in production** - Track the metrics and alerts defined
 
-- End-to-end success rate
-- Step failure rate by type
-- Recovery success rate
-- Average completion time
-- Rollback frequency
+## Cross-References
+
+See [Base Agent](../base-agent/) for foundational patterns that apply to all agents.

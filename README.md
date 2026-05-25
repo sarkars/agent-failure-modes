@@ -97,13 +97,23 @@ agents/
 
 | Agent Type | Description | Goals | Failure Patterns |
 |------------|-------------|-------|------------------|
-| [OCR Agent](agents/ocr-agent/) | Document text extraction and processing | 6 | 48 |
-| [RAG Agent](agents/rag-agent/) | Retrieval-augmented generation | 4 | 39 |
-| [Voice Agent](agents/voice-agent/) | Speech recognition, synthesis, and conversation | 4 | 26 |
-| [Code Agent](agents/code-agent/) | Code generation, review, and modification | 4 | Planned |
-| [Customer Service Agent](agents/customer-service-agent/) | Customer interaction and support | 4 | Planned |
-| [Data Extraction Agent](agents/data-extraction-agent/) | Structured data extraction from unstructured sources | 4 | Planned |
-| [Workflow Agent](agents/workflow-agent/) | Multi-step task automation | 4 | Planned |
+| [Workflow Agent](agents/workflow-agent/) | Goal understanding and task planning | 2 | 20 |
+| [Tool Agent](agents/tool-agent/) | Tool selection and invocation | 2 | 22 |
+| [RAG Agent](agents/rag-agent/) | Retrieval-augmented generation | 2 | 52 |
+| [Stateful Agent](agents/stateful-agent/) | State tracking across steps and turns | 1 | 9 |
+| [Memory Agent](agents/memory-agent/) | Memory storage and recall | 1 | 9 |
+| [Customer Service Agent](agents/customer-service-agent/) | Customer conversation resolution | 1 | 11 |
+| [Action Agent](agents/action-agent/) | Action execution in external systems | 1 | 11 |
+| [Evaluation Agent](agents/evaluation-agent/) | Output verification and QA | 1 | 15 |
+| [Multi-Agent System](agents/multi-agent/) | Agent coordination and orchestration | 1 | 15 |
+| [Security Agent](agents/security-agent/) | Security and autonomy controls | 1 | 14 |
+| [Governance Agent](agents/governance-agent/) | Compliance and accountability | 1 | 12 |
+| [Domain Agent](agents/domain-agent/) | Domain-specific judgment | 1 | 10 |
+| [Learning Agent](agents/learning-agent/) | Self-improvement and learning | 1 | 12 |
+| [OCR Agent](agents/ocr-agent/) | Document text extraction | 6 | 48 |
+| [Voice Agent](agents/voice-agent/) | Speech recognition and synthesis | 4 | 26 |
+| [Code Agent](agents/code-agent/) | Code generation and review | - | Planned |
+| [Data Extraction Agent](agents/data-extraction-agent/) | Structured data extraction | - | Planned |
 
 ## How to Use This Repo
 
