@@ -1,6 +1,6 @@
-# Core Patterns
+# Cross-Cutting Patterns
 
-Cross-cutting failure patterns that apply to **all AI systems** regardless of domain or capability.
+Failure patterns that apply to **all AI systems** regardless of capability or use case.
 
 ## Categories
 
