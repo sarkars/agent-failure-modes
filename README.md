@@ -17,6 +17,22 @@
 
 ---
 
+## Index
+
+| Section | Description |
+|---------|-------------|
+| [Why This Repo?](#why-this-repo) | What makes this playbook different |
+| [Structure](#structure) | How the repository is organized |
+| [Agent Types](#agent-types) | Base agents and domain-specific agents |
+| [How to Use](#how-to-use-this-repo) | Practical use cases and pattern structure |
+| [Quick Reference](#quick-reference-cross-cutting-failure-patterns) | Most common failure patterns at a glance |
+| [Research Sources](#research-sources--references) | Academic papers, incident databases, industry reports |
+| [Recent Sources](#recent-sources-feb-may-2026) | Latest 2026 incidents and research |
+| [Contributing](#contributing) | How to add failure patterns |
+| [About SaraLabs.ai](#about-saralabsai) | Who we are and how to work with us |
+
+---
+
 ## Why This Repo?
 
 Unlike academic failure taxonomies, this repository focuses on **real deployment issues** that engineers encounter when building and operating AI agents. Each failure pattern is a complete playbook:
