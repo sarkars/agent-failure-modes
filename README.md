@@ -58,62 +58,64 @@ agents/
                 └── <failure-pattern>.md  # Individual failure pattern
 ```
 
-### Example: OCR Agent
+### Example: Structure
 
 ```
 agents/
-└── ocr-agent/
-    ├── README.md
-    └── goals/
-        ├── accurate-text-extraction/
-        │   ├── README.md
-        │   └── failures/
-        │       ├── character-confusion.md
-        │       ├── punctuation-errors.md
-        │       ├── font-handling.md
-        │       └── ...
-        ├── layout-preservation/
-        │   └── failures/
-        │       ├── table-boundaries.md
-        │       └── ...
-        ├── document-classification/
-        ├── multimodal-reliability/
-        ├── agentic-orchestration/
-        └── production-reliability/
+├── base-agent/                    # Cross-cutting (apply to all agents)
+│   ├── security-agent/
+│   │   └── goals/
+│   │       ├── safety-security/
+│   │       ├── runtime-security/
+│   │       ├── agent-trust/
+│   │       ├── data-loss-prevention/
+│   │       └── security-autonomy/
+│   ├── accuracy-agent/
+│   ├── operations-agent/
+│   ├── governance-agent/
+│   └── learning-agent/
+│
+└── domain-agents/                 # Domain-specific agents
+    ├── workflow-agent/
+    ├── rag-agent/
+    ├── ocr-agent/
+    │   └── goals/
+    │       ├── accurate-text-extraction/
+    │       ├── layout-preservation/
+    │       └── ...
+    ├── voice-agent/
+    └── ...
 ```
 
 ## Agent Types
 
-### Base Agent (Cross-Cutting - Apply to All Agent Types)
+### Base Agent (Cross-Cutting Patterns - Apply to ALL Agent Types)
 
-| Agent Type | Description | Goals | Failure Patterns |
-|------------|-------------|-------|------------------|
-| [Base Agent](agents/base-agent/) | **All cross-cutting patterns** | 16 | 153 |
-| ├─ [Security Agent](agents/base-agent/security-agent/) | Security, trust, runtime protection, DLP | 4 | 43 |
-| ├─ [Accuracy Agent](agents/base-agent/accuracy-agent/) | Output correctness, anti-hallucination, evaluation | 4 | 38 |
-| └─ [Operations Agent](agents/base-agent/operations-agent/) | Tools, cost, coordination, memory, context | 8 | 72 |
+| Agent | Description | Goals | Patterns |
+|-------|-------------|-------|----------|
+| [Base Agent](agents/base-agent/) | **All cross-cutting patterns** | 24 | 246 |
+| ├─ [Security Agent](agents/base-agent/security-agent/) | Security, trust, runtime protection, DLP | 5 | 57 |
+| ├─ [Accuracy Agent](agents/base-agent/accuracy-agent/) | Output correctness, evaluation, verification | 5 | 53 |
+| ├─ [Operations Agent](agents/base-agent/operations-agent/) | Tools, cost, coordination, memory, state | 12 | 112 |
+| ├─ [Governance Agent](agents/base-agent/governance-agent/) | Compliance, audit, accountability | 1 | 12 |
+| └─ [Learning Agent](agents/base-agent/learning-agent/) | Self-improvement, feedback loops | 1 | 12 |
 
 ### Domain-Specific Agents
 
-| Agent Type | Description | Goals | Failure Patterns |
-|------------|-------------|-------|------------------|
-| [Workflow Agent](agents/workflow-agent/) | Goal understanding and task planning | 2 | 20 |
-| [Tool Agent](agents/tool-agent/) | Tool selection and invocation | 2 | 22 |
-| [RAG Agent](agents/rag-agent/) | Retrieval-augmented generation | 2 | 52 |
-| [Stateful Agent](agents/stateful-agent/) | State tracking across steps and turns | 1 | 9 |
-| [Memory Agent](agents/memory-agent/) | Memory storage and recall | 1 | 9 |
-| [Customer Service Agent](agents/customer-service-agent/) | Customer conversation resolution | 1 | 11 |
-| [Action Agent](agents/action-agent/) | Action execution in external systems | 1 | 11 |
-| [Evaluation Agent](agents/evaluation-agent/) | Output verification and QA | 1 | 15 |
-| [Multi-Agent System](agents/multi-agent/) | Agent coordination and orchestration | 1 | 15 |
-| [Security Agent](agents/security-agent/) | Security and autonomy controls | 1 | 14 |
-| [Governance Agent](agents/governance-agent/) | Compliance and accountability | 1 | 12 |
-| [Domain Agent](agents/domain-agent/) | Domain-specific judgment | 1 | 10 |
-| [Learning Agent](agents/learning-agent/) | Self-improvement and learning | 1 | 12 |
-| [OCR Agent](agents/ocr-agent/) | Document text extraction | 6 | 48 |
-| [Voice Agent](agents/voice-agent/) | Speech recognition and synthesis | 4 | 26 |
-| [Code Agent](agents/code-agent/) | Code generation and review | - | Planned |
-| [Data Extraction Agent](agents/data-extraction-agent/) | Structured data extraction | - | Planned |
+| Agent | Description | Goals | Patterns |
+|-------|-------------|-------|----------|
+| [Workflow Agent](agents/domain-agents/workflow-agent/) | Goal understanding, task planning | 2 | 20 |
+| [Action Agent](agents/domain-agents/action-agent/) | Action execution in external systems | 1 | 11 |
+| [Customer Service Agent](agents/domain-agents/customer-service-agent/) | Customer conversation resolution | 1 | 11 |
+| [Domain Expert Agent](agents/domain-agents/domain-agent/) | Domain-specific judgment | 1 | 10 |
+| [Multi-Agent System](agents/domain-agents/multi-agent/) | Agent coordination and orchestration | 1 | 15 |
+| [RAG Agent](agents/domain-agents/rag-agent/) | Retrieval-augmented generation | 5 | 52 |
+| [OCR Agent](agents/domain-agents/ocr-agent/) | Document text extraction | 6 | 48 |
+| [Voice Agent](agents/domain-agents/voice-agent/) | Speech recognition and synthesis | 4 | 26 |
+| [Code Agent](agents/domain-agents/code-agent/) | Code generation and review | - | Planned |
+| [Data Extraction Agent](agents/domain-agents/data-extraction-agent/) | Structured data extraction | - | Planned |
+
+**Total: 439 patterns across 45 goals**
 
 ## How to Use This Repo
 

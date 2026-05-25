@@ -1,37 +1,17 @@
-# Goal: Context Management
+# Context Management
 
-Handle context windows, memory, and state effectively. Context failures cause agents to lose track of information, forget instructions, or act inconsistently.
-
-## Business Context
-
-- Lost context leads to repeated work and user frustration
-- Instruction drift causes agents to deviate from requirements
-- Memory limitations constrain complex task handling
-- State management issues cause inconsistent behavior
+Context window handling
 
 ## Failure Patterns
 
-| Failure Pattern | Frequency | Impact |
-|-----------------|-----------|--------|
-| [Context Window Overflow](failures/context-overflow.md) | Common | High |
-| [Instruction Drift](failures/instruction-drift.md) | Common | High |
-| [Lost Conversation State](failures/lost-state.md) | Common | High |
-| [Conflicting Instructions](failures/conflicting-instructions.md) | Occasional | Medium |
-| [Memory Corruption](failures/memory-corruption.md) | Occasional | High |
-| [Cross-Session Confusion](failures/cross-session-confusion.md) | Occasional | Medium |
-| [State Awareness Failure](failures/state-awareness.md) | Common | High |
+| Pattern |
+|---------|
+| [Conflicting Instructions](failures/conflicting-instructions.md) |
+| [Context Overflow](failures/context-overflow.md) |
+| [Cross Session Confusion](failures/cross-session-confusion.md) |
+| [Instruction Drift](failures/instruction-drift.md) |
+| [Lost State](failures/lost-state.md) |
+| [Memory Corruption](failures/memory-corruption.md) |
+| [State Awareness](failures/state-awareness.md) |
 
-## Key Statistics
-
-| Finding | Source |
-|---------|--------|
-| Context overflow is #1 cause of agent failures on complex tasks | AWS Analysis |
-| Instruction drift increases with conversation length | Research study |
-| 82% discovered unknown AI agents in past year | CSA "Autonomous but Not Controlled" |
-
-## Key Metrics
-
-- Context utilization percentage
-- Instruction adherence rate over conversation length
-- State recovery success rate
-- Long-conversation task completion rate
+**Total: 7 patterns**

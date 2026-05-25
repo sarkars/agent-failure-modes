@@ -1,63 +1,36 @@
 # Base Agent
 
-This section documents **cross-cutting failure patterns** that apply to any AI agent regardless of domain. These foundational patterns affect code agents, customer service agents, RAG agents, and every other agent type.
+Cross-cutting failure patterns that apply to **all AI agents** regardless of domain.
 
-Use these as a checklist when building or evaluating any agent system.
-
-## Agent Categories
+## Sub-Agents
 
 | Agent | Description | Goals | Patterns |
 |-------|-------------|-------|----------|
-| [Security Agent](security-agent/) | Security, trust, runtime protection, data loss prevention | 4 | 43 |
-| [Accuracy Agent](accuracy-agent/) | Output correctness, anti-hallucination, evaluation | 4 | 38 |
-| [Operations Agent](operations-agent/) | Tools, cost, coordination, traceability, memory, context | 8 | 72 |
+| [Security Agent](security-agent/) | Security, trust, runtime protection, data loss prevention | 5 | 57 |
+| [Accuracy Agent](accuracy-agent/) | Output correctness, anti-hallucination, evaluation | 5 | 53 |
+| [Operations Agent](operations-agent/) | Tools, cost, coordination, memory, context, state | 12 | 112 |
+| [Governance Agent](governance-agent/) | Compliance, audit, accountability, policy | 1 | 12 |
+| [Learning Agent](learning-agent/) | Self-improvement, feedback loops, safe learning | 1 | 12 |
 
-**Total: 153 patterns across 16 goals**
+**Total: 246 patterns across 24 goals**
 
 ## Structure
 
 ```
 base-agent/
-├── README.md
-├── security-agent/
-│   └── goals/
-│       ├── safety-security/        (19 patterns)
-│       ├── runtime-security/       (8 patterns)
-│       ├── agent-trust/            (8 patterns)
-│       └── data-loss-prevention/   (8 patterns)
-│
-├── accuracy-agent/
-│   └── goals/
-│       ├── output-accuracy/        (11 patterns)
-│       ├── reasoning-quality/      (12 patterns)
-│       ├── context-management/     (7 patterns)
-│       └── evaluation-reliability/ (8 patterns)
-│
-└── operations-agent/
-    └── goals/
-        ├── tool-reliability/       (17 patterns)
-        ├── cost-efficiency/        (12 patterns)
-        ├── multi-agent-coordination/ (9 patterns)
-        ├── traceability/           (8 patterns)
-        ├── human-oversight-reliability/ (8 patterns)
-        ├── cost-tracking/          (6 patterns)
-        ├── context-lifecycle/      (6 patterns)
-        └── memory-management/      (6 patterns)
+├── security-agent/     # Security, trust, DLP
+├── accuracy-agent/     # Output correctness, evaluation
+├── operations-agent/   # Tools, cost, coordination
+├── governance-agent/   # Compliance, accountability
+└── learning-agent/     # Self-improvement
 ```
 
 ## How to Use
 
-1. **Start with Security** - Review security patterns first for any agent handling sensitive data
-2. **Check Accuracy** - Ensure your agent doesn't hallucinate or drift from goals
-3. **Optimize Operations** - Improve tool reliability and cost efficiency
-4. **Apply to Domain Agents** - These patterns complement domain-specific agents (OCR, RAG, etc.)
+1. **Start with Security** - Review security patterns first
+2. **Check Accuracy** - Ensure agent doesn't hallucinate
+3. **Optimize Operations** - Tool reliability, cost efficiency
+4. **Add Governance** - Compliance and accountability
+5. **Enable Learning** - Safe self-improvement
 
-## Key Statistics (2026)
-
-| Finding | Source |
-|---------|--------|
-| 88% of enterprises reported AI agent security incidents | VentureBeat/Kiteworks 2026 |
-| 52% of enterprise AI responses contain fabrications | Enterprise Survey 2026 |
-| 37% of tool calls have silent parameter mismatches | Developer Analysis |
-| Multi-agent systems fail at 41-86.7% rates | MAST Taxonomy |
-| $47,000 spent on single 11-day agent loop | DEV.to incident report |
+These patterns complement domain-specific agents (RAG, OCR, Voice, etc.).
