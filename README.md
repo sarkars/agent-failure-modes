@@ -49,71 +49,58 @@ The repository follows a **goal-based hierarchy**:
 
 ```
 agents/
-└── <agent-type>/
-    ├── README.md                    # Agent overview
-    └── goals/
-        └── <business-or-technical-goal>/
-            ├── README.md            # Goal description
-            └── failures/
-                └── <failure-pattern>.md  # Individual failure pattern
-```
-
-### Example: Structure
-
-```
-agents/
-├── base-agent/                    # Cross-cutting (apply to ALL agents)
-│   ├── security-agent/            # 57 patterns
-│   ├── accuracy-agent/            # 53 patterns
-│   ├── operations-agent/          # 112 patterns
-│   ├── governance-agent/          # 12 patterns
-│   └── learning-agent/            # 12 patterns
+├── core/                          # Cross-cutting (apply to ALL)
+│   ├── security/                  # 57 patterns
+│   ├── accuracy/                  # 53 patterns
+│   ├── operations/                # 112 patterns
+│   ├── governance/                # 12 patterns
+│   └── learning/                  # 12 patterns
 │
-├── capability-agents/             # Design-driven failure modes
-│   ├── workflow-agent/            # Planning, goal understanding
-│   ├── action-agent/              # External system execution
-│   ├── voice-agent/               # Speech/audio handling
-│   └── domain-expert-agent/       # Domain judgment
+├── capabilities/                  # Design-driven failure modes
+│   ├── workflow/                  # Planning, goal understanding
+│   ├── action/                    # External system execution
+│   ├── voice/                     # Speech/audio handling
+│   └── domain-expertise/          # Domain judgment
 │
-└── domain-agents/                 # Use-case specific
-    ├── rag-agent/                 # Knowledge retrieval
-    ├── ocr-agent/                 # Document processing
-    ├── customer-service-agent/    # Support conversations
-    └── multi-agent/               # Agent orchestration
+└── domains/                       # Use-case specific
+    ├── rag/                       # Knowledge retrieval
+    ├── ocr/                       # Document processing
+    ├── customer-service/          # Support conversations
+    └── multi-agent-systems/       # Coordination
 ```
 
-## Agent Types
+## Pattern Categories
 
-### Base Agent (Cross-Cutting Patterns - Apply to ALL Agent Types)
+### Core (Cross-Cutting - Apply to ALL AI Systems)
 
-| Agent | Description | Goals | Patterns |
-|-------|-------------|-------|----------|
-| [Base Agent](agents/base-agent/) | **All cross-cutting patterns** | 24 | 246 |
-| ├─ [Security Agent](agents/base-agent/security-agent/) | Security, trust, runtime protection, DLP | 5 | 57 |
-| ├─ [Accuracy Agent](agents/base-agent/accuracy-agent/) | Output correctness, evaluation, verification | 5 | 53 |
-| ├─ [Operations Agent](agents/base-agent/operations-agent/) | Tools, cost, coordination, memory, state | 12 | 112 |
-| ├─ [Governance Agent](agents/base-agent/governance-agent/) | Compliance, audit, accountability | 1 | 12 |
-| └─ [Learning Agent](agents/base-agent/learning-agent/) | Self-improvement, feedback loops | 1 | 12 |
+| Category | Description | Goals | Patterns |
+|----------|-------------|-------|----------|
+| [Core Patterns](agents/core/) | **All cross-cutting patterns** | 24 | 246 |
+| ├─ [Security](agents/core/security/) | Security, trust, runtime protection, DLP | 5 | 57 |
+| ├─ [Accuracy](agents/core/accuracy/) | Output correctness, evaluation, verification | 5 | 53 |
+| ├─ [Operations](agents/core/operations/) | Tools, cost, coordination, memory, state | 12 | 112 |
+| ├─ [Governance](agents/core/governance/) | Compliance, audit, accountability | 1 | 12 |
+| └─ [Learning](agents/core/learning/) | Self-improvement, feedback loops | 1 | 12 |
 
-### Capability Agents (Design-Driven Failure Modes)
+### Capabilities (Design-Driven Failure Modes)
 
-| Agent | Description | Goals | Patterns |
-|-------|-------------|-------|----------|
-| [Workflow Agent](agents/capability-agents/workflow-agent/) | Goal understanding, task planning | 2 | 20 |
-| [Action Agent](agents/capability-agents/action-agent/) | Action execution in external systems | 1 | 11 |
-| [Voice Agent](agents/capability-agents/voice-agent/) | Speech recognition and synthesis | 4 | 26 |
-| [Domain Expert Agent](agents/capability-agents/domain-expert-agent/) | Domain-specific judgment | 1 | 10 |
+| Capability | Description | Goals | Patterns |
+|------------|-------------|-------|----------|
+| [Workflow](agents/capabilities/workflow/) | Goal understanding, task planning | 2 | 20 |
+| [Action](agents/capabilities/action/) | Action execution in external systems | 1 | 11 |
+| [Voice](agents/capabilities/voice/) | Speech recognition and synthesis | 4 | 26 |
+| [Domain Expertise](agents/capabilities/domain-expertise/) | Domain-specific judgment | 1 | 10 |
 
-### Domain Agents (Use-Case Specific)
+### Domains (Use-Case Specific)
 
-| Agent | Description | Goals | Patterns |
-|-------|-------------|-------|----------|
-| [RAG Agent](agents/domain-agents/rag-agent/) | Retrieval-augmented generation | 5 | 52 |
-| [OCR Agent](agents/domain-agents/ocr-agent/) | Document text extraction | 6 | 48 |
-| [Customer Service Agent](agents/domain-agents/customer-service-agent/) | Customer conversation resolution | 1 | 11 |
-| [Multi-Agent System](agents/domain-agents/multi-agent/) | Agent coordination and orchestration | 1 | 15 |
-| [Code Agent](agents/domain-agents/code-agent/) | Code generation and review | - | Planned |
-| [Data Extraction Agent](agents/domain-agents/data-extraction-agent/) | Structured data extraction | - | Planned |
+| Domain | Description | Goals | Patterns |
+|--------|-------------|-------|----------|
+| [RAG](agents/domains/rag/) | Retrieval-augmented generation | 5 | 52 |
+| [OCR](agents/domains/ocr/) | Document text extraction | 6 | 48 |
+| [Customer Service](agents/domains/customer-service/) | Customer conversation resolution | 1 | 11 |
+| [Multi-Agent Systems](agents/domains/multi-agent-systems/) | Coordination and orchestration | 1 | 15 |
+| [Code](agents/domains/code/) | Code generation and review | - | Planned |
+| [Data Extraction](agents/domains/data-extraction/) | Structured data extraction | - | Planned |
 
 **Total: 439 patterns across 45 goals**
 
@@ -180,22 +167,22 @@ See [PATTERN_TEMPLATE.md](PATTERN_TEMPLATE.md) for the full pattern structure.
 
 ## Quick Reference: Cross-Cutting Failure Patterns
 
-These failures appear across multiple agent types. See [Base Agent](agents/base-agent/) for full documentation.
+These failures appear across multiple AI systems. See [Core Patterns](agents/core/) for full documentation.
 
-| Pattern | Agent | Goal | Description |
-|---------|-------|------|-------------|
-| [Prompt Injection](agents/base-agent/security-agent/goals/safety-security/failures/prompt-injection.md) | Security | Safety & Security | Malicious input hijacks agent behavior |
-| [Memory Poisoning](agents/base-agent/security-agent/goals/safety-security/failures/memory-poisoning.md) | Security | Safety & Security | Malicious instructions injected into agent memory |
-| [MCP Protocol Exploitation](agents/base-agent/security-agent/goals/runtime-security/failures/mcp-protocol-exploitation.md) | Security | Runtime Security | MCP vulnerabilities enable RCE on 200K+ servers |
-| [Unverified Agent Output](agents/base-agent/security-agent/goals/agent-trust/failures/unverified-agent-output.md) | Security | Agent Trust | Agents accept other agents' outputs without verification |
-| [Confident Fabrication](agents/base-agent/accuracy-agent/goals/output-accuracy/failures/confident-fabrication.md) | Accuracy | Output Accuracy | Agent states false information with high confidence |
-| [Goal Drift](agents/base-agent/accuracy-agent/goals/reasoning-quality/failures/goal-drift.md) | Accuracy | Reasoning Quality | Agent loses focus on original objective |
-| [Context Overflow](agents/base-agent/accuracy-agent/goals/context-management/failures/context-overflow.md) | Accuracy | Context Management | Agent loses information when context exceeds limits |
-| [Infinite Loops](agents/base-agent/operations-agent/goals/cost-efficiency/failures/infinite-loops.md) | Operations | Cost Efficiency | Agent gets stuck in retry loops, burns tokens |
-| [Parameter Mismatches](agents/base-agent/operations-agent/goals/tool-reliability/failures/parameter-mismatches.md) | Operations | Tool Reliability | 37% of tool calls have silent parameter errors |
-| [Agent Misalignment](agents/base-agent/operations-agent/goals/multi-agent-coordination/failures/agent-misalignment.md) | Operations | Multi-Agent | Agents pursue conflicting objectives |
-| [PII Exposure](agents/base-agent/security-agent/goals/data-loss-prevention/failures/pii-exposure.md) | Security | Data Loss Prevention | Agent outputs contain personal data |
-| [Cross-Session Bleed](agents/base-agent/security-agent/goals/data-loss-prevention/failures/cross-session-bleed.md) | Security | Data Loss Prevention | User A's data appears in User B's session |
+| Pattern | Category | Goal | Description |
+|---------|----------|------|-------------|
+| [Prompt Injection](agents/core/security/goals/safety-security/failures/prompt-injection.md) | Security | Safety & Security | Malicious input hijacks system behavior |
+| [Memory Poisoning](agents/core/security/goals/safety-security/failures/memory-poisoning.md) | Security | Safety & Security | Malicious instructions injected into memory |
+| [MCP Protocol Exploitation](agents/core/security/goals/runtime-security/failures/mcp-protocol-exploitation.md) | Security | Runtime Security | MCP vulnerabilities enable RCE on 200K+ servers |
+| [Unverified Output](agents/core/security/goals/agent-trust/failures/unverified-agent-output.md) | Security | Agent Trust | Accepting outputs without verification |
+| [Confident Fabrication](agents/core/accuracy/goals/output-accuracy/failures/confident-fabrication.md) | Accuracy | Output Accuracy | False information stated with high confidence |
+| [Goal Drift](agents/core/accuracy/goals/reasoning-quality/failures/goal-drift.md) | Accuracy | Reasoning Quality | Losing focus on original objective |
+| [Context Overflow](agents/core/accuracy/goals/context-management/failures/context-overflow.md) | Accuracy | Context Management | Information loss when context exceeds limits |
+| [Infinite Loops](agents/core/operations/goals/cost-efficiency/failures/infinite-loops.md) | Operations | Cost Efficiency | Stuck in retry loops, burns tokens |
+| [Parameter Mismatches](agents/core/operations/goals/tool-reliability/failures/parameter-mismatches.md) | Operations | Tool Reliability | 37% of tool calls have silent parameter errors |
+| [Agent Misalignment](agents/core/operations/goals/multi-agent-coordination/failures/agent-misalignment.md) | Operations | Multi-Agent | Pursuing conflicting objectives |
+| [PII Exposure](agents/core/security/goals/data-loss-prevention/failures/pii-exposure.md) | Security | Data Loss Prevention | Outputs contain personal data |
+| [Cross-Session Bleed](agents/core/security/goals/data-loss-prevention/failures/cross-session-bleed.md) | Security | Data Loss Prevention | User A's data appears in User B's session |
 
 ## Research Sources & References
 
