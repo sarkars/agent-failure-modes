@@ -11,6 +11,7 @@ Use this as a security checklist when building or auditing agent systems.
 | [Safety & Security](goals/safety-security/) | Prevent prompt injection, data leakage, and unauthorized actions | 19 patterns |
 | [Runtime Security](goals/runtime-security/) | Prevent exploitation during agent execution (MCP, tokens, RCE) | 8 patterns |
 | [Agent Trust](goals/agent-trust/) | Establish and verify trust between agents | 8 patterns |
+| [Data Loss Prevention](goals/data-loss-prevention/) | Prevent sensitive data exposure through outputs, logs, and tools | 8 patterns |
 
 ## Structure
 
@@ -29,10 +30,15 @@ security-agent/
     │       ├── mcp-protocol-exploitation.md
     │       ├── oauth-token-theft.md
     │       └── ...
-    └── agent-trust/
+    ├── agent-trust/
+    │   └── failures/
+    │       ├── agent-impersonation.md
+    │       ├── blind-delegation.md
+    │       └── ...
+    └── data-loss-prevention/
         └── failures/
-            ├── agent-impersonation.md
-            ├── blind-delegation.md
+            ├── pii-exposure.md
+            ├── credential-leakage.md
             └── ...
 ```
 

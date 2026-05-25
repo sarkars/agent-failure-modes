@@ -8,11 +8,11 @@ Use these as a checklist when building or evaluating any agent system.
 
 | Agent | Description | Goals | Patterns |
 |-------|-------------|-------|----------|
-| [Security Agent](security-agent/) | Security, trust, runtime protection | 3 | 35 |
+| [Security Agent](security-agent/) | Security, trust, runtime protection, data loss prevention | 4 | 43 |
 | [Accuracy Agent](accuracy-agent/) | Output correctness, anti-hallucination, evaluation | 4 | 38 |
 | [Operations Agent](operations-agent/) | Tools, cost, coordination, traceability, human oversight | 5 | 54 |
 
-**Total: 127 patterns across 12 goals**
+**Total: 135 patterns across 13 goals**
 
 ## Structure
 
@@ -23,7 +23,8 @@ base-agent/
 │   └── goals/
 │       ├── safety-security/        (19 patterns)
 │       ├── runtime-security/       (8 patterns)
-│       └── agent-trust/            (8 patterns)
+│       ├── agent-trust/            (8 patterns)
+│       └── data-loss-prevention/   (8 patterns)
 │
 ├── accuracy-agent/
 │   └── goals/

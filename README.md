@@ -1,6 +1,10 @@
-# AI Agent Failure Taxonomy
+# AI Agent Reliability Playbook
 
-> A practitioner's guide to real-world AI agent failures - organized by agent type, goals, and common issues encountered in production deployments.
+> Failure patterns, eval recipes, mitigation strategies, and production signals for real-world AI agents.
+
+⭐ Star this repo if you are building production AI agents.
+🤝 PRs welcome: contribute failures from your domain.
+📚 Use this as a checklist before shipping an AI agent.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
@@ -60,8 +64,8 @@ agents/
 
 | Agent Type | Description | Goals | Failure Patterns |
 |------------|-------------|-------|------------------|
-| [Base Agent](agents/base-agent/) | **All cross-cutting patterns** | 12 | 127 |
-| ├─ [Security Agent](agents/base-agent/security-agent/) | Security, trust, runtime protection | 3 | 35 |
+| [Base Agent](agents/base-agent/) | **All cross-cutting patterns** | 13 | 135 |
+| ├─ [Security Agent](agents/base-agent/security-agent/) | Security, trust, runtime protection, DLP | 4 | 43 |
 | ├─ [Accuracy Agent](agents/base-agent/accuracy-agent/) | Output correctness, anti-hallucination, evaluation | 4 | 38 |
 | └─ [Operations Agent](agents/base-agent/operations-agent/) | Tools, cost, coordination, traceability, human oversight | 5 | 54 |
 
@@ -147,6 +151,8 @@ These failures appear across multiple agent types. See [Base Agent](agents/base-
 | [Infinite Loops](agents/base-agent/operations-agent/goals/cost-efficiency/failures/infinite-loops.md) | Operations | Cost Efficiency | Agent gets stuck in retry loops, burns tokens |
 | [Parameter Mismatches](agents/base-agent/operations-agent/goals/tool-reliability/failures/parameter-mismatches.md) | Operations | Tool Reliability | 37% of tool calls have silent parameter errors |
 | [Agent Misalignment](agents/base-agent/operations-agent/goals/multi-agent-coordination/failures/agent-misalignment.md) | Operations | Multi-Agent | Agents pursue conflicting objectives |
+| [PII Exposure](agents/base-agent/security-agent/goals/data-loss-prevention/failures/pii-exposure.md) | Security | Data Loss Prevention | Agent outputs contain personal data |
+| [Cross-Session Bleed](agents/base-agent/security-agent/goals/data-loss-prevention/failures/cross-session-bleed.md) | Security | Data Loss Prevention | User A's data appears in User B's session |
 
 ## Research Sources & References
 
