@@ -9,15 +9,23 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
-**Maintained by [SaraLabs.ai](https://saralabs.ai)** | Questions? Reach out at **team@saralabs.ai**
+<p align="center">
+  <strong>An open-source project by <a href="https://saralabs.ai">SaraLabs.ai</a></strong><br>
+  We help teams build AI agents that work reliably in production.<br><br>
+  <a href="https://saralabs.ai">Website</a> · <a href="mailto:team@saralabs.ai">Contact Us</a> · <a href="#about-saralabsai">About</a>
+</p>
+
+---
 
 ## Why This Repo?
 
-Unlike academic failure taxonomies, this repository focuses on **real deployment issues** that engineers encounter when building and operating AI agents. Each failure is documented with:
+Unlike academic failure taxonomies, this repository focuses on **real deployment issues** that engineers encounter when building and operating AI agents. Each failure pattern is a complete playbook:
 
-- Concrete examples from production systems
-- Root cause analysis
-- Mitigation strategies that actually work
+- **Eval Recipes**: Test cases and metrics to catch failures before production
+- **Mitigation Strategies**: Architecture patterns and code to prevent failures
+- **Production Signals**: Metrics, alerts, and dashboards to detect failures in real-time
+
+Plus concrete examples from production systems and root cause analysis.
 
 ## Structure
 
@@ -131,9 +139,16 @@ OCR Agent → Accurate Text Extraction → Character Confusion
 | **Example** | Concrete scenario with code/logs showing the failure |
 | **Key Statistics** | Data from research and production systems |
 | **Contributing Factors** | Conditions that increase likelihood |
-| **Mitigation Strategies** | Actionable steps to prevent or reduce impact |
-| **Detection** | How to monitor for this failure in production |
-| **References** | Links to research papers, documentation, and case studies |
+
+#### Actionable Sections
+
+| Section | Purpose | Contents |
+|---------|---------|----------|
+| **Eval Recipes** | Test before production | Test cases, evaluation datasets, metrics, automated checks |
+| **Mitigation Strategies** | Prevent the failure | Prevention techniques, detection & response, architecture patterns |
+| **Production Signals** | Monitor in production | Key metrics, logs & traces, alerts, dashboard panels, health checks |
+
+See [PATTERN_TEMPLATE.md](PATTERN_TEMPLATE.md) for the full pattern structure.
 
 ## Quick Reference: Cross-Cutting Failure Patterns
 
@@ -455,24 +470,62 @@ To add a new failure pattern:
 
 ## About SaraLabs.ai
 
-This repository is maintained by [SaraLabs.ai](https://saralabs.ai), a company focused on building reliable AI systems for production environments.
+<p align="center">
+  <a href="https://saralabs.ai"><strong>saralabs.ai</strong></a> — Building reliable AI agents for production
+</p>
 
-**What we do:**
-- Build AI agents that work reliably in real-world conditions
-- Help organizations deploy AI systems with confidence
-- Research and document failure patterns to improve the entire AI ecosystem
+This repository is maintained by **[SaraLabs.ai](https://saralabs.ai)**, a company dedicated to making AI agents work reliably in production environments.
 
-**Why we maintain this taxonomy:**
-We've seen too many AI agent projects fail in production due to predictable, preventable issues. By documenting these failure patterns openly, we aim to help the entire community build more reliable AI systems. Every failure pattern in this repository comes from real production experience - either our own or from documented incidents across the industry.
+### Our Mission
 
-**Get in touch:**
-- **General inquiries**: [team@saralabs.ai](mailto:team@saralabs.ai)
-- **Contribute a failure pattern**: Submit a PR or email us with details
-- **Report an issue with this repo**: Open a GitHub issue
-- **Partnership opportunities**: [team@saralabs.ai](mailto:team@saralabs.ai)
+We believe AI agents will transform how businesses operate—but only if they work reliably. Today, **40% of agentic AI projects are projected to be scrapped by 2027** (Gartner), and **88% of enterprises report AI agent security incidents**. We're here to change that.
 
-We actively review all contributions and respond to queries. If you've encountered a failure pattern not documented here, we'd love to hear about it.
+SaraLabs.ai builds the knowledge, tools, and expertise needed to deploy AI agents with confidence.
+
+### What We Do
+
+| Area | Description |
+|------|-------------|
+| **Domain-Specific Reliability** | Deep expertise in vertical-specific agent failures (legal, healthcare, finance, enterprise) |
+| **Production AI Agents** | Build and deploy agents that handle real-world edge cases |
+| **Reliability Engineering** | Eval frameworks, monitoring systems, and failure detection |
+| **Consulting & Advisory** | Help teams ship agents faster with fewer production incidents |
+
+### Why This Repository?
+
+This playbook represents our core belief: **reliability knowledge should be open**.
+
+- Every failure pattern comes from real production incidents
+- We continuously update with new failure modes as the field evolves
+- Domain-specific agents (OCR, RAG, Voice, Code) get dedicated coverage
+- Community contributions make this resource stronger
+
+By sharing this knowledge openly, we help the entire ecosystem build better AI agents—and demonstrate the depth of expertise we bring to our work.
+
+### Work With Us
+
+| Need | How We Help |
+|------|-------------|
+| **Shipping an AI agent?** | We audit for reliability gaps before launch |
+| **Agent failing in production?** | We diagnose and fix systematic issues |
+| **Building an eval framework?** | We design domain-specific evaluation systems |
+| **Training your team?** | We run workshops on agent reliability |
+
+### Get In Touch
+
+| | |
+|---|---|
+| **General inquiries** | [team@saralabs.ai](mailto:team@saralabs.ai) |
+| **Consulting & projects** | [team@saralabs.ai](mailto:team@saralabs.ai) |
+| **Contribute a pattern** | Submit a PR or email us |
+| **Report an issue** | Open a GitHub issue |
+
+We respond to every inquiry. If you've encountered a failure pattern not documented here, we'd love to hear about it.
+
+<p align="center">
+  <a href="https://saralabs.ai"><strong>Visit saralabs.ai →</strong></a>
+</p>
 
 ---
 
-*Built by practitioners, for practitioners. Share your failures so others can learn.*
+*Built by [SaraLabs.ai](https://saralabs.ai) — Reliable AI agents for production.*
