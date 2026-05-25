@@ -13,6 +13,9 @@ Use this as an operations checklist when deploying and maintaining agent systems
 | [Multi-Agent Coordination](goals/multi-agent-coordination/) | Ensure agents work together effectively | 9 patterns |
 | [Traceability](goals/traceability/) | Enable auditing, debugging, and compliance | 8 patterns |
 | [Human Oversight Reliability](goals/human-oversight-reliability/) | Ensure human oversight mechanisms function correctly | 8 patterns |
+| [Cost Tracking](goals/cost-tracking/) | Track, attribute, and enforce budgets | 6 patterns |
+| [Context Lifecycle](goals/context-lifecycle/) | Manage context assembly, truncation, and prioritization | 6 patterns |
+| [Memory Management](goals/memory-management/) | Handle summarization, compaction, and retrieval | 6 patterns |
 
 ## Structure
 
@@ -41,10 +44,25 @@ operations-agent/
     │       ├── missing-audit-trail.md
     │       ├── non-reproducible-execution.md
     │       └── ...
-    └── human-oversight-reliability/
+    ├── human-oversight-reliability/
+    │   └── failures/
+    │       ├── escalation-not-triggered.md
+    │       ├── approval-timeout-mishandling.md
+    │       └── ...
+    ├── cost-tracking/
+    │   └── failures/
+    │       ├── budget-enforcement-bypass.md
+    │       ├── cost-attribution-errors.md
+    │       └── ...
+    ├── context-lifecycle/
+    │   └── failures/
+    │       ├── truncation-information-loss.md
+    │       ├── context-priority-inversion.md
+    │       └── ...
+    └── memory-management/
         └── failures/
-            ├── escalation-not-triggered.md
-            ├── approval-timeout-mishandling.md
+            ├── summary-drift.md
+            ├── memory-retrieval-failures.md
             └── ...
 ```
 
