@@ -59,13 +59,14 @@ agents/
 │   ├── task-planning/             # Planning, goal understanding
 │   ├── external-actions/          # External system execution
 │   ├── speech-and-audio/          # Speech/audio handling
-│   └── domain-expertise/          # Domain judgment
+│   ├── domain-expertise/          # Domain judgment
+│   ├── document-processing/       # OCR patterns
+│   ├── knowledge-retrieval/       # RAG patterns
+│   └── multi-agent-systems/       # Coordination
 │
-└── by-use-case/                   # Use-case specific
-    ├── knowledge-retrieval/       # RAG patterns
-    ├── document-processing/       # OCR patterns
+└── by-use-case/                   # Domain-specific
     ├── customer-service/          # Support conversations
-    └── multi-agent-systems/       # Coordination
+    └── mortgage-documents/        # Mortgage OCR and compliance
 ```
 
 ## Pattern Categories
@@ -89,19 +90,20 @@ agents/
 | [External Actions](agents/by-capability/external-actions/) | Action execution in external systems | 1 | 11 |
 | [Speech and Audio](agents/by-capability/speech-and-audio/) | Speech recognition and synthesis | 4 | 66 |
 | [Domain Expertise](agents/by-capability/domain-expertise/) | Domain-specific judgment | 1 | 10 |
+| [Document Processing](agents/by-capability/document-processing/) | OCR and document text extraction | 6 | 48 |
+| [Knowledge Retrieval](agents/by-capability/knowledge-retrieval/) | RAG and retrieval-augmented generation | 5 | 52 |
+| [Multi-Agent Systems](agents/by-capability/multi-agent-systems/) | Coordination and orchestration | 1 | 15 |
 
 ### By Use Case (Domain-Specific)
 
 | Use Case | Description | Goals | Patterns |
 |----------|-------------|-------|----------|
-| [Knowledge Retrieval](agents/by-use-case/knowledge-retrieval/) | RAG and retrieval-augmented generation | 5 | 52 |
-| [Document Processing](agents/by-use-case/document-processing/) | OCR and document text extraction | 6 | 48 |
 | [Customer Service](agents/by-use-case/customer-service/) | Customer conversation resolution | 1 | 11 |
-| [Multi-Agent Systems](agents/by-use-case/multi-agent-systems/) | Coordination and orchestration | 1 | 15 |
+| [Mortgage Documents](agents/by-use-case/mortgage-documents/) | Mortgage document OCR and compliance | 3 | 24 |
 | [Code](agents/by-use-case/code/) | Code generation and review | - | Planned |
 | [Data Extraction](agents/by-use-case/data-extraction/) | Structured data extraction | - | Planned |
 
-**Total: 479 patterns across 45 goals**
+**Total: 503 patterns across 48 goals**
 
 ## How to Use This Repo
 

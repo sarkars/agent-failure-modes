@@ -10,8 +10,11 @@ Failure patterns driven by **what the system does** - the capabilities that intr
 | [External Actions](external-actions/) | Action execution in external systems | 1 | 11 |
 | [Speech and Audio](speech-and-audio/) | Speech recognition and synthesis | 4 | 66 |
 | [Domain Expertise](domain-expertise/) | Domain-specific judgment | 1 | 10 |
+| [Document Processing](document-processing/) | OCR and document text extraction | 6 | 48 |
+| [Knowledge Retrieval](knowledge-retrieval/) | RAG and retrieval-augmented generation | 5 | 52 |
+| [Multi-Agent Systems](multi-agent-systems/) | Agent coordination and orchestration | 1 | 15 |
 
-**Total: 107 patterns across 8 goals**
+**Total: 222 patterns across 20 goals**
 
 ## Why "By Capability"?
 
@@ -21,6 +24,9 @@ These failures come from **how the system is designed**:
 - **External Actions**: Execution failures (wrong target, no rollback)
 - **Speech and Audio**: Audio/speech failures (accent bias, interruption handling)
 - **Domain Expertise**: Judgment failures (regulatory misses)
+- **Document Processing**: OCR and extraction failures (character confusion, layout errors)
+- **Knowledge Retrieval**: Retrieval failures (context precision, answer relevancy)
+- **Multi-Agent Systems**: Coordination failures (agent misalignment, communication breakdowns)
 
 ## Cross-References
 
