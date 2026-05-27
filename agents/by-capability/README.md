@@ -8,10 +8,10 @@ Failure patterns driven by **what the system does** - the capabilities that intr
 |------------|-------------|-------|----------|
 | [Task Planning](task-planning/) | Goal understanding, task planning | 2 | 20 |
 | [External Actions](external-actions/) | Action execution in external systems | 1 | 11 |
-| [Speech and Audio](speech-and-audio/) | Speech recognition and synthesis | 4 | 26 |
+| [Speech and Audio](speech-and-audio/) | Speech recognition and synthesis | 4 | 66 |
 | [Domain Expertise](domain-expertise/) | Domain-specific judgment | 1 | 10 |
 
-**Total: 67 patterns across 8 goals**
+**Total: 107 patterns across 8 goals**
 
 ## Why "By Capability"?
 

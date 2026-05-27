@@ -11,5 +11,6 @@
 | [Device Compatibility Issues](failures/device-compatibility-issues.md) |
 | [Echo Feedback Issues](failures/echo-feedback-issues.md) |
 | [Multi Speaker Confusion](failures/multi-speaker-confusion.md) |
+| [Call Disconnection Handling](failures/call-disconnection-handling.md) |
 
-**Total: 5 patterns**
+**Total: 6 patterns**

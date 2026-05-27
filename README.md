@@ -87,7 +87,7 @@ agents/
 |------------|-------------|-------|----------|
 | [Task Planning](agents/by-capability/task-planning/) | Goal understanding, task planning | 2 | 20 |
 | [External Actions](agents/by-capability/external-actions/) | Action execution in external systems | 1 | 11 |
-| [Speech and Audio](agents/by-capability/speech-and-audio/) | Speech recognition and synthesis | 4 | 26 |
+| [Speech and Audio](agents/by-capability/speech-and-audio/) | Speech recognition and synthesis | 4 | 66 |
 | [Domain Expertise](agents/by-capability/domain-expertise/) | Domain-specific judgment | 1 | 10 |
 
 ### By Use Case (Domain-Specific)
@@ -101,7 +101,7 @@ agents/
 | [Code](agents/by-use-case/code/) | Code generation and review | - | Planned |
 | [Data Extraction](agents/by-use-case/data-extraction/) | Structured data extraction | - | Planned |
 
-**Total: 439 patterns across 45 goals**
+**Total: 479 patterns across 45 goals**
 
 ## How to Use This Repo
 
