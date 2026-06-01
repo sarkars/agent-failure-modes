@@ -7,11 +7,11 @@ Failure patterns specific to **where the system is used** - the use case or doma
 | Use Case | Description | Goals | Patterns |
 |----------|-------------|-------|----------|
 | [Customer Service](customer-service/) | Customer conversations | 1 | 11 |
-| [Mortgage Documents](mortgage-documents/) | Mortgage document OCR and compliance | 3 | 24 |
+| [Mortgage Documents](mortgage-documents/) | Mortgage document OCR, fraud, AI reliability | 6 | 44 |
 | [Code](code/) | Code generation and review | - | Planned |
 | [Data Extraction](data-extraction/) | Structured data extraction | - | Planned |
 
-**Total: 35 patterns across 4 goals**
+**Total: 55 patterns across 7 goals**
 
 ## Why "By Use Case"?
 

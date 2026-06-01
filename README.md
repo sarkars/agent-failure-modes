@@ -99,11 +99,11 @@ agents/
 | Use Case | Description | Goals | Patterns |
 |----------|-------------|-------|----------|
 | [Customer Service](agents/by-use-case/customer-service/) | Customer conversation resolution | 1 | 11 |
-| [Mortgage Documents](agents/by-use-case/mortgage-documents/) | Mortgage document OCR and compliance | 3 | 24 |
+| [Mortgage Documents](agents/by-use-case/mortgage-documents/) | Mortgage document OCR, fraud, compliance | 6 | 44 |
 | [Code](agents/by-use-case/code/) | Code generation and review | - | Planned |
 | [Data Extraction](agents/by-use-case/data-extraction/) | Structured data extraction | - | Planned |
 
-**Total: 503 patterns across 48 goals**
+**Total: 523 patterns across 51 goals**
 
 ## How to Use This Repo
 

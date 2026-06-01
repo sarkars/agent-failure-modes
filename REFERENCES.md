@@ -94,6 +94,50 @@ Research sources, incident databases, statistics, and industry reports that info
 - [IDP Accuracy Reckoning 2026](https://idp-software.com/news/idp-accuracy-reckoning-2026/) - Practitioner perspectives on OCR, agents, tables
 - [IDP Challenges 2026](https://idp-software.com/guides/idp-challenges-2026/) - Table extraction as hardest unsolved problem
 
+### Mortgage Document Processing
+- [NMP: The Verification Collapse](https://nationalmortgageprofessional.com/news/verification-collapse-why-ai-underwriting-building-fragile-foundation) - AI underwriting validation gaps
+- [Indecomm: Why Document AI Breaks Mortgage Ops](https://indecomm.com/article/why-document-ai-breaks-mortgage-ops/) - Quiet, distributed failures in mortgage AI
+- [DocVu.AI: 7 Mortgage Document Challenges](https://www.docvu.ai/7-mortgage-document-challenges-lenders-cant-ignore-in-2026-and-how-docvu-ai-solves-them/) - Lender challenges in 2026
+- [Infrrd: AI Mortgage Document Processing](https://www.infrrd.ai/solutions/ai-mortgage-document-processing) - QC, audit, investor delivery
+- [Infrrd: Mortgage Data Extraction Guide](https://www.infrrd.ai/blog/mortgage-data-extraction-guide) - 2026 lender guide
+- [ABBYY: AI Mortgage Process Automation](https://www.abbyy.com/blog/ai-mortgage-process-automation/) - Process automation 2026
+- [HCLTech: Intelligent Automation in Mortgage](https://www.hcltech.com/blogs/revolutionizing-mortgage-how-intelligent-automation-overcomes-document-processing-challenges) - Document processing challenges
+- [Docsumo: IDP in Lending](https://www.docsumo.com/blogs/intelligent-document-processing/lending-industry) - Lending industry IDP
+- [Chrisman: IDP New Engine of Mortgage Efficiency](https://www.chrismancommentary.com/post/intelligent-document-processing-mortgage-efficiency) - Beyond OCR
+- [AWS: Rocket Close Case Study](https://aws.amazon.com/blogs/machine-learning/rocket-close-transforms-mortgage-document-processing-with-amazon-bedrock-and-amazon-textract/) - 90% accuracy, 15x faster
+
+### Mortgage Fraud & Identity
+- [CrossCheck: AI, Fraud, and Mortgage Risk](https://crosscheckcompliance.com/resources/industry-insights/ai-fraud-and-the-future-of-mortgage-risk-management/) - AI fraud risk management
+- [TCS: GenAI to Combat Mortgage Fraud](https://www.tcs.com/what-we-do/industries/banking/white-paper/generative-ai-combat-mortgage-fraud) - Using AI against fraud
+- [FTI: Emerging Fraud Risks](https://www.fticonsulting.com/insights/articles/mortgage-fraud-emerging-risks-mitigation-strategies) - Mitigation strategies
+- [FraudFinder AI](https://www.fraudfinderai.com/) - Document fraud detection
+- [True.AI: Fraud Document Detection](https://true.ai/fraud-document-detection/) - AI fraud strategies
+- [Microblink: Top Mortgage Fraud Detection Tools](https://microblink.com/resources/blog/top-mortgage-fraud-detection-tools/) - Digital onboarding
+- [World Economic Forum: Identity Fraud in AI Age](https://www.weforum.org/stories/2025/12/how-identity-fraud-is-increasing-in-the-age-of-ai/) - Deepfakes, synthetic ID
+- [MortgageFlow: Automating Fraud Detection](https://www.opsflowhq.com/newsletter-issues/how-to-automate-mortgage-document-fraud-detection-using-ai) - Automation strategies
+
+### Mortgage AI/ML & Underwriting
+- [Ocrolus: Mythbusters AI in Underwriting](https://www.ocrolus.com/blog/mythbusters-ai-in-mortgage-underwriting/) - AI underwriting myths
+- [CGI: Transforming Mortgage Underwriting](https://www.cgi.com/us/en-us/article/banking-and-capital-markets/transforming-mortgage-underwriting-ai-automation) - AI and automation
+- [CrossCheck: Fair Lending and AI](https://crosscheckcompliance.com/resources/articles/automated-underwriting-ai-fair-lending-risk/) - Fair lending risk
+- [SCN Soft: LLMs for Mortgage](https://www.scnsoft.com/lending/large-language-models) - LLM applications in lending
+- [PerformLine: How LLMs Represent Financial Products](https://performline.com/blog-post/how-llms-represent-financial-products/) - LLM accuracy issues
+- [BizTech: LLM Hallucinations in Finance](https://biztechmagazine.com/article/2025/08/llm-hallucinations-what-are-implications-financial-institutions) - Implications for FIs
+
+### Mortgage Quality Control
+- [Fannie Mae Quality Insider](https://singlefamily.fanniemae.com/originating-underwriting/loan-quality/quality-insider/september-2025) - Top defects Q1 2025
+- [Fannie Mae Loan Quality](https://singlefamily.fanniemae.com/originating-underwriting/loan-quality) - Quality requirements
+- [ICE: Containing Repurchase Risk](https://mortgagetech.ice.com/blog/containing-repurchase-risk-with-automated-file-audits) - Automated audits
+- [Infrrd: AI-Driven Mortgage Audits](https://www.infrrd.ai/blog/ai-driven-mortgage-audits) - AI for QC
+- [Servion: Cost of Quality in Mortgage](https://www.myservion.com/blog/coq) - COQ framework
+- [Fannie Mae Income Calculator](https://singlefamily.fanniemae.com/applications-technology/income-calculator) - Self-employment income
+
+### Mortgage Compliance & Fair Lending
+- [CFPB HMDA](https://www.consumerfinance.gov/data-research/hmda/) - HMDA data and reporting
+- [CFPB Regulation Z](https://www.consumerfinance.gov/rules-policy/regulations/1026/) - Truth in Lending
+- [Massachusetts AG AI Underwriting Settlement](https://www.cfsreview.com/2025/07/massachusetts-ag-settles-fair-lending-action-based-upon-ai-underwriting-model/) - State AI enforcement
+- [CFPB Fair Lending Rule Change](https://themortgagereports.com/131115/cfpb-fair-lending-rule-change) - 2026 ECOA changes
+
 ### Multimodal/VLM Document Processing
 - [Hallucination of Multimodal LLMs Survey](https://arxiv.org/html/2404.18930v2) - Object, attribute, relational hallucination types
 - [Mitigating OCR Hallucinations in MLLMs](https://arxiv.org/html/2506.20168v2) - NeurIPS 2025 research on visual degradation
