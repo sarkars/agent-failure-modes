@@ -12,8 +12,10 @@ Failure patterns specific to mortgage document processing, including loan applic
 | [Fraud Detection](goals/fraud-detection/) | Synthetic identity, AI forgery, deepfakes, behavioral signals | 7 |
 | [Quality Control](goals/quality-control/) | GSE defects, repurchase risk, audit failures | 6 |
 | [AI Model Reliability](goals/ai-model-reliability/) | Verification collapse, hallucination, vendor accuracy | 7 |
+| [Cross-Document Validation](goals/cross-document-validation/) | Name matching, income triangulation, SSN correlation, timeline consistency | 10 |
+| [Document Integrity](goals/document-integrity/) | PDF forensics, barcode validation, font analysis, digital signatures | 8 |
 
-**Total: 44 patterns across 6 goals**
+**Total: 62 patterns across 8 goals**
 
 ## Key Statistics
 
@@ -32,6 +34,8 @@ Mortgage document processing has unique failure modes:
 
 - **High-stakes accuracy**: Errors can delay closings or cause compliance violations
 - **Multi-document correlation**: Income, assets, employment must align across documents
+- **Cross-document validation**: W-2 must match tax return, pay stubs must align with VOE, names must correlate across timeline
+- **Document integrity**: PDF metadata, barcode encoding, font consistency reveal tampering
 - **Regulatory requirements**: TRID, RESPA, fair lending compliance
 - **Fraud detection**: AI-generated forgeries, synthetic identities, deepfakes
 - **Document variety**: W-2s, tax returns, bank statements, appraisals, titles
