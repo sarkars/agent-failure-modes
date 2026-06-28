@@ -10,9 +10,9 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
 <p align="center">
-  <strong>An open-source project by <a href="https://saralabs.ai">SaraLabs.ai</a></strong><br>
+  <strong>An open-source project by <a href="https://jivik.ai">Jivik AI</a></strong><br>
   We help teams build AI agents that work reliably in production.<br><br>
-  <a href="https://saralabs.ai">Website</a> · <a href="mailto:team@saralabs.ai">Contact Us</a> · <a href="#about-saralabsai">About</a>
+  <a href="https://jivik.ai">Website</a> · <a href="mailto:team@jivik.ai">Contact Us</a> · <a href="#about-jivik-ai">About</a>
 </p>
 
 ---
@@ -28,7 +28,7 @@
 | [Quick Reference](#quick-reference-cross-cutting-failure-patterns) | Most common failure patterns at a glance |
 | [References](REFERENCES.md) | Research sources, incident databases, statistics |
 | [Contributing](#contributing) | How to add failure patterns |
-| [About SaraLabs.ai](#about-saralabsai) | Who we are and how to work with us |
+| [About Jivik AI](#about-jivik-ai) | Who we are and how to work with us |
 
 ---
 
@@ -203,19 +203,19 @@ To add a new failure pattern:
 
 ---
 
-## About SaraLabs.ai
+## About Jivik AI
 
 <p align="center">
-  <a href="https://saralabs.ai"><strong>saralabs.ai</strong></a> — Building reliable AI agents for production
+  <a href="https://jivik.ai"><strong>jivik.ai</strong></a> — Building reliable AI agents for production
 </p>
 
-This repository is maintained by **[SaraLabs.ai](https://saralabs.ai)**, a company dedicated to making AI agents work reliably in production environments.
+This repository is maintained by **[Jivik AI](https://jivik.ai)**, a company dedicated to making AI agents work reliably in production environments.
 
 ### Our Mission
 
 We believe AI agents will transform how businesses operate—but only if they work reliably. Today, **40% of agentic AI projects are projected to be scrapped by 2027** (Gartner), and **88% of enterprises report AI agent security incidents**. We're here to change that.
 
-SaraLabs.ai builds the knowledge, tools, and expertise needed to deploy AI agents with confidence.
+Jivik AI builds the knowledge, tools, and expertise needed to deploy AI agents with confidence.
 
 ### What We Do
 
@@ -250,17 +250,17 @@ By sharing this knowledge openly, we help the entire ecosystem build better AI a
 
 | | |
 |---|---|
-| **General inquiries** | [team@saralabs.ai](mailto:team@saralabs.ai) |
-| **Consulting & projects** | [team@saralabs.ai](mailto:team@saralabs.ai) |
+| **General inquiries** | [team@jivik.ai](mailto:team@jivik.ai) |
+| **Consulting & projects** | [team@jivik.ai](mailto:team@jivik.ai) |
 | **Contribute a pattern** | Submit a PR or email us |
 | **Report an issue** | Open a GitHub issue |
 
 We respond to every inquiry. If you've encountered a failure pattern not documented here, we'd love to hear about it.
 
 <p align="center">
-  <a href="https://saralabs.ai"><strong>Visit saralabs.ai →</strong></a>
+  <a href="https://jivik.ai"><strong>Visit jivik.ai →</strong></a>
 </p>
 
 ---
 
-*Built by [SaraLabs.ai](https://saralabs.ai) — Reliable AI agents for production.*
+*Built by [Jivik AI](https://jivik.ai) — Reliable AI agents for production.*

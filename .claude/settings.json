@@ -1,0 +1,32 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash",
+      "Bash(*)",
+      "Bash(cd *)",
+      "Bash(find *)",
+      "Bash(for *)",
+      "Bash(cat *)",
+      "Bash(echo *)",
+      "Bash(wc *)",
+      "Write",
+      "Write(*)",
+      "Read",
+      "Read(*)",
+      "Glob",
+      "Grep",
+      "WebFetch",
+      "WebSearch",
+      "WebFetch(domain:*)"
+    ],
+    "defaultMode": "bypassPermissions",
+    "additionalDirectories": [
+      "C:\\Users\\saura\\Documents\\Codex\\2026-06-02\\agent-failure-modes",
+      "C:\\Users\\saura\\Documents\\",
+      "C:\\Users\\saura\\"
+    ]
+  },
+  "sandbox": {
+    "enabled": false
+  }
+}

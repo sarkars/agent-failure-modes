@@ -1,5 +1,13 @@
 # Parameter Type Mismatches
 
+> **⚠️ DEPRECATED — Largely Mitigated**: Strict JSON-schema / structured-output
+> tool-calling modes (now standard in major model tool-use APIs) constrain the
+> model to emit schema-conformant types at generation time, closing most of
+> the failure path described below. Still relevant for legacy integrations
+> without strict-mode enforcement. For tool-side leniency (the tool itself
+> silently coercing bad input after a valid call), see `silent-type-coercion.md`,
+> which is not mitigated by this and remains current.
+
 ## Issue: Agent Passes Wrong Parameter Types to Tools
 
 **Frequency**: Very Common

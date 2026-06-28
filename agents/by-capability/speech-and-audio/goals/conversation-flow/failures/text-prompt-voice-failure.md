@@ -1,5 +1,13 @@
 # Text Prompt Voice Failure
 
+> **⚠️ DEPRECATED — Largely Mitigated**: This pattern assumes a cascaded
+> pipeline (text-generating LLM → separate TTS engine), where markdown/list
+> formatting from a text-style prompt leaks into spoken output. Native
+> speech-to-speech / voice-native models generate audio directly and are
+> trained on conversational speech, not text-formatting conventions, so this
+> failure mode mainly applies to legacy cascaded architectures (text LLM +
+> bolt-on TTS) rather than current voice-native agent stacks.
+
 ## Issue: System Prompts Designed for Text Chatbots Fail in Voice Conversations
 
 **Frequency**: Very Common
