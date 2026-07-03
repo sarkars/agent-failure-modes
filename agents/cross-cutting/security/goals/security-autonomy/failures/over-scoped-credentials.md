@@ -6,20 +6,87 @@
 
 **Symptoms**
 - Credential can access unrelated systems/data.
-- [Add more specific symptoms]
+- Single API token grants permissions to read/write/delete across multiple databases/services.
+- Agent credential includes wildcards or overly broad scopes (e.g., "all databases" instead of "product_db only").
+- Service account used by agent also has admin/root permissions in production environment.
+- Credential has been in use for 6+ months without review or re-authentication.
+- Same credential used across dev, staging, and production environments.
 
 **Root Cause**
 Agent has broad access when narrow scope was enough.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+Scenario: E-commerce platform uses a single service account for multiple agents.
+
+Setup:
+- Agent is designed to process refunds on customer orders.
+- Service account has permissions: ["databases:read:*", "databases:write:*", "admin:users:read"]
+- Credential is stored in plaintext in config file with git history.
+
+Attack/Failure:
+1. Attacker gains access to agent config (via Git history, CI/CD logs, or compromised host).
+2. Attacker extracts the API key.
+3. Uses key to access:
+   - Customer payment database (customer_db) → exports 100K credit cards
+   - Internal audit database (audit_db) → deletes evidence of unauthorized access
+   - User management (admin API) → creates new admin account for persistent backdoor
+
+Impact:
+- PCI DSS violation (payment data exposure)
+- Loss of audit trail
+- Attacker maintains persistent admin access
+- Regulatory fine of $10K-$100K+ per card exposed
+- Customer trust loss and likely lawsuits
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Credential provisioning follows convenience-over-security principle; one token for all agent use cases.
+- No access control policy review before deployment (assumed safe if "for agents").
+- Credentials stored in source code, config files, or environment variables with insufficient access controls.
+- No credential rotation policy or expiration date enforced.
+- Insufficient logging of which permissions each credential actually uses.
+- Team unfamiliar with least-privilege principle; assume "admin" tokens are necessary.
+- Credential granted to service account in multiple environments without tenant/environment isolation.
+- No segregation of duties (refund agent should not have audit log deletion access).
 
 ---
+
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Agent has credentials with excessive permissions
+- Credentials used for all operations
+- No principle of least privilege
+- No per-operation permission scoping
+
+### Trigger Mechanism
+```
+1. Agent credentials: admin permissions for entire database
+2. Attacker compromises agent or injects malicious prompt
+3. Agent/attacker can delete, modify any database record
+4. User credentials bypass normal access controls
+5. Entire database modified or deleted
+```
+
+### Expected Failure State
+- Agent credentials grant excessive permissions
+- Single compromised credential affects entire system
+- No granular access control per operation
+- Attacker gains full database access
+
+### Mitigation Validation Protocol
+**Test Checklist:**
+- [ ] Reproduce: Credential compromise affects entire system
+- [ ] Apply mitigations (least privilege, scoped credentials)
+- [ ] Re-run attack → limited to specific operations
+- [ ] Test permission boundaries
+
+**Success Criteria:**
+- Credentials scoped to minimum required permissions
+- Each operation has dedicated low-privilege credential
+- Credential compromise limits damage scope
 
 ## Eval Recipes
 
@@ -38,14 +105,38 @@ Agent has broad access when narrow scope was enough.
 ## Mitigation Strategies
 
 ### Prevention
-1. Scoped tokens and periodic access reviews.
-2. [Add more prevention strategies]
+1. **Scoped credentials per agent**: Each agent gets a dedicated credential with minimal necessary permissions. Refund agent only has refund database read/write, not user management or audit log access.
+2. **Automated access review cycle**: Quarterly or semi-annual review of agent credentials. Question each permission: "Does this agent actually need this?" Revoke unused permissions.
+3. **Credential rotation policy**: Enforce credential expiration (max 90 days). Rotate automatically or require re-approval to extend.
+4. **Secrets management system**: Store credentials in vault (AWS Secrets Manager, HashiCorp Vault), not in code. Audit all access to secrets.
+5. **Environment-specific credentials**: Use different credentials for dev/staging/prod. Never reuse production credentials in non-prod.
+6. **Segregation of duties**: Separate read permissions from write, write from delete, normal operations from admin operations across different credentials.
+7. **Capability-based tokens**: Use token systems that explicitly list allowed operations (not role-based wildcards). Example: `token_can_read:refunds_db_2024` not `token_role:admin`.
 
 ### Detection
 - Credential can access unrelated systems/data.
 
 ### Recovery
-- [Add recovery strategies]
+**Immediate (Stop the Attack)**
+1. Revoke the compromised credential immediately in all systems (IAM, API key vault, database ACLs).
+2. Terminate any active sessions or connections using that credential.
+3. If credential was exposed in git history, force-push to remove it and invalidate all clones.
+4. Block associated IP addresses or API consumer IDs if identifiable.
+
+**Investigation (Understand Scope)**
+1. Retrieve API/database audit logs for all actions using the compromised credential in the last 30-90 days.
+2. Identify all systems the credential could access (cross-reference with IAM policy, database user permissions).
+3. For each system, query audit logs for unauthorized reads/writes/deletes (data export, admin account creation, audit log deletion).
+4. Correlate with external threat intelligence (IP reputation, WHOIS) to determine if attacker is known threat actor.
+5. Estimate data exposure: how many records were read? Which customer/transaction IDs?
+
+**Remediation (Prevent Recurrence)**
+1. Implement least-privilege credentials and automated access review (see Prevention).
+2. Audit all other service accounts for over-scoping; create remediation plan.
+3. Rotate all credentials across the infrastructure (even ones not directly impacted, to be safe).
+4. Implement credential secrets scanning in CI/CD and code repositories to prevent re-exposure.
+5. Notify affected customers per regulatory requirements (GDPR, CCPA, PCI DSS).
+6. Conduct post-incident review to identify process gaps (code review, secrets scanning, access control).
 
 ---
 
