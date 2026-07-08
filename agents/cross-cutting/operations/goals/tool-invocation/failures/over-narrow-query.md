@@ -38,14 +38,30 @@ Agent misses correct data due to overly strict filters.
 ## Mitigation Strategies
 
 ### Prevention
-1. Recall retry strategy with query expansion.
-2. [Add more prevention strategies]
+1. **Filter Necessity Justification**: The agent must be able to justify each filter it adds (why this date range, why this exact status) against the user's actual request; filters not traceable to an explicit user constraint are treated as agent-invented and discouraged through prompt guidance and few-shot examples.
+2. **Fuzzy/Synonym Matching Defaults**: Text and categorical filters default to fuzzy or synonym-aware matching (stemming, close-date windows, status aliases) rather than exact string/enum match, so minor phrasing or data-entry variance doesn't silently exclude valid records.
+3. **Filter Combination Sanity Bounds**: The query builder limits how many simultaneous AND-ed filters can be stacked without an intermediate result check; queries with more than N conjunctive filters are broken into a staged search with a "does narrowing this further still return results?" check at each step.
 
-### Detection
-- Empty result despite known relevant records.
+### Detection & Response
+1. **Empty/Near-Empty Result Monitoring**: Any retrieval call returning zero or near-zero results on a query type that historically returns non-zero is flagged; the agent is required to attempt at least one relaxation pass (drop one filter) before treating the result as authoritative.
+2. **Known-Record Recall Probes**: Synthetic canary records with known attributes are seeded into the searchable dataset (or a shadow index); periodic probe queries confirm they are still retrievable under typical filter combinations, catching silent over-narrowing caused by filter/index drift.
+3. **Filter Relaxation Outcome Tracking**: When the agent's auto-relaxation logic drops a filter and subsequently finds results, that event is logged; a high rate of "found after relaxing" events indicates the initial filter-construction logic is systematically too strict and needs tuning.
 
-### Recovery
-- [Add recovery strategies]
+### Architecture Patterns
+1. **Automatic Query Relaxation Ladder**: On zero results, the retrieval wrapper automatically retries with a defined relaxation sequence (widen date range, drop least-specific filter, switch exact-match to fuzzy) up to a bounded number of steps, surfacing which relaxation finally succeeded.
+2. **Filter Confidence Annotation**: Each filter the agent applies is tagged as "explicit" (stated by the user) or "inferred" (assumed by the agent); only explicit filters are treated as hard constraints, while inferred filters are automatically candidates for relaxation on empty results.
+3. **Two-Pass Search Strategy**: A first pass executes a broad query to confirm relevant records exist at all; a second pass applies the full filter set. If pass one returns nonzero but pass two returns zero, the system flags the filters — not the dataset — as the likely cause.
+
+### Metrics
+1. **zero_result_query_rate_percent**: Target: < 3%; Alert threshold: > 8%
+2. **relaxation_recovery_rate_percent**: Target: trending down over time; Alert threshold: > 25% of zero-result queries recovered via relaxation
+3. **canary_record_retrieval_success_rate_percent**: Target: 100%; Alert threshold: < 100%
+4. **inferred_filter_share_percent**: Target: < 30% of applied filters; Alert threshold: > 50%
+
+### Alerts
+1. **Canary Record Retrieval Failure** (P1 - Critical): Condition - a seeded known-good record is not returned by its standard probe query. Action: Investigate index/filter/search-pipeline regression immediately, page search infra owner.
+2. **Zero-Result Spike** (P2 - Warning): Condition - zero_result_query_rate_percent exceeds threshold for a query type over 1 hour. Action: Inspect recent filter-construction prompt changes, enable the relaxation ladder if not already active.
+3. **High Relaxation Recovery Rate** (P3 - Info): Condition - relaxation_recovery_rate_percent exceeds threshold over a week. Action: Tune default filter strictness/fuzzy-matching thresholds for the affected tool.
 
 ---
 

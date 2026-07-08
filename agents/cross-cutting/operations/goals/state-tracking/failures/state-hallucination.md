@@ -38,14 +38,30 @@ Agent believes a step happened when it did not.
 ## Mitigation Strategies
 
 ### Prevention
-1. Require tool evidence before state update.
-2. [Add more prevention strategies]
+1. **Evidence-Gated State Transitions**: The internal task/state ledger only marks a step "completed" when a corresponding successful tool-call result (with matching return values, e.g., message_id for a sent email, file path + hash for a created file) is recorded. The model narrating "I sent the email" in text has no effect on the ledger — only the actual tool receipt does.
+2. **Action-Claim Binding Enforcement**: Any completion claim the model makes in its output is required to reference a specific tool_call_id from the current trace. A claim without a matching tool call is rejected by a post-generation checker before the response is finalized, forcing the model to either make the real call or avoid the claim.
+3. **Read-After-Write Verification**: For consequential actions (send, create, delete, submit), immediately follow the write with an independent read/verification call (e.g., check the sent-items folder, list the created file) before reporting success, rather than trusting the write call's own return value alone.
 
-### Detection
-- Claims email sent, file created, or test run without evidence.
+### Detection & Response
+1. **Claim-vs-Evidence Consistency Check**: Post-generation, scan the response for completion-claim language ("sent", "created", "ran the tests", "updated") and cross-reference each claim against the trace for a matching successful tool call. Unmatched claims are flagged and the response is blocked from sending.
+2. **User-Reported Non-Occurrence Tracking**: Monitor for user follow-ups indicating a claimed action didn't happen ("I never got the email", "the file isn't there"), and log the corresponding trace to find where the false completion claim originated.
+3. **Ledger-vs-Reality Reconciliation Job**: Periodically spot-check completed-status ledger entries against the actual external system state (e.g., query the email provider's sent log, the file system) to catch cases where evidence-gating was bypassed or a tool call itself lied about success.
 
-### Recovery
-- [Add recovery strategies]
+### Architecture Patterns
+1. **Tool-Call-Backed State Ledger**: The task state machine's only valid input for marking a step done is a structured tool-result event, not model-generated text; the model narrates from the ledger, it does not write to it directly.
+2. **Post-Generation Claim Checker**: A verification pass runs between draft generation and final send, parsing claimed actions and requiring each to resolve to a tool_call_id + success status in the current trace; failures trigger regeneration with the unverified claim removed or corrected.
+3. **Verification-Call Requirement for High-Stakes Actions**: The action-execution framework requires a defined verification step (distinct from the action call itself) for a configured list of high-stakes action types, and the ledger entry isn't marked complete until the verification step also succeeds.
+
+### Metrics
+1. **unverified_completion_claim_rate_percent**: Target: 0% reaching the user; Alert threshold: > 0%
+2. **claim_evidence_match_rate_percent**: Target: 100%; Alert threshold: < 99.5%
+3. **user_reported_false_completion_count**: Target: 0 per week; Alert threshold: > 1 per week
+4. **verification_step_coverage_percent**: Target: 100% of high-stakes action types; Alert threshold: < 100%
+
+### Alerts
+1. **False Completion Claim Sent to User** (P1 - Critical): Condition - user reports or reconciliation job confirms a claimed action never occurred. Action: Immediate correction to user, perform the actual action if still valid, audit the generation path for the claim-checker gap.
+2. **Claim Checker Bypass** (P1 - Critical): Condition - an unverified claim was found in a sent response despite the post-generation checker being active. Action: Freeze deploys of the generation pipeline, root-cause the bypass, re-audit recent responses for the same pattern.
+3. **Missing Verification Step on High-Stakes Action** (P2 - Warning): Condition - a configured high-stakes action type completed without its required verification call. Action: Add/fix the verification step, mark any ledger entries completed without it as unverified pending manual check.
 
 ---
 
