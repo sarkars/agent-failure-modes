@@ -38,14 +38,31 @@ Agent acts on wrong account, order, file, or user.
 ## Mitigation Strategies
 
 ### Prevention
-1. Target confirmation and typed object summaries.
-2. [Add more prevention strategies]
+1. **Target Confirmation with Semantic Summary**: Before executing action, display semantic summary of target resource (e.g., 'Refund $500 for Customer: John Doe (ID: CUST-123), Order: #12345-ABC'). Require explicit agent confirmation of target identity. Bind confirmed target to action request.
+2. **Typed Object Representations**: Use rich object representations (not just IDs) for action targets. Display disambiguating information (e.g., if multiple customers named 'John Doe', show email, phone, account balance to enable user to differentiate). Use type checking to verify object is correct type.
+3. **Target Validation Rules per Action**: Define validation rules per action type. Example: 'refund action must target an order_id with status=completed AND order_amount_in_range AND within_refund_window'. Enforce before execution.
 
-### Detection
-- Entity mismatch between request and tool call.
+### Detection & Response
+1. **Target Confirmation Mismatch Detection**: Compare target object confirmed by agent/user with actual target of execution. Alert if mismatch detected (confirmed_target_id ≠ executed_target_id). Potential target mix-up.
+2. **Context-Specific Target Anomaly Detection**: Flag actions targeting unusual resources. Example: agent refunding orders from unusual customers (high-value orders, VIP customers), deleting resources of unusual type/age. Correlate with user.
+3. **Bulk Action Target Validation**: For batch operations (multi-target), validate each target's appropriateness. Sample-check targets (e.g., audit 10% of target set). Flag anomalies (unusual resource mix, unexpected quantity).
 
-### Recovery
-- [Add recovery strategies]
+### Architecture Patterns
+1. **Target Confirmation Middleware**: All actions route through confirmation layer. Display rich target summary with key disambiguating fields. Persist confirmed_target_id with action for later verification. Fail if confirmation not provided.
+2. **Semantic Target Validation**: Before execution, re-verify target still matches original confirmation summary. Alert if target was modified between confirmation and execution (race condition detection).
+3. **Audit Trail with Target Binding**: Log action with: confirmed_target (user-acknowledged), executed_target (actual target), delta (if mismatch). Enables incident investigation if wrong-target occurred.
+
+### Metrics
+1. **wrong_target_action_attempts_per_day**: Target: 0; Any wrong-target is critical
+2. **target_confirmation_mismatch_rate_percent**: Target: < 0.01%; Alert threshold: > 0.05%; Track: mismatches, agents, targets
+3. **target_confirmation_accuracy_rate_percent**: Target: 99.9%; Measure confirmations that match actual execution
+4. **target_validation_failure_rate_percent**: Target: < 0.1%; Measure validation rule catches
+5. **bulk_action_target_anomaly_detection_rate_percent**: Target: > 95%; Detect unusual target mixes
+
+### Alerts
+1. **Target Confirmation Mismatch Detected** (P1 - Critical): Condition - confirmed_target ≠ executed_target. Action: Immediately block action execution, audit investigation, attempted rollback, stakeholder notification.
+2. **Target Validation Failure** (P2 - Warning): Condition - target fails validation rules for action type. Action: Block action, notify agent with failure reason, require manual override with justification.
+3. **Bulk Action Target Anomaly** (P1 - Critical): Condition - batch operation targets unusual resources (e.g., 95% of targets older than 1-year threshold). Action: Auto-pause operation, require manual review and confirmation, audit sample of targets.
 
 ---
 

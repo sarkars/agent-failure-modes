@@ -38,14 +38,31 @@ Agent misses relevant documents.
 ## Mitigation Strategies
 
 ### Prevention
-1. Hybrid search, query expansion, recall evals.
-2. [Add more prevention strategies]
+1. **Hybrid Search Strategy**: Combine dense vector search (semantic similarity) with sparse lexical search (BM25/TF-IDF). Execute both in parallel, merge results using reciprocal rank fusion (RRF). Catches documents missed by either method alone.
+2. **Query Expansion and Reformulation**: Automatically expand queries with: synonyms, related terms, acronyms, spelling variations. Example: 'CEO' expands to ['chief executive officer', 'president', 'c-suite']. Implement multi-query retrieval: run expanded queries, merge top results.
+3. **Recall-Focused Eval Dataset**: Build eval set with queries where ground-truth relevant documents are known. Measure recall@k metrics (recall@10, recall@100). Set recall targets per domain (legal: 98%+, customer service: 95%+). Run evals regularly.
 
-### Detection
-- User/source shows answer existed but was not retrieved.
+### Detection & Response
+1. **Recall Metric Monitoring**: Estimate recall@k in production via user feedback (clicks, marks_relevant). Track recall trends. Alert if recall@10 drops > 5% month-over-month. Baseline per query type.
+2. **Zero-Result Query Analysis**: Monitor queries returning 0 results. These are recall failures. Analyze: query type, vocabulary mismatch, missing documents. Use patterns to improve query expansion or index content.
+3. **User Feedback False Negatives**: When user provides correct document not in retrieved set, mark as false negative. Track false negative rate. Alert if rate exceeds baseline.
 
-### Recovery
-- [Add recovery strategies]
+### Architecture Patterns
+1. **Multi-Index Architecture**: Maintain parallel indices: dense (embeddings), sparse (keywords), multi-modal (tables/figures). Query all indices, re-rank merged results using learning-to-rank model. Increases recall coverage.
+2. **Query Understanding Pipeline**: Before retrieval, classify query intent, detect key entities, identify domain. Route to specialized retrieval strategy (legal queries → legal index, technical queries → code index). Improves recall by matching query to right corpus.
+3. **Iterative Query Refinement**: If initial retrieval recall low (< 50% coverage), automatically rewrite query using synonyms/expansion, retry retrieval. Continue iterations up to max_iterations. Log all refinements for learning.
+
+### Metrics
+1. **recall_at_10_percent**: Target: > 85%; Alert threshold: < 80%
+2. **recall_at_100_percent**: Target: > 95%; Alert threshold: < 90%
+3. **zero_result_queries_percent**: Target: < 2%; Alert threshold: > 5%
+4. **false_negative_rate_per_1000_queries**: Target: < 20; Alert threshold: > 50
+5. **recall_consistency_across_domains_percent**: Target: > 90%; Variance < 10%
+
+### Alerts
+1. **Recall Degradation** (P1 - Critical): Condition - recall@10 drops > 10% month-over-month. Action: Investigate index staleness, embedding model drift, query distribution shift, potential index rebuild.
+2. **Zero-Result Query Spike** (P2 - Warning): Condition - zero_result_queries_percent > 5%. Action: Analyze query patterns, add query expansion rules, update stop words/synonyms.
+3. **High False-Negative Rate** (P1 - Critical): Condition - false_negative_rate > 50 per 1000 queries. Action: Audit retrieval pipeline, consider hybrid search tuning, ranking model retraining.
 
 ---
 

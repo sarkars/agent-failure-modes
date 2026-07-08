@@ -38,14 +38,31 @@ Agent uses OCR/RAG text when database/source document should win.
 ## Mitigation Strategies
 
 ### Prevention
-1. Source-of-truth hierarchy.
-2. [Add more prevention strategies]
+1. **Source-of-Truth Hierarchy**: Define explicit authoritative source hierarchy for each data type. Example: [1] Live Database (authoritative), [2] API System-of-Record, [3] Source Document (original), [4] RAG/OCR (extracted text), [5] LLM Knowledge (lowest authority). Query sources in priority order; stop at first available.
+2. **Database-First Query Strategy**: Before using RAG/OCR/LLM knowledge, query authoritative database/system. If authoritative source available, use it (don't supplement with RAG). Only use RAG/OCR when database source unavailable.
+3. **Source Conflict Resolution**: When sources conflict (e.g., database says $500 but OCR shows $5000), follow hierarchy: database wins. Log conflict for investigation. Alert if conflicts frequent (data integrity issue).
 
-### Detection
-- Answer conflicts with authoritative system.
+### Detection & Response
+1. **Source-of-Truth Violation Detection**: Monitor all decisions. For each decision, verify source matches hierarchy. Example: if decision based on OCR but database available, flag violation. Log all violations.
+2. **Source Conflict Tracking**: When multiple sources provide different answers, log conflict: source_A=value_A, source_B=value_B, hierarchy_decision=winner, outcome. Track conflict patterns.
+3. **Authoritative Source Availability Audit**: For each data type, measure: % of queries where authoritative source is available. Alert if availability drops (data integrity issue emerging). High availability = should not use RAG.
 
-### Recovery
-- [Add recovery strategies]
+### Architecture Patterns
+1. **Source Precedence Middleware**: Middleware that enforces source hierarchy. Query in priority order: db → api → document → rag → llm. Use first available source. Log which source was used. Fail on hierarchy violation.
+2. **Source Verification Layer**: After decision made, verify source matches hierarchy. If conflict detected (decision used low-precedence source when high-precedence available), alert and consider decision reversal.
+3. **Conflict Alert System**: When sources conflict, generate alert with conflicting values + hierarchy decision. Route to human expert for resolution. Log resolution for future similar conflicts.
+
+### Metrics
+1. **source_hierarchy_violation_rate_percent**: Target: 0%; Alert threshold: > 0.1%; Any violation is incident
+2. **database_first_query_compliance_percent**: Target: 100%; Always query database when available
+3. **source_conflict_resolution_accuracy_percent**: Target: 100%; Hierarchy decisions correct
+4. **rag_usage_when_database_available_percent**: Target: 0%; Should never use RAG if DB available
+5. **authoritative_source_availability_percent**: Target: > 95%; High availability expected
+
+### Alerts
+1. **Source-of-Truth Hierarchy Violation** (P1 - Critical): Condition - decision based on low-precedence source when high-precedence source available. Action: Immediate decision review, escalate to expert, potential decision reversal, source system investigation.
+2. **Source Conflict Detected** (P2 - Warning): Condition - multiple sources provide conflicting answers. Action: Alert expert, log conflict, apply hierarchy resolution, investigate why conflict exists.
+3. **Database Unavailability** (P2 - Warning): Condition - authoritative database unavailable for query. Action: Alert to database team, route to manual review if critical query, switch to fallback source with disclaimer.
 
 ---
 

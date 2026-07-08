@@ -155,62 +155,46 @@ Root cause: 20% error in Agent A cascaded to 60%+ system dysfunction
 
 ## Mitigation Strategies
 
-1. **Agent-Level Error Detection**
-   - Each agent validates its own output before passing to next agent
-   - Validation checks: output format, value ranges, schema compliance
-   - If validation fails: retry, escalate, or return error (don't pass bad data)
-   - Prevents propagation of obviously malformed outputs
+### Prevention
 
-2. **Confidence Tracking Through Pipeline**
-   - Each agent tags output with confidence score
-   - Downstream agent checks confidence before using as premise
-   - Low-confidence outputs trigger verification before downstream use
-   - Confidence decays with each step (not amplifies)
+1. **Implement handoff schema validation with type checking**: Define explicit message contracts between agents using JSON Schema or Protocol Buffers. Each handoff includes: required fields, field types, context cardinality, consistency invariants (e.g., 'account_id must match previous context'). Validation layer rejects malformed handoffs before forwarding. Root cause: Prevents information loss and state inconsistency by catching misalignment at handoff boundaries.
 
-3. **Error Isolation & Circuit Breaker**
-   - Monitor error rate at each agent stage
-   - If error rate exceeds threshold (e.g., 25%), halt pipeline
-   - Don't pass degraded data downstream; flag for human review
-   - Prevent cascade before it amplifies
+2. **Establish distributed consensus checkpoints**: Before critical transitions (agent A -> B), compute and store world-model checkpoints as semantic hashes of key state variables. On agent B entry, verify checkpoint matches derived from B's initial inputs. If mismatch, trigger rollback or human escalation. Root cause: Detects state divergence early, enabling recovery before cascading errors.
 
-4. **Upstream Verification Checkpoints**
-   - Downstream agents can query upstream agents: "Are you confident in this output?"
-   - Upstream agent re-checks its own work
-   - Enables feedback loop where downstream questions trigger upstream re-validation
-   - Catches upstream errors before they propagate far
+3. **Implement error isolation with saga pattern**: Structure multi-agent workflows as compensating sagas. Each agent's action has a reverse operation. On error, compensating actions execute in reverse order, restoring system to consistent state. Track saga state in distributed ledger (event log). Root cause: Prevents cascade failures by ensuring partial execution doesn't corrupt global state.
 
-5. **Redundancy & Consensus**
-   - Run Agent A twice (independent instances), compare outputs
-   - Only pass to Agent B if outputs match
-   - For mission-critical steps, run 3 times; use majority vote
-   - Trade-off: 2-3x compute cost, but prevents single-point failures
+### Detection & Response
 
-6. **Decomposition & Parallelization**
-   - Don't chain agents sequentially; run independent paths where possible
-   - Only merge results when necessary
-   - Reduces error coupling; easier to isolate problems
-   - Requires redesigning workflow, but significantly improves robustness
+1. **State consistency verification at handoffs**: At each inter-agent message, verify: (1) Handoff schema conforms to contract, (2) Required fields present and non-null, (3) Semantic consistency (e.g., derived context matches explicit assertions). Log mismatches with full message context. Alert on schema violation rate >0.5%.
 
-7. **Human Checkpoints at High-Impact Stages**
-   - Identify 2-3 critical handoffs in pipeline (highest business impact)
-   - Require human review/approval at these stages
-   - Human can catch cascading errors before they propagate further
-   - Trade-off: Adds latency, reduces automation benefit
+2. **Distributed tracing with invariant checking**: Instrument all agent-to-agent calls with trace IDs. Track state variables across spans. Compute invariant violations: e.g., total_balance should equal sum(accounts). Flag spans where invariants break. Correlate with handoff timing to identify failure point.
 
-### Metrics
-- Error amplification factor per stage: error_rate_N / error_rate_N-1
-- Cumulative error rate: % of end-to-end incorrect outputs
-- Detection rate: % of bad data caught and prevented from propagating
-- System reliability: Probability of correct end-to-end output
-- Cascade depth: How many stages before error becomes unrecoverable
+### Architecture Patterns
 
-### Alerts
-- Error rate increases >20% in any agent stage → P2 (degradation detected)
-- Confidence scores decrease with pipeline depth → P2 (cascade starting)
-- Circuit breaker triggers (error rate >threshold) → P1 (halt pipeline)
-- Human checkpoint detects upstream error → P1 (downstream impact prevented)
+1. Handoff Contract Engine: Define per-workflow interaction schemas with required fields, optional extensions, and invariant predicates. Codegen produces type-safe message classes. Validation happens pre-send with detailed error reporting (which field failed, why).
 
----
+2. Saga Pattern with Event Sourcing: All agent actions append to immutable event log. On failure, replay log in reverse (applying compensating actions) to reach consistent state. World-model reconstructed from event log deterministically.
+
+3. Distributed Tracing + Invariant Monitor: OpenTelemetry spans track all inter-agent messages. Background service computes invariants (e.g., sum checks, state graph acyclicity) against live span data. Alert on invariant violation with full context trail.
+
+### Key Metrics
+
+| Metric | Target | Alert Threshold | Measurement Method |
+|--------|--------|-----------------|--------------------|
+| Handoff Schema Violation Rate | <0.1% | >0.5% | Percentage of inter-agent messages failing schema validation |
+| State Consistency Score | >99.5% | <99% | Percentage of handoffs where world-model is consistent between agents |
+| Error Cascade Depth | <1 | >2 | Average number of agents affected by single agent failure |
+| Mean Recovery Time | <30s | >60s | Time from error detection to system returning to consistent state |
+| Compensating Action Success Rate | >99% | <95% | Percentage of compensation actions that successfully restore state |
+
+### Alerts & Escalation
+
+| Alert | Condition | Severity | Response |
+|-------|-----------|----------|----------|
+| Handoff Contract Breach | Schema validation fails for >0.5% of handoffs in 5-min window | CRITICAL | Halt new orchestrations; page on-call; investigate agent contract mismatch |
+| State Divergence Detected | Invariant violation detected at checkpoint verification | HIGH | Trigger rollback; log full message trace; alert SRE team |
+| Cascade Failure Pattern | Single agent error causes >2 downstream agents to fail | HIGH | Pause orchestration; execute compensation; investigate isolation boundaries |
+
 
 ## Related Patterns
 - [Multi-Agent Collective Reasoning Collapse](./multi-agent-false-consensus-risk.md) — Consensus amplifies errors (related mechanism)
