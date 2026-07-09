@@ -30,6 +30,50 @@
 
 ---
 
+## Test Scenario & Reproduction
+
+How to reliably reproduce this failure in a controlled environment.
+
+### Scenario Setup
+[Describe the environment configuration needed to reproduce the failure]
+- Agent configuration
+- Tool/API availability
+- Data prerequisites
+- Resource constraints (if relevant)
+
+### Trigger Mechanism
+[Exact, reproducible steps to cause the failure to occur]
+
+**Example Reproduction Steps:**
+```
+1. [Step 1: Configure/initialize]
+2. [Step 2: Provide input/trigger condition]
+3. [Step 3: Observe failure manifestation]
+4. [Step 4: Verify expected failure state]
+```
+
+### Expected Failure State
+[Observable indicators that confirm the failure occurred]
+- Behavioral indicator 1 (what the agent does wrong)
+- Output indicator 2 (malformed/incorrect output)
+- Log/trace indicator 3 (error signals)
+- System state indicator 4 (if applicable)
+
+### Mitigation Validation Protocol
+[How to verify that mitigations actually prevent or reduce the failure]
+
+**Test Checklist:**
+- [ ] Reproduce failure without mitigation → confirm failure occurs
+- [ ] Apply mitigation strategy
+- [ ] Re-run reproduction steps → confirm failure is prevented/reduced
+- [ ] Measure improvement against baseline
+
+**Success Criteria:**
+- [Specific measurable outcome that proves mitigation works]
+- [Regression test to ensure this failure doesn't resurface]
+
+---
+
 ## Eval Recipes
 
 How to test for this failure before it reaches production.

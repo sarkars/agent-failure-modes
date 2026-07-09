@@ -1,0 +1,17 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\agents",
+    "\\agents\\by-use-case",
+    "\\agents\\by-use-case\\content-marketing",
+    "\\agents\\by-use-case\\content-marketing\\goals",
+    "\\agents\\by-use-case\\content-marketing\\goals\\quality-control",
+    "\\agents\\by-use-case\\content-marketing\\goals\\quality-control\\failures",
+    "\\agents\\by-use-case\\customer-service",
+    "\\agents\\by-use-case\\customer-service\\goals",
+    "\\agents\\by-use-case\\customer-service\\goals\\conversation-resolution",
+    "\\agents\\by-use-case\\customer-service\\goals\\conversation-resolution\\failures"
+  ],
+  "SelectedNode": "\\agents\\by-use-case\\customer-service\\goals\\conversation-resolution\\failures\\agent-issues-account-credit-without-rechecking-tool-confirmation-status.md",
+  "PreviewInSolutionExplorer": false
+}
