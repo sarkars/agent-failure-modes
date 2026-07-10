@@ -66,19 +66,33 @@ From Stanford Legal RAG Hallucinations Study (2025):
 - Retrieval doesn't weight recency appropriately
 - Users can't easily see document dates
 
-**Mitigation Strategies**
-1. **Citation validation services**: Integrate Shepard's, KeyCite for legal
-2. **Recency weighting**: Prefer newer documents in retrieval
-3. **Supersession tracking**: Maintain graph of superseding relationships
-4. **Date display**: Prominently show document dates
-5. **Staleness warnings**: Alert when citing old sources
-6. **Continuous reindexing**: Update knowledge base regularly
+## Mitigation Strategies
 
-**Detection**
-- Expert review identifies outdated citations
-- Automated checking against update services
-- User corrections for "this law changed"
-- Comparison of response dates vs. current date
+### Prevention
+1. **Supersession-Graph-Aware Retrieval**: Maintain an explicit graph of which documents/precedents have been overruled, repealed, or amended, and exclude or heavily demote superseded nodes from retrieval by default — directly targeting the Roe/Casey-overruled-by-Dobbs failure, where semantic similarity alone can't detect supersession.
+2. **Integration With Authoritative Currency-Checking Services**: For legal domains, integrate citation validation services (Shepard's, KeyCite, or equivalent regulatory-currency APIs) as a mandatory post-retrieval filter step, since standard citation-existence checks miss the "still good law" question entirely.
+3. **Recency-Weighted Retrieval Scoring**: Incorporate document effective date and last-confirmed-current timestamp as an explicit ranking feature, so even without a complete supersession graph, more recent authoritative sources are preferred over older ones discussing the same doctrine.
+
+### Detection & Response
+1. **Expert Currency-Review Sampling**: Route a sample of legal/medical/policy answers to domain experts specifically to check whether cited sources are still current, not just whether they exist — the review needed since normal citation checks miss temporal supersession.
+2. **Currency-Service Cross-Check Logging**: Log every case where a citation validation service flags a retrieved source as overruled, repealed, or withdrawn, and treat any such case reaching the user as a critical incident given the risk of serious harm noted in the file.
+3. **User-Reported "This Changed" Correction Tracking**: Track and trend user corrections indicating the law/policy/guideline has changed since the cited source, feeding directly into supersession-graph maintenance priorities.
+
+### Architecture Patterns
+1. **Point-in-Time Knowledge Graph With Supersession Edges**: Model each authoritative source as a node with explicit "superseded_by" edges; retrieval resolves to the current authoritative node in the chain, and any older node is only surfaced with an explicit historical-context disclaimer.
+2. **Mandatory Staleness Disclaimer Generation**: Require the answer generator to state the retrieval/index date and explicitly flag domains (law, medicine, tax) where currency cannot be fully guaranteed, rather than presenting retrieved content as unconditionally current.
+3. **Continuous Authoritative-Source Reindexing Pipeline**: For high-stakes domains, run a dedicated pipeline that ingests supersession/repeal/amendment notices from official sources (court dockets, federal register, regulatory bulletins) and propagates them into the retrieval index faster than general corpus reindexing cycles.
+
+### Metrics
+1. **supersession_graph_coverage_percent**: Target: > 95% of legal/policy corpus mapped; Alert threshold: < 85%
+2. **overruled_source_retrieval_rate**: Target: 0%; Alert threshold: any nonzero occurrence
+3. **currency_service_flag_rate**: Target: < 1% of legal queries; Alert threshold: > 3%
+4. **expert_audit_temporal_error_rate**: Target: < 2%; Alert threshold: > 5%
+
+### Alerts
+1. **Overruled Source Surfaced** (P1): Condition - a document flagged by the currency-checking service as overruled/repealed appears in a synthesized answer. Action: immediately purge from the active index, issue a correction if already delivered to a user, audit the supersession graph gap.
+2. **Currency Service Integration Failure** (P1): Condition - the currency-check step fails or times out and retrieval proceeds without it. Action: fail closed (block synthesis) rather than fail open, page on-call.
+3. **Expert Audit Temporal Error Spike** (P2): Condition - expert_audit_temporal_error_rate exceeds 5% in a review cycle. Action: prioritize supersession-graph backfill for the affected domain area.
 
 ## References
 

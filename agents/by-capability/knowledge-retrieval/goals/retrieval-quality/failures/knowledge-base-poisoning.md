@@ -45,19 +45,33 @@ Result: Performance review manipulated through RAG poisoning
 - Trust in retrieved content leads to instruction following
 - Persistence across sessions and users
 
-**Mitigation Strategies**
-1. **Write access controls**: Restrict who can add to knowledge base
-2. **Content validation**: Scan ingested documents for prompt injection
-3. **Source verification**: Track and validate document provenance
-4. **Instruction filtering**: Detect and remove directive content from docs
-5. **Retrieval anomaly detection**: Flag unusual retrieval patterns
-6. **Periodic audits**: Review knowledge base for poisoned content
+## Mitigation Strategies
 
-**Detection**
-- Documents with high retrieval frequency but low expected relevance
-- Instruction-like content in data documents
-- Behavioral changes correlated with new document additions
-- User reports of unexpected agent outputs
+### Prevention
+1. **Write-Access Least-Privilege Controls**: Restrict who can add or edit documents in role-specific knowledge bases (e.g., HR feedback corpora) to a narrow trusted group with audit logging, closing the "employee gains write access" vector directly shown in the example. Trade-off: adds friction for legitimate content contributors.
+2. **Ingestion-Time Prompt-Injection Scanning**: Run every newly ingested document through a classifier/heuristic scanner for instruction-like or directive language ("always include...", "per HR directive...") before it's added to the index, flagging suspicious documents for human review rather than auto-indexing them.
+3. **Data/Instruction Boundary Enforcement in the Prompt Template**: Wrap all retrieved content in explicit delimiters with system-level instructions telling the model that retrieved text is data to reference, never instructions to follow, directly countering the "no clear boundary between data and instructions" root cause.
+
+### Detection & Response
+1. **Retrieval-Frequency vs. Expected-Relevance Anomaly Detection**: Flag documents retrieved unusually often relative to their topical breadth — a poisoned document claiming broad "policy" relevance will over-trigger retrieval across unrelated queries — and route flagged documents to manual review.
+2. **Behavioral Change Correlation**: Monitor for shifts in agent output patterns (e.g., unusually uniform positive review sentiment) that correlate in time with new document additions, and tie the correlation back to the specific new document.
+3. **Provenance and Source-Trust Scoring**: Track and surface the origin/author/upload-path of every document; weight or suppress retrieval of low-trust-provenance content, and alert when synthesis relies heavily on a low-trust source.
+
+### Architecture Patterns
+1. **Content Validation Pipeline (Pre-Index Quarantine)**: New documents land in a quarantine index first, pass through automated injection/anomaly scanning plus optional human review, and only then get promoted to the production-searchable index.
+2. **Provenance Graph With Trust Propagation**: Model each document's source chain (uploader, system, review status) as a trust score; synthesis logic weights or excludes low-trust content, and any claim sourced solely from unreviewed content is flagged to the user.
+3. **Periodic Corpus Audit With Diffing**: Run scheduled full-corpus scans comparing current content against last-audited snapshots, specifically hunting for injected directive language, and require sign-off on any newly flagged document before it stays live.
+
+### Metrics
+1. **ingestion_injection_scan_coverage_percent**: Target: 100% of new documents scanned; Alert threshold: < 100%
+2. **anomalous_retrieval_frequency_flags**: Target: < 1% of corpus flagged/month; Alert threshold: any unreviewed flag > 7 days old
+3. **quarantine_review_latency_hours**: Target: < 24h; Alert threshold: > 72h
+4. **low_trust_source_synthesis_rate**: Target: < 2% of answers relying on unreviewed content; Alert threshold: > 5%
+
+### Alerts
+1. **Directive Content Detected** (P1): Condition - the ingestion scanner flags instruction-like language in a new document. Action: quarantine immediately, block from the index, escalate to security review before any promotion.
+2. **Anomalous Retrieval Pattern** (P1): Condition - a single document's retrieval frequency exceeds 3x its topical-relevance baseline. Action: pull the document from the live index pending manual review, audit who added it and when.
+3. **Unreviewed Write Access Detected** (P2): Condition - a document is added to a role-restricted knowledge base by an account outside the approved writer list. Action: revoke access, quarantine the document, audit access controls.
 
 ## References
 

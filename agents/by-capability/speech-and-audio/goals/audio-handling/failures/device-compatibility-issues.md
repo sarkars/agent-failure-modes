@@ -79,20 +79,33 @@ From Device Research (2026):
 - No device-specific thresholds
 - Testing only on high-quality devices
 
-**Mitigation Strategies**
-1. **Device detection**: Identify device type
-2. **Device-specific tuning**: Adjust parameters per device
-3. **Quality assessment**: Measure mic quality, adapt
-4. **Codec flexibility**: Support multiple formats
-5. **Device-aware thresholds**: Adjust confidence per device
-6. **Broad testing**: Test across device spectrum
+## Mitigation Strategies
 
-**Detection**
-- Track success rate by device type
-- Monitor audio quality metrics per device
-- Analyze failure distribution by platform
-- Compare ASR confidence by device
-- Survey device-specific user issues
+### Prevention
+1. **Device Fingerprinting and Detection**: Identify device type/model, OS, and audio input path (built-in mic, Bluetooth, wired headset, speakerphone) at session start via client metadata or codec/negotiation signals, so downstream processing can select device-appropriate parameters. Trade-off: fingerprinting adds a small amount of session-setup complexity and must handle unknown/spoofed device strings gracefully.
+2. **Per-Device Parameter Profiles**: Maintain tuned ASR confidence thresholds, noise-suppression aggressiveness, and gain normalization per device class (premium phone, budget phone, Bluetooth, car system, smart speaker far-field), rather than one global configuration. Trade-off: profile maintenance overhead grows with device diversity; requires periodic re-tuning as new device classes appear.
+3. **Codec and Format Negotiation**: Support multiple audio codecs/sample rates and negotiate the best mutually supported option per device/network rather than assuming a single format, with automatic fallback when a preferred codec is unavailable.
+
+### Detection & Response
+1. **Success-Rate Monitoring by Device Class**: Continuously track task completion and ASR confidence segmented by device type; when a device class's success rate drops significantly below the fleet average, treat it as a compatibility regression rather than a one-off support ticket.
+2. **Low-Confidence Device Fallback**: For device classes with a known history of poor audio quality (e.g., cheap Bluetooth earbuds), proactively lower automatic-action thresholds and increase confirmation prompting rather than waiting for per-utterance failures to accumulate.
+3. **New Device Class Detection**: Flag traffic from previously unseen device fingerprints so they can be manually profiled and validated before they scale to a meaningful share of traffic.
+
+### Architecture Patterns
+1. **Device-Aware Pipeline Configuration**: Route each session through a configuration resolver that selects noise-suppression, AEC, and confidence-threshold parameters based on detected device class, rather than hardcoding one pipeline for all input sources.
+2. **Tiered Interaction Fallback by Device**: For device classes with historically poor recognition (e.g., car speakerphone, budget Bluetooth), automatically enable a more constrained interaction style (shorter prompts, explicit confirmations, DTMF fallback) instead of the full open-ended dialog used for high-quality devices.
+3. **Continuous Device Regression Testing**: Maintain a test-audio corpus recorded/replayed through representative hardware (premium phone, budget phone, common Bluetooth models, in-car systems) and run it in CI against every ASR/pipeline change to catch device-specific regressions before deployment.
+
+### Metrics
+1. **task_success_rate_by_device_class**: Target: no device class more than 15pp below fleet average; Alert threshold: gap > 25pp
+2. **wer_variance_across_devices**: Target: < 2x between best and worst device class; Alert threshold: > 3x
+3. **unrecognized_device_fingerprint_rate_percent**: Target: < 5% of sessions; Alert threshold: > 15%
+4. **device_specific_confirmation_rate_percent**: Target: matches configured profile (e.g., 30-40% for low-quality classes); Alert threshold: deviates > 20pp from profile target
+
+### Alerts
+1. **Device-Class Success Rate Collapse** (P1): Condition - a device class (e.g., a specific Bluetooth headset model) drops below 50% task success rate. Action: Pull sample audio for that class, verify pipeline configuration, consider temporary confirmation-mode override for affected class.
+2. **Untuned New Device Surge** (P2): Condition - traffic share from an unrecognized/undefaulted device fingerprint exceeds 10% of daily volume. Action: Prioritize profiling and tuning for the new device class before it further dilutes aggregate metrics.
+3. **Codec Negotiation Failures** (P2): Condition - codec negotiation fallback-to-lowest-common-denominator rate exceeds 20% of sessions. Action: Investigate client/server codec support mismatch, update supported codec list.
 
 ## References
 

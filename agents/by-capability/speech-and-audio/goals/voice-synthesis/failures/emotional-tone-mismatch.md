@@ -77,20 +77,33 @@ From Emotional TTS Research (2026):
 - Same voice for all brands/contexts
 - No user state consideration
 
-**Mitigation Strategies**
-1. **Emotion classification**: Detect required emotion from content
-2. **Multi-style TTS**: TTS capable of different emotions
-3. **SSML emotion**: Use emotion markup when supported
-4. **Context injection**: Consider user state in tone selection
-5. **Brand voice**: Match tone to brand personality
-6. **Review critical messages**: Human review of sensitive content
+## Mitigation Strategies
 
-**Detection**
-- Survey emotional appropriateness
-- Analyze complaints mentioning tone
-- A/B test emotional vs neutral delivery
-- Review sensitive message handling
-- Monitor brand perception metrics
+### Prevention
+1. **Content-Based Emotion Classification**: Classify each message's required emotional register (empathetic, urgent, celebratory, neutral) from its content/context before synthesis, using a rules layer for known message categories (fraud alerts, approvals, denials, condolences) backed by a classifier for novel content. Trade-off: misclassification of edge-case content can produce a confidently wrong tone, which may be worse than a safe neutral default.
+2. **Multi-Style/Emotion-Capable TTS Engine**: Adopt a TTS engine or voice model that supports distinct emotional styles (empathetic, upbeat, serious) as selectable parameters, rather than a single fixed-prosody voice applied uniformly regardless of content. Trade-off: multi-style voices require more training/validation per style and can sound inconsistent if styles aren't carefully matched to the base persona.
+3. **Human Review Gate for High-Sensitivity Message Categories**: Require human sign-off on the tone/script for message categories with high emotional stakes (denials, bereavement-adjacent content, security incidents) before they're added to the automated delivery library, rather than trusting automatic classification for the most sensitive content.
+
+### Detection & Response
+1. **Emotional Appropriateness Sampling**: Regularly sample delivered messages against their required emotional register and score appropriateness (via human review or a trained appropriateness classifier), tracking this as a distinct quality metric from general TTS naturalness.
+2. **Tone-Complaint Correlation**: Monitor complaint/feedback text specifically for tone-mismatch language ("sounded happy about," "didn't seem to care," "too casual") and map complaints back to the specific message template/category responsible.
+3. **Sensitive-Category Audit Trail**: For high-stakes message categories (fraud, denial, bereavement), log every delivery with its selected emotional style so mismatches can be traced to a specific classification decision and corrected at the template level.
+
+### Architecture Patterns
+1. **Emotion-Tagged Message Template System**: Attach a required-emotion tag to every message template at authoring time (not inferred purely at runtime), so the emotion selection is a deliberate content-design decision reviewed alongside the script itself, with runtime classification only as a fallback for dynamically generated content.
+2. **SSML Emotion/Style Markup Pipeline**: Where the TTS engine supports it, drive emotional delivery through standardized SSML style/emotion tags generated from the message's emotion-tag metadata, keeping the emotion decision and the markup application as separate, auditable steps.
+3. **Brand-Voice Consistency Layer**: Define a small, curated set of emotional styles that map consistently to the brand persona (rather than an unbounded range of TTS emotions), so tone variation stays within brand-appropriate bounds even as classification improves.
+
+### Metrics
+1. **emotional_appropriateness_score_percent**: Target: > 85%; Alert threshold: < 60%
+2. **tone_related_complaint_rate_percent**: Target: < 5%; Alert threshold: > 15%
+3. **sensitive_category_human_review_coverage_percent**: Target: 100%; Alert threshold: < 100%
+4. **emotion_classification_confidence_avg**: Target: > 0.8 for auto-classified content; Alert threshold: < 0.5 triggers fallback-to-neutral
+
+### Alerts
+1. **Sensitive-Category Tone Failure** (P1): Condition - a fraud/denial/bereavement-adjacent message is delivered with a cheerful or clearly mismatched tone. Action: Immediate template/script review, pull message from rotation, notify content/compliance team.
+2. **Appropriateness Score Drop** (P2): Condition - rolling emotional-appropriateness sample score falls below 60%. Action: Audit recent template additions and emotion-classifier changes.
+3. **Tone Complaint Spike** (P2): Condition - tone-related complaints increase > 3x week-over-week. Action: Identify implicated message category, expedite human review and re-tagging.
 
 ## References
 

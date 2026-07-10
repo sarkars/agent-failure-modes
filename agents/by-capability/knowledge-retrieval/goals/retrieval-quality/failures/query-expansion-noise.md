@@ -69,20 +69,33 @@ From Query Expansion Research (2026):
 - LLM expansion hallucinations
 - Ignoring query specificity signals
 
-**Mitigation Strategies**
-1. **Controlled vocabulary**: Expand only with domain-approved synonyms
-2. **Expansion validation**: Verify expansions maintain intent
-3. **Weighted fusion**: Weight original query higher than expansions
-4. **Selective expansion**: Only expand low-recall queries
-5. **Diversity filtering**: Remove contradictory expansions
-6. **A/B testing**: Measure expansion impact rigorously
+## Mitigation Strategies
 
-**Detection**
-- Compare precision with/without expansion
-- Track semantic similarity: original vs. expanded
-- Monitor retrieval diversity (too diverse = drift)
-- Log expansion terms that correlate with failures
-- Measure intent preservation in expansions
+### Prevention
+1. **Domain-Controlled Vocabulary Expansion**: Restrict synonym/term expansion to a curated, domain-approved thesaurus rather than generic or LLM-generated synonyms, preventing wrong-sense expansions like "Mercury" (element) drifting to "Mercury" (planet) or "quicksilver fish tank."
+2. **Expansion-Intent Validation Step**: After generating expansions (LLM rephrasing or HyDE), run a semantic-similarity or entailment check between the original query and each expansion, discarding any expansion that drifts below an intent-preservation threshold before it reaches retrieval.
+3. **Weighted Query Fusion Favoring the Original**: When combining original and expanded query results, weight the original query's matches higher by default (e.g., 2x) so expansions can only add supplementary recall, not override precision on the primary intent — directly addressing the -0.33 net precision drop in the example.
+
+### Detection & Response
+1. **Precision Delta Monitoring (Expanded vs. Original)**: Continuously compute precision for original-only vs. expanded retrieval on the same query stream; alert when expansion's precision cost (0.85 -> 0.52 as in the example) exceeds its recall benefit.
+2. **Expansion-Term Failure Logging**: Log which specific expansion terms appear in queries that subsequently produce low-precision or off-topic retrieval, building a denylist of failure-prone terms over time (e.g., "quicksilver", "planet Mercury").
+3. **Retrieval Diversity Spike Detection**: Monitor topical diversity of the retrieved set after expansion; an abnormal spike (mixing unrelated domains like heavy-metal toxicity and astrology) signals the expansion introduced off-topic terms rather than useful synonyms.
+
+### Architecture Patterns
+1. **Selective/Conditional Expansion**: Only trigger expansion for queries independently classified as low-recall-risk (very short queries, queries with zero good initial matches), instead of expanding every query by default, since expansion's precision cost is unnecessary when the original query already retrieves well.
+2. **Multi-Query With Per-Branch Scoring and Fusion Filtering**: Run the original query and each expansion as separate retrieval branches, score each branch independently, and fuse only branches whose top results pass a relevance floor — dropping a branch like "Mercury planet fish zodiac" entirely rather than merging it in.
+3. **HyDE With Grounding Constraint**: When using hypothetical document embeddings, constrain the hypothetical generation with retrieved domain glossary terms or a domain-specific prompt to reduce the chance the LLM invents an off-domain interpretation, like the planetary Mercury tangent in the example.
+
+### Metrics
+1. **expansion_precision_delta**: Target: >= 0; Alert threshold: < -0.15
+2. **expansion_recall_gain**: Target: 15-30%; Alert threshold: monitored jointly with precision delta, not in isolation
+3. **off_domain_expansion_term_rate**: Target: < 10%; Alert threshold: > 20%
+4. **intent_preservation_score**: Target: > 0.8; Alert threshold: < 0.65
+
+### Alerts
+1. **Precision Collapse From Expansion** (P1): Condition - expansion_precision_delta falls below -0.15 for a query category. Action: disable expansion for that category pending review, fall back to original-query-only retrieval.
+2. **Wrong-Sense Term Detected** (P2): Condition - a denylisted or flagged ambiguous term appears in a generated expansion. Action: strip the term from the expansion, add it to the controlled-vocabulary blocklist.
+3. **Diversity Spike Anomaly** (P3): Condition - retrieved-set topical diversity after expansion exceeds baseline by > 2x. Action: review the expansion generation prompt/technique for that query, consider reverting to narrower expansion.
 
 ## References
 

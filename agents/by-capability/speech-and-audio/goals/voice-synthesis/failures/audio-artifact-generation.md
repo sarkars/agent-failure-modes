@@ -76,20 +76,33 @@ From Audio Quality Research (2026):
 - No post-processing
 - Playback device issues
 
-**Mitigation Strategies**
-1. **High-quality TTS**: Use modern neural TTS
-2. **Post-processing**: Apply audio cleanup
-3. **Higher bitrate**: Use quality audio encoding
-4. **Crossfading**: Smooth segment transitions
-5. **Quality monitoring**: Detect artifacts automatically
-6. **A/B testing**: Compare TTS quality
+## Mitigation Strategies
 
-**Detection**
-- Audio quality metrics (SNR, THD)
-- Automatic artifact detection
-- User audio quality complaints
-- A/B testing with quality focus
-- Sample-based human evaluation
+### Prevention
+1. **Modern Neural TTS with Waveform-Level Continuity**: Use neural vocoders (rather than older concatenative or lower-quality parametric TTS) that generate continuous waveforms without hard segment-boundary joins, directly addressing the clicks/pops that arise from discontinuities between synthesized segments. Trade-off: neural TTS is more compute-intensive per utterance, affecting latency/cost trade-offs discussed in response-latency-issues.
+2. **Crossfade at Segment Boundaries**: When audio must be assembled from multiple synthesized or cached segments (e.g., dynamic slot insertion into a template), apply short crossfades at each join rather than hard concatenation, smoothing the discontinuity that otherwise produces audible clicks.
+3. **High-Bitrate Encoding Through the Full Pipeline**: Ensure the audio encoding/transmission path (not just the TTS model itself) uses sufficiently high bitrate/quality settings end-to-end, since distortion on sibilants and general artifact perception often comes from downstream compression, not just the synthesis model.
+
+### Detection & Response
+1. **Automated Artifact Detection via Signal Analysis**: Run objective audio-quality metrics (SNR, THD, click/pop detectors looking for sharp discontinuities in the waveform) on a sample of production TTS output continuously, rather than relying solely on user complaints to surface artifact regressions.
+2. **MOS Sampling Pipeline**: Regularly route a sample of synthesized utterances through human (or model-based) Mean Opinion Score evaluation, tracking the score over time so a gradual quality regression (e.g., from a TTS model update or codec change) is caught before it affects a large share of users.
+3. **Complaint-Keyword Correlation**: Monitor user feedback/complaint text for audio-quality-specific keywords (glitchy, robotic, clicking) and correlate spikes against recent TTS model, encoding, or infrastructure changes to speed root-cause attribution.
+
+### Architecture Patterns
+1. **Post-Processing Audio Cleanup Stage**: Insert a dedicated post-processing stage after TTS synthesis (de-clicking, de-essing for sibilant distortion, normalization) as a separate, independently-tunable pipeline stage rather than depending entirely on raw TTS model output quality.
+2. **A/B Quality Gate for TTS Model/Encoding Changes**: Route any TTS model version, vocoder, or encoding-pipeline change through an automated artifact-detection and MOS-sampling gate before full rollout, similar to a canary deployment but scored on audio-quality metrics specifically.
+3. **Segment-Join Crossfade Library**: A shared, reusable audio-assembly utility that all dynamic-content-insertion call sites (numbers, names, slot values) must use, guaranteeing consistent crossfade treatment rather than each integration point handling concatenation ad hoc.
+
+### Metrics
+1. **artifact_detection_rate_percent**: Target: < 5% of sampled utterances; Alert threshold: > 15%
+2. **mos_score**: Target: > 4.0; Alert threshold: < 3.5
+3. **click_pop_incidents_per_1000_utterances**: Target: < 10; Alert threshold: > 40
+4. **audio_quality_complaint_rate_percent**: Target: < 3%; Alert threshold: > 8%
+
+### Alerts
+1. **MOS Regression** (P2): Condition - rolling MOS sample average drops below 3.5. Action: Check for recent TTS model/vocoder/encoding changes, roll back if correlated.
+2. **Artifact Detection Spike** (P1): Condition - automated artifact detection rate exceeds 15% of sampled utterances. Action: Page voice-quality on-call, pull raw samples for manual review, consider reverting latest TTS deploy.
+3. **Complaint Keyword Surge** (P3): Condition - audio-quality-related complaint keywords increase > 3x week-over-week. Action: Correlate with recent deploys, prioritize investigation of segment-join and encoding pipeline.
 
 ## References
 

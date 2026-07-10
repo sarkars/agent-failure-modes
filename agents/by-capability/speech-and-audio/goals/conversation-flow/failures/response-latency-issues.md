@@ -73,20 +73,33 @@ From Latency Research (2026):
 - Distant servers
 - No response caching
 
-**Mitigation Strategies**
-1. **Streaming responses**: Start TTS before full response ready
-2. **Smaller models**: Use faster models for simple tasks
-3. **Response caching**: Cache common responses
-4. **Parallel processing**: Overlap ASR, NLU, TTS
-5. **Filler responses**: "Let me check..." while processing
-6. **Edge deployment**: Reduce network latency
+## Mitigation Strategies
 
-**Detection**
-- Measure end-to-end latency (p50, p95, p99)
-- Track latency by component
-- Monitor user "hello?" interruptions
-- Correlate latency with abandonment
-- A/B test latency optimizations
+### Prevention
+1. **Streaming Pipeline with Incremental TTS**: Begin synthesizing and playing TTS audio as soon as the first sentence/clause of the LLM response is available, rather than waiting for the full response to generate, cutting perceived latency by overlapping generation and playback. Trade-off: streaming requires the LLM output and TTS engine to both support incremental/chunked processing, and early chunks can't be revised if the full response changes tone/content.
+2. **Model Tiering by Task Complexity**: Route simple, well-defined requests (weather lookup, balance check) to smaller/faster models or cached logic, reserving larger LLM calls for genuinely open-ended reasoning, rather than sending every utterance through the same heavyweight model. Trade-off: requires reliable upfront complexity/intent classification to route correctly, and misrouting simple-looking-but-actually-complex requests degrades quality.
+3. **Parallelized Pipeline Stages**: Overlap ASR finalization, NLU, and backend calls where they don't have hard sequential dependencies (e.g., start a backend lookup speculatively once partial ASR is confident enough) rather than a strictly serial ASR-then-NLU-then-backend-then-LLM-then-TTS chain.
+
+### Detection & Response
+1. **Per-Component Latency Instrumentation**: Break down end-to-end latency into ASR, NLU/LLM, backend, and TTS segments in production telemetry (not just aggregate latency), so regressions can be attributed to the specific stage that slowed down rather than treated as a single opaque number.
+2. **Filler-Response Trigger on Latency Threshold**: When projected/actual response time exceeds a threshold (e.g., 700ms), automatically insert a lightweight filler ("Let me check that...") to preserve conversational rhythm and prevent user "Hello?" interjections, rather than leaving dead air.
+3. **User Hello/Repeat Detection as Latency Proxy**: Treat user utterances like "Hello?" or exact repeats of the prior question as an implicit latency complaint signal; correlate their rate with p95/p99 latency to validate whether the perceived-latency threshold assumptions match real user tolerance.
+
+### Architecture Patterns
+1. **Streaming ASR-to-TTS Pipeline**: Standard low-latency voice architecture — streaming ASR emits partials, a fast intent router acts on high-confidence partials where safe, LLM generation streams tokens directly into a streaming TTS engine, and audio playback begins on the first synthesized chunk.
+2. **Response Caching for Common Queries**: Cache full or partial responses for high-frequency, low-variance queries (store hours, standard policies) keyed on normalized intent+slots, bypassing the LLM generation step entirely for cache hits.
+3. **Edge/Regional Deployment**: Deploy ASR/TTS/LLM inference in regions close to the user base to cut network round-trip contribution to latency, particularly impactful for globally distributed user bases hitting a single central region.
+
+### Metrics
+1. **end_to_end_latency_ms_p95**: Target: < 800ms; Alert threshold: > 1500ms
+2. **llm_generation_latency_ms_p95**: Target: < 400ms; Alert threshold: > 1000ms
+3. **filler_response_trigger_rate_percent**: Target: < 15% of turns; Alert threshold: > 40% (indicates systemic slowness, not occasional spikes)
+4. **user_hello_or_repeat_rate_percent**: Target: < 5%; Alert threshold: > 15%
+
+### Alerts
+1. **P95 Latency Breach** (P1): Condition - end-to-end p95 latency exceeds 1500ms for 5+ minutes. Action: Page on-call, check LLM/backend service health and autoscaling, consider temporary model-tier downgrade for non-critical flows.
+2. **Filler-Trigger Rate Spike** (P2): Condition - filler-response trigger rate exceeds 40% in a rolling window. Action: Identify slow pipeline stage via per-component latency breakdown, investigate recent deploys.
+3. **User Frustration Signal Surge** (P2): Condition - "Hello?"/repeat rate exceeds 15% of conversations. Action: Correlate with latency metrics, prioritize latency fix for affected flow/region.
 
 ## References
 

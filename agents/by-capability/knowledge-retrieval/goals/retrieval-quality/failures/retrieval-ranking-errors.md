@@ -68,20 +68,33 @@ From Ranking Research (RAGAS studies, 2026):
 - Ignoring document metadata in ranking
 - Training data distribution mismatch
 
-**Mitigation Strategies**
-1. **Hybrid scoring**: Combine semantic + lexical + metadata signals
-2. **Dynamic top-k**: Adjust based on score distribution
-3. **Multi-stage retrieval**: Initial recall, then precision-focused reranking
-4. **Score calibration**: Normalize scores for comparability
-5. **Query classification**: Different ranking for different query types
-6. **Relevance feedback**: Learn from user interactions
+## Mitigation Strategies
 
-**Detection**
-- Track RAGAS Context Precision scores
-- Monitor Mean Reciprocal Rank (MRR)
-- Analyze answer accuracy by best-doc position
-- Compare retrieval recall vs. effective precision
-- Log position of actually-used context
+### Prevention
+1. **Hybrid Multi-Signal Scoring**: Combine semantic similarity with lexical/keyword matching (BM25) and metadata signals (e.g., account-type match) so documents like "401k early withdrawal penalties" aren't out-ranked by generically similar but wrong-account-type documents like IRA rules, directly addressing the "similarity != relevance" root cause.
+2. **Entity/Attribute-Aware Scoring Boost**: Detect key disambiguating entities in the query (401k vs. IRA, specific product/account names) and boost documents matching that entity, since embedding similarity alone conflated topic closeness with entity-level correctness in the example.
+3. **Dynamic Top-K Based on Score Distribution**: Instead of a fixed top-3/top-5 cutoff, use the score distribution (gap detection) to decide how many results to pass to the LLM, reducing the chance a relevant document at rank 5 or 8 is cut off arbitrarily.
+
+### Detection & Response
+1. **Context Precision and MRR Tracking**: Continuously monitor Context Precision and Mean Reciprocal Rank in production; treat a median around 0.65 as a baseline to improve against, with alerts on regression.
+2. **Best-Answer-Position Analysis**: Log the rank position of the document that actually contained the correct answer (via eval or user feedback), and track how often it falls outside the top-k actually used, quantifying the "lost in the middle" effect.
+3. **Entity-Mismatch Sampling**: For domain queries with disambiguating entities (account types, product names, versions), sample cases where the top-ranked result doesn't match the query's specific entity, using this to retrain or tune the scoring function.
+
+### Architecture Patterns
+1. **Multi-Stage Retrieval With Precision-Focused Refinement**: Use a fast recall-oriented first stage, then a slower but more accurate second-stage scorer (learned-to-rank or cross-encoder with entity features) to fix ordering before truncating to top-k.
+2. **Score Calibration Across Signal Types**: Normalize and calibrate semantic, lexical, and metadata scores onto a common scale before combining, since raw cosine similarity and BM25 scores aren't directly comparable and naive combination can wash out useful signals.
+3. **Query-Type-Specific Ranking Profiles**: Maintain distinct ranking configurations for query types known to require entity disambiguation (financial account types, product variants) versus general informational queries, rather than one universal ranking function.
+
+### Metrics
+1. **context_precision_at_k**: Target: > 0.75; Alert threshold: < 0.6
+2. **mean_reciprocal_rank**: Target: > 0.7; Alert threshold: < 0.5
+3. **correct_answer_outside_topk_rate**: Target: < 15%; Alert threshold: > 25%
+4. **entity_mismatch_top1_rate**: Target: < 10% for entity-disambiguation queries; Alert threshold: > 20%
+
+### Alerts
+1. **Ranking Quality Regression** (P2): Condition - context_precision_at_k drops below 0.6 for a query segment. Action: audit the scoring function/signal weights for that segment, check for recent index or model changes.
+2. **Entity Disambiguation Failure Spike** (P1): Condition - entity_mismatch_top1_rate exceeds 20% for queries with detectable disambiguating entities (e.g., account type). Action: add/boost the entity-matching feature in ranking, escalate given the risk of factually wrong domain-specific answers.
+3. **Correct Answer Buried** (P2): Condition - correct_answer_outside_topk_rate exceeds 25%. Action: increase effective top-k or improve multi-stage refinement before truncation.
 
 ## References
 

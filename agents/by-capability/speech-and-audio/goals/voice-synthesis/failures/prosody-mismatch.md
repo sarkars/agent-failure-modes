@@ -78,20 +78,33 @@ From Prosody Research (2026):
 - Single speaking style
 - No content-aware synthesis
 
-**Mitigation Strategies**
-1. **Neural TTS**: Use modern neural synthesis
-2. **SSML prosody**: Mark emphasis, breaks, pitch
-3. **Content analysis**: Identify key words for emphasis
-4. **Punctuation handling**: Map punctuation to prosody
-5. **Speaking styles**: Use different styles for different content
-6. **A/B testing**: Compare prosody approaches
+## Mitigation Strategies
 
-**Detection**
-- MOS (Mean Opinion Score) testing
-- Comprehension testing
-- Compare with human speech baseline
-- Analyze user replay requests
-- Survey naturalness ratings
+### Prevention
+1. **Neural TTS with Learned Prosody**: Use neural TTS models trained to predict prosody (pitch, stress, pacing) from semantic/syntactic content rather than basic concatenative synthesis with uniform prosody, directly addressing the monotone delivery and misplaced emphasis described in the root cause. Trade-off: neural prosody models can still misjudge emphasis on novel/ambiguous sentence structures and need evaluation against domain-specific content.
+2. **Punctuation-to-Prosody Mapping Rules**: Explicitly map punctuation and sentence structure to prosodic targets — question marks to rising terminal pitch, commas/list items to pauses, periods to falling pitch and full stop — as a rules layer that supplements (and can override) the model's default prosody when it's known to be unreliable for a construct (e.g., lists).
+3. **SSML Prosody Markup for Key-Information Emphasis**: For content where specific words carry critical information (date, time, amount), explicitly mark emphasis via SSML `<emphasis>` or pitch/rate tags rather than relying on the TTS model to infer which words matter.
+
+### Detection & Response
+1. **Question-Intonation Accuracy Sampling**: Specifically test and monitor whether question-type utterances receive rising terminal intonation (not just overall MOS), since flat question delivery is a distinct, correctable failure mode separate from general naturalness.
+2. **Comprehension-Impact A/B Testing**: Periodically A/B test prosody-enhanced vs. flat delivery on comprehension-sensitive content (lists, confirmations) and measure task success/replay-request rate, quantifying the real-world cost of prosody mismatches rather than relying on subjective naturalness scores alone.
+3. **Replay-Request Rate as Proxy Signal**: Track how often users ask the agent to repeat itself; correlate spikes with specific message templates or content types to identify where prosody (or pacing) is likely impairing comprehension.
+
+### Architecture Patterns
+1. **Punctuation-Aware SSML Generation Layer**: Insert a deterministic text-to-SSML transformation stage between response generation and TTS synthesis that converts sentence structure/punctuation into explicit prosody markup, giving predictable behavior for lists and questions independent of the underlying model's learned prosody.
+2. **Content-Type-Specific Speaking Styles**: Define distinct prosody/speaking-style profiles for different content types (confirmations, lists, questions, alerts) and select the profile based on the response template's declared type, rather than one uniform style for all output.
+3. **Human-Baseline Comparison Harness**: Maintain a benchmark suite comparing synthesized prosody against human speech recordings of the same scripts (MOS and objective pitch/timing comparison) run in CI against TTS model/config changes.
+
+### Metrics
+1. **question_intonation_accuracy_percent**: Target: > 90%; Alert threshold: < 70%
+2. **emphasis_placement_accuracy_percent**: Target: > 85%; Alert threshold: < 60%
+3. **mos_naturalness_score**: Target: > 4.0; Alert threshold: < 3.5
+4. **replay_request_rate_percent**: Target: < 5%; Alert threshold: > 15%
+
+### Alerts
+1. **Question Intonation Regression** (P2): Condition - question-intonation accuracy on eval set drops below 70%. Action: Review recent TTS model/SSML-layer changes, verify punctuation-to-prosody rules still applied correctly.
+2. **Naturalness MOS Drop** (P2): Condition - rolling MOS naturalness score falls below 3.5. Action: Investigate TTS model/version changes, compare against human-baseline harness results.
+3. **Replay Request Spike** (P2): Condition - replay-request rate exceeds 15% for a specific message template/content type. Action: Review prosody/pacing for that template, consider adding explicit SSML emphasis/pause markup.
 
 ## References
 

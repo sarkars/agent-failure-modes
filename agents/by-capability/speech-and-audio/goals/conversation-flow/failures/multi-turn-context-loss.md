@@ -85,20 +85,33 @@ From Dialogue Research (2026):
 - No entity tracking
 - Each turn processed independently
 
-**Mitigation Strategies**
-1. **Conversation state**: Maintain full conversation history
-2. **Entity tracking**: Track mentioned entities across turns
-3. **Coreference resolution**: Resolve pronouns and references
-4. **Slot carryover**: Carry forward established values
-5. **Context injection**: Include prior turns in LLM context
-6. **Explicit confirmation**: Confirm understood references
+## Mitigation Strategies
 
-**Detection**
-- Track repeated information requests
-- Monitor reference resolution accuracy
-- Analyze "which one?" clarification rate
-- Survey user about conversation coherence
-- Measure task completion across turn counts
+### Prevention
+1. **Persistent Conversation State with Entity Tracking**: Maintain a structured dialog state object (not just raw transcript history) that tracks named entities mentioned so far (restaurant list, selected restaurant, date/time) across turns, updated incrementally rather than re-derived from scratch each turn. Trade-off: requires careful state-schema design per domain and invalidation logic when entities become stale.
+2. **Coreference and Ellipsis Resolution Pass**: Run a dedicated coreference-resolution step (rule-based ordinals like "the second one," pronoun resolution like "it"/"there," and ellipsis like "at 7" implying the previously named entity) before intent classification, rather than passing raw text straight to NLU. Trade-off: coreference models trained on text don't always transfer cleanly to spoken, disfluent input.
+3. **Full-History Context Injection for LLM-Backed Agents**: When using an LLM for response generation, inject recent turn history and the structured entity state directly into the prompt context rather than relying on the model's implicit memory of a truncated context window, ensuring references resolve even in longer conversations.
+
+### Detection & Response
+1. **Repeated-Information-Request Tracking**: Monitor how often the agent asks for information the user already provided in an earlier turn (a strong, directly observable signal of context loss); spikes here indicate either entity-tracking bugs or context-window truncation.
+2. **Reference Resolution Confidence Check**: When resolving an ambiguous reference ("the second one," "it," "there"), track confidence in the resolution and fall back to an explicit clarification ("Just to confirm, you mean Bella Napoli?") when confidence is low, rather than guessing silently.
+3. **Turn-Count vs. Task-Completion Correlation**: Segment task completion rate by conversation length; a completion rate that drops sharply after turn 3-4 typically indicates the context window or entity tracker is losing information as the conversation grows.
+
+### Architecture Patterns
+1. **Dialog State Tracker (DST) as Source of Truth**: Separate "what was said" (transcript) from "what we currently believe" (structured slot/entity state) via a dedicated dialog state tracker component, so reference resolution and downstream logic operate against a clean, deduplicated state rather than re-parsing history each turn.
+2. **Ordinal/Positional Reference Resolver**: Maintain an indexed, ordered list of recently presented options (e.g., search results) specifically to resolve ordinal references ("the second one") — a narrow, high-value special case of coreference that's cheap to implement and covers a large share of real usage.
+3. **Sliding-Window Context with Entity Pinning**: For LLM-backed agents, use a sliding context window for raw turn history (to bound token cost) but "pin" key entities (currently selected restaurant, date, party size) outside the sliding window so they survive even after the originating turn ages out of context.
+
+### Metrics
+1. **repeated_information_request_rate_percent**: Target: < 10%; Alert threshold: > 25%
+2. **reference_resolution_accuracy_percent**: Target: > 85%; Alert threshold: < 65%
+3. **task_completion_by_turn_count**: Target: < 10pp drop from turn 1-2 to turn 5+; Alert threshold: > 25pp drop
+4. **clarification_rate_for_ambiguous_references_percent**: Target: 10-20%; Alert threshold: > 40% (over-triggering) or < 5% (under-triggering, likely guessing wrong silently)
+
+### Alerts
+1. **Context Loss Regression** (P1): Condition - repeated-information-request rate exceeds 25% across a rolling window. Action: Check entity tracker / DST service health, verify no context-window truncation regression in LLM prompt construction.
+2. **Reference Resolution Accuracy Drop** (P2): Condition - reference resolution accuracy on eval set falls below 65%. Action: Review recent coreference model or DST logic changes, roll back if correlated.
+3. **Long-Conversation Completion Cliff** (P2): Condition - task completion rate for conversations with 5+ turns drops more than 25pp versus 1-2 turn conversations. Action: Investigate context-window sizing and entity-pinning logic for long conversations.
 
 ## References
 

@@ -75,20 +75,33 @@ From Turn-Taking Research (2026):
 - Half-duplex audio design
 - Missing conversational cues
 
-**Mitigation Strategies**
-1. **Prosody analysis**: Detect turn-completion cues
-2. **Predictive turn-taking**: Anticipate turn boundaries
-3. **Overlap detection**: Stop if user resumes speaking
-4. **Back-off mechanism**: Yield on simultaneous start
-5. **Full-duplex audio**: Continuous listening
-6. **Completion signals**: Explicit "go ahead" cues
+## Mitigation Strategies
 
-**Detection**
-- Measure overlap frequency
-- Track user repetition rate (sign of being cut off)
-- Monitor simultaneous speech events
-- Analyze user complaints about interruptions
-- Compare turn-taking with human baseline
+### Prevention
+1. **Prosody-Based Turn-Completion Prediction**: Use pitch contour, tempo, and energy trends (not just silence duration) to predict genuine turn-completion versus a mid-utterance pause or self-correction, since simple VAD triggers on any short pause regardless of whether the sentence is grammatically/prosodically complete. Trade-off: prosody models add latency and need tuning across speaking styles and languages.
+2. **Full-Duplex Listening with Overlap Detection**: Keep the mic active throughout agent speech and continuously check for resumed user speech; if detected, immediately stop the agent output rather than continuing to completion, converting what would be an overlap-and-confusion event into a clean yield. Trade-off: shares the same AEC dependency as barge-in — the agent must distinguish real resumed speech from its own echoed audio.
+3. **Back-Off on Simultaneous Start**: When both agent and user begin speaking within the same short window (double-start), have the agent yield immediately (stop and listen) rather than continuing, mirroring human conversational back-off norms rather than "whoever started, continues."
+
+### Detection & Response
+1. **Overlap Frequency Monitoring**: Continuously measure the rate of simultaneous agent+user speech across calls; a rising trend indicates the turn-completion predictor or pause thresholds have drifted out of calibration relative to the actual user population's speaking cadence.
+2. **User Repetition as Cut-Off Proxy**: Track how often users repeat all or part of an utterance within a few seconds of being overlapped/cut off; this is a strong indirect signal of premature agent responses even when direct overlap detection is imperfect.
+3. **Self-Correction Interruption Detection**: Specifically flag cases where the agent responds mid-self-correction ("at three— actually four"); train the turn-completion model to recognize the "actually/wait/I mean" self-repair pattern as a strong non-completion signal.
+
+### Architecture Patterns
+1. **Predictive Turn-Taking Model**: A model trained on prosodic and lexical cues to predict turn-end probability continuously (not just at a single silence checkpoint), letting the agent decide to begin, hold, or wait based on a probability trend rather than a single threshold crossing.
+2. **Overlap-Aware Response Gate**: Gate agent TTS start behind a short "still speaking?" check even after a candidate turn-end fires, and gate continued playback behind continuous overlap detection, so both false starts and failure-to-yield are covered by the same mechanism.
+3. **Human-Baseline Calibration Loop**: Periodically compare system overlap rate and cut-off rate against a human-conversation baseline (5-10% overlap) and use the gap as the primary tuning signal for both the completion predictor and the back-off policy.
+
+### Metrics
+1. **overlap_rate_percent**: Target: < 10% (approaching human baseline); Alert threshold: > 20%
+2. **user_cutoff_rate_percent**: Target: < 10%; Alert threshold: > 20%
+3. **agent_cutoff_by_user_rate_percent**: Target: < 10%; Alert threshold: > 20% (indicates agent not yielding)
+4. **self_correction_misfire_rate_percent**: Target: < 10%; Alert threshold: > 25%
+
+### Alerts
+1. **Overlap Rate Regression** (P2): Condition - overlap rate exceeds 20% across a rolling window, more than 2x human baseline. Action: Review recent turn-completion model or VAD threshold changes.
+2. **Failure-to-Yield Spike** (P1): Condition - agent-cutoff-by-user rate exceeds 20%, indicating the agent isn't stopping when the user resumes speaking. Action: Verify full-duplex listening and overlap-detection service health; this degrades user trust quickly if left unresolved.
+3. **Self-Correction Handling Regression** (P2): Condition - self-correction misfire rate exceeds 25%. Action: Review turn-completion model training data for self-repair patterns, retrain/tune.
 
 ## References
 

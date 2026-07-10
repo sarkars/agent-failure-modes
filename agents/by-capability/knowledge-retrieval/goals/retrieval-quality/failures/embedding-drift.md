@@ -31,19 +31,33 @@ Similarity with correct doc: 0.45 (was 0.89 with v1.0)
 Result: Correct document no longer retrieved
 ```
 
-**Mitigation Strategies**
-1. **Version tracking**: Track which model version indexed each document
-2. **Atomic updates**: Re-index all documents when changing models
-3. **Blue-green indexes**: Build new index before switching
-4. **Compatibility testing**: Test retrieval quality before deploying new model
-5. **Rollback capability**: Keep previous index for quick rollback
-6. **Gradual migration**: Migrate documents in batches with validation
+## Mitigation Strategies
 
-**Detection**
-- Monitor retrieval metrics after model changes
-- Track embedding model version across index
-- Alert on retrieval score distribution shifts
-- A/B test model versions before full rollout
+### Prevention
+1. **Embedding Version Pinning**: Tag every vector with the exact model name and version used to produce it, and only compare query embeddings against vectors from the same version. This prevents the silent cross-version comparison that dropped similarity from 0.89 to 0.45 in the example. Trade-off: requires version metadata storage and lookup on every query.
+2. **Blue-Green Re-Embedding Pipeline**: Build the entire new index under the new model version in parallel, validate retrieval quality against a benchmark set, then atomically cut over; the old index stays available for immediate rollback. Trade-off: doubles storage cost during the migration window.
+3. **Compatibility Gate Before Deploy**: Require a fixed regression suite of query-document relevance pairs to pass a defined similarity/recall threshold on the new embedding model before it touches production traffic, catching incompatible vector spaces before they reach users.
+
+### Detection & Response
+1. **Similarity-Score Distribution Monitoring**: Track the distribution of top-1 retrieval similarity scores; a sudden downward shift (like 0.89 to 0.45) signals a version mismatch and should auto-trigger an index audit.
+2. **Mixed-Version Index Scanning**: Periodically scan the index for vectors tagged with a stale model version and quantify what fraction of queries are being compared against them.
+3. **Canary Query Set Replay**: Replay a fixed set of known-good queries against the live index after any embedding-related deploy; alert if the retrieved document identities change unexpectedly.
+
+### Architecture Patterns
+1. **Dual-Write During Migration**: During the migration window, embed new/updated documents with both old and new models, tagged separately, so retrieval can serve from whichever version matches the query embedder until migration completes.
+2. **Model Registry With Compatibility Matrix**: Maintain an explicit registry mapping which query-embedder versions are compatible with which document-embedder versions; reject retrieval calls that cross incompatible pairs instead of silently returning degraded matches.
+3. **Gradual Batch Migration With Validation Gates**: Re-embed documents in batches (by collection or recency), validating retrieval quality after each batch rather than a single atomic full-corpus swap that has no intermediate checkpoint.
+
+### Metrics
+1. **embedding_version_consistency_rate**: Target: 100%; Alert threshold: < 99%
+2. **top1_similarity_score_p50**: Target: within historical baseline +/-5%; Alert threshold: > 15% deviation
+3. **index_migration_completion_percent**: Target: 100% within migration SLA; Alert threshold: stalled > 48h
+4. **canary_query_retrieval_stability**: Target: > 95% same-document match rate; Alert threshold: < 90%
+
+### Alerts
+1. **Vector Space Incompatibility** (P1): Condition - top1_similarity_score_p50 drops > 15% within a rolling 24h window following a model change. Action: immediately roll back to the prior embedding model/index, investigate before retrying.
+2. **Stale-Version Vectors Detected** (P2): Condition - embedding_version_consistency_rate falls below 99%. Action: prioritize the re-embedding backlog for flagged documents.
+3. **Canary Regression** (P1): Condition - canary_query_retrieval_stability falls below 90% post-deploy. Action: block further rollout, revert the embedding model change.
 
 ## References
 

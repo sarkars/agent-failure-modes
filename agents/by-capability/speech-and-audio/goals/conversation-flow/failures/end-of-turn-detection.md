@@ -81,20 +81,33 @@ From Turn Detection Research (2026):
 - No learning from user patterns
 - Can't detect lists or compounds
 
-**Mitigation Strategies**
-1. **Prosody analysis**: Use pitch and tempo cues
-2. **Syntactic completeness**: Check if sentence is complete
-3. **Context-aware timeouts**: Longer for lists, shorter for yes/no
-4. **Explicit cues**: "...and that's it" signals completion
-5. **Partial confirmation**: "Got burger and fries so far..."
-6. **User adaptation**: Learn individual speaking patterns
+## Mitigation Strategies
 
-**Detection**
-- Track false end rate
-- Monitor user repetitions/completions
-- Analyze cut-off utterances
-- Compare detection accuracy by sentence type
-- Survey user experience with turn-taking
+### Prevention
+1. **Prosody-Enhanced Endpointing Model**: Combine acoustic silence duration with prosodic cues (falling pitch, slowing tempo, breath patterns) in a trained endpointing model rather than a fixed silence timer, since compound sentences and lists produce mid-utterance pauses that look identical to true completion under silence-only detection. Trade-off: prosody models need language/speaker-specific training data and add inference latency.
+2. **Syntactic Completeness Checking**: Run a lightweight incremental parser/LLM check on the partial transcript to estimate whether the utterance forms a syntactically/semantically complete unit (e.g., a list with a trailing "and" is very likely incomplete) before committing to end-of-turn. Trade-off: adds a dependency on streaming ASR partial-transcript quality, which is itself imperfect.
+3. **Context-Aware Dynamic Timeout**: Vary the silence threshold based on dialog context — shorter (e.g., 0.5s) after a yes/no question, longer (e.g., 3-4s) after an open-ended or list-eliciting prompt — rather than one global timeout for every turn type.
+
+### Detection & Response
+1. **False-End Rate Tracking via User Continuation**: Detect when a user resumes speaking within a short window after the agent responded (a strong signal of a false end-of-turn); log these as false-end events and use them to retrain/tune the endpointing model and per-intent timeout settings.
+2. **Partial-Confirmation Fallback**: When confidence in end-of-turn detection is marginal, respond with a partial confirmation that invites continuation ("Got burger and fries so far — anything else?") rather than a final confirmation that implies the turn is closed, reducing the cost of a wrong guess.
+3. **List/Compound-Sentence Pattern Detection**: Specifically monitor error rates for utterances containing list markers ("and," enumerated items, trailing conjunctions) since these are disproportionately mis-endpointed; treat this segment as a distinct quality cohort.
+
+### Architecture Patterns
+1. **Two-Stage Endpointing (Acoustic + Semantic)**: Use a fast acoustic VAD as a first-pass candidate end-of-turn signal, then gate the final "commit" decision through a semantic completeness check before triggering the agent's response, decoupling "user paused" from "user finished."
+2. **Streaming ASR with Continuation-Aware Response Generation**: Generate a draft response as soon as a candidate end-of-turn fires, but hold it un-sent for a configurable grace period during which further speech can cancel/revise it — trading a small amount of latency for fewer false-end interruptions.
+3. **Per-Intent Timeout Configuration**: Store expected-completion-time metadata per intent/slot type (e.g., "list of items" vs "yes/no confirmation") and drive the dynamic timeout from that configuration rather than a single hardcoded global value.
+
+### Metrics
+1. **false_end_of_turn_rate_percent**: Target: < 10%; Alert threshold: > 20%
+2. **missed_end_wait_time_ms_p95**: Target: < 2000ms; Alert threshold: > 4000ms
+3. **list_compound_sentence_error_rate_percent**: Target: < 15%; Alert threshold: > 30%
+4. **user_continuation_after_response_rate_percent**: Target: < 8%; Alert threshold: > 20%
+
+### Alerts
+1. **False-End Rate Spike** (P1): Condition - false end-of-turn rate exceeds 20% in a rolling window. Action: Check for recent VAD/endpointing model or timeout config changes, consider temporary global timeout increase as mitigation.
+2. **List-Handling Regression** (P2): Condition - error rate for list/compound utterances exceeds 35%. Action: Review endpointing model training data coverage for enumerations, adjust per-intent timeout for list-eliciting prompts.
+3. **User Continuation Surge** (P2): Condition - rate of users resuming speech immediately after an agent response exceeds 20%. Action: Audit affected intents, retune context-aware timeouts for those flows.
 
 ## References
 
