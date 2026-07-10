@@ -38,20 +38,49 @@ Drafted contract goes to the counterparty with the wrong liability cap; the erro
 
 ## Mitigation Strategies
 
-1. **Deterministic Canonical-Version Lookup Before Similarity Ranking**: Retrieve the applicable clause by its canonical, currently-approved version ID for the relevant jurisdiction and deal type first, and only use embedding similarity for genuinely open-ended drafting tasks where no canonical version exists, never for standard boilerplate retrieval
-2. **Surface Version Metadata in the Retrieved Context**: Inject the clause's version ID, approval date, and jurisdiction applicability as structured, high-salience fields in the prompt alongside the retrieved clause text, rather than relying on the model to infer currency from prose alone
-3. **Canonical-Template Cross-Check Gate**: Require an automated, non-LLM verification step that the version ID of every boilerplate clause inserted into a draft matches the canonical, currently-approved template for that jurisdiction and deal type before the draft is sent for review or to a counterparty
-4. **Near-Duplicate Clause Audit of the Template Library**: Periodically scan the clause library for near-identical clause variants differing in legally material terms (cap amounts, notice periods, jurisdiction), and flag those clusters for mandatory deterministic-lookup routing rather than similarity search
+### Prevention
 
-### Metrics
-- Rate of drafted contracts where an inserted boilerplate clause's version ID does not match the canonical, currently-approved template, sampled via review
-- Count of near-duplicate clause clusters identified in the template library with no deterministic-lookup override in place
-- Time between draft issuance and detection of a wrong-clause-version error, by detection method (internal review vs. counterparty redline)
+1. **Deterministic canonical-version lookup before similarity ranking, with jurisdiction/deal-type filtering**: Modify retrieval pipeline: (a) when agent requests a boilerplate clause (e.g., "limitation-of-liability clause for mid-market SaaS"), first attempt deterministic lookup by clause_type + jurisdiction + deal_size → canonical_version_id, (b) retrieve clause by version_id (not by text similarity), (c) only if no canonical version exists for that combination, fall back to embedding similarity over near-candidate clauses, (d) always display [VERSION_ID], [APPROVAL_DATE], [JURISDICTION], [DEAL_TYPE] metadata prominently in retrieved clause context. Root cause: Prevents similarity ranking from surfacing near-duplicate superseded versions by using deterministic lookup as primary retrieval mechanism.
 
-### Alerts
-- Draft finalized with a boilerplate clause whose version ID fails the canonical-template cross-check → P1
-- Review sampling finds wrong-clause-version rate above baseline for a given clause type or jurisdiction → P2
-- New clause variant added to the template library creates a near-duplicate cluster with an existing canonical clause without a deterministic-lookup rule added → P3
+2. **Clause version metadata surfacing with high-salience structured fields**: Embed retrieved clause in context block: "=== RETRIEVED CLAUSE === VERSION_ID: LiabilityCap_2x_USDefault_v2024-06 | APPROVAL_DATE: 2024-06-01 | CANONICAL: YES | JURISDICTION: US | DEAL_TYPE: Mid-Market | LIABILITY_CAP: 2x Annual Fees | [clause text follows]". Require agent to read and acknowledge version/approval metadata before inserting into draft. Make metadata visual and distinct (not buried in prose). Root cause: Prevents model from defaulting to topical similarity while ignoring version metadata.
+
+3. **Canonical-template cross-check gate with automated version-ID validation**: Before draft finalized, run non-LLM verification step: (a) for every boilerplate clause in draft, extract inserted clause's version_id, (b) query: is this the canonical version for this clause_type + jurisdiction + deal_size? (c) if yes, pass; if no, flag with details: "Inserted liability clause is version_v2024-04 (superseded); canonical is version_v2024-06. BLOCK: Use canonical version or document override justification." Require explicit human approval if non-canonical version used. Fail-safe: if version_id missing/unverifiable, block draft. Root cause: Adds independent verification layer that catches wrong-version insertions before finalization.
+
+### Detection & Response
+
+1. **Clause retrieval audit logging with version-match tracking and near-duplicate detection**: For every drafted contract, log: (a) clause type requested, (b) retrieval method (deterministic lookup vs. similarity search), (c) clause version retrieved (version_id, approval_date), (d) is it the canonical version? (match/mismatch), (e) cross-check result (passed/failed), (f) if mismatched, was override documented? Run automated QA: sample drafted contracts and verify all boilerplate clauses are canonical versions. Measure: canonical_version_match_rate, retrieval_method_accuracy, version_cross_check_pass_rate.
+
+2. **Retroactive version audit on draft rejection or counterparty redline**: When draft rejected or counterparty flags wrong clause version, trace to original retrieval. Was retrieval deterministic or similarity-based? Did cross-check catch the mismatch? If not, update retrieval pipeline logic. For clause types with recurring version mismatches, audit clause library: are there near-duplicate clusters that need routing rules?
+
+### Architecture Patterns
+
+1. **Clause Retrieval Router**: (1) Extract clause type and context (jurisdiction, deal size), (2) Attempt deterministic lookup: {clause_type, jurisdiction, deal_size} → canonical_version_id, (3) If match found, retrieve by version_id and surface metadata, (4) If no match, fall back to similarity search with near-candidate filtering, (5) Always display version metadata prominently.
+
+2. **Canonical-Version Validator**: (1) For each clause in draft, extract version_id, (2) Query clause registry: is this the canonical version for this clause_type + context? (3) If mismatch, flag with reason and block or require approval, (4) Pass result to draft finalization gate.
+
+3. **Near-Duplicate Clause Cluster Detector**: (1) Scan clause library for near-identical clause pairs with different version_ids, (2) Identify legally material differences (liability cap amounts, notice periods, jurisdiction language), (3) Build routing rules: "For limitation-of-liability clauses, check jurisdiction_first before similarity ranking", (4) On new clause variant added, check for new near-duplicate cluster creation.
+
+### Key Metrics
+
+| Metric | Target | Alert Threshold | Measurement Method |
+|--------|--------|-----------------|-------------------|
+| Deterministic-Lookup Success Rate | >95% | <90% | # of boilerplate clause requests successfully fulfilled via deterministic lookup / total boilerplate requests |
+| Canonical-Version Match Rate | 100% | <99% | # of drafted contracts where all boilerplate clauses match canonical versions for their type + jurisdiction + deal size / total drafted contracts |
+| Version Cross-Check Pass Rate | 100% | <98% | # of drafted contracts passing version-ID cross-check before finalization / total contracts checked |
+| Wrong-Version Detection Rate (Pre-Finalization) | 100% | <99% | # of inserted non-canonical clauses detected and flagged by cross-check before draft sent out / total non-canonical insertions |
+| Near-Duplicate Clause Cluster Coverage | >95% | <90% | # of near-duplicate clause clusters with deterministic-routing rules in place / total clusters identified |
+| False Positive Rate (Over-Flagging Version Mismatches) | <2% | >5% | # of false mismatch alerts / total mismatch alerts |
+| Clause Version Metadata Accuracy | 100% | <99% | # of retrieved clauses with accurate, current version_id and approval_date metadata / total retrieved clauses (validated by library audit) |
+
+### Alerts & Escalation
+
+| Alert | Condition | Severity | Response |
+|-------|-----------|----------|----------|
+| Deterministic Lookup Fails | Clause type + jurisdiction + deal size has no canonical version in registry; falls back to similarity search | MEDIUM | Flag for library maintenance team; add canonical version if type is in common use; ensure fallback search includes version metadata |
+| Non-Canonical Clause Inserted | Draft contains boilerplate clause from non-current version (version_id does not match canonical for that type + context) | CRITICAL | Flag before draft finalization; block or require explicit approval and documentation of why non-canonical version used |
+| Version Cross-Check Failed | Inserted clause's version_id cannot be verified against clause registry; version metadata missing or corrupted | CRITICAL | Block draft finalization; require clause to be re-retrieved or manually verified before proceeding |
+| Near-Duplicate Cluster Without Routing Rule | New clause variant added creates near-duplicate cluster with existing canonical clause, but no deterministic-routing rule in place | MEDIUM | Audit existing drafts using clauses from this cluster; add routing rule for future retrievals; monitor for retrieval errors |
+| Counterparty Flags Wrong Clause Version | Counterparty's redline identifies inserted boilerplate clause as non-current or jurisdiction-wrong version | HIGH | Investigate why cross-check did not catch; determine if version error or retrieval routing failure; trace to library audit if systematic issue; re-retrieve and re-draft with correct version |
 
 ---
 
@@ -60,3 +89,4 @@ Drafted contract goes to the counterparty with the wrong liability cap; the erro
 - [Towards Reliable Retrieval in RAG Systems for Large Legal Datasets](https://arxiv.org/html/2510.06999v1)
 - [Version Control for Legal Documents](https://arxiv.org/abs/2108.06421)
 - [Evaluation of Large Language Models in Legal Applications: Challenges, Methods, and Future Directions](https://arxiv.org/pdf/2601.15267)
+- [Clause Versioning and Template Management in Legal Drafting Systems](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3892456)

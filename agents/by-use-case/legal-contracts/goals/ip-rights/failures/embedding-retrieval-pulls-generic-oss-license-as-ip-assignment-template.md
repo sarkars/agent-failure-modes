@@ -40,20 +40,46 @@ Six months later, contractor asserts ownership of the delivered codebase, citing
 
 ## Mitigation Strategies
 
-1. **Structured Template-Type Filter Before Semantic Search**: Require the RAG step to filter candidate templates by a structured `template_type` field matching the drafting task's contract category before ranking by semantic similarity, rather than relying on similarity ranking alone
-2. **Defined-Terms Consistency Check**: After retrieval, automatically compare the retrieved clause's defined terms against the rest of the contract being drafted and flag a mismatch (e.g., "Contribution" vs. "Work Product") for human review before insertion
-3. **Legal-Effect Tagging at Template Authoring Time**: Require every template added to the library to be tagged with its legal effect (assignment vs. license vs. waiver) as structured metadata, independent of its prose content, so retrieval can be effect-aware
-4. **Sampled Retrieval Audits on High-Overlap Template Families**: Periodically sample retrieval results for template families known to have high lexical overlap but different legal effect (IP assignment vs. license; NDA vs. confidentiality side letter) and verify the correct template was retrieved
+### Prevention
 
-### Metrics
-- Rate of drafted contracts where the inserted template's `template_type` tag does not match the requested contract category
-- Number of defined-terms mismatches flagged between retrieved clause and surrounding contract per drafting session
-- Retrieval precision@1 measured specifically within high-lexical-overlap template families, not just overall
+1. **Structured template-type filtering before semantic-similarity ranking**: Implement template-retrieval pipeline: (a) Every template tagged with structured fields: {template_type (enum: contractor-ip-assignment, oss-contributor-license, inbound-license, ip-waiver, etc.), legal_effect (enum: full-assignment, limited-license, waiver, cross-license), contract_category, jurisdiction}, (b) RAG query includes explicit intent signal (e.g., "Need IP terms for: contractor work-for-hire assignment"), (c) Retrieval first filters by template_type and legal_effect matching the intent, (d) Only within filtered set apply semantic similarity ranking, (e) Retrieve top 3 candidates; require drafter to select one + confirm legal effect before insertion. Root cause: Prevents high-lexical-overlap documents from being ranked by similarity alone.
 
-### Alerts
-- A drafted contract is finalized with a retrieved template whose `template_type` tag does not match the requested category → P1
-- Defined-terms consistency check finds a mismatch between retrieved clause and contract body and the document proceeds to signature without resolution → P1
-- Retrieval precision@1 within a high-overlap template family drops below baseline for two consecutive drafting batches → P2
+2. **Legal-effect matching at retrieval-intent stage**: Before RAG query, parse drafting request for legal-effect signals: "work-for-hire" → search for legal_effect='full-assignment', "licenseonly" → search for legal_effect='limited-license'. Map drafting intent to required legal effect, then constrain retrieval: retrieve only templates with matching legal_effect tag. If no templates match, return None and escalate to human drafter: "No templates found with legal effect: full-assignment. Please manually select." Root cause: Ensures retrieval is effect-aware, not just vocabulary-aware.
+
+3. **Defined-terms and key-concept consistency checking post-retrieval**: After template retrieved, automatically: (a) extract defined terms from retrieved template (e.g., "Contribution", "Licensor", "Work Product", "Contractor"), (b) extract defined terms from drafting context (existing clauses, party names, roles), (c) compare sets: flag if >20% of key terms are disjoint or map to different parties (e.g., template says "Licensor" but contract says "Contractor"), (d) if mismatch detected, flag for human review before insertion, show side-by-side comparison. Root cause: Detects unsuitable templates before they're inserted into contract.
+
+### Detection & Response
+
+1. **Retrieval audit logging with effect-matching verification**: For each template retrieval, log: {query_intent, requested_legal_effect, retrieved_template_id, template_type_tag, template_legal_effect_tag, semantic_similarity_score, effect_match_status (MATCH/MISMATCH), defined_terms_check_result (PASS/FLAG), drafter_action_taken}. Run daily audit: sample 5% of retrievals from past 24h, verify: (a) template_legal_effect matches query intent, (b) semantic_similarity_score for correct-effect templates is within 10% of retrieved-template score. Alert if: mismatch rate >2%, or correct-effect templates ranked >2 positions lower than retrieved templates.
+
+2. **Template-family collision detection and monitoring**: Identify high-lexical-overlap template families (contractor-ip-assignment vs. oss-contributor-license, nda vs. confidentiality-side-letter). For these families, monitor retrieval precision: weekly, run 10 queries designed to retrieve each template type, measure precision@1 for effect-correct template. Alert if precision drops >5% vs. baseline. Trigger root-cause analysis if collision family shows degradation.
+
+### Architecture Patterns
+
+1. **Effect-First Template Retrieval Engine**: Parse drafting intent → Infer legal_effect requirement → Filter template_index by legal_effect → Retrieve top-3 candidates by semantic_similarity → Rank by defined-terms consistency with drafting context → Return ranked candidates with effect-match and term-consistency scores. Drafter confirms selection + effect before insertion. Logs all decisions for audit.
+
+2. **Template Tagging & Metadata Registry**: Maintains curated template library with structured fields: template_id, template_name, template_type, legal_effect, contract_category, defined_terms[], high_collision_family (boolean), last_updated, usage_count. Enables filtering and effect-aware retrieval. Collision-family flag triggers enhanced monitoring and defined-terms checking.
+
+3. **Defined-Terms Consistency Validator**: On template insertion, extracts defined_terms from template and compares against contract-drafting context. Builds term-mapping rules: "if template uses 'Licensor' and contract says 'Contractor', flag mismatch". Flags high-risk mismatches (definitions that imply different ownership intent) before insertion.
+
+### Key Metrics
+
+| Metric | Target | Alert Threshold | Measurement Method |
+|--------|--------|-----------------|--------------------|
+| Template Retrieval Legal-Effect Accuracy | >99% | <98% | # of retrievals with legal_effect matching query intent / total retrievals |
+| High-Collision-Family Precision@1 | >98% | <95% | # of retrievals returning effect-correct template in position 1 for high-overlap families / total queries for those families |
+| Defined-Terms Mismatch Detection Rate | >95% | <90% | # of defined-terms mismatches caught by automated checker before insertion / total mismatches in audited drafts |
+| Template Category Match Rate | 100% | <99% | # of finalized contracts using templates matching requested contract_category / total drafted contracts |
+| Post-Signature Legal-Effect Disputes | 0% | >0.5% | # of post-execution disputes attributing to template legal-effect mismatch / total executed contracts |
+
+### Alerts & Escalation
+
+| Alert | Condition | Severity | Response |
+|-------|-----------|----------|----------|
+| Effect-Mismatched Template Retrieved | Template with legal_effect not matching query intent ranked #1 | CRITICAL | Block insertion; escalate to drafter with explanation; require manual selection from effect-filtered candidates |
+| Defined-Terms Inconsistency Flagged | Defined-terms consistency check finds >20% mismatch between template and contract context | HIGH | Prevent insertion into contract; show side-by-side term comparison; require drafter confirmation that mismatch is intentional |
+| Collision-Family Precision Degradation | Retrieval precision@1 for high-lexical-overlap family drops >5% for 3 consecutive days | HIGH | Investigate retrieval engine performance; audit recent queries; may require re-tuning effect-filtering weights |
+| Legal-Effect Mismatch Discovered Post-Signature | Post-execution, contract discovered to have legal_effect not matching original drafting intent | CRITICAL | Legal escalation; assess enforceability and remediation; audit all contracts drafted in same session; may require amendment |
 
 ---
 

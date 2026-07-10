@@ -37,18 +37,45 @@ Impact: Billing dispute; reconciliation needed
 
 ## Mitigation Strategies
 
-1. **Amendment Consolidation**: Merge amendments into single contract document
-2. **Version Control**: Track contract versions with effective dates
-3. **Temporal Reasoning**: Model contract state as time-series (what applies when)
-4. **Change Tracking**: Highlight changes from previous version
+### Prevention
 
-### Metrics
-- Amendment detection rate (should be 100% for all amendments)
-- Current state accuracy (does model know current terms?)
-- Version currency (is model using latest version?)
+1. **Mandatory amendment consolidation with unified version control**: On contract intake, implement pipeline: (1) Ingest original contract + all amendments (scan for "Amendment", "Modification", "Addendum", "Change Order" documents), (2) Consolidate: extract effective date + modified clauses from each amendment, (3) Build merged document with all amendments applied in chronological order, (4) Tag each clause with amendment-origin and effective-date, (5) Generate "Current State" document (what applies today), (6) Maintain version history with timeline. Analysis operates on "Current State" document, never on original-only. Fail-safe: if amendments missing/undiscovered, analysis flags as "[INCOMPLETE - possible amendments not found]" rather than proceeding. Root cause mitigation: Prevents original-only analysis by enforcing amendment consolidation before analysis.
 
-### Alerts
-- Amendment found not in analyzed contract → Re-analyze with full amendment history
+2. **Temporal reasoning with effective-date enforcement**: For every material term (pricing, payment terms, liabilities, termination), track temporal history: {term, original_value, amendment_1: {new_value, effective_date_1}, ...}. Before analysis, determine "current date context" and apply only terms with effective_date <= current_date. Generate time-aware analysis: "As of 2024-06, payment terms are 45 days (per Amendment 2, effective 2024-06-01)". Root cause: Explicitly models time-dependent contract state rather than static original view.
+
+3. **Amendment discovery and change-tracking workflows**: Implement automated amendment discovery: scan incoming documents for amendment indicators, OCR if images, extract amendment metadata (effective date, modified sections). Use semantic search to find related amendments: "Which document modified the 'Price' clause?" Maintain amendment index per contract. Analyst reviews flagged amendments before analysis. Root cause: Ensures amendments are discovered and tracked systematically.
+
+### Detection & Response
+
+1. **Amendment completeness audit logging**: For every contract analysis, log: (a) original document received, (b) amendments discovered and consolidated (count, list), (c) temporal state as of analysis date, (d) effective clauses applied, (e) "current state" document version used. Alert when analysis performed on document with <4 months of amendment history available (suggests amendments may have been missed). Target: 100% of contracts analyzed have amendment consolidation completed.
+
+2. **Retroactive re-analysis on amendment discovery**: If amendment discovered post-analysis, trigger re-analysis of contract with complete amendment history. Compare old analysis vs. new analysis: flag changed conclusions (e.g., "old analysis: $100/month cost; new analysis: $110/month after Amendment 2"). Escalate to contracts/business team if discrepancy could affect current obligations.
+
+### Architecture Patterns
+
+1. **Amendment Consolidation Engine**: Document ingestion pipeline → Amendment Discovery (regex + semantic NLP) → Extract Metadata (effective dates, modified sections) → Build Amendment Index → Merge Document (original + amendments in chronological order) → Generate Current-State Document (clauses as of analysis date) → Version Control (track all versions with timestamps).
+
+2. **Temporal Contract Reasoner**: For each contract, maintains temporal state machine: {date: T, state: {price: X, payment_terms: Y, liabilities: Z}}. Analysis engine: accepts (contract, as_of_date) and returns analysis reflecting contract state on that date. Supports historical queries: "What were terms on 2024-01-01?"
+
+3. **Amendment Index & Change Tracker**: Searchable index: (contract_id, amendment_num, effective_date, modified_sections, change_summary). Enables queries: "Which contracts' payment terms changed since 2024-01?" "Which amendments affected liability caps?" Feeds business intelligence.
+
+### Key Metrics
+
+| Metric | Target | Alert Threshold | Measurement Method |
+|--------|--------|-----------------|--------------------|
+| Amendment Discovery Rate | 100% | <99% | # of amendments identified and consolidated / total amendments in contract file history |
+| Amendment Consolidation Completeness | 100% | <98% | % of contracts with all known amendments merged and effective dates tracked |
+| Current-State Accuracy | 100% | <99% | # of analyses matching "current" contract state / total analyses (validated via business-team spot-checks) |
+| Temporal Reasoning Coverage | >95% | <90% | % of material terms with tracked effective dates and amendment history |
+| Amendment Re-Analysis Timeliness | <5 business days | >10 days | Time from amendment discovery to completed re-analysis (if material change detected) |
+
+### Alerts & Escalation
+
+| Alert | Condition | Severity | Response |
+|-------|-----------|----------|----------|
+| Amendment Not Consolidated | Analysis performed on contract with known amendments not yet merged into analyzed document | CRITICAL | Block analysis publication; trigger amendment consolidation; re-analyze with complete amendment history |
+| Post-Analysis Amendment Discovery | Amendment discovered after contract analysis completed; re-analysis shows material change in obligations | HIGH | Escalate to contracts/business team; may require retroactive reconciliation; re-do any analyses depending on changed terms |
+| Temporal State Mismatch | Analysis uses effective date X, but later business activity assumes effective date Y (amendment-sequencing error) | HIGH | Investigate temporal reasoning; audit all analyses for date-related errors; may require billing/obligation reconciliation |
 
 ---
 

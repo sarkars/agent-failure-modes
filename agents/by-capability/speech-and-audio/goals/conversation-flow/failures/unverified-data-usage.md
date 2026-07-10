@@ -296,25 +296,41 @@ instructions: |
   - Acknowledge briefly and never use the name again
 ```
 
----
+### Detection & Response
 
-## Production Signals
+1. **Data-verification audit logging with unverified-data-usage tracking**: For each call, log: {call_id, data_source: (from_caller|from_crm|from_system), data_verified (Y/N), data_used_in_greeting (Y/N), caller_confirmed_or_corrected (Y/N), wrong_person_detected (Y/N), data_accuracy_issue: (none|partial_mismatch|complete_mismatch)}. Alert immediately if: unverified_data used in greeting, or caller corrects data, or wrong person indicated. Track monthly: % of calls with unverified-data issues, breakdown by data_source, impact (complaints filed, dissatisfaction indicators).
+
+2. **Real-time wrong-person detection and immediate correction protocol**: During call, monitor for signals of wrong-person: (a) caller says "you have the wrong number", (b) caller says "I'm not [name used]", (c) caller corrects name/email unprompted. On any signal: immediately stop using any pre-populated data, apologize, request correct information from caller, don't use CRM data for rest of call. Log incident with severity_rating (potential privacy breach).
+
+### Architecture Patterns
+
+1. **Data-Verification Gate with Forced Confirmation**: Before using any CRM data in greeting, gate checks: verified=true? If false, require verification from caller before use. Alternatively, use data-neutral greeting ("Hi, is this a good time to talk?") without using pre-populated names/emails.
+
+2. **Wrong-Person Detector with Immediate Data Disabling**: Monitors caller utterances for wrong-person signals. On detection: (a) flag data_source as unreliable, (b) disable all pre-populated data for rest of call, (c) request correct information directly from caller, (d) escalate to CRM team to investigate data quality issue.
+
+3. **CRM-Data Freshness Monitor**: Tracks staleness of pre-populated data. On calls >6 months after data last updated, treat as UNVERIFIED and require caller confirmation before use.
 
 ### Key Metrics
-| Metric | Alert Threshold |
-|--------|-----------------|
-| `identity.unverified_name_used` | > 0% |
-| `identity.wrong_person.detected` | Track rate |
-| `identity.correction.ignored` | > 0% |
-| `identity.third_party.fabrication` | > 0% |
 
-### Alerts
-| Alert | Condition | Severity |
-|-------|-----------|----------|
-| Unverified Name Used | Any occurrence | P2 |
-| Wrong Person Not Detected | miss rate > 10% | P1 |
-| Name Correction Ignored | Any occurrence | P2 |
-| Privacy Complaint | Any occurrence | P1 |
+| Metric | Target | Alert Threshold | Measurement Method |
+|--------|--------|-----------------|--------------------|
+| Unverified-Data Usage Rate | 0% | >0% | # of calls where unverified CRM data used without caller confirmation / total calls with pre-populated data |
+| Wrong-Person Detection Accuracy | >99% | <95% | # of wrong-person signals detected by agent / total wrong-person calls (audited via call review) |
+| Data-Correction Acknowledgment Rate | 100% | <98% | # of caller corrections that agent acknowledged and stopped using incorrect data / total caller-initiated corrections |
+| CRM-Data Accuracy Rate | >95% | <90% | # of CRM data points confirmed/not-corrected by caller / total data points used (post-call audit) |
+| Privacy-Related Complaint Rate | <1% | >2% | # of complaints mentioning privacy, data accuracy, or wrong-person issues / total calls |
+| Data-Freshness Compliance | >90% | <80% | # of calls with CRM data <6 months old or verified by caller / total calls using pre-populated data |
+
+### Alerts & Escalation
+
+| Alert | Condition | Severity | Response |
+|-------|-----------|----------|----------|
+| Unverified Data Used in Greeting | Agent uses CRM name/email in greeting without caller confirmation (e.g., "Hi John") | MEDIUM | Flag call; if caller corrects, escalate to CRM data-quality review; may indicate data staleness or system error |
+| Wrong Person Not Detected | Caller indicates wrong number/wrong person, but agent continues using pre-populated data | HIGH | Flag call as compliance violation; immediately disable CRM data for call; escalate to superviso |
+| Caller-Initiated Correction Ignored | Caller corrects pre-populated data (e.g., "My name is actually Jane, not John"), but agent continues using original data | HIGH | Flag as non-responsiveness; log for agent coaching; may impact customer trust |
+| Stale Data in Use | CRM data >6 months old being used without verification | MEDIUM | Escalate to CRM data-refresh team; may indicate data-sync issues; require caller verification for older data |
+| Third-Party Privacy Breach | Agent references data about family members, household composition, or other third-party information without explicit caller consent | CRITICAL | Immediate escalation to legal/compliance; may violate GDPR/CCPA; assess customer impact; may require breach notification |
+| Multiple Data-Accuracy Issues on Call | >1 data inaccuracy or correction in single call | MEDIUM | Flag account for CRM re-verification; may indicate identity mismatch or systematic data-quality issue |
 
 ---
 

@@ -39,22 +39,44 @@ Drafted agreement is executed with the wrong-jurisdiction non-compete language; 
 
 ## Mitigation Strategies
 
-1. **Jurisdiction-First Deterministic Filter**: Restrict candidate clause templates to the contract's actual governing-law jurisdiction via a deterministic lookup before any similarity-based ranking over clause subject matter is applied
-2. **Surface Governing-Law Metadata as a Required Field**: Require the retrieved template's jurisdiction and statutory citation to be displayed alongside the contract's actual governing-law jurisdiction so a mismatch is visually checkable before the draft proceeds
-3. **Cross-Jurisdiction Near-Duplicate Audit**: Periodically scan the template library for clause templates with closely overlapping subject matter across different jurisdictions and flag those clusters for mandatory deterministic jurisdiction-based routing rather than similarity search
-4. **Enforceability Cross-Check Gate**: Require an automated, non-LLM verification step confirming the retrieved clause's statutory citation and substantive requirements (thresholds, required notices) match the contract's actual governing-law jurisdiction before the draft is finalized
+### Prevention
 
-### Metrics
-- Rate of drafted contracts where a jurisdiction-specific clause's template jurisdiction does not match the contract's actual governing-law jurisdiction, sampled via review
-- Count of cross-jurisdiction near-duplicate clause clusters identified in the template library without a deterministic-routing rule in place
-- Time between draft issuance and detection of a wrong-jurisdiction clause error, by detection method
+1. **Jurisdiction-first deterministic filter with mandatory pre-filter gating**: Modify retrieval pipeline: (a) extract contract's governing-law jurisdiction, (b) pre-filter clause library: "Show only templates tagged with jurisdiction=X", (c) search within jurisdiction-filtered pool only by similarity, (d) never perform open-ended cross-jurisdiction similarity search. Enforce gating: if governing-law jurisdiction not found in template, flag as missing. Fail-safe: retrieve error if jurisdiction-filtered templates unavailable. Root cause: Prevents similarity ranking across jurisdictions by restricting candidate pool first.
 
-### Alerts
+2. **Governing-law metadata surfacing with mandatory field display**: Require retrieved clause to display: {contract_governing_law: X, template_jurisdiction: Y, template_statutory_citation: Z}. If contract_governing_law ≠ template_jurisdiction, display mismatch prominently: "JURISDICTION MISMATCH: Contract governed by NY; template from NJ." Require explicit human confirmation before inserting mismatched template. Root cause: Makes jurisdiction mismatch visually obvious.
+
+3. **Enforceability cross-check gate with substantive-requirement validation**: Before clause finalized, run automated check: (a) extract clause's governing-law jurisdiction and statutory citation, (b) query enforceability database: "Is this statute's non-compete enforceable in this jurisdiction? Requirements: [list]", (c) scan clause for compliance with requirements (notice language, consideration disclosure, geographic scope), (d) flag if clause text doesn't match requirements, (e) block finalization. Root cause: Adds independent verification that clause meets actual jurisdiction's substantive requirements.
+
+### Detection & Response
+
+1. **Clause retrieval audit logging with jurisdiction-match tracking**: For every drafted contract, log: (a) clause type requested, (b) contract's governing-law jurisdiction, (c) template retrieved and its jurisdiction, (d) jurisdiction match status (match/mismatch), (e) enforceability check result (pass/fail). Measure: jurisdiction_match_rate, enforceability_check_pass_rate.
+
+2. **Retroactive enforceability audit on clause challenge**: When clause enforceability challenged in litigation or redline, trace to original retrieval. Was correct jurisdiction selected? Does clause meet jurisdiction's substantive requirements? Update enforceability database and retrieval logic based on findings.
+
+### Architecture Patterns
+
+1. **Jurisdiction-First Clause Retriever**: (1) Extract governing-law jurisdiction, (2) Pre-filter templates by jurisdiction, (3) Rank within filtered set by similarity, (4) Surface metadata prominently.
+
+2. **Enforceability Validator**: (1) Extract clause's jurisdiction and statutory citation, (2) Query enforceability database, (3) Check clause text against requirement rules, (4) Flag non-compliance.
+
+### Key Metrics
+
+| Metric | Target | Alert Threshold | Measurement Method |
+|--------|--------|-----------------|-------------------|
+| Jurisdiction Pre-Filter Success Rate | >95% | <90% | # of clause requests successfully fulfilled via jurisdiction-filtered pool / total requests |
+| Jurisdiction Match Rate | 100% | <99% | # of clauses where template jurisdiction matches contract's governing-law jurisdiction / total clauses |
+| Enforceability Check Pass Rate | 100% | <98% | # of clauses passing automated enforceability requirements check / total clauses checked |
+| Wrong-Jurisdiction Detection Rate | 100% | <99% | # of cross-jurisdiction clause mismatches detected and blocked before draft finalized / total mismatches present |
+| Post-Deployment Enforceability Challenge Rate | 0 | >0 | # of deployed clauses challenged as unenforceable due to wrong jurisdiction / total deployed clauses |
+
+### Alerts & Escalation
+
 | Alert | Condition | Severity | Response |
 |-------|-----------|----------|----------|
-| Governing-law citation mismatch | Retrieved clause's statutory citation does not match the contract's recorded governing-law jurisdiction | P1 | Block finalization; route to legal review for correct-jurisdiction template |
-| Cross-jurisdiction near-duplicate detected | New template added to library creates a near-duplicate cluster with an existing template from a different jurisdiction | P3 | Add deterministic jurisdiction-routing rule for the cluster |
-| Recurring mismatch on same clause type | Multiple wrong-jurisdiction errors traced to the same clause type (e.g., non-compete, arbitration) | P2 | Audit retrieval configuration for that clause type |
+| Jurisdiction Pre-Filter Unavailable | No templates found for contract's governing-law jurisdiction; unable to retrieve jurisdiction-first | CRITICAL | Escalate to template library team; add templates for missing jurisdiction; do not proceed with cross-jurisdiction fallback without explicit approval |
+| Jurisdiction Mismatch Detected | Retrieved clause from different jurisdiction than contract's governing-law | CRITICAL | Block finalization; escalate to legal; retrieve correct-jurisdiction template; if mismatch override needed, document justification |
+| Enforceability Check Failed | Clause fails automated enforceability validation; doesn't comply with governing-law requirements | HIGH | Block finalization; escalate to legal; may require clause revision to meet jurisdiction requirements |
+| Recurring Wrong-Jurisdiction Pattern | Multiple wrong-jurisdiction errors on same clause type (e.g., 3+ non-competes from wrong jurisdictions) | HIGH | Audit retrieval configuration; enhance jurisdiction-first filtering; add routing rules for high-risk clause types |
 
 ---
 
@@ -62,3 +84,4 @@ Drafted agreement is executed with the wrong-jurisdiction non-compete language; 
 
 - [Towards Reliable Retrieval in RAG Systems for Large Legal Datasets](https://arxiv.org/html/2510.06999v1)
 - [Evaluation of Large Language Models in Legal Applications: Challenges, Methods, and Future Directions](https://arxiv.org/pdf/2601.15267)
+- [Jurisdiction-Specific Clause Retrieval and Enforceability in Legal Drafting Systems](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3896342)

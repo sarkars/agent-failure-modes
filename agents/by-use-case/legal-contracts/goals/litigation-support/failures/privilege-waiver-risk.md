@@ -31,19 +31,47 @@ Impact: Inadvertent production risks waiver of privilege over the underlying leg
 
 ## Mitigation Strategies
 
-1. **Purpose-Based Classification, Not Metadata-Only**: Train/prompt the privilege classifier to reason about the communication's purpose (relaying or seeking legal advice, prepared in anticipation of litigation) rather than relying primarily on sender/recipient identity
-2. **Privilege-by-Reference Detection**: Specifically flag documents that discuss or summarize legal advice even when no attorney is a direct party to the communication
-3. **Mandatory Attorney Sampling Review**: Require a statistically sampled attorney review pass over documents the agent classified as non-privileged, before any production, as a check against false negatives
-4. **Detailed Privilege Log Generation**: Require the agent to generate a privilege log entry with a specific, defensible basis for every withheld document, not a generic label
+### Prevention
 
-### Metrics
-- Recall for privilege-by-reference documents in attorney-sampled QA review
-- % of withheld documents with a complete, defensible privilege log basis
-- Inadvertent production incident rate (documents clawed back post-production)
+1. **Purpose-driven privilege classification with multi-factor context analysis**: Restructure privilege classifier to evaluate: (a) direct_involvement (is attorney a sender/recipient), (b) advice_seeking_language (keywords: "legal advice", "counsel's recommendation", "attorney guidance", "seek counsel"), (c) privilege_by_reference (document relays legal advice received from counsel even if no attorney is direct party), (d) litigation_preparation (keywords: "anticipated litigation", "litigation strategy", "draft legal memo"), (e) chain_context (if document is a forward/reply of privileged communication, mark privileged even if forwarding party is non-attorney), (f) in_house_counsel_indicator (flag any communication involving in-house legal team even if email address is business-domain). For each document, score all 6 factors and output privilege_probability. Threshold: if score >0.6 OR any factor=true, classify as "REQUIRES ATTORNEY REVIEW" rather than auto-producing. Root cause: Prevents metadata-only heuristics from missing privilege-by-reference and litigation-work-product.
 
-### Alerts
-- Document discussing legal advice classified as non-privileged with no attorney sampling override → P1
-- Privilege log entry generated without a specific, defensible basis statement → P2
+2. **Privilege-by-reference detection with legal-advice-relaying patterns**: Implement NLP classifier trained on privilege-by-reference document patterns: emails/memos summarizing advice received from counsel, internal strategy discussions referencing "our lawyers recommended", decision memos citing legal guidance. Trigger: scan all communications from business executives (non-legal role codes) that mention legal topics or cite counsel advice, flag for privilege assessment. Auto-escalate if: (a) communication mentions "legal counsel" or "attorney", (b) discusses legal risk, regulatory compliance, litigation exposure, or (c) references prior communication with legal team. Root cause: Catches privilege-by-reference that metadata heuristics would miss.
+
+3. **Mandatory multi-pass attorney sampling review before production**: Implement production-gate: (a) agent performs first-pass classification (privileged/non-privileged), (b) before any production, sample 10% of agent-classified-as-non-privileged documents, stratified by document type (emails, memos, chat, etc.), (c) have licensed attorney review sample, (d) calculate false-negative rate (privileged documents in sample classified as non-privileged), (e) if false-negative rate >2%, halt production and expand attorney review to 30%; if >5%, re-classify entire set with human attorney review. Log: sample_size, false_negative_rate, documents_reclassified_to_privileged. Root cause: Catches systematic blind spots in agent classification.
+
+### Detection & Response
+
+1. **Privilege classification audit with false-negative tracking**: For each document classified by agent as non-privileged, log: {doc_id, classification (privileged|non_privileged), classification_basis (direct_involvement|advice_seeking|litigation_prep|privilege_by_reference|none), confidence_score, attorney_sampled (Y/N), attorney_determination (if sampled)}. Monthly audit: calculate false_negative_rate = (# classified non-privileged but determined privileged by attorney / total sampled). Alert if false_negative_rate >2%. Track trends: which document types, senders, keywords have highest false-negative rates for pattern analysis.
+
+2. **Privilege-log completeness validation and waiver-risk assessment**: For every withheld document, require privilege_log_entry: {doc_id, date, sender, recipient, privilege_type (attorney_client|work_product|other), basis_statement (specific, detailed reason for privilege claim, e.g., "Internal email from VP requesting legal counsel's review of contract termination rights in anticipation of settlement negotiations; communication made for the purpose of seeking legal advice"), withholding_agent_id, attorney_approval_status}. Before production, verify: (a) all withheld documents have complete privilege_log_entries with defensible basis_statements, (b) privilege_type is accurate, (c) get IP counsel sign-off on privilege log as a whole. Escalate any entries with vague basis (e.g., "legal advice", "work product") for manual attorney clarification before production.
+
+### Architecture Patterns
+
+1. **Purpose-Driven Privilege Classifier with Multi-Factor Scoring**: Document → NLP analysis {direct_involvement, advice_seeking_language, privilege_by_reference, litigation_preparation, chain_context, in_house_counsel_indicator} → Privilege_probability_score → If score >0.6 OR any critical factor true, output "REQUIRES ATTORNEY REVIEW"; otherwise output privilege_determination + confidence. Integrates with privilege_by_reference detector and litigation-work-product identifier.
+
+2. **Privilege-by-Reference Pattern Detector**: Identifies communications relaying legal advice or litigation strategy even when no attorney is direct sender/recipient. Maintains pattern library: {pattern_name, keyword_set, risk_level}. On ingestion, scans documents against pattern library; if match, auto-flags for attorney review regardless of sender metadata.
+
+3. **Multi-Pass Production Gate with Attorney Sampling**: First pass: agent classifies all documents. Second pass: stratified sampling (10%+ of non-privileged, 100% of documents with high confidence uncertainty). Attorney review of sample. If false-negative rate >threshold, expand sample or re-classify entire set. Before production release, attorney approves privilege_log and certifies production meets privilege standards.
+
+### Key Metrics
+
+| Metric | Target | Alert Threshold | Measurement Method |
+|--------|--------|-----------------|--------------------|
+| Privilege Classification Sensitivity (Recall) | >99% | <98% | # of privileged documents correctly classified / total privileged documents (estimated from attorney sample review) |
+| Privilege-by-Reference Detection Rate | >95% | <90% | # of privilege-by-reference documents identified by classifier / total privilege-by-reference documents in audited set (discovered post-production or via attorney review) |
+| False-Negative Rate in Attorney Sampling | <2% | >2% | # of agent-classified-as-non-privileged but attorney-determined-privileged / total sampled documents |
+| Privilege-Log Completeness | 100% | <99% | # of withheld documents with complete privilege_log_entry including defensible basis_statement / total withheld documents |
+| Inadvertent Production Incidents | 0% | >0% | # of privileged documents produced in discovery production sets / total documents produced (requires claw-back or waiver assessment) |
+
+### Alerts & Escalation
+
+| Alert | Condition | Severity | Response |
+|-------|-----------|----------|----------|
+| Privilege-by-Reference Not Flagged | Document discusses legal advice or litigation strategy with no attorney direct involvement, classified as non-privileged | CRITICAL | Escalate to attorney reviewer; may require reclassification and withholding before production; assess privilege waiver risk if already produced |
+| False-Negative Rate Elevated | Attorney sampling finds >2% of sampled documents classified as non-privileged are actually privileged | HIGH | Halt production; expand attorney review scope to 30%+ or re-classify entire set; investigate classifier systematic failures |
+| Privilege-Log Entry Insufficient | Withheld document has no privilege_log_entry or entry lacks specific, defensible basis statement | HIGH | Block production release; require attorney to provide detailed basis_statement before document withholding is certified |
+| Litigation-Work-Product Missed | Document containing litigation strategy or legal memo not flagged as work-product protected | CRITICAL | Reclassify as work-product; withhold from production; assess privilege waiver risk; notify counsel if document already produced |
+| Post-Production Privilege Waiver | Privileged document discovered post-production in discovery set | CRITICAL | Assess privilege waiver (voluntary disclosure + notice to opposing counsel may cure, or waiver may be irreversible). Trigger claw-back procedure if available. Escalate to litigation counsel for strategic decision. Audit entire production set for similar issues. |
 
 ---
 

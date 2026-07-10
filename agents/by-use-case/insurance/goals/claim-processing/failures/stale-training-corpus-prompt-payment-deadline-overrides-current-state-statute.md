@@ -43,22 +43,45 @@ retrieves the correct amended figure and confirms the original timeline was non-
 
 ## Mitigation Strategies
 
-1. **Mandatory Regulatory-Tool Call Before Setting Any Deadline**: Require a live regulatory-requirements tool call before any claim-processing deadline is set or communicated, regardless of whether the agent's own reasoning already produces a plausible figure
-2. **Statute-Change Trigger for In-Flight Claims**: When a state's prompt-payment statute changes, automatically flag claims already in process in that state for deadline re-verification against the updated requirement
-3. **Jurisdiction-Tagged Deadline Snapshot**: Pass the regulatory-requirements tool's last-updated timestamp and jurisdiction alongside the deadline figure in tool results so the agent can recognize when general cross-state knowledge might not reflect this state's current requirement
-4. **Compliance Cross-Check Before Acknowledgment Sent**: Run an automated check comparing the internal processing deadline against the live regulatory-requirements tool's current figure before any acknowledgment or payment communication is sent to the claimant
+### Prevention
 
-### Metrics
-- Rate of claim-processing deadlines that do not match the current regulatory-requirements tool's figure for the claim's jurisdiction
-- Number of claims processed without a corresponding regulatory-requirements tool call in the session trace
-- Time lag between a statute amendment and the first claim correctly processed under the new deadline
+1. **Forced regulatory-tool-call gate before deadline setting**: Implement gating: any claim-processing workflow that needs to set a processing deadline (acknowledgment, investigation start, payment target) is blocked from proceeding until a mandatory regulatory-requirements tool call is made and its result explicitly logged. The tool call must return: (state, deadline_type, days/calendar_days, effective_date_of_statute, data_source_timestamp). Fail-safe: if tool call fails or result is stale (data source timestamp >30 days old), return "Cannot proceed - current regulatory requirement unavailable; halt deadline setting" rather than defaulting to agent's own reasoning. Root cause mitigation: Prevents parametric-knowledge-only reasoning by enforcing explicit tool-use with result validation.
 
-### Alerts
+2. **Statute amendment monitoring with in-flight claim re-verification triggers**: Maintain automated subscription to state prompt-payment law change feeds. On amendment detected: (a) Identify all claims in that state currently in-flight, (b) Flag them for deadline re-verification, (c) Re-run regulatory-requirements tool call for each affected claim, (d) Alert if internal deadline no longer matches updated statute, (e) Generate escalation report with compliance exposure estimate. Root cause: Catches statute changes that would otherwise silently invalidate prior deadline settings.
+
+3. **Execution-trace validation with tool-call provenance checking**: Implement post-hoc audit: after claim processing, verify execution trace includes mandatory regulatory-tool-call. If trace shows deadline-setting step without tool-call in preceding steps, flag as compliance violation. Auto-review such claims for potential deadline mismatches. Generate audit report: "Claims processed without tool-call provenance: [N]; deadline audit: [X matches statute, Y mismatch]". Root cause: Detects tool-use bypass by tracing execution provenance.
+
+### Detection & Response
+
+1. **Deadline-accuracy audit logging with source validation**: For every claim-processing deadline set, log: (a) jurisdiction (state), (b) deadline type (ack, investigate, pay), (c) regulatory-tool call result (days, effective date, data source timestamp), (d) internal deadline set, (e) match/mismatch vs. tool result, (f) execution trace (was tool call made). Alert when: (1) deadline set without tool call in trace, (2) deadline differs from tool result, (3) tool result stale (data source >30 days old). Target: 100% of deadlines have validated tool-call provenance.
+
+2. **Post-statute-amendment compliance re-audit**: On each state statute amendment, trigger batch re-audit: scan all claims processed in past 6 months in affected state. Re-run regulatory-tool call for each. Categorize: (a) claims compliant under old statute but now violate new statute, (b) claims that remained compliant despite statute change, (c) claims processed after amendment with correct new deadline. Generate exposure report and escalate category (a) for potential remediation (timing adjustment, claimant notification).
+
+### Architecture Patterns
+
+1. **Forced Regulatory-Tool Gate**: Claim-processing workflow step: (claim_state, deadline_type) → FORCED: call regulatory-requirements tool → Retrieve: (required_days, effective_statute_date, data_source_timestamp) → VALIDATE: data_source_timestamp <30 days → SET: internal_deadline = today + required_days → LOG: (tool_call, result, deadline_set, match_status) → PROCEED: only if all validations pass; HALT: otherwise.
+
+2. **Statute Amendment Monitoring & In-Flight Escalation**: Service subscribes to state prompt-payment law changes (state legislature feeds, insurance commissioner notices). On amendment: Trigger batch job → Query: "All claims in state X processed between [old effective date, new effective date]" → For each: re-call regulatory-tool → Compare old vs. new deadline → Flag mismatches → Generate compliance escalation.
+
+3. **Execution-Trace Validator**: Post-processing audit. Input: claim_processing_session_trace → Validates: (1) deadline-setting steps have preceding regulatory-tool-call steps in trace, (2) tool-call result matches stated deadline, (3) tool result timestamp validates freshness. Output: compliance_status (PASS/VIOLATION) with details.
+
+### Key Metrics
+
+| Metric | Target | Alert Threshold | Measurement Method |
+|--------|--------|-----------------|--------------------|
+| Regulatory-Tool-Call Provenance Rate | 100% | <99% | % of deadline-setting steps with documented regulatory-tool-call in execution trace |
+| Deadline-Accuracy Compliance Rate | 100% | <99% | # of processed deadlines matching current regulatory-requirements tool result / total claims |
+| Tool-Call Freshness Rate | 100% | <95% | % of regulatory-tool calls with data source timestamp <30 days old (current statutory data) |
+| Post-Amendment Compliance Rate | 100% | <99% | % of claims processed post-statute-amendment that use updated deadline (vs. pre-amendment deadline) |
+| Statute-Change Detection Latency | <5 days | >14 days | Time from state statute amendment effective date to detection by monitoring system and flag generation |
+
+### Alerts & Escalation
+
 | Alert | Condition | Severity | Response |
 |-------|-----------|----------|----------|
-| Deadline mismatch with live statute | Internal processing deadline does not match current regulatory-requirements tool output for the claim's jurisdiction | P1 | Halt processing clock; recalculate deadline from live tool result |
-| Deadline set without regulatory-tool call | Processing deadline set with no regulatory-requirements tool call in trace | P2 | Flag for compliance audit; reinforce mandatory-call instruction |
-| Post-amendment violation spike | Rate of deadline mismatches rises in the claims following a statute amendment in a given state | P1 | Trigger mandatory re-verification mode for all in-flight claims in that state |
+| Deadline Set Without Tool-Call | Execution trace shows deadline-setting step with no preceding regulatory-requirements tool call | CRITICAL | Audit claim for deadline accuracy; re-run regulatory tool; verify deadline against current statute; escalate if mismatch |
+| Deadline-Statute Mismatch | Internal processing deadline does not match current regulatory-requirements tool output for claim's jurisdiction | CRITICAL | Halt claim processing; re-calculate deadline from tool result; notify claimant if acknowledgment/payment already sent at wrong deadline |
+| Stale Tool-Call Data | Regulatory-requirements tool returns data older than 30 days (statute may have changed); deadline based on stale data | HIGH | Escalate to compliance; attempt to retrieve fresh data from state legislature; re-verify deadline when fresh data available |
 
 ---
 

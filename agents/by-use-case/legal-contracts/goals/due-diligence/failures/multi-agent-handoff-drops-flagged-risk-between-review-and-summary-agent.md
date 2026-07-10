@@ -38,20 +38,46 @@ Deal proceeds without the counterparty-termination risk having been raised to th
 
 ## Mitigation Strategies
 
-1. **Mandatory Structured Risk-Flag Field for Every Material Note**: Require the review agent to populate a structured `risk_flagged` field (with category and severity) for any document where its commentary identifies a material risk, and block the document's review record from being marked complete without it
-2. **Commentary-to-Findings Reconciliation Check**: Run an automated scan of review-stage commentary for risk-relevant keywords and verify a corresponding structured findings-list entry exists before the document proceeds to summary synthesis, flagging any mismatch for human review
-3. **Summary Agent Re-Reads Full Commentary for Flagged-Risk Documents**: For any document with a structured or keyword-detected risk flag, require the summary agent to ingest the full review-stage commentary directly rather than relying solely on the structured findings list, ensuring nuance is not lost in extraction
-4. **Deal-Team Sign-Off Requires Explicit Risk-Flag Acknowledgment**: Before the diligence memo is finalized for deal-team use, require an explicit reconciliation step confirming every risk flag raised across all reviewed documents appears somewhere in the memo, not merely in the underlying review records
+### Prevention
 
-### Metrics
-- Rate of diligence memos missing a risk that the corresponding document's review-stage commentary had explicitly identified
-- Percentage of review-stage outputs with risk-relevant commentary but no corresponding structured findings-list entry
-- Post-closing dispute or claim rate attributable to a risk identified during review but absent from the diligence memo
+1. **Mandatory structured risk-flag interface with schema enforcement**: Redesign review agent's output contract to require: (a) for any document where review-stage commentary identifies a material risk, explicit population of structured fields {risk_category, risk_description, severity_level, recommended_action}, (b) validation gate: block review record from completion unless all risk_category items are populated when commentary mentions risk keywords, (c) schema enforcement via JSON Schema or Protocol Buffer validation, (d) pipeline fails open: if risk detected but structured fields missing, escalate to human reviewer for manual categorization before document proceeds to summary stage. Root cause: Prevents undocumented risks by enforcing structured risk fields as mandatory exit condition.
 
-### Alerts
-- Diligence memo finalized while a reconciliation check finds review-stage commentary with risk-relevant language and no corresponding structured findings entry → P1
-- Reconciliation check finds a commentary-to-findings mismatch rate above baseline for two consecutive diligence engagements → P2
-- A due-diligence pipeline stage is deployed or modified without a mandatory structured risk-flag field in its output contract → P3
+2. **Commentary-to-structured-findings reconciliation with automated gap detection**: Implement post-review audit: (a) parse review-stage free-text commentary for risk-keyword patterns ("risk", "concern", "flag", "material", "undisclosed", "change-of-control", "termination trigger"), (b) cross-check against structured findings list for corresponding risk entries, (c) if risk keyword found with no matching structured field, auto-escalate to reviewer: "Risk keyword detected in commentary but not in structured findings. Please confirm: is this intentional, or should it be added?" (d) log all gap instances in audit trail. Root cause: Detects and forces closure of commentary-to-structured-findings gaps before handoff.
+
+3. **Multi-stage handoff contract validation with invariant checking**: Define handoff contract between review and summary agents: required fields (risk_flags[], material_risks[], change_of_control_flag, undisclosed_liabilities_flag), optional fields (commentary). Before passing review output to summary agent, validate: (a) all mandatory fields populated, (b) semantic invariant: if risk keywords in commentary, at least one structured risk_flag entry exists, (c) count invariant: number of risk_category entries >= count of risk keywords in commentary, (d) fail if invariants violated. Root cause: Prevents handoff when contract violated.
+
+### Detection & Response
+
+1. **Handoff audit logging with commentary-findings reconciliation**: For each document reviewed, log: {document_id, review_date, risk_keywords_found_in_commentary: [list], structured_risk_flags_populated: [list], mismatch_count, reconciliation_status (PASS/FAIL/ESCALATED), reviewer_action_if_gap}. Run daily audit: sample 10% of reviews from past 5 days, auto-scan commentary for risk keywords, verify structured fields match. Alert if mismatch rate >2%. Generate weekly report: "Documents with commentary-findings gaps by category" for trend analysis.
+
+2. **Memo finalization gate with explicit risk-flag reconciliation**: Before diligence memo published to deal team, trigger automated reconciliation: (a) extract all risk_flags from all reviewed documents, (b) scan memo text for mentions of each flagged risk, (c) flag risks not mentioned in memo for explicit deal-team review, (d) require deal team to sign off: "We acknowledge the following risks were identified during review but not included in this memo: [list]". Prevents un-reviewed deal progression.
+
+### Architecture Patterns
+
+1. **Handoff Contract Engine with Schema Enforcement**: Review agent output → JSON Schema validation (enforces risk_flags[], commentary reconciliation) → Semantic invariant checker (if risk keywords in commentary, risk_flag entry required) → Structured findings list → Summary agent input. Validation fails open: unvalidated reviews escalated to human.
+
+2. **Risk-Keyword Detector with Gap Reconciliation**: NLP pipeline detects risk patterns in commentary (trained on legal risk language). On each review: (a) identify risk keywords, (b) cross-check against structured_risk_flags for matching entries, (c) report gaps to reviewer for confirmation/closure before handoff. Maintains risk taxonomy: {keyword_pattern, required_structure_field, severity_if_missed}.
+
+3. **Deal-Memo Reconciliation Gate**: Before memo publication: (a) enumerate all risk_flags from document reviews, (b) full-text search memo for each flagged risk, (c) unmapped risks tagged for deal-team acknowledgment, (d) sign-off gate: memo release blocked until deal team explicitly reviews unmapped risks. Tracks acknowledgment audit trail.
+
+### Key Metrics
+
+| Metric | Target | Alert Threshold | Measurement Method |
+|--------|--------|-----------------|--------------------|
+| Commentary-to-Findings Reconciliation Rate | 100% | <98% | # of reviews with risk keywords having matching structured findings / total reviews with risk keywords |
+| Risk-Flag Capture Completeness | >99% | <97% | # of material risks flagged in structured fields / total material risks identified during review (audited spot-check) |
+| Memo-Risk Inclusion Rate | 100% | <98% | # of structured risk-flags appearing somewhere in final memo / total risk-flags across all reviewed documents |
+| Handoff Contract Validation Pass Rate | 100% | <99% | # of review records passing schema validation on first attempt / total review records |
+| Post-Closure Risk-Miss Rate | 0% | >0.5% | # of post-closing disputes attributable to risks flagged in review but missing from memo / total closed deals |
+
+### Alerts & Escalation
+
+| Alert | Condition | Severity | Response |
+|-------|-----------|----------|----------|
+| Commentary-Findings Mismatch | Risk keywords detected in review commentary with no corresponding structured risk-flag entry | CRITICAL | Block document from proceeding to summary stage; escalate to reviewer for gap closure; re-validate before handoff |
+| Handoff Contract Breach | Review output fails schema validation (missing risk_flags or invariant violation) | CRITICAL | Halt summary stage; return record to reviewer for remediation; re-validate before retry |
+| Unmapped Risks in Memo | Structured risk-flags exist but not mentioned in finalized memo | HIGH | Block memo publication; escalate to deal team for explicit review; require signed acknowledgment before release |
+| High Mismatch Rate Trend | Commentary-findings reconciliation mismatch rate >2% for 3 consecutive days | HIGH | Audit review agent performance; investigate whether risk-keyword patterns require update; retrain if needed |
 
 ---
 

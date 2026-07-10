@@ -310,25 +310,40 @@ instructions: |
   A single "busy" anywhere in their response = override.
 ```
 
----
+### Detection & Response
 
-## Production Signals
+1. **Real-time override-signal detection with priority-based action**: For every caller turn, OverrideHandler.check_for_override() runs first (highest priority, before any other processing). Signals prioritized: IMMEDIATE_SIGNALS (stop, hang up, end call) → SAFETY_SIGNALS (driving, emergency) → TEMPORAL_SIGNALS (busy, meeting) → IMPLICIT_SIGNALS (have to go). On detection, agent: (a) immediately stops normal flow, (b) generates context-appropriate response (close_now vs. ask_callback_only vs. close_politely), (c) transitions to close or callback-only state, (d) logs override: {signal_detected, signal_type, caller_language, response_given, agent_action}.
+
+2. **Post-call override-compliance audit**: After call completes, audit: did agent correctly recognize and respond to override signals? Check: (a) any override signals in transcript? (b) if yes, did agent detect? (c) if detected, did agent immediately stop pitch? (d) if temporal override, did agent ask only callback preference (no other questions)? (e) Calculate override_compliance_score for call. Log failures: {call_id, override_signal_missed: Y/N, trailing_questions_after_override: count}. Alert if: >10% of calls with override signals show compliance failure.
+
+### Architecture Patterns
+
+1. **Priority-Based Override State Machine**: On every turn, check OverrideHandler BEFORE entering normal flow. IMMEDIATE_SIGNALS trigger "close_now" state. SAFETY_SIGNALS trigger "close_now" state with urgency. TEMPORAL_SIGNALS trigger "ask_callback_only" state. IMPLICIT_SIGNALS trigger "close_politely" state. Normal flow only executes if no override detected.
+
+2. **Override-Signal Detector with Language-Specific Patterns**: Maintains lists of signals in multiple languages (English, Hindi, Hinglish). NLP-based pattern matching (not just string matching) recognizes synonyms and variations. E.g., "I'm really busy" or "totally swamped" should match "busy" signal.
+
+3. **Callback-Preference Capture (Temporal Override Only)**: For temporal overrides ("busy", "meeting", "call later"), agent transitions to "ask_callback_only" state. Single question: "Evening or weekend better for a callback?" Captures preference. No other questions or pitch elements.
 
 ### Key Metrics
-| Metric | Alert Threshold |
-|--------|-----------------|
-| `override.detection.rate` | < 90% |
-| `override.first_response` | < 85% |
-| `override.clean_exit` | < 80% |
-| `override.repeat_needed` | > 10% |
 
-### Alerts
-| Alert | Condition | Severity |
-|-------|-----------|----------|
-| Override Ignored | detection < 85% | P1 |
-| Safety Signal Missed | Any safety ignore | P0 |
-| Repeat Override High | > 15% | P2 |
-| Trailing Questions | clean_exit < 75% | P2 |
+| Metric | Target | Alert Threshold | Measurement Method |
+|--------|--------|-----------------|--------------------|
+| Override Signal Detection Rate | >99% | <90% | # of override signals in call detected by agent / total override signals in call transcript (audited manual check) |
+| Immediate-Signal Response Time | <2 sec | >5 sec | Time from signal spoken to agent stops pitch and responds |
+| Clean Exit Rate (No Trailing Questions) | 100% | <85% | # of override calls with no questions asked after override / total override calls |
+| Temporal-Override Callback-Only Compliance | 100% | <95% | # of temporal overrides where agent asked only callback preference / total temporal overrides |
+| Safety-Signal Missed Rate | 0% | >0% | # of calls with safety signals (driving, emergency) that agent failed to detect / total safety-signal calls |
+| Override Repeat Rate | <5% | >10% | # of calls where caller had to repeat override signal >1 time / total override calls |
+
+### Alerts & Escalation
+
+| Alert | Condition | Severity | Response |
+|-------|-----------|----------|----------|
+| Immediate-Signal Ignored | Agent continues pitch after caller says "stop", "hang up", "end call" | CRITICAL | Immediate call termination; escalate to agent review; may indicate agent malfunction |
+| Safety-Signal Missed | Agent continues after caller indicates driving, emergency, or safety concern | CRITICAL | Immediate call termination; escalate to safety review; may indicate agent danger |
+| Trailing Questions After Override | Agent asks questions after detecting override (e.g., "Got it! Quick question though—") | HIGH | Flag call for compliance violation; escalate to training; may impact caller satisfaction |
+| Temporal Override, No Callback Captured | Caller signals "call me later" or "not now" but agent doesn't ask callback preference | MEDIUM | Flag call as incomplete; may attempt callback without knowing caller preference |
+| Override Signal Not Detected | Agent continues normally despite override signal in transcript | HIGH | Audit signal-detection patterns; may indicate NLP model degradation; may require model retraining |
 
 ---
 

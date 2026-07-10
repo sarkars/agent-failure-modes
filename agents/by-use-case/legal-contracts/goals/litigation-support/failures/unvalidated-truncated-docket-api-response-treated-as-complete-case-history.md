@@ -37,22 +37,47 @@ Re-running the docket query while following the continuation token through all p
 
 ## Mitigation Strategies
 
-1. **Mandatory Completeness Check Before Use**: Require the agent to check every paginated or length-capped tool response for a continuation token, `has_more` flag, or total-count field, and to follow pagination to exhaustion (or explicitly flag the result as partial) before using the result in any summary, citation, or drafting decision
-2. **Hard Stop on Unconfirmed Completeness**: Block any downstream legal conclusion ("no prior motion exists," "docket reflects X") that is not explicitly tagged as derived from a confirmed-complete record
-3. **Total-Count Reconciliation**: Require the agent to compare the number of entries actually retrieved against any total-count field in the API response and treat a mismatch as a hard stop requiring further pagination, not a result to summarize as-is
-4. **Confirmed-Complete Labeling in Output**: Require any docket-derived determination presented to an attorney to state explicitly whether it rests on a confirmed-complete docket pull or a partial one, so reviewers can immediately judge reliability
+### Prevention
 
-### Metrics
-- Rate of docket/document API calls where the agent's summary was built from a response containing an unaddressed pagination or completeness indicator
-- Number of legal conclusions later contradicted by docket entries that existed outside the originally retrieved page
-- Percentage of docket pulls that included an explicit completeness confirmation before being used in drafting
+1. **Mandatory pagination-exhaustion protocol with completeness verification gates**: On every docket/document API call: (a) check response for pagination indicators (continuation_token, has_more, next_page_url, page_count, total_count), (b) if any indicator present, implement pagination loop: keep following continuation tokens until has_more=false or no next_token exists, (c) after all pages retrieved, reconcile: retrieved_count vs. total_count (if both present, verify they match; if mismatch, flag as INCOMPLETE and require human review), (d) output result only after completeness confirmed, with metadata tag {completeness: COMPLETE, total_entries_retrieved: X, pages_queried: Y}, (e) if pagination fails or max-retry limit hit, output result as INCOMPLETE and block any legal conclusion from relying on it. Root cause: Ensures agent cannot mistake a partial result for complete by enforcing exhaustive pagination.
 
-### Alerts
+2. **Hard-stop gate on legal conclusions from unconfirmed-complete results**: Implement conclusion-blocking rule: any statement the agent attempts to make about "no prior X exists", "docket does not reflect Y", "case history contains Z" must reference the completeness tag from the docket pull. If completeness != COMPLETE, block the statement with escalation message: "Cannot make definitive docket-based conclusions from partial result. Please confirm complete docket pull or note in output: 'based on partial docket retrieval, may be incomplete.'" Root cause: Prevents unqualified legal claims from partial data.
+
+3. **Total-count reconciliation with entry-level validation**: For each docket pull, log: {query_params, pages_retrieved, total_count_from_api, actual_entries_retrieved, reconciliation_status (MATCH|MISMATCH)}. If mismatch: (a) flag for human review, (b) require secondary docket-API call using different pagination mechanism or manual confirmation, (c) only proceed with MATCH status. For high-volume cases (>100 entries), validate by category: ensure all categories of filings (motions, decisions, briefs) are represented across pages (not concentrated in first page), spot-check 10% of entries across first/middle/last pages for consistent data quality. Root cause: Catches systematic truncation or API errors before legal reliance.
+
+### Detection & Response
+
+1. **API-response audit logging with completeness tracking**: For each docket/document API call, log: {call_id, case_id, query_type, api_response_status, pagination_indicator_present (Y/N), continuation_token_present (Y/N), total_count_field_present (Y/N), total_count_value, pages_retrieved, entries_retrieved, completeness_confirmed (Y/N), completeness_tag_applied (Y/N), downstream_conclusion_attempted (Y/N)}. Daily audit: sample 20% of calls, verify: (a) if pagination_indicator_present=true, then pages_retrieved > 1 (or documented reason why single page was sufficient), (b) if total_count_field present, then entries_retrieved == total_count, (c) if conclusion_attempted, then completeness_confirmed=true. Alert if: >5% of sampled calls have unconfirmed completeness, or >10% have pagination indicators but only 1 page retrieved.
+
+2. **Docket-based-conclusion audit with contradiction detection**: Track all legal conclusions derived from docket pulls. When new docket entries become available or when opposing counsel cites entries the agent missed, flag as contradiction. Trigger investigation: (a) was the original docket pull marked COMPLETE? (b) if yes but entries exist outside original pull, investigate API failure or timing issue, (c) if original was INCOMPLETE, verify original output carried appropriate caveat. Maintain trend dashboard: "Docket-based contradictions by case type, date range" to identify patterns.
+
+### Architecture Patterns
+
+1. **Pagination-Exhaustion Engine with Completeness Verification**: Docket API query → Collect first response → Check pagination indicators → If pagination present, loop pagination_handler: fetch next page, append to results, repeat until has_more=false → After loop, verify total_count reconciliation → Output result with completeness_tag. If API fails mid-pagination or max retries hit, output INCOMPLETE status + already-retrieved data.
+
+2. **Conclusion Blocker with Completeness Gate**: When agent attempts to formulate statement about docket ("no motion exists", "docket shows"), intercept and check completeness_tag from underlying docket_pull. If INCOMPLETE, generate advisory message inserted into output: "[Note: Based on partial docket retrieval (X of Y total entries retrieved). Full docket pull may reveal additional entries.]" If user continues with unqualified claim despite advisory, escalate to attorney reviewer.
+
+3. **API-Response Validator with Heuristic Reconciliation**: Validates API responses for completeness signals. Maintains registry of known API pagination behaviors (PACER court docket, Westlaw API, etc.) and expected response shapes. When response received, runs reconciliation: page_count field, total_count field, continuation_token presence, entry count consistency. Flags anomalies (e.g., single page but total_count=200) for investigation.
+
+### Key Metrics
+
+| Metric | Target | Alert Threshold | Measurement Method |
+|--------|--------|-----------------|--------------------|
+| Pagination-Exhaustion Compliance | 100% | <99% | # of paginated API responses where all pages were retrieved / total responses with pagination indicators present |
+| Total-Count Reconciliation Pass Rate | 100% | <99% | # of docket pulls where entries_retrieved == total_count (or explained mismatch) / total pulls with total_count field |
+| Completeness Confirmation Rate | 100% | <99% | # of docket pulls marked COMPLETE (all pages exhausted, count reconciled) / total docket pulls used in legal conclusions |
+| Unconfirmed-Conclusion Blocking Rate | 100% | <95% | # of incomplete-docket-based conclusions blocked from output / total conclusions attempted on unconfirmed-complete results |
+| Docket-Based-Conclusion Contradiction Rate | 0% | >0.5% | # of legal conclusions contradicted by subsequently discovered docket entries / total docket-based conclusions made (audited via opposing counsel citations, human attorney review) |
+
+### Alerts & Escalation
+
 | Alert | Condition | Severity | Response |
 |-------|-----------|----------|----------|
-| Unaddressed pagination indicator | Tool response contains a continuation token or has_more flag with no evidence of follow-up pagination before use | P1 | Block downstream drafting reliance on the result; re-query to completion |
-| Total-count mismatch | Retrieved entry count does not match the response's total-count field | P1 | Treat result as incomplete; re-query before any legal conclusion is drawn |
-| Conclusion drawn from unconfirmed-complete record | Drafting or summary output lacks an explicit completeness confirmation tag | P2 | Flag for attorney review before filing or sending |
+| Unaddressed Pagination Indicator | API response contains continuation_token or has_more=true but agent attempts to use result without completing pagination | CRITICAL | Block downstream conclusion; require agent to complete pagination loop and reconcile total_count; re-query and re-process |
+| Total-Count Mismatch | Retrieved entries do not match API's total_count field | CRITICAL | Mark result as INCOMPLETE; block any legal conclusion from this docket pull; require manual verification or secondary API call |
+| Conclusion on Unconfirmed-Complete Docket | Agent outputs "no prior motion exists" or similar statement without completeness_tag=COMPLETE from underlying docket pull | HIGH | Escalate to attorney; require advisory note: "Based on partial docket; full history may contain additional entries"; may require redraft after complete docket pull |
+| Pagination Loop Timeout/Failure | Agent exceeds max_retries while attempting to follow continuation tokens | HIGH | Output result as INCOMPLETE; surface error message to attorney; recommend manual docket verification before reliance |
+| Post-Conclusion Docket Contradiction | Subsequent docket entry discovered that contradicts prior agent conclusion ("no prior motion on X exists") | CRITICAL | Audit all conclusions from that docket pull; investigate whether original pull was incomplete or API changed; assess whether conclusion-reliant work products (briefs, motions) require amendment |
 
 ---
 

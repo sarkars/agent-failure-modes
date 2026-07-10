@@ -346,25 +346,40 @@ instructions: |
   - Any commitment about future actions
 ```
 
----
+### Detection & Response
 
-## Production Signals
+1. **Real-time scope-check auditing with violation flagging**: For every agent response, log: {turn_id, caller_question, agent_response, scope_check_result (in_scope|out_of_scope), deflection_used (Y/N), violation_detected (Y/N), violation_type (fabrication|unauthorized_commitment|partial_false|none)}. If violation_detected, auto-flag for human review. Run real-time alert: if >1 violation detected in same call, escalate to supervisor for immediate call intervention or post-call transcript review.
+
+2. **Deferral-effectiveness audit with scope-boundary enforcement**: Track deflection success: when agent defers out-of-scope question using approved deflection template, does caller accept redirect or press for more details? If caller presses >2 times on same topic, flag call for manual intervention (human takeover or refined deflection training). Monitor which topics trigger most deferral resistance; use data to improve deflection phrasing or investigate whether scope definition itself is too restrictive.
+
+### Architecture Patterns
+
+1. **Scope-First Response Generation with Violation Detection**: Query → ScopeManager.is_in_scope() → If in_scope, generate response from APPROVED_KNOWLEDGE → Validate response against NEVER_SAY phrases and commitment_patterns → If violations found, escalate or return generic deflection. If out_of_scope, generate deflection from DEFLECTION_TEMPLATE. Never return un-validated response.
+
+2. **Forbidden-Phrase & Commitment-Pattern Blocker**: Maintains NEVER_SAY phrase list and commitment_pattern regex library. Post-generation, scans response for: (a) forbidden phrases (e.g., "you don't need to", "team will call"), (b) unauthorized commitments (e.g., "within 2 days", "someone will follow up"). Any match blocks response and escalates for revision or deflection.
+
+3. **Deferral-Template Library with Topic Mapping**: Maintains {topic: deflection_phrase} mapping. When out-of-scope question detected, looks up appropriate deflection from library (e.g., "selection" → "The playbook covers the selection process—can I share it?"). If no mapping exists, uses generic fallback ("The playbook explains that—want me to share it?").
 
 ### Key Metrics
-| Metric | Alert Threshold |
-|--------|-----------------|
-| `scope.violation.rate` | > 5% |
-| `scope.fabrication.detected` | > 0% |
-| `scope.commitment.unauthorized` | > 0% |
-| `scope.deferral.rate` | < 80% |
 
-### Alerts
-| Alert | Condition | Severity |
-|-------|-----------|----------|
-| Fabrication Detected | Any occurrence | P1 |
-| Unauthorized Commitment | Any occurrence | P1 |
-| Low Deferral Rate | deferral < 70% | P2 |
-| Scope Violation Spike | violations > 10% | P2 |
+| Metric | Target | Alert Threshold | Measurement Method |
+|--------|--------|-----------------|--------------------|
+| Scope Adherence Rate | >99% | <95% | # of responses within approved knowledge scope / total responses |
+| Fabrication Detection Rate | 0% | >0% | # of fabricated/invented details detected by post-generation validator / total responses |
+| Unauthorized Commitment Rate | 0% | >0% | # of commitments outside agent authority detected / total responses |
+| Correct Deferral Rate | >95% | <90% | # of out-of-scope questions deflected to playbook/human | total out-of-scope questions |
+| Deferral Acceptance Rate | >80% | <70% | # of callers accepting deflection without further pressing / total deflection attempts |
+| Scope-Violation Call Rate | <2% | >5% | # of calls with any detected scope violation / total calls |
+
+### Alerts & Escalation
+
+| Alert | Condition | Severity | Response |
+|-------|-----------|----------|----------|
+| Fabricated Detail Detected | Agent provides specific information not in APPROVED_KNOWLEDGE (e.g., "selection criteria", "timeline") | CRITICAL | Flag response; block transmission; log for model review; may escalate to caller for correction |
+| Unauthorized Commitment | Agent promises future action (e.g., "team will follow up", "you'll hear back in 2 days") | CRITICAL | Block response; flag as contract/expectation violation risk; escalate to supervisor; may require callback to correct caller expectation |
+| Forbidden Phrase Used | Response contains NEVER_SAY phrase (e.g., "no mandatory", "very flexible") | HIGH | Flag response; require manual approval or alternative phrasing before sending; escalate if phrase used >2 times in session |
+| Low Deferral Acceptance | Caller presses for answer >2 times after deflection attempt on same topic | MEDIUM | Investigate whether scope definition is too narrow or deflection phrasing ineffective; may offer refined deflection or escalate to human agent |
+| Scope Violation in Call | Any scope violation detected during call | HIGH | Flag call for post-call review; escalate to compliance for pattern analysis; may require outbound call to correct misinformation if violation was critical |
 
 ---
 

@@ -41,22 +41,46 @@ Product is already shipped to customers with the unlicensed sublicense scope; re
 
 ## Mitigation Strategies
 
-1. **Mandatory Verbatim-Quote-and-Diff Gate**: Before any clearance opinion can be filed or released, require the agent to extract the actual clause text verbatim from the source document and run an automated diff between that verbatim text and the opinion's characterization, blocking release on any unresolved discrepancy
-2. **Independent Verification Pass**: Route the opinion through a second, independent re-read of the source document by a separate prompt or reviewer (human or model) that has not seen the original opinion's framing, rather than allowing the same generation pass to both draft and clear itself
-3. **Confidence-Scope Labeling**: Require the opinion to explicitly label which scope claims are direct quotes (with page/section reference) versus the agent's own characterization or inference, so reviewers can immediately see which statements have not been independently checked
-4. **Hold Autonomous Filing for High-Stakes Clearances**: For clearance opinions that unblock shipping or public release, require a human sign-off step after the verification gate rather than allowing the agent to file the opinion as final and actionable on its own
+### Prevention
 
-### Metrics
-- Rate of filed clearance opinions where the quoted clause text does not exactly match the source document on independent re-read
-- Mean time between opinion filing and detection of a scope discrepancy (internal verification vs. external/licensor-flagged)
-- Percentage of clearance opinions that included a verbatim-quote-and-diff check before filing
+1. **Mandatory two-phase verification: generation + independent re-check**: Restructure clearance workflow: (a) Phase 1 (Generation): Agent drafts opinion with clause characterizations and paraphrases, (b) Phase 2 (Verification): Before filing, separate verification pass (human or independent model prompt) re-reads source document WITHOUT seeing Phase 1 opinion, (c) Verification pass extracts verbatim clause text and generates independent characterization, (d) Auto-diff: compare Phase 1 characterization against verbatim source text, flag any drift, (e) If drift detected, block filing and escalate to human legal review. Root cause: Separates draft from verification so mischaracterizations are caught before release.
 
-### Alerts
+2. **Verbatim-quote extraction and inline-diff enforcement**: Within opinion text, enforce structure: for any claim about a license right, require inline citation format: "{Claim} [Source: {Section}, Clause: {quoted verbatim text from source}]". On filing, automated extraction: (a) parse all claims and their quoted source texts, (b) cross-check each quoted text against actual source document, (c) if any quote does not appear verbatim in source (e.g., quote is paraphrase or inaccurate), highlight as "UNVERIFIED CLAIM" and flag for correction, (d) only allow filing if all claims are verified or explicitly labeled "Unverified - requires manual review." Root cause: Prevents paraphrases from masquerading as direct quotes.
+
+3. **Confidence-scoring and claim-grading with evidence tracing**: Opinion structured with three claim categories: (a) Verified-Direct-Quote: clause text matches source verbatim, confidence 100%, (b) Characterized-From-Source: characterization of clause but not verbatim, requires verification before use, confidence 50-90%, (c) Inferred-or-Extrapolated: claim not directly stated in source, requires manual review, confidence <50%. Opinion output shows: "{Claim} [Grade: Verified-Direct-Quote / Characterized / Inferred] [Confidence: X%]". High-stakes clearances require all claims be Verified-Direct-Quote grade; Characterized/Inferred claims require human sign-off before filing.
+
+### Detection & Response
+
+1. **Verification gate with verbatim-diff audit logging**: For each clearance opinion about to be filed, log: {opinion_id, source_doc_id, claims_count, verified_direct_quote_count, characterized_count, inferred_count, verification_gate_pass (Y/N), verification_timestamp, verified_by (human/model)}. Run daily audit: sample 20% of filed opinions from past 24h, re-read source documents, verify all Verified-Direct-Quote claims actually appear verbatim in source. Alert if: >5% have quote mismatches, or >10% filed without verification gate.
+
+2. **Post-filing source-verification audit with downstream usage tracking**: On discovery of a characterization-mismatch post-filing, trigger: (a) audit trail: when did teams rely on this opinion? What actions taken in reliance? (b) downstream impact assessment: is product already shipped, distributed, licensed? (c) remediation: if impact minimal, correct opinion + notify teams; if impact material, escalate to legal for licensor notification + remedial licensing. Log all instances in trend-analysis dashboard.
+
+### Architecture Patterns
+
+1. **Two-Phase Verification Engine**: Phase 1 (Generation) → Opinion draft with characterizations. Phase 2 (Verification) → Independent prompt re-reads source with instruction "extract verbatim clause text, provide independent characterization without seeing prior opinion". Diff engine auto-compares Phase 1 vs. Phase 2, flags discrepancies. Verification gate: no filing unless diff passes or human approves override.
+
+2. **Verbatim-Quote Extraction & Enforcement**: Opinion generation enforces inline citation format. On extraction, verify every quoted text against source document via string matching. Build quote index: {source_section, quote_text, claim_number}. Diff report: shows which quotes verified verbatim vs. unverified.
+
+3. **Claim-Grading & Evidence Tracing**: Opinion structured with claim-grade metadata {claim_grade: verified-direct-quote|characterized|inferred, confidence_score, source_section, evidence_span (text range from source)}. High-stakes clearances require evidence_span for all claims, enabling human auditor to immediately locate and re-read source evidence.
+
+### Key Metrics
+
+| Metric | Target | Alert Threshold | Measurement Method |
+|--------|--------|-----------------|--------------------|
+| Verbatim-Quote Verification Rate | 100% | <99% | # of quoted clauses matching source document verbatim on re-read / total quoted clauses in filed opinions |
+| Verified-Direct-Quote Percentage | >95% | <90% | # of claims graded Verified-Direct-Quote / total claims in high-stakes clearance opinions |
+| Characterization-Mismatch Detection Rate | >99% | <95% | # of characterization mismatches caught by verification gate before filing / total characterizations in opinions |
+| Opinion-File Verification-Gate Pass Rate | 100% | <99% | # of opinions passing verification gate on first attempt / total opinions filed |
+| Post-Filing Discrepancy Rate | 0% | >0.5% | # of filed opinions later found to have verbatim-quote or characterization mismatches / total filed opinions |
+
+### Alerts & Escalation
+
 | Alert | Condition | Severity | Response |
 |-------|-----------|----------|----------|
-| Verbatim diff mismatch | Verbatim-quote-and-diff gate finds opinion's characterization does not match source clause text | P1 | Block filing; route to independent legal review before any downstream team acts |
-| Opinion filed without verification gate | Clearance opinion released to tracker with no record of a verbatim-quote-and-diff check | P2 | Retroactively verify; flag any downstream usage already taken in reliance on it |
-| Recurring drift on same license type | Multiple verified discrepancies traced to the same source-license template or clause type | P3 | Audit clearance prompts/templates for that license type |
+| Verbatim-Quote Mismatch | Quoted clause text does not appear verbatim in source document on re-read | CRITICAL | Block filing; route to independent legal review; correct quote or revise characterization; re-file only after verification |
+| Characterization Drift Detected | Verification gate finds opinion's characterization of clause differs materially from independent re-read | CRITICAL | Block filing; escalate to IP counsel for source clause interpretation; re-file with verified characterization |
+| Unverified Claim Detected | Opinion filed with claim graded Inferred or Characterized without underlying direct quote | HIGH | Retroactively verify; if mismatch found, notify downstream teams of potential reliance error; may require usage remediation |
+| High Post-Filing Discrepancy Rate | >1% of filed opinions later found to have quote/characterization mismatches in monthly audit | HIGH | Audit clearance prompts/templates; investigate verification gate effectiveness; may require human sign-off on all opinions until remediation confirmed |
 
 ---
 

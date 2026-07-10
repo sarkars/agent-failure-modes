@@ -30,19 +30,45 @@ Impact: Drug accumulation risk, bleeding complications, preventable with eGFR-ba
 
 ## Mitigation Strategies
 
-1. **Mandatory Renal/Hepatic Function Lookup**: Require the agent to retrieve current eGFR/creatinine clearance and liver function tests before finalizing any dose for renally- or hepatically-cleared drugs
-2. **Drug-Specific Adjustment Tables**: Encode structured, drug-specific renal/hepatic dose-adjustment tables rather than applying a generic percentage reduction
-3. **Alternative-Agent Suggestion**: When a drug has no safe adjustment for the patient's organ function, surface alternative agents with more favorable clearance profiles
-4. **Dose-Adjustment Audit Trail**: Log which renal/hepatic values were used and which adjustment table was applied, for clinical review
+### Prevention
 
-### Metrics
-- % of renally/hepatically-cleared drug recommendations with documented organ-function check
-- Inappropriate-dose rate stratified by renal/hepatic function category
-- Time from new lab result (eGFR/LFT change) to re-evaluation of existing dosing
+1. **Mandatory organ-function gating before dose recommendation**: Implement a required pre-recommendation gate that triggers only after: (a) Drug's clearance profile is identified (renal % vs. hepatic %), (b) Patient's current lab values retrieved (eGFR from last 30 days, AST/ALT/bilirubin from last 30 days), (c) Drug-specific adjustment table selected from indexed database. Fail-safe: if organ-function data missing, return "cannot dose - missing renal/hepatic function labs" instead of defaulting to standard adult dose. Root cause mitigation: Prevents reliance on training-data-learned standard dosing by enforcing explicit lab-based override logic.
 
-### Alerts
-- Renally-cleared drug recommended with no eGFR check in chart → P1
-- Recommended dose exceeds adjustment-table maximum for documented renal/hepatic function → P1
+2. **Typed drug-specific adjustment tables with non-linear mappings**: Build centralized dose-adjustment library indexed by: drug name, clearance route (renal/hepatic), and parametric dosing rules. For renal: map eGFR ranges to percent-of-standard-dose (e.g., "eGFR 30-50 → 75% dose; eGFR <30 → 50% dose or contraindicated"). For hepatic: map Child-Pugh class to dose adjustments. Use pharmaceutical compendia (Micromedex, UpToDate, drug-package-inserts) as source of truth. Root cause: Avoids generic percentage reductions by encoding nonlinear, drug-specific rules.
+
+3. **Alternative-agent recommendation with clearance hierarchy**: When recommended drug cannot be safely dosed for patient's organ function, surface tier-1 alternatives with more favorable clearance profiles (e.g., "Patient eGFR 20: contraindicated for Ciprofloxacin; suggest Levofloxacin (50% renally cleared) or Moxifloxacin (hepatic metabolism)"). Root cause: Prevents "no safe dose exists" dead-ends by proactively suggesting alternatives.
+
+### Detection & Response
+
+1. **Organ-function check instrumentation**: For every drug recommendation with expected renal/hepatic clearance, log: (a) drug name, (b) patient's eGFR and LFTs, (c) which adjustment table was applied, (d) recommended dose, (e) rationale. Alert when adjustment tables not applied despite clearance pathway indicating need. Target: 100% of renally/hepatically-cleared drugs show documented organ-function check in audit logs.
+
+2. **Lab-update-triggered dose re-evaluation**: When new lab results (eGFR decline, LFT elevation) recorded in chart, automatically flag existing prescriptions that may need dose adjustment. Run batch job daily to identify patients with eGFR change >10 points in past 7 days; flag for pharmacist review. Target: Re-evaluation completed within 24 hours of significant lab change.
+
+### Architecture Patterns
+
+1. **Organ-Function Clearance Classification Engine**: Indexed database of drugs with metadata: {drug_name, routes_of_elimination: [{route: "renal", percent: 80}, {route: "hepatic", percent: 20}], adjustment_tables: {renal: [...], hepatic: [...]}}. Before dosing, classification engine returns required organ-function parameters and corresponding adjustment table.
+
+2. **Parametric Dose Adjustment Service**: Input: (drug_name, patient_eGFR, patient_child_pugh_class) → Output: (adjusted_dose, rationale, confidence_level). Service queried synchronously before recommendation finalized. Backed by Micromedex and drug-package-insert data, updated quarterly.
+
+3. **Lab-Change Alert Service**: Batch job monitoring lab results table. On eGFR change >10 or LFT elevation >20% of ULN, flags all active prescriptions for drugs requiring dose adjustment in this new organ-function state. Creates task for clinical pharmacist.
+
+### Key Metrics
+
+| Metric | Target | Alert Threshold | Measurement Method |
+|--------|--------|-----------------|--------------------|
+| Organ-Function Check Completeness | 100% | <99% | % of renally/hepatically-cleared drug recommendations with documented organ-function lookup in audit log |
+| Dose Appropriateness Rate | >99% | <98% | # of doses matching adjustment-table recommendation / total doses for renally/hepatically-cleared drugs |
+| eGFR-Adjusted Dosing Accuracy | >98% | <95% | # of doses matching eGFR-specific table entries / total renal-cleared drug recommendations |
+| Child-Pugh-Adjusted Dosing Accuracy | >98% | <95% | # of doses matching Child-Pugh class / total hepatically-cleared drugs in patients with cirrhosis/elevated LFTs |
+| Lab-Change Response Time | <24 hours | >48 hours | Time from significant lab change to pharmacist review of affected prescriptions |
+
+### Alerts & Escalation
+
+| Alert | Condition | Severity | Response |
+|-------|-----------|----------|----------|
+| Renally-Cleared Drug Without eGFR Check | Drug recommended with renal clearance >50% but no eGFR lookup documented in audit trail | CRITICAL | Block recommendation; require eGFR lookup and dose adjustment before prescriber sees recommendation |
+| Dose Exceeds Adjustment Table Maximum | Recommended dose exceeds maximum allowed for patient's documented organ function (eGFR, Child-Pugh) | CRITICAL | Alert to prescriber; require pharmacist override with explicit justification; escalate if override given |
+| Lab Change Not Triggering Re-evaluation | eGFR declined >10 points or LFT elevated >20% in past 7 days; existing prescriptions not flagged for re-evaluation | HIGH | Auto-generate pharmacist task; review all renal/hepatic-cleared drugs for potential dose adjustment |
 
 ---
 

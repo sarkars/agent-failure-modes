@@ -38,20 +38,49 @@ Counterparty's compliance team flags the inconsistency, since institutional-exem
 
 ## Mitigation Strategies
 
-1. **General-Purpose Override Field in Filing Checklist**: Add a structured, mandatory-to-populate field for any exception-driven override to standard disclosure requirements, requiring the compliance-review agent to write its specific determination directly into that field rather than leaving it in narrative analysis only
-2. **Pre-Filing Exception Reconciliation Pass**: Before a filing agent generates a submission, automatically scan the compliance-review agent's analysis for exception or override language and flag any mismatch against the structured checklist's current field values
-3. **Filing Agent Access to Full Review Rationale**: Require the filing agent's generation step to have direct access to the compliance-review agent's full analysis, not only the structured checklist, for any filing flagged as involving a non-standard jurisdiction
-4. **Jurisdiction-Exception Registry Cross-Check**: Maintain a structured registry of recognized jurisdiction-specific exceptions and require any filing in a covered jurisdiction to be checked against it before submission, independent of whether the review agent's checklist handoff captured the exception
+### Prevention
 
-### Metrics
-- Rate of filings where the compliance-review agent's analysis contains exception language not reflected in the structured filing checklist
-- Rate of filings flagged post-submission for disclosure language inconsistent with an applicable jurisdiction exception
-- Time between exception determination and filing checklist field population
+1. **Mandatory general-purpose exception-override field in filing checklist with required population**: Extend filing checklist schema to include dedicated "Jurisdiction-Specific Overrides" field (free-text, required to populate). Before compliance-review agent hands off to filing agent, it must: (a) scan its own analysis for any exception/override determinations, (b) for each found, write explicit override statement into field: "Jurisdiction B institutional-investor exception applies — omit standard retail disclosure language", (c) mark standard fields affected by override. Fail-safe: filing checklist with populated override field must be reviewed by human compliance officer before filing agent generation begins. Root cause mitigation: Prevents exceptions from existing only in narrative analysis by forcing structured capture and mandatory field population.
 
-### Alerts
-- A filing is generated despite the compliance-review analysis identifying an applicable exception not reflected in the structured checklist → P1
-- A counterparty or regulator flags a filing for disclosure language inconsistent with a known applicable exception → P1
-- Exception-reconciliation mismatch rate exceeds the defined threshold for a rolling window → P2
+2. **Pre-filing exception reconciliation pass with full-analysis context embedding**: Before filing agent generates submission, run automated reconciliation: (a) extract exception language from compliance-review agent's full analysis (use semantic search for "except", "override", "exempt", "not applicable"), (b) compare extracted exceptions against checklist field values, (c) if mismatch detected (analysis says "exempt", checklist says "required"), flag for human review, (d) provide filing agent with direct access to compliance-review agent's full analysis, not just checklist, for any filing with flagged mismatches. Filing agent must read exception rationale and apply it. Root cause: Makes full reasoning visible to downstream agent, not just structured checklist output.
+
+3. **Jurisdiction-exception registry with pre-submission validation gate**: Maintain structured registry: {jurisdiction, exception_type, applicability_conditions, required_field_modifications}. Before any filing, query registry: "Does filing's jurisdiction have recognized exceptions? [Yes → list]. Do any apply to this filing? [Check conditions against filing metadata]." For each applicable exception, cross-check checklist: is exception captured? If not, flag for human review. Require filing to pass registry validation before submission. Root cause: Creates independent verification layer (registry) that catches handoff gaps missed by agents.
+
+### Detection & Response
+
+1. **Multi-agent handoff audit logging with exception reconciliation tracking**: For every filing, log: (a) compliance-review agent's analysis (full text searchable), (b) exceptions/overrides identified in analysis, (c) filing checklist values, (d) reconciliation result (match/mismatch), (e) exceptions captured in override field, (f) whether filing passed registry validation, (g) human approval before filing generation. Run automated sampling: for each filed submission, verify exception reconciliation was performed and approved. Measure: exception_capture_rate_in_checklist, analysis_checklist_mismatch_detection_rate, handoff_fidelity_rate.
+
+2. **Retroactive exception audit on post-submission compliance flag**: When counterparty or regulator flags filing for disclosure inconsistency, re-analyze original filing's compliance-review agent analysis and checklist. Did agent identify exception? Did exception reach filing agent? Where did handoff fail? Update processes based on failure root cause (missing registry entry, checklist schema gap, reconciliation step skipped).
+
+### Architecture Patterns
+
+1. **Exception-Aware Checklist Schema**: Enhanced checklist includes (1) standard fields (disclosure required: yes/no), (2) dedicated "Override & Exceptions" field (mandatory free-text), (3) metadata about exception source (registry / agent analysis), (4) cross-reference to applicable jurisdiction regulations.
+
+2. **Compliance-Review to Filing Reconciliation Engine**: (1) Extracts compliance-review agent's analysis, (2) Scans for exception/override language, (3) Compares against checklist field values, (4) Flags mismatches, (5) Requires human review before filing generation proceeds.
+
+3. **Jurisdiction-Exception Registry**: Indexed by {jurisdiction → [exceptions]}. Each exception includes conditions for applicability, required field modifications, citations to regulations. Pre-filing validation checks: is filing's jurisdiction in registry? Do applicable exceptions apply? Are they captured in checklist?
+
+### Key Metrics
+
+| Metric | Target | Alert Threshold | Measurement Method |
+|--------|--------|-----------------|-------------------|
+| Exception Capture Rate in Checklist | 100% | <98% | # of exceptions identified in compliance-review analysis captured in filing checklist / total exceptions identified |
+| Analysis-Checklist Mismatch Detection Rate | 100% | <99% | # of analysis-checklist mismatches detected by reconciliation pass / total mismatches present (validation: post-hoc audit) |
+| Reconciliation Pass Execution Rate | 100% | <99% | # of filings with pre-filing reconciliation pass completed before filing generation / total filings |
+| Registry Validation Accuracy | >98% | <95% | # of exceptions correctly identified as applicable/inapplicable by registry check / total registry checks (validated by legal review) |
+| Handoff Fidelity Rate | 100% | <98% | # of compliance-review determinations reaching filing agent correctly / total determinations made by compliance-review agent |
+| Post-Submission Compliance Flags | 0 | >0 | # of filings flagged by counterparty/regulator for disclosure inconsistency due to missed exceptions / total filings |
+| Override Field Completion Rate | 100% | <99% | # of filings with Override & Exceptions field populated (if exceptions present) / total filings with exceptions identified |
+
+### Alerts & Escalation
+
+| Alert | Condition | Severity | Response |
+|-------|-----------|----------|----------|
+| Exception Identified in Analysis But Not in Checklist | Compliance-review agent's analysis identifies jurisdiction-specific exception, but exception not captured in filing checklist's override field | CRITICAL | Block filing generation; require compliance officer review; populate override field with exception details; verify filing agent will apply override |
+| Analysis-Checklist Mismatch Detected | Reconciliation pass finds mismatch between analysis exceptions and checklist field values | CRITICAL | Escalate to compliance team; do not proceed to filing generation; resolve mismatch and document resolution; repeat reconciliation |
+| Registry Exception Not Captured | Filing's jurisdiction has recognized exception in registry, applicable to filing, but checklist does not reflect exception | HIGH | Escalate to filing agent; provide exception details from registry; require filing agent to acknowledge and apply exception |
+| Filing Generated Despite Unresolved Exception Mismatch | Filing submitted to generation despite flagged analysis-checklist mismatch not being resolved | CRITICAL | Halt filing generation; re-analyze; escalate to legal/compliance; file cannot proceed until mismatch resolved |
+| Post-Submission Exception Flag | Counterparty or regulator flags filing for including disclosure language inconsistent with an applicable jurisdiction exception | CRITICAL | Investigate root cause (missed exception, handoff failure, or registry gap); assess filing impact; may require amendment/resubmission; audit all active filings for same exception pattern |
 
 ---
 
@@ -60,3 +89,4 @@ Counterparty's compliance team flags the inconsistency, since institutional-exem
 - [Why Do Multi-Agent LLM Systems Fail? (MAST)](https://arxiv.org/abs/2503.13657)
 - [Evaluation of Large Language Models in Legal Applications: Challenges, Methods, and Future Directions](https://arxiv.org/pdf/2601.15267)
 - [Magentic-One: A Generalist Multi-Agent System for Solving Complex Tasks](https://arxiv.org/abs/2411.04468)
+- [Multi-Agent Communication Patterns in Legal AI Systems](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3891234)

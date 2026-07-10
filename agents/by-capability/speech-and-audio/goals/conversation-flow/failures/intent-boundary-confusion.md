@@ -215,24 +215,38 @@ intents:
     REQUIRES: Temporal qualifier (now, currently, right now)
 ```
 
----
+### Detection & Response
 
-## Production Signals
+1. **Intent-classification audit logging with boundary-accuracy tracking**: For each call, log: {call_id, detected_intent (enum: soft_no|hard_no|interested|interested_but_later|not_qualified), intent_confidence_score (0-1.0), boundary_classification_correct (Y/N), escalation_triggered (Y/N), escalation_type (if yes: soft_to_hard|interested_to_action|unqualified_push), caller_satisfaction_indicator}. Daily audit: sample 10% of calls, manually verify intent classification against actual caller intent. Alert if: intent_accuracy <85%, or soft_to_hard escalation rate >5%, or hard_no misclassification rate >2%.
+
+2. **Escalation-compliance monitoring with temporal-qualifier validation**: Track every escalation: when escalation happened, what temporal qualifier was present (if any). Verify: was temporal qualifier present before escalation? If no temporal qualifier, was escalation still triggered? Alert if agent escalates without temporal qualifier presence (potential over-escalation). Monthly report: "Escalations by intent type", "Over-escalations (missing temporal qualifier)", "Misclassifications (soft_no treated as interested)".
+
+### Architecture Patterns
+
+1. **Intent Classifier with Boundary Enforcement**: On caller response, classifier analyzes: (a) explicit keywords ("stop", "no", "interested"), (b) temporal qualifiers ("right now", "later", "eventually"), (c) intent score and confidence threshold. Maps to intent_enum: soft_no → callback eligible; hard_no → do not contact; interested → pitch; interested_but_later → callback; not_qualified → soft exit. Boundaries enforced: if soft_no detected, NO escalation unless temporal_qualifier present.
+
+2. **Escalation Gate with Temporal-Qualifier Validation**: Before agent escalates from soft_no to hard_no or push, check: temporal_qualifier present? If absent, block escalation. If present, proceed with qualified escalation. All escalations logged with temporal_qualifier reference.
 
 ### Key Metrics
-| Metric | Alert Threshold |
-|--------|-----------------|
-| `intent.confusion.rate` | > 15% |
-| `intent.escalation.over` | > 5% |
-| `intent.boundary.accuracy` | < 85% |
-| `intent.clarification.rate` | > 20% |
 
-### Alerts
-| Alert | Condition | Severity |
-|-------|-----------|----------|
-| Intent Confusion Spike | confusion > 20% | P2 |
-| Over-Escalation High | soft→hard > 10% | P2 |
-| DNC Misclassification | DNC errors > 8% | P1 |
+| Metric | Target | Alert Threshold | Measurement Method |
+|--------|--------|-----------------|--------------------|
+| Intent Classification Accuracy | >95% | <85% | # of correctly classified intents / total intents (audited manual check) |
+| Soft-No to Callback Rate | >80% | <70% | # of soft_no calls that receive callback preference capture / total soft_no calls |
+| Hard-No Respect Rate | 99%+ | <98% | # of hard_no calls where agent terminates without push / total hard_no calls |
+| Over-Escalation Rate | <2% | >5% | # of escalations from soft_no to hard_no without temporal qualifier / total escalations |
+| DNC Misclassification Rate | <1% | >2% | # of hard_no/DNC calls misclassified as interested (audited via post-call complaints) / total hard_no calls |
+| Intent Confidence Threshold Accuracy | >90% | <80% | # of low-confidence classifications correctly escalated for human review / total low-confidence intents |
+
+### Alerts & Escalation
+
+| Alert | Condition | Severity | Response |
+|-------|-----------|----------|----------|
+| Soft-No Misclassified | Caller's soft-no ("not right now") classified as hard-no (DNC) without temporal qualifier present | CRITICAL | Flag call for correction; update DNC classification; may require callback to correct customer expectation |
+| Over-Escalation Detected | Agent escalates from soft_no to hard_no push without temporal qualifier ("right now", "currently") present | HIGH | Flag as boundary violation; escalate to agent coaching; audit similar calls from same agent |
+| Hard-No Disrespected | Agent continues pitching after caller clearly indicated hard-no (DNC intent) | CRITICAL | Flag compliance violation; may impact compliance/legal risk if repeated; escalate to supervisor |
+| Intent Confidence Below Threshold | Classifier confidence on intent <70%; escalate for human review before proceeding | MEDIUM | Route to human agent or escalation team; do not proceed with automated action until verified |
+| Temporal-Qualifier Requirement Missed | Agent should have awaited temporal qualifier before escalating; proceeded without | MEDIUM | Investigate whether temporal-qualifier detection is functioning; may require NLP model update |
 
 ---
 

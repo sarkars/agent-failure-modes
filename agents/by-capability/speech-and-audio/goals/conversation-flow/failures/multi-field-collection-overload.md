@@ -166,12 +166,14 @@ From VAPI Voice Data Collection Research (2026):
 ## Mitigation Strategies
 
 ### Prevention
-1. **Single field per turn**: Always ask one field at a time
-2. **Confirm before proceeding**: Read back each value
-3. **Sequential flow**: Name → Confirm → Phone → Confirm → Email → Confirm
-4. **Graceful re-ask**: Only re-ask missing fields
-5. **Spell-back for names/emails**: Verify letter by letter
-6. **DTMF for numbers**: Allow keypad entry when possible
+
+1. **Enforce single-field-per-turn collection with confirmation gates**: (a) Agent maintains ordered field collection list, (b) For each field, generate one-turn prompt: "What's your [field]?", (c) Await response, (d) Generate confirmation prompt: read-back value with request for yes/no confirmation, (e) On confirmation, proceed to next field; on non-confirmation, re-ask current field only, (f) Never ask multiple fields in single turn. Implement as state machine: each turn represents single field + confirmation cycle, (g) For high-error-rate fields (phone, email), auto-enable spell-back/digit-by-digit confirmation. Root cause: Cognitive overload is prevented by forcing sequential collection rather than multi-field asks.
+
+2. **Adaptive collection flow with early-field optimization**: Reorder field collection based on: (a) call-termination risk (collect high-importance fields early to ensure capture even if caller hangs up), (b) dependency-ordering (collect fields required for subsequent validation before optional fields), (c) error-rate patterns (fields with known high ASR errors or caller-confusion collected with extra confirmation steps), (d) caller-context (some fields easier to provide together by caller, but split into sequential asks with intermediate-step confirmation). Implement learner: track which field sequences yield lowest re-ask rates; continuously optimize ordering. Root cause: Reduces re-asks by collecting in psychologically optimal order.
+
+3. **Cognitive-load-aware field clustering with explicit transitions**: For multi-step address collection (street, city, state, zip), implement chunking: (a) Ask for "full address", (b) If caller provides multi-part answer, parse into components, (c) Confirm each component separately, (d) If caller provides single field, ask for remaining fields one at a time with transition messages ("Got the street. Now the city?"). Never require caller to hold 4 items in memory at once. Root cause: Reduces cognitive overload by staying within ~2-3 item working-memory limit.
+
+### Detection & Response
 
 ### Implementation
 ```python
@@ -362,25 +364,38 @@ instructions: |
   - Ask for anything missed
 ```
 
----
+1. **Real-time collection-turn audit logging with error detection**: For each call, log: {call_id, field_collection_sequence: [{field_name, prompt_text, fields_in_prompt_count, caller_response, parsed_values, re_ask_required (Y/N), confirmation_attempt (Y/N), confirmation_success (Y/N)}], total_turns_for_collection, re_ask_count, total_fields_collected, first_try_success_rate}. Real-time monitoring: if fields_in_prompt_count > 1, immediately flag as "multi-field ask violation" and log. Daily audit: calculate metrics below. Alert if: >10% of calls contain multi-field asks, or re_ask_rate >20% or first_try_success <85%.
 
-## Production Signals
+2. **Field-error-pattern detection and adaptive re-prompt**: After failed collection attempt, analyze failure mode: (a) Did caller misunderstand which field was being asked? (b) Did ASR fail to capture response? (c) Did caller provide wrong format (phone as letters vs. digits)? (d) Adjust re-prompt based on failure mode: if misunderstanding, explicitly narrow scope; if ASR issue, offer DTMF alternative; if format issue, provide format example. Track which re-prompt variations yield highest success rates; continuously tune.
+
+### Architecture Patterns
+
+1. **Sequential Field-Collection State Machine**: Maintains ordered field list. On each turn: (a) current field index, (b) generate prompt for current field only, (c) await response, (d) parse/validate response, (e) if invalid, increment re-ask counter; if re-ask count > 2, offer alternative collection method (DTMF, spell-back), (f) on success, generate confirmation prompt, (g) on confirmation, increment field index and repeat. Never proceeds to next field until current field confirmed.
+
+2. **Multi-Field-Ask Detector with Real-Time Prevention**: NLP analyzer scans agent prompts before transmission. If prompt contains >1 field mention (detected via field-keyword regex or entity extraction), blocks prompt and escalates: "Prompt asks for multiple fields. Please revise to ask for single field only." Prevents multi-field asks from ever reaching caller.
+
+3. **Cognitive-Load-Aware Re-Prompt Engine**: After collection failure, re-prompt selection based on: failure_mode, field_type, caller_characteristics (if known). Maintains per-field re-prompt templates: "I missed that. What's your [field]?" vs. "Let's try again. Your phone number, digits only?" Learns which re-prompts minimize subsequent re-asks.
 
 ### Key Metrics
-| Metric | Alert Threshold |
-|--------|-----------------|
-| `collection.multi_field_asks` | > 10% |
-| `collection.re_ask_rate` | > 20% |
-| `collection.first_try_success` | < 85% |
-| `collection.turns_per_field` | > 1.5 |
 
-### Alerts
-| Alert | Condition | Severity |
-|-------|-----------|----------|
-| Multi-Field Asks | > 20% | P2 |
-| High Re-ask Rate | > 30% | P2 |
-| Low First-Try Success | < 75% | P1 |
-| No Confirmation | < 80% | P2 |
+| Metric | Target | Alert Threshold | Measurement Method |
+|--------|--------|-----------------|--------------------|
+| Multi-Field Asks per Call | 0% | >10% | # of turns asking >1 field / total collection turns |
+| First-Try Collection Success | >92% | <85% | # of fields collected on first attempt without re-ask / total fields attempted |
+| Re-Ask Rate per Field | <8% | >20% | # of fields requiring re-ask / total fields attempted |
+| Mean Turns per Field | <1.1 | >1.5 | (total turns in collection / total fields collected) |
+| Confirmation Success Rate | >95% | <90% | # of confirmed values matching caller's intent / total confirmations attempted |
+| ASR Error Rate (Speech Recognition) | <5% | >10% | # of ASR transcription errors / total turns with speech input |
+
+### Alerts & Escalation
+
+| Alert | Condition | Severity | Response |
+|-------|-----------|----------|----------|
+| Multi-Field Ask Attempted | Prompt generated asking for >1 field in single turn | CRITICAL | Block prompt transmission; escalate to prompt review; require single-field re-prompt before sending |
+| High Re-Ask Rate on Call | Re-ask rate >20% for fields in single call | HIGH | Flag call for analysis; investigate whether specific fields have systemic issues; may offer alternative collection method (DTMF) |
+| Persistent ASR Failures | >3 consecutive ASR misrecognitions on same field in single call | MEDIUM | Offer DTMF/spell-back alternative for that field; escalate to ASR model review if pattern persists |
+| Confirmation Refusal Pattern | Caller repeatedly denies read-back confirmation (>3 times on same field) | MEDIUM | Simplify read-back; offer alternative phrasing or DTMF; escalate if caller frustration evident |
+| Collection Abandonment | Caller hangs up before completing required field collection | HIGH | Log incomplete call with fields collected so far; for returning callers, pre-populate known fields; investigate whether field sequence or cognitive load caused abandonment |
 
 ---
 

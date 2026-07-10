@@ -31,19 +31,45 @@ Impact: Chart documentation does not match what was actually communicated, creat
 
 ## Mitigation Strategies
 
-1. **Transcript-Grounded Generation Only**: Require informed-consent documentation language to be generated strictly from what is verifiably present in the encounter transcript or structured consent form, never from a template default
-2. **Explicit Uncertainty Flagging**: When the transcript does not clearly capture a risks/benefits/alternatives discussion, the agent should flag the gap rather than filling it with boilerplate
-3. **Clinician Review and Attestation**: Require the clinician to explicitly review and attest to AI-drafted consent language before it is finalized in the chart
-4. **Consent-Specific Audit Sampling**: Periodically audit a sample of AI-drafted consent documentation against the source transcript for fidelity
+### Prevention
 
-### Metrics
-- % of AI-drafted consent notes reviewed and attested by clinician before finalization
-- Discrepancy rate between transcript content and drafted consent language (audit sample)
-- Informed-consent-related dispute rate
+1. **Strict transcript-grounding for consent documentation with citation requirements**: Implement constraint that AI-generated informed-consent sections must explicitly cite corresponding transcript segments for each claim about discussion (e.g., "Risks discussed: Bleeding risk mentioned at timestamp 3:45 in encounter transcript"). Reject generation that infers consent discussions without transcript evidence. Auto-flag as "[REVIEW REQUIRED]" any consent language where >20% is interpolated without direct citation. Fail-safe: if no transcript or minimal transcript, generate "Consent obtained per documented process" without detail rather than inferring details. Root cause mitigation: Prevents template-completion bias by enforcing source grounding and citation.
 
-### Alerts
-- Consent language drafted with no corresponding transcript evidence of detailed discussion → P1
-- Clinician finalizes note without review flag cleared → P2
+2. **Mandatory clinician attestation gate before chart finalization**: Require clinician to explicitly review AI-drafted consent sections and answer: "Does this accurately reflect what was discussed in this encounter? [Yes / No / Partially]". If "No" or "Partially", require clinician to edit consent language or flag discrepancies in chart. Draft cannot be finalized without attestation checkbox. Log clinician decision. Root cause: Prevents silent insertion of unverified boilerplate by requiring active human verification.
+
+3. **Structured consent capture form with auto-documentation**: For high-liability procedures, implement structured consent capture: clinician completes form fields ("Risks discussed: Y/N", "Alternatives presented: Y/N", "Patient questions answered: Y/N", "Level of detail: [detailed / moderate / brief]"). AI generates documentation from form fields rather than inferring from transcript. Root cause: Moves from transcript-inference to explicit clinician attestation of discussion content and depth.
+
+### Detection & Response
+
+1. **Transcript-fidelity audit logging**: For every consent documentation auto-generated, log: (a) transcript length (words, duration), (b) detected discussion segments (using NLP for consent keywords: "risks", "benefits", "alternatives"), (c) citation coverage (% of consent claims backed by transcript citations), (d) clinician attestation decision, (e) discrepancies flagged by clinician. Alert when citation coverage <80% or transcript length <500 words but detailed consent language generated.
+
+2. **Consent fidelity auditing**: Monthly sampling of 50-100 AI-drafted consent notes: have independent clinician review each against source transcript and rate fidelity (0-100%, "does documented consent match actual discussion?"). Track fidelity by procedure type and documentation system version. Target: >95% fidelity. Alert on patterns of inflated consent documentation.
+
+### Architecture Patterns
+
+1. **Transcript-Grounded Consent Generator**: Input: (encounter_transcript, procedure_type, structured_consent_form_if_available) → Process: (1) NLP extraction of consent-related discussion segments from transcript, (2) Structured claim generation ("Risks discussed: [extracted segments]"), (3) Citation mapping (each claim tagged with transcript timestamp range), (4) Flagging of unsupported details. Output: (draft_consent_note_with_citations, [REVIEW_FLAGS]) → Clinician attestation gate → Finalized note (with or without clinician edits).
+
+2. **Structured Consent Capture Form**: Procedure-specific form with checkboxes and fields: "Informed consent type: [full / abbreviated / emergency]", "Risks discussed: Y/N [brief description]", "Alternatives presented: Y/N [list]", "Patient understood: Y/N [evidence]". Auto-maps to clinical note template. Used as primary source for consent documentation rather than transcript inference.
+
+3. **Consent Fidelity Audit Service**: Monthly sampling and independent clinician review. Scores fidelity (0-100), flags discrepancies, tracks trends by procedure and AI model version. Results feed back to model improvement and clinician training.
+
+### Key Metrics
+
+| Metric | Target | Alert Threshold | Measurement Method |
+|--------|--------|-----------------|--------------------|
+| Transcript-Citation Coverage | >95% | <85% | % of consent documentation claims with direct transcript citations and timestamps |
+| Clinician Attestation Compliance | 100% | <99% | % of AI-drafted consent notes with documented clinician attestation (Yes/No/Partially) before finalization |
+| Consent Fidelity (Audit Sample) | >95% | <90% | % of sampled consent notes rated as faithful to actual encounter discussion (monthly audit by independent clinician) |
+| Boilerplate Detection Rate | <5% | >10% | % of consent documentation flagged as containing unsupported detail or template language without transcript basis |
+| Consent-Related Disputes | 0 | >0 | # of informed-consent-related patient disputes or complaints related to documentation-encounter discrepancy |
+
+### Alerts & Escalation
+
+| Alert | Condition | Severity | Response |
+|-------|-----------|----------|----------|
+| Transcript-Ungrounded Consent Language | Drafted consent documentation contains detailed discussion claims without corresponding transcript citations or transcript <500 words | CRITICAL | Flag draft as "[REVIEW REQUIRED]"; require clinician to manually review and attest or edit before finalization; cannot auto-approve |
+| Clinician Attestation Gap | Consent note finalized without documented clinician attestation decision (audit shows no review checkbox recorded) | CRITICAL | Audit chart; investigate note finalization process; potential chart amendment required; escalate to compliance |
+| High Fidelity Discrepancy (Audit Sample) | Independent audit rates consent note as <80% faithful to transcript (significant unsubstantiated detail or template insertion) | HIGH | Escalate to clinical leadership; investigate AI model or clinician practices; flag similar notes from same clinician/procedure for review |
 
 ---
 

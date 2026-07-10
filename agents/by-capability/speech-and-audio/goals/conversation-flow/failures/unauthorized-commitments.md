@@ -364,25 +364,40 @@ instructions: |
   Honest limitations build more trust than broken promises.
 ```
 
----
+### Detection & Response
 
-## Production Signals
+1. **Real-time unauthorized-commitment detection and blocking**: For each agent response, NLP pattern-matcher checks against UNAUTHORIZED_PATTERNS (no_spam, timing_guarantee, delivery_guarantee, data_promise, group_promise). If any pattern detected: (a) flag response as containing unauthorized commitment, (b) auto-block transmission, (c) escalate to supervisor with suggested replacement phrase from OBJECTION_RESPONSES, (d) log instance for trend analysis. Alert threshold: any detected unauthorized commitment is flagged (zero-tolerance).
+
+2. **Post-call broken-promise auditing and customer-impact tracking**: When customer complaints received that reference "you promised X", trigger audit: (a) retrieve recording from that call, (b) verify whether promise was actually made, (c) if promise made, categorize as broken commitment, (d) assess impact: did customer churn? Did complaint escalate? Did reputational damage occur? (e) log in "broken commitments" database with severity_rating. Track trends: which commitment types are most commonly broken? Which agents most frequently make unauthorized commitments?
+
+### Architecture Patterns
+
+1. **Commitment Authorizer with Real-Time Response Blocking**: Agent generates response → CommitmentAuthorizer.analyze() → Checks against AUTHORIZED_COMMITMENTS and UNAUTHORIZED_PATTERNS → If unauthorized pattern detected, blocks transmission and suggests authorized alternative. If authorized commitment, allows transmission.
+
+2. **Objection Handler with Authorized-Only Responses**: When objection detected (caller pushes back or asks for guarantee), handler routes through OBJECTION_RESPONSES lookup table. Ensures response is authorized and maintains customer trust without making false promises.
+
+3. **Broken-Promise Incident Tracking & Trend Analysis**: Maintains database of (call_id, promised_commitment, whether_fulfilled, customer_impact, complaint_filed). Generates monthly report: "Top unauthorized commitments made", "Top broken commitments (by frequency)", "Agents with most unauthorized commitments". Uses data to improve training and prompt design.
 
 ### Key Metrics
-| Metric | Alert Threshold |
-|--------|-----------------|
-| `commitment.unauthorized` | > 5% |
-| `commitment.broken_complaints` | > 2% |
-| `commitment.timing_promises` | > 10% |
-| `commitment.spam_promises` | > 10% |
 
-### Alerts
-| Alert | Condition | Severity |
-|-------|-----------|----------|
-| Unauthorized Promise | Any detected | P2 |
-| Broken Promise Complaint | Any occurrence | P1 |
-| SLA Promise Without Auth | Timing guarantee | P2 |
-| Data Promise | Privacy claim | P1 |
+| Metric | Target | Alert Threshold | Measurement Method |
+|--------|--------|-----------------|--------------------|
+| Unauthorized Commitment Rate | <1% | >5% | # of calls with any unauthorized commitment detected / total calls |
+| Authorization Pattern Coverage | 100% | <95% | # of detected unauthorized patterns correctly caught by validator / total occurrences (audited sample) |
+| Broken Promise Complaint Rate | <1% | >2% | # of complaints referencing broken agent promises / total calls (extrapolated from complaint sample) |
+| SLA Promise Without Authority | 0% | >0% | # of timing guarantees made without corresponding SLA / total calls |
+| Data-Handling-Promise Violations | 0% | >0% | # of data-privacy promises that contradicted actual policy / total data-promise calls |
+| Customer Trust Impact (broken promises) | >90% satisfaction | <85% | Follow-up survey satisfaction among callers who received vs. broken promises |
+
+### Alerts & Escalation
+
+| Alert | Condition | Severity | Response |
+|-------|-----------|----------|----------|
+| Unauthorized Commitment Detected | Agent response contains pattern from UNAUTHORIZED_PATTERNS (e.g., "no spam", "within 24 hours") | CRITICAL | Block response transmission; escalate to supervisor; suggest authorized alternative from OBJECTION_RESPONSES; log for agent coaching |
+| Authorization Boundary Violation | Agent makes commitment outside AUTHORIZED_COMMITMENTS list (e.g., "I guarantee delivery by Friday") | CRITICAL | Block transmission; escalate to supervisor; may require escalation to authorized party (e.g., logistics manager for delivery guarantees) |
+| Broken Promise Complaint | Customer calls back or files complaint citing unfulfilled agent promise | HIGH | Retrieve call recording; verify promise was made; categorize broken commitment; assess impact (churn, escalation, reputational); compensate if applicable |
+| Timing Guarantee Without SLA | Agent promises callback/response within X hours but no formal SLA exists for that timeframe | HIGH | Flag call; investigate whether SLA should be established or whether agent training needs update; notify customer if callback SLA missed |
+| Privacy/Data-Handling Mismatch | Agent makes data-privacy promise (e.g., "won't share your number") that contradicts actual company policy | CRITICAL | Legal/compliance escalation; assess customer impact; may require opt-out mechanism or policy communication; escalate if multiple customers affected |
 
 ---
 

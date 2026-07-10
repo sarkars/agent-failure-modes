@@ -39,20 +39,46 @@ Buyer's risk assessment, relying on the chart, flags exposure to a litigation ma
 
 ## Mitigation Strategies
 
-1. **Identifier-Based Matching as Primary Path**: Require entity linkage in the structure chart to be established by matching registration number, tax ID, or another unique identifier first, falling back to name similarity only when no identifier match exists, and flagging that fallback explicitly
-2. **Mandatory Ownership-Filing Confirmation Before Chart Inclusion**: Before adding any entity to the structure chart, require confirmation that a specific ownership or control filing documents the relationship to the target, rather than including any name-similar entity by default
-3. **High-Collision Naming-Pattern Flagging**: Maintain a list of jurisdictions and industry sectors with known high name-collision rates and require any entity match in those contexts to undergo mandatory secondary verification before inclusion
-4. **Surface Match Method in Chart Output**: Require the structure chart to indicate, for each entity, whether the link was established by identifier match or by name similarity, so reviewers can prioritize verification of similarity-based links
+### Prevention
 
-### Metrics
-- Rate of structure-chart entities whose link to the target was established by name similarity rather than identifier match
-- Rate of similarity-matched entities that fail an identifier-based verification check when audited
-- Number of due-diligence findings later found to be misattributed due to an entity-matching error
+1. **Enforce identifier-primary entity matching with fallback detection**: Implement entity resolution pipeline: (1) All entity matches must first attempt lookup via registration number/tax ID/LEI against authoritative registry (SEC EDGAR, national business registries, Refinitiv/FactSet), (2) Only if no identifier match found, apply semantic similarity scoring as secondary signal, (3) Require explicit user confirmation before including any similarity-matched entity, (4) Flag all similarity-matched entities with confidence metadata in structure chart, (5) Maintain audit trail: {matched_entity, match_method, confidence_score, override_reason}. Root cause mitigation: Prevents false positives by enforcing identifier-first methodology rather than similarity-first.
 
-### Alerts
-- A structure-chart entity is included with no identifier-based confirmation of its relationship to the target → P1
-- A similarity-matched entity fails identifier verification on audit after being included in a finalized chart → P1
-- Similarity-match fallback rate for entity linkage exceeds the defined threshold for a rolling window → P2
+2. **High-collision jurisdiction/industry flagging with mandatory verification gates**: Build registry of high-collision-risk contexts: (a) jurisdictions with common naming conventions (e.g., Hong Kong holding companies), (b) industries with generic terms (e.g., "Holdings", "Capital", "Partners"), (c) multi-national subsidiary families where different countries use similar names. For any entity match in flagged contexts, require: secondary verification step (look up in alternative registry), document approval from compliance/legal reviewer before chart inclusion, cross-reference against filed ownership disclosures for contradictions. Root cause: Prevents matching based solely on similarity in high-risk scenarios.
+
+3. **Ownership-filing validation before structure-chart inclusion**: Before adding any entity link to chart, require corroborating ownership filing from at least one independent source: (a) Specific SEC 13D/13G/Schedule 13A filing naming the relationship, (b) Foreign registry deed/certificate of incorporation naming parent, (c) UCC liens or financing statements naming control relationship, (d) Bankruptcy filings or creditor lists showing ownership. Match required filing document ID and effective date. If filing unavailable, mark entity as "[UNVERIFIED - no filed ownership document found]" and escalate to analyst. Root cause: Ensures relationships are documented, not inferred.
+
+### Detection & Response
+
+1. **Entity match audit logging with verification signals**: For each entity link in structure chart, capture: entity name, target company, match method (identifier vs. similarity), match confidence score (0-1.0), corroborating ownership filing (yes/no, document ID), analyst override (yes/no, reason), effective date. Alert if: >10% of chart entities linked via similarity only (no identifier confirmation), >1 entity per chart failed verification audit, entity linked without corroborating filing. Monitor weekly: audit random 10% of finalized charts; validate each link against alternative data sources (alternative registry lookups, document re-verification).
+
+2. **Post-chart discovery reconciliation on new filings**: When new corporate filings received post-chart publication, parse for entity relationship data. If new filing contradicts previous chart (e.g., "this entity is not a subsidiary of target"), trigger automated chart audit: flag affected entities, re-run identifier-based matching, generate reconciliation report. Escalate to due-diligence team if contradiction affects material findings (e.g., liability exposure calculation).
+
+### Architecture Patterns
+
+1. **Entity Resolution Pipeline with Identifier-Priority Matching**: Ingestion → Parse Entity Names → Identifier Lookup (against SEC EDGAR, Refinitiv, national registries) → If match found, confirm via filing document → If no match, apply semantic similarity scoring with threshold (>0.85) → Require explicit verification/override → Add to chart with match metadata {entity_id, match_method, confidence, filing_doc_id}. Prevents similarity-only matches in primary path.
+
+2. **High-Collision Jurisdiction Registry & Verification Gate**: Maintains curated list of high-collision contexts (e.g., "Hong Kong + Holding Company", "Singapore + Capital"). When entity matches in flagged context: (a) Cross-check against alternative registries (e.g., if EDGAR lookup succeeds but foreign subsidiary suspected, verify with foreign registration authority), (b) Flag for manual compliance review, (c) Require override confirmation before inclusion. Reduces false-positive family relationships.
+
+3. **Ownership Filing Validator**: Searchable index of filed ownership documents (SEC 13D/13G, foreign deeds, UCC filings, corporate bylaws naming control). On entity link: query index for corroborating filing. If found, auto-confirm link + document ID. If not found, flag for analyst verification. Maintains audit trail of all lookup attempts.
+
+### Key Metrics
+
+| Metric | Target | Alert Threshold | Measurement Method |
+|--------|--------|-----------------|--------------------|
+| Identifier Match Success Rate | >95% | <90% | # of entities matched via registration ID/LEI / total entity links in charts |
+| Similarity-Only Fallback Rate | <5% | >10% | # of entities matched only via similarity (no identifier confirmation) / total chart entities |
+| Corroborating Filing Coverage | 100% | <95% | # of entities with confirmed ownership filing / entities included in chart |
+| Chart Audit Verification Rate | >99% | <98% | # of entities confirmed as legitimate on spot-check audit / audited entities |
+| Post-Chart Reconciliation Discrepancies | <1% | >2% | # of entities found contradictory on later filings / total published chart entities |
+
+### Alerts & Escalation
+
+| Alert | Condition | Severity | Response |
+|-------|-----------|----------|----------|
+| Unverified Entity Inclusion | Entity added to chart via similarity match with no corroborating ownership filing | CRITICAL | Block chart publication; require identifier verification or filing confirmation; re-analyze chart |
+| High Similarity-Only Rate | >10% of entities in chart linked via similarity without identifier confirmation | HIGH | Audit entire chart; re-run identifier matching for all similarity-matched entities; reprioritize verification |
+| Filing Contradiction Detected | Later filing contradicts entity relationship in published chart (entity claims non-subsidiary status) | HIGH | Escalate to due-diligence/compliance team; review any findings tied to contradicted entity; issue chart amendment if material |
+| Collision Context Miss | Entity matched in high-collision jurisdiction without mandatory verification gate applied | MEDIUM | Log oversight; re-analyze entity link with secondary verification; update high-collision registry if jurisdiction pattern not previously captured |
 
 ---
 

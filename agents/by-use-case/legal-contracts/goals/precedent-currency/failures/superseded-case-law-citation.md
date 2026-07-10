@@ -32,19 +32,49 @@ Impact: Opposing counsel flags the citation as relying on overruled authority, u
 
 ## Mitigation Strategies
 
-1. **Mandatory Citator Check at Generation Time**: Require every case citation produced by the agent to be checked against a live citator service for negative subsequent treatment (overruled, vacated, limited, questioned) before inclusion in any output
-2. **Currency Flag on All Citations**: Surface the citator-checked status explicitly alongside every citation in the agent's output (e.g., "good law as of [date]" or "flagged: superseded by [citation]"), rather than presenting citations without status context
-3. **Corpus Freshness Tracking**: Track and disclose the as-of date of any static reference corpus used, and treat citations sourced from a corpus older than a defined threshold as requiring mandatory live verification
-4. **Human Attorney Sign-Off on Citations**: Require attorney verification of all case citations before filing or client delivery, treating the agent's output as a draft requiring citation validation rather than a final authority
+### Prevention
 
-### Metrics
-- Percentage of agent-generated citations checked against a live citator before output
-- Number of citations flagged with negative subsequent treatment caught before filing/delivery vs. caught after (by opposing counsel or court)
-- Corpus freshness (time since last update) for any static legal reference data in use
+1. **Mandatory real-time citator-check gate before output**: Implement citation-output validation: (a) after agent generates candidate citations, before returning to user, run each citation through live citator service (Shepard's/KeyCite/LexisNexis/legal-research-API), (b) citator check queries: case overruled? vacated? limited? negatively treated? (c) for each citation, capture citator_status = {status: (GOOD_LAW|OVERRULED|VACATED|LIMITED|QUESTIONED|NEGATIVE_HISTORY), negative_authority: [list of overruling cases], negative_history_summary: "text", check_date: timestamp, citator_service: name}. (d) If citator_status != GOOD_LAW, output citation with warning flag and negative_authority link: "[Citation] [WARNING: Overruled by X (2024)]", never output without flag. (e) Fail-safe: if citator service unavailable, output citation as UNVERIFIED and require attorney confirmation before use. Root cause: Prevents superseded cases from reaching users unvalidated.
 
-### Alerts
-- An agent-generated citation is included in a final output without a citator check → P1
-- A citator check returns negative subsequent treatment for a citation already included in a draft → P1
+2. **Corpus-freshness tracking and age-based verification gating**: For any reference corpus (case database, precedent library, statutory compilations): (a) track as-of_date (last update), (b) on every citation sourced from corpus older than 6 months, auto-flag as "sourced from potentially stale data; citator check mandatory", (c) for corpus older than 1 year, mandatory citator check + attorney approval before citation included in output, (d) output metadata: "This citation sourced from corpus dated [date]; citator check performed [date, result]". For live-feed services (PACER, ECLI), no age restriction applies. Root cause: Ensures user visibility into corpus freshness and prevents reliance on outdated-corpus citations.
+
+3. **Citation-status disclosure in all outputs**: Require every citation in agent output to include status label: {case_name, citation_format, citator_status (GOOD_LAW|NEGATIVE_HISTORY|UNVERIFIED), citator_check_date, status_brief (e.g., "Good law as of 2026-07-11" or "Overruled on this point by X (2024)")}. For negative-history cases, include summary of negative authority and reasoning. Never output naked citation without status context. User can immediately see which citations carry risk and which are verified good law. Root cause: Makes citation status transparent rather than opaque.
+
+### Detection & Response
+
+1. **Citation-output audit logging with citator-check verification**: For each citation output, log: {citation_id, case_id, citator_check_performed (Y/N), citator_service_used, citator_status_at_output_time, status_flag_included_in_output (Y/N), corpus_source_date (if applicable), subsequent_citator_check_results (if discovered post-output)}. Weekly audit: sample 20% of output citations, re-run citator checks to verify status has not changed since output was generated. Alert if: >2% have changed status post-output, indicating either citator service lag or citations that became superseded between output and audit. For high-risk citations (opinions, motions filed in court), re-check immediately before filing.
+
+2. **Post-Output Supersession Detection and Retroactive Remediation**: Monitor for new citations, overruling decisions, statute amendments that affect previously-output citations. When supersession detected: (a) identify all outputs containing affected citation, (b) notify users/attorneys of supersession, (c) provide corrected citation or retraction recommendation, (d) for filed documents: assess whether retroactive supplemental brief required. Log all retroactive supersessions for trend analysis: which case types, practice areas most frequently become superseded? Use for corpus-update planning.
+
+### Architecture Patterns
+
+1. **Real-Time Citator-Check Integration at Output Gate**: Before citation returned to user, query live citator service. Retrieve citator_status and negative_authority. Tag citation in output with status. If citator unavailable, mark UNVERIFIED and escalate. Build integration with multiple citator providers (Shepard's, KeyCite, FastCase) with fallback logic.
+
+2. **Corpus-Freshness Registry with Age-Based Verification Gating**: Maintains metadata for every reference corpus in use: name, as-of_date, refresh_frequency, freshness_threshold (6 months | 1 year). On citation generation, check if source corpus age exceeds threshold. If yes, auto-flag for citator check. On corpus refresh, update registry and trigger re-check of recent citations from old corpus.
+
+3. **Citation-Status Disclosure Engine**: Post-citator-check, structured citation output includes status_label for every citation. Never outputs citation without status context. Supports detailed disclosure for negative-history cases.
+
+### Key Metrics
+
+| Metric | Target | Alert Threshold | Measurement Method |
+|--------|--------|-----------------|--------------------|
+| Citator-Check Coverage Rate | 100% | <99% | # of case citations checked against live citator before output / total case citations generated |
+| Citator-Check Availability | >99.5% | <99% | # of citator checks completed successfully / total citations requiring checks (excluding service-unavailable scenarios) |
+| Negative-History Detection Rate | 100% | <99% | # of citations with negative subsequent treatment flagged before output / total citations with negative history (validated via audit re-checks) |
+| Status-Flag Inclusion Rate | 100% | <99% | # of output citations including citator_status flag / total citations in final output |
+| Corpus-Age Threshold Compliance | 100% | <99% | # of citations sourced from corpus older than threshold that underwent citator check / total such citations |
+| Post-Filing Supersession Incidents | 0% | >0% | # of filed documents later flagged by court or opposing counsel as citing superseded authority / total filed documents (audited via post-filing opposition/ruling review) |
+
+### Alerts & Escalation
+
+| Alert | Condition | Severity | Response |
+|-------|-----------|----------|----------|
+| Citation Output Without Citator Check | Citation included in output with no evidence of citator check performed | CRITICAL | Remove citation from output before delivery; require citator check; re-deliver only after GOOD_LAW or status-flagged status confirmed |
+| Negative-History Citation Not Flagged | Citation with negative subsequent treatment (overruled, limited, questioned) included in output without warning flag | CRITICAL | Immediately escalate to attorney; remove or re-flag citation; if already delivered, notify recipient of correction; assess filing/delivery damage |
+| Citator Service Unavailable at Output Time | Citator API down or unavailable when citation generated | HIGH | Mark citation UNVERIFIED in output; notify user; require attorney confirmation or secondary citator check before use; monitor citator availability |
+| Stale-Corpus Citation Not Verified | Citation from corpus older than threshold included in output without citator check | MEDIUM | Escalate to attorney; recommend citator verification before use; may not block output but requires advisory flag |
+| Post-Output Citation Supersession Detected | New authority or ruling discovered post-output that supersedes previously-output citation | HIGH | Identify all outputs affected; notify relevant attorneys; assess whether filed documents require supplemental brief; update corpus and future citations |
+| Court/Opposing-Counsel Supersession Challenge | Court or opposing counsel flags citation in filed document as superseded or bad law | CRITICAL | Immediate escalation to litigation counsel; assess whether malpractice/sanctions risk; determine whether supplemental filing or retraction required; audit all recent citations from same corpus/agent for similar issues |
 
 ---
 

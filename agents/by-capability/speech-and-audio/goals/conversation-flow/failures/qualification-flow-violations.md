@@ -321,25 +321,40 @@ instructions: |
   Captured data: {captured_fields}
 ```
 
----
+### Detection & Response
 
-## Production Signals
+1. **Flow-sequence-compliance audit with step-tracking logging**: For each call, log: {call_id, qualification_flow_sequence: [{ step_number, step_name, completed (Y/N), fields_captured: [], step_skipped (Y/N), combined_questions_asked (count) }], total_steps_required, steps_completed, steps_skipped, sequence_compliance_score (steps_completed / steps_required)}. On every turn, log current_step and captured_fields to maintain state machine visibility. Alert if: sequence_compliance <85%, or combined_questions >2 in any turn, or steps skipped, or duplicate questions asked.
+
+2. **Premature-close detection and data-completeness audit**: Before agent closes call, verify: all required fields captured? If any required field missing, block close and escalate: "Incomplete qualification. Missing: [fields]. Ask before closing." Track: calls closed with missing fields (non-compliance). Post-call audit: verify captured data matches completion criteria. Alert if: >10% of calls closed with missing required fields.
+
+### Architecture Patterns
+
+1. **Ordered Qualification Flow State Machine**: Maintains ordered list of qualification steps: {step_1, step_2, ..., step_N}. On each turn: (a) determine current_step, (b) validate response against step requirements, (c) capture fields, (d) only proceed to next_step after current_step complete, (e) never skip steps or ask combined questions within a step. Logs current_step before every agent turn.
+
+2. **Duplicate-Question Detector with Context Tracking**: Maintains history of asked_questions for call. Before agent generates response, check: have we already asked this question? If yes, block repeat question. Alert on detection.
+
+3. **Close-Gate Validator**: Before agent can close/wrap call, gate checks: required_fields_captured? If missing, blocks close and suggests fields to capture. Only allows close when data_completeness_check passes.
 
 ### Key Metrics
-| Metric | Alert Threshold |
-|--------|-----------------|
-| `flow.sequence.compliance` | < 85% |
-| `flow.combined.questions` | > 10% |
-| `flow.premature.close` | > 10% |
-| `flow.repeated.questions` | > 5% |
 
-### Alerts
-| Alert | Condition | Severity |
-|-------|-----------|----------|
-| Step Skip High | skip > 15% | P2 |
-| Combined Questions | combined > 15% | P2 |
-| Incomplete Close | missing_fields > 12% | P1 |
-| Flow Sequence Broken | compliance < 80% | P2 |
+| Metric | Target | Alert Threshold | Measurement Method |
+|--------|--------|-----------------|--------------------|
+| Flow-Step Compliance | >95% | <85% | # of calls following prescribed step order without skips / total calls |
+| Combined-Question Rate | <2% | >10% | # of turns asking multiple qualification fields in one question / total qualification turns |
+| Duplicate-Question Rate | 0% | >5% | # of duplicate questions asked in single call / total qualification calls |
+| Required-Field Capture Completeness | 100% | <95% | # of calls with all required fields captured before close / total qualification calls |
+| Premature-Close Prevention Rate | 100% | <98% | # of close attempts with missing required fields that were blocked / total close attempts |
+| Step-Skip Rate | 0% | >5% | # of calls that skipped required steps / total calls |
+
+### Alerts & Escalation
+
+| Alert | Condition | Severity | Response |
+|-------|-----------|----------|----------|
+| Step Skip Detected | Agent advances to next qualification step without completing current step | HIGH | Block advancement; escalate to complete current step before proceeding; log step-skip attempt |
+| Combined Question Violation | Agent asks multiple qualification fields in single turn ("What's your name and email?") | MEDIUM | Flag turn as non-compliant; escalate to single-field re-ask; log violation |
+| Duplicate Question Detected | Agent asks same qualification question twice in same call | MEDIUM | Flag as inefficiency; log for agent coaching; may indicate context-tracking failure |
+| Premature Close Attempted | Agent tries to close/wrap call with required fields missing | CRITICAL | Block close action; escalate with list of missing fields; require completion before call terminates |
+| Flow-Sequence Compliance Low | Overall compliance <85% for call; multiple step violations | HIGH | Flag call for manual review; investigate whether flow design is unclear or agent needs retraining |
 
 ---
 

@@ -31,19 +31,45 @@ Impact: Elevated actual risk activity is monitored under thresholds calibrated f
 
 ## Mitigation Strategies
 
-1. **Event-Driven Refresh Triggers**: Implement triggers that initiate an out-of-cycle KYC refresh when transaction monitoring detects material changes in volume, geography, or counterparty risk profile, independent of the calendar-based schedule
-2. **Behavioral Drift Detection**: Continuously compare current transaction behavior against the behavior profile that justified the original risk tier, and flag significant drift even when no single transaction crosses an alert threshold
-3. **Dynamic Threshold Escalation**: Temporarily apply higher-risk-tier monitoring thresholds when behavioral drift is detected, pending completion of the triggered refresh, rather than waiting for the refresh to complete before adjusting scrutiny
-4. **Refresh Completion Tracking**: Track time-to-completion for triggered refreshes separately from calendar-based refreshes, ensuring event-driven triggers are not deprioritized relative to scheduled ones
+### Prevention
 
-### Metrics
-- % of customers with an event-driven refresh trigger fired, and time-to-completion for that refresh
-- Behavioral drift score (current activity vs. risk-tier-justifying baseline activity) per customer
-- Rate of risk-tier upgrades resulting from event-driven refresh vs. calendar-based refresh
+1. **Event-driven KYC refresh triggers with behavioral drift detection**: Implement automated monitoring: continuously track customer transaction behavior (volume, geography, counterparty profiles) against the original KYC risk-rating baseline. Define drift thresholds: "30% increase in transaction volume to high-risk jurisdictions", "new counterparty in sanctioned geography", "5x increase in transaction frequency". On drift detection, auto-trigger out-of-cycle KYC refresh (priority: complete within 15 business days). Maintain audit trail: what triggered the refresh and when. Root cause mitigation: Prevents static monitoring under stale risk tiers by detecting behavioral changes independently of calendar schedule.
 
-### Alerts
-- Material behavioral drift detected with no corresponding refresh trigger fired → P1
-- Event-driven refresh trigger fired but not completed within the required regulatory timeframe → P1
+2. **Dynamic threshold escalation during refresh pending state**: When event-driven refresh triggered but pending completion, immediately apply next-higher-risk-tier monitoring thresholds to customer's transactions. Example: "Customer was low-risk (refresh every 3 years); behavioral drift detected → trigger refresh; pending completion, apply medium-risk thresholds (lower alert tolerances)". This escalates scrutiny while refresh is in progress, preventing "stale tier" monitoring gaps. Root cause: Provides real-time protection while refresh process completes.
+
+3. **Refresh completion SLA tracking and escalation**: Track calendar-based refreshes separately from event-driven refreshes. Event-driven refreshes must complete within 15 business days (regulatory expectation). If not completed within SLA, escalate to compliance/risk leadership and notify triggering team. Maintain dashboard: "Overdue event-driven refreshes: [list with trigger dates]". Root cause: Prevents event-driven refreshes from being de-prioritized.
+
+### Detection & Response
+
+1. **Behavioral drift instrumentation with drift score logging**: For each customer, compute monthly drift score: divergence of current 30-day transaction profile from original onboarding profile (cosine similarity of transaction-pattern embeddings). Log drift score alongside transaction monitoring alerts. Alert when: (a) drift score exceeds threshold without corresponding refresh trigger, (b) high drift score continues during refresh pending period (indicates escalated thresholds not working).
+
+2. **Risk-tier-upgrade tracking post-refresh**: After event-driven KYC refresh completes, track whether customer's risk tier was upgraded/downgraded. Report: "Tier upgrades from event-driven refreshes: [count] vs. [count] from calendar-based refreshes". Alert if event-driven refreshes consistently result in upgrades (indicates calendar-only schedule is missing real risk changes).
+
+### Architecture Patterns
+
+1. **Behavioral Drift Detection Service**: Real-time monitoring service. Input: (customer_id, transaction_events) → Compute: drift_score (compare to onboarding profile) + behavior_embedding (current 30-day profile) → On drift>threshold: fire event-driven refresh trigger + escalate monitoring thresholds. Backed by transaction database and KYC historical data.
+
+2. **Dynamic Threshold Escalation Engine**: Upon event-driven refresh trigger, immediately apply risk-tier+1 thresholds to customer monitoring rules. Rules include: alert thresholds, surveillance triggers, transaction approval workflows. On refresh completion, revert to actual risk tier. Maintains audit trail of threshold changes and justifications.
+
+3. **KYC Refresh SLA Monitor**: Tracks all refresh jobs (calendar and event-driven). Maintains SLA: event-driven <15 business days, calendar-based per tier. Alerts on approaching deadline. Generates compliance report: "On-time completion rate by refresh type".
+
+### Key Metrics
+
+| Metric | Target | Alert Threshold | Measurement Method |
+|--------|--------|-----------------|--------------------|
+| Event-Driven Refresh Trigger Rate | 10-20% | <5% | # of out-of-cycle refreshes triggered / total active customers (annual) |
+| Behavioral Drift Detection Sensitivity | >80% | <70% | # of actual risk changes detected via drift monitoring / total risk changes detected (by post-refresh upgrade rate) |
+| Event-Driven Refresh SLA Compliance | 100% | <98% | # of event-driven refreshes completed within 15 business days / total event-driven refreshes |
+| Risk-Tier Upgrade Rate (Event-Driven) | 15-30% | <10% | # of customers whose risk tier upgraded after event-driven refresh / total event-driven refreshes |
+| Refresh Completion Time (Event-Driven) | <10 business days | >20 days | Mean time from trigger to completion for event-driven refreshes |
+
+### Alerts & Escalation
+
+| Alert | Condition | Severity | Response |
+|-------|-----------|----------|----------|
+| Behavioral Drift Without Refresh | Customer behavioral drift score exceeds threshold (e.g., transaction volume to high-risk jurisdictions +30%) but no refresh trigger has fired | CRITICAL | Immediately fire event-driven refresh trigger; escalate thresholds; investigate drift detection system if alert recurring |
+| Event-Driven Refresh SLA Miss | Event-driven refresh triggered but not completed within 15 business days (regulatory expectation) | CRITICAL | Escalate to risk/compliance leadership; pause new transactions for customer if refresh not completed within 20 days; notify regulator if required |
+| Risk-Tier Mismatch Post-Refresh | After refresh completion, actual risk tier upgraded but previous transactions monitored under old tier during pending period show signal patterns | HIGH | Audit high-drift transactions from pending period for potential AML gaps; consider retroactive escalation review |
 
 ---
 

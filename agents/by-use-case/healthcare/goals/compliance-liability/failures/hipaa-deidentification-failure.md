@@ -32,19 +32,45 @@ Impact: HIPAA violation exposure; breach notification obligation if discovered p
 
 ## Mitigation Strategies
 
-1. **Combinatorial Risk Scoring, Not Just Entity Removal**: Apply a statistical re-identification risk check (k-anonymity style or Expert Determination methodology) on top of entity removal, especially for rare-condition or small-population cases
-2. **Narrative-Aware Scrubbing**: Run de-identification over free-text narrative content specifically, not only structured demographic fields, to catch descriptive identifiers embedded in prose
-3. **Small-Population Suppression Rule**: Automatically generalize or suppress fields (exact diagnosis, exact location) when the resulting record would represent fewer than a defined threshold of individuals in the source population
-4. **Pre-Release Verification Gate**: Require a verification step — automated re-identification risk scoring plus human review for rare/small-population cases — before any output crosses the HIPAA-covered boundary
+### Prevention
 
-### Metrics
-- % of de-identified outputs passing combinatorial re-identification risk scoring, not just entity-removal checklist
-- Rate of narrative-embedded identifiers caught in QA sampling vs. missed
-- Time-to-detection for de-identification failures found post-release
+1. **Layered de-identification with k-anonymity verification**: Implement multi-stage de-identification: (Stage 1) Safe Harbor entity removal (names, MRNs, exact dates); (Stage 2) Narrative-aware NLP scrubbing to catch embedded descriptors ("nurse at County General", "only specialist in town"); (Stage 3) k-anonymity scoring using: condition + location + age-range + gender + rare-procedure. For any record with k-anonymity <5 in source population, auto-generalize or suppress quasi-identifiers (e.g., "rare genetic disorder" → "genetic disorder", exact-date → "month-year"). Fail-safe: outputs with k<5 flagged for manual review before release. Root cause mitigation: Prevents checklist-only false confidence by enforcing statistical re-identification risk threshold.
 
-### Alerts
-- De-identified output contains a rare-condition + location + date combination below population-size suppression threshold → P1
-- Narrative text in output not passed through narrative-aware scrubbing before release → P2
+2. **Narrative-aware de-identification with descriptor suppression**: Deploy NLP pipeline specifically for free-text scrubbing: identify profession mentions ("her father is a doctor"), facility affiliations ("treated at the County Clinic"), and contextual descriptors that can re-identify in conjunction with quasi-identifiers. Use clinical NLP libraries (e.g., scispaCy, BERT-based de-identification models) with domain-tuning on healthcare narratives. Root cause: Catches prose-embedded identifiers missed by structured-field-only approaches.
+
+3. **Small-population suppression rules with pre-release gate**: Encode suppression thresholds per data context: "Research dataset: suppress if k<5"; "Support ticket to external vendor: suppress if k<10"; "Public dashboard: suppress if k<20". Before any de-identified output released (external analytics, vendor systems, public reports), run k-anonymity check. If below threshold, escalate to Privacy Officer for Expert Determination review. Root cause: Prevents release of de-identified data that remains combinatorially identifying.
+
+### Detection & Response
+
+1. **De-identification audit trail with combinatorial risk scoring**: For every de-identification operation, log: (a) original quasi-identifiers (condition, location, dates), (b) removal/generalization applied, (c) k-anonymity score computed, (d) suppression rules triggered, (e) pre-release review decision. Alert when k-anonymity score <5 without documented Privacy Officer approval. Target: 100% of de-identified outputs have computed k-anonymity score logged.
+
+2. **Post-release monitoring for de-identification breaches**: Sample released data monthly to verify no re-identification. Use reverse-matching: given a de-identified record, attempt to match back to source population using quasi-identifiers. Alert on successful matches. Additionally, monitor incident reports and privacy complaints to detect de-identification failures discovered by external parties.
+
+### Architecture Patterns
+
+1. **Multi-Layer De-Identification Engine**: Modular pipeline: (Input: clinical note or record) → Safe Harbor Entity Removal (NER-based, removes 18 categories) → Narrative Descriptor Scrubbing (scispaCy + domain rules) → k-Anonymity Scorer (querying source population statistics) → Suppression Rule Engine (generalizes quasi-identifiers based on thresholds) → Pre-Release Gate (flags k<threshold for manual review) → (Output: de-identified record).
+
+2. **k-Anonymity Threshold Service**: Queryable service with pre-computed k-anonymity statistics: "Given condition=X, location=Y, age-range=Z, gender=G, rare_procedure=P, what is population count in source data?" Supports Expert Determination by computing re-identification risk. Updated quarterly from source data.
+
+3. **Privacy Officer Review & Approval Queue**: Pre-release gate routes flagged de-identified outputs (k<suppression_threshold) to Privacy Officer queue. Officer manually reviews quasi-identifiers and decides: suppress further, approve with caveats, or reject. Decision logged and tracked.
+
+### Key Metrics
+
+| Metric | Target | Alert Threshold | Measurement Method |
+|--------|--------|-----------------|--------------------|
+| k-Anonymity Compliance Rate | 100% | <99% | % of de-identified outputs meeting suppression thresholds (k≥specified value) before release |
+| Narrative De-Identification Coverage | >99% | <98% | % of free-text identifiers (descriptors, facility mentions, profession refs) caught by scrubbing in QA sampling |
+| Pre-Release Review Completion | 100% | <99% | % of outputs with k<threshold that received documented Privacy Officer review before release |
+| Post-Release Re-identification Risk | 0% | >0% | # of released records successfully re-identified via reverse-matching / total released (monthly audit) |
+| Expert Determination Coverage | 100% | <90% | % of small-population or rare-condition outputs that received Expert Determination risk assessment (not just checklist) |
+
+### Alerts & Escalation
+
+| Alert | Condition | Severity | Response |
+|-------|-----------|----------|----------|
+| k-Anonymity Below Threshold | De-identified output has k-anonymity <5 (or configured threshold) without documented Privacy Officer approval | CRITICAL | Halt release; route to Privacy Officer; Expert Determination required before approval |
+| Narrative Descriptor Missed | Post-release audit detects identifiable prose descriptor (e.g., "treated at the only clinic in County X") in "de-identified" output | CRITICAL | Initiate breach investigation; determine if re-identification occurred; potential breach notification; audit all similar outputs |
+| Pre-Release Gate Bypass | De-identified output released without passing k-anonymity check or Privacy Officer review (audit trail gap detected) | CRITICAL | Investigate release process; potential HIPAA violation; retrospective risk assessment; notify Privacy Officer |
 
 ---
 

@@ -31,19 +31,46 @@ Impact: Title to the custom software work product may remain with the contractor
 
 ## Mitigation Strategies
 
-1. **Mechanism-Category-Jurisdiction Matching**: Require the agent to explicitly check whether the work-for-hire categories applicable in the relevant jurisdiction cover the actual type of work being performed, not just whether work-for-hire language exists
-2. **Present-Assignment Fallback Check**: Flag any contractor agreement relying on work-for-hire language alone, without a present-assignment-of-rights fallback clause, as incomplete
-3. **Background IP and Third-Party Component Disclosure**: Require explicit disclosure and carve-out language for contractor background IP and any third-party/open-source components incorporated into deliverables
-4. **Moral Rights Waiver Check**: In jurisdictions with non-waivable-by-assignment-alone moral rights, verify an explicit moral rights waiver is present where legally permissible
+### Prevention
 
-### Metrics
-- % of contractor agreements with both work-for-hire and present-assignment fallback language verified
-- Rate of work-category-to-doctrine mismatches caught in QA sampling
-- Background IP / third-party component disclosure completeness rate
+1. **Jurisdiction-work-category-doctrine matching with dynamic reference database**: Build reference database: {jurisdiction, work_category, work_for_hire_applies (boolean), statutory_scope, fallback_requirement (mandatory|optional|not_applicable)}. On contract review: (a) identify work_category from agreement scope (e.g., "custom software", "documentation", "design"), (b) identify jurisdiction, (c) lookup required IP mechanisms for that jurisdiction-category pair, (d) validate contract contains all required mechanisms or flag as incomplete. For U.S. contractors: flag if agreement relies on work-for-hire for custom software without present-assignment fallback (custom software typically outside statutory WFH scope). Root cause: Ensures mechanism-to-category-to-jurisdiction match is explicitly validated, not inferred from presence of assignment language.
 
-### Alerts
-- Contractor agreement relies on work-for-hire language alone with no present-assignment fallback → P1
-- Work product category falls outside the jurisdiction's work-for-hire statutory list with no fallback assignment → P1
+2. **Multi-mechanism IP-assignment enforcement**: Require contractor agreements to include layered assignment language: (a) Primary: present assignment of all work-product IP ("Contractor hereby assigns to Company all right, title, and interest in Work Product"), (b) Fallback: explicit work-for-hire language for categories where WFH applies ("To the extent applicable, Work Product is deemed work made for hire"), (c) Jurisdiction-specific rider (e.g., in EU/Germany, explicit moral-rights waiver where permitted, non-waivable rights acknowledged), (d) Include pre-existing and background-IP carve-outs: "Contractor retains all right to Pre-Existing IP identified in Exhibit B, except as incorporated into Work Product." Fail-safe: clause checklist requires all three mechanisms present before agreement marked as IP-compliant.
+
+3. **Background IP and third-party-component disclosure protocol**: Before contractor starts work: (a) require Contractor Disclosure Schedule: list all pre-existing IP, libraries, components Contractor intends to use or incorporate, (b) for each disclosed item, confirm licensing permits integration into Work Product and transfer of rights, (c) create IP Audit clause requiring Contractor to warrant no third-party IP incorporated without permission, (d) add materiality-cap: if third-party IP discovered post-delivery, Contractor required to either remove it, obtain transfer-of-rights, or indemnify. Root cause: Prevents undisclosed third-party dependencies from blocking clean IP transfer.
+
+### Detection & Response
+
+1. **Contract-review gate with multi-factor IP-compliance checklist**: On contractor-agreement review, automated checklist: (1) Work category identified? (2) Jurisdiction identified? (3) WFH doctrine applicable for this category-jurisdiction pair? (4) If WFH not applicable, present-assignment clause present? (5) Explicit moral-rights waiver (where jurisdiction requires)? (6) Background IP disclosure schedule completed? (7) Third-party component licensing verified? Score: 7/7 required for approval. Log failures as audit entries. Alert on any failed check.
+
+2. **Post-execution IP-audit and background-IP reconciliation**: For contracts in execution, periodic audit (annual or per-milestone): (a) reconcile delivered work product against Contractor's IP Disclosure Schedule, (b) scan deliverables for third-party licenses (automated analysis: grep for common SPDX license headers, dependency-tree analysis for known open-source components), (c) if discrepancy found (undisclosed component), trigger investigation and remediation: remove component, obtain IP transfer, or require contractor indemnity.
+
+### Architecture Patterns
+
+1. **Jurisdiction-Doctrine Matching Engine**: Reference database maps {jurisdiction, work_category} → {doctrine_status, required_mechanisms[], statutory_exceptions}. On contract review: input work_category + jurisdiction, return required IP-assignment mechanisms + compliance checklist. Flags non-compliant contracts for manual review before execution.
+
+2. **Layered IP-Assignment Template Library**: For each jurisdiction-category pair, maintain template with: primary present-assignment clause, jurisdiction-specific fallback clause (WFH where applicable), moral-rights waiver (where permitted), pre-existing IP carve-out, third-party-component acknowledgment. On agreement drafting, system recommends appropriate template set based on identified jurisdiction + work_category.
+
+3. **Background IP Disclosure & Audit Workflow**: Pre-engagement: Contractor completes IP Disclosure Schedule (pre-existing IP, intended third-party components). On delivery: automated IP audit scans deliverables for third-party dependencies and compares against schedule. Discrepancy triggers remediation workflow (remove, license-transfer, or indemnification).
+
+### Key Metrics
+
+| Metric | Target | Alert Threshold | Measurement Method |
+|--------|--------|-----------------|--------------------|
+| IP-Mechanism Compliance Rate | 100% | <99% | # of contractor agreements with all required mechanisms (WFH, assignment, moral-rights waiver) verified / total contractor agreements |
+| Work-Category-Doctrine Match Accuracy | 100% | <99% | # of agreements with IP mechanisms appropriate for stated work category + jurisdiction / total audited agreements |
+| Background IP Disclosure Completeness | 100% | <98% | # of contractor agreements with completed IP Disclosure Schedule / total contractor agreements in execution |
+| Third-Party IP Discovery Rate | >99% | <95% | # of third-party components identified in deliverables / total third-party components actually incorporated (audited via code analysis) |
+| Post-Execution IP-Title Disputes | 0% | >0.5% | # of disputes post-execution over IP ownership / total completed contractor engagements |
+
+### Alerts & Escalation
+
+| Alert | Condition | Severity | Response |
+|-------|-----------|----------|----------|
+| Incomplete IP-Assignment Mechanism | Contractor agreement lacks required mechanism for jurisdiction-category pair (e.g., no present-assignment fallback for U.S. custom software) | CRITICAL | Block execution; escalate to legal; revise agreement with missing mechanism; re-execute before work begins |
+| Work-Category-Doctrine Mismatch | Work product category falls outside jurisdiction's WFH statutory scope with no present-assignment clause | CRITICAL | Halt agreement execution; add present-assignment fallback clause; re-execute |
+| Missing Background IP Disclosure | Contractor agreement finalized without completed IP Disclosure Schedule | HIGH | Block work start; require Contractor to complete schedule before engagement begins |
+| Third-Party Component Discovered Post-Delivery | Code audit finds undisclosed third-party open-source or licensed component in deliverables | HIGH | Escalate to contractor; require removal, license-transfer, or indemnification; audit all other deliverables for similar issues |
 
 ---
 

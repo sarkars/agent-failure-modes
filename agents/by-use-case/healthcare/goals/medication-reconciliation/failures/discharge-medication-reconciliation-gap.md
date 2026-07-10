@@ -31,18 +31,45 @@ Impact: Patient discharged without home antihypertensive; rebound hypertension r
 
 ## Mitigation Strategies
 
-1. **Three-Column Reconciliation**: Require the agent to produce home medications, inpatient medications, and discharge medications as three explicit columns with a stated disposition (continue/stop/change/new) for every entry across all three
-2. **Pre-Admission List as Source of Truth Anchor**: Always pull the verified pre-admission medication list as a required input, not optional context, before drafting discharge orders
-3. **Temporary-Medication Tagging**: Tag inpatient-only medication classes (IV antihypertensives, sedation, stress-dose steroids) so they are excluded from discharge lists by default unless explicitly continued
-4. **Pharmacist Review Gate**: Route any discharge list with an unexplained home-medication omission to pharmacist review before finalization
+### Prevention
 
-### Metrics
-- % of discharge lists with complete continue/stop/change/new disposition for every pre-admission medication
-- Home medication omission rate at discharge
-- 30-day readmission rate attributable to medication discrepancy
+1. **Mandatory three-column reconciliation with explicit disposition tagging**: Implement required workflow: (Column 1) Pre-admission home medications (required authoritative source: reconciliation at admission), (Column 2) Inpatient active medications (from MAR during hospitalization), (Column 3) Discharge medications (proposed, with explicit rationale per drug). For every home medication, agent must state disposition: "CONTINUE / STOP / CHANGED-TO [alternative] / NEW-INITIATED-FOR [indication]". Fail-safe: if any pre-admission medication missing from discharge list with no documented disposition, flag as "[RECONCILIATION GAP]" and block finalization until pharmacist explains omission. Root cause mitigation: Forces explicit reconciliation against pre-admission list rather than silent omission.
 
-### Alerts
-- Home chronic medication absent from discharge list with no documented rationale → P1
+2. **Temporary-medication classification and default-exclusion rules**: Encode temporary-medication classes: IV antihypertensives, sedation/anesthetics, stress-dose corticosteroids, ICU-only agents. Tag inpatient orders with duration/indication: "labetalol IV for acute hypertension - ICU only". On discharge list generation, auto-exclude temporary-medication classes unless clinician explicitly re-orders for discharge. Root cause: Prevents carryover of ICU-only medications that should be stopped.
+
+3. **Pharmacist review gate with medication-omission escalation**: If discharge list shows home chronic medication absent with no documented rationale (e.g., home metoprolol not listed, no "STOP" explanation), escalate to pharmacist review queue. Pharmacist must approve discharge list with omission explanation: "Intentionally stopped due to [clinical reason]" or "Mistakenly omitted - ADD back". Block discharge summary until pharmacist sign-off. Root cause: Catches omissions before patient sees incomplete list.
+
+### Detection & Response
+
+1. **Reconciliation-completeness audit logging**: For every discharge medication list, log: (a) pre-admission medications (from verified list), (b) inpatient medications (from MAR), (c) discharge medications, (d) disposition mapping (continue/stop/change/new for each), (e) unexplained omissions/additions, (f) pharmacist review result if applicable. Alert when: (1) any home chronic medication absent without documented disposition, (2) temporary medications carried to discharge without explicit continuation order, (3) duplicate therapy (home + hospital equivalent both in discharge list).
+
+2. **Post-discharge error tracking and readmission correlation**: Track post-discharge medication-related adverse events: readmissions within 30 days, ED visits, medication-error phone calls from patients. Correlate with discharge medication discrepancies. Flag discharge lists with unresolved reconciliation gaps as "high-risk". Monthly audit: "Discharge lists with omissions: [N]; post-discharge readmissions: [X]; correlation [Y%]".
+
+### Architecture Patterns
+
+1. **Three-Column Reconciliation Engine**: Input: (pre_admission_meds, inpatient_MAR) → Process: (1) Map home meds to inpatient meds (by active ingredient, therapeutic class), (2) Generate three-column table with disposition for each, (3) Identify unmapped home meds (omissions), unmapped inpatient meds (new), (4) Tag temporary-medication classes for exclusion check → Output: reconciled_discharge_list with explicit dispositions + escalation flags.
+
+2. **Temporary-Medication Classifier**: Hardcoded classification: IV antihypertensives, sedation/anesthesia, stress-dose steroids, ICU-only vasopressors, etc. On every inpatient order: assigns temporary/permanent flag + expected duration. On discharge generation: auto-filters temporary class unless explicit continuation order.
+
+3. **Pharmacist Review Gate**: Discharge lists with reconciliation gaps (unexplained home-medication omissions, temporary meds carried over, duplicates) auto-routed to pharmacist queue. Pharmacist reviews, documents rationale, approves/revises. Blocks discharge summary finalization without sign-off.
+
+### Key Metrics
+
+| Metric | Target | Alert Threshold | Measurement Method |
+|--------|--------|-----------------|--------------------|
+| Medication Reconciliation Completeness | 100% | <99% | % of discharge lists with documented disposition (continue/stop/change/new) for all pre-admission medications |
+| Home-Medication Omission Rate | 0% | >0% | # of pre-admission chronic medications absent from discharge list without documented disposition / total pre-admission meds |
+| Temporary-Medication Carryover Rate | 0% | >0% | # of inpatient-only medications (IV agents, sedation) appearing in discharge list / total inpatient-only orders |
+| Duplicate-Therapy Detection Rate | 100% | <99% | # of detected instances of home+hospital equivalent both in discharge list / estimated duplicates (audit sample) |
+| Pharmacist Review Compliance | 100% | <99% | % of discharge lists with reconciliation gaps that received pharmacist review/approval before finalization |
+
+### Alerts & Escalation
+
+| Alert | Condition | Severity | Response |
+|-------|-----------|----------|----------|
+| Home Medication Unexplained Omission | Pre-admission chronic medication (e.g., home metoprolol for HTN) absent from discharge list with no documented STOP/CHANGED rationale | CRITICAL | Block discharge list finalization; escalate to pharmacist; require documented clinical justification for omission before release |
+| Temporary Medication Carried to Discharge | Inpatient-only medication (IV labetalol, ICU sedation) appears in discharge orders without explicit continuation justification | CRITICAL | Flag discharge list; require clinician to explicitly re-order if intended to continue; remove if inadvertent carryover |
+| Duplicate Therapy in Discharge List | Home medication and hospital-substituted equivalent both present in discharge list (e.g., home metoprolol + hospital labetalol both at discharge) | CRITICAL | Alert to prescriber; recommend discontinuing one; risk of doubled therapeutic effect; escalate to pharmacist review |
 - Inpatient-only medication class present on discharge list → P2
 
 ---
