@@ -73,20 +73,33 @@ From Log Security Research (2026):
 - Error messages with full context
 - Tracing capturing all span attributes
 
-**Mitigation Strategies**
-1. **Log sanitization**: Redact PII/secrets before logging
-2. **Structured logging**: Separate sensitive from non-sensitive fields
-3. **Log levels**: Disable debug logging in production
-4. **Sampling**: Don't log every request
-5. **Retention policies**: Minimize sensitive data retention
-6. **Access controls**: Restrict who can view logs
+## Mitigation Strategies
 
-**Detection**
-- Scan log storage for PII patterns
-- Audit third-party log destinations
-- Review trace attributes for sensitive fields
-- Monitor log access patterns
-- Periodic log content audits
+### Prevention
+1. **Sanitization at the logging call site, not after the fact**: Redact/mask known-sensitive field patterns (SSN, card numbers, credentials) at the point logging statements are written — using a shared, mandatory logging wrapper that all agent code must use — rather than relying on downstream log-storage scrubbing to catch what was already captured verbatim. Trade-off: requires disciplined use of the sanitizing wrapper across the entire codebase, and any code path that logs directly (bypassing the wrapper) reintroduces the risk.
+2. **Structured logging with sensitivity-tagged fields**: Use structured log formats where fields are explicitly tagged by sensitivity level, and configure the logging pipeline to strip or redact fields above the destination's authorized sensitivity level before shipping to third-party observability tools, rather than logging free-form strings that mix sensitive and non-sensitive content indistinguishably. Trade-off: requires restructuring logging calls throughout the codebase to use tagged fields instead of interpolated strings.
+3. **Debug-level logging disabled by default in production**: Default production logging configuration to INFO level or higher, with DEBUG-level (which the example shows capturing full prompts, tool parameters, and responses) requiring explicit, time-limited, audited enablement rather than being left on as a standing default. Trade-off: reduces the diagnostic detail available for troubleshooting production issues, requiring more deliberate temporary debug-enablement workflows when issues arise.
+
+### Detection & Response
+1. **Periodic PII-pattern scanning of log storage**: Regularly scan stored logs (including third-party destinations like Datadog/Splunk) for PII patterns (SSN format, card number format, email addresses) that should have been redacted, catching sanitization gaps in the pipeline before they accumulate across the full retention window.
+2. **Trace/span attribute auditing**: Specifically review OpenTelemetry/tracing span attributes for sensitive data, since the example shows financial transaction details and emails landing in trace attributes through a different code path than traditional log statements, requiring separate scrutiny from standard log-content audits.
+3. **Third-party log destination compliance auditing**: Audit every third-party service that receives logs (observability platforms, log aggregators) for its own data-handling and retention practices, since sensitive data reaching a third party effectively expands the compliance/exposure boundary beyond internal systems.
+
+### Architecture Patterns
+1. **Mandatory sanitizing logging wrapper as the only logging interface**: Architect the codebase so all logging goes through a single, mandatory wrapper library that performs sanitization/redaction, rather than allowing direct use of the underlying logging framework, structurally preventing the "one overlooked log statement" failure pattern.
+2. **Sensitivity-tiered log routing**: Route logs to different storage/retention tiers based on their sensitivity tags — non-sensitive operational logs to standard long-retention storage, sensitive-field logs to a restricted-access, short-retention, encrypted store (or excluded from third-party shipping entirely).
+3. **Sampling with sensitivity-aware exclusion**: When sampling logs to reduce volume, ensure the sampling logic doesn't inadvertently over-represent sensitive interactions, and apply sanitization uniformly regardless of whether a given request is sampled for detailed logging.
+
+### Metrics
+1. **log_sanitization_coverage**: Target: 100% of logging call sites use the mandatory sanitizing wrapper; Alert on any direct/bypassing logging call detected in code review or static analysis
+2. **pii_pattern_detection_in_stored_logs**: Target: 0% of stored logs contain unredacted PII patterns; Alert on any detection during periodic scans
+3. **debug_logging_production_enablement_duration**: Target: 0 standing DEBUG-level loggers in production; Alert if DEBUG logging is enabled for longer than its authorized time-limited window
+4. **third_party_log_destination_compliance_coverage**: Target: 100% of log destinations reviewed and compliant; Alert on any destination lacking a completed compliance review
+
+### Alerts
+1. **PII Found in Stored Logs** (P1): Condition - periodic scanning finds unredacted PII in log storage (internal or third-party). Action: Purge/redact the affected log entries where feasible, investigate which logging call site bypassed sanitization, fix the gap.
+2. **Standing Debug Logging in Production** (P2): Condition - DEBUG-level logging is found enabled in production beyond its authorized window. Action: Disable immediately, audit what sensitive data may have been captured during the exposure window.
+3. **Sensitive Data in Trace Spans** (P1): Condition - audit finds sensitive data (financial details, PII) in tracing/span attributes. Action: Update instrumentation to exclude the sensitive attribute, purge affected spans from trace storage if retention policy allows.
 
 ## References
 

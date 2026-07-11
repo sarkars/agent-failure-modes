@@ -72,20 +72,33 @@ From Security Research (2026):
 - Permissions follow data, not policy
 - Edge agents often least secured
 
-**Mitigation Strategies**
-1. **Explicit trust boundaries**: Define where trust stops
-2. **Trust decay**: Reduce trust level at each hop
-3. **Direct verification**: Re-verify identity at trust boundaries
-4. **Permission re-scoping**: Re-authorize at each boundary
-5. **Trust chain limits**: Maximum depth for transitive trust
-6. **Zero-trust segments**: No transitivity in sensitive areas
+## Mitigation Strategies
 
-**Detection**
-- Map trust relationships explicitly
-- Monitor for multi-hop access patterns
-- Track permission flow through chains
-- Alert on edge agent activity affecting core
-- Audit trust transitivity assumptions
+### Prevention
+1. **Explicit trust boundary definitions with no default transitivity**: Define, for every agent-to-agent relationship, whether trust is transitive or not as an explicit configuration decision, defaulting to non-transitive (each agent must independently verify the ultimate originator, not just its immediate sender) rather than allowing trust to silently extend through chains by default. Trade-off: requires deliberate design work at every trust relationship rather than the convenience of implicit propagation, and can add friction to legitimate multi-hop workflows.
+2. **Trust decay across hops**: When transitivity is genuinely needed, reduce the effective trust/permission level at each hop rather than preserving full trust indefinitely through the chain, so a request that has passed through several intermediate agents arrives at a high-privilege agent with correspondingly reduced authority, limiting what a laundered attack can accomplish even if it succeeds. Trade-off: requires careful design of what reduced-trust operations look like and may block legitimate deep-chain workflows that need full privilege at the end.
+3. **Re-verification at sensitive trust boundaries**: For agents guarding especially sensitive operations (e.g., CoreDB), require direct re-verification of the ultimate request originator's identity/authorization rather than accepting "my trusted neighbor sent this," specifically at the boundary where the consequence of a wrong trust decision is highest. Trade-off: adds latency and complexity at exactly the points where the system may need to respond fastest.
+
+### Detection & Response
+1. **Multi-hop access pattern monitoring**: Monitor for requests that have traversed multiple agent hops before reaching a high-privilege agent, and flag/scrutinize these specifically, since legitimate direct requests and laundered multi-hop requests can be distinguished by hop count and path even when the final request looks identical.
+2. **Permission flow tracing through chains**: Track how permissions/authorization propagate through a delegation or trust chain, flagging any point where a low-privilege agent's request results in a high-privilege operation being executed further down the chain without an explicit re-authorization step.
+3. **Edge-agent-activity-affecting-core alerting**: Specifically alert when activity originating from or passing through known lower-security edge agents (external-facing, less hardened) results in operations at core, high-privilege agents, since this pattern is the specific signature of trust-laundering attacks.
+
+### Architecture Patterns
+1. **Zero-trust segmentation for sensitive operations**: Architect the highest-privilege agents (databases, financial systems, production infrastructure) to require direct, non-transitive verification for every request regardless of the apparent trust of the immediate sender, eliminating transitivity entirely for the segment of the system where a laundered attack would be most damaging.
+2. **Explicit trust graph with bounded depth**: Maintain an explicit, auditable trust graph (not implicit trust-of-trust assumptions) with a maximum configured transitivity depth, beyond which requests require fresh authorization rather than inheriting trust from the chain.
+3. **Capability-token re-scoping at each boundary**: Architect delegation so that permissions are represented as scoped, re-issued tokens at each trust boundary (each agent issues a new, narrower-scoped token to the next hop) rather than a single token or credential that flows unchanged through the entire chain.
+
+### Metrics
+1. **transitive_trust_default_rate**: Target: 0% of trust relationships default to transitive without explicit configuration; Alert on any undocumented transitive relationship discovered in audit
+2. **multi_hop_high_privilege_access_rate**: Target: track as baseline; Alert if requests reaching core/high-privilege agents via 3+ hops exceed baseline by 2x
+3. **core_agent_direct_reverification_rate**: Target: 100% of high-privilege agent operations require direct re-verification; Alert on any operation executed without it
+4. **edge_to_core_activity_correlation**: Target: track as baseline; Alert on statistically unusual correlation between edge-agent activity and core-agent operations
+
+### Alerts
+1. **Undocumented Transitive Trust Discovered** (P1): Condition - an audit finds a trust relationship defaulting to transitivity without explicit sign-off. Action: Treat as a security gap; require explicit re-scoping or non-transitive redesign before the relationship continues in production.
+2. **Multi-Hop Access to Core Agent** (P1): Condition - a request reaches a core/high-privilege agent through 3+ hops without direct re-verification. Action: Block the request pending direct verification of the ultimate originator; investigate the chain for signs of trust laundering.
+3. **Edge-to-Core Activity Spike** (P2): Condition - activity correlation between edge agents and core-agent operations exceeds baseline by 2x. Action: Investigate the specific edge agent(s) involved for compromise before the pattern continues.
 
 ## References
 

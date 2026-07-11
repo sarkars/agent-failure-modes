@@ -76,20 +76,33 @@ From Credential Exposure Research (2026):
 - No secret detection on outputs
 - Environment variable values exposed
 
-**Mitigation Strategies**
-1. **Secret scanning**: Scan all outputs for credential patterns
-2. **Input sanitization**: Remove credentials from context before agent sees it
-3. **Placeholder patterns**: Train agent to use `<API_KEY>` placeholders
-4. **Vault integration**: Credentials never in plain text
-5. **Pre-commit hooks**: Catch credentials before they're added to context
-6. **Real-time blocking**: Block output if credential detected
+## Mitigation Strategies
 
-**Detection**
-- Pattern matching: AWS keys, GitHub tokens, etc.
-- Entropy analysis: High-entropy strings
-- Known secret patterns database
-- Comparison against internal credential stores
-- Monitor for connection strings, URLs with auth
+### Prevention
+1. **Input sanitization before context assembly**: Strip or mask real credentials from any codebase/config/documentation content before it's placed in the agent's context window, so the agent physically cannot reproduce a secret it never saw, rather than relying on it to recognize and withhold credentials it has direct access to. Trade-off: requires accurate secret-detection at ingestion time, which itself can miss novel credential formats, and overly aggressive masking can break legitimate debugging tasks that need to reference (not reveal) real config.
+2. **Vault-backed credential architecture with placeholders in all agent-visible surfaces**: Store all real credentials in a secrets vault and ensure every codebase, config file, and documentation surface the agent can see uses vault references or placeholders (`<DATABASE_PASSWORD>`), never plaintext values, so there is no real secret anywhere in the agent's accessible context to leak in the first place. Trade-off: requires disciplined vault adoption across the entire organization's codebase and tooling, which is a significant migration for legacy systems with hardcoded credentials.
+3. **Real-time output blocking on credential-pattern detection**: Scan every agent output for credential patterns (AWS key format, GitHub token prefixes, high-entropy strings resembling secrets, connection-string patterns) before it's returned to the user, and block/redact matches rather than allowing potentially-real credentials to reach the user based only on upstream prevention. Trade-off: pattern-based detection has both false positives (blocking legitimate example/placeholder text that happens to match a pattern) and false negatives (novel credential formats not yet covered by the pattern database).
+
+### Detection & Response
+1. **Entropy-based secret detection as a complement to pattern matching**: Run entropy analysis on generated strings (high-entropy strings are more likely to be real secrets than low-entropy example placeholders) as a secondary detection layer alongside known-pattern matching, since this catches secret types without a well-known prefix pattern that pure pattern-matching would miss.
+2. **Comparison against internal credential/secret inventories**: Where the organization maintains an inventory of known active credentials (vault-issued secrets, rotated keys), compare any detected credential-shaped string in agent output against that inventory to distinguish a genuinely-leaked live credential from an inert example/placeholder, prioritizing incident response accordingly.
+3. **Post-incident credential rotation as standard response**: Treat any confirmed credential leak (even to a single internal user) as grounds for immediate rotation of that credential, since the "average time to exploit exposed credential" is under an hour according to industry research — waiting to confirm actual misuse before rotating is too slow.
+
+### Architecture Patterns
+1. **Zero-real-secrets-in-context architecture**: Architect the entire agent-accessible surface (codebase snapshots, config templates, documentation) so it structurally never contains a real credential value — everything the agent can see uses vault references — making credential leakage from context impossible rather than merely unlikely.
+2. **Layered output-scanning gateway**: Insert a mandatory secret-scanning gateway between agent output generation and delivery to the user, combining pattern matching, entropy analysis, and inventory comparison, so leakage prevention doesn't depend on any single detection method's coverage.
+3. **Automated credential rotation pipeline tied to leak detection**: Wire confirmed credential-leak detections directly to an automated rotation pipeline (not just an alert for manual follow-up), minimizing the exploitation window between leak and rotation.
+
+### Metrics
+1. **credential_pattern_detection_rate**: Target: track as baseline; Alert if detection rate spikes (signals either an uptick in leak attempts or new content sources with embedded secrets)
+2. **real_vs_placeholder_credential_ratio**: Target: 0% real credentials detected in agent output (100% should be placeholders/vault-references); Alert on any real-credential detection
+3. **time_to_rotation_after_leak_detection**: Target: < 15 minutes; Alert if rotation takes longer than 1 hour
+4. **context_surface_plaintext_secret_coverage**: Target: 0% of agent-accessible codebase/config contains plaintext real credentials; Alert on any detected instance during periodic scans
+
+### Alerts
+1. **Real Credential Detected in Output** (P1): Condition - output scanning confirms a real (not placeholder) credential was generated in an agent response. Action: Block the output immediately, trigger automatic credential rotation, investigate how the real credential entered the agent's context.
+2. **Plaintext Secret Found in Agent-Accessible Surface** (P1): Condition - periodic scanning finds a real credential in plaintext within codebase/config/docs the agent can access. Action: Rotate the credential, remove/mask it from the accessible surface, treat as a preventive-control gap requiring root-cause fix.
+3. **Entropy Anomaly Without Pattern Match** (P2): Condition - a high-entropy string is generated in output that doesn't match a known credential pattern. Action: Manually review for a novel credential format; update the pattern database if confirmed as a genuine secret type.
 
 ## References
 

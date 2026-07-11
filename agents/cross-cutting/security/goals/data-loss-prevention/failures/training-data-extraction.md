@@ -70,20 +70,33 @@ From Extraction Research (2026):
 - Low output temperature settings
 - No output filtering for known training content
 
-**Mitigation Strategies**
-1. **Differential privacy**: Train with DP guarantees
-2. **Deduplication**: Remove repeated training examples
-3. **Output filtering**: Detect verbatim training data in outputs
-4. **Canary tokens**: Plant detectable strings to catch extraction
-5. **Temperature floors**: Prevent low-temperature exploitation
-6. **Fine-tuning hygiene**: Minimize sensitive data in fine-tuning
+## Mitigation Strategies
 
-**Detection**
-- N-gram matching against training data
-- Perplexity analysis (memorized = low perplexity)
-- Canary token monitoring
-- Verbatim reproduction alerts
-- Unusual prompt patterns suggesting extraction
+### Prevention
+1. **Fine-tuning data hygiene and minimization**: Minimize the amount of sensitive/proprietary/repeated content included in fine-tuning datasets, since fine-tuned models are documented to be roughly 10x more extractable than base models — treat "does this need to be in the fine-tuning set at all" as the first line of defense rather than relying solely on post-hoc extraction prevention. Trade-off: reducing fine-tuning data can reduce the model's task-specific performance if genuinely useful examples are excluded out of caution.
+2. **Training-data deduplication before fine-tuning**: Deduplicate repeated content in the training/fine-tuning corpus, since memorization is shown to increase strongly with repetition — the same confidential document or code block appearing multiple times in training data disproportionately increases its extractability. Trade-off: deduplication tooling and processes add overhead to the data pipeline and can be imperfect for near-duplicate (not exact-duplicate) content.
+3. **Differential privacy training guarantees for sensitive fine-tuning**: For fine-tuning on genuinely sensitive/proprietary data, use differential-privacy training techniques (e.g., DP-SGD) that provide formal guarantees limiting how much any single training example can influence the model's outputs, directly bounding extractability rather than relying only on downstream filtering. Trade-off: DP training typically incurs a meaningful accuracy/utility cost and adds engineering complexity to the training pipeline.
+
+### Detection & Response
+1. **Output filtering for verbatim training-data reproduction**: Scan model outputs for signatures of verbatim memorized reproduction (long exact matches against known training corpus content, especially confidential documents or proprietary code) and block/redact before the output reaches the user, providing a runtime safety net independent of training-time mitigations.
+2. **Canary token monitoring**: Plant unique, synthetic canary strings into training data specifically to detect extraction — since these tokens have no legitimate reason to appear in any output, any appearance is unambiguous evidence of memorization/extraction and can be monitored without false positives.
+3. **Perplexity-based memorization detection**: Monitor output perplexity for suspiciously low values (memorized content is typically produced with anomalously high confidence/low perplexity compared to genuinely generated text), using this as a signal to flag potential extraction even without an exact known-content match to compare against.
+
+### Architecture Patterns
+1. **Extraction-resistant serving layer independent of the base model**: Architect a serving-layer defense (output filtering, canary monitoring, perplexity checks) as a mandatory gate between model generation and user-visible output, so extraction risk is mitigated even for models where full DP-guaranteed training wasn't feasible or fully effective.
+2. **Temperature-floor enforcement at the API layer**: Enforce a minimum sampling temperature at the serving/API layer (not merely as a client-configurable default) since low-temperature settings are documented to significantly increase verbatim-reproduction likelihood, and this floor should not be bypassable by a client requesting temperature=0 for extraction purposes.
+3. **Segregated fine-tuning pipelines by data sensitivity**: Maintain separate fine-tuning pipelines/processes for sensitive vs. non-sensitive data, applying DP training, deduplication, and stricter review specifically to pipelines touching proprietary or confidential content, rather than a single uniform fine-tuning process for all use cases.
+
+### Metrics
+1. **verbatim_reproduction_detection_rate**: Target: 0% of outputs match known-sensitive training content verbatim; Alert on any detection
+2. **canary_token_extraction_rate**: Target: 0 canary tokens ever appear in production output; Alert on any occurrence
+3. **low_perplexity_flag_rate**: Target: track as baseline; Alert on spikes suggesting increased extraction attempts or a new memorization pattern
+4. **fine_tuning_deduplication_rate**: Target: > 99% duplicate content removed from fine-tuning corpus before training; Alert if a training run proceeds with < 95% deduplication coverage
+
+### Alerts
+1. **Canary Token Extracted** (P1): Condition - a planted canary token appears in model output. Action: Treat as confirmed memorization/extraction; investigate the extraction technique used, assess broader exposure risk for other training content, consider model retraining or additional DP safeguards.
+2. **Verbatim Sensitive Content Reproduction** (P1): Condition - output filtering detects verbatim reproduction of known-sensitive training content. Action: Block the output, investigate the triggering prompt pattern, assess legal/compliance exposure (copyright, trade secret, privacy) for the specific content reproduced.
+3. **Low-Perplexity Anomaly Spike** (P2): Condition - the rate of suspiciously low-perplexity outputs rises significantly. Action: Investigate for a new extraction technique being used against the model; cross-check against canary tokens and verbatim-matching for confirmation.
 
 ## References
 

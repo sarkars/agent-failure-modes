@@ -70,20 +70,33 @@ From Security Research (2026):
 - Shared communication channels
 - No agent identity certificates
 
-**Mitigation Strategies**
-1. **Cryptographic identity**: Sign all agent messages with private keys
-2. **Mutual TLS**: Agents authenticate each other before communication
-3. **Agent certificates**: Issue and verify agent identity certificates
-4. **Message authentication**: HMAC or signatures on all messages
-5. **Zero-trust architecture**: Verify identity on every interaction
-6. **Behavioral verification**: Detect anomalous agent behavior
+## Mitigation Strategies
 
-**Detection**
-- Monitor for new agent identities
-- Track agent behavior patterns
-- Alert on commands from unusual sources
-- Verify message signatures
-- Audit agent registration/creation
+### Prevention
+1. **Cryptographic message signing with per-agent private keys**: Require every inter-agent message to be signed with the sending agent's private key, and require receiving agents to verify the signature against a known public key before acting on the message, rather than trusting a plain string "from" field that any party with message-queue access can set. Trade-off: requires a key-issuance and rotation infrastructure, and adds signing/verification overhead to every inter-agent message.
+2. **Mutual TLS between agent endpoints**: Require agents to mutually authenticate via TLS client certificates before any message exchange, so network-level access to a message channel is insufficient to impersonate an agent without also possessing its private key. Trade-off: adds certificate management overhead and infrastructure complexity, especially for dynamically-provisioned agents.
+3. **Agent identity certificates issued by a trusted authority**: Issue each agent a certificate from a controlled internal certificate authority binding its identity to a cryptographic key pair, and require certificate validation (not just presence of a name string) at every trust decision point. Trade-off: requires standing up and operating certificate issuance/revocation infrastructure.
+
+### Detection & Response
+1. **Message signature verification failure monitoring**: Log and alert on every message that fails signature verification, since a failed verification is a direct signal of an impersonation attempt (or a misconfiguration), unlike anomaly-based detection which is probabilistic.
+2. **New/unusual agent identity monitoring**: Alert when a message purports to come from an agent identity not previously seen in the registered agent inventory, or from a known agent identity but originating from an unusual network location/channel.
+3. **Behavioral drift detection for existing agents**: Establish a behavioral baseline (typical command types, typical targets, typical volume) per agent identity, and flag deviations even when message signatures are valid, since a compromised legitimate agent's credentials being used maliciously won't fail signature checks but will look behaviorally anomalous.
+
+### Architecture Patterns
+1. **Zero-trust inter-agent architecture**: Require cryptographic identity verification on every inter-agent interaction regardless of network location or apparent trust level, eliminating the implicit trust-by-network-position pattern that made the message-queue injection attack possible.
+2. **Signed-message-only communication bus**: Architect the agent messaging infrastructure so unsigned or invalid-signature messages are rejected at the transport layer itself, before they ever reach application logic, rather than relying on each receiving agent to independently implement verification correctly.
+3. **Certificate-bound capability scoping**: Bind each agent's permitted actions/capabilities to its certificate identity so that even a successfully-authenticated agent cannot request actions outside its certified scope (e.g., a ReportGenerator agent's certificate should not permit `execute_query` on a production database).
+
+### Metrics
+1. **signature_verification_failure_rate**: Target: 0% of accepted messages have invalid/missing signatures; Alert on any occurrence
+2. **unknown_agent_identity_rate**: Target: 0% of processed messages from unregistered identities; Alert on any occurrence
+3. **behavioral_anomaly_detection_rate**: Target: track as baseline; Alert if a specific agent's behavior deviates significantly (e.g., z-score > 3) from its established baseline
+4. **certificate_expiry_compliance**: Target: 100% of active agents have valid, non-expired certificates; Alert on any expired-certificate usage attempt
+
+### Alerts
+1. **Signature Verification Failure** (P1): Condition - any message reaches a receiving agent with an invalid or missing signature. Action: Reject the message, quarantine the apparent sender identity pending investigation, page security on-call.
+2. **Unknown Agent Identity** (P1): Condition - a message purports to originate from an agent identity not in the registered inventory. Action: Block the message, treat as a potential impersonation attempt, investigate the message queue/channel for compromise.
+3. **Behavioral Anomaly on Privileged Agent** (P1): Condition - a high-privilege agent (e.g., database write access) shows behavioral deviation from baseline even with valid signatures. Action: Temporarily suspend the agent's credentials pending investigation of possible credential compromise.
 
 ## References
 

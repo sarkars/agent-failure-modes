@@ -72,20 +72,33 @@ From Exfiltration Research (2026):
 - Overly powerful tool permissions
 - No data classification in tool calls
 
-**Mitigation Strategies**
-1. **Egress filtering**: Whitelist allowed external destinations
-2. **Tool sandboxing**: Restrict network access per tool
-3. **Content inspection**: Scan outbound data for sensitive content
-4. **Recipient validation**: Verify email/message recipients
-5. **Action confirmation**: Human approval for external sends
-6. **Rate limiting**: Detect unusual exfiltration volume
+## Mitigation Strategies
 
-**Detection**
-- Monitor all external API calls
-- Flag requests to unknown domains
-- Alert on large outbound payloads
-- Track email/message destinations
-- Analyze tool call patterns for anomalies
+### Prevention
+1. **Egress allowlisting enforced at the network/infrastructure layer**: Restrict outbound network access from agent-tool execution environments to an explicit allowlist of known, approved destinations, enforced at the network/firewall level (not just application logic), so a prompt-injection-induced tool call to an attacker-controlled domain fails at the network layer regardless of what the agent was tricked into attempting. Trade-off: requires maintaining and updating the allowlist as legitimate integrations change, and can block legitimate new integrations until explicitly added.
+2. **Recipient/destination validation independent of agent-supplied parameters**: For tools that send data externally (email, messaging, webhooks), validate the recipient/destination against a known-good list or existing business relationship, independent of whatever destination the agent (potentially under injection) supplies, rather than trusting the agent's tool-call parameters at face value. Trade-off: adds friction for legitimate use cases involving genuinely new/first-time recipients, which may need a separate verification workflow.
+3. **Human confirmation gate for external-send actions**: Require explicit human approval before any tool call that sends data to an external destination executes, particularly for high-risk tool categories (email, webhooks, file uploads to external services), rather than allowing the agent to autonomously complete external sends based on its own reasoning about user intent. Trade-off: adds latency and reduces the autonomy benefit of the agent for legitimate use cases needing frequent external communication.
+
+### Detection & Response
+1. **Content inspection of outbound payloads for sensitive data**: Scan the actual content of outbound tool calls (not just the destination) for sensitivity markers (document classification labels, PII patterns, financial data formats) before allowing the send to complete, catching exfiltration attempts even when the destination itself doesn't look obviously suspicious.
+2. **Anomalous tool-call pattern and volume monitoring**: Monitor for unusual patterns in tool usage — unexpected destination domains, unusually large outbound payloads, atypical tool-call sequences — and flag/rate-limit deviations from established baselines, since exfiltration attempts often produce statistically unusual tool-call signatures even when individual calls look superficially legitimate.
+3. **Prompt-injection-source correlation**: When an exfiltration attempt is detected or blocked, trace back to the specific input (document, tool output, message) that likely contained the injection payload, and use that to both remediate the immediate source and to harden input sanitization against that injection pattern going forward.
+
+### Architecture Patterns
+1. **Sandboxed tool execution with mandatory egress control**: Architect tool execution environments (especially network-capable tools and MCP servers) to run within a sandbox that enforces egress allowlisting and content inspection as a structural property of the execution environment, not as optional application-level logic that individual tool implementations might skip.
+2. **Human-in-the-loop gate for irreversible/external actions**: Build a mandatory confirmation step into the tool-invocation pipeline specifically for the category of tools capable of external data egress, architected so this gate cannot be bypassed by agent reasoning regardless of how the agent justifies the action to itself.
+3. **Least-privilege tool permissioning per task**: Grant agents access only to the specific tools and destinations required for their current task, rather than a standing broad toolset with wide network access, reducing the blast radius available to a successful injection attack.
+
+### Metrics
+1. **egress_allowlist_violation_rate**: Target: 0 tool calls reach non-allowlisted destinations; Alert on any occurrence (should be blocked at network layer, so any successful violation is a control failure)
+2. **content_inspection_block_rate**: Target: track as baseline; Alert on spikes (signals either increased injection attempts or a control gap)
+3. **human_confirmation_bypass_rate**: Target: 0% of gated external-send actions execute without confirmation; Alert on any bypass
+4. **anomalous_tool_call_detection_rate**: Target: track as baseline; Alert on statistically significant deviation (e.g., payload size z-score > 3) from established per-tool baselines
+
+### Alerts
+1. **Egress Allowlist Violation** (P1): Condition - a tool call reaches or attempts to reach a non-allowlisted external destination. Action: Block immediately (should already be blocked at network layer — treat any success as a critical control failure), investigate the injection source, review the allowlist enforcement mechanism.
+2. **Sensitive Content in Outbound Payload** (P1): Condition - content inspection flags sensitivity markers in a tool's outbound payload. Action: Block the send, investigate the originating input for injection, notify security team.
+3. **Human Confirmation Gate Bypassed** (P1): Condition - an external-send action executes without the required human confirmation. Action: Treat as a critical control failure; halt the responsible tool-invocation path, audit for the scope of any data already sent.
 
 ## References
 

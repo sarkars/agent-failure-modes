@@ -83,20 +83,33 @@ From Context Leakage Research (2026):
 - Embedding search without metadata filters
 - "Helpful" agent synthesizing all context
 
-**Mitigation Strategies**
-1. **Access-controlled retrieval**: Filter by user permissions
-2. **Sensitivity classification**: Tag and filter sensitive docs
-3. **System prompt protection**: Resist extraction attempts
-4. **Context auditing**: Review what's injected
-5. **Output filtering**: Don't emit injected sensitive content
-6. **Retrieval scoping**: Limit to relevant, permitted docs
+## Mitigation Strategies
 
-**Detection**
-- Monitor retrieval for sensitive documents
-- Track system prompt extraction attempts
-- Audit cross-user document access
-- Alert on sensitive keywords in output
-- Log and review context composition
+### Prevention
+1. **Permission-filtered retrieval enforced at the query layer**: Apply the requesting user's actual access permissions as a hard filter on the retrieval query itself (not as a post-hoc check on results), so documents the user isn't authorized to see are never pulled into context in the first place — retrieval should be scoped by identity before relevance ranking runs, not after. Trade-off: requires accurate, up-to-date permission metadata attached to every indexed document, which can lag behind actual access-control changes if not kept in sync.
+2. **Sensitivity-tagged document filtering**: Classify indexed documents by sensitivity level (public, internal, confidential, restricted) at ingestion, and filter retrieval to exclude documents above the requesting context's authorized sensitivity level, independent of and in addition to user-specific permission filtering. Trade-off: requires a sensitivity-classification process for all indexed content, which can be incomplete for large or fast-growing document stores.
+3. **System prompt isolation from user-visible context**: Architect the system so the system prompt/instructions are never included in any context the model could be induced to repeat verbatim (e.g., keep policy instructions in a separate control channel enforced by code, not solely by asking the model not to reveal them), since prompting alone ("don't reveal your instructions") is a documented weak defense against injection-based extraction. Trade-off: some agent frameworks tightly couple system instructions and context, making structural separation a nontrivial redesign.
+
+### Detection & Response
+1. **Output sensitive-keyword/pattern scanning before response delivery**: Scan agent responses for sensitivity markers (classification labels, known-confidential project names, patterns matching restricted document content) before the response is returned to the user, and block/redact matches rather than relying solely on retrieval-time filtering to prevent leakage. This catches cases where filtering imperfections let sensitive content into context anyway.
+2. **System prompt extraction attempt monitoring**: Log and alert on inputs matching known extraction-attempt patterns ("ignore previous instructions," "repeat your system prompt") even when the attempt fails, since a pattern of attempts against a given user/session is a strong signal of active probing that warrants scrutiny of that session's other activity.
+3. **Cross-user document access auditing**: Regularly audit retrieval logs for any case where a user's retrieved context included documents outside their explicit access grant, treating any such instance as a confirmed access-control defect requiring immediate investigation rather than an isolated anomaly.
+
+### Architecture Patterns
+1. **Retrieval-time access control as a mandatory gateway**: Architect RAG retrieval so every query passes through a permission-and-sensitivity filter before reaching the vector search/ranking stage, making it structurally impossible for over-permissioned documents to enter the candidate set, rather than relying on prompt instructions or post-hoc filtering.
+2. **Separate control-plane for system instructions**: Keep system-level instructions in a control channel architecturally distinct from user-facing context/conversation, enforced by the serving infrastructure (e.g., instructions injected server-side and never echoed in any code path that formats user-visible output) rather than relying on the model's own judgment to keep them confidential.
+3. **Tenant/user-partitioned retrieval indices**: For multi-tenant RAG systems, use hard index-level partitioning by tenant/user (separate indices or mandatory tenant-ID filters enforced at the database/vector-store level) rather than a single shared index relying on metadata filters that can be misconfigured or bypassed.
+
+### Metrics
+1. **cross_permission_retrieval_rate**: Target: 0% of retrieved documents fall outside the requester's access grant; Alert on any occurrence
+2. **system_prompt_extraction_attempt_rate**: Target: track as baseline; Alert if a specific user/session shows a spike in extraction-pattern attempts
+3. **sensitive_keyword_output_block_rate**: Target: track as baseline; Alert if block rate spikes (signals either an uptick in attacks or a retrieval-filtering regression)
+4. **retrieval_filter_coverage**: Target: 100% of indexed documents have valid permission/sensitivity metadata; Alert if any document lacks required metadata (treat as un-retrievable until classified)
+
+### Alerts
+1. **Cross-Permission Document Retrieved** (P1): Condition - a retrieval event includes a document outside the requesting user's access grant. Action: Treat as a confirmed access-control defect; investigate the specific query/index path immediately, audit for the scope of prior exposure.
+2. **System Prompt Extraction Success** (P1): Condition - output scanning detects system-instruction content was returned to a user. Action: Treat as an incident; investigate the injection vector, harden the control-plane separation, rotate any exposed instruction content that reveals sensitive business logic.
+3. **Extraction Attempt Pattern Spike** (P2): Condition - a session or user shows a spike in known extraction-attempt patterns. Action: Increase scrutiny on that session's subsequent activity; consider rate-limiting or flagging for review.
 
 ## References
 

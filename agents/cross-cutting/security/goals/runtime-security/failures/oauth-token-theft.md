@@ -65,20 +65,33 @@ From Security Research (2026):
 - Tokens stored in accessible memory
 - Debug logging includes sensitive data
 
-**Mitigation Strategies**
-1. **MCP server verification**: Cryptographic verification of MCP servers
-2. **Token isolation**: Never pass tokens through agent context
-3. **Short-lived tokens**: Use tokens with minimal TTL
-4. **Scope limitation**: Request minimum required OAuth scopes
-5. **Token monitoring**: Alert on token usage from new locations
-6. **Secure storage**: Use OS keychain, not environment variables
+## Mitigation Strategies
 
-**Detection**
-- Monitor OAuth token usage patterns
-- Alert on token use from unexpected IPs/locations
-- Track MCP server connections
-- Audit token scope usage vs. granted scope
-- Watch for bulk repository access patterns
+### Prevention
+1. **Token isolation from agent context entirely**: Architect the OAuth flow so tokens never pass through or become visible within the agent's LLM context/conversation state — token exchange and storage should happen in a separate, non-LLM-accessible credential broker, since the documented theft vector is interception during passage through the MCP connection and extraction from agent memory/context. Trade-off: requires a more complex credential-broker architecture separating token handling from the conversational agent layer, rather than the simpler (but vulnerable) pattern of tokens flowing through agent-visible state.
+2. **Cryptographic MCP server verification before OAuth flow initiation**: Require cryptographic verification of an MCP server's identity before allowing any OAuth authentication flow to proceed through that connection, so a malicious server disguised as a legitimate tool cannot intercept tokens during the handshake. Trade-off: requires a verified-server registry/certificate infrastructure, and users must be prevented from (or warned strongly against) connecting to unverified MCP servers even when convenient.
+3. **Short-lived tokens with minimal necessary scope**: Request only the minimum OAuth scopes required for the specific task, and use tokens with the shortest practical TTL, so even a successfully-stolen token provides limited access and expires quickly, rather than a broad, long-lived token granting persistent full-account access. Trade-off: short-lived tokens require more frequent re-authentication, adding friction, and minimal scopes may require re-prompting for additional consent if the task scope expands.
+
+### Detection & Response
+1. **Token-usage location/pattern monitoring**: Monitor OAuth token usage for access from unexpected IP addresses, geographic locations, or usage patterns inconsistent with the legitimate user's normal behavior, since stolen tokens are typically used from different infrastructure than the original user, providing a detectable anomaly signal.
+2. **Scope-usage-vs-granted-scope auditing**: Audit actual API calls made with a token against the scopes it was granted, flagging any usage pattern suggesting broader access than the task justified (e.g., bulk repository access when the task was a single commit), since this can reveal token misuse even without a location-based anomaly.
+3. **MCP server connection tracking with anomaly detection**: Track and log every MCP server connection the agent makes, specifically flagging new/unrecognized servers and connections that coincide with subsequent unusual token usage, to correlate the theft vector back to its originating connection.
+
+### Architecture Patterns
+1. **Credential-broker architecture separating tokens from agent context**: Architect a dedicated credential-broker service that handles OAuth flows and token storage entirely outside the LLM's context/memory, exposing only a scoped, audited API for the agent to request specific actions rather than ever holding or seeing the raw token itself.
+2. **OS-keychain-backed secure token storage**: Store tokens exclusively in OS-native secure storage (keychain/credential manager), never in environment variables, plaintext config, or anywhere accessible to the agent's context or debug logging, closing off the "context extraction" and "log exposure" theft vectors.
+3. **Verified-server-only OAuth flow gating**: Architect the system so OAuth authentication flows can only be initiated through cryptographically-verified MCP server connections, structurally blocking the "malicious server disguised as legitimate tool" attack path at the point of the auth flow itself.
+
+### Metrics
+1. **token_usage_location_anomaly_rate**: Target: track as baseline; Alert on any token usage from a new/unexpected location or IP
+2. **scope_usage_vs_grant_mismatch_rate**: Target: 0% of token usage exceeds its task-justified scope; Alert on any significant mismatch (e.g., bulk access when single-item access was expected)
+3. **token_context_exposure_rate**: Target: 0% of tokens ever appear in agent-visible context or logs; Alert on any detected exposure
+4. **unverified_mcp_server_oauth_attempt_rate**: Target: 0 OAuth flows initiated through unverified MCP server connections; Alert on any occurrence
+
+### Alerts
+1. **Token Usage Anomaly Detected** (P1): Condition - OAuth token usage occurs from an unexpected location/IP or shows a scope-usage mismatch. Action: Revoke the token immediately, notify the affected user, investigate the connection history for the theft vector.
+2. **Token Exposure in Context/Logs** (P1): Condition - a raw OAuth token is found in agent-visible context or log output. Action: Revoke the exposed token immediately, treat as a confirmed incident, fix the architectural gap that allowed context/log exposure.
+3. **OAuth Flow via Unverified MCP Server** (P1): Condition - an OAuth authentication flow is initiated through an MCP server that failed or lacks cryptographic verification. Action: Block the flow, warn the user, investigate the server's legitimacy before allowing any future connection.
 
 ## References
 

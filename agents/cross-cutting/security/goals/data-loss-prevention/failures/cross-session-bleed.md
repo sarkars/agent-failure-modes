@@ -70,20 +70,33 @@ From Session Isolation Research (2026):
 - RAG without tenant filtering
 - Conversation history not scoped
 
-**Mitigation Strategies**
-1. **Session isolation**: Strict boundaries per user/tenant
-2. **Scoped caching**: Include user ID in all cache keys
-3. **Memory partitioning**: Separate memory stores per user
-4. **Context clearing**: Explicit reset between sessions
-5. **RAG filtering**: Tenant ID in all retrieval queries
-6. **Stateless design**: Prefer stateless agent architecture
+## Mitigation Strategies
 
-**Detection**
-- Audit logs for cross-user data access
-- Canary data per user to detect bleed
-- Monitor for references to "other" conversations
-- Test with synthetic multi-user scenarios
-- Alert on user A's data patterns in user B's session
+### Prevention
+1. **User/tenant ID as a mandatory component of every cache and memory key**: Require every cache key, memory-store key, and retrieval query filter to include the user or tenant identifier as a non-optional, enforced-at-the-framework-level component, so it becomes structurally impossible to read another user's cached response or memory even if application logic elsewhere has a bug. Trade-off: requires auditing and retrofitting every existing caching/memory layer in the system, which can be extensive in mature codebases with ad hoc caching added over time.
+2. **Stateless agent architecture with explicit context passed per request**: Prefer designing agent instances to be stateless between requests, with all session/user context explicitly passed in on each call rather than persisted in shared, long-running agent instance memory, eliminating the entire class of bugs where a previous user's context lingers in an agent instance reused for a new user. Trade-off: stateless design can increase per-request latency (context must be reloaded each time) and complicates use cases that benefit from genuine long-running conversational memory.
+3. **Explicit session/context clearing with verification, not assumption**: When session-scoped state must exist, implement and test explicit clearing logic between sessions, with automated tests verifying that state is actually empty post-clear (not just assuming a reset call worked), since "context not properly cleared" was a documented root cause even in systems that believed they were clearing state.
+
+### Detection & Response
+1. **Canary data per user for bleed detection**: Seed each user/tenant's session with a unique, synthetic canary value and periodically check whether any other user's session ever surfaces that canary, providing an active, continuous test for cross-session bleed rather than relying solely on passive audit review.
+2. **Cross-user data access auditing**: Regularly audit logs for any case where a response to User B's request contains data patterns, identifiers, or content traceable to User A, treating any confirmed instance as a critical incident given the demonstrated potential for full patient/financial record exposure.
+3. **Synthetic multi-user test scenarios in CI/staging**: Run automated multi-user test scenarios (simulating rapid session switching, concurrent multi-tenant load) specifically designed to trigger bleed conditions before any deployment, since this failure mode is often load- or concurrency-dependent and won't surface in single-user manual testing.
+
+### Architecture Patterns
+1. **Hard tenant/user partitioning at the data-store level**: Architect memory stores, caches, and RAG indices with hard partitioning (separate physical/logical stores per tenant, or database-enforced row-level security keyed to tenant ID) rather than relying on application-level filters that can be forgotten or misapplied in a specific code path.
+2. **Request-scoped context injection over shared long-running state**: Design the agent execution model so context is injected fresh per request from an explicitly-scoped source (not read from a shared, potentially-stale in-memory object), eliminating reliance on correct manual clearing.
+3. **Automated isolation-verification gate in CI/CD**: Build cross-session-bleed test scenarios into the standard CI/CD pipeline as a release gate, not an occasional manual audit, so isolation regressions are caught before deployment rather than discovered in production.
+
+### Metrics
+1. **canary_bleed_detection_rate**: Target: 0 canary values ever surface outside their originating session; Alert on any occurrence
+2. **cache_key_scoping_coverage**: Target: 100% of cache/memory keys include user/tenant ID; Alert if any unscoped key pattern is found in audit
+3. **cross_user_data_audit_finding_rate**: Target: 0 confirmed cross-user exposures; Alert on any occurrence
+4. **isolation_test_pass_rate_in_ci**: Target: 100% of multi-user isolation tests pass before deployment; Alert/block deployment on any failure
+
+### Alerts
+1. **Canary Data Bleed Detected** (P1): Condition - a user-specific canary value surfaces in another user's session. Action: Treat as a confirmed critical incident; investigate the specific caching/memory layer responsible immediately, assess scope of actual user data exposed during the same window.
+2. **Cross-User Data Exposure Confirmed** (P1): Condition - audit finds a response containing another user's data. Action: Immediately notify affected users per breach-notification policy, contain the responsible code path, conduct full incident review.
+3. **Isolation Test Failure in CI** (P1): Condition - a multi-user isolation test fails during CI/CD. Action: Block the deployment; do not allow release until the isolation defect is fixed and tests pass.
 
 ## References
 

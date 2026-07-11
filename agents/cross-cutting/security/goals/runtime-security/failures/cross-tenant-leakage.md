@@ -67,20 +67,33 @@ From Security Research (2026):
 - Shared caching layers
 - Insufficient testing of isolation boundaries
 
-**Mitigation Strategies**
-1. **Tenant isolation by design**: Separate infrastructure per tenant for sensitive workloads
-2. **Filter-before-retrieve**: Apply tenant filters at query time, not result time
-3. **Dedicated model instances**: Separate model deployments for high-security tenants
-4. **Context clearing**: Explicitly clear context between tenant sessions
-5. **Embedding isolation**: Separate vector stores per tenant
-6. **Audit logging**: Log all cross-tenant access attempts
+## Mitigation Strategies
 
-**Detection**
-- Monitor for tenant ID mismatches in responses
-- Scan responses for other tenants' identifiers
-- Track similarity search patterns across tenants
-- Alert on context containing multiple tenant IDs
-- Regular penetration testing of tenant boundaries
+### Prevention
+1. **Filter-before-retrieve query construction**: Apply the tenant_id filter as part of the similarity-search query itself (restricting the candidate set before ranking) rather than running an unfiltered top-k search and filtering results afterward — the documented failure mode is specifically this "filter-after-retrieve" ordering, where high-similarity cross-tenant documents already entered the context before filtering removed them from the final response. Trade-off: tenant-scoped queries can be less efficient than a single global index if the vector database isn't optimized for filtered search, and require verifying every retrieval code path uses the correct query construction.
+2. **Hard infrastructure isolation for high-sensitivity tenants**: For tenants with the highest sensitivity requirements (competitors sharing infrastructure, regulated industries), provision fully separate vector stores, caches, and potentially model deployment instances rather than relying solely on logical/filter-based isolation within shared infrastructure. Trade-off: significantly increases infrastructure cost and operational complexity versus shared multi-tenant infrastructure.
+3. **Explicit context clearing between tenant sessions**: Ensure no residual context, cache entries, or embeddings from one tenant's session can persist into a subsequent session serving a different tenant, verified through automated testing rather than assumed from application logic. Trade-off: requires disciplined state-management across every layer that might retain data (model context, cache, connection pool) and adds overhead to session teardown.
+
+### Detection & Response
+1. **Response scanning for cross-tenant identifiers**: Scan outgoing responses for identifiers, names, or content patterns associated with a different tenant than the one being served, catching leakage that occurred despite retrieval-time filtering, since this is a documented failure mode where filtering order bugs let cross-tenant content into context before the tenant check ran.
+2. **Similarity-search pattern monitoring across tenants**: Track retrieval patterns for anomalies such as unusually high cross-tenant similarity matches or queries that structurally resemble a filter-bypass, since these can indicate either a genuine architectural flaw or an active probing attempt.
+3. **Regular penetration testing of tenant boundaries**: Conduct scheduled, adversarial testing specifically targeting tenant isolation (attempting to retrieve or infer another tenant's data through crafted queries) rather than relying solely on passive monitoring, since isolation bugs like the filter-order issue can persist undetected until specifically tested for.
+
+### Architecture Patterns
+1. **Tenant-scoped retrieval as a structural guarantee**: Architect the retrieval layer so tenant_id is a mandatory, non-optional parameter of the underlying query API itself (not an application-level filter that can be omitted or misordered), making the filter-before-retrieve pattern the only way to query the system at all.
+2. **Tiered isolation architecture by sensitivity level**: Offer isolation tiers (shared infrastructure with strict logical isolation for standard tenants, dedicated infrastructure for high-sensitivity tenants) as an explicit architectural and commercial offering, rather than a uniform one-size-fits-all isolation model.
+3. **Cross-tenant audit logging as a standing control**: Log every retrieval query with its tenant scope and the tenant scope of any results returned, enabling both real-time anomaly detection and forensic reconstruction if a leak is later discovered.
+
+### Metrics
+1. **cross_tenant_retrieval_rate**: Target: 0% of retrieved documents belong to a tenant other than the requester; Alert on any occurrence
+2. **filter_order_audit_pass_rate**: Target: 100% of retrieval code paths verified to filter-before-retrieve; Alert on any code path found to filter-after-retrieve
+3. **cross_tenant_identifier_in_response_rate**: Target: 0%; Alert on any occurrence
+4. **penetration_test_finding_rate**: Target: 0 critical tenant-isolation findings per test cycle; Alert on any critical finding
+
+### Alerts
+1. **Cross-Tenant Data in Response** (P1): Condition - a response to one tenant is found to contain another tenant's data. Action: Treat as a confirmed critical incident, notify affected tenants per contractual/regulatory breach obligations, halt the responsible retrieval path immediately.
+2. **Filter-After-Retrieve Pattern Found** (P1): Condition - code audit or testing finds a retrieval path that filters by tenant after (not before) the similarity search. Action: Fix immediately as a P1 defect; treat as a confirmed vulnerability even absent evidence of actual exploitation.
+3. **Penetration Test Critical Finding** (P1): Condition - scheduled penetration testing finds a way to access or infer another tenant's data. Action: Remediate before the next production deployment; treat findings as blocking release.
 
 ## References
 

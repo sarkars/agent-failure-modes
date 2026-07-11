@@ -71,20 +71,33 @@ From Security Research (2026):
 - No rollback mechanisms
 - State changes not audited
 
-**Mitigation Strategies**
-1. **State integrity checks**: Hash and verify agent state regularly
-2. **Immutable core state**: Protect critical configuration
-3. **State versioning**: Track and rollback state changes
-4. **Input sanitization**: Prevent memory manipulation via inputs
-5. **State isolation**: Separate state per trust level
-6. **Corruption detection**: Monitor for unexpected state changes
+## Mitigation Strategies
 
-**Detection**
-- Baseline agent state and monitor for drift
-- Compare agent outputs to expected behavior
-- Hash critical state and verify periodically
-- Track state modification events
-- Test agents with known inputs for expected outputs
+### Prevention
+1. **Immutable core configuration separated from mutable conversational memory**: Store critical policy/configuration state (refund policy, shipping rules) in an immutable, code-reviewed configuration layer that cannot be modified through conversational input, keeping only genuinely dynamic, low-stakes context in mutable agent memory. Trade-off: reduces the agent's ability to adapt policy dynamically based on conversation, which may be a desired feature in some systems.
+2. **Strict input sanitization against memory-write patterns**: Detect and reject inputs that resemble memory-modification commands (e.g., "UPDATE MEMORY:", instruction-injection patterns) before they reach any component with write access to agent state, rather than trusting the agent's own judgment to distinguish legitimate conversation from an embedded state-mutation attempt. Trade-off: pattern-based sanitization can be evaded by sufficiently creative injection phrasing and requires ongoing updates as new attack patterns emerge.
+3. **State-write authorization separate from conversational processing**: Require any actual write to persistent agent state to go through an explicit, separately-authorized code path (not something the LLM can trigger directly from processing untrusted conversational input), so a crafted customer message cannot, even in principle, directly mutate the policy memory it's merely being asked about. Trade-off: requires re-architecting systems where state updates were designed to flow naturally from conversation processing.
+
+### Detection & Response
+1. **Periodic state hashing and drift detection**: Hash critical agent state at regular intervals and compare against the last known-good baseline, alerting on any unexpected change that didn't go through the authorized state-update path, since corrupted state can otherwise persist invisibly until manually inspected.
+2. **Behavioral consistency testing against known inputs**: Regularly probe agents with a fixed set of known-input/expected-output test cases (e.g., "what's your refund policy?" should return the current authorized policy) and alert on any deviation, catching corruption through its behavioral symptom even before the underlying state is directly inspected.
+3. **State modification event auditing**: Log every write to agent state with its trigger source (which input, which component authorized it), enabling forensic tracing of exactly when and how corruption was introduced, and enabling targeted rollback rather than a full state reset.
+
+### Architecture Patterns
+1. **Layered state architecture with trust-level isolation**: Separate agent state into tiers by trust/mutability requirement (immutable core config, semi-trusted learned preferences, fully mutable conversational scratch state), with write access to each tier gated by a correspondingly strict authorization mechanism, rather than a single flat, uniformly-writable memory store.
+2. **Versioned state with rollback capability**: Store agent state with full version history so any detected corruption can be rolled back to the last known-good version rather than requiring a full state rebuild or extended downtime while investigating.
+3. **Corruption-spread containment via state isolation across agent instances**: Architect shared knowledge bases/state stores so a single compromised agent's writes don't automatically propagate to all agents reading from that store — require validation or quarantine of state changes before they're trusted by downstream consumers.
+
+### Metrics
+1. **state_integrity_hash_mismatch_rate**: Target: 0% unexplained mismatches (all changes traceable to an authorized update); Alert on any unexplained mismatch
+2. **behavioral_test_deviation_rate**: Target: 0% deviation on core known-input test cases; Alert on any deviation
+3. **unauthorized_state_write_attempt_rate**: Target: track as baseline (input sanitization should catch these); Alert if attempts rise sharply, signaling a new attack pattern
+4. **time_to_corruption_detection**: Target: < 1 hour via automated hash/behavioral checks; Alert if detection relies on manual discovery (signals monitoring gap)
+
+### Alerts
+1. **Unexplained State Hash Mismatch** (P1): Condition - a critical state hash changes without a corresponding authorized update log entry. Action: Treat as a confirmed corruption event; roll back to last known-good version immediately, quarantine the agent instance pending investigation.
+2. **Behavioral Test Deviation** (P1): Condition - an agent's response to a known-input test case deviates from expected baseline. Action: Suspend the agent from production traffic, investigate state for corruption before returning to service.
+3. **Unauthorized State Write Attempt Spike** (P2): Condition - detected attempts to inject memory-modification patterns rise significantly above baseline. Action: Investigate the source/channel of the attempted attacks, strengthen input sanitization rules for the new pattern observed.
 
 ## References
 
