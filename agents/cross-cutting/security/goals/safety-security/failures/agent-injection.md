@@ -35,18 +35,35 @@ Result: Consensus model now heavily weighted toward approval
 - Manipulation of system decisions
 - Denial of service through resource consumption
 
-**Mitigation Strategies**
-1. **Agent registry validation**: Maintain allowlist of authorized agents
-2. **Cryptographic identity**: Each agent has verifiable identity
-3. **Anomaly detection**: Monitor for unexpected agent registrations
-4. **Access controls**: Restrict who can add agents to system
-5. **Audit logging**: Track all agent additions and changes
+## Mitigation Strategies
 
-**Detection**
-- Agent count differs from expected
-- Unknown agent IDs in workflow logs
-- Sudden shifts in consensus outcomes
-- Unexpected network connections from agent processes
+### Prevention
+1. **Allowlisted agent registry with fixed expected membership**: Maintain an explicit, version-controlled registry of authorized agents for each multi-agent workflow (e.g., "exactly 5 voting agents for content moderation") and reject any workflow execution whose participant count or identity set deviates from the registry, since the root cause is a threat actor introducing entirely new components into a system with no such check. Trade-off: legitimate scaling of the agent pool (adding a 6th moderator) now requires an explicit registry-update step rather than dynamic self-registration.
+2. **Cryptographically signed agent identity for workflow participation**: Require every agent to present a cryptographic identity (signed certificate/key) issued by a trusted authority before it can join a workflow or cast a vote, so an attacker who gains code-level access to add an agent still cannot make it a *recognized* participant without also compromising the signing authority. Trade-off: adds key-management overhead and a dependency on a secure certificate-issuance process, which itself becomes a target.
+3. **Restricted access controls on agent provisioning pipelines**: Lock down who/what can register a new agent instance or modify agent discovery services to a small, audited set of principals, directly closing the "Exploiting agent registration mechanisms" and "Poisoning agent provisioning pipelines" attack vectors named in the file. Trade-off: slows down legitimate operational agility (e.g., quickly spinning up a new agent for an incident) since provisioning now requires going through the restricted, audited path.
+
+### Detection & Response
+1. **Real-time agent-count and identity reconciliation**: Continuously compare the live count and identity set of agents participating in a workflow against the registry baseline, triggering an immediate halt when a mismatch is found — directly catching the documented scenario where 10 unauthorized agents joined a 5-agent voting system.
+2. **Consensus-outcome shift monitoring**: Track the statistical distribution of consensus outcomes over time (e.g., historical approve/deny ratios for content moderation) and flag sudden shifts like the 15-5 approval skew in the example, since a coordinated block of injected agents voting identically produces a detectable deviation from historical baselines.
+3. **Unknown-agent-ID correlation with network/resource activity**: When an unrecognized agent ID appears in workflow logs, immediately correlate it against network connections and resource consumption from that agent instance to assess whether it's performing data exfiltration or denial-of-service, per the "Potential Effects" listed in the file.
+
+### Architecture Patterns
+1. **Consensus quorum bound to a cryptographically verified fixed roster**: Architect the voting/consensus mechanism to only count votes from agents whose identity is verified against the fixed roster at vote-tally time, not just at session start, so injected agents cannot participate even if they briefly join the process.
+2. **Isolated agent-provisioning control plane**: Separate the control plane that provisions/registers agents from the runtime plane that executes workflows, with independent access controls on each, so compromising the runtime environment doesn't automatically grant the ability to inject new registered agents.
+3. **Immutable, append-only agent-membership audit trail**: Record every agent addition, removal, and identity change to an append-only log independent of the agent system itself, ensuring that even a successful injection attack leaves an unerasable record for post-incident investigation.
+
+### Metrics
+1. **agent_roster_deviation_count**: Target: 0 discrepancies between live agent count/identity and the registry baseline; Alert on any deviation
+2. **consensus_outcome_drift_score**: Target: outcomes stay within historical statistical bounds; Alert on any statistically significant shift (e.g., >2 standard deviations from baseline)
+3. **unauthorized_registration_attempt_rate**: Target: 0 agent registrations from principals outside the restricted provisioning access list; Alert on any attempt
+4. **unknown_agent_id_occurrence_rate**: Target: 0 unrecognized agent IDs appearing in workflow logs; Alert on any occurrence
+
+### Alerts
+1. **Agent Roster Mismatch Detected** (P1): Condition - live participating agent count/identity set diverges from the registered baseline for a workflow. Action: Halt the workflow immediately, quarantine unrecognized agents, investigate the provisioning pipeline for compromise.
+2. **Consensus Outcome Anomaly** (P2): Condition - voting/consensus results shift significantly from historical baseline distribution. Action: Suspend automatic action on the consensus result, manually review recent votes and agent roster, re-run with verified-only agents.
+3. **Unauthorized Agent Registration Attempt** (P1): Condition - an agent registration or discovery-service modification is attempted by a principal outside the approved provisioning access list. Action: Block the registration, alert security team, audit recent provisioning pipeline changes for tampering.
+
+## References
 
 ## References
 

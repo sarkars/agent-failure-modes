@@ -74,20 +74,33 @@ From Overfitting Research (2026):
 - Optimization pressure on eval metrics
 - No production feedback loop
 
-**Mitigation Strategies**
-1. **Held-out test set**: Never touch until final evaluation
-2. **Rotating eval sets**: Refresh evaluation data regularly
-3. **Production sampling**: Evaluate on real production queries
-4. **Generalization testing**: Test on rephrased/variant queries
-5. **Blind evaluation**: Developers don't see eval details
-6. **Overfitting detection**: Monitor eval-production correlation
+## Mitigation Strategies
 
-**Detection**
-- Track eval vs. production performance gap
-- Test on query variations
-- Monitor improvement rate for anomalies
-- Sample production failures against eval
-- Calculate generalization metrics
+### Prevention
+1. **Held-out final test set never used during iteration**: Maintain a separate held-out set used only once for a final go/no-go decision, never touched during the development iterations, directly addressing "no held-out test set" in Contributing Factors. Trade-off: requires disciplined process to resist peeking, and iteration feedback comes only from the (still-overfittable) dev eval set.
+2. **Rotating/refreshing eval sets on a fixed cadence**: Refresh a meaningful portion of the evaluation set on a scheduled cadence rather than reusing the same 100 problems for 6+ months, since 85% of teams reuse the same eval set for over 6 months per Key Statistics and overfitting is detectable after roughly 20 iterations. Trade-off: rotating eval sets makes historical score trends harder to compare directly, since the underlying cases change.
+3. **Blind evaluation with restricted developer visibility**: Restrict developers' direct visibility into exact eval case details during iterative development, exposing only aggregate scores, so fixes target genuine generalization rather than the exact phrasing pattern (e.g., "Write a function to sort a list"). Trade-off: reduces diagnostic detail available for root-causing a specific failure, slowing debugging.
+
+### Detection & Response
+1. **Eval-vs-production performance gap tracking**: Continuously track the delta between eval-set score and real production performance; the example's 99%→61% gap is a textbook overfitting signature that should trigger investigation well before reaching that magnitude.
+2. **Generalization testing via rephrased/variant queries**: Periodically test the current model against systematically rephrased versions of existing eval cases (not the literal originals) to measure whether performance holds; a drop above 20% per the Overfitting Indicators table signals memorization rather than genuine capability.
+3. **Improvement-rate anomaly monitoring**: Monitor the eval score's month-over-month improvement rate and flag sustained gains above threshold (>5% monthly for 3+ months per the Overfitting Indicators table) as a signal to investigate whether the eval set itself, not agent capability, is what's improving.
+
+### Architecture Patterns
+1. **Shadow evaluation against live production traffic**: Run continuous shadow evaluation on real, unseen production queries in parallel with the static eval set, so a true generalization signal exists independent of whatever the static eval set has become optimized for.
+2. **Separated dev-set/held-out-set architecture with access controls**: Architecturally separate the iterable dev eval set from the held-out final test set at the infrastructure level (different storage, different access permissions), so separation isn't merely a policy convention that can be casually violated under deadline pressure.
+3. **Versioned eval-set registry with rotation scheduling**: Maintain eval sets as versioned artifacts with an enforced rotation/expiry policy built into the eval pipeline itself, so an eval set automatically ages out of "trusted for release gating" status rather than being silently reused indefinitely.
+
+### Metrics
+1. **eval_production_performance_gap**: Target: <10 percentage points; Alert when gap exceeds 20 points
+2. **eval_score_monthly_improvement_rate**: Target: track trend; Alert on sustained >5% monthly improvement for 3+ consecutive months without corresponding production improvement
+3. **rephrased_variant_accuracy_drop**: Target: <10% accuracy drop on paraphrased eval variants vs. originals; Alert when drop exceeds 20%
+4. **eval_set_age_since_rotation_days**: Target: <180 days since last meaningful refresh; Alert when age exceeds 270 days
+
+### Alerts
+1. **Eval-Production Gap Exceeds Threshold** (P1): Condition - the tracked gap between eval score and production performance crosses the alert threshold (e.g., >20 points). Action: freeze eval-driven release decisions, investigate for overfitting, initiate eval-set refresh/rotation.
+2. **Suspicious Sustained Eval Improvement** (P2): Condition - eval score shows sustained monthly gains above threshold for 3+ months. Action: run generalization testing against rephrased variants and shadow production evaluation before trusting the trend.
+3. **Eval Set Rotation Overdue** (P3): Condition - the active eval set has exceeded its defined rotation age without refresh. Action: schedule eval-set refresh, treat current eval scores as lower-confidence until refreshed.
 
 ## References
 

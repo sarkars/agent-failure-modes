@@ -25,19 +25,33 @@ Agent: "You're working on Project Gamma"
 Result: Bob sees Alice's project info - privacy violation
 ```
 
-**Mitigation Strategies**
-1. **Session isolation**: Strict separation of session state
-2. **User authentication**: Verify user identity per session
-3. **Memory scoping**: Tag memories with user/session IDs
-4. **Cache invalidation**: Clear caches between sessions
-5. **Privacy checks**: Validate data access permissions
-6. **Audit logging**: Track cross-session data access
+## Mitigation Strategies
 
-**Detection**
-- Monitor for cross-session data references
-- Alert on user ID mismatches
-- Audit memory access patterns
-- Test session isolation regularly
+### Prevention
+1. **Strict per-session state isolation**: Architect session state (conversation history, working memory, retrieved context) so each session has its own isolated store keyed to a verified session/user ID, with no code path capable of reading another session's state, since the root cause is shared memory or state across sessions combined with improper isolation letting one user's data leak into another's session. Trade-off: full isolation prevents legitimate cross-session features (e.g., "resume where I left off across devices" for the same user) unless explicitly re-architected as same-user, cross-device access rather than shared global state.
+2. **Mandatory user authentication before memory access**: Require verified user identity (not just a session token) before any long-term memory or preference lookup, and reject memory reads/writes where the requesting session's authenticated user doesn't match the memory's owner tag, directly closing the vector where "user identification errors" let one user's session retrieve another user's info. Trade-off: adds an authentication dependency to every memory-touching operation, which can add latency or break in degraded-auth scenarios (e.g., anonymous/guest sessions that still expect some personalization).
+3. **Cache keying on full session/user identity, not just conversation content**: Ensure any response or state cache is keyed on the combination of user ID and session ID (never on conversation content alone), so a cached response generated for one user's context can never be served to a different user asking a similarly-worded question. Trade-off: reduces cache hit rate and thus increases latency/cost compared to a content-only cache key, since near-identical questions from different users won't share a cache entry.
+
+### Detection & Response
+1. **Cross-session data reference monitoring**: Scan agent outputs for references to entities (project names, personal details) that were introduced in a different session than the current one, flagging any match as a potential leak, since the observable symptom is the agent stating information it could only have if session boundaries were violated.
+2. **User ID mismatch alerting on memory access**: Log every memory read/write with both the requesting session's authenticated user ID and the memory record's owner ID, and alert immediately on any mismatch, since this is the direct, structural signature of the failure rather than an inferred one.
+3. **Session isolation regression testing**: Run scheduled synthetic tests that open two sessions as two distinct test users, have one state a private fact, and verify the other cannot retrieve it, catching isolation regressions introduced by code changes before real users are exposed.
+
+### Architecture Patterns
+1. **Per-user memory namespacing with owner-tag enforcement**: Architect long-term memory storage so every entry is tagged with an immutable owner (user ID), and the retrieval layer structurally cannot return entries whose owner tag doesn't match the requesting session's authenticated user — enforced at the data layer, not just the prompt layer, so a prompt-injection or logic bug can't bypass it.
+2. **Ephemeral, non-persistent session cache with explicit invalidation**: Architect session-scoped caches (recent turns, working context) to be created fresh per session and explicitly destroyed at session end, rather than a long-lived shared cache keyed loosely enough that stale entries can be served to the wrong session.
+3. **Audit-logged memory access layer**: Interpose a dedicated memory-access service between the agent and the memory store that logs every access with requester identity and returns a hard error (not a fallback to default/shared data) on any authorization failure, making cross-session access both harder to trigger accidentally and easier to trace when it happens.
+
+### Metrics
+1. **cross_session_reference_rate**: Target: 0 instances of one session's private data appearing in another session; Alert on any detected occurrence
+2. **user_id_mismatch_rate**: Target: 0% of memory accesses show requester/owner ID mismatch; Alert on any mismatch, treated as a P1 incident
+3. **session_isolation_test_pass_rate**: Target: 100% pass rate on scheduled synthetic isolation tests; Alert on any failure
+4. **cache_cross_user_hit_rate**: Target: 0 cache hits served across different authenticated users; Alert on any occurrence
+
+### Alerts
+1. **Cross-Session Data Leak Confirmed** (P1): Condition - a memory or cache entry owned by one user is served to a session authenticated as a different user. Action: Immediately invalidate the affected cache/session, notify affected users per privacy policy, freeze the code path pending root-cause fix.
+2. **Memory Access Owner Mismatch** (P1): Condition - memory-access audit log shows a read/write where requester user ID doesn't match record owner ID. Action: Block the access, log full context for investigation, review recent deploys touching the memory-access layer.
+3. **Session Isolation Regression Test Failure** (P2): Condition - scheduled synthetic isolation test detects one test user's data accessible from another test session. Action: Treat as a release blocker, roll back the most recent change to session/memory handling, re-run tests before allowing further deploys.
 
 ---
 

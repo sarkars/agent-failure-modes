@@ -75,20 +75,33 @@ From Contamination Research (2026):
 - No contamination testing
 - Pressure to show high scores
 
-**Mitigation Strategies**
-1. **Data separation**: Strict isolation of eval from training
-2. **Deduplication**: Check for overlaps before evaluation
-3. **Contamination testing**: Probe model for memorization
-4. **Held-out creation**: Create fresh eval data after training
-5. **Provenance tracking**: Track data lineage
-6. **Canary examples**: Include unique markers to detect leakage
+## Mitigation Strategies
 
-**Detection**
-- Check exact match rates (too high = suspicious)
-- Compare response times (memorized = fast)
-- Test on paraphrased versions of eval
-- Run deduplication against training data
-- Analyze n-gram overlap with training corpus
+### Prevention
+1. **Enforced eval/training data separation with provenance tracking**: Track data lineage for every training and eval example from source, and gate the training pipeline so no example with an ID present in the eval set can be ingested, since leakage here occurred because "same logs used for fine-tuning" with "no deduplication between datasets." Trade-off: requires investment in a data lineage system and discipline in tagging every dataset at ingestion.
+2. **Post-training held-out eval creation**: Create the eval set only after the training/fine-tuning cutoff, drawn from data provably outside the training window, rather than reusing historical production logs also used for training. Trade-off: delays eval availability and may not reflect the exact distribution used during training-time development iterations.
+3. **Deduplication and near-duplicate screening before eval use**: Run exact and semantic-similarity deduplication between the eval set and training corpus before trusting any eval run, catching both the 25% direct overlap and 18% near-duplicate paraphrase overlap found in the example's audit. Trade-off: near-duplicate detection via semantic similarity has false positives/negatives and requires threshold tuning.
+
+### Detection & Response
+1. **Exact-match-rate anomaly monitoring**: Track exact-match rate as a signal distinct from overall accuracy; a rate as high as the example's 94% exact match on leaked cases versus 31% on clean cases is a strong contamination signal warranting audit.
+2. **Response-latency differential analysis**: Compare response time across eval cases, since memorized/leaked cases in the example returned in 0.3s versus 1.2s for genuinely-reasoned cases, giving an operational tell independent of the accuracy score itself.
+3. **Periodic n-gram/embedding overlap audits**: Run scheduled contamination audits (n-gram overlap, semantic similarity) between the current eval set and the full training corpus, since only 20% of teams do this per the Key Statistics and leakage is otherwise invisible until an accuracy gap appears in production.
+
+### Architecture Patterns
+1. **Isolated eval-data custody with separate ownership**: Assign eval-set creation and custody to a team/process organizationally separate from the training-data pipeline team, structurally preventing the "no separation between eval and training teams" contributing factor.
+2. **Canary-example injection pipeline**: Inject unique, traceable canary examples into the eval set (never into training) so that if they later surface in the training corpus or a model's memorized outputs, contamination is definitively detected via a controlled marker rather than statistical inference.
+3. **Versioned golden-set registry with cryptographic hashing**: Hash-fingerprint every eval example and check training-data ingestion against the fingerprint registry at pipeline time, giving an automated, structural block on direct-inclusion leakage rather than relying on after-the-fact audits.
+
+### Metrics
+1. **eval_training_overlap_rate**: Target: 0% exact-match overlap between eval and training sets; Alert on any overlap detected
+2. **eval_training_near_duplicate_rate**: Target: <2% semantic-similarity near-duplicates; Alert above 5%
+3. **exact_match_rate_anomaly**: Target: exact-match rate variance consistent with genuine reasoning; Alert when a subset of cases shows exact-match rate >90% while overall accuracy is materially lower
+4. **contamination_audit_freshness_days**: Target: audit run within last 30 days; Alert when audit age exceeds 60 days
+
+### Alerts
+1. **Eval-Training Overlap Detected** (P1): Condition - deduplication finds any eval example (exact or near-duplicate) present in the training corpus. Action: quarantine affected eval cases, recompute eval score excluding them, investigate the ingestion path that caused overlap.
+2. **Suspicious Exact-Match/Latency Cluster** (P2): Condition - a subset of eval cases shows anomalously high exact-match rate and low latency relative to the rest of the set. Action: manually review the flagged subset for memorization, cross-check against training data provenance.
+3. **Canary Example Surfaced Outside Eval Context** (P1): Condition - a planted canary example is found in training data, model output, or logs outside its intended eval-only use. Action: treat as confirmed contamination, invalidate current eval scores, trace and fix the leak path before the next eval run.
 
 ## References
 

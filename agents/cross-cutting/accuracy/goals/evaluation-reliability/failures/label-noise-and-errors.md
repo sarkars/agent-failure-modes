@@ -80,20 +80,33 @@ From Label Quality Research (2026):
 - Time pressure on annotators
 - No ongoing label quality audits
 
-**Mitigation Strategies**
-1. **Multi-annotator labeling**: Multiple humans per example
-2. **Inter-annotator agreement**: Measure and require threshold
-3. **Expert review**: Subject matter experts validate labels
-4. **Confidence scoring**: Track label certainty
-5. **Error detection**: Use model to find likely label errors
-6. **Regular audits**: Periodic label quality reviews
+## Mitigation Strategies
 
-**Detection**
-- Calculate inter-annotator agreement
-- Flag cases where model consistently "fails"
-- Sample failed cases for human review
-- Track label corrections over time
-- Monitor annotator consistency metrics
+### Prevention
+1. **Multi-annotator labeling with adjudication**: Require every golden example to be labeled by multiple independent annotators, with disagreements routed to an adjudication step, rather than a single annotator's judgment standing as ground truth, since the example's cases #5672 and #5891 showed the same underlying phrasing pattern labeled inconsistently. Trade-off: multiplies labeling cost and time proportional to the number of annotators per example.
+2. **Clear, example-anchored labeling guidelines**: Write labeling guidelines with explicit worked examples for known-ambiguous patterns (e.g., "not bad" sentiment framing, mixed statements like "Revolutionary but overpriced"), rather than leaving standards implicit, since inconsistency and ambiguity accounted for 20% of problematic labels in the example's audit. Trade-off: guidelines require ongoing maintenance and can't fully eliminate genuinely subjective cases.
+3. **Expert review pass for high-stakes or ambiguous categories**: Route labels in domains requiring subject-matter judgment through an expert reviewer before they enter the golden set, addressing "no expert review of labels" in Contributing Factors. Trade-off: expert reviewer time is scarce and expensive, limiting how much of the dataset can receive this level of review.
+
+### Detection & Response
+1. **Inter-annotator agreement measurement and threshold enforcement**: Calculate inter-annotator agreement (e.g., Cohen's kappa) on overlapping-labeled samples and require it to clear a minimum threshold before a batch is accepted into the golden set, since the example's typical agreement range (70-85%) leaves meaningful room for undetected inconsistency.
+2. **Model-disagreement-driven label review**: When the model "consistently fails" a specific case across multiple otherwise-strong checkpoints, flag that case for human re-review rather than assuming the model is wrong, since this is a known signal of label error and the example found true agent accuracy (~85%) was actually higher than reported (74%).
+3. **Periodic label-quality audits with corrected-label tracking**: Run scheduled audits sampling golden labels for correctness, tracking the volume and rate of corrections over time as a first-class quality metric, rather than a one-time dataset creation with no ongoing quality process.
+
+### Architecture Patterns
+1. **Inter-rater reliability pipeline as a first-class labeling stage**: Architect the golden-data creation pipeline so every example passes through multi-annotator labeling, automatic agreement scoring, and adjudication-on-disagreement as sequential pipeline stages, not an optional add-on, structurally preventing single-annotator errors from entering the golden set unchecked.
+2. **Confidence-scored label registry**: Store a confidence/agreement score alongside every golden label, derived from inter-annotator agreement and adjudication history, enabling downstream eval reporting to weight or exclude low-confidence labels rather than treating all golden labels as equally authoritative.
+3. **Continuous label-correction feedback loop**: Architect a pipeline where model-disagreement flags and periodic audits feed directly into a label-correction queue that updates the golden set in place, versioning each correction, rather than treating the golden set as static after initial creation.
+
+### Metrics
+1. **inter_annotator_agreement_score**: Target: >85% agreement (e.g., Cohen's kappa >=0.8) on multi-labeled samples; Alert when agreement falls below 70%
+2. **label_correction_rate**: Target: <5% of golden labels require correction per audit cycle; Alert when correction rate exceeds 15%
+3. **model_consistent_failure_flag_backlog**: Target: all flagged consistent-failure cases reviewed within one sprint; Alert when the backlog of unreviewed flagged cases exceeds threshold
+4. **single_annotator_label_percent**: Target: 0% of golden labels from only a single annotator with no adjudication; Alert on any batch accepted below full multi-annotator coverage
+
+### Alerts
+1. **Inter-Annotator Agreement Below Threshold** (P2): Condition - a labeling batch's measured agreement score falls below the required minimum. Action: halt acceptance of that batch into the golden set, route to adjudication/expert review, revise guidelines if the disagreement pattern is systematic.
+2. **Model Consistently Fails Specific Case(s)** (P3): Condition - the model fails the same golden case(s) across multiple independent evaluation runs despite otherwise strong performance. Action: flag case for human re-review as a likely label error before penalizing the model further.
+3. **Label Correction Rate Spike** (P2): Condition - a scheduled audit finds correction rate significantly above historical baseline. Action: investigate the labeling batch/annotator/process that produced the affected examples, consider re-auditing adjacent batches from the same source.
 
 ## References
 

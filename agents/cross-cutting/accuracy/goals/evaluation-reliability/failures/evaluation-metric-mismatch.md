@@ -75,20 +75,33 @@ From Evaluation Research (2026):
 - No metric-to-outcome correlation analysis
 - Goodhart's Law ("measure becomes target")
 
-**Mitigation Strategies**
-1. **Multi-metric evaluation**: Balance multiple dimensions
-2. **Human evaluation sampling**: Regular human judgment calibration
-3. **Outcome correlation**: Validate metrics predict real outcomes
-4. **Semantic similarity**: Use embeddings instead of exact match
-5. **Task-specific metrics**: Design metrics for actual use case
-6. **A/B validation**: Correlate eval scores with production A/B results
+## Mitigation Strategies
 
-**Detection**
-- Compare eval scores to user satisfaction
-- Audit "passed eval, failed production" cases
-- Calculate metric-outcome correlations
-- Survey users about quality vs. eval results
-- Track metric gaming indicators
+### Prevention
+1. **Outcome-validated metric selection**: Before adopting any eval metric, validate it against actual user outcomes (satisfaction, task completion, compliance) on a sample, rather than inheriting metrics from another domain, since 45% of teams use metrics inherited without validation per Key Statistics. Trade-off: requires an upfront correlation study and ongoing re-validation as the product evolves.
+2. **Task-specific composite metrics over generic NLP metrics**: Design metrics specific to the actual use case (e.g., legal citation accuracy, compliance adherence) rather than relying on generic proxies like BLEU or exact match, since the example showed BLEU (0.78) scored wrong citations the same as correct ones. Trade-off: task-specific metrics are more expensive to build, require domain expertise, and don't transfer to other products.
+3. **Multi-metric guardrails instead of single-metric optimization**: Require a response to pass a balanced set of metrics (factual accuracy, completeness, compliance, task completion) rather than any single measurable metric, preventing the single-axis optimization pressure Goodhart's Law describes in Contributing Factors. Trade-off: multi-metric thresholds are harder to tune and can conflict, requiring an explicit prioritization policy.
+
+### Detection & Response
+1. **Eval-score-to-outcome correlation tracking**: Continuously calculate the correlation between eval metric scores and downstream outcomes (satisfaction, business KPIs, incident rate); a metric with declining or low correlation is flagged for review, directly targeting the "60% of eval metrics don't correlate with user satisfaction" finding.
+2. **Passed-eval-failed-production case audits**: Systematically audit cases that passed evaluation but generated complaints or incidents in production, like the example's 3 compliance violations despite an all-metrics PASS, tracing which metric(s) gave false confidence.
+3. **Human evaluation spot-checking against automated scores**: Run periodic human judgment sampling calibrated against automated metric scores, since BLEU/ROUGE correlate below 0.3 with human quality judgments per Key Statistics, giving an independent check the automated metric alone cannot provide.
+
+### Architecture Patterns
+1. **LLM-as-judge or human-in-the-loop layer alongside automated metrics**: Architect the eval pipeline so a semantic/quality-judging layer runs in parallel with cheap automated metrics like exact match or BLEU, rather than relying on the cheap metric alone as the pass/fail gate.
+2. **A/B-validated metric pipeline**: Structurally require that any new or changed eval metric be validated against live A/B test outcome data before it can gate releases, closing the "metric-business outcome correlation rarely measured" gap.
+3. **Domain-specific assertion framework**: Build an assertion-based evaluation harness (e.g., citation-checker, compliance-rule-checker) as a first-class architecture component alongside generic text-similarity scoring, so domain-critical failure modes have a dedicated detection path instead of being absorbed into a generic score.
+
+### Metrics
+1. **metric_outcome_correlation_coefficient**: Target: >0.6 correlation between eval score and user satisfaction/business outcome; Alert when correlation drops below 0.4
+2. **passed_eval_failed_production_rate**: Target: <2% of production incidents trace back to cases that passed eval; Alert above 5%
+3. **human_automated_score_agreement_rate**: Target: >85% agreement between human judgment sample and automated metric verdict; Alert below 70%
+4. **single_metric_gaming_indicator**: Target: 0 detected metric-optimized-but-quality-flat changes; Alert when a change improves the primary metric by more than 5% with no corresponding user-outcome improvement
+
+### Alerts
+1. **Metric-Outcome Correlation Collapse** (P2): Condition - tracked correlation between an eval metric and real outcomes drops below the defined floor. Action: suspend using that metric as a release gate, initiate a metric redesign/validation cycle.
+2. **Compliance/Safety Incident Despite Passing Eval** (P1): Condition - a production incident occurs from a response category the eval marked as passing. Action: halt further releases gated solely on that metric, add a dedicated assertion/check for the failure category, re-audit recent passed cases.
+3. **Human-Automated Score Divergence** (P2): Condition - human evaluation sample disagrees with automated metric verdict above threshold rate. Action: pause reliance on the automated metric for release decisions until recalibrated against fresh human judgments.
 
 ## References
 

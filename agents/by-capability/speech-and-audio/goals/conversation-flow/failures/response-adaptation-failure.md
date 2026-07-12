@@ -137,181 +137,31 @@ From Voice Agent Adaptation Research (2026):
 ## Mitigation Strategies
 
 ### Prevention
-1. **Response classification**: Detect triggers before generating response
-2. **Interrupt flow**: Questions/concerns override planned next step
-3. **Context injection**: Include caller's last response in prompt
-4. **Conditional branching**: Handle "yes but..." differently from "yes"
-5. **Acknowledgment first**: Address what they said before continuing
-6. **Relevance check**: Ask "Does my planned response fit what they said?"
+1. **Pre-response trigger classification**: run a lightweight classifier on every caller turn (question / concern / condition / context / objection / standard) before generating the next agent turn, and require the response to address any detected trigger before continuing the planned flow, since the failure is structurally caused by the agent generating its next scripted step without first checking whether the caller's response requires a different path. Trade-off: adds a classification call (latency/cost) to every turn, and misclassified turns can still let genuine adaptation triggers slip through.
+2. **Acknowledgment-before-continuation prompt constraint**: enforce a hard prompt/response-schema rule that any detected question, concern, or objection must be addressed in the response before any planned-flow content is emitted ("answer/address first, then continue"), since transcripts show the agent completing sentences and moving to the next script step even mid-caller-interruption. Trade-off: rigidly enforcing "address first" can produce overly long responses when multiple triggers stack in one caller turn.
+3. **Conditional-branch library for common objection/condition patterns**: pre-author explicit conditional branches for frequent patterns ("yes, but only if...", "I already know about this," "I don't have time") so the flow has a designed alternate path rather than forcing the model to improvise a deviation from script, since the state machine's rigidity itself — not just the model's attentiveness — is a root cause. Trade-off: branch libraries require ongoing curation as new caller patterns emerge and can't cover every conversational variation.
 
-### Implementation
-```python
-class ResponseAdapter:
-    """Adapt conversation flow based on caller response"""
-    
-    QUESTION_MARKERS = [
-        "what", "how", "why", "when", "where", "who",
-        "can you", "could you", "will", "would",
-        "kya", "kaise", "kyun", "kab"
-    ]
-    
-    CONCERN_MARKERS = [
-        "worried", "concerned", "afraid", "spam",
-        "too many", "bother", "annoy", "privacy",
-        "safe", "secure", "trust"
-    ]
-    
-    CONDITION_MARKERS = [
-        "only if", "but only", "as long as", "if",
-        "depends", "maybe if", "unless"
-    ]
-    
-    OBJECTION_MARKERS = [
-        "don't have time", "too busy", "not sure",
-        "sounds like a lot", "complicated"
-    ]
-    
-    def classify_response(self, transcript: str) -> dict:
-        """Classify what type of response adaptation is needed"""
-        transcript_lower = transcript.lower()
-        
-        # Check for questions (highest priority)
-        if any(m in transcript_lower for m in self.QUESTION_MARKERS):
-            if "?" in transcript or self.is_question_structure(transcript):
-                return {
-                    "type": "question",
-                    "action": "answer_first",
-                    "can_continue_after": True
-                }
-        
-        # Check for concerns
-        if any(m in transcript_lower for m in self.CONCERN_MARKERS):
-            return {
-                "type": "concern",
-                "action": "address_concern",
-                "can_continue_after": True
-            }
-        
-        # Check for conditions
-        if any(m in transcript_lower for m in self.CONDITION_MARKERS):
-            return {
-                "type": "conditional",
-                "action": "acknowledge_condition",
-                "can_continue_after": True
-            }
-        
-        # Check for objections
-        if any(m in transcript_lower for m in self.OBJECTION_MARKERS):
-            return {
-                "type": "objection",
-                "action": "handle_objection",
-                "can_continue_after": False
-            }
-        
-        return {"type": "standard", "action": "continue_flow"}
-    
-    def generate_adapted_response(self, classification: dict,
-                                   caller_input: str,
-                                   planned_response: str) -> str:
-        """Generate response that addresses caller before continuing"""
-        
-        action = classification["action"]
-        
-        if action == "answer_first":
-            # Extract and answer the question, then continue
-            answer = self.generate_answer(caller_input)
-            if classification["can_continue_after"]:
-                return f"{answer} {planned_response}"
-            return answer
-        
-        if action == "address_concern":
-            # Acknowledge concern, provide reassurance, then continue
-            reassurance = self.generate_reassurance(caller_input)
-            return f"{reassurance} {planned_response}"
-        
-        if action == "acknowledge_condition":
-            # Note the condition, then continue
-            acknowledgment = self.acknowledge_condition(caller_input)
-            return f"{acknowledgment} {planned_response}"
-        
-        if action == "handle_objection":
-            # Handle objection - may change flow entirely
-            return self.handle_objection(caller_input)
-        
-        return planned_response
+### Detection & Response
+1. **Turn-pair relevance scoring**: score each agent turn for topical relevance to the immediately preceding caller turn (embedding similarity or an LLM-judge check of "does this response address what was just said"); low-relevance pairs are the direct signature of a continued-script-ignoring-response failure. Response: flag the call segment for review and, for real-time-capable systems, insert a corrective clarifying turn.
+2. **"Not what I asked" / correction-phrase detection**: detect caller phrases indicating the agent missed their input ("that's not what I asked," repeated restatements). Response: route matched call transcripts into a labeled adaptation-failure eval set and, if live, prompt the agent to re-acknowledge the missed input.
+3. **Trigger-type miss-rate breakdown**: track, per trigger type (question/concern/condition/context/objection), what fraction were followed by an on-topic response versus a script continuation — this call-level breakdown identifies which trigger type the classifier or prompt is weakest on. Response: prioritize prompt/classifier fixes for the worst-performing trigger type.
 
+### Architecture Patterns
+1. **Interrupt-driven flow manager**: replace the linear/rigid flow state machine with an interrupt-driven design where classified triggers (question, concern, objection) can preempt the current planned step, requiring the flow manager to explicitly resume or re-route after handling the interrupt, structurally supporting deviation instead of only forward progression.
+2. **Context-carrying turn generation**: inject the full classification result and the caller's last utterance, not just the next scripted step, into every generation call, so response generation is conditioned on "what do I need to address" as a first-class input rather than the model needing to infer it from raw transcript history under turn-by-turn prompting.
+3. **Conditional branching engine**: implement conditions and objections as explicit branch nodes in the flow graph, not implicit model behavior, so a conditional "yes, but..." or an objection structurally routes to a different next-state than an unconditional "yes," matching the finding that conditional answers are among the most frequently mishandled trigger types.
 
-class AdaptiveFlowManager:
-    """Manage conversation flow with adaptation"""
-    
-    def __init__(self):
-        self.adapter = ResponseAdapter()
-        self.current_step = "opening"
-        self.pending_question = None
-    
-    def process_turn(self, caller_input: str) -> dict:
-        # First: classify what the caller said
-        classification = self.adapter.classify_response(caller_input)
-        
-        # If they asked a question, answer it first
-        if classification["type"] == "question":
-            self.pending_question = caller_input
-            return {
-                "response_type": "answer_question",
-                "then_continue": self.current_step,
-                "instruction": f"Answer their question: '{caller_input}' "
-                              f"Then continue with {self.current_step}"
-            }
-        
-        # If they raised a concern, address it
-        if classification["type"] == "concern":
-            return {
-                "response_type": "address_concern",
-                "concern": caller_input,
-                "instruction": f"Address their concern about: '{caller_input}' "
-                              f"Then continue naturally"
-            }
-        
-        # Normal flow
-        return {
-            "response_type": "standard",
-            "continue_with": self.current_step
-        }
-```
+### Metrics
+1. **adaptation_rate**: Target: >85%; Alert on <75% over rolling 7-day call sample
+2. **question_answered_before_continuation_rate**: Target: >90%; Alert on <80%
+3. **concern_addressed_rate**: Target: >80%; Alert on <70%
+4. **condition_acknowledgment_rate**: Target: >90%; Alert on <75%
+5. **not_listening_complaint_rate**: Target: <10%; Alert on >15%
 
-### Prompt Design
-```yaml
-instructions: |
-  ## ADAPTATION RULES (CRITICAL)
-  
-  Before generating your response, CHECK what the caller said:
-  
-  IF they asked a QUESTION:
-  → Answer it FIRST, then continue with your planned response
-  → Example: "Good question—[answer]. So, [continue]..."
-  
-  IF they raised a CONCERN:
-  → Address it FIRST, don't just acknowledge
-  → Example: "Totally get that—[address concern]. [continue]..."
-  
-  IF they said YES with a CONDITION ("only if...", "but..."):
-  → Note the condition before continuing
-  → Example: "Got it, [acknowledge condition]. [continue]..."
-  
-  IF they shared CONTEXT (already know, participated before):
-  → Acknowledge relevance before continuing
-  → Example: "Oh nice! [connect to context]. [continue]..."
-  
-  IF they raised an OBJECTION:
-  → Handle it—don't continue the pitch
-  → This may change the flow entirely
-  
-  NEVER:
-  - Continue to next script step ignoring their question
-  - Say "Great!" then ask an unrelated question
-  - Acknowledge a concern without addressing it
-  - Treat a conditional yes as an unconditional yes
-```
+### Alerts
+1. **Adaptation Rate Drop** (P2): Condition - adaptation_rate falls below 75% over a rolling 7-day window. Action: pull a call sample stratified by trigger type, identify the weakest classifier/prompt path, patch and re-eval before the next deploy.
+2. **High Not-Listening Complaints** (P1): Condition - not_listening_complaint_rate exceeds 15%. Action: page the conversation-design owner, sample recent calls for repeated script-continuation failures, consider rolling back recent flow-script changes.
+3. **Condition/Objection Mishandling Spike** (P2): Condition - condition_acknowledgment_rate falls below 75% or objection-handling relevance score drops sharply week over week. Action: review and expand the conditional-branch library for the specific patterns driving the drop.
 
 ---
 

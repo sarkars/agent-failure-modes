@@ -76,20 +76,33 @@ From Coverage Research (2026):
 - Production distribution not analyzed
 - New features added without test data
 
-**Mitigation Strategies**
-1. **Coverage analysis**: Map golden data to production distribution
-2. **Stratified sampling**: Ensure representation across segments
-3. **Edge case mining**: Deliberately create challenging cases
-4. **Production sampling**: Add real queries to golden set
-5. **Adversarial testing**: Include deliberately difficult inputs
-6. **Coverage metrics**: Track and require minimum coverage
+## Mitigation Strategies
 
-**Detection**
-- Compare golden vs. production query distributions
-- Track accuracy by query segment
-- Monitor failures from underrepresented categories
-- Audit golden set demographics
-- Alert on coverage threshold violations
+### Prevention
+1. **Production-distribution-mapped stratified sampling**: Build the golden set by sampling proportional to (or oversampling relative to risk for) the actual production query distribution across segments, rather than convenience sampling, since the example's golden set had 0% non-English speakers against 12% of actual production volume. Trade-off: requires ongoing production distribution analysis and may require translating/localizing test cases.
+2. **Deliberate edge-case and adversarial-case mining**: Allocate dedicated effort to constructing edge-case, adversarial, and rare-condition test cases rather than relying on convenience samples, since edge cases are only 2-5% of golden data but drive 15-25% of production failures per Key Statistics. Trade-off: edge-case creation is expensive and requires domain expertise to construct realistic scenarios.
+3. **Mandatory minimum coverage gate for new features**: Require every new feature to ship with golden-set coverage meeting a minimum threshold before launch, rather than launching with under 50% coverage as is typical per Key Statistics. Trade-off: adds eval-authoring time to the feature timeline, creating pressure to skip this step under deadline pressure.
+
+### Detection & Response
+1. **Golden-vs-production distribution comparison**: Continuously compare golden-set composition against actual production query distribution across the same segment categories, surfacing gaps like the example's "Emergency scenarios: 1% golden vs 5% production" before they cause missed escalations.
+2. **Segment-level accuracy monitoring with risk-weighted alerting**: Track production accuracy broken out by segment and weight alerting by the safety/business criticality of that segment, since the example's emergency-scenario accuracy (58%) and elderly-multi-condition accuracy (52%) were the most dangerous gaps despite low golden-set volume.
+3. **Underrepresented-category failure clustering**: When analyzing production failures, specifically tag and count how many trace back to categories below a coverage threshold in the golden set, directly measuring the "40% of critical failures from untested scenarios" finding.
+
+### Architecture Patterns
+1. **Continuous production-sampling pipeline feeding golden set**: Architect an ongoing pipeline that samples real production queries (with privacy review) into the golden set on a schedule, weighted toward underrepresented and high-risk segments, rather than treating golden-set creation as a one-time convenience-sample exercise.
+2. **Coverage-metrics dashboard gating releases**: Build a coverage-tracking system that computes golden-set representation against defined production segments and blocks deployment when any critical segment (e.g., emergency scenarios in a medical triage bot) falls below its required minimum.
+3. **Adversarial/red-team test-case generation harness**: Maintain a dedicated adversarial test generation process as a permanent part of the eval architecture, separate from the "happy path" golden set, so adversarial coverage doesn't compete with or get diluted by common-case cases.
+
+### Metrics
+1. **golden_production_segment_coverage_ratio**: Target: each defined segment represented at >=80% of its production proportion; Alert when any segment falls below 30% of its production proportion
+2. **edge_case_representation_rate**: Target: edge/rare cases >=10% of golden set; Alert when below 5%
+3. **new_feature_launch_coverage_percent**: Target: >=80% golden coverage at feature launch; Alert if a feature launches below 50%
+4. **critical_segment_accuracy_floor**: Target: no safety-critical segment (e.g., emergency scenarios) below 90% accuracy; Alert on any critical segment below floor
+
+### Alerts
+1. **Safety-Critical Segment Coverage Gap** (P1): Condition - a safety/business-critical segment (e.g., emergency scenarios, non-English speakers) falls below minimum golden-set representation. Action: block release, prioritize immediate test-case creation for that segment, escalate to eval owner.
+2. **Segment Accuracy Cliff in Production** (P1): Condition - production accuracy for any tracked segment drops significantly below the golden-set-measured accuracy for that segment. Action: page on-call, investigate whether coverage gap or genuine regression, add representative cases to golden set.
+3. **New Feature Launched Below Coverage Threshold** (P2): Condition - a feature reaches production with golden-set coverage below the required minimum. Action: flag to engineering leadership, schedule urgent backfill of test cases, increase production monitoring for that feature until coverage closes.
 
 ## References
 

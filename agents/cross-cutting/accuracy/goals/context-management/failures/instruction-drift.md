@@ -24,19 +24,33 @@ Turn 30: "Yeah, that's totally doable!"
 Result: Agent has drifted from formal style to casual
 ```
 
-**Mitigation Strategies**
-1. **Instruction repetition**: Periodically re-inject key instructions
-2. **Instruction anchoring**: Place instructions where attention is highest
-3. **Behavior monitoring**: Detect drift and course-correct
-4. **Shorter sessions**: Reset context for fresh instruction adherence
-5. **Instruction summarization**: Compress but preserve constraints
-6. **Explicit reminders**: User or system reminds of constraints
+## Mitigation Strategies
 
-**Detection**
-- Track instruction adherence metrics over conversation length
-- Monitor for constraint violations
-- Compare early vs. late behavior patterns
-- Alert on style/behavior drift
+### Prevention
+1. **Periodic instruction re-injection**: Automatically re-insert the original system constraints (e.g., "respond formally, never use contractions") into context at a fixed turn interval or token threshold, rather than relying on a single system-prompt statement to remain influential as the conversation grows, since the root cause is that instructions become proportionally smaller in context over time and lose relative attention weight. Trade-off: repeated re-injection consumes additional tokens on every long conversation and can feel repetitive or robotic if surfaced to the user rather than kept in hidden system context.
+2. **Instruction anchoring at high-attention positions**: Place critical constraints at both the start and immediately before the most recent user turn (the positions models attend to most reliably), rather than only at the very beginning of a long context, directly countering the mechanism where "agent attention shifts toward recent content" causes early instructions to lose influence. Trade-off: requires re-architecting prompt assembly to dynamically reposition constraints on every turn, adding complexity versus a static system prompt.
+3. **Bounded session length with reset**: Cap conversation length (by turns or tokens) and prompt for a fresh session (carrying forward only an explicit summary of decisions, not full history) once the cap is reached, since a shorter effective context keeps the original instructions proportionally larger and closer to the model's attention. Trade-off: resets interrupt long-running workflows and require a reliable summarization step to avoid losing state when starting the new session.
+
+### Detection & Response
+1. **Instruction-adherence scoring over conversation length**: Periodically score agent outputs against the original constraints (e.g., "contains a contraction" as a formality violation) and plot adherence against turn number, since the documented pattern is gradual degradation over the length of the conversation — a downward trend is the direct signature of drift.
+2. **Early-vs-late behavior comparison**: Automatically compare a sample of early-conversation outputs against late-conversation outputs on the same measurable dimension (tone, format, constraint compliance) and flag statistically significant divergence, catching drift that a single-point adherence check might miss.
+3. **Explicit reminder triggers on detected drift**: When adherence scoring crosses a threshold, automatically inject an explicit reminder of the violated constraint into the next turn rather than waiting for the user to notice and re-state it, closing the loop between detection and correction within the same session.
+
+### Architecture Patterns
+1. **Constraint-checking middleware on output**: Architect a post-generation validation layer that checks agent output against the original constraint set (formality, banned phrases, persona rules) before it's returned, rejecting or auto-correcting violations rather than relying solely on the model's in-context adherence holding up over a long conversation.
+2. **Persistent constraint store separate from conversational context**: Maintain the original instructions in a structured, external store that is re-rendered into the prompt fresh on every turn (rather than living only in the conversation history that grows and dilutes them), so instruction strength doesn't degrade as a function of conversation length.
+3. **Session-summary-carrying reset architecture**: Architect long workflows as a sequence of bounded sub-sessions, each initialized with a compact structured summary (decisions, state, constraints) rather than raw history, so each sub-session starts with instructions at full relative strength instead of instructions that have been diluted across dozens of prior turns.
+
+### Metrics
+1. **instruction_adherence_score**: Target: no statistically significant decline from turn 1-10 baseline through turn 30+; Alert on adherence dropping more than 15% from early-conversation baseline
+2. **constraint_violation_rate_by_turn_bucket**: Target: flat violation rate across turn buckets (1-10, 11-20, 21-30+); Alert on rate increasing with turn number
+3. **drift_correction_trigger_rate**: Target: track as baseline; Alert on sustained high trigger rate indicating reminders aren't durably fixing drift
+4. **session_length_at_reset**: Target: sessions reset before exceeding configured turn/token cap; Alert on sessions exceeding cap without a reset occurring
+
+### Alerts
+1. **Significant Instruction Adherence Decline** (P2): Condition - adherence score drops more than 15% from early-conversation baseline within a single session. Action: Inject an explicit constraint reminder into the next turn, log the session for review, consider forcing a session reset if the workflow supports it.
+2. **Persona/Style Violation in Long Session** (P3): Condition - constraint-checking middleware flags an output violating a known persona rule (e.g., contraction detected in formal-mode session) in a session beyond turn 20. Action: Auto-correct the output if the middleware supports rewriting, otherwise flag for human review, log turn number for drift-pattern analysis.
+3. **Session Exceeds Reset Threshold Without Reset** (P3): Condition - a session's turn or token count exceeds the configured cap without a reset/summarization event firing. Action: Investigate why the reset trigger failed, force a manual summarization checkpoint, review reset-logic configuration for that workflow.
 
 ---
 

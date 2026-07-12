@@ -81,20 +81,33 @@ From Evaluation Research (2026):
 - Single "correct" answer assumed
 - Evaluation tools lack flexibility
 
-**Mitigation Strategies**
-1. **Semantic similarity**: Use embeddings to compare meaning
-2. **LLM-as-judge**: Use another model to evaluate equivalence
-3. **Normalization**: Standardize format before comparison
-4. **Multiple valid answers**: Accept multiple correct responses
-5. **Assertion-based**: Test properties, not exact strings
-6. **Fuzzy matching**: Allow threshold-based matching
+## Mitigation Strategies
 
-**Detection**
-- Audit failed cases for semantic equivalence
-- Track exact match vs. semantic similarity scores
-- Sample failures for human review
-- Compare evaluation methods on same data
-- Monitor false failure rates
+### Prevention
+1. **Semantic-similarity-based comparison replacing exact match**: Use embedding-based semantic similarity or LLM-as-judge as the primary comparison method instead of exact string match, since exact match misses 30-50% of valid responses per Key Statistics while semantic similarity catches 85-95% of them. Trade-off: semantic similarity scoring is less deterministic than exact match and requires threshold tuning to avoid accepting genuinely wrong-but-similar answers.
+2. **Response normalization before comparison**: Normalize both expected and actual responses (case, punctuation, numeric format, whitespace) before any comparison step, directly closing the format-variation failure class shown in the example ("30" vs "30.0", capitalization, punctuation). Trade-off: normalization rules must be maintained per data type and can mask genuine formatting-requirement failures.
+3. **Multiple-valid-answer acceptance sets**: Author golden data with a set of acceptable answers/orderings (e.g., accept any permutation of "Red, blue, yellow") rather than assuming one canonical phrasing is correct, addressing "single 'correct' answer assumed" in Contributing Factors. Trade-off: authoring multiple acceptable variants per case increases golden-data creation effort significantly for open-ended questions.
+
+### Detection & Response
+1. **Semantic-equivalence audit of failed cases**: Before accepting a failure as genuine, run failed cases through a semantic-equivalence check (embedding similarity or LLM-as-judge) and flag cases where the failure appears wording-only, since the example found actual accuracy (94%) was 16 points higher than reported (78%).
+2. **Dual-scoring comparison (exact match vs. semantic similarity)**: Run both exact-match and semantic-similarity scoring in parallel on every eval run and track the delta between them; a large and growing gap signals the eval is systematically under-crediting valid responses.
+3. **False-failure-rate sampling and reporting**: Periodically sample "failed" cases for human review specifically to classify them as genuine failures vs. semantic false failures, tracking this false-failure rate as an ongoing quality metric for the eval harness itself, not just the agent.
+
+### Architecture Patterns
+1. **LLM-as-judge evaluation layer for open-ended responses**: Architect the eval pipeline so open-ended/free-text responses are scored by an LLM-as-judge configured to assess semantic equivalence to the expected answer, rather than falling back to string matching by default for anything not trivially structured.
+2. **Assertion-based test framework for structured properties**: For cases with clear structural properties (e.g., "contains the correct city name," "numerically equals 30"), architect tests as property assertions rather than string equality, so format/order variation is structurally irrelevant to pass/fail.
+3. **Fuzzy-matching threshold layer with tunable acceptance bands**: Build a configurable fuzzy-matching layer (edit distance, set comparison for unordered lists, numeric tolerance) between the raw response and exact-match scoring, so common equivalence classes are handled structurally rather than via ad hoc case-by-case fixes.
+
+### Metrics
+1. **exact_match_vs_semantic_similarity_gap**: Target: <5 percentage points between the two scoring methods; Alert when gap exceeds 15 points
+2. **false_failure_rate**: Target: <5% of "failed" cases are semantic false failures upon human review; Alert when sampled false-failure rate exceeds 15%
+3. **semantic_similarity_catch_rate**: Target: >90% of valid responses correctly scored as passing; Alert when catch rate drops below 80%
+4. **llm_judge_human_agreement_rate**: Target: >85% agreement between LLM-as-judge verdicts and human review sample; Alert below 70%
+
+### Alerts
+1. **Exact-Match/Semantic-Similarity Divergence** (P2): Condition - the gap between exact-match score and semantic-similarity score for the same eval run exceeds threshold. Action: treat exact-match score as unreliable for this run, prioritize semantic-similarity or LLM-as-judge scoring for the release decision.
+2. **False Failure Rate Spike** (P2): Condition - sampled audit of failed cases finds false-failure rate above threshold. Action: pause using the current eval scoring method for release gating, prioritize normalization/semantic-matching fixes to the eval harness.
+3. **LLM-Judge/Human Disagreement** (P3): Condition - LLM-as-judge verdicts diverge from human review sample beyond acceptable threshold. Action: recalibrate or replace the judge prompt/model, fall back to human review for affected case categories until resolved.
 
 ## References
 
