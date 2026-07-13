@@ -48,6 +48,21 @@ Result: Fake PO number causes ERP lookup failure or worse, matches wrong PO
 2. **Field Presence Rate Anomaly** (P2): Condition - a document type's field-population rate for an optional field exceeds the known true population rate by more than 15 points. Action: Sample recently processed documents to confirm hallucination, tighten presence-detection step or negative-sample training.
 3. **Reference Lookup Failure Spike** (P2): Condition - lookup failure rate for an extracted reference ID field exceeds 8%. Action: Sample failed lookups against source documents to check whether the field was genuinely absent and hallucinated rather than a data-quality issue in the system of record.
 
+## Universal Pattern Reference
+
+This is a domain-specific implementation of the universal pattern:
+**[Hallucination: Objects (Cross-Cutting)](../../../cross-cutting/accuracy/goals/output-accuracy/failures/hallucination-object.md)**
+
+The universal pattern covers why models hallucinate objects/fields. This variant focuses on **document processing** where models invent fields that don't exist (phantom PO numbers, phantom tables, phantom signatures).
+
+### Related Domain Variants
+- [Vision: Object Hallucination](../../../vision-and-images/goals/visual-hallucination/failures/object-hallucination.md) — Hallucinated objects in cluttered or empty scenes
+
+### Related Base Pattern
+- [Hallucination: Base Mechanism](../../../cross-cutting/accuracy/goals/output-accuracy/failures/hallucination-base-mechanism.md) — Universal root cause of all hallucinations
+
+---
+
 ## References
 
 - [Hallucination of Multimodal LLMs Survey](https://arxiv.org/html/2404.18930v2) - Object hallucination taxonomy

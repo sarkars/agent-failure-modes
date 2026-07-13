@@ -157,6 +157,29 @@ Impact:
 
 ---
 
+## Complementary Pattern
+
+**This pattern focuses on DETECTION & RESPONSE (attack scenarios and recovery).**
+
+For architectural prevention and defense-in-depth, see the complementary pattern:
+**[Privilege Escalation: Prevention & Architecture (Safety-Security)](../safety-security/failures/privilege-escalation.md)**
+
+The safety-security pattern covers:
+- Architectural defenses to prevent escalation
+- Permission propagation and validation
+- Policy enforcement patterns
+- Tool-level permission checks
+
+This pattern (security-autonomy) covers:
+- Attack scenarios and how agents can be socially engineered to escalate
+- Detection of active privilege escalation attempts
+- Incident recovery and audit procedures
+- Post-incident analysis
+
+**Best Practice**: Implement both perspectives — prevent escalation where possible (safety-security), but also design for detection and recovery in case prevention fails (security-autonomy).
+
+---
+
 ## References
 
 - [CSA-Agentic-Profile](https://labs.cloudsecurityalliance.org/agentic/agentic-nist-ai-rmf-profile-v1/)

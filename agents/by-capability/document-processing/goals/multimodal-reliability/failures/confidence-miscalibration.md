@@ -48,6 +48,19 @@ Result: High-confidence wrong answer bypasses review queue
 2. **Calibration Drift** (P2): Condition - confidence-bucket accuracy drifts more than 15 percentage points from its calibrated baseline. Action: Re-run calibration against fresh labeled data; investigate whether document mix or model version has shifted.
 3. **Ensemble Disagreement Signal Degradation** (P3): Condition - ensemble disagreement no longer correlates with actual error rate. Action: Re-evaluate whether ensemble diversity (model choice, prompt variation) still provides a meaningful uncertainty signal for current document types.
 
+## Universal Pattern Reference
+
+This is a domain-specific implementation of the universal pattern:
+**[Hallucination and Confidence Miscalibration (Cross-Cutting)](../../../cross-cutting/accuracy/goals/output-accuracy/failures/hallucination-confidence-miscalibration.md)**
+
+The universal pattern covers why LLMs/VLMs produce confident but false content. This variant focuses on **document processing** where VLM overconfidence on extracted field values prevents routing hallucinations to human review.
+
+### Related Domain Variants
+- [Knowledge Retrieval: Confidence Miscalibration](../../../knowledge-retrieval/goals/answer-synthesis/failures/confidence-miscalibration.md) — LLM overconfidence on RAG answers
+- [Vision: Confidence Miscalibration](../../../vision-and-images/goals/visual-hallucination/failures/confidence-miscalibration.md) — Vision model overconfidence on hallucinated objects
+
+---
+
 ## References
 
 - [Evaluating Multimodal LLMs for Production](https://galileo.ai/blog/multimodal-llm-guide-evaluation) - Confidence calibration

@@ -189,6 +189,21 @@ HAVING hallucinated_count / total_detections > 0.1
 
 ---
 
+## Universal Pattern Reference
+
+This is a domain-specific implementation of the universal pattern:
+**[Hallucination: Objects (Cross-Cutting)](../../../cross-cutting/accuracy/goals/output-accuracy/failures/hallucination-object.md)**
+
+The universal pattern covers why models hallucinate objects/fields. This variant focuses on **vision-based tasks** where models confidently detect objects that don't exist in the image (especially in cluttered or empty scenes).
+
+### Related Domain Variants
+- [Document Processing: Object Hallucination](../../../document-processing/goals/multimodal-reliability/failures/object-hallucination.md) — Hallucinated fields in document extraction
+
+### Related Base Pattern
+- [Hallucination: Base Mechanism](../../../cross-cutting/accuracy/goals/output-accuracy/failures/hallucination-base-mechanism.md) — Universal root cause of all hallucinations
+
+---
+
 ## References
 
 - [Hallucination of Multimodal LLMs Survey](https://arxiv.org/html/2404.18930v2) - Comprehensive taxonomy of object, attribute, and spatial hallucinations in vision models

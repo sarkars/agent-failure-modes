@@ -85,12 +85,14 @@ agents/
 
 | Category | Description | Goals | Patterns |
 |----------|-------------|-------|----------|
-| [Cross-Cutting](agents/cross-cutting/) | **All universal patterns** | 27 | 387 |
+| [Cross-Cutting](agents/cross-cutting/) | **All universal patterns** | 27 | 267 |
 | ├─ [Security](agents/cross-cutting/security/) | Security, trust, runtime protection, DLP | 5 | 57 |
-| ├─ [Accuracy](agents/cross-cutting/accuracy/) | Output correctness, hallucination, verification, knowledge staleness, context loss | 8 | 190 |
+| ├─ [Accuracy](agents/cross-cutting/accuracy/) | Output correctness, **hallucination** (4 new canonical), verification, knowledge staleness, context loss | 8 | 194 |
 | ├─ [Operations](agents/cross-cutting/operations/) | Tools, cost, coordination, memory, state | 12 | 112 |
 | ├─ [Governance](agents/cross-cutting/governance/) | Compliance, audit, accountability | 1 | 12 |
 | └─ [Learning](agents/cross-cutting/learning/) | Self-improvement, feedback loops | 1 | 12 |
+
+> **New (2026-07)**: Added 4 canonical hallucination patterns (Base Mechanism, Confidence Miscalibration, Attributes, Objects) with 50+ domain-variant cross-references. See [Categorization Updates](CATEGORIZATION_UPDATES.md) for details.
 
 ### By Capability (Design-Driven Failure Modes)
 
@@ -121,8 +123,9 @@ agents/
 | [Customer Service](agents/by-use-case/customer-service/) | Customer conversation resolution, issue routing, satisfaction | 11 |
 | [Mortgage Documents](agents/by-use-case/mortgage-documents/) | Document OCR, fraud detection, compliance validation | 44 |
 
-**Total: 703 unique patterns across 80+ goals**
-*(After consolidating 141+ duplicate patterns into 6 canonical cross-cutting/by-capability patterns)*
+**Total: 848 unique patterns across 80+ goals**
+*(267 cross-cutting + 266 by-capability + 315 by-use-case)*  
+*(After consolidating hallucination patterns with canonical + domain-variant model)*
 
 ## How to Use This Repo
 

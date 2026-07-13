@@ -85,6 +85,19 @@ Result: User misses meeting because they assumed Tuesday
 | Rising Clarification Demand | User Clarification Rate exceeds 10% (vs. 5% baseline) over 24-hour window | HIGH | Investigate query decomposition or answer template effectiveness |
 
 
+## Universal Pattern Reference
+
+This is a domain-specific implementation of the universal pattern:
+**[Hallucination and Confidence Miscalibration (Cross-Cutting)](../../../cross-cutting/accuracy/goals/output-accuracy/failures/hallucination-confidence-miscalibration.md)**
+
+The universal pattern covers why LLMs produce confident but false content. This variant focuses on **RAG/answer synthesis** where confidence miscalibration prevents routing hallucinations to human review.
+
+### Related Domain Variants
+- [Document Processing: Confidence Miscalibration](../../../document-processing/goals/multimodal-reliability/failures/confidence-miscalibration.md) — VLM overconfidence on extracted values
+- [Vision: Confidence Miscalibration](../../../vision-and-images/goals/visual-hallucination/failures/confidence-miscalibration.md) — Vision model overconfidence on hallucinated objects
+
+---
+
 ## References
 
 - [Stanford Legal RAG Hallucinations](https://dho.stanford.edu/wp-content/uploads/Legal_RAG_Hallucinations.pdf) - Confidence without accuracy

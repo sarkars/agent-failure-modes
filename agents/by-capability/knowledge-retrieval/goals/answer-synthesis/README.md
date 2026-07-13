@@ -1,6 +1,18 @@
 # Answer Synthesis
 
-Answer generation
+Answer generation and confidence in RAG/retrieval-augmented systems.
+
+## Universal Hallucination Pattern (See Cross-Cutting)
+
+This pattern has a **universal canonical version** in cross-cutting/accuracy:
+
+| Domain Pattern | Canonical Pattern |
+|---|---|
+| [Confidence Miscalibration](failures/confidence-miscalibration.md) | [Hallucination: Confidence Miscalibration](../../../../cross-cutting/accuracy/goals/output-accuracy/failures/hallucination-confidence-miscalibration.md) — Why LLMs are overconfident on RAG answers |
+
+See the canonical pattern for universal mitigation strategies. This page provides **RAG/answer-synthesis-specific examples and implementations**.
+
+---
 
 ## Failure Patterns
 

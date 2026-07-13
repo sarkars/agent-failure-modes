@@ -48,6 +48,21 @@ Result: Payment terms calculated from wrong date
 2. **Domain Validation Failure Spike** (P1): Condition - domain validation failure rate exceeds 4% for a field type. Action: Halt automatic acceptance for that field, route to human review, investigate root cause (template change vs. model regression).
 3. **Adversarial Accuracy Regression** (P2): Condition - accuracy on the uncommon-but-valid test set drops below 85%. Action: Treat as a model/prompt regression signal even if aggregate production accuracy looks unaffected; investigate before next deployment.
 
+## Universal Pattern Reference
+
+This is a domain-specific implementation of the universal pattern:
+**[Hallucination: Attributes (Cross-Cutting)](../../../cross-cutting/accuracy/goals/output-accuracy/failures/hallucination-attribute.md)**
+
+The universal pattern covers why models hallucinate object attributes. This variant focuses on **document processing** where VLMs "correct" extracted field values toward common patterns (e.g., rounding numbers, normalizing dates).
+
+### Related Domain Variants
+- [Vision: Attribute Hallucination](../../../vision-and-images/goals/visual-hallucination/failures/attribute-hallucination.md) — Hallucinated colors, sizes, materials in object detection
+
+### Related Base Pattern
+- [Hallucination: Base Mechanism](../../../cross-cutting/accuracy/goals/output-accuracy/failures/hallucination-base-mechanism.md) — Universal root cause of all hallucinations
+
+---
+
 ## References
 
 - [Hallucination of Multimodal LLMs Survey](https://arxiv.org/html/2404.18930v2) - Attribute hallucination types

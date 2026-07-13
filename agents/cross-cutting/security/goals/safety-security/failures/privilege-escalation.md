@@ -55,6 +55,27 @@ Result: Viewer modified data they should only read
 2. **Permission Scope Widened at Agent Handoff** (P1): Condition - the permission context received by a downstream agent is broader than what the upstream agent held. Action: block the handoff immediately, investigate the propagation path for the loss point.
 3. **Novel Tool Combination Bypasses Policy** (P2): Condition - composition testing or production monitoring detects a tool sequence achieving an action neither tool permits individually. Action: disable the combination pending review, patch the policy rules to cover it.
 
+## Complementary Pattern
+
+**This pattern focuses on PREVENTION (architectural controls).**
+
+For incident response and attack recovery procedures, see the complementary pattern:
+**[Privilege Escalation: Attack & Response (Security-Autonomy)](../security-autonomy/failures/privilege-escalation.md)**
+
+The security-autonomy pattern covers:
+- Attack scenarios and how agents can be socially engineered to escalate
+- Detection of active privilege escalation
+- Incident recovery and audit procedures
+
+This pattern (safety-security) covers:
+- Architectural defenses to prevent escalation
+- Permission propagation and validation
+- Policy enforcement patterns
+
+**Best Practice**: Implement both perspectives — prevent escalation where possible, but also design for detection and recovery in case prevention fails.
+
+---
+
 ## References
 - [Microsoft: Taxonomy of Failure Mode in Agentic AI](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/microsoft/final/en-us/microsoft-brand/documents/Taxonomy-of-Failure-Mode-in-Agentic-AI-Systems-Whitepaper.pdf)
 - [NSA: Careful Adoption of Agentic AI](https://media.defense.gov/2026/Apr/30/2003922823/-1/-1/0/CAREFUL%20ADOPTION%20OF%20AGENTIC%20AI%20SERVICES_FINAL.PDF)

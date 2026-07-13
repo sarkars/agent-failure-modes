@@ -1,6 +1,20 @@
 # Multimodal Reliability
 
+Correctness and reliability of VLM/MLLM outputs for document processing and multimodal understanding.
 
+## Universal Hallucination Patterns (See Cross-Cutting)
+
+These patterns have **universal canonical versions** in cross-cutting/accuracy that cover the general mechanism:
+
+| Domain Pattern | Canonical Pattern |
+|---|---|
+| [Confidence Miscalibration](failures/confidence-miscalibration.md) | [Hallucination: Confidence Miscalibration](../../../../cross-cutting/accuracy/goals/output-accuracy/failures/hallucination-confidence-miscalibration.md) — Why VLM extractions are overconfident |
+| [Attribute Hallucination](failures/attribute-hallucination.md) | [Hallucination: Attributes](../../../../cross-cutting/accuracy/goals/output-accuracy/failures/hallucination-attribute.md) — VLMs "correct" values toward common patterns |
+| [Object Hallucination](failures/object-hallucination.md) | [Hallucination: Objects](../../../../cross-cutting/accuracy/goals/output-accuracy/failures/hallucination-object.md) — VLMs invent fields that don't exist |
+
+See the canonical patterns for universal mitigation strategies. This page provides **document-processing-specific examples and implementations**.
+
+---
 
 ## Failure Patterns
 

@@ -83,6 +83,19 @@ Actual accuracy on similar images: 60%
 
 ---
 
+## Universal Pattern Reference
+
+This is a domain-specific implementation of the universal pattern:
+**[Hallucination and Confidence Miscalibration (Cross-Cutting)](../../../cross-cutting/accuracy/goals/output-accuracy/failures/hallucination-confidence-miscalibration.md)**
+
+The universal pattern covers why vision models produce confident but false detections. This variant focuses on **vision-based tasks** where model overconfidence on hallucinated objects prevents routing to human review.
+
+### Related Domain Variants
+- [Knowledge Retrieval: Confidence Miscalibration](../../../knowledge-retrieval/goals/answer-synthesis/failures/confidence-miscalibration.md) — LLM overconfidence on RAG answers
+- [Document Processing: Confidence Miscalibration](../../../document-processing/goals/multimodal-reliability/failures/confidence-miscalibration.md) — VLM overconfidence on extracted values
+
+---
+
 ## References
 
 - [On Calibration of Vision Models](https://arxiv.org/abs/2106.08254)
