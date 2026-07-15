@@ -68,20 +68,33 @@ From Caching Research (2026):
 - No TTL for time-sensitive data
 - Fear of returning incorrect cached response
 
-**Mitigation Strategies**
-1. **Semantic caching**: Use embeddings to match similar queries
-2. **Tiered caching**: Different TTLs for different content types
-3. **Cache warming**: Pre-populate cache with common queries
-4. **Invalidation triggers**: Refresh cache when source data changes
-5. **Confidence thresholds**: Only cache high-confidence matches
-6. **A/B validation**: Periodically verify cached responses
+## Mitigation Strategies
 
-**Detection**
-- Track cache hit/miss rates
-- Monitor API costs relative to query volume
-- Identify repeated semantic queries
-- Measure staleness of cached responses
-- Alert on cache invalidation failures
+### Prevention
+1. **Embedding-based semantic cache lookup**: Since exact-match caching captures only 5-15% of redundant queries (per the FAQ bot example where "What's your return policy?" vs. "Return policy?" both miss), embed each incoming query and compare against cached query embeddings with a cosine-similarity threshold before hitting the LLM. Trade-off: embedding computation and vector search add latency (typically 10-50ms) to every request, even cache misses.
+2. **Tiered TTLs by content volatility**: Because the failure table shows "No TTL" causes stale data and "No invalidation" causes trust erosion, classify content by how often it changes (e.g., static FAQ answers vs. time-sensitive order status) and assign TTLs accordingly rather than one global TTL. Trade-off: tiering adds a content-classification step that must be maintained as new query types are added.
+3. **Confidence-gated cache writes**: Only cache a response when the model's confidence (or a validation pass) exceeds a threshold, addressing the "Over-broad" cache failure mode where wrong responses get served to slightly different queries. Trade-off: this reduces effective hit rate somewhat since more first-time queries won't be cached.
+
+### Detection & Response
+1. **Cache hit rate vs. expected redundancy**: Since 30-60% of queries are semantically similar to prior ones, a measured hit rate well below the 45-65% "proper implementation" benchmark signals the semantic matching threshold is miscalibrated or absent.
+2. **Near-duplicate query clustering**: Periodically cluster logged queries (like the "What's your return policy?" / "Return policy?" / "How do I return something?" variants) that resulted in separate API calls; a large cluster size indicates missed semantic cache opportunity.
+3. **Invalidation-triggered incorrect-response reports**: Track user-reported or QA-flagged incorrect answers and correlate against cache age; since cache invalidation errors cause 8% of incorrect responses, spikes here indicate the invalidation trigger logic isn't firing on source-data changes.
+
+### Architecture Patterns
+1. **GPTCache-style semantic cache layer**: Deploy a vector-store-backed cache (e.g., GPTCache, or a Redis vector index) sitting in front of the LLM call, returning cached responses above a similarity threshold; deployment consideration is choosing the similarity threshold carefully — too loose returns wrong answers (the "Over-broad" failure), too strict degrades to exact-match behavior.
+2. **Cache warming for high-frequency intents**: Pre-populate the cache with known common queries (e.g., top FAQ variants) at deploy time so the first live occurrence of each variant is already a hit, addressing the "first query → API call" cold-start cost in the example. Deployment consideration: requires periodically refreshing the warm set as query distribution shifts.
+3. **Event-driven invalidation hooks**: Wire cache invalidation to source-data change events (e.g., a policy-document update publishes an invalidation message) rather than relying purely on TTL expiry, directly addressing the "Missing cache invalidation logic" contributing factor. Deployment consideration: requires the source system to reliably emit change events, which may not exist for all data sources.
+
+### Metrics
+1. **cache_hit_rate**: Target 45-65% (per the "proper implementation" benchmark); Alert if < 30%.
+2. **cost_per_1k_queries**: Target < $50 (per the semantic-cache example: 1M queries/month at $500 = $0.50/1k); Alert if > $200 (approaching the uncached $5,000/1M = $5/1k baseline).
+3. **cache_staleness_incident_rate**: Target < 8% of incorrect responses attributable to stale cache (matching research baseline as ceiling, not target); Alert if > 8%.
+4. **semantic_match_precision**: Target > 95% of served cache hits judged correct on spot-check/A-B validation; Alert if < 90%.
+
+### Alerts
+1. **Cache-Hit-Rate-Collapse** (P2): Condition - cache_hit_rate drops below 30% for a sustained 1-hour window on a previously well-cached query pattern (e.g., FAQ traffic). Action: check whether the embedding service or vector index is degraded/unreachable, causing silent fallback to always-miss behavior.
+2. **Stale-Response-Spike** (P2): Condition - staleness-related incorrect-response reports exceed the 8% baseline in a rolling 24h window. Action: audit invalidation triggers for the affected content type and manually flush the relevant cache tier.
+3. **Cost-Per-Query-Regression** (P3): Condition - cost_per_1k_queries rises above $200 despite stable traffic volume. Action: investigate whether cache TTLs were tightened excessively or a recent deploy bypassed the cache lookup path.
 
 ## References
 

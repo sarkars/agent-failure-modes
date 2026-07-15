@@ -51,18 +51,32 @@ From MAST study of 1642 MAS traces:
 - Model limitations in grounding reasoning to actions
 - Long reasoning chains losing thread
 
-**Mitigation Strategies**
-1. **Action verification**: Confirm action matches stated intent
-2. **Reasoning-action binding**: Explicitly link reasoning to parameters
-3. **Pre-execution review**: Show planned action before execution
-4. **Consistency checks**: Validate action against reasoning
-5. **Structured output**: Force explicit parameter extraction
+## Mitigation Strategies
 
-**Detection**
-- Stated intent differs from executed action
-- Tool parameters don't match reasoning
-- User corrections for "I said X but you did Y"
-- Logical analysis contradicted by action
+### Prevention
+1. **Reasoning-to-parameter binding**: Require the final action's parameters to be mechanically extracted from the explicitly stated conclusion in the reasoning (e.g., bind the delete argument directly to the file identified as "oldest" in the reasoning trace: `backup_2024_01.tar`) rather than letting the model independently regenerate the parameter at the action-call step, which is where the swap to `backup_2024_12.tar` occurred. Trade-off: requires structured reasoning output the binding step can parse reliably, which adds prompt/format constraints.
+2. **Pre-execution action-intent diff**: Before executing, automatically diff the target named in the reasoning conclusion against the target in the actual tool call and block execution on any mismatch, directly catching the "target confusion" pattern from the example. Trade-off: adds a verification pass to every tool call, with associated latency cost.
+3. **Structured output forcing explicit parameter extraction**: Force the model to emit its conclusion as a structured field (e.g., `{"target_file": "backup_2024_01.tar"}`) immediately after reasoning, rather than free-text reasoning followed by a separately-generated tool call, reducing the chance of "copy-paste errors in parameter extraction" named as a contributing factor. Trade-off: constrains the model's reasoning format, which can reduce reasoning quality for genuinely complex judgment calls.
+
+### Detection & Response
+1. **Stated-intent-vs-executed-action comparison**: For every action, programmatically compare the entity/parameter named in the immediately preceding reasoning text against what was actually passed to the tool call, flagging any divergence (this alone would have caught the backup-file mismatch).
+2. **User "I said X but you did Y" correction tracking**: Specifically tag and count user corrections that describe a mismatch between stated intent and executed action, distinguishing this from other error types like wrong reasoning entirely.
+3. **Irreversible-action extra scrutiny**: Apply heightened verification specifically to irreversible actions like file deletion, since a reasoning-action mismatch on a delete operation (as in the example) is unrecoverable, unlike a mismatch on a read-only action.
+
+### Architecture Patterns
+1. **Pre-execution review step**: Surface the planned action (target, parameters) alongside the reasoning conclusion for confirmation — human or automated — before execution, specifically for destructive operations, catching cases like deleting the wrong backup before it happens. Deployment consideration: adds a checkpoint that must be fast enough not to break agentic flow for routine actions.
+2. **Consistency-check middleware**: Insert a lightweight verification layer between reasoning generation and tool execution that re-derives the expected action from the reasoning text and compares it to the actual call, similar to a chain-of-verification pass. Deployment consideration: the verifier itself must be reliable or it introduces new failure surface.
+3. **Action-verification confirmation loop**: After generating a tool call, have the model explicitly restate "this action targets X because Y" and check that Y matches the earlier reasoning's conclusion, catching inverted-logic and parameter-swap patterns before the call fires. Deployment consideration: adds token overhead per action; most valuable when reserved for higher-stakes tool calls.
+
+### Metrics
+1. **reasoning_action_consistency_rate**: Target: > 99% of executed actions match the conclusion stated in immediately preceding reasoning; Alert if < 97% over rolling 200 actions.
+2. **irreversible_action_mismatch_rate**: Target: 0 reasoning-action mismatches on irreversible actions (delete, send, purchase); Alert on any single confirmed incident.
+3. **parameter_swap_incident_rate**: Target: < 1% of multi-candidate actions (choosing among several named entities) show a parameter swap; Alert if > 3% over rolling 100 actions.
+4. **pre_execution_block_rate**: Target: pre-execution diff checks block < 2% of actions (indicates mismatches are rare, not that the checker is mis-calibrated); Alert if > 8%, which suggests either a systemic mismatch problem or checker miscalibration.
+
+### Alerts
+1. **Irreversible Action Mismatch Blocked** (P1): Condition - pre-execution diff detects a mismatch between reasoning conclusion and action target on a destructive/irreversible operation. Action: block execution immediately, surface both the reasoning and the attempted action to a human for resolution, and log for pattern analysis.
+2. **Consistency Rate Degradation** (P2): Condition - reasoning_action_consistency_rate drops below 97% over a rolling 200-action window. Action: review recent mismatches for a common pattern (parameter swap vs. target confusion vs. inverted logic) and adjust the binding/extraction mechanism accordingly.
 
 ## References
 

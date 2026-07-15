@@ -75,20 +75,32 @@ From Batch Processing Research (2026):
 - Lack of batching infrastructure
 - Context window size concerns
 
-**Mitigation Strategies**
-1. **Batch API usage**: Use native batch endpoints when available
-2. **Dynamic batching**: Group items up to context limit
-3. **Async batch processing**: Process batches in parallel
-4. **Partial failure handling**: Retry only failed items
-5. **Size-aware batching**: Group similar-sized items together
-6. **Queue-based batching**: Accumulate items before processing
+## Mitigation Strategies
 
-**Detection**
-- Monitor requests per logical task
-- Track items processed per API call
-- Compare latency: sequential vs. potential batched
-- Measure rate limit utilization
-- Audit processing patterns for batch opportunities
+### Prevention
+1. **Batch API adoption for batch-eligible task types**: For classification, extraction, and translation workloads — the task types with High batch potential per the table above — route through native batch endpoints (Anthropic Message Batches, OpenAI Batch API) instead of the loop-based sequential pattern described in the root cause. This directly targets the 90% API-call reduction and 20-40% cost reduction the research shows. Trade-off: batch APIs introduce async completion delays (often minutes to hours), so they're unsuitable for latency-sensitive interactive flows.
+2. **Dynamic batch sizing within context limits**: Since the example shows a 10-doc batch dropping tokens from 700/doc to 520/doc, build a batcher that accumulates items up to a size/token ceiling (the 5-20 item optimal range noted in the file) before dispatching, rather than a fixed batch size that either underfills (losing overhead savings) or overfills (hitting diminishing returns or context limits). Trade-off: dynamic sizing adds queuing latency for the first items in a batch while it waits to fill.
+3. **Size-aware grouping to avoid mixed-batch waste**: Group items of similar token size together before batching, since the "difficulty handling mixed-size items" contributing factor causes either padding waste or oversized batches that risk truncation. Trade-off: sorting/grouping is an extra pre-processing pass that adds latency for small workloads.
+
+### Detection & Response
+1. **Items-per-API-call ratio**: Monitor the ratio of items processed to API calls issued for classification/extraction/translation tasks; a ratio near 1:1 signals the sequential anti-pattern from the root cause is active and batching opportunity is being missed.
+2. **Batch-eligibility audit on task logs**: Periodically scan logged task traces for loop-based sequential API call patterns against the Batch-Eligible Tasks table (Classification, Entity extraction = High potential) and flag high-potential task types still running sequentially.
+3. **Partial-failure retry rate**: Track what fraction of a batch fails and requires individual retry — if this is high, the fear-of-partial-failure contributing factor may be causing engineers to avoid batching entirely, which should be addressed with better retry-only-failed-items logic rather than abandoning batching.
+
+### Architecture Patterns
+1. **Native batch endpoint integration**: Use Anthropic's Message Batches API or OpenAI's Batch API directly for offline/async classification and extraction jobs; deployment consideration is that these are priced and rate-limited separately from synchronous calls, so cost dashboards must track them as a distinct line item.
+2. **Request coalescing queue**: A queue-based accumulator that buffers incoming items (with a max wait time, e.g. 500ms-2s) and flushes a batch API call when either the size or time threshold is hit, addressing the "accumulate items before processing" mitigation; deployment consideration is tuning the wait threshold so it doesn't add unacceptable latency to interactive paths.
+3. **Partial-failure isolation and retry**: Process each batch response item independently so a single failed item triggers only a targeted single-item retry rather than re-running or discarding the whole batch, directly addressing the partial-failure contributing factor called out as a reason teams avoid batching.
+
+### Metrics
+1. **items_per_api_call**: Target > 8 for batch-eligible task types (classification, extraction); Alert if < 3 for tasks flagged as batch-eligible.
+2. **batch_eligible_task_batch_rate**: Target > 80% of classification/extraction/translation task volume routed through batch endpoints; Alert if < 50%.
+3. **cost_per_1k_items_processed**: Target < $2.60 (per the batched example: 10 calls × 5,200 tokens for 100 docs); Alert if > $3.50 (approaching the sequential-processing cost of $3.50/100 docs).
+4. **partial_batch_failure_rate**: Target < 2% of items per batch requiring individual retry; Alert if > 10%.
+
+### Alerts
+1. **Sequential-Processing-On-Batch-Eligible-Workload** (P2): Condition - a task type classified as High/Medium batch potential (per the eligibility table) shows items_per_api_call < 2 for a sustained 24h window. Action: page the owning team to review whether batch API integration was skipped, and check for regressions in the dynamic batcher.
+2. **Batch-Cost-Regression** (P3): Condition - cost_per_1k_items_processed exceeds the sequential-processing baseline ($3.50/100 docs equivalent) for a batch-eligible workload. Action: investigate whether batch size has collapsed to near-1 (defeating the purpose) or whether per-request overhead has increased.
 
 ## References
 

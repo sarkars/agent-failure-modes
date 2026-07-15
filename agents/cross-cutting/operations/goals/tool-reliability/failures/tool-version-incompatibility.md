@@ -69,20 +69,33 @@ From API Versioning Research (2026):
 - Agent training data outdated
 - No version negotiation protocol
 
-**Mitigation Strategies**
-1. **Schema versioning**: Version tool descriptions explicitly
-2. **Runtime validation**: Validate calls against current schema
-3. **Graceful migration**: Support multiple versions during transition
-4. **Change detection**: Monitor for tool schema changes
-5. **Dynamic loading**: Load tool schemas at runtime
-6. **Deprecation warnings**: Alert on deprecated usage
+## Mitigation Strategies
 
-**Detection**
-- Monitor tool call validation errors
-- Track parameter rejection rates
-- Compare agent tool schema vs. actual API
-- Alert on deprecated endpoint usage
-- Audit tool description freshness
+### Prevention
+1. **Dynamic schema loading at call time instead of static baked-in tool knowledge**: The example's core failure is the agent using "v2.0 knowledge" (`/charge` with `{amount, currency, card_token}`) against a production API that migrated to v3.0 (`/payments/create` with different field names) — eliminate this class of error by having the tool-calling layer fetch the current live API schema/OpenAPI spec at session start rather than relying on the agent's trained or configured knowledge of the tool's shape. Trade-off: dynamic loading adds a dependency on the schema source being available and correctly published, and a stale or broken schema endpoint becomes a new single point of failure.
+2. **Runtime pre-call validation against the current schema, not the agent's assumed schema**: Before dispatching `POST /charge {amount: 10.00, currency: "USD", card_token: "tok_123"}`, validate the call shape against the actual current API contract and fail with a specific "this endpoint is deprecated, use /payments/create with {amount_cents, currency_code, payment_method_id}" error rather than letting it hit a bare 404 that the agent can't self-correct from. Trade-off: requires maintaining an always-current schema source separate from the live API itself, or querying the API's own schema endpoint on every session, adding latency.
+3. **Deprecation window with the old endpoint still functioning and warning, not immediately removed**: Rather than fully removing `/charge` the moment `/payments/create` ships, keep the deprecated endpoint operational (perhaps proxying to the new one) for a defined window while returning a deprecation warning in the response body, giving agent configurations time to be updated before the old shape starts hard-failing with 404s as in the example. Trade-off: maintaining backward-compatible shims for deprecated endpoints is ongoing engineering cost and can mask the urgency of migrating callers.
+
+### Detection & Response
+1. **404-on-known-endpoint tracking as a version-mismatch signal**: The example shows the agent's call resulting in a 404 that it then retries fruitlessly — specifically flag 404s on endpoints the agent's configuration lists as known/supported (as opposed to genuinely-unknown endpoints), since this pattern strongly indicates the agent's tool knowledge has gone stale relative to the live API, distinct from a normal not-found error.
+2. **Tool-description freshness audit against the live API**: Given the cited stat that 34% of tool integrations use outdated schemas and mean detection time is 2-5 days, run a scheduled job comparing each configured tool's schema against the live API's actual current schema (via its OpenAPI spec or a canary call) rather than waiting for production failures to surface the drift.
+3. **Retry-then-give-up pattern detection**: The example shows the agent retrying the same failing v2-shaped call before eventually failing with "unknown error" — detecting this exact retry-without-adaptation pattern on a specific endpoint is a strong, fast signal of version incompatibility that predates the 2-5 day average detection time cited in the stats.
+
+### Architecture Patterns
+1. **Schema registry with explicit version pinning per agent deployment**: Maintain a central registry recording which API version each agent configuration expects, and validate at deploy/session time that the pinned version still matches what the live API serves, catching the v2-vs-v3 mismatch in the example before any call is attempted; deployment consideration — requires disciplined version-bumping discipline on both the API-provider and agent-configuration sides.
+2. **API gateway with version translation/adapter layer**: Insert a gateway that accepts legacy-shaped calls (the old `/charge` with `card_token`) and translates them to the current API's shape (`/payments/create` with `payment_method_id`) server-side, buying time for agent configurations to migrate without hard 404 failures; deployment consideration — the translation layer itself becomes a long-lived piece of infrastructure that needs its own deprecation plan eventually.
+3. **Contract tests running against the live production API on a schedule**: Automated tests that exercise each tool integration's exact call shape against the real API (or a staging mirror) on a recurring cadence, surfacing breaking changes proactively rather than via the 2-5 day mean-time-to-detect cited in production incident data; deployment consideration — needs safe test credentials/sandbox environments for APIs like payments where test calls have real-world side effects if misconfigured.
+
+### Metrics
+1. **schema_staleness_days** (per tool): Target < 7 days since last verified against live API; Alert if > 30 days for any tool with a known active version-change cadence (1-2 breaking changes/year per the cited stat implies periodic checks matter).
+2. **version_mismatch_404_rate**: Target < 0.5% of calls to known/configured endpoints resulting in 404; Alert if > 5% over a 1-hour window (strong version-drift signal).
+3. **retry_without_adaptation_rate**: Target < 2% of failed calls retried with an identical shape rather than an adapted one; Alert if > 10% for a specific tool (indicates the agent has no mechanism to self-correct on version mismatch).
+4. **mean_time_to_detect_version_drift**: Target < 4 hours via contract testing (down from the cited 2-5 day production-detection baseline); Alert if a drift incident's detection time exceeds 24 hours.
+
+### Alerts
+1. **Breaking Version Mismatch Confirmed** (P1): Condition - version_mismatch_404_rate spikes above 5% for a critical tool (e.g., payments) over 1 hour. Action: page immediately, especially for payment/financial-transaction tools where a silent failure or retry storm carries real business risk; deploy a translation shim or update the agent's schema source urgently.
+2. **Stale Schema Detected by Contract Test** (P2): Condition - a scheduled contract test finds the live API schema diverges from the configured/agent-facing schema. Action: update the tool schema source, notify the team owning the agent configuration, assess whether a deprecation window is needed for a graceful transition.
+3. **Retry-Without-Adaptation Pattern** (P3): Condition - retry_without_adaptation_rate exceeds 10% for a tool. Action: investigate whether the agent's error-handling logic needs a specific "schema changed" recovery path, review recent API changelog for that integration.
 
 ## References
 

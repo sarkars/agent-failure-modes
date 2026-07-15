@@ -29,21 +29,33 @@ Turn 5: Context window exceeded
 Result: Quadratic growth instead of linear
 ```
 
-**Mitigation Strategies**
-1. **Context summarization**: Compress history periodically
-2. **Selective context**: Only include relevant prior turns
-3. **Tool output truncation**: Summarize or trim large outputs
-4. **Reference by ID**: Don't repeat full documents, reference them
-5. **Token budgets per turn**: Limit input/output tokens
-6. **Sliding window**: Keep only recent N turns in context
+## Mitigation Strategies
 
-**Detection**
-- Track tokens per turn over conversation
-- Alert on growth rate exceeding threshold
-- Monitor context utilization percentage
-- Compare actual vs. expected token usage
+### Prevention
+1. **Periodic context summarization instead of full accumulation**: Since the example shows tokens doubling each turn (1,000 → 2,500 → 5,000 → 10,000) because each turn "includes" all prior turns verbatim, compress conversation history into a running summary at fixed intervals (e.g., every 3-5 turns) so growth becomes roughly linear instead of the quadratic pattern described. Trade-off: summarization can lose fine-grained details from earlier turns that later prove relevant, and the summarization call itself costs tokens.
+2. **Reference-by-ID for repeated documents**: Since "repeatedly passing large documents" and "multi-agent handoffs duplicating context" are named root causes, store large documents/tool outputs once and pass a reference ID or pointer in subsequent turns instead of re-embedding the full content each time. Trade-off: requires a retrieval mechanism the agent (or handoff target) can use to dereference the ID when it actually needs the content, adding an extra round-trip when content is genuinely needed again.
+3. **Sliding-window with hard per-turn token budget**: Cap included context to only the most recent N turns rather than the full history, paired with an explicit token budget per turn that forces truncation/summarization before the budget is exceeded, directly preventing the "Turn 5: Context window exceeded" failure in the example. Trade-off: dropping older turns risks losing context that becomes relevant again later in long-running conversations.
 
----
+### Detection & Response
+1. **Per-turn token growth rate**: Track tokens-per-turn across a conversation and compute the growth rate turn-over-turn; the example's pattern (roughly doubling each turn) is a clear quadratic-growth signature that should trigger alerting well before the context window is actually exceeded.
+2. **Context-window headroom tracking**: Monitor remaining context window capacity as a percentage at each turn; a conversation trending toward 0% headroom within a small number of remaining turns (as in "Turn 5: Context window exceeded") should trigger automatic summarization before the hard failure occurs.
+3. **Actual-vs-expected token usage comparison**: Compare observed token usage per turn against a linear-growth expectation baseline; sustained divergence (actual growing faster than linear) indicates one of the named root causes (unsummarized history, verbose tool outputs, duplicated handoff context, or excessive chain-of-thought) is active.
+
+### Architecture Patterns
+1. **Rolling summarization pipeline**: A background or inline process that periodically collapses older turns into a compact summary, replacing raw turn history in the context sent to the model, directly implementing the "Context summarization" and "Sliding window" strategies as enforced infrastructure. Deployment consideration: needs tuning of summarization frequency/aggressiveness against the risk of losing detail needed for task correctness.
+2. **Document/tool-output store with reference passing**: A content-addressable store (keyed by document ID or content hash) that agents and multi-agent handoffs reference instead of re-serializing full documents into every prompt, addressing the "multi-agent handoffs duplicating context" root cause specifically. Deployment consideration: requires all agents in a handoff chain to support dereferencing IDs, so partial rollout (some agents still inlining content) doesn't fully solve the problem.
+3. **Tool-output truncation/summarization layer**: Insert a post-processing step on verbose tool outputs (e.g., large API responses, file contents) that trims or summarizes before the output enters context, rather than passing raw output through unmodified. Deployment consideration: truncation logic must preserve the specific fields the agent actually needs, which requires some awareness of what the output will be used for.
+
+### Metrics
+1. **token_growth_rate_per_turn**: Target linear growth (< 1.2x turn-over-turn ratio); Alert if growth ratio exceeds 1.8x for 2+ consecutive turns (approaching the ~2x-per-turn pattern in the example).
+2. **context_window_headroom_pct**: Target > 30% headroom remaining at any given turn; Alert if < 10% headroom (imminent risk of the "context window exceeded" failure).
+3. **avg_tokens_per_conversation_at_turn_10**: Target < 15,000 tokens (reflecting effective summarization); Alert if > 40,000 tokens (indicating unmitigated accumulation).
+4. **duplicated_document_reinclusion_count**: Target 0 instances of the same full document being re-embedded in context within one task/handoff chain; Alert if any detected.
+
+### Alerts
+1. **Context-Window-Imminent-Exceeded** (P1): Condition - context_window_headroom_pct drops below 10% mid-conversation. Action: force immediate summarization/truncation of oldest turns before the next model call, and log the conversation for review of why summarization didn't trigger earlier.
+2. **Quadratic-Growth-Detected** (P2): Condition - token_growth_rate_per_turn exceeds 1.8x for 2+ consecutive turns. Action: check whether summarization or sliding-window logic is disabled/misconfigured for this conversation/agent path.
+3. **Duplicated-Document-Reinclusion** (P3): Condition - the same document/tool-output is detected verbatim in context more than once within a task or handoff chain. Action: route that content through the reference-by-ID store instead of inline re-embedding.
 
 ## References
 

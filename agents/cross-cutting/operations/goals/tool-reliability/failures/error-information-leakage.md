@@ -79,19 +79,33 @@ From MCP Server Mistakes Analysis (2026):
 - Logging that prints full exceptions
 - Framework default error handlers
 
-**Mitigation Strategies**
-1. **Structured error responses**: Return {error: type, message: safe_msg}
-2. **Error categorization**: "database_unavailable" vs raw exception
-3. **Actionable guidance**: Include retry_after, fallback suggestions
-4. **Sanitize before return**: Strip paths, IPs, credentials
-5. **Log internally, summarize externally**: Full trace to logs only
-6. **Error enums**: Define known error types AI can reason about
+## Mitigation Strategies
 
-**Detection**
-- Search tool responses for file paths (/, \\)
-- Check for IP addresses in error responses
-- Look for "Traceback" keyword in responses
-- Monitor context token usage on error paths
+### Prevention
+1. **Catch at the tool boundary, never let exceptions propagate raw**: Wrap every tool implementation in a try/except that converts internal exceptions (like the `OperationalError` from a downed Postgres connection) into a structured `{error: "database_unavailable", message, retry_after_seconds}` payload before it reaches the AI. Trade-off: requires an explicit mapping from every internal exception type to a safe external error code, which is ongoing maintenance as new failure modes appear.
+2. **Sanitize before return, not after**: Strip hostnames, IPs, file paths, and connection strings from any text that could reach the response — don't rely on remembering to redact case-by-case, since the example shows a leaked internal hostname (`db.internal.company.com`) and IP (`10.0.1.42`) in a single unhandled traceback. Trade-off: aggressive sanitization can also strip legitimately useful debugging context the AI needs to self-correct (e.g., which field was invalid).
+3. **Define a closed set of AI-facing error enums**: Limit tool errors to a known vocabulary (`database_unavailable`, `rate_limited`, `invalid_input`, `not_found`) instead of forwarding whatever exception class the underlying library raised, so the AI can pattern-match and choose a recovery path instead of parsing prose. Trade-off: novel failure modes not yet mapped to an enum fall back to a generic "unknown_error" until someone adds a case.
+
+### Detection & Response
+1. **Traceback keyword scan on tool responses**: Grep outgoing tool responses for `"Traceback"`, `File "`, or stack-frame patterns; any match means an unhandled exception leaked past the sanitization layer, exactly the 40-60 line dumps described in the root cause.
+2. **Sensitive-pattern scan**: Regex-scan responses for IPv4 addresses, `/`-or-`\`-delimited absolute paths, and common credential patterns (`postgres://`, `Bearer `, API key prefixes); a hit indicates the exact leakage class this failure mode describes.
+3. **Context-token cost on error paths**: Track average response token count specifically on error-returning calls; since a full traceback wastes 500-1000 tokens per the cited stats, error responses averaging near that size (vs. the ~20-50 tokens of a structured error) signal unsanitized leakage.
+
+### Architecture Patterns
+1. **Error-translation middleware layer**: Centralize exception-to-structured-error mapping in one middleware/decorator applied to every tool, rather than per-tool try/except blocks, so sanitization can't be forgotten on a new tool; deployment consideration — a single shared layer becomes a single point that must handle every exception class thrown anywhere in the tool surface.
+2. **Dual-channel logging**: Send full unredacted tracebacks to an internal log/observability system (Sentry, Datadog) for human debugging while the AI-facing channel only ever sees the sanitized enum-based error; deployment consideration — requires correlating an internal trace ID between the two channels so on-call engineers can find the full context from a sanitized error report.
+3. **Circuit breaker on the failing dependency**: When the same underlying error (e.g., `database_unavailable`) recurs repeatedly, trip a circuit breaker that short-circuits to the structured error immediately instead of re-attempting the call and re-generating a fresh traceback each time; deployment consideration — needs a reset/half-open policy so the tool recovers automatically once the dependency is healthy again.
+
+### Metrics
+1. **leaked_error_rate**: Target < 0.1% of error responses containing a sanitization-scan hit (path, IP, or "Traceback"); Alert if > 1% over a 1-hour window.
+2. **avg_error_response_tokens**: Target < 100 tokens per structured error response; Alert if average exceeds 300 tokens (indicates raw tracebacks slipping through).
+3. **unmapped_exception_rate**: Target < 1% of tool errors falling through to a generic/unknown enum; Alert if > 5% over 24 hours (signals missing exception mappings).
+4. **agent_recovery_rate_on_error**: Target > 70% of tool errors followed by a sensible agent recovery action (retry, fallback, user notification) rather than a stalled or nonsensical response; Alert if it drops below 50%.
+
+### Alerts
+1. **Raw Traceback Leaked** (P1): Condition - a tool response matches the traceback/path/IP sanitization scan. Action: page the owning team, patch the specific tool's exception handling immediately, treat as a potential credential-exposure incident and check whether any leaked value was sensitive.
+2. **Error Sanitization Coverage Gap** (P2): Condition - unmapped_exception_rate exceeds 5% for a given tool over 24 hours. Action: review logs for the specific exception classes falling through, add explicit mappings to the error-translation layer.
+3. **Elevated Error Token Cost** (P3): Condition - avg_error_response_tokens exceeds 300 for a tool. Action: audit that tool's error path for missed sanitization or verbose default exception formatting.
 
 ## References
 

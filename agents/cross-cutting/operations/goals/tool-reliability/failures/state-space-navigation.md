@@ -43,18 +43,33 @@ From Aegis study of 142 failed agent traces:
 - Large state spaces with many exploration paths
 - Lack of environment observability
 
-**Mitigation Strategies**
-1. **Environment lookahead**: Show agent preview of available data
-2. **Completeness signals**: Indicate when more data exists
-3. **Exploration prompts**: Encourage exhaustive search
-4. **Tool bundling**: Group related discovery tools
-5. **State space hints**: Indicate unexplored regions
+## Mitigation Strategies
 
-**Detection**
-- Task results missing obvious relevant data
-- Tool call patterns showing incomplete exploration
-- Comparison of agent path vs. ideal exploration path
-- User corrections indicating missed information
+### Prevention
+1. **Bundle related discovery tools so partial coverage is structurally harder**: The example failure is specifically that `search_direct_flights` and `search_connecting_flights` are separate tools the agent must both remember to call — merge them into a single `search_flights(direct: bool, connecting: bool)` call (or default to searching both) so "cheapest flight" queries can't silently stop after only direct-flight results. Trade-off: bundling increases the latency and cost of every call since it now always covers a broader scope, even when the narrower one would have sufficed.
+2. **Explicit completeness signals in every tool response**: Have `search_direct_flights` return a field like `"other_flight_types_available": ["connecting"]` so the agent has a concrete signal that its exploration is incomplete rather than silently assuming the returned direct-flight results are exhaustive — this directly targets the root cause that the agent "assumes current results are exhaustive." Trade-off: requires every tool in a domain to be aware of sibling tools it should reference, coupling tool implementations together.
+3. **Exploration checklist embedded in the task-planning prompt for domains with known multi-source data**: For tasks like "find cheapest X," provide the agent an explicit checklist of data sources that must be queried before concluding (direct flights, connecting flights, alternate airports) rather than trusting the agent to independently know connecting flights exist as a category. Trade-off: checklists must be maintained per domain and don't generalize to novel task types not anticipated in the checklist.
+
+### Detection & Response
+1. **Ideal-path vs. actual-path comparison for known task types**: For task categories where the full state space is known (e.g., flight search has exactly two source types: direct, connecting), programmatically compare the agent's actual tool-call sequence against the ideal exhaustive sequence and flag any gap — this directly catches the example's missed `search_connecting_flights()` call.
+2. **Result-plausibility checks against known cheaper alternatives**: Where a domain has predictable structure (connecting flights are usually cheaper than direct), flag "cheapest" answers that don't account for a category the agent didn't query, prompting a targeted audit of whether that category would have changed the answer.
+3. **User-correction clustering by missing-data-category**: When users correct agent answers for missing information, tag the correction with which specific tool/data source was never called (e.g., "connecting flights") and track recurrence — repeated corrections pointing to the same uncalled tool indicate a systemic exploration gap, not an isolated miss.
+
+### Architecture Patterns
+1. **Single composite discovery tool over the full domain**: Replace fragmented `search_direct_flights` / `search_connecting_flights` tools with one `search_all_flights` that internally queries every source and returns a unified, ranked result set, removing the exploration decision from the agent entirely; deployment consideration — internally, this shifts the "did we search everything" responsibility to the tool implementation, which must itself be kept in sync as new flight-source types are added.
+2. **Exhaustiveness metadata on paginated/partial responses**: Any tool capable of returning partial results should include `{"complete": false, "additional_sources": [...]}` metadata rather than a response that looks identical whether it's exhaustive or not, giving the agent (or an orchestration layer) a mechanical way to detect under-exploration; deployment consideration — retrofitting this metadata onto existing tools requires updating every tool in the domain consistently.
+3. **Planner-verifier pattern for exploration-sensitive tasks**: For tasks in domains with known multi-source structure, use a separate verification pass that checks the agent's tool-call plan against a known-complete checklist before allowing the agent to finalize its answer; deployment consideration — adds a second LLM pass or rules-engine check, increasing cost and latency on every applicable task.
+
+### Metrics
+1. **exploration_completeness_rate**: Target > 95% of task executions in known multi-source domains covering all expected data sources; Alert if < 80% over a week for any tracked domain.
+2. **missed_cheaper_alternative_rate**: Target < 2% of "cheapest X" style answers where a subsequently-verified cheaper option existed in an unqueried source; Alert if > 8%.
+3. **ideal_vs_actual_path_deviation_rate**: Target < 5% of sessions in domains with a known ideal exploration path deviating from it; Alert if > 15%.
+4. **user_correction_rate_for_missing_data**: Target < 3% of task completions corrected by users for missing/incomplete information; Alert if > 10% for a given task category over a week.
+
+### Alerts
+1. **Confirmed Missed Cheaper/Better Alternative** (P1): Condition - missed_cheaper_alternative_rate detects a case where an unqueried source had a materially better answer (e.g., $290 connecting flight missed in favor of a $380 "cheapest" direct answer). Action: treat as a user-trust incident, notify if the user already acted on the answer, prioritize bundling or completeness-signal fix for that domain.
+2. **Exploration Completeness Drop** (P2): Condition - exploration_completeness_rate falls below 80% for a tracked domain over a week. Action: review whether related tools were recently split or a prompt change reduced exploration thoroughness, consider tool bundling.
+3. **Rising Missing-Data Corrections** (P3): Condition - user_correction_rate_for_missing_data exceeds 10% for a task category. Action: identify the specific uncalled tool/data source pattern from correction logs, add completeness signals or an exploration checklist.
 
 ## References
 

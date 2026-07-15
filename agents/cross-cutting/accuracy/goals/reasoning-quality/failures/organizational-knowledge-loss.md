@@ -42,19 +42,33 @@ Recovery: 6 months of external consultants to rebuild capability
 - Compliance failures due to unexplainable decisions
 - Competitive disadvantage if AI access lost
 
-**Mitigation Strategies**
-1. **Knowledge documentation**: Maintain human-readable process docs
-2. **Skill rotation**: Periodically have humans perform agent tasks
-3. **Shadow operations**: Humans observe agent decisions
-4. **Exit planning**: Document how to replace agent functionality
-5. **Decision logging**: Capture rationale for all significant decisions
-6. **Training programs**: Keep human skills current despite automation
+## Mitigation Strategies
 
-**Detection**
-- Employees unable to explain automated processes
-- No manual fallback procedures documented
-- Agent outages cause complete work stoppage
-- Audit findings about unexplainable decisions
+### Prevention
+1. **Mandatory human-readable process documentation**: For every task class delegated to the agent (e.g., financial reconciliation), require the agent itself to generate and maintain a plain-language explanation of its methodology as it operates, not just execute — so the "how" doesn't exist only inside the agent. Trade-off: documentation generation adds ongoing overhead and can drift from actual agent behavior if not periodically re-synced.
+2. **Scheduled skill-rotation exercises**: Periodically require humans (e.g., a rotating finance team member) to perform the delegated task manually, per a fixed cadence, specifically to prevent the "Finance team reduced, agent handles all reconciliation" scenario from fully eliminating human capability. Trade-off: reintroduces the labor cost the automation was meant to remove, at least partially.
+3. **Exit/succession planning at delegation time**: Before delegating a key activity (meetings, decisions, relationship management) to an agent, document an explicit plan for how that function would be replaced if the agent/provider became unavailable, as a precondition for delegation approval. Trade-off: adds upfront planning cost and may be deprioritized under delivery pressure.
+
+### Detection & Response
+1. **Human explainability spot-checks**: Periodically ask a human (not the agent) to explain a sampled automated decision from scratch; inability to do so (as in "Historical decisions unexplainable" in the example) is a direct signal of knowledge concentration.
+2. **Single-point-of-failure dependency mapping**: Track which business processes have zero documented manual fallback and treat that count as a standing risk metric, since the example shows the failure only became visible when the provider disappeared — well after the risk had accumulated.
+3. **Audit finding tracking**: Specifically flag compliance/audit findings that cite "lack of human oversight" or "unexplainable decisions" (as in the example's regulatory audit failure) as leading indicators of organizational knowledge loss, not isolated compliance issues.
+
+### Architecture Patterns
+1. **Shadow-operations review cadence**: Require humans to review a sample of agent decisions on an ongoing basis (not just at rollout) so verification skill doesn't atrophy — addresses the "Verification skills" knowledge-loss pattern named in the file. Deployment consideration: shadow review needs dedicated time allocation or it's the first thing cut under resource pressure.
+2. **Decision-rationale logging as a first-class output**: Architect the agent to emit structured rationale (not just the decision) for every significant action, stored independently of the agent/provider, so "why certain choices were made" survives a provider outage. Deployment consideration: rationale logs must be stored in a vendor-independent format and location to actually help during an exit.
+3. **Tiered delegation with retained human checkpoints**: For key activities (meetings, decisions, relationships), keep a human formally in the approval loop rather than fully delegating, scaling the human's involvement down but never to zero — directly mitigates the "especially concerning when delegated to key activities" root cause. Deployment consideration: determining which activities are "key" enough to require this is itself a judgment call that needs periodic reassessment.
+
+### Metrics
+1. **process_documentation_coverage**: Target: 100% of agent-delegated task classes have current human-readable process docs; Alert if any delegated process has docs older than 6 months.
+2. **human_explainability_pass_rate**: Target: > 95% of spot-checked automated decisions can be explained by a human without agent assistance; Alert if < 80%.
+3. **manual_fallback_availability**: Target: 100% of business-critical delegated processes have a tested manual fallback procedure; Alert on any critical process without one.
+4. **skill_rotation_completion_rate**: Target: 100% of scheduled skill-rotation exercises completed per quarter; Alert if < 75% completion in a quarter.
+
+### Alerts
+1. **Critical Process Without Fallback** (P1): Condition - a business-critical delegated process is confirmed to have no documented or tested manual fallback. Action: prioritize fallback documentation immediately and schedule a shadow-operations exercise before further scaling automation on that process.
+2. **Audit Finding on Unexplainable Decisions** (P1): Condition - a compliance or internal audit flags decisions that cannot be explained by human staff. Action: pause further delegation expansion in that domain, initiate decision-rationale log review, and report to compliance leadership.
+3. **Skill Rotation Overdue** (P3): Condition - a scheduled skill-rotation exercise for a key delegated process is more than one cycle overdue. Action: schedule the exercise within 2 weeks and flag to team leadership as a resilience gap.
 
 ## References
 

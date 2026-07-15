@@ -49,18 +49,32 @@ From Aegis study: User instruction following failures are classified under explo
 - Ambiguity in instruction interpretation
 - Conflicting instructions from different sources
 
-**Mitigation Strategies**
-1. **Instruction extraction**: Parse and confirm requirements before acting
-2. **Explicit confirmation**: Repeat back understood instructions
-3. **Constraint highlighting**: Elevate user constraints to prominent position
-4. **Override warnings**: Flag when agent would deviate from instruction
-5. **Preference memory**: Remember user preferences for consistency
+## Mitigation Strategies
 
-**Detection**
-- User complaints about ignored requests
-- Actions that contradict stated preferences
-- Output formats not matching specifications
-- Pattern of "optimization" overriding user choice
+### Prevention
+1. **Constraint extraction and pinning**: Before acting, parse the user's message for explicit constraints (e.g., "the 9 AM one, not the 8 AM one, even though it's cheaper") and pin them as hard constraints the agent's own cost/quality judgment cannot override during action selection. Trade-off: requires reliable constraint-extraction, which can itself misparse nuanced phrasing.
+2. **Explicit confirmation of understood instructions**: Have the agent restate the extracted constraints back before acting ("Booking the 9 AM flight at $320 as requested, despite the cheaper 8 AM option") so any misparse is caught before the booking happens, not after. Trade-off: adds a confirmation round-trip that slows down simple, unambiguous requests.
+3. **Override-warning checkpoint**: If the agent's internal reasoning is about to select an option that contradicts a stated user constraint (as happened when "cost-effective" reasoning overrode the explicit "9 AM" instruction), force an explicit flagged warning and require justification before proceeding. Trade-off: can produce false-positive warnings when the agent's read of the constraint is actually correct.
+
+### Detection & Response
+1. **Constraint-violation scanning**: Post-action, automatically check whether the executed action (e.g., which flight was booked) matches every explicit constraint stated in the original request, not just the general intent.
+2. **"Optimization override" pattern detection**: Specifically watch for cases where agent reasoning contains cost/quality/efficiency language that contradicts an explicit user preference already stated — this is the exact pattern in the example ("more cost-effective, so I'll book that one").
+3. **User correction tracking**: Log and categorize every user correction of an agent action, distinguishing "agent ignored my explicit instruction" from other error types, to quantify how often this specific failure occurs.
+
+### Architecture Patterns
+1. **Constraint highlighting in the working context**: Elevate extracted user constraints to a persistent, prominently-positioned block in the agent's context (separate from the general request text) so they aren't "buried in longer messages" as the file's contributing factors describe. Deployment consideration: requires a reliable extraction step that runs before planning begins.
+2. **Preference memory across turns/sessions**: Persist explicit user preferences (e.g., "always prefer later departures") so recurring instructions don't need to be re-stated and re-risk being overridden each time. Deployment consideration: stored preferences can become stale or wrongly generalized beyond the original context.
+3. **Hard-constraint vs. soft-preference action filter**: Architecturally separate "things the user explicitly required" from "things the agent may optimize" so the search/selection step is filtered by hard constraints first (only 9 AM flights considered) rather than optimizing over the full option set and hoping the constraint holds. Deployment consideration: requires the planning layer to support constraint-first filtering rather than pure objective optimization.
+
+### Metrics
+1. **explicit_constraint_adherence_rate**: Target: > 99% of actions honor every explicitly stated user constraint; Alert if < 97% over rolling 100 constrained tasks.
+2. **preference_override_incidents**: Target: 0 incidents of agent substituting its own judgment for an explicit contradicting instruction; Alert on any confirmed incident.
+3. **format_compliance_rate**: Target: > 98% of outputs match explicitly requested format; Alert if < 95% over rolling 100 tasks.
+4. **user_correction_rate_for_ignored_instructions**: Target: < 1% of tasks require user correction for an ignored instruction; Alert if > 3% over rolling 200 tasks.
+
+### Alerts
+1. **Explicit Constraint Violated** (P1): Condition - a completed action contradicts an explicitly stated user constraint (e.g., wrong flight booked). Action: immediately notify the user, offer to reverse/correct the action if still possible, and log the constraint-extraction failure for review.
+2. **Confirmation Step Skipped on High-Stakes Action** (P2): Condition - a booking/purchase/irreversible action executes without the constraint-confirmation step having run. Action: pause further high-stakes actions for that session, verify the confirmation gate is enabled, and audit recent actions of that type.
 
 ## References
 

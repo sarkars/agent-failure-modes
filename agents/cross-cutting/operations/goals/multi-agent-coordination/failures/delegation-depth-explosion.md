@@ -82,20 +82,33 @@ From Delegation Research (2026):
 - No direct execution preference
 - Recursive agent architectures
 
-**Mitigation Strategies**
-1. **Depth limits**: Hard cap on delegation depth (e.g., max 3)
-2. **Complexity threshold**: Only delegate complex tasks
-3. **Direct execution bias**: Prefer handling directly when capable
-4. **Delegation tracking**: Track full delegation chain
-5. **Loop detection**: Prevent circular delegation
-6. **Cost-aware delegation**: Consider overhead before delegating
+## Mitigation Strategies
 
-**Detection**
-- Monitor delegation depth per task
-- Track latency vs. delegation depth
-- Alert on circular delegation patterns
-- Compare direct vs. delegated execution costs
-- Audit delegation decisions
+### Prevention
+1. **Hard depth budget passed through the call chain**: The Tokyo weather example shows a simple lookup passed through 5 layers (L0-L4) purely because each agent's default behavior is "delegate" rather than "check if I can just do this." Attach a decrementing depth budget (e.g., start at 3) to the task at L0, and require any agent receiving budget=0 to execute directly or fail rather than delegate further — this caps the chain before it reaches L4-level absurdity. Trade-off: a hard cap can force a genuinely complex task to be handled by an under-equipped agent if the budget is set too low.
+2. **Complexity-gated delegation instead of default-delegate**: "What's the weather in Tokyo?" is a single API call, yet every layer chose to delegate rather than execute — the stats confirm average production depth should be 2-3 levels, not 5. Require each agent to score task complexity (e.g., "does this need one tool call or multiple reasoning steps?") before delegating, and force direct execution for single-tool-call tasks like weather lookups. Trade-off: complexity scoring itself costs an LLM call and can be wrong, occasionally delegating something that should have been direct or vice versa.
+3. **Circular-delegation guard via visited-agent set**: The "worse case" in the example — Agent A delegates to B, B delegates back to A — causes a hang/crash with no depth limit needed to trigger it. Attach a visited-agent-ID list to the task context and reject any delegation that would re-enter an agent already in the chain. Trade-off: requires every agent in the system to honor and propagate the visited-list faithfully; a non-compliant agent reintroduces the loop risk.
+
+### Detection & Response
+1. **Per-level latency accumulation tracking**: Since each delegation level in the example adds ~500ms (400-800ms per the stats) and the chain compounds to 5x direct latency, instrument each hop to log cumulative latency and flag any task exceeding 2x the direct-execution baseline latency for its task type.
+2. **Token/cost multiplier monitor**: The example shows 8x token cost ($0.016 vs $0.002) purely from delegation overhead with zero added value (same answer, just re-narrated at each level). Track the ratio of total tokens consumed across the chain vs. tokens the final tool call itself required, and flag ratios above a threshold (e.g., >3x) as excessive delegation overhead.
+3. **Context fidelity decay check**: The stats note 10-20% fidelity drop per level as "72°F, Sunny" gets re-narrated (L4→L3→L2→L1→L0). Sample final output against the ground-truth tool result and flag semantic drift (paraphrase divergence) beyond a threshold as a sign the chain is too deep for the content it's carrying.
+
+### Architecture Patterns
+1. **Supervisor with bounded delegation depth**: A single supervisor (L0) holds the depth budget and a registry of available direct-execution tools (like the weather API), so it can call the tool itself instead of delegating to a Research Agent that delegates to a Data Gathering Agent, etc. Deployment consideration: requires the supervisor to maintain an up-to-date tool/capability registry, or it will fall back to delegation anyway.
+2. **Flat tool-calling instead of nested agent-to-agent delegation**: For tasks like the weather lookup that resolve to one API call, replace the L1-L4 agent hierarchy with direct tool access from L0 — i.e., treat "weather API" as a callable tool, not a sub-agent to delegate to. Deployment consideration: blurs the architectural line between "agent" and "tool," requiring clear guidelines on when a capability should be a tool vs. a full agent.
+3. **Delegation ledger with loop detection**: Maintain an explicit, task-scoped ledger recording every delegation hop (who delegated to whom, at what depth) that is checked before each new delegation for depth-budget and cycle violations — directly preventing the "Agent A delegates to Agent B, Agent B delegates to Agent A" infinite loop. Deployment consideration: the ledger must be passed reliably through every hop; losing it mid-chain reopens the loop risk.
+
+### Metrics
+1. **avg_delegation_depth**: Target 2-3 levels (per observed production baseline); Alert if p95 exceeds 4 levels for any task category.
+2. **delegation_overhead_ratio**: Target < 2x tokens/latency vs. direct execution baseline; Alert if > 5x (matching the example's 8x/5x blowup pattern).
+3. **circular_delegation_rate**: Target 0% of tasks hitting a repeated agent ID in the delegation chain; Alert on any occurrence (P1, since this causes hangs per the 8% hang-rate stat).
+4. **context_fidelity_at_final_hop**: Target > 90% semantic similarity between final output and ground-truth tool result; Alert if < 80%.
+
+### Alerts
+1. **Circular Delegation Detected** (P1): Condition - a delegation chain re-enters an agent ID already present in the visited-agent list. Action: immediately abort the chain, return an error to the originating caller, and log the full chain for debugging (matches the "system hangs or crashes" failure mode in the example).
+2. **Depth Budget Exhausted** (P2): Condition - a task's delegation depth budget reaches 0 without task completion. Action: force the current agent to execute directly with available tools or return a "cannot complete without further delegation" response rather than silently continuing.
+3. **Excessive Overhead Ratio** (P3): Condition - delegation_overhead_ratio for a completed task exceeds 5x the direct-execution baseline. Action: log for delegation-policy review; if recurring for the same task pattern, add a complexity-threshold rule to route that pattern to direct execution.
 
 ## References
 

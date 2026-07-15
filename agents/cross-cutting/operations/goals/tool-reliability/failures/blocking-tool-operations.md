@@ -84,19 +84,33 @@ From MCP Server Mistakes Analysis (2026):
 - Single-threaded server architectures
 - Tutorials show synchronous examples
 
-**Mitigation Strategies**
-1. **Use async I/O**: asyncio, httpx, asyncpg for all external calls
-2. **Connection pooling**: Reuse connections instead of creating new ones
-3. **Timeout management**: Set appropriate timeouts per operation type
-4. **Background processing**: Queue long operations, return job ID
-5. **Progress reporting**: Stream updates for long operations
-6. **Concurrent limits**: Cap parallel operations to prevent overload
+## Mitigation Strategies
 
-**Detection**
-- Monitor tool execution times
-- Track timeout rates by tool
-- Measure queue depth under load
-- Profile blocking time vs. execution time
+### Prevention
+1. **Migrate to async I/O for all external calls**: Replace synchronous `requests`/blocking DB drivers with `httpx.AsyncClient`, `asyncpg`, etc., so a 30-second report call no longer holds the single-threaded MCP server hostage while a 10-100ms product query waits behind it. Trade-off: async rewrites touch every I/O call site and require re-testing error/cancellation paths that behave differently than sync code.
+2. **Route long-running work through a job queue**: For operations like report generation (10-60s) or file processing (5-30s), have the tool enqueue work and immediately return a job ID rather than holding the connection open past typical 10-second client timeouts. Trade-off: the agent must now poll or subscribe for completion, adding a second tool call and more orchestration logic.
+3. **Cap concurrent slow operations with a worker pool**: Bound simultaneous AI-model calls or report jobs (e.g., a semaphore of 4-8) so a burst of slow requests can't starve fast ones even under async I/O. Trade-off: legitimate bursts get queued and delayed rather than all running immediately.
+
+### Detection & Response
+1. **Per-tool execution time percentiles**: Track p50/p95/p99 execution time per tool; a normally-fast tool (list_products, 10-100ms baseline) whose p95 spikes into seconds signals it's being blocked behind a slow synchronous call sharing the same server thread.
+2. **Timeout rate correlated by tool pairing**: Log which tool was executing when a different tool's client-side timeout fired; repeated timeouts on fast tools coinciding with slow-tool execution windows confirms blocking rather than tool-specific failure.
+3. **Queue depth under load**: Monitor the server's pending-request queue depth; sustained non-zero depth on a nominally async server indicates a blocking call slipped through (e.g., a sync library invoked from async code).
+
+### Architecture Patterns
+1. **Async-first server runtime**: Build the MCP server on an async framework (asyncio/FastAPI+uvicorn) from the start so blocking is the exception; deployment consideration — audit third-party client libraries for hidden sync calls (e.g., a sync boto3 client inside an async handler still blocks the event loop).
+2. **Background job + polling pattern**: For 10s+ operations, return `{job_id, status: "running"}` immediately and expose a `check_job_status(job_id)` tool; deployment consideration — requires a job store (Redis/DB) with TTL cleanup so abandoned jobs don't leak.
+3. **Bulkhead isolation**: Run slow external-API-bound tools in a separate worker pool or process from fast DB-bound tools so exhaustion in one pool can't starve the other; deployment consideration — adds operational surface (two pools to monitor/scale) but contains blast radius.
+
+### Metrics
+1. **tool_p95_latency_ms** (per tool): Target: DB-backed tools < 200ms, external-API tools < 5s; Alert if p95 exceeds 2x its 7-day baseline.
+2. **client_timeout_rate**: Target < 0.5% of calls; Alert if > 2% over a 15-minute window.
+3. **event_loop_blocked_ms**: Target: 0 sustained blocking on an async server; Alert if any single blocking span exceeds 500ms.
+4. **queue_depth**: Target: 0 steady-state; Alert if > 10 pending requests for more than 60 seconds.
+
+### Alerts
+1. **Blocking Call Detected** (P1): Condition - event_loop_blocked_ms exceeds 500ms on a server expected to be fully async. Action: page on-call, capture a stack trace via profiler, identify and patch the synchronous call site (common culprits: sync DB driver, sync HTTP client, CPU-bound loop with no yield).
+2. **Fast Tool Timeout Spike** (P2): Condition - a normally sub-200ms tool's timeout rate exceeds 2% while a known slow tool executes concurrently. Action: confirm blocking via queue-depth correlation, temporarily cap concurrent slow-tool invocations, file a bug against the blocking call.
+3. **Queue Depth Sustained** (P3): Condition - queue_depth > 10 for 5+ minutes. Action: check for a traffic spike vs. a blocking regression; scale the worker pool if traffic-driven, investigate code if not.
 
 ## References
 

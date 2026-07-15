@@ -29,21 +29,33 @@ Agent tells user: "I've sent your notification"
 Result: User never receives notification, thinks it was sent
 ```
 
-**Mitigation Strategies**
-1. **End-to-end confirmation**: Tools verify action completed
-2. **Explicit failure responses**: Never swallow errors
-3. **Status codes with details**: Include success criteria in response
-4. **Async completion tracking**: Return job ID, check completion
-5. **Idempotency tokens**: Enable safe retries
-6. **Health checks**: Verify dependent services before calling
+## Mitigation Strategies
 
-**Detection**
-- Track success responses vs. actual outcomes
-- Monitor downstream confirmation rates
-- Alert on mismatches between tool response and reality
-- Log completion verification results
+### Prevention
+1. **Never return `{"status": "success"}` on enqueue alone**: The example failure is specifically that `send_notification` reported success the instant the message was queued, not when it was actually delivered — fix this by making the tool's success response contingent on confirmed delivery (or, for genuinely async operations, on returning an explicit `{"status": "queued", "job_id": ...}` rather than a bare "success"). Trade-off: waiting for true completion increases the tool call's latency, which is exactly why "async operations not confirming completion" became the shortcut in the first place.
+2. **Ban blanket try/except that swallows exceptions without re-raising a structured signal**: Since the root cause names "error handling that catches and hides exceptions" as a direct driver, enforce (via lint rule or code review) that every except block in a tool implementation either re-raises or returns an explicit failure object — a bare `except: pass` or `except: return {"status": "success"}` should be treated as a bug class, not a style preference. Trade-off: requires auditing all existing tool implementations for this anti-pattern, which is a one-time but potentially large remediation effort.
+3. **Require tools to validate their own output before returning success**: A notification tool should check the downstream service's actual response (was the message accepted for delivery, or just accepted into a local queue that may never drain) rather than assuming its own successful invocation implies the intended real-world effect happened — this directly targets "tools not validating their own output."
 
----
+### Detection & Response
+1. **Downstream confirmation rate tracking**: For every tool that reports success, independently verify against the actual downstream system state (e.g., did the notification service's delivery webhook fire) at a sampled rate; a gap between tool-reported success and confirmed downstream success is exactly the silent-failure pattern in the example.
+2. **Queued-but-never-delivered tracking**: Since the example's root cause is "notification service was down, message queued indefinitely," specifically monitor queue age/depth for async operations and treat "success" responses whose underlying job never completes within an expected window as retroactive failures requiring an alert.
+3. **User-facing claim vs. system-of-record mismatch audits**: Sample agent responses like "I've sent your notification" against the actual notification-service delivery log; any claim unsupported by a confirmed delivery record is a silent failure that reached the user undetected.
+
+### Architecture Patterns
+1. **Idempotent job-status pattern with explicit terminal states**: Return a job ID immediately for async operations like notification delivery, with defined states (`queued`, `sent`, `delivered`, `failed`) rather than a single premature "success," and require the agent (or a background poller) to check for a terminal state before telling the user it's done; deployment consideration — needs a job-status store with retention/TTL and a polling or webhook mechanism the agent can use.
+2. **Dead-letter queue for stuck async jobs**: When a queued notification (or similar async action) doesn't reach a terminal state within an expected window, move it to a dead-letter queue and surface that as a distinct, alertable failure rather than letting it sit "queued indefinitely" as in the example; deployment consideration — requires defining a reasonable timeout per operation type, which varies (a notification vs. a batch report have very different normal durations).
+3. **Health check before dispatch**: Check the dependent service's health/availability (e.g., is the notification service actually up) before accepting the request, so a known-down downstream produces an immediate, honest failure rather than a queued message with no realistic delivery prospect; deployment consideration — health checks add latency and can themselves be a source of false negatives if the check itself is flaky.
+
+### Metrics
+1. **claimed_vs_confirmed_success_gap**: Target < 0.5% of tool "success" responses lacking independent downstream confirmation; Alert if > 3% over a 1-hour window.
+2. **async_job_stuck_rate**: Target < 1% of queued jobs failing to reach a terminal state within their expected SLA window; Alert if > 5%.
+3. **swallowed_exception_count**: Target: 0 tool code paths with a bare except that doesn't re-raise or return a structured failure (enforced via static analysis); Alert on any new occurrence introduced in a code review/CI check.
+4. **user_facing_false_success_rate**: Target: 0% of user-facing "I've done X" claims unsupported by a confirmed system-of-record success; Alert on any detected occurrence.
+
+### Alerts
+1. **Confirmed Silent Failure** (P1): Condition - a tool reported success but downstream confirmation shows the action never completed (e.g., notification never delivered). Action: page immediately, notify the affected user if identifiable, patch the tool to require real completion confirmation before reporting success.
+2. **Async Job Stuck Beyond SLA** (P2): Condition - async_job_stuck_rate exceeds 5% for a given operation type over an hour. Action: investigate the downstream dependency's health, move affected jobs to the dead-letter queue, alert the owning team.
+3. **New Swallowed-Exception Code Path** (P2): Condition - static analysis detects a new bare except/error-suppression pattern merged into a tool implementation. Action: block or flag the PR in review, require explicit structured error handling before merge.
 
 ## References
 

@@ -76,20 +76,33 @@ From Multi-Agent Research (2026):
 - Static routing rules
 - No routing explainability
 
-**Mitigation Strategies**
-1. **Semantic routing**: Use embeddings to match task to agent capabilities
-2. **Capability profiles**: Detailed agent capability declarations
-3. **Multi-factor routing**: Consider complexity, load, expertise
-4. **Routing validation**: Validate agent can handle task before handoff
-5. **Rerouting protocol**: Easy path to correct routing mistakes
-6. **Routing analytics**: Track routing decisions and outcomes
+## Mitigation Strategies
 
-**Detection**
-- Monitor task-agent capability alignment
-- Track rerouting frequency
-- Measure task completion quality by route
-- Alert on circular routing patterns
-- Compare actual vs. optimal routing
+### Prevention
+1. **Semantic multi-intent routing over keyword first-match**: The customer query "My bill seems wrong, I was charged for a feature I can't seem to access" contains both a billing keyword ("bill") and a technical issue, but "first match wins" keyword logic sent it entirely to billing_agent, missing the actual root cause. Replace keyword matching with embedding-based intent classification that can detect multiple co-occurring intents (billing + technical) in one query, matching the 85-95% semantic vs. 60-70% keyword accuracy gap cited in the stats. Trade-off: semantic routing requires an embedding model and capability-vector maintenance, adding infra and latency vs. a simple keyword lookup.
+2. **Root-cause-first routing order for compound queries**: The example shows the correct order was technical_agent (diagnose the access bug) before billing_agent (issue credit), but keyword-first-match picked billing arbitrarily. For queries matching multiple agent capabilities, define an explicit resolution-order policy (e.g., diagnose-before-refund) rather than "first match wins," so compound issues route to the root-cause specialist first. Trade-off: requires maintaining an explicit precedence policy across every pair of overlapping capabilities, which grows combinatorially with agent count.
+3. **Capability profiles that flag "requires escalation" cases**: billing_agent, on receiving this query, told the user "bill is correct" and stopped — it had no mechanism to recognize the query exceeded its capability (verifying feature access) and route onward. Give each agent an explicit capability boundary declaration and require it to check incoming queries against that boundary, escalating to routing rather than answering partially when out of scope. Trade-off: agents must be honest about their own limits, and an overly cautious boundary can cause excessive re-routing for queries the agent could actually have handled.
+
+### Detection & Response
+1. **Compound-intent detection at the entry point**: The failure mode here specifically involves one query with two independent problems (billing + access). Run intent classification that outputs a *set* of matched capabilities per query, not just a single winner, and flag any query matching 2+ agent capabilities for either multi-agent handling or the resolution-order policy rather than defaulting to first match.
+2. **Resolution-doesn't-match-complaint check**: billing_agent's response ("bill is correct") didn't address the "can't access" part of the original query at all. Compare the closing response against the full original query for topic coverage, and flag responses that leave part of a compound query unaddressed as likely mis-routes.
+3. **Churn/re-contact correlation**: The example's stated impact is customer churn and negative review after being told "bill is correct" while still unable to access the feature. Track re-contact rate on the same ticket/session within a short window after agent resolution as a lagging indicator of mis-routing, since a correctly-routed resolution shouldn't need a follow-up on the same underlying issue.
+
+### Architecture Patterns
+1. **Capability-profile-based semantic router with confidence scores**: Maintain detailed per-agent capability profiles (billing_agent: invoices/payments/refunds; technical_agent: bugs/config/access issues) and route via similarity between query embedding and capability profile embeddings, surfacing a confidence score so low-confidence routes (like this ambiguous compound query) get flagged rather than silently first-matched. Deployment consideration: capability profiles need active maintenance as agents' actual scope evolves, or the router drifts from reality.
+2. **Sequential multi-agent handoff for compound queries**: For queries matching multiple capabilities (billing + technical here), route through technical_agent first to resolve the root cause, then automatically hand off to billing_agent for the credit — instead of picking one agent and terminating. Deployment consideration: needs the task-handoff machinery (from task-handoff-errors) to reliably pass context between the two agents, or the second hop loses information.
+3. **Rerouting/escalation protocol as a first-class agent action**: Give billing_agent an explicit "this is outside my capability, re-route to technical" action it can invoke instead of answering "bill is correct" and closing the ticket — this directly prevents the dead-end resolution in the example. Deployment consideration: agents must be incentivized/prompted to use re-route rather than force an answer, since a forced complete-looking answer can look like better performance in naive metrics.
+
+### Metrics
+1. **routing_accuracy**: Target > 90% of tasks routed to the optimal agent on first attempt (above the 85-95% semantic-routing ceiling cited); Alert if < 75%.
+2. **compound_query_detection_rate**: Target > 90% of queries with 2+ matching capabilities correctly flagged as multi-intent; Alert if < 70%.
+3. **rerouting_rate**: Target < 15% of tickets requiring a second routing hop; Alert if > 30%, indicating first-pass routing logic is unreliable.
+4. **same_issue_recontact_rate**: Target < 5% of resolved tickets generating a follow-up contact on the same underlying issue within 7 days; Alert if > 15%.
+
+### Alerts
+1. **Compound Intent Mis-Routed** (P2): Condition - a query classified as matching 2+ agent capabilities was routed to only one agent and marked resolved. Action: re-open the ticket, route to the unaddressed capability's agent, and log the original routing decision for the router's calibration review.
+2. **Unaddressed Query Component** (P2): Condition - agent response does not semantically cover all detected intents in the original query (e.g., addresses billing but not access). Action: auto-flag for re-routing before the resolution is sent to the customer.
+3. **High Recontact on Same Issue** (P3): Condition - same_issue_recontact_rate exceeds threshold for a given agent or routing path. Action: audit that agent's recent routing decisions and capability profile for gaps causing incomplete resolutions.
 
 ## References
 
