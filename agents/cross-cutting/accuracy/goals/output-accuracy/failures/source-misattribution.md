@@ -24,19 +24,33 @@ Reality: Q3 report showed 15%, but citation points to Q2 report
 Result: User follows citation, finds different data, loses trust
 ```
 
-**Mitigation Strategies**
-1. **Extractive citations**: Quote directly from source
-2. **Page/line references**: Point to exact location
-3. **Citation verification**: Validate claim appears in cited source
-4. **Source-claim linking**: Maintain explicit mappings
-5. **Retrieval-then-generate**: Generate only from retrieved content
-6. **Citation auditing**: Regularly verify citation accuracy
+## Mitigation Strategies
 
-**Detection**
-- Automated citation verification
-- Compare extracted quotes to source text
-- Track user reports of broken citations
-- Sample-based human review
+### Prevention
+1. **Extractive-only citation generation**: Require the agent to quote or closely paraphrase the exact retrieved span it's citing rather than freely generating a citation number and separately generating the claim — this prevents the example's failure where a 15% growth claim was generated correctly but linked to source [1], which actually contained the 12% Q2 figure. Trade-off: extractive citation is more restrictive and can produce less fluent prose than freely-generated summaries.
+2. **Claim-source binding at generation time**: Bind each generated claim to the specific retrieved chunk it was derived from as part of the generation process (not a post-hoc citation lookup), so the citation mechanism can't drift from the claim it's attached to. Trade-off: requires a generation architecture that tracks provenance per-span, which is more complex than plain retrieval-augmented generation.
+3. **Page/line-level reference granularity**: Cite to the specific location within a source (page, paragraph, line) rather than the document as a whole, making it possible to verify the claim actually appears at the cited location rather than just somewhere in a large source. Trade-off: requires source documents to be chunked/indexed at fine granularity, adding preprocessing overhead.
+
+### Detection & Response
+1. **Automated claim-in-source verification**: For every citation, programmatically check whether the cited claim's key facts (numbers, names, dates) actually appear in the cited source span — this would directly catch the 15%-vs-12% mismatch in the example before it reaches the user.
+2. **User-reported broken-citation tracking**: Log and categorize user reports of citations that don't support the claim (as in the example's "user follows citation, finds different data") to identify systemic patterns versus one-off errors.
+3. **Sample-based human citation audits**: Periodically sample published citations and have a human verify the cited source actually supports the claim, since automated matching can miss paraphrased or contextually-wrong citations that pass a naive keyword check.
+
+### Architecture Patterns
+1. **Retrieval-then-generate with hard provenance links**: Generate claims only from retrieved content, maintaining an explicit mapping from each generated sentence to its source chunk throughout the generation process, so misattribution requires an active linking bug rather than being the default failure mode of free generation. Deployment consideration: constrains the generation model to retrieved content, which can reduce fluency or force awkward phrasing when retrieved content doesn't read naturally.
+2. **Citation verification as a blocking post-generation step**: Run a dedicated verification pass after generation that checks every citation against its claimed source and blocks or flags responses where citations fail verification, rather than trusting citations added during generation. Deployment consideration: adds a verification model/step to the pipeline, increasing latency and cost per response.
+3. **Versioned source-claim mapping store**: Maintain an explicit, queryable mapping between claims and sources (not just inline citation markers) so citation accuracy can be audited and corrected independently of the generation pipeline. Deployment consideration: requires infrastructure to store and query claim-source mappings at scale, beyond what inline citations alone provide.
+
+### Metrics
+1. **citation_accuracy_rate**: % of citations where the cited source actually contains the claimed fact; target > 98%; alert if < 90%.
+2. **claim_source_mismatch_rate**: % of citations pointing to a source discussing a related but different fact/period (like Q2 vs Q3 in the example); target < 2%; alert if > 8%.
+3. **user_broken_citation_reports**: Reports per 10,000 citations served; target < 5; alert if > 20.
+4. **sample_audit_pass_rate**: % of human-audited citation samples confirmed accurate; target > 97%; alert if < 90%.
+
+### Alerts
+1. **Citation Accuracy Below Threshold** (P1): Condition — citation_accuracy_rate drops below 90% for a content category. Action: pause citation-bearing responses for that category pending root-cause review of the retrieval/generation binding.
+2. **Claim-Source Mismatch Spike** (P2): Condition — claim_source_mismatch_rate exceeds 8% over a rolling week. Action: audit recent responses for the specific mismatch pattern (e.g., adjacent time-period confusion) and patch the claim-source binding logic.
+3. **User Broken-Citation Reports Spike** (P2): Condition — user_broken_citation_reports exceeds 20 per 10,000 citations. Action: sample the reported cases, confirm the pattern, and escalate to the retrieval/generation pipeline owners.
 
 ---
 

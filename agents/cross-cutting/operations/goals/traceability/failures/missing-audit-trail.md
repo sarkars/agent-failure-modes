@@ -71,20 +71,33 @@ From Operations Research (2026):
 - High-volume actions overwhelm storage
 - Development/production logging mismatch
 
-**Mitigation Strategies**
-1. **Structured audit logging**: Log inputs, decisions, actions, outcomes
-2. **Decision capture**: Record reasoning at decision points
-3. **Immutable audit store**: Write-once audit trail
-4. **Sampling for volume**: Statistical sampling for high-frequency actions
-5. **Compliance templates**: Pre-built audit schemas for regulations
-6. **Real-time audit streaming**: Enable live compliance monitoring
+## Mitigation Strategies
 
-**Detection**
-- Audit trail coverage metrics
-- Compliance audit dry runs
-- Incident investigation time tracking
-- "Unknown cause" incident rate
-- Auditor finding trends
+### Prevention
+1. **Structured audit logging covering input, decision, action, and outcome as one record**: Require every consequential agent action to log what data it received, what rules/pricing logic it applied, what alternatives it considered, and the final action — not just the terminal `POST /charge` call — so an incident investigation isn't reduced to "only final API call logged" as in the example. Trade-off: structured full-lifecycle logging adds development overhead to every action path, which teams often skip under delivery pressure (the named contributing factor "logging seen as overhead, not requirement").
+2. **Decision capture at the point of decision, not reconstructed after**: Record the reasoning and confidence at the moment the agent decides to charge $500 (or any consequential action), since reasoning captured after the fact is unreliable or simply unavailable — the example's "why did it choose this action? Reasoning not recorded" is unrecoverable once the moment has passed. Trade-off: capturing reasoning requires the agent architecture to expose an explicit decision step, not just an opaque action call.
+3. **Compliance-template-driven audit schema for regulated actions**: Use pre-built audit schemas aligned to relevant compliance requirements (billing/financial actions in this example) so audit completeness is checked against a known standard rather than ad hoc logging that happens to miss exactly the fields an auditor will ask for. Trade-off: templates need to be kept current with evolving regulatory requirements and may over-log for actions that don't actually need full compliance-grade detail.
+
+### Detection & Response
+1. **Audit-trail-coverage metrics per action type**: Continuously measure what fraction of consequential actions (billing charges, account changes) have a complete audit record (input, decision, action, outcome) versus only a partial one (like the example's charge-only log), rather than discovering the gap during an actual incident.
+2. **"Unknown cause" incident-rate tracking**: Track how often incident investigations conclude "cannot determine if bug, policy violation, or correct behavior" due to missing audit data — this is the exact, named outcome in the example and is the clearest signal that audit trail coverage is inadequate.
+3. **Compliance audit dry runs**: Periodically simulate an auditor's request for a specific action's full evidence trail (as in "what data did it use," "why did it choose this action") and check whether the current logging can actually answer it, catching the gap before a real regulator does.
+
+### Architecture Patterns
+1. **Immutable, write-once audit store separate from application logs**: Maintain a dedicated audit trail store (distinct from general application logging, which is often incomplete or rotated) that captures the full input-decision-action-outcome record for every consequential action and cannot be altered after the fact, directly addressing "no evidence of agent decision-making process." Deployment consideration: requires separate infrastructure investment beyond existing app logging, plus retention and access-control policy for the immutable store.
+2. **Sampling with 100% capture for consequential/high-risk action categories**: Apply statistical sampling for high-frequency, low-risk actions to control storage cost, but exempt consequential categories (billing, account changes) from sampling entirely so a customer billing dispute always has a complete record rather than a 1-in-N chance of being captured. Deployment consideration: requires classifying actions by consequence tier up front and enforcing different logging policies per tier.
+3. **Real-time audit streaming to a compliance monitoring system**: Stream structured audit records to a compliance/monitoring pipeline as actions happen, enabling live detection of policy violations rather than only reconstructing behavior after an incident is reported. Deployment consideration: adds a real-time data pipeline dependency and requires the compliance system to keep pace with agent action volume.
+
+### Metrics
+1. **audit_trail_completeness_rate**: % of consequential actions with a full input-decision-action-outcome audit record; target 100% for regulated action types (billing, financial); alert if < 95%.
+2. **unknown_cause_incident_rate**: % of incident investigations that conclude with "cannot determine cause" due to missing audit data; target < 5%; alert if > 20%.
+3. **incident_investigation_time_multiplier**: How much longer investigations take without a complete audit trail versus with one; target < 2x; alert if > 5x (baseline research cites 5-10x, the failure state to avoid).
+4. **compliance_dry_run_pass_rate**: % of simulated auditor evidence requests that current logging can fully answer; target > 95%; alert if < 80%.
+
+### Alerts
+1. **Audit Trail Gap on Consequential Action** (P1): Condition — audit_trail_completeness_rate falls below 95% for a regulated action category (billing, financial transactions). Action: treat as a compliance risk; block further unaudited actions of that type if feasible, and prioritize closing the logging gap immediately.
+2. **Unknown-Cause Incident Rate Elevated** (P2): Condition — unknown_cause_incident_rate exceeds 20% over a rolling quarter. Action: review recent unresolved incidents for common missing-data patterns and prioritize structured audit logging for the affected action types.
+3. **Compliance Dry Run Failure** (P1): Condition — compliance_dry_run_pass_rate falls below 80% for a regulated action category. Action: escalate to compliance stakeholders before a real audit occurs, and remediate the specific missing fields identified by the dry run.
 
 ## References
 

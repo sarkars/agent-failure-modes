@@ -57,18 +57,33 @@ From MAST study of 1642 MAS traces:
 - Difficulty interpreting test outputs
 - Overconfidence in initial output
 
-**Mitigation Strategies**
-1. **Mandatory verification**: Require verification before completion
-2. **Structured test cases**: Define expected test scenarios
-3. **External validation**: Use separate verification agent
-4. **Result comparison**: Explicit expected vs actual comparison
-5. **Multi-stage verification**: Multiple verification rounds
+## Mitigation Strategies
 
-**Detection**
-- Outputs failing when users test them
-- Verification claims without corresponding actions
-- Test results mismatched with verification conclusions
-- Pattern of "verified" outputs having errors
+### Prevention
+1. **Structured expected-vs-actual comparison, not free-text judgment**: Require verification to programmatically compare the actual tool/execution output against a structured expected value (factorial(5) == 120, checked as `actual == expected`) rather than letting the agent narrate "that looks correct" over an unparsed result — this directly prevents the example's failure, where the agent misread `0` as matching `120`. Trade-off: requires defining structured expected outputs up front, which isn't always possible for open-ended or subjective tasks.
+2. **Independent verification agent/pass**: Use a separate verification step (different prompt context or a different agent) whose only job is checking the primary output against requirements, rather than letting the same generation context that produced the bug also "verify" it — self-verification in the same context is prone to the same blind spots that produced the error. Trade-off: doubles inference cost and adds latency for every task requiring verification.
+3. **Mandatory verification as a hard gate, not a narrated step**: Make verification a required, checkable action (e.g., a test-execution tool call with a parsed pass/fail result) before a task can be marked complete, rather than trusting a natural-language claim of having verified. Trade-off: requires tooling support for structured verification in every task category, which isn't available for all agent workflows.
+
+### Detection & Response
+1. **Verification-claim-to-action audit**: Check whether a "verified" claim in agent output corresponds to an actual logged verification action (test run, comparison call) rather than being asserted without any underlying check — this is exactly the MAST-identified "hallucinated verification" pattern and is directly auditable from action logs.
+2. **User-side failure correlation**: Track how often outputs that were marked "verified" by the agent subsequently fail when the user actually runs/uses them (as the factorial bug would on first real use); a high correlation indicates verification is unreliable, not just occasionally wrong.
+3. **Result-interpretation spot checks**: Sample cases where the agent ran a test and reported success, and independently check whether the raw test output actually matches what the agent claimed — catches misread-result failures like the `0` vs. `120` mismatch in the example.
+
+### Architecture Patterns
+1. **External validator agent with programmatic comparison**: Route task outputs through a dedicated validator that executes structured checks (unit tests, schema validation, output comparison) and returns a machine-readable pass/fail rather than relying on the generating agent's self-assessment. Deployment consideration: needs task-specific test/validation logic to be defined for each task category, which is upfront engineering work.
+2. **Multi-stage verification with escalating rigor**: Chain a fast automated check (structured comparison) with a slower, more thorough check (independent agent or human review) for high-stakes outputs, so cheap verification catches obvious errors like the factorial bug while expensive verification catches subtler ones. Deployment consideration: requires triaging which outputs warrant the expensive second stage without reviewing everything at top cost.
+3. **Verification-result logging as a first-class artifact**: Store the raw verification output (not just the agent's summary of it) alongside the task result, so misread-result failures are auditable after the fact even if not caught in real time. Deployment consideration: adds storage and pipeline complexity for capturing and retaining raw verification artifacts.
+
+### Metrics
+1. **verification_hallucination_rate**: % of "verified" claims without a corresponding logged verification action; target < 1%; alert if > 5%.
+2. **post_verification_failure_rate**: % of agent-verified outputs that fail when actually used/tested by the user; target < 3%; alert if > 10%.
+3. **result_misinterpretation_rate**: % of sampled verification actions where the raw result contradicts the agent's stated verification conclusion; target < 2%; alert if > 8%.
+4. **independent_validator_coverage**: % of high-stakes tasks routed through an independent validator rather than self-verification; target > 90%; alert if < 70%.
+
+### Alerts
+1. **Verification Hallucination Detected** (P1): Condition — verification_hallucination_rate exceeds 5% over a rolling week. Action: audit affected task categories, require structured verification tooling before allowing "complete" status, and review recently delivered outputs from that category.
+2. **Post-Verification Failure Rate Spike** (P1): Condition — post_verification_failure_rate exceeds 10% for a task category. Action: treat all recent "verified" outputs in that category as unverified pending re-check; investigate the result-comparison logic for misinterpretation bugs.
+3. **Result Misinterpretation Pattern Confirmed** (P2): Condition — result_misinterpretation_rate exceeds 8% in spot-check sampling. Action: replace narrative self-verification with structured programmatic comparison for the affected task type.
 
 ## References
 

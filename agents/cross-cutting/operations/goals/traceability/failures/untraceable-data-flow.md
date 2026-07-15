@@ -67,20 +67,33 @@ From Data Governance Research (2026):
 - Summarization obscures sources
 - RAG retrieval doesn't tag sources
 
-**Mitigation Strategies**
-1. **Source tagging**: Mark all data with origin metadata
-2. **Transformation logging**: Record each data modification
-3. **Lineage graph**: Maintain data flow DAG
-4. **Output attribution**: Tag output segments with sources
-5. **PII tracking**: Special lineage for sensitive data
-6. **Cross-agent lineage**: Preserve lineage across boundaries
+## Mitigation Strategies
 
-**Detection**
-- Audit output for unattributed data
-- Test PII source tracing
-- Measure lineage coverage
-- Run lineage queries on samples
-- Compliance audit dry runs
+### Prevention
+1. **Source-tagging at retrieval time for every data source touched**: Tag every piece of retrieved data (customer record, support ticket, prior email, knowledge-base entry) with its origin the moment it enters the agent's context, so a summarization step can filter based on source sensitivity — the example's SSN leak specifically happened because the support-ticket source (which had unmasked SSN in free text) wasn't distinguished from the customer-database source (which was properly masked) once both were pulled into the same summarization step. Trade-off: tagging every retrieved fragment adds overhead to the retrieval pipeline and requires every data source integration to participate consistently.
+2. **PII-aware filtering enforced at each transformation step, not just at the final source**: Apply PII detection/masking at every transformation boundary (ticket → summary → email), not only at the original customer-database query, since the example shows masking was correctly applied at step 1 but the unmasked SSN entered through step 2 (the support ticket) and propagated unfiltered through summarization and email generation. Trade-off: requires PII-scanning at multiple pipeline stages rather than once, increasing latency and false-positive risk (over-redacting legitimate content).
+3. **Explicit output-attribution requirement before including sensitive-category content**: Require that any output segment containing a sensitive data pattern (SSN-like strings, financial data) carry a resolvable source attribution before it's allowed into the final output; if attribution can't be established, block or redact rather than pass through — this would have flagged the SSN in the summary as unattributed/unexpected before the email was ever generated. Trade-off: adds a hard gate that can block legitimate content if the attribution mechanism has gaps, trading some availability for security.
+
+### Detection & Response
+1. **Automated output-content auditing for unattributed sensitive data**: Continuously scan agent outputs for PII-pattern content (SSNs, financial identifiers) and check whether each instance can be traced to an attributed, expected source; content without traceable attribution is the exact leak pattern the example describes and should be caught before or immediately after the email sends, not during a reactive investigation.
+2. **PII-source-tracing test suite**: Regularly test whether the pipeline can correctly trace a known-injected PII value back through retrieval, transformation, and output stages, verifying the lineage mechanism actually works rather than assuming it does until an incident like the SSN leak forces a manual investigation.
+3. **Lineage-coverage measurement across all data sources**: Measure what fraction of an agent's touched data sources (the example notes agents typically touch 5-10 per task) actually have lineage tracking versus being "black box" inputs — the support-ticket source in the example was evidently one of the untracked ones, which is exactly the coverage gap this metric surfaces.
+
+### Architecture Patterns
+1. **Lineage graph (DAG) as a first-class pipeline artifact**: Maintain an explicit directed graph of data flow — source → transformation → output — for every task execution, so a question like "where did the SSN come from" resolves to a graph traversal (`ticket.notes → summary.context → email.body`) instead of a reactive, manual, cross-source investigation. Deployment consideration: requires every pipeline stage (retrieval, summarization, generation) to emit lineage edges, which is a structural requirement on the agent architecture, not an add-on.
+2. **PII-tagged special-handling lineage for sensitive data categories**: Build a dedicated, higher-scrutiny lineage path specifically for data classified as PII, so sensitive content is tracked with extra rigor (mandatory masking checkpoints, mandatory attribution) distinct from the lineage tracking applied to non-sensitive data. Deployment consideration: requires reliable PII classification at ingestion, which itself can have false negatives (unstructured free-text SSNs, as in the support ticket, are harder to classify than structured database fields).
+3. **Cross-agent lineage preservation at every handoff boundary**: When data or derived summaries pass between agents or pipeline stages, explicitly carry forward the lineage metadata rather than letting it reset at each boundary — "cross-agent flow lost at boundaries" is named as a very common gap type, and preserving lineage across boundaries is what makes end-to-end tracing (not just within-agent tracing) possible. Deployment consideration: requires a shared lineage schema/protocol that every agent and tool in a multi-agent pipeline honors consistently.
+
+### Metrics
+1. **lineage_coverage_rate**: % of data sources touched by agent tasks that have functioning lineage tracking; target > 95%; alert if < 70% (targeting the "5-10 sources per task, many untracked" gap in the example).
+2. **unattributed_sensitive_content_rate**: % of outputs containing PII-pattern content without a resolvable source attribution; target 0%; alert on any nonzero occurrence in production.
+3. **pii_source_tracing_test_pass_rate**: % of PII-tracing test cases (known-injected sensitive values) correctly traced end-to-end; target 100%; alert if < 95%.
+4. **cross_agent_lineage_preservation_rate**: % of multi-agent handoffs that preserve lineage metadata across the boundary; target > 90%; alert if < 60%.
+
+### Alerts
+1. **Unattributed Sensitive Content in Output** (P1): Condition — unattributed_sensitive_content_rate registers any nonzero event in production (PII-pattern content without traceable source, matching the SSN-in-email example). Action: immediately quarantine/recall the affected output if possible, treat as a data-protection incident, and trace the leak path using whatever lineage data exists before it's lost.
+2. **Lineage Coverage Gap** (P2): Condition — lineage_coverage_rate falls below 70% for a task category. Action: prioritize adding source-tagging and transformation logging for the highest-risk untracked sources first (free-text fields like support tickets, which are more likely to contain unmasked PII than structured database fields).
+3. **PII Tracing Test Failure** (P1): Condition — pii_source_tracing_test_pass_rate falls below 95%. Action: block reliance on lineage claims for compliance purposes until the tracing mechanism is fixed and re-validated; treat any compliance attestations made using the broken tracing as suspect.
 
 ## References
 
