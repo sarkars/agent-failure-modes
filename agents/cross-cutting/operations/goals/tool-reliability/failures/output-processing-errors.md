@@ -52,6 +52,36 @@ From Aegis study: Tool output processing failures are a major category under exp
 - Number formatting inconsistencies
 - Complex multi-column comparisons
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Agent must answer a max/min/ranking question over tabular tool output with no dedicated aggregation/comparison tool
+- No pre-sorted or pre-aggregated response option available
+- No ground-truth diffing between the agent's stated answer and the actual data
+
+### Trigger Mechanism
+1. Return a multi-row table with currency-formatted values where the correct max/min is not the first row
+2. Ask the agent a ranking question ("who has the highest X")
+3. Compare the agent's answer against a programmatically computed ground truth
+
+**Example Reproduction Steps:**
+```
+1. Return get_sales_data with 4+ employees, formatted with $ and commas, where the actual highest value is NOT the first row (e.g., Carol at $142,800 vs. Alice listed first at $127,450)
+2. Ask: "Find the employee with the highest sales last quarter"
+3. Capture the agent's stated answer and figure
+4. Independently sort the same data programmatically to get ground truth
+5. Measure: does the agent's answer match the true maximum?
+```
+
+### Expected Failure State
+- Agent reports an employee/value that is not the true maximum (e.g., the first-listed row rather than the actual highest)
+- No deterministic recomputation caught the mismatch before the answer reached the user
+- Error rate increases further as row count grows beyond ~20
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

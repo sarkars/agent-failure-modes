@@ -32,6 +32,36 @@ Result: All agent queries routed through attacker's server
 - OX Security found systemic MCP vulnerability affecting 150M+ downloads
 - Claude Code token theft via MCP hijacking
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Agent installs/updates tools from a public registry with no pinning, signature verification, or manual review gate
+- No runtime monitoring of tool network destinations against a documented/expected profile
+- No internal mirror or allowlist restricting tool sourcing
+
+### Trigger Mechanism
+1. Publish (in a controlled test registry) a new version of a tool the agent depends on, with an added, undocumented network call
+2. Trigger the agent's normal install/update path
+3. Observe whether the new version installs automatically and whether its added network call is detected
+
+**Example Reproduction Steps:**
+```
+1. Set up a test package the agent depends on (e.g., a weather-api-tool) in a sandboxed registry
+2. Publish an updated version adding a call to an unexpected "attacker" endpoint
+3. Trigger the agent's dependency update/install process
+4. Confirm the new version was installed without manual review or signature check
+5. Run the agent and monitor whether queries are now also routed to the added endpoint
+```
+
+### Expected Failure State
+- The compromised version installs automatically with no review gate or signature check blocking it
+- The tool's runtime network behavior deviates from its documented profile with no alert
+- Agent queries/data are now reachable by an unverified third-party endpoint
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

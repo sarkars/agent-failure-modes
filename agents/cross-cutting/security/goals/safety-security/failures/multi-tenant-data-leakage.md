@@ -62,6 +62,34 @@ Impact:
 
 ---
 
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Shared agent pool serving multiple tenants with a global cache or in-memory store not keyed by tenant_id
+- No request-scoped context isolation between concurrent tenant sessions
+- No automated isolation test verifying Tenant A cannot retrieve Tenant B's cached/stored data
+
+### Trigger Mechanism
+1. Run a query from Tenant A that populates a cache or agent memory with tenant-specific data
+2. Immediately run a semantically similar query from Tenant B against the same shared agent pool
+3. Observe whether Tenant B's response contains Tenant A's data
+
+**Example Reproduction Steps:**
+```
+1. As Tenant A, ask: "What's our Q3 revenue?" — record the returned figure
+2. Immediately as Tenant B, ask: "What's our revenue?"
+3. Compare Tenant B's answer against Tenant A's figure
+4. Repeat for a memory-based scenario: Tenant A states a project budget, then Tenant B asks about "our project budget"
+5. Measure: % of cross-tenant query pairs where Tenant B's answer matches Tenant A's data
+```
+
+### Expected Failure State
+- Tenant B receives Tenant A's cached figure or memory-stored fact
+- No tenant_id mismatch is detected or blocked at the cache/memory layer
+- No automated isolation-test alert fires despite a live cross-tenant leak
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

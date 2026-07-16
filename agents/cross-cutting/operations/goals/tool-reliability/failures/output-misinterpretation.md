@@ -33,6 +33,36 @@ User asked about: Alice's balance (100)
 Result: Agent reports wrong balance
 ```
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Tool response combines a per-item list and an aggregate field with no disambiguating field-level description
+- No deterministic extraction layer between raw tool output and agent reasoning for single-entity queries
+- No extracted-value-vs-raw-output diffing in place
+
+### Trigger Mechanism
+1. Call the tool for a response containing both a list of items and a rolled-up aggregate field (as in the example)
+2. Ask the agent a question scoped to one specific item (e.g., "What's Alice's balance?")
+3. Observe whether the agent's answer matches the per-item value or the aggregate value
+
+**Example Reproduction Steps:**
+```
+1. Return { "users": [{"name": "Alice", "balance": 100}, {"name": "Bob", "balance": 200}], "total_balance": 300 } from the tool
+2. Ask the agent: "What's Alice's balance?"
+3. Capture the agent's stated number
+4. Compare against the ground-truth per-item value (100) vs. the aggregate (300)
+5. Measure: extraction accuracy across repeated trials with similarly shaped responses
+```
+
+### Expected Failure State
+- Agent reports the aggregate value (300) instead of the queried individual's value (100)
+- No field-level annotation or extraction layer disambiguated which field answered the question
+- No diffing mechanism flagged the mismatch between the reported answer and the ground-truth field
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

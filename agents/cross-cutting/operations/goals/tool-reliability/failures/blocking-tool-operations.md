@@ -84,6 +84,36 @@ From MCP Server Mistakes Analysis (2026):
 - Single-threaded server architectures
 - Tutorials show synchronous examples
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- MCP server implements at least one tool using synchronous/blocking I/O (e.g., `requests.get` with a 30s timeout) alongside a fast tool sharing the same server thread
+- No async runtime, job queue, or worker-pool isolation between slow and fast tools
+- Client configured with a realistic timeout (e.g., 10s)
+
+### Trigger Mechanism
+1. Issue a call to the slow, synchronous tool (e.g., `run_report`)
+2. Immediately issue a call to the fast tool (e.g., `list_products`) from a concurrent client/session
+3. Measure whether the fast tool's response is delayed until the slow tool completes
+
+**Example Reproduction Steps:**
+```
+1. Deploy the server with run_report (blocking, 30s) and list_products (fast, 10-100ms) as in the example
+2. Call run_report(report_id) and immediately call list_products() from a second concurrent request
+3. Record the timestamp list_products actually returns
+4. Compare against its expected 10-100ms baseline latency
+5. Measure: did list_products wait ~30s for run_report to finish, and did the client's 10s timeout fire first?
+```
+
+### Expected Failure State
+- The fast tool's response is delayed until the slow tool completes, well past its normal latency
+- The client's timeout fires before either call completes
+- No queue-depth or blocked-event-loop alert fires despite the server being single-threaded and blocked
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

@@ -74,6 +74,36 @@ From Tool Usage Research (2026):
 - No capability probing mechanism
 - Optimistic interpretation bias
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Search/utility tool has a vague description with no explicit negative-capability statements
+- No structured capability manifest or completeness field in tool responses
+- No cross-verification against a second, differently-scoped tool for high-stakes completeness claims
+
+### Trigger Mechanism
+1. Give the agent a task that requires capabilities the tool doesn't actually have (date filtering, academic-source scope) but that a vague description doesn't rule out
+2. Observe whether the agent's constructed query assumes unsupported functionality
+3. Check whether the tool's response is treated as complete despite being capped/partial
+
+**Example Reproduction Steps:**
+```
+1. Provide a web-search tool described only as "Search the web for information" with a real cap of 10 results and no date filter
+2. Ask the agent: "Find all scientific papers on X published between 2020-2024"
+3. Capture the actual query the agent constructs (check for assumed date-filter syntax)
+4. Capture the tool's raw response (result count, any completeness field)
+5. Capture the agent's final summary — does it claim the search is complete?
+```
+
+### Expected Failure State
+- Agent's query embeds unsupported functionality (date range, site-restricted boolean query) the tool silently ignores
+- Tool returns exactly its capped result count (10) with no completeness/truncation flag
+- Agent's final answer is presented as complete despite being a small, non-representative sample
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

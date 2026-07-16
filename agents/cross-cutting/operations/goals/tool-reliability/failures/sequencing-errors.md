@@ -27,6 +27,36 @@ Agent sequence:
 Result: Email fails, user created without notification
 ```
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Two tools with an implicit dependency (`send_welcome_email` needs a `user_id` that only `create_user` produces) documented only externally, not in the tool description
+- No return-value chaining or plan-before-execute step enforced
+- No prerequisite-violation check inside `send_welcome_email`
+
+### Trigger Mechanism
+1. Give the agent a compound task requiring both tools in a specific order
+2. Observe the actual order of tool invocations the agent chooses
+3. Check whether the dependent tool is called before its prerequisite exists
+
+**Example Reproduction Steps:**
+```
+1. Ask the agent: "Create a user named Alice and send her a welcome email"
+2. Capture the full sequence of tool calls the agent issues
+3. Check whether send_welcome_email is called with a valid, real user_id from create_user's output, or a placeholder/missing value
+4. If called out of order, check the agent's final response to the user for whether it discloses the email failure
+5. Measure: % of trials where the agent sequences the calls incorrectly
+```
+
+### Expected Failure State
+- `send_welcome_email` is invoked before `create_user`, with a missing or invalid `user_id`
+- The email tool call fails, but the user is created regardless
+- Agent's final response does not clearly disclose that the welcome email failed
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

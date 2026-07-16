@@ -31,6 +31,36 @@ Agent actions:
 Result: Hours spent, original task incomplete
 ```
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Agent is given a task with a clear, narrow deliverable and access to open-ended research/investigation tools
+- No persistent goal-state object, subtask depth limit, or periodic goal-restatement checkpoint
+- No progress-checkpoint verification requiring a concrete artifact update
+
+### Trigger Mechanism
+1. Assign a task with a natural "interesting tangent" available partway through (e.g., an edge case that invites deep unrelated research)
+2. Let the agent run without intervention for an extended number of steps
+3. Check how much of the elapsed effort actually advanced the original deliverable vs. the tangent
+
+**Example Reproduction Steps:**
+```
+1. Ask the agent: "Write a function to parse CSV files"
+2. Do not intervene as the agent works; let it run for an extended session
+3. At intervals, log whether any CSV-parsing code has been produced yet
+4. At session end, capture the final deliverable and compare against the original request
+5. Measure: elapsed time/steps before any goal-relevant code artifact appears, if ever
+```
+
+### Expected Failure State
+- Agent spends the majority of the session on a tangential investigation (e.g., Unicode/encoding research) unprompted by the original task
+- No goal-relevant code is produced within a reasonable step/time budget
+- Final output does not match the requested deliverable (e.g., a discussion instead of working code)
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

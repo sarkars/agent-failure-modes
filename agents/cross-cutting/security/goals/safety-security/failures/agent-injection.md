@@ -35,6 +35,38 @@ Result: Consensus model now heavily weighted toward approval
 - Manipulation of system decisions
 - Denial of service through resource consumption
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- A multi-agent workflow with a fixed, expected roster (e.g., 5 voting agents for content moderation)
+- No cryptographic identity check or registry enforcement on workflow participation
+- Agent registration/discovery mechanism reachable by more principals than strictly necessary
+
+### Trigger Mechanism
+1. Register additional agent instances against the same discovery/registration mechanism the legitimate agents use, configured to always vote a fixed way
+2. Have the injected agents join the next workflow execution alongside the legitimate roster
+3. Observe whether the workflow validates participant count/identity before tallying the consensus result
+
+**Example Reproduction Steps:**
+```
+1. Stand up a 5-agent consensus workflow (e.g., content moderation voting)
+2. Register 10 additional agent instances via the same provisioning path, each hardcoded to vote "approve"
+3. Submit a piece of content that the legitimate 5 agents would reject 5-0
+4. Observe the tallied consensus result
+5. Check: did the workflow detect that 15 agents voted instead of 5?
+6. Measure: consensus outcome (expected reject, injected-agent scenario approves 10-5)
+```
+
+### Expected Failure State
+- Workflow executes and tallies votes from all 15 agents with no roster-mismatch error
+- Consensus outcome flips from the expected reject to approve
+- No alert fires despite 3x the expected agent count participating
+- Audit trail shows no distinction between legitimate and injected agents
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

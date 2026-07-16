@@ -74,6 +74,35 @@ From Availability Research (2026):
 - No circuit breaker pattern
 - Optimistic availability assumptions
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Multi-step workflow depends on a tool with no pre-flight availability check, no exponential backoff, and no fallback/cache
+- No circuit breaker between the agent and the rate-limited/unavailable tool
+
+### Trigger Mechanism
+1. Put the dependent external tool into a rate-limited or offline state (e.g., mock a 429 response)
+2. Trigger a multi-step agent task that reaches that tool partway through
+3. Observe the agent's retry behavior and whether the task ultimately fails or degrades gracefully
+
+**Example Reproduction Steps:**
+```
+1. Mock weather_api to return 429 with retry_after: 3600 for all requests
+2. Ask the agent: "Analyze weather patterns for our store locations" (requires database, maps_api, then weather_api)
+3. Observe whether steps 1-2 (database, maps_api) succeed while step 3 fails
+4. Count the number of retry attempts against weather_api and measure elapsed time before the agent gives up
+5. Check whether any fallback or cached data was used instead of failing the whole task
+```
+
+### Expected Failure State
+- Agent retries the rate-limited tool immediately and repeatedly with no backoff
+- After many retries and significant elapsed time, the entire task fails rather than returning partial results
+- No circuit breaker or fallback source engaged
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

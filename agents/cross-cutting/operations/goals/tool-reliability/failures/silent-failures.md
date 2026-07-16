@@ -29,6 +29,37 @@ Agent tells user: "I've sent your notification"
 Result: User never receives notification, thinks it was sent
 ```
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Notification tool returns `{"status": "success"}` upon enqueue rather than confirmed delivery
+- No downstream confirmation check or dead-letter/stuck-job monitoring
+- Agent trusts the tool's reported status at face value with no independent verification
+
+### Trigger Mechanism
+1. Simulate the downstream notification service being unavailable (queue accepts messages but never delivers)
+2. Have the agent call the notification tool as part of a normal task
+3. Observe whether the tool reports success and whether the agent's user-facing message matches reality
+
+**Example Reproduction Steps:**
+```
+1. Take the downstream notification service offline while leaving the queue accepting writes
+2. Ask the agent to notify a user: send_notification(user_id: 123, message: "Alert!")
+3. Capture the tool's raw response
+4. Capture the agent's user-facing summary of the action
+5. Check the downstream system's delivery log for whether the message was ever actually delivered
+6. Measure: gap between claimed success and confirmed downstream delivery
+```
+
+### Expected Failure State
+- Tool returns `{"status": "success"}` despite the message being stuck in an undelivered queue
+- Agent tells the user "I've sent your notification" with no caveat
+- No stuck-job or claimed-vs-confirmed monitoring flags the discrepancy
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

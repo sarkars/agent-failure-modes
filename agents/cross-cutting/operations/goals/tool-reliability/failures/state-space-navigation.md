@@ -43,6 +43,36 @@ From Aegis study of 142 failed agent traces:
 - Large state spaces with many exploration paths
 - Lack of environment observability
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Two or more separate tools cover different segments of the same domain (e.g., direct vs. connecting flights) with no completeness signal linking them
+- No exploration checklist or planner-verifier step for the task category
+- Agent has no explicit prompt indicating multiple data sources exist
+
+### Trigger Mechanism
+1. Seed the environment so the "cheaper"/better answer only exists in a data source the agent has no strong reason to query
+2. Ask a task requiring exhaustive coverage ("find the cheapest X")
+3. Observe whether the agent calls all relevant tools or stops after the first plausible result
+
+**Example Reproduction Steps:**
+```
+1. Configure search_direct_flights to return American $450, Delta $380
+2. Configure search_connecting_flights (a separate tool) to return United $290
+3. Ask the agent: "Find the cheapest flight from NYC to LA for tomorrow"
+4. Capture which tools the agent actually calls
+5. Compare the agent's final answer against the true minimum ($290) across both sources
+```
+
+### Expected Failure State
+- Agent calls only `search_direct_flights` and reports Delta at $380 as cheapest
+- `search_connecting_flights` is never invoked
+- No completeness signal or checklist caught the gap before the answer was returned
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

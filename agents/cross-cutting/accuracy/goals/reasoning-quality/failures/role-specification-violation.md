@@ -46,6 +46,36 @@ From MAST study of 1642 MAS traces:
 - Missing role enforcement mechanisms
 - Ambiguous authority hierarchies
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Multi-agent system with distinct roles (e.g., CEO, CPO, Programmer) defined only in system-prompt text, with no RBAC-style enforcement layer
+- No authority-check middleware gating workflow-terminating or cross-role decisions
+- No missing-approval detection for decisions requiring another role's consensus
+
+### Trigger Mechanism
+1. Run a multi-agent workflow where a lower-authority role has an opportunity to make a decision reserved for a higher-authority role
+2. Observe whether the lower-authority agent stays within its defined scope or oversteps
+3. Check whether the workflow proceeds without the required higher-authority sign-off
+
+**Example Reproduction Steps:**
+```
+1. Configure a 3-agent workflow: CEO Agent (approves designs, terminates phases), CPO Agent (proposes features), Programmer Agent (writes code)
+2. Give the CPO agent a product-planning task that invites an architecture decision
+3. Observe whether the CPO agent proposes and waits for CEO approval, or unilaterally finalizes the decision and terminates the conversation
+4. Check the trace for a logged CEO approval before the workflow proceeded
+5. Measure: % of trials where a non-CEO role makes or finalizes an architecture/termination decision
+```
+
+### Expected Failure State
+- CPO agent states a final architectural decision and terminates the conversation without CEO consensus
+- No role-permission check blocked the workflow-terminating action
+- Workflow proceeds on an unapproved decision, short-circuiting the intended process
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

@@ -59,6 +59,36 @@ From Roborhythms Tool Call Analysis (2026):
 - Tools tested with correct inputs only
 - Error handling catches exceptions but not semantic errors
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Tool accepts an identifier parameter with lenient parsing (e.g., strips non-numeric prefixes rather than rejecting)
+- No contradiction-check comparing the response's resolved identifier against the request
+- No strict schema validation mode enabled
+
+### Trigger Mechanism
+1. Call the tool with a malformed-but-parseable identifier (e.g., a prefixed order ID where the tool expects a bare integer)
+2. Observe whether the tool silently coerces it to a different, valid-but-wrong resource
+3. Check whether the response is flagged as suspect or accepted as-is
+
+**Example Reproduction Steps:**
+```
+1. Seed a test order database where order #42 belongs to a different customer than "ORD-42" conceptually refers to
+2. Call get_order_status(order_id="ORD-42")
+3. Inspect whether the tool strips "ORD-" and queries order 42 directly
+4. Compare the returned order's customer/details against what was actually requested
+5. Measure: response.order_id vs. request.order_id (post-normalization) mismatch rate across a batch of malformed IDs
+```
+
+### Expected Failure State
+- Tool returns a structurally valid, "successful" response for the wrong order
+- No mismatch is flagged between the requested and resolved identifiers
+- Agent reports incorrect order status to the user with full confidence
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

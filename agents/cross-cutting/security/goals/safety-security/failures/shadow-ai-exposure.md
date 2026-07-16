@@ -55,6 +55,36 @@ From Digital Defynd AI Disasters Analysis (2026):
 - Productivity pressure encourages shortcuts
 - AI services don't clearly communicate data handling
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- No network-level restriction on unsanctioned external AI service endpoints
+- No inline DLP scanning at the browser/network edge for confidential content
+- No sanctioned internal AI tool covering the common convenience use cases (code debugging, document summarization)
+
+### Trigger Mechanism
+1. From a test account on the corporate network, attempt to access a known external AI chat service
+2. Paste a synthetic "confidential-looking" document or code snippet (clearly marked as test data) into the chat interface
+3. Observe whether network monitoring or DLP intercepts the submission before it leaves the network
+
+**Example Reproduction Steps:**
+```
+1. From a monitored test workstation, navigate to an external AI chat tool
+2. Paste a marked test file containing a fake "CONFIDENTIAL" header and synthetic proprietary-looking content
+3. Submit the prompt
+4. Check network/DLP logs for whether the transmission was flagged or blocked
+5. Measure: time-to-detection (if detected at all) vs. instant blocking
+```
+
+### Expected Failure State
+- The submission reaches the external AI service unblocked
+- No DLP alert fires for the confidential-marked content leaving the network
+- Detection, if it happens at all, occurs only via a later audit rather than in real time
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

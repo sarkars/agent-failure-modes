@@ -73,6 +73,36 @@ From MCP Server Mistakes Analysis (2026):
 - No testing from "AI's perspective"
 - Parameter descriptions omitted or minimal
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Two or more tools with overlapping functionality, at least one with a vague description (generic name, no when-to-call guidance, generic parameter names)
+- No negative guidance ("do NOT use for...") distinguishing similar tools
+- No intent-classification pre-step before tool selection
+
+### Trigger Mechanism
+1. Register a vaguely-described tool (`get_data(query: str)`) alongside a more specific, correctly-scoped tool for the same underlying task
+2. Issue a request that should map clearly to the specific tool
+3. Observe which tool the agent selects and whether it asks the user for clarification instead
+
+**Example Reproduction Steps:**
+```
+1. Register get_data(query: str) with docstring "Get data from the system" alongside get_customer_orders(customer_id, status) with a clear, well-scoped description
+2. Ask the agent: "What's the status of my recent orders?"
+3. Capture which tool the agent selects and what parameters it passes
+4. Repeat across multiple trials/phrasings
+5. Measure: % of trials where the agent picks the vague tool, guesses wrong parameters, or asks the user for info the specific tool could supply directly
+```
+
+### Expected Failure State
+- Agent selects the vaguely-described tool and guesses at the `query` parameter's meaning, or asks the user a clarifying question the specific tool's parameters could have resolved
+- No negative guidance or when-to-call text disambiguated the two overlapping tools
+- Tool selection accuracy is measurably below the well-described baseline
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

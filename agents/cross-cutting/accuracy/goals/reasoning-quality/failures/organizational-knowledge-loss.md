@@ -42,6 +42,35 @@ Recovery: 6 months of external consultants to rebuild capability
 - Compliance failures due to unexplainable decisions
 - Competitive disadvantage if AI access lost
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- A business process has been fully delegated to an agent for an extended period with no maintained human-readable process documentation
+- No scheduled skill-rotation exercise or manual fallback procedure exists
+- No decision-rationale logging independent of the agent/provider
+
+### Trigger Mechanism
+1. Simulate the agent/provider becoming unavailable (disable access in a test environment)
+2. Ask a human staff member (not previously involved in the delegated process) to perform or explain the delegated task from scratch
+3. Measure how much of the process can be reconstructed without agent assistance
+
+**Example Reproduction Steps:**
+```
+1. Identify a process fully delegated to the agent for 12+ months (e.g., financial reconciliation)
+2. Disable agent access in a controlled test/tabletop exercise
+3. Ask the current team to perform the reconciliation manually and explain a sampled past decision
+4. Measure: time to reconstruct the process, % of the process successfully replicated, whether historical decisions can be explained
+```
+
+### Expected Failure State
+- No team member can perform or fully explain the delegated process without the agent
+- No documented manual fallback exists to reference
+- Reconstruction requires external consultants or extended downtime
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

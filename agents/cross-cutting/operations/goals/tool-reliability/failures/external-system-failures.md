@@ -71,6 +71,36 @@ From Failure Modes in LLM Systems (arxiv:2511.19933):
 - External changes happen without agent awareness
 - Silent failures return valid but wrong responses
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Agent tool calls a real or mocked external API with no error-code-to-meaning mapping layer
+- Success and error responses are not structurally distinguished (e.g., both could resemble an "empty" result)
+- No schema validation or circuit breaker on the external dependency
+
+### Trigger Mechanism
+1. Configure the external API mock to return a rate-limit or auth-expiry error for a specific call
+2. Have the agent make a correct, well-formed tool call against that endpoint
+3. Observe how the agent's final answer characterizes the failure to the user
+
+**Example Reproduction Steps:**
+```
+1. Mock get_orders(customer_id) to return {"error": "rate_limit_exceeded", "retry_after": 60}
+2. Ask the agent: "Look up the customer's recent orders"
+3. Capture the agent's final user-facing response
+4. Compare the agent's stated reason ("no orders found") against the actual API response (rate limit)
+5. Measure: does the agent's answer misattribute the rate-limit error as "no data"?
+```
+
+### Expected Failure State
+- Agent confidently tells the user the customer has no orders
+- No structural distinction alerted the agent that this was an error, not an empty result
+- No circuit breaker or retry-with-backoff intercepted the rate-limit response before it reached the agent's reasoning
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

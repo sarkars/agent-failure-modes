@@ -36,6 +36,35 @@ Agent: "Authentication is now implemented!"
 Result: Incomplete, insecure authentication system
 ```
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Agent is assigned a task type with a well-known standard component set (e.g., authentication) but no enumerated completion checklist provided
+- No requirement-coverage check or standard-component scan runs before a "complete" declaration is accepted
+
+### Trigger Mechanism
+1. Assign a task with an implicit, domain-standard scope larger than its surface description suggests
+2. Let the agent work until it declares the task complete
+3. Compare the delivered components against the known-standard requirement set for that task type
+
+**Example Reproduction Steps:**
+```
+1. Ask the agent: "Implement user authentication" with no explicit component checklist given
+2. Let the agent work until it states the task is complete
+3. Enumerate the standard requirement set: login, logout, session management, password reset, rate limiting, error handling
+4. Compare against what was actually delivered
+5. Measure: requirement_coverage_at_completion (delivered components / standard components)
+```
+
+### Expected Failure State
+- Agent declares "Authentication is now implemented!" after delivering only login and password hashing
+- No coverage check blocked the premature completion claim
+- Logout, session management, password reset, rate limiting, and error handling are all missing
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

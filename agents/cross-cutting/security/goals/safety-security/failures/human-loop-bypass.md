@@ -41,6 +41,36 @@ Result: Malicious action executed with "user approval"
 - Financial transactions approved fraudulently
 - Compliance violations with apparent approval trail
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Agent can generate an unbounded number of approval requests with no per-user rate limit
+- Approval prompts show raw/technical action descriptions rather than plain-language summaries
+- No detection for quick-approval-after-denial or batch-item risk disparity
+
+### Trigger Mechanism
+1. Craft a prompt/task that causes the agent to generate a rapid sequence of approval requests, mixing routine and one malicious action
+2. Present the requests to a test user in quick succession
+3. Observe whether the malicious action gets approved after fatigue sets in, and whether any rate limit or pattern detection intervenes
+
+**Example Reproduction Steps:**
+```
+1. Configure an agent capable of issuing HitL approval requests with no rate limit
+2. Trigger a prompt causing 50 approval requests within 10 minutes, one of which is malicious
+3. Have a test reviewer work through the queue as a real user would (reading early ones carefully)
+4. Observe whether the malicious request (e.g., #47) gets approved due to fatigue
+5. Check logs: did any rate-limit or quick-approval-after-denial alert fire before the malicious approval?
+```
+
+### Expected Failure State
+- The malicious action is approved somewhere in the middle/end of a large batch
+- No circuit breaker paused the flood of requests
+- No plain-language summary or cooling-off delay gave the user a second chance to catch it
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

@@ -35,6 +35,36 @@ Missing:
 Result: Deployment fails, data corrupted, no rollback
 ```
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Agent must produce a plan for a multi-step, high-risk task (e.g., deployment) with no domain-specific decomposition template to check against
+- No mandatory dependency mapping or completeness checklist gate before execution
+- No plan-vs-template diff step
+
+### Trigger Mechanism
+1. Ask the agent to plan a task with well-known required sub-steps beyond the obvious ones (e.g., a deployment requiring migration, LB drain, health checks, rollback, monitoring)
+2. Capture the agent's generated plan before any execution occurs
+3. Compare the plan against the known-complete set of required steps
+
+**Example Reproduction Steps:**
+```
+1. Ask the agent: "Deploy the new API version" in an environment with an actual DB migration, load balancer, and monitoring stack
+2. Capture the full step-by-step plan the agent produces
+3. Compare against the known-required steps: DB migration, LB drain, health checks, rollback prep, monitoring setup
+4. Measure: how many of the 5 required-but-non-obvious steps are missing from the agent's plan
+5. If executed in a sandbox, observe what breaks due to the missing steps (e.g., migration not run before restart)
+```
+
+### Expected Failure State
+- Agent's plan contains only the surface-level steps ("update code," "restart service") and omits migration, rollback, and monitoring
+- No checklist or template comparison flagged the gap before execution began
+- Executing the incomplete plan in a sandbox produces a failure traceable directly to a missing step
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

@@ -30,6 +30,36 @@ Agent selects: file_write with empty content
 Result: File emptied but not deleted, takes up space
 ```
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Three overlapping file tools (`file_read`, `file_write`, `file_delete`) with no negative guidance or verb-to-tool intent mapping
+- No confirmation/dry-run gate on destructive or state-changing tools
+- No guardrail on `file_write` rejecting an empty-content overwrite of an existing file
+
+### Trigger Mechanism
+1. Issue an unambiguous deletion request
+2. Observe which tool the agent selects
+3. Check whether the resulting file state matches the user's actual intent (gone vs. merely emptied)
+
+**Example Reproduction Steps:**
+```
+1. Create a test file with content in a sandbox with file_read/file_write/file_delete tools available
+2. Ask the agent: "Delete the file"
+3. Capture which tool the agent invokes and with what arguments
+4. Check the file's post-call state: does it still exist (empty) or is it actually gone?
+5. Measure: % of trials where file_write is selected instead of file_delete
+```
+
+### Expected Failure State
+- Agent calls `file_write` with empty content instead of `file_delete`
+- The file still exists (now empty) rather than being removed
+- No confirmation step or guardrail flagged the empty-content overwrite as a likely delete-intent mismatch
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

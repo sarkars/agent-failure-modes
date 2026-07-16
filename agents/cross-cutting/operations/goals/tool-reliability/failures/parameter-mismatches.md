@@ -37,6 +37,36 @@ Result: Tool fails or silently processes wrong types
 **Key Statistic**
 37% of tool calls have silent parameter mismatches according to developer analysis.
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- A legacy tool integration without strict/structured tool-calling mode enabled
+- No runtime type-validation or coercion-with-logging layer at the tool boundary
+- Schema communicates types only loosely (e.g., via description, not enforced JSON Schema types)
+
+### Trigger Mechanism
+1. Configure the agent's model/SDK to call the tool in free-form (non-strict) mode
+2. Prompt the agent in a way likely to produce a string-typed value for an integer field (e.g., referencing an ID conversationally)
+3. Inspect the actual tool call payload for type mismatches
+
+**Example Reproduction Steps:**
+```
+1. Define a tool schema: { "user_id": integer, "active": boolean } without strict mode enabled
+2. Ask the agent to "check if user 12345 is active"
+3. Capture the raw tool call arguments
+4. Check whether user_id arrived as "12345" (string) instead of 12345 (integer), or active as "true" (string) instead of true (boolean)
+5. Measure: type-mismatch rate across repeated trials against the 37% historical baseline
+```
+
+### Expected Failure State
+- Tool call arrives with string-typed values for integer/boolean fields
+- No validation layer rejects or logs the coercion before the call reaches the underlying system
+- Tool either fails outright or silently processes the wrong type, producing an incorrect result
+
+---
+
 ## Mitigation Strategies
 
 Note: as flagged in the deprecation notice above, strict JSON-schema tool-calling modes now close most of this failure path at generation time by constraining the model to emit schema-conformant types. The strategies below are scoped to the residual surface: legacy integrations without strict-mode enforcement, and defense-in-depth for when strict mode is unavailable or misconfigured.

@@ -34,6 +34,36 @@ Agent: Rewrites entire file (introduces new bugs)
 Result: Never fixes original issue, creates more problems
 ```
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Agent has an iterative fix-and-retest loop with no root-cause diagnostic step or repeated-error-signature tracking
+- No external validation (compiler/linter/test) gating whether a "fix" actually resolved the reported error
+- No escalation trigger after N failed attempts on the same error
+
+### Trigger Mechanism
+1. Introduce a code error with an unambiguous, mechanically-verifiable error message (e.g., a syntax error on a specific line)
+2. Have the agent attempt to fix it across multiple iterations without external guidance
+3. Track whether each fix attempt actually addresses the reported error or drifts to unrelated changes
+
+**Example Reproduction Steps:**
+```
+1. Seed a file with a syntax error producing "Unexpected token on line 5"
+2. Ask the agent to fix the error, running the compiler/linter after each attempt
+3. Record what the agent changes on each iteration and the resulting error message
+4. Continue for 3+ iterations
+5. Measure: does the identical error signature persist across iterations, and does a later attempt (e.g., full rewrite) introduce new errors?
+```
+
+### Expected Failure State
+- The same error signature ("Unexpected token on line 5") persists across multiple iterations
+- Agent's changes target unrelated lines or add non-functional changes (comments) instead of the actual cause
+- A later escalation (full-file rewrite) introduces new bugs without resolving the original error
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

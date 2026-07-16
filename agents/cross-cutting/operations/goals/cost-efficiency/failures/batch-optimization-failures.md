@@ -75,6 +75,36 @@ From Batch Processing Research (2026):
 - Lack of batching infrastructure
 - Context window size concerns
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Batch-eligible workload (e.g., document classification) implemented as a loop issuing one API call per item
+- No dynamic batcher, request-coalescing queue, or native batch endpoint integration
+- No items_per_api_call monitoring
+
+### Trigger Mechanism
+1. Run a batch-eligible task (classification/extraction) over a representative item set through the existing sequential loop
+2. Measure total API calls, tokens, latency, and cost
+3. Re-run the same workload through a batched implementation (e.g., 10 items per call) and compare
+
+**Example Reproduction Steps:**
+```
+1. Take 100 documents needing classification
+2. Run the existing sequential per-document loop; record API call count, total tokens, wall-clock latency, and cost
+3. Implement/run a batched version (10 docs per call) over the same 100 documents
+4. Compare: items_per_api_call, total tokens, latency, cost between the two runs
+5. Measure: % reduction achieved by batching vs. the sequential baseline
+```
+
+### Expected Failure State
+- Sequential implementation shows items_per_api_call near 1, with 100 API calls for 100 documents
+- Token cost and latency are measurably higher than the batched alternative (per the 26% token / 84% latency reduction shown in the example)
+- No batching alerting flagged the batch-eligible workload running sequentially
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

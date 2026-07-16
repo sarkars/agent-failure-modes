@@ -68,6 +68,36 @@ From Caching Research (2026):
 - No TTL for time-sensitive data
 - Fear of returning incorrect cached response
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- FAQ-style agent with no caching, or exact-match-only caching, in front of the LLM
+- No semantic similarity matching or embedding-based cache lookup
+- No cache-hit-rate monitoring against the expected 30-60% query-redundancy baseline
+
+### Trigger Mechanism
+1. Send a batch of semantically identical but textually varied queries (paraphrases of the same question)
+2. Observe how many result in a fresh API call vs. a cache hit
+3. Measure total cost/latency against what a semantic cache would have achieved
+
+**Example Reproduction Steps:**
+```
+1. Send 5 paraphrased variants of the same question to the agent: "What's your return policy?", "What is the return policy?", "Return policy?", "How do I return something?", "What are your return rules?"
+2. Log whether each triggers a fresh LLM API call or a cache hit
+3. Repeat with 100 total queries drawn from a small set of paraphrased FAQ variants
+4. Measure: cache_hit_rate achieved vs. the 45-65% "proper implementation" benchmark
+5. Compare total cost against the semantic-cache cost estimate in the example
+```
+
+### Expected Failure State
+- Every paraphrased variant triggers a separate API call (cache_hit_rate near 0%)
+- No semantic similarity matching catches near-duplicate queries
+- Measured cost is far above the semantic-cache benchmark for the same query volume
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

@@ -27,6 +27,36 @@ Missing: subject (required)
 Result: Email not sent, user thinks message was delivered
 ```
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Tool schema (`send_email`) marks required fields only in prose/description, not in a structural `required` array
+- No reject-before-execute validation gate at the tool boundary
+- Conversation context is long enough that an earlier-mentioned parameter (e.g., subject) may be lost
+
+### Trigger Mechanism
+1. Ask the agent to send an email over a multi-turn conversation where the subject is mentioned early and the send request comes many turns later
+2. Observe whether the agent's assembled tool call includes all required fields
+3. Check whether a missing field causes a silent failure or a loud, user-visible error
+
+**Example Reproduction Steps:**
+```
+1. Tell the agent early in conversation: "The subject should be 'Meeting Reminder'"
+2. After several unrelated turns, ask: "Send that email to user@example.com with body 'Hello!'"
+3. Inspect the actual send_email(...) call the agent issues for a subject field
+4. If subject is missing, check whether the agent's response to the user claims success or reports the failure
+5. Measure: % of long-conversation send requests that drop a required field
+```
+
+### Expected Failure State
+- The tool call omits the `subject` field despite it being stated earlier in the conversation
+- The tool either fails silently or the agent's user-facing message claims the email was sent
+- No validation gate blocked the malformed call before it reached the underlying system
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

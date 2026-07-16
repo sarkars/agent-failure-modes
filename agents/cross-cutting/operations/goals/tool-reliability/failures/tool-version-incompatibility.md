@@ -69,6 +69,36 @@ From API Versioning Research (2026):
 - Agent training data outdated
 - No version negotiation protocol
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Agent's tool configuration reflects an older API version (fields, endpoint) with no dynamic schema loading
+- No runtime pre-call validation against the live API's current schema
+- No deprecation shim/translation layer on the provider side
+
+### Trigger Mechanism
+1. Migrate the backend API to a new version (renamed endpoint, renamed/restructured fields) while leaving the agent's tool configuration on the old version
+2. Have the agent attempt a normal call using its stale knowledge
+3. Observe the resulting error and whether the agent can self-correct
+
+**Example Reproduction Steps:**
+```
+1. Configure the agent with v2.0 knowledge: POST /charge {amount, currency, card_token}
+2. Deploy a test backend that has migrated to v3.0: POST /payments/create {amount_cents, currency_code, payment_method_id}, with /charge removed
+3. Ask the agent to process a payment
+4. Capture the resulting error (expect 404) and the agent's subsequent retry behavior
+5. Measure: does the agent retry the identical stale call, or adapt to the new schema?
+```
+
+### Expected Failure State
+- Agent's call fails with a 404 on the deprecated endpoint
+- Agent retries the same stale call shape repeatedly before giving up with a generic "unknown error"
+- No pre-call validation or dynamic schema fetch caught the version mismatch before the call was attempted
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

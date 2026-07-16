@@ -52,6 +52,36 @@ From Aegis study: Domain rule violations are classified under exploitation failu
 - Conflicting rules requiring prioritization
 - Implicit rules not explicitly stated
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- System prompt contains multiple domain rules with an implicit priority relationship (a general rule and a status-based override) expressed only in prose
+- No externalized rules engine or priority-ordered rule table
+- No chain-of-verification step before finalizing a denial
+
+### Trigger Mechanism
+1. Construct a request where a lower-priority rule would normally block the action, but a higher-priority exception (e.g., membership tier) should override it
+2. Submit the request with the qualifying status clearly stated
+3. Observe whether the agent applies the override correctly or stops at the first matching rule
+
+**Example Reproduction Steps:**
+```
+1. Provide the agent the three rules from the example (24hr cancellation, Basic Economy non-refundable, Elite override)
+2. Submit: "Cancel my Basic Economy flight departing tomorrow" with user_status: Elite clearly available in context
+3. Capture the agent's reasoning and final decision (block vs. allow)
+4. Repeat across multiple rule-conflict combinations to measure consistency
+5. Measure: % of trials where the agent incorrectly stops at the non-refundable rule instead of applying the Elite override
+```
+
+### Expected Failure State
+- Agent blocks the cancellation citing the non-refundable rule alone
+- No enumeration of all potentially-overriding rules occurred before the denial was finalized
+- Valid action is incorrectly denied despite the user's stated qualifying status
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

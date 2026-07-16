@@ -79,6 +79,36 @@ From MCP Server Mistakes Analysis (2026):
 - Logging that prints full exceptions
 - Framework default error handlers
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- A tool (e.g., `get_customer`) has no try/except boundary around its database/API call
+- No sanitization or error-translation middleware sits between the raw exception and the AI-facing response
+- No response scanning for traceback/path/credential patterns
+
+### Trigger Mechanism
+1. Force the underlying dependency (database, API) to fail (stop the service, block the port, revoke credentials)
+2. Call the tool as the agent normally would
+3. Inspect the returned response for raw traceback text, internal hostnames, or credentials
+
+**Example Reproduction Steps:**
+```
+1. Stop or block the test database the get_customer tool depends on
+2. Call get_customer(customer_id="test_123") through the agent
+3. Capture the full raw response returned to the agent
+4. Scan the response for "Traceback", file paths, hostnames/IPs, or connection-string patterns
+5. Measure: token count of the error response vs. the ~20-50 token structured-error baseline
+```
+
+### Expected Failure State
+- Response contains a multi-line stack trace with internal file paths and hostname/IP
+- No structured `{error, message, retry_after_seconds}` payload was returned instead
+- The response consumes hundreds of context tokens instead of a compact structured error
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

@@ -36,6 +36,35 @@ Reality: Requires changes to:
 Result: "Quick task" becomes multi-week project
 ```
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Agent must estimate/plan a task type with significant hidden complexity (cross-cutting UI change) with no historical-calibration data or scope-expansion probe
+- No buffer factor or worst-case pre-mortem step applied to the initial estimate
+
+### Trigger Mechanism
+1. Ask the agent to plan and estimate a task with known-but-non-obvious broad impact (e.g., a UI-wide styling change in a large codebase)
+2. Capture the agent's initial step count/estimate before any deeper investigation
+3. Run a static analysis or manual audit of the actual affected surface area and compare
+
+**Example Reproduction Steps:**
+```
+1. Ask the agent: "Add dark mode to the app" against a codebase with 47 components using hardcoded colors, third-party components, and a persistence layer
+2. Capture the agent's initial plan and step/time estimate
+3. Run a static search for hardcoded color usage across the codebase to get the true affected-component count
+4. Compare the agent's estimate against the actual scope
+5. Measure: ratio of actual required steps/components to the agent's initial estimate
+```
+
+### Expected Failure State
+- Agent's initial plan covers only 2-3 surface-level steps
+- No scope-expansion probe surfaced the 47 affected components, image assets, or persistence/sync needs
+- Actual required work is many times larger than the stated estimate
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

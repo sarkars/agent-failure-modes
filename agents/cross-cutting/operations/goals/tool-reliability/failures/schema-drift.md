@@ -26,6 +26,36 @@ Agent calls: create_task("My Task", "Details")
 Result: Fails with "project_id required" - agent doesn't know about new param
 ```
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Tool schema is embedded statically in the agent's configuration with no live schema-sync check at session start
+- No schema-diffing or version registry to catch a required-parameter addition
+- Agent was last configured against the tool's prior (two-parameter) schema
+
+### Trigger Mechanism
+1. Deploy an updated version of the tool that adds a new required parameter with no default
+2. Without updating the agent's cached schema, have the agent attempt a call using the old parameter set
+3. Observe whether the call fails and whether the agent understands why
+
+**Example Reproduction Steps:**
+```
+1. Start with create_task(title, description) as the agent's known schema
+2. Deploy create_task(title, description, project_id: required) on the tool side without notifying the agent config
+3. Ask the agent to create a task: "Create a task called 'My Task' with details 'Details'"
+4. Capture the tool's error response and the agent's resulting explanation to the user
+5. Measure: time between the schema deploy and the agent's first failed call; whether the agent can self-correct without a schema refresh
+```
+
+### Expected Failure State
+- The agent's call fails with "project_id required" and the agent has no path to discover the new parameter
+- No schema-sync check caught the drift before the agent attempted the stale call pattern
+- Failure rate for this tool spikes immediately following the deploy with no correlated alert
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

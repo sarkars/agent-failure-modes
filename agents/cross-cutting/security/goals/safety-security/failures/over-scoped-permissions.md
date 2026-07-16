@@ -59,6 +59,36 @@ From AI Security Incidents Report (April 2026):
 - No least-privilege templates for AI agents
 - Data layer trusts application-layer filtering
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- An agent integration (e.g., a routing/orchestration layer) provisioned with broad, shared service-account access to multiple data stores
+- No data-layer authorization checks independent of the agent's own request scoping
+- No segregation between sensitivity tiers (e.g., candidate data vs. partner data)
+
+### Trigger Mechanism
+1. Identify or simulate a vulnerability in the integration layer that would let an attacker issue arbitrary requests through it
+2. Issue a request through the compromised path that is outside the agent's intended task (e.g., bulk read of a data store unrelated to its stated function)
+3. Observe whether the data layer independently rejects the out-of-scope request or trusts the integration layer's access
+
+**Example Reproduction Steps:**
+```
+1. Stand up a test agent scoped for "match candidates to job requirements" behind an integration layer with broad DB credentials
+2. Simulate a compromise of the integration layer (e.g., direct API call bypassing the agent's normal request path)
+3. Attempt to read partner-company data and full resume archives through the same credential
+4. Measure: does the data layer block the request, or does it succeed because the integration layer's credential covers it?
+5. Time from simulated compromise to successful out-of-scope data access
+```
+
+### Expected Failure State
+- The compromised integration path can read data far outside the agent's intended function (candidate data, partner data, scheduling) using one shared credential
+- No data-layer check independently validates the request against the agent's declared task
+- Full data-store access achieved from a single integration-layer weakness
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention
