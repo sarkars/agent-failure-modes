@@ -55,6 +55,24 @@ Result: User must re-provide information, frustrated
 
 ---
 
+## Related Patterns
+
+**This pattern focuses on GENERIC context window overflow — when context exceeds the model's window.**
+
+For SILENT truncation (overflow without user awareness or indication), see:
+- **[Context Window Overflow with Silent Truncation](../../memory-safety/failures/context-window-overflow-silent-truncation.md)** — Silent truncation without user notification or quality degradation warnings
+
+Other context management patterns:
+- [Context Window Limits](../../../by-capability/document-processing/goals/agentic-orchestration/failures/context-window-limits.md) — Hard model architecture constraints
+- [Context Window Saturation](../../../by-capability/knowledge-retrieval/goals/answer-synthesis/failures/context-window-saturation.md) — Retrieval degrades context quality
+- [Context Window Poisoning](../../security/goals/runtime-security/failures/context-window-poisoning.md) — Adversarial attacks via context manipulation
+
+**Key distinction:**
+- `context-overflow` = User is aware of overflow or quality loss
+- `context-window-overflow-silent-truncation` = User UNAWARE truncation happened or quality degraded
+
+---
+
 ## References
 
 - [AWS: 3 Agent Failure Modes](https://dev.to/aws/why-ai-agents-fail-3-failure-modes-that-cost-you-tokens-and-time-1flb) - Context overflow as top failure mode

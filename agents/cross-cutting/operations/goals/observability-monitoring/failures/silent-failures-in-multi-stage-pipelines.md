@@ -172,6 +172,19 @@ HAVING silent_failure_rate > 0.05
 
 ---
 
+## Related Patterns
+
+**This pattern focuses on PIPELINE-LEVEL silent failures where degraded outputs propagate silently across stages.**
+
+For failures at the INDIVIDUAL TOOL level (a tool returns false success), see:
+- **[Silent Tool Failures](../../tool-reliability/failures/silent-failures.md)** — When individual tools fail but report success without downstream effects
+
+For failures caused by incomplete observability infrastructure, see:
+- **[Blind Spots in Observability](./blind-spots-in-observability.md)** — When critical monitoring is missing at certain pipeline stages
+- **[Missing End-to-End Tracing](./missing-end-to-end-tracing.md)** — When requests can't be traced across pipeline stages, preventing correlation of failures
+
+---
+
 ## References
 
 - [Observability Engineering](https://www.oreilly.com/library/view/observability-engineering/9781492076438/) — Best practices for observing systems

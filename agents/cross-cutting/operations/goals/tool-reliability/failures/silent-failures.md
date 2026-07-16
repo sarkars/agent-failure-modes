@@ -88,6 +88,18 @@ Result: User never receives notification, thinks it was sent
 2. **Async Job Stuck Beyond SLA** (P2): Condition - async_job_stuck_rate exceeds 5% for a given operation type over an hour. Action: investigate the downstream dependency's health, move affected jobs to the dead-letter queue, alert the owning team.
 3. **New Swallowed-Exception Code Path** (P2): Condition - static analysis detects a new bare except/error-suppression pattern merged into a tool implementation. Action: block or flag the PR in review, require explicit structured error handling before merge.
 
+## Related Patterns
+
+**This pattern focuses on INDIVIDUAL TOOL failures that go undetected.**
+
+For failures that propagate SILENTLY across a multi-stage pipeline (different stages using incomplete/degraded data), see:
+- **[Silent Failures in Multi-Stage Pipelines](../../observability-monitoring/failures/silent-failures-in-multi-stage-pipelines.md)** — When failures occur silently at one stage but aren't caught before being used by downstream stages
+
+For failures caused by insufficient observability/instrumentation, see:
+- **[Blind Spots in Observability](../../observability-monitoring/failures/blind-spots-in-observability.md)** — When critical code paths are completely unmonitored
+
+---
+
 ## References
 
 - [Silent Tool-Call Errors](https://www.roborhythms.com/fix-ai-agent-tool-call-errors/) - How silent errors go undetected in agent systems

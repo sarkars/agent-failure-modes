@@ -179,6 +179,23 @@ Result: $0.10 request becomes $30 in costs
 
 ---
 
+## Related Patterns
+
+**This pattern focuses on COST EXPLOSION caused by cascading retries across multiple layers within a single request.**
+
+For coordination failures where multiple agents retry simultaneously, see:
+- **[Retry Storms](./retry-storms.md)** — When multiple agents retry at the same time without backoff, overwhelming downstream services
+
+**Key distinction:**
+- `retry-amplification-of-costs` = Single request → cascading retries across layers → LLM re-invocation → 10-100x cost
+- `retry-storms` = Multiple agents → simultaneous retries without coordination → overwhelm downstream → rate limits
+
+Related cost-control patterns:
+- **[Expensive Model Cascade](./expensive-model-cascade.md)** — Unnecessary routing to expensive models
+- **[Cost-Quality Tradeoff](./cost-quality-tradeoff.md)** — Spending more tokens for diminishing accuracy gains
+
+---
+
 ## References
 
 - [Exponential Backoff and Jitter](https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/) — Best practices for retry delays

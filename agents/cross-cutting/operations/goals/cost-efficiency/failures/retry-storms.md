@@ -58,6 +58,19 @@ Result: 300 API calls instead of 3
 2. **Non-Retriable-Error-Looping** (P2): Condition - non_retriable_error_retry_rate exceeds 1% for a sustained period. Action: audit the error classification logic for the affected operation type and add the missing terminal-error rule.
 3. **Backoff-Coordination-Gap** (P3): Condition - multiple distinct agent instances show retry timestamps clustering within the same sub-second window against a shared dependency. Action: verify jitter configuration is active and shared rate-limit coordination is functioning.
 
+## Related Patterns
+
+**This pattern focuses on COORDINATION failures where multiple agents retry simultaneously.**
+
+For cost explosion caused by cascading retries across multiple layers within a single request, see:
+- **[Retry Amplification of Costs](./retry-amplification-of-costs.md)** — When exponential backoff and layered retries multiply costs 10-100x through LLM re-invocation
+
+**Key distinction:**
+- `retry-storms` = Multiple agents coordinating poorly (no backoff, simultaneous retries) → overwhelm downstream
+- `retry-amplification-of-costs` = Single request with cascading retries across layers (agent → tool → API) → cost explosion from re-processing
+
+---
+
 ## References
 
 - [AWS: 3 Agent Failure Modes](https://dev.to/aws/why-ai-agents-fail-3-failure-modes-that-cost-you-tokens-and-time-1flb) - Common failure patterns including retry storms

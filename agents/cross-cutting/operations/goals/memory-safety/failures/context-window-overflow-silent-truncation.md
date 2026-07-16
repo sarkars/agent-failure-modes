@@ -96,6 +96,23 @@ Impact:
 
 ---
 
+## Related Patterns
+
+**This pattern focuses on SILENT truncation where users are UNAWARE context was dropped.**
+
+For generic context window overflow (user is aware or quality degradation is visible), see:
+- **[Context Overflow](../../accuracy/goals/context-management/failures/context-overflow.md)** — When context exceeds window with visible awareness or error handling
+
+Other context management patterns:
+- [Context Window Limits](../../../by-capability/document-processing/goals/agentic-orchestration/failures/context-window-limits.md) — Hard model architecture constraints
+- [Context Window Saturation](../../../by-capability/knowledge-retrieval/goals/answer-synthesis/failures/context-window-saturation.md) — Retrieval quality degrades
+
+**Key distinction:**
+- `silent-truncation` = Truncation without user awareness; quality degrades silently
+- `context-overflow` = User is aware or degradation is visible
+
+---
+
 ## References
 
 - [Transformer Attention Is All You Need](https://arxiv.org/abs/1706.03762) — Context window fundamentals

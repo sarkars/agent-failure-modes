@@ -234,16 +234,24 @@ HAVING injections_detected > 0
 
 ## Related Patterns
 
-**Parent Family**: [Security Autonomy](../../../goals/security-autonomy/README.md) — Attacks and compromises specific to agent autonomy
+**This pattern focuses on prompt injection via UNVALIDATED USER INPUT — emphasis on input validation gaps.**
 
-**Sibling Patterns**:
-- [Jailbreak via Indirect Prompting](jailbreak-via-indirect-prompting.md) — Similar mechanism, different execution
-- [Tool Abuse via Instruction Override](tool-abuse-via-instruction-override.md) — Injection for tool misuse
-- [Data Exfiltration via Compromised Agent](../../../learning/goals/safe-learning/failures/data-exfiltration-via-model-queries.md) — Using injection to extract data
+**Other prompt injection patterns:**
+- **[Direct Prompt Injection](./direct-prompt-injection.md)** — Direct attacks in user messages (broader attack/response patterns, attack techniques)
+- **[Indirect Prompt Injection](./indirect-prompt-injection.md)** — Attacker embeds instructions in documents/emails agent retrieves (external content sources)
+- **[Prompt Injection](../safety-security/failures/prompt-injection.md)** — General prompt injection defenses (canonical pattern)
 
-**Related Mitigations**:
-- [Prompt Template Security](../safety-security/failures/prompt-template-injection.md) — Canonical pattern for prompt injection prevention
-- [Input Validation Framework](../../../operations/goals/tool-reliability/failures/untrusted-input-handling.md) — General input validation strategies
+**Key distinctions:**
+- `via-user-context` = INPUT VALIDATION focus: unvalidated user input in conversation
+- `direct-prompt-injection` = ATTACK RESPONSE focus: direct attacks with exploitation techniques
+- `indirect-prompt-injection` = EXTERNAL SOURCE focus: retrieved documents, emails, web content
+
+**Related attack patterns**:
+- [Tool Abuse via Instruction Override](./tool-abuse-via-instruction-override.md) — Using injection to misuse agent tools
+- [Data Exfiltration via Prompt Injection](../../../learning/goals/safe-learning/failures/data-exfiltration-via-model-queries.md) — Extracting data via injection
+
+**General input validation**:
+- [Input Validation Framework](../../../operations/goals/tool-reliability/failures/untrusted-input-handling.md) — Generic input sanitization strategies
 
 ---
 
