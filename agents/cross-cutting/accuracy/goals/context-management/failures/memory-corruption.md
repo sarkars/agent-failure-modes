@@ -27,6 +27,39 @@ Used as: "User can go higher than $10,000"
 Result: Agent makes recommendations exceeding actual budget
 ```
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- A user states a precise, numerically critical fact in conversation (e.g., "User's budget is $10,000")
+- The long-term memory pipeline passes this fact through a summarization step rather than storing it verbatim
+- No validation-against-source check runs before the summarized memory entry is committed or later reused
+
+### Trigger Mechanism
+1. State the exact critical fact in the source conversation
+2. Allow the memory pipeline to summarize and store it
+3. Retrieve the stored memory entry in a later turn/session and inspect its wording against the original
+4. Have the agent use the retrieved memory entry to drive a recommendation and check whether it violates the original constraint
+
+**Example Reproduction Steps:**
+```
+1. Source turn: "User's budget is $10,000"
+2. Trigger the memory-write pipeline and capture the stored entry (expect something like "User budget is flexible, around $10K")
+3. In a later session/turn, retrieve the memory entry (expect further drift, e.g., "User has approximately $10,000 budget but flexible")
+4. Ask the agent to recommend a product/plan based on the retrieved memory
+5. Record the agent's recommendation and check whether it exceeds $10,000
+6. Diff the final retrieved value against the original verbatim source statement
+```
+
+### Expected Failure State
+- The stored memory entry no longer matches the original number/qualifier ("$10,000" becomes "flexible, around $10K")
+- A subsequent retrieval further drifts the meaning (e.g., interpreted as "can go higher than $10,000")
+- The agent's recommendation exceeds the user's actual stated budget, directly contradicting the original fact
+- A correctly-behaving system would store and retrieve the exact "$10,000" figure unchanged, or explicitly flag that the value was derived from a summarization step
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

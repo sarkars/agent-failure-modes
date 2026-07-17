@@ -28,6 +28,38 @@ The answer is 4.
 Result: 600 tokens for a 1-token answer
 ```
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Agent configured with unconstrained chain-of-thought prompting and no output-length/complexity scaling
+- No structured-output schema or hard token cap applied to trivial/deterministic-answer task categories
+- No conciseness instruction present in the system prompt
+
+### Trigger Mechanism
+1. Submit a trivially simple, deterministic query to the agent ("What's 2+2?")
+2. Let the agent's default chain-of-thought behavior generate an unconstrained explanatory preamble before the answer
+3. Measure total output tokens generated versus the minimum tokens actually needed to convey the answer
+
+**Example Reproduction Steps:**
+```
+1. Configure the agent with default chain-of-thought prompting, no task-complexity classifier, and no output token cap
+2. Submit the query: "What's 2+2?"
+3. Capture the full response and count total output tokens
+4. Identify the portion of the response that constitutes the actual answer ("The answer is 4") versus preamble/explanation ("Let me think through this step by step... Addition is a mathematical operation...")
+5. Compute the verbosity ratio: total output tokens / minimum-necessary tokens (expect roughly 600:1)
+6. Re-run with a task-appropriate detail-scaling or output-token-cap policy applied and compare response length
+```
+
+### Expected Failure State
+- The response to "What's 2+2?" consumes approximately 600 tokens, including an unrequested explanation of what addition means, before arriving at the 1-token answer "4"
+- The verbosity ratio (output tokens / minimum-necessary tokens) lands far above any reasonable target, in the hundreds-to-one range
+- No task-complexity classifier or token cap intervenes to scale the response down for a task in the "trivial" tier
+- The same explanatory boilerplate pattern recurs across other simple queries, not just this one instance
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

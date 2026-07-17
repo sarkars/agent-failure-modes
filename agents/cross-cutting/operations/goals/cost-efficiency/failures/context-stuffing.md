@@ -31,6 +31,38 @@ Actual need: Weather API tool + location
 Result: 100,000 tokens used, 500 needed
 ```
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Agent system with a static system prompt describing all 200 available tools regardless of task
+- Context-assembly pipeline attaches the full conversation history and a complete company knowledge base/user manual by default, with no relevance filtering
+- No intent classifier gating what gets included in the prompt before the model call
+
+### Trigger Mechanism
+1. Submit a simple, narrowly-scoped query ("What's the weather in NYC?") to the agent
+2. Let the default context-assembly pipeline attach the full 50-page user manual, complete 100-turn conversation history, all 200 tool descriptions, and the full knowledge base
+3. Measure total tokens sent to the model versus tokens the model actually needed/referenced to answer
+
+**Example Reproduction Steps:**
+```
+1. Configure the agent's default context pipeline to include: full user manual (50 pages), full conversation history (100 turns), all 200 tool definitions, complete knowledge base
+2. Send the query: "What's the weather in NYC?"
+3. Capture the assembled prompt and count total tokens sent to the model
+4. Identify which specific context elements the model actually cited/used in producing its answer (expected: only the weather tool description + location)
+5. Compute the ratio of tokens included vs. tokens actually referenced
+6. Repeat with a relevance-filtered context (only the weather tool + location) and compare token counts and latency
+```
+
+### Expected Failure State
+- The unfiltered run sends roughly 100,000 tokens to the model for a query that needed roughly 500 tokens (weather tool + location)
+- Context utilization ratio (referenced tokens / included tokens) is near 0%, far below any reasonable target
+- Latency and cost for a trivial single-fact lookup match those of a complex, knowledge-base-spanning task
+- No relevance-filtering step intervenes despite the task being classifiable as simple/single-intent
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

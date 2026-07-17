@@ -50,6 +50,39 @@ From MAST study of 1642 MAS traces:
 - Lack of progress tracking mechanism
 - Missing state management
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Agent tasked with "Find and summarize the Q3 sales report" using `search_files` and `read_file` tools
+- No visible action history or idempotency check preventing re-execution of an already-completed tool call
+- Agent's context window does not reliably retain a record of prior turns' completed actions
+
+### Trigger Mechanism
+1. Agent calls `search_files("Q3 sales report")` and receives `report.pdf` as a result
+2. Agent calls `read_file("report.pdf")` and receives the contents
+3. On the next turn, with no memory check against prior identical calls, the agent re-issues `search_files("Q3 sales report")` and `read_file("report.pdf")` again
+4. This alternating pair repeats across multiple turns without ever transitioning to the summarization step
+
+**Example Reproduction Steps:**
+```
+1. Provide the agent access to search_files and read_file tools with report.pdf discoverable under "Q3 sales report"
+2. Issue the task: "Find and summarize the Q3 sales report"
+3. Log each tool call and its parameters turn by turn: Turn 1 search_files, Turn 2 read_file, Turn 3 search_files (expect duplicate), Turn 4 read_file (expect duplicate), continuing
+4. Check whether an identical (tool, parameters) pair from Turn 1/2 reappears at Turn 3/4, Turn 5/6, etc.
+5. Track whether the agent ever transitions to a summarize action or emits a final summary
+6. Measure total tokens consumed across the repeated discovery cycles before the run is manually halted
+```
+
+### Expected Failure State
+- The identical `search_files("Q3 sales report")` -> `read_file("report.pdf")` pair repeats 3 or more times with no variation in parameters or approach
+- The agent never proceeds to the summarization step despite already having the report contents from Turn 2
+- Token spend accrues steadily across repeated turns while the task-progress state (discovery -> read -> summarize) remains stuck at "read," never advancing
+- No repeated-call detector intercepts or short-circuits the duplicate calls with a cached result
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

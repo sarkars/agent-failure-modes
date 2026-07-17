@@ -53,6 +53,40 @@ From MAST study of 1642 MAS traces:
 - Multi-agent consensus required but not achieved
 - State not clearly indicating "done"
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Multi-agent code review pipeline: Reviewer Agent, CI Agent, Merger Agent, each operating on the same PR
+- Each agent's completion is expressed only as free-text status narration ("Approved," "checks passed," "ready to merge"), not a structured DONE event
+- No coordinator checks the conjunction of all three agents' completion signals; no supervising halt mechanism exists
+
+### Trigger Mechanism
+1. Submit a PR through the pipeline; Reviewer, CI, and Merger each independently reach and narrate their own success state
+2. Because no structured termination signal or conjunction check exists, none of the three agents (or a coordinator) issues a halt
+3. Each agent, having no new input but also no "stop" instruction, re-invokes its own verification action
+4. Observe whether the pipeline continues running past the point all three signals are green
+
+**Example Reproduction Steps:**
+```
+1. Configure the 3-agent pipeline (Reviewer, CI, Merger) with no explicit conjunction-based termination check and no structured DONE event
+2. Submit a PR that passes review, passes CI, and is mergeable
+3. Capture Reviewer Agent's output: "Code looks good, tests pass. Approved."
+4. Capture CI Agent's output: "All checks passed."
+5. Capture Merger Agent's output: "Ready to merge."
+6. Continue running the pipeline loop past this point and log each agent's next action
+7. Measure elapsed time/compute spent after all three completion signals were emitted, until (if ever) the pipeline halts
+```
+
+### Expected Failure State
+- All three completion signals (reviewer_approved, ci_passed, merge_ready) are present, yet the pipeline does not halt
+- Reviewer Agent re-runs "Let me check the code again...", CI Agent re-runs "Running tests again...", Merger Agent re-runs "Checking merge status..." with no new input since their prior success report
+- The system continues consuming compute/tokens indefinitely (or until an external timeout) despite the task being objectively complete
+- No termination/halt event is logged even though a conjunction of all required signals was reached
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

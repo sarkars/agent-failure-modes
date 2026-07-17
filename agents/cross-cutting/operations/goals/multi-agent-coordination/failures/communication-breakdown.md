@@ -40,6 +40,38 @@ Result: Invalid recommendation due to lost caveat
 - Duplicated work due to lost state
 - Cascading errors through agent chain
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- A multi-agent pipeline where a Research Agent produces findings containing a specific applicability constraint
+- A Summary Agent that condenses the Research Agent's output via free-text summarization with no required-field schema
+- A Decision Agent that consumes only the summarized output and applies it to a case that would violate the (dropped) constraint
+
+### Trigger Mechanism
+1. Have the Research Agent produce findings that include an explicit caveat limiting applicability (e.g., a numeric threshold)
+2. Pass the findings through a Summary Agent that condenses to bullet points without a required caveat/constraint field
+3. Feed the summary to a Decision Agent and apply its recommendation to a case that violates the dropped caveat
+
+**Example Reproduction Steps:**
+```
+1. Have the Research Agent summarize 10 papers and include: "Results only valid for datasets > 1M rows"
+2. Pass the full research output to the Summary Agent and request a condensed bullet-point version
+3. Inspect the Summary Agent's output for the presence or absence of the ">1M rows" caveat
+4. Feed the Summary Agent's bullets to the Decision Agent and ask it to recommend an approach
+5. Apply the Decision Agent's recommended approach to a 10K-row dataset
+6. Check whether the Decision Agent's recommendation acknowledges the dataset-size mismatch or proceeds as if the approach is valid
+```
+
+### Expected Failure State
+- The Summary Agent's bullet points omit the ">1M rows" caveat present in the original Research Agent output
+- The Decision Agent recommends the approach with no awareness of the size precondition it silently depends on
+- The recommendation is applied to a 10K-row dataset (four orders of magnitude below the real threshold) without any flag or warning
+- Tracing the final recommendation back to the original research finding shows the caveat existed at the source but is unrecoverable from the Decision Agent's input alone
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

@@ -80,6 +80,39 @@ From Label Quality Research (2026):
 - Time pressure on annotators
 - No ongoing label quality audits
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- A 10,000-example sentiment-analysis golden dataset labeled by 5 annotators over 3 months, with no inter-annotator agreement checks or adjudication step
+- Specific known-problematic cases present in the set: an objectively mislabeled example (#2341), a pair of near-identical phrasings labeled inconsistently (#5672 vs #5891), and a genuinely ambiguous case (#8901)
+- No periodic label-quality audit process in place
+
+### Trigger Mechanism
+1. Run the agent against the full golden set and record the reported accuracy
+2. Pull a sample of "failed" cases and manually re-review the golden label's correctness against the source text
+3. Identify near-identical phrasings labeled differently across the dataset
+4. Recompute agent accuracy against a corrected subset of labels
+
+**Example Reproduction Steps:**
+```
+1. Run agent on case #2341: text "The product is not bad at all" → agent outputs "Positive," golden label is "Negative" → recorded as FAIL
+2. Manually re-review case #2341's golden label against the text; confirm "Positive" is the objectively correct sentiment
+3. Compare case #5672 ("I guess it's okay" → golden: Positive) against case #5891 ("I suppose it's fine" → golden: Negative) for labeling consistency on near-identical phrasing
+4. Review case #8901 ("Revolutionary but overpriced" → golden: Positive) for inherent ambiguity/reasonable disagreement
+5. Sample and audit a larger batch (e.g., 1,000 cases) for objective errors, inconsistencies, and ambiguous cases; compute the problematic-case rate
+6. Recompute agent accuracy excluding/correcting the problematic cases and compare to the originally reported accuracy
+```
+
+### Expected Failure State
+- The agent's objectively correct output on case #2341 ("Positive") is scored as a failure because the golden label itself is wrong ("Negative")
+- Near-identical phrasings (#5672 vs #5891) receive contradictory golden labels with no adjudication trail explaining the discrepancy
+- Reported agent accuracy (e.g., 74%) is materially lower than the agent's true accuracy against corrected labels (e.g., ~85%), an artificial penalty of roughly 11 points
+- A correctly-behaving evaluation process would route case #2341 and the #5672/#5891 pair through multi-annotator adjudication before accepting them into the golden set, rather than letting single-annotator errors silently penalize a correct agent
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

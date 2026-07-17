@@ -25,6 +25,40 @@ Reality: Requirement was in context but truncated to fit window
 Result: User must re-provide information, frustrated
 ```
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- A conversation session with a fixed context window and no retrieval-augmented or pinned-context handling in place
+- A large source document (e.g., a 50-page specification) submitted early in the conversation
+- No context-prioritization or external state store capturing document content outside the window
+- Enough intervening turns/content after the document to approach or exceed the window before the document content is needed again
+
+### Trigger Mechanism
+1. Submit the full 50-page specification as an early-turn message
+2. Continue the conversation with several intervening turns that consume additional context tokens
+3. Ask a question that depends on a specific detail from early in the document (e.g., a requirement on page 3)
+4. Observe whether the agent can recall the detail or claims it was never provided
+
+**Example Reproduction Steps:**
+```
+1. Turn 1: paste the full 50-page specification into the conversation
+2. Turns 2-4: exchange several unrelated follow-up messages/tool calls to consume context budget
+3. Turn 5: ask "What does the requirement on page 3 say about X?"
+4. Record the agent's response
+5. Check context-window utilization at turn 5 (token count vs. model's window limit)
+6. Compare the answer against the actual page-3 content to confirm whether it was dropped
+```
+
+### Expected Failure State
+- Agent responds with something like "I don't see that requirement in our conversation. Could you remind me what it was?" despite the information having been provided
+- Context-window utilization logs show the page-3 content was truncated or summarized out before turn 5
+- No truncation-event log or user-facing notice exists explaining that content was dropped
+- A correctly-behaving system would either retrieve the page-3 detail on demand or explicitly flag that it can no longer access early content, rather than silently failing to recall it
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

@@ -28,6 +28,38 @@ Agent: "Your name is John Smith"
 Result: Unnecessary API call, added latency and cost
 ```
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Agent operating in a context that already explicitly states a fact (e.g., "The user's name is John Smith")
+- Agent has access to a `get_user_profile()` tool capable of fetching the same fact from an external source
+- No context-first check or read-through cache preventing redundant tool invocation for already-available information
+
+### Trigger Mechanism
+1. Present the agent with a context block containing the needed fact directly stated in text
+2. Ask the agent a question answerable purely from that stated fact (e.g., "What's my name?")
+3. Observe whether the agent answers directly from context or first issues a tool call to re-fetch the same information
+
+**Example Reproduction Steps:**
+```
+1. Construct a context containing the line: "The user's name is John Smith"
+2. Give the agent access to a get_user_profile() tool that returns the same name when called
+3. Ask the agent: "What's my name?"
+4. Log whether the agent calls get_user_profile() before answering, or answers directly from the stated context
+5. If the call occurs, record the added latency and API cost of that single unnecessary call
+6. Repeat across multiple context-stated-fact scenarios (order status, account tier, etc.) to measure the rate at which the agent re-fetches already-available data
+```
+
+### Expected Failure State
+- The agent calls `get_user_profile()` to retrieve a name already explicitly present in its context, before answering "Your name is John Smith"
+- The tool call adds measurable latency and API cost with zero information gain, since the fetched result matches what was already stated
+- No context-first check intercepts the call despite the target fact being trivially present in the text the agent already has
+- The pattern recurs across similar already-known-fact queries, indicating systemic over-reliance on tool calls rather than context reading
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

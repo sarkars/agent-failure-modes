@@ -70,6 +70,40 @@ From Parallel Execution Research (2026):
 - Stale state used for decisions
 - No parallel execution visibility
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Code editing multi-agent system with 3 concurrent agents assigned to `auth.py`: Agent A (refactor code), Agent B (write/update tests), Agent C (update docs)
+- No file-level locking or dependency-aware partitioning between the three agents
+- All three agents read `auth.py` once at task start (T0), with no requirement to re-read/refresh before committing
+
+### Trigger Mechanism
+1. Dispatch "Refactor the authentication module" as three parallel subtasks to Agent A, B, and C simultaneously
+2. Let Agent A rename `login()` to `authenticate()` and commit mid-task (T3) while B and C are still working from their T0 snapshot
+3. Allow Agent B and Agent C to commit their own work (tests, docs) without re-reading `auth.py`'s current state
+4. Merge all three branches and run the test suite
+
+**Example Reproduction Steps:**
+```
+1. Seed a repo with auth.py containing a login() function, plus a test suite and docs referencing login()
+2. Launch Agent A, B, C in parallel, all reading auth.py at T0
+3. Have Agent A rename login() to authenticate() throughout auth.py and commit at T3
+4. Have Agent B write/update tests calling login() and commit at T4 without refreshing its read of auth.py
+5. Have Agent C update documentation referencing login() and commit at T5, also without refreshing
+6. Merge branches A, B, C in commit order
+7. Run the full test suite against the merged result and check for symbol resolution errors
+```
+
+### Expected Failure State
+- Merged branch contains tests (Agent B) and docs (Agent C) that reference `login()`, a function that no longer exists after Agent A's rename
+- Test suite fails with a name/attribute error despite a clean, conflict-free textual merge (no merge conflict markers)
+- 2 of 3 parallel branches (B and C) produce invalid output while only Agent A's branch is internally consistent
+- No automated signal at commit time flagged that B and C's work was based on stale state
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

@@ -82,6 +82,38 @@ From Delegation Research (2026):
 - No direct execution preference
 - Recursive agent architectures
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- A hierarchical multi-agent system where each agent defaults to delegating rather than checking whether it can execute directly
+- No hard depth-budget limit or complexity-based delegation gate configured
+- A trivially simple task (single API call) submitted at the top of the hierarchy
+
+### Trigger Mechanism
+1. Submit a simple, single-tool-call task to the top-level agent (L0) in a system with delegation capability at every layer
+2. Let each layer choose to delegate further rather than execute directly, and record the resulting chain depth
+3. Measure the cumulative latency, token cost, and final-answer fidelity against a direct single-call baseline
+
+**Example Reproduction Steps:**
+```
+1. Submit "What's the weather in Tokyo?" to the Main Agent (L0) with delegation enabled
+2. Trace the chain as L0 delegates to a Research Agent (L1), which delegates to a Data Gathering Agent (L2), which delegates to an API Specialist Agent (L3), which delegates to a Weather API Agent (L4)
+3. Record that only L4 actually calls the weather API, returning "72F, Sunny"
+4. Trace the response as it is re-narrated at each level going back up (L4->L3->L2->L1->L0->User)
+5. Measure total LLM calls (expect ~10 vs. 1 for direct execution), cumulative latency (~5x), and token cost (~8x, $0.016 vs $0.002)
+6. Additionally configure Agent A to delegate to Agent B and Agent B to delegate back to Agent A, and observe whether the system hangs
+```
+
+### Expected Failure State
+- The simple weather lookup passes through 5 agent layers (L0-L4) instead of being resolved with a single direct tool call
+- Total LLM calls, latency, and token cost are several times higher than the direct-execution baseline (approximately 10x calls, 5x latency, 8x cost per the documented figures) for identical output
+- The final answer to the user is a re-narrated paraphrase ("Based on my research, Tokyo is 72F and Sunny") several hops removed from the actual API response, with measurable fidelity drift at each hop
+- In the circular-delegation variant, the system hangs or crashes with no depth limit catching the A->B->A loop
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

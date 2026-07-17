@@ -24,6 +24,38 @@ Reality: Q3 report showed 15%, but citation points to Q2 report
 Result: User follows citation, finds different data, loses trust
 ```
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- A retrieval-augmented generation pipeline with multiple similar source documents available (e.g., Q2 2024 and Q3 2024 reports covering the same company)
+- No extractive-citation or claim-source binding requirement enforced at generation time
+- A specific, checkable numeric claim that differs between the similar source documents (12% vs. 15% growth)
+
+### Trigger Mechanism
+1. Ensure both the Q2 and Q3 reports are present in the retrieval corpus, with different growth figures in each
+2. Prompt the agent to answer a question about Q3 revenue growth with a citation
+3. Check whether the cited source [1] actually contains the claimed figure, or whether the claim and citation were drawn from different documents
+
+**Example Reproduction Steps:**
+```
+1. Load both the Q2 2024 report (12% growth) and Q3 2024 report (15% growth) into the retrieval index
+2. Ask: "What was the revenue growth in the Q3 2024 report?"
+3. Record the agent's stated figure and its citation marker (e.g., "15% [1]")
+4. Open the document referenced by citation [1] and check whether it actually states 15% growth or a different figure (12%, from Q2)
+5. Repeat across multiple near-duplicate document pairs (adjacent quarters, similar-named entities) to measure how often the citation resolves to the wrong-but-related document
+6. Compute the claim-source mismatch rate across the test batch
+```
+
+### Expected Failure State
+- The stated numeric claim (15%) is correct, but the citation marker points to a document (Q2 report, 12%) that does not contain that figure
+- Manually following the citation surfaces contradictory data rather than confirming the claim
+- The mismatch is specifically a wrong-but-adjacent source (same company, neighboring time period) rather than a completely unrelated document, matching the documented failure pattern
+- No automated check catches the mismatch before the response is delivered to the user
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

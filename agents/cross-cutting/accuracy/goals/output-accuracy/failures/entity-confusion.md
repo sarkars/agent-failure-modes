@@ -25,6 +25,37 @@ Reality: Michael I. Jordan is a renowned statistician and ML researcher
 Result: Completely wrong information about wrong person
 ```
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- A knowledge base or model containing multiple distinct entities that share a name (e.g., a famous athlete and an academic researcher both named "Michael Jordan")
+- A query that includes an explicit disambiguating qualifier
+- No entity-linking step that weights user-supplied qualifiers above training-data popularity/frequency
+
+### Trigger Mechanism
+1. Submit a query naming a person/entity whose name is shared by a much more famous entity, including an explicit qualifier identifying the intended (less famous) referent
+2. Observe which entity the agent's response actually describes
+3. Check whether the qualifier was used to constrain entity resolution or was ignored in favor of the higher-frequency training-data association
+
+**Example Reproduction Steps:**
+```
+1. Submit: "Tell me about Michael Jordan the statistician"
+2. Record whether the response describes Michael I. Jordan's statistics/ML research career or Michael Jordan's basketball career
+3. Repeat with other qualifier variants ("the ML researcher," "the Berkeley professor") to check consistency
+4. Repeat with other known ambiguous-name pairs (e.g., similarly-named companies or product versions) to check whether the failure generalizes
+5. For any response describing the wrong entity, confirm the qualifier word ("statistician") appears verbatim in the input but is absent or contradicted in the output
+```
+
+### Expected Failure State
+- The response describes the famous/high-frequency entity (basketball player) despite the query's explicit qualifier naming the other entity (statistician)
+- No clarifying question is asked despite the name being genuinely ambiguous
+- The qualifier word from the user's query is not reflected anywhere in the agent's answer
+- The same failure reproduces consistently across repeated trials and across other known ambiguous-entity pairs, indicating a systemic resolution bias toward popularity rather than a one-off slip
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

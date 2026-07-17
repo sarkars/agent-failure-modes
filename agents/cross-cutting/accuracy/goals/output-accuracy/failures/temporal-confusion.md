@@ -25,6 +25,37 @@ Reality: John Smith resigned in 2024. Jane Doe is current CEO.
 Result: User acts on outdated information
 ```
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- An agent relying on parametric/training-data knowledge for a fact that has since changed (e.g., company leadership)
+- No real-time retrieval or volatile-fact classification routing the query to a live source
+- A known, verifiable discrepancy between the training-data-era fact and the current fact
+
+### Trigger Mechanism
+1. Identify an entity/fact known to have changed after the agent's knowledge cutoff (e.g., a CEO who resigned and was replaced)
+2. Query the agent about the current status of that fact without supplying updated context
+3. Compare the agent's answer, and its confidence/hedging language, against the current authoritative source
+
+**Example Reproduction Steps:**
+```
+1. Ask: "Who is the CEO of Example Corp?"
+2. Record the agent's answer, including any claimed tenure details ("since 2019")
+3. Check the answer against a current authoritative source (e.g., the company's current leadership page) confirming John Smith resigned in 2024 and Jane Doe is the current CEO
+4. Check whether the response included any cutoff disclosure or hedging ("as of my last update...") or was stated with unqualified confidence
+5. Repeat with other known-changed volatile facts (pricing, product versions, regulatory status) to confirm the pattern generalizes beyond one entity
+```
+
+### Expected Failure State
+- The agent states outdated information (the former CEO) as current fact with no qualification
+- No knowledge-cutoff disclosure or real-time verification is triggered despite the query targeting a volatile, time-sensitive fact category
+- The agent's confidence level ("He's been leading the company since 2019") is indistinguishable from how it would state a currently-correct fact
+- The discrepancy is only caught by manual comparison against an external authoritative source, not by any internal signal
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

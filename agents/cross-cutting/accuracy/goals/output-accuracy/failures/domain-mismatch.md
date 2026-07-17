@@ -55,6 +55,38 @@ From Failure Modes in LLM Systems (arxiv:2511.19933):
 - Benchmark tests don't capture domain-specific depth
 - Confidence masks lack of expertise
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- An agent with broad general-purpose pre-training but no specialized routing or domain-specific retrieval for technical/professional queries
+- A query containing domain-specific notation, formulas, or terminology from a specialized field (e.g., chemical process engineering)
+- No domain-classification or confidence-gating step before the agent generates a response
+
+### Trigger Mechanism
+1. Submit a query requiring a specific technical calculation or method that only a domain specialist would recognize
+2. Observe whether the agent attempts the actual domain-specific method or substitutes generic, related-sounding advice
+3. Check whether the response's fluency masks the absence of the expected technical content
+
+**Example Reproduction Steps:**
+```
+1. Submit: "What's the optimal residence time for a CSTR with A -> B reaction, k=0.05/min, target 95% conversion?"
+2. Check whether the response applies the residence-time formula tau = X/(k(1-X)) and produces a numeric answer
+3. If no formula/calculation appears, record the response as a domain-mismatch candidate
+4. Compare the response's terminology against expected process-engineering vocabulary (CSTR, conversion, residence time) versus generic chemistry-safety language
+5. Have a chemical engineer score the response for depth and correctness against the expected calculated answer
+6. Repeat with a battery of other specialized-domain queries (e.g., structural load calculations, statute interpretation) to check for a repeatable pattern
+```
+
+### Expected Failure State
+- The response is fluent and internally coherent but never performs the expected domain calculation (method avoidance)
+- Generic advice ("monitor temperature and pressure," "consider stoichiometry") is substituted for the specific numeric/formula-based answer the query required
+- A domain expert scores the response as shallow or wrong despite it reading as confident and complete
+- No uncertainty or "this requires specialized calculation" disclaimer is surfaced to the user
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

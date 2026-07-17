@@ -32,6 +32,38 @@ Result: $47,000 in API costs over 11 days (real incident)
 - $437 overnight from unchecked agent run
 - Development environments running indefinitely
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Agent configured with retry logic but no hard iteration ceiling and no distinction between retriable and non-retriable errors
+- Downstream API enforces a persistent rate limit that the agent's retry cannot resolve
+- No real-time cost/budget kill-switch monitoring the running task
+
+### Trigger Mechanism
+1. Agent calls the external API and receives a rate-limit error
+2. Retry logic re-issues the identical call immediately (or with insufficient backoff) without checking whether the error is terminal for the current window
+3. Each retry again hits the same rate limit, and the loop repeats with no upper bound on iteration count or elapsed cost
+
+**Example Reproduction Steps:**
+```
+1. Configure an agent task that calls a rate-limited external API with standard retry-on-failure logic and no max-iteration cap
+2. Trigger a sustained rate-limit condition on the API (e.g., throttle responses to always return 429)
+3. Start the agent task and let it enter the retry loop
+4. Log iteration count, elapsed time, and cumulative API/token cost at intervals (iteration 1, 10, 100, 1,000, 10,000)
+5. Continue the run unattended and measure total elapsed time and cost before any external intervention occurs
+6. Compare against the documented real incident: 10,000+ iterations, 11 days, $47,000 in API costs
+```
+
+### Expected Failure State
+- The agent performs the same retry action with the same input thousands of times with no state change or progress
+- Iteration count climbs into the thousands/tens of thousands with no automatic termination
+- Cumulative cost grows unbounded over the run's duration (days), eventually reaching the $47,000-scale magnitude documented in the real incident
+- No alert or kill-switch fires despite iteration count and elapsed time being orders of magnitude beyond any normal task
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

@@ -64,6 +64,39 @@ From Cost Analysis Research (2026):
 - Lack of A/B testing infrastructure
 - No cost visibility per query type
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Customer support agent handling a mixed query distribution: 60% simple (FAQ/status), 30% medium (lookup/calc), 10% complex (reasoning)
+- No task-complexity classifier or model router in place; all queries default to the most capable model (GPT-4o)
+- No cost-per-query-type visibility or per-tier tracking
+
+### Trigger Mechanism
+1. Route a representative sample of 1M monthly queries through the agent with no complexity-based routing logic
+2. Every query, regardless of type ("What's your return policy?" through "Help me decide between products"), is sent to GPT-4o
+3. Tabulate cost by measuring token usage against GPT-4o's per-token pricing across the full query distribution
+
+**Example Reproduction Steps:**
+```
+1. Simulate or replay a 1M-query/month distribution: 600K simple, 300K medium, 100K complex
+2. Configure the agent to route 100% of queries to GPT-4o ($5/1M input tokens) with no classifier in front
+3. Compute monthly cost across the full distribution (expected ~$5,000 per the example)
+4. Re-run the same distribution with a complexity classifier routing simple/medium to GPT-4o-mini ($0.15/1M) and complex to GPT-4o ($5/1M)
+5. Compute monthly cost for the routed variant (expected ~$635 per the example)
+6. Sample response quality for simple/medium queries under both configurations and compare accuracy
+7. Compute the overspend percentage between routed and unrouted configurations
+```
+
+### Expected Failure State
+- Monthly spend for the unrouted configuration lands near $5,000 versus the ~$635 achievable with routing, an ~87% overspend with no accuracy benefit
+- Simple queries like "What's your return policy?" and trivial lookups consume frontier-model-level tokens indistinguishable in quality from what a cheaper model would have produced
+- No cost-distribution-by-query-type audit exists to surface that 90% of spend is going toward queries that didn't need the expensive model
+- pct_simple_queries_on_expensive_model sits at 100% with no alert, since no routing/classification layer exists to violate
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

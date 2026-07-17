@@ -46,6 +46,40 @@ From Aegis study: State awareness failures are classified under exploration fail
 - Implicit state changes not communicated
 - Multiple concurrent operations
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- A shell/file-system-driving agent executing a multi-step task ("Navigate to /home/user/docs and delete temp files") where the environment returns only bare success/failure signals, not full resulting state
+- No state-declaring action wrappers or running action-and-state summary maintained in the agent's context
+- A task sequence long enough to include an implicit state-changing action (e.g., `cd ..`) between two similar-looking actions (`rm` calls)
+
+### Trigger Mechanism
+1. Issue a navigation command establishing an initial location
+2. Perform several successful state-changing actions (deletions) in that location, each returning only "Success"
+3. Issue an additional navigation command that changes location (e.g., `cd ..`) without an explicit confirmation being surfaced prominently
+4. Issue a further action assuming the original location is still current, and observe whether it fails
+
+**Example Reproduction Steps:**
+```
+1. cd /home/user/docs → capture response ("Success")
+2. ls → capture response (report.pdf, temp1.txt, temp2.txt)
+3. rm temp1.txt → capture response ("Success")
+4. rm temp2.txt → capture response ("Success")
+5. cd .. → capture response ("Success", now actually in /home/user)
+6. rm temp3.txt → capture response and check for an error (e.g., "No such file or directory")
+7. Ask the agent to state its believed current directory and compare it to the environment's actual last-reported state
+```
+
+### Expected Failure State
+- Step 6 fails with a state-mismatch error ("No such file: temp3.txt") because the agent is no longer in /home/user/docs
+- The agent's self-reported belief about its location ("I'm still in /home/user/docs") does not match the environment's actual last-confirmed state (/home/user)
+- No verification step ran before the consequential `rm` action to catch the discrepancy
+- A correctly-behaving system would either receive explicit resulting-state confirmation after `cd ..` or verify current location before attempting the delete, avoiding the failed command entirely
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

@@ -65,6 +65,40 @@ From Failure Modes in LLM Systems (arxiv:2511.19933):
 - Task completion rates declining
 - Complaints about "dumber" responses
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Cost-optimization routing layer classifies tasks as "simple" or "complex" and routes "simple" tasks (including any task tagged "summarization") to a cheaper model (GPT-3.5) with truncated context
+- No minimum-quality guardrail validates output before or after the cost-optimized route is applied
+- Monitoring tracks cost and latency but not response completeness or accuracy
+
+### Trigger Mechanism
+1. Submit a summarization request for a 50-page research paper
+2. Let the router classify "summarization" as a simple task type and route it to GPT-3.5 with context-window truncation applied to fit budget
+3. Capture the generated summary and compare it against the full source document's actual findings
+4. Track cost, response time, and user satisfaction metrics over the following weeks
+
+**Example Reproduction Steps:**
+```
+1. Configure the cost-optimization router to classify by task-type label only ("summarization" = simple), independent of input length
+2. Submit: "Summarize the key findings from this 50-page research paper"
+3. Confirm the router selects GPT-3.5 and truncates the context window rather than passing the full 50 pages
+4. Generate the summary and diff its claimed findings against the paper's actual later-section content
+5. Log whether any truncation warning or error was surfaced to the user or to monitoring
+6. Track cost_per_query, response_time, and user_satisfaction_score over the following weeks to see when/if the quality drop is detected
+7. Compare the time-to-detection via user complaints vs. via internal quality monitoring
+```
+
+### Expected Failure State
+- The summary omits findings from the later sections of the paper because they were truncated out of context before generation
+- The response reads as confident and complete, with no error, warning, or hedge indicating information was dropped
+- Monitoring shows cost down 60% and response time down 40% with no alert, while user satisfaction only registers a ~25% drop weeks later
+- No quality-score metric moves in tandem with the cost metric at the time of the routing change, so the degradation goes undetected by automated monitoring
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

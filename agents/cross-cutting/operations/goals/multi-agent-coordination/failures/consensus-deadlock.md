@@ -43,6 +43,38 @@ Result: Code review never completes
 - Timeout with arbitrary or no decision
 - User frustration with unresponsive system
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- A 4-agent consensus system (Security, Performance, Readability, Testing) voting approve/reject on a single artifact under a 3/4 majority rule
+- Agents evaluating on genuinely orthogonal criteria (safety risk vs. style/completeness) rather than the same underlying question
+- No tie-break weighting, round cap, or identical-split detector configured
+
+### Trigger Mechanism
+1. Submit a code change that has a real security/performance issue but is well-documented and well-tested, so orthogonal criteria produce a structural even split
+2. Run the 4-agent vote and record each agent's vote and stated rationale
+3. Re-run additional rounds without changing the input and check whether the vote distribution repeats identically
+
+**Example Reproduction Steps:**
+```
+1. Submit a code change containing a SQL injection vulnerability and an inefficient query, but with clean formatting, documentation, and full test coverage
+2. Run Round 1: record Agent A (Security) reject, Agent B (Performance) reject, Agent C (Readability) approve, Agent D (Testing) approve -> 2-2
+3. Run Round 2 with agents re-evaluating the same artifact and record whether the split is identical
+4. Run Rounds 3 through 10, logging the vote distribution and each agent's stated rationale every round
+5. Hash each round's vote distribution and compare consecutive rounds for an exact repeat
+6. Measure total rounds elapsed and confirm no consensus threshold (3/4) is ever reached
+```
+
+### Expected Failure State
+- The vote remains at a persistent 2-2 split across all 10 rounds with no convergence toward the 3/4 majority threshold
+- Each round's rationale is substantively unchanged from the prior round (zero information gain per round) despite "re-evaluation"
+- No automatic escalation, tie-break, or veto rule triggers to resolve the deadlock, so the review never completes
+- The security objection (SQL injection) receives no special priority despite being a safety-relevant issue, getting diluted equally with style-level disagreement
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

@@ -74,6 +74,39 @@ From Overfitting Research (2026):
 - Optimization pressure on eval metrics
 - No production feedback loop
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- A fixed, 100-problem code-generation evaluation set reused across ~50 development iterations over 6 months, with full developer visibility into every case
+- No held-out final test set separate from the iterated-on dev eval set, and no eval-set rotation/refresh policy
+- A parallel production traffic stream containing materially different query phrasing (ambiguous, contextual requests vs. clean, well-specified problems)
+
+### Trigger Mechanism
+1. Track the eval score across each monthly development checkpoint over the 6-month cycle
+2. At the point the eval score reaches near-ceiling (99%), deploy to production and measure real-world accuracy over a comparable window
+3. Systematically rephrase a sample of existing eval cases (not verbatim) and re-test the deployed agent against the rephrased variants
+4. Compare eval-set performance, rephrased-variant performance, and production performance
+
+**Example Reproduction Steps:**
+```
+1. Record monthly eval score on the fixed 100-problem set: Month 1: 72%, Month 2: 81%, Month 3: 89%, Month 4: 94%, Month 5: 97%, Month 6: 99%
+2. Deploy the Month-6 model version to production
+3. Measure Week 1 production accuracy on live user requests (expect a sharp drop, e.g., 61%)
+4. Pull a sample of production failures and compare their phrasing to the eval set (e.g., eval: "Write a function to sort a list" vs. production: "Can you help me organize this data?")
+5. Rephrase 20 existing eval-set problems without changing their underlying requirements, and re-run the agent against the rephrased set
+6. Compare rephrased-variant accuracy against original eval-set accuracy
+```
+
+### Expected Failure State
+- Production accuracy (e.g., 61%) is dramatically lower than the final eval-set score (99%), a gap of roughly 38 points
+- Rephrased variants of the same underlying problems show a significant accuracy drop compared to the original eval-set phrasing, indicating memorization of exact wording rather than genuine problem-solving capability
+- A large share of production queries (e.g., ~40%) don't resemble any eval-set case in structure or ambiguity level
+- A correctly-behaving development process would have tracked the eval-production gap and rephrased-variant accuracy throughout the 6 months, flagging the sustained monthly eval gains (>5%/month for 3+ months) as an overfitting signal well before the 99%-to-61% gap was discovered in production
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

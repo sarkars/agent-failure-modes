@@ -28,6 +28,39 @@ Agent: "Ah yes, let's proceed with Project Alpha"
 Result: User frustrated by repetition
 ```
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- A multi-turn conversation where a named decision/entity is established explicitly early on (e.g., "Let's call it Project Alpha" at turn 3)
+- No explicit structured state object tracking key decisions outside the raw transcript
+- Enough intervening turns between the decision and a later reference to create pressure on the agent's ability to recall it from raw history alone
+
+### Trigger Mechanism
+1. Establish the named decision at an early turn
+2. Have the agent use/confirm the decision shortly after, to prove it was captured correctly at that point
+3. Continue the conversation through additional turns unrelated to the named decision
+4. At a later turn, observe whether the agent independently re-asks the already-answered question
+
+**Example Reproduction Steps:**
+```
+1. Turn 3: User: "Let's call it Project Alpha"
+2. Turn 5: prompt the agent to proceed with the project; confirm it correctly uses "Project Alpha"
+3. Turns 6-14: continue with unrelated task turns
+4. Turn 15: prompt the agent to reference the project by name again
+5. Record whether the agent asks "What would you like to name the project?" instead of using the known name
+6. If it does, restate "I told you - Project Alpha" and check whether the agent then acknowledges correctly
+```
+
+### Expected Failure State
+- At turn 15, the agent asks the user to re-provide the project name despite it having been established at turn 3 and correctly used at turn 5
+- The agent shows no evidence of checking against a stored decision; it simply re-asks rather than reading a tracked value
+- The user has to restate previously-given information, producing visible frustration/repetition in the transcript
+- A correctly-behaving system would look up "Project Alpha" from a structured state record rather than re-deriving it from scanning the full transcript at turn 15
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

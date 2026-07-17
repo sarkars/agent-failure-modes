@@ -45,6 +45,38 @@ Result: Data integrity issues, wasted compute
 - Data inconsistency from parallel execution
 - Deadlocks when agents wait for each other
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Three-stage document pipeline: Agent A (extract tables), Agent B (validate extractions), Agent C (integrate validated data)
+- No task queue with explicit ownership; handoff between agents is implicit ("Agent B is expected to validate")
+- No handoff acknowledgment, idempotent task claiming, or state machine enforcing extract -> validate -> integrate ordering
+
+### Trigger Mechanism
+1. **Dropped-handoff variant**: Agent A completes extraction and marks the task "complete," but no mechanism confirms Agent B was actually triggered to pick up validation, so Agent C polls for "complete" tasks and consumes Agent A's output directly
+2. **Duplicate-handoff variant**: Agent A extracts tables from the document; Agent B, misunderstanding its assigned task, independently re-extracts tables from the same document instead of validating; Agent C receives both outputs as if both were authoritative
+
+**Example Reproduction Steps:**
+```
+1. Configure the pipeline with Agent A (extract), Agent B (validate), Agent C (integrate) and no explicit task queue/state machine
+2. Feed a document into Agent A; have it extract tables and mark the task "complete" with no downstream acknowledgment check
+3. Do not trigger Agent B (simulating scenario 1's "never activated")
+4. Let Agent C poll for completed tasks and consume Agent A's raw, unvalidated output
+5. Separately, rerun with Agent B active but instructed ambiguously so it re-extracts tables rather than validating (scenario 2)
+6. Feed both Agent A's and Agent B's extraction outputs to Agent C
+7. Inspect Agent C's final integrated output for validation-flag absence (scenario 1) or conflicting duplicate extractions (scenario 2)
+```
+
+### Expected Failure State
+- Scenario 1: Agent C integrates data that was never validated, with no validation-flag precondition failure raised, despite the pipeline nominally requiring validation before integration
+- Scenario 2: Agent C receives two independently-produced extraction results for the same document and cannot determine which is authoritative, producing data integrity issues
+- No timeout or missing-handoff alert fires when Agent B fails to pick up the task in scenario 1
+- No duplicate-claim detector flags Agent B's redundant re-extraction in scenario 2, resulting in wasted compute and inconsistent downstream data
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

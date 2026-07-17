@@ -76,6 +76,39 @@ From Coverage Research (2026):
 - Production distribution not analyzed
 - New features added without test data
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- A medical triage chatbot golden dataset composed predominantly of common-symptom cases (80%), with emergency scenarios (1%), non-English speakers (0%), and elderly-with-multiple-conditions cases (0.5%) heavily underrepresented or absent
+- No production-distribution-mapped sampling or mandatory minimum coverage gate applied when the golden set was built
+- Production traffic containing a materially different segment mix (5% emergency, 12% non-English, 15% elderly-multi-condition)
+
+### Trigger Mechanism
+1. Run the standard golden-set evaluation and record the aggregate accuracy
+2. Segment production traffic by the same categories used in the golden set
+3. Draw a labeled sample of production queries from the underrepresented segments (emergency, non-English, elderly-multi-condition)
+4. Run the agent against that labeled underrepresented-segment sample and score accuracy per segment
+
+**Example Reproduction Steps:**
+```
+1. Run golden-set eval (1000 cases: 80% common, 15% moderate, 4% rare, 1% emergency, 0% non-English, 0.5% elderly-multi) and record aggregate accuracy (96%)
+2. Pull a labeled production sample stratified by segment: common 60%, moderate 20%, rare 8%, emergency 5%, non-English 12%, elderly-multi 15%
+3. Score agent accuracy specifically on the emergency-scenario subsample
+4. Score agent accuracy specifically on the non-English-speaker subsample
+5. Score agent accuracy specifically on the elderly-with-multiple-conditions subsample
+6. Compare each segment's accuracy against the golden-set aggregate accuracy (96%)
+```
+
+### Expected Failure State
+- Emergency-scenario accuracy in production is dramatically lower than the golden aggregate (e.g., ~58% vs. 96%), despite the golden set reporting high overall accuracy
+- Non-English-speaker accuracy is very low (e.g., ~41%) because that segment had zero golden-set representation to catch it beforehand
+- Elderly-with-multiple-conditions accuracy is similarly degraded (e.g., ~52%), a segment that was 30x underrepresented in golden data relative to production volume
+- A correctly-behaving evaluation process would have surfaced these segment-level accuracy cliffs before deployment, since the golden set's composition would have been checked against production distribution rather than left as a convenience sample
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

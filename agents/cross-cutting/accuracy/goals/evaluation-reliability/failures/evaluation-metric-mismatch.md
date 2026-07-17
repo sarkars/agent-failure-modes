@@ -75,6 +75,39 @@ From Evaluation Research (2026):
 - No metric-to-outcome correlation analysis
 - Goodhart's Law ("measure becomes target")
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- A legal document assistant evaluated using generic proxy metrics (exact-match accuracy, response time, BLEU score) with defined pass thresholds
+- No task-specific composite metric (e.g., citation accuracy, legal correctness) implemented alongside the generic metrics
+- A parallel channel for real-world outcome data (user satisfaction ratings, compliance incident reports) not correlated against the eval metrics
+
+### Trigger Mechanism
+1. Run the standard eval suite (exact match, response time, BLEU) and record the pass/fail verdict
+2. Deploy to production and collect real user satisfaction and compliance-incident data over a comparable period
+3. Manually review a sample of eval cases where exact-match penalized valid paraphrases
+4. Compare the eval verdict against production outcome signals
+
+**Example Reproduction Steps:**
+```
+1. Run eval suite: exact match 85%, response time 1.2s avg, BLEU 0.78 → overall verdict PASS (all above threshold)
+2. Manually inspect a penalized case: expected "Three years is the statute of limitations," agent produced "The statute of limitations is 3 years" - mark whether this is legally correct despite failing exact match
+3. Inspect a BLEU-scored case where a wrong citation and a correct citation receive similar word-overlap scores
+4. Deploy the passing agent version to production for a fixed window
+5. Collect production signals: user satisfaction rating, rate of "answers miss the point" complaints, count of compliance violations
+6. Compare the eval PASS verdict against the collected production signals (satisfaction 2.8/5, 40% "miss the point" reports, 3 compliance violations)
+```
+
+### Expected Failure State
+- The eval suite reports an all-metrics PASS despite production revealing compliance violations and a 40% "misses the point" complaint rate
+- Exact-match specifically penalizes a legally-correct, differently-worded answer as a failure
+- BLEU score treats a response with a wrong legal citation the same as one with a correct citation, since it only measures word overlap
+- A correctly-behaving eval process would surface the compliance-relevant and factual-accuracy failures that generic proxy metrics structurally cannot detect, rather than reporting a clean PASS
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

@@ -39,6 +39,38 @@ Result: Agents repeatedly modify same code
 - Output quality degradation
 - User confusion about system behavior
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- A multi-agent system with three or more agents holding orthogonal, unranked objectives (e.g., performance, readability, security) operating on the same shared artifact
+- No published goal hierarchy or ownership partitioning constraining which agent's changes take precedence
+- A single ambiguous top-level task ("improve the codebase") given to all agents without a shared structured objective spec
+
+### Trigger Mechanism
+1. Assign the same ambiguous task to multiple agents with different, unranked optimization objectives operating on the same codebase/artifact
+2. Let each agent independently act on its own interpretation of "improve" without coordination
+3. Observe whether the agents' edits converge to a stable state or repeatedly overwrite each other
+
+**Example Reproduction Steps:**
+```
+1. Give three agents (Performance, Readability, Security) the shared task "Improve the codebase" against the same repository
+2. Let Agent A (Performance) inline functions for speed
+3. Let Agent B (Readability) extract functions for clarity on the same code region
+4. Let Agent C (Security) add validation to every function, including the ones A and B just modified
+5. Run another round and check whether any agent reverts or re-modifies a region another agent just changed
+6. Measure whether performance, readability, and security metrics are all trending in a stable direction or oscillating turn over turn
+```
+
+### Expected Failure State
+- The same file/function is repeatedly modified by multiple agents across turns with no convergence to a stable state
+- Net code quality metrics move in conflicting directions (e.g., performance degrades from added validation while readability suffers from mixed styles)
+- No single agent's success criteria are satisfied in the final state
+- The system shows no natural termination condition — deliberation/edits continue indefinitely absent external intervention
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

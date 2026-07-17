@@ -30,6 +30,39 @@ Repeat 100x before any succeeds
 Result: 300 API calls instead of 3
 ```
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Three independent agent instances (Agent 1, 2, 3) each configured with immediate-retry-on-failure logic and no exponential backoff or jitter
+- All three agents call the same rate-limited downstream API around the same time, with no shared coordination/rate-limit awareness between them
+- No circuit breaker or shared retry-budget ceiling exists across the agent instances
+
+### Trigger Mechanism
+1. Trigger a rate-limit condition on the shared downstream API (e.g., all three agents' concurrent calls exceed the API's rate limit)
+2. Each agent independently retries immediately upon failure with no backoff or jitter, causing all three to resend on the same tick
+3. The simultaneous retry wave again exceeds the rate limit, and the cycle repeats
+
+**Example Reproduction Steps:**
+```
+1. Configure Agent 1, 2, 3 to call the same API endpoint concurrently with immediate-retry-on-failure (no backoff, no jitter)
+2. Set the API's rate limit low enough that 3 simultaneous calls exceed it
+3. Trigger all three agents to call the API at approximately the same time
+4. Log each failure and each subsequent retry timestamp per agent
+5. Let the cycle run and count total API calls made before any agent succeeds
+6. Compare against the documented pattern: 3 legitimate calls ballooning into 300 calls after ~100 synchronized retry cycles
+7. Measure whether retry timestamps across the 3 agents cluster within the same sub-second window on each cycle
+```
+
+### Expected Failure State
+- Total API calls made balloon to roughly 100x the number of legitimate calls needed (300 calls instead of 3) before any request succeeds
+- Retry timestamps from Agent 1, 2, and 3 cluster within the same sub-second window on every retry cycle, showing no jitter/desynchronization
+- The downstream API remains saturated by the synchronized retry wave rather than recovering between attempts
+- No circuit breaker trips to halt the pattern despite dozens of consecutive failed cycles against the same endpoint
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

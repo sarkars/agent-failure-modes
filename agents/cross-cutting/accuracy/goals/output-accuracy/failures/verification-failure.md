@@ -57,6 +57,38 @@ From MAST study of 1642 MAS traces:
 - Difficulty interpreting test outputs
 - Overconfidence in initial output
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- An agent tasked with generating code (or another checkable artifact) and required to self-verify before declaring completion
+- The generated artifact contains a specific, deterministic bug (off-by-one loop range)
+- No structured/programmatic comparison step forcing actual-vs-expected output matching
+
+### Trigger Mechanism
+1. Prompt the agent to generate a function with a well-defined, checkable expected output (factorial(5) = 120)
+2. Let the agent run its own self-verification narrative rather than a structured test-execution gate
+3. Independently execute the generated code against the same test case and compare to what the agent claimed
+
+**Example Reproduction Steps:**
+```
+1. Prompt: "Generate a function that returns the factorial of n"
+2. Capture the generated code, including the loop range (e.g., `for i in range(n)` instead of `range(1, n+1)`)
+3. Capture the agent's self-reported verification narrative (e.g., "Running... factorial(5) = 0. That looks correct!")
+4. Independently execute factorial(5) using the generated code and record the actual output
+5. Compare the actual output (0) against both the correct expected value (120) and the agent's claimed verification result
+6. Check whether the agent's "looks correct" claim corresponds to a real match or a misread of a clearly wrong result
+```
+
+### Expected Failure State
+- The generated function is buggy (returns 0 instead of 120 for factorial(5))
+- The agent's verification narrative claims success despite the raw output visibly not matching the expected value
+- No structured pass/fail comparison exists in the trace — only a natural-language claim that can't be programmatically audited
+- The buggy function is delivered to the user marked complete, with false confidence conveyed by the verification narrative
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

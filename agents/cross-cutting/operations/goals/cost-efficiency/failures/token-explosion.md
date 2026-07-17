@@ -29,6 +29,39 @@ Turn 5: Context window exceeded
 Result: Quadratic growth instead of linear
 ```
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Multi-turn conversation where each turn's prompt includes the full verbatim history of all prior turns, with no summarization or sliding window
+- No reference-by-ID mechanism for large documents/tool outputs reused across turns
+- Fixed context window with no per-turn token budget enforcement
+
+### Trigger Mechanism
+1. Start a conversation and record the token count at Turn 1 (baseline)
+2. At each subsequent turn, append the new turn's content to the full unmodified history of all prior turns rather than summarizing or windowing
+3. Continue the conversation and track token count growth turn over turn
+4. Observe what happens once the accumulated token count approaches the context window limit
+
+**Example Reproduction Steps:**
+```
+1. Configure the agent to include full, unmodified conversation history in every prompt (no summarization, no sliding window)
+2. Run a multi-turn conversation and log prompt token count at each turn: Turn 1, Turn 2, Turn 3, Turn 4, Turn 5
+3. Verify Turn 2's prompt includes Turn 1 in full, Turn 3's includes Turns 1-2 in full, and so on
+4. Compute the turn-over-turn growth ratio (expect roughly 2x: 1,000 -> 2,500 -> 5,000 -> 10,000)
+5. Continue to Turn 5 and check whether the prompt exceeds the model's context window
+6. Re-run the same conversation with periodic summarization enabled and compare the growth curve (expect roughly linear instead of quadratic)
+```
+
+### Expected Failure State
+- Token count per turn grows at a roughly doubling (quadratic) rate rather than linearly: approximately 1,000 -> 2,500 -> 5,000 -> 10,000 tokens across turns 1-4
+- By Turn 5, the accumulated context exceeds the model's context window and the request fails outright
+- No summarization or truncation step intervenes before the hard context-window failure occurs
+- Growth rate diverges sharply from a linear-growth baseline well before the actual failure turn, but no alert fires on the trend itself
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

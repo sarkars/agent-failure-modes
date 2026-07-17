@@ -81,6 +81,39 @@ From Evaluation Research (2026):
 - Single "correct" answer assumed
 - Evaluation tools lack flexibility
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- A knowledge Q&A evaluation harness using exact string matching as the sole comparison method, with no semantic-similarity or normalization layer
+- Golden expected answers authored as single canonical strings (e.g., "Paris", "Red, blue, yellow", "30") rather than acceptance sets or structural assertions
+- A set of agent responses that are semantically, numerically, or order-equivalent correct but differ in wording, order, or format from the golden string
+
+### Trigger Mechanism
+1. Submit each test question to the agent and capture its verbatim response
+2. Run the standard exact-match comparison against the golden expected string
+3. Independently assess each response for semantic/numeric/set equivalence to the expected answer
+4. Compare the exact-match verdict against the semantic-equivalence assessment for each case
+
+**Example Reproduction Steps:**
+```
+1. Test case #1: ask "What is the capital of France?", golden expected "Paris", agent responds "The capital of France is Paris." → run exact match (expect FALSE/FAIL)
+2. Test case #2: ask "List the primary colors", golden expected "Red, blue, yellow", agent responds "Blue, red, and yellow" → run exact match (expect FALSE/FAIL)
+3. Test case #3: ask "What is 15% of 200?", golden expected "30", agent responds "30.0" → run exact match (expect FALSE/FAIL)
+4. Test case #4: ask to summarize the refund policy, golden expected "Returns accepted within 30 days with receipt.", agent responds with an equivalent paraphrase → run exact match (expect FALSE/FAIL)
+5. For each case, independently judge semantic/numeric/set equivalence (all four should judge EQUIVALENT)
+6. Compute reported accuracy (exact-match-based) vs. actual accuracy (semantic-equivalence-based) across the full test suite
+```
+
+### Expected Failure State
+- All four semantically-correct responses are marked FAIL by the exact-match evaluator despite being correct in meaning, order-invariant content, or numeric value
+- Reported accuracy (e.g., 78%) is significantly lower than actual accuracy under semantic judgment (e.g., 94%), a false-failure rate of roughly 16 points
+- No normalization (case, punctuation, numeric format) or set-comparison logic intervenes before the exact-match verdict is finalized
+- A correctly-behaving evaluation process would apply semantic-similarity scoring, response normalization, or multiple-acceptable-answer sets so that these four cases pass rather than being counted as agent failures
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

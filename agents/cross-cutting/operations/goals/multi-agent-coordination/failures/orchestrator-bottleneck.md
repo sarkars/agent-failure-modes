@@ -73,6 +73,41 @@ From Orchestration Research (2026):
 - Synchronous coordination model
 - No delegation to sub-orchestrators
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Central orchestrator with 4 specialist agents (OCR, Classification, Extraction, Validation), each taking ~10 seconds per call
+- Orchestrator configured to call agents synchronously (call, wait, call next) rather than dispatch-and-continue
+- Batch of 1000 documents queued for processing, with no checkpoint/offload mechanism for orchestrator state
+- No sub-orchestrators or sharding — all documents flow through the single orchestrator instance
+
+### Trigger Mechanism
+1. Submit the 1000-document batch to the single orchestrator
+2. For each document, orchestrator issues a blocking call to OCR agent, waits for the response, then blocking calls Classification, then Extraction, then Validation in sequence
+3. Monitor orchestrator utilization vs. each agent's utilization while the batch runs
+4. Track the orchestrator's tracked-task count as documents accumulate
+
+**Example Reproduction Steps:**
+```
+1. Configure orchestrator with 4 downstream agents (OCR, Classification, Extraction, Validation), each simulated with 10s latency
+2. Submit 1000 documents to be processed sequentially through the pipeline
+3. Instrument the orchestrator to log call-start/call-end timestamps per stage per document
+4. Run the batch and measure total wall-clock time
+5. Compare against a parallel-pipeline variant fanning the batch across 4 concurrent pipeline instances
+6. Measure orchestrator utilization (%) vs. each agent's utilization (%) during the run
+7. Track the orchestrator's internal task-state count and note whether/when state is lost around task ~50
+```
+
+### Expected Failure State
+- Total processing time for 1000 documents approaches ~10,000 seconds (2.7 hours) instead of the ~2,500 seconds (42 min) achievable via parallel fan-out
+- Orchestrator utilization measures at or near 100% while each specialist agent sits around ~25% (idle waiting on the orchestrator)
+- Orchestrator's active task-tracking state degrades or is lost once accumulated tasks approach ~50, even though 1000 total documents were queued
+- A single orchestrator failure during the run halts the entire batch with no fault isolation between documents
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

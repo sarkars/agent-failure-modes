@@ -75,6 +75,39 @@ From Contamination Research (2026):
 - No contamination testing
 - Pressure to show high scores
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- A golden evaluation set (500 Q&A pairs) and a fine-tuning dataset (10,000 Q&A pairs), both sourced from the same production logs with no deduplication step between them
+- No provenance/lineage tracking distinguishing which examples are eval-only versus training-eligible
+- No exact-match or near-duplicate contamination audit run before trusting eval scores
+
+### Trigger Mechanism
+1. Run exact-match deduplication between the golden set and the fine-tuning corpus
+2. Run near-duplicate/semantic-similarity screening between the two sets
+3. Split eval results into "confirmed leaked," "near-duplicate," and "clean" case buckets
+4. Compare accuracy, exact-match rate, and response latency across the buckets
+
+**Example Reproduction Steps:**
+```
+1. Run exact-match deduplication of the 500-case golden set against the 10,000-case fine-tuning set; identify the overlapping subset (expect ~127 pairs, 25%)
+2. Run semantic-similarity screening for near-duplicates; identify additional overlap (expect ~89 pairs, 18%)
+3. Re-run the eval, separately scoring the 127 leaked cases, the 89 near-leaked cases, and the remaining 284 clean cases
+4. Record accuracy, exact-match rate, and average response time for each bucket
+5. Compare aggregate reported eval accuracy (89%) against the clean-only subset accuracy
+6. Compute the inflation gap between reported and clean-subset accuracy
+```
+
+### Expected Failure State
+- Leaked cases show anomalously high accuracy (~98%), near-instant response time (~0.3s), and high exact-match rate (~94%) consistent with memorization rather than reasoning
+- Clean, non-leaked cases show materially lower accuracy (~72%) and longer response time (~1.2s)
+- The aggregate reported eval accuracy (89%) significantly overstates true capability (~72%), an inflation of roughly 17 percentage points
+- A correctly-behaving eval process would have blocked overlapping examples from ever appearing in both sets, or at minimum flagged the anomalous accuracy/latency cluster before the 89% score was reported as trustworthy
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

@@ -76,6 +76,40 @@ From Multi-Agent Research (2026):
 - Static routing rules
 - No routing explainability
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Customer service multi-agent system with `billing_agent`, `technical_agent`, `sales_agent`, and `general_agent`
+- Router implemented as keyword matching with "first match wins" conflict resolution, no semantic or multi-intent classification
+- No capability-boundary check on individual agents — each answers whatever reaches it rather than flagging out-of-scope elements
+
+### Trigger Mechanism
+1. Submit a compound query containing both a billing keyword and a technical/access issue
+2. Let the keyword router scan for matches ("bill" -> billing_agent, "feature" -> sales_agent, "can't access" -> technical_agent) and apply first-match-wins
+3. Observe which single agent receives the query and how it responds
+4. Check whether the response addresses every component of the original query
+
+**Example Reproduction Steps:**
+```
+1. Configure the router with keyword rules: "bill"->billing_agent, "feature"->sales_agent, "can't access"->technical_agent, first match wins
+2. Submit the query: "My bill seems wrong, I was charged for a feature I can't seem to access"
+3. Log which keyword matched first and which agent received the routed task
+4. Capture billing_agent's response to the query
+5. Compare the response against the full query text for topic coverage (billing vs. access/technical)
+6. Check whether a re-route to technical_agent ever occurs
+7. Simulate a follow-up contact from the same customer within 7 days and log it against the same_issue_recontact_rate metric
+```
+
+### Expected Failure State
+- Query is routed entirely to billing_agent based on the first keyword match ("bill"), even though the root cause is a technical access bug
+- billing_agent responds "bill is correct" without investigating or escalating the access problem, closing the ticket
+- The customer's actual issue (feature inaccessible despite being charged) remains unresolved
+- No compound-intent flag or re-routing occurs despite the query matching 2+ agent capabilities
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

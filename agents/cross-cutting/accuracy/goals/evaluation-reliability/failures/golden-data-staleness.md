@@ -69,6 +69,39 @@ From Data Quality Research (2026):
 - No staleness detection mechanism
 - Infrequent evaluation audits
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- A golden test case with a hardcoded expected string for a volatile fact (e.g., "What is the price of the Pro plan?" → expected "$29/month"), created in January 2025
+- No dynamic lookup against the pricing source-of-truth system and no scheduled refresh cadence tied to the pricing data's known decay rate
+- The underlying real-world value has since changed (price updated to $39/month in March 2026) without the golden entry being updated
+
+### Trigger Mechanism
+1. Run the golden test case against the agent as currently deployed
+2. Independently confirm the current, correct value from the authoritative source system (pricing catalog)
+3. Compare the agent's correct, current answer against the golden dataset's stale expected value
+4. Check the golden entry's last-validated timestamp against the source system's last-changed timestamp
+
+**Example Reproduction Steps:**
+```
+1. Query the agent: "What is the price of the Pro plan?"
+2. Capture the agent's answer ("$39/month")
+3. Look up test case #47's expected value in the golden dataset ("$29/month", authored January 2025)
+4. Confirm the actual current Pro plan price in the source-of-truth pricing system ($39/month, changed March 2026)
+5. Run the eval comparison and record the verdict
+6. Check golden-entry age (last validated) against source-system last-changed timestamp
+```
+
+### Expected Failure State
+- The eval marks the agent's correct, current answer ("$39/month") as FAIL because it doesn't match the stale golden expectation ("$29/month")
+- The golden entry's last-validated timestamp significantly predates the source system's last price-change timestamp, with no automated flag raised
+- Aggregate eval score is artificially depressed (e.g., reported 94% vs. an actual ~98% once stale cases are excluded)
+- A correctly-behaving evaluation process would either pull the expected price dynamically from the pricing source-of-truth or flag test case #47 as stale before penalizing the agent for being accurate
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

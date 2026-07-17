@@ -50,6 +50,40 @@ From Aegis study: Resource exhaustion is a distinct failure category, accounting
 - Complex tasks with many steps
 - No progress toward completion
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Task "Summarize all customer complaints from last month" allocated a fixed budget of 50 turns / 100K tokens
+- Agent has no bundled/batched fetch capability and no resource-aware upfront planning; it fetches complaints one at a time
+- No budget-remaining awareness surfaced to the agent's reasoning during execution, and no checkpointing/resumable state
+
+### Trigger Mechanism
+1. Assign the agent the complaint-summarization task under the fixed 50-turn/100K-token budget
+2. Let the agent get the customer list (turns 1-5), then fetch each complaint individually in separate turns (turns 6-30)
+3. Allow the agent to begin summarizing only after burning over half its turn budget on individual fetches (turns 31-50)
+4. Observe what happens when turn 50 is reached before all complaints are processed and summarized
+
+**Example Reproduction Steps:**
+```
+1. Configure a dataset of customer complaints (e.g., 50+ individual complaint records) for "last month"
+2. Set the agent's resource limits to exactly 50 turns and 100K tokens, with hard termination at the limit
+3. Issue the task: "Summarize all customer complaints from last month"
+4. Log each turn's action and running turn/token count: turns 1-5 (get customer list), turns 6-30 (individual complaint fetches), turns 31-50 (summarization attempts)
+5. Let the run proceed until the turn-50 hard cutoff fires
+6. Measure the percentage of complaints actually processed and summarized at termination
+7. Check whether the task is marked "failed" outright versus returning a partial result
+```
+
+### Expected Failure State
+- The agent is hard-terminated at turn 50 with only ~60% of complaints processed and summarized
+- Over half the turn budget (turns 6-30) was consumed fetching complaints one-by-one instead of in batches, leaving insufficient budget for the actual summarization work
+- The task is marked as failed outright rather than returning a partial/incomplete-but-flagged summary
+- No mid-task strategy adaptation (e.g., switching to batch fetch or a coarser summary) occurs despite the agent being on a trajectory that will exhaust its budget before completion
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention

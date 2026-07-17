@@ -78,6 +78,39 @@ From Distribution Research (2026):
 - Infrequent golden data refresh
 - No drift detection system
 
+---
+
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- A golden evaluation dataset created from a single time-period snapshot (e.g., Black Friday 2025 query traffic) for an e-commerce product assistant
+- No continuous production-sampling or distribution-divergence monitoring feeding the golden set
+- A subsequent evaluation run performed against current production traffic from a materially different time period (Summer 2026)
+
+### Trigger Mechanism
+1. Run the agent's standard evaluation suite against the Black Friday-era golden dataset and record the score
+2. Collect a representative sample of live production queries from the current period (Summer 2026)
+3. Categorize both the golden dataset and the production sample by query type/topic
+4. Compare per-category accuracy and overlap between the two distributions
+
+**Example Reproduction Steps:**
+```
+1. Run golden-set evaluation (Black Friday 2025 composition: 35% deal-seeking, 45% electronics, 25% gift-related, 30% winter products) and record accuracy (94%)
+2. Sample current production queries and categorize them (8% deal-seeking, 25% electronics, 5% gift-related, 40% summer products, 25% outdoor gear, 15% sustainability)
+3. Compute category overlap between golden and production distributions
+4. Run the agent against a labeled sample of the new-category production queries (summer products, outdoor gear, sustainability)
+5. Record per-category accuracy for the new categories
+6. Compare aggregate golden-set accuracy (94%) against measured production accuracy (71%)
+```
+
+### Expected Failure State
+- Category overlap between golden and production distributions is low (~35% match, 65% of production queries not represented in golden data)
+- Per-category accuracy on categories absent from the golden set is dramatically lower than the aggregate golden score (e.g., 48-61% vs. 94%)
+- No distribution-divergence alert fires despite the golden set's Black Friday composition being stale relative to Summer 2026 traffic
+- A correctly-behaving evaluation process would have flagged the golden set's staleness/divergence before the aggregate 94% score was trusted as representative of current production quality
+
+---
+
 ## Mitigation Strategies
 
 ### Prevention
