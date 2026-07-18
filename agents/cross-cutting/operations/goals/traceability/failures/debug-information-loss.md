@@ -76,6 +76,40 @@ From Observability Research (2026):
 - Debug levels only in development
 - No tiered retention strategy
 
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Deploy an agent performing financial calculations, with detailed trace retention set to 1-4 hours, full payload retention to 1 hour, and request sampling at a flat 1% rate
+- No incident-triggered retention extension exists to preserve traces flagged as anomalous
+- No cold-storage archival path exists once the hot-retention window expires; data is simply deleted
+- The agent makes an incorrect financial calculation during normal operation
+
+### Trigger Mechanism
+1. The agent produces an incorrect financial calculation, but the error isn't visible to anyone at the time it occurs
+2. The customer notices the discrepancy and reports it 3 days later
+3. By the time the investigation begins, detailed traces (1-4 hour retention), full payloads (1 hour), and precise metrics (aggregated to hourly after 24 hours) have all already rotated out
+4. The investigator is left with only an aggregated error count and a generic summary log entry: "Error in calculation module"
+
+### Example Reproduction Steps
+```
+1. Day 0, 10:00: Agent performs calculation with input X, produces
+   incorrect output Y (bug present, no anomaly flag raised at the time)
+2. Day 0, 11:00: Full payload for this request is deleted (1-hour
+   retention expired)
+3. Day 0, 14:00: Detailed trace for this request is deleted (4-hour
+   retention expired)
+4. Day 3: Customer reports the incorrect calculation
+5. Investigator queries for the original request:
+   GET /traces?request_id=X -> 404, trace already rotated
+   GET /logs?date=Day0 -> only "Error in calculation module" summary
+   remains, no exact input values or intermediate steps
+6. Investigation concludes: root cause cannot be determined; team must
+   wait for recurrence with additional monitoring in place
+```
+
+### Expected Failure State
+Three days after the incident, no exact input values, intermediate calculation steps, or reasoning trace remain retrievable, forcing the investigation to stall until the bug recurs with monitoring specifically added, leaving the customer's issue unresolved for weeks. A correctly defended system either extends retention automatically for traces later flagged as anomalous, or moves detailed traces to cold storage instead of deleting them, so the 3-day-later investigation can still retrieve the exact calculation steps.
+
 ## Mitigation Strategies
 
 ### Prevention

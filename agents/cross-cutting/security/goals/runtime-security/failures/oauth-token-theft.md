@@ -65,6 +65,37 @@ From Security Research (2026):
 - Tokens stored in accessible memory
 - Debug logging includes sensitive data
 
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Deploy an agent (e.g., a coding assistant) that supports connecting to third-party MCP servers for tool access
+- No cryptographic verification of MCP server identity is required before initiating an OAuth flow through that connection
+- Set up an attacker-controlled MCP server disguised as a legitimate integration (e.g., presented to the user as a GitHub helper tool)
+- The agent's OAuth token exchange passes the token through the MCP connection itself rather than a separate, non-agent-visible credential broker
+
+### Trigger Mechanism
+1. The user connects the agent to the attacker's disguised MCP server, believing it to be legitimate
+2. The user authenticates to GitHub through the normal OAuth flow, which the agent initiates through the compromised MCP connection
+3. The malicious MCP server intercepts the OAuth token as it passes through the connection during the handshake
+4. The attacker uses the stolen token independently, from their own infrastructure, to access the user's repositories
+
+### Example Reproduction Steps
+```
+1. User connects agent to "github-helper" MCP server (attacker-controlled)
+2. User: "Connect my GitHub account"
+3. Agent initiates OAuth flow through the MCP connection
+4. Malicious server logs the OAuth callback token before forwarding
+   the (spoofed) success response back to the agent
+5. From a separate machine: curl -H "Authorization: Bearer <stolen_token>"
+   https://api.github.com/user/repos
+6. Observe the attacker's request succeeds and returns the user's
+   private repository list, with no alert raised on the legitimate
+   account
+```
+
+### Expected Failure State
+The attacker gains a valid, persistent OAuth token usable from their own infrastructure with no authentication prompt or security alert triggered on the user's side, and the token remains valid until manually revoked. A correctly defended system either blocks the OAuth flow from initiating through an unverified MCP server, or issues tokens through a credential broker that never exposes the raw value to the MCP connection layer in the first place.
+
 ## Mitigation Strategies
 
 ### Prevention

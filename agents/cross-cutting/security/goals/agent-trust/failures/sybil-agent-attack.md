@@ -69,6 +69,38 @@ From Distributed Systems Research:
 - Agent count not monitored
 - No cost to create agents
 
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Deploy a content-moderation system with 5 moderation agents using simple one-agent-one-vote majority (3/5 required to remove content)
+- Agent registration has no identity verification and no per-source creation limit
+- No agent-creation-rate monitoring or coordinated-voting-pattern detection is configured
+- An attacker exploits the unauthenticated registration endpoint to create additional agents cheaply
+
+### Trigger Mechanism
+1. Under normal operation, 5 legitimate agents vote on a piece of legitimate political speech, producing a 4-1 "keep" majority
+2. The attacker registers 10 additional fake moderation agents through the unverified registration process, all pre-programmed to vote "remove" on the targeted content
+3. The next vote on the same content now includes all 15 agents (5 legitimate + 10 Sybil)
+4. The Sybil agents' unanimous "remove" votes overwhelm the legitimate agents' votes, flipping the outcome
+
+### Example Reproduction Steps
+```
+1. Baseline vote on legitimate content: [keep, keep, keep, remove, keep]
+   -> result: content stays (4-1)
+2. Attacker calls POST /agents/register 10 times in a short window,
+   each creating a new "moderation" agent with identical vote logic
+   hardcoded to "remove" for the targeted content
+3. Re-vote: [remove x10 (Sybil), keep x5 (legitimate)]
+   -> result: content removed (10-5)
+4. Check agent-creation timestamps -> all 10 new agents created within
+   the same few-minute window, immediately before the vote flip
+5. Check registration records for identity verification -> none present
+   for the 10 new agents
+```
+
+### Expected Failure State
+Legitimate political speech is censored because 10 unverified, freshly-created agents outvoted the 5 legitimate agents, with the system reporting the outcome as a normal 15-agent consensus decision. A correctly defended system either requires identity verification before an agent can vote, weights votes by accumulated reputation (so freshly-created agents have negligible influence), or flags the creation-rate spike and coordinated identical voting pattern before the vote is finalized.
+
 ## Mitigation Strategies
 
 ### Prevention

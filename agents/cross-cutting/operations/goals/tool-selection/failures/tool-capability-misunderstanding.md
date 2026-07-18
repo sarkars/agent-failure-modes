@@ -33,7 +33,36 @@ Agent assumes a tool can do something it cannot.
 |--------|--------|----------------|
 | [Metric name] | [Target value] | [Measurement method] |
 
----
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Deploy an agent with a `customer_search` tool that supports only exact-ID lookup, but whose model-facing schema description doesn't explicitly state that fuzzy/partial name matching is unsupported
+- No capability manifest separate from the schema description exists, and no capability regression test suite runs in CI to catch mismatches between what the model believes and what the tool actually does
+- The tool silently no-ops or returns an empty result (rather than a typed "UNSUPPORTED_OPERATION" error) when given a partial name instead of an exact ID
+
+### Trigger Mechanism
+1. A user asks the agent to find a customer by a partial name ("someone named Johnson")
+2. The agent, believing the search tool supports fuzzy name matching (since the schema doesn't say otherwise), calls it with the partial name as if it were a valid query
+3. The tool returns an empty result set rather than a typed capability error, since it silently doesn't support this query shape
+4. The agent, receiving an ambiguous empty result, either reports "no customer found" (incorrect) or retries the same impossible query multiple times
+
+### Example Reproduction Steps
+```
+1. User: "Find the customer named Johnson"
+2. Agent calls: customer_search(query="Johnson")  // tool only
+   supports exact ID lookup, not name fuzzy-match
+3. Tool returns: [] (empty result, no error indicating unsupported
+   operation)
+4. Agent: "I couldn't find a customer named Johnson" (incorrect --
+   the customer exists, but the search was fundamentally the wrong
+   shape for this tool)
+5. Check repeated_impossible_request_rate for this session -> agent
+   retries with slight query variations ("Johnson", "johnson",
+   "Mr. Johnson"), all failing the same way
+```
+
+### Expected Failure State
+The agent incorrectly tells the user no matching customer exists, when in fact the customer_search tool simply doesn't support the fuzzy name-matching operation the agent assumed it could perform, and the silent empty-result failure gives no signal to correct the agent's belief. A correctly defended system either has the capability manifest reject the fuzzy-name call before dispatch (since it's outside the tool's documented supported operations) or has the tool return a typed `UNSUPPORTED_OPERATION` error that lets the agent recognize it needs a different approach (e.g., asking the user for an exact customer ID).
 
 ## Mitigation Strategies
 

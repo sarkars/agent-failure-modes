@@ -73,6 +73,39 @@ From Log Security Research (2026):
 - Error messages with full context
 - Tracing capturing all span attributes
 
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Deploy an agent with DEBUG-level logging enabled in production, capturing full prompts, tool call parameters, and tool responses via direct calls to the logging framework (no mandatory sanitizing wrapper)
+- Logs are shipped to a third-party observability platform (e.g., Datadog/Splunk) with 30-90 day retention and broader internal access than the production database itself
+- OpenTelemetry tracing captures full span attributes, including prompt and response text, without sensitivity filtering
+- No periodic PII-pattern scanning runs against stored logs
+
+### Trigger Mechanism
+1. A user asks the agent to look up a customer's SSN and update their address
+2. The agent logs the incoming prompt, the tool call parameters, and the tool response at DEBUG level, each containing the SSN
+3. The final agent response (also containing the SSN) is logged and additionally captured as a trace span attribute
+4. All of this data ships to the third-party observability platform as part of normal log/trace forwarding
+
+### Example Reproduction Steps
+```
+1. User: "Look up customer SSN 287-65-4921 and update their address
+   to 123 Main St"
+2. Logs emitted:
+   DEBUG Prompt: "Look up customer SSN 287-65-4921 and update..."
+   DEBUG Tool call: database_query params: {"ssn": "287-65-4921"}
+   DEBUG Tool response: {"name": "John Smith", "ssn": "287-65-4921", ...}
+   INFO  Response: "I've updated John Smith's address. SSN
+         287-65-4921 confirmed."
+3. Trace span: agent.execute { attributes: { prompt: "...", response: "..." } }
+4. Query the third-party log platform for the string "287-65-4921"
+   -> 4+ matches across log lines and trace spans, all outside the
+   production database's access controls
+```
+
+### Expected Failure State
+The customer's SSN appears four or more times across logs and trace spans, now stored in a third-party system with broader access and longer retention than the production database, with no redaction applied at any point. A correctly defended system routes all logging through a sanitizing wrapper that redacts SSN-pattern fields at the call site, and defaults production logging to INFO level so DEBUG-level full-payload capture never occurs without explicit, time-limited authorization.
+
 ## Mitigation Strategies
 
 ### Prevention

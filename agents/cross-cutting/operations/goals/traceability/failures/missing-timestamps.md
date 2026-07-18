@@ -71,6 +71,44 @@ From Observability Research (2026):
 - Clock synchronization neglected
 - Log batching loses precision
 
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Deploy an agent pipeline where the record-update service, cache-invalidation service, and read-serving service each log events without a shared, high-precision timestamp source (some use second-only precision, no monotonic-clock ordering)
+- No centralized timestamp library or distributed tracing with correlation IDs links these log entries together
+- A customer reports seeing inconsistent (stale) data after an update
+
+### Trigger Mechanism
+1. A customer record is updated
+2. A read request for the same record arrives and is served (potentially from a stale cache)
+3. The cache is invalidated
+4. A response is sent to the customer containing what may be stale data, and the investigator must determine the actual order of these four events
+
+### Example Reproduction Steps
+```
+1. Log entries found (no timestamps, or second-only precision):
+   "Customer record updated"
+   "Cache invalidated"
+   "Customer record read"
+   "Response sent"
+2. Investigator: "Did cache invalidate before or after read?" ->
+   cannot determine from log order alone (logs may not be delivered
+   in event order)
+3. Investigator: "How long between update and cache invalidation?" ->
+   unknown, no timing data
+4. Compare against a properly-instrumented run with millisecond
+   timestamps:
+   10:30:01.234 - Customer record updated
+   10:30:01.890 - Customer record read      <- read before invalidation
+   10:30:02.001 - Cache invalidated         <- root cause
+   10:30:02.005 - Response sent (stale data)
+5. Without millisecond timestamps, this ordering (read-before-
+   invalidation racing the update) cannot be established
+```
+
+### Expected Failure State
+The investigation cannot prove whether the customer's stale-data experience was caused by a read racing ahead of cache invalidation, cannot calculate the actual latency between update and invalidation, and cannot verify SLA compliance or reproduce the timing-dependent bug. A correctly instrumented system attaches millisecond-or-finer timestamps from a shared, monotonic-ordered clock source to every log entry, making the read-before-invalidation race condition immediately visible from the log alone.
+
 ## Mitigation Strategies
 
 ### Prevention

@@ -33,7 +33,35 @@ Agent receives conflicting tool outputs and picks one without rationale.
 |--------|--------|----------------|
 | [Metric name] | [Target value] | [Measurement method] |
 
----
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Deploy a travel-booking agent that queries both an internal inventory system and a third-party availability API for the same flight, with no source-authority ranking or mandatory conflict-reasoning step configured
+- The internal system and third-party API occasionally disagree on seat availability due to sync lag
+- No contradiction detector runs across parallel tool outputs within a turn
+
+### Trigger Mechanism
+1. A user asks the agent to book a specific flight
+2. The agent queries both the internal inventory tool and the third-party availability API in the same turn
+3. The two tools return conflicting seat-availability counts for the same flight
+4. The agent picks one value (whichever it processed last) and proceeds to book without acknowledging the discrepancy anywhere in its response or reasoning trace
+
+### Example Reproduction Steps
+```
+1. User: "Book me a seat on flight AB123"
+2. Agent calls: internal_inventory.check("AB123") -> {available: 0}
+3. Agent calls: third_party_api.check("AB123") -> {available: 3}
+4. Agent's final reasoning text contains no mention of the
+   discrepancy; agent proceeds: "Booking confirmed for flight AB123"
+   (based on the third-party API's stale/incorrect count)
+5. Booking attempt fails downstream because the internal system's
+   "0 available" was actually correct
+6. Inspect trace for a conflict-reasoning step -> none present,
+   confirming the silent-pick pattern
+```
+
+### Expected Failure State
+The agent confidently confirms a booking based on the third-party API's conflicting availability count without ever surfacing that the internal system disagreed, leading to a failed booking downstream and a confused customer. A correctly defended system detects the divergent seat-availability values, applies the authority ranking (internal system of record outranks third-party API), and either resolves the conflict with a stated rationale or presents the uncertainty to the user rather than silently picking one value.
 
 ## Mitigation Strategies
 

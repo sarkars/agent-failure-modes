@@ -70,6 +70,35 @@ From Session Isolation Research (2026):
 - RAG without tenant filtering
 - Conversation history not scoped
 
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Deploy a multi-tenant agent service where response caching keys are built from the query text alone, without including the requesting user's ID
+- Two different users, User A (healthcare company) and User B (a different company), share the same agent deployment and cache layer
+- No canary-data detection or cross-user audit process monitors for cache-key collisions
+- Session/context clearing between requests relies on assumed rather than verified behavior
+
+### Trigger Mechanism
+1. User A asks a question that triggers a lookup and gets a response, which is cached under a key derived only from the query text
+2. User A's session ends
+3. User B, unrelated to User A, asks a structurally similar or identical query
+4. The cache layer returns User A's cached response to User B because the cache key didn't distinguish between users
+
+### Example Reproduction Steps
+```
+1. Session A (user_id=A): "What's my account balance?"
+   Agent retrieves and responds: "Your balance is $45,230.00"
+   Cache write: key = hash("What's my account balance?") -> "$45,230.00"
+2. Session B (user_id=B): "What's my account balance?"
+   Cache lookup: key = hash("What's my account balance?") -> HIT
+   Agent returns cached: "Your balance is $45,230.00"
+3. Verify User B's actual balance differs from the cached value
+   returned, confirming User A's data was served to User B
+```
+
+### Expected Failure State
+User B receives User A's account balance (or, in the healthcare variant, User A's patient record) because the cache key lacked a user/tenant identifier, with no error or warning surfaced to either user. A correctly isolated system includes the user or tenant ID as a mandatory component of every cache key, so a structurally identical query from a different user can never produce a cache hit against another user's cached response.
+
 ## Mitigation Strategies
 
 ### Prevention

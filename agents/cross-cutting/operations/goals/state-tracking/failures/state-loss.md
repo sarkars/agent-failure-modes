@@ -33,7 +33,38 @@ Agent forgets completed steps or user-provided constraints.
 |--------|--------|----------------|
 | [Metric name] | [Target value] | [Measurement method] |
 
----
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Deploy a multi-step onboarding agent that relies solely on the raw conversation transcript in context to track completed steps and user-provided constraints, with no durable external state ledger or structured task object
+- The session is long enough that early turns (where the user provided key constraints) fall outside the context window after compaction/truncation
+- No duplicate-step detection checks the completed-step ledger before re-executing an action
+
+### Trigger Mechanism
+1. Early in the session, the user provides a constraint ("I need this account set up with a $5,000 monthly spending limit") and the agent completes an initial setup step
+2. The conversation continues for many more turns, and context-window compaction drops the early turns containing both the constraint and the record of the completed step
+3. The agent, now relying only on its remaining (truncated) context, has no memory of the spending-limit constraint or that initial setup already occurred
+4. The agent re-asks the user for the spending limit and re-executes the initial setup step, potentially creating a duplicate account configuration
+
+### Example Reproduction Steps
+```
+1. Turn 3: user: "I need this account set up with a $5,000 monthly
+   spending limit"
+2. Turn 4: agent calls create_account(limit=5000) -> succeeds,
+   account created
+3. Turns 5-40: extended conversation on unrelated setup details,
+   triggering context-window compaction that drops turns 3-4
+4. Turn 41: agent: "What monthly spending limit would you like for
+   this account?" (already answered in turn 3, now lost)
+5. User re-answers "$5,000" (again)
+6. Agent calls create_account(limit=5000) again -- no duplicate-step
+   check against a ledger, since no ledger exists outside context
+7. Query the account system -> two account records created for the
+   same user
+```
+
+### Expected Failure State
+The agent asks the user to re-provide information already given, and worse, re-executes the account-creation step, resulting in a duplicate account configuration because completed-step and constraint tracking existed only in the raw transcript that was later truncated. A correctly defended system writes completed steps and constraints to a persistent ledger/task object outside the context window at the moment they're established, and checks that ledger — not its own recollection from context — before re-asking questions or re-executing actions.
 
 ## Mitigation Strategies
 

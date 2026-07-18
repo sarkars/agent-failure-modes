@@ -33,7 +33,36 @@ Agent misreads/transforms tool output incorrectly.
 |--------|--------|----------------|
 | [Metric name] | [Target value] | [Measurement method] |
 
----
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Deploy an agent that calls a pricing tool returning structured data, then free-text-summarizes the result into a natural-language response rather than using a typed extraction layer or verbatim pass-through for critical values
+- No chain-of-custody diff or tool-output-to-answer consistency check runs before the response is sent
+- The pricing tool returns a value with several decimal places and a specific currency
+
+### Trigger Mechanism
+1. The user asks for the total cost of an order
+2. The pricing tool returns a structured response: `{total: 1234.56, currency: "USD"}`
+3. The agent, generating the final answer in free text, misreads or mistransforms the value while composing prose (e.g., transposing digits or dropping a decimal place)
+4. The final response is sent to the user with the corrupted value, with no automated check catching the discrepancy
+
+### Example Reproduction Steps
+```
+1. Tool call: get_order_total(order_id="ORD-99") -> {total: 1234.56,
+   currency: "USD"}
+2. Agent generates: "Your total comes to $1,234.65" (digits
+   transposed: 56 -> 65) or "$123.45" (decimal place dropped)
+3. Compare the generated response text against the original tool
+   response value -> mismatch detected
+4. Check for a typed extraction/verbatim-pass-through step between
+   tool output and final generation -> none present; value was
+   re-derived through free-text generation
+5. Run the tool-output-to-answer consistency check retroactively ->
+   flags the mismatch that shipped to the user
+```
+
+### Expected Failure State
+The customer receives an incorrect total ($1,234.65 or $123.45 instead of the actual $1,234.56) because the value passed through free-text generation rather than a verbatim pass-through from the structured tool response, and no consistency check caught the transcription error before sending. A correctly defended system copies the `total` field directly from the structured tool response into the final output template, or runs a chain-of-custody diff that blocks the send when the generated value doesn't byte-for-byte match (allowing only declared formatting transforms) the original tool output.
 
 ## Mitigation Strategies
 

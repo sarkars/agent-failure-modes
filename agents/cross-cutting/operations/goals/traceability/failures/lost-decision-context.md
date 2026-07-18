@@ -74,6 +74,37 @@ From AI Governance Research (2026):
 - Focus on outcomes, not process
 - Explainability seen as optional
 
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Deploy a loan-application decisioning agent that logs only the final outcome (`{"decision": "DENIED", "application_id": "...", "timestamp": "..."}`) with no factor-attribution, confidence, or policy-checkpoint logging
+- No structured decision-record schema captures which input factors were considered or their relative weight
+- No explanation-generation service exists to reconstruct rationale from a structured record
+- A regulator later issues an adverse-action inquiry requiring the specific factors behind a denial
+
+### Trigger Mechanism
+1. The agent denies a loan application, logging only the outcome and timestamp
+2. The applicant complains, citing good credit, and asks why they were denied
+3. Internal investigation attempts to answer "which factors contributed," "was this consistent with similar applications," and "what would have changed the decision" but finds none of this was ever captured
+4. A regulatory inquiry formally requests "the factors that led to this adverse action"
+
+### Example Reproduction Steps
+```
+1. Decision logged: {"decision": "DENIED", "application_id":
+   "APP-12345", "timestamp": "2026-04-15T10:30:00Z"}
+2. Customer: "Why was I denied? I have good credit."
+3. Investigator queries the decision record for factors/weights ->
+   no such fields exist in the log
+4. Investigator queries for policy-checkpoint results (which rules
+   were evaluated) -> not recorded
+5. Regulatory inquiry: "Provide the factors that led to this adverse
+   action"
+6. Compliance team response: "We don't have that information"
+```
+
+### Expected Failure State
+The organization cannot answer either the customer's or the regulator's request for the specific factors behind the denial, cannot verify that discrimination did not occur, and cannot confirm the decision followed policy — constituting an active compliance violation under adverse-action disclosure requirements. A correctly instrumented system captures factor attribution, weights, and policy-checkpoint results at the moment of decision, so both the customer explanation and the regulatory inquiry can be answered directly from the logged record.
+
 ## Mitigation Strategies
 
 ### Prevention

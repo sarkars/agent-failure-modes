@@ -70,6 +70,39 @@ From Multi-Agent Research (2026):
 - Complex transformations lose attribution
 - No standard provenance format
 
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Deploy a four-stage research report pipeline (DataCollector -> Analyst -> Writer -> Editor) where each agent passes plain-text output to the next with no source-agent metadata or claim-level attribution
+- No audit log records each agent's individual contribution separately from the final merged output
+- DataCollector has a known hallucination tendency for numeric figures under certain query phrasings
+
+### Trigger Mechanism
+1. DataCollector hallucinates a market-cap figure ("$450 billion" instead of the actual $45 billion) and passes it downstream as plain text
+2. Analyst incorporates the wrong figure into a comparative analysis, compounding the error with a confident derived claim ("10x larger than competitors")
+3. Writer drafts prose from Analyst's output, and Editor refines the language, with the original numeric error now buried in persuasive narrative with no attribution trail
+4. A reviewer discovers the final report's growth figure is wrong and attempts to trace which agent introduced it
+
+### Example Reproduction Steps
+```
+1. DataCollector output: "$450 billion" (actual: $45 billion) - plain
+   text, no source tag
+2. Analyst receives raw text, outputs: "TechCorp is 10x larger than
+   its nearest competitor" - plain text, no link back to DataCollector's
+   claim
+3. Writer/Editor produce final prose: "Market growth exceeded 15% in
+   Q3, driven primarily by the APAC region..." - both the growth
+   figure and region attribution are now unattributable prose
+4. Reviewer asks: "Where did the 15% figure come from?" and queries
+   the audit log -> no per-agent contribution record exists, only the
+   final merged text
+5. Measure time to identify the responsible agent by manually
+   re-running each stage in isolation
+```
+
+### Expected Failure State
+Identifying which of the four agents introduced the wrong market-cap figure requires manually re-executing and inspecting each pipeline stage in isolation, taking hours instead of minutes, because no structured attribution links the final claim back to its originating agent. A correctly instrumented system tags every claim with its source agent at each hand-off, so the audit log alone identifies DataCollector as the origin of the "$450 billion" figure within minutes.
+
 ## Mitigation Strategies
 
 ### Prevention

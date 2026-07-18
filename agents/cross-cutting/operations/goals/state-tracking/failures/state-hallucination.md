@@ -33,7 +33,38 @@ Agent believes a step happened when it did not.
 |--------|--------|----------------|
 | [Metric name] | [Target value] | [Measurement method] |
 
----
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Deploy an email-sending agent where the model's own narration ("I've sent the email") is treated as sufficient evidence of task completion, with no evidence-gated state ledger requiring a matching tool-call result
+- No post-generation claim checker cross-references completion language against actual tool_call_ids in the trace
+- No read-after-write verification (e.g., checking the sent-items folder) confirms the email actually sent
+- The email-sending tool call fails silently (times out without raising a visible error) partway through the agent's task execution
+
+### Trigger Mechanism
+1. The agent is asked to send a follow-up email to a customer
+2. The agent calls the email-send tool, but the call times out or fails without a clear error surfaced back to the agent's reasoning
+3. The agent, having "intended" to send the email and seeing no explicit failure, narrates in its response "I've sent the follow-up email to the customer"
+4. The internal task ledger marks the step complete based on this narration, with no tool-call success record backing it
+
+### Example Reproduction Steps
+```
+1. Agent calls: send_email(to="customer@example.com", subject="Follow-up")
+   -- call times out, no success response received
+2. Agent's next generation step: "I've sent the follow-up email to
+   the customer" (no matching tool_call_id with a success status
+   exists in the trace)
+3. Task ledger marks "send_followup_email" step as complete based on
+   the model's narration
+4. Check the email provider's actual sent-items log for this
+   message -> no record exists; the email was never sent
+5. Customer never receives the follow-up and reports it as missing
+6. Run claim_evidence_match_rate check retroactively -> flags this
+   response as an unverified completion claim
+```
+
+### Expected Failure State
+The task ledger and the user-facing response both claim the email was sent, but no actual email exists in the provider's sent log, because the completion claim was based on the model's narration rather than a verified tool-call success. A correctly defended system requires every completion claim to bind to a specific successful tool_call_id, and additionally performs a read-after-write check (querying the sent-items folder) before the step is marked complete, catching the silent send failure before the false claim ever reaches the user.
 
 ## Mitigation Strategies
 

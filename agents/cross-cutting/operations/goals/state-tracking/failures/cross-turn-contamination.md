@@ -33,7 +33,38 @@ Current task is polluted by unrelated previous context.
 |--------|--------|----------------|
 | [Metric name] | [Target value] | [Measurement method] |
 
----
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Deploy a conversational agent that carries the full raw conversation transcript forward on every turn, with no task-boundary detection or context-window scoping per task
+- No topic-drift detection checks similarity between the current turn and prior turns before reusing that context
+- Earlier in the session, the user discussed an unrelated topic (e.g., asked about vacation destinations) before switching to an entirely different task (asking for help debugging code)
+
+### Trigger Mechanism
+1. The user's session begins with a conversation about vacation planning, including specific preferences (e.g., "I prefer beach destinations, budget under $2000")
+2. The user then switches topics entirely, asking the agent to help debug a Python script, with no explicit signal recognized as a task boundary
+3. The agent constructs its response using the full raw transcript, including the earlier vacation preferences, which remain in context
+4. The agent's debugging response includes an irrelevant reference to the earlier unrelated topic
+
+### Example Reproduction Steps
+```
+1. Turn 1-5: User discusses vacation planning: "I prefer beach
+   destinations, budget under $2000"
+2. Turn 6: User: "Can you help me debug this Python function? It's
+   throwing a KeyError"
+3. Agent response includes: "Sure, let's debug this. By the way,
+   given your budget under $2000, have you considered checking
+   error-handling costs..." (nonsensical irrelevant reference bleeding
+   through from turn 1-5 context)
+4. Check for a task-boundary marker inserted between turn 5 and
+   turn 6 -> none present, since no topic-switch classifier ran
+5. Measure contamination_flag_rate for this session -> flagged, since
+   the debugging response references vacation-budget content absent
+   from the current task's turns
+```
+
+### Expected Failure State
+The agent's debugging response contains a nonsensical reference to the user's earlier, entirely unrelated vacation budget discussion, confusing the user and signaling that irrelevant prior context leaked into the current task. A correctly defended system detects the topic switch at turn 6, inserts a task-boundary marker, and constructs the debugging response's context from only the current task's turns, excluding the vacation-planning content entirely.
 
 ## Mitigation Strategies
 

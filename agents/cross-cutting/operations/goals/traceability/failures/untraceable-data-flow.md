@@ -67,6 +67,39 @@ From Data Governance Research (2026):
 - Summarization obscures sources
 - RAG retrieval doesn't tag sources
 
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Deploy a customer-support agent that retrieves data from multiple sources (customer database with masked SSN, support ticket system with unmasked free-text notes, prior emails, knowledge base) and summarizes it into a response email
+- No source-tagging is applied to retrieved fragments before they enter the agent's context, and no PII-aware filtering runs at each transformation step (only at the original database query)
+- The support ticket system contains a ticket with a customer's full SSN typed into the free-text notes field
+- No lineage graph or output-attribution requirement blocks unattributed sensitive content
+
+### Trigger Mechanism
+1. The agent retrieves the customer record (SSN properly masked) and the related support ticket (SSN present, unmasked, in free-text notes)
+2. Both sources are pulled into the same summarization context with no distinguishing source tags
+3. The summarization step includes the ticket's SSN in its output, since PII filtering was only applied at the database-query step and not at this transformation
+4. The generated email propagates the SSN from the summary into the final customer-facing message
+
+### Example Reproduction Steps
+```
+1. Retrieve customer record -> SSN masked: "XXX-XX-4921"
+2. Retrieve support ticket notes -> contains: "Customer confirmed
+   SSN 287-65-4921 for verification"
+3. Summarization step combines both sources with no source tagging;
+   output includes: "...verified customer identity using SSN
+   287-65-4921..."
+4. Email generation step propagates the summary text unchanged into
+   the outbound email body
+5. Investigator: "Where did the SSN come from?" -> queries customer
+   database (masked, ruled out), support ticket system (checks notes
+   field, finds unmasked SSN) -> confirms leak path only after manual
+   cross-source investigation, since no lineage graph existed
+```
+
+### Expected Failure State
+The customer's unmasked SSN reaches the outbound email because it entered through the support-ticket source (not the properly-masked database source) and no lineage tracking or transformation-stage PII filtering caught it before the email was sent, requiring a reactive manual investigation across every possible source to find the leak path afterward. A correctly instrumented system tags the ticket-notes content by source and sensitivity at retrieval time, applies PII filtering at the summarization transformation step (not just the original query), and blocks the SSN from reaching the summary in the first place.
+
 ## Mitigation Strategies
 
 ### Prevention

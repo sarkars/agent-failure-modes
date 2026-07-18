@@ -69,6 +69,39 @@ From Observability Research (2026):
 - Internal operations not instrumented
 - Logging added reactively, not by design
 
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Deploy an agent handling "update customer address and send confirmation" tasks, with logging added only at the obvious external API call points (GET, PUT, POST) and no instrumentation on internal reads, validation checks, or retries
+- The agent's actual workflow includes address-validation-rule lookups, a geocoding service call with retry-on-failure logic, and a fraud-rule check, none of which are logged
+- No time-gap detection flags unexplained latency between logged actions
+
+### Trigger Mechanism
+1. A task triggers the full internal workflow: GET customer, read validation rules, query geocoding (fails, retries twice), check fraud rules, PUT update, generate email content, POST send email
+2. Only the GET, PUT, and POST calls are logged; the validation-rule read, geocoding query and its two retries, and fraud check are all invisible
+3. An investigator notices the PUT update happened 4 seconds after the GET, with no logged explanation for the delay
+4. The investigator cannot determine whether the 4-second gap represents a geocoding SLA violation, a fraud-check delay, or something else entirely
+
+### Example Reproduction Steps
+```
+1. Logged trace:
+   10:30:01 - GET /customer/123
+   10:30:05 - PUT /customer/123 {address: "..."}
+   10:30:06 - POST /email/send
+2. Actual (unlogged) sequence: read validation rules (10:30:01),
+   query geocoding (10:30:01, fails), retry geocoding (10:30:02),
+   retry geocoding again (10:30:03), check fraud rules (10:30:04,
+   passed), then the logged PUT at 10:30:05
+3. Investigator asks: "Why did the update take 4 seconds?"
+4. Query the log for the gap between 10:30:01 and 10:30:05 -> no
+   entries exist, gap is unexplained
+5. Measure action_logging_coverage_rate for this task -> approximately
+   30% of actual operations logged (3 of 10 steps)
+```
+
+### Expected Failure State
+The investigator cannot determine whether the 4-second delay was caused by a geocoding service SLA violation or a fraud-check bottleneck, because two full retry attempts and a compliance-relevant fraud check are completely invisible in the log, and both represent real operational and compliance concerns left undiagnosed. A correctly instrumented system logs every internal tool call, retry, and validation check through a common middleware layer, so the gap between GET and PUT is fully explained by geocoding-retry and fraud-check entries in the trace.
+
 ## Mitigation Strategies
 
 ### Prevention

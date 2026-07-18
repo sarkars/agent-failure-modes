@@ -33,7 +33,37 @@ Multiple agents/users modify same object without coordination.
 |--------|--------|----------------|
 | [Metric name] | [Target value] | [Measurement method] |
 
----
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Deploy two agent instances handling support tickets from the same queue, both able to update a shared `ticket` object's status field, with no version token or optimistic concurrency control on writes
+- No pessimistic lock is acquired before the read-modify-write sequence on ticket status
+- No conflict-resolution service exists to reconcile simultaneous updates
+
+### Trigger Mechanism
+1. Agent A reads ticket #500's current status ("open") and begins processing a "assign to specialist" update
+2. Before Agent A's write completes, Agent B independently reads the same ticket's status ("open") and begins processing a "close as duplicate" update
+3. Both agents write their updates without checking whether the object changed since their read
+4. Whichever write lands last silently overwrites the other, with no conflict detected or logged
+
+### Example Reproduction Steps
+```
+1. Agent A: read ticket #500 -> {status: "open", version: 1}
+2. Agent B: read ticket #500 -> {status: "open", version: 1}
+   (both reads happen within the same short window)
+3. Agent A: write {status: "assigned_to_specialist"} -- no version
+   check, succeeds
+4. Agent B: write {status: "closed_duplicate"} -- no version check,
+   succeeds, silently overwrites Agent A's assignment
+5. Query final ticket #500 state -> {status: "closed_duplicate"},
+   with no record that the specialist assignment ever happened
+6. Run the lost-update reconciliation scan against ticket #500's
+   mutation history -> confirms Agent A's write was overwritten
+   without going through conflict resolution
+```
+
+### Expected Failure State
+Ticket #500 ends up in the "closed_duplicate" state with the specialist assignment silently lost, because neither agent's write checked whether the object had changed since its read, and no lock or version mismatch ever surfaced the conflict. A correctly defended system requires each write to include the version read (optimistic concurrency control), so Agent B's write is rejected with a 409 conflict once Agent A's update has already advanced the version, forcing Agent B to re-read and reconcile instead of silently overwriting.
 
 ## Mitigation Strategies
 

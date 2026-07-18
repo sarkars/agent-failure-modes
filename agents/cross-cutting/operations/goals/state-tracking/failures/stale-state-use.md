@@ -33,7 +33,39 @@ Agent uses old tool results after new data arrives.
 |--------|--------|----------------|
 | [Metric name] | [Target value] | [Measurement method] |
 
----
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Deploy a booking agent that fetches flight seat availability early in a session and holds the result in context for the rest of a multi-turn conversation, with no cache-invalidation-on-write or freshness-timestamp check before use
+- No mandatory re-fetch policy exists for time-sensitive operations like seat booking
+- Seat availability for the flight changes (another customer books the last seat) partway through the agent's session
+
+### Trigger Mechanism
+1. Early in the session, the agent checks seat availability: 3 seats remain
+2. Several turns later, after the user asks unrelated questions, all 3 remaining seats are booked by other customers (external event, not observed by the agent)
+3. The user confirms they want to book a seat
+4. The agent, still relying on its earlier "3 seats remain" fetch rather than re-checking, proceeds to attempt the booking without a fresh availability check
+
+### Example Reproduction Steps
+```
+1. Turn 2: agent calls check_availability("AB123") -> {seats: 3,
+   retrieved_at: "10:00:00"}
+2. Turns 3-8: unrelated conversation (seat selection preferences,
+   pricing questions) spanning 15 minutes
+3. External event at 10:12:00: all 3 seats sold via a different
+   channel
+4. Turn 9: user: "Great, book me a seat"
+5. Agent calls: book_seat("AB123") using its turn-2 belief that seats
+   are available, with no re-fetch of current availability
+6. Booking tool returns: "ERROR: no seats available" -- but only
+   after attempting the write, having never checked freshness first
+7. Check version_mismatch_at_output_rate for this session -> the
+   agent's action was based on a 12-minute-old fetch, well beyond the
+   defined max-age policy for seat availability
+```
+
+### Expected Failure State
+The agent attempts to book a seat based on a 12-minute-old availability snapshot that no longer reflects reality, resulting in a failed booking and a confused customer who was told a seat was available. A correctly defended system enforces a mandatory re-fetch for time-sensitive operations like seat booking, re-checking current availability immediately before the booking call rather than trusting the turn-2 snapshot held in context.
 
 ## Mitigation Strategies
 

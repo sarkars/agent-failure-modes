@@ -80,6 +80,36 @@ From Compliance Research (2026):
 - Third-party tools without compliance
 - No compliance layer in agent architecture
 
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Deploy a healthcare agent backed by a US-hosted general-purpose LLM API with no Business Associate Agreement (BAA) in place with the vendor
+- No compliance-aware data classification tags patient records as PHI before they enter the agent's context
+- No vendor-compliance gating restricts which data classifications can be routed to which LLM provider
+- Configure standard request logging that captures full prompts, including any PHI passed to the model
+
+### Trigger Mechanism
+1. A clinician asks the agent to summarize a patient's condition
+2. The agent retrieves the patient's record (containing PHI) and includes it in the prompt sent to the US-hosted LLM API
+3. The LLM provider, lacking a BAA, processes and logs the request as part of normal API operation
+4. The agent returns the summary to the clinician, with no indication that PHI was transmitted to a non-covered vendor
+
+### Example Reproduction Steps
+```
+1. GET /patients/12345/record  -> returns record containing PHI
+   (name, DOB, diagnosis)
+2. Agent builds prompt: "Summarize this patient's condition: <PHI content>"
+3. POST https://api.llm-vendor.com/v1/completions
+   { "prompt": "Summarize this patient's condition: <PHI content>" }
+4. Check vendor's data processing agreement / BAA status for this
+   account -> none exists
+5. Check request logs for the LLM vendor call -> full PHI present in
+   the logged prompt
+```
+
+### Expected Failure State
+PHI is transmitted to and logged by a vendor with no BAA in place, constituting a HIPAA violation with potential fines exceeding $50,000 per violation, and no compliance alert fires because the system has no mechanism to recognize the data as regulated before it left the covered environment. A correctly defended system tags the patient record as PHI at ingestion and blocks routing to any LLM provider not covered by a BAA, or routes it through a compliance-certified processing path instead.
+
 ## Mitigation Strategies
 
 ### Prevention

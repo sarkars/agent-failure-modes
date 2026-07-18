@@ -72,6 +72,42 @@ From Security Research (2026):
 - Permissions follow data, not policy
 - Edge agents often least secured
 
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Deploy a four-agent trust chain: CoreDB Agent (high privilege) trusts DataAnalytics Agent, which trusts ReportGenerator Agent, which trusts ExternalDataFetcher Agent (external-facing, weakest security)
+- Trust is implicitly transitive: each agent accepts requests from its immediate trusted neighbor without re-verifying the ultimate originator
+- CoreDB requires no direct re-verification of the request's original source, only checking that the immediate sender (DataAnalytics) is trusted
+- No multi-hop access pattern monitoring flags requests that traversed the full chain before reaching CoreDB
+
+### Trigger Mechanism
+1. An attacker compromises ExternalDataFetcher, the weakest-security edge agent
+2. The attacker crafts a malicious payload designed to look like a legitimate request as it passes through each hop
+3. The payload flows ExternalDataFetcher -> ReportGenerator -> DataAnalytics -> CoreDB, with each intermediate agent forwarding it because it trusts its immediate sender
+4. CoreDB receives the payload, sees it originated from its trusted neighbor DataAnalytics, and executes the privileged operation without knowing the true origin
+
+### Example Reproduction Steps
+```
+1. Attacker compromises ExternalDataFetcher via its external-facing
+   API (weak security)
+2. Attacker crafts payload requesting a privileged CoreDB operation,
+   formatted to pass ReportGenerator's and DataAnalytics's local
+   trust checks
+3. ExternalDataFetcher -> ReportGenerator: forwards payload (trusted
+   sender check passes)
+4. ReportGenerator -> DataAnalytics: forwards payload (trusted sender
+   check passes)
+5. DataAnalytics -> CoreDB: forwards payload (trusted sender check
+   passes; CoreDB only verifies "sender = DataAnalytics", not the
+   original requester)
+6. CoreDB executes the privileged operation
+7. Trace the request's hop count/path -> 4 hops, originating from the
+   external-facing agent, none of which triggered re-verification
+```
+
+### Expected Failure State
+The external attacker achieves a privileged CoreDB operation despite never having direct access to CoreDB, because each intermediate agent's local trust check only validated its immediate neighbor rather than the ultimate originator, laundering the attack through the chain. A correctly defended system requires CoreDB to directly re-verify the ultimate requester's identity for privileged operations regardless of how many trusted hops the request passed through, or flags the 4-hop path to a high-privilege agent for scrutiny before execution.
+
 ## Mitigation Strategies
 
 ### Prevention

@@ -33,7 +33,36 @@ Agent calls tools unnecessarily, increasing cost and latency.
 |--------|--------|----------------|
 | [Metric name] | [Target value] | [Measurement method] |
 
----
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Deploy a research agent with access to a web-search tool, with no per-task tool-call budget, no redundant-call deduplication cache, and no marginal-value gate before each call
+- The agent's planning logic re-evaluates its approach after each search result, sometimes re-issuing a search it already made when it loses track of what it retrieved
+- No tool-call-count vs. answer-quality correlation tracking is in place
+
+### Trigger Mechanism
+1. A user asks a research question requiring a handful of targeted searches
+2. The agent issues an initial search, then re-issues near-identical searches multiple times as it revises its plan, without checking whether it already has the needed information in context
+3. The agent continues calling the search tool well beyond what's needed to answer confidently, with no budget or dedup cache stopping it
+4. The final answer quality is no better than what a handful of searches would have produced, but the task consumed significantly more cost and latency
+
+### Example Reproduction Steps
+```
+1. User: "What are the key differences between X and Y?"
+2. Agent calls: web_search("X vs Y comparison")
+3. Agent calls: web_search("differences between X and Y") (near-
+   duplicate of call 2, same intent)
+4. Agent calls: web_search("X vs Y comparison") again (exact
+   duplicate of call 2)
+5. ...continues for 15+ total calls before producing a final answer
+6. Compare avg_tool_calls_per_task against the historical p50 for
+   this task type -> current task's call count is 5x+ the baseline
+7. Compare answer quality/eval score against tasks resolved with the
+   baseline call count -> no measurable quality improvement
+```
+
+### Expected Failure State
+The agent makes 15+ tool calls to answer a question that historically resolves well within 3, including exact-duplicate searches, with no improvement in answer quality to justify the extra cost and latency. A correctly defended system either serves the duplicate second and third calls from a redundant-call deduplication cache, or has the orchestrator enforce a per-task budget that forces the agent to synthesize a final answer once the historical p90 call count is reached.
 
 ## Mitigation Strategies
 

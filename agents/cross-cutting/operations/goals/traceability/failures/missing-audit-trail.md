@@ -71,6 +71,38 @@ From Operations Research (2026):
 - High-volume actions overwhelm storage
 - Development/production logging mismatch
 
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Deploy a billing agent that only logs the final API call (`POST /charge {amount}`) with no structured record of the customer context it received, the pricing rules it applied, or alternatives it considered
+- No immutable, write-once audit store separate from general application logs exists for consequential billing actions
+- No compliance-template-driven audit schema defines what fields a billing decision must capture
+- The agent charges a customer an incorrect amount
+
+### Trigger Mechanism
+1. The billing agent processes a charge, applying internal pricing logic that isn't logged anywhere beyond the final charge amount
+2. The customer disputes the charge as incorrect
+3. Investigators ask what data the agent used, what pricing rules it applied, and why it chose this specific amount, and find none of this was recorded
+4. Only the final `POST /charge {amount: $500}` call and its timestamp remain as evidence
+
+### Example Reproduction Steps
+```
+1. Available evidence: POST /charge {amount: $500},
+   timestamp: 2026-04-15 14:32:01
+2. Investigator: "What data did the agent use?" -> input not captured
+3. Investigator: "What pricing rules did it apply?" -> reasoning not
+   recorded
+4. Investigator: "What was the exact decision sequence?" -> only the
+   final API call logged
+5. Query audit_trail_completeness_rate for this billing action ->
+   input-decision-action-outcome record incomplete (action-only)
+6. Escalate to compliance: cannot determine if this was a bug, a
+   policy violation, or correct behavior under an edge-case pricing rule
+```
+
+### Expected Failure State
+The investigation cannot determine whether the incorrect charge was a bug, a policy violation, or technically correct behavior under an unusual pricing rule, and the team cannot prevent recurrence or satisfy an auditor's request for evidence of the agent's decision-making process. A correctly instrumented system captures the full input-decision-action-outcome record in an immutable audit store for every billing action, so an investigator can retrieve exactly what data was used, what pricing rule was applied, and why $500 was the resulting charge.
+
 ## Mitigation Strategies
 
 ### Prevention

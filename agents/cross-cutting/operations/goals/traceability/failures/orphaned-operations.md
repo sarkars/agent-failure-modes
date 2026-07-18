@@ -74,6 +74,38 @@ From Operations Research (2026):
 - Error paths skip cleanup
 - No ownership metadata on resources
 
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Deploy an agent that writes intermediate results to a `temp_calculations` table during task execution, with no schema-enforced session_id, created_by, or request_id fields and no default TTL on the rows
+- No correlation-ID propagation middleware links these writes back to the originating agent session or user request
+- The agent has been running in production for 6 months, accumulating temp_calculations rows with every task execution
+- A database audit is triggered by rising storage costs
+
+### Trigger Mechanism
+1. Over 6 months, the agent creates temp_calculations rows for every task, none tagged with session/request/creator metadata
+2. A storage-cost audit discovers 10,000 orphaned rows in the table
+3. Investigators attempt to determine which agent/session created each row and whether they're still needed, finding no correlation metadata to answer either question
+4. After a 40-hour investigation, the team quarantines the rows for 90 days and then deletes them, only to discover some were still needed, causing a customer-facing bug
+
+### Example Reproduction Steps
+```
+1. Query: SELECT COUNT(*) FROM temp_calculations WHERE session_id IS
+   NULL AND created_by IS NULL AND request_id IS NULL -> 10,000
+2. Investigator: "Which agent created these?" -> unknown, no
+   identifier field populated
+3. Investigator: "Are these still needed?" -> unknown, no link to
+   active/completed sessions
+4. After 40 hours of investigation and a 90-day quarantine, rows are
+   deleted
+5. Customer reports a broken feature -> traced back to a deleted
+   temp_calculations row that was still referenced by an active
+   long-running session
+```
+
+### Expected Failure State
+10,000 rows accumulate with no way to attribute them to their originating session or request, costing 40 hours of investigation to even attempt an answer, and the eventual deletion breaks a customer-facing feature because some "orphaned" rows were actually still needed. A correctly instrumented system enforces a mandatory session_id/request_id on every temp_calculations write and applies a default TTL tied to session completion, so orphan accumulation and unsafe deletion never happen in the first place.
+
 ## Mitigation Strategies
 
 ### Prevention

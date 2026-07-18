@@ -33,7 +33,36 @@ Agent calls write tool before reading/verifying current state.
 |--------|--------|----------------|
 | [Metric name] | [Target value] | [Measurement method] |
 
----
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Deploy an agent with a `update_inventory_count` write tool and a `get_inventory_count` read tool, with no state-aware gateway enforcing a read-before-write invariant
+- No version/ETag token is required on write calls, so the write tool accepts any count value regardless of whether the agent has current information
+- The inventory count for a specific SKU changed (via a separate process) between the start of the agent's session and the moment it issues a write
+
+### Trigger Mechanism
+1. The agent is asked to decrement inventory for a SKU after a sale, and proceeds directly to the write tool using a count value it remembers from earlier in a long session
+2. No read call precedes this specific write within the current turn
+3. The write succeeds, overwriting the current (already-changed) inventory count with a stale-derived value
+4. The actual inventory count is now incorrect, having been calculated from outdated information
+
+### Example Reproduction Steps
+```
+1. Early in session: agent reads inventory for SKU-42 -> count: 100
+   (10:00:00)
+2. Separately, another process sells 5 units, updating count to 95
+   (10:05:00, not observed by the agent)
+3. At 10:10:00, agent is asked to record a new sale of 3 units for
+   SKU-42, and calls: update_inventory_count(sku="SKU-42", count=97)
+   -- calculated as 100-3, using the stale 10:00:00 read, with no
+   fresh read call in this turn
+4. Actual correct count should be 95-3=92, but the write sets it to 97
+5. Check tool-call trace for a read_inventory_count call immediately
+   preceding this write -> none present within the staleness window
+```
+
+### Expected Failure State
+The inventory count is silently corrupted to an incorrect value (97 instead of 92) because the agent wrote based on a stale read from 10 minutes earlier rather than verifying current state immediately before the write, with no error surfaced anywhere. A correctly defended system requires a version/ETag token from a read taken within a defined staleness window immediately before the write, rejecting the write attempt (or forcing a fresh read) since the stale 10:00:00 read's version token no longer matches current state.
 
 ## Mitigation Strategies
 

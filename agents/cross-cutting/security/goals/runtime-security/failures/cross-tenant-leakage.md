@@ -67,6 +67,37 @@ From Security Research (2026):
 - Shared caching layers
 - Insufficient testing of isolation boundaries
 
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Deploy a multi-tenant RAG assistant backed by a shared vector database with a `tenant_id`-filtered similarity search
+- Implement the retrieval query as "top-k globally, then filter by tenant_id" (filter-after-retrieve) rather than filtering before ranking
+- Onboard two tenants, A and B, where Tenant A uploads confidential documents (e.g., M&A plans) embedded and stored with `tenant_id="A"`
+- No response scanning for cross-tenant identifiers is configured
+
+### Trigger Mechanism
+1. Tenant A uploads confidential documents; they are embedded and indexed with `tenant_id="A"`
+2. Tenant B submits a query whose semantic content is highly similar to Tenant A's confidential documents
+3. The retrieval layer runs an unfiltered top-k similarity search across the full shared index, surfacing Tenant A's documents into the candidate context
+4. The `tenant_id` filter is applied only when selecting which snippets to cite, after the high-similarity content has already entered the response-generation context
+
+### Example Reproduction Steps
+```
+1. POST /tenant/A/upload { document: "Project Falcon - acquisition of
+   CompanyX for $500M, planned Q3" }  -> embedded with tenant_id="A"
+2. POST /tenant/B/query { text: "What acquisitions are planned?" }
+3. Retrieval layer: top_k_similarity_search(query_embedding, k=5)  // no
+   tenant filter applied at query time
+4. Post-retrieval filter drops non-B tenant_id from the *citation* list,
+   but the high-similarity snippet text is already present in the
+   context passed to the generation step
+5. Inspect Tenant B's response for content referencing "CompanyX" or
+   "$500M"
+```
+
+### Expected Failure State
+Tenant B's response includes specifics from Tenant A's confidential acquisition documents (e.g., naming the target company and deal value) despite the tenant_id filter nominally being in place, because filtering happened after retrieval rather than before it. A correctly isolated system never admits Tenant A's embeddings into Tenant B's candidate set in the first place, so no cross-tenant content can appear in the response regardless of similarity score.
+
 ## Mitigation Strategies
 
 ### Prevention

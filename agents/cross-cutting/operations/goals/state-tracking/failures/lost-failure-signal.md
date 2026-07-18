@@ -33,7 +33,37 @@ Agent ignores tool warning/error and continues.
 |--------|--------|----------------|
 | [Metric name] | [Target value] | [Measurement method] |
 
----
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Deploy an agent performing a multi-step file-migration task, where each tool call's result is returned as an unstructured text string rather than a structured envelope with explicit `status`/`severity` fields
+- No mandatory-halt rule exists for fatal_error responses; the agent's loop simply proceeds to the next step regardless of what the previous tool call returned
+- One step in the migration (uploading a file to its destination) fails with a clear error message embedded in the tool's text output
+
+### Trigger Mechanism
+1. The agent calls the file-upload tool as part of a multi-step migration
+2. The tool returns an error string ("ERROR: upload failed, destination bucket unreachable") mixed into otherwise-normal-looking output text
+3. The agent, having no structured status field to check and no forced acknowledgment requirement, doesn't specifically parse for the error and proceeds directly to the next step (marking the file as migrated)
+4. The migration completes and reports success, despite the actual file never having been uploaded
+
+### Example Reproduction Steps
+```
+1. Agent calls: upload_file(path="/data/report.csv",
+   dest="s3://bucket/report.csv")
+   Tool returns (as plain text): "Attempting upload... ERROR: upload
+   failed, destination bucket unreachable. Retrying is recommended."
+2. Agent's next turn: "File uploaded successfully, proceeding to mark
+   migration complete" -- no acknowledgment of the embedded error
+3. Agent calls: mark_migration_complete(file="report.csv")
+4. Check destination bucket for report.csv -> file does not exist,
+   confirming the upload never actually succeeded
+5. Scan the trace for a halt event following the ERROR-containing
+   tool response -> none fired, since the tool wrapper had no
+   structured severity classification to trigger one
+```
+
+### Expected Failure State
+The migration is reported as complete and the file is marked migrated, even though the actual upload failed, because the error was embedded in free-text tool output that the agent's loop had no structured mechanism to detect and halt on. A correctly defended system wraps the upload tool's result in an envelope with an explicit `status: fatal_error` field, and the orchestration middleware halts the agent loop immediately, forcing an explicit acknowledgment and retry/escalation before allowing progression to `mark_migration_complete`.
 
 ## Mitigation Strategies
 

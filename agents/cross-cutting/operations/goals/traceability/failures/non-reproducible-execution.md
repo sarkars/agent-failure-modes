@@ -69,6 +69,39 @@ From Debugging Research (2026):
 - State captured incompletely
 - Test environments don't match production
 
+## Test Scenario & Reproduction
+
+### Scenario Setup
+- Deploy a financial-advisory agent whose recommendations depend on retrieved news articles, a live market-data feed, model sampling temperature/seed, and prior conversation context, none of which are recorded together as a single execution bundle
+- No snapshot-and-freeze mechanism preserves the exact tool/API responses returned in production; replay attempts re-fetch "current" values from live services
+- A customer reports the agent recommended selling all their stocks, an unusually aggressive recommendation
+
+### Trigger Mechanism
+1. Engineers attempt to reproduce the bug using the same customer query and same model version, but get a "balanced portfolio" recommendation instead
+2. They add the same timestamp, still get a balanced-approach result
+3. They add the same market-data snapshot, and get a "minor rebalancing" result, closer but still not the reported "sell everything" outcome
+4. They realize the retrieved news articles have since been updated, the model's random seed differed, prior conversation context wasn't captured, and tool response latencies (which affected reasoning) are also unrecorded — all varying simultaneously in the original production run
+
+### Example Reproduction Steps
+```
+1. Production bug report: "Agent recommended selling all customer's
+   stocks"
+2. Reproduction attempt 1: same query, same model version ->
+   "balanced portfolio" (different result)
+3. Reproduction attempt 2: + same timestamp -> "balanced approach"
+   (still different)
+4. Reproduction attempt 3: + same market data snapshot -> "minor
+   rebalancing" (still different)
+5. Check for recorded: news articles retrieved (not captured, since
+   updated), model seed (not captured), conversation history (not
+   captured), tool response latencies (not captured)
+6. Conclude: reproduction_success_rate for this bug = 0%; fix cannot
+   be verified
+```
+
+### Expected Failure State
+Despite three escalating reproduction attempts each fixing one variable, engineers cannot recreate the "sell everything" recommendation because several non-deterministic inputs (seed, news retrieval, conversation history, tool latencies) all differed simultaneously and none were recorded, leaving the team unable to confirm any fix actually addresses the root cause. A correctly instrumented system records the full execution bundle — seed, retrieved content snapshot, tool responses, and conversation state — at production time, enabling deterministic replay that reproduces the exact "sell everything" recommendation on demand.
+
 ## Mitigation Strategies
 
 ### Prevention
