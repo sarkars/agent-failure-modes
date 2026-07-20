@@ -29,6 +29,13 @@ Agent tells user: "I've sent your notification"
 Result: User never receives notification, thinks it was sent
 ```
 
+### Domain Examples
+The same mechanism — a tool call returns an error, timeout, or empty payload, and the agent's downstream narrative treats that absence of data as a substantive negative result rather than a failed check — recurs across domains, previously documented as separate by-use-case patterns before being consolidated here:
+- **Content marketing / compliance**: a claim-substantiation database call returns a 500 with an empty body during a deployment window; the agent's compliance summary states "claim substantiation confirmed" instead of surfacing the failed lookup, and unsubstantiated content is published.
+- **Insurance / policy renewal**: an MVR (motor-vehicle-record) lookup returns an empty payload during a provider rate-limit window; the agent narrates the renewal as "clean driving record confirmed" instead of a failed check, and a batch of renewals is priced without the verification that was supposed to happen.
+
+In both cases the fix is identical to the notification example above: the tool/agent boundary must structurally distinguish "checked and found nothing" from "the check itself didn't happen," and the agent's narrative generation must be gated on that distinction rather than defaulting to the most fluent reading of an empty response.
+
 ---
 
 ## Test Scenario & Reproduction

@@ -6,6 +6,7 @@ Reliable tool invocation
 
 | Pattern |
 |---------|
+| [Action-Completion Claimed Without Status Check](failures/action-completion-claimed-without-status-check.md) |
 | [Blocking Tool Operations](failures/blocking-tool-operations.md) |
 | [Error Information Leakage](failures/error-information-leakage.md) |
 | [External System Failures](failures/external-system-failures.md) |
@@ -17,6 +18,7 @@ Reliable tool invocation
 | [Sequencing Errors](failures/sequencing-errors.md) |
 | [Silent Failures](failures/silent-failures.md) |
 | [Silent Type Coercion](failures/silent-type-coercion.md) |
+| [Stale Tool Confirmation After Revision](failures/stale-tool-confirmation-after-revision.md) |
 | [State Space Navigation](failures/state-space-navigation.md) |
 | [Tool Availability Assumptions](failures/tool-availability-assumptions.md) |
 | [Tool Capability Overestimation](failures/tool-capability-overestimation.md) |
@@ -24,4 +26,4 @@ Reliable tool invocation
 | [Vague Tool Descriptions](failures/vague-tool-descriptions.md) |
 | [Wrong Tool Selection](failures/wrong-tool-selection.md) |
 
-**Total: 17 patterns**
+**Total: 19 patterns**
