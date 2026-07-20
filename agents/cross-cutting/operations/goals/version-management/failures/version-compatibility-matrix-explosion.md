@@ -76,5 +76,5 @@ this one customer's environment.
 
 ## Related Patterns
 - [Version Skipping Unsupported](./version-skipping-unsupported.md) - an upgrade path issue that becomes far more likely to go unnoticed when the compatibility matrix is already too large to reason about
-- [Version Deprecation Timeline Miss](./version-deprecation-timeline-miss.md) - failing to actually retire old supported versions is a direct driver of matrix growth over time
+- [Deprecated Endpoint Retirement](../../tool-capability-limits/failures/deprecated-endpoint-retirement.md) - failing to actually retire old supported versions/endpoints on their announced timeline is a direct driver of matrix growth over time
 - [Deployment Dependency Deadlock](./deployment-dependency-deadlock.md) - both stem from independently-versioned components lacking a shared, explicit compatibility contract

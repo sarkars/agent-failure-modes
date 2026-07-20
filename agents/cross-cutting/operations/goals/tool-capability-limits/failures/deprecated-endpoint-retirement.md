@@ -38,6 +38,8 @@ Vendors typically announce deprecations through channels (email to account owner
 | Typical vendor deprecation notice windows range from 6 to 18 months, but internal awareness of the notice frequently lapses well before the retirement date | Due to staff turnover and notice channels not reaching operational owners |
 | Teams that maintain an internal dependency-and-deprecation calendar report retirement-related incidents at a fraction of the rate of teams without one, often cited as an 80%+ reduction | By converting a vendor-side notice into an internally tracked deadline with an owner |
 
+**Note on scope**: this pattern generalizes beyond a single tool endpoint returning 404/410 — the identical mechanism (notice received, never converted to an owned/dated task, hard failure or silent behavior change on the vendor's schedule) applies equally to library major-version EOL, platform-component sunsets, and model/API version deprecations. Those are domain variants of the same root cause and mitigation set, not separate patterns; track them in the same internal deprecation calendar described above rather than building parallel tracking per dependency type.
+
 ## Mitigations
 1. **Maintain an internal deprecation calendar**: Track every third-party endpoint dependency with its known deprecation/retirement date (where announced) in a system the operations team actually monitors, not just the vendor's own notification channel.
 2. **Route vendor deprecation notices to a monitored channel**: Ensure vendor account settings point deprecation/changelog emails to a team distribution list or ticketing system, not an individual's personal inbox.
