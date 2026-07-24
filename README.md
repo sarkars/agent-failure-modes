@@ -10,9 +10,7 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
 <p align="center">
-  <strong>An open-source project by <a href="https://jivik.ai">Jivik AI</a></strong><br>
-  We help teams build AI agents that work reliably in production.<br><br>
-  <a href="https://jivik.ai">Website</a> · <a href="mailto:team@jivik.ai">Contact Us</a> · <a href="#about-jivik-ai">About</a>
+  <strong>🌐 Browse the published knowledge base: <a href="https://agent-kb-autopublish.vercel.app/">agent-kb-autopublish.vercel.app</a></strong>
 </p>
 
 ---
@@ -28,7 +26,7 @@
 | [Quick Reference](#quick-reference-cross-cutting-failure-patterns) | Most common failure patterns at a glance |
 | [References](REFERENCES.md) | Research sources, incident databases, statistics |
 | [Contributing](#contributing) | How to add failure patterns |
-| [About Jivik AI](#about-jivik-ai) | Who we are and how to work with us |
+| [Published Knowledge Base](https://agent-kb-autopublish.vercel.app/) | Browse all patterns online |
 
 ---
 
@@ -414,64 +412,19 @@ To add a new failure pattern:
 
 ---
 
-## About Jivik AI
+## Published Knowledge Base
 
 <p align="center">
-  <a href="https://jivik.ai"><strong>jivik.ai</strong></a> — Building reliable AI agents for production
+  <a href="https://agent-kb-autopublish.vercel.app/"><strong>agent-kb-autopublish.vercel.app</strong></a> — Browse every failure pattern online
 </p>
 
-This repository is maintained by **[Jivik AI](https://jivik.ai)**, a company dedicated to making AI agents work reliably in production environments.
-
-### Our Mission
-
-We believe AI agents will transform how businesses operate—but only if they work reliably. Today, **40% of agentic AI projects are projected to be scrapped by 2027** (Gartner), and **88% of enterprises report AI agent security incidents**. We're here to change that.
-
-Jivik AI builds the knowledge, tools, and expertise needed to deploy AI agents with confidence.
-
-### What We Do
-
-| Area | Description |
-|------|-------------|
-| **Domain-Specific Reliability** | Deep expertise in vertical-specific agent failures (legal, healthcare, finance, enterprise) |
-| **Production AI Agents** | Build and deploy agents that handle real-world edge cases |
-| **Reliability Engineering** | Eval frameworks, monitoring systems, and failure detection |
-| **Consulting & Advisory** | Help teams ship agents faster with fewer production incidents |
-
-### Why This Repository?
-
-This playbook represents our core belief: **reliability knowledge should be open**.
-
-- Every failure pattern comes from real production incidents
-- We continuously update with new failure modes as the field evolves
-- Domain-specific agents (OCR, RAG, Voice, Code) get dedicated coverage
-- Community contributions make this resource stronger
-
-By sharing this knowledge openly, we help the entire ecosystem build better AI agents—and demonstrate the depth of expertise we bring to our work.
-
-### Work With Us
-
-| Need | How We Help |
-|------|-------------|
-| **Shipping an AI agent?** | We audit for reliability gaps before launch |
-| **Agent failing in production?** | We diagnose and fix systematic issues |
-| **Building an eval framework?** | We design domain-specific evaluation systems |
-| **Training your team?** | We run workshops on agent reliability |
+Every pattern in this repository is published and kept in sync at [agent-kb-autopublish.vercel.app](https://agent-kb-autopublish.vercel.app/), so you can search and browse the full playbook without cloning the repo.
 
 ### Get In Touch
 
 | | |
 |---|---|
-| **General inquiries** | [team@jivik.ai](mailto:team@jivik.ai) |
-| **Consulting & projects** | [team@jivik.ai](mailto:team@jivik.ai) |
-| **Contribute a pattern** | Submit a PR or email us |
+| **Contribute a pattern** | Submit a PR |
 | **Report an issue** | Open a GitHub issue |
 
-We respond to every inquiry. If you've encountered a failure pattern not documented here, we'd love to hear about it.
-
-<p align="center">
-  <a href="https://jivik.ai"><strong>Visit jivik.ai →</strong></a>
-</p>
-
----
-
-*Built by [Jivik AI](https://jivik.ai) — Reliable AI agents for production.*
+If you've encountered a failure pattern not documented here, we'd love to hear about it.
