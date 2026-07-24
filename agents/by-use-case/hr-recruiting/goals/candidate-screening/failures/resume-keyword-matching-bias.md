@@ -70,5 +70,5 @@ Impact: Missed hire; talent acquisition inefficiency
 
 ## References
 
-- [Semantic Job Matching](https://arxiv.org/abs/2106.02544) - Research on synonym recognition
-- [Resume Parsing Best Practices](https://arxiv.org/abs/1906.12345) - HR AI evaluation
+- [Gender, Race, and Intersectional Bias in Resume Screening via Language Model Retrieval](https://arxiv.org/abs/2407.20371) - Audit study finding embedding-based resume retrieval systematically favors certain demographic-associated names, evidence of the surface-matching failure mode this pattern describes
+- [Illusion of Neutrality: Superficial Keyword Matching in LLM Screening](https://web3.arxiv.org/pdf/2507.11548) - Shows apparent lack of bias in LLM screeners can mask an inability to make substantive judgments beyond keyword matching

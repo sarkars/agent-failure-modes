@@ -137,6 +137,5 @@ Impact: Trade execution failure, lost opportunity
 
 ## References
 
-- [LLM Agents Over-Rely on Training Knowledge](https://arxiv.org/abs/2401.12345)
-- [Tool-Use Behavior in Agentic Systems](https://arxiv.org/abs/2402.12345)
-- [Knowledge Freshness in LLM Agents](https://arxiv.org/abs/2403.12345)
+- [STALE: Can LLM Agents Know When Their Memories Are No Longer Valid?](https://arxiv.org/abs/2605.06527) - Introduces a benchmark of expert-validated conflict scenarios showing agents fail to revise stored beliefs when live evidence contradicts them
+- [ALAS: Autonomous Learning Agent for Self-Updating Language Models](https://arxiv.org/pdf/2508.15805) - Documents how parametric knowledge becomes outdated past training cutoff and hampers agents in fast-changing domains

@@ -176,5 +176,5 @@ Impact: Underwriting risk missed, adverse selection
 
 ## References
 
-- [Context Window and Attention in Long Conversations](https://arxiv.org/abs/2406.12345)
-- [Long-Document Processing in LLMs](https://arxiv.org/abs/2407.12345)
+- [LLMs Get Lost In Multi-Turn Conversation](https://arxiv.org/abs/2505.06120) - Finds an average 39% performance drop across generation tasks when instructions are spread across multiple turns instead of given upfront
+- [Multi-Layered Memory Architectures for LLM Agents](https://arxiv.org/html/2603.29194v1) - Documents how earlier contextual signals get compressed or discarded as dialogue length increases, causing entity drift and factual instability

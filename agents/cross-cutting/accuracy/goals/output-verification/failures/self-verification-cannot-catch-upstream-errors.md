@@ -141,5 +141,5 @@ Impact: Candidate offer sent despite failed background check
 
 ## References
 
-- [Self-Verification Failures in AI Systems](https://arxiv.org/abs/2404.12345)
-- [Independent Verification Requirements](https://arxiv.org/abs/2405.12345)
+- [LLMs cannot find reasoning errors, but can correct them given the error location](https://arxiv.org/abs/2311.08516) - Shows poor self-correction stems from an inability to locate mistakes, not an inability to fix a known one — the core limitation behind self-verification missing upstream errors
+- [The Self-Correction Illusion: LLMs Correct Others but Not Themselves](https://arxiv.org/html/2606.05976) - Finds LLM agents show markedly higher correction rates for errors attributed to external sources than for identical errors in their own output/upstream dependencies
