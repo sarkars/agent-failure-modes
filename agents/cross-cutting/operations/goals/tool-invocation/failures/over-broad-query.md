@@ -6,18 +6,24 @@
 
 **Symptoms**
 - Large noisy result set; irrelevant citations.
-- [Add more specific symptoms]
+- Agent's answer cites or blends details from unrelated records diluted into an oversized result set.
 
 **Root Cause**
 Agent retrieves too much data and reasons over irrelevant records.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+A user asks "show me John's recent orders." The agent queries orders by
+first name only, with no date bound or customer ID filter, and gets back
+340 orders across every customer named John. It answers using the first
+few records in the response, which belong to a different John than the
+one in the conversation.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Agent under-specifies filter parameters (customer ID, date range, status) when a looser query is easier to construct.
+- Tool defaults to a broad scope when optional filters are omitted, and the agent doesn't know this default.
+- No result-count check before reasoning over the returned set, so an oversized result is silently skimmed instead of narrowed.
 
 ---
 
@@ -26,12 +32,12 @@ Agent retrieves too much data and reasons over irrelevant records.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Ambiguous-name broad pull | Query for a common name/term with no ID or date filter supplied | Agent narrows the query (asks for a disambiguating filter or applies one from context) before answering | Answer blends or misattributes details from an unrelated record in the oversized result set |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| result_set_oversize_rate | < 5% of queries return > 3x the tool's typical result count | Track result-count distribution per tool call and flag outliers before the agent reasons over them |
 
 ---
 
@@ -70,12 +76,12 @@ Agent retrieves too much data and reasons over irrelevant records.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| oversized_result_rate_percent | > 10% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Medium |
+| Oversized Result Used Unfiltered | Query returns > 3x typical result count and agent proceeds to answer without narrowing | Medium |
 
 ---
 

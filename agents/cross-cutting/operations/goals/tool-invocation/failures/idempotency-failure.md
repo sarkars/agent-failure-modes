@@ -6,18 +6,24 @@
 
 **Symptoms**
 - Duplicate tickets/emails/charges/events.
-- [Add more specific symptoms]
+- Same idempotency key reused across genuinely different payloads, or omitted entirely on a retry, defeating deduplication.
 
 **Root Cause**
 Agent repeats a write action and creates duplicates.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+A support agent calls create_ticket() for a customer complaint. The HTTP
+response times out client-side after 10s, but the server had already
+committed the write. The agent's retry logic re-issues create_ticket()
+with the same payload and no idempotency key, producing two open tickets
+for the same complaint and two separate agent replies to the customer.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Tool wrapper retries automatically on timeout without checking whether the original call already succeeded server-side.
+- No idempotency key support exposed in the tool's API surface, so the agent has no mechanism to signal "this is the same action."
+- Agent's session state doesn't persist which write actions were already attempted across a multi-turn conversation or after a crash/restart.
 
 ---
 
@@ -26,12 +32,12 @@ Agent repeats a write action and creates duplicates.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Timeout-then-retry duplicate | Simulate a create-ticket call that times out client-side after the server already committed the write | Agent detects the existing ticket via idempotency key or pre-write check and does not create a second one | A second ticket/charge/event appears for the same source event |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| duplicate_write_rate | < 0.1% of write actions | Reconcile write-tool call logs against created objects in the target system over a rolling 24h window |
 
 ---
 
@@ -70,12 +76,12 @@ Agent repeats a write action and creates duplicates.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| duplicate_write_rate_percent | > 0.5% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Critical |
+| Duplicate Write Detected | Reconciliation job finds 2+ objects with matching target/payload from the same session within 5 minutes | Critical |
 
 ---
 

@@ -6,18 +6,24 @@
 
 **Symptoms**
 - Tool returns schema validation error.
-- [Add more specific symptoms]
+- Agent sends a value in the wrong type (string instead of number), an invalid enum member, or malformed JSON that fails schema validation.
 
 **Root Cause**
 Agent sends invalid JSON, enum, type, or schema.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+The agent needs to close a ticket and sets `status: "done"`, but the
+tool's accepted enum is `["completed", "closed"]` and never lists "done"
+as a synonym anywhere the agent can see. The call is rejected with a
+generic 400 schema error, and the agent retries with the same invalid
+value because it can't tell which part of the payload was wrong.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Tool schema examples in the prompt/description are sparse or absent, so the model guesses a plausible-looking format instead of the exact one required.
+- Enum values aren't enumerated in the tool description, leaving the model to infer synonyms that the API rejects.
+- No client-side schema validation runs before the call reaches the live API, so format errors surface only as opaque downstream failures.
 
 ---
 
@@ -26,12 +32,12 @@ Agent sends invalid JSON, enum, type, or schema.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Enum-synonym mismatch | Ask the agent to set a status using natural language that maps to a valid enum synonym not explicitly listed in the schema | Agent maps to the exact accepted enum value or asks for clarification | Agent sends an unlisted synonym and the call fails schema validation |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| schema_validation_error_rate | < 2% of tool calls | Track share of tool calls rejected by schema/type validation, grouped by tool and field |
 
 ---
 
@@ -70,12 +76,12 @@ Agent sends invalid JSON, enum, type, or schema.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| schema_validation_error_rate_percent | > 5% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Medium |
+| Repeated Schema Validation Failures | Same tool/field rejected by schema validation 3+ times in one session | Medium |
 
 ---
 

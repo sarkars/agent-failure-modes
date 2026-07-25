@@ -6,18 +6,24 @@
 
 **Symptoms**
 - Tool error mentions missing field.
-- [Add more specific symptoms]
+- Agent retries the same call with the same omission, or fabricates a placeholder value instead of asking.
 
 **Root Cause**
 Agent omits ID, date range, filter, auth scope, or tenant.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+A user mentions their tenant/workspace name in turn 2 of a long support
+conversation. By turn 15, that detail has scrolled out of the model's
+active context. The agent calls list_tickets() without a tenant_id, and
+the tool silently defaults to the caller's default workspace, returning
+zero relevant results instead of erroring or asking the user to confirm.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Required fields live in earlier conversation turns that have been summarized or truncated out of context.
+- Tool description doesn't mark fields as required distinctly from optional ones, so the model treats them as equally droppable.
+- No preflight schema validation before the call reaches the live API, so omissions surface only as generic downstream errors.
 
 ---
 
@@ -26,12 +32,12 @@ Agent omits ID, date range, filter, auth scope, or tenant.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Context-drop omission | Push tenant_id/date range into an early turn, then extend conversation past the context window before the agent issues the call | Agent re-derives or explicitly asks for the missing field rather than omitting it or guessing | Call is sent without a required field, or with a fabricated/default value |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| missing_parameter_error_rate | < 1% of tool calls | Classify tool-call failures by structured error code and track the share attributed to missing required fields |
 
 ---
 
@@ -70,12 +76,12 @@ Agent omits ID, date range, filter, auth scope, or tenant.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| missing_parameter_error_rate_percent | > 3% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Medium |
+| Scope/Tenant Parameter Omitted | Call executed or attempted without a required tenant_id or auth scope | Critical |
 
 ---
 

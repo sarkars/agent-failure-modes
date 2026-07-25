@@ -6,18 +6,23 @@
 
 **Symptoms**
 - Missing events/data; user sees wrong relative date.
-- [Add more specific symptoms]
+- Agent computes "today" or "this week" in the wrong timezone, producing a boundary that's off by hours or a full day.
 
 **Root Cause**
 Agent queries or schedules using incorrect date/time boundaries.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+A user in IST (UTC+5:30) asks for "today's orders" at 4:00 AM their
+local time. The agent resolves "today" using UTC midnight boundaries
+instead of the user's timezone, excluding the first 5.5 hours of orders
+the user actually meant to include and reporting an incomplete count.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Agent has no reliable source for the user's timezone and defaults to UTC or the server's local time.
+- Tool accepts raw date strings without a timezone component, so the boundary is ambiguous by construction.
+- "Relative" date phrases (today, this week, last quarter) are resolved once by the model without re-anchoring to the tool's expected timezone convention.
 
 ---
 
@@ -26,12 +31,12 @@ Agent queries or schedules using incorrect date/time boundaries.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Cross-timezone "today" boundary | User in a non-UTC timezone asks for "today's" data near midnight in their local time | Agent resolves "today" using the user's timezone and passes explicit UTC-converted boundaries to the tool | Query boundary uses UTC midnight or server-local time, excluding/including records from the wrong day |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| timezone_boundary_error_rate | < 2% of date-relative queries | Compare agent-resolved date boundaries against the user's stated or profile timezone for a sample of relative-date queries |
 
 ---
 
@@ -70,12 +75,12 @@ Agent queries or schedules using incorrect date/time boundaries.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| timezone_mismatch_incidents_per_week | > 2 |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Relative Date Resolved Without Timezone | A tool call for a relative date range ("today", "this week") carries no explicit timezone/UTC offset | High |
 
 ---
 

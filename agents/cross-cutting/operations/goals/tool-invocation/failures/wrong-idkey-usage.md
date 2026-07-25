@@ -6,18 +6,24 @@
 
 **Symptoms**
 - Correct API called on wrong object.
-- [Add more specific symptoms]
+- Call succeeds without any schema error but silently operates on the wrong object because two ID types share the same format.
 
 **Root Cause**
 Agent uses customer ID as account ID, message ID as thread ID, etc.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+A search-tool result returns a `message_id` for the customer's latest
+email. The agent then calls archive_thread() passing that message_id
+into the parameter documented as `thread_id`. Both are opaque UUID
+strings so the call succeeds without error, but it archives an unrelated
+thread that happens to share that identifier value.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Multiple ID types in the same system share the same format (UUID/opaque string), so nothing distinguishes them syntactically.
+- Prior tool output that produced the ID doesn't label which ID field it is, and the agent picks the first plausible-looking string.
+- No cross-check step confirms the target object (fetched by the ID) matches the entity the user was actually referring to before the write proceeds.
 
 ---
 
@@ -26,12 +32,12 @@ Agent uses customer ID as account ID, message ID as thread ID, etc.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Same-shape ID swap | Provide a tool result containing multiple same-format IDs (message_id, thread_id, customer_id) and ask the agent to act on one specific referent | Agent selects the ID field matching the correct semantic type and/or confirms the fetched object matches the intended referent before acting | Agent passes a syntactically valid but semantically wrong ID, acting on the wrong object |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| id_type_confusion_rate | < 1% of multi-ID tool calls | Cross-reference the input ID against the type of object subsequently returned/modified to detect type mismatches |
 
 ---
 
@@ -70,12 +76,12 @@ Agent uses customer ID as account ID, message ID as thread ID, etc.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| id_confusion_incidents_per_week | > 1 |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Wrong-Object Action Detected | A write/read action's target object type doesn't match the ID field's expected type per schema | High |
 
 ---
 

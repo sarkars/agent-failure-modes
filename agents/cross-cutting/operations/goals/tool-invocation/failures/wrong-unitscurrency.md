@@ -6,18 +6,24 @@
 
 **Symptoms**
 - Magnitude/unit errors in action/output.
-- [Add more specific symptoms]
+- Output or tool call is off by a fixed multiplicative factor (100x for cents/dollars, 1000x for grams/kg) that isn't caught because the number still looks plausible.
 
 **Root Cause**
 Agent sends cents vs dollars, UTC vs local, kg vs grams.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+A pricing API returns a product's price as a raw integer in cents
+(`4999`), with no unit suffix in the field name. The agent reads this
+as dollars and displays "$4999" for a product that actually costs
+$49.99, and if it also uses the same value to construct a charge, the
+customer is billed 100x the intended amount.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- API returns raw integer values in a minor unit (cents, grams) without an explicit unit label in the field name or docs.
+- Agent's training/prior exposure biases it toward assuming "natural" units (dollars, kg) unless the schema states otherwise.
+- No sanity-range check on the resulting value (e.g. a $4999 latte) before it's surfaced or acted on.
 
 ---
 
@@ -26,12 +32,12 @@ Agent sends cents vs dollars, UTC vs local, kg vs grams.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Minor-unit field misread | Return a price/weight field in cents/grams with no explicit unit suffix in the field name | Agent checks the tool schema's documented unit and converts correctly before displaying or acting on it | Agent treats a minor-unit value as the major unit, producing a 100x/1000x magnitude error |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| unit_conversion_error_rate | < 0.5% of numeric fields carrying implicit units | Sample tool calls/outputs involving currency, weight, or time-duration fields and check for magnitude-consistent conversion |
 
 ---
 
@@ -70,12 +76,12 @@ Agent sends cents vs dollars, UTC vs local, kg vs grams.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| unit_magnitude_error_incidents_per_week | > 1 |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Implausible Magnitude Detected | Output value for a known-unit field falls outside a sane range (e.g. price > $10,000 for a retail SKU) | High |
 
 ---
 

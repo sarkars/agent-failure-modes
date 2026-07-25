@@ -6,18 +6,24 @@
 
 **Symptoms**
 - Repeated errors or duplicate actions.
-- [Add more specific symptoms]
+- Agent blindly retries a write action immediately after a timeout without confirming whether the original call already succeeded.
 
 **Root Cause**
 Agent fails silently or retries destructively after API limit/timeout.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+A billing tool call times out client-side after 30s. The server actually
+completed the charge before the timeout fired. The agent's retry logic
+treats the timeout as an unambiguous failure and immediately re-issues
+the same charge call with no idempotency key, resulting in the customer
+being billed twice for one purchase.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Retry logic is applied uniformly to reads and writes, without distinguishing that a write's effects may have already landed server-side.
+- No idempotency key or duplicate-check accompanies the retry, so the second call is indistinguishable from a fresh one.
+- Rate-limit (429) and timeout errors are handled identically to generic failures, triggering immediate retry instead of backoff plus a state check.
 
 ---
 
@@ -26,12 +32,12 @@ Agent fails silently or retries destructively after API limit/timeout.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Timeout-then-blind-retry | Simulate a client-side timeout on a write call where the server actually completed the request | Agent checks resulting state (or uses an idempotency key) before retrying, avoiding a duplicate write | Agent retries immediately and produces a duplicate charge/ticket/event |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| destructive_retry_after_timeout_rate | < 0.5% of timed-out write calls | Cross-reference timeout events with subsequent identical write calls and downstream duplicate objects |
 
 ---
 
@@ -70,12 +76,12 @@ Agent fails silently or retries destructively after API limit/timeout.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| duplicate_writes_from_retry_percent | > 1% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Retry-Induced Duplicate | A write call is retried within seconds of a timeout/429 with no idempotency key or state check | High |
 
 ---
 

@@ -6,18 +6,24 @@
 
 **Symptoms**
 - Empty result despite known relevant records.
-- [Add more specific symptoms]
+- Agent reports "no results found" or gives an incomplete answer despite the data existing under a different filter value.
 
 **Root Cause**
 Agent misses correct data due to overly strict filters.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+A user asks for "my open support ticket." The agent filters strictly on
+status = "open", but the ticket was reassigned to status "pending" during
+triage. The exact-match filter excludes the record entirely, and the
+agent tells the user no open ticket exists even though it's sitting one
+status value away.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Agent applies an exact-match filter where a fuzzy or range filter was needed (exact string vs. contains, exact date vs. range).
+- Model assumes a single canonical field value for a real-world category that actually has several valid synonyms or states.
+- No fallback/broadening step is defined for when a filtered query returns zero results, so the empty result is taken at face value.
 
 ---
 
@@ -26,12 +32,12 @@ Agent misses correct data due to overly strict filters.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Zero-result-should-retry case | Query with a filter value that excludes a known-relevant record (e.g. wrong status enum) | Agent detects the zero/near-zero result count as suspicious and retries with a broadened filter before concluding "no data" | Agent reports no results exist when a relevant record was excluded only by an overly strict filter |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| zero_result_query_rate | < 3% of queries return zero results without a retry-broadened follow-up | Track queries returning empty sets and whether the agent issued a broader follow-up query before answering |
 
 ---
 
@@ -70,12 +76,12 @@ Agent misses correct data due to overly strict filters.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| zero_result_without_retry_percent | > 8% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Medium |
+| Zero-Result Answer Without Broadening | Agent reports no data found after a single narrowly-filtered query with no retry | Medium |
 
 ---
 

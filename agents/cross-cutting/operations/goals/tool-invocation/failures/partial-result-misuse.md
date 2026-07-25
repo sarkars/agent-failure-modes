@@ -6,18 +6,23 @@
 
 **Symptoms**
 - Tool response has warning, omitted fields, or truncation.
-- [Add more specific symptoms]
+- Agent's summary or downstream calculation is based on a truncated page or list, silently dropped fields ignored.
 
 **Root Cause**
 Agent treats partial/incomplete output as complete.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+A paginated order-history API returns the first 50 of 200 records with a
+`has_more: true` flag. The agent's summarization step reads only the
+returned array and computes "customer lifetime spend" from the 50 records
+it has, presenting the partial sum as the customer's full total.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Tool response includes a pagination/truncation flag that the agent's prompt or parsing logic doesn't surface or check.
+- Partial results look structurally identical to complete ones (same shape, no obvious error), so nothing prompts a second look.
+- Agent is optimized to answer quickly rather than verify completeness before aggregating or reasoning over a result set.
 
 ---
 
@@ -26,12 +31,12 @@ Agent treats partial/incomplete output as complete.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Truncated-list aggregation | Return a paginated result with has_more=true and only a fraction of total records | Agent fetches remaining pages (or explicitly caveats the answer as partial) before computing an aggregate | Agent computes a sum/count/summary from only the first page and presents it as complete |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| partial_result_treated_as_complete_rate | < 2% of paginated/truncated responses | Instrument tool responses with completeness flags and check whether the agent's subsequent action accounted for them |
 
 ---
 
@@ -70,12 +75,12 @@ Agent treats partial/incomplete output as complete.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| unflagged_partial_result_rate_percent | > 5% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Partial Result Used As Complete | Agent produces an aggregate/answer from a response flagged has_more/truncated without fetching the rest | High |
 
 ---
 
