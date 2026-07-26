@@ -12,6 +12,7 @@ Tools, cost, coordination, memory, state tracking, real-time performance
 | [Cost Optimization](goals/cost-optimization/) | 13 |
 | [Cost Tracking](goals/cost-tracking/) | 6 |
 | [Dependency Management](goals/dependency-management/) | 23 |
+| [Established Framework Adoption](goals/established-framework-adoption/) | 6 |
 | [Fault Tolerance](goals/fault-tolerance/) | 20 |
 | [Human Oversight Reliability](goals/human-oversight-reliability/) | 8 |
 | [Inference Cost Management](goals/inference-cost-management/) | 15 |
@@ -43,7 +44,7 @@ Tools, cost, coordination, memory, state tracking, real-time performance
 | [Traceability](goals/traceability/) | 8 |
 | [Version Management](goals/version-management/) | 22 |
 
-**Total: 403 patterns**
+**Total: 409 patterns**
 
 Empty scaffold folders with no patterns yet: cascading-failures, data-pipeline-integration, deployment-and-rollback, explainability-and-debugging, logging-and-tracing, monitoring-and-alerting, recovery-mechanisms, resource-consumption-management, system-integration, traffic-routing-load-balancing.
 
