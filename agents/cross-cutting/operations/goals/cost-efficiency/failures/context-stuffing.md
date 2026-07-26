@@ -90,6 +90,11 @@ Result: 100,000 tokens used, 500 needed
 1. **Context-Bloat-On-Simple-Task** (P2): Condition - a task classified as simple/single-intent triggers context assembly exceeding 20,000 tokens. Action: review the relevance filter and dynamic tool loader for the affected intent category; check for a missing intent classification rule.
 2. **Utilization-Rate-Drop** (P3): Condition - context_utilization_rate falls below 15% sustained over a rolling window of tasks. Action: audit recently added "just in case" context sources (new tools, new document attachments) for removal from default inclusion.
 
+## Related Patterns
+
+- [Unbounded Context Growth Across Turns](../../cost-optimization/failures/unbounded-context-growth-across-turns.md) - the turn-over-turn accumulation failure, as distinct from this pattern's static, single-turn over-inclusion
+- [Prompt Compression Not Applied](../../cost-optimization/failures/prompt-compression-not-applied.md) - the case where included content is genuinely relevant but expressed far more verbosely than necessary, as distinct from this pattern's inclusion of irrelevant content
+
 ## References
 
 - [AWS: 3 Agent Failure Modes](https://dev.to/aws/why-ai-agents-fail-3-failure-modes-that-cost-you-tokens-and-time-1flb) - Common failure patterns including context overloading

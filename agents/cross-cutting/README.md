@@ -8,11 +8,11 @@ Failure patterns that apply to **all AI systems** regardless of capability or us
 |----------|-------------|-------|----------|
 | [Security](security/) | Security, trust, runtime protection, DLP | 5 | 57 |
 | [Accuracy](accuracy/) | Output correctness, evaluation, verification | 5 | 53 |
-| [Operations](operations/) | Tools, cost, coordination, memory, state | 12 | 112 |
+| [Operations](operations/) | Tools, cost, coordination, memory, state | 13 | 124 |
 | [Governance](governance/) | Compliance, audit, accountability | 1 | 12 |
 | [Learning](learning/) | Self-improvement, feedback loops | 1 | 12 |
 
-**Total: 246 patterns across 24 goals**
+**Total: 258 patterns across 25 goals**
 
 ## How to Use
 

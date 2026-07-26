@@ -126,6 +126,11 @@ From Caching Research (2026):
 2. **Stale-Response-Spike** (P2): Condition - staleness-related incorrect-response reports exceed the 8% baseline in a rolling 24h window. Action: audit invalidation triggers for the affected content type and manually flush the relevant cache tier.
 3. **Cost-Per-Query-Regression** (P3): Condition - cost_per_1k_queries rises above $200 despite stable traffic volume. Action: investigate whether cache TTLs were tightened excessively or a recent deploy bypassed the cache lookup path.
 
+## Related Patterns
+
+- [Repeated Regeneration of Known-Incorrect Answer](../../cost-optimization/failures/repeated-regeneration-of-known-incorrect-answer.md) - the missing negative-cache/failure-memory counterpart to this pattern's positive-cache focus
+- [Full Reprocessing on Incremental Change](../../cost-optimization/failures/full-reprocessing-on-incremental-change.md) - the document/index-reprocessing-specific case of caching failure, as distinct from this pattern's LLM-response-caching focus
+
 ## References
 
 - [GPTCache](https://github.com/zilliztech/GPTCache) - Semantic caching for LLMs
