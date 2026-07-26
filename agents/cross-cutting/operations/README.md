@@ -41,8 +41,9 @@ Tools, cost, coordination, memory, state tracking, real-time performance
 | [Tool SLA Quality Limits](goals/tool-sla-quality-limits/) | 5 |
 | [Tool Special Constraints](goals/tool-special-constraints/) | 6 |
 | [Traceability](goals/traceability/) | 8 |
+| [Version Management](goals/version-management/) | 22 |
 
-**Total: 381 patterns**
+**Total: 403 patterns**
 
 Empty scaffold folders with no patterns yet: cascading-failures, data-pipeline-integration, deployment-and-rollback, explainability-and-debugging, logging-and-tracing, monitoring-and-alerting, recovery-mechanisms, resource-consumption-management, system-integration, traffic-routing-load-balancing.
 
