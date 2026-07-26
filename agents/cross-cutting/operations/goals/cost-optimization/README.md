@@ -18,5 +18,6 @@ Agentic planning, learning, and architecture-level cost waste — distinct from 
 | [Unnecessary Ensemble Voting Overhead](failures/unnecessary-ensemble-voting-overhead.md) |
 | [Full Reprocessing on Incremental Change](failures/full-reprocessing-on-incremental-change.md) |
 | [Prompt Compression Not Applied](failures/prompt-compression-not-applied.md) |
+| [Missing Task Specialization](failures/missing-task-specialization.md) |
 
-**Total: 12 patterns**
+**Total: 13 patterns**

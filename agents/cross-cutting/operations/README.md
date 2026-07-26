@@ -8,7 +8,7 @@ Tools, cost, coordination, memory, state tracking, real-time performance
 |------|----------|
 | [Context Lifecycle](goals/context-lifecycle/) | 6 |
 | [Cost Efficiency](goals/cost-efficiency/) | 12 |
-| [Cost Optimization](goals/cost-optimization/) | 12 |
+| [Cost Optimization](goals/cost-optimization/) | 13 |
 | [Cost Tracking](goals/cost-tracking/) | 6 |
 | [Human Oversight Reliability](goals/human-oversight-reliability/) | 8 |
 | [Memory Management](goals/memory-management/) | 6 |
@@ -21,7 +21,7 @@ Tools, cost, coordination, memory, state tracking, real-time performance
 | [Tool Selection](goals/tool-selection/) | 10 |
 | [Traceability](goals/traceability/) | 8 |
 
-**Total: 136 patterns**
+**Total: 137 patterns**
 
 ## Cross-References
 
