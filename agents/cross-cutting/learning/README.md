@@ -10,6 +10,8 @@ Self-improvement and feedback loops
 
 **Total: 12 patterns**
 
+Empty scaffold folders with no patterns yet: feedback-and-adaptation, in-context-learning.
+
 ## Cross-References
 
 See [Core](../) for other cross-cutting patterns.

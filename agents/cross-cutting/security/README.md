@@ -6,13 +6,16 @@ Security, trust, runtime protection, data loss prevention
 
 | Goal | Patterns |
 |------|----------|
-| [Agent Trust](goals/agent-trust/) | 8 |
+| [Agent Trust](goals/agent-trust/) | 11 |
 | [Data Loss Prevention](goals/data-loss-prevention/) | 8 |
 | [Runtime Security](goals/runtime-security/) | 8 |
 | [Safety Security](goals/safety-security/) | 19 |
-| [Security Autonomy](goals/security-autonomy/) | 14 |
+| [Security Autonomy](goals/security-autonomy/) | 19 |
+| [Tool Authorization Limits](goals/tool-authorization-limits/) | 10 |
 
-**Total: 57 patterns**
+**Total: 75 patterns**
+
+Empty scaffold folders with no patterns yet: jailbreak-resistance, output-filtering-moderation, value-alignment.
 
 ## Cross-References
 

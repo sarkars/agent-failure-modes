@@ -6,9 +6,14 @@ Compliance, audit, accountability
 
 | Goal | Patterns |
 |------|----------|
+| [Agent Oversight](goals/agent-oversight/) | 1 |
+| [Approval Workflows](goals/approval-workflows/) | 14 |
 | [Governance](goals/governance/) | 12 |
+| [Tool Compliance Limits](goals/tool-compliance-limits/) | 6 |
 
-**Total: 12 patterns**
+**Total: 33 patterns**
+
+Empty scaffold folders with no patterns yet: policy-enforcement.
 
 ## Cross-References
 

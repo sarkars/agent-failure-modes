@@ -6,14 +6,16 @@ Output correctness, anti-hallucination, evaluation
 
 | Goal | Patterns |
 |------|----------|
-| [Context Management](goals/context-management/) | 7 |
+| [Context Management](goals/context-management/) | 8 |
 | [Evaluation Reliability](goals/evaluation-reliability/) | 8 |
-| [Output Accuracy](goals/output-accuracy/) | 11 |
+| [Knowledge Staleness](goals/knowledge-staleness/) | 1 |
+| [Output Accuracy](goals/output-accuracy/) | 16 |
 | [Output Optimization](goals/output-optimization/) | 5 |
+| [Output Verification](goals/output-verification/) | 1 |
 | [Reasoning Quality](goals/reasoning-quality/) | 12 |
 | [Verification](goals/verification/) | 15 |
 
-**Total: 58 patterns**
+**Total: 66 patterns**
 
 ## Cross-References
 
