@@ -1,60 +1,70 @@
-# Mortgage Documents OCR
+# What Is the Most Critical Failure Pattern in Mortgage Document Processing?
 
-Failure patterns specific to mortgage document processing, including loan applications, income verification, property documents, fraud detection, quality control, and AI model reliability.
+**Mortgage document processing failure spans 8 interconnected goals (AI reliability, data extraction, compliance validation, cross-document validation, document integrity, document verification, fraud detection, quality control) where failures in one goal cascade to create systemic risks in others—hallucinated income values fail compliance checks and fraud detection, forged documents pass extraction but fail integrity checks, missing documents pass individual verification but fail quality-control audits—creating a "verification collapse" where AI systems validate their own outputs without independent checkpoints.**
+
+The mortgage industry has made a bet on speed over integrity: lenders deploy AI to extract data, validate consistency, calculate compliance metrics, detect fraud, and make underwriting recommendations using the same dataset, creating a dangerous loop where AI errors propagate silently through the entire loan decision pipeline, compounding with each stage.
+
+## Key Takeaways
+
+- 8 interconnected mortgage-document failure goals span the full document processing pipeline: AI model reliability (hallucination, vendor accuracy gaps, verification collapse), data extraction (income, assets, employment extraction accuracy), cross-document validation (identity, income, employment consistency), document integrity (PDF tampering, font substitution, barcode mismatches), document verification (authenticity, completeness, signature validity), compliance validation (TRID timing, APR, fair lending, QM/ATR), fraud detection (synthetic identities, AI forgery, behavioral anomalies), and quality control (appraisal defects, GSE compliance).
+- Cascading failures are systemic: extraction errors (income misread by 5%) create downstream false-positives in cross-document validation (income doesn't match tax return), which trigger fraud flags (income fabrication signal), which may incorrectly escalate loans or approve them with wrong pricing. A single 5% extraction error propagates across 4 validation layers.
+- Document-integrity and document-verification failures (forged W-2s, fake bank statements, falsified employment) are detected too late: AI extraction systems treat forged documents as legitimate data, produce plausible-but-wrong values, which pass compliance and cross-document checks because the underlying fraud is at the document level, not the data level.
+- The verification collapse creates a systemic risk: when AI systems handle extraction, validation, fraud detection, and underwriting on the same dataset without independent verification, single errors compound silently. Post-closing defect discovery rates for AI-only processing (8–15%) are 2–3× higher than workflows with human checkpoints, indicating architectural risk rather than accuracy improvement.
+
+## Scope
+
+Mortgage documents flow through three stages of AI processing, each with distinct failure modes:
+
+**Stage 1: Document Intake and Authenticity** — Document verification (authenticity checks, signature validation, completeness by loan type), document integrity (PDF tampering, font substitution, barcode validation, metadata timestamp checks). Failures here result in forged or stale documents entering the pipeline undetected.
+
+**Stage 2: Content Extraction and Validation** — Data extraction (income, assets, employment, property values), cross-document validation (identity consistency, income triangulation, employment timeline), AI model reliability (hallucination detection, vendor accuracy gaps, verification independence). Failures here result in inaccurate or inconsistent data propagating downstream.
+
+**Stage 3: Compliance and Quality Assurance** — Compliance validation (TRID timing, APR calculation, fair lending, QM/ATR, HMDA), fraud detection (synthetic identities, behavioral anomalies, employment fabrication, AI-generated forgery), quality control (appraisal defects, GSE compliance). Failures here result in regulatory violations and investor repurchase demands post-closing.
+
+## When Mortgage Document Processing Matters
+
+- A lender is accelerating straight-through processing (STP) and removing human underwriters from the loan-decision loop, requiring robust AI-driven validation across all 8 goals to detect the same defects human underwriters would flag.
+- Post-closing audit findings or investor repurchase demands have revealed patterns of defects (missing documents, appraisal defects, compliance violations, fraud) that AI systems failed to catch, indicating the lender needs better integration across the 8 validation goals.
+- A mortgage platform is expanding geographic footprint or loan-product offerings, and validation rules need extension across new document types, state-specific requirements, and fraud patterns that weren't present in prior portfolios.
+
+## Cross-Pattern Insight
+
+Across all 8 mortgage-document goals, the core insight is that failures in any one goal create systemic risk across the entire document processing pipeline. AI extraction accuracy of 95% is often celebrated, but that 5% error rate becomes 5%+ after cross-document validation (some errors caught, some false-positives created), cascades to compliance violation discovery (extracted income off by 3%, DTI calculation off by 1–2%, borrower doesn't qualify), and explodes to post-closing repurchase demands when regulators or investors audit the file. Document-integrity failures (forged W-2s, falsified bank statements) bypass extraction, cross-document validation, and compliance checks because the fraud is at the document level, not the data level. Fraud-detection systems trained on plausible-but-forged data don't learn to recognize forgery; independent verification (IRS transcript, employer call, bank API) is the only reliable detection method. The mitigation is architectural: each goal requires independent validation gates. Extraction requires confidence scoring and human escalation for low-confidence fields. Cross-document validation requires tolerance thresholds for legitimate variance, not perfect matching. Compliance validation requires encoding rules as assertions, not guidelines. Fraud detection requires external verification, not single-file analysis. Quality control requires pre-closing audits on high-risk loans, not post-closing discovery. The "verification collapse" is solved by decoupling validation from decision: AI can suggest; only independent verification can authorize.
+
+## Frequently Asked Questions
+
+### How should lenders decide which document validation steps are safe to automate versus which require human review?
+
+Automation is safe for repetitive, rule-based checks: document completeness (presence of required documents by loan type), date staleness (pay stubs >60 days old, appraisals >90 days old), signature presence (required-signature fields filled). Automation is not safe for subjective or risk-bearing decisions: authenticity determination (forged vs. genuine), fair-lending pattern analysis, fraud-case escalation. The practical approach: automate gate-keeping (missing documents block underwriting), automate flagging (suspicious patterns trigger review queues), escalate decision-making (human underwriter decides if a discrepancy is acceptable). For mortgages, the industry practice is: 70–80% of loans pass automated checks and proceed to standard underwriting; 20–30% of loans are flagged for exception handling; 1–3% of flagged loans are escalated to senior underwriters or fraud investigation.
+
+### What prevents extraction-accuracy improvements (95% → 96%) from translating to lower defect rates?
+
+Extraction accuracy is per-field; defect risk is systemic. A 1% improvement in income extraction (95% → 96%) improves income accuracy but doesn't address: (1) income validation (extracted income must still be verified against tax return and pay stubs), (2) downstream impact (income error cascades to DTI error, which may flip approval or pricing), (3) extraction on other fields (assets, employment, property values still have their own error rates). A 5-percentage-point improvement in extraction (95% → 100%) would significantly reduce defects; a 1-percentage-point improvement is often swamped by downstream validation challenges. The lesson: accuracy improvements above 95% show diminishing returns; architectural improvements (independent verification gates, human checkpoints, rule-based validation) deliver larger defect-reduction gains.
+
+### What should be the priority order for implementing validation across the 8 goals?
+
+Priority should be based on defect-discovery risk: (1) Document verification (authenticity, completeness, signature validity) — blocks fake documents from entering pipeline — highest priority because forged documents bypass all downstream validation. (2) Document integrity (PDF tampering, barcode, metadata, fonts) — detects sophisticated forgery — high priority for same reason. (3) Data extraction (accuracy, confidence scoring) — gates downstream validation — essential before compliance or cross-document checks. (4) Cross-document validation (consistency, identity, income triangulation) — catches extraction errors before compliance — medium priority. (5) Compliance validation (TRID, APR, fair lending) — regulatory requirement — medium priority but often required for loan eligibility. (6) AI model reliability (hallucination detection, vendor accuracy gaps) — addresses systematic accuracy issues — medium priority. (7) Fraud detection (synthetic identities, behavioral anomalies) — catches high-stakes fraud — priority depends on fraud risk in portfolio. (8) Quality control (appraisal defects, GSE compliance) — post-funding audit — lower priority for origination but critical for secondary-market success.
+
+### How do the 8 mortgage goals relate to the general document-processing capability?
+
+Mortgage documents are a specialized use case of the broader document-processing capability (general OCR, layout analysis, table extraction, entity recognition). The general document-processing capability covers: how to reliably extract text from images, tables from layouts, structured data from unstructured documents. The mortgage-documents goals add domain-specific layers: mortgage documents require cross-file validation (income must reconcile across 4+ sources), regulatory compliance validation (TRID, RESPA, fair lending), fraud-detection specificity (AI-generated forgery, synthetic identities, occupancy fraud), and quality-control rigor (GSE audit requirements, repurchase-demand patterns). A lender using the general document-processing capability without the mortgage-document goals would achieve good extraction but miss compliance violations, cross-file inconsistencies, and fraud. The two capabilities are complementary: document-processing handles OCR and layout; mortgage-documents handles business rules and verification.
 
 ## Goals
 
-| Goal | Description | Patterns |
-|------|-------------|----------|
-| [Document Verification](goals/document-verification/) | Fraud detection, signatures, authenticity, completeness | 8 |
-| [Data Extraction](goals/data-extraction/) | Income, assets, employment, property values | 10 |
-| [Compliance Validation](goals/compliance-validation/) | TRID, APR, fair lending, QM/ATR, HMDA | 6 |
-| [Fraud Detection](goals/fraud-detection/) | Synthetic identity, AI forgery, deepfakes, behavioral signals | 7 |
-| [Quality Control](goals/quality-control/) | GSE defects, repurchase risk, audit failures | 6 |
-| [AI Model Reliability](goals/ai-model-reliability/) | Verification collapse, hallucination, vendor accuracy | 7 |
-| [Cross-Document Validation](goals/cross-document-validation/) | Name matching, income triangulation, SSN correlation, timeline consistency | 10 |
-| [Document Integrity](goals/document-integrity/) | PDF forensics, barcode validation, font analysis, digital signatures | 8 |
+| Goal | Focus | Key Patterns | Cross-Links |
+|------|-------|--------------|-------------|
+| [AI Model Reliability](goals/ai-model-reliability/) | Hallucination, vendor accuracy, verification independence | 3 patterns | Feeds [Data Extraction](goals/data-extraction/), [Cross-Document Validation](goals/cross-document-validation/), [Fraud Detection](goals/fraud-detection/) |
+| [Data Extraction](goals/data-extraction/) | Income, assets, employment, property accuracy | 10 patterns | Upstream of [Cross-Document Validation](goals/cross-document-validation/), [Compliance Validation](goals/compliance-validation/), [Quality Control](goals/quality-control/) |
+| [Cross-Document Validation](goals/cross-document-validation/) | Identity, income, employment consistency across files | 10 patterns | Depends on [Data Extraction](goals/data-extraction/), informs [Fraud Detection](goals/fraud-detection/), [Compliance Validation](goals/compliance-validation/) |
+| [Document Integrity](goals/document-integrity/) | PDF tampering, font analysis, barcode, metadata, signatures | 8 patterns | Upstream of [Document Verification](goals/document-verification/), [Data Extraction](goals/data-extraction/) |
+| [Document Verification](goals/document-verification/) | Authenticity, completeness, signatures, staleness | 8 patterns | Gates [Data Extraction](goals/data-extraction/), complements [Document Integrity](goals/document-integrity/), informs [Fraud Detection](goals/fraud-detection/) |
+| [Compliance Validation](goals/compliance-validation/) | TRID, APR, fair lending, QM/ATR, HMDA | 6 patterns | Depends on [Data Extraction](goals/data-extraction/), [Cross-Document Validation](goals/cross-document-validation/), informs [Quality Control](goals/quality-control/) |
+| [Fraud Detection](goals/fraud-detection/) | Synthetic identities, AI forgery, employment fabrication, behavioral anomalies | 7 patterns | Uses signals from [Data Extraction](goals/data-extraction/), [Cross-Document Validation](goals/cross-document-validation/), [Document Integrity](goals/document-integrity/) |
+| [Quality Control](goals/quality-control/) | Appraisal defects, GSE compliance, repurchase risk | 1 pattern | Downstream audit of [Data Extraction](goals/data-extraction/), [Compliance Validation](goals/compliance-validation/), [Fraud Detection](goals/fraud-detection/) |
 
-**Total: 62 patterns across 8 goals**
+**Total: 8 goals, 62 patterns**
 
-## Key Statistics
+## Related Categories
 
-| Finding | Source |
-|---------|--------|
-| 48% of mortgage lenders list AI as top tech priority | Industry Survey 2025 |
-| FBI logged 12,000+ real estate fraud complaints, $275M losses (2025) | FBI IC3 |
-| AI-assisted document forgery rose from 0% to 2% of fakes (2024-2025) | FraudFinder AI |
-| Manual mortgage processes have 10-15% defect rates | Industry Analysis |
-| 63% of AI-using lenders rely on AI for document classification | Industry Survey |
-| Rocket Mortgage's LLM achieves 90% accuracy on extraction | AWS Case Study |
-
-## Why Mortgage Documents?
-
-Mortgage document processing has unique failure modes:
-
-- **High-stakes accuracy**: Errors can delay closings or cause compliance violations
-- **Multi-document correlation**: Income, assets, employment must align across documents
-- **Cross-document validation**: W-2 must match tax return, pay stubs must align with VOE, names must correlate across timeline
-- **Document integrity**: PDF metadata, barcode encoding, font consistency reveal tampering
-- **Regulatory requirements**: TRID, RESPA, fair lending compliance
-- **Fraud detection**: AI-generated forgeries, synthetic identities, deepfakes
-- **Document variety**: W-2s, tax returns, bank statements, appraisals, titles
-- **Verification collapse**: AI validating its own outputs without independent verification
-- **GSE quality requirements**: 10% audit sampling, 90-day windows, repurchase risk
-
-## The Verification Collapse
-
-> "Decision engines are increasingly 'signing their own homework,' validating the same data they rely on to make decisions. This is the Verification Collapse."
-> — National Mortgage Professional, 2026
-
-As AI handles both extraction AND underwriting, the industry faces a systemic risk: speed has outpaced data integrity. [Read more](goals/ai-model-reliability/failures/verification-collapse.md)
-
-## Cross-References
-
-- [Document Processing](../../by-capability/document-processing/) - General OCR patterns
-- [Knowledge Retrieval](../../by-capability/knowledge-retrieval/) - RAG for mortgage guidelines
-- [Cross-Cutting Security](../../cross-cutting/security/) - PII handling in financial docs
-
-## References
-
-See [REFERENCES.md](../../../REFERENCES.md#mortgage-document-processing) for full source list.
+- [Document Processing](../../by-capability/document-processing/) — General-purpose OCR, layout analysis, and entity extraction for unstructured documents; complements mortgage-documents with foundational extraction capabilities and fails when document format is non-standard or recognition requires domain knowledge. Mortgage documents are a specialized application of document-processing; document-processing provides the technical foundation, mortgage-documents adds business rules.
+- [Cross-Cutting Security](../../cross-cutting/security/) — PII handling, data encryption, regulatory compliance for sensitive documents; overlaps with mortgage-documents on fair-lending analysis (protected-class data handling) and PII exposure risks (storing extracted borrower names, SSNs, income).
