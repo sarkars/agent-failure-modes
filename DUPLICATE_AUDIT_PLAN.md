@@ -1,5 +1,7 @@
 # Comprehensive Duplicate Audit Plan: 851 Agent Failure Patterns
 
+> **Status update (2026-07-27)**: Part 1's 11 groups were re-verified against current disk state. 7 groups (infinite-loops, wrong-tool-selection, intent-misclassification, semantic-mismatch, distribution-shift, temporal-confusion, memory-poisoning) are already resolved — one copy was deleted in an earlier run (sometimes the opposite side of the pair from what this doc recommended, but only one copy remains either way, so there's no remaining duplicate). The other 4 groups (confidence-miscalibration ×3, attribute-hallucination ×2, object-hallucination ×2, privilege-escalation ×2) still have all copies on disk, but inspection shows they were **not** left as naive duplicates: each now carries an explicit `## Universal Pattern Reference` (pointing to a shared cross-cutting canonical) or `## Complementary Pattern` (explicit Prevention-vs-Detection&Response split) section, with genuinely distinct Root Cause/Example/Mitigations content per copy and correct cross-links between them. This is the legitimate domain-variant/complementary-split outcome `DUPLICATE_PREVENTION_PROTOCOL.md` allows, not leftover duplication — do **not** merge or delete these 4 groups. Part 1 of this plan is effectively closed; no further action needed on it.
+
 ## Executive Summary
 
 ### Audit Results
