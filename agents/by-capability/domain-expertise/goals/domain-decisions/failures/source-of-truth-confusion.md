@@ -6,18 +6,27 @@
 
 **Symptoms**
 - Answer conflicts with authoritative system.
-- [Add more specific symptoms]
+- Agent quotes a value extracted via OCR/RAG that differs from the live database record, and no hierarchy check catches the conflict before the value is used.
+- Investigation finds the authoritative source was queryable and available the whole time, but the agent defaulted to the retrieved/extracted text anyway.
 
 **Root Cause**
 Agent uses OCR/RAG text when database/source document should win.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+A customer asks an agent for their current account balance. The agent's RAG
+pipeline retrieves a cached statement PDF showing a balance from three weeks
+ago and answers with that figure, even though the live account database
+(the actual source of truth) is queryable and shows a materially different
+current balance. The customer makes a purchasing decision based on the stale
+figure and later disputes a declined transaction.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- No explicit source-of-truth hierarchy encoded — RAG/OCR retrieval and live database queries are treated as equally valid inputs.
+- RAG pipeline is queried by default/first, with the authoritative database treated as a fallback rather than the primary source.
+- No conflict-detection step comparing retrieved text against the authoritative source before answering.
+- Caching of extracted/retrieved content outlives the freshness window of the underlying authoritative data.
 
 ---
 
@@ -26,12 +35,15 @@ Agent uses OCR/RAG text when database/source document should win.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Database available, RAG also has an answer | Live database has current balance; cached statement PDF has stale figure | Agent uses database value | Agent uses RAG/OCR value despite database availability |
+| Sources conflict | Extracted document value differs from database record | Agent applies hierarchy (database wins), logs conflict | Agent picks whichever source it queried first, no conflict logged |
+| Database unavailable | Authoritative database is down | Agent falls back to next-tier source with explicit disclaimer | Agent answers from lower-tier source with no indication of reduced confidence |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| database_first_query_compliance_eval_percent | 100% | % of eval cases where agent queries the authoritative database before falling back to RAG/OCR |
+| source_hierarchy_violation_rate_eval_percent | 0% | % of eval cases where the answer is based on a lower-precedence source despite a higher-precedence one being available |
 
 ---
 
@@ -71,12 +83,16 @@ Agent uses OCR/RAG text when database/source document should win.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| source_hierarchy_violation_rate_percent | > 0.1% |
+| rag_usage_when_database_available_percent | > 0% |
+| authoritative_source_availability_percent | < 95% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Source-of-Truth Hierarchy Violation | Decision based on low-precedence source when high-precedence source was available | Critical |
+| Source Conflict Detected | Multiple sources provide conflicting answers | Warning |
+| Database Unavailability | Authoritative database unavailable for query | Warning |
 
 ---
 

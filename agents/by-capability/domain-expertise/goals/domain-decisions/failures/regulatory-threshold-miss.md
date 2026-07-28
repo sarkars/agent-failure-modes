@@ -6,18 +6,27 @@
 
 **Symptoms**
 - Compliance exception discovered after action.
-- [Add more specific symptoms]
+- Agent approves a transaction or action that exceeds a regulatory limit because the limit wasn't checked in real time.
+- A refund, disclosure, or filing deadline passes silently because no deadline-tracking mechanism existed.
 
 **Root Cause**
 Agent misses limits, deadlines, eligibility, or compliance triggers.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+An agent processes a large customer withdrawal without checking it against
+the daily anti-money-laundering reporting threshold. The transaction clears
+the threshold but no compliance report is filed, because the agent's
+workflow only validates account balance sufficiency, not regulatory
+reporting triggers. The gap is caught three weeks later during a routine
+audit, triggering a late-filing remediation with the regulator.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Regulatory thresholds and deadlines live in policy documents rather than as queryable, enforced rules.
+- Agent's validation logic checks business constraints (balance, inventory) but not compliance constraints (reporting thresholds, filing windows).
+- No deadline-tracking system that alerts before a regulatory window closes.
+- Thresholds change over time (regulatory updates) but the agent's rule set isn't version-controlled or reviewed on a compliance cadence.
 
 ---
 
@@ -26,12 +35,15 @@ Agent misses limits, deadlines, eligibility, or compliance triggers.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Transaction at regulatory reporting threshold | Withdrawal amount at/above AML reporting limit | Agent triggers compliance filing workflow | Transaction processed with no compliance trigger fired |
+| Approaching deadline | Refund window closing in 2 days | Agent surfaces deadline warning, expedites processing | Deadline passes with no alert or escalation |
+| Threshold just below limit | Transaction just under the regulatory limit | Agent processes normally, no false-positive trigger | Agent incorrectly blocks a compliant transaction |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| compliance_validation_coverage_eval_percent | 100% | % of eval decisions where all applicable regulatory thresholds were checked |
+| regulatory_threshold_violation_rate_eval_percent | 0% | % of eval cases where the decision violates a regulatory threshold |
 
 ---
 
@@ -71,12 +83,16 @@ Agent misses limits, deadlines, eligibility, or compliance triggers.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| regulatory_threshold_violations_per_day | > 0 |
+| deadline_miss_rate_percent | > 0% |
+| compliance_audit_exception_rate_percent | > 0.1% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Critical |
+| Regulatory Threshold Violation | Decision/action violates a regulatory threshold | Critical |
+| Deadline Approaching | Regulatory deadline within 48 hours | Warning |
+| Compliance Audit Exception | Audit finds threshold violation post-action | Critical |
 
 ---
 

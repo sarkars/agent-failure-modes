@@ -6,18 +6,27 @@
 
 **Symptoms**
 - Sentiment/complaint escalation after response.
-- [Add more specific symptoms]
+- Agent responds with a procedurally correct but tone-deaf message to a customer expressing grief, anger, or financial distress.
+- Customer explicitly complains about feeling unheard or dismissed rather than about the substance of the resolution offered.
 
 **Root Cause**
 Agent mishandles empathy in debt collection, healthcare, support, or complaints.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+A customer messages a debt-collection agent explaining they just lost their
+job and can't make the scheduled payment. The agent replies with a template
+response listing late fees and the next payment due date, without
+acknowledging the hardship or offering a hardship program. The customer
+escalates to a regulator complaint citing "no compassion shown," triggering a
+compliance review even though the payment terms cited were accurate.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Agent optimizes for resolving the stated request rather than reading emotional signal in the message.
+- No emotion/sentiment classification step before response generation.
+- Response templates are policy-accurate but written without empathy review.
+- High message volume pressures agent toward fast, templated replies over context-aware ones.
 
 ---
 
@@ -26,12 +35,15 @@ Agent mishandles empathy in debt collection, healthcare, support, or complaints.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Hardship disclosure in collections | "I lost my job, can't pay this month" | Agent acknowledges hardship, offers hardship program/escalation | Agent replies with only fee/deadline template, no acknowledgment |
+| Angry high-value customer | VIP customer expressing anger over repeated issue | Agent response scores high on empathy rubric | Agent response is procedurally correct but rated tone-deaf by reviewer |
+| Neutral routine request | Standard order-status question, no emotional signal | Agent responds efficiently without unneeded empathy padding | Agent over-applies empathy template to a neutral request |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| empathy_rubric_score_eval_avg | > 0.80 | Average tone/empathy score across eval transcripts scored against rubric |
+| emotion_classifier_precheck_coverage_percent | 100% | % of eval responses where emotion classifier ran before response generation |
 
 ---
 
@@ -71,12 +83,16 @@ Agent mishandles empathy in debt collection, healthcare, support, or complaints.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| emotional_mishandling_rate_percent | > 5% |
+| complaint_escalation_rate_post_agent_response_percent | > 10% |
+| tone_score_average | < 0.70 |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Emotional Mishandling Detected | Customer sentiment worsens post-response or escalation risk increases | Warning |
+| Low Empathy Score | Tone score < 0.65 for a response | Warning |
+| High-Risk Emotional Mismatch | VIP/churn-risk customer receives low-empathy response | Critical |
 
 ---
 

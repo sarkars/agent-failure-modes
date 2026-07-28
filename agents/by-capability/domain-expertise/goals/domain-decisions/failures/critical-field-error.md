@@ -6,18 +6,27 @@
 
 **Symptoms**
 - Field mismatch against source image/database.
-- [Add more specific symptoms]
+- Downstream system rejects or silently processes a transposed digit (amount, account number, or date) with no validation catch.
+- Manual audit finds extraction confidence was never checked against a threshold before use.
 
 **Root Cause**
 Agent extracts wrong amount, date, name, address, account number, or ID.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+Agent extracts a wire transfer amount from a scanned invoice as $15,000 when
+the source document actually reads $150,000 — a decimal/comma OCR
+misread. The field has no confidence threshold or cross-reference check
+against the accompanying purchase order, so the transfer is initiated at the
+wrong amount and only caught when the vendor calls asking for the remaining
+$135,000.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Low-quality source scans (skewed, low-resolution, handwritten) increase OCR/extraction error rate.
+- No confidence score attached to extracted fields, or confidence score computed but never checked before use.
+- No cross-reference against a second source (database record, accompanying document) for high-stakes fields.
+- Field formats (amount, date, account number) not validated against expected pattern before downstream use.
 
 ---
 
@@ -26,12 +35,15 @@ Agent extracts wrong amount, date, name, address, account number, or ID.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Low-quality scan with ambiguous digit | Skewed invoice scan, "$15,000" vs "$150,000" ambiguity | Low confidence triggers manual review, field not auto-used | Agent uses field without flagging low confidence |
+| Field format violation | Extracted account number fails checksum | Agent rejects field and escalates | Agent passes invalid field downstream without validation |
+| Cross-reference mismatch | Extracted amount conflicts with accompanying PO/database record | Agent flags mismatch, blocks auto-processing | Agent uses extracted value despite conflicting authoritative source |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| critical_field_confidence_check_coverage_percent | 100% | % of critical field extractions where confidence score was computed and checked against threshold before use |
+| critical_field_eval_extraction_error_rate_percent | < 0.1% | % of eval test cases where extracted critical field doesn't match ground truth |
 
 ---
 
@@ -71,12 +83,16 @@ Agent extracts wrong amount, date, name, address, account number, or ID.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| critical_field_extraction_error_rate_percent | > 0.5% |
+| low_confidence_field_escalation_rate_percent | outside 2-5% baseline |
+| field_validation_failure_rate_percent | > 0.1% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Critical |
+| Critical Field Extraction Error | Critical field mismatch detected (extracted != source) | Critical |
+| Low Confidence Field Usage | Field with confidence < threshold used in a decision | Warning |
+| Field Validation Failure | Extracted field fails validation checks (format, range, existence) | Critical |
 
 ---
 

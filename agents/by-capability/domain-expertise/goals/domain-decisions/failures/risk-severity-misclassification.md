@@ -6,18 +6,28 @@
 
 **Symptoms**
 - Escalation severity mismatch.
-- [Add more specific symptoms]
+- A security or safety-relevant report is triaged as low priority and sits in a queue for days before anyone notices.
+- Reviewers repeatedly override the agent's severity classification, but the pattern isn't fed back into the rubric.
 
 **Root Cause**
 Agent treats critical issue as minor or vice versa.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+A support agent receives a message reporting that a customer's account shows
+signs of unauthorized access (login from an unrecognized country, password
+reset the customer didn't request). The agent classifies it as a routine
+"account access question" (P3) instead of a security incident (P1), so it
+sits in the standard 24-hour queue instead of triggering immediate fraud-team
+escalation. By the time it's reviewed, the attacker has already changed the
+account's payment details.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Severity rubric criteria are vague or not explicitly tied to specific issue signals (e.g., "unauthorized access" isn't hardcoded to trigger P1).
+- No confidence score or reasoning trace attached to severity classification, making misclassifications hard to catch before escalation delay causes harm.
+- High volume of routine issues creates pressure to default to lower severity absent an unambiguous signal.
+- No feedback loop from reviewer overrides back into rubric refinement or agent retraining.
 
 ---
 
@@ -26,12 +36,15 @@ Agent treats critical issue as minor or vice versa.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Security-signal issue | Message reports unrecognized login + unauthorized password reset | Classified P1, immediate fraud-team escalation | Classified P3/routine, no immediate escalation |
+| Ambiguous severity | Issue with mixed signals (minor complaint but from a high-risk customer) | Agent's confidence score reflects ambiguity, routes to secondary review | Agent classifies confidently with no reasoning trace despite ambiguity |
+| Routine low-risk issue | Standard order-status inquiry | Classified P4, no unnecessary escalation | Agent over-classifies routine issue as high severity |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| severity_misclassification_rate_eval_percent | < 2% | % of eval cases where classification doesn't match expert-labeled ground truth |
+| p1_misclassification_rate_eval_percent | < 1% | % of eval cases where a true P1 issue is under-classified |
 
 ---
 
@@ -71,12 +84,16 @@ Agent treats critical issue as minor or vice versa.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| severity_misclassification_rate_percent | > 5% |
+| p1_misclassification_rate_percent | > 1% |
+| escalation_speed_by_severity_sla_met_percent | < 100% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Critical Issue Misclassified as Minor | P1-level issue classified as P3/P4 | Critical |
+| Escalation SLA Miss | Issue not escalated within SLA for its severity level | Warning |
+| Low Confidence Severity Classification | Classification confidence < 0.60 | Warning |
 
 ---
 

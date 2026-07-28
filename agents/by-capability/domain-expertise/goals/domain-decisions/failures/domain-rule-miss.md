@@ -6,18 +6,28 @@
 
 **Symptoms**
 - Wrong decision under domain policy.
-- [Add more specific symptoms]
+- Agent applies the general-case rule where an industry-specific exception clearly applied.
+- Compliance or legal review flags a decision as violating a rule that was never encoded in the agent's reasoning or rule engine.
 
 **Root Cause**
 Agent misses industry-specific rule or exception.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+An insurance-claims agent processes a claim under the standard 30-day filing
+window, denying a claim filed on day 35. It misses the state-specific
+exception that extends the filing window to 60 days for claims involving a
+hospitalization, because that exception was never encoded in the agent's
+rule set — only the general policy was. The denial is later overturned by a
+regulator, and the insurer faces a compliance finding for improperly denied
+claims across the affected state.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Domain rules exist as tribal knowledge or scattered documents rather than a queryable, versioned rule engine.
+- Jurisdiction- or product-specific exceptions are not systematically captured alongside the general rule.
+- No domain-expert review cadence to catch rule set gaps before they cause repeated wrong decisions.
+- Agent has no mechanism to flag "rule uncertain" and escalate rather than defaulting to the general case.
 
 ---
 
@@ -26,12 +36,15 @@ Agent misses industry-specific rule or exception.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Known jurisdictional exception applies | Claim filed day 35, state grants 60-day hospitalization exception | Agent applies exception, approves claim | Agent applies general 30-day rule, denies claim |
+| No matching rule found | Novel case not covered by any encoded rule | Agent escalates to domain expert rather than guessing | Agent invents a plausible-sounding but unverified rule application |
+| Conflicting rules | Two applicable rules give different outcomes | Agent applies documented conflict-resolution priority or escalates | Agent silently picks one rule without following resolution strategy |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| domain_rule_coverage_eval_percent | 100% | % of eval decision types with a corresponding rule in the rule engine |
+| domain_rule_violation_rate_eval_percent | < 0.5% | % of eval decisions that don't match the applicable rule per domain-expert review |
 
 ---
 
@@ -71,12 +84,16 @@ Agent misses industry-specific rule or exception.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| domain_rule_violation_rate_percent | > 1% |
+| rule_exception_invocation_rate_percent | outside domain-specific baseline |
+| rule_coverage_percent | < 100% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Domain Rule Violation | Decision doesn't match applicable rule from rule engine | Warning |
+| Exception Abuse Pattern | Agent invokes exceptions 3+ times/week or > 20% of decisions | Warning |
+| Rule Conflict Unresolved | Multiple conflicting rules apply and resolution fails | Critical |
 
 ---
 

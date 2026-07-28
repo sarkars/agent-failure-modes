@@ -6,18 +6,27 @@
 
 **Symptoms**
 - Wrong extraction schema or workflow applied.
-- [Add more specific symptoms]
+- Required fields for the actual document type come back empty or nonsensical because the wrong schema's field map was used.
+- Downstream approval or underwriting decision is based on fields extracted from a misidentified document.
 
 **Root Cause**
 Agent misclassifies paystub, W-2, bank statement, invoice, policy, etc.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+A loan-processing agent receives a scanned combined document containing both
+a bank statement and a paystub on facing pages. It classifies the whole
+upload as "bank statement," applies the bank-statement extraction schema, and
+never extracts the paystub's gross income field. The application proceeds
+with an incomplete income picture, and the mistake surfaces only when
+underwriting can't reconcile the stated income with the extracted fields.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Documents with mixed or multi-page content confuse single-label classifiers.
+- Classifier has no abstain/low-confidence path, forcing a best-guess label even when uncertain.
+- Visually similar document types (invoice vs. purchase order, W-2 vs. 1099) share layout features that confuse classification.
+- No post-extraction validation step to catch when required fields for the assumed type are missing or malformed.
 
 ---
 
@@ -26,12 +35,15 @@ Agent misclassifies paystub, W-2, bank statement, invoice, policy, etc.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Mixed multi-document upload | Single PDF with bank statement + paystub pages | Classifier splits/flags mixed content or abstains for manual review | Classifier assigns one label to whole document, misses second document type |
+| Visually similar document pair | W-2 vs. 1099 with similar layout | Classifier distinguishes correctly using text-pattern signals, not just layout | Classifier confuses the two based on layout alone |
+| Low-confidence scan | Poor-quality scan of an uncommon document type | Classifier abstains, routes to manual classification | Classifier forces a best-guess label despite low confidence |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| document_classification_accuracy_eval_percent | > 98% | % of eval documents correctly classified against ground-truth labels |
+| schema_field_completeness_post_classification_percent | > 99% | % of extractions where all required fields for the assigned schema are present and valid |
 
 ---
 
@@ -71,12 +83,16 @@ Agent misclassifies paystub, W-2, bank statement, invoice, policy, etc.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| document_misclassification_rate_percent | > 2% |
+| abstention_rate_percent | outside 2-5% baseline |
+| schema_application_error_rate_percent | > 0.1% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Document Type Misclassification | Document classified with confidence < 0.70 or wrong schema applied | Warning |
+| Classifier Accuracy Degradation | Classification accuracy drops > 5% month-over-month | Warning |
+| High Abstention Rate | Abstention rate > 8% for a document type | Warning |
 
 ---
 

@@ -6,18 +6,27 @@
 
 **Symptoms**
 - Customer/business metric harmed despite correctness.
-- [Add more specific symptoms]
+- Agent enforces a policy to the letter in a case where a discretionary exception was commercially obvious.
+- Post-mortem review finds the "correct" decision was technically defensible but a human agent with account context would have chosen differently.
 
 **Root Cause**
 Technically correct answer is commercially wrong.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+A VIP customer with $250K lifetime value asks for a $40 exception to a return
+window that closed 3 days ago. The agent, following the literal return policy,
+denies the request as "outside the 30-day window." Technically correct — but
+the customer churns a $2K/month subscription over a $40 dispute, and the
+decision surfaces in a QBR as a case the account team would have approved in
+seconds had they seen it.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Agent has no visibility into customer LTV, account health, or churn risk at decision time.
+- Policy engine treats all customers identically regardless of business context.
+- No feedback loop connecting agent decisions to downstream business outcomes (churn, NPS, revenue).
+- Success is measured by policy-compliance rate rather than business-outcome quality.
 
 ---
 
@@ -26,12 +35,15 @@ Technically correct answer is commercially wrong.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| High-LTV customer, minor policy breach | VIP customer, return 3 days past window, $40 item | Agent grants exception or escalates using LTV context | Agent denies purely on literal policy with no context check |
+| Low-value customer, borderline request | New customer, first-time minor policy breach | Agent applies standard policy correctly | Agent over-extends high-cost exception without business justification |
+| Business context available but unused | Agent has access to LTV/account_health fields | Agent's decision reasoning references business context | Agent decision ignores available business context fields entirely |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| business_context_utilization_rate_in_eval_percent | 100% | % of eval decisions where available business context fields appear in agent's reasoning trace |
+| technically_correct_but_business_harmful_rate_percent | 0% | % of eval cases where decision is policy-compliant but scored as commercially wrong by reviewer |
 
 ---
 
@@ -71,12 +83,16 @@ Technically correct answer is commercially wrong.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| business_kpi_degradation_post_decision_percent | > 0% |
+| customer_churn_rate_by_decision_cohort | > 2x baseline |
+| business_context_utilization_rate_percent | < 100% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Business KPI Degradation | Business metric degrades post-decision vs pre-decision baseline | Warning |
+| High-Value Customer Harm | Decision harms high-LTV customer resulting in churn risk or satisfaction drop | Critical |
+| Cohort Business Outcome Degradation | Cohort of decisions exhibits business outcomes 20% worse than control | Warning |
 
 ---
 
