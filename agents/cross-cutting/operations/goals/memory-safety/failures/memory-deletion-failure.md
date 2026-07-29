@@ -6,18 +6,33 @@
 
 **Symptoms**
 - Deleted fact still influences later responses.
-- [Add more specific symptoms]
+- Forget request succeeds against the primary database but the vector/embedding index or a cache still returns near-duplicate matches for the deleted content.
+- A compliance audit discovers the deleted fact persisting inside a derived summary or cached prompt context generated before the deletion.
+- A forget request is marked "complete" even though it was never verified against every store that could hold a copy.
 
 **Root Cause**
 Agent fails to forget information when requested.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+User: "Please delete my home address, I don't want it stored anymore."
+Agent: "Done, your address has been removed."
+
+[Primary DB row deleted. Vector index still holds the original embedding;
+a nightly summary job generated a week earlier still contains the address
+in its cached text.]
+
+Two weeks later, unrelated session:
+Agent: "Should I use your address on file, 42 Birch Lane, for the delivery estimate?"
+User: "I told you to delete that."
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Deletion is implemented as a single DELETE against the primary store without fanning out to derived stores (embeddings, caches, summaries, analytics extracts).
+- No tombstone mechanism, so replicas or caches that already loaded the value keep serving it after the primary delete.
+- No post-deletion verification probe confirms removal took effect across every store before the request is marked complete.
+- Summaries or other derived artifacts generated before the deletion are never regenerated or scanned for the deleted content.
+- The store registry used for fanout is not kept current as new caches or analytics sinks are added to the system.
 
 ---
 
@@ -26,12 +41,16 @@ Agent fails to forget information when requested.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Full-store fanout test | A forget request for a fact known to exist in the primary DB, vector index, and cache | The fact is absent from every store after the request completes | Probe finds the fact still present in any one store |
+| Derived-artifact residue test | Delete a fact after a summary referencing it was already generated | The cached summary is regenerated or scrubbed of the deleted content | The deleted fact still appears verbatim or paraphrased in the cached summary |
+| Tombstone bypass test | Query the retrieval path directly against a replica that hasn't finished syncing the delete | Tombstone record suppresses the value even on the lagging replica | Stale replica value surfaces in the response |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| store_fanout_completeness_rate | 100% | In a test harness, issue a delete against a fact seeded in every registered store and verify each store confirms removal |
+| post_deletion_recall_probe_pass_rate | 100% | Run synthetic recall queries against test fixtures immediately after simulated deletion and confirm zero hits |
+| mean_test_deletion_latency | < 15 min (simulated) | Measure time from delete request to full-propagation confirmation across all stores in the test environment |
 
 ---
 
@@ -70,12 +89,15 @@ Agent fails to forget information when requested.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| deletion_full_propagation_rate_percent | < 100% for any request past SLA |
+| post_deletion_recall_probe_failure_count | > 0 |
+| tombstone_bypass_count | > 0 |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Deleted Fact Resurfaced in Response | Post-deletion recall probe or live user interaction shows a deleted fact still influencing output | Critical |
+| Deletion Request Stuck Incomplete | A forget request has not reached full-propagation status within SLA (e.g., 60 min) | High |
 
 ---
 

@@ -6,18 +6,37 @@
 
 **Symptoms**
 - Race conditions; conflicting updates.
-- [Add more specific symptoms]
+- Last write silently wins with no conflict ever detected or logged, erasing an earlier valid update.
+- Mutation history shows an object's field flipping between two agents' intended values with no reconciliation event recorded in between.
+- Conflicts appear only intermittently, concentrated on whichever write path lacks a version check or lock.
+- Object ends in a state that neither concurrent writer actually intended (e.g., a ticket closed as duplicate after being assigned).
 
 **Root Cause**
 Multiple agents/users modify same object without coordination.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+Two order-fulfillment agents both pull from the same warehouse queue.
+Agent A reads order #781 (status: "pending", qty_reserved: 0) and
+begins reserving 5 units of SKU-221.
+Agent B reads the same order a moment later, also sees qty_reserved: 0,
+and begins reserving 5 units of a substitute SKU because the primary
+is low-stock.
+Both writes succeed since neither checks whether qty_reserved changed
+since its read. The order ends up with two overlapping reservations
+against different SKUs, and the warehouse over-picks inventory that
+was never actually needed twice.
+No 409 conflict, lock timeout, or reconciliation alert ever fires,
+so the double-reservation is only caught days later during a stock
+count.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- No optimistic concurrency control (version tokens/ETags) on the shared object's write path, so a stale read is never rejected at write time.
+- Multiple agent instances (or agent + human) act on the same queue or record with no shared locking service coordinating access.
+- Write operations are implemented as read-modify-write rather than an atomic compare-and-swap, widening the race window.
+- High-frequency access concentrated on a small set of "hot" shared objects (a single queue, a popular ticket, a shared counter) increases collision likelihood.
+- No conflict-resolution service exists, so even when a conflict is technically detectable, there is no defined merge or escalation path to act on it.
 
 ---
 
@@ -26,12 +45,16 @@ Multiple agents/users modify same object without coordination.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Concurrent status update race | Two simulated agents read the same ticket (status="open", version=1) within 50ms, then each writes a different status without re-checking | Second write is rejected with a 409 version conflict; final ticket state reflects a deliberate reconciliation, not a race | Second write succeeds unconditionally and silently overwrites the first agent's update |
+| Stuck lock auto-release | Simulate an agent process crashing mid-transaction while holding a critical-section lock on a shared inventory object | Lock is auto-released after its TTL, allowing a waiting writer to proceed | Lock remains held past TTL, blocking all other writers with no auto-release or alert |
+| High-concurrency hot object | 20 concurrent simulated writers issue read-modify-write against the same shared counter with no version checks | Writes serialize correctly with zero lost updates; final counter equals the sum of all increments | Final counter undercounts writes, indicating one or more concurrent updates were silently dropped |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| version_check_enforcement_rate_percent | 100% of writes to shared objects include a version token | Scan eval-harness write logs for writes missing the version/ETag field |
+| simulated_conflict_detection_rate_percent | >= 99% of injected concurrent-write pairs are caught as conflicts | Run a paired-write test harness that issues deliberately racing writes and measure the 409-rejection rate |
+| lost_update_rate_in_harness_percent | 0% of simulated concurrent write pairs result in a silently overwritten update | Compare final object state against the full simulated write log after each test run |
 
 ## Test Scenario & Reproduction
 
@@ -100,12 +123,16 @@ Ticket #500 ends up in the "closed_duplicate" state with the specialist assignme
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| write_conflict_rate_percent | > 8% |
+| lost_update_incidents_per_week | > 0 |
+| stuck_lock_count | > 0 |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Lost Update Detected | Reconciliation scan finds a committed write that was silently overwritten without conflict resolution | Critical |
+| High Contention on Shared Object | write_conflict_rate_percent exceeds 8% for a specific object class over 1h | Warning |
+| Stuck Lock Blocking Writers | A lock is held past its TTL with pending waiters | Warning |
 
 ---
 

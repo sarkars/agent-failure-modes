@@ -6,18 +6,35 @@
 
 **Symptoms**
 - User says they already told the agent.
-- [Add more specific symptoms]
+- Retrieval returns zero relevant hits for a query even though a matching stored fact exists, because the query's wording doesn't closely resemble the original storage phrasing.
+- Agent re-asks for information the user provided in an earlier session.
+- A structured preference category (dietary, contact channel, order history) fails to surface simply because the current query isn't semantically close to how the fact was originally phrased.
 
 **Root Cause**
 Agent fails to use relevant durable information.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+Session 1 (January):
+User: "Just so you know, I'm vegetarian."
+[Stored: subject=user, predicate=dietary_preference, object=vegetarian]
+
+Session 2 (June), different phrasing:
+User: "What should I order for dinner tonight?"
+Agent: "How about the grilled steak special?"
+User: "I'm vegetarian, I told you that months ago."
+
+[The embedding for "what should I order for dinner" was not close enough to
+"I'm vegetarian" for pure vector retrieval to surface it, and there was no
+structured dietary-preference index to fall back on.]
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Retrieval relies solely on embedding similarity without a keyword or structured-index fallback, missing facts phrased differently than the current query.
+- No mandatory pre-response recall step, so memory is only searched when the model happens to decide to look something up.
+- Lack of query expansion or synonym handling widens the vocabulary gap between how a fact was stored and how it's later referenced.
+- No regression suite tracking realistic paraphrase gaps, so retrieval-breadth regressions ship unnoticed.
+- Sparse or missing structured preference index for common categories (dietary, contact method, prior orders).
 
 ---
 
@@ -26,12 +43,16 @@ Agent fails to use relevant durable information.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Paraphrase-gap retrieval test | Stored fact "vegetarian"; later query "what should I eat for dinner" | Dietary preference is retrieved and applied to the recommendation | Recommendation ignores the stored preference |
+| "Already told you" regression case | A real (stored_fact, later_query) pair captured from a past missed-recall incident | Fact surfaces on replay through the retrieval pipeline | Retrieval still returns empty or irrelevant results |
+| Entity-matched empty-result test | Query referencing an entity (e.g., an order ID) for which stored records exist | Non-empty, relevant retrieval results are returned | Retrieval returns zero hits despite matching records existing |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| recall_coverage_rate_percent | > 95% on regression suite | Run the (fact, query) regression suite and measure the fraction where the fact is correctly retrieved |
+| paraphrase_gap_miss_rate | < 5% | Run semantically-equivalent but lexically different query variants against stored facts and measure retrieval misses |
+| structured_index_hit_rate | > 98% for known preference categories | Run exact subject/predicate lookups against the structured index in a test harness and measure hit rate |
 
 ---
 
@@ -70,12 +91,15 @@ Agent fails to use relevant durable information.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| recall_coverage_rate_percent | < 90% |
+| user_reported_missed_recall_rate_percent | > 1.5% |
+| empty_result_on_known_entity_rate_percent | > 5% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Low |
+| Recall Regression Suite Failure | A deploy drops recall_coverage_rate_percent below 90% on the regression suite | Low |
+| Spike in User-Reported Missed Recall | user_reported_missed_recall_rate_percent exceeds 1.5% over a rolling week | Low |
 
 ---
 

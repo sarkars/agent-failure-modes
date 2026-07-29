@@ -6,18 +6,36 @@
 
 **Symptoms**
 - Wrong name/account/date in action.
-- [Add more specific symptoms]
+- An action executes with an entity-attribute pairing that doesn't match any valid combination in the source records (e.g., an account number paired with a different customer's name).
+- The bound value appears to come from "the closest mentioned value" in the prose rather than from a specific, traceable source record.
+- Multi-entity tasks (several accounts, several dates, several people) show values swapped between two similar entities.
+- No pre-execution restatement or confirmation step exists to catch a mismatched binding before the action takes effect.
 
 **Root Cause**
 Agent attaches wrong value to wrong entity.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+Task: "Move $500 from Account A to Account B, and update Account C's
+mailing address to the one on file for Account B."
+
+While assembling the transfer action, the agent binds Account B's
+old mailing address (mentioned two sentences earlier) to Account A
+instead, because both accounts were referenced close together in the
+same paragraph and the agent inferred the binding positionally
+rather than reading from a structured entity table.
+
+The executed action updates Account A's address instead of Account
+C's, using a value that was never sourced from Account A's own
+records at all.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Entity-value associations are inferred positionally from free text ("the closest mentioned value") instead of read from a structured, keyed binding table.
+- No typed entity resolution step converts ambiguous references ("the account," "that date") into canonical entity_ids before attribute values are attached.
+- Tasks involving multiple similar entities (several accounts, several people, several dates) increase the chance of cross-entity mix-ups.
+- No pre-execution confirmation restates the specific binding for high-stakes actions before they take effect.
+- No validation gate cross-checks a bound value's provenance against the source record it claims to come from prior to execution.
 
 ---
 
@@ -26,12 +44,16 @@ Agent attaches wrong value to wrong entity.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Multi-entity proximity confusion | Task mentions two similar entities (Account A, Account B) close together with attributes for each | Each attribute binds to the correct entity_id per the structured binding table | An attribute from one entity is bound to a different entity in the executed action |
+| Cross-reference validation | Action bound to entity X using a value claimed to come from entity X's source record | Validation gate confirms the value actually exists in entity X's record before execution | Action executes with a value that doesn't appear in the claimed source entity's data |
+| Pre-execution confirmation catch | High-stakes action (fund transfer) with a fully assembled binding is presented for confirmation before execution | Confirmation step restates the exact binding, allowing a mismatched binding to be caught and corrected | Action executes without a restated confirmation, or confirmation text doesn't match the actual bound parameters |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| eval_binding_accuracy_percent | >= 99% of eval multi-entity test cases bind values to the correct entity_id | Run eval suite with proximity-confusable multi-entity scenarios, compare bound values against ground truth |
+| eval_cross_reference_validation_catch_rate_percent | >= 99% of injected mis-bindings are caught by the validation gate | Inject deliberately wrong entity-value pairings into eval scenarios, measure gate rejection rate |
+| eval_confirmation_restatement_accuracy_percent | 100% of eval high-stakes actions produce a confirmation matching the actual bound parameters | Compare pre-execution confirmation text against the actual parameters passed to the eval tool call |
 
 ---
 
@@ -70,12 +92,16 @@ Agent attaches wrong value to wrong entity.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| binding_validation_failure_rate_percent | > 2% |
+| wrong_entity_action_count | > 1 per week |
+| cross_reference_mismatch_rate_percent | > 1% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Wrong-Entity Action Executed | An action executed with an entity-attribute binding that doesn't match the source record (e.g., wrong account debited) | Critical |
+| Validation Gate Bypass | An action executed without passing through the action-parameter validation gate | Critical |
+| Rising Binding Validation Failures | binding_validation_failure_rate_percent exceeds 2% over a rolling week for a specific task type | Warning |
 
 ---
 

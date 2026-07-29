@@ -6,18 +6,35 @@
 
 **Symptoms**
 - Irrelevant memory/preferences appear in answer.
-- [Add more specific symptoms]
+- Response references entities, constraints, or preferences from an earlier unrelated topic that never appeared in the current task's turns.
+- No task-boundary marker exists in the trace at the point where the topic clearly switched.
+- User reacts with confusion ("what does that have to do with...") because the response mixes content from two unrelated conversations.
+- The same raw transcript is reused verbatim across topic switches instead of being scoped to the active task.
 
 **Root Cause**
 Current task is polluted by unrelated previous context.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+User (turns 1-5): plans a vacation, mentions "beach destinations,
+budget under $2000."
+User (turn 6): "Can you help me debug this Python function? It's
+throwing a KeyError."
+Agent: "Sure, let's debug this. By the way, given your budget under
+$2000, have you considered checking error-handling costs before
+scaling this service?"
+The debugging response nonsensically drags in the earlier vacation
+budget because the full raw transcript, not a task-scoped context,
+was fed into generation, and no topic-switch classifier ever marked
+a boundary between the two unrelated tasks.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- The orchestration layer carries the full raw conversation transcript forward indefinitely instead of scoping context per task.
+- No topic-drift or entity-similarity check runs before reusing prior-turn context for the current response.
+- No explicit task-boundary detection (topic switch, new goal, "let's move on") exists to mark where old context should stop being carried forward.
+- Long sessions accumulate many unrelated sub-topics, increasing the chance that stale content resurfaces in an unrelated later turn.
+- Memory/preference retrieval pulls broadly from session history rather than from a durable, explicitly-scoped memory store.
 
 ---
 
@@ -26,12 +43,16 @@ Current task is polluted by unrelated previous context.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Abrupt topic switch | 5 turns of unrelated small talk (vacation planning) followed by an explicit, unrelated task request (debug a script) | Response addresses only the debugging request with no reference to vacation content; a task-boundary event appears in the trace | Response text or reasoning references vacation-related entities/preferences absent from the current task's turns |
+| Carry-forward allowlist check | User legitimately references prior-task info ("use the same shipping address as before") | Agent pulls the address via an explicit memory lookup rather than leaking the entire prior task's raw context | Agent surfaces unrelated details from the earlier task beyond just the referenced fact |
+| Long-session drift | 40+ turn session spanning 4 distinct unrelated sub-topics, final turn asks about topic 1 again | Agent correctly reconstructs topic 1 context without bleeding in topics 2-4 | Response mixes entities/constraints from intervening unrelated topics into the topic-1 answer |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| eval_contamination_detection_rate_percent | >= 95% of injected topic-switch test cases correctly flagged | Run the boundary classifier against a labeled eval set of topic-switch and non-switch transcripts, measure recall |
+| eval_irrelevant_entity_rate_percent | 0% of generated eval responses contain entities from an unrelated injected prior turn | Automated entity extraction on eval outputs, diffed against the current task's turn content |
+| eval_carry_forward_precision_percent | >= 98% of legitimate cross-task references resolve via explicit lookup, not raw leakage | Compare eval responses referencing prior-task facts against expected explicit-memory-lookup provenance |
 
 ## Test Scenario & Reproduction
 
@@ -101,12 +122,16 @@ The agent's debugging response contains a nonsensical reference to the user's ea
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| contamination_flag_rate_percent | > 3% |
+| task_boundary_detection_recall_percent | < 85% |
+| user_confusion_signal_rate_percent | > 1.5% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Medium |
+| Contamination Spike | contamination_flag_rate_percent exceeds 3% over a rolling day | Warning |
+| Boundary Detector Recall Drop | task_boundary_detection_recall_percent falls below 85% on eval set | Warning |
+| Repeated User Confusion in Session | 2+ user confusion signals within a single session | Info |
 
 ---
 

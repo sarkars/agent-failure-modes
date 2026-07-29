@@ -6,18 +6,30 @@
 
 **Symptoms**
 - High tool-call count without improved answer quality.
-- [Add more specific symptoms]
+- Exact or near-duplicate tool calls (same tool, same/overlapping arguments) issued multiple times within a single task.
+- Tool-call count for a task runs well above the historical p50/p90 baseline for that task type with no corresponding gain in answer quality.
+- Agent re-issues a search or lookup it already performed earlier in the session after losing track of context.
+- Cost-per-resolved-task rises for a task category without any capability or quality improvement to justify it.
 
 **Root Cause**
 Agent calls tools unnecessarily, increasing cost and latency.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+User: "What are the key differences between X and Y?"
+Agent calls: web_search("X vs Y comparison")
+Agent calls: web_search("differences between X and Y")  # near-duplicate
+Agent calls: web_search("X vs Y comparison")  # exact duplicate
+...continues for 15+ calls before producing a final answer that is
+no more accurate than a 3-call baseline would have produced.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- No per-task tool-call budget exists, so nothing forces the agent to synthesize a final answer once it has sufficient evidence.
+- No redundant-call deduplication cache, so identical queries re-issued after a plan revision or context reset are dispatched again instead of served from cache.
+- The planner re-evaluates its approach after each result without checking whether the needed information is already in context.
+- No marginal-value gate requires justification for why a next tool call is expected to change the answer, so low-value calls go through unchecked.
+- No tool-call-count vs. answer-quality correlation tracking exists, so overuse regressions after a prompt or model change go unnoticed until cost anomalies appear.
 
 ---
 
@@ -26,12 +38,16 @@ Agent calls tools unnecessarily, increasing cost and latency.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Duplicate-Call Detection Probe | Task where the agent issues the same web_search query twice within one session | Second identical call is served from the dedup cache, not re-dispatched to the tool | Tool is invoked twice with identical normalized arguments, both hitting the live backend |
+| Budget Enforcement Probe | Task type with a p90 historical budget of 3 calls, agent attempts a 4th | Orchestrator returns "budget exceeded, synthesize final answer" and blocks the 4th call | Agent's 4th+ call is dispatched without a budget-exceeded signal |
+| Marginal-Value Gate Probe | Agent proposes a tool call that would only re-fetch data already present in context | Gate rejects the call for lacking a plausible marginal-value justification | Call is dispatched despite no new information being sought |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| eval_avg_tool_calls_per_task | Within 1.2x of the task type's historical p50 baseline on the eval suite | Run the fixed eval task set, compare average tool-call count per task against stored baseline |
+| eval_redundant_call_rate | < 5% of calls in the eval suite are exact/near-duplicates | Run eval tasks known to be resolvable with a small fixed number of distinct calls, count duplicate calls issued |
+| eval_quality_per_call_efficiency | Positive or flat quality score as call count increases | Score eval task answers with the standard quality rubric, correlate against tool-call count across the suite |
 
 ## Test Scenario & Reproduction
 
@@ -99,12 +115,16 @@ The agent makes 15+ tool calls to answer a question that historically resolves w
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| avg_tool_calls_per_task | > 2x p50 |
+| redundant_tool_call_rate | > 15% |
+| cost_per_resolved_task | > 25% above rolling 7-day baseline |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Medium |
+| Task Budget Repeatedly Exceeded | > 10% of tasks in a category hit the hard tool-call budget cap in a day | Warning |
+| Redundant Call Spike | redundant_tool_call_rate exceeds threshold for a sustained period | Warning |
+| Cost Anomaly | cost_per_resolved_task spikes > 2x baseline for a task category | Critical |
 
 ---
 

@@ -6,18 +6,35 @@
 
 **Symptoms**
 - Repeated questions; duplicate steps.
-- [Add more specific symptoms]
+- Agent re-asks for constraints the user already provided earlier in the same session.
+- A step already completed and recorded (e.g., account creation) is re-executed, producing a duplicate record.
+- Loss coincides with a context-window compaction/truncation event that dropped the turns containing the original information.
+- No persistent ledger exists outside the model's context, so recovery after truncation relies entirely on whatever remains in the visible transcript.
 
 **Root Cause**
 Agent forgets completed steps or user-provided constraints.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+Turn 4: user says "please exclude any suppliers located outside the
+EU for this sourcing request."
+Turn 5: agent begins the sourcing search honoring that exclusion.
+
+Turns 6-50: a long back-and-forth over product specifications causes
+context-window compaction, dropping turns 4-5.
+
+Turn 51: agent, now unaware of the earlier constraint, presents a
+shortlist that includes three non-EU suppliers and asks the user,
+"Do you have any geographic restrictions for suppliers?" -- a
+question already answered 47 turns earlier.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Completed steps and user-provided constraints are tracked only in the raw conversation transcript, with no durable external ledger or task object.
+- Long sessions accumulate enough turns that context-window compaction/truncation drops early turns containing key information.
+- No duplicate-step detection checks a completed-step ledger before an action is re-executed.
+- No structured task object extracts constraints out of the transcript at the moment they're stated, leaving them vulnerable to truncation.
+- Session resumption after interruption reconstructs context from the transcript alone rather than from a persistent state store.
 
 ---
 
@@ -26,12 +43,16 @@ Agent forgets completed steps or user-provided constraints.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Post-compaction constraint recall | User states a constraint early, session runs long enough to trigger context compaction, then a decision depending on that constraint is requested | Agent applies the original constraint correctly without re-asking | Agent re-asks for the constraint or produces a result that violates it |
+| Duplicate-step prevention | Agent is asked to repeat an action (e.g., "set up the account") that the ledger shows already completed | Agent surfaces the existing result instead of re-executing the step | Agent re-executes the step, creating a duplicate record |
+| Session resume after interruption | Session is interrupted mid-task and resumed later | Reconstructed context reflects the persistent ledger's completed steps and constraints accurately | Resumed session is missing completed steps or constraints present in the ledger before interruption |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| eval_post_compaction_recall_rate_percent | 100% of eval constraints correctly recalled after simulated compaction | Inject a constraint early in a scripted eval session, force compaction, verify it's honored in a later turn |
+| eval_duplicate_step_rate_percent | 0% of eval re-execution attempts result in an actual duplicate action | Script eval scenarios that request an already-completed step, check whether ledger lookup prevents re-execution |
+| eval_ledger_rehydration_accuracy_percent | 100% of eval session-resume scenarios reconstruct the full prior ledger state | Interrupt and resume scripted eval sessions, diff reconstructed state against the pre-interruption ledger |
 
 ## Test Scenario & Reproduction
 
@@ -101,12 +122,16 @@ The agent asks the user to re-provide information already given, and worse, re-e
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| duplicate_step_execution_rate_percent | > 0% |
+| repeated_question_rate_percent | > 4% |
+| ledger_rehydration_failure_count | > 2 per week |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Medium |
+| Duplicate Step Executed | The ledger check was bypassed and a step already marked complete was re-executed (e.g., duplicate charge, duplicate email) | Critical |
+| Repeated-Question Spike | repeated_question_rate_percent exceeds 4% over a rolling week | Warning |
+| Ledger Rehydration Failure | A resumed session failed to correctly rebuild state from the persistent ledger | Critical |
 
 ---
 

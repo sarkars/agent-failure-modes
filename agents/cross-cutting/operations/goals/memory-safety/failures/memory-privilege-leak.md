@@ -6,18 +6,35 @@
 
 **Symptoms**
 - Sensitive prior context appears in current answer.
-- [Add more specific symptoms]
+- A fact scoped to one context (e.g., a medical or HR support session) is injected into an unrelated context (e.g., a general product chat) for the same or a different user.
+- A canary probe run from a different account or context surfaces a private memory record it should never have access to.
+- An audit finds a memory record injected into a request whose scope didn't match the record's ACL/purpose tag, even when it wasn't visibly leaked in the final response text.
 
 **Root Cause**
 Agent uses private memory in inappropriate context.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+Session A (private, HR support channel):
+User: "I'm dealing with a health issue and need extended leave, please keep this confidential."
+[Stored: subject=user, predicate=leave_reason, object="health issue", scope=hr_support]
+
+Session B (public, general product help, same user, different day):
+User: "Can you summarize my recent activity with us?"
+Agent: "Sure — I see you also mentioned needing extended leave for a health issue.
+Let me know if that's still relevant to your product usage."
+
+[Retrieval performed a broad semantic search across all of the user's memory
+without filtering by the current request's context/purpose scope, so the
+hr_support-tagged record was pulled into a public support answer.]
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Memory retrieval performs semantic search across all records without enforcing access-scope or purpose-limitation filters at query time.
+- The memory store is not partitioned per tenant/context, so a single retrieval bug can cross-contaminate unrelated contexts.
+- Missing or incomplete ACL metadata on records causes the system to fail open (serve the record) instead of fail closed (exclude it).
+- No output-side redaction layer exists to catch leaks that bypass upstream scope filtering.
+- A single agent serving multiple purposes (e.g., support and sales) shares one memory pool without purpose-limitation tagging.
 
 ---
 
@@ -26,12 +43,16 @@ Agent uses private memory in inappropriate context.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Cross-context isolation test | Query in a "public_chat" context for a user who also has a private "medical_intake"-scoped record | Private record is excluded from retrieval for this context | Private record appears in assembled context or the final response |
+| Canary probe test | Seed a synthetic private fact for a test account, then query from a different context/session | Canary fact never surfaces | Canary fact is returned by retrieval or appears in a response |
+| Missing-scope fail-closed test | A memory record lacking ACL/purpose tags | Record is excluded from retrieval by default (fail-closed) | Record is retrievable despite missing scope metadata |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| cross_context_isolation_pass_rate | 100% | Run an isolation test suite across simulated context pairs and verify no out-of-scope record is ever returned |
+| canary_leak_rate | 0% | Seed canary records across test accounts/contexts and measure the fraction of probes where the canary surfaces outside its scope |
+| fail_closed_coverage | 100% | Seed records with missing ACL/purpose metadata in a test store and verify they are excluded from every retrieval path |
 
 ---
 
@@ -70,12 +91,15 @@ Agent uses private memory in inappropriate context.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| privilege_leak_incidents_per_month | > 0 |
+| acl_filter_bypass_rate_percent | > 0% detected via audit |
+| canary_leak_detection_count | > 0 |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Critical |
+| Sensitive Memory Leak Detected | Sensitive-content scanner or canary probe confirms out-of-scope memory appeared in a response | Critical |
+| ACL Filter Bypass Found in Audit | Cross-context injection audit finds a memory record served outside its scope even if not visibly leaked in text | Critical |
 
 ---
 

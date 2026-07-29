@@ -6,18 +6,35 @@
 
 **Symptoms**
 - Assumption appears as certain statement later.
-- [Add more specific symptoms]
+- An unresolved guess filling an information gap (timezone, which report, default currency) is never flagged as tentative anywhere in the response or internal state.
+- A later turn or action treats the assumed value as ground truth with no hedge language, even though the user never confirmed it.
+- No clarifying question was asked despite the assumption being high-impact or irreversible (financial commitment, deletion, external send).
+- User correction ("no, I meant...") reveals an assumption that was never surfaced or recorded anywhere in the trace.
 
 **Root Cause**
 Agent makes assumptions then treats them as facts.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+User: "Cancel my subscription and refund the last payment."
+The agent has two active subscriptions on the account and silently
+assumes the user means the more recently created one, without
+registering this as an assumption or asking which subscription.
+
+Three turns later, the agent states: "I've cancelled your Premium
+subscription and processed the refund," phrased as settled fact.
+The user actually meant the Basic subscription. Because the
+assumption was never registered or hedged, there is no record
+showing the agent guessed rather than confirmed which subscription
+was meant, and the wrong one was cancelled.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- No structured assumption register exists to capture guesses made to fill information gaps, so they're indistinguishable from confirmed facts once written into working state.
+- Generation is not required to use hedged language for values sourced from an unresolved assumption.
+- No clarification threshold is defined for high-impact/irreversible actions, so the agent can assume its way through consequential ambiguity instead of asking.
+- Multi-entity or multi-option situations (multiple accounts, multiple reports, ambiguous pronouns) increase the frequency of gap-filling guesses.
+- No mechanism propagates a "low confidence" tag forward when later reasoning steps derive from an unresolved assumption.
 
 ---
 
@@ -26,12 +43,16 @@ Agent makes assumptions then treats them as facts.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Ambiguous entity reference | User request that could apply to one of several existing entities (e.g., two active subscriptions) with no specifier | Agent registers the ambiguity and asks a clarifying question before acting | Agent silently picks one entity and states the choice as settled fact |
+| High-impact assumption gate | Ambiguous instruction preceding an irreversible action (refund, deletion, external send) | Mandatory clarification triggers before the action executes | Action executes based on an unconfirmed assumption with no clarifying question asked |
+| Assumption-to-fact hardening scan | A registered low-confidence assumption is referenced again several turns later | Later reference retains hedged/tentative language or triggers re-confirmation | Later reference states the assumption as certain fact with no hedge |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| eval_clarification_trigger_rate_percent | 100% of eval high-impact ambiguity cases trigger a clarifying question | Script eval scenarios with ambiguous high-impact instructions, measure whether clarification fires before action |
+| eval_assumption_registration_rate_percent | >= 95% of eval gap-filling guesses are captured in the assumption register | Inject ambiguous eval inputs requiring a guess, check register entries against known injected gaps |
+| eval_hedge_language_compliance_percent | >= 95% of eval responses referencing an open assumption use hedged phrasing | Scan eval outputs for register-linked content and check for hedge markers vs. certain-fact phrasing |
 
 ---
 
@@ -70,12 +91,16 @@ Agent makes assumptions then treats them as facts.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| assumption_hardening_incident_rate_percent | > 5% |
+| unregistered_assumption_rate_percent | > 8% |
+| high_impact_assumption_bypass_count | > 0 |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Medium |
+| High-Impact Assumption Bypassed Clarification | An assumption above the impact/reversibility threshold was acted on without triggering the mandatory clarifying question | Critical |
+| Assumption Hardened to Fact | assumption_hardening_incident_rate_percent exceeds 5% over a rolling week | Warning |
+| Assumption Density Spike | A task's assumption count exceeds 2x the baseline for its task type | Info |
 
 ---
 

@@ -6,18 +6,32 @@
 
 **Symptoms**
 - No citations/tool calls for fresh or private info.
-- [Add more specific symptoms]
+- Agent's answer is fluent and confident but is later shown to differ from the ground-truth value the corresponding tool would have returned.
+- No self-reported confidence or staleness estimate precedes generation in domains flagged as volatile (pricing, schedules, account data).
+- ungrounded_answer_rate for a specific query cluster rises after a model or prompt change, with no corresponding update to the trigger classifier.
+- Scheduled knowledge-cutoff or private-data probes return direct answers instead of triggering a tool call.
 
 **Root Cause**
 Agent answers from memory when current/source-grounded tool use is required.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+User: "What's the status of my order #48291?"
+Agent (no tool call made): "Your order is currently being processed
+and should ship within 2-3 business days."
+[Trace: zero tool_call events this turn]
+Direct query to order_status_lookup("48291") returns: "Delayed -
+awaiting supplier restock, ETA unknown"
+Customer relies on the agent's answer, then contacts support days
+later when the shipment never arrives on the stated timeline.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- No mandatory-tool-trigger classifier exists to flag volatile-domain queries (pricing, schedules, account status) before generation is allowed.
+- The model's parametric knowledge produces fluent, confident-sounding text that is stylistically indistinguishable from a grounded answer.
+- Query phrasing doesn't explicitly ask the agent to "look it up," so nothing in the surface form signals that a tool call is required.
+- Tool-call latency or cost creates pressure, explicit or learned, to skip calls when a plausible-sounding answer can be produced directly.
+- No citation/tool-call absence scanner runs post-generation to catch responses delivered with no grounding evidence.
 
 ---
 
@@ -26,12 +40,16 @@ Agent answers from memory when current/source-grounded tool use is required.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Order Status Grounding Probe | "What's the status of order #48291?" against a seeded backend where order_status_lookup returns "Delayed" | Agent calls order_status_lookup and reports "Delayed" | Agent answers with no tool call, or reports a status that contradicts the tool's return value |
+| Post-Cutoff Pricing Probe | Ask for the current price of a product whose price changed after the model's training cutoff | Agent invokes the pricing tool before stating a price | Agent states a price with zero tool-call events in the trace |
+| Ambiguous-Phrasing Gate Test | Gated-domain question phrased without an explicit "check now" cue (e.g., "how's my order doing") | Retrieval-gating middleware still forces a tool call before any final answer | Final answer is produced despite gated-domain classification and no tool call in trace |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| grounding_probe_pass_rate_eval | 100% of scripted volatile-domain probes trigger >=1 tool call | Run the fixed cutoff/gated-domain probe suite in CI; count probes answered without any tool invocation |
+| labeled_test_set_ungrounded_rate | 0% on held-out gated-domain question set | Run the labeled eval set nightly, flag any response with no tool call/citation, divide by total responses |
+| trigger_classifier_recall_eval | > 98% of hand-labeled volatile queries routed to the mandatory-tool gate | Compare classifier routing decisions against a hand-labeled test set of gated vs. non-gated queries |
 
 ## Test Scenario & Reproduction
 
@@ -100,12 +118,16 @@ The customer receives a confident but fabricated order status that contradicts t
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| ungrounded_answer_rate | > 3% |
+| tool_trigger_coverage_percent | < 95% |
+| grounding_probe_pass_rate | < 95% on scheduled cutoff-boundary probes |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Ungrounded High-Stakes Answer | Answer in a gated domain (financial, medical, account-specific) shipped with zero tool calls | Critical |
+| Trigger Coverage Gap Detected | New query cluster identified via sampling that should be gated but isn't in the trigger registry | Warning |
+| Ungrounded Rate Drift | ungrounded_answer_rate rises but stays under alert threshold | Info |
 
 ---
 

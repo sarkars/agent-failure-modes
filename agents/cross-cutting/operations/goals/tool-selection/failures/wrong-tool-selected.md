@@ -6,18 +6,31 @@
 
 **Symptoms**
 - Tool result irrelevant or low-authority.
-- [Add more specific symptoms]
+- Agent selects a lower-authority tool (e.g., general web search) over a higher-authority, purpose-built tool (e.g., a verified database) that was available and applicable to the task.
+- Selection appears driven by superficial keyword overlap between the query phrasing and the tool's description rather than the task's actual authority/freshness requirements.
+- Result is presented without any caveat noting that a higher-authority alternative tool existed and went unused.
+- tool_selection_policy_violation_rate rises for a task category after a new tool is added to the catalog with an overlapping description.
 
 **Root Cause**
 Agent chooses an inappropriate tool for the task.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+User: "What's the current statute of limitations for this claim type
+in California?"
+Agent calls: quick_web_search("California statute of limitations
+[claim type]") -- selects this over verified_legal_database
+Result: a 2019 blog post citing an since-amended statute.
+Agent presents the outdated figure as current fact, with no caveat
+about source authority or that verified_legal_database went unused.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Overlapping tool descriptions give the model multiple superficially-plausible options with no clear disambiguation of when to use each.
+- No documented tool-selection policy hierarchy maps task-intent features (authority, freshness, cost) to a ranked list of preferred tools.
+- No post-call relevance/authority scoring flags cases where a lower-authority tool was used despite a higher-authority one being available.
+- Few-shot examples in the system prompt don't cover known-confusable tool pairs, leaving the model to disambiguate purely from schema text.
+- The arbitration/routing layer doesn't constrain the model's choice set for task categories with a clear preferred tool, so selection is fully delegated to in-context judgment every time.
 
 ---
 
@@ -26,12 +39,16 @@ Agent chooses an inappropriate tool for the task.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Authority-Hierarchy Selection Probe | Legal-citation query with both quick_web_search and verified_legal_database available | Agent selects verified_legal_database per the documented source hierarchy | Agent selects quick_web_search despite the higher-authority tool being applicable |
+| Low-Authority Usage Flag Probe | Task flagged high-stakes with both tools available in the eval harness | Selection matches the policy-recommended tool; no low-authority flag raised | low_authority_tool_usage_rate flags the eval case for using the lower-ranked tool |
+| Disambiguation Few-Shot Regression Probe | Query phrased similarly to a historically-confused example from production logs | Agent selects the policy-correct tool matching the few-shot guidance | Agent reverts to the previously-confused (wrong) tool selection |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| eval_policy_violation_rate | < 3% of eval task selections diverge from the documented tool hierarchy | Run labeled eval tasks with a known correct tool per the hierarchy, compare actual selection against policy |
+| eval_irrelevant_result_rate | < 5% of eval task results are irrelevant to inferred task intent | Score eval task results for relevance (embedding similarity or judge model) against the task's actual information need |
+| eval_low_authority_usage_rate | < 5% of eval cases where a higher-authority tool was available result in the lower-authority tool being selected | Run eval tasks with both tools available, flag selections that diverge from the authority ranking despite availability |
 
 ## Test Scenario & Reproduction
 
@@ -101,12 +118,16 @@ The agent presents an outdated statute from a low-authority blog post as current
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| tool_selection_policy_violation_rate | > 10% |
+| irrelevant_result_rate | > 15% |
+| low_authority_tool_usage_rate | > 15% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| High-Stakes Task Using Low-Authority Tool | Agent selects a low-authority/low-precision tool for a task flagged as high-stakes despite a higher-authority tool being available | Warning |
+| Policy Violation Rate Spike | tool_selection_policy_violation_rate exceeds threshold over a rolling week | Warning |
+| Irrelevant Result Rate Above Threshold | irrelevant_result_rate crosses baseline threshold | Info |
 
 ---
 

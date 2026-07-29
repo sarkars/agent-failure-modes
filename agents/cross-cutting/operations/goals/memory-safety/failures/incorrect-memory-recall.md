@@ -6,18 +6,34 @@
 
 **Symptoms**
 - Personalized answer contradicts known current context.
-- [Add more specific symptoms]
+- Agent attributes one user's stated fact to a different, similar-sounding entity (wrong order, wrong past trip, wrong contact).
+- Retrieval surfaces a semantically similar but factually different record, and the model treats the near-neighbor as an exact match.
+- Agent blends two distinct stored facts into a single incorrect composite answer.
+- The same recall query returns different facts across sessions even though no update event occurred in between.
 
 **Root Cause**
 Agent recalls wrong past preference or fact.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+User (Session 1, March): "My name is Alicia, I prefer an aisle seat and I'm flying with my toddler."
+[Stored: subject=Alicia, predicate=seat_preference, object=aisle]
+
+User (Session 2, June): "Hi, it's Alice. Can you book my usual seat for the Denver flight?"
+Agent: "Sure Alice, booking your usual window seat, as requested for your solo trips."
+User: "I never said window seat, and I always travel with my kid."
+
+[Retrieval matched "Alice" against the embedding-nearest record for "Alicia" (high
+semantic similarity, no exact-provenance check), pulling in a different customer's
+seat preference and travel-companion fact.]
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Retrieval relies on pure vector similarity without an exact-match or provenance verification step, so near-duplicate names/entities collide.
+- High density of similar records (many users with similarly phrased preferences) increases the odds of an embedding near-neighbor being mistaken for the true match.
+- No verbatim citation requirement lets the model paraphrase from a fuzzy match instead of quoting the actual stored string.
+- Embedding index staleness or partial reindexing leaves outdated or cross-linked vectors in place.
+- Missing or unenforced confidence thresholding lets low-similarity matches through to generation.
 
 ---
 
@@ -26,12 +42,16 @@ Agent recalls wrong past preference or fact.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Near-duplicate entity disambiguation | Two users with near-identical stored preferences ("Alice: window seat" vs "Alicia: aisle seat"); query recalls Alice's preference | Returns Alice's exact record | Response reflects Alicia's preference instead |
+| Verbatim citation check | Query recalling a stored fact that has a source pointer | Response quotes the stored value verbatim with its source | Response paraphrases into a materially different value |
+| High-stakes confirm-before-use | Recall of a payment or medical fact used to take an action | Agent restates the recalled fact and asks for confirmation before acting | Agent acts directly on the recalled value without confirmation |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| embedding_near_duplicate_confusion_rate | < 1% | Inject confusable near-duplicate record pairs into a test store and measure how often retrieval returns the wrong entity's record |
+| verbatim_match_rate | > 99% | Compare the model's stated fact against the ground-truth stored string for a sample of recall-driven responses |
+| confidence_gate_precision | > 95% | Of eval retrievals that pass the confidence/provenance threshold, measure the fraction that are actually the correct record |
 
 ---
 
@@ -70,12 +90,15 @@ Agent recalls wrong past preference or fact.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| recall_accuracy_rate_percent | < 95% over rolling 24h window |
+| user_contradiction_rate_percent | > 2% of personalized responses |
+| low_confidence_recall_injection_rate_percent | > 0% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Medium |
+| Recall Accuracy Degradation | recall_accuracy_rate_percent falls below 95% for any 24h window | Medium |
+| High-Stakes Incorrect Recall | User contradiction detected on a confirmed high-stakes fact (payment, medical, legal) the agent acted on | Critical |
 
 ---
 

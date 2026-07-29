@@ -6,18 +6,31 @@
 
 **Symptoms**
 - Invalid tool arguments or impossible requested action.
-- [Add more specific symptoms]
+- Tool is invoked with a query shape or parameter it was never built to support (e.g., fuzzy match against an exact-ID-only endpoint).
+- The tool returns an empty or generic result rather than a typed capability error, so the agent has no signal that its assumption was wrong.
+- Agent retries the same fundamentally-impossible request with minor rephrasing rather than switching approach.
+- invalid_tool_call_rate or unsupported_operation_rejection_rate spikes immediately after a tool/API version change, without a corresponding update to the model-facing schema description.
 
 **Root Cause**
 Agent assumes a tool can do something it cannot.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+User: "Find the customer named Johnson."
+Agent calls: customer_search(query="Johnson")
+  # tool only supports exact-ID lookup, not name fuzzy-match
+Tool returns: [] (empty result, no typed error)
+Agent: "I couldn't find a customer named Johnson."
+Agent then retries: customer_search(query="johnson"),
+customer_search(query="Mr. Johnson") -- same failure, three times.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Tool schema description states only what the tool can do, never what it explicitly cannot, leaving unsupported operations to be inferred by omission.
+- No capability manifest exists separately from the free-text schema shown to the model, so there's nothing for the planner to validate a proposed call against.
+- The tool fails silently (empty result or generic error) instead of returning a typed "UNSUPPORTED_OPERATION" response, giving the agent no signal to correct its belief.
+- No capability regression test suite runs in CI, so drift between the tool's real behavior and its documented behavior isn't caught before deployment.
+- Tool API changes (e.g., a search backend narrowing its matching behavior) ship without a corresponding update to the prompt-facing description.
 
 ---
 
@@ -26,12 +39,16 @@ Agent assumes a tool can do something it cannot.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Fuzzy-Match Rejection Probe | customer_search(query="Johnson") against an exact-ID-only backend | Agent recognizes the tool needs an exact ID and asks the user for one, or the capability manifest blocks the call pre-dispatch | Agent submits the fuzzy query and reports "not found" instead of recognizing the capability mismatch |
+| Repeated-Impossible-Request Probe | Same unsupported query issued 3 times with minor rephrasing in one session | Agent stops retrying after the first typed UNSUPPORTED_OPERATION error and changes strategy | Agent issues 3+ near-identical calls that all fail the same way |
+| Manifest-Schema Drift Check | Tool version bumped to remove a previously-supported parameter | CI capability regression suite fails, blocking deploy until the schema description is updated | New tool version ships with schema text still describing the removed capability |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| capability_probe_pass_rate | 100% of golden capability probes (valid + intentionally-unsupported calls) resolve as expected | Run the fixed capability regression suite in CI against every tool version, compare actual vs. expected accept/reject |
+| eval_invalid_call_rate | < 2% of calls in the held-out task set are invalid/unsupported | Run labeled eval tasks requiring specific tool operations, count calls rejected as unsupported |
+| eval_repeated_impossible_request_rate | 0% of eval sessions retry an unsupported action more than once | Run eval sessions through scripted unsupported-operation scenarios, count consecutive same-shape retries |
 
 ## Test Scenario & Reproduction
 
@@ -99,12 +116,16 @@ The agent incorrectly tells the user no matching customer exists, when in fact t
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| invalid_tool_call_rate | > 5% |
+| unsupported_operation_rejection_rate | > 3% or sudden spike after a tool version change |
+| repeated_impossible_request_rate | > 2% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Capability Drift After Tool Update | unsupported_operation_rejection_rate spikes immediately following a tool/API version bump | Critical |
+| Repeated Impossible-Action Loop | Same agent session issues 3+ requests for an action the manifest marks unsupported | Warning |
+| New Unsupported-Operation Pattern | A previously unseen invalid-argument pattern appears in logs | Info |
 
 ---
 

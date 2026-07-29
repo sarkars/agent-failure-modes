@@ -6,18 +6,34 @@
 
 **Symptoms**
 - Value changes between tool output and final answer.
-- [Add more specific symptoms]
+- Numeric transcription errors (transposed digits, dropped decimal places, unit mismatches) appear only in the free-text response, never in the tool's raw output.
+- No automated diff exists between the structured tool response and the final generated text, so corruption ships silently.
+- Critical values (prices, IDs, dates) are re-derived through prose generation rather than copied verbatim from structured data.
+- Corruption rate correlates with response length or complexity, since longer free-text summarization gives more opportunity for transcription drift.
 
 **Root Cause**
 Agent misreads/transforms tool output incorrectly.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+Tool call: get_account_balance(account="AC-4471")
+  -> {balance: 8032.10, currency: "USD", as_of: "2026-07-29"}
+
+Agent's generated response: "Your current balance is $8,320.10 as of
+July 29." (digits transposed: 032 -> 320)
+
+The customer, trusting the free-text answer, makes a payment decision
+based on the wrong balance. No consistency check ever compared the
+generated sentence against the original {balance: 8032.10} value
+before the response was sent.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Critical values pass through free-text generation instead of a typed extraction or verbatim pass-through step.
+- No schema validation exists between the tool call's structured output and the values the model repeats in prose.
+- No chain-of-custody diff runs between successive transformation steps (tool output -> extracted value -> final answer).
+- High-precision fields (multi-decimal currency, long IDs, dates in multiple formats) are especially prone to transcription drift during summarization.
+- No sampled human audit exists for high-stakes domains (financial totals, medical dosages) to catch corruption patterns automated checks miss.
 
 ---
 
@@ -26,12 +42,16 @@ Agent misreads/transforms tool output incorrectly.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| High-precision currency pass-through | Tool returns {total: 1234.56, currency: "USD"}, agent asked to summarize the order total in prose | Final response states exactly $1,234.56, matching the tool output byte-for-byte (modulo declared formatting) | Response contains a different numeric value (transposed digits, dropped decimal, wrong magnitude) |
+| Multi-value summarization | Tool returns a list of 5 line items with distinct prices; agent asked to summarize the invoice | Every line-item price in the summary matches its source tool-output value exactly | One or more line-item prices in the summary don't match their source values |
+| Unit/date reformatting | Tool returns a date as ISO 8601 and a quantity in grams; agent asked to present it in a user-friendly format | Reformatted date/unit is a faithful, declared transform of the original (no value change, only format) | Reformatted value represents a different underlying quantity/date than the source |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| eval_value_mismatch_rate_percent | < 0.5% of eval cases referencing tool output | Run the consistency-check diff against a labeled eval suite of tool-output/response pairs, measure mismatch rate |
+| eval_schema_validation_pass_rate_percent | > 99% of extracted values pass schema validation | Run typed extraction over eval tool outputs and measure validation pass rate before generation |
+| eval_high_stakes_transcription_accuracy_percent | 100% exact match on high-stakes eval cases (financial/medical values) | Sample high-stakes eval cases, diff generated text against source tool output field-by-field |
 
 ## Test Scenario & Reproduction
 
@@ -99,12 +119,16 @@ The customer receives an incorrect total ($1,234.65 or $123.45 instead of the ac
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| value_mismatch_rate_percent | > 1% |
+| schema_validation_failure_rate_percent | > 2% |
+| high_stakes_audit_error_rate_percent | > 0.2% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Critical Value Mismatch Reached User | Post-send audit or user report confirms a tool-output value was corrupted in the final answer (e.g., wrong price, wrong dosage) | Critical |
+| Extraction Schema Validation Failures Rising | schema_validation_failure_rate_percent exceeds 2% over a rolling day | Warning |
+| Diff-and-Block Stage Blocking Excessively | blocked_send_due_to_diff_failure_count spikes 3x above baseline | Info |
 
 ---
 

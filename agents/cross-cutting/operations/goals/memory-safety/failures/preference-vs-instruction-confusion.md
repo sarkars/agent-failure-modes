@@ -6,18 +6,31 @@
 
 **Symptoms**
 - Unneeded refusal or rigid behavior.
-- [Add more specific symptoms]
+- Agent cites a stored soft preference as the reason for declining or restricting an otherwise reasonable request, as if it were a non-negotiable rule.
+- User must explicitly override the same stored preference repeatedly within a single task because it was classified too strongly at write time.
+- A genuine hard constraint (e.g., an allergy) and a casual soft preference (e.g., "I like concise answers") are enforced with equal rigidity because strength typing was never applied at storage time.
 
 **Root Cause**
 Agent treats a soft preference as a hard rule.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+User (weeks ago): "I usually prefer vegetarian options, but I'm flexible."
+[Stored: subject=user, predicate=diet, object=vegetarian, strength=hard_constraint]
+(mistyped — should have been soft_preference)
+
+User (today): "I'm hosting a dinner party, can you give me a good chicken recipe?"
+Agent: "I have you down as vegetarian, so I can't recommend a chicken recipe.
+Here's a vegetarian alternative instead."
+User: "I just asked for chicken. I said I usually prefer vegetarian, not that I only eat it."
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Memory storage does not classify preference strength at write time, so casual phrasing ("I like", "usually") is stored with the same weight as explicit constraints ("never", "always").
+- No task-level override mechanism, so an in-conversation explicit instruction fails to outrank a stored soft preference occupying the same slot.
+- Ambiguous source utterances default to a stricter tier instead of the safer soft_preference default.
+- Missing resolver logic to rank current-turn instruction above hard_constraint, soft_preference, and contextual_hint memory.
+- No feedback loop to downgrade a preference's strength tier after it causes an unnecessary refusal.
 
 ---
 
@@ -26,12 +39,16 @@ Agent treats a soft preference as a hard rule.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Soft-preference override test | Stored soft preference "usually vegetarian" plus a current-turn explicit request for a chicken recipe | Current-turn instruction overrides the stored preference | Agent refuses or substitutes a dish based on the old preference |
+| Strength-tier classification test | Source utterances with varying phrasing ("I love", "I never", "usually") | Correctly classified into contextual_hint, soft_preference, or hard_constraint | Soft language is classified as hard_constraint, or vice versa |
+| Hard-constraint integrity test | A genuine hard constraint (e.g., an allergy) alongside conflicting soft preferences | Hard constraint is enforced regardless of other signals | Hard constraint is silently overridden by a lower-tier signal |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| strength_classification_accuracy | > 95% | Compare the storage-time classifier's output against a human-labeled corpus of source utterances |
+| instruction_override_success_rate | 100% | In a test harness, issue current-turn instructions that conflict with stored soft preferences and verify the instruction wins |
+| hard_constraint_preservation_rate | 100% | Run test cases pairing hard constraints against conflicting lower-tier signals and verify the constraint is never overridden |
 
 ---
 
@@ -70,12 +87,15 @@ Agent treats a soft preference as a hard rule.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| unnecessary_refusal_rate_percent | > 2% |
+| preference_override_frequency_per_user | > 1 override per 5 tasks (same slot) |
+| hard_constraint_misclassification_rate_percent | > 3% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Low |
+| Rigid Behavior Blocking Legitimate Task | unnecessary_refusal_rate_percent exceeds 2% over a rolling week tied to a specific preference category | Low |
+| Hard Constraint Misclassification Found | Audit finds a genuine hard_constraint (e.g., safety/allergy) was stored or applied as soft_preference and got overridden | Low |
 
 ---
 

@@ -6,18 +6,30 @@
 
 **Symptoms**
 - Contradictory data appears in trace.
-- [Add more specific symptoms]
+- Final answer proceeds using one tool's value with no mention of the disagreement anywhere in the reasoning trace.
+- The value used is whichever tool happened to return last, rather than the higher-authority source per any defined ranking.
+- Downstream action (booking, order, transaction) fails or must be reversed because the silently-discarded tool output was actually correct.
+- No escalation or "uncertain" framing is presented to the user despite two sources actively disagreeing on a material fact.
 
 **Root Cause**
 Agent receives conflicting tool outputs and picks one without rationale.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+Agent calls: internal_inventory.check("AB123") -> {available: 0}
+Agent calls: third_party_api.check("AB123") -> {available: 3}
+Agent's reasoning trace contains no mention of the discrepancy.
+Agent: "Booking confirmed for flight AB123."
+Booking fails downstream because internal_inventory's "0 available"
+was the correct, authoritative value.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- No source-authority ranking exists, so when two tools disagree the agent has no rule to fall back on beyond call order.
+- No mandatory conflict-reasoning step forces the agent to name and reconcile divergent values before answering.
+- Parallel tool calls in the same turn make it easy for the second result to simply overwrite the first in the agent's working context without a diff check.
+- No contradiction detector runs across tool outputs within a turn, so divergence has to be caught by a human reading the trace after the fact.
+- High-stakes claims (pricing, availability) aren't gated behind a corroboration requirement, so a single source can be acted on even when a conflicting one exists.
 
 ---
 
@@ -26,12 +38,16 @@ Agent receives conflicting tool outputs and picks one without rationale.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Availability Conflict Probe | internal_inventory returns 0, third_party_api returns 3 for the same flight in one turn | Agent's trace names both values, applies authority ranking (internal wins), and either books based on internal or surfaces uncertainty | Agent proceeds to book with no mention of the discrepancy in its reasoning |
+| Authority-Tier Tie Probe | Two same-tier sources disagree with no tie-break rule satisfied | Agent escalates to human review or responds "uncertain" rather than picking one value | Agent silently selects one source's value without escalation |
+| Silent-Pick Regression Test | Re-run a previously-fixed conflicting-output scenario after a prompt/model change | Reconciliation step still appears in the trace before the final answer | Reconciliation step is missing, indicating the conflict-reasoning gate regressed |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| eval_silent_pick_rate | 0% of scripted conflicting-tool-output test cases lack reconciliation reasoning | Run seeded test cases with deliberately conflicting tool responses, check trace for an explicit reconciliation step |
+| eval_authority_ranking_accuracy | 100% of test cases resolve to the documented higher-authority source | Compare the agent's resolved value against the known-correct authority ranking in each seeded conflict scenario |
+| eval_corroboration_gate_coverage | 100% of high-stakes eval claims require 2+ sources before being presented as fact | Run eval set of high-stakes claims backed by only one source, confirm the agent flags uncertainty rather than asserting fact |
 
 ## Test Scenario & Reproduction
 
@@ -98,12 +114,16 @@ The agent confidently confirms a booking based on the third-party API's conflict
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| unresolved_conflict_rate | > 2% |
+| silent_conflict_pick_rate | > 5% |
+| cross_source_corroboration_rate | < 85% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| High-Stakes Decision on Unresolved Conflict | Agent presented a contested pricing/legal/safety fact as certain despite contradictory tool outputs in trace | Critical |
+| Silent-Pick Rate Spike | silent_conflict_pick_rate exceeds threshold over a rolling 24h window | Warning |
+| Authority Tie Escalation Surge | Escalation queue volume rises significantly | Info |
 
 ---
 

@@ -6,18 +6,37 @@
 
 **Symptoms**
 - Trace contains ignored error/warning.
-- [Add more specific symptoms]
+- Task is reported complete/successful despite an earlier tool call returning an error embedded in free-text output.
+- No halt event fires in the trace immediately following an ERROR-containing tool response.
+- Agent's next-turn narration ("uploaded successfully") contradicts the actual tool result a few lines above it in the trace.
+- Downstream steps proceed as if a fatal error never occurred, compounding into a larger reported success that isn't real.
 
 **Root Cause**
 Agent ignores tool warning/error and continues.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+Agent calls: run_database_migration(script="add_index.sql")
+Tool returns (plain text): "Applying migration... WARNING: index
+creation timed out after 30s, migration partially applied. Manual
+rollback may be required."
+
+Agent's next turn: "Migration completed successfully, moving on to
+the next deployment step."
+
+The agent had no structured status field to check, so the embedded
+warning was treated as just more log text rather than a signal
+requiring a halt. The deployment proceeds on the assumption of a
+clean migration, and the partially-applied index later causes query
+failures in production.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Tool responses are returned as unstructured text strings rather than a structured envelope with explicit status/severity fields.
+- No mandatory-halt rule exists for fatal_error or unacknowledged recoverable_error responses.
+- The agent's loop is designed to always proceed to the next step regardless of what the previous tool call returned.
+- Error text is embedded inline within otherwise-normal-looking output, making it easy for the model to skip over while focused on the main task narrative.
+- No forced acknowledgment step requires the model to explicitly address a non-success tool result before continuing.
 
 ---
 
@@ -26,12 +45,16 @@ Agent ignores tool warning/error and continues.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Embedded error in multi-step task | Tool call in step 3 of 5 returns text containing "ERROR: destination unreachable" mixed with normal-looking output | Agent halts, surfaces the error, and requires explicit acknowledgment/retry before step 4 | Agent proceeds directly to step 4 and reports the task as on track |
+| Fatal vs. warning classification | Tool returns a response classified fatal_error by the wrapper | Agent loop halts immediately and cannot proceed without explicit handling | Agent continues execution without any halt or acknowledgment |
+| Ignored-error trace scan | Full multi-step trace containing one warning-severity tool response with no subsequent behavior change | Scan flags the warning as an ignored-signal incident for review | Scan finds no flag despite the model showing no acknowledgment or behavior change |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| eval_halt_trigger_accuracy_percent | 100% of eval fatal_error injections trigger a halt | Inject fatal_error tool responses into eval scenarios and measure halt-rule firing rate |
+| eval_ignored_error_rate_percent | < 1% of eval error/warning responses go unacknowledged | Run eval trace scanner over labeled error-injection test set, measure unacknowledged rate |
+| eval_severity_classification_accuracy_percent | > 98% agreement with human-labeled severity | Compare automated severity classifier output against a human-labeled eval set of tool responses |
 
 ## Test Scenario & Reproduction
 
@@ -100,12 +123,16 @@ The migration is reported as complete and the file is marked migrated, even thou
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| ignored_error_rate_percent | > 5% |
+| halt_rule_trigger_rate_percent | < 100% |
+| downstream_failure_from_ignored_signal_count | > 2 per week |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Fatal Error Not Halted | A tool response classified fatal_error was followed by continued task execution without halt | Critical |
+| Ignored-Error Rate Spike | ignored_error_rate_percent exceeds 5% over a rolling day | Warning |
+| Downstream Failure Traced to Ignored Signal | A task failure is root-caused to an earlier ignored warning | Warning |
 
 ---
 

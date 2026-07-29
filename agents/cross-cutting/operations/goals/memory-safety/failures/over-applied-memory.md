@@ -6,18 +6,34 @@
 
 **Symptoms**
 - Irrelevant personalization affects task.
-- [Add more specific symptoms]
+- A preference learned in one task domain (e.g., flight seating) is applied to an unrelated domain (e.g., restaurant seating) without the user ever indicating it should generalize.
+- User pushes back ("why are you doing that?") when a stored preference causes an unexpected deviation from default behavior in an off-domain task.
+- Personalization is applied at full strength regardless of how distant the current task is from the one where the preference was originally learned.
 
 **Root Cause**
 Agent applies a past preference where it does not belong.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+User (booking a flight, March): "I prefer an aisle seat."
+[Stored: subject=user, predicate=seating_preference, object=aisle, domain=air_travel]
+
+User (arranging a dinner reservation, June): "Can you book us a table for four tonight?"
+Agent: "Sure, I've requested a table near the aisle, away from the window, per your
+usual seating preference."
+User: "That's a restaurant, not a flight — why does that matter here?"
+
+[Retrieval surfaced the seating_preference record because "seating" matched
+semantically, but there was no applicability-domain check to stop a flight
+preference from bleeding into a restaurant-booking task.]
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Memory records lack applicability-domain tags, so any semantically related retrieval surfaces the preference regardless of task type.
+- No relevance/applicability classifier gate sits between retrieval and prompt injection to catch off-domain matches.
+- Preferences are applied with constant strength instead of decaying based on how far the current task is from where they were learned.
+- Ambiguous inference at write time defaults to a global scope instead of a conservative single-domain scope.
+- No user-facing mechanism exists to exclude a preference from specific task types once it's been misapplied.
 
 ---
 
@@ -26,12 +42,16 @@ Agent applies a past preference where it does not belong.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Cross-domain bleed test | A preference tagged for domain A is retrieved during a domain B task | Applicability gate excludes or down-weights it | Preference visibly influences the domain B response |
+| Task-distance decay test | Compare a preference applied in a closely related task vs. a distant one | Influence strength decays as task distance increases | Preference is applied with equal strength regardless of task distance |
+| User-pushback regression test | A real, previously flagged instance of irrelevant personalization | On replay, the preference is no longer applied in that domain | The same irrelevant personalization recurs |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| applicability_classifier_precision_percent | > 92% | Score the classifier against a labeled set of domain-tagged preference/task pairs and measure precision |
+| cross_domain_bleed_rate | < 2% | Run an adversarial domain-mismatch suite and measure the fraction of off-domain injections that pass the applicability gate |
+| task_distance_decay_correctness | > 90% | Compare influence strength across paired near/far task scenarios and measure the fraction where decay behaves as expected |
 
 ---
 
@@ -70,12 +90,15 @@ Agent applies a past preference where it does not belong.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| over_application_flag_rate_percent | > 3% |
+| domain_mismatch_injection_rate_percent | > 5% |
+| user_pushback_on_personalization_rate_percent | > 2% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Medium |
+| Cross-Domain Preference Leakage Spike | domain_mismatch_injection_rate_percent exceeds 5% over a rolling week | Medium |
+| User Pushback Trend | user_pushback_on_personalization_rate_percent exceeds 2% for a specific memory category | Medium |
 
 ---
 

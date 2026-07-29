@@ -6,18 +6,37 @@
 
 **Symptoms**
 - Later output uses earlier version/timestamp.
-- [Add more specific symptoms]
+- Agent takes an action (booking, purchase, confirmation) that fails at execution time because the underlying resource changed after the agent's last fetch.
+- No re-fetch occurs before a time-sensitive action even though many turns or minutes elapsed since the original fetch.
+- Cached tool results carry no freshness timestamp or max-age policy that would have flagged them as stale before use.
+- External changes (another user/agent modifying the resource) go completely unnoticed because no cache-invalidation event exists for that resource type.
 
 **Root Cause**
 Agent uses old tool results after new data arrives.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+Agent checks a hotel room's rate at the start of a chat session:
+check_rate("ROOM-812") -> {rate: 149.00, retrieved_at: "09:00:00"}
+
+The user spends 20 minutes comparing amenities and asking unrelated
+questions. At 09:14:00, the hotel's revenue system raises the rate
+to $189.00 due to a demand spike.
+
+At 09:20:00 the user says "book it at that rate." The agent, still
+holding its 09:00:00 snapshot in context, calls book_room("ROOM-812",
+rate=149.00) without re-checking current pricing. The booking tool
+either rejects the mismatched rate or, worse, silently books at the
+stale price, creating a billing discrepancy discovered only at
+checkout.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Fetched tool results are held in context for the remainder of a multi-turn session with no cache-invalidation-on-write mechanism.
+- No freshness timestamp or per-resource max-age policy exists to force a re-fetch before using older data.
+- No mandatory re-fetch policy is enforced for time-sensitive operations (pricing, inventory, availability, balances).
+- Long gaps between the initial fetch and the dependent action increase the odds that an external actor changed the underlying resource in the meantime.
+- Tool APIs don't return a version/ETag alongside data, so there's nothing for the agent's decision logic to check before committing an action.
 
 ---
 
@@ -26,12 +45,16 @@ Agent uses old tool results after new data arrives.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Stale availability before booking | Agent fetches availability early, resource changes externally, then user confirms booking after a long gap | Agent re-fetches availability immediately before the booking call rather than reusing the old snapshot | Agent calls the booking tool using the original fetch with no re-fetch, despite exceeding the max-age policy |
+| Cache invalidation on external write | A resource is modified by an external writer while cached in the agent's context | Cache entry is evicted/marked stale and the next read triggers a fresh fetch | Agent's next decision still uses the pre-change cached value |
+| Version-mismatch rejection | Agent attempts a write using a version/ETag older than the resource's current version | Write is rejected and the agent is forced to re-fetch and reconcile | Write succeeds despite an outdated version, silently applying a decision based on stale data |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| eval_refetch_compliance_rate_percent | 100% of eval time-sensitive actions preceded by a fresh fetch | Run eval scenarios with injected time gaps before dependent actions, check for a re-fetch call immediately prior |
+| eval_stale_action_rate_percent | 0% of eval actions execute using data older than the defined max-age policy | Compare each eval action's input timestamp/version against the policy threshold |
+| eval_invalidation_propagation_latency_ms | < 1000ms from simulated write event to cache eviction in test harness | Inject a resource-change event mid-eval-scenario and measure time until the cached copy is invalidated |
 
 ## Test Scenario & Reproduction
 
@@ -102,12 +125,16 @@ The agent attempts to book a seat based on a 12-minute-old availability snapshot
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| stale_state_use_incident_count | > 3 per week |
+| cache_invalidation_lag_ms | > 10000ms |
+| time_sensitive_op_refetch_compliance_percent | < 100% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Stale State Drove Incorrect Action | An agent action was taken based on state confirmed stale (version mismatch beyond window) for a time-sensitive resource | Critical |
+| Cache Invalidation Lag Spike | cache_invalidation_lag_ms exceeds 10s consistently over 1h | Warning |
+| Time-Sensitive Refetch Bypass | A time-sensitive operation proceeded using a cached value instead of the mandated re-fetch | Critical |
 
 ---
 

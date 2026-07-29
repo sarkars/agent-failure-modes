@@ -6,18 +6,36 @@
 
 **Symptoms**
 - Claims email sent, file created, or test run without evidence.
-- [Add more specific symptoms]
+- Task ledger marks a step complete based on the model's own narration rather than a matching tool-call success record.
+- No tool_call_id backs the completion claim anywhere in the trace.
+- A silently failed or timed-out tool call is followed by confident success language in the very next turn.
+- User later reports the claimed action never actually happened (email never arrived, file doesn't exist).
 
 **Root Cause**
 Agent believes a step happened when it did not.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+Agent calls: create_calendar_event(title="Team Sync", time="3pm")
+The calendar API times out with no response before the connection
+drops.
+
+Agent's next turn: "I've added the Team Sync event to your calendar
+for 3pm today."
+
+The task ledger marks "create_calendar_event" as done because the
+model said so, even though no tool_call_id with a success status
+exists in the trace. The user shows up to find no event was ever
+created, since the model's intention to complete the action was
+mistaken for evidence that it did.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- The internal task/state ledger accepts model narration as sufficient evidence of completion, with no requirement for a matching tool-call success result.
+- No post-generation claim checker cross-references completion language against actual tool_call_ids in the trace.
+- No read-after-write verification (e.g., checking the sent-items folder or file listing) confirms the action's real-world effect.
+- Tool calls that time out or fail silently don't surface a clear, structured error back into the agent's reasoning, so the agent has no signal to contradict its own narration.
+- High-stakes action types lack a defined mandatory verification step distinct from the action call itself.
 
 ---
 
@@ -26,12 +44,16 @@ Agent believes a step happened when it did not.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Silent tool timeout | Tool call times out with no response, agent proceeds to generate a final answer | Agent reports the failure/uncertainty and does not claim completion; ledger stays "pending" | Agent narrates the action as successfully completed with no matching tool_call_id |
+| Claim-evidence binding check | Response text contains completion language ("I've sent...", "created the file...") | Every completion claim resolves to a specific successful tool_call_id in the trace | A completion claim exists in the response with no matching tool call in the trace |
+| Read-after-write verification | High-stakes action (email send) tool call reports success | An independent verification call (checking sent-items) confirms the action before ledger marks complete | Ledger marks complete based solely on the write call's own return value, with no verification step |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| eval_claim_evidence_match_rate_percent | 100% of eval completion claims match a real tool_call_id | Run eval suite with injected silent-failure tool calls, scan generated responses for unmatched claims |
+| eval_verification_step_coverage_percent | 100% of high-stakes eval action types trigger a verification call | Check eval traces for a distinct verification call following each high-stakes action type |
+| eval_false_completion_injection_catch_rate_percent | >= 99% of injected silent-failure scenarios are caught before reaching final output | Inject silent tool failures into eval scenarios and measure how often the claim checker blocks the false claim |
 
 ## Test Scenario & Reproduction
 
@@ -101,12 +123,16 @@ The task ledger and the user-facing response both claim the email was sent, but 
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| unverified_completion_claim_rate_percent | > 0% |
+| claim_evidence_match_rate_percent | < 99.5% |
+| user_reported_false_completion_count | > 1 per week |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| False Completion Claim Sent to User | User reports or reconciliation job confirms a claimed action never occurred | Critical |
+| Claim Checker Bypass | An unverified claim was found in a sent response despite the post-generation checker being active | Critical |
+| Missing Verification Step on High-Stakes Action | A configured high-stakes action type completed without its required verification call | Warning |
 
 ---
 

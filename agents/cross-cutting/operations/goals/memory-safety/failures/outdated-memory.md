@@ -6,18 +6,34 @@
 
 **Symptoms**
 - Stored fact conflicts with recent user statement.
-- [Add more specific symptoms]
+- Agent references a fact (current project, employer, subscription tier) that changed since it was stored, with no recent reconfirmation on record.
+- Freshness or TTL metadata is missing or ignored, so a stale record is treated with the same confidence as a recently confirmed one.
+- The same user has to correct the same outdated fact repeatedly across sessions because the correction never propagated back into durable memory.
 
 **Root Cause**
 Agent uses information that changed.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+Session 1 (March):
+User: "I'm currently working on the Atlas project."
+[Stored: subject=user, predicate=current_project, object=Atlas, last_confirmed=March]
+
+Session 2 (April), in passing:
+User: "Yeah I just switched teams, but anyway, can you help me with this email?"
+[Agent uses the correction for the current turn only; no memory-update action fires.]
+
+Session 3 (July):
+Agent: "Since you're still on the Atlas project, should I file this under that budget?"
+User: "I told you weeks ago I switched teams."
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- No category-specific TTL or decay policy, so volatile facts (current project, employer) are treated with the same durability as stable ones (name).
+- Contradictions stated mid-conversation are applied only to the current turn and never trigger a persistent memory-update action.
+- No active reconfirmation workflow exists for high-volatility fact categories.
+- Freshness metadata (last_confirmed_at) is absent from the record or not factored into retrieval scoring.
+- Lag in the update-propagation pipeline between detecting a contradiction and writing the superseding record.
 
 ---
 
@@ -26,12 +42,16 @@ Agent uses information that changed.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| TTL expiry exclusion test | A volatile-category fact past its TTL with no reconfirmation | Fact is excluded or down-weighted in retrieval | Stale fact is injected into context at full confidence |
+| Contradiction propagation test | User states a fact mid-conversation that contradicts a stored record | A memory-update action fires and supersedes the old record | The next session still surfaces the old, contradicted value |
+| Reconfirmation trigger test | A high-volatility fact approaching its TTL | Agent issues a lightweight reconfirmation prompt | No reconfirmation occurs and the fact silently ages past TTL |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| stale_fact_injection_rate | < 1% | Run a TTL test suite of past-TTL facts and measure how often they are injected into context at full confidence |
+| contradiction_propagation_success_rate | 100% | In a test harness, state a contradiction and verify a superseding record is written within the expected window |
+| reconfirmation_trigger_coverage | > 95% | Run high-volatility fixtures approaching TTL and measure the fraction that correctly trigger a reconfirmation prompt |
 
 ---
 
@@ -70,12 +90,15 @@ Agent uses information that changed.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| stale_fact_usage_rate_percent | > 3% |
+| contradiction_to_update_latency_minutes | > 60 min |
+| facts_past_ttl_unreconfirmed_percent | > 15% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Medium |
+| High-Volatility Fact Used Past TTL | A response used a high-volatility category fact whose last_confirmed_at exceeds its TTL by more than 2x | Medium |
+| Contradiction Detected But Not Propagated | contradiction_to_update_latency_minutes exceeds SLA for a detected live contradiction | Medium |
 
 ---
 

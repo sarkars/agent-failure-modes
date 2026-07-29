@@ -6,18 +6,32 @@
 
 **Symptoms**
 - Update/delete/send precedes read/confirm.
-- [Add more specific symptoms]
+- A write/update/delete/send call fires with no read/get/list call on the same resource earlier in the session's trace.
+- Write value is calculated from a count or state read early in a long session rather than from a fresh, current read.
+- No version/ETag token accompanies the write, so a state change between read and write goes undetected.
+- Post-hoc diff between the agent's stated intent and the actual resulting state reveals the agent acted on outdated information.
 
 **Root Cause**
 Agent calls write tool before reading/verifying current state.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+10:00:00 - Agent reads inventory for SKU-42 -> count: 100
+10:05:00 - A separate process sells 5 units -> count: 95 (agent never
+           observes this)
+10:10:00 - Agent asked to record a sale of 3 units, calls:
+  update_inventory_count(sku="SKU-42", count=97)  # 100-3, using the
+  stale 10:00:00 read, no fresh read this turn
+Actual correct count should be 92 (95-3); the write silently sets it
+to the wrong value of 97.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- No state-aware gateway enforces a read-before-write invariant per resource, so a write can dispatch with no preceding verification in the session.
+- Writes accept any value without a version/ETag token, so there's no mechanism to detect that state changed since the agent last observed it.
+- Long sessions let an early read remain in context far past its staleness window without being refreshed before a later write depends on it.
+- No staleness window is configured on read-write pairing, so a read from many turns earlier is treated as equally valid as a fresh one.
+- Standalone write tools exist independent of any read step, so nothing structurally forces the agent through a verify-then-write sequence.
 
 ---
 
@@ -26,12 +40,16 @@ Agent calls write tool before reading/verifying current state.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Read-Before-Write Enforcement Probe | Agent asked to update a resource with no prior read call in the session | Gateway rejects the write and forces a read/verify call first | Write dispatches successfully with zero preceding read calls on the resource |
+| Stale-Read Staleness-Window Probe | Read occurs at session start, write attempted 30+ minutes later without a fresh read | Gateway requires a fresh read within the staleness window before allowing the write | Write proceeds using the stale early-session read value |
+| Version-Mismatch Race Probe | Resource state changes (via a simulated concurrent process) between the agent's read and its write | Write is rejected due to version/ETag mismatch, forcing a re-read | Write succeeds and overwrites the changed state, corrupting the resource |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| eval_read_before_write_compliance | 100% of eval write actions preceded by a same-session read | Run scripted write-task eval set, check trace for a preceding read/get/list on the same resource |
+| eval_stale_write_rate | 0% of eval write actions use a read older than the configured staleness window | Seed eval scenarios with time-lapsed state changes, check whether the agent used a fresh read before writing |
+| eval_version_mismatch_handling | 100% of seeded version-conflict scenarios trigger a re-read rather than a forced overwrite | Simulate concurrent state changes in the eval harness, verify the agent responds correctly to the ETag mismatch |
 
 ## Test Scenario & Reproduction
 
@@ -99,12 +117,16 @@ The inventory count is silently corrupted to an incorrect value (97 instead of 9
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| read_before_write_compliance_rate | < 99.5% |
+| stale_write_rate | > 2% |
+| version_mismatch_rejection_count | sudden increase indicating race conditions or gateway bypass |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Write Without Preceding Read | Gateway detects (or a bypass allows) a write/delete/send call with no prior read on the resource in-session | Critical |
+| Version/ETag Mismatch on Write | Write rejected due to stale version token, indicating the agent acted on outdated state | Critical |
+| Rising Stale-Write Trend | stale_write_rate trending upward over a rolling week | Warning |
 
 ---
 
