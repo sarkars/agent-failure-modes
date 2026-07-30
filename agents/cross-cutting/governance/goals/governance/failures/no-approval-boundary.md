@@ -6,18 +6,34 @@
 
 **Symptoms**
 - Inconsistent HITL decisions across use cases.
-- [Add more specific symptoms]
+- Two similar customer-facing requests (e.g., a $50 refund vs. a $5,000 refund) receive different approval treatment because no risk-based rule distinguishes them.
+- Engineers debate mid-incident whether an action "should have" required approval, with no matrix to consult.
+- A newly added tool goes live and starts executing autonomously because no one classified it before launch.
 
 **Root Cause**
 Unclear which actions require human approval.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+The support agent's toolset ships a new "issue_refund" action. The team
+assumes refunds under $100 are "obviously low risk" and doesn't add an
+explicit entry to the approval matrix for it.
+
+Week 1: The agent auto-approves a $95 refund. No issue.
+Week 3: A prompt-injected support ticket manipulates the agent into
+interpreting a $4,800 order as eligible for the same "low risk" refund
+path, since no matrix entry exists to force human review at higher
+amounts.
+Week 3, +2h: Finance flags an unusual refund; by the time it's caught,
+the agent has already auto-approved 3 more refunds above $1,000 using
+the same unclassified action path.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- New action types are wired into the agent's toolset without an explicit approval-tier classification step.
+- Approval defaults to auto-execute for anything not explicitly listed, rather than failing closed to human review.
+- Risk thresholds (e.g., dollar amounts, action reversibility) are not encoded as machine-checkable rules, so classification relies on ad hoc developer judgment.
+- No review process exists to catch approval-matrix gaps before a new capability reaches production traffic.
 
 ---
 
@@ -26,12 +42,16 @@ Unclear which actions require human approval.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Unclassified action fail-closed | Agent invokes an action type absent from the approval matrix | Action is routed to human review by default | Action executes automatically without a matrix entry |
+| Boundary consistency check | Same action type invoked twice with different input values (e.g., $50 vs $5,000 refund) | Both routed per the matrix's risk-based rule, not just action name | One instance is auto-approved and the other is blocked inconsistently, or vice versa |
+| New tool onboarding gate | A new tool is added to the agent's toolset without a matrix entry | Deployment is blocked until classification is signed off | Tool goes live and executes without an assigned approval tier |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| unclassified_action_block_rate | 100% | Inject test actions with no matrix entry and verify all are routed to review, none auto-execute |
+| matrix_coverage_at_launch_percent | 100% | Audit tool onboarding checklist compliance across a sample of recently launched capabilities |
+| hitl_routing_consistency_score | 100% | Replay the same action type with varying risk-relevant parameters and verify routing matches the matrix rule, not a cached decision |
 
 ---
 
@@ -70,12 +90,17 @@ Unclear which actions require human approval.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| unclassified_action_rate_percent | > 0% of executed actions lack a matrix entry |
+| hitl_consistency_score_percent | < 98% |
+| approval_override_rate_percent | > 5% |
+| avg_approval_queue_wait_time_minutes | > 60 min |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Unclassified Action Executed | Agent executed an action type with no entry in the approval matrix | Critical |
+| HITL Routing Inconsistency Detected | Same action type routed differently across 3+ consecutive occurrences within a day | Warning |
+| Approval Queue Backlog | Pending human approvals exceed SLA wait time | Info |
 
 ---
 

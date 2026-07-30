@@ -6,18 +6,37 @@
 
 **Symptoms**
 - User confusion or compliance gap.
-- [Add more specific symptoms]
+- Users only learn they were talking to an AI after escalating to a human and asking directly.
+- A regulator inquiry finds that an automated denial decision was sent without the disclosure required by law.
+- Support fields a spike in complaints about "being tricked" into an AI conversation with no indication it wasn't a human agent.
 
 **Root Cause**
 Users are not told AI is acting or making decisions where needed.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+An insurance claims agent automatically denies a subset of low-value
+claims based on a rules-plus-LLM assessment, with the denial letter
+written in the agent's voice and sent directly to claimants. No
+disclosure that the decision was made by an automated system is
+included, because the jurisdiction's AI disclosure requirement was
+never mapped into the notification policy for this use case.
+
+A claimant, entitled under a new state AI-decision-disclosure law to
+know their claim was automatically denied and to request human review,
+is not informed of either. They file a complaint with the state
+insurance regulator.
+
+The company faces a compliance inquiry and has to retroactively
+identify every automated denial sent without disclosure over the
+preceding year to assess remediation scope.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Disclosure requirements are not centrally tracked per use case and jurisdiction, so teams may not know a requirement applies.
+- Notification is treated as opt-in rather than default-on for consequential automated decisions.
+- Disclosure copy is written by product/engineering without legal review, risking language that doesn't meet clarity/conspicuousness requirements.
+- No audit mechanism verifies that required disclosures are actually reaching users in production, as opposed to just being specified in a design doc.
 
 ---
 
@@ -26,12 +45,16 @@ Users are not told AI is acting or making decisions where needed.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Default-on disclosure | A consequential automated decision (approval/denial/pricing) | Disclosure notice is attached by default | Decision is sent without disclosure and no explicit waiver exists |
+| Jurisdiction-specific disclosure | Same decision type served to users in different jurisdictions | Disclosure content matches jurisdiction-specific requirements | Generic disclosure served where jurisdiction-specific language is required |
+| Disclosure delivery audit | Sampled production interactions in scope of the disclosure policy | Disclosure was shown to the user | Sampled interaction shows no disclosure was surfaced |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| default_disclosure_attachment_rate | 100% | Sample consequential decisions and verify disclosure is attached absent an explicit waiver |
+| jurisdiction_accuracy_rate | 100% | Test the policy engine against a matrix of use case/jurisdiction combinations and verify correct disclosure content is returned |
+| disclosure_delivery_audit_pass_rate | 100% | Periodically sample live interactions and confirm required disclosure was actually rendered to the user |
 
 ---
 
@@ -70,12 +93,17 @@ Users are not told AI is acting or making decisions where needed.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| disclosure_coverage_rate_percent | < 99% |
+| missing_disclosure_incidents_per_month | > 0 |
+| ai_confusion_complaint_rate | > 0.5% |
+| jurisdiction_rule_staleness_days | > 90 days |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Medium |
+| Consequential Decision Sent Without Disclosure | An in-scope automated decision/interaction reached the user without required disclosure | Critical |
+| Disclosure Coverage Audit Failure | Sampled audit finds disclosure missing on a channel/use case | Warning |
+| Regulatory Change Outpacing Policy Table | Tracked jurisdiction rule change has no corresponding policy table update after 30 days | Info |
 
 ---
 

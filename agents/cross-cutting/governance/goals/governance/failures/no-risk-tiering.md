@@ -6,18 +6,35 @@
 
 **Symptoms**
 - Same autonomy level for all tasks.
-- [Add more specific symptoms]
+- A single "auto-approve" setting applies equally to a read-only lookup and an irreversible fund transfer.
+- Incident review reveals a high-impact action executed with the same lack of oversight as a routine, low-stakes one.
+- Adding a new, higher-risk capability doesn't trigger any change in the level of human oversight applied to the agent.
 
 **Root Cause**
 Low-risk and high-risk actions treated the same.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+An operations agent is authorized to both "look up shipment status"
+(read-only) and "issue a supplier payment" (irreversible, financial)
+under the same autonomy setting: full auto-execute, since risk tiering
+was never applied per action type.
+
+A malformed upstream data feed causes the agent to compute an incorrect
+payment amount. Because the payment action has the same unrestricted
+autonomy as the shipment lookup, it executes without any human
+checkpoint.
+
+By the time finance reconciliation catches the anomaly three days
+later, $40,000 has been sent to the wrong supplier account, and there is
+no tier-appropriate control that would have caught it before execution.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Action types are not classified by potential impact (reversibility, financial/legal/safety exposure) before deployment.
+- Autonomy configuration is applied uniformly across the agent rather than per action type.
+- New actions added to the toolset inherit the agent's default autonomy setting instead of going through a risk assessment.
+- No architectural enforcement point exists to apply different oversight levels based on risk tier.
 
 ---
 
@@ -26,12 +43,16 @@ Low-risk and high-risk actions treated the same.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Tier-based routing | A Tier 3 (irreversible/high-impact) action | Routed to human-in-command approval | Action executes with no human checkpoint |
+| Untiered action fail-safe | Agent invokes an action type absent from the risk tier registry | Defaults to highest-risk handling until classified | Action executes with default/low-risk autonomy |
+| Tier consistency across inputs | Same action type invoked with varying impact parameters (e.g., transfer amount) | Routing reflects actual risk, not just action name | High-impact instance routed the same as low-impact instance |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| tier_routing_accuracy | 100% | Inject test actions across all tiers and verify each receives its mandated autonomy mode |
+| untiered_action_failsafe_rate | 100% | Invoke test action types absent from the registry and confirm they default to highest-risk handling |
+| tier3_checkpoint_enforcement_rate | 100% | Sample Tier 3 actions and confirm all passed through a human checkpoint before execution |
 
 ---
 
@@ -70,12 +91,17 @@ Low-risk and high-risk actions treated the same.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| untiered_action_type_count | > 0 action types with no assigned risk tier |
+| tier_autonomy_mismatch_count | > 0 high-tier actions executed without required checkpoint |
+| tier3_human_review_rate_percent | < 100% |
+| misclassified_tier_incidents_per_quarter | > 1 |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| High-Risk Action Executed Without Required Checkpoint | A Tier 3 action executed without the mandated human approval | Critical |
+| Unclassified Action Type Detected | Agent executes an action type absent from the risk tier registry | Warning |
+| Tier Distribution Shift | Proportion of high-tier actions increases significantly week-over-week | Info |
 
 ---
 

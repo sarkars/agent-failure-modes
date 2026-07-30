@@ -6,18 +6,36 @@
 
 **Symptoms**
 - Regression after unreviewed change.
-- [Add more specific symptoms]
+- A one-line prompt tweak meant to fix a narrow edge case causes a broad regression across unrelated use cases.
+- Engineers cannot identify which specific change caused a production regression because multiple prompt/tool/model edits shipped together without individual review.
+- "Who changed this and why" cannot be answered for a live prompt, because edits were made directly in a shared config without version history.
 
 **Root Cause**
 Prompt/tool/model changes go live without review.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+An engineer edits the production system prompt directly in an admin
+panel to fix a formatting bug in one response type, then saves
+immediately without running it against the eval suite or getting a
+second reviewer.
+
+The edit inadvertently removes a clause instructing the agent to always
+cite its data source. Within an hour, the agent begins generating
+unsourced financial figures in customer-facing responses.
+
+Because the change wasn't logged with an author, timestamp, or diff, and
+no eval regression was run, it takes the on-call team 6 hours to
+identify the prompt edit — rather than the change itself — as the root
+cause, during which the agent serves the flawed behavior to thousands
+of users.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Prompts/tool schemas are editable directly in a live admin panel or config file with no review requirement.
+- No automated eval suite runs against proposed changes before they reach production.
+- Changes are not versioned individually, so a batch of edits can't be isolated to identify which one caused a regression.
+- Emergency/hotfix paths exist that bypass the review gate with no requirement for retroactive review.
 
 ---
 
@@ -26,12 +44,16 @@ Prompt/tool/model changes go live without review.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Review gate enforcement | A prompt/tool/model change submitted without approval | Deployment is blocked | Change reaches production without a recorded approval |
+| Pre-deploy regression detection | A change that fails 2+ golden eval cases | Deployment is blocked and flagged | Change deploys despite eval regression |
+| Automated rollback trigger | Post-deploy metrics breach threshold within monitoring window | Agent auto-reverts to last known-good version | Bad version remains live past the monitoring window |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| review_gate_bypass_rate | 0% | Audit deployment log for changes lacking a recorded approval |
+| eval_regression_catch_rate | 100% | Inject known-bad changes into the pipeline and verify all are blocked pre-deploy |
+| auto_rollback_trigger_accuracy | 100% | Simulate a post-deploy metric breach and confirm automatic rollback fires within the target window |
 
 ---
 
@@ -70,12 +92,17 @@ Prompt/tool/model changes go live without review.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| unreviewed_change_count | > 0 changes deployed without passing review gate |
+| pre_deploy_eval_pass_rate_percent | any regression vs. baseline |
+| post_deploy_regression_incidents_per_month | > 1 |
+| mean_time_to_rollback_minutes | > 60 min |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Unreviewed Change Deployed | A prompt/tool/model change reached production without passing the review gate | Critical |
+| Post-Deploy Metric Regression | Key behavior metric breaches threshold after a change | Critical |
+| Emergency Change Bypass Used | A change was pushed via emergency/hotfix path bypassing normal review | Info |
 
 ---
 

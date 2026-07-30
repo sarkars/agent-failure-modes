@@ -6,18 +6,35 @@
 
 **Symptoms**
 - Incident lacks clear owner for remediation.
-- [Add more specific symptoms]
+- An incident review stalls because no one can say who has the authority to decide whether to pause the agent.
+- The agent's original creator has left the company and no formal handoff ever assigned a successor.
+- Multiple teams assume "someone else" is responsible for the agent's behavior, so obvious issues go unaddressed for months.
 
 **Root Cause**
 No accountable owner for agent decisions/actions.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+A pricing agent was built by an engineer on the growth team as a side
+project 14 months ago. It quietly became load-bearing for a checkout
+flow. The engineer left the company 6 months ago; no ownership transfer
+was recorded.
+
+The agent starts applying an incorrect discount rule after an upstream
+API schema change. Customer support escalates, but the on-call engineer
+paged has never touched this agent and doesn't know who built it, what
+its intended behavior is, or who has authority to pause it.
+
+It takes 9 hours and three escalations up the management chain to find
+someone willing to take responsibility for disabling the agent, during
+which the incorrect discount is applied to several hundred orders.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Agents can be deployed to production without a mandatory, named-individual owner recorded anywhere.
+- No process exists to reassign ownership when the original owner leaves the company or changes teams.
+- Ownership is recorded informally (a Slack channel, an engineer's personal knowledge) rather than in a queryable, enforced registry.
+- Teams treat "who owns this" as implicit from who built it, which breaks down once that person moves on.
 
 ---
 
@@ -26,12 +43,16 @@ No accountable owner for agent decisions/actions.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Deployment ownership gate | Deployment manifest with an empty or invalid owner field | Deployment is blocked | Agent deploys to production without a valid owner |
+| Departure-triggered flag | Simulated HR departure event for a recorded agent owner | Agent is flagged for reassignment within the SLA window | Agent remains attributed to a departed owner with no flag |
+| Incident owner resolution | Incident opened for an agent with a registered owner | Owner is identified and paged within the target time | Incident responders cannot identify or reach an accountable owner |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| deployment_owner_gate_enforcement_rate | 100% | Attempt test deployments with missing/invalid owner fields and confirm all are blocked |
+| departure_flag_latency | < 24h | Simulate an owner departure event and measure time until the agent is flagged |
+| incident_owner_resolution_time | < 5 min | Time how long it takes a simulated incident responder to identify the accountable owner via the registry |
 
 ---
 
@@ -70,12 +91,17 @@ No accountable owner for agent decisions/actions.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| ownerless_agent_count | > 0 |
+| stale_owner_record_count | > 0 |
+| owner_response_time_to_page_minutes | > 60 min |
+| incident_owner_identification_time_minutes | > 30 min |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Agent Deployed Without Owner | Deployment manifest missing or references invalid owner | Critical |
+| Owner Unreachable During Incident | Accountable owner does not respond to page within SLA | Critical |
+| Owner Departure Detected | HR/identity event indicates named owner has left the company or team | Warning |
 
 ---
 

@@ -6,18 +6,37 @@
 
 **Symptoms**
 - Stale credentials/permissions remain active.
-- [Add more specific symptoms]
+- Departed employees' or decommissioned agents' credentials remain active with full scope.
+- Permission scope grows monotonically over time as new tools are added but old ones are never revoked.
+- Security audits discover agents holding access to systems no longer relevant to their current task.
 
 **Root Cause**
 Agent permissions are not periodically reviewed.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+Agent "vendor-onboarding-bot" was granted write access to the finance ERP
+system 18 months ago to auto-create vendor records during a one-time
+migration project. The migration ended after 3 weeks, but the credential
+was never revoked.
+
+Month 14: The finance team rotates its ERP access policy and runs a
+routine credential audit. They discover vendor-onboarding-bot still holds
+standing write access, unused for over a year, with no owner able to
+explain why.
+
+Security investigation reveals: the agent's API key was never scoped to
+expire, no recertification process exists, and the original requester
+left the company 8 months prior. The stale credential is flagged as a
+potential attack surface during the next penetration test.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Credentials/permissions are provisioned with no default expiration, so they persist indefinitely absent manual revocation.
+- No scheduled recertification cadence exists to force owners to re-justify standing access.
+- Access requests are approved as one-off exceptions without linking to the task/project they support, making it hard to tell later whether the grant is still needed.
+- Ownership of a granted credential is not tracked, so when the original requester leaves or changes roles, nobody is positioned to revoke it.
+- Security teams lack visibility into the full inventory of agent credentials across all integrated systems, so audits are manual and infrequent.
 
 ---
 
@@ -26,12 +45,16 @@ Agent permissions are not periodically reviewed.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Expired credential enforcement | A credential passes its 90-day expiry without recertification | Access is auto-revoked and a ticket is opened | Credential remains active past expiry with no revocation |
+| Orphaned owner detection | Owner of a granted credential departs the company (simulated HR event) | Credential is flagged and quarantined within 24h | Credential remains fully active with no flag raised |
+| Recertification prompt delivery | Grant approaches its review date | Owner receives a recertification task via the configured workflow tool | No recertification prompt is sent; grant silently continues |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| stale_grant_detection_rate | 100% | Seed a test registry with grants unused for 30+ days and verify the scanner flags all of them |
+| recertification_prompt_delivery_rate | 100% | Verify every grant approaching its review date generates a recertification task in the test harness |
+| auto_revocation_accuracy | 100% | Confirm grants that miss their recertification deadline are auto-revoked without affecting still-valid grants |
 
 ---
 
@@ -70,12 +93,17 @@ Agent permissions are not periodically reviewed.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| stale_grant_count | > 0 grants unused for 30+ days |
+| recertification_completion_rate_percent | < 95% |
+| avg_grant_age_days | > 180 days |
+| orphaned_grant_count | > 0 grants tied to decommissioned agents/departed owners |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Recertification Deadline Missed | Grant passes recertification deadline without owner action | Critical |
+| Orphaned Grant Detected | Active grant tied to decommissioned agent or departed owner | Warning |
+| Privilege Drift Detected | Agent's active scopes exceed declared least-privilege baseline | Info |
 
 ---
 

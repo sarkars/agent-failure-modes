@@ -6,18 +6,36 @@
 
 **Symptoms**
 - Vendor outage/change/security issue affects agent.
-- [Add more specific symptoms]
+- A model provider silently deprecates the pinned model version, breaking agent behavior with no advance warning reaching the team.
+- A vendor discloses a security incident and the company cannot quickly determine what data was exposed or which agent functionality depends on the vendor.
+- The agent goes fully down during a vendor outage because no fallback path was ever designed for that "critical" dependency.
 
 **Root Cause**
 External model/tool vendors create unmanaged risk.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+An agent relies on a single third-party embeddings API for its
+retrieval pipeline, integrated years ago with no formal vendor risk
+assessment and no fallback provider.
+
+The vendor experiences a multi-hour outage during a regional
+infrastructure failure. Because the agent's retrieval calls go directly
+to the vendor SDK with no circuit breaker or fallback, the entire agent
+becomes non-functional for the outage's duration — not just degraded,
+but fully down.
+
+Post-incident review finds the vendor was never classified as
+critical-path despite the agent having no functional path without it,
+and no one had reviewed the vendor's own uptime SLA or incident history
+before relying on it for a production-critical function.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Vendors are integrated based on functional fit alone, without a risk-tiering or security assessment step.
+- No architectural fallback exists for vendors the agent cannot function without.
+- Vendor API calls are made directly via SDK calls scattered through the codebase, with no abstraction layer to swap providers quickly.
+- Vendor changelogs, deprecation notices, and security disclosures are not systematically monitored or routed to an owning team.
 
 ---
 
@@ -26,12 +44,16 @@ External model/tool vendors create unmanaged risk.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Circuit breaker failover | Simulated elevated error rate/latency from a critical vendor | Circuit breaker trips and traffic routes to fallback provider | Agent continues sending traffic to the failing vendor with no failover |
+| Vendor risk assessment coverage | A newly integrated vendor | Risk assessment completed and vendor registered before go-live | Vendor is integrated into production with no recorded assessment |
+| Security incident exposure assessment | Simulated vendor security incident disclosure | Data exposure and affected functionality are assessed within target time | Exposure assessment is not completed or takes far longer than target |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| circuit_breaker_failover_success_rate | 100% | Simulate vendor degradation and verify traffic reroutes to fallback within target time |
+| vendor_assessment_precheck_rate | 100% | Audit recently integrated vendors for a completed risk assessment before go-live |
+| incident_exposure_assessment_time | < 4 hours | Time a simulated vendor incident disclosure to a completed exposure assessment |
 
 ---
 
@@ -70,12 +92,17 @@ External model/tool vendors create unmanaged risk.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| vendor_risk_assessment_coverage_percent | < 100% |
+| critical_vendor_fallback_coverage_percent | < 100% |
+| vendor_incident_response_time_hours | > 24 hours |
+| stale_vendor_assessment_count | > 0 for critical-tier vendors |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Critical Vendor Outage Detected | Critical-path vendor API error rate or latency breaches threshold | Critical |
+| Vendor Security Incident Disclosed | Vendor reports a breach or critical vulnerability affecting shared data or integrated tooling | Critical |
+| Vendor Assessment Overdue | Critical or high-tier vendor's risk assessment is past its review cadence | Warning |
 
 ---
 

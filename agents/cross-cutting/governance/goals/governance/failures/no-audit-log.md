@@ -6,18 +6,36 @@
 
 **Symptoms**
 - Missing trace/tool/action logs.
-- [Add more specific symptoms]
+- Incident responders cannot reconstruct the sequence of tool calls that led to a bad outcome, so root-cause analysis stalls.
+- Compliance requests for "show us what the agent did for user X" cannot be fulfilled.
+- Disputes with users about what the agent said or did cannot be resolved because no record exists to check against.
 
 **Root Cause**
 Cannot reconstruct what the agent saw, decided, and did.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+A user disputes that the agent authorized a $2,300 charge on their
+account, claiming they never approved it. Support pulls up the case to
+verify.
+
+The agent's runtime logs only the final API call result ("charge:
+success"), not the reasoning that led to it, the user message that
+triggered it, or which tool the agent selected and why. There is no
+trace_id linking the charge back to the specific conversation turn.
+
+Support cannot confirm or refute the user's claim. The charge is
+refunded as a precaution, and the incident is escalated to engineering,
+who spend two days manually correlating disparate application logs to
+reconstruct what likely happened — with no certainty the reconstruction
+is complete.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Logging is treated as a best-effort side effect of execution rather than a hard precondition for it.
+- No shared trace_id links the user's input, the agent's reasoning, and the resulting tool calls into a single reconstructable chain.
+- Log schema is inconsistent across tools/integrations, so some actions are logged richly and others barely at all.
+- Logging pipeline failures are not monitored, so gaps accumulate silently until an incident forces someone to notice.
 
 ---
 
@@ -26,12 +44,16 @@ Cannot reconstruct what the agent saw, decided, and did.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Full chain reconstruction | A completed agent session with multiple tool calls | Perceive-decide-act chain is fully reconstructable from trace_id | One or more steps in the chain are missing from the log |
+| Log-then-act enforcement | Simulated logging service outage during an action attempt | Action is blocked until log write is confirmed | Action executes despite failed log write |
+| Retention retrievability | Query a log record within its required retention window | Record is retrievable | Record is missing or inaccessible before retention period ends |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| trace_reconstruction_success_rate | 100% | Sample completed sessions and verify each can be fully replayed from trace_id alone |
+| log_then_act_enforcement_rate | 100% | Simulate logging failures and verify no downstream action executes without a confirmed write |
+| retention_retrieval_success_rate | 100% | Query logs at random points within the retention window and confirm successful retrieval |
 
 ---
 
@@ -70,12 +92,17 @@ Cannot reconstruct what the agent saw, decided, and did.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| trace_completeness_rate_percent | < 99.5% of sessions have full perceive-decide-act chains |
+| log_write_failure_rate_percent | > 0.1% |
+| logging_pipeline_lag_seconds | > 60s |
+| retention_compliance_rate_percent | < 100% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Action Without Log Record | Executed agent action has no corresponding trace event | Critical |
+| Logging Pipeline Degradation | Event ingestion volume drops sharply relative to agent activity | Critical |
+| Retention Gap Detected | Logs within required retention window are missing or unretrievable | Warning |
 
 ---
 

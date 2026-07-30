@@ -6,18 +6,36 @@
 
 **Symptoms**
 - Slow remediation after AI incident.
-- [Add more specific symptoms]
+- The first response to an agent-caused failure is improvised, with responders unsure whether to pause the agent, roll back a version, or escalate to legal.
+- Standard software incident playbooks don't cover agent-specific failure modes (hallucinated commitments, runaway tool loops), so responders waste time adapting generic procedures mid-incident.
+- Similar agent failures recur because no post-incident process feeds learnings back into prevention.
 
 **Root Cause**
 No defined response for agent-caused failures.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+An agent handling appointment scheduling begins hallucinating available
+time slots that don't exist on the calendar backend, after a tool
+integration silently starts returning malformed responses.
+
+The on-call engineer, who normally handles infrastructure outages, has
+no agent-specific playbook to reference. They spend 40 minutes trying to
+determine whether this is a data problem, a prompt problem, or a tool
+integration problem, and another 20 minutes finding someone who knows
+how to pause just this one agent without taking down the whole
+scheduling service.
+
+By the time the agent is paused, it has confirmed 60 appointments
+against slots that don't exist, requiring a full day of manual outreach
+to fix.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- No agent-specific incident playbook exists distinct from standard infrastructure incident response.
+- Severity classification for agent failures is ad hoc, so responders debate priority instead of following a pre-defined tier.
+- No tooling exists to quickly pause or throttle a single agent/action type without broader service impact.
+- Post-incident reviews don't tag failures against known failure patterns, so the same root cause recurs without being recognized.
 
 ---
 
@@ -26,12 +44,16 @@ No defined response for agent-caused failures.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Playbook match on known failure type | Simulated agent failure matching a cataloged pattern | Responder is routed to the correct playbook automatically | Responder has no playbook reference and improvises response |
+| Kill switch responsiveness | On-call triggers agent-specific pause from incident dashboard | Agent is paused within target time without affecting other services | Pause requires a full deployment cycle or affects unrelated agents |
+| Post-incident pattern tagging | A closed incident review | Incident is tagged against a known failure pattern taxonomy | Incident closes with no pattern tag or playbook-adherence record |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| playbook_match_rate | > 90% | Sample recent incidents and check what fraction matched an existing playbook entry |
+| kill_switch_activation_time | < 5 min | Time a simulated kill-switch activation from trigger to confirmed agent pause |
+| post_incident_tagging_completion_rate | 100% | Audit closed incidents for a completed pattern tag and playbook-adherence note |
 
 ---
 
@@ -70,12 +92,17 @@ No defined response for agent-caused failures.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| mean_time_to_detect_minutes | > 30 min |
+| mean_time_to_mitigate_minutes | > 90 min |
+| incidents_without_playbook_match_percent | > 25% |
+| post_incident_review_completion_rate_percent | < 90% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Agent Incident Triggered, No Playbook Match | Incident opened for an agent failure with no matching playbook entry | Critical |
+| Mitigation SLA Breach | Agent-caused incident remains unmitigated past the target mitigation time | Critical |
+| Post-Incident Review Overdue | Closed incident has no completed retro after 5 business days | Info |
 
 ---
 

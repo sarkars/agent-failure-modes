@@ -6,18 +6,34 @@
 
 **Symptoms**
 - Bad release persists in production.
-- [Add more specific symptoms]
+- A bad prompt change stays live for hours because reverting it requires reconstructing the previous version from memory or scattered commits.
+- The team discovers during an actual incident that the "rollback procedure" has never been tested and doesn't actually work.
+- Reverting a model version pin breaks because the vendor's "latest" alias has moved on and the exact prior snapshot is no longer identifiable.
 
 **Root Cause**
 Cannot revert bad prompt/model/tool changes quickly.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+A prompt change intended to make the agent's tone more concise ships to
+production. It inadvertently causes the agent to omit required legal
+disclaimers from loan-related responses.
+
+The on-call engineer wants to revert immediately, but the previous
+prompt version only exists as an old Slack message and a
+partially-remembered diff — there is no versioned artifact with an
+unambiguous "last known-good" pointer.
+
+Reconstructing the exact prior prompt takes 45 minutes of
+cross-referencing chat history and old deployment logs, during which the
+agent continues serving non-compliant responses to loan applicants.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Configuration changes (prompts, tool schemas, model pins) are not stored as versioned, individually addressable artifacts.
+- No "last known-good" pointer is maintained alongside the live configuration.
+- Rollback procedures are documented but never exercised, so they're unproven when actually needed.
+- Model version routing uses floating aliases ("latest") rather than pinned snapshots, making a vendor-side update itself unrollbackable.
 
 ---
 
@@ -26,12 +42,16 @@ Cannot revert bad prompt/model/tool changes quickly.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Rollback execution time | Trigger rollback to last known-good version | Configuration reverts within target time | Rollback takes longer than target or fails to complete |
+| Rollback drill | Scheduled rollback drill against a non-production environment | Drill completes successfully, restoring known-good behavior | Drill fails or reveals the rollback path doesn't work |
+| Post-rollback verification | Rollback executed after a detected regression | Eval suite re-run confirms known-good behavior is restored | Rollback completes but eval suite still shows regression |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| rollback_execution_time | < 10 min | Time a triggered rollback from initiation to confirmed reversion |
+| rollback_drill_pass_rate | 100% | Track pass/fail outcomes of scheduled rollback drills over time |
+| post_rollback_eval_pass_rate | 100% | Re-run the eval suite immediately after each rollback and confirm baseline is restored |
 
 ---
 
@@ -70,12 +90,17 @@ Cannot revert bad prompt/model/tool changes quickly.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| mean_time_to_rollback_minutes | > 30 min |
+| rollback_drill_success_rate_percent | < 100% |
+| bad_release_dwell_time_minutes | > 60 min |
+| rollback_verification_pass_rate_percent | < 100% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Bad Release Detected, No Rollback Executed | Post-deploy metrics breach threshold and no rollback initiated within target window | Critical |
+| Rollback Execution Failure | Rollback command fails to restore last known-good version | Critical |
+| Rollback Drill Failure | Scheduled rollback drill does not complete successfully | Info |
 
 ---
 

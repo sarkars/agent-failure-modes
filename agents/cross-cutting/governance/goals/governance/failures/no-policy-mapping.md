@@ -6,18 +6,36 @@
 
 **Symptoms**
 - Compliance review cannot trace control coverage.
-- [Add more specific symptoms]
+- A regulatory audit asks "which control satisfies obligation X" and no one can answer without a multi-week manual investigation.
+- A new agent capability launches and later turns out to violate a data-handling policy that was never checked against it.
+- Compliance and engineering disagree about whether a given control is "covered," because no shared source of truth exists.
 
 **Root Cause**
 Agent behavior not mapped to company/regulatory policies.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+A healthcare intake agent is expanded to summarize patient-reported
+symptoms into structured notes for clinicians. The team ships the
+feature because it passes functional testing; no one checks it against
+HIPAA minimum-necessary or data-handling obligations, because no
+policy-to-control matrix exists to consult.
+
+Six months later, a compliance audit asks the engineering team to
+demonstrate which technical controls enforce minimum-necessary access to
+the summarized notes. No one can produce a mapping — the feature was
+never registered against any policy obligation in the first place.
+
+The audit finding requires a retroactive control review and a temporary
+feature freeze while the mapping gap is closed, delaying an unrelated
+product launch that depended on the same compliance sign-off.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- New agent capabilities ship based on functional testing alone, with no policy-obligation checklist as part of launch review.
+- The set of applicable policies/regulations is not centrally tracked, so teams may not know which obligations even apply to a given feature.
+- No control matrix exists linking each policy to the specific technical control that satisfies it, so compliance coverage can't be verified without manual investigation.
+- Regulatory changes are tracked by legal but not systematically propagated to engineering as new control requirements.
 
 ---
 
@@ -26,12 +44,16 @@ Agent behavior not mapped to company/regulatory policies.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Launch review policy check | A new capability going through launch review | Reviewer confirms applicable policies are mapped to implemented controls | Capability launches with no policy mapping recorded |
+| Control-to-policy traceability query | Compliance queries "which control implements policy X" | Query returns a specific control with implementing component | Query cannot be answered without manual investigation |
+| Regulatory change propagation | A tracked regulatory change affecting an existing capability | Control matrix is updated within 30 days | Regulatory change has no corresponding matrix update after 30+ days |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| launch_review_policy_check_rate | 100% | Audit a sample of recently launched capabilities for a recorded policy mapping |
+| control_traceability_query_success_rate | 100% | Run sample compliance queries against the registry and confirm all resolve without manual lookup |
+| regulatory_change_propagation_time | < 30 days | Track time from regulatory change identification to control matrix update |
 
 ---
 
@@ -70,12 +92,17 @@ Agent behavior not mapped to company/regulatory policies.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| policy_coverage_percent | < 95% |
+| unmapped_capability_count | > 0 deployed capabilities without a policy mapping |
+| control_matrix_staleness_days | > 90 days since last review |
+| compliance_gap_waivers_open | any waiver open past its expiry |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Unmapped Capability Deployed | Agent capability shipped to production with no entry in the policy control matrix | Critical |
+| Regulatory Change Without Matrix Update | A tracked regulatory/policy change has no corresponding control matrix update after 30 days | Warning |
+| Compliance Waiver Expired | A time-boxed gap waiver passes its expiry without remediation | Info |
 
 ---
 
