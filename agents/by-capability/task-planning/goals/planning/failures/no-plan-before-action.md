@@ -6,18 +6,25 @@
 
 **Symptoms**
 - Immediate write/action calls on complex task.
-- [Add more specific symptoms]
+- Agent starts editing files or running migrations on the first turn of a multi-file refactor with no visible plan or task list.
+- Later steps contradict earlier ones (e.g., renames a function, then a subsequent edit still calls the old name) because there was no upfront map of dependent files.
+- Agent re-derives scope mid-task after already making changes, requiring rework or reverts.
+- No task list, TODO breakdown, or reasoning trace precedes the first shell/file-write command for a task spanning multiple components.
 
 **Root Cause**
 Agent jumps into tool calls or actions without decomposing the workflow.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+A coding agent is asked to "migrate the app's date handling from moment.js to date-fns across the codebase." Instead of first enumerating the files that import moment.js, checking for usages with non-trivial API differences (timezone handling, locale formatting), and sequencing the change, the agent immediately opens the first file it finds and starts swapping imports and rewriting calls. Three files in, it hits a timezone-conversion usage that date-fns handles differently, requiring a different replacement pattern than the one it has been applying — but by then it has already committed inconsistent replacements across the first three files, and has to backtrack and redo work it could have planned around from the start.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Task appears simple at first glance ("just swap a library") so the agent underestimates the need for upfront decomposition.
+- No complexity classifier or gate requires a plan artifact before the first mutating tool call.
+- Agent's tool-use loop rewards fast visible progress (file edits) over an initial non-action planning turn.
+- Long-horizon dependencies (files that reference each other) aren't visible without an explicit search/enumeration step the agent skipped.
+- No session-level enforcement distinguishes exploratory read-only calls from the first committing action.
 
 ---
 
@@ -26,12 +33,15 @@ Agent jumps into tool calls or actions without decomposing the workflow.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Multi-file refactor gate | "Migrate date handling from moment.js to date-fns across the repo" | Agent produces a file-level plan/task list (enumerated affected files, sequencing) before the first file edit | First file edit occurs with no preceding plan artifact or enumeration step in the trace |
+| Trivial single-file task exemption | "Fix the typo in README.md line 12" | Agent may act directly without a formal plan (task below complexity threshold) | Agent stalls generating an unnecessary plan for a genuinely trivial change |
+| Dependency-aware sequencing | Task touching 5 interdependent files with shared imports | Plan lists files in a dependency-respecting order before edits begin | Edits proceed in file-discovery order with no dependency analysis, causing rework |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| plan_before_first_mutation_rate_percent | 100% for tasks above complexity threshold | Check trace for a plan/task-list artifact preceding the first file-write or shell-mutating call |
+| rework_edit_rate_percent | < 10% | Count of files edited more than once due to inconsistent early changes, divided by total files touched |
 
 ---
 
@@ -70,12 +80,16 @@ Agent jumps into tool calls or actions without decomposing the workflow.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| plan_presence_rate_percent | < 98% for complex tasks |
+| premature_action_rate_percent | > 1% |
+| mean_actions_before_plan | >= 1 |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| **Mutating Action With No Plan Artifact** | A file-write, git-commit, or migration command executes with no plan/task-list present in session state | High |
+| **Elevated Premature Action Rate** | premature_action_rate exceeds 1% over a rolling day | Medium |
+| **Complexity Classifier Drift** | Misroute rate (simple-lane tasks that were actually complex) trending upward over a week | Low |
 
 ---
 

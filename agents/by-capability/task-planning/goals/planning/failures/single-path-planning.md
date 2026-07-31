@@ -6,18 +6,25 @@
 
 **Symptoms**
 - Failure after one empty search/API error.
-- [Add more specific symptoms]
+- Agent reports "unable to fulfill shipment" after a single carrier API returns an error, without checking any alternate carrier or route.
+- Plan lists exactly one supplier/route for a sourcing task with no documented fallback if that supplier is out of stock.
+- Agent retries the identical failed call several times (same carrier, same endpoint) rather than switching to a structurally different approach.
+- Task terminates as "blocked" immediately following one empty inventory-lookup result, with no secondary warehouse or vendor queried.
 
 **Root Cause**
 Agent has no fallback when the first route fails.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+A logistics coordination agent is asked to "arrange expedited shipment of replacement parts to the Denver facility." It queries its primary carrier's rate API, which returns a timeout error due to an unrelated outage. The agent's plan had only ever considered this one carrier, so it reports back "unable to arrange shipment, carrier API unavailable" and stops — even though two other approved carriers are configured in the system and could have fulfilled the request within the same SLA. The Denver facility misses its production deadline because no fallback route was ever part of the plan.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Planning stage generates a single strategy rather than being required to produce ranked alternatives for tasks above a risk/complexity threshold.
+- No fallback-trigger library exists mapping common failure signatures (timeout, empty result, rate limit) to predefined alternate routes.
+- The executor treats a tool failure as task failure rather than a signal to select the next-ranked strategy.
+- Time-boxed sessions discourage generating multiple candidate strategies upfront since only one is expected to be needed.
+- Alternate providers/routes exist in the system configuration but aren't surfaced to the planner as viable options at plan-generation time.
 
 ---
 
@@ -26,12 +33,15 @@ Agent has no fallback when the first route fails.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Carrier fallback on API failure | Primary carrier rate API returns a timeout/5xx error | Agent selects the next-ranked configured carrier and completes the shipment plan | Task reported as failed/blocked immediately after the single carrier error, no fallback attempted |
+| Empty inventory result | Primary warehouse inventory lookup returns zero stock for requested part | Agent queries at least one alternate warehouse/vendor before reporting unavailability | Task terminates as unfulfillable after one empty lookup with no secondary source queried |
+| Distinguishing transient vs. structural failure | Primary carrier returns a transient rate-limit error vs. a permanent route-unavailable error | Transient error triggers backoff+retry; structural error triggers a fallback strategy switch | Agent applies the same bare retry to both error types, or gives up on a transient error |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| fallback_generation_rate_percent | > 90% of eligible plans include a ranked alternate strategy | Check plan artifacts for tasks above the risk/complexity threshold for a second-ranked strategy field |
+| task_success_rate_after_primary_failure_percent | > 70% | Of tasks where the primary route/tool failed, measure how many still completed successfully via a fallback |
 
 ---
 
@@ -70,12 +80,16 @@ Agent has no fallback when the first route fails.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| single_path_failure_rate_percent | > 15% |
+| fallback_invocation_rate_percent | near 0% despite nonzero primary failures |
+| task_success_rate_after_fallback_percent | < 40% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Medium |
+| **Terminal Failure After Single Carrier/Route Attempt** | Task reported as failed after exactly one tool-call failure with no fallback route attempted | Medium |
+| **Fallback Library Miss for New Failure Signature** | A failure signature (error code/pattern) has no mapped fallback strategy in the library | Low |
+| **Fallback Success Rate Decline** | task_success_rate_after_fallback drops below 40% over a rolling week | Medium |
 
 ---
 

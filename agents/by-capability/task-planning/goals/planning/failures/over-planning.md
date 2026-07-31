@@ -6,18 +6,25 @@
 
 **Symptoms**
 - Many plan turns; no execution progress.
-- [Add more specific symptoms]
+- Agent repeatedly regenerates the outline for a report or workflow without ever calling a search/data tool to fill it in.
+- Successive planning turns reorder or rename the same subtasks with no new information incorporated.
+- Agent poses clarifying sub-questions it could resolve with a tool call, but keeps deliberating instead of calling the tool.
+- Session times out or hits a turn/cost budget while still in the planning phase, with zero completed deliverable sections.
 
 **Root Cause**
 Agent spends excessive time planning instead of acting.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+A research agent is asked to "produce a competitive analysis of three SaaS vendors for the procurement team." Instead of researching the first vendor after an initial outline, the agent spends 14 turns iterating on the report structure — adding a subsection, then merging it back, then splitting the pricing comparison into two different framings, then reconsidering the audience and revising the outline again. No search or data-gathering tool is called during this entire span. By the time a human notices no actual vendor data has been retrieved, half the allotted session budget is gone and the report is still an empty outline.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- No turn or time budget is enforced on the planning phase, so refinement can continue indefinitely.
+- Task is genuinely open-ended ("produce an analysis") with no crisp definition of "done planning," inviting endless elaboration.
+- Agent's self-critique loop rewards producing a more polished-looking plan over transitioning to execution.
+- No diminishing-returns check compares successive plan revisions for actual new information.
+- Planning and execution are not architecturally separated, so there is no natural handoff point forcing a transition.
 
 ---
 
@@ -26,12 +33,15 @@ Agent spends excessive time planning instead of acting.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Planning turn budget enforcement | "Produce a competitive analysis of 3 SaaS vendors" | Agent transitions to research/execution within 3-5 planning turns | Agent exceeds 6+ planning turns with zero tool calls made |
+| Diminishing-returns detection | Plan revised 3 times with no new information introduced between revisions | Orchestrator forces transition to execution after the 2nd no-new-info revision | Agent continues revising the same plan indefinitely without new information |
+| Genuinely complex task allowance | Task requiring coordination across 8 interdependent systems | Agent is allowed a proportionally larger but still capped planning budget | Agent is force-transitioned before a genuinely necessary planning step completes, causing execution errors |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| planning_turns_before_first_tool_call | <= 3 | Count reasoning/plan-revision turns preceding the first search/data tool call in the eval trace |
+| plan_revision_information_gain_rate_percent | > 50% of revisions introduce new information | LLM-judge or diff-based comparison of consecutive plan revisions for materially new content |
 
 ---
 
@@ -70,12 +80,16 @@ Agent spends excessive time planning instead of acting.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| planning_turns_before_first_action | > 6 |
+| planning_time_to_action_ratio | > 0.6 |
+| timeout_forced_execution_rate_percent | > 25% of sessions |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Low |
+| **Planning Budget Exceeded** | Session exceeds the configured planning turn/time budget with no tool call made | Low |
+| **Zero-Progress Session** | 5+ planning turns logged with zero tool executions | Medium |
+| **Session Timeout During Planning** | Session hits its overall time/cost budget while still in the planning phase, producing no deliverable | Medium |
 
 ---
 

@@ -6,18 +6,25 @@
 
 **Symptoms**
 - New user correction ignored; old branch continued.
-- [Add more specific symptoms]
+- User provides a corrected shipping address mid-conversation, but the agent's next action still ships to the original (wrong) address from earlier in the plan.
+- A tool result contradicts an assumption baked into the current plan (e.g., "item is out of stock") yet the agent continues fulfillment steps built on the stale assumption.
+- Agent's final summary references the original plan's outcome, not the actually-revised one, causing a mismatch between what was said and what was done.
+- Plan continues referencing an entity (order, ticket, account) whose state changed externally (e.g., cancelled by the customer through another channel) mid-session.
 
 **Root Cause**
 Agent continues an old plan after new evidence invalidates it.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+A customer success agent is mid-way through processing an order-modification request when the customer sends a follow-up message: "actually, cancel that — ship to my new office address instead, 500 Market St." The agent acknowledges the message conversationally but continues executing the plan it had already committed to — updating the item quantity and confirming shipment to the original home address — because the plan artifact it is executing against was generated before the correction and nothing in the execution loop re-checked it against the new user input. The customer receives a shipping confirmation to the wrong address and has to contact support again to unwind it.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- No mechanism ties incoming user messages during execution to a mandatory plan re-evaluation step; the agent treats the plan as fixed once generated.
+- Plan artifacts aren't stamped with the state/context they were generated from, so there is no cheap way to detect staleness.
+- Long tool-call sequences run without checkpoints where the agent re-reads the latest user turn before continuing.
+- Corrections phrased conversationally ("actually...") rather than as explicit commands are easy for the agent to acknowledge in text without actually updating the plan.
+- Multi-step fulfillment workflows are optimized for throughput, discouraging pauses to re-verify assumptions mid-flight.
 
 ---
 
@@ -26,12 +33,15 @@ Agent continues an old plan after new evidence invalidates it.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Mid-execution user correction | User corrects shipping address after agent has already started an order-modification plan | Agent halts the current plan, regenerates it incorporating the new address, and confirms the change before proceeding | Original plan continues executing (ships to old address) with no visible replan |
+| Contradicting tool result | Inventory-check tool returns "out of stock" mid-plan for an item the plan assumed was available | Agent replans around the new information (backorder, substitute, notify customer) | Agent proceeds with fulfillment steps built on the now-false in-stock assumption |
+| Externally changed entity state | Order referenced in the plan is cancelled by the customer via another channel mid-session | Agent detects the state change on next reference and halts/replans | Agent completes actions against the now-cancelled order as if nothing changed |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| ignored_correction_detection_rate_percent | > 95% of injected corrections caught and reflected in a plan diff | Inject a mid-session correction into eval transcripts and measure whether the resulting plan changes to match it |
+| stale_plan_execution_rate_percent | < 1% | Compare each executed action's target state against the plan's originating state snapshot across the eval set |
 
 ---
 
@@ -70,12 +80,16 @@ Agent continues an old plan after new evidence invalidates it.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| stale_plan_execution_rate_percent | > 0.5% |
+| ignored_correction_rate_percent | > 1% |
+| replan_trigger_latency_seconds | > 10s |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| **Action Executed on Stale Plan** | An action executes while the plan's state fingerprint no longer matches current world state | High |
+| **User Correction Not Reflected in Plan** | A user correction message has no corresponding plan diff within one turn | High |
+| **Replan Latency Exceeded** | Time from invalidating event to replan exceeds 10 seconds | Medium |
 
 ---
 
