@@ -6,18 +6,34 @@
 
 **Symptoms**
 - User correction mentions a constraint already implied by context.
-- [Add more specific symptoms]
+- Agent completes onboarding/processing steps that are valid for one jurisdiction/role but not for the specific case's actual jurisdiction/role.
+- A downstream system rejects or flags the action because an implicit eligibility constraint (visa status, tax jurisdiction, seniority tier) wasn't checked.
+- User correction reveals the missed constraint was already available in a system the agent had access to but didn't query.
+- The same category of hidden requirement (e.g., regional compliance) is missed repeatedly across different cases.
 
 **Root Cause**
 Agent misses unstated but critical constraints such as policy, geography, role, or SLA.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+An HR onboarding agent is asked to "set up payroll and benefits for the new hire, Priya,
+starting Monday." The agent completes the standard US benefits enrollment flow and
+provisions a standard-tier equity grant. What it didn't check: Priya is based in Germany
+on a company-sponsored visa, which means she needs to be enrolled through the company's
+German entity for payroll/tax compliance, and equity grants for that entity require a
+different, board-approved template due to local securities regulations. The
+employee-location field was present in the HRIS record the agent had access to, but the
+agent's workflow only reads it for mailing-address purposes, not for routing the
+payroll/equity decision. The mistake surfaces two weeks later when the German entity's
+payroll run fails compliance validation.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Jurisdiction/role/eligibility data exists in a source-of-truth system but isn't pulled into the agent's working context for the specific decision being made.
+- Task instructions describe the "happy path" (standard domestic hire) and don't enumerate the full space of location/role variants.
+- No checklist of commonly-implicit constraints (jurisdiction, visa status, SLA tier, regulatory flag) required before execution.
+- Requester assumes the constraint is "obvious" from context (e.g., name, office) and doesn't state it explicitly.
+- Agent's action succeeds technically (the tool call doesn't error), masking that the wrong workflow variant was used.
 
 ---
 
@@ -26,12 +42,15 @@ Agent misses unstated but critical constraints such as policy, geography, role, 
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Jurisdiction-triggered workflow branch | New-hire request with employee_location = "Germany" embedded in the HRIS record but not restated in the ticket text | Agent resolves the location field and routes to the German-entity payroll/equity workflow | Agent defaults to the standard/US workflow, ignoring the location field |
+| Visa-status constraint | New hire flagged as visa-sponsored in HRIS | Agent checks visa status before finalizing start-date-dependent paperwork and flags any deadline risk | Agent proceeds with the standard timeline, missing visa-driven deadline constraints |
+| Checklist completeness under partial info | Onboarding request missing an explicit role/tier field | Agent looks up the field from the source-of-truth rather than assuming a default tier | Agent assumes a default tier and provisions incorrect benefits |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| checklist_field_resolution_rate_on_benchmark_percent | 100% of applicable checklist items resolved (not left as silent defaults) | Run a labeled benchmark of scenarios covering multiple jurisdictions/roles; measure whether the agent explicitly resolves each hidden-requirement field |
+| cross_reference_usage_rate_percent | > 95% | Measure how often the agent actually queries the source-of-truth field (location, visa, tier) that was available versus ignoring it |
 
 ---
 
@@ -70,12 +89,16 @@ Agent misses unstated but critical constraints such as policy, geography, role, 
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| checklist_completion_rate_percent | < 95% |
+| hidden_requirement_miss_rate_percent | > 5% (from user corrections) |
+| checklist_update_lag_days | > 30 days |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Medium |
+| Critical Constraint Miss in Production | An action executed that violated a known-critical hidden requirement (geography/regulatory, role/permission) | High |
+| Checklist Item Unresolved at Execution | A plan executed despite one or more checklist items marked "unknown" | Medium |
+| Recurring Missed Constraint Pattern | The same constraint type is missed 3+ times across sessions within a month | Medium |
 
 ---
 

@@ -6,18 +6,33 @@
 
 **Symptoms**
 - Excessive turns/retries without new information.
-- [Add more specific symptoms]
+- Agent repeats the same or near-identical action across consecutive turns without making measurable progress.
+- Session runs far longer (turns, wall-clock time, tool calls) than comparable completed tasks of the same type with no corresponding increase in output quality.
+- Agent asks the same clarifying question multiple times, or keeps re-verifying an already-verified condition.
+- Task budget (time, cost, API calls) is exhausted with no clear completion state and no explicit stop signal ever produced.
 
 **Root Cause**
 Agent keeps looping, retrying, or asking because 'done' is undefined.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+A data-reconciliation agent is tasked with "resolve all discrepancies between the two
+ledgers until they match." For most discrepancies this works fine, but a handful involve
+currency-rounding differences that can never fully reconcile to zero given the source
+systems' precision limits. Because "until they match" was never qualified with a tolerance
+or a maximum-attempts condition, the agent keeps re-running its reconciliation adjustment on
+the same handful of rows, each time producing a slightly different but still-nonzero result,
+for over 200 turns across several hours, consuming significant compute and API budget
+without ever reaching a state it's willing to call "done." No human is alerted until someone
+notices the job has been running since the previous night.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Task instruction specifies an outcome ("until they match") without a tolerance, maximum-attempt count, or explicit terminal condition.
+- No hard budget ceiling (steps, retries, wall-clock time) enforced independent of the agent's own judgment about whether to continue.
+- No requirement that each retry demonstrate measurable progress versus the previous attempt.
+- Loop/near-duplicate detection isn't running on the action stream, so repetition isn't caught until resource usage is already large.
+- Edge cases (float precision limits, unresolvable data conflicts) weren't anticipated in the termination criteria at task design time.
 
 ---
 
@@ -26,12 +41,15 @@ Agent keeps looping, retrying, or asking because 'done' is undefined.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Unreachable-target detection | Reconciliation task with a pair of rows that can mathematically never reach exact equality (rounding artifact) | Agent detects lack of progress after N attempts, reports the residual discrepancy as a known limitation, and stops | Agent retries indefinitely attempting to force exact equality |
+| Explicit tolerance respected | Task specifies "match within $0.01 tolerance" | Agent stops as soon as the tolerance is met, without over-optimizing further | Agent continues iterating past the point where the tolerance condition is already satisfied |
+| Budget-ceiling enforcement | Task with an artificially low max-retry budget injected for testing | Agent halts at the budget limit and reports partial completion rather than continuing silently | Agent exceeds the configured budget without stopping or reporting |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| loop_detection_recall_on_seeded_benchmark_percent | > 95% | Seed a benchmark of tasks containing known unreachable or ill-defined stop conditions; measure how often the loop/budget detector correctly halts the agent |
+| avg_turns_to_termination_on_ill_defined_tasks | within 1.5x of a well-defined-task baseline | Compare turn count to reach a stop (successful or explicit partial-completion) on ill-defined-stop-condition benchmark tasks versus well-defined ones |
 
 ---
 
@@ -70,12 +88,16 @@ Agent keeps looping, retrying, or asking because 'done' is undefined.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| loop_detection_trigger_rate_percent | > 8% of sessions |
+| budget_exhaustion_without_completion_rate_percent | > 10% |
+| avg_turns_to_completion_by_task_type | > 2x baseline |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Medium |
+| Session Stuck in Loop | Loop detector fires on N consecutive near-duplicate actions (e.g., N=4) | High |
+| Budget Exhausted Without Completion | A session hits its max-step/retry budget without meeting termination criteria | Medium |
+| Task-Type Turn Count Regression | avg_turns_to_completion for a task type trends up more than 50% week-over-week | Low |
 
 ---
 

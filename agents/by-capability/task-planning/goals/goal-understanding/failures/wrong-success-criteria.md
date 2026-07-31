@@ -6,18 +6,33 @@
 
 **Symptoms**
 - Tool success but downstream status unchanged.
-- [Add more specific symptoms]
+- Agent reports a task as complete based on a tool call returning HTTP 200/no error, while the downstream system-of-record shows the real-world state unchanged.
+- Customer-facing status (e.g., "order shipped") is communicated before the actual fulfillment event has occurred.
+- Discrepancy between agent-reported completion and verified outcome is only discovered when the customer complains or asks for a status update.
+- Same action/tool type produces false-success reports repeatedly, suggesting a systematically unreliable success signal rather than isolated flukes.
 
 **Root Cause**
 Agent reports success when the real-world task outcome is not complete.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+An order-fulfillment agent calls the warehouse management system's "create shipment" API for
+a customer order, receives a 200 OK response, and immediately messages the customer that
+"your order has shipped" and updates the order status to Shipped. In reality, the warehouse
+system's 200 response only confirms the shipment request was queued, not that a physical
+shipment occurred -- the actual pick-pack-ship process runs asynchronously and, in this
+case, fails silently because the item is out of stock at that warehouse location. The
+agent's success criteria was "API call returned success," not "package is physically in a
+carrier's hands," so it reported completion three days before anyone discovers the order
+never actually shipped, when the customer contacts support asking where their package is.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Success is inferred from the immediate tool-call return code rather than from the actual downstream system-of-record state.
+- The action-triggering step and the state-confirming step are asynchronous/decoupled, but the agent treats them as synchronous.
+- No independent verification step exists between "action requested" and "success reported to user."
+- The agent's role bundles both executing the action and self-certifying its completion, with no separation of duties.
+- Downstream failures (out-of-stock, carrier rejection) fail silently rather than propagating an error the agent would see.
 
 ---
 
@@ -26,12 +41,15 @@ Agent reports success when the real-world task outcome is not complete.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Async completion verification | Shipment API returns 200 (queued) but warehouse fulfillment ultimately fails (out of stock) | Agent withholds "shipped" status/customer messaging until the warehouse system confirms actual pick-pack-ship completion | Agent reports "shipped" immediately off the API's 200 response |
+| Silent downstream failure | Downstream system fails the actual fulfillment step without raising an error to the calling API | Reconciliation check catches the mismatch between reported and verified state within the SLA window | Mismatch goes undetected until the customer complains |
+| True success confirmation | Shipment genuinely completes and the warehouse system confirms | Agent reports "shipped" only after verified confirmation, with no unnecessary delay beyond the verification SLA | Agent either reports too early (false positive) or delays reporting well past actual completion (false negative) |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| tool_success_verified_outcome_match_rate_on_benchmark_percent | > 98% | Run a benchmark of fulfillment scenarios including seeded async-failure cases; compare the agent's reported completion against the verified warehouse/carrier state |
+| false_success_rate_on_seeded_failure_cases_percent | < 2% | On seeded cases where the downstream action is engineered to fail after an API 200, measure how often the agent still reports success |
 
 ---
 
@@ -70,12 +88,16 @@ Agent reports success when the real-world task outcome is not complete.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| tool_success_to_verified_outcome_match_rate_percent | < 90% |
+| false_success_report_rate_percent | > 5% |
+| verification_latency_p95 | Exceeds SLA (e.g., > 2 min) |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Confirmed False Success Report | Reconciliation job finds a task marked complete where downstream state shows no change after the verification window | High |
+| Systemic Tool Unreliability Detected | false_success_report_rate for a specific action/tool exceeds threshold for 3+ consecutive days | Medium |
+| Verification Latency Breach | verification_latency_p95 exceeds its SLA | Low |
 
 ---
 
