@@ -6,18 +6,28 @@
 
 **Symptoms**
 - Correct doc excluded by filter.
-- [Add more specific symptoms]
+- Query for the current/active version of a document returns 0 results because the filter targets an outdated version string or date range.
+- A document that should match a region/product filter is silently excluded because its metadata field was populated inconsistently (e.g., "US" vs "United States").
+- A filter combination narrows results to zero even though a relevant document exists once one constraint (e.g., region) is dropped.
 
 **Root Cause**
 Wrong date, version, region, product, role, or policy filter.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+Query: "What's the current EU data retention policy?" applies filter
+region=EU AND status=active AND effective_date<=today. The actual policy document was
+tagged region=Europe (not "EU") during ingestion, so the exact-match filter excludes it.
+The query returns 0 results, and the agent tells the user "No retention policy found
+for the EU," when the document exists and is correct — it's just been filtered out by
+a metadata value mismatch.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Metadata values populated inconsistently across ingestion pipelines (e.g., "EU" vs "Europe", "US" vs "United States") with no controlled vocabulary or enum validation.
+- Filters use exact-match logic rather than normalized/canonicalized matching against a controlled taxonomy.
+- No automatic filter-relaxation fallback when a fully-constrained filter returns zero results.
+- Date-range filters computed from an incorrect "current date" reference or timezone mismatch, excluding documents that are actually within range.
 
 ---
 
@@ -26,12 +36,13 @@ Wrong date, version, region, product, role, or policy filter.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Metadata value mismatch | Query filters on region="EU" while the correct document is tagged region="Europe" | Retrieval normalizes/matches the equivalent value and returns the document | Filter excludes the document, returning 0 results |
+| Over-constrained filter | Query combines status=active, a date range, and a region filter where the last constraint eliminates the only matching document | System auto-relaxes the least-necessary filter and surfaces the near-match with a notice | Query returns 0 results with no relaxation or explanation |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| zero_result_filter_queries_percent | < 3% | Track % of production queries where applied metadata filters return zero results, sampled daily |
 
 ---
 
@@ -71,12 +82,12 @@ Wrong date, version, region, product, role, or policy filter.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| zero_result_filter_queries_percent | > 8% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Filter Zero-Result Spike | zero_result_filter_queries_percent exceeds 8% over a rolling 24-hour window | High |
 
 ---
 

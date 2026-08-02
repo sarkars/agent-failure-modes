@@ -6,18 +6,28 @@
 
 **Symptoms**
 - Long context; answer ignores key chunk.
-- [Add more specific symptoms]
+- Answer omits a fact present in a retrieved chunk buried in the middle of a long context window ("lost in the middle").
+- Increasing top-k retrieved chunks measurably lowers answer accuracy even though the correct chunk is included somewhere in context.
+- Synthesis draws on a low-relevance chunk positioned near the start or end of the context instead of the correct chunk placed mid-context.
 
 **Root Cause**
 Too many chunks dilute relevant evidence.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+Query: "What's the notice period for terminating the enterprise contract?"
+Retrieval returns the top-20 chunks (k=20) to maximize recall. The correct chunk
+(notice period = 60 days) is ranked 11th and lands in the middle of the 20-chunk
+context window. The synthesis model's answer instead cites a tangential chunk about
+"contract renewal timelines" from near the top of the context, because the correct
+answer was diluted among 19 other chunks discussing unrelated contract clauses.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Retrieval configured with a large top-k (e.g., 15-20) to maximize recall, with no re-ranking or truncation step before synthesis.
+- No relevance-based ordering of chunks within the context window, so the most relevant chunk isn't positioned where the model attends most (start/end).
+- No chunk-level relevance scores passed to the synthesis model to help it weight evidence.
+- Fixed context budget forces inclusion of many marginally-relevant chunks rather than a curated few highly-relevant ones.
 
 ---
 
@@ -26,12 +36,13 @@ Too many chunks dilute relevant evidence.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Buried correct chunk | Query where the correct answer's chunk is ranked 10-15th among 20 retrieved chunks | Answer uses the correct, lower-ranked chunk | Answer uses a higher-ranked but less relevant chunk instead |
+| Answer quality vs context size | Same query run with top-k=5 vs top-k=20 | Accuracy stays consistent or improves with more context | Accuracy at k=20 is measurably lower than at k=5 |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| key_evidence_inclusion_rate_percent | 100% | For eval queries with a known ground-truth chunk, check whether that chunk's content is reflected in the synthesized answer |
 
 ---
 
@@ -71,12 +82,12 @@ Too many chunks dilute relevant evidence.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| key_evidence_inclusion_rate_percent | < 90% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Medium |
+| Key Evidence Drop Detected | key_evidence_inclusion_rate_percent on eval sample falls below 90% | Medium |
 
 ---
 

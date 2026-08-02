@@ -6,18 +6,27 @@
 
 **Symptoms**
 - Answer misses adjacent table/paragraph context.
-- [Add more specific symptoms]
+- Retrieved chunk ends mid-sentence or mid-list, and the completing clause lives in the next chunk which wasn't retrieved.
+- Answer correctly states a rule but omits an exception listed in the immediately following (unretrieved) sentence.
 
 **Root Cause**
 Needed fact is split across chunks and lost.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+Document text: "Employees are eligible for the relocation stipend after 90 days
+of employment. This does not apply to contractors or interns converted to
+full-time status, who instead follow the conversion bonus schedule in Section 4."
+Fixed-size chunking splits this at the sentence boundary: chunk_14 contains only
+the first sentence. Retrieval surfaces chunk_14 alone, and the agent tells a
+converted intern they're eligible for the standard relocation stipend.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Fixed-size or fixed-token chunking splits at arbitrary character counts rather than semantic boundaries.
+- No chunk overlap, so a clause split across a boundary appears in neither chunk's retrieved context.
+- No parent-document or neighboring-chunk retrieval to recover context lost at the cut point.
+- Retrieval ranks chunks independently, so a highly relevant chunk with an important adjacent caveat outranks and displaces its neighbor.
 
 ---
 
@@ -26,12 +35,13 @@ Needed fact is split across chunks and lost.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Exception-clause split | Query targets a rule whose exception sits in the sentence immediately after a known chunk boundary | Answer includes both the rule and its exception | Answer states the rule with no mention of the exception |
+| Table row split across chunks | Query asks about a table row that straddles a chunk cut | Answer reflects the full row (all columns) | Answer is missing a column value or misattributes it |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| chunk_coherence_score_avg | > 0.85 | Score whether each retrieved chunk reads as a complete thought, using an LLM-based coherence judge |
 
 ---
 
@@ -71,12 +81,12 @@ Needed fact is split across chunks and lost.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| fragment_sentences_in_results_percent | > 5% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Medium |
+| Chunk Boundary Fragment Rate High | Share of retrieved chunks containing an incomplete sentence at the boundary exceeds 5% | Medium |
 
 ---
 

@@ -6,18 +6,28 @@
 
 **Symptoms**
 - Citations do not support claim.
-- [Add more specific symptoms]
+- Top-ranked results include documents that share keywords with the query but address a different topic entirely.
+- Synthesized answer contains a claim that traces back to a semantically similar but factually unrelated chunk.
+- Precision@5 drops noticeably below the precision@10 baseline for a specific query category (e.g., short, ambiguous queries).
 
 **Root Cause**
 Agent retrieves irrelevant chunks and synthesizes wrong answer.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+Query: "What's the policy on remote work for contractors?"
+Vector search returns high-similarity chunks because "remote," "work," and "contractors"
+appear frequently, but several top-5 results come from a "Remote Desktop Access" IT
+security doc, not the HR contractor policy. The agent synthesizes an answer blending
+VPN/remote-access rules with contractor status, producing a claim about "contractors
+needing VPN approval for remote work" that neither source actually states.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Embedding model conflates surface-level keyword overlap with true semantic relevance (e.g., "remote work" appearing in unrelated contexts).
+- No re-ranking stage runs after initial dense retrieval to filter out topically-similar-but-irrelevant chunks.
+- Retrieval similarity threshold is set too permissively, letting borderline-relevant chunks into the top-k.
+- No citation-grounding check catches that a chunk doesn't actually support the specific claim before it's used in synthesis.
 
 ---
 
@@ -26,12 +36,13 @@ Agent retrieves irrelevant chunks and synthesizes wrong answer.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Keyword-overlap false positive | Query with terms that appear in both a relevant doc and an unrelated doc using the same vocabulary | Top results are dominated by the truly relevant document | Top results include the unrelated same-vocabulary document above the relevant one |
+| Re-ranker impact | Same query run with and without the LTR re-ranking stage | precision@5 with re-ranker is markedly higher | precision@5 without re-ranker shows irrelevant docs in top positions |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| precision_at_5_percent | > 80% | Sample production queries, have raters mark each top-5 result relevant/irrelevant, compute % relevant |
 
 ---
 
@@ -71,12 +82,12 @@ Agent retrieves irrelevant chunks and synthesizes wrong answer.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| precision_at_5_percent | < 70% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Medium |
+| Precision Degradation | precision_at_5_percent drops below 70% on rolling weekly sample | Medium |
 
 ---
 

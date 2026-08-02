@@ -6,18 +6,27 @@
 
 **Symptoms**
 - Cited source correct; final answer wrong.
-- [Add more specific symptoms]
+- Answer flips a negation from the source ("does not require" becomes "requires") during paraphrasing.
+- Numeric values in the answer don't match the numbers in the cited chunk (off-by-one unit conversion, wrong column read from a table-like chunk).
+- Answer merges facts from two different retrieved chunks into a claim neither chunk actually supports.
 
 **Root Cause**
 Correct information is retrieved but summarized incorrectly.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+Retrieved chunk: "Refunds are not available for digital purchases after the 7-day
+trial period, except where required by local consumer law."
+Synthesized answer to the user: "You can get a refund for your digital purchase
+since you're past the 7-day trial period." The synthesis step inverted the
+exception clause into the main rule while compressing the sentence for readability.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Synthesis model paraphrases instead of extracting, so negations, exceptions, and conditionals are the first things lost to compression.
+- No structured intermediate representation (facts extracted as key/value/source) between retrieval and the final generated sentence.
+- Long chunks with multiple qualifying clauses get truncated in the model's attention to the sentence that matches the query's surface wording.
+- No automated check comparing the polarity (affirmative/negative) of the answer against the polarity of the source claim.
 
 ---
 
@@ -26,12 +35,13 @@ Correct information is retrieved but summarized incorrectly.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Negation preservation | Chunk contains "not X except Y"; ask for a direct yes/no answer | Answer preserves the exception and the negation | Answer states the general case as unconditionally true |
+| Multi-chunk merge | Two chunks each partially answer the question | Answer clearly attributes each fact to its own source, doesn't invent a combined claim | Answer states a claim no single chunk supports |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| synthesis_correctness_percent | > 95% | Sample synthesized answers, compare against source chunks with human or NLI-based grading |
 
 ---
 
@@ -71,12 +81,12 @@ Correct information is retrieved but summarized incorrectly.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| answer_source_consistency_percent | < 90% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Polarity Mismatch | Answer's affirmative/negative polarity diverges from the cited source's polarity | High |
 
 ---
 

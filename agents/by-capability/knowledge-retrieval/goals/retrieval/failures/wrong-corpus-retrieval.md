@@ -6,18 +6,29 @@
 
 **Symptoms**
 - Retrieved docs unrelated to user/account/product.
-- [Add more specific symptoms]
+- Retrieved documents belong to a different product line or a different tenant's knowledge base than the one the querying user is scoped to.
+- Answer blends terminology/policies from a different corpus (e.g., a different product's pricing) with the user's actual product context.
+- A cross-tenant document appears in results with no access-control rejection, exposing another customer's content.
 
 **Root Cause**
 Agent searches the wrong knowledge base or tenant corpus.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+A support agent for "Product A" (a project management tool) is asked "How do I reset
+my password?" The retrieval system searches a shared vector index that contains docs
+for both Product A and Product B (a separate CRM product) with no corpus/tenant filter
+applied to the query. Because "password reset" phrasing is nearly identical across
+both products' help docs, the top result comes from Product B's corpus, and the agent
+gives Product B's reset instructions (different URL, different support contact) to a
+Product A user.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Shared vector index across multiple products/tenants with no mandatory corpus or tenant_id filter applied at query time.
+- No pre-retrieval query classification step to route the query to the correct corpus before search executes.
+- Corpus/tenant metadata attached inconsistently at ingestion, so filtering by corpus_id silently misses some documents.
+- Access-control checks enforced only at the application/display layer rather than at the index/query layer, so wrong-corpus documents are retrieved even if later hidden.
 
 ---
 
@@ -26,12 +37,13 @@ Agent searches the wrong knowledge base or tenant corpus.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Cross-product leakage | Query phrased identically to a query valid in two different product corpora, run against Product A's scoped session | Results come only from Product A's corpus | Results include documents from Product B's corpus |
+| Tenant isolation breach | Query run under Tenant A's session, corpus contains Tenant B's documents with similar content | No Tenant B documents appear in results | At least one Tenant B document appears in retrieved results |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| wrong_corpus_retrieval_rate_percent | 0% | Run tenant/corpus isolation test suite in CI, measure % of test queries that return any document tagged with the wrong corpus_id |
 
 ---
 
@@ -71,12 +83,12 @@ Agent searches the wrong knowledge base or tenant corpus.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| wrong_corpus_retrieval_rate_percent | > 0% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Cross-Corpus Retrieval Detected | Any retrieved document's corpus_id does not match the query's scoped corpus/tenant | High |
 
 ---
 

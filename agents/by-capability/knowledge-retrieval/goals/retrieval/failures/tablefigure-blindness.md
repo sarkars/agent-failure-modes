@@ -6,18 +6,30 @@
 
 **Symptoms**
 - Relevant value only present visually; answer omits it.
-- [Add more specific symptoms]
+- Answer omits a specific numeric value that exists only inside a table cell or chart, even though the surrounding prose is retrieved and used.
+- Query referencing a named table or figure ("Table 3", "Figure 2") returns the paragraph mentioning the reference but not the table/figure's actual content.
+- Retrieved chunk contains a table rendered as OCR'd row-jumbled text, and the synthesized answer misattributes a value to the wrong row or column.
 
 **Root Cause**
 Agent misses data embedded in tables, charts, images, or PDFs.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+Query: "What's the warranty period for the industrial model?"
+The spec sheet PDF states the answer only in Table 2 (a grid mapping model names to
+warranty months), while the surrounding prose just says "see Table 2 for warranty
+details by model." The ingestion pipeline extracts document text via plain OCR that
+does not parse table structure, so the table's actual cell values are never indexed.
+The agent retrieves the paragraph, sees "see Table 2," but has no indexed table content
+to draw from, and answers "The warranty period is not specified" despite the number
+being present in the source document.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Ingestion pipeline extracts document text via plain OCR/text extraction that does not detect or structurally parse tables, so table cell values are lost or flattened into unusable text.
+- No separate table-index or structured JSON representation of table data alongside the text index.
+- No table-reference resolution linking a text mention ("see Table 2") to the corresponding table's actual content.
+- Vision/multimodal extraction not applied to figures and charts, so numeric values encoded only visually are never captured as retrievable text.
 
 ---
 
@@ -26,12 +38,13 @@ Agent misses data embedded in tables, charts, images, or PDFs.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Table-only value missing | Query whose answer exists only as a cell value in a table, not restated in surrounding prose | Answer includes the correct table cell value | Answer states the information isn't available, or omits the value |
+| Table reference not resolved | Document text says "see Table 3" and Table 3 contains the needed data | Retrieval resolves the reference and surfaces Table 3's content alongside the paragraph | Only the referencing paragraph is retrieved; table content is absent |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| table_content_retrieval_recall_percent | > 85% | Run eval set of queries whose ground-truth answer lives in a table cell, measure % where the table content is present in retrieved results |
 
 ---
 
@@ -71,12 +84,12 @@ Agent misses data embedded in tables, charts, images, or PDFs.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| table_content_retrieval_recall_percent | < 75% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Medium |
+| Table Content Retrieval Failure | table_content_retrieval_recall_percent on eval sample drops below 75% | Medium |
 
 ---
 

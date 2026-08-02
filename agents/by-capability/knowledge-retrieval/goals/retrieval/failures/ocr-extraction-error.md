@@ -6,18 +6,27 @@
 
 **Symptoms**
 - Extracted field conflicts with image/source.
-- [Add more specific symptoms]
+- Extracted numeric field (price, date, ID) differs from what's visible in the source scan due to character confusion (e.g., "0" read as "O", "8" as "3").
+- OCR output contains garbled or nonsensical text runs where the source image was rotated, skewed, or low-resolution, yet the document is indexed and retrieved anyway.
+- Agent answers confidently using an OCR'd figure that is objectively wrong when checked against the original scanned image.
 
 **Root Cause**
 Agent misreads scanned, smudged, rotated, or low-quality text.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+A scanned invoice states the total as "$1,800.00," but poor scan quality and a stray
+toner smudge cause the OCR engine to read the amount as "$1,300.00" (the '8' misread
+as '3'). The document is indexed with no confidence flag. A user later asks "What was
+the invoice total?" and the agent retrieves the OCR'd text and answers "$1,300.00,"
+propagating the misread figure as if it were ground truth from the source document.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Low source scan quality (low resolution, skew, smudges, faded print) increases character-level OCR error rate, especially for numerals and similar-looking glyphs.
+- No per-word or per-field confidence scores retained alongside OCR output, so downstream retrieval can't distinguish high- and low-confidence extractions.
+- Single OCR engine used with no cross-validation or ensemble check against a second engine.
+- Original source images not retained or linked, so there's no way to verify or correct a misread field after indexing.
 
 ---
 
@@ -26,12 +35,13 @@ Agent misreads scanned, smudged, rotated, or low-quality text.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Numeral confusion | Scanned document with a smudged or low-resolution numeric field (e.g., invoice total) | Extracted value matches the true value on the source image | Extracted value differs from the source image due to character misread |
+| Low-quality scan flagged | Rotated or low-DPI scanned page ingested through the OCR pipeline | Document is tagged low-confidence and excluded from confident-answer synthesis | Low-quality OCR text is indexed and retrieved with no confidence flag |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| ocr_word_accuracy_percent | > 95% | Weekly manual spot-check comparing sampled OCR output against source images, computing % of words correctly transcribed |
 
 ---
 
@@ -71,12 +81,12 @@ Agent misreads scanned, smudged, rotated, or low-quality text.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| ocr_word_accuracy_percent | < 90% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| OCR Accuracy Degradation | ocr_word_accuracy_percent drops more than 5% month-over-month on spot-check sample | High |
 
 ---
 

@@ -6,18 +6,28 @@
 
 **Symptoms**
 - Source date older than current policy.
-- [Add more specific symptoms]
+- Agent answers with a value from a superseded policy document while a newer version with a different value exists in the corpus.
+- Retrieved document is tagged "deprecated" or "archived" in metadata but still surfaces in top-k results and gets cited.
+- The cited document's effective date is more than one revision cycle behind the document type's expected update cadence.
 
 **Root Cause**
 Agent uses outdated policy/doc/version.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+Query: "What's the current mileage reimbursement rate?"
+The corpus contains both the 2021 Travel Policy (rate = $0.56/mile) and the 2024
+Travel Policy (rate = $0.67/mile, marked as the current active version). The 2021 doc
+has more inbound links and a higher historical click count, so it ranks higher in
+retrieval. The agent answers "$0.56 per mile" using the outdated 2021 document, without
+checking that a newer, currently-active version supersedes it.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Ranking signal weighted toward historical engagement (clicks, links) rather than document recency or active/deprecated status.
+- No deprecation or supersession metadata attached to documents at ingestion, so old and new versions are treated as equally valid.
+- No freshness/time-decay factor in the retrieval scoring function.
+- Superseded documents not removed or flagged in the index after a newer version is published, leaving both versions retrievable indefinitely.
 
 ---
 
@@ -26,12 +36,13 @@ Agent uses outdated policy/doc/version.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Superseded version returned | Query where both an old and a current version of the same policy exist in the corpus | Answer uses the current, active version and its value | Answer uses the outdated version's value |
+| Deprecated doc still retrieved | Query surfaces a document explicitly tagged "deprecated" in metadata | Deprecated document is excluded from standard retrieval results | Deprecated document appears in top-k and is cited in the answer |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| median_document_age_in_retrieved_set_days | < 60 | Track median age (from last-updated timestamp) of documents in the retrieved top-10 for policy-type queries, sampled weekly |
 
 ---
 
@@ -71,12 +82,12 @@ Agent uses outdated policy/doc/version.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| median_document_age_in_retrieved_set_days | > 180 |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Stale Document Surfaced | median_document_age_in_retrieved_set_days for policy queries exceeds 180 days | High |
 
 ---
 

@@ -6,18 +6,29 @@
 
 **Symptoms**
 - Claim-source entailment check fails.
-- [Add more specific symptoms]
+- Citation points to a document/section that discusses a related but distinct topic, not the actual claim.
+- Same source cited for multiple claims in an answer, but only some of those claims are actually supported by it.
+- Citation names the correct document but the wrong page or section for the stated fact.
 
 **Root Cause**
 Agent cites a source that does not support the claim.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+Query: "What is the maximum PTO carryover for salaried employees?"
+Retrieved chunks include both the 2023 "PTO Policy" doc (states carryover cap = 40 hours)
+and a "Sabbatical Policy" doc (mentions PTO only in passing while discussing sabbaticals).
+The synthesis model generates: "The maximum carryover is 80 hours [Sabbatical Policy, p.2]" —
+citing the sabbatical document, which never states a carryover figure. The 80-hour number
+was invented during synthesis and attached to whichever retrieved source was topically
+closest, rather than the one that actually contained a carryover number.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Synthesis model generates the citation independently from the claim rather than extracting the claim directly from a retrieved passage's text.
+- No post-hoc entailment/grounding check verifies the cited chunk's content actually supports the generated claim.
+- Citation formatting is templated ("[Source Name]"), letting the model fill in a plausible-looking source without it being derived from the retrieved text.
+- Multiple retrieved chunks share similar topic/keywords, making it easy for the model to attribute a claim to the wrong one.
 
 ---
 
@@ -26,12 +37,13 @@ Agent cites a source that does not support the claim.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Wrong-source citation | Query where two retrieved chunks cover related topics but only one actually contains the specific numeric claim | Answer cites the chunk that genuinely contains the claim | Answer cites the topically-similar but non-supporting chunk |
+| Page-level mismatch | Query targets a fact from one section of a multi-section document that's also retrieved for other reasons | Citation points to the specific section/page containing the fact | Citation points to the correct document but the wrong section/page |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| citation_entailment_score_avg | > 0.85 | NLI model scores whether the cited passage's text entails the generated claim, sampled from production answers |
 
 ---
 
@@ -71,12 +83,12 @@ Agent cites a source that does not support the claim.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| citation_entailment_score_avg | < 0.75 |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Citation Entailment Drop | citation_entailment_score_avg falls below 0.75 on rolling daily sample | High |
 
 ---
 

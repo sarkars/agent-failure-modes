@@ -6,18 +6,28 @@
 
 **Symptoms**
 - Two cited docs disagree; no resolution.
-- [Add more specific symptoms]
+- Answer presents one contradictory value as fact without flagging that a second, differing source was also retrieved.
+- Agent selects whichever source ranked highest on similarity, ignoring publication date or authority level of the sources.
+- Agent blends contradictory numbers into an averaged or invented middle value that appears in neither source.
 
 **Root Cause**
 Agent fails to reconcile contradictions between sources.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+Query: "What is the maximum expense reimbursement for client dinners?"
+Retrieved set contains the 2022 Travel & Expense Policy (states $75/person) and a 2024
+Finance FAQ page (states $100/person, which supersedes the 2022 policy but doesn't say
+so explicitly). The agent's answer says "$75 per person," citing the 2022 policy, because
+that chunk ranked higher on vector similarity — even though the FAQ page is the current
+authoritative source and directly contradicts it.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Retrieval ranks by semantic similarity only, with no signal for document recency or source authority.
+- No NLI/contradiction-detection step runs over the retrieved set before synthesis.
+- Documents lack machine-readable supersession metadata (no "replaces doc X" or effective-date field) tying newer sources to the ones they override.
+- Synthesis prompt instructs the model to "answer using the retrieved context" without requiring it to check for and surface conflicts between sources.
 
 ---
 
@@ -26,12 +36,13 @@ Agent fails to reconcile contradictions between sources.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Two contradictory values, no flag | Two retrieved docs give different numeric answers to the same question, one older, one newer | Answer surfaces both values and states which is authoritative/current | Answer presents only one value with no acknowledgment of the conflict |
+| Authority ignored | Retrieved set contains an official policy doc and a lower-authority forum/blog post with a different answer | Answer defers to the official policy source | Answer uses the blog/forum value, or blends both |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| conflicting_source_detection_rate_percent | > 90% | Run eval set of queries with known contradictory retrieved docs; measure % where the answer explicitly flags the conflict |
 
 ---
 
@@ -71,12 +82,12 @@ Agent fails to reconcile contradictions between sources.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| conflicting_source_detection_rate_percent | < 70% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Conflict Surfacing Rate Drop | conflicting_source_detection_rate_percent falls below 70% on weekly eval run | High |
 
 ---
 

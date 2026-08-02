@@ -6,18 +6,29 @@
 
 **Symptoms**
 - User/source shows answer existed but was not retrieved.
-- [Add more specific symptoms]
+- A document later confirmed to contain the answer never appears in the retrieved top-k for that query.
+- Query using different terminology than the source document returns 0 or near-0 results despite a relevant document existing in the corpus.
+- Recall@10 for a specific query category (e.g., acronym-heavy or long-tail queries) is measurably lower than the overall baseline.
 
 **Root Cause**
 Agent misses relevant documents.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+Query: "Can I expense a conference badge?"
+The relevant policy document uses the phrase "registration fee reimbursement" and never
+says "conference badge" or "expense." Pure dense vector search ranks the correct document
+outside the top-20 because embedding similarity between the query and the differently-
+worded passage is too low, and no lexical/BM25 fallback exists to catch the exact keyword
+mismatch. The agent responds "I don't have information on this," even though a directly
+relevant document exists in the corpus.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Single-method retrieval (dense-only or sparse-only) misses documents the other method would have caught.
+- No query expansion/reformulation step to handle synonyms, acronyms, or vocabulary mismatch between query and source phrasing.
+- Embedding model not fine-tuned on domain vocabulary, so domain-specific terms don't cluster near their synonyms in vector space.
+- Index gaps — documents not ingested, chunked incorrectly, or excluded by an overly aggressive pre-filter — remove candidates before search even runs.
 
 ---
 
@@ -26,12 +37,13 @@ Agent misses relevant documents.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Vocabulary mismatch | Query phrased with different words than the source document uses for the same concept (e.g., "badge" vs "registration fee") | Relevant document appears in top-10 results | Relevant document is absent from top-20 despite existing in the corpus |
+| Zero-result query | Query using domain jargon or an acronym not present verbatim in any indexed document | Query expansion surfaces the relevant document under its full-term phrasing | Query returns zero or irrelevant results |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| recall_at_10_percent | > 85% | Run eval set with known ground-truth relevant documents per query, measure % where the ground-truth doc appears in top-10 |
 
 ---
 
@@ -71,12 +83,12 @@ Agent misses relevant documents.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| recall_at_10_percent | < 80% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Recall Degradation | recall_at_10_percent drops more than 10% month-over-month on eval benchmark | High |
 
 ---
 
