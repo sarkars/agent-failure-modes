@@ -6,18 +6,25 @@
 
 **Symptoms**
 - No revert path after failure.
-- [Add more specific symptoms]
+- Incident response stalls because engineers must manually reconstruct pre-action state from logs instead of triggering an automated undo.
+- Partial rollback leaves the resource in a state that matches neither the pre-action nor the intended post-action state.
 
 **Root Cause**
 Agent cannot undo a bad action.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+Agent hard-deletes 200 stale user records to "clean up test accounts" per a support request,
+but the request actually meant a different, narrower set of records. There is no soft-delete
+or snapshot for the delete operation, so the only recovery path is restoring from a nightly
+backup — losing same-day writes for the affected accounts.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Action implemented as a hard/destructive operation (permanent delete, direct overwrite) with no compensating transaction defined.
+- No pre-action snapshot or backup captured specifically for the resource being modified.
+- Rollback path was never tested, so it's discovered to be broken only during a real incident.
+- Multi-step actions where only some steps have a defined compensation, leaving gaps in the rollback chain.
 
 ---
 
@@ -26,12 +33,13 @@ Agent cannot undo a bad action.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Rollback after bad delete | Agent executes a delete action later flagged as incorrect | Compensating transaction restores the exact pre-action snapshot | Resource remains missing or restored state differs from snapshot |
+| Rollback of multi-step action mid-failure | Step 3 of a 5-step action fails | All 3 completed steps are compensated in reverse order | Steps 1-2 remain applied with no compensation executed |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| rollback_success_rate_percent | 100% | Successful rollbacks restoring exact pre-action state, divided by rollback attempts |
 
 ---
 
@@ -71,12 +79,14 @@ Agent cannot undo a bad action.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| rollback_success_rate_percent | < 95% |
+| action_failures_without_rollback_per_day | > 0 |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Critical |
+| Rollback Failure Detected | Rollback attempted but failed to restore pre-action state | Critical |
+| Compensation Transaction Missing | Action failed and no compensation transaction is defined for it | Critical |
 
 ---
 

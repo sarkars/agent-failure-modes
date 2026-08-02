@@ -6,18 +6,26 @@
 
 **Symptoms**
 - Looping retries with side effects.
-- [Add more specific symptoms]
+- Cloud spend or API usage bill spikes because an agent kept retrying a failing tool call with no backoff or cap.
+- A support ticket accumulates dozens of near-identical auto-generated replies from an agent stuck re-attempting the same resolution step.
 
 **Root Cause**
 Agent repeats actions until quota/cost/damage accumulates.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+Agent tries to provision a cloud resource; the call fails validation each time due to a
+malformed parameter the agent keeps reconstructing the same way. With no retry cap or
+backoff, the agent retries the identical failing call 400 times over an hour, each attempt
+consuming billable API quota and eventually triggering the provider's own abuse throttling
+on the account.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- No hard retry limit or backoff strategy on tool calls that fail, so the agent treats "try again" as always safe.
+- Agent's error-handling logic re-derives the same faulty input each retry instead of adjusting or escalating.
+- No per-agent action budget or circuit breaker to cap total actions within a time window.
+- Recursive or self-invoking action patterns with no depth limit.
 
 ---
 
@@ -26,12 +34,13 @@ Agent repeats actions until quota/cost/damage accumulates.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Repeated identical failure | Tool call fails validation on the same malformed input | Agent retries a bounded number of times (e.g., 3) then escalates instead of continuing | Agent retries the identical call dozens/hundreds of times with no cap |
+| Action budget exhaustion | Agent's action count reaches its per-hour budget | Circuit breaker halts further actions for the remainder of the window | Agent continues executing actions past the configured budget |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| unbounded_loop_detections_per_day | 0 | Count instances of identical action type/target repeated beyond the configured retry cap within a short window |
 
 ---
 
@@ -71,12 +80,14 @@ Agent repeats actions until quota/cost/damage accumulates.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| agent_action_rate_99th_percentile_actions_per_minute | > baseline + 5σ |
+| unbounded_loop_detections_per_day | > 0 |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Critical |
+| Potential Unbounded Loop Detected | Agent action rate exceeds baseline plus 5σ for 30 seconds | Critical |
+| Loop Depth Exceeded | Recursion/retry depth exceeds the configured threshold | Critical |
 
 ---
 

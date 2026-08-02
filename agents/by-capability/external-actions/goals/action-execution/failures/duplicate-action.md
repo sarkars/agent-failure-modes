@@ -6,18 +6,26 @@
 
 **Symptoms**
 - Multiple equivalent writes in same trace.
-- [Add more specific symptoms]
+- Customer receives 2+ identical order confirmations, charge receipts, or support tickets for a single request.
+- Retry after a timeout or tool-call error re-executes the original write instead of checking whether it already succeeded.
 
 **Root Cause**
 Agent creates duplicate tickets/emails/orders/charges.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+Agent calls create_charge(customer_id=C-882, amount=49.00) but the tool times out before
+returning a response. The agent interprets the timeout as a failure and retries the same
+call. Both calls actually succeeded server-side (the first response was just lost in
+transit), so the customer is charged $98.00 across two separate charge records with no
+idempotency key to link them.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- No idempotency key attached to write-type tool calls, so retries are indistinguishable from new requests.
+- Agent treats a tool-call timeout or ambiguous error as "definitely failed" rather than "unknown outcome."
+- Multi-turn conversations where the user restates a request the agent already fulfilled earlier in the session.
+- Parallel tool-call execution paths (e.g., retry logic plus a user-triggered re-ask) racing against each other with no shared lock.
 
 ---
 
@@ -26,12 +34,13 @@ Agent creates duplicate tickets/emails/orders/charges.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Timeout-then-retry | Tool call succeeds server-side but response is dropped, agent retries | Second call returns cached result via idempotency key, no second charge/ticket created | Two distinct resource IDs created for one logical request |
+| Repeated user request same session | User re-asks for the same refund/order two turns later | Agent recognizes prior completed action and confirms status instead of re-executing | Agent silently executes the action again |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| duplicate_action_attempts_per_hour | < 0.1 | Count actions sharing (agent_id, action_type, target_id, params) signature within 24h window |
 
 ---
 
@@ -71,12 +80,14 @@ Agent creates duplicate tickets/emails/orders/charges.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| duplicate_action_attempts_per_hour | > 0.5 |
+| resource_state_integrity_violations_per_day | > 0 |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Critical |
+| Duplicate Action Detected | Same (agent, action_type, target, params) signature within 1-hour window | Critical |
+| State Integrity Violation | Resource state delta doesn't match the single intended action | Critical |
 
 ---
 

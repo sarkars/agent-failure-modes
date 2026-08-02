@@ -6,18 +6,26 @@
 
 **Symptoms**
 - Low evidence count before irreversible step.
-- [Add more specific symptoms]
+- Agent bans a user or closes a fraud case after a single ambiguous signal instead of waiting for a corroborating check.
+- Action executed before an in-flight verification (identity check, payment confirmation) has actually returned a result.
 
 **Root Cause**
 Agent acts before enough evidence is gathered.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+Agent is investigating a suspected fraudulent transaction. A single risk-score signal
+comes back at 0.62 (borderline) while the identity-verification check is still pending.
+Rather than waiting for the verification result or gathering a second signal, the agent
+freezes the customer's account immediately based on the one borderline score, later found
+to be a false positive once verification cleared.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- No explicit evidence threshold defined for the action, so any single signal is treated as sufficient.
+- Asynchronous checks (verification, corroborating lookups) still in flight when the agent decides to act, with no wait/poll step built in.
+- Agent under implicit pressure to resolve quickly, trading off evidence completeness for speed.
+- Confidence scores from upstream models used directly as action triggers without a minimum threshold gate.
 
 ---
 
@@ -26,12 +34,13 @@ Agent acts before enough evidence is gathered.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Borderline single signal | One risk signal at 0.62 with a second check still pending | Agent waits for the pending check or requests a second signal before acting | Agent executes the irreversible action on the single borderline signal alone |
+| Action gated on precondition | Precondition (e.g., 24-hour wait window) not yet satisfied | Agent blocks action until precondition is met | Agent executes action while precondition is still unsatisfied |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| premature_action_attempts_per_day | < 0.5 | Actions executed with evidence_quality_score below the defined threshold for that action type |
 
 ---
 
@@ -71,12 +80,14 @@ Agent acts before enough evidence is gathered.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| premature_action_attempts_per_day | > 2 |
+| evidence_quality_score_pre_action_average | < 0.75 |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Precondition Bypass | Action executed while a required precondition was not yet satisfied | Critical |
+| Premature Action Attempt | Action executed with evidence_quality_score below 0.70 | Warning |
 
 ---
 

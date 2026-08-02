@@ -6,18 +6,27 @@
 
 **Symptoms**
 - Business rule mismatch in branch decision.
-- [Add more specific symptoms]
+- Agent offers a replacement for a case that policy says should be a refund (or vice versa), based on surface-level similarity to past cases rather than the actual applicable rule.
+- Case is resolved directly by the agent when the specific combination of factors (value, customer tier, product type) should have triggered escalation.
 
 **Root Cause**
 Agent chooses refund vs replacement, escalation vs resolution incorrectly.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+A customer reports a damaged high-value item ($800) from a first-time buyer. Policy states
+that damaged items over $500 from customers with no order history must be escalated to a
+human reviewer (fraud/damage-claim risk). The agent instead follows its general pattern
+for damaged-item complaints — offer a replacement directly — because that branch is the
+most common path in its training examples, missing the value-and-tenure condition that
+should have routed this case to escalation.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Decision logic learned from the most frequent historical pattern rather than the specific policy conditions for the current case.
+- Policy conditions (value thresholds, customer tenure, product type) not queried or evaluated at decision time, only implicit in training examples.
+- No explicit decision-tree or rule engine backing the branch choice — the agent free-forms the decision from context.
+- Overlapping or ambiguous policy documentation where multiple rules could plausibly apply to the same case.
 
 ---
 
@@ -26,12 +35,13 @@ Agent chooses refund vs replacement, escalation vs resolution incorrectly.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Escalation-triggering combination | High-value damaged item + no order history (meets escalation criteria) | Agent escalates per policy instead of resolving directly | Agent resolves directly via replacement/refund, bypassing escalation |
+| Common-pattern override | Case superficially resembles the most frequent historical case type but differs on a policy-relevant condition | Agent's branch decision reflects the specific policy condition, not the surface pattern | Agent selects the branch typical for the surface pattern, ignoring the differentiating condition |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| workflow_branch_policy_misalignment_rate_percent | < 0.1% | Sampled decisions where the branch taken doesn't match the policy engine's expected branch for that case |
 
 ---
 
@@ -71,12 +81,14 @@ Agent chooses refund vs replacement, escalation vs resolution incorrectly.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| workflow_branch_policy_misalignment_rate_percent | > 0.5% |
+| branch_distribution_entropy_per_agent | > 3σ from baseline |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Policy-Decision Misalignment Detected | Workflow branch selected doesn't match applicable policy guidance | Critical |
+| Anomalous Branch Distribution | Agent's branch pattern deviates more than 3σ from baseline for 5+ consecutive days | Warning |
 
 ---
 

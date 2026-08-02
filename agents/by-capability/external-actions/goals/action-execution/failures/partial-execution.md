@@ -6,18 +6,26 @@
 
 **Symptoms**
 - Subtask status incomplete vs final status success.
-- [Add more specific symptoms]
+- Customer told "your refund and replacement are processed" but only the refund actually completed.
+- Downstream system shows resource in a half-migrated or half-updated state that doesn't match either the before or after expected state.
 
 **Root Cause**
 Agent completes only some steps but reports full success.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+Agent runs a 4-step order-cancellation flow: cancel order, restock inventory, issue refund,
+notify customer. Step 3 (issue refund) fails silently due to a payment-gateway rate limit,
+but the agent's final response is generated from the overall task description rather than
+per-step results, so it reports "Your order has been cancelled and refunded" while the
+refund never actually processed.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Agent generates its final summary from the intended plan rather than verified per-step results.
+- No atomic/transactional boundary around the multi-step action, so steps can partially commit.
+- Silent tool failures (rate limits, soft errors) that don't raise an exception the agent's control flow catches.
+- Missing post-execution state verification against what each step was supposed to produce.
 
 ---
 
@@ -26,12 +34,13 @@ Agent completes only some steps but reports full success.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Silent mid-sequence failure | Step 3 of 4 fails without raising a hard error | Agent reports partial_success with the specific failed step, not full success | Agent reports full success despite step 3 not completing |
+| Post-execution state check | Multi-step action completes | Final state of every affected resource is verified against expected end state before reporting success | Reported success without any state verification query |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| multi_step_action_completion_rate_percent | 100% | All required subtasks confirmed complete via state check, divided by total multi-step actions |
 
 ---
 
@@ -71,12 +80,14 @@ Agent completes only some steps but reports full success.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| multi_step_action_completion_rate_percent | < 98% |
+| partial_execution_attempts_per_day | > 0 |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Partial Action Execution Detected | Multi-step action stopped before all steps completed but was reported as success | Critical |
+| Inconsistent Final State Post-Action | Resource state doesn't match the expected final state for the reported outcome | High |
 
 ---
 

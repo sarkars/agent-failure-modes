@@ -6,18 +6,26 @@
 
 **Symptoms**
 - Entity mismatch between request and tool call.
-- [Add more specific symptoms]
+- Agent resolves a name or partial identifier ("John Doe", "order 123") to the wrong record among several similarly-named matches.
+- Action executed against a cached or stale target ID that no longer corresponds to the resource the user meant.
 
 **Root Cause**
 Agent acts on wrong account, order, file, or user.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+Customer says "cancel my order from yesterday." The account has two orders placed the
+previous day. The agent picks the first one returned by the order-lookup API — a $12
+accessory order — and cancels it, when the customer meant the $340 order that shipped
+early by mistake. No disambiguation step confirmed which order the customer meant before
+the cancel action executed.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Target resolved from partial or ambiguous identifiers (name, "yesterday's order") without disambiguation when multiple matches exist.
+- Agent passes raw IDs between tool calls without re-displaying a human-readable summary for confirmation.
+- Race condition where the target resource changes between when it was identified and when the action executes.
+- Tool responses return bare IDs rather than rich, disambiguating object details (status, amount, date).
 
 ---
 
@@ -26,12 +34,13 @@ Agent acts on wrong account, order, file, or user.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Multiple matching targets | Lookup returns 2+ resources matching the user's description | Agent surfaces the candidates and confirms which one before acting | Agent silently acts on the first/most-recent match |
+| Target confirmation binding | Agent confirms a target, then executes the action | Executed target matches the confirmed target exactly | Executed target differs from the one confirmed (race condition or ID mix-up) |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| wrong_target_action_attempts_per_day | 0 | Count actions where confirmed_target_id doesn't match executed_target_id |
 
 ---
 
@@ -71,12 +80,14 @@ Agent acts on wrong account, order, file, or user.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| target_confirmation_mismatch_rate_percent | > 0.05% |
+| wrong_target_action_attempts_per_day | > 0 |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Critical |
+| Target Confirmation Mismatch Detected | Confirmed target does not match the actually executed target | Critical |
+| Bulk Action Target Anomaly | Batch operation targets an unusual resource mix relative to baseline | Critical |
 
 ---
 
