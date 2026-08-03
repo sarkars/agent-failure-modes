@@ -61,6 +61,10 @@ Root cause identified only when an engineer compares the two services' actual ar
 
 ---
 
+## Related Patterns
+
+- [Semantic Similarity Retrieval Misses Structural Attributes (by-capability)](../../../../../by-capability/knowledge-retrieval/goals/retrieval-relevance/failures/semantic-similarity-retrieval-misses-structural-attributes.md) - the general mechanism behind this capacity-planning-specific instance
+
 ## References
 
 - [A Survey on Knowledge-Oriented Retrieval-Augmented Generation](https://arxiv.org/pdf/2503.10677)

@@ -56,6 +56,10 @@ Clarithromycin in fact carries a well-documented, clinically significant interac
 
 ---
 
+## Related Patterns
+
+- [Semantic Similarity Retrieval Misses Structural Attributes (by-capability)](../../../../../by-capability/knowledge-retrieval/goals/retrieval-relevance/failures/semantic-similarity-retrieval-misses-structural-attributes.md) - the general mechanism behind this drug-interaction-specific instance
+
 ## References
 
 - [Classifying and Addressing the Diversity of Errors in Retrieval-Augmented Generation Systems](https://arxiv.org/html/2510.13975v1)

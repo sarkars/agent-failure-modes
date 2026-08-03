@@ -56,6 +56,10 @@ Previous-version service instances querying the changed schema during the rollou
 
 ---
 
+## Related Patterns
+
+- [Semantic Similarity Retrieval Misses Structural Attributes (by-capability)](../../../../../by-capability/knowledge-retrieval/goals/retrieval-relevance/failures/semantic-similarity-retrieval-misses-structural-attributes.md) - the general mechanism behind this deployment-safety-specific instance
+
 ## References
 
 - [Multi-Agent LLM Orchestration Achieves Deterministic, High-Quality Decision Support for Incident Response](https://arxiv.org/pdf/2511.15755)

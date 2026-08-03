@@ -61,6 +61,10 @@ Recommendation is reverted after the first reclamation-correlated incident, but 
 
 ---
 
+## Related Patterns
+
+- [Semantic Similarity Retrieval Misses Structural Attributes (by-capability)](../../../../../by-capability/knowledge-retrieval/goals/retrieval-relevance/failures/semantic-similarity-retrieval-misses-structural-attributes.md) - the general mechanism behind this cost-optimization-specific instance
+
 ## References
 
 - [A Survey on Knowledge-Oriented Retrieval-Augmented Generation](https://arxiv.org/pdf/2503.10677)

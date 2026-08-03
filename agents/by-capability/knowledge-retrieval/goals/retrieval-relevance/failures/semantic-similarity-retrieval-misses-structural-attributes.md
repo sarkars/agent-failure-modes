@@ -90,6 +90,17 @@ Outcome: Wrong component ordered; production halted
 
 ---
 
+## Related Patterns
+
+Domain-specific instances of this same mechanism, each with mitigations tailored to that domain's structural attributes rather than the generic ones above:
+
+- [Devops: Capacity Profile Matched by Name Similarity](../../../../../by-use-case/devops/goals/capacity-planning/failures/embedding-retrieval-applies-wrong-services-capacity-profile-by-name-similarity.md) - matches on statefulness/write-topology instead of service name
+- [Devops: Cost Playbook Matched by Tag Similarity](../../../../../by-use-case/devops/goals/cost-optimization/failures/embedding-retrieval-applies-wrong-workloads-cost-playbook-by-tag-similarity.md) - matches on workload resource profile instead of tags
+- [Devops: Deployment Checklist Mismatch](../../../../../by-use-case/devops/goals/deployment-safety/failures/embedding-retrieval-applies-wrong-services-deployment-checklist.md) - matches on deployment topology instead of service description
+- [Healthcare: Drug Interaction Class Mismatch](../../../../../by-use-case/healthcare/goals/adverse-drug-interaction/failures/embedding-retrieval-matches-structurally-similar-different-class-drug-for-interaction-check.md) - matches on drug class instead of active-ingredient interaction profile
+- [Sales-CRM: Deal Cohort Benchmark Mismatch](../../../../../by-use-case/sales-crm/goals/pipeline-forecasting/failures/embedding-retrieval-pulls-mismatched-historical-deal-cohort-as-stage-conversion-benchmark.md) - matches on deal description instead of segment/stage attributes
+- [Supply Chain: Logistics Lane Benchmark Mismatch](../../../../../by-use-case/supply-chain/goals/logistics-routing/failures/embedding-retrieval-selects-wrong-historical-lane-as-transit-time-benchmark.md) - matches on route description instead of mode/distance attributes
+
 ## References
 
 - [Classifying and Addressing the Diversity of Errors in Retrieval-Augmented Generation Systems](https://arxiv.org/html/2510.13975v1)

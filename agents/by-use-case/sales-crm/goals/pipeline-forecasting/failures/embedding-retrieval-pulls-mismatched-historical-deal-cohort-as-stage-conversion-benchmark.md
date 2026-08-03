@@ -67,6 +67,10 @@ closer to the unretrieved, more structurally appropriate cohort's historical rat
 
 ---
 
+## Related Patterns
+
+- [Semantic Similarity Retrieval Misses Structural Attributes (by-capability)](../../../../../by-capability/knowledge-retrieval/goals/retrieval-relevance/failures/semantic-similarity-retrieval-misses-structural-attributes.md) - the general mechanism behind this pipeline-forecasting-specific instance
+
 ## References
 
 - [LLM-based Agents Suffer from Hallucinations: A Survey of Taxonomy, Methods, and Directions](https://arxiv.org/html/2509.18970v1)
