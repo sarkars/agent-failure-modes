@@ -6,18 +6,28 @@
 
 **Symptoms**
 - Multiple agents produce same unsupported answer.
-- [Add more specific symptoms]
+- Agreement rate between agents stays high even when the shared answer conflicts with ground truth or external verification.
+- All agents were seeded from the same upstream retrieval/context source, so their "independent" votes are actually correlated, not independent.
+- Confidence in the aggregated answer rises with agent count even though the agents lack the diversity needed to add real signal.
 
 **Root Cause**
 Agents agree because they share flawed context or bias.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+Agent A, Agent B, and Agent C are each asked to independently verify a claim, but
+all three receive the same outdated knowledge-base snippet as context. All three
+confidently agree the claim is "true" because they're reasoning from the identical
+stale source, not independent evidence. The voting/aggregation layer reports "3/3
+consensus, high confidence" -- masking that this is one shared error, not three
+independent confirmations.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- All agents draw from a single shared retrieval index or context source instead of independent, diverse evidence.
+- Agents instantiated from the same base model/prompt template with no diversity in reasoning strategy or temperature.
+- Voting/aggregation logic treats agreement as a proxy for correctness without checking evidence independence.
+- No dissent-seeking mechanism (e.g., devil's-advocate agent, adversarial review) built into the consensus process.
 
 ---
 
@@ -26,12 +36,16 @@ Agents agree because they share flawed context or bias.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Shared-bias injection | Feed all agents an identical, subtly-wrong context snippet and ask them to vote on a claim | System flags low evidence diversity and lowers confidence, or an independent-source check catches the error | Agents unanimously agree on the wrong answer and the system reports high confidence |
+| Source-diversity audit | Trace each agent's evidence sources for a given consensus decision | Agents draw from genuinely independent sources for a "high confidence" verdict | All agreeing agents trace back to the same single upstream source |
+| Adversarial dissent test | Introduce a devil's-advocate agent instructed to challenge the majority view with independent evidence | Consensus score adjusts downward when dissent surfaces valid counter-evidence | Majority consensus persists unchanged even when presented with contradicting independent evidence |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| Evidence Source Diversity | >=2 independent sources per consensus decision | Count of distinct upstream evidence sources feeding into agents that agree |
+| Consensus-Accuracy Correlation | Positive, r>0.7 | Correlation between agreement level and ground-truth correctness on a labeled eval set |
+| Dissent Surfacing Rate | >90% of injected errors caught | Percentage of seeded shared-bias test cases where an adversarial/independent check flags the error before final consensus |
 
 ---
 
@@ -83,12 +97,16 @@ Agents agree because they share flawed context or bias.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| Single-Source Consensus Rate | >20% of decisions |
+| Consensus-Ground-Truth Divergence | >5% on sampled audits |
+| Dissent Agent Override Rate | <2% (implausibly low suggests dissent isn't functioning) |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Medium |
+| Correlated-Source Consensus | Majority of agreeing agents trace to a single shared upstream context source | Medium |
+| High-Confidence Wrong Answer | Consensus decision marked high-confidence is contradicted by ground-truth/audit sample | High |
+| Dissent Mechanism Silent | Adversarial/dissent agent produces zero challenges over an extended window despite eligible cases | Low |
 
 ---
 

@@ -6,18 +6,29 @@
 
 **Symptoms**
 - Repeated outputs/calls from different agents.
-- [Add more specific symptoms]
+- Two or more agents independently call the same expensive external tool/API for the same input, inflating cost and latency.
+- The final output contains redundant or slightly inconsistent versions of the same finding merged together, confusing downstream consumers.
+- Resource usage (tokens, API quota, compute) scales worse than task complexity would justify because of redundant execution.
 
 **Root Cause**
 Multiple agents solve the same subtask independently.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+Task decomposition splits "research competitor pricing" into two parallel
+subtasks that both end up querying the same competitor's pricing page. Agent A
+and Agent C each independently call the web-search tool, retrieve the same page,
+and produce two separate summaries with slightly different wording and one
+differing number (rounding). The aggregator includes both summaries in the final
+report as if they were corroborating independent sources, doubling token cost
+and confusing the reader with near-duplicate, slightly conflicting figures.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Task decomposition performed without checking for overlapping scope between parallel subtasks.
+- No shared task registry or claim/lock mechanism preventing two agents from picking up the same unit of work.
+- High-parallelism fan-out architectures where many agents pull from a shared task queue without deduplication logic.
+- Agents lack visibility into what other agents are currently working on or have already completed.
 
 ---
 
@@ -26,12 +37,16 @@ Multiple agents solve the same subtask independently.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Overlapping subtask detection | Decompose a task into subtasks with intentional scope overlap | System detects the overlap and merges/reassigns before execution | Both overlapping subtasks execute independently, producing duplicate work |
+| Shared-queue race condition | Two agents poll the same task queue simultaneously for the same item | Claim/lock mechanism ensures only one agent executes the item | Both agents dequeue and execute the same item independently |
+| Redundant tool-call detection | Run a fan-out task where two agents are likely to need the same external resource | System caches/shares the first agent's tool result with the second | Both agents independently call the same external tool for identical input |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| Duplicate Subtask Rate | <2% | Percentage of decomposed subtasks with >50% scope overlap with another subtask in the same run |
+| Redundant Tool-Call Rate | <5% | Percentage of external tool calls that are near-duplicates (same tool + same/similar input) within a single run |
+| Task Claim Conflict Rate | <1% | Percentage of task-queue dequeues where two agents claim the same item before lock enforcement |
 
 ---
 
@@ -83,12 +98,16 @@ Multiple agents solve the same subtask independently.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| Duplicate Subtask Rate | >5% of runs |
+| Redundant External Tool Calls | >10% of total tool calls |
+| Wasted Compute/Token Spend from Duplication | >5% of run budget |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Medium |
+| Overlapping Subtask Execution | Two or more agents execute subtasks with substantially overlapping scope in the same run | Medium |
+| Redundant Tool Call Spike | Duplicate external tool calls for identical input exceed baseline rate | Medium |
+| Task Queue Double-Claim | Same queue item claimed and executed by more than one agent | High |
 
 ---
 

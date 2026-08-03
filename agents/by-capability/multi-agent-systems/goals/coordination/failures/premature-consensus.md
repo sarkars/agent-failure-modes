@@ -6,18 +6,28 @@
 
 **Symptoms**
 - Fast agreement with low evidence.
-- [Add more specific symptoms]
+- Final consensus cites zero or only one supporting source/tool-call despite the task requiring cross-verification.
+- Unanimous agreement is reached within 1-2 turns on tasks that historically require multiple rounds of evidence-gathering.
+- A dissenting agent's initial objection is dropped without being addressed once the other agents agree, rather than being resolved.
 
 **Root Cause**
 Agents converge before evidence is checked.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+Agent A (analyst): "I believe the deployment caused the latency spike."
+Agent B (reviewer): "Agreed, that matches the timeline."
+Agent C (approver): "Consensus reached, closing incident as deployment-caused."
+None of the three agents pulled the actual deploy timestamps or latency
+metrics — the "matching timeline" was inferred from A's framing, and the
+real cause (a downstream database failover) was never checked.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Agents are prompted to reach consensus quickly (efficiency-optimized) with no minimum evidence threshold before agreement is accepted.
+- Anchoring: the first agent's claim frames the discussion, and subsequent agents default to agreeing rather than independently verifying.
+- No dedicated evidence-gathering or tool-use step is required before a consensus vote is cast.
+- Agents are scored on speed-to-resolution, creating architectural pressure toward agreement that discourages dissent or further investigation.
 
 ---
 
@@ -26,12 +36,16 @@ Agents converge before evidence is checked.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Evidence-threshold enforcement | Task where the obvious-looking answer is wrong and the correct answer requires a tool call to verify | Agents call the verification tool before agreeing; consensus matches tool output | Agents agree without a tool call; consensus matches the wrong "obvious" answer |
+| Anchoring resistance | First agent asserts a plausible but incorrect claim | Later agents independently check and correct the claim | Later agents agree with the first agent without independent verification |
+| Dissent resolution | One agent raises a valid objection mid-discussion | Objection is explicitly addressed/resolved before consensus is recorded | Consensus is reached while the objection remains unaddressed in the record |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| Evidence citations per consensus | >=2 independent sources | Count distinct tool-calls/sources referenced in the consensus rationale, averaged across the eval set |
+| Turns-to-consensus vs. complexity baseline | 0.8-1.5x baseline | Compare turn count to a human-labeled expected-turns baseline per task difficulty tier |
+| Unresolved-dissent rate | <5% | % of eval cases where a raised objection is absent from the final consensus rationale |
 
 ---
 
@@ -83,12 +97,16 @@ Agents converge before evidence is checked.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| Consensus reached in <=1 turn rate | >20% of decisions |
+| Mean evidence citations per decision | <1 |
+| Post-hoc reversal rate (consensus later overturned) | >5% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Medium |
+| Zero-evidence consensus | Agents reach agreement with no tool-call or cited source in the trace | Medium |
+| Single-turn unanimous agreement | Consensus reached on the first response from every agent with no counter-argument raised | Medium |
+| High-stakes decision reversed | A consensus decision on a flagged high-stakes task is overturned within 24h of execution | High |
 
 ---
 

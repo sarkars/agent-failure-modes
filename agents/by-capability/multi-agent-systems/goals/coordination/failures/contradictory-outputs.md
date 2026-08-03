@@ -6,18 +6,28 @@
 
 **Symptoms**
 - Conflicting recommendations without arbitration.
-- [Add more specific symptoms]
+- End users or downstream systems receive two mutually exclusive answers (e.g., "approve" and "deny") with no indication which to trust.
+- Disagreement is detected only after the fact by a human, because no automated arbitration step runs before output is finalized.
+- The same disagreement recurs for similar inputs because there is no learned or codified tie-breaking rule.
 
 **Root Cause**
 Agents disagree and no resolver exists.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+Agent A (pricing agent) recommends a 15% discount based on customer loyalty tier.
+Agent B (margin-protection agent) recommends a 0% discount based on current
+inventory cost pressure. Both recommendations are appended to the customer-facing
+quote generator as-is; the generated quote reads "recommended discount: 15%" in one
+section and "no discount available" in another, with no arbitration step ever
+invoked.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- No designated arbiter agent or deterministic tie-breaking policy for cross-agent disagreement.
+- Agents optimize different, non-overlapping objective functions (e.g., growth vs. margin) with no shared reconciliation criteria.
+- Output aggregation pipeline concatenates or passes through all agent outputs rather than requiring convergence before finalizing.
+- Agents run in parallel/independently with no communication channel to negotiate or flag conflicting conclusions to each other.
 
 ---
 
@@ -26,12 +36,16 @@ Agents disagree and no resolver exists.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Direct conflict injection | Configure two agents with inputs guaranteed to produce opposing recommendations | Arbiter agent or resolution policy selects/blends a single final answer with rationale logged | Both conflicting recommendations reach the final output unresolved |
+| Silent pass-through check | Run pipeline on a case with known agent disagreement and inspect the final customer-facing output | Output contains one coherent recommendation | Output contains both contradictory recommendations or an incoherent blend |
+| Recurring conflict pattern | Run the same conflict-prone input scenario 10 times | Resolution is consistent and traceable to a defined policy each time | Resolution (or lack thereof) varies run to run with no consistent policy applied |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| Unresolved Disagreement Rate | <1% of multi-agent runs | Percentage of runs where two agents produce contradictory outputs on the same decision with no arbitration record |
+| Arbitration Coverage | 100% | Percentage of detected disagreements that trigger a defined arbiter/tie-break process |
+| Resolution Consistency | >95% | Percentage of repeated identical-conflict scenarios resolved the same way |
 
 ---
 
@@ -83,12 +97,16 @@ Agents disagree and no resolver exists.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| Unarbitrated Conflict Rate | >1% of runs |
+| Contradictory Output Reaching End User | >0/week (target zero) |
+| Mean Time to Arbitration | >5s per detected conflict |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Unresolved Contradiction Shipped | Final output contains mutually exclusive recommendations with no arbitration log entry | High |
+| Arbiter Agent Unavailable | Arbitration step fails or times out and the pipeline proceeds without resolving the conflict | Critical |
+| Repeated Conflict Pattern | Same input signature produces agent disagreement 3+ times without a policy update | Medium |
 
 ---
 

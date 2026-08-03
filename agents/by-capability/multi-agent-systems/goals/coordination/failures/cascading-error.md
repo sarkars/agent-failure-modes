@@ -6,18 +6,28 @@
 
 **Symptoms**
 - Later agents amplify same wrong premise.
-- [Add more specific symptoms]
+- A single malformed or hallucinated output from the first agent in the chain is treated as ground truth by every downstream agent.
+- Error magnitude grows at each hop -- a slightly wrong number becomes a wildly wrong conclusion by the final agent.
+- The root-cause agent's output looks locally reasonable in isolation, so no individual agent's trace looks obviously broken.
 
 **Root Cause**
 Early error propagates through the multi-agent pipeline.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+Agent A (data extractor) misreads an invoice total as $45,000 instead of $4,500
+(misplaced decimal). Agent B (budget analyzer) flags the department as "critically
+over budget" based on the bad figure. Agent C (report writer) drafts an executive
+escalation citing a "10x budget overrun" and recommends an emergency spending
+freeze. No agent re-validates the original source figure; each trusts the prior
+agent's output as-is.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Strictly linear/sequential pipeline topology with no independent re-verification step between stages.
+- Agents configured to trust upstream output implicitly, with no confidence scores or source citations passed along.
+- No checkpoint or sanity-check gate comparing early-stage outputs against original source data before downstream stages consume them.
+- Deep pipelines with high agent count, where a small error compounds multiplicatively at each transformation.
 
 ---
 
@@ -26,12 +36,16 @@ Early error propagates through the multi-agent pipeline.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Seeded upstream error | Inject a known-wrong value into Agent A's output (e.g., wrong currency figure) | Downstream agents flag the anomaly or re-derive from source rather than propagating it unchanged | Final output reflects the seeded error, amplified rather than corrected or flagged |
+| Source re-validation check | Agent A's extracted figure diverges from the ground-truth source document | A validation gate at Agent B's entry catches the divergence before proceeding | Pipeline completes without any stage cross-checking Agent A's figure against the source |
+| Amplification magnitude test | Run pipeline with a small (5%) seeded error at stage 1 | Final output error stays within a bounded, traceable range | Final output error grows disproportionately (e.g., 5% input error becomes 10x conclusion error) |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| Error Amplification Factor | <2x | Ratio of final-output error magnitude to seeded first-stage error magnitude, measured on synthetic error-injection runs |
+| Source Re-validation Rate | 100% | Percentage of pipeline stages that cross-check upstream numeric/factual claims against original source before use |
+| Cascade Containment Rate | >95% | Percentage of seeded upstream errors caught before reaching the final output |
 
 ---
 
@@ -83,12 +97,16 @@ Early error propagates through the multi-agent pipeline.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| Error Cascade Depth | >2 agents affected |
+| Source-to-Output Divergence | >10% variance vs. original source data |
+| Unvalidated Handoff Rate | >5% of stage transitions lacking a re-validation check |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Critical |
+| Runaway Amplification | Output magnitude diverges from source data by more than a defined threshold across pipeline stages | Critical |
+| Unvalidated Numeric Handoff | Downstream agent consumes a numeric/factual claim from upstream without a source cross-check | High |
+| Repeated Premise Reuse | Same unverified claim referenced by 3+ downstream agents in one run | High |
 
 ---
 

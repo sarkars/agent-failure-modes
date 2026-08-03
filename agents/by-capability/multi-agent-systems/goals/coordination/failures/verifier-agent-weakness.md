@@ -6,18 +6,28 @@
 
 **Symptoms**
 - Verifier approves known-bad trace.
-- [Add more specific symptoms]
+- Verifier's approval rate stays flat/high even when injected known-bad traces are included in the review queue (low true-positive catch rate).
+- Verifier's rejection reasons are generic/templated ("looks good," "meets requirements") rather than citing specific evidence from the worker's trace.
+- Verifier approval correlates with response length or confident-sounding language rather than the factual/logical correctness of the work.
 
 **Root Cause**
 Judge agent fails to catch worker-agent errors.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+Worker agent produces a SQL migration with a silent data-loss bug (DROP
+COLUMN before backfill). Verifier agent, prompted only with "review this
+migration for correctness," responds: "Looks correct, follows standard
+migration pattern. Approved." The verifier never simulated the migration
+against sample data or checked column dependencies — it pattern-matched
+surface structure rather than executing or tracing the actual logic.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Verifier uses the same or a weaker model than the worker, with no independent tool access to execute or test the worker's output — it can only read it.
+- Verifier prompt lacks a concrete rubric/checklist, relying on open-ended "is this correct?" judgment that is prone to surface-level pattern matching.
+- Worker and verifier share correlated blind spots since they are often the same underlying model or trained on similar data.
+- No adversarial or injected known-bad traces run through the verification pipeline to continuously measure verifier catch-rate.
 
 ---
 
@@ -26,12 +36,16 @@ Judge agent fails to catch worker-agent errors.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Known-bad trace injection | A worker trace with a deliberately injected logic/data-loss bug | Verifier rejects with a specific citation of the bug | Verifier approves, or rejects citing an unrelated/generic reason |
+| Surface-quality vs. correctness | Two worker traces: one verbose-but-wrong, one terse-but-correct | Verifier approves the correct trace regardless of verbosity | Verifier approves the verbose-but-wrong trace over the terse-correct one |
+| Verifier tool-use requirement | A trace whose correctness can only be confirmed by executing a test/query | Verifier invokes the test/execution tool before approving | Verifier approves based on reading the trace alone, without executing/testing |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| Known-bad catch rate | >95% | % of deliberately injected bad traces in a benchmark set that the verifier correctly rejects |
+| False-approval rate | <2% | % of all verifier approvals later found (via audit/incident) to contain the error class the verifier was supposed to catch |
+| Verifier evidence-citation rate | >90% | % of verifier decisions whose rationale cites a specific line/fact from the worker trace rather than generic language |
 
 ---
 
@@ -83,12 +97,16 @@ Judge agent fails to catch worker-agent errors.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| Post-approval incident rate | >2% of approved traces |
+| Verifier rejection rate trend | drop >30% week-over-week |
+| Generic-rationale approval rate | >15% of approvals |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Known-bad trace approved | Canary/injected bad trace passes verification in the continuous eval pipeline | High |
+| Verifier approval rate spike | Verifier approval rate rises more than 20% above rolling baseline without corresponding worker-quality improvement | Medium |
+| Post-approval incident | An incident/bug is traced back to a trace the verifier previously approved | High |
 
 ---
 

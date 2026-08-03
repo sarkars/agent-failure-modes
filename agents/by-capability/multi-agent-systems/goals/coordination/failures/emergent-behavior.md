@@ -6,18 +6,28 @@
 
 **Symptoms**
 - Multi-agent trace fails while individual agents pass.
-- [Add more specific symptoms]
+- Agents fall into unintended repetitive loops (e.g., mutual clarification requests) only visible when they interact live, never in single-agent unit tests.
+- Aggregate system behavior (e.g., runaway cost, oscillating decisions) emerges from feedback loops between agents that no single agent's test suite exercises.
+- Behavior varies nondeterministically between runs with identical inputs because of timing-dependent interaction effects between agents.
 
 **Root Cause**
 Interaction creates behavior not seen in isolated tests.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+Agent A (negotiator) and Agent B (counter-negotiator) each pass all unit tests
+in isolation with scripted counterpart responses. In production, Agent A
+proposes a price, Agent B counters, Agent A re-proposes a slightly adjusted
+price referencing Agent B's counter, and the two enter an unbounded
+back-and-forth loop neither was tested against, burning through the token
+budget before a human notices the conversation never converges.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Unit/integration tests validate each agent in isolation with mocked or scripted counterpart behavior, never live agent-to-agent interaction.
+- Feedback loops between agents (Agent A's output feeds Agent B, whose output feeds back to Agent A) with no turn/iteration cap.
+- High degrees of freedom in agent responses (open-ended generation) expand the space of possible interaction sequences beyond what was tested.
+- No production-scale multi-agent simulation or chaos-style testing performed before deployment, only per-agent evals.
 
 ---
 
@@ -26,12 +36,16 @@ Interaction creates behavior not seen in isolated tests.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Live-pair interaction test | Run Agent A and Agent B against each other (not mocked) for an extended number of turns | Interaction converges to a resolution within a bounded number of turns | Agents enter a loop, oscillation, or divergence not seen when each was tested against a scripted counterpart |
+| Non-determinism replay test | Run the identical input through the full multi-agent system 10 times | Outputs and interaction paths are consistent across runs | Interaction outcome varies significantly between runs with identical inputs |
+| Iteration cap enforcement | Configure agents in a feedback loop with no natural stopping condition | System enforces a max-turn/iteration cap and escalates gracefully | Agents continue interacting unbounded until timeout or resource exhaustion |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| Live-Pair Test Coverage | 100% of interacting agent pairs | Percentage of agent pairs tested against each other's live (non-mocked) behavior, not just scripted stubs |
+| Interaction Convergence Rate | >95% | Percentage of live multi-agent test runs that reach a stable resolution within the defined turn cap |
+| Run-to-Run Determinism | >90% output similarity | Similarity score of outputs across repeated runs of identical input through the full multi-agent system |
 
 ---
 
@@ -83,12 +97,16 @@ Interaction creates behavior not seen in isolated tests.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| Unbounded Interaction Loop Rate | >1% of runs |
+| Turn Count Exceeding Expected Range | >3x median turn count |
+| Run-to-Run Output Variance (identical input) | >10% divergence |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Interaction Loop Detected | Agent pair exceeds expected turn count without converging to resolution | High |
+| Iteration Cap Breach | Feedback loop between agents hits the max-turn safety cap, forcing termination | Medium |
+| Novel Interaction Pattern | Multi-agent trace fails despite all individual agents passing isolated unit tests | High |
 
 ---
 

@@ -6,18 +6,28 @@
 
 **Symptoms**
 - Repeated critique loops; no final result.
-- [Add more specific symptoms]
+- Turn count between critic and reviser exceeds typical task complexity by 5-10x with no convergence in quality score.
+- Critique feedback cycles between the same 2-3 objections rather than surfacing new issues each round.
+- Token/cost consumption for a single task grows unbounded as the debate continues with no forcing function to stop it.
 
 **Root Cause**
 Agents critique/revise endlessly without termination.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+Round 1: Writer produces draft. Critic: "Missing error handling for null inputs."
+Round 2: Writer adds null checks. Critic: "Error handling present but inconsistent with style guide."
+Round 3: Writer aligns style. Critic: "Style now consistent, but null-check ordering is suboptimal."
+Round 4: Writer reorders checks. Critic: "Ordering fixed, but this reintroduces the gap from Round 1."
+... loop continues for 40 rounds; no termination condition ever fires; task
+times out after 2 hours with no accepted output.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- No maximum round cap or diminishing-returns check on the critique-revise loop.
+- Critic agent is prompted/rewarded to always surface at least one issue, biasing it against ever approving.
+- No shared, versioned rubric — the critic re-litigates different criteria each round instead of converging on a fixed checklist.
+- Writer and Critic hold symmetric authority with no tie-breaking arbiter or human-escalation path to force closure.
 
 ---
 
@@ -26,12 +36,16 @@ Agents critique/revise endlessly without termination.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Round-cap enforcement | Task seeded with an unresolvable style disagreement (two valid but conflicting conventions) | System halts and escalates after N rounds with no quality-score improvement | Loop continues past the cap or terminates without producing output |
+| Diminishing-returns detection | Quality score plateaus within +/-1% across 3 consecutive critique-revise rounds | Orchestrator forces final selection at the plateau | Debate continues past the plateau, consuming additional rounds |
+| Oscillating critique | Critique alternates between two contradictory demands (round 1 wants A, round 2 wants not-A) | Cycle detector flags the repeated critique pattern and escalates | Agents cycle indefinitely without the cycle detector triggering |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| Mean rounds to convergence | <=5 | Count critique-revise turns per task in an offline eval set until critic approval |
+| Non-convergence rate | <2% | % of eval tasks that hit the round cap without reaching approval |
+| Critique novelty ratio | >0.7 | Fraction of critique points per round that are semantically new vs. repeated from prior rounds (embedding similarity) |
 
 ---
 
@@ -83,12 +97,16 @@ Agents critique/revise endlessly without termination.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| Debate round count (p95) | >15 rounds |
+| Task wall-clock time in debate loop | >10 min |
+| Critique repetition rate | >40% repeated objections across rounds |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Medium |
+| Unbounded debate loop | Task exceeds 20 critique-revise rounds without termination | Medium |
+| Critique cycle detected | Same objection (semantic match) recurs 3+ times across rounds | High |
+| Debate cost spike | Token spend for a single task's debate loop exceeds 10x the median task cost | High |
 
 ---
 

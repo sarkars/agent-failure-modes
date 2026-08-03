@@ -6,18 +6,29 @@
 
 **Symptoms**
 - Subtasks poorly assigned; final synthesis incomplete.
-- [Add more specific symptoms]
+- Worker agents receive subtasks outside their capability/scope, producing low-quality or off-topic results the coordinator doesn't catch.
+- The coordinator's final synthesis omits or misrepresents valid worker outputs, e.g., dropping a completed subtask's findings entirely.
+- Task decomposition duplicates effort in some areas while leaving other necessary subtasks unassigned.
 
 **Root Cause**
 Manager agent assigns wrong tasks or fails to synthesize.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+Coordinator agent decomposes "audit Q3 financials" into subtasks and assigns
+"tax compliance review" to a worker agent configured only for expense
+categorization. The worker returns a low-confidence, out-of-scope response, but
+the coordinator includes it verbatim in the final report as if authoritative.
+Meanwhile a completed "revenue reconciliation" subtask from another worker is
+never pulled into the synthesis, because the coordinator's aggregation step only
+reads the first N worker outputs it receives.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Task decomposition logic is static/templated rather than capability-aware, so subtask-to-agent matching ignores actual worker specialization.
+- Coordinator lacks a validation step to check worker output relevance/confidence before including it in synthesis.
+- Synthesis step has a fixed input slot count or ordering assumption that silently drops late-arriving or overflow worker outputs.
+- No feedback loop from synthesis quality back to the task-assignment policy, so misassignment patterns repeat across runs.
 
 ---
 
@@ -26,12 +37,16 @@ Manager agent assigns wrong tasks or fails to synthesize.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Capability mismatch assignment | Give the coordinator a task requiring a specialist skill no available worker has | Coordinator flags the capability gap or escalates rather than force-assigning | Coordinator assigns the subtask to an ill-suited worker and includes the low-quality result unflagged |
+| Dropped-output synthesis check | Run a decomposition producing more worker outputs than the coordinator's expected slot count | All completed worker outputs appear in the final synthesis | One or more valid completed subtask outputs are missing from the final synthesis |
+| Assignment completeness audit | Decompose a multi-part task and verify every necessary subtask has an assigned owner | 100% of identified subtasks have an assigned worker | One or more necessary subtasks go unassigned, leaving gaps in the final deliverable |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| Task-Capability Match Rate | >95% | Percentage of subtask assignments where worker capability profile matches subtask requirements |
+| Synthesis Completeness | 100% | Percentage of completed worker outputs that appear in the final synthesized result |
+| Assignment Coverage | 100% | Percentage of decomposed subtasks that receive a valid worker assignment |
 
 ---
 
@@ -83,12 +98,16 @@ Manager agent assigns wrong tasks or fails to synthesize.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| Task-Capability Mismatch Rate | >5% of assignments |
+| Synthesis Drop Rate (worker outputs missing from final) | >1% of runs |
+| Unassigned Subtask Rate | >0% (target zero) |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Capability Mismatch Assignment | Subtask assigned to a worker whose capability profile doesn't cover the required skill | High |
+| Worker Output Dropped from Synthesis | Completed worker output is not present in the final coordinator synthesis | High |
+| Decomposition Gap Detected | An identified necessary subtask has no assigned worker at execution start | Medium |
 
 ---
 

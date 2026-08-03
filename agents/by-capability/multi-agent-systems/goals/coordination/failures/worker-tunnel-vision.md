@@ -6,18 +6,28 @@
 
 **Symptoms**
 - Local output good; final task fails.
-- [Add more specific symptoms]
+- Individual agent's per-subtask evaluation score is high, but the aggregated end-to-end task metric fails or regresses.
+- Agent optimizes a proxy metric it was given (e.g., "minimize response length") in a way that harms the actual end-user goal.
+- Agent ignores or overrides context from other agents or the global plan when it conflicts with its own local objective.
 
 **Root Cause**
 Specialized agents optimize local goals over global success.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+Agent A (SEO-optimizer) is scored on keyword density and rewrites product
+descriptions to maximize keyword hits — its local score is 95/100.
+Agent B (final assembler) ships A's copy unchanged. End-to-end conversion
+rate drops 18% because the keyword-stuffed copy reads as spam to real
+users — the global objective (sales) was never part of A's reward signal,
+only the local proxy (SEO score).
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Each specialized agent is evaluated/rewarded on a narrow local metric with no term for global/end-to-end outcome.
+- Agents lack visibility into the overall task objective or downstream consumers of their output, since information is siloed by design.
+- Pipeline architecture is strictly sequential/one-directional, so no agent can flag that its "good" local output is harming the global result.
+- High specialization (narrow tool access, narrow prompt scope) makes agents structurally unable to consider cross-cutting tradeoffs.
 
 ---
 
@@ -26,12 +36,16 @@ Specialized agents optimize local goals over global success.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Local-global divergence detection | Task where optimizing the local metric provably harms the global outcome (e.g., keyword stuffing vs. readability) | Agent trades off local score for global outcome, or flags the conflict | Agent maximizes local score at the expense of the global outcome with no flag |
+| Global-objective visibility | Specialized agent is queried about the end-to-end task goal mid-task | Agent can state the global objective and how its subtask serves it | Agent cannot articulate the global objective beyond its own local metric |
+| Cross-agent conflict flagging | Two agents' local optima are mutually exclusive (e.g., speed vs. thoroughness) | Conflict is surfaced to an orchestrator/human for a tradeoff decision | Each agent proceeds independently with no flagged conflict, and the global outcome worsens |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| Local-global score correlation | >0.7 | Correlation between each agent's local metric and end-to-end task success across eval runs |
+| Global-objective recall | >90% | % of agents that, when queried, can correctly state the overarching task goal |
+| Tradeoff escalation rate | >80% of true conflicts | % of eval cases with a genuine local/global conflict where the conflict is surfaced rather than silently resolved locally |
 
 ---
 
@@ -83,12 +97,16 @@ Specialized agents optimize local goals over global success.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| Local-score vs. end-to-end success divergence | >20 percentage points |
+| Global objective awareness rate | <80% of agents |
+| Silent local-optimization incidents | >3 per week |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Medium |
+| Local-global score divergence | Agent's local score is in the top quartile while the end-to-end task outcome fails | Medium |
+| Global objective blind spot | Agent queried mid-task cannot state the overarching task goal | Low |
+| Repeated local-optimization failure | Same agent role causes global-outcome regression in more than 3 tasks within a week | High |
 
 ---
 

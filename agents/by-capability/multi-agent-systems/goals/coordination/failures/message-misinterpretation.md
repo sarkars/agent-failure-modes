@@ -6,18 +6,27 @@
 
 **Symptoms**
 - Downstream action contradicts upstream result.
-- [Add more specific symptoms]
+- Receiving agent acts on a paraphrase or summary of the upstream output rather than the literal structured result, dropping qualifiers (e.g., "draft, not final").
+- Ambiguous natural-language handoff (no structured schema) leads the receiving agent to infer a different unit, scope, or polarity than intended.
+- The same upstream message produces different downstream interpretations across repeated runs, even though the upstream input is unchanged.
 
 **Root Cause**
 One agent misunderstands another agent's output.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+Agent A (researcher): "Findings: revenue is DOWN 12% vs last quarter, driven by churn."
+Agent B (report writer), working from a truncated context window, generates:
+  "Revenue grew 12% this quarter, primarily due to reduced churn."
+No structured field for direction/sign existed in the handoff — B free-text
+paraphrased A's natural-language summary and inverted the sign.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Handoffs use free-form natural-language summaries instead of structured fields for polarity, units, and scope.
+- Receiving agent has a truncated or compressed context window that drops the original upstream message before generating its own interpretation.
+- No confirmation/paraphrase-back step where the receiving agent restates its understanding for validation before acting.
+- Upstream agent's output format varies run-to-run (no fixed schema), forcing downstream prompt-based parsing to re-infer structure each time.
 
 ---
 
@@ -26,12 +35,16 @@ One agent misunderstands another agent's output.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Sign inversion detection | Upstream message stating a negative trend ("revenue down 12%") | Downstream summary preserves the negative direction | Downstream output states a positive/growth direction |
+| Qualifier preservation | Upstream output marked "DRAFT — unverified" | Downstream agent treats the output as provisional (flags or withholds action) | Downstream agent acts on it as final/verified |
+| Unit consistency | Upstream reports a metric in percentage-points; downstream expects raw percentage | Downstream correctly converts/labels units to match upstream | Downstream reuses the number with a mismatched unit label |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| Semantic fidelity score | >0.9 | Entailment/similarity score between upstream message and downstream agent's restated interpretation |
+| Sign/polarity accuracy | 100% | % of eval cases where downstream preserves the correct positive/negative direction of upstream claims |
+| Paraphrase-back match rate | >95% | % of handoffs where downstream's confirmation paraphrase is judged (rubric or LLM-judge) equivalent to upstream intent |
 
 ---
 
@@ -83,12 +96,16 @@ One agent misunderstands another agent's output.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| Semantic drift score (upstream vs. downstream) | <0.85 |
+| Contradiction rate between agent outputs | >2% of handoffs |
+| Paraphrase-back mismatch rate | >5% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Downstream contradicts upstream | Automated entailment check flags downstream output as contradicting the upstream source message | High |
+| Missing confirmation step | Handoff proceeds without a downstream paraphrase-back validation on a high-stakes task | Medium |
+| Repeated misinterpretation pattern | Same upstream-downstream agent pair misinterprets output more than 3 times in 24h | High |
 
 ---
 

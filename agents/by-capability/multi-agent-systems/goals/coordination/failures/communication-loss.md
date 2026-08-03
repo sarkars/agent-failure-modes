@@ -6,18 +6,27 @@
 
 **Symptoms**
 - Evidence present in one agent trace, absent in another.
-- [Add more specific symptoms]
+- Agent B contradicts or ignores a fact Agent A explicitly discovered because it was never included in the handoff payload.
+- Context-window truncation or lossy summarization drops critical details (e.g., a caveat or exception) between agent hops.
+- Agents operating on separate memory/context stores answer the same question differently depending on which one is asked.
 
 **Root Cause**
 Key information is not shared between agents.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+Agent A (research agent) discovers the customer already requested a refund last
+week and notes it internally. Agent A's handoff summary to Agent B (support-reply
+agent) only includes "customer wants order status" -- the refund history is dropped
+during summarization. Agent B replies with a standard shipping update, ignoring the
+prior refund request, causing customer frustration and a duplicate support ticket.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Handoffs implemented as lossy natural-language summaries rather than structured, complete state transfer.
+- Aggressive context-window truncation or token-budget limits that silently drop earlier findings.
+- Agents maintaining separate/local memory stores instead of a shared, queryable context store.
+- No explicit "must-carry" field list defining which facts are required to survive every handoff.
 
 ---
 
@@ -26,12 +35,16 @@ Key information is not shared between agents.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Critical-fact dropout | Seed Agent A with a fact that must influence the final decision (e.g., prior refund), then run the full pipeline | Final output reflects the seeded fact | Final output ignores or contradicts the seeded fact because it never reached the consuming agent |
+| Summarization fidelity check | Compare Agent A's full trace to the actual handoff payload sent to Agent B | Handoff payload contains all fields marked must-carry | Must-carry fields are missing or altered in the handoff payload |
+| Cross-agent fact consistency | Ask two agents sharing a pipeline the same factual question about the case | Both agents give the same answer | Agents give different answers because they hold different subsets of context |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| Must-Carry Field Retention Rate | 100% | Percentage of handoffs where all fields tagged must-carry are present and unmodified in the receiving agent's input |
+| Cross-Agent Fact Consistency | >99% | Percentage of sampled fact-queries answered identically by agents sharing the same case context |
+| Context Truncation Incidence | <1% | Percentage of handoffs where token-budget truncation removes content from the pre-truncation payload |
 
 ---
 
@@ -83,12 +96,16 @@ Key information is not shared between agents.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| Must-Carry Field Drop Rate | >0.5% of handoffs |
+| Cross-Agent Fact Contradiction Rate | >1% of sampled queries |
+| Context Truncation Events | >10/day |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Critical Field Missing at Handoff | A must-carry field is absent or null in a downstream agent's received context | High |
+| Cross-Agent Contradiction Detected | Two agents in the same run give factually inconsistent answers to the same question | High |
+| Context Truncation Spike | Truncation events exceed baseline rate in a rolling window | Medium |
 
 ---
 

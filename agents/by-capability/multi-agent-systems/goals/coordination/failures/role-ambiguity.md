@@ -6,18 +6,27 @@
 
 **Symptoms**
 - Duplicate or missing work across agents.
-- [Add more specific symptoms]
+- Two agents independently perform the same subtask (e.g., both call the same external API or edit the same file), producing conflicting results.
+- A required subtask (e.g., input validation) is never performed because each agent assumed another agent owned it.
+- Agents ask each other or the user clarifying questions about ownership mid-task ("is this my responsibility or yours?") instead of proceeding.
 
 **Root Cause**
 Agents do not know who owns which responsibility.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+Agent A (data-fetcher) and Agent B (data-validator) are both given the
+system prompt "ensure the dataset is clean before analysis."
+Run 1: A fetches and also silently drops malformed rows (assuming that's
+its job); B receives already-cleaned data and validates nothing, letting a
+corrupted row pass through untouched on a run where A skipped the drop.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Overlapping natural-language role descriptions ("ensure quality," "handle data issues") are assigned to multiple agents without a single owner per responsibility.
+- No shared task/responsibility registry (e.g., a RACI-style matrix) that agents can query at runtime.
+- Dynamic agent selection/routing changes the set of participating agents per run, so role boundaries are never fixed.
+- High agent count in the workflow increases the combinatorial chance that two agents' implicit scopes overlap.
 
 ---
 
@@ -26,12 +35,16 @@ Agents do not know who owns which responsibility.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Ownership collision detection | Task where two agents' prompts both plausibly cover "input validation" | Only one agent performs validation; the other explicitly defers/no-ops with a logged reason | Both agents perform validation redundantly, or outputs conflict |
+| Coverage gap detection | Task requiring 3 distinct subtasks assigned across 2 agents with an intentional gap in the prompt | System flags the uncovered subtask before completion | Task completes with the gap subtask silently never performed |
+| Role registry lookup | Agent queries the shared responsibility registry mid-task for an ambiguous subtask | Agent receives an unambiguous single-owner answer and proceeds accordingly | Agent proceeds on assumption without querying, or the registry returns conflicting owners |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| Duplicate-work rate | <2% | % of eval tasks where two agents' traces show redundant execution of the same subtask |
+| Coverage completeness | 100% | % of required subtasks (per task spec) that appear performed exactly once in the trace |
+| Ownership-query rate | tracked, no fixed target | Count of times agents explicitly query the responsibility registry vs. proceed on assumption, per task |
 
 ---
 
@@ -83,12 +96,16 @@ Agents do not know who owns which responsibility.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| Duplicate subtask execution rate | >3% of tasks |
+| Missing subtask rate | >1% of tasks |
+| Inter-agent ownership clarification requests | >10% of tasks |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Duplicate execution detected | Trace shows two agents completing the same subtask (same tool/target) within one workflow run | High |
+| Uncovered required subtask | A required subtask from the task spec has zero corresponding execution in the trace | High |
+| Ownership deadlock | Two or more agents repeatedly defer the same subtask to each other without resolution | Medium |
 
 ---
 

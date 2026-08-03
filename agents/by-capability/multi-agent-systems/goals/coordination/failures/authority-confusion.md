@@ -6,18 +6,27 @@
 
 **Symptoms**
 - Final answer merges incompatible outputs.
-- [Add more specific symptoms]
+- Two agents claim ownership of the same decision and the system silently applies a last-writer-wins rule.
+- Downstream consumers receive contradictory field values (e.g., both "high risk" and "low risk" labels) with no indication of which agent's judgment took precedence.
+- Human reviewers cannot reconstruct after the fact which agent's output was authoritative, because precedence was never logged.
 
 **Root Cause**
 System does not know which agent output wins.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+Agent A (compliance-checker) flags a loan application: "reject: insufficient collateral."
+Agent B (underwriter) independently outputs: "approve: strong income ratio."
+Aggregator concatenates both into the final report as "approve, pending review of
+collateral concerns" -- a synthesized answer neither agent produced, because no
+precedence rule defines which agent is binding on collateral vs. income criteria.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- No declared ownership/priority map assigning which agent is authoritative for which decision domain (e.g., risk vs. compliance vs. pricing).
+- Flat peer-to-peer topology where any agent can write to shared output state without a gatekeeper.
+- Aggregation/merge step implemented as naive concatenation or last-write-wins rather than an explicit conflict-resolution policy.
+- Agents added incrementally over time without revisiting the original authority model, so newer agents' scopes overlap with older ones.
 
 ---
 
@@ -26,12 +35,16 @@ System does not know which agent output wins.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Overlapping-domain conflict | Two agents (compliance, underwriting) each rule on the same loan with staged conflicting facts | System resolves to the pre-declared authoritative agent's verdict and logs the override | Final output blends both verdicts or picks arbitrarily instead of following the authority map |
+| Silent last-writer test | Agent A writes a verdict, then Agent B writes a conflicting verdict to the same field milliseconds later | System flags the conflict and requires explicit resolution before finalizing | Final answer reflects whichever agent wrote last with no conflict flag raised |
+| Missing authority declaration | New agent added to the pipeline without an authority-map entry, given a decision overlapping an existing agent | Orchestrator rejects the ambiguous configuration at validation time | Pipeline runs anyway and produces merged/contradictory output at runtime |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| Authority Map Coverage | 100% of decision domains mapped | Static analysis of orchestration config against agent output schemas |
+| Unresolved Conflict Rate | <1% of multi-agent runs | Percentage of runs where two agents write conflicting values to the same output field with no logged resolution |
+| Precedence Override Traceability | 100% | Percentage of conflict resolutions with a logged "agent X overrode agent Y because Z" record |
 
 ---
 
@@ -83,12 +96,16 @@ System does not know which agent output wins.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| Unresolved Authority Conflict Rate | >1% of runs |
+| Silent Overwrite Count (no resolution log) | >5/day |
+| Authority Map Staleness | >30 days since last review vs. new agent additions |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Authority Contract Violation | Two agents write conflicting values to the same field with no precedence rule matched | High |
+| Silent Last-Write Detected | Output field overwritten without a logged conflict-resolution decision | Medium |
+| Unmapped Agent Deployed | New agent goes live with overlapping decision scope and no authority-map entry | High |
 
 ---
 
