@@ -6,18 +6,27 @@
 
 **Symptoms**
 - No change rationale or source trace.
-- [Add more specific symptoms]
+- A prompt/policy update is live in production but no one can point to the incident, feedback batch, or eval result that motivated it, or which specific behavior it was supposed to fix.
+- When a regression is later discovered, engineers cannot quickly determine which of several recent changes caused it because none of the changes have linked rationale or eval evidence.
 
 **Root Cause**
 Cannot explain what changed and why.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+A team notices the support agent's tone has shifted to be noticeably more apologetic over the past
+quarter. Six prompt revisions were pushed in that period, each merged with a commit message like
+"tune response style" and no linked feedback IDs, eval scores, or rationale. When a customer complains
+that the new tone reads as insincere, nobody can determine which of the six changes introduced the
+shift, whether it was a deliberate response to specific feedback, or whether any eval was run before
+each change shipped -- so the team can't confidently roll back to a specific known-good version.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Change record creation (rationale, trigger source, eval evidence) is optional/manual rather than enforced by the deployment pipeline.
+- Hotfixes or urgent tuning changes are pushed outside the normal review process "just this once," bypassing the audit gate entirely.
+- Commit messages and PR descriptions are treated as sufficient documentation even though they aren't linked to feedback IDs or eval results in a queryable ledger.
+- No periodic reconciliation sweep exists to catch deployed artifacts that have no matching audit record.
 
 ---
 
@@ -26,12 +35,16 @@ Cannot explain what changed and why.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Missing-rationale deployment attempt | Candidate deployment with a diff but no linked feedback ID, rationale, or eval evidence | CI gate blocks the deployment until the change record is complete | Deployment proceeds with an incomplete or empty change record |
+| Orphan artifact detection | Production artifact hash with no matching entry in the change ledger (simulated bypass) | Reconciliation sweep flags the artifact as an orphan within one scheduled run | Orphan artifact remains undetected across multiple sweep cycles |
+| Rationale lookup latency | Query for "why did behavior X change between version N and N+1" | Ledger returns the linked rationale, trigger source, and eval diff in a single lookup | Answering requires manually searching commit history/chat logs across multiple sources |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| change_audit_completeness_percent (eval) | 100% | Sample recent deployments and check for a complete linked change record |
+| ci_gate_bypass_rate_percent | 0% | Audit deployment logs for artifacts that reached production without passing the audit-metadata gate |
+| mean_time_to_locate_change_rationale (eval) | < 5 minutes | Time a reviewer performing a single ledger lookup to explain a given behavior change |
 
 ---
 
@@ -70,12 +83,16 @@ Cannot explain what changed and why.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| orphan_deployment_count | any occurrence |
+| change_audit_completeness_percent | < 95% |
+| change_records_missing_eval_evidence_percent | > 5% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Orphan Deployment Detected | a production artifact exists with no matching change ledger record | High |
+| Incomplete Change Record Merged | audit completeness scan finds a record missing rationale or eval evidence | Medium |
+| Reconciliation Sweep Finds Drift | retroactive sweep finds a mismatch between deployed hash and ledger | Low |
 
 ---
 

@@ -6,18 +6,28 @@
 
 **Symptoms**
 - Old failure recurs after prompt/model/tool change.
-- [Add more specific symptoms]
+- A prompt edit made to fix one reported bug causes a previously-fixed, unrelated failure pattern to resurface, and it isn't caught until a customer reports it again.
+- Engineers have no fast way to tell which of several recent prompt/model/tool changes reintroduced a known bug, so triage on multi-change releases takes days.
 
 **Root Cause**
 Fixing one case breaks another.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+Three months ago, a scheduling agent was fixed after it double-booked a room when a
+user rescheduled mid-conversation. No regression test was added for that fix -- the team
+moved on once the immediate bug report was closed. This week, a prompt change intended to
+improve tone for a different complaint reworks the same instruction block that governed
+reschedule handling. The double-booking bug reappears in production, identical to the
+one fixed three months earlier, because nothing in the test suite would have caught the
+shared prompt section regressing.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Confirmed production bug fixes are closed out without a corresponding permanent regression test capturing the exact failing case.
+- Prompt/model/tool changes can merge without running (or passing) a regression suite, so there's no automated gate preventing reintroduction.
+- Shared prompt sections or instruction blocks are edited without an impact analysis showing which historical failure patterns depend on that section.
+- No tooling exists to bisect across recent changes, so when a regression does surface, root-causing which change caused it is slow and manual.
 
 ---
 
@@ -26,12 +36,16 @@ Fixing one case breaks another.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Reschedule double-booking replay | Mid-conversation reschedule request matching the original confirmed-bug scenario | Agent avoids double-booking, exactly as fixed previously | The historical bug's exact failure mode reproduces |
+| Shared-prompt-section impact scan | Diff of a prompt edit touching an instruction block linked to 3 historical failure patterns | All 3 linked regression cases still pass after the edit | Any linked regression case starts failing after the edit |
+| Full regression suite gate | Candidate release with all prompt/model/tool changes applied | 100% of regression suite cases still pass | Any previously-passing regression case now fails |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| regression_suite_pass_rate_pct | 100% | Run full regression suite (one case per historically confirmed failure) on every candidate release |
+| new_regression_cases_added_per_incident | 1 per confirmed production failure | Audit closed incidents for a linked regression test case before closure |
+| failure_pattern_recurrence_rate_pct | < 1% of closed patterns recur in production | Tag regression cases with failure pattern ID, monitor production for recurrence of that pattern |
 
 ---
 
@@ -70,12 +84,16 @@ Fixing one case breaks another.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| regression_suite_pass_rate_pct | < 100% (any regression blocks release) |
+| new_regression_cases_added_per_incident | 0 (incident closed without regression case) |
+| failure_pattern_recurrence_rate_pct | > 5% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Regression Detected Pre-Merge | Any previously-passing regression case fails on a candidate change | High |
+| Incident Closed Without Regression Case | A confirmed production failure is marked resolved without a corresponding new regression test | Medium |
+| Regression Suite Runtime Bloat | Suite runtime exceeds 45 minutes, risking bypass under release pressure | Low |
 
 ---
 

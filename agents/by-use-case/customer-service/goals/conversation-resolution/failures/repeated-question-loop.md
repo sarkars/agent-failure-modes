@@ -6,18 +6,25 @@
 
 **Symptoms**
 - Same slot requested multiple times.
-- [Add more specific symptoms]
+- User has to re-type or re-paste identical information (order number, email, account ID) that they already gave earlier in the same conversation.
+- User explicitly flags the repetition ("I already told you this") and the agent still doesn't reuse the previously given value on the next turn.
 
 **Root Cause**
 Agent asks for information already provided.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+User: "My order number is #48213 and it hasn't shipped in 10 days."
+Agent: "I'm sorry to hear that. Could you provide your order number so I can look into it?"
+User: "I just gave it to you — it's #48213."
+Agent: "Thanks! And can you confirm your order number one more time so I can pull up the details?"
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- No structured slot-memory store, so the model relies on re-reading raw transcript history each turn and misses previously stated values.
+- Entity/slot extraction happens on-demand at generation time rather than being persisted immediately when the user provides the information.
+- Question-generation isn't gated by a slot-store lookup, so the model can ask about a slot regardless of whether it's already known.
+- Long or noisy conversation history makes it harder for the model to reliably attend back to where a value was first mentioned.
 
 ---
 
@@ -26,12 +33,16 @@ Agent asks for information already provided.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Value given early, needed later | User states order number in turn 1; a later tool call needs it in turn 6 | Agent reuses the stored order number without re-asking | Agent asks the user to provide the order number again |
+| User flags repetition | User says "I already told you my email" | Agent immediately reuses the previously given value and apologizes briefly | Agent asks for the email a third time |
+| Value update mid-conversation | User corrects a previously given value (new shipping address) | Agent reconciles which value is current, confirming instead of blindly re-asking or overwriting silently | Agent re-asks for the original value already superseded, or ignores the correction |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| Duplicate slot request rate (eval set) | <1% | Percentage of multi-turn eval conversations where the agent asks for the same slot more than once |
+| Slot extraction miss rate (eval set) | <5% | Percentage of eval turns where a provided value isn't correctly persisted to the slot store |
+| User-repetition-phrase rate (eval set) | <2% | Percentage of eval conversations where the user has to say "I already told you" or equivalent |
 
 ---
 
@@ -70,12 +81,16 @@ Agent asks for information already provided.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| duplicate_slot_request_rate | >3% weekly |
+| user_already_told_you_phrase_rate | >4% |
+| slot_extraction_miss_rate | >12% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Medium |
+| Duplicate Slot Request Spike | duplicate_slot_request_rate exceeds 3% over 7 days | Medium |
+| Live "Already Told You" Detected | Real-time detector matches a user-frustration phrase for repeated info | Low |
+| Slot Extraction Miss Rate High | Audit sampling shows slot_extraction_miss_rate exceeds 12% | Medium |
 
 ---
 

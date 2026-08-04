@@ -6,18 +6,29 @@
 
 **Symptoms**
 - Self-critique passes known wrong answer.
-- [Add more specific symptoms]
+- The same model family consistently rates its own output higher than an independent verifier rates matched outputs, even when the underlying quality is identical.
+- A known-error injection test shows the self-verification step passing outputs from a labeled bank of confirmed-wrong answers at a nontrivial rate.
 
 **Root Cause**
 Same model judges its own flawed output.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+A code-generation agent is asked to write a function and then self-critique its own
+output for bugs before returning it. The generated function has an off-by-one error in a
+loop boundary -- a mistake rooted in the same reasoning pattern the model tends to make
+whenever it reasons about loop bounds. When asked to self-critique, the model reviews its
+own code using the same flawed mental model that produced the bug in the first place, and
+confidently reports "no issues found." An independent verifier (a different model, or
+simply running the test suite) would have caught the off-by-one immediately, but the
+self-critique step shares the exact blind spot it's supposed to catch.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Verification is implemented as the same model critiquing its own output, sharing whatever systematic reasoning blind spots produced the original error.
+- No independent, architecturally separate verifier (different model family, tool-grounded check, rule-based validator) exists to catch errors the generator's own self-assessment cannot see.
+- No known-error injection testing exists to measure how often the self-verifier passes known-wrong outputs, so the bias goes undetected until it causes a production incident.
+- Self-critique is treated as a sufficient gate on its own rather than a cheap first pass that should be followed by an externally grounded check.
 
 ---
 
@@ -26,12 +37,16 @@ Same model judges its own flawed output.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Known-error injection | Labeled bank of confirmed off-by-one/logic bugs fed through self-critique | Self-verifier flags the known bug | Self-verifier passes the known-wrong output as correct |
+| Self vs. independent verifier gap | Same generated output scored by both self-critique and an independent model/tool-grounded check | Flag rates are comparable between the two | Self-verifier flags substantially fewer issues than the independent verifier |
+| Test-execution ground truth | Generated code with a hidden bug, run through both self-critique and the actual test suite | Test suite catches the bug regardless of self-critique's verdict | Self-critique passes code that the test suite proves is broken |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| known_error_pass_through_rate_pct | < 2% of known-wrong outputs pass self-verification | Replay a labeled known-error bank through self-verification and measure pass-through rate |
+| self_vs_independent_verifier_flag_gap_pct | < 10 point gap | Compare flag rates of self-verifier vs. independent verifier on matched output samples |
+| cross_verifier_disagreement_rate_pct | Tracked, escalation-driving | Log disagreement rate between self and independent verifiers on the same outputs |
 
 ---
 
@@ -70,12 +85,16 @@ Same model judges its own flawed output.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| known_error_pass_through_rate_pct | > 10% |
+| self_vs_independent_verifier_flag_gap_pct | > 25 point gap |
+| cross_verifier_disagreement_rate_pct | > 15% of cases disagree |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Medium |
+| Known-Error Pass-Through Detected | Known-error injection test shows self-verifier pass-through rate above 10% | High |
+| Self-Independent Verifier Gap Widening | Self-verifier flag rate falls more than 25 points below independent verifier's flag rate on matched samples | Medium |
+| Cross-Verifier Disagreement Spike | Disagreement rate between self and independent verifiers exceeds 15% | Medium |
 
 ---
 

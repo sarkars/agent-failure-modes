@@ -6,18 +6,27 @@
 
 **Symptoms**
 - Performance worsens after feedback ingestion.
-- [Add more specific symptoms]
+- A small number of mislabeled or adversarial ratings (e.g., coordinated brigading, a mis-clicked bulk-review tool) get weighted the same as trustworthy feedback and measurably shift the agent's policy.
+- Gold-standard spot-check accuracy for a specific reviewer or automated grader quietly drops while their feedback keeps flowing into training unchanged.
 
 **Root Cause**
 Agent updates behavior based on incorrect/noisy feedback.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+A crowd-sourced rating panel is used to grade an agent's email-drafting suggestions. One contractor,
+working through a large batch under a per-item time bonus, rates nearly every suggestion "excellent"
+without reading them, including several drafts with factual errors and one with an inappropriate tone.
+Because contractor accuracy isn't tracked against a gold-standard set, this batch is ingested at full
+weight. The training update reinforces the exact behaviors (padding, unverified claims) that a careful
+reviewer would have flagged, and post-deployment quality metrics drop over the following week.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- No gold-standard/spot-check items are seeded into review queues, so reviewer or grader accuracy cannot be measured against ground truth.
+- Feedback sources are weighted equally regardless of historical accuracy, so a single degraded or adversarial source has full influence.
+- Incentive structures (per-item pay, throughput quotas) reward reviewers for speed over accuracy, encouraging rubber-stamping.
+- No pre/post-ingestion eval regression check exists, so a bad batch reaches production before anyone notices the quality drop.
 
 ---
 
@@ -26,12 +35,16 @@ Agent updates behavior based on incorrect/noisy feedback.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Gold-standard seed accuracy check | Known-answer item seeded into a reviewer's queue disguised as real traffic | Reviewer/grader rating matches the known-correct label | Reviewer rates the seeded item incorrectly and this goes undetected |
+| Rubber-stamped batch detection | Batch where >95% of items from one source receive an identical "excellent" rating regardless of content | Anomalous-pattern detector flags the batch for quarantine before ingestion | Batch is ingested at full weight with no anomaly flag |
+| Post-ingestion eval regression | Full eval suite run before and after ingesting a synthetic bad-feedback batch | Regression is detected and the batch is blocked/rolled back automatically | Batch ships to production despite a measurable eval regression |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| reviewer_source_accuracy_vs_gold_standard_percent (eval) | > 90% | Score reviewer/source ratings on seeded gold-standard items against the known-correct label |
+| post_ingestion_eval_regression_rate_percent (eval) | 0% | Run the fixed eval suite before and after simulated ingestion of a candidate feedback batch |
+| anomalous_batch_detection_recall | > 95% | Inject synthetic corrupted/adversarial batches into a test harness and measure detection rate |
 
 ---
 
@@ -70,12 +83,16 @@ Agent updates behavior based on incorrect/noisy feedback.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| post_ingestion_eval_regression_rate_percent | any regression on a shipped update |
+| reviewer_source_accuracy_vs_gold_standard_percent | < 75% |
+| rollback_events_per_month | > 2 in a rolling 30 days |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Post-Update Regression Detected | eval or production metric regresses beyond tolerance after a feedback-driven update ships | High |
+| Feedback Source Accuracy Drop | a reviewer/source's gold-standard accuracy drops below 75% | Medium |
+| Anomalous Label Pattern Flagged | outlier detection flags unusual distribution shift in incoming feedback | Low |
 
 ---
 

@@ -6,18 +6,29 @@
 
 **Symptoms**
 - Format passes but semantic correctness fails.
-- [Add more specific symptoms]
+- A high-risk task (financial transaction, medical/legal content) is gated only by a lightweight check (schema validation, keyword match) that was never designed to catch the failure modes actually relevant to that task's risk.
+- Postmortems on escaped failures repeatedly conclude "the verifier technically passed this" even though the output was clearly wrong in a way a more rigorous check would have caught.
 
 **Root Cause**
 Agent uses weak checks for a high-risk task.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+A payment-processing agent's output is verified by a JSON-schema check confirming the
+transaction object has the right fields and types. The schema check passes on a
+transaction where the currency field is set correctly but the amount is off by a factor
+of 100 due to a unit-conversion bug (cents vs. dollars). Schema validation was never
+designed to catch semantic/business-logic errors like this -- it only checks shape, not
+value correctness -- yet it was the only verifier attached to a task where an incorrect
+amount has direct financial consequences. The wrong verifier rigor was assigned to a
+high-risk task.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- No explicit mapping exists between task risk tier and the minimum required verifier rigor level, so high-risk tasks can ship with whatever check was cheapest to implement.
+- Verifier selection is done without first enumerating the task's actual failure modes, so a format-only check gets applied to a task whose real risks are semantic or business-logic errors.
+- Risk tiers and verifier assignments drift out of sync over time as the system evolves, with no periodic audit catching the mismatch.
+- Postmortem root-cause analysis doesn't distinguish "wrong verifier for this risk tier" from other failure causes, so the pattern keeps recurring unaddressed.
 
 ---
 
@@ -26,12 +37,16 @@ Agent uses weak checks for a high-risk task.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Unit-conversion error past schema check | Payment transaction with correct schema but amount off by 100x (cents/dollars mismatch) | A business-logic/semantic verifier catches the amount error, not just schema | Schema-only check passes the transaction, amount error ships |
+| Verifier-to-risk-tier match audit | Inventory of all high-risk (financial/legal/medical) tasks and their assigned verifier rigor | Every high-risk task has at least a rule-based or independent-judge verifier, not format-only | A high-risk task is found with only a format/schema-level check |
+| Failure-mode-to-verifier traceability check | Known failure mode from a past incident cross-referenced against current verifier's checks | The verifier explicitly covers that failure mode | Known failure mode has no corresponding check in the assigned verifier |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| verifier_risk_tier_match_rate_pct | 100% of high-risk tasks have adequately-tiered verifier | Audit all high-risk tasks against the verifier-to-risk-tier mapping registry |
+| failure_mode_coverage_pct | 100% of known failure modes mapped to a detecting verifier | Cross-reference known failure modes (from incidents) against verifier check coverage |
+| escaped_failure_wrong_verifier_rate_pct | < 10% of escaped failures attributed to verifier mismatch | Tag root cause of escaped production failures, track "wrong verifier" category rate |
 
 ---
 
@@ -70,12 +85,16 @@ Agent uses weak checks for a high-risk task.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| verifier_risk_tier_match_rate_pct | < 95% |
+| escaped_failure_wrong_verifier_rate_pct | > 30% |
+| failure_mode_coverage_pct | < 80% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| High-Risk Task With Inadequate Verifier | Risk-tier audit finds a high-risk task using a verifier rigor level below its required tier | High |
+| Escaped Failure Attributed to Wrong Verifier | A production incident's root cause is tagged as verifier failure-mode mismatch | High |
+| Failure Mode Coverage Gap | Failure-mode-to-verifier coverage audit finds new known failure modes unmapped to any verifier check | Low |
 
 ---
 

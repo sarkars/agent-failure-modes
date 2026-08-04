@@ -6,18 +6,27 @@
 
 **Symptoms**
 - Failures cluster on unusual cases.
-- [Add more specific symptoms]
+- Eval suite reports 98%+ pass rate release after release, yet production incident reports repeatedly involve empty inputs, malformed fields, or rare locales never exercised in testing.
+- Engineers are surprised in postmortems that a specific input shape "was never considered," despite it recurring in production for months.
 
 **Root Cause**
 Edge cases are missing from tests.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+A booking agent's eval suite consists of 40 well-formed requests: valid dates, standard
+party sizes, common cities. It passes at 99%. In production, a user submits a request
+with a past-dated check-in ("book me a room for yesterday") -- a case never represented
+in the suite. The agent confirms a nonsensical booking instead of rejecting or clarifying
+it. The eval suite continues to report near-perfect scores because it never contained a
+single boundary-date or malformed-input case.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Eval cases are hand-authored by the same engineers who built the happy-path flow, so they only imagine inputs that fit their mental model of "normal" usage.
+- No taxonomy of edge-case categories exists, so there's no checklist forcing coverage of boundary values, malformed input, or rare locales.
+- Time pressure at launch favors writing a small set of demo-friendly passing cases over investing in fuzzing or long-tail mining.
+- Production logs are not mined for rare-but-real input shapes, so edge cases discovered by users never make it back into the eval suite.
 
 ---
 
@@ -26,12 +35,16 @@ Edge cases are missing from tests.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Boundary date rejection | "Book me a room for yesterday" (past check-in date) | Agent rejects or asks for clarification | Agent confirms an invalid/nonsensical booking |
+| Malformed field handling | Request with empty party-size field and duplicated date key | Agent surfaces a validation error, does not guess | Agent silently fabricates a default value and proceeds |
+| Long-tail locale/format | Query in a low-frequency locale with non-ASCII characters and unusual date format | Agent parses correctly or escalates | Agent misparses input without flagging uncertainty |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| edge_case_category_coverage_pct | 100% of taxonomy categories have >= 5 cases | Audit eval suite against the edge-case taxonomy checklist |
+| edge_case_pass_rate_pct | Within 5 points of core happy-path pass rate | Score eval runs broken out by edge-case category vs. core category |
+| long_tail_case_ratio_pct | >= 20% of eval cases from bottom-quartile-frequency production inputs | Cross-reference eval case inputs against production frequency distribution |
 
 ---
 
@@ -70,12 +83,16 @@ Edge cases are missing from tests.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| edge_case_pass_rate_pct | Gap > 15 points below core happy-path pass rate |
+| uncovered_failure_cluster_count | > 3 open past 2 weeks |
+| edge_case_category_coverage_pct | < 80% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Medium |
+| Edge-Case Pass Rate Collapse | Any edge-case category pass rate falls more than 20 points below core pass rate | High |
+| Recurring Uncovered Failure Cluster | Same production failure cluster shape recurs without a matching eval case for 2+ weeks | Medium |
+| Taxonomy Coverage Drift | Edge-case category coverage drops below 80% after a suite refactor | Medium |
 
 ---
 

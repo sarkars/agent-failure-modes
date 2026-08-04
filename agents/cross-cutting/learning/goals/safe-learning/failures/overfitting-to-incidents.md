@@ -6,18 +6,28 @@
 
 **Symptoms**
 - Regression suite fails after local fix.
-- [Add more specific symptoms]
+- A prompt/policy patch written to stop one specific reported incident from recurring introduces an overly broad instruction (e.g., "never mention competitor products") that suppresses correct, desired behavior in unrelated, more common scenarios.
+- Each individual post-incident fix looks harmless in isolation, but holdout benchmark performance quietly erodes over many such fixes, since no single change trips a regression alert on its own.
 
 **Root Cause**
 Fix addresses one case but damages general behavior.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+After one customer complains that the agent recommended a third-party plugin instead of the
+company's own paid add-on, an engineer adds a system-prompt rule: "Never recommend any third-party
+tool or plugin under any circumstances." The specific complaint is resolved. Two weeks later, the
+regression suite -- run only after a routine audit, not gated on this change -- reveals the agent now
+refuses to mention well-established, genuinely helpful third-party integrations in dozens of unrelated
+support conversations where a third-party recommendation was the correct answer, measurably lowering
+resolution quality across the board.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Incident response pressure favors the fastest fix that stops the specific complaint, not the narrowest one that avoids collateral damage.
+- No holdout/generalization benchmark is run before merge, so a fix is validated only against the triggering case, never against unrelated behavior.
+- Fixes are expressed as broad, global instructions (blanket prohibitions) rather than scoped to the specific condition that caused the incident.
+- Small per-fix generalization losses accumulate silently across many incidents because no one tracks the cumulative holdout-score trend over time.
 
 ---
 
@@ -26,12 +36,16 @@ Fix addresses one case but damages general behavior.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Two-tier fix validation | Candidate fix for a single reported incident, run against both the repro case and the full holdout suite | Repro case passes and holdout suite shows no new failures | Repro case passes but holdout suite shows newly broken, unrelated behaviors |
+| Blast-radius scoping check | Fix expressed as a broad global rule (e.g., "never mention X") versus a narrowly scoped condition | Reviewer/tooling flags the broad rule and requires scoping to the specific triggering condition | Broad rule merges unchanged, suppressing correct behavior in unrelated cases |
+| Cumulative generalization drift | Sequence of 10 small incident-driven fixes applied over time, each individually passing regression | Holdout generalization score is tracked cumulatively and any downward trend is flagged | Score drifts down across the sequence with no fix individually triggering an alert |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| holdout_generalization_score_delta (eval) | >= 0 per fix | Run the holdout benchmark before and after each candidate fix and compare scores |
+| regression_suite_pass_rate_percent (eval) | 100% before merge | Run the full regression suite against each candidate fix, not just the triggering repro case |
+| cumulative_generalization_drift_over_n_fixes | near 0 over a rolling window (e.g., 20 fixes) | Track holdout score trend across a sequence of incident-driven fixes rather than per-fix only |
 
 ---
 
@@ -70,12 +84,16 @@ Fix addresses one case but damages general behavior.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| incident_fix_collateral_regression_count | >= 1 |
+| holdout_generalization_score_delta | negative delta exceeding tolerance |
+| fixes_rolled_back_for_overfit_percent | > 15% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Regression Introduced by Incident Fix | full regression suite shows a new failure after an incident-driven fix | High |
+| Holdout Generalization Loss | holdout benchmark score drops beyond tolerance after a fix | Medium |
+| Repeated Narrow-Fix Pattern | fixes-rolled-back-for-overfit rate exceeds 15% over a rolling period | Low |
 
 ---
 

@@ -6,18 +6,28 @@
 
 **Symptoms**
 - High reviewer disagreement.
-- [Add more specific symptoms]
+- The agent's behavior oscillates version to version as training batches happen to be dominated by different reviewers' preferences.
+- Two agent instances fine-tuned on overlapping data but different reviewer splits diverge in tone/behavior on the same input class.
 
 **Root Cause**
 Different reviewers prefer different behaviors.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+A support-ticket triage agent proposes "close as resolved" for a class of ambiguous refund requests.
+Reviewer A (trained on a strict cost-containment rubric) consistently marks these proposals "good."
+Reviewer B (trained on a customer-satisfaction rubric) consistently marks the same proposals "bad."
+The training pipeline averages the two thumbs-up/thumbs-down signals into a single reward per example.
+The resulting policy update nudges the agent toward closing tickets slightly more often on some days
+and slightly less on others, tracking which reviewer's labels happened to dominate that batch, with no
+stable improvement in either direction.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- No shared, example-anchored rubric, so reviewers fall back to personal judgment on ambiguous behaviors.
+- Reviewers come from different functions (e.g., support ops vs. trust & safety) with different incentive structures baked into their evaluation criteria.
+- Labels are averaged/aggregated into a single reward signal before training rather than tracked per-reviewer, hiding the disagreement.
+- No adjudication step exists, so conflicting labels flow directly into the update pipeline instead of being resolved first.
 
 ---
 
@@ -26,12 +36,16 @@ Different reviewers prefer different behaviors.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Dual-rater ambiguous case | Same borderline refund-ticket transcript sent to 2 calibrated reviewers | Both raters land within tolerance of the gold adjudicated label | Raters disagree beyond tolerance on >1 in 5 ambiguous cases |
+| Reward aggregation check | Synthetic example set with known split-reviewer labels (half "good", half "bad") | Pipeline flags the example as conflicting/quarantined rather than emitting an averaged reward | Item receives a blended reward and enters training without adjudication |
+| Cross-rubric consistency | Same 20-item calibration set scored by reviewers from each function/team | Scores should correlate above the kappa target across teams | One team's scores systematically diverge from the others on a specific category |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| Eval-set inter-rater kappa | > 0.7 | Compute Cohen's/Fleiss' kappa across reviewer pairs on a held-out calibration set before each training run |
+| Conflicting-example quarantine rate | 100% of items above disagreement tolerance | Audit training batches for any item with split labels that was not routed to adjudication |
+| Adjudicated-label coverage | 100% of quarantined items resolved before use | Check label store for quarantined items missing a final adjudicated ruling |
 
 ---
 
@@ -70,12 +84,16 @@ Different reviewers prefer different behaviors.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| inter_rater_agreement_kappa | < 0.5 on any tracked behavior category |
+| conflicting_label_rate_percent | > 15% of reviewed items |
+| adjudication_queue_depth | > 72h backlog |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Medium |
+| Rubric-Level Disagreement Spike | kappa drops below 0.5 for a behavior category across 3+ reviewer pairs | Critical |
+| Adjudication Backlog Breach | adjudication queue depth exceeds 72 hours | Medium |
+| Reviewer Drift Detected | a reviewer's divergence from adjudicated consensus exceeds 25% over 2 weeks | Low |
 
 ---
 

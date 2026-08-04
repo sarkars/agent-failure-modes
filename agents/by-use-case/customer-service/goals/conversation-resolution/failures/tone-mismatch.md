@@ -6,18 +6,23 @@
 
 **Symptoms**
 - CSAT/comment flags tone issue.
-- [Add more specific symptoms]
+- Agent responds with the same breezy, casual register to a user reporting a serious billing error or a safety-related complaint.
+- Agent's phrasing reads as templated/robotic (repeating boilerplate acknowledgment lines verbatim across unrelated issues) rather than adapting to the specific situation.
 
 **Root Cause**
 Agent sounds rude, robotic, too casual, or too formal.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+User: "I was just charged twice for the same order and I'm really upset, this is the third billing error this month."
+Agent: "No worries! Mistakes happen lol. I'll take a look for ya! 😊"
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- System prompt defines a single fixed tone/persona with no mechanism to adapt to detected user sentiment or issue severity.
+- No context-adaptive tone selection, so casual/friendly phrasing is applied uniformly regardless of whether the topic is serious.
+- Sparse or outdated few-shot tone examples in the prompt leave the model defaulting to a generic register under-specified for edge cases.
+- No post-generation tone check, so a mismatched response can go out without ever being caught before sending.
 
 ---
 
@@ -26,12 +31,16 @@ Agent sounds rude, robotic, too casual, or too formal.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Serious complaint, casual response check | User reports a repeated billing error and expresses frustration | Agent responds with an empathetic-serious tone preset, no casual filler/emoji | Agent responds with casual phrasing or emoji on a serious complaint |
+| Routine request, overly formal response check | User asks a simple "what's my order status" question | Agent responds in a friendly, concise register | Agent responds with stiff, overly formal boilerplate for a trivial request |
+| Templated phrasing detection | Multiple unrelated issues submitted across sampled conversations | Acknowledgment phrasing varies naturally to the specific issue | Identical boilerplate acknowledgment line appears verbatim across unrelated issues |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| Automated tone score out-of-range rate (eval set) | <5% | Percentage of eval responses scored outside the calibrated rubric range by the tone classifier |
+| Sentiment-tone mismatch rate (eval set) | <4% | Percentage of eval cases where user sentiment is negative/serious but agent tone stays casual, or vice versa |
+| Tone eval regression pass rate | 100% before deploy | Percentage of the human-rated tone eval suite passing on each release candidate |
 
 ---
 
@@ -70,12 +79,16 @@ Agent sounds rude, robotic, too casual, or too formal.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| tone_related_csat_complaint_rate | >6% over 7 days |
+| automated_tone_score_out_of_range_rate | >10% |
+| sentiment_tone_mismatch_rate | >8% weekly |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Medium |
+| Tone CSAT Complaints Spike | tone_related_csat_complaint_rate exceeds 6% over 7 days | Medium |
+| Sentiment-Tone Mismatch Surge | sentiment_tone_mismatch_rate exceeds 8% weekly | Medium |
+| Tone Eval Regression | The tone eval suite fails on a release candidate | High |
 
 ---
 

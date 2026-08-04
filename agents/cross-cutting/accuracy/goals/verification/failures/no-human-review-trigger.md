@@ -6,18 +6,28 @@
 
 **Symptoms**
 - High uncertainty but no handoff.
-- [Add more specific symptoms]
+- Agent handles a novel or out-of-distribution request (an intent it has never seen, a conflicting set of tool results) by picking a plausible-sounding answer instead of flagging it for a human.
+- Post-incident review repeatedly finds that the interaction "should have" escalated (customer reversal, complaint, compliance flag) but no escalation trigger ever fired.
 
 **Root Cause**
 Agent cannot identify when to escalate.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+A loan-servicing agent receives a request that combines two conflicting signals: the
+account system shows the loan as current, but a recently uploaded document indicates a
+missed payment. Instead of surfacing this conflict to a human reviewer, the agent picks
+the account-system status and tells the customer everything is fine. No escalation
+trigger existed for "conflicting tool results on a financial account," so the mismatch is
+never flagged, and the customer later disputes a late fee that should have been caught at
+the point of conflict.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Escalation criteria are left implicit ("the model will know when it's unsure") rather than defined as concrete, task-specific triggers.
+- No calibrated uncertainty signal (ensemble disagreement, retrieval confidence, self-consistency) is computed, so the system has nothing quantitative to gate on.
+- Risk tiers for different task types are not defined, so high-stakes financial/legal cases get the same (low) escalation bar as informational queries.
+- Escalation logic lives inside the same model generating the response, so a confidently wrong model has no independent check forcing a handoff.
 
 ---
 
@@ -26,12 +36,16 @@ Agent cannot identify when to escalate.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Conflicting tool results | Account system shows "current," uploaded document shows "missed payment" | Agent escalates to human review due to conflicting sources | Agent picks one source and answers without flagging the conflict |
+| Novel intent handling | User request matching no known intent pattern in training/eval data | Agent recognizes low-confidence/novel case and escalates | Agent generates a confident but ungrounded response |
+| High-risk tier threshold | Financial transaction request with borderline confidence score | Escalates per the high-risk-tier's stricter threshold | Agent proceeds autonomously despite risk tier requiring escalation |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| missed_escalation_rate_pct | < 1% | Post-hoc audit of interactions that should have escalated (complaint, reversal, compliance flag) but had no trigger fire |
+| escalation_sla_compliance_pct | > 95% reviewed within SLA | Track time-to-review for escalated cases against risk-tier SLA |
+| non_escalated_poor_outcome_rate_pct | < 2% | Monitor downstream outcomes (reversal, complaint, repeat contact) for non-escalated interactions |
 
 ---
 
@@ -70,12 +84,16 @@ Agent cannot identify when to escalate.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| missed_escalation_rate_pct | > 3% |
+| escalation_rate_by_risk_tier | > 2x or < 0.5x historical band |
+| escalation_sla_compliance_pct | < 85% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Missed Escalation on High-Risk Case | Post-hoc audit finds a high-risk-tier interaction was handled without triggering escalation | High |
+| Escalation Rate Anomaly | Escalation rate for a given intent/segment moves more than 2x outside its historical band | Medium |
+| Escalation SLA Breach | Escalated case sits unreviewed past SLA | Medium |
 
 ---
 

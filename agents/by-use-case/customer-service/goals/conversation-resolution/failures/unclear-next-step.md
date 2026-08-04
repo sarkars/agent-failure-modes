@@ -6,18 +6,25 @@
 
 **Symptoms**
 - User asks 'now what?' or repeats request.
-- [Add more specific symptoms]
+- Agent marks a multi-step process as underway (e.g., "your refund is processing") but never states an expected timeline, owner, or how the user will be notified.
+- User sends a follow-up message shortly after a turn the agent considered resolved, indicating the closing message didn't clearly communicate that the conversation was complete.
 
 **Root Cause**
 User does not know what happens next.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+Agent: "I've submitted your refund request."
+User: "Okay... so is that it? Do I need to do anything else?"
+Agent: "Your request has been submitted."
+User: "When will I actually get the money back?"
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- No mandatory next-step slot in the response template, so a response can be sent that's otherwise complete but omits the forward-looking statement.
+- Multi-turn/multi-system processes (refunds, ticket escalations) have no persistent status indicator, so users lose track of where they are after the triggering turn.
+- Closing/resolution messages aren't gated by a template requiring an explicit "what happens next" statement before the conversation is marked resolved.
+- Agent prioritizes brevity over completeness, dropping the next-step sentence to keep the response short.
 
 ---
 
@@ -26,12 +33,16 @@ User does not know what happens next.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Multi-step process closing turn | Agent submits a refund request | Response states expected timing, how the user will be notified, and whether further action is needed | Response ends with "submitted"/"processing" and no next-step detail |
+| Resolution closing message | Agent believes the issue is fully resolved | Closing message explicitly states resolution status and confirms no further action is needed | User sends an immediate follow-up asking "is that it?" or repeats the original request |
+| Ambiguous-ending detection | Agent gives a complete factual answer with no natural next step | Response still closes with either "no further action needed" or an offer of further help | Response ends abruptly with no next-step framing at all |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| Next-step statement coverage (eval set) | >95% | Percentage of eval non-terminal turns that include an explicit next-step statement |
+| "Now what" / repeat-request rate (eval set) | <2% | Percentage of eval conversations where a follow-up user turn indicates confusion about next steps |
+| Post-resolution follow-up rate (eval set) | <8% | Percentage of eval conversations where the user sends another message immediately after the agent marks the conversation resolved |
 
 ---
 
@@ -70,12 +81,16 @@ User does not know what happens next.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| now_what_phrase_rate | >4% weekly |
+| post_resolution_followup_rate | >15% weekly |
+| next_step_statement_coverage | <85% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Low |
+| Now-What Rate Spike | now_what_phrase_rate exceeds 4% over 7 days | Low |
+| Post-Resolution Follow-up Surge | post_resolution_followup_rate exceeds 15% weekly | Medium |
+| Next-Step Coverage Drop | next_step_statement_coverage falls below 85% in automated scan | Medium |
 
 ---
 

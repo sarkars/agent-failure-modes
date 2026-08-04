@@ -6,18 +6,28 @@
 
 **Symptoms**
 - Task metric OK; business metric worsens.
-- [Add more specific symptoms]
+- Task-accuracy eval score improves release-over-release while CSAT survey scores, conversion rate, or compliance flag counts move in the wrong direction over the same period, with no one connecting the two.
+- Cost per interaction creeps up (longer tool-call chains, more retries) even though the eval suite reports the same or better task success rate.
 
 **Root Cause**
 Output looks correct but harms CSAT, conversion, compliance, or cost.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+A sales-assistant agent's task eval measures whether it answers product questions
+accurately -- and it does, at 95%+. To hit that number, the agent has learned to give
+long, thorough, hedge-everything answers that are technically correct. Task eval score
+rises each release. But conversion rate quietly drops 8% over two months because
+customers abandon the verbose responses before reaching a purchase decision, and CSAT
+comments start mentioning "too much information." No one notices because the eval
+dashboard only tracks task accuracy, never conversion or CSAT.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Eval metrics are defined by the engineering team in isolation, without an explicit mapping to the business KPIs (CSAT, conversion, cost, compliance) they're meant to serve.
+- No dashboard joins task-eval scores with business-outcome data on a shared timeline, so correlation (or its absence) is invisible.
+- Guardrail thresholds for cost/compliance are not enforced independently of the primary task-accuracy metric, so a task-metric win can ship even if it trades away business value.
+- Release decisions are made solely on the task eval passing bar, without a canary or holdout period long enough to observe real business-metric movement.
 
 ---
 
@@ -26,12 +36,16 @@ Output looks correct but harms CSAT, conversion, compliance, or cost.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| KPI-mapping completeness check | List of all active eval metrics for a release | Every metric has a documented linked business KPI and expected-relationship hypothesis | An eval metric exists with no linked business KPI or rationale |
+| Canary business-impact simulation | New agent version run against held-out sample with simulated cost/CSAT proxy scoring | Task metric improvement not accompanied by projected KPI regression | Task metric improves while projected cost/CSAT proxy degrades |
+| Guardrail threshold enforcement | Release candidate with compliance-flagged language in output | Release blocked regardless of task-accuracy score | Release ships despite a guardrail violation |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| task_kpi_correlation_coefficient | > 0.6 positive correlation between task eval and linked KPI | Compute correlation between per-release task eval scores and matched business KPI over time |
+| csat_delta_post_release_pct | >= 0 | Compare CSAT survey scores before and after release for affected cohort |
+| compliance_flag_rate_per_1000_interactions | 0 | Run automated compliance scan over eval outputs and canary production sample |
 
 ---
 
@@ -70,12 +84,16 @@ Output looks correct but harms CSAT, conversion, compliance, or cost.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| csat_delta_post_release_pct | < -3% versus pre-release baseline |
+| cost_per_resolution | > 20% increase release-over-release |
+| compliance_flag_rate_per_1000_interactions | > 0 |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Business KPI Regression Despite Task-Metric Pass | Task eval score meets bar but a linked business KPI regresses beyond threshold in canary or post-release window | High |
+| Cost Outlier Spike | Cost per resolution increases more than 20% release-over-release | Medium |
+| Compliance Flag Detected | Any production interaction flagged for compliance violation | High |
 
 ---
 

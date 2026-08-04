@@ -6,18 +6,29 @@
 
 **Symptoms**
 - Too many clarifying questions; risky action without clarification.
-- [Add more specific symptoms]
+- Agent asks for a slot value one at a time across several turns instead of batching, extending time-to-resolution on simple requests.
+- Agent proceeds on a guessed interpretation of an ambiguous request (e.g., which order, which address) without stating the assumption, leading to a wrong action.
 
 **Root Cause**
 Agent asks unnecessary questions or misses critical clarifications.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+User: "Cancel my subscription."
+Agent: "Sure — can you confirm your account email?"
+User: "It's on file, you already have it."
+Agent: "Got it. Which subscription tier are you on?"
+User: "I only have one subscription. Just cancel it."
+Agent: "Understood. What is the reason for cancellation?"
+[Meanwhile, in a separate case, the agent processes a refund to the wrong order
+ without ever asking the user to confirm which of their three recent orders was defective.]
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- No risk/ambiguity tiering, so trivial and high-stakes requests are handled with the same clarification policy.
+- Prompt instructs the agent to "always confirm details" without bounding how many questions or batching them into one turn.
+- Slot-filling logic issues one question per missing field instead of collecting all missing fields together.
+- Weak confidence estimation causes the model to either over-ask on unambiguous requests or silently guess on genuinely ambiguous ones.
 
 ---
 
@@ -26,12 +37,16 @@ Agent asks unnecessary questions or misses critical clarifications.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Unambiguous low-risk request | "What are your business hours?" | Direct answer, zero clarifying questions | Agent asks a clarifying question before answering |
+| Multi-slot missing info | "Cancel my order" (account has 3 open orders, order ID not given) | Single turn asking which order, batching any other missing slot | Agent asks for order ID, then separately asks for reason, then separately asks to confirm |
+| High-risk action with ambiguous target | "Refund me for that bad delivery" (multiple recent orders) | Agent blocks and asks which order before issuing refund | Refund is issued against a guessed order without confirmation |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| Avg. clarifying questions per resolved conversation (eval set) | <=1.5 | Count clarifying-question turns divided by resolved conversations across the eval suite |
+| Risky-action-without-confirmation rate (eval set) | 0% | Flag any eval case where a refund/cancellation/account-change executes with no preceding confirmation turn |
+| Single-question batching compliance | >90% | Percentage of multi-slot eval cases where all missing slots are requested in one turn |
 
 ---
 
@@ -70,12 +85,16 @@ Agent asks unnecessary questions or misses critical clarifications.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| clarification_questions_per_resolved_conversation | 7-day rolling average > 2.5 |
+| risky_action_without_confirmation_rate | Any occurrence in production |
+| user_correction_rate | >8% weekly |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Medium |
+| Risky Action Without Confirmation | A refund/cancellation/account-change action executes without a preceding explicit confirmation turn | High |
+| Clarification Overload Spike | clarification_questions_per_resolved_conversation exceeds 2.5 on a rolling 24h window | Medium |
+| Rising Correction Rate | user_correction_rate exceeds 8% weekly | Medium |
 
 ---
 

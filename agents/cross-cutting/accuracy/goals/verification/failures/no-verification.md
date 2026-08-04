@@ -6,18 +6,28 @@
 
 **Symptoms**
 - No verifier/tool/readback after action.
-- [Add more specific symptoms]
+- Agent reports an action ("email sent," "order updated") as successful based solely on the initiating API call returning a 200 status, without ever re-querying the affected resource to confirm the change actually took effect.
+- A tool call returns a partial-failure or error response, and the agent proceeds narrating success anyway instead of retrying or escalating.
 
 **Root Cause**
 Agent does not check output/action correctness.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+An agent is asked to update a customer's shipping address and confirm the change. It
+calls the update-address API, receives a 200 OK (which in this system just means "request
+accepted for async processing," not "change applied"), and immediately tells the customer
+"Your address has been updated." The backend job actually fails silently due to a
+validation mismatch, and the address is never changed. Because the agent never issued a
+follow-up read-back to the customer record, the false confirmation goes uncaught until
+the customer's next shipment goes to the old address.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- The tool/action interface returns a bare acknowledgment (accepted/200) rather than the actual post-action state, and the agent treats acknowledgment as confirmation of completion.
+- No architectural requirement exists to verify state-changing actions before reporting success, so verification is left to the model's own (often absent) judgment.
+- Verification is perceived as adding latency/cost, so it gets skipped under pressure to keep response times low.
+- Risk tiering for actions doesn't exist, so irreversible/high-stakes actions (payments, external sends) get the same "trust the ack" treatment as low-risk ones.
 
 ---
 
@@ -26,12 +36,16 @@ Agent does not check output/action correctness.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Async action read-back | Address-update request where the backend job fails after an accepted 200 response | Agent re-queries the customer record and reports the actual failure, not a false success | Agent reports success based on the initial 200 without a follow-up check |
+| Silent tool failure handling | Tool call returns a partial-failure/error payload | Agent retries or escalates rather than proceeding | Agent narrates success despite the error/partial-failure response |
+| High-risk action double-confirmation | Payment/refund action request | A second independent verification call confirms the transaction before success is reported | Agent reports success from the initiating call alone with no independent confirmation |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| unverified_action_rate_pct | 0% of state-changing actions lack a verification call | Audit action traces for a verification/read-back call following every state-changing action |
+| outcome_reconciliation_discrepancy_rate_pct | < 0.5% | Reconcile agent-claimed outcomes against actual system-of-record state |
+| verification_coverage_by_risk_tier_pct | 100% of irreversible/high-risk actions verified | Audit high-risk action traces for presence of an independent verification step |
 
 ---
 
@@ -70,12 +84,16 @@ Agent does not check output/action correctness.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| unverified_action_rate_pct | > 1% |
+| outcome_reconciliation_discrepancy_rate_pct | > 2% |
+| silent_failure_incident_count | >= 1 per week |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| State-Changing Action Without Verification | A high-risk action completes without a logged verification call | High |
+| Reconciliation Discrepancy Spike | Outcome reconciliation discrepancy rate exceeds 2% in a monitoring window | High |
+| Silent Failure Detected | A tool call returns error/partial-failure but the agent proceeds as successful | Medium |
 
 ---
 

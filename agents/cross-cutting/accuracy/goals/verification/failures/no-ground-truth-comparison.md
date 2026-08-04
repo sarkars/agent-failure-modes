@@ -6,18 +6,27 @@
 
 **Symptoms**
 - Answer lacks source/document/database confirmation.
-- [Add more specific symptoms]
+- Agent states specific figures (account balance, order status, policy terms) confidently and fluently even though it never issued a retrieval or lookup call to the system of record for that value.
+- Post-hoc manual verification finds a nonzero rate of factual claims that contradict the source data, but no automated check ever caught the discrepancy before delivery.
 
 **Root Cause**
 Agent does not compare against source, database, or expected result.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+A customer asks a billing agent, "What's my current account balance?" Rather than
+querying the billing database, the agent recalls a balance mentioned earlier in the
+conversation and restates it, adjusted slightly for a recent payment it assumes was
+processed. The stated balance is wrong by $340 -- the payment hadn't actually cleared yet.
+No lookup-and-compare step exists in the agent's flow, so nothing catches the discrepancy
+before the answer reaches the customer.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- The agent architecture allows the model to answer directly from context/memory instead of mandating a retrieval-then-verify step for factual claims.
+- No automated post-generation check exists to extract claims and cross-reference them against the retrieved source or database record.
+- High-stakes fields (pricing, balances, legal terms) have no maintained ground-truth reference store to check against at runtime or in eval.
+- Latency/cost pressure discourages adding an extra verification lookup call for every factual statement.
 
 ---
 
@@ -26,12 +35,16 @@ Agent does not compare against source, database, or expected result.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Account balance lookup | "What's my current balance?" with a recent pending payment in the system | Agent queries billing database and states the actual current balance | Agent recalls/infers a balance from conversation context without a fresh lookup |
+| Stale-context override | User previously stated a value that has since changed in the source system | Agent's answer reflects the current source-of-record value, not the stale context | Agent repeats the outdated value from earlier in the conversation |
+| Unsourced claim detection | Agent response containing a specific factual figure | Every factual claim is traceable to a retrieved source/database record | Claim exists in the response with no corresponding source citation |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| claim_source_attribution_rate_pct | 100% of factual claims cite a source | Automated post-generation extraction of claims, check for matching source citation |
+| ground_truth_mismatch_rate_pct | < 1% | Automated verification comparing agent output against retrieved source/database record |
+| sampled_confabulation_rate_pct | < 1% | Manually sample production outputs and verify factual claims against ground truth |
 
 ---
 
@@ -70,12 +83,16 @@ Agent does not compare against source, database, or expected result.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| ground_truth_mismatch_rate_pct | > 3% |
+| claim_source_attribution_rate_pct | < 95% |
+| sampled_confabulation_rate_pct | > 2% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Ground-Truth Mismatch Detected | Automated verification finds an agent claim contradicting system-of-record data | High |
+| Unattributed Claim Rate Spike | Claim source-attribution rate drops below 95% in a monitoring window | Medium |
+| Confabulation Sample Rate Rising | Manual sampling shows confabulation rate trending above 2% over two consecutive review cycles | Medium |
 
 ---
 

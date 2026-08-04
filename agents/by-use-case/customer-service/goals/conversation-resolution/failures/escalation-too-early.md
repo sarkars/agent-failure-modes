@@ -6,18 +6,25 @@
 
 **Symptoms**
 - High handoff rate on routine tasks.
-- [Add more specific symptoms]
+- Agent escalates after a single failed tool call or retrieval miss without retrying with a reformulated query or alternate approach.
+- Escalation message gives a vague, generic reason ("I'm unable to help with this") rather than citing a specific missing capability or data gap.
 
 **Root Cause**
 Agent gives up despite solvable request.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+User: "Can you look up the tracking status for order #48213?"
+Agent: [calls order-lookup tool; tool times out once]
+Agent: "I'm not able to help with that. Let me transfer you to a human agent."
+[No retry was attempted, and a simple re-query or alternate lookup tool would have succeeded.]
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- No requirement to retry with a reformulated query or alternate tool before escalating, so a single transient failure (timeout, empty result) is treated as "unsolvable."
+- Escalation confidence threshold set conservatively, so the model defaults to handing off rather than attempting a harder solve path.
+- No structured justification requirement, so vague "can't help" escalations aren't distinguishable from genuine capability gaps until a human reviews the transcript.
+- Capability registry (what tools/data the agent actually has access to) is incomplete or not consulted, so the model underestimates what it can solve.
 
 ---
 
@@ -26,12 +33,16 @@ Agent gives up despite solvable request.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Transient tool failure, routine task | Order lookup tool times out once, then succeeds on retry | Agent retries the lookup and resolves the request without escalating | Agent escalates immediately after the first timeout |
+| Solvable via reformulation | Retrieval returns no result for exact wording; a paraphrase would match | Agent reformulates the query and finds the answer | Agent escalates citing "no information found" without reformulating |
+| Escalation justification check | A genuinely unsolvable request (requires data the agent has no access to) | Agent escalates with a specific stated capability/data gap | Escalation message is generic ("I can't help with that") with no specific reason |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| Single-attempt escalation rate on eval set | <10% | Percentage of eval escalations that occur after only one solve attempt |
+| Routine-task solve rate before escalation | >90% | Percentage of eval tasks tagged "routine" resolved without escalation |
+| Escalation justification specificity | >80% | Percentage of eval escalations citing a specific capability/data gap vs. a generic refusal |
 
 ---
 
@@ -70,12 +81,16 @@ Agent gives up despite solvable request.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| routine_task_handoff_rate | >10% over 7-day window |
+| single_attempt_escalation_rate | >25% |
+| post_handoff_low_effort_resolution_rate | >25% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Medium |
+| Routine Handoff Spike | routine_task_handoff_rate exceeds 10% over 24h | Medium |
+| Single-Attempt Escalation Surge | single_attempt_escalation_rate exceeds 25% weekly | Medium |
+| Low-Effort Resolution Trend | post_handoff_low_effort_resolution_rate exceeds 25% for 2 consecutive weeks | Low |
 
 ---
 

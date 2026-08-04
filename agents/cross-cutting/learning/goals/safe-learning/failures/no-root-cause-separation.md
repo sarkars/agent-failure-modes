@@ -6,18 +6,29 @@
 
 **Symptoms**
 - Repeated failures after superficial fix.
-- [Add more specific symptoms]
+- Engineers reflexively edit the system prompt whenever any output looks wrong, even when the actual defect lives in a stale retrieval index, a tool returning malformed data, or a policy layer silently overriding the model's response.
+- The same symptom signature (e.g., "agent gives outdated pricing") recurs across multiple "fixed" incidents, each time patched at a different layer than the one previously patched, because no one ever isolated which layer was actually at fault.
 
 **Root Cause**
 Agent treats symptom as cause: prompt vs retrieval vs tool vs policy.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+A customer support agent tells a user their order shipped from a warehouse that closed six months
+ago. The on-call engineer, seeing only the final response text, assumes the prompt is telling the
+model to guess a warehouse name and adds an instruction: "always say 'our fulfillment center' instead
+of naming a specific warehouse." Two weeks later the same stale-fact pattern reappears with a
+different field (an old return-policy window), because the actual defect was a retrieval index that
+had not been reindexed after a warehouse-closure database migration -- a layer nobody isolated because
+the fix was authored directly against the symptom text rather than by testing prompt, retrieval, and
+tool layers independently.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- No layer-isolated reproduction harness exists, so engineers can only observe the final output, not which layer (prompt, retrieval, tool, policy) actually produced the defect.
+- Prompt edits are the fastest, lowest-friction fix available, creating a bias to reach for a prompt change regardless of where the true defect lives.
+- Time pressure to close an incident quickly discourages the slower work of isolation testing across layers.
+- No failure-signature index links new incidents to past ones, so recurrence at a different layer isn't recognized as the same underlying symptom resurfacing.
 
 ---
 
@@ -26,12 +37,16 @@ Agent treats symptom as cause: prompt vs retrieval vs tool vs policy.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Layer-swap isolation test | Failing case replayed with a known-good retrieval context substituted, prompt/tool unchanged | Output becomes correct, confirming retrieval (not prompt) was the root cause | Fix is authored against the prompt without ever running the layer-swap test |
+| Recurrence-after-fix check | Previously "fixed" symptom signature re-injected 30 days after closure, at a different layer | Failure-signature index flags the match and reopens RCA before a new fix is authored | New incident is triaged as unrelated and independently patched at yet another layer |
+| RCA evidence gate | Fix PR submitted with no linked isolation-test result | Review blocks the merge pending isolation evidence | Fix is merged on symptom description alone with no isolation evidence attached |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| root_cause_isolation_test_coverage_percent (eval) | 100% of sampled fixes have linked isolation evidence | Audit a sample of merged fixes for a linked layer-isolation test result |
+| repeat_failure_rate_after_fix_percent (eval) | < 5% | Replay past "fixed" failure signatures against the current system and measure recurrence |
+| root_cause_layer_distribution_skew (eval) | proportional to isolation-confirmed failure mix | Compare attributed root-cause layer distribution against isolation-test-confirmed ground truth on a sample set |
 
 ---
 
@@ -70,12 +85,16 @@ Agent treats symptom as cause: prompt vs retrieval vs tool vs policy.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| repeat_failure_rate_after_fix_percent | > 15% |
+| root_cause_isolation_test_coverage_percent | < 80% |
+| root_cause_layer_distribution_skew | single layer > 70% of attributions without isolation evidence |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Recurrence After "Fixed" Incident | a failure signature matching a previously closed incident reappears within 30 days | High |
+| Fix Merged Without Isolation Evidence | a fix PR lacks a linked isolation-test result in its RCA record | Medium |
+| Triage Bias Detected | root-cause layer distribution skews heavily to one layer without isolation-test support | Low |
 
 ---
 

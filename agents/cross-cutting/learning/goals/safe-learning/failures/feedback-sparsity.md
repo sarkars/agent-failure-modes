@@ -6,18 +6,27 @@
 
 **Symptoms**
 - Few labels; high variance in conclusions.
-- [Add more specific symptoms]
+- Long-tail intents or rare edge-case behaviors receive an update-affecting "conclusion" from a handful of labels while high-traffic segments have hundreds, producing wildly different statistical confidence across segments that the pipeline treats as equally trustworthy.
+- A single vocal reviewer or a short burst of feedback (e.g., one bad week) swings the aggregate signal for a low-volume segment because there is no other data to dilute it.
 
 **Root Cause**
 Not enough signal to learn safely.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+A travel-booking agent handles a rare "multi-city award-ticket rebooking" intent only 8 times in a
+month. Three of those interactions happen to receive a thumbs-down (perhaps from one frustrated
+customer contacting support three times). The learning pipeline computes a 37.5% negative rate for
+this intent, well above the 10% threshold that normally triggers a policy rollback, and disables the
+agent's handling of that intent entirely -- even though 8 samples is far too small to distinguish a
+real regression from noise.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Long-tail intents/segments naturally receive low traffic, so absolute label counts stay small no matter how long the system runs.
+- No minimum sample size or confidence-interval gate exists before a segment's aggregate feedback is allowed to drive an automated update.
+- Reviewer capacity is allocated uniformly or randomly rather than prioritized toward high-uncertainty or low-coverage segments (no active learning).
+- Feedback collection is opt-in/passive (e.g., only unhappy users bother to rate), so the small sample that does exist is not representative of the segment as a whole.
 
 ---
 
@@ -26,12 +35,16 @@ Not enough signal to learn safely.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Low-count segment update attempt | Segment with 8 labels, 3 negative, below the configured minimum of 50 | Pipeline blocks the automated update and marks the segment "insufficient data" | Update proceeds and changes production behavior for that segment |
+| Confidence-interval width check | Segment metric with wide CI due to small n (e.g., 37.5% negative rate, n=8) | Conclusion is not acted on because CI width exceeds tolerance | Point estimate is treated as ground truth and drives a policy rollback |
+| Active-learning prioritization | Pool of unlabeled examples with varying model uncertainty scores | Highest-uncertainty examples are surfaced to reviewers first | Reviewer queue is ordered randomly/FIFO, ignoring uncertainty signal |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| labels_per_segment_count (eval) | >= 50 per segment before use | Count labels per segment in the evaluation dataset and compare to configured minimum |
+| conclusion_confidence_interval_width (eval) | within pre-defined tolerance | Compute CI on the segment's key metric using standard binomial/Wilson interval methods |
+| sparse_segment_flag_accuracy | 100% of below-minimum segments correctly flagged | Verify the guardrail layer correctly marks all synthetic below-threshold segments as insufficient data |
 
 ---
 
@@ -70,12 +83,16 @@ Not enough signal to learn safely.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| labels_per_segment_count | < 50% of defined minimum |
+| label_coverage_percent_of_traffic | < 50% |
+| sparse_segment_count | increasing for 2+ consecutive review cycles |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Medium |
+| Update Triggered on Insufficient Data | an automated behavior update is about to apply to a segment below the minimum sample size | Critical |
+| Coverage Drop Across Segments | label coverage percent falls below 50% for two consecutive cycles | Medium |
+| Active Learning Queue Starved | uncertainty-sampled queue is not being cleared at the expected rate | Low |
 
 ---
 

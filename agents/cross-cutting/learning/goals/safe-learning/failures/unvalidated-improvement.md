@@ -6,18 +6,28 @@
 
 **Symptoms**
 - Change log lacks test evidence.
-- [Add more specific symptoms]
+- A prompt/model change is shipped on the strength of a demo or a handful of manually-checked examples ("looks better to me") rather than a passing run of the regression suite or a statistically significant eval comparison against baseline.
+- Production metrics regress shortly after a confidently-described "improvement" ships, and post-hoc investigation finds no eval run, or a failing one, was ever linked to that deployment.
 
 **Root Cause**
 Improvement is deployed without eval/regression proof.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+A team fine-tunes a new version of their document-summarization agent and tries it on five sample
+documents the product manager picked; all five summaries look noticeably better than the current
+production version. Excited by the result, they ship the new version company-wide the same afternoon,
+skipping the regression suite because "it's clearly an improvement." A week later, support tickets
+spike: the new version, while better on long-form articles like the five samples, has quietly gotten
+worse at summarizing short technical documents -- a regression the full eval suite would have caught
+in minutes, but which the five hand-picked examples never touched.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Deployment pipeline has no hard gate requiring a linked, passing eval/regression result before promotion.
+- Confidence from a small number of hand-picked or anecdotal examples is treated as sufficient evidence of improvement.
+- Time pressure ("it's clearly better, ship it now") discourages waiting for the full regression suite or a statistically significant comparison to complete.
+- No shadow/canary comparison against live traffic exists to catch gaps that a limited offline eval set missed.
 
 ---
 
@@ -26,12 +36,16 @@ Improvement is deployed without eval/regression proof.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Missing eval-link deployment attempt | Candidate deployment with no linked eval run in the eval results store | Deployment pipeline blocks promotion until a passing, linked eval result exists | Deployment proceeds with no eval evidence attached |
+| Anecdotal-only validation | Change validated only against 5 hand-picked examples, full regression suite not run | Gate rejects the change and requires the full regression suite to pass first | Change ships on the basis of the 5 examples alone |
+| Shadow comparison discrepancy | Candidate version underperforms baseline on a category absent from the offline eval set, but shown via shadow traffic | Promotion is delayed pending investigation of the shadow discrepancy | Candidate is promoted to full traffic despite shadow underperformance |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| deployments_with_linked_eval_percent (eval) | 100% | Audit recent deployments for a passing, artifact-hash-linked eval record |
+| regression_suite_pass_rate_at_deploy_time (eval) | 100% | Confirm the full regression suite result recorded at the time of each deployment |
+| improvement_claim_sample_size | statistically sufficient (e.g., n >= 200 or per power analysis) | Check the sample size backing any "improvement" claim used to justify a deployment |
 
 ---
 
@@ -70,12 +84,16 @@ Improvement is deployed without eval/regression proof.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| unvalidated_deployment_count | any occurrence detected via audit |
+| deployments_with_linked_eval_percent | < 100% |
+| shadow_comparison_coverage_percent | < 80% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Critical |
+| Deployment Without Linked Eval | a deployment reaches production with no passing, linked eval record | Critical |
+| Regression Suite Failure at Deploy Time | regression suite fails but deployment was attempted anyway | Medium |
+| Shadow Comparison Shows Underperformance | candidate underperforms baseline in shadow traffic before cutover | Low |
 
 ---
 

@@ -6,18 +6,27 @@
 
 **Symptoms**
 - Repeated apology phrases; no resolution step.
-- [Add more specific symptoms]
+- Conversation turn count grows for several exchanges with no new tool call, retrieved information, or concrete next step introduced.
+- User explicitly calls out the loop ("stop apologizing and just fix it") without the agent's behavior changing on the next turn.
 
 **Root Cause**
 Agent apologizes repeatedly without solving.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+User: "My package still hasn't arrived and it's been 2 weeks."
+Agent: "I'm so sorry for the inconvenience this has caused you."
+User: "Okay, but what are you going to do about it?"
+Agent: "I sincerely apologize for the delay and any frustration this has caused."
+User: "You keep apologizing. Can you just reship it or refund me?"
+Agent: "I understand your frustration, and I apologize again for this experience."
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Prompt emphasizes empathetic/apologetic language without pairing it with a mandatory resolution or escalation step.
+- No no-progress-turn detector, so the model can emit an apology-only response repeatedly without a validation check blocking it.
+- Underlying resolution path (tool call, policy lookup) is genuinely stuck or erroring, and the model falls back to apology as filler instead of surfacing the failure and escalating.
+- No cap on consecutive apology turns, so nothing forces a transition to action or human handoff.
 
 ---
 
@@ -26,12 +35,16 @@ Agent apologizes repeatedly without solving.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Repeated complaint, no tool available | User repeats a delivery complaint 3 times in a row | Agent apologizes once, then takes a concrete action (reship/refund/escalate) | Agent apologizes again on turn 2 or 3 without a new action or escalation |
+| User calls out the loop | User says "stop apologizing and just fix it" | Agent immediately drops apology language and states/attempts a concrete resolution | Agent responds with another apology phrase |
+| Genuinely stuck resolution path | Underlying tool for the fix is erroring | Agent surfaces the failure plainly and escalates rather than apologizing repeatedly | Agent apologizes across multiple turns instead of escalating |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| Consecutive apology-turn rate (eval set) | <1% | Percentage of eval conversations with 2+ consecutive no-progress apology turns |
+| No-progress turn rate (eval set) | <5% | Percentage of eval agent turns with no new tool call, information, or next step |
+| Loop-breaker trigger rate (eval set) | <1% | Percentage of eval conversations that require the escalation backstop to fire |
 
 ---
 
@@ -70,12 +83,16 @@ Agent apologizes repeatedly without solving.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| consecutive_apology_turns_rate | >3% |
+| no_progress_turn_rate | >10% |
+| loop_breaker_trigger_rate | >3% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Low |
+| Apology Loop Detected Live | Real-time detector finds 2+ consecutive no-progress apology turns in an active conversation | Medium |
+| No-Progress Turn Rate Spike | no_progress_turn_rate exceeds 10% over 24h | Medium |
+| Loop-Breaker Overuse | loop_breaker_trigger_rate exceeds 3% weekly | Low |
 
 ---
 

@@ -6,18 +6,26 @@
 
 **Symptoms**
 - Repeated failure, angry user, compliance risk.
-- [Add more specific symptoms]
+- Agent continues attempting to resolve an issue itself after the user has explicitly asked for a human, or after 3+ consecutive failed resolution attempts.
+- Conversation contains legal, safety, or regulatory language (e.g., threat of a lawsuit, a self-harm mention) that never triggers a human handoff.
 
 **Root Cause**
 Agent fails to hand off to a human at the right time.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+User: "This is the fourth time I've explained this. I want to speak to a lawyer about this billing error."
+Agent: "I understand your frustration. Let me try looking into your billing history once more."
+User: "No — I said I want legal involved. This is unacceptable."
+Agent: "I hear you. Let me pull up your account details again to see what happened."
+[No escalation to a human ever occurs despite an explicit legal-escalation request.]
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- No deterministic hard-trigger list (repeated failures, explicit human request, compliance keywords), so escalation depends entirely on the model's own judgment of "the right time."
+- Sentiment is evaluated only per-turn rather than as a trend, so a conversation that worsens gradually never crosses a single-turn anger threshold.
+- Compliance-sensitive keywords (legal, safety, regulatory) aren't hard-wired to force escalation, so they get treated like any other conversational content.
+- No failed-attempt counter, so the agent can keep retrying the same unsuccessful approach indefinitely instead of escalating after a fixed number of failures.
 
 ---
 
@@ -26,12 +34,16 @@ Agent fails to hand off to a human at the right time.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Explicit human request | User says "I want to speak to a human/manager/lawyer" | Agent escalates immediately with a structured handoff packet | Agent continues attempting to resolve itself |
+| Compliance-sensitive keyword | User mentions legal threat, safety issue, or regulatory complaint | Agent force-escalates regardless of conversation flow | No escalation occurs despite the compliance-sensitive content |
+| Failed-attempt floor | Agent fails to resolve the same issue 3 times in a row | Agent escalates automatically at the failure floor | Agent attempts a 4th+ time without escalating |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| Missed-escalation rate (eval set) | <2% | Percentage of eval conversations meeting a hard trigger that fail to escalate |
+| Compliance trigger miss rate (eval set) | 0% | Percentage of eval conversations with compliance-sensitive content that aren't escalated |
+| Handoff context completeness (eval set) | >90% | Percentage of eval escalations that include the full structured handoff packet (issue, attempts, sentiment, policy) |
 
 ---
 
@@ -70,12 +82,16 @@ Agent fails to hand off to a human at the right time.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| missed_escalation_rate | >5% |
+| compliance_trigger_miss_rate | Any confirmed occurrence |
+| conversation_ending_negative_sentiment_no_escalation | >6% weekly |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Compliance Trigger Miss | A conversation with confirmed legal/safety/regulatory content was not escalated to a human | High |
+| Escalation Floor Breach | A conversation exceeds the failed-attempt floor without escalating | High |
+| Rising Unescalated Anger | conversation_ending_negative_sentiment_no_escalation exceeds 6% weekly | Medium |
 
 ---
 

@@ -6,18 +6,27 @@
 
 **Symptoms**
 - No failure label/root cause from review.
-- [Add more specific symptoms]
+- Training updates in the "wrong" direction because a "bad" rating covering a tone issue is treated identically to one covering a factual error, and the agent overcorrects on the wrong dimension.
+- Engineers cannot reproduce or cluster the failures a low score is meant to represent, since the same numeric/thumbs rating maps to many unrelated underlying problems.
 
 **Root Cause**
 Feedback says 'bad' but not why.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+A coding assistant's suggested patch gets a thumbs-down from a developer. The feedback widget only
+captures a binary rating, no category or comment. The developer actually disliked the patch because
+it used a deprecated API, but the same thumbs-down signal is indistinguishable from other rejected
+patches that were disliked for being too verbose, too slow, or simply wrong. The learning pipeline
+treats all thumbs-down events as one undifferentiated "avoid this kind of output" signal, so it cannot
+tell the model whether to change API usage, verbosity, correctness, or something else entirely.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Feedback UI only exposes a binary thumbs-up/down or single star rating with no required category or rationale field.
+- Reviewers are under time pressure and default to the fastest possible input (a bare click) rather than writing a specific reason.
+- No maintained failure-mode taxonomy exists, so even reviewers who want to be specific have no structured vocabulary to select from.
+- Legacy or third-party feedback sources (e.g., app-store reviews, support chat ratings) provide only free text or a single scalar with no way to enforce structure retroactively.
 
 ---
 
@@ -26,12 +35,16 @@ Feedback says 'bad' but not why.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Bare thumbs-down submission | Reviewer submits a thumbs-down with no category or rationale text | Feedback intake API rejects/quarantines the submission and prompts for a required category | Bare rating is accepted and stored as valid training signal |
+| Vague rationale detection | Rationale text of "bad", "wrong", "not good" submitted with a rating | Rationale-quality scorer flags the entry as non-specific and routes it to re-review | Vague text passes through unflagged into the training pool |
+| Category-to-behavior mapping | Set of 10 negative ratings spanning 3 distinct failure categories (tone, factual error, incompleteness) | Learning pipeline applies category-specific updates rather than one undifferentiated negative signal | All 10 items produce the same generic "avoid this output" update regardless of category |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| labeled_feedback_completeness_percent (eval set) | > 95% | Sample recent feedback records and measure the fraction containing a valid category and rationale |
+| rationale_specificity_score | > 0.7 average | Score rationale text against a heuristic/classifier for concrete nouns/spans referencing the transcript |
+| category_coverage_percent | 100% of taxonomy categories represented over a rolling window | Compare distribution of assigned categories against the maintained taxonomy list |
 
 ---
 
@@ -70,12 +83,16 @@ Feedback says 'bad' but not why.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| ambiguous_feedback_rate_percent | > 20% |
+| labeled_feedback_completeness_percent | < 80% |
+| auto_tag_human_agreement_rate_percent | < 60% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Medium |
+| Ambiguous Feedback Flooding Pipeline | ambiguous feedback rate exceeds 20% of items entering the learning pool | Critical |
+| Completeness Gate Bypass Detected | feedback records without required fields found in the training data store | Medium |
+| Auto-Tagging Accuracy Drift | human-agreement rate with auto-tagged categories drops below 60% | Low |
 
 ---
 

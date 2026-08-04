@@ -6,18 +6,27 @@
 
 **Symptoms**
 - No link from agent trace to KPI outcome.
-- [Add more specific symptoms]
+- Credit for a lagging outcome (e.g., renewal, churn, chargeback) gets assigned to whichever agent action is temporally closest, even when an unrelated action actually drove the result.
+- Learning updates stall or apply stale/wrong reward because the outcome event arrives after the trace has already expired or been purged.
 
 **Root Cause**
 Business outcome arrives later and cannot be attributed to agent action.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+A retention agent offers a customer a discount during a support chat in week 1. The customer churns
+in week 6, after several unrelated product-quality issues in weeks 2-5. The billing system's churn
+event carries only an account ID, not a trace ID, so the learning pipeline joins the churn outcome to
+the most recent agent action on that account -- a routine password-reset macro run in week 5 -- and
+penalizes that unrelated action while the actual discount-offer decision (which may have delayed the
+churn by five weeks) receives no credit or blame at all.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Trace/session IDs are not propagated into downstream systems (billing, CRM, support) that eventually emit the outcome event.
+- Trace retention TTL is shorter than the typical outcome latency, so the linking record has already expired by the time the outcome arrives.
+- Multiple agent actions precede a single outcome with no documented multi-touch attribution model, so credit defaults arbitrarily to the last or nearest action.
+- No validated short-term proxy metric exists, forcing either a long wait for ground truth or reliance on an unvalidated stand-in.
 
 ---
 
@@ -26,12 +35,16 @@ Business outcome arrives later and cannot be attributed to agent action.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Late-arriving outcome join | Simulated churn event arriving 45 days after the originating agent action, trace TTL set to 30 days | Pipeline either extends retention to capture the join or explicitly logs the trace as expired/unattributed | Outcome silently attributes to an unrelated, more recent action on the account |
+| Multi-touch credit split | Account with 3 distinct agent actions in the 30 days preceding a renewal outcome | Credit is split per the documented attribution model (e.g., decay-weighted) across all 3 actions | All credit lands on only the single most recent action |
+| Proxy-vs-ground-truth backtest | Historical dataset with both an immediate proxy signal (e.g., CSAT) and the eventual ground-truth outcome | Correlation between proxy and ground truth is computed and reported before the proxy is used for learning | Proxy is used for reward without any correlation check against ground truth |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| trace_to_outcome_join_rate_percent (eval set) | > 90% | Replay historical outcome events against stored traces and measure successful join rate |
+| attribution_window_coverage_percent | > 90% of outcomes arrive within the configured window | Compare outcome arrival latency distribution against the documented attribution window in a backtest |
+| proxy_ground_truth_correlation | > 0.6 | Correlate proxy metric values with eventual ground-truth outcomes on a held-out historical cohort |
 
 ---
 
@@ -70,12 +83,16 @@ Business outcome arrives later and cannot be attributed to agent action.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| trace_to_outcome_join_rate_percent | < 70% |
+| unattributed_outcome_rate_percent | > 25% |
+| proxy_ground_truth_correlation | < 0.3 |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Medium |
+| Attribution Pipeline Broken | trace-to-outcome join rate drops below 70% | Critical |
+| Attribution Window Exceeded | median attribution latency exceeds the configured window for a growing share of outcomes | Medium |
+| Proxy Metric Decoupled from Ground Truth | proxy-to-outcome correlation degrades below 0.3 | Low |
 
 ---
 

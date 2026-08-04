@@ -6,18 +6,28 @@
 
 **Symptoms**
 - Good eval score but production failures.
-- [Add more specific symptoms]
+- Eval suite is dominated by clean, curated examples while production traffic includes messy formatting, code-switched language, or truncated inputs the suite never sampled.
+- Eval pass rate stays flat release-over-release while support ticket volume for the same feature climbs.
 
 **Root Cause**
 Tests do not represent production inputs.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+The eval suite for a support-ticket triage agent was built from 200 hand-picked tickets
+collected at launch, all in English, well-formatted, single-issue. Eval score holds at
+97% for three straight releases. Meanwhile, real traffic has shifted: 30% of tickets now
+arrive via a chat widget with typos, mixed languages, and multiple bundled issues per
+message. The agent silently misclassifies these, but the eval suite -- frozen since
+launch -- never surfaces the drop, and it isn't caught until CSAT for chat-origin tickets
+craters a full quarter later.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Eval set was built once at launch/project kickoff and never refreshed as production traffic composition shifted.
+- No pipeline exists to sample or label real production traffic for inclusion in the eval corpus.
+- Eval cases are hand-picked by engineers for clarity/readability rather than sampled proportionally from actual usage.
+- New channels, locales, or user segments are onboarded without a corresponding eval-set update.
 
 ---
 
@@ -26,12 +36,16 @@ Tests do not represent production inputs.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Stratified sample replay | 500 requests sampled proportionally from last 7 days of production traffic | Eval pass rate within 5 points of the curated eval suite's score | Curated suite scores high while stratified production sample scores meaningfully lower |
+| New-channel coverage check | Requests from a channel/locale added in the last quarter | Eval suite contains >= 20 cases from that channel | Zero or near-zero eval cases exist for a channel carrying real production volume |
+| Distribution drift probe | Token-length and intent-frequency histogram of eval set vs. last 30 days of production | KL divergence / embedding distance below threshold | Eval set diverges sharply from current production distribution |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| eval_set_median_age_days | < 30 days | Track collection_date metadata per eval case, compute median age at each release |
+| eval_vs_prod_sample_score_delta_pct | < 5% | Run the eval rubric against both the static suite and a fresh stratified production sample, diff pass rates |
+| eval_prod_distribution_divergence | < 0.1 normalized distance | Compute embedding centroid or KL divergence between eval set and rolling production traffic window |
 
 ---
 
@@ -70,12 +84,16 @@ Tests do not represent production inputs.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| eval_prod_distribution_divergence | > 0.25 |
+| eval_set_median_age_days | > 90 days |
+| eval_vs_shadow_score_delta_pct | > 15% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Eval-Production Divergence Spike | Distributional divergence exceeds 0.25 or shadow score drops >15% below static eval for two consecutive releases | High |
+| Eval Set Staleness | Eval set median age exceeds 90 days without refresh | Medium |
+| Unconverted Production Gaps | More than 10 flagged production gaps sit unconverted to eval cases past SLA | Low |
 
 ---
 

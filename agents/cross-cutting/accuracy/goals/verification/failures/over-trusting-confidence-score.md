@@ -6,18 +6,28 @@
 
 **Symptoms**
 - High confidence but source mismatch.
-- [Add more specific symptoms]
+- Auto-accept logic lets outputs above a raw confidence threshold skip human review entirely, and a nonzero share of those high-confidence outputs later turn out to be wrong when spot-checked against ground truth.
+- Confidence scores stay uniformly high even as input quality degrades (blurry scans, out-of-distribution document types), because the score was never calibrated against a labeled dataset for this task.
 
 **Root Cause**
 Agent treats model/OCR confidence as correctness.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+An invoice-processing pipeline uses OCR confidence >= 0.95 as the bar for auto-posting
+extracted line-item totals without human review. A new vendor starts sending invoices in
+a slightly different layout. The OCR model reports 0.97 confidence on the extracted total
+-- it's reading the number cleanly -- but it's reading the wrong field (a subtotal instead
+of the grand total) because the new layout shifted column positions. The pipeline
+auto-posts the wrong amount because confidence was treated as a proxy for correctness
+rather than being calibrated or cross-checked against a source total.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Confidence scores are used operationally straight out of the vendor/model default without ever being calibrated against a labeled ground-truth dataset for this specific task.
+- No independent source/ground-truth cross-check is required for high-stakes fields even when confidence is high, so a confidently-wrong extraction sails through.
+- Confidence thresholds are set once at launch and never revisited as input distribution shifts (new document layouts, new vendors, new locales).
+- Models and OCR systems are systematically overconfident on out-of-distribution inputs, and this failure mode isn't monitored for specifically.
 
 ---
 
@@ -26,12 +36,16 @@ Agent treats model/OCR confidence as correctness.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| High-confidence wrong-field extraction | New vendor invoice layout with shifted column positions, OCR confidence >= 0.95 | Extracted total is cross-checked against source and routed to review on mismatch | Wrong field auto-posted despite high confidence, no source cross-check performed |
+| Calibration curve validation | Labeled ground-truth dataset scored for reliability diagram/Brier score | Calibration curve matches expected confidence-to-accuracy relationship | High-confidence bucket shows a nontrivial real error rate |
+| Out-of-distribution confidence check | Document type/locale never seen in training data | Confidence score reflects genuine uncertainty (lower) or triggers review | Model reports high confidence on an out-of-distribution input it gets wrong |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| high_confidence_error_rate_pct | < 1% (errors within the "high confidence" bucket) | Sample high-confidence outputs and check against ground truth |
+| calibration_curve_deviation_ece | Expected Calibration Error < 0.05 | Compute reliability diagram/ECE against a labeled ground-truth dataset |
+| source_verification_override_rate_pct | Tracked, no fixed target | Track how often independent source-verification overrides a high-confidence extraction |
 
 ---
 
@@ -70,12 +84,16 @@ Agent treats model/OCR confidence as correctness.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| high_confidence_error_rate_pct | > 3% |
+| calibration_curve_deviation_ece | > 0.15 |
+| confidence_distribution_drift_score | > 2 std dev shift without recalibration |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| High-Confidence Error Rate Exceeds Threshold | Sampled audit finds high-confidence bucket error rate above 3% | High |
+| Calibration Drift Detected | Expected Calibration Error exceeds 0.15 versus last validated calibration | Medium |
+| Confidence Distribution Shift | Confidence score distribution shifts significantly without matching recalibration | Low |
 
 ---
 

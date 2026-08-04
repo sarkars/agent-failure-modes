@@ -6,18 +6,28 @@
 
 **Symptoms**
 - Single-turn tests pass; workflow fails.
-- [Add more specific symptoms]
+- Agent contradicts a fact it established earlier in the same session (forgets a stated constraint, repeats a step the user already confirmed as done) once a conversation runs past a handful of turns.
+- Task completion rate for long sessions (10+ turns) is measurably lower than for short sessions, but the eval suite -- built entirely from single-turn or 2-3 turn cases -- never surfaces the gap.
 
 **Root Cause**
 Multi-step degradation is missed.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+A trip-planning agent walks a user through a 15-turn itinerary-building conversation:
+picking a destination, dates, flights, then hotels. By turn 12, the agent recommends a
+hotel in a city different from the one confirmed at turn 2 -- the original destination
+context has drifted out of its effective attention as the conversation grew. Every
+single-turn eval case passes because each was tested as an isolated 1-2 turn exchange;
+none exercised a full 12+ turn trajectory, so this compounding drift was never caught
+before launch.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Eval suite is built entirely from short, isolated single-turn or few-turn exchanges, with no long-running trajectory scenarios.
+- Agent architecture relies on unbounded context accumulation rather than explicit state checkpointing, so drift compounds silently as conversations lengthen.
+- No production monitoring breaks out quality/completion rate by session length, so long-horizon degradation has no visibility even after launch.
+- Long-horizon scenarios are expensive/slow to construct and run, so they get deprioritized in favor of cheaper single-turn test cases under release-schedule pressure.
 
 ---
 
@@ -26,12 +36,16 @@ Multi-step degradation is missed.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| 12+ turn trajectory consistency | Full itinerary-building conversation from destination through hotel booking | Agent's turn-12 recommendation matches turn-2 confirmed destination | Agent contradicts an earlier-established fact later in the session |
+| Long-session task completion | Simulated 15-turn multi-step workflow end-to-end | Task completes successfully at a rate comparable to short-session cases | Completion rate drops sharply as workflow length increases |
+| State checkpoint recall | Ask the agent to restate a constraint established 10 turns earlier | Agent correctly recalls the constraint | Agent forgets, contradicts, or repeats an already-completed step |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| quality_degradation_slope_per_turn | ~0 (no significant downward trend) | Score each turn in a trajectory eval and regress quality against turn number |
+| workflow_completion_rate_by_length_bucket_pct | < 10 point drop from short to long bucket | Bucket eval trajectories by turn count, compare completion rate across buckets |
+| long_horizon_eval_coverage_count | >= 20 multi-turn scenarios in regression suite | Count trajectory-level scenarios (10+ turns) maintained in the eval suite |
 
 ---
 
@@ -70,12 +84,16 @@ Multi-step degradation is missed.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| workflow_completion_rate_by_length_bucket_pct | > 25 point drop long vs. short bucket |
+| context_drift_incident_rate_pct | > 8% of long sessions |
+| quality_degradation_slope_per_turn | Statistically significant negative slope |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Long-Horizon Completion Rate Collapse | Workflow completion rate for the long-length bucket drops more than 25 points below the short-length bucket | High |
+| Context Drift Spike | Context drift incident rate exceeds 8% of long sessions in a monitoring window | Medium |
+| Quality Degradation Trend Detected | Turn-by-turn quality shows a statistically significant downward slope in production sampling | Medium |
 
 ---
 

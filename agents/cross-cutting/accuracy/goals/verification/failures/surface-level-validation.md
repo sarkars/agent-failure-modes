@@ -6,18 +6,28 @@
 
 **Symptoms**
 - JSON valid but business data wrong.
-- [Add more specific symptoms]
+- Output passes schema/format validation at 100% while a business invariant (line-item totals summing to the invoice total, status transitions following the allowed state machine) is silently violated.
+- Engineers treat "the pipeline didn't throw a validation error" as equivalent to "the output is correct," with no separate semantic check ever run.
 
 **Root Cause**
 Checks formatting but not semantic correctness.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+An invoice-extraction agent outputs perfectly well-formed JSON: correct field names,
+correct types, valid schema. It passes format validation every time. But on one invoice,
+it extracts a line-item total of $1,200 while the sum of the individual line items is
+actually $1,450 -- it picked up a subtotal field instead of the true total. The schema
+validator has nothing to say about this: the JSON is syntactically perfect. Only a
+business-rule check (does total equal sum of line items) would have caught it, and no
+such check exists in the pipeline.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Validation logic is built as a single schema/format check, with no separate semantic or business-rule validation stage layered on top.
+- Business invariants (totals must reconcile, dates must be logically ordered, status transitions must follow the state machine) are never explicitly encoded anywhere in the system.
+- "Valid JSON" and "correct answer" are conflated in team communication and dashboards, so a 100% format-pass rate is mistaken for a correctness guarantee.
+- Eval suites test format/schema compliance thoroughly but have few or no semantic test cases distinct from format tests.
 
 ---
 
@@ -26,12 +36,16 @@ Checks formatting but not semantic correctness.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Total-vs-line-items reconciliation | Invoice with mismatched subtotal/total fields but valid JSON schema | Business rule engine flags the mismatch, output blocked or routed for review | Schema-valid output ships with a mismatched total |
+| Status transition validity | Extracted record showing a status transition not allowed by the state machine | Output rejected by domain rule engine despite valid schema | Schema-valid output with an invalid state transition ships unflagged |
+| Semantic vs. format test ratio audit | Full eval suite inventory | At least a 1:1 ratio of semantic to format test cases | Format test cases vastly outnumber semantic/business-correctness cases |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| schema_valid_but_semantically_wrong_rate_pct | < 1% | Sample schema-valid production outputs and check business correctness against source data |
+| business_rule_violation_rate_pct | < 1% of schema-valid outputs | Run domain rule engine checks over schema-valid outputs and measure violation rate |
+| semantic_eval_coverage_ratio | >= 1:1 semantic test cases to format test cases | Count and classify eval suite test cases by type |
 
 ---
 
@@ -70,12 +84,16 @@ Checks formatting but not semantic correctness.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| schema_valid_but_semantically_wrong_rate_pct | > 5% |
+| business_rule_violation_rate_pct | > 5% of schema-valid outputs |
+| cross_field_consistency_pass_rate_pct | < 98% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Business Rule Violation on Schema-Valid Output | Output passes schema validation but fails a business invariant | High |
+| Semantic Error Rate Rising | Sampled semantic accuracy review shows error rate above 5% while format-pass rate remains at 100% | Medium |
+| Semantic Test Coverage Gap | Semantic-to-format test case ratio falls below 1:3 | Low |
 
 ---
 

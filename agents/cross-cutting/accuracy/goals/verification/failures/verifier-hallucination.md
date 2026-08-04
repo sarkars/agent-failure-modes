@@ -6,18 +6,27 @@
 
 **Symptoms**
 - Judge rationale unsupported by evidence.
-- [Add more specific symptoms]
+- The verifier's stated rationale cites a fact, quote, or detail that does not actually appear anywhere in the output being judged.
+- Re-running the same verifier judgment on the same output produces a different verdict and a different (equally confident-sounding) rationale each time.
 
 **Root Cause**
 Evaluator invents reasons to pass/fail.
 
 **Example**
 ```
-[Add concrete example showing this failure pattern]
+An LLM-judge verifier is asked to grade whether a support response "correctly cited the
+refund policy." The response never mentions a refund policy at all -- it's off-topic. The
+verifier nonetheless outputs: "PASS - the response correctly cites the 14-day refund
+policy in paragraph two." No such paragraph or citation exists in the response; the
+verifier fabricated a plausible-sounding justification that matches the shape of a good
+rationale without any of it being grounded in the actual text it was supposed to check.
 ```
 
 **Contributing Factors**
-- [List factors that make this failure more likely]
+- Verifier is prompted with an open-ended "is this good?" judgment rather than a rubric that requires citing a specific quoted span for each criterion.
+- No automated check exists to confirm the verifier's cited evidence actually appears in and supports the output being judged.
+- Only a single verifier runs per case, so there's no cross-verifier disagreement signal to catch a fabricated rationale that a second independent verifier wouldn't reproduce.
+- Verifier judgments are trusted as final without any reproducibility testing (same output judged multiple times) that would reveal inconsistent, post-hoc rationale generation.
 
 ---
 
@@ -26,12 +35,16 @@ Evaluator invents reasons to pass/fail.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Fabricated citation detection | Off-topic response graded against a rubric criterion requiring a specific citation | Verifier fails the response since no matching citation exists | Verifier passes the response and cites a quote/paragraph that isn't present |
+| Judgment reproducibility check | Same output judged by the same verifier 5 times | Same verdict and consistent rationale each run | Verdict or rationale changes across repeated runs on identical input |
+| Cross-verifier agreement | Same output judged by two independently configured verifiers | Verifiers agree on verdict and cite overlapping evidence | Verifiers disagree, or one verifier's evidence citation doesn't match the other's |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| ungrounded_rationale_rate_pct | < 2% of verifier judgments lack matching evidence | Automated check comparing verifier-cited evidence spans against the actual output text |
+| cross_verifier_agreement_rate_pct | > 90% | Run matched samples through 2+ independent verifiers and measure verdict agreement |
+| judgment_reproducibility_rate_pct | > 95% same verdict on re-run | Re-run the same verifier on identical outputs multiple times and measure verdict consistency |
 
 ---
 
@@ -70,12 +83,16 @@ Evaluator invents reasons to pass/fail.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| ungrounded_rationale_rate_pct | > 8% |
+| cross_verifier_agreement_rate_pct | < 75% |
+| judgment_reproducibility_rate_pct | < 85% |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Medium |
+| Ungrounded Rationale Rate Spike | Automated evidence-consistency check finds ungrounded rationale rate above 8% | High |
+| Cross-Verifier Disagreement Surge | Agreement rate between independent verifiers drops below 75% | Medium |
+| Judgment Reproducibility Failure | Re-run testing shows verdict/rationale reproducibility below 85% | Medium |
 
 ---
 
