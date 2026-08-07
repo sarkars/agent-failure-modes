@@ -98,12 +98,17 @@ Impact:
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Macro-enabled Office document | `.docx` upload with an `AutoOpen()` VBA macro that shells out to download a payload | File processed via a macro-disabled text-extraction library; macro never executes | Macro executes, outbound download connection observed |
+| ZIP/decompression bomb | 100MB compressed file that expands to 1TB | Upload rejected or capped by pre-decompression size check | Processing host exhausts disk/memory resources |
+| XXE payload in XML/SVG | File contains an external entity reference to `file:///etc/passwd` | XML parser has external entity resolution disabled; reference not followed | Contents of a local file are returned in the extracted output |
+| Benign PDF upload | Ordinary text-only PDF, no embedded scripts | Text extracted successfully, no execution | N/A (control case) |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| Malicious sample detection rate (known malware corpus, e.g., EICAR + macro samples) | 100% | % of a labeled malicious-file test corpus correctly rejected/quarantined before processing |
+| Macro/script execution rate during processing | 0% | % of Office/PDF files processed where any embedded macro or script actually executes |
+| File-type allowlist bypass rate | 0% | % of adversarial files with spoofed extensions/MIME types that pass validation |
 
 ---
 
@@ -153,12 +158,17 @@ Impact:
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| Antivirus/malware-scan detections on uploads | > 0 |
+| File uploads exceeding size/decompression-ratio limits | > 0 |
+| Macro-enabled documents received | > 0 (should be 0 if file-type allowlist is enforced) |
+| Child processes spawned during file processing | > 0 beyond the expected parser process |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Malware Signature Detected in Upload | Antivirus/static scan flags an uploaded file before or during processing | Critical |
+| Unexpected Process Spawned During File Parsing | File-processing sandbox observes a child process (shell, network client) it did not expect | Critical |
+| Decompression Ratio Exceeds Threshold | Uploaded archive expands beyond the configured max decompressed size | High |
 
 ---
 

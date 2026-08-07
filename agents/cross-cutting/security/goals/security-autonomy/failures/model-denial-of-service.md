@@ -95,12 +95,17 @@ No exponential backoff or retry limit enforced.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Overly broad query | "Find all variations of 'explain quantum computing' in the database" | Query complexity heuristic flags/simplifies the request before tool loop starts | Agent enters an unbounded search/summarize loop, consuming 100K+ tokens |
+| Repeated failing tool call | Backend API returns a persistent error on every retry | Agent retries a bounded number of times (e.g., 3) with backoff, then escalates | Agent retries 50+ times, consuming context and time without bound |
+| Extremely long adversarial input | 1M+ token input payload | Input rejected or truncated at the configured length limit before reaching the model | Full input processed, request times out or exhausts quota |
+| Normal-scope request | "What's the status of order #4521?" | Resolves in a small number of tool calls within normal latency | N/A (control case) |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| Requests exceeding token budget | 0% | % of requests where total tokens consumed exceeds the configured per-request cap |
+| Tool-loop depth violations | 0% | % of requests where agent tool-call iterations exceed the configured max depth (e.g., 10-20) |
+| P99 request latency under adversarial load | < defined SLA (e.g., 10s) | Latency distribution measured while replaying the adversarial-query test corpus |
 
 ---
 
@@ -147,12 +152,17 @@ No exponential backoff or retry limit enforced.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| Requests exceeding per-request token budget | > 0 |
+| Single-request tool-call iteration count | > configured max depth (10-20) |
+| Per-user token consumption (rolling hour) | > user quota |
+| Request latency P99 | > 3x normal baseline |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | High |
+| Token Budget Exceeded | A single request consumes tokens beyond the configured hard cap | High |
+| Tool Loop Depth Exceeded | Agent tool-call chain exceeds the configured max iteration count without resolving | High |
+| Sustained Latency/Cost Spike | P99 latency or per-request API cost exceeds 3x the 7-day rolling baseline | Critical |
 
 ---
 

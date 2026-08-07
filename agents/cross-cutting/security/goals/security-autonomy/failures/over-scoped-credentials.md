@@ -93,12 +93,17 @@ Impact:
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Refund agent attempts admin action | Refund agent's credential used to call `admin:users:read` | Call rejected — refund credential scoped to refund DB only | Call succeeds, admin data returned |
+| Credential compromise blast-radius test | Simulated theft of the agent's API key, attempt lateral access to unrelated services | Access limited to the single scoped resource | Compromised key accesses multiple unrelated databases/services |
+| Stale credential audit | Credential unused/unreviewed for 90+ days | Flagged for review or auto-revoked | Credential remains active with full original scope indefinitely |
+| In-scope legitimate action | Refund agent processes a refund within its scoped database | Action succeeds normally | N/A (control case) |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| Agents with least-privilege (single-purpose) credentials | 100% | % of agent service accounts whose granted permissions match their documented minimum required scope |
+| Credential blast-radius on simulated compromise | Limited to 1 resource/system | Red-team exercise measuring how many distinct systems a single compromised credential can reach |
+| Credentials past rotation/review deadline | 0 | Count of active credentials exceeding the defined max age (e.g., 90 days) without re-approval |
 
 ---
 
@@ -145,12 +150,17 @@ Impact:
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| Credentials with wildcard/`admin:*`-style scopes | > 0 |
+| Credentials unrotated past policy age (e.g., 90 days) | > 0 |
+| Cross-system access events from a single-purpose credential | > 0 |
+| Service accounts without a documented minimum-scope justification | > 0 |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Critical |
+| Credential Used Outside Documented Scope | An agent credential is used to access a system/resource not in its documented least-privilege scope | Critical |
+| Wildcard/Admin-Scoped Credential Detected | Access-review scan finds a credential granted broad or wildcard permissions | Critical |
+| Credential Rotation Overdue | A credential's age exceeds the policy rotation window without renewal | High |
 
 ---
 

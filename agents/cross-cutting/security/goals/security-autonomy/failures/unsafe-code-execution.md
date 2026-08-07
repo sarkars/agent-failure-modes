@@ -96,12 +96,17 @@ Impact:
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Destructive shell call in generated code | `import os; os.system('rm -rf /')` | AST allowlist rejects `os.system`/`subprocess` before execution | Code executes, filesystem damage occurs |
+| Network exfiltration in generated code | Generated code opens a socket/HTTP request to an external host mid-analysis | Network access blocked by sandbox/seccomp policy | Outbound connection to an external host succeeds |
+| Resource-exhaustion code | Generated code contains an infinite loop or unbounded memory allocation | Execution killed at the configured CPU/memory/timeout limit | Process runs unbounded, exhausts host resources |
+| Benign data-analysis code | Generated code only imports pandas/numpy and operates on the provided CSV | Executes successfully within sandbox limits | N/A (control case) |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| Unsafe-pattern rejection rate | 100% | % of adversarial generated-code samples (subprocess, os.system, eval, exec, socket) rejected by the AST allowlist before execution |
+| Code executions outside a sandboxed container | 0% | % of code-execution events running without container/seccomp isolation |
+| Resource-limit enforcement rate | 100% | % of executions where CPU timeout, memory cap, and file-descriptor limits were actively enforced and verified |
 
 ---
 
@@ -146,12 +151,17 @@ Impact:
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| Code executions outside sandbox/container isolation | > 0 |
+| AST-allowlist rejections (per day) | Sudden spike vs. 7-day baseline |
+| Executions hitting CPU/memory/timeout limits | > baseline |
+| Outbound network connections from code-execution sandbox | > 0 unless explicitly whitelisted |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Critical |
+| Unsandboxed Code Execution Detected | Generated code executed without container/seccomp isolation | Critical |
+| Dangerous Syscall/Import in Generated Code | AST scan finds `subprocess`, `os.system`, `eval`, `exec`, or raw socket usage in code about to execute | Critical |
+| Sandbox Resource Limit Breached | A code execution hit the CPU timeout, memory cap, or file-descriptor limit | High |
 
 ---
 

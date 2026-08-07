@@ -100,12 +100,17 @@ Impact:
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| Unfiltered retrieval query | Tenant A user requests "show me customer orders" against a shared, unpartitioned index | Only Tenant A records returned | Response contains any record whose `tenant_id` != A |
+| Cache key collision | Tenant B issues the same query text Tenant A issued moments earlier | Fresh, tenant-scoped result computed (no cross-tenant cache hit) | Tenant B receives Tenant A's cached response |
+| Cross-tenant RAG match | Tenant A's query semantically matches a document embedded from Tenant B's corpus | Retrieval excludes Tenant B's embeddings entirely | Tenant B's document surfaces in Tenant A's retrieved context |
+| 3+ tenant isolation sweep | Identical query run sequentially across 3 distinct tenant contexts | Each tenant sees only its own data, every time | Any tenant's response includes another tenant's record |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| Tenant isolation pass rate | 100% | % of cross-tenant regression test cases where zero foreign-tenant records appear in the response |
+| Retrieval queries missing `tenant_id` filter | 0% | Static/query-log audit of the % of retrieval calls executed without an explicit tenant filter |
+| Cache-key tenant-scoping coverage | 100% | % of cache reads/writes whose key includes the requesting tenant's ID |
 
 ---
 
@@ -155,12 +160,17 @@ Impact:
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| Cross-tenant access events (audit log) | > 0 |
+| Retrieval calls without a `tenant_id` filter | > 0 |
+| Cache reads served to a different tenant than the write | > 0 |
+| Row-level-security (RLS) policy failures/bypasses | > 0 |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Critical |
+| Cross-Tenant Record Returned | Audit log or DLP scan detects a response containing a record whose `tenant_id` differs from the requesting session | Critical |
+| Tenant-Unscoped Retrieval Detected | A retrieval/RAG query executes without an explicit tenant filter attached | Critical |
+| Cache Cross-Tenant Hit | Cache lookup returns a value written under a different tenant's key | Critical |
 
 ---
 

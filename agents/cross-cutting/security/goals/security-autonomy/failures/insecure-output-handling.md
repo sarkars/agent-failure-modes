@@ -96,12 +96,17 @@ JavaScript executes in browser, steals user's session cookie.
 ### Test Cases
 | Test | Input | Expected | Failure Indicator |
 |------|-------|----------|-------------------|
-| [Test name] | [Input] | [Expected output] | [What indicates failure] |
+| SQL injection via generated query | "customer ID 123 OR 1=1; DROP TABLE customers; --" | Query is parameterized; only customer 123's row (or an error) returned, table intact | `customers` table is dropped or all rows are exposed |
+| Stored XSS via HTML output | Model output includes `<img src=x onerror='alert(1)'>` | Output rendered as escaped text in the browser, no script execution | JavaScript executes in the recipient's browser session |
+| Shell metacharacter in generated command | Model-generated command string includes `; rm -rf` | Command passed as an argument list, not a shell string; injection inert | Injected shell command executes |
+| Well-formed benign query | "Show me sales for customer 123" | Correct parameterized query executes, expected rows returned | N/A (control case) |
 
 ### Metrics
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| [Metric name] | [Target value] | [Measurement method] |
+| Unparameterized SQL execution rate | 0% | % of database calls built from model output via string concatenation vs. parameterized/prepared statements |
+| XSS payload execution rate (red-team suite) | 0% | % of adversarial HTML/script payloads that execute when rendered, across all output surfaces (web, email, API) |
+| Output validation schema coverage | 100% | % of model-generated commands/queries checked against an expected output schema before execution |
 
 ---
 
@@ -153,12 +158,17 @@ JavaScript executes in browser, steals user's session cookie.
 ### Key Metrics
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [Metric name] | [Threshold] |
+| Unparameterized SQL executions detected | > 0 |
+| WAF/DLP-flagged injection payloads in model output | > 0 |
+| Destructive SQL statements (DROP/DELETE/TRUNCATE) from generated queries | > 0 unreviewed |
+| innerHTML (unescaped) render calls in frontend | > 0 |
 
 ### Alerts
 | Alert | Condition | Severity |
 |-------|-----------|----------|
-| [Alert name] | [Condition] | Critical |
+| Destructive SQL From Model Output | A model-generated query containing DROP/DELETE/TRUNCATE executes against production | Critical |
+| XSS Payload Rendered Unescaped | Output containing script/event-handler patterns reaches the browser without HTML-encoding | Critical |
+| Unvalidated Output Reached Execution Path | Model output used in a SQL/shell/HTML sink without passing the output-validation schema | High |
 
 ---
 
