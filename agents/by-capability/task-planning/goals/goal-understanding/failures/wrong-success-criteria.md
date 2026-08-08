@@ -12,7 +12,7 @@
 - Same action/tool type produces false-success reports repeatedly, suggesting a systematically unreliable success signal rather than isolated flukes.
 
 **Root Cause**
-Agent reports success when the real-world task outcome is not complete.
+The agent infers success from the immediate return code of the tool it called rather than from the actual state of the downstream system of record, treating what is really an asynchronous, decoupled process — request accepted versus outcome achieved — as if the two happened synchronously. No independent verification step sits between "action requested" and "success reported to the user," and because the same agent both performs the action and certifies its own completion, there's no separation of duties that would catch a false positive. When the downstream step then fails silently, as an out-of-stock warehouse system might, that failure never propagates back as an error the agent would see, so it reports completion with total confidence for a task that never actually finished.
 
 **Example**
 ```

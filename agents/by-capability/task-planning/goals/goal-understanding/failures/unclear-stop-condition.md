@@ -12,7 +12,7 @@
 - Task budget (time, cost, API calls) is exhausted with no clear completion state and no explicit stop signal ever produced.
 
 **Root Cause**
-Agent keeps looping, retrying, or asking because 'done' is undefined.
+Tasks are frequently specified as an outcome to reach ("until they match") without a tolerance, a maximum-attempt count, or any other terminal condition, so the agent has no basis for recognizing that further effort is futile rather than merely incomplete. There is no hard ceiling on steps, retries, or wall-clock time enforced independently of the agent's own judgment, and no requirement that each retry demonstrate measurable progress over the last one, so a stalled loop looks identical to legitimate ongoing work from the inside. Because repetition-detection isn't running on the action stream and edge cases like floating-point precision limits were never anticipated when the termination criteria were written, the agent can burn through hours and budget chasing a target that was never reachable in the first place.
 
 **Example**
 ```

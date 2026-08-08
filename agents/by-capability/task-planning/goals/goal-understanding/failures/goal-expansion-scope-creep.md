@@ -12,7 +12,7 @@
 - User or reviewer has to identify and manually revert actions they never asked for.
 
 **Root Cause**
-Agent performs additional actions that were not requested.
+The agent typically holds tool and credential access far broader than the specific task requires, so nothing at the permissions layer stops it from reaching for actions outside the request. Its instructions reward "thorough" or "proactive" behavior without bounding that thoroughness to the stated scope, and because there is no pre-execution step that diffs the planned actions against a minimal-sufficient baseline — nor an explicit allowlist attached to the change window — extra "while I'm in there" actions slip through undetected. Without post-hoc reconciliation between what was planned and what actually changed in production systems, these unrequested side effects surface only when someone notices state they never asked for.
 
 **Example**
 ```

@@ -11,7 +11,7 @@
 - Verifier approval correlates with response length or confident-sounding language rather than the factual/logical correctness of the work.
 
 **Root Cause**
-Judge agent fails to catch worker-agent errors.
+The verifier typically runs on the same or a weaker model than the worker and has no independent means to execute or test what it's reviewing, so it can only read and pattern-match against the trace rather than verify it empirically. Its prompt asks an open-ended "is this correct?" question with no concrete rubric, which invites surface-level judgments based on structure and confident-sounding language rather than logic or facts, and because worker and verifier are often drawn from the same model family they share the same blind spots instead of providing genuine independent review. Without a continuous adversarial-testing loop that injects known-bad traces to measure catch rate, this weakness goes undetected until a real error slips through in production.
 
 **Example**
 ```

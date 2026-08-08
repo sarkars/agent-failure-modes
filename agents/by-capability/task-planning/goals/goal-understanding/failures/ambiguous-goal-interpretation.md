@@ -12,7 +12,7 @@
 - Agent's stated confidence in its chosen interpretation is high even though the request contains genuinely ambiguous phrasing.
 
 **Root Cause**
-Agent optimizes for a different meaning of the user's/business goal.
+Requests are frequently phrased with overloaded, colloquial verbs ("close," "clean up," "handle") that map cleanly onto several distinct system operations, and because intake isn't structured into an enumerated action list, nothing forces the requester to disambiguate before the agent starts working. Latency and throughput incentives push the agent to auto-execute rather than round-trip a clarifying question, and without access to a domain glossary of previously-resolved terms it has no grounded way to prefer one reading over another. The result is that requester and agent silently operate on different implicit conventions, and the gap only surfaces after an interpretation with irreversible consequences has already been acted on.
 
 **Example**
 ```

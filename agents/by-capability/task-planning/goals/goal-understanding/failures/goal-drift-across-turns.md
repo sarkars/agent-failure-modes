@@ -12,7 +12,7 @@
 - Session transcript shows a gradual topic/scope shift with no single turn that looks obviously wrong in isolation.
 
 **Root Cause**
-Agent's objective changes over long conversations or workflows.
+Nothing in a long-running session periodically re-checks the current line of work against the goal stated at turn one, so as the context window fills with recent turns, recency-weighted attention gradually deprioritizes the original request in favor of whatever the agent has been looking at most recently. Adjacent problems the agent notices along the way are often more immediately engaging than the harder original task, and because there is no persistent, structured goal-contract object that survives unmodified across turns — and no requirement that each action trace back to the original acceptance criteria — small, individually reasonable pivots accumulate into a session that has quietly substituted a different goal for the one it started with.
 
 **Example**
 ```

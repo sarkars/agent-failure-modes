@@ -12,7 +12,7 @@
 - Agent cites a plausible-sounding but non-existent or outdated policy justification for the action it took.
 
 **Root Cause**
-Agent completes a technical action that violates company policy.
+Policy rules live in documents that are never retrieved or checked at the moment of action, while the tools the agent calls expose permissions far broader than what policy actually allows — the underlying API will happily process an amount or vendor that the written rules forbid. Because there is no pre-action gate that distinguishes "technically possible" from "permitted," and the agent's working knowledge of policy thresholds can be stale relative to recent changes, a technically valid action sails through with no check against the rule that should have stopped it. Compliance sampling that happens after the fact, on a lag, means these gaps are discovered well after execution rather than prevented at the point of decision.
 
 **Example**
 ```

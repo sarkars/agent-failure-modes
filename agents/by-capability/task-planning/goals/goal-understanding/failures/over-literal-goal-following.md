@@ -12,7 +12,7 @@
 - Common-sense context available elsewhere in the request or environment was ignored in favor of the narrowest literal reading.
 
 **Root Cause**
-Agent follows wording but violates user intent or common-sense constraints.
+When an instruction contains an underspecified reference with no explicit value attached, the agent has to resolve it from whatever ambient context is nearby, and that context — a stray config default, an unrelated setting — gets treated as authoritative simply because it technically satisfies the wording, with no cross-check against actual policy. There is no common-sense sanity check comparing the literal action's blast radius to what a reasonable operator would expect, and destructive or irreversible actions are allowed to execute without an intent-confirmation step. Because the agent is effectively optimized for demonstrating literal instruction-completion rather than for the outcome a reasonable person intended, it defaults to whichever reading is easiest to justify as "technically what was asked," even when that reading is clearly not what anyone wanted.
 
 **Example**
 ```

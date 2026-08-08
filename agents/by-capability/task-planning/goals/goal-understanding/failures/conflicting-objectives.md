@@ -12,7 +12,7 @@
 - Two objectives are each individually satisfied in isolation, but the combined action produces an outcome neither objective owner would endorse.
 
 **Root Cause**
-Agent cannot resolve tradeoffs like speed vs accuracy, helpfulness vs compliance.
+Objectives are listed side by side in the prompt or policy with no explicit priority ordering, so nothing tells the agent that a compliance rule should override a helpfulness goal rather than trade off against it. Hard constraints like spend caps are phrased as guidance instead of non-negotiable filters, and the agent is typically evaluated and rewarded on the softer, more visible objective — deals closed, customer satisfaction — with no matching penalty for breaching the harder one. Since there is no pre-action step that checks a candidate action against every declared objective and flags disagreement, and escalation for genuine conflicts is slow or unclear, the agent ends up resolving high-stakes tradeoffs itself, inconsistently, rather than routing them to whoever set the priority in the first place.
 
 **Example**
 ```

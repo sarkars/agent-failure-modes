@@ -12,7 +12,7 @@
 - Prerequisite step exists in the agent's plan but executes after the dependent action rather than before it.
 
 **Root Cause**
-Agent skips required validation, lookup, permission, or confirmation.
+Prerequisite checks like a balance lookup or a permission verification are usually treated as obviously implied by the task description rather than encoded as their own explicit, required steps, so nothing forces the agent to actually perform them before acting. The underlying API layer doesn't enforce these preconditions either, so a skipped check produces no error at call time — the action simply succeeds, masking the gap — and time pressure in a short conversation further incentivizes shortcutting straight to the requested action. Because prior runs that skipped the prerequisite still "worked," the shortcut gets reinforced as an acceptable pattern, and in multi-turn sessions the agent can lose track of which prerequisites were actually satisfied earlier versus merely assumed, letting a stale assumption stand in for a real check.
 
 **Example**
 ```

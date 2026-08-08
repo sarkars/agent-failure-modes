@@ -12,7 +12,7 @@
 - Session times out or hits a turn/cost budget while still in the planning phase, with zero completed deliverable sections.
 
 **Root Cause**
-Agent spends excessive time planning instead of acting.
+Nothing enforces a turn or time budget on the planning phase, so for a genuinely open-ended task with no crisp definition of "done planning," refinement has no natural stopping point and can continue indefinitely. The agent's self-critique loop tends to reward producing a more polished-looking plan over making the transition to execution, and without a diminishing-returns check comparing successive plan revisions for actual new information, reordering the same subtasks looks like productive iteration rather than the stall it actually is. Because planning and execution aren't architecturally separated into distinct phases with an enforced handoff, there is no structural moment that forces the agent to stop refining and start gathering the information the plan was supposed to be organizing in the first place.
 
 **Example**
 ```

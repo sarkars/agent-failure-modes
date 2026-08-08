@@ -12,7 +12,7 @@
 - Compensating action referenced in the plan doesn't actually exist for the target system (e.g., assumes a delete is soft when it's hard).
 
 **Root Cause**
-Agent performs irreversible actions without recovery strategy.
+Reversibility is never classified when a tool is registered, so the execution layer has no basis for knowing that a given action needs a rollback plan at all — a delete call looks the same to the executor whether it's trivially undoable or permanent. Cost-cutting and cleanup tasks carry an implicit urgency that discourages the extra step of staging or dry-running a deletion, and the evidence used to justify the action, like an access-log lookback window, is frequently shorter than the resource's real usage cycle, producing a confident false negative for "unused." Without a human-approval gate for irreversible actions below a certain blast radius, and with compensating mechanisms like versioning assumed to exist rather than verified against the specific resource's actual configuration, the agent proceeds on an assumption of recoverability that was never actually confirmed.
 
 **Example**
 ```

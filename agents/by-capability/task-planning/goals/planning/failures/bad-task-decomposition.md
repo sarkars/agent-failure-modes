@@ -12,7 +12,7 @@
 - Plan granularity is inconsistent: trivial steps get their own subtask while a critical multi-part step is folded into one line.
 
 **Root Cause**
-Agent splits the task into wrong subtasks, causing missed work.
+Task requests typically arrive as flowing prose rather than an itemized list, which makes it easy for decomposition to silently fold two distinct requirements — like document verification and payment-terms setup — into a single subtask that only actually performs one of them. Because no acceptance-criteria extraction step runs before decomposition, there is no structured checklist to validate the subtask list against, and the decomposition prompt tends to gravitate toward whichever tools and APIs are readily available rather than the full scope of the request. With only a single decomposition pass and no critic reviewing coverage before execution begins, and no template forcing one subtask per system when a task spans multiple owners, gaps in the plan are indistinguishable from a complete one until missing work surfaces much later.
 
 **Example**
 ```

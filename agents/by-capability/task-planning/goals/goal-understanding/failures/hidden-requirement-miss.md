@@ -12,7 +12,7 @@
 - The same category of hidden requirement (e.g., regional compliance) is missed repeatedly across different cases.
 
 **Root Cause**
-Agent misses unstated but critical constraints such as policy, geography, role, or SLA.
+The constraining data — jurisdiction, visa status, account tier — often already exists in a system of record, but the agent's workflow was never built to pull it into context for the decision at hand; it reads adjacent fields for one purpose and never cross-references them for eligibility. Task instructions describe only the common, "happy path" scenario, and with no checklist of commonly-implicit constraints required before execution, the agent has no prompt to check for the variant it's actually facing. Because the requester assumes the constraint is obvious from context and the underlying tool call still succeeds technically, the mismatch produces no error at the time of action and surfaces only once a downstream system enforces the rule the agent never checked.
 
 **Example**
 ```

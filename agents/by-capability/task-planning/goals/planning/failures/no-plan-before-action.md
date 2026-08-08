@@ -12,7 +12,7 @@
 - No task list, TODO breakdown, or reasoning trace precedes the first shell/file-write command for a task spanning multiple components.
 
 **Root Cause**
-Agent jumps into tool calls or actions without decomposing the workflow.
+Tasks that look simple on the surface — "just swap a library" — lead the agent to underestimate how much upfront decomposition they actually require, and with no complexity gate mandating a plan artifact before the first mutating call, there's nothing to correct that misjudgment before changes start happening. The agent's tool-use loop tends to reward fast, visible progress like file edits over an initial non-action planning turn, and dependencies between files or systems that would only become visible through an explicit enumeration step stay hidden until the agent stumbles into them mid-edit. Because the session enforces no distinction between exploratory read-only calls and the first truly committing action, the agent can commit to an approach before it has surveyed enough of the problem to know that approach won't hold for the whole task.
 
 **Example**
 ```

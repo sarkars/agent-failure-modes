@@ -11,7 +11,7 @@
 - Agent ignores or overrides context from other agents or the global plan when it conflicts with its own local objective.
 
 **Root Cause**
-Specialized agents optimize local goals over global success.
+Each specialized agent is scored and rewarded against a narrow, locally-defined metric that has no term for the end-to-end outcome, so there is nothing in its optimization target pulling it toward the global goal. Compounding this, agents are deliberately siloed from the overall task objective and from how downstream stages will consume their output, and the pipeline's strictly sequential architecture gives no agent a channel to flag that its locally-optimal work is hurting the final result. The narrow tool access and prompt scope that make each agent good at its specialty are the same properties that make it structurally blind to cross-cutting tradeoffs.
 
 **Example**
 ```
