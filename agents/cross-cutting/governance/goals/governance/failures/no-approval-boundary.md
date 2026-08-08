@@ -11,7 +11,7 @@
 - A newly added tool goes live and starts executing autonomously because no one classified it before launch.
 
 **Root Cause**
-Unclear which actions require human approval.
+This ambiguity is baked in at the moment a new action is added to the toolset: nothing forces an explicit approval-tier classification before the capability goes live, and the runtime's default behavior is to auto-execute anything not explicitly listed rather than to fail closed and demand review. Because risk thresholds like dollar amount or reversibility are never encoded as machine-checkable rules, classification falls to ad hoc developer judgment applied inconsistently case by case, and with no pre-launch review step to catch matrix gaps, unclassified or under-classified actions reach production traffic before anyone notices the boundary was never drawn.
 
 **Example**
 ```

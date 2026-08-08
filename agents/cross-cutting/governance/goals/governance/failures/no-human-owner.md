@@ -11,7 +11,7 @@
 - Multiple teams assume "someone else" is responsible for the agent's behavior, so obvious issues go unaddressed for months.
 
 **Root Cause**
-No accountable owner for agent decisions/actions.
+Ownership is never made a deployment requirement in the first place: an agent can reach production with no mandatory, named individual recorded as accountable, and whatever ownership does exist tends to live informally — a Slack thread, one engineer's personal knowledge — rather than in an enforced registry. Because the org defaults to treating "whoever built it" as the implicit owner, and no process exists to formally reassign that role when the builder leaves or changes teams, the agent quietly becomes ownerless the moment that person exits, and no one discovers the gap until an incident requires someone to take responsibility.
 
 **Example**
 ```

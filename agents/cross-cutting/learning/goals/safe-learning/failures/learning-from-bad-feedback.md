@@ -10,7 +10,7 @@
 - Gold-standard spot-check accuracy for a specific reviewer or automated grader quietly drops while their feedback keeps flowing into training unchanged.
 
 **Root Cause**
-Agent updates behavior based on incorrect/noisy feedback.
+Without gold-standard items seeded into review queues, there is no ongoing way to measure whether a given reviewer or automated grader's ratings are actually accurate, so a degraded or careless source can operate undetected indefinitely. Every feedback source is then weighted equally regardless of its (unmeasured) track record, and because incentive structures like per-item pay or throughput quotas reward reviewers for speed rather than accuracy, rubber-stamping becomes the path of least resistance under those incentives. With no pre- or post-ingestion eval regression check standing between a feedback batch and the training pipeline, a batch corrupted by one careless or adversarial source reaches production and measurably degrades behavior before anyone notices the quality of the underlying labels had dropped.
 
 **Example**
 ```

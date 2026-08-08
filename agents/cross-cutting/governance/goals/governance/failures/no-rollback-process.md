@@ -11,7 +11,7 @@
 - Reverting a model version pin breaks because the vendor's "latest" alias has moved on and the exact prior snapshot is no longer identifiable.
 
 **Root Cause**
-Cannot revert bad prompt/model/tool changes quickly.
+Reverting quickly requires an unambiguous "last known-good" artifact to revert to, but configuration changes are typically not stored as versioned, individually addressable artifacts, and no such pointer is maintained alongside the live configuration — so the previous state has to be reconstructed from memory, chat history, or scattered commits under time pressure. Whatever rollback runbook exists on paper is usually untested, since drills are rarely run, and even a successful prompt/tool rollback can fail to restore known-good behavior if model routing points at a floating "latest" alias rather than a pinned snapshot, meaning the underlying model itself may have moved on and can no longer be reverted to.
 
 **Example**
 ```

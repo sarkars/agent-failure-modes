@@ -11,7 +11,7 @@
 - Storage costs and breach exposure grow silently as the agent accumulates data it never needed past the original interaction.
 
 **Root Cause**
-Agent stores sensitive data unnecessarily.
+Ingestion pipelines are built to store data by default and require no explicit justification for each field retained, so PII that was only ever needed for the duration of a single interaction ends up written to memory, logs, and vector indexes alike. None of these records carry a TTL at write time, and because sensitive data propagates into secondary stores — caches, embeddings, debug logs — that fall outside the primary system's retention policy and are never classified as sensitive in the first place, the data keeps accumulating across locations no one has inventoried until a deletion request or audit forces someone to go looking.
 
 **Example**
 ```

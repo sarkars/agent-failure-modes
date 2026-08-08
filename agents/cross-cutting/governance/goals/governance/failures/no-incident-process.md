@@ -11,7 +11,7 @@
 - Similar agent failures recur because no post-incident process feeds learnings back into prevention.
 
 **Root Cause**
-No defined response for agent-caused failures.
+Standard incident tooling and playbooks are built around infrastructure failures — servers down, latency spikes — and nothing has been written to cover agent-specific modes like hallucinated commitments or runaway tool loops, so on-call responders are left adapting an unfamiliar procedure in real time. Severity is never pre-classified for agent incidents, meaning responders debate priority instead of following a tier, and because no tooling exists to pause a single agent or action type in isolation, mitigation is slower than it needs to be; since post-incident reviews also don't tag failures against a known pattern taxonomy, each new occurrence is investigated from scratch rather than recognized as a repeat.
 
 **Example**
 ```

@@ -11,7 +11,7 @@
 - Support fields a spike in complaints about "being tricked" into an AI conversation with no indication it wasn't a human agent.
 
 **Root Cause**
-Users are not told AI is acting or making decisions where needed.
+Disclosure obligations are scattered across jurisdictions and use cases with no central tracking, so a team can ship a consequential automated decision without ever learning that a specific disclosure law applies to it. The default posture treats notification as something to add in if someone thinks of it rather than a required default for any consequential decision, and because the copy that does exist is often written by product or engineering without legal review, it can fail to meet clarity or conspicuousness requirements even where a notice is present. None of this is caught in production because no audit mechanism verifies that a specified disclosure is actually reaching users, as opposed to merely existing in a design document.
 
 **Example**
 ```

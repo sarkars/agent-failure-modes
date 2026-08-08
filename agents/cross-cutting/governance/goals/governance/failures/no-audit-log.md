@@ -11,7 +11,7 @@
 - Disputes with users about what the agent said or did cannot be resolved because no record exists to check against.
 
 **Root Cause**
-Cannot reconstruct what the agent saw, decided, and did.
+Logging is architected as an afterthought bolted onto execution rather than a precondition for it, so an action can complete and its log write can simply fail with nothing blocking the action or raising an alarm. Without a shared trace_id threading the user's input, the agent's reasoning, and the resulting tool calls into one chain, and with log schemas that vary by integration so some actions are richly captured while others are barely noted, gaps accumulate invisibly — and because no one monitors the logging pipeline itself for silent failures, those gaps are only discovered after an incident forces a manual reconstruction.
 
 **Example**
 ```

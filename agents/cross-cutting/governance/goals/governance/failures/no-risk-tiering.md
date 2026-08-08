@@ -11,7 +11,7 @@
 - Adding a new, higher-risk capability doesn't trigger any change in the level of human oversight applied to the agent.
 
 **Root Cause**
-Low-risk and high-risk actions treated the same.
+Autonomy settings are configured once for the agent as a whole rather than per action type, because no classification step ever sorts individual actions by potential impact — reversibility, financial exposure, safety risk — before deployment. New capabilities added later simply inherit whatever default autonomy the agent already has instead of triggering a fresh risk assessment, and since no architectural enforcement point exists to apply differentiated oversight based on tier, there is nothing in the execution path capable of routing a high-stakes action differently from a routine one even if someone wanted it to.
 
 **Example**
 ```

@@ -10,7 +10,7 @@
 - A single vocal reviewer or a short burst of feedback (e.g., one bad week) swings the aggregate signal for a low-volume segment because there is no other data to dilute it.
 
 **Root Cause**
-Not enough signal to learn safely.
+Rare intents and low-traffic segments will always accumulate small absolute label counts no matter how long the system runs, but nothing in the pipeline treats that as a special case: there is no minimum sample size or confidence-interval gate that must be cleared before a segment's aggregate feedback is allowed to drive an automated update, so a handful of labels gets the same statistical authority as a well-sampled high-traffic segment. Reviewer capacity is typically allocated uniformly or randomly rather than prioritized toward the highest-uncertainty or lowest-coverage segments via active learning, and because feedback collection is opt-in and passive — only unhappy users bother to rate — the few labels that do exist for a sparse segment are also unlikely to be representative, so a handful of coincidentally negative interactions can look statistically significant and trigger a rollback that noise alone produced.
 
 **Example**
 ```

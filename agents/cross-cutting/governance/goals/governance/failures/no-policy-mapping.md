@@ -11,7 +11,7 @@
 - Compliance and engineering disagree about whether a given control is "covered," because no shared source of truth exists.
 
 **Root Cause**
-Agent behavior not mapped to company/regulatory policies.
+Capabilities ship based on whether they work, not whether they've been checked against what they're legally or contractually obligated to do, because launch review has no policy-obligation checklist step at all. Compounding this, the set of applicable regulations isn't centrally tracked, so a team may not even know an obligation like HIPAA minimum-necessary applies to their feature, and with no control matrix linking each policy to the specific technical control that satisfies it, compliance coverage can only be verified through manual investigation. Legal tracks regulatory change, but nothing systematically propagates that change into engineering as a new control requirement, so the mapping — where it exists at all — goes stale as the regulatory landscape shifts.
 
 **Example**
 ```

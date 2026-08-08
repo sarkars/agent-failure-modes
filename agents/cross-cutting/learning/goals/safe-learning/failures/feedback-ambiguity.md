@@ -10,7 +10,7 @@
 - Engineers cannot reproduce or cluster the failures a low score is meant to represent, since the same numeric/thumbs rating maps to many unrelated underlying problems.
 
 **Root Cause**
-Feedback says 'bad' but not why.
+The feedback UI itself is the bottleneck: when it exposes nothing but a binary thumbs-up/down or a single star with no required category or rationale field, a reviewer under time pressure will always take the fastest available input — a bare click — over writing out a specific reason, even when they know exactly what was wrong. Even reviewers motivated to be specific often have no structured vocabulary to draw on, because no maintained failure-mode taxonomy exists to select from, and legacy or third-party feedback sources like app-store reviews compound the problem by providing only free text or a single scalar that can't be retrofitted with structure after the fact. The result is a stream of undifferentiated negative signal that a downstream learning pipeline has no way to disaggregate into distinct, actionable directions.
 
 **Example**
 ```

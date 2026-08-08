@@ -10,7 +10,7 @@
 - Learning updates stall or apply stale/wrong reward because the outcome event arrives after the trace has already expired or been purged.
 
 **Root Cause**
-Business outcome arrives later and cannot be attributed to agent action.
+The disconnect exists because trace or session identifiers generated at the moment of an agent action are never propagated into the downstream systems — billing, CRM, support — that eventually emit the outcome event, so there's no key left to join on by the time that outcome arrives. Trace retention is typically set shorter than realistic outcome latency, meaning the linking record has often already expired before the churn or renewal event shows up, and when multiple agent actions genuinely did precede a single outcome, there's no documented multi-touch attribution model to split credit, so it defaults arbitrarily to whichever action happened to be most recent. Absent a validated short-term proxy metric, teams are left choosing between waiting weeks for ground truth or leaning on an unvalidated stand-in that may not actually track the real outcome.
 
 **Example**
 ```

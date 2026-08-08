@@ -11,7 +11,7 @@
 - "Who changed this and why" cannot be answered for a live prompt, because edits were made directly in a shared config without version history.
 
 **Root Cause**
-Prompt/tool/model changes go live without review.
+The gap opens wherever prompts, tool schemas, or model configuration can be edited directly in a live admin panel or config file with no review gate standing between the edit and production traffic. Because no automated eval suite runs against a proposed change before it ships and changes aren't versioned individually, a regression-causing edit can't be isolated from whatever else shipped alongside it, and when teams rely on an emergency hotfix path that skips review with no requirement for retroactive sign-off, that exception path becomes the normal path under any time pressure at all.
 
 **Example**
 ```

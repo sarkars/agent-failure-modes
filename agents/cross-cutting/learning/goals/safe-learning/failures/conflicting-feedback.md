@@ -10,7 +10,7 @@
 - Two agent instances fine-tuned on overlapping data but different reviewer splits diverge in tone/behavior on the same input class.
 
 **Root Cause**
-Different reviewers prefer different behaviors.
+Reviewers fall back to personal judgment because no shared, example-anchored rubric tells them how to score an ambiguous case, and since they're often drawn from different functions — support ops versus trust and safety, say — their personal judgment is itself shaped by different incentive structures baked into how each team evaluates success. The training pipeline then averages these divergent thumbs-up/thumbs-down signals into a single reward per example before it ever reaches training, which hides the disagreement rather than surfacing it, and because no adjudication step exists to resolve conflicting labels first, contradictory signal flows straight into the update pipeline and the policy chases whichever reviewer's preferences happened to dominate a given batch.
 
 **Example**
 ```

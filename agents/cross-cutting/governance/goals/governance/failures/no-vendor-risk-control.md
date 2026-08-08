@@ -11,7 +11,7 @@
 - The agent goes fully down during a vendor outage because no fallback path was ever designed for that "critical" dependency.
 
 **Root Cause**
-External model/tool vendors create unmanaged risk.
+Vendors get integrated because they solve the immediate functional problem, with no risk-tiering or security assessment step forcing anyone to ask what happens if that dependency degrades or disappears. Because vendor API calls are typically made directly through SDK calls scattered across the codebase rather than behind an abstraction layer, there is no architected fallback for vendors the agent can't function without — a single point of failure that surfaces only during an actual outage. This is made worse by the fact that vendor changelogs, deprecation notices, and security disclosures aren't systematically monitored or routed to an owning team, so the organization typically learns about a vendor-side change from a production incident rather than from advance warning.
 
 **Example**
 ```

@@ -11,7 +11,7 @@
 - Security audits discover agents holding access to systems no longer relevant to their current task.
 
 **Root Cause**
-Agent permissions are not periodically reviewed.
+Credentials are provisioned to grant access, not to expire it: without a default TTL or a scheduled recertification cadence, a grant that made sense for a three-week migration simply persists once the task ends, since nothing forces anyone to re-justify it. This is compounded by the fact that access requests are approved as one-off exceptions with no durable link to the project they supported, and no tracked ownership record, so once the original requester moves on there is no one positioned to notice or revoke the grant — and no centralized inventory that would let security catch it without a manual, infrequent audit.
 
 **Example**
 ```
