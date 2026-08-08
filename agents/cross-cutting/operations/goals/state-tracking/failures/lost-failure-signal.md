@@ -12,7 +12,7 @@
 - Downstream steps proceed as if a fatal error never occurred, compounding into a larger reported success that isn't real.
 
 **Root Cause**
-Agent ignores tool warning/error and continues.
+Tool responses come back as unstructured text rather than a structured envelope with an explicit status or severity field, so an embedded warning or error looks like just another line in normal-looking output instead of a flagged condition the agent must react to. Because the agent's loop is built to advance to the next step by default and no mandatory-halt rule or forced-acknowledgment gate exists for fatal or unacknowledged errors, the model can sail past a failure buried in the log text and narrate success anyway, with nothing in the architecture positioned to stop it.
 
 **Example**
 ```

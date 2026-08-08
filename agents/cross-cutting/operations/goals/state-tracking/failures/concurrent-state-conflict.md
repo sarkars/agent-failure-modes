@@ -12,7 +12,7 @@
 - Object ends in a state that neither concurrent writer actually intended (e.g., a ticket closed as duplicate after being assigned).
 
 **Root Cause**
-Multiple agents/users modify same object without coordination.
+Writes to the shared object follow a read-modify-write pattern with no version token or ETag check, so nothing at write time can tell whether the object changed since it was read, and no shared locking service exists to serialize access when multiple agent instances (or an agent and a human) work the same queue or record. This is worst on a small set of "hot" objects that see disproportionate concurrent access, and because no conflict-resolution service exists even when a mismatch is technically detectable, there is no defined merge or escalation path — the system has no way to do anything but let the last write silently win.
 
 **Example**
 ```

@@ -12,7 +12,7 @@
 - Corruption rate correlates with response length or complexity, since longer free-text summarization gives more opportunity for transcription drift.
 
 **Root Cause**
-Agent misreads/transforms tool output incorrectly.
+Critical values from a tool call are routed through free-text prose generation instead of being copied verbatim from the structured response or passed through a typed extraction step, so the model effectively re-derives numbers, IDs, and dates from memory of what it just read rather than reproducing them exactly. Nothing in the pipeline diffs the generated text against the original structured value before it ships, and high-precision fields — multi-decimal currency, long IDs, dates in different formats — are the most exposed because they offer the most opportunity for transcription drift during summarization, an exposure that grows with response length and complexity.
 
 **Example**
 ```

@@ -12,7 +12,7 @@
 - User later reports the claimed action never actually happened (email never arrived, file doesn't exist).
 
 **Root Cause**
-Agent believes a step happened when it did not.
+The task ledger accepts the model's own narration as sufficient evidence that a step completed, with nothing requiring a matching tool-call success record before a step is marked done, and no post-generation checker cross-references completion language against real tool_call_ids in the trace. This gap is worsened by tool calls that fail silently or time out without surfacing a structured error the model can react to, and by the absence of read-after-write verification (checking the sent-items folder, listing the created file) that would independently confirm the action's real-world effect instead of trusting the write call's own claim.
 
 **Example**
 ```

@@ -11,7 +11,7 @@
 - The same user has to correct the same outdated fact repeatedly across sessions because the correction never propagated back into durable memory.
 
 **Root Cause**
-Agent uses information that changed.
+Memory records carry no category-specific decay policy, so a fast-changing fact like current project or employer is stored with the same implicit durability as a stable one like a name, and nothing in retrieval down-weights it as it ages. When the user corrects the record mid-conversation, that correction is applied only to the current turn rather than triggering a persistent update, and because there is no active reconfirmation workflow for volatile fact categories, the superseded value keeps surfacing in later sessions — often compounded by lag in whatever pipeline is supposed to propagate the correction into durable storage.
 
 **Example**
 ```

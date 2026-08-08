@@ -12,7 +12,7 @@
 - The same raw transcript is reused verbatim across topic switches instead of being scoped to the active task.
 
 **Root Cause**
-Current task is polluted by unrelated previous context.
+The orchestration layer carries the full raw transcript forward indefinitely rather than scoping context to the active task, and because no topic-drift or entity-similarity check runs before that history is reused, nothing stops stale content from an earlier, unrelated exchange from being fed back into generation. The deeper gap is the absence of explicit task-boundary detection — no signal ever marks where one topic ends and another begins — so as sessions accumulate more sub-topics over time, the odds rise that some earlier thread resurfaces where it doesn't belong, especially since memory retrieval pulls broadly from session history instead of a durably scoped store.
 
 **Example**
 ```

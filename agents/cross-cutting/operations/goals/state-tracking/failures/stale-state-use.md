@@ -12,7 +12,7 @@
 - External changes (another user/agent modifying the resource) go completely unnoticed because no cache-invalidation event exists for that resource type.
 
 **Root Cause**
-Agent uses old tool results after new data arrives.
+Fetched tool results sit in context for the rest of a multi-turn session with no cache-invalidation-on-write mechanism and no freshness timestamp or per-resource max-age policy forcing a re-fetch, so nothing structurally distinguishes a value read seconds ago from one read twenty minutes ago. Because tool APIs don't return a version or ETag alongside their data, the agent's decision logic has nothing to check before committing an action, and without a mandatory re-fetch rule for time-sensitive operations the gap between a stale read and a dependent write only widens the longer a session runs, giving external actors more opportunity to change the underlying resource unnoticed.
 
 **Example**
 ```

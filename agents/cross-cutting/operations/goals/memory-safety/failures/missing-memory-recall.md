@@ -11,7 +11,7 @@
 - A structured preference category (dietary, contact channel, order history) fails to surface simply because the current query isn't semantically close to how the fact was originally phrased.
 
 **Root Cause**
-Agent fails to use relevant durable information.
+Retrieval depends on embedding similarity alone, with no keyword or structured-index fallback and no query expansion to bridge the vocabulary gap between how a fact was originally phrased and how it's later referenced, so a stored fact silently fails to surface whenever the current wording drifts even moderately from the storage-time phrasing. Compounding this, recall is never a required step in the response pipeline — the model only searches memory when it happens to decide to — and there is no regression suite of realistic paraphrase pairs to catch retrieval-breadth regressions before they reach users, so the gap persists undetected release after release.
 
 **Example**
 ```

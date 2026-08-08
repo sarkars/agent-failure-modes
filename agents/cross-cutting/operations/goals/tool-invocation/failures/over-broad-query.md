@@ -9,7 +9,7 @@
 - Agent's answer cites or blends details from unrelated records diluted into an oversized result set.
 
 **Root Cause**
-Agent retrieves too much data and reasons over irrelevant records.
+Constructing a loosely-filtered query is simply easier than specifying the customer ID, date range, or status that would properly scope it, and the agent has no visibility into the fact that omitting a filter makes the tool silently fall back to its broadest possible default. With no check on the returned result count before reasoning begins, an oversized, noisy set gets skimmed rather than narrowed, so the agent ends up answering from whichever records happen to appear first instead of the ones the user actually meant.
 
 **Example**
 ```

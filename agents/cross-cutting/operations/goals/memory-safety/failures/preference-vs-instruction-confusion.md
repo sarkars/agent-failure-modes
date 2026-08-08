@@ -11,7 +11,7 @@
 - A genuine hard constraint (e.g., an allergy) and a casual soft preference (e.g., "I like concise answers") are enforced with equal rigidity because strength typing was never applied at storage time.
 
 **Root Cause**
-Agent treats a soft preference as a hard rule.
+Nothing classifies preference strength at the moment a fact is written to memory, so casual phrasing like "usually" or "I like" is stored with the same weight as an explicit constraint like "never," and ambiguous source utterances default toward the stricter tier instead of the safer soft-preference one. Because there is no resolver logic ranking the current turn's explicit instruction above whatever strength tier a memory happens to carry, a stored soft preference can outrank what the user is asking for right now — and without a feedback loop that downgrades a preference's tier after it causes an unwarranted refusal, the same mistyped record keeps overriding legitimate requests indefinitely.
 
 **Example**
 ```

@@ -9,7 +9,7 @@
 - Agent retries the same call with the same omission, or fabricates a placeholder value instead of asking.
 
 **Root Cause**
-Agent omits ID, date range, filter, auth scope, or tenant.
+Required fields that were stated early in a conversation fall out of context once summarization or truncation kicks in, and because the tool description doesn't distinguish required fields from optional ones, the model has no structural reason to treat their disappearance as a problem worth flagging. With no preflight schema validation sitting between the model's constructed call and the live API, the omission never gets caught before dispatch — it just surfaces later as a generic downstream error (or, worse, a silent default) rather than a blocked call the agent is forced to fix.
 
 **Example**
 ```

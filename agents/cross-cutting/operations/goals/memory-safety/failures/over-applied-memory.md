@@ -11,7 +11,7 @@
 - Personalization is applied at full strength regardless of how distant the current task is from the one where the preference was originally learned.
 
 **Root Cause**
-Agent applies a past preference where it does not belong.
+Preferences are stored without applicability-domain tags, so anything that matches semantically — "seating" for a flight preference matching a restaurant booking — gets pulled into context regardless of whether the task type has anything to do with where the preference was learned, and no relevance classifier sits between retrieval and prompt injection to catch that mismatch. The problem is reinforced by two design defaults: ambiguous preferences are scoped globally at write time instead of conservatively to a single domain, and once injected, a preference is applied at constant strength rather than decaying with task distance, so there is neither a gate to stop the bleed nor a way for a user to permanently exclude a preference from a domain where it keeps resurfacing.
 
 **Example**
 ```

@@ -12,7 +12,7 @@
 - No pre-execution restatement or confirmation step exists to catch a mismatched binding before the action takes effect.
 
 **Root Cause**
-Agent attaches wrong value to wrong entity.
+Entity-value associations are inferred positionally from free text — whatever value was "closest mentioned" — instead of read from a structured, keyed binding table, and no typed entity-resolution step converts ambiguous references like "the account" or "that date" into canonical entity_ids before attribute values get attached to them. This positional inference becomes increasingly error-prone as a task involves more similar entities referenced close together, and because no pre-execution restatement or provenance validation checks a bound value against the specific source record it claims to come from, a mismatched binding sails through to execution unchallenged.
 
 **Example**
 ```

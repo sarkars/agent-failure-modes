@@ -9,7 +9,7 @@
 - Same idempotency key reused across genuinely different payloads, or omitted entirely on a retry, defeating deduplication.
 
 **Root Cause**
-Agent repeats a write action and creates duplicates.
+The tool wrapper retries automatically on timeout without ever checking whether the original call already succeeded server-side, and because the tool's API surface exposes no idempotency-key mechanism, the agent has no way to signal "this is the same action" even if it wanted to. That gap is compounded by session state that doesn't persist which write actions were already attempted across a multi-turn conversation or a crash/restart, so a retry after a dropped connection looks to the system exactly like a brand-new, independent request.
 
 **Example**
 ```

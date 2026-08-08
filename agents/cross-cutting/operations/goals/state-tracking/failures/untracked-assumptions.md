@@ -12,7 +12,7 @@
 - User correction ("no, I meant...") reveals an assumption that was never surfaced or recorded anywhere in the trace.
 
 **Root Cause**
-Agent makes assumptions then treats them as facts.
+There is no structured place to record a guess made to fill an information gap, so the moment an assumption is written into working state it becomes indistinguishable from a confirmed fact, and generation is never required to render it with hedged language that would signal it's still open. Nothing defines a clarification threshold for high-impact or irreversible actions either, so the agent can reason its way through consequential ambiguity instead of stopping to ask — a risk that compounds in multi-entity situations where several plausible referents exist and a silent guess is the path of least resistance.
 
 **Example**
 ```

@@ -9,7 +9,7 @@
 - Agent reports "no results found" or gives an incomplete answer despite the data existing under a different filter value.
 
 **Root Cause**
-Agent misses correct data due to overly strict filters.
+The agent reaches for an exact-match filter in situations that actually needed fuzzy or range matching, implicitly assuming a real-world category (status, date, name) has one canonical value when in practice it has several valid synonyms or states a record could legitimately hold. Because no fallback or broadening step is defined for when a filtered query comes back empty, that zero-result response is taken at face value instead of being treated as a signal to relax a filter and retry, so a record sitting one status value away from the query is reported as if it didn't exist at all.
 
 **Example**
 ```

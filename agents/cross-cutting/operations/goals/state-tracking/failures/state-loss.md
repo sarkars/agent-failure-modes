@@ -12,7 +12,7 @@
 - No persistent ledger exists outside the model's context, so recovery after truncation relies entirely on whatever remains in the visible transcript.
 
 **Root Cause**
-Agent forgets completed steps or user-provided constraints.
+Completed steps and stated constraints live only in the raw conversation transcript rather than a durable external ledger or structured task object, so once a long session triggers context-window compaction and drops the early turns, that information simply ceases to exist anywhere the agent can consult. There is no duplicate-step check against a persistent record before an action re-executes, and session resumption after any interruption reconstructs context from whatever transcript remains rather than from a persistent state store — so the same architectural gap causes both the repeated questions and the duplicate actions, not two separate problems.
 
 **Example**
 ```
