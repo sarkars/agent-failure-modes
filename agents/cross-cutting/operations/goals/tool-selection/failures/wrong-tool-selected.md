@@ -12,7 +12,7 @@
 - tool_selection_policy_violation_rate rises for a task category after a new tool is added to the catalog with an overlapping description.
 
 **Root Cause**
-Agent chooses an inappropriate tool for the task.
+When two tools' descriptions overlap enough that both look like a plausible match for a query, the model tends to resolve the ambiguity by surface-level keyword similarity between the query phrasing and the tool description rather than by the task's actual authority or freshness requirements, because no documented policy hierarchy exists to rank tools by those dimensions for a given task type. Nothing scores the returned result's relevance or authority after the call completes, so a low-authority substitute for a purpose-built source goes unnoticed unless someone happens to check. This is left uncorrected because few-shot examples in the prompt rarely cover the specific tool pairs known to cause confusion, and the routing/arbitration layer doesn't constrain the model's choice set for task categories that already have a clear preferred tool — selection is fully delegated to in-context judgment every single time, with no memory of past mistakes.
 
 **Example**
 ```

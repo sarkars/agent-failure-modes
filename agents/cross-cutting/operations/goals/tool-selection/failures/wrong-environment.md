@@ -12,7 +12,7 @@
 - No pre-execution echo/confirmation of the resolved environment or tenant ID exists before a destructive or write call proceeds.
 
 **Root Cause**
-Agent acts in production instead of staging, wrong tenant, or wrong project.
+Because a single deployment credential accepts an environment parameter rather than being physically scoped to one environment, the agent's choice of target is enforced only by its own reasoning, not by anything at the auth layer — a wrong guess simply goes through. That guess is especially likely to be wrong in long-running sessions, where environment or tenant context set for an earlier, unrelated task can silently persist and get reused for a new request without anyone re-confirming it is still correct. Nothing requires the agent to echo back and confirm the resolved environment before a write proceeds, and because the deploy tool itself is shared across environments (selected via a flag rather than being a separate, namespaced tool), environment selection is left as an agent-controlled parameter instead of a routing-layer decision — with no real-time check comparing credential scope against the resource actually being touched, the mismatch isn't caught until after the change has already landed.
 
 **Example**
 ```

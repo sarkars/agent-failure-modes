@@ -9,7 +9,7 @@
 - Output or tool call is off by a fixed multiplicative factor (100x for cents/dollars, 1000x for grams/kg) that isn't caught because the number still looks plausible.
 
 **Root Cause**
-Agent sends cents vs dollars, UTC vs local, kg vs grams.
+APIs frequently return monetary and physical-quantity values as bare integers in their minor unit — cents, grams — without a unit suffix on the field name or any accompanying metadata, so the number alone carries no information about its own scale. Absent that signal, the model defaults to whatever unit convention is most common in everyday language and its training data — dollars, kilograms — rather than the one the schema actually uses, because nothing forces it to check. That misreading then passes through unchallenged because no range or plausibility check ever questions whether the resulting figure makes sense (a $4,999 coffee, for instance), so a fixed 100x or 1000x error reaches the user or a downstream charge looking entirely unremarkable.
 
 **Example**
 ```

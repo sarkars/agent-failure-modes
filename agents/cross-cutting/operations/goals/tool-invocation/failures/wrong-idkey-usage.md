@@ -9,7 +9,7 @@
 - Call succeeds without any schema error but silently operates on the wrong object because two ID types share the same format.
 
 **Root Cause**
-Agent uses customer ID as account ID, message ID as thread ID, etc.
+Because most systems represent every kind of identifier — customer, account, message, thread — as the same opaque string or UUID format, there is nothing in the value itself that reveals what kind of entity it actually points to. When an upstream tool result surfaces several such IDs without clearly labeling which field corresponds to which entity, the agent has to guess based on position or naming convention, and it will happily pick a plausible-looking string that satisfies the schema even though it names the wrong object. This goes undetected because no step in the pipeline re-fetches and confirms that the object behind the chosen ID actually matches what the user was referring to before a write is allowed to proceed, so a syntactically valid but semantically wrong ID sails straight through.
 
 **Example**
 ```

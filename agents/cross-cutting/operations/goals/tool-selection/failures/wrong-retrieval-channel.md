@@ -12,7 +12,7 @@
 - Search results come back irrelevant because the selected channel has no knowledge of the internal entity being queried, and the agent retries or reports "not found" instead of switching channels.
 
 **Root Cause**
-Agent searches public web instead of internal/private source or vice versa.
+When internal and external retrieval are exposed through a single, ambiguously-named search tool, the decision of which index to hit falls entirely on the model's in-context judgment rather than being enforced by any routing layer, and nothing classifies the query's data sensitivity beforehand to constrain that choice. Task types with obviously fixed data requirements — a customer account lookup is always internal — have no hardcoded channel allowlist, so the routing decision gets re-derived from scratch on every call instead of being settled once at the task-template level. Because no leakage detector inspects outbound public-search queries for embedded PII or internal identifiers, and because the internal and external tool descriptions overlap enough that keyword matching can't reliably tell them apart, a misrouted query can carry a customer's name and account number straight to an external provider before anything catches it.
 
 **Example**
 ```

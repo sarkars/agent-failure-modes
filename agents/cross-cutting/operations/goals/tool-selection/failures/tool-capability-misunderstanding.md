@@ -12,7 +12,7 @@
 - invalid_tool_call_rate or unsupported_operation_rejection_rate spikes immediately after a tool/API version change, without a corresponding update to the model-facing schema description.
 
 **Root Cause**
-Agent assumes a tool can do something it cannot.
+Tool schemas are almost always written in the affirmative — describing what a tool supports — and rarely enumerate what it explicitly cannot do, so the model is left to infer boundaries by omission rather than being told them outright. There's typically no separate, machine-checkable capability manifest that a planner could validate a proposed call against before dispatch, so an out-of-scope request is only caught, if at all, after it reaches the live tool. Worse, when the tool does receive an unsupported request it tends to fail silently — an empty result or a generic error rather than a typed rejection — giving the agent no signal that its underlying assumption about the tool's capabilities was wrong, a problem compounded further when the tool's real behavior drifts after an API change with no corresponding update to the schema text or a CI regression check to catch the mismatch.
 
 **Example**
 ```

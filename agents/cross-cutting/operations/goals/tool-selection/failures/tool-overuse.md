@@ -12,7 +12,7 @@
 - Cost-per-resolved-task rises for a task category without any capability or quality improvement to justify it.
 
 **Root Cause**
-Agent calls tools unnecessarily, increasing cost and latency.
+Without a per-task budget on tool calls, nothing forces the agent to stop exploring and synthesize an answer once it already has enough evidence, so it keeps calling as long as another call seems marginally plausible. That tendency is amplified by a planning loop that re-evaluates its approach after every result without first checking whether the information it's about to fetch is already sitting in context, and because there's no deduplication cache, an identical query re-issued after a plan revision goes straight back to the live tool instead of being served from what was already retrieved. No gate requires the agent to justify why the next call will actually change the answer, and because nobody tracks the relationship between call count and answer quality, this drift toward excessive tool use isn't caught until the cost anomaly itself becomes visible.
 
 **Example**
 ```

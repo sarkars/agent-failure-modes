@@ -9,7 +9,7 @@
 - Agent invokes a tool expecting a plain internal state update, unaware the same call also triggers a customer-facing notification or billing event.
 
 **Root Cause**
-Agent misses that a tool sends email, bills, deploys, or notifies.
+Tool descriptions are typically written around their primary function — updating a status field — and rarely document the secondary systems (notification service, billing pipeline, deploy hook) that fire automatically as a consequence, so the agent has no textual signal that a side effect exists at all. There is also no dry-run or preview path that would let the agent see what a call would trigger before committing to it, and because side-effecting and side-effect-free tools share the same calling convention, nothing about the interface itself distinguishes a safe internal write from one with external consequences. The result is that the agent reasons only about the effect it intended and has no mechanism to discover the effects it didn't.
 
 **Example**
 ```

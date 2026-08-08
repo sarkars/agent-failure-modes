@@ -12,7 +12,7 @@
 - A single-source, unverified tool output is treated as authoritative for a high-stakes (financial, legal, safety) claim with no corroboration.
 
 **Root Cause**
-Agent treats malformed, stale, or injected tool output as authoritative.
+Tool output is typically dropped directly into the model's context with no structural marker separating "data returned by a tool" from "instructions to follow," so an instruction embedded inside a document or API response carries exactly the same apparent authority as a legitimate system directive. Nothing scans that output for injection patterns before it reaches the model, and because tool results carry no provenance or freshness metadata — no source, no timestamp, no checksum — there is no way to check staleness or origin before the content is used. This is compounded by the absence of any corroboration requirement for high-stakes claims, so a single tool call, however malformed, stale, or manipulated, is sufficient on its own to be treated as ground truth, and content-ingestion tools that return raw extracted text without sanitizing embedded natural-language instructions make the injection vector directly reachable.
 
 **Example**
 ```

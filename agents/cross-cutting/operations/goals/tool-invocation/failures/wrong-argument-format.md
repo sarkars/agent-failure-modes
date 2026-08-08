@@ -9,7 +9,7 @@
 - Agent sends a value in the wrong type (string instead of number), an invalid enum member, or malformed JSON that fails schema validation.
 
 **Root Cause**
-Agent sends invalid JSON, enum, type, or schema.
+When a tool's schema is documented with little more than a type signature and no concrete examples, the model has to guess at the exact casing, nesting, or enum spelling the API expects, and it fills that gap with plausible-looking values drawn from general patterns rather than the tool's actual contract. Enum fields are especially prone to this because the accepted values are rarely spelled out in full, so the model reaches for a natural-language synonym instead of the exact token the backend recognizes. Because no validation layer checks the constructed payload against the real schema before it is sent, these mismatches aren't caught until the API itself rejects the call, and even then the resulting error is often too generic to tell the agent which field or value was actually wrong.
 
 **Example**
 ```

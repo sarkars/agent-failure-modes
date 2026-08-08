@@ -12,7 +12,7 @@
 - Post-hoc diff between the agent's stated intent and the actual resulting state reveals the agent acted on outdated information.
 
 **Root Cause**
-Agent calls write tool before reading/verifying current state.
+Nothing in the tool-dispatch path enforces a read-before-write invariant per resource, so a write can fire based on whatever value the agent happens to be holding in context, regardless of when that value was actually observed. Writes accept any value without a version or ETag token, which removes the one mechanism that could otherwise detect that the underlying state changed since the agent last looked; combined with the fact that no staleness window is configured on read-write pairing, a read from early in a long session is treated as just as valid as one taken seconds ago. Because write tools exist as standalone capabilities independent of any read step, there's no structural coupling forcing the agent through a verify-then-write sequence — it is entirely up to the agent to remember to check first, and in long sessions it doesn't.
 
 **Example**
 ```

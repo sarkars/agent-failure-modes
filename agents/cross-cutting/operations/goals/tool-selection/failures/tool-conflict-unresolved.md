@@ -12,7 +12,7 @@
 - No escalation or "uncertain" framing is presented to the user despite two sources actively disagreeing on a material fact.
 
 **Root Cause**
-Agent receives conflicting tool outputs and picks one without rationale.
+When two tools disagree, the agent has no authority ranking to consult, so it defaults to whatever heuristic is easiest to apply — typically just the value it processed most recently — rather than reasoning about which source should be trusted. Nothing in the pipeline forces an explicit reconciliation step, and because parallel calls in the same turn simply populate the working context in sequence, the second result silently overwrites the first with no diff or contradiction check flagging that they disagreed in the first place. This is allowed to reach the user because high-stakes claims aren't gated behind a corroboration requirement, so a single arbitrarily-chosen source is sufficient to produce a confident final answer even when a conflicting, possibly-correct value existed right there in the same trace.
 
 **Example**
 ```

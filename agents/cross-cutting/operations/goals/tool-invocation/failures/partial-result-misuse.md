@@ -9,7 +9,7 @@
 - Agent's summary or downstream calculation is based on a truncated page or list, silently dropped fields ignored.
 
 **Root Cause**
-Agent treats partial/incomplete output as complete.
+Pagination and truncation metadata typically travels alongside the data itself, but the parsing layer that hands tool output to the model often extracts only the record array and drops the accompanying `has_more`/`truncated` flag, so the signal that would trigger a second fetch never reaches the reasoning step. Because a partial result set is byte-for-byte the same shape as a complete one, there is no structural cue — no error, no odd formatting — that would make the agent pause and double-check. That gap is compounded by an optimization toward fast single-pass answers: verifying completeness costs an extra round trip, and nothing in the agent's objective rewards taking it before aggregating or summarizing.
 
 **Example**
 ```

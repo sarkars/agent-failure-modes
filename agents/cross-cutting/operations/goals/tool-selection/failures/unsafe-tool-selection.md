@@ -12,7 +12,7 @@
 - No pre-state snapshot exists for the affected resource, making rollback impossible once the misinterpretation is discovered.
 
 **Root Cause**
-Agent uses destructive capability for exploratory work.
+Ambiguous phrasing like "clean up" or "remove old stuff" doesn't distinguish between a reporting task and an execution task, and left to resolve that ambiguity on its own, the agent tends to default toward the more decisive interpretation — deletion — rather than the safer one. Nothing at the credential layer stops this: a single broad-scope credential grants both read/discovery and destructive operations, so an incorrect interpretation of intent isn't blocked even when the reasoning behind it was wrong, and there is no policy engine mapping the task's current phase (still exploratory) to a correspondingly restricted tool tier. Because destructive actions triggered by ambiguous intent aren't required to run as a dry-run first, nothing surfaces the blast radius before execution, and with no pre-state snapshot captured beforehand, there is no fast rollback once the misinterpretation is discovered — the mistake becomes permanent before anyone has a chance to catch it.
 
 **Example**
 ```

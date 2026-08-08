@@ -9,7 +9,7 @@
 - Agent blindly retries a write action immediately after a timeout without confirming whether the original call already succeeded.
 
 **Root Cause**
-Agent fails silently or retries destructively after API limit/timeout.
+Most retry logic treats every failed call the same way regardless of whether it was a read or a write, so it never accounts for the fact that a timed-out write may have already completed on the server before the client gave up waiting. Without an idempotency key or a way to check whether the original action landed, a retry is indistinguishable from a brand-new request, so re-issuing it simply duplicates the effect rather than confirming and resuming it. Because 429s and timeouts are folded into the same generic-failure handling as any other error, the system reaches for immediate retry instead of the backoff-plus-state-check sequence that ambiguous outcomes actually require.
 
 **Example**
 ```

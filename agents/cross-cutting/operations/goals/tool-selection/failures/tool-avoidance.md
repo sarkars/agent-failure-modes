@@ -12,7 +12,7 @@
 - Scheduled knowledge-cutoff or private-data probes return direct answers instead of triggering a tool call.
 
 **Root Cause**
-Agent answers from memory when current/source-grounded tool use is required.
+Without a classifier that flags volatile-domain queries (pricing, schedules, account state) before generation begins, nothing structurally blocks the model from answering straight from its parametric knowledge, and that knowledge produces text that reads exactly as confidently as a properly grounded answer, giving neither the model nor a reviewer any stylistic cue that a lookup was skipped. The problem is worsened when the user's phrasing doesn't explicitly demand a lookup ("how's my order doing" rather than "check my order"), since the surface form carries no signal forcing a tool call, and any latency or cost pressure on tool use only reinforces the shortcut. Because no post-generation scanner checks for the presence of a supporting tool call or citation before a response ships, an answer built entirely on stale or absent grounding reaches the user unflagged.
 
 **Example**
 ```

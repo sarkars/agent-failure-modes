@@ -9,7 +9,7 @@
 - Agent computes "today" or "this week" in the wrong timezone, producing a boundary that's off by hours or a full day.
 
 **Root Cause**
-Agent queries or schedules using incorrect date/time boundaries.
+The agent often has no authoritative source for the user's timezone — no profile field, no session context — so it falls back to whatever default is easiest to reach, usually UTC or the server's own local time, regardless of where the user actually is. That guess is never corrected because the tools it calls accept bare date strings with no timezone component, so the ambiguity is baked into the request format itself rather than flagged as missing information. Compounding this, relative phrases like "today" or "this week" get resolved once, early in the exchange, without being re-anchored to whatever timezone convention the target tool actually expects, so a boundary that was reasonable at the point of interpretation can still be wrong by the time it reaches the API.
 
 **Example**
 ```
