@@ -10,7 +10,7 @@
 - Retry after a timeout or tool-call error re-executes the original write instead of checking whether it already succeeded.
 
 **Root Cause**
-Agent creates duplicate tickets/emails/orders/charges.
+Write-type tool calls carry no idempotency key, so a retry is indistinguishable at the receiving system from a brand-new request — there is nothing in the request itself that says "this is the same logical operation as the one five seconds ago." The agent compounds this by treating an ambiguous outcome (a timeout, a dropped response) as "definitely failed" rather than "unknown," so it retries by default instead of first checking whether the original call actually succeeded server-side. With no shared lock across parallel execution paths (retry logic racing a user-triggered re-ask, for instance), two logically identical writes can commit independently with no mechanism at any layer positioned to recognize they're the same request.
 
 **Example**
 ```

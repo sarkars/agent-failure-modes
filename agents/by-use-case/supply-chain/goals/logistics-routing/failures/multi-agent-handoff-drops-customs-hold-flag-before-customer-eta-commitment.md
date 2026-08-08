@@ -5,14 +5,14 @@
 **Frequency**: Occasional
 
 **Symptoms**
-- Customer-facing delivery ETA is committed as if transit time were the only variable, while the routing agent's own planning commentary for the same shipment explicitly flagged a customs-hold risk at a named border crossing
-- The structured shipment record consumed by the customer-notification agent contains transit-time and route-leg fields but no corresponding customs-risk field, even though the routing agent's reasoning text discusses the risk in detail
-- Re-running the same ETA commitment with the customs-hold risk explicitly included as a structured field on the shipment record produces a wider, risk-adjusted ETA range, isolating the failure to the handoff contract rather than the routing analysis being wrong
-- The dropped flag concentrates on routes through border crossings with historically variable hold times, where the risk is most likely to be expressed as a qualitative note rather than a structured probability or delay-range field
-- Customer escalates when the shipment is held at customs and the delivery date passes, despite the routing agent having identified this exact risk before the ETA was ever communicated
+- The routing agent's plan for a specific shipment names an exact border crossing and explains, in prose, why hold risk is elevated there this quarter — but the shipment record's structured fields carry only transit times per leg, with no risk field at all
+- The customer-notification agent generates the delivery ETA by summing the structured transit-time fields across every leg; it has no step that opens or parses the routing agent's free-text planning notes before committing a date
+- When the committed ETA passes and the shipment is still held at the flagged crossing, the resulting escalation record, compared against the routing agent's original commentary, shows the risk was identified before the ETA was ever sent to the customer
+- The gap is worst on crossings with historically volatile hold times, precisely because those are the cases where the routing agent's judgment is qualitative rather than backed by a fixed rule — a crossing with a hard, published hold-time SLA would at least have a rule available to encode into a structured field
+- No reconciliation step anywhere in the pipeline compares risk language in routing commentary against the structured record actually consumed downstream, so the mismatch is never caught before a customer-facing failure surfaces it
 
 **Root Cause**
-The routing agent and customer-notification agent are separately invoked components that communicate through a structured shipment record, not through each other's free-text reasoning. When the routing agent's output contract allows it to note a customs-hold risk only in commentary without requiring a corresponding structured field on the shipment record, that risk is visible to a human reading the routing plan but invisible to the notification agent, which generates the customer-facing ETA from structured transit-time fields rather than re-reading the routing agent's full commentary for every shipment before committing a date.
+The shipment record schema connecting these two agents was built to answer "how long will each leg take," not "what could go wrong on this leg" — it carries a transit-time field per route leg but no field for a qualitative risk note tied to a specific crossing point. When the routing agent's planning step identifies a customs-hold risk, that conclusion lives only in the free-text commentary attached to the routing plan, a field the notification agent's ETA-generation logic was never built to read; it sums the numeric transit-time fields and commits a date. Because the two agents are invoked separately, at different points in the shipment lifecycle, there is no shared execution context in which the notification agent would encounter the routing agent's reasoning unless it were explicitly written to a field the notification agent actually consumes.
 
 **Example**
 ```

@@ -10,7 +10,7 @@
 - Updating a config or database field triggers a downstream billing run, shipment, or deployment the agent had no visibility into.
 
 **Root Cause**
-Agent misses that action triggers notifications, billing, shipment, or deployment.
+The action's cascading effects live entirely in a downstream system — a billing webhook, a notification trigger, a fulfillment pipeline — that sits outside the agent's own tool schema, so the tool description documents only the primary, intended effect ("update this field") and has no way to surface what else that write will set in motion. Because there is no side-effect manifest or registry the agent can consult before executing a state change, and shared database fields make an internal correction indistinguishable from a customer-initiated one, the agent has no signal available to it — even in principle — that a seemingly narrow write is about to trigger a much broader downstream consequence.
 
 **Example**
 ```

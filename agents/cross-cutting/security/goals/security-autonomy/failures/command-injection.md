@@ -13,7 +13,7 @@
 - Audit logs show unexpected commands executed (e.g., user requested file list, but find/grep/rm commands run).
 
 **Root Cause**
-Agent passes unsafe user/tool input into shell/API commands.
+The vulnerability stems from constructing shell command strings via direct interpolation of tool parameters (often model-generated or user-supplied) rather than passing arguments through a parameterized, `shell=False` execution path. Because the pattern typically runs `subprocess.run()`/`os.system()` with `shell=True` on a string built from raw input, any shell metacharacter embedded in that input becomes executable syntax rather than inert data. This gap persists because no input validation or allowlisting sits between the input and the shell call, no static-analysis rule flags `shell=True` usage in the codebase, and the model itself was never trained to avoid generating shell metacharacters — the injection succeeds precisely because nothing in the pipeline treats the boundary between "data" and "command" as one that needs active enforcement.
 
 **Example**
 ```

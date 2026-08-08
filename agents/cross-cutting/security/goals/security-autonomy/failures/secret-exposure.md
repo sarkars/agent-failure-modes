@@ -13,7 +13,7 @@
 - Secret rotated immediately after exposure, indicating automated detection post-hoc.
 
 **Root Cause**
-API keys/tokens/private URLs leak through answer/log/tool.
+Secrets reach the model's context in plaintext (connection strings in environment variables, credentials embedded in verbose exception messages) with no redaction layer between the point a secret enters the agent's reasoning and the point its output reaches a user or a log. Because error handling is designed for developer debugging convenience — echoing the full exception including embedded credentials rather than a sanitized message — and the model was never trained to recognize and withhold credential-shaped strings from its responses, a secret that enters the reasoning trace for any reason (even an internal debugging step) has an unobstructed path to being repeated back verbatim in the final answer or the persisted log.
 
 **Example**
 ```

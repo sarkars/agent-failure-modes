@@ -10,7 +10,7 @@
 - Service-account credentials used by the agent turn out to be over-scoped, letting an intended read-only task perform writes.
 
 **Root Cause**
-Agent performs an action without permission.
+Service and API credentials granted to the agent are typically over-scoped relative to its actual task — provisioned once for convenience rather than tightly matched to what a given session needs — and the only authorization check that happens is a static credential validation at connection time, with no runtime check confirming the specific action requested actually matches what this session was authorized to do. Ambiguous user phrasing then gets interpreted as authorization for whatever action the over-scoped credential happens to permit, and because cross-tenant or cross-resource ownership checks live only at the upstream authentication layer rather than at the point of action execution, a credential that's valid in general is treated as sufficient even when the specific target or operation was never actually approved.
 
 **Example**
 ```

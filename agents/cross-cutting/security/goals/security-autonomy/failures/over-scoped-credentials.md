@@ -13,7 +13,7 @@
 - Same credential used across dev, staging, and production environments.
 
 **Root Cause**
-Agent has broad access when narrow scope was enough.
+Credentials are provisioned once, broadly, for convenience — a single token covering every operation an agent might ever need — rather than scoped per task to the minimum permissions that task actually requires, and no access-control review at deployment time questions whether each granted permission is necessary. Because nothing logs which permissions a credential actually exercises in practice, over-scoping goes undetected indefinitely, and without a rotation or expiration policy the same broad credential remains valid and usable long after the context that justified its scope has changed. The result is that a single compromised credential grants an attacker the union of everything the agent could ever theoretically need, rather than only what it needed for the specific operation being carried out at the time of compromise.
 
 **Example**
 ```

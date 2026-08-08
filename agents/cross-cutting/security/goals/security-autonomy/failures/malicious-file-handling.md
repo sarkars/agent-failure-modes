@@ -13,7 +13,7 @@
 - SVG or XML file contains XXE payload or embedded JavaScript.
 
 **Root Cause**
-Agent processes adversarial/weaponized documents or files.
+Uploaded files are handed to full-featured Office/PDF/XML parsing libraries with macro execution and external-entity resolution left enabled, running in the same process as the agent itself rather than an isolated sandbox — so any executable content embedded in a file (a macro, an XXE reference, a decompression bomb) runs with the agent's own privileges the moment the file is opened. Because there is no file-type allowlist, size cap, or antivirus scan gating what reaches the parser, and no sandbox boundary containing the blast radius if something malicious does execute, the system relies entirely on uploaded files being benign rather than on any control actively verifying that they are.
 
 **Example**
 ```

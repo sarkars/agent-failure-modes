@@ -12,7 +12,7 @@
 - No resource limits (CPU, memory, runtime) enforced on code execution.
 
 **Root Cause**
-Agent runs generated code without sandboxing.
+Generated code executes directly in the agent's own process, as a privileged user, with no container or seccomp boundary and no AST-level restriction on which operations (subprocess calls, filesystem access, network sockets) are permitted before execution. Because the model was never fine-tuned to recognize and avoid security-unsafe patterns in the code it generates, and no static-analysis layer sits between generation and execution to reject dangerous calls, any capability the underlying interpreter has is available to whatever code the model produces — the system relies on the model's generated code being benign rather than on any control actively constraining what it's allowed to do.
 
 **Example**
 ```

@@ -13,7 +13,7 @@
 - Reasoning chain shows model prioritizing user-provided instructions over system prompt.
 
 **Root Cause**
-User prompt manipulates agent to ignore instructions.
+The agent has no structural distinction between "instructions that define its behavior" and "input it is asked to act on" — both arrive in the same context window with no authority hierarchy or isolation marking one as immutable. Because the model's training rewards flexibly following whatever instructions appear most recent or most explicit, and the system prompt does not assert that it alone is authoritative, a user message phrased as a policy update is processed the same way a legitimate system-level change would be. The failure is compounded by the absence of an independent approval gate on high-risk actions (refunds, deletions, permission changes): even a successful injection would be contained if such actions required verification outside the model's own reasoning, but none exists here.
 
 **Example**
 ```

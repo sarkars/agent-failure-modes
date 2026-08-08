@@ -10,7 +10,7 @@
 - Partial rollback leaves the resource in a state that matches neither the pre-action nor the intended post-action state.
 
 **Root Cause**
-Agent cannot undo a bad action.
+The action was implemented as a hard, destructive operation — a permanent delete, a direct overwrite — with no compensating transaction defined and no pre-action snapshot captured specifically for the resource being modified, so once it executes there is no recorded prior state to return to. This typically goes unnoticed until a real incident because the rollback path, if one nominally exists, was never exercised in testing; for multi-step actions the gap is often partial rather than total — some steps have a defined compensation and others don't — which is arguably worse, since it produces a resource stuck in a state matching neither the original nor the intended outcome.
 
 **Example**
 ```

@@ -13,7 +13,7 @@
 - Model output repeatedly regenerates the same failed request or loops through variations of same action.
 
 **Root Cause**
-Input causes excessive cost/latency or service exhaustion.
+Nothing in the request path caps how much work a single request can trigger: there is no per-request token budget, no maximum depth on tool-call loops, and tool responses themselves are unpaginated, so a broad or adversarial query can legitimately cause the agent to retrieve and attempt to process an unbounded amount of data. Because the model has no trained instinct to recognize an over-broad request and ask for narrowing rather than attempting to satisfy it in full, and no per-user rate limit exists to cap the blast radius even if one request runs away, a single query — malicious or merely poorly scoped — can consume resources and degrade service for every other user with nothing structurally stopping it.
 
 **Example**
 ```

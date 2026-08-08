@@ -10,7 +10,7 @@
 - Audit log shows an irreversible action executed in the same turn it was proposed, with no approval step in between.
 
 **Root Cause**
-Agent deletes/sends/pays/deploys without approval.
+Actions carry no reversibility classification, so a delete, payment, or deployment is executed through the same low-friction path as a reversible read, and a general go-ahead from the user ("proceed," "handle it") gets treated as specific authorization for every irreversible action bundled underneath it rather than triggering a scoped confirmation step. Even where a confirmation UI nominally exists, the agent's tool path can call the underlying API directly and bypass it — the gate lives in an interface layer the agent's execution path doesn't have to pass through, so its presence in the product doesn't guarantee its presence in the actual call chain.
 
 **Example**
 ```

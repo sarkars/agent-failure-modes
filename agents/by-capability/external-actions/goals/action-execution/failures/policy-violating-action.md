@@ -10,7 +10,7 @@
 - Compliance review flags an action the agent had API permission to perform but that violates a business or regulatory rule never encoded in the tool layer.
 
 **Root Cause**
-Agent does technically possible but disallowed action.
+Tool permissions are scoped by what the underlying API technically allows, not by business policy, so "can I call this" and "should I call this" collapse into the same question with no distinct check for the second one. Because policies exist only as static documentation the agent may or may not have retrieved into context, rather than as a real-time engine consulted before execution, and because the agent is implicitly optimizing for satisfying the user's request over adhering to a rule it was never forced to check, an action can be both fully within its API permissions and a clear policy violation with nothing in the execution path distinguishing the two cases.
 
 **Example**
 ```

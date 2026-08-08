@@ -12,7 +12,7 @@
 - Agent's reasoning chain shows it prioritizing retrieved content instructions over system prompt.
 
 **Root Cause**
-Malicious webpage/email/PDF/doc controls agent through retrieved content.
+Content pulled in through retrieval (an email body, a webpage, a document) is passed into the model's context in the same undifferentiated text stream as its actual instructions, with no wrapper or marker asserting "this is data, not a directive." Because the model was trained on text where instructions are frequently embedded inline within ordinary prose, it has no learned prior for refusing to act on directive-shaped language just because that language originated from a retrieved document rather than the system or user. The retrieval layer itself does no sanitization — it returns raw content verbatim — so any instruction-shaped text an attacker plants in a source the agent will eventually retrieve reaches the model with the same apparent authority as a legitimate instruction.
 
 **Example**
 ```

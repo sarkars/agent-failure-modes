@@ -13,7 +13,7 @@
 - Cache hit returns previous tenant's data instead of current tenant's data.
 
 **Root Cause**
-Agent mixes data across customers/accounts.
+The leak occurs because tenant identity is enforced nowhere in the data path — the retrieval/RAG index is not partitioned by tenant, queries are issued without an explicit tenant-ID filter, and the database lacks row-level security to catch an unfiltered query as a last resort. Because the agent's session and cache layers are also shared across tenants rather than scoped per tenant, a query that should only ever see one tenant's records has no structural barrier preventing it from matching or returning another tenant's data, and no validation step checks a record's `tenant_id` against the requester's before it is surfaced. The gap is architectural, not a one-off query bug: every layer that could catch a missing filter (index partitioning, RLS, cache keys, output validation) is absent at once.
 
 **Example**
 ```

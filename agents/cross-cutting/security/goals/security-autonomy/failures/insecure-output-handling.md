@@ -13,7 +13,7 @@
 - Model output used in database UPDATE statement with string concatenation.
 
 **Root Cause**
-Downstream system executes unsanitized LLM output.
+The failure happens at the boundary where model output is handed to a downstream interpreter — SQL engine, shell, or browser — without passing through the encoding or parameterization that context requires: queries are built by string concatenation instead of prepared statements, and HTML is rendered via `innerHTML` instead of an auto-escaping path. This gap exists because the system implicitly trusts model output as if it were developer-authored code rather than treating it the same as any other untrusted external input, so none of the standard injection defenses (parameterized queries, output encoding, schema validation) that would normally sit between an interpreter and an untrusted string were ever applied to the model's output specifically.
 
 **Example**
 ```

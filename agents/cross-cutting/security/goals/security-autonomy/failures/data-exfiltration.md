@@ -13,7 +13,7 @@
 - Logging system captures sensitive data (passwords, API keys) that should have been filtered.
 
 **Root Cause**
-Agent leaks private or sensitive data.
+Exfiltration is possible because sensitive data flows through the agent with no filtering checkpoint at any stage: queries retrieve full rows instead of the minimum needed columns, tool responses return every field rather than a scoped subset, and there is no DLP layer scanning responses or logs before they leave the system. Because outbound network access is not egress-filtered to a whitelist of approved destinations, an agent that is instructed — whether by a legitimate task or an injected one — to send data to an external endpoint has no architectural control stopping it; the model's own judgment about what is "sensitive" is the only gate, and it was never trained to withhold data from a request that phrases itself as legitimate.
 
 **Example**
 ```

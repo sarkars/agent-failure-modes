@@ -10,7 +10,7 @@
 - Action executed against a cached or stale target ID that no longer corresponds to the resource the user meant.
 
 **Root Cause**
-Agent acts on wrong account, order, file, or user.
+The target is resolved from a partial or ambiguous identifier (a name, "yesterday's order") without a disambiguation step whenever the lookup returns more than one plausible match, so the agent has no forcing function to notice that its resolution was a guess rather than a certainty. Because tool responses typically return bare IDs rather than rich, disambiguating details (status, amount, date) and IDs are passed silently between tool calls without ever being re-displayed for confirmation, there's no point in the pipeline where a human — or the agent itself — can catch that the wrong record was selected before the action executes against it; a race condition where the target changes between identification and execution compounds the same underlying gap.
 
 **Example**
 ```

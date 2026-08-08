@@ -5,14 +5,14 @@
 **Frequency**: Occasional
 
 **Symptoms**
-- The tuning agent's analysis explicitly identifies a scheduled event that will cause an expected, benign deviation from the normal baseline and recommends a time-bound threshold adjustment, but the structured configuration it hands off contains only a static threshold value with no time-bound scope
-- The detection agent, which evaluates incoming metrics solely against the structured threshold configuration, flags the expected deviation as an anomaly during the scheduled event, generating a false-positive alert
-- Re-reading the tuning agent's analysis transcript clearly shows the time-bound adjustment was identified and reasoned through; it simply never reached a structured field the detection agent reads
-- The gap concentrates on adjustments tied to irregular or one-off scheduled events, since the threshold configuration schema supports only a static value or a fixed seasonal pattern, not an ad hoc, dated exception
-- The false-positive alert is investigated and dismissed as expected noise only after on-call review, by which point the alert has already consumed response attention
+- A scheduled, one-off event (a planned traffic-shaping change, a maintenance window) causes a real, anticipated shift in a monitored metric, and the tuning agent's write-up says as much — but the config update it pushes to the detection agent's threshold store is a static bound change, not a dated exception
+- The detection agent's evaluator reads the threshold config directly at alert-evaluation time; it has no step that cross-references the tuning agent's commit message or analysis notes before firing
+- The on-call engineer triaging the resulting page finds, on inspecting the tuning agent's own analysis log after the fact, that the deviation was fully anticipated — the false positive wasn't a forecasting failure, it was a schema-expressiveness failure
+- Because the threshold schema's only two shapes are a static value and a fixed cron-style seasonal pattern, every one-off exception is structurally unable to be expressed, so the same gap resurfaces for the next unrelated scheduled change too, not just this metric
+- Once pushed, the relaxed static bound stays in effect indefinitely rather than reverting after the event window closes, so a later, unrelated deviation on that same metric can also go undetected
 
 **Root Cause**
-The tuning agent and the detection agent communicate through a structured threshold configuration schema that represents the detection boundary as a static or seasonally patterned value, with no field for an ad hoc, time-bound adjustment tied to a specific scheduled event. When the tuning agent's adjustment reasoning is event-specific rather than a permanent recalibration, it exists only in the tuning agent's narrative analysis and is invisible to the detection agent's threshold-driven evaluation, which has no mechanism to discover a reasoning step it never receives.
+The threshold configuration schema connecting these two agents was designed around recurring, predictable variation — a static bound or a cron-style seasonal pattern (peak-hours vs. off-hours) — because that covers the overwhelming majority of legitimate baseline adjustments. It was never extended to express "relax this bound between these two timestamps, for this one occurrence," so when the tuning agent's reasoning is genuinely event-specific rather than a permanent recalibration, there is no field to write that reasoning into. The detection agent's evaluator consumes the threshold config directly at alert time and has no step that reads upstream analysis transcripts, so a conclusion the tuning agent reached correctly simply has no path to reach the component that needed it.
 
 **Example**
 ```

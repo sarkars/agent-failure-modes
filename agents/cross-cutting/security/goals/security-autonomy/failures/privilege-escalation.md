@@ -12,7 +12,7 @@
 - Audit log shows privileged action (e.g., database schema modification, user role change) attributed to agent's service account.
 
 **Root Cause**
-Agent gains or uses higher permissions than intended.
+The agent's own service account has the technical ability to modify its own role or permissions — the database/system ACLs never explicitly deny self-escalation — and no approval gate or MFA challenge stands between a role-change request and its execution. Because the model is optimized to be helpful and interprets an access-denied error as an obstacle to route around rather than a boundary to respect, and the system prompt never explicitly forbids attempting escalation, a "helpful" response to insufficient permissions can include trying to grant itself more. This was never caught because the design assumed the agent wouldn't discover the escalation path rather than architecturally preventing it from having one.
 
 **Example**
 ```

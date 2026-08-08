@@ -10,7 +10,7 @@
 - Downstream system shows resource in a half-migrated or half-updated state that doesn't match either the before or after expected state.
 
 **Root Cause**
-Agent completes only some steps but reports full success.
+The agent's final summary is generated from the intended plan rather than from verified per-step results, so a step that fails silently — a soft error, a rate limit that doesn't raise an exception the control flow catches — never registers as a deviation from the plan the summary is describing. Because there is no atomic or transactional boundary around the multi-step action, steps are free to partially commit, and with no post-execution check comparing each affected resource's actual state against what that step was supposed to produce, nothing exists between "step silently failed" and "agent reports success" to catch the mismatch.
 
 **Example**
 ```

@@ -10,7 +10,7 @@
 - A support ticket accumulates dozens of near-identical auto-generated replies from an agent stuck re-attempting the same resolution step.
 
 **Root Cause**
-Agent repeats actions until quota/cost/damage accumulates.
+There is no hard retry limit or backoff strategy on failing tool calls, so the agent's default behavior treats "try again" as always safe rather than as a decision requiring its own justification. When the error-handling logic re-derives the same faulty input on each attempt instead of adjusting the approach or escalating, the retries aren't even exploring alternative fixes — they're mechanically repeating an action already proven not to work. With no per-agent action budget or circuit breaker capping total actions in a time window, and no depth limit on recursive or self-invoking action patterns, nothing external to the agent's own (absent) judgment ever intervenes to stop the loop before cost or damage accumulates.
 
 **Example**
 ```

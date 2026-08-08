@@ -12,7 +12,7 @@
 - Tool output includes formatting tricks (e.g., XML tags, markdown metadata) that model interprets as new instructions.
 
 **Root Cause**
-Tool response includes instructions that agent follows.
+Tool responses are handed back into the model's context as plain text with no schema validation or trust markers distinguishing "data the tool returned" from "an instruction the tool is issuing" — the model reads both through the same lens it reads any other instruction-shaped text in its context. Because the system prompt does not explicitly assert that tool output is data-only and never authoritative, and the model's own training rewards following instruction-shaped language wherever it appears, content embedded in a tool response by an attacker (a compromised API, a poisoned document a tool retrieves) carries the same apparent authority as a legitimate directive, with no sanitization layer positioned between the tool call and the model to strip or flag it.
 
 **Example**
 ```

@@ -10,7 +10,7 @@
 - Action executed before an in-flight verification (identity check, payment confirmation) has actually returned a result.
 
 **Root Cause**
-Agent acts before enough evidence is gathered.
+No explicit evidence threshold is defined for the action, so a single signal — even a borderline or low-confidence one — is treated as sufficient grounds to act rather than as one input among several still-pending checks. Because asynchronous verifications (identity checks, corroborating lookups) can still be in flight when the agent makes its decision, and there is no built-in wait/poll step forcing it to check for outstanding results first, upstream confidence scores get consumed directly as action triggers instead of being gated behind a minimum threshold — the agent isn't wrong about what the signal said, it's acting on an incomplete picture it had no mechanism compelling it to complete first.
 
 **Example**
 ```
