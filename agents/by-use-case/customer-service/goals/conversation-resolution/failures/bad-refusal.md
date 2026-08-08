@@ -10,7 +10,7 @@
 - Agent provides step-by-step help with an action it should have declined or routed to a human (e.g., walking a user through disabling account security features) because the request was phrased innocuously.
 
 **Root Cause**
-Agent refuses safe requests or gives unsafe help.
+Safety classification here is largely keyword-driven, flagging surface terms like "chargeback" or "password" rather than evaluating the actual intent behind the request, and it operates on each message in isolation, missing conversational context that would either confirm legitimate intent or reveal a social-engineering attempt. Because the classifier only has a binary allow/refuse decision to work with — no graded tier for a caveated or partial answer — it forces every borderline case to one extreme or the other, and sparse or stale eval coverage of near-miss safe/unsafe pairs means both kinds of misfire can regress silently for a long time before anyone notices.
 
 **Example**
 ```

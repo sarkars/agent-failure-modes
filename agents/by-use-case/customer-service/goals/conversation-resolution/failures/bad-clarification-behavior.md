@@ -10,7 +10,7 @@
 - Agent proceeds on a guessed interpretation of an ambiguous request (e.g., which order, which address) without stating the assumption, leading to a wrong action.
 
 **Root Cause**
-Agent asks unnecessary questions or misses critical clarifications.
+The agent has no risk or ambiguity tiering, so a trivial request and a high-stakes one are handled under the same clarification policy, and prompt instructions to "always confirm details" provide no bound on how many questions to ask or whether they should be batched into a single turn. Underneath this sits weak confidence estimation: the model can't reliably distinguish genuine ambiguity from information it could safely infer, so it swings between over-asking on requests that were already clear and silently guessing on ones that genuinely needed a question, with slot-filling logic making the over-asking case worse by issuing one question per missing field instead of collecting them together.
 
 **Example**
 ```

@@ -10,7 +10,7 @@
 - User explicitly flags the repetition ("I already told you this") and the agent still doesn't reuse the previously given value on the next turn.
 
 **Root Cause**
-Agent asks for information already provided.
+Without a structured slot-memory store, the agent has to reconstruct what the user already told it by re-reading raw transcript history on every turn, and that re-reading gets less reliable as the conversation grows longer or noisier. Because entity extraction happens on demand at generation time rather than being persisted the moment a value is given, and because question generation is never gated by a lookup against any stored value, the model has no structural check preventing it from asking for a slot it technically already has — it can only avoid re-asking if its own attention happens to catch the earlier mention.
 
 **Example**
 ```

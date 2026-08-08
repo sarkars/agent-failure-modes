@@ -12,7 +12,7 @@
 - Task terminates as "blocked" immediately following one empty inventory-lookup result, with no secondary warehouse or vendor queried.
 
 **Root Cause**
-Agent has no fallback when the first route fails.
+Planning produces a single linear strategy rather than being required to output ranked alternatives for anything above a basic complexity threshold, partly because time-boxed sessions discourage spending budget on candidate paths that might not end up being needed, and partly because alternate providers or routes that do exist in system configuration are never surfaced to the planner as viable options at generation time. With no library mapping common failure signatures — timeouts, empty results, rate limits — to predefined fallback strategies, the executor has nothing to reach for when a call fails, so it treats the tool failure as equivalent to task failure instead of a signal to try the next-ranked approach.
 
 **Example**
 ```

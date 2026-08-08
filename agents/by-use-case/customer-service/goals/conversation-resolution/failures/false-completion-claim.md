@@ -10,7 +10,7 @@
 - Customer contacts support again shortly after because the claimed action (refund, address update, cancellation) never actually took effect.
 
 **Root Cause**
-Agent says done when action was not completed.
+Response generation is not gated on the tool-call result it's supposedly reporting, so the model is free to emit a success phrase regardless of what the tool actually returned — a gap made worse by tools that signal failure ambiguously, such as an HTTP 200 with an error buried in the body, which the model doesn't reliably parse. Without a post-action verification or read-back step, a call that fails silently downstream (accepted by the API but never persisted) has no chance to be caught before the confirmation goes out, and prompt guidance that rewards concise, confident closing statements gives the model every incentive to assert completion rather than flag missing or ambiguous evidence.
 
 **Example**
 ```

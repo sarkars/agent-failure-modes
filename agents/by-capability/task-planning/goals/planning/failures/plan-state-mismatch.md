@@ -12,7 +12,7 @@
 - Plan continues referencing an entity (order, ticket, account) whose state changed externally (e.g., cancelled by the customer through another channel) mid-session.
 
 **Root Cause**
-Agent continues an old plan after new evidence invalidates it.
+Plans are generated once and then treated as fixed artifacts, with no state fingerprint or snapshot attached that would let the executor cheaply detect when the world has moved on; nothing in the execution loop mandates a re-read of the latest user turn or tool result before the next step fires, especially across long, uninterrupted tool-call sequences optimized for throughput rather than built with safety checkpoints. Compounding this, conversational corrections ("actually...") are easy for the model to acknowledge in text without that acknowledgment ever being wired to an actual plan update, so the agent can sound responsive while its execution state silently diverges from what the user believes is happening.
 
 **Example**
 ```

@@ -12,7 +12,7 @@
 - Time or turn pressure late in a session correlates with a spike in finalized outputs missing one or more checklist items.
 
 **Root Cause**
-Agent returns final answer before completing required subtasks.
+The finalize action has no hard gate tying it to checklist completeness, so it stays callable at any point regardless of session state, and session turn or cost budgets create real pressure to invoke it once resources run low even with required subtasks still outstanding. Because summary generation isn't grounded in actual tool-call evidence, the agent can describe an unperformed step as done rather than being forced to admit a gap, and with no independent verification pass or risk-tiered checklist logic to catch the discrepancy before release, an incomplete disposition goes out looking indistinguishable from a complete one.
 
 **Example**
 ```

@@ -10,7 +10,7 @@
 - User explicitly calls out the loop ("stop apologizing and just fix it") without the agent's behavior changing on the next turn.
 
 **Root Cause**
-Agent apologizes repeatedly without solving.
+The prompt emphasizes empathetic, apologetic language without pairing it to any mandatory resolution or escalation step, so apology becomes a free action the model can reach for whenever it lacks something concrete to offer — often because the actual resolution path (a tool call or policy lookup) is stuck or erroring and the model falls back to apologizing as filler rather than surfacing that failure. With no detector checking whether a turn actually introduced new progress and no cap on consecutive apology turns, nothing forces a transition to a real action or a human handoff, so the pattern can repeat indefinitely even after the user explicitly names it.
 
 **Example**
 ```

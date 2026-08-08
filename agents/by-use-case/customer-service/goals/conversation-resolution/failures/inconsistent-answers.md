@@ -10,7 +10,7 @@
 - Two independent sessions asking the identical policy question receive materially different answers, revealing retrieval or generation-level nondeterminism rather than a genuine policy change.
 
 **Root Cause**
-Agent gives different answers across turns.
+There is no single canonical source per policy topic, so retrieval can surface a different, overlapping, or outdated document depending on how a question happens to be phrased, and the knowledge base itself often contains duplicate or conflicting entries for the same policy that were never deduplicated. Rather than being grounded in one fixed retrieved passage, the model reconstructs each answer from weak parametric memory on every turn, and because the agent keeps no structured record of facts it has already asserted earlier in the conversation, nothing checks a new answer against what was already said before it goes out.
 
 **Example**
 ```

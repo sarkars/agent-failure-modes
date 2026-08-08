@@ -10,7 +10,7 @@
 - User sends a follow-up message shortly after a turn the agent considered resolved, indicating the closing message didn't clearly communicate that the conversation was complete.
 
 **Root Cause**
-User does not know what happens next.
+The response template has no mandatory next-step slot, so a reply can be otherwise complete — the refund was submitted, the ticket was filed — and still go out without stating what happens from here, especially when the agent prioritizes brevity and drops the forward-looking sentence to keep the message short. Multi-turn processes that span several systems have no persistent status indicator to fall back on, so once the triggering turn passes, the user has no way to reorient, and because closing messages aren't gated by any requirement to state resolution status explicitly, a conversation can be marked resolved on the agent's side while the user still doesn't know whether anything is actually finished.
 
 **Example**
 ```

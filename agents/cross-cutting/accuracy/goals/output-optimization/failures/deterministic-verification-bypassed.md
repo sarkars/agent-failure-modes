@@ -12,7 +12,7 @@
 - Tool-call arguments that violate the tool's own declared parameter schema (wrong type, out-of-range value, missing required argument) are only caught after execution fails, not before, despite a schema check being cheap to run pre-call
 
 **Root Cause**
-Agent relies solely on an LLM-judge to assess its own output when a deterministic, executable check (schema validation, test suite, linter, tool-call format check) was available and would have caught the error at near-zero cost.
+No inventory exists distinguishing which output types already have a cheap deterministic check available from those that genuinely require subjective judgment, so teams default to routing everything through an LLM-judge even when a test suite or schema validator sitting right in the environment could have caught the error directly. Pipeline latency and cost budgets are typically tuned around a single judge call, and wiring in the deterministic check gets deprioritized as an "extra step" rather than recognized as a near-zero-cost, higher-precision replacement — a mistake that goes unquestioned because the judge's scores correlate reasonably well with human review on a small sample, without anyone separately testing whether they correlate with what the deterministic checker would have caught.
 
 **Example**
 ```

@@ -10,7 +10,7 @@
 - Escalation message gives a vague, generic reason ("I'm unable to help with this") rather than citing a specific missing capability or data gap.
 
 **Root Cause**
-Agent gives up despite solvable request.
+There's no requirement that the agent attempt a reformulated query or an alternate tool before handing off, so a single transient failure like one timed-out call gets treated the same as a genuinely unsolvable request. The escalation confidence threshold is tuned conservatively, biasing the model toward handing off rather than pushing through a harder solve path, and an incomplete or unconsulted capability registry leaves the agent unsure what it can actually do, so it underestimates its own reach. Nothing forces a structured justification at escalation time either, so a vague "I can't help with that" handoff is indistinguishable from a genuine capability gap until a human reads the transcript.
 
 **Example**
 ```

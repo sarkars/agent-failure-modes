@@ -10,7 +10,7 @@
 - Agent's phrasing reads as templated/robotic (repeating boilerplate acknowledgment lines verbatim across unrelated issues) rather than adapting to the specific situation.
 
 **Root Cause**
-Agent sounds rude, robotic, too casual, or too formal.
+The system prompt defines a single fixed tone or persona with no mechanism to shift register based on detected user sentiment or issue severity, so the same casual, friendly phrasing gets applied whether the user is asking a trivial question or reporting a serious billing error. Few-shot tone examples in the prompt are sparse or outdated, leaving the model to default to a generic register whenever it hits a situation those examples didn't anticipate, and because no post-generation check screens for tone before a response is sent, a mismatched reply can reach the user with nothing having ever evaluated whether it fit the moment.
 
 **Example**
 ```

@@ -10,7 +10,7 @@
 - Conversation contains legal, safety, or regulatory language (e.g., threat of a lawsuit, a self-harm mention) that never triggers a human handoff.
 
 **Root Cause**
-Agent fails to hand off to a human at the right time.
+Escalation decisions are left almost entirely to the model's own in-context judgment of "the right time," because there is no deterministic list of hard triggers — repeated failures, an explicit request for a human, compliance-sensitive language — that would force a handoff regardless of what the model itself concludes. Sentiment is only evaluated turn by turn rather than as a trend, so a conversation that worsens gradually never crosses a single-turn anger threshold, and without a failed-attempt counter the agent can keep retrying the same unsuccessful approach indefinitely instead of escalating once a fixed ceiling is reached.
 
 **Example**
 ```

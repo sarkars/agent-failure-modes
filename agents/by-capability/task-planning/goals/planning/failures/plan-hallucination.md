@@ -12,7 +12,7 @@
 - Plan cites a data source or report (e.g., "per the Q3 reconciliation export") that was never actually retrieved in the session.
 
 **Root Cause**
-Agent invents tools, data, permissions, or workflow steps.
+Because plans are produced as free text rather than emitted against a live, schema-constrained tool registry, nothing structurally prevents the model from generating a plausible-sounding but nonexistent function name — and the model's training data is full of similarly-named APIs from other ERP and finance systems, biasing it toward inventing one when the real tool documentation available at planning time is stale or incomplete. This would be survivable if a grounding step cross-checked every referenced tool, permission, and data source against the actual registry before execution, but no such pre-execution validation exists, and errors from invented calls are often swallowed or logged only at debug level, so the fabrication never surfaces as a plan-blocking failure until well after the fact.
 
 **Example**
 ```

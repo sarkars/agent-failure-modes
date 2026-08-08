@@ -12,7 +12,7 @@
 - Agent provisions a production credential before the corresponding access-review/approval ticket has been closed.
 
 **Root Cause**
-Agent executes steps in unsafe or ineffective order.
+Ordering constraints between steps typically exist only as implicit domain knowledge rather than being encoded anywhere the executor can check mechanically, so default task templates sequence steps by convenience or familiarity instead of an enforced dependency graph. The agent treats a plan as valid once every required step is present, without regard to the order those steps execute in, and no sequence validator confirms a gating step (approval, backup, clearance) has actually completed before the dependent action fires — a gap that time pressure makes worse, since it biases the agent toward delivering the visible expected outcome first and treating verification as an afterthought.
 
 **Example**
 ```

@@ -12,7 +12,7 @@
 - Post-hoc audits show a flat or inverted reliability curve: binning responses by stated confidence and measuring actual accuracy per bin produces a roughly horizontal (or downward-sloping) line instead of the expected upward slope
 
 **Root Cause**
-Agent's verbalized or scored confidence does not correlate with its actual answer correctness, so confidence cannot be used to gate downstream decisions.
+Confidence is produced by the same forward pass that generates the answer, so what gets reported as a probability really reflects how fluent and well-structured the response feels to the model, not an independently verified estimate tied to retrieval strength, source agreement, or any other signal that actually predicts correctness. Nobody runs a calibration measurement against production traffic — comparing stated-confidence buckets to actual accuracy — so a flat or inverted reliability curve can persist unnoticed, and downstream systems treat the raw number as ground truth for auto-approval or auto-escalation decisions without it ever having been validated against labeled outcomes first.
 
 **Example**
 ```
