@@ -10,7 +10,7 @@
 - Engineers are surprised in postmortems that a specific input shape "was never considered," despite it recurring in production for months.
 
 **Root Cause**
-Edge cases are missing from tests.
+The gap stems from who writes the tests and under what pressure: the same engineers who built the happy-path flow author the eval cases, so the suite only reflects the inputs they already imagined as "normal," and without an explicit taxonomy of edge-case categories (boundary values, malformed input, rare locales) there's no checklist forcing broader coverage. Launch timelines further bias effort toward a small set of demo-friendly passing cases rather than fuzzing or long-tail mining, and because production logs are never mined for the rare-but-real input shapes users actually send, edge cases discovered in the wild never make their way back into the suite that's supposed to catch them next time.
 
 **Example**
 ```

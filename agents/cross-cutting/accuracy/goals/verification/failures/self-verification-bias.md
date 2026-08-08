@@ -10,7 +10,7 @@
 - A known-error injection test shows the self-verification step passing outputs from a labeled bank of confirmed-wrong answers at a nontrivial rate.
 
 **Root Cause**
-Same model judges its own flawed output.
+The bias is structural: when verification is implemented as the same model critiquing its own output, it necessarily shares whatever systematic reasoning blind spots produced the original error, so the very pattern that caused the mistake is also the lens used to check for it. This goes uncaught because no architecturally independent verifier -- a different model family, a tool-grounded check, a rule-based validator -- sits in the loop, no known-error injection testing exists to measure how often the self-verifier waves through confirmed-wrong outputs, and self-critique is treated as a sufficient gate on its own rather than a cheap first pass that should be followed by an externally grounded check.
 
 **Example**
 ```

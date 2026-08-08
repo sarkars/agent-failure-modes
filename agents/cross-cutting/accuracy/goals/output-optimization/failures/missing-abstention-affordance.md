@@ -12,7 +12,7 @@
 - When retrieval returns zero or low-relevance results, the agent still produces a full-length answer rather than a short, distinct abstention response
 
 **Root Cause**
-Agent's output space has no low-friction "insufficient information, cannot answer" option, so it produces a best-guess answer even when grounding is inadequate.
+This gap traces to how the response schema and prompt were designed: requiring a substantive-answer field with no equivalent abstention enum forces the model to fill in something even when it has nothing grounded to say, and few-shot examples reinforce only the complete-answer pattern since none demonstrate a graceful decline. Compounding this, a retrieval relevance score is often computed but never wired to a decision threshold that would short-circuit generation, and product/UX framing treats any abstention as a failure metric to drive toward zero rather than a correct outcome under poor grounding, so the system is implicitly optimized to never use the escape hatch it doesn't even have.
 
 **Example**
 ```

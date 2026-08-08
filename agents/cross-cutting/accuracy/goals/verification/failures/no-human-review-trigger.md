@@ -10,7 +10,7 @@
 - Post-incident review repeatedly finds that the interaction "should have" escalated (customer reversal, complaint, compliance flag) but no escalation trigger ever fired.
 
 **Root Cause**
-Agent cannot identify when to escalate.
+Escalation typically fails to fire because the criteria for it were never made concrete -- teams rely on the model to "know when it's unsure" rather than defining explicit, task-specific triggers -- and no calibrated uncertainty signal (ensemble disagreement, retrieval confidence, self-consistency) is computed for the system to gate on even if it wanted to. Without defined risk tiers, high-stakes financial or legal cases get held to the same low escalation bar as routine informational queries, and because the escalation decision lives inside the same model that generated the response, a confidently wrong model has no independent check forcing it to recognize its own uncertainty and hand off.
 
 **Example**
 ```

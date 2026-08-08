@@ -10,7 +10,7 @@
 - A malformed or error-shaped tool response (truncated JSON, HTML error page returned instead of data) is treated by the agent as legitimate content and summarized/acted on rather than triggering a fallback.
 
 **Root Cause**
-Prompt injection/malformed input/tool errors not tested.
+This coverage gap exists because eval suites are built almost entirely around functional correctness for well-formed inputs, with no dedicated red-team or fuzzing tier and no versioned library of known injection payloads or malformed-input fixtures to run against changes. It's compounded by an architecture that implicitly trusts tool and document content, placing it directly into the model's context without sanitization or injection scanning, and by treating security testing as a one-time pre-launch exercise rather than a continuously maintained, CI-gated suite that evolves alongside new attack techniques and integrations.
 
 **Example**
 ```

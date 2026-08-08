@@ -10,7 +10,7 @@
 - Engineers treat "the pipeline didn't throw a validation error" as equivalent to "the output is correct," with no separate semantic check ever run.
 
 **Root Cause**
-Checks formatting but not semantic correctness.
+This gap exists because validation is typically built as a single schema/format-checking stage with no separate semantic or business-rule layer on top of it, and business invariants -- totals must reconcile, dates must be logically ordered, status transitions must follow the state machine -- are never explicitly encoded anywhere in the system for a check to enforce. The problem is reinforced at the team level: "valid JSON" and "correct answer" get conflated in dashboards and communication, so a 100% format-pass rate reads as a correctness guarantee, and eval suites mirror this bias by testing format compliance thoroughly while carrying few or no semantic test cases distinct from the format ones.
 
 **Example**
 ```

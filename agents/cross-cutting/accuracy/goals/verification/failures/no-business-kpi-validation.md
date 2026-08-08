@@ -10,7 +10,7 @@
 - Cost per interaction creeps up (longer tool-call chains, more retries) even though the eval suite reports the same or better task success rate.
 
 **Root Cause**
-Output looks correct but harms CSAT, conversion, compliance, or cost.
+The disconnect arises because eval metrics are typically defined by the engineering team in isolation, without an explicit, documented mapping to the business KPIs -- CSAT, conversion, cost, compliance -- they're ultimately meant to serve, so a task metric can improve while the outcome it was supposed to proxy moves in the opposite direction unnoticed. No dashboard joins task-eval scores with business-outcome data on a shared timeline to surface that divergence, cost and compliance guardrails aren't enforced independently of the primary accuracy metric, and release decisions get made purely on whether the task eval clears its bar, without a canary or holdout period long enough to observe how real business metrics actually respond.
 
 **Example**
 ```

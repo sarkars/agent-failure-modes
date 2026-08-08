@@ -10,7 +10,7 @@
 - Task completion rate for long sessions (10+ turns) is measurably lower than for short sessions, but the eval suite -- built entirely from single-turn or 2-3 turn cases -- never surfaces the gap.
 
 **Root Cause**
-Multi-step degradation is missed.
+The blind spot exists because eval suites are built almost entirely from short, isolated exchanges, so nothing in the test process ever runs a trajectory long enough to exercise compounding drift. The underlying architecture makes this worse by relying on unbounded context accumulation rather than explicit state checkpointing, letting facts and constraints silently fall out of effective attention as a conversation grows, and production monitoring rarely breaks out quality or completion rate by session length, so even after launch there's no visibility into the degradation. Long-horizon scenarios are also expensive and slow to construct relative to single-turn cases, so under release-schedule pressure they consistently lose out to cheaper, shorter test cases.
 
 **Example**
 ```

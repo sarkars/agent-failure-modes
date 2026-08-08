@@ -12,7 +12,7 @@
 - No task-type or output-category in the system is ever routed to a critique/revise step, even for categories explicitly documented elsewhere (runbooks, risk policy) as high-stakes
 
 **Root Cause**
-Agent skips a beneficial critique/revise pass on a high-stakes output, going straight to a single-shot answer where a reflection round would demonstrably have caught an error.
+Because no stakes or difficulty classifier exists to route outputs into a mandatory review step, reflection is applied uniformly (often not at all) rather than concentrated where it matters most, and the added latency and token cost of a critique pass gets treated as overhead to minimize everywhere without weighing it against the cost of a missed error in specifically high-stakes categories. This is reinforced by the absence of any catalog quantifying how much reflection reduces error rates per output category, leaving teams with no data to justify the extra step, and by a tendency to generalize a single "reflection didn't move the needle" result measured on low-stakes traffic into a blanket policy, never re-testing it on the high-stakes subset where the benefit would actually concentrate.
 
 **Example**
 ```

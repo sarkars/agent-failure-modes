@@ -10,7 +10,7 @@
 - A tool call returns a partial-failure or error response, and the agent proceeds narrating success anyway instead of retrying or escalating.
 
 **Root Cause**
-Agent does not check output/action correctness.
+This happens when the tool or action interface returns only a bare acknowledgment -- a 200 status meaning "request accepted," not "change applied" -- and the agent's flow treats that acknowledgment as proof the action actually completed, because no architectural requirement forces a read-back or re-query of the affected resource before success is reported. Verification is easy to skip because it's perceived purely as added latency and cost under pressure to keep response times low, and without any risk tiering of actions, irreversible or high-stakes operations like payments and external sends get the same "trust the ack" treatment as low-risk ones, so nothing scales verification rigor to what's actually at stake.
 
 **Example**
 ```

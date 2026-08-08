@@ -10,7 +10,7 @@
 - Postmortems on escaped failures repeatedly conclude "the verifier technically passed this" even though the output was clearly wrong in a way a more rigorous check would have caught.
 
 **Root Cause**
-Agent uses weak checks for a high-risk task.
+This mismatch happens because no explicit mapping exists between a task's risk tier and the minimum verifier rigor it requires, so high-risk tasks can ship with whatever check was cheapest to implement at the time. Verifier selection is typically done without first enumerating the task's actual failure modes, so a format-only check ends up guarding a task whose real risks are semantic or business-logic errors it was never designed to catch, and because risk tiers and verifier assignments drift out of sync as the system evolves with no periodic audit catching the gap, and postmortems rarely distinguish "wrong verifier for this risk tier" as its own root-cause category, the same mismatch keeps recurring unaddressed.
 
 **Example**
 ```

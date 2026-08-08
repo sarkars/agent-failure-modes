@@ -10,7 +10,7 @@
 - Eval pass rate stays flat release-over-release while support ticket volume for the same feature climbs.
 
 **Root Cause**
-Tests do not represent production inputs.
+This happens because the eval corpus is treated as a one-time deliverable rather than a living artifact: it gets assembled at launch or project kickoff and then frozen, with no pipeline in place to continuously sample and label real traffic back into it. Engineers tend to hand-pick cases for clarity and readability rather than drawing a proportional sample of actual usage, so the suite skews toward well-formed examples from the start, and as new channels, locales, or user segments get onboarded, nothing forces a corresponding eval-set update, so the gap between what's tested and what's actually flowing through production widens silently over time.
 
 **Example**
 ```

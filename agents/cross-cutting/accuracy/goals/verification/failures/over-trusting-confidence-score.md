@@ -10,7 +10,7 @@
 - Confidence scores stay uniformly high even as input quality degrades (blurry scans, out-of-distribution document types), because the score was never calibrated against a labeled dataset for this task.
 
 **Root Cause**
-Agent treats model/OCR confidence as correctness.
+This happens because confidence scores are typically used operationally straight out of the model or vendor default, never calibrated against a labeled ground-truth dataset that would reveal what a given score actually means for this task, and no independent source cross-check is required for high-stakes fields even when the reported confidence is high. Thresholds are usually set once at launch and left unrevisited as the input distribution shifts -- new vendors, layouts, or locales -- even though models and OCR systems are known to be systematically overconfident on exactly this kind of out-of-distribution input, a failure mode that goes unmonitored because no one is specifically watching for it.
 
 **Example**
 ```

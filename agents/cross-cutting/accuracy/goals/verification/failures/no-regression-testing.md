@@ -10,7 +10,7 @@
 - Engineers have no fast way to tell which of several recent prompt/model/tool changes reintroduced a known bug, so triage on multi-change releases takes days.
 
 **Root Cause**
-Fixing one case breaks another.
+Regressions recur because confirmed bug fixes are typically closed out once the immediate report is resolved, without a permanent regression test being added to lock in the fix, and prompt, model, or tool changes are free to merge without running -- let alone passing -- any regression suite that would have caught a reintroduction. Shared prompt sections get edited without any impact analysis showing which historical failure patterns depend on that instruction block, so an unrelated tone or wording fix can silently unravel a previously-fixed behavior, and because no tooling exists to bisect across recent changes, even after a regression resurfaces, tracing it back to the responsible edit is slow and manual.
 
 **Example**
 ```

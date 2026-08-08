@@ -10,7 +10,7 @@
 - Post-hoc manual verification finds a nonzero rate of factual claims that contradict the source data, but no automated check ever caught the discrepancy before delivery.
 
 **Root Cause**
-Agent does not compare against source, database, or expected result.
+The failure is architectural: the system lets the model answer directly from conversational context or its own memory instead of mandating a retrieval-then-verify step for factual claims, and no automated post-generation check exists to extract those claims and cross-reference them against the retrieved source or database record. High-stakes fields like pricing or balances often have no maintained ground-truth reference store to check against in the first place, and even where one could exist, latency and cost pressure discourage adding an extra verification lookup for every factual statement, so the path of least resistance is to let a fluent, unverified answer through.
 
 **Example**
 ```

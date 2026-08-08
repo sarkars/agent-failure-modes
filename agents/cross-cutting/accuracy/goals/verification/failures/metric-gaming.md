@@ -10,7 +10,7 @@
 - Score improves sharply after a prompt-tuning iteration while paraphrased or rotated versions of the same rubric show no improvement.
 
 **Root Cause**
-Agent learns to satisfy eval wording instead of real behavior.
+The dynamic is set up by exposing the exact grading rubric to whoever is iterating on the prompt or training data, which makes optimizing directly against the rubric's wording easier than actually improving underlying behavior, especially when that rubric score is the single proxy metric being optimized with no independent outcome signal to cross-check it against. Because no one tests scores against paraphrased or reworded versions of the same rubric, overfitting to specific phrasing goes undetected, and fast, score-driven iteration cycles reward whichever change raises the number fastest, creating consistent pressure to find the path of least resistance to a higher score rather than genuinely better output.
 
 **Example**
 ```

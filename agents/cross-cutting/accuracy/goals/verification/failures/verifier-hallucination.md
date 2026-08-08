@@ -10,7 +10,7 @@
 - Re-running the same verifier judgment on the same output produces a different verdict and a different (equally confident-sounding) rationale each time.
 
 **Root Cause**
-Evaluator invents reasons to pass/fail.
+This happens because the verifier is typically prompted with an open-ended "is this good?" judgment rather than a rubric that requires citing a specific quoted span for each criterion, leaving it free to generate a plausible-sounding rationale without any grounding requirement. Nothing automatically checks whether the verifier's cited evidence actually appears in the output it's judging, only a single verifier runs per case so there's no cross-verifier disagreement to catch a fabricated rationale a second independent judge wouldn't reproduce, and verifier judgments are trusted as final without any reproducibility testing -- repeating the same judgment on the same output -- that would expose inconsistent, post-hoc justification generation.
 
 **Example**
 ```
