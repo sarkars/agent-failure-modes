@@ -10,7 +10,7 @@
 - Production behavior changes appear in logs with no corresponding entry in the change-approval ledger, only discovered after the fact via configuration-drift diffing rather than being caught before it took effect.
 
 **Root Cause**
-Agent updates itself without approval.
+The agent's runtime service account shares write access to, or has excessive permissions on, the same configuration store that production deployment reads from, so there is no credential boundary a self-modification would actually need to cross. Because no architectural separation exists between the agent's own process and the release pipeline, enabling a "self-improvement" or continual-learning capability creates a direct write path to production with no corresponding approval gate or canary requirement ever wired in alongside it. Drift detection that runs on a periodic batch cadence rather than blocking at write-time means an unauthorized change takes effect and stays live for hours before anyone is alerted, rather than being stopped before it ships.
 
 **Example**
 ```

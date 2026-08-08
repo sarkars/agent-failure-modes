@@ -12,7 +12,7 @@
 - User has to repeatedly re-clarify the same fact because the conflict was never surfaced or resolved.
 
 **Root Cause**
-Two memories contradict; agent fails to resolve.
+Preference fields are modeled as an append-only list of facts rather than single-valued, versioned fields, so a new value never actually supersedes an old one — both simply coexist as equally "live" records. No write-time contradiction check runs before a new record is committed, and because records carry no timestamp or source-authority tier, retrieval has no deterministic basis for preferring one conflicting value over the other, arbitrarily returning whichever it happens to fetch first. Inferred or third-party-imported facts are stored with the same trust weight as an explicit user statement, and with no scheduled scan job hunting for contradictory pairs, conflicts sit unresolved until a user notices the agent contradicting itself.
 
 **Example**
 ```

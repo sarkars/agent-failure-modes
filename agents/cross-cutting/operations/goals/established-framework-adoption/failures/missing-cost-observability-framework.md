@@ -12,7 +12,7 @@
 - Token usage and cost figures differ between the finance spreadsheet, the provider dashboard, and engineering's own estimates, with no single source of truth reconciling them
 
 **Root Cause**
-Team tracks LLM spend via manual log scraping or spreadsheet exports instead of adopting an established gateway/observability framework, losing real-time budget enforcement and per-call cost attribution.
+Cost tracking was never evaluated against an established gateway or observability framework before the team built custom logging, largely because spend monitoring was treated as a finance/ops afterthought bolted on after launch rather than an architectural requirement designed in alongside the model integration. Direct provider SDK calls scattered across multiple services with no shared proxy layer make it structurally difficult to retrofit centralized budget enforcement later, and because no one owns "LLM spend" as a metric the way an SRE owns latency or error rate, nobody is incentivized to invest in real-time attribution tooling. The gap stays hidden as long as usage volume is low enough that manual log scraping appears to "work," and only becomes visible once volume outpaces what a spreadsheet workflow can catch before the damage is done.
 
 **Example**
 ```

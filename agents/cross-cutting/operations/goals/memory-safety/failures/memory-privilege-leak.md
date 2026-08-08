@@ -11,7 +11,7 @@
 - An audit finds a memory record injected into a request whose scope didn't match the record's ACL/purpose tag, even when it wasn't visibly leaked in the final response text.
 
 **Root Cause**
-Agent uses private memory in inappropriate context.
+Memory retrieval performs a broad semantic search across all of a user's records without enforcing access-scope or purpose-limitation filters at query time, so relevance ranking alone decides what gets pulled into a prompt regardless of which context it was collected in. The memory store isn't partitioned per tenant or context, and where ACL metadata is missing or incomplete, the system fails open — serving the record — rather than failing closed and excluding it by default. A single agent serving multiple purposes, such as support and sales, often shares one undifferentiated memory pool with no purpose-limitation tagging, and with no output-side redaction layer as a backstop, a record that slips past upstream scope filtering has nothing left to catch it before it reaches the response.
 
 **Example**
 ```

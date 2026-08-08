@@ -12,7 +12,7 @@
 - The same recall query returns different facts across sessions even though no update event occurred in between.
 
 **Root Cause**
-Agent recalls wrong past preference or fact.
+Retrieval relies on pure vector similarity with no exact-match or provenance verification step, so when the record store contains many users with similarly phrased preferences, an embedding near-neighbor gets treated as the true match purely because it scored highest. Nothing forces the model to quote the stored record verbatim, so it paraphrases from whatever fuzzy match retrieval handed it instead of surfacing a discrepancy, and without an enforced confidence threshold, low-similarity matches pass through to generation unchallenged. Stale or partially reindexed embeddings compound the problem by leaving outdated or cross-linked vectors in place, so the same query can even return different "facts" across sessions with no update event to explain the change.
 
 **Example**
 ```

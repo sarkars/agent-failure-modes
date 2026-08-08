@@ -12,7 +12,7 @@
 - Rotated/revoked credentials still show up unredacted in historical logs and transcripts because there is no retroactive scan-and-purge process, only forward-looking (if any) checks
 
 **Root Cause**
-Agent outputs, logs, and tool-call payloads are never scanned by an automated secrets/credential-detection framework, relying on manual review (or nothing) to catch API keys and tokens before they're persisted or displayed.
+Secrets scanning is mentally filed under source-code pre-commit hooks, so nobody thinks to apply the same pattern-and-entropy detection to runtime logs, transcripts, and tool-call payloads where credentials just as easily leak. The observability/logging infrastructure and the agent's tool-calling layer are typically built by different teams, and neither feels ownership for wiring a scanning step into the boundary between them, so the gap persists structurally rather than by oversight alone. Payload volume is high enough that manual review was never going to catch more than a small fraction, yet the team keeps treating "we'll review anything unusual manually" as an adequate stopgap, and new tool integrations keep getting added without a security review step that would otherwise catch payload shapes capable of carrying credentials.
 
 **Example**
 ```

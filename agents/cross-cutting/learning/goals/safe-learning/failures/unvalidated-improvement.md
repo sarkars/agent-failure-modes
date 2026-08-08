@@ -10,7 +10,7 @@
 - Production metrics regress shortly after a confidently-described "improvement" ships, and post-hoc investigation finds no eval run, or a failing one, was ever linked to that deployment.
 
 **Root Cause**
-Improvement is deployed without eval/regression proof.
+The deployment pipeline has no hard gate requiring a linked, passing eval or regression result before a change is promoted, so whether validation happens at all is left to the author's discretion rather than being structurally enforced. A handful of hand-picked examples that look obviously better is treated as sufficient proof, especially under the time pressure to ship a confidently-described win immediately, even though a small anecdotal sample can't surface regressions outside the categories it happened to sample. Without a shadow or canary comparison against live traffic, gaps that a limited offline eval set missed — like a category of input the hand-picked examples never touched — aren't caught until they're already affecting production users.
 
 **Example**
 ```

@@ -10,7 +10,7 @@
 - The same incident accumulates multiple fix attempts across different PRs, each addressing a plausible-sounding but unconfirmed layer, before someone finally targets the layer the original RCA had already pinpointed.
 
 **Root Cause**
-System changes prompt when schema/retrieval/tool/data was root cause.
+Fixing the layer an RCA actually identified — a tool config, a schema migration, a stale index — often requires more coordination, risk, and lead time than a prompt edit, which creates pressure to take the faster path regardless of what the investigation found. That substitution goes unchecked because no automated linter compares the RCA's declared root-cause layer against the file paths a fix diff actually touches, and the engineer authoring the fix is frequently not the person who ran the isolation testing, so the root-cause finding doesn't fully transfer into the implementation. With no post-fix verification re-running the original failing case, a fix that never addressed the real defect can still be merged and marked resolved, leaving the true cause untouched until the same symptom reappears.
 
 **Example**
 ```

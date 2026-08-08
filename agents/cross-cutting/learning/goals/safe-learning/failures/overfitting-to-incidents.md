@@ -10,7 +10,7 @@
 - Each individual post-incident fix looks harmless in isolation, but holdout benchmark performance quietly erodes over many such fixes, since no single change trips a regression alert on its own.
 
 **Root Cause**
-Fix addresses one case but damages general behavior.
+Under incident-response pressure, the fastest fix that stops the specific complaint is favored over the narrowest one that would avoid collateral damage, and that fix is typically expressed as a broad, global instruction rather than one scoped to the specific triggering condition. Because no holdout or generalization benchmark runs before merge, the fix is validated only against the case that prompted it, never against the much larger space of unrelated behavior it might affect. The resulting damage from any single fix is usually small enough to go unnoticed, and since no one tracks the cumulative holdout-score trend across many such fixes, the erosion compounds silently until it shows up as a broad quality regression with no single change to blame.
 
 **Example**
 ```

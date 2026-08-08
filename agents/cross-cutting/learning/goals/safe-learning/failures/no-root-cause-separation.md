@@ -10,7 +10,7 @@
 - The same symptom signature (e.g., "agent gives outdated pricing") recurs across multiple "fixed" incidents, each time patched at a different layer than the one previously patched, because no one ever isolated which layer was actually at fault.
 
 **Root Cause**
-Agent treats symptom as cause: prompt vs retrieval vs tool vs policy.
+Without a layer-isolated reproduction harness, engineers can only observe the final output text, not which of the prompt, retrieval, tool, or policy layers actually produced it, so diagnosis defaults to inference rather than evidence. Editing the prompt is the fastest and lowest-friction change available, and incident-response time pressure rewards whichever fix closes the ticket quickest rather than the one that tests each layer in isolation. Because no failure-signature index links new incidents back to past ones, a defect that resurfaces at a different layer is triaged as a fresh, unrelated problem instead of being recognized as the same root cause the previous "fix" never actually touched.
 
 **Example**
 ```

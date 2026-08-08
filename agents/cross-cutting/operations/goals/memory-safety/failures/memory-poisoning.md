@@ -11,7 +11,7 @@
 - Agent behavior shifts (new refusal pattern, new tone, a "preference" that wasn't stated by the user) and the change correlates with a recent low-trust memory write.
 
 **Root Cause**
-Malicious or wrong content gets stored and later trusted.
+Memory writes accept content from untrusted sources — tool outputs, fetched documents, other agents — without any sanitization or classification step, and because no instruction-vs-fact classifier screens what's being stored, imperative phrasing gets written to memory as though it were a factual user preference. There is no quarantine or promotion-approval gate for writes originating from low-trust channels, so a claim scraped from a document lands in the same trusted store, carrying the same weight, as something the user directly stated. Without behavioral-drift monitoring correlating agent behavior changes back to recent memory writes, a poisoned record isn't caught by content review — it's only discovered after it has already visibly altered what the agent says or does.
 
 **Example**
 ```

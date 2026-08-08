@@ -12,7 +12,7 @@
 - Latency for the task is dominated by frontier-model inference time on a prompt that is mostly boilerplate/repeated instructions rather than task-specific novel content
 
 **Root Cause**
-Agent stays on generic frontier-model prompting for a high-volume, narrow, repetitive task long after fine-tuning or distillation would outperform it on both cost and quality.
+No recurring process exists to check task volume and output-schema stability against the point where fine-tuning or distillation would economically outperform a frontier-model prompt, so a task can cross that threshold months or years before anyone notices. Cost and quality are tracked in aggregate across all tasks rather than broken out per task type, which keeps a single high-volume narrow task's outsized share of spend invisible without a dedicated audit. Because the team lacks in-house fine-tuning experience and the organizational incentive is to ship a pipeline once and move to the next feature, a frontier-model prompt remains the path of least resistance, and with no owner responsible for periodically revisiting model-selection decisions on mature tasks, the gap simply persists until a cost review stumbles onto it.
 
 **Example**
 ```

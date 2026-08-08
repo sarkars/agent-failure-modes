@@ -12,7 +12,7 @@
 - Red-team or adversarial testing of injection resistance never happens on a recurring basis, so regressions from prompt or model changes go undetected until a user reports odd behavior
 
 **Root Cause**
-System prompt instructions are the only defense against prompt injection and unsafe output, with no established guardrails/scanning framework wired in front of or behind the model call.
+Prompt-level instructions feel like a complete defense because they hold up in casual manual testing, which masks the fact that no adversarial or red-team testing was ever run against them to reveal how easily they can be bypassed. Guardrail frameworks are perceived as adding latency or infrastructure complexity, so teams under deadline pressure defer the integration indefinitely, and because ownership of injection defense is unclear between the application team and any central security or platform team, neither side ever evaluates or procures a scanning framework. Meanwhile the system's tool surface — what a successful injection could actually trigger — keeps growing as new capabilities ship, without a corresponding reassessment of whether prompt-only defenses are still adequate for the expanded blast radius.
 
 **Example**
 ```

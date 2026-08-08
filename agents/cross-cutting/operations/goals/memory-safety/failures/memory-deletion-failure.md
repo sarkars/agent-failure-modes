@@ -11,7 +11,7 @@
 - A forget request is marked "complete" even though it was never verified against every store that could hold a copy.
 
 **Root Cause**
-Agent fails to forget information when requested.
+Deletion is implemented as a single DELETE against the primary database with no fanout to the vector index, caches, or derived summaries that may hold their own copy of the same fact, so removing the canonical record does nothing to the copies scattered across the rest of the system. There's no tombstone mechanism to suppress a value that a stale replica or cache already loaded, and no post-deletion verification probe re-queries those other stores to confirm the fact is actually gone before the request is marked complete. Summaries and other derived artifacts generated before the deletion are never regenerated or scanned for the deleted content, and because the store registry used for fanout isn't kept current as new caches and analytics sinks get added, newer stores are silently excluded from the deletion path entirely.
 
 **Example**
 ```

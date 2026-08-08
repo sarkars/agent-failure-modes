@@ -13,7 +13,7 @@
 - PII exposure is discovered only through customer complaints or manual spot-checks, not through proactive scanning of a representative sample of stored transcripts
 
 **Root Cause**
-Team relies on ad-hoc regex or manual review for PII detection/redaction instead of adopting an established, maintained framework, missing entity types and edge cases the framework would catch by default.
+PII redaction was treated as a quick regex task handed to whichever engineer had spare time, rather than routed through security or compliance for a genuine build-vs-buy decision against established detection frameworks. Deadline pressure led to copying a handful of generic patterns rather than mapping detection coverage against the organization's actual data classification policy, and because compliance requirements were captured only as a high-level "PII must be redacted" checkbox, they were never translated into a concrete list of entity types the detector needed to cover. With no single owner responsible for the redaction pipeline, coverage was never revisited as new document formats and locales were onboarded, so entire categories of identifiers went unchecked for months without any confidence-scoring mechanism that could have surfaced the blind spot earlier.
 
 **Example**
 ```

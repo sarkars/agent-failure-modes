@@ -10,7 +10,7 @@
 - When a regression is later discovered, engineers cannot quickly determine which of several recent changes caused it because none of the changes have linked rationale or eval evidence.
 
 **Root Cause**
-Cannot explain what changed and why.
+Change-record creation — capturing the trigger, rationale, and eval evidence behind a deployment — is optional and manual rather than something the deployment pipeline enforces, so authors skip it under time pressure or urgent hotfixes that bypass the normal review path entirely. Commit messages and PR descriptions end up serving as the only documentation, but they're never linked to feedback IDs or eval results in a queryable ledger, so they can't actually answer "why" later. With no periodic reconciliation sweep checking deployed artifacts against a change ledger, gaps accumulate silently until someone needs the rationale and discovers it was never captured.
 
 **Example**
 ```
