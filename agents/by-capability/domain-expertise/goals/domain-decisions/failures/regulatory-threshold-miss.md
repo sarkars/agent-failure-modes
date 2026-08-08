@@ -10,7 +10,7 @@
 - A refund, disclosure, or filing deadline passes silently because no deadline-tracking mechanism existed.
 
 **Root Cause**
-Agent misses limits, deadlines, eligibility, or compliance triggers.
+The agent's validation logic was built to check business constraints — balance sufficiency, inventory availability — and was never extended to check compliance constraints, because regulatory thresholds and filing deadlines live in policy documents rather than as queryable, enforced rules the validation step actually consults. With no deadline-tracking system to alert before a reporting window closes, and no version-controlled review process to keep the rule set current as regulations change, a transaction that clears every business check the agent knows to run can still silently cross a regulatory line the agent was never wired to check.
 
 **Example**
 ```

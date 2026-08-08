@@ -10,7 +10,7 @@
 - Reviewers repeatedly override the agent's severity classification, but the pattern isn't fed back into the rubric.
 
 **Root Cause**
-Agent treats critical issue as minor or vice versa.
+The severity rubric's criteria are vague and not hardcoded to specific, unambiguous signals — "unauthorized access" isn't wired to force a P1 outcome the way a concrete rule would — so classification depends on a loose judgment call rather than a deterministic trigger. High routine-issue volume pushes that judgment toward the lower-effort default severity absent an unmistakable signal, and because the classifier attaches no confidence score or reasoning trace, a misclassification is indistinguishable from a correct one until someone manually reviews it. Reviewer overrides that would reveal the pattern never feed back into rubric refinement, so the same ambiguous criteria keep producing the same class of miss.
 
 **Example**
 ```

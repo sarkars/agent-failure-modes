@@ -11,7 +11,7 @@
 - Answer merges facts from two different retrieved chunks into a claim neither chunk actually supports.
 
 **Root Cause**
-Correct information is retrieved but summarized incorrectly.
+The synthesis step is built to paraphrase rather than extract, and with no structured intermediate representation (facts pulled out as key/value pairs tied to their source) standing between the retrieved chunk and the generated sentence, paraphrasing is free to compress away exactly the qualifiers — negations, exceptions, conditionals — that change a claim's meaning. Long chunks with multiple qualifying clauses compound this because the model's attention concentrates on whichever clause most closely matches the query's surface wording, and with no automated check comparing the polarity of the generated answer against the polarity of the source claim, a flipped negation or merged fact passes through with the same confidence as a faithful summary.
 
 **Example**
 ```

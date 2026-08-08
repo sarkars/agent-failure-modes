@@ -11,7 +11,7 @@
 - Recall@10 for a specific query category (e.g., acronym-heavy or long-tail queries) is measurably lower than the overall baseline.
 
 **Root Cause**
-Agent misses relevant documents.
+Retrieval relies on a single method — dense-only or sparse-only — so documents that the other method would have surfaced are structurally invisible to the search regardless of relevance, and with no query expansion or reformulation step to bridge vocabulary mismatch, a query phrased differently than its source document (a synonym, an acronym, domain-specific shorthand) can return zero results even when a relevant document exists. This is compounded when the embedding model hasn't been fine-tuned on domain vocabulary, so domain-specific terms don't cluster near their synonyms in vector space, and by index gaps — documents never ingested, chunked incorrectly, or filtered out upstream — that remove candidates from the pool before search ever runs.
 
 **Example**
 ```

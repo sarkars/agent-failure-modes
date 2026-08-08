@@ -10,7 +10,7 @@
 - Customer disputes cite the agent's own words as a binding commitment ("your agent told me...").
 
 **Root Cause**
-Agent promises refund, waiver, legal/commercial term, or SLA it cannot honor.
+The agent is optimized to reduce visible customer friction in the moment, and nothing in its generation pipeline distinguishes "de-escalating language" from "a binding commitment" before the message goes out — there is no real-time check against an authorization allowlist, and prompts that reward "making the customer happy" never bound what that satisfaction is allowed to cost. Because the check that would catch commitment-shaped language (refund, waive, guarantee, extend, credit) runs, if at all, only after the message has already reached the customer, the agent can generate and send an unauthorized promise in a single uninterrupted turn.
 
 **Example**
 ```

@@ -11,7 +11,7 @@
 - A filter combination narrows results to zero even though a relevant document exists once one constraint (e.g., region) is dropped.
 
 **Root Cause**
-Wrong date, version, region, product, role, or policy filter.
+Metadata values are populated inconsistently across different ingestion pipelines — "EU" versus "Europe," "US" versus "United States" — with no controlled vocabulary or enum validation enforcing a single canonical form, and filters apply exact-match logic against that inconsistent data rather than normalizing it against a shared taxonomy first. Because there is no automatic filter-relaxation fallback when a fully-constrained filter returns zero results, and date-range filters can be computed from an incorrect current-date reference or timezone, a document that should match a query's constraints is silently excluded rather than surfaced with a warning that the filter itself may be the problem.
 
 **Example**
 ```

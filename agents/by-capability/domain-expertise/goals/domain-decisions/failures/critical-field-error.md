@@ -10,7 +10,7 @@
 - Manual audit finds extraction confidence was never checked against a threshold before use.
 
 **Root Cause**
-Agent extracts wrong amount, date, name, address, account number, or ID.
+Extraction pipelines built primarily for throughput compute a per-field confidence score but don't gate downstream use on it, so a low-quality scan that produces an ambiguous OCR read (a smudged decimal, a transposed digit) proceeds exactly as confidently as a clean one. Because there is no cross-reference against a second, independent source (an accompanying purchase order, a database record) and no format or range validation before the value is used, nothing in the pipeline is positioned to catch a plausible-looking but wrong value — the error only surfaces downstream, after the action it enabled has already occurred.
 
 **Example**
 ```

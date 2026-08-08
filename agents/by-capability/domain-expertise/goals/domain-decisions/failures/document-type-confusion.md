@@ -10,7 +10,7 @@
 - Downstream approval or underwriting decision is based on fields extracted from a misidentified document.
 
 **Root Cause**
-Agent misclassifies paystub, W-2, bank statement, invoice, policy, etc.
+The classifier is built to assign a single label per document and has no abstain path, so when it encounters genuinely ambiguous input — a multi-page upload mixing two document types, or two types sharing near-identical layout features — it still forces out a best-guess label rather than flagging uncertainty. Downstream, no validation step checks whether the fields the assumed schema expected actually came back populated and well-formed, so a wrong classification propagates through extraction and into the workflow without anything checking that the applied schema actually matched the content it was applied to.
 
 **Example**
 ```

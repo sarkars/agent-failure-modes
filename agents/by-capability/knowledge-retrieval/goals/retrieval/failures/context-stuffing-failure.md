@@ -11,7 +11,7 @@
 - Synthesis draws on a low-relevance chunk positioned near the start or end of the context instead of the correct chunk placed mid-context.
 
 **Root Cause**
-Too many chunks dilute relevant evidence.
+Retrieval is configured with a large top-k to maximize recall, but with no re-ranking or truncation step before synthesis and no relevance-based ordering of chunks within the context window, the correct chunk can end up buried in the middle of the context rather than positioned where the model attends most (the start or end). Because no chunk-level relevance scores are passed to the synthesis model to help it weight evidence, and a fixed context budget forces the inclusion of many only-marginally-relevant chunks alongside the correct one, the model has no signal telling it which chunk in a long, undifferentiated context actually matters — so more retrieved evidence measurably lowers accuracy instead of raising it.
 
 **Example**
 ```

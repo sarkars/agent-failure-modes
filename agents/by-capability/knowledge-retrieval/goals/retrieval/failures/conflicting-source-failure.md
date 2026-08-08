@@ -11,7 +11,7 @@
 - Agent blends contradictory numbers into an averaged or invented middle value that appears in neither source.
 
 **Root Cause**
-Agent fails to reconcile contradictions between sources.
+Retrieval ranks candidate sources purely by semantic similarity, with no signal for recency or source authority and no supersession metadata (a "replaces doc X" or effective-date field) tying newer sources to the ones they override — so when two retrieved documents disagree, nothing in the ranking distinguishes the current, authoritative one from the outdated one. Because no contradiction-detection step ever runs over the retrieved set, and the synthesis prompt only instructs the model to "answer using the retrieved context" without requiring it to check for conflicts, the model is left to either silently pick whichever source ranked highest or blend the disagreement into an invented value that matches neither source.
 
 **Example**
 ```

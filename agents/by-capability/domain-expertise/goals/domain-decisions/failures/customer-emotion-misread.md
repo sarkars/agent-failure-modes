@@ -10,7 +10,7 @@
 - Customer explicitly complains about feeling unheard or dismissed rather than about the substance of the resolution offered.
 
 **Root Cause**
-Agent mishandles empathy in debt collection, healthcare, support, or complaints.
+The agent's generation path is optimized to resolve the literal content of a request, and without a dedicated emotion or sentiment classification step running before response generation, there is nothing to route an emotionally loaded message differently from a routine one. Response templates are validated for policy accuracy but never reviewed for tone, and high message volume creates pressure toward fast, templated replies — so a hardship disclosure receives the same procedurally correct, emotionally blind treatment as a routine status question, and the mismatch is only visible after the customer reacts to it.
 
 **Example**
 ```

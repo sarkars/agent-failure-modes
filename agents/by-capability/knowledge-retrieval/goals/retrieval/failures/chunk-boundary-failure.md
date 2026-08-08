@@ -10,7 +10,7 @@
 - Answer correctly states a rule but omits an exception listed in the immediately following (unretrieved) sentence.
 
 **Root Cause**
-Needed fact is split across chunks and lost.
+Chunking is done at a fixed size or token count rather than at semantic boundaries, so a clause or list item can be split mid-sentence with no overlap between the resulting chunks — meaning the completing half never appears in either chunk's retrieved context. Because retrieval ranks and returns chunks independently rather than considering neighboring or parent-document context, a chunk that scores highly for relevance can outrank and displace the very neighbor that carries the exception or continuation it depends on, with no fallback mechanism to recover what the boundary cut away.
 
 **Example**
 ```

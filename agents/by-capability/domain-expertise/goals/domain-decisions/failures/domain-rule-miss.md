@@ -10,7 +10,7 @@
 - Compliance or legal review flags a decision as violating a rule that was never encoded in the agent's reasoning or rule engine.
 
 **Root Cause**
-Agent misses industry-specific rule or exception.
+Domain rules exist as tribal knowledge and scattered policy documents rather than a queryable, versioned rule engine, so exceptions — jurisdiction-specific carve-outs, product-specific windows — are never systematically captured alongside the general rule they modify. Because the agent has no "rule uncertain" signal that would trigger escalation, and no review cadence exists to catch rule-set gaps before they cause repeated wrong decisions, the agent defaults to whichever general rule it does have encoded, silently and confidently, even when an exception it was never given clearly applies.
 
 **Example**
 ```

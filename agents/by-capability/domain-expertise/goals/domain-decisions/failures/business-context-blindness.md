@@ -10,7 +10,7 @@
 - Post-mortem review finds the "correct" decision was technically defensible but a human agent with account context would have chosen differently.
 
 **Root Cause**
-Technically correct answer is commercially wrong.
+The agent's decision inputs are limited to the policy rule and the request itself — it has no access to customer LTV, account health, or churn-risk signals at decision time, so a policy engine that treats every customer identically has no data available that would let it treat any customer differently. This gap is reinforced by how the agent is evaluated: because success is measured as policy-compliance rate rather than business-outcome quality, and no feedback loop ever reports the downstream churn or revenue consequence of a decision back to the system, the gap between "technically correct" and "commercially right" is invisible to everything that could otherwise catch it.
 
 **Example**
 ```

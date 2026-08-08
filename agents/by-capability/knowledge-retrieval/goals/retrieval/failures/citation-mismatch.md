@@ -11,7 +11,7 @@
 - Citation names the correct document but the wrong page or section for the stated fact.
 
 **Root Cause**
-Agent cites a source that does not support the claim.
+The citation is generated as a separate step from the claim itself, rather than being derived directly from the retrieved passage the claim was extracted from, so the two can drift apart with nothing keeping them tied together. Templated citation formatting ("[Source Name]") lets the model fill in a plausible-looking reference without that reference being grounded in specific retrieved text, and because no post-hoc entailment check verifies the cited chunk's content actually supports the generated claim before the answer ships, a citation that merely shares topic or keywords with the claim passes as if it substantiated it.
 
 **Example**
 ```

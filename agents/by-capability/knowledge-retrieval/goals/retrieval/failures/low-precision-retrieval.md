@@ -11,7 +11,7 @@
 - Precision@5 drops noticeably below the precision@10 baseline for a specific query category (e.g., short, ambiguous queries).
 
 **Root Cause**
-Agent retrieves irrelevant chunks and synthesizes wrong answer.
+The embedding model conflates surface-level keyword overlap with true semantic relevance, so a chunk that shares vocabulary with the query but addresses an unrelated topic can score as similar as one that actually answers it. With no re-ranking stage running after initial dense retrieval to filter topically-similar-but-irrelevant chunks, and a similarity threshold set permissively enough to let borderline matches into the top-k, irrelevant chunks reach synthesis alongside relevant ones — and because no citation-grounding check verifies a chunk actually supports the specific claim before it's used, the wrong chunk can end up cited as if it did.
 
 **Example**
 ```

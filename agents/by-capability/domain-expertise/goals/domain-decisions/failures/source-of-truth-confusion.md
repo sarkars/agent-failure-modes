@@ -10,7 +10,7 @@
 - Investigation finds the authoritative source was queryable and available the whole time, but the agent defaulted to the retrieved/extracted text anyway.
 
 **Root Cause**
-Agent uses OCR/RAG text when database/source document should win.
+The retrieval pipeline treats RAG/OCR-extracted text and the live authoritative database as equally valid inputs because no explicit source-of-truth hierarchy is encoded anywhere in the system — and in practice the RAG pipeline is queried first by default, with the database treated as a fallback rather than the primary source. Without a conflict-detection step that compares retrieved text against the authoritative source before answering, and with cached extracted content often outliving the freshness window of the data it represents, the agent has no mechanism to notice it is answering from a stale or lower-precedence source even when the correct one was queryable the whole time.
 
 **Example**
 ```
