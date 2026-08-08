@@ -11,7 +11,7 @@
 - The cited document's effective date is more than one revision cycle behind the document type's expected update cadence.
 
 **Root Cause**
-Agent uses outdated policy/doc/version.
+The retrieval ranking function rewards historical engagement signals like click count and inbound links rather than recency or active/deprecated status, so a well-established old document can consistently outscore its replacement. This is compounded by an ingestion process that never records supersession relationships between document versions, meaning the system has no structural way to know the 2021 policy was replaced by the 2024 one. Because there is also no time-decay factor in scoring and no process for removing or flagging retired documents once a newer version is published, both versions sit in the index indefinitely as if equally current.
 
 **Example**
 ```

@@ -11,7 +11,7 @@
 - The same disagreement recurs for similar inputs because there is no learned or codified tie-breaking rule.
 
 **Root Cause**
-Agents disagree and no resolver exists.
+There is no designated arbiter agent or deterministic tie-breaking policy defined anywhere in the pipeline, so when two agents optimize genuinely different objectives -- growth versus margin, for instance -- with no shared reconciliation criteria, their outputs have nowhere to converge. The aggregation step makes this worse by concatenating or passing through whatever each agent produces rather than requiring the outputs to agree before being finalized. Since the agents run in parallel with no communication channel to negotiate or even flag the conflict to one another, neither agent nor the system has any opportunity to notice the contradiction before it reaches the end user.
 
 **Example**
 ```

@@ -11,7 +11,7 @@
 - Task decomposition duplicates effort in some areas while leaving other necessary subtasks unassigned.
 
 **Root Cause**
-Manager agent assigns wrong tasks or fails to synthesize.
+Task decomposition is driven by static or templated logic rather than genuine awareness of each worker's actual capabilities, so subtasks get matched to agents based on convenience or ordering rather than fit. The coordinator has no validation step that checks a worker's output for relevance or confidence before folding it into the synthesis, so a low-quality, out-of-scope response is included as if authoritative. Separately, the synthesis step often assumes a fixed number or ordering of input slots, so outputs that arrive late or beyond that count are silently dropped rather than merged -- and because there is no feedback loop from synthesis quality back to the assignment policy, these mismatches and drops recur across runs instead of being learned from.
 
 **Example**
 ```

@@ -11,7 +11,7 @@
 - Retrieved chunk contains a table rendered as OCR'd row-jumbled text, and the synthesized answer misattributes a value to the wrong row or column.
 
 **Root Cause**
-Agent misses data embedded in tables, charts, images, or PDFs.
+The ingestion pipeline treats documents as flat text, running OCR or extraction that captures prose but does not detect or structurally parse tabular layouts, so cell values are either lost or flattened into unusable strings before they ever reach the index. Because no separate table index or structured representation exists, and no vision/multimodal step is applied to charts and figures, numeric values that are only ever encoded visually simply never become retrievable text. The gap is made worse by the absence of any mechanism to resolve a text reference like "see Table 2" to the table's actual content, so even when the surrounding prose is retrieved correctly, the data it points to remains invisible to the system.
 
 **Example**
 ```

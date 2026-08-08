@@ -11,7 +11,7 @@
 - The same upstream message produces different downstream interpretations across repeated runs, even though the upstream input is unchanged.
 
 **Root Cause**
-One agent misunderstands another agent's output.
+Handoffs carry meaning in free-form natural language rather than structured fields for polarity, units, or scope, so a receiving agent has to infer rather than read facts like direction of change directly. That inference gets riskier when the receiving agent's context window is truncated or compressed, dropping the original upstream message before it generates its own restatement, and there is no confirmation step where the downstream agent paraphrases its understanding back for validation before acting on it. Because the upstream agent's output format is not fixed by any schema, it can also vary from run to run, forcing the downstream agent to re-infer structure fresh each time rather than parse a stable contract -- which is exactly the kind of ambiguity that lets a sign or scope get flipped unnoticed.
 
 **Example**
 ```

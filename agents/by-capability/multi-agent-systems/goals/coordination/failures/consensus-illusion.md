@@ -11,7 +11,7 @@
 - Confidence in the aggregated answer rises with agent count even though the agents lack the diversity needed to add real signal.
 
 **Root Cause**
-Agents agree because they share flawed context or bias.
+Because every agent in the vote is typically instantiated from the same base model and prompt template, and pulls from a single shared retrieval index rather than independently sourced evidence, their votes are correlated rather than truly independent even though the aggregation layer treats them as separate confirmations. The voting logic itself never checks whether the agreeing agents actually consulted different evidence -- it treats agreement count as a direct proxy for correctness, so three agents reasoning from one stale snippet score exactly like three agents that verified the claim three separate ways. With no devil's-advocate or adversarial dissent mechanism built into the process, there is also nothing structurally positioned to challenge a unanimous but shared error before it is reported as high confidence.
 
 **Example**
 ```

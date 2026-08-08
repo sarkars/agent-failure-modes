@@ -11,7 +11,7 @@
 - Token/cost consumption for a single task grows unbounded as the debate continues with no forcing function to stop it.
 
 **Root Cause**
-Agents critique/revise endlessly without termination.
+Nothing in the loop's design caps the number of rounds or checks for diminishing returns, so as long as the critic can find something to say, the cycle continues by default. That tendency is reinforced when the critic is prompted or rewarded to always surface at least one issue, which biases it structurally against ever issuing an approval, and by the absence of a fixed, shared rubric, which lets the critic re-litigate a different criterion each round instead of converging on a stable checklist. Because the writer and critic hold symmetric authority with no arbiter or human-escalation path to force a decision, there is also no mechanism that can end the exchange once it stops making progress -- it just keeps going until an external resource limit, like a timeout, cuts it off.
 
 **Example**
 ```

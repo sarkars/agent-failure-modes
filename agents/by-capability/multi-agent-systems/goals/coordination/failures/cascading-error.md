@@ -11,7 +11,7 @@
 - The root-cause agent's output looks locally reasonable in isolation, so no individual agent's trace looks obviously broken.
 
 **Root Cause**
-Early error propagates through the multi-agent pipeline.
+The pipeline is built as a strictly linear chain where each agent consumes the prior agent's output as trusted input, with no confidence score, source citation, or independent re-verification step carried along to signal that the figure might be wrong. Without a checkpoint or sanity-check gate that compares an early-stage output back against the original source data, there is no point in the chain where a bad extraction could be caught before downstream agents build further conclusions on top of it. The deeper the pipeline and the more agents involved, the more this compounds, since each transformation stage can amplify the same unverified error rather than correct it.
 
 **Example**
 ```

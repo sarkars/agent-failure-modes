@@ -11,7 +11,7 @@
 - Resource usage (tokens, API quota, compute) scales worse than task complexity would justify because of redundant execution.
 
 **Root Cause**
-Multiple agents solve the same subtask independently.
+Task decomposition happens without any check for overlapping scope between the subtasks it produces, so two branches of the same fan-out can end up covering identical ground without anyone noticing at planning time. There is no shared task registry or claim/lock mechanism to prevent two agents from picking up the same unit of work, which matters most in high-parallelism architectures where many agents pull independently from a shared queue. Because agents also have no visibility into what their peers are currently doing or have already finished, each one proceeds as if it were the only one addressing the problem, and the resulting redundant tool calls and near-duplicate outputs get merged into the final result as if they were independent corroboration.
 
 **Example**
 ```

@@ -11,7 +11,7 @@
 - A dissenting agent's initial objection is dropped without being addressed once the other agents agree, rather than being resolved.
 
 **Root Cause**
-Agents converge before evidence is checked.
+Agents are prompted and effectively rewarded for reaching consensus quickly, with no minimum evidence threshold required before an agreement counts as final, so the path of least resistance is simply to concur rather than verify. This is worsened by anchoring: the first agent's framing sets the terms of the discussion, and subsequent agents default to agreeing with it rather than independently gathering their own evidence, since no dedicated evidence-gathering or tool-use step is required before a vote is cast. Because the agents are also scored on speed-to-resolution, the architecture creates active pressure against dissent or further investigation, so a plausible-sounding first guess can harden into "consensus" well before anyone actually checked whether it was true.
 
 **Example**
 ```

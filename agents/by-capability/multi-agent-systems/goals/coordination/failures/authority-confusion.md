@@ -11,7 +11,7 @@
 - Human reviewers cannot reconstruct after the fact which agent's output was authoritative, because precedence was never logged.
 
 **Root Cause**
-System does not know which agent output wins.
+No ownership or priority map exists that assigns which agent is authoritative for which decision domain, so when two agents' conclusions touch the same field there is no rule to consult. The topology compounds this: agents write to shared output state as peers with no gatekeeper, and the aggregation step is implemented as naive concatenation or last-write-wins rather than an explicit conflict-resolution policy, so whichever output arrives last (or gets merged first) wins by accident rather than by design. This gap tends to widen over time as new agents are added incrementally without anyone revisiting the original authority model, so newer agents' scopes silently overlap with older ones that were never designed to share a decision space.
 
 **Example**
 ```

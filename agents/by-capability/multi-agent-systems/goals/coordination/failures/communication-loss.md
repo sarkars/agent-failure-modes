@@ -11,7 +11,7 @@
 - Agents operating on separate memory/context stores answer the same question differently depending on which one is asked.
 
 **Root Cause**
-Key information is not shared between agents.
+Handoffs between agents are implemented as free-text summaries rather than structured, complete state transfer, so a detail an author agent considered secondary can be silently dropped in the act of condensing it into prose. Token-budget limits and aggressive context truncation compound this by cutting earlier findings before they are ever serialized into the handoff, and because agents keep separate, local memory stores rather than reading from one shared context, there is no fallback path for the receiving agent to recover what was lost. Nothing in the handoff process defines a "must-carry" set of fields that are required to survive every transfer, so which facts make it through depends on the summarizer's judgment call in the moment rather than on any guarantee.
 
 **Example**
 ```

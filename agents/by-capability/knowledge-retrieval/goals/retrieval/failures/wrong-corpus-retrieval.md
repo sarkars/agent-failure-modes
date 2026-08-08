@@ -11,7 +11,7 @@
 - A cross-tenant document appears in results with no access-control rejection, exposing another customer's content.
 
 **Root Cause**
-Agent searches the wrong knowledge base or tenant corpus.
+This happens because multiple products' or tenants' documents live in a single shared vector index with no mandatory corpus or tenant filter enforced at query time, so semantically similar phrasing across unrelated corpora can win the ranking regardless of which product the user actually belongs to. There is no pre-retrieval step that classifies the query and routes it to the correct corpus before search runs, and because corpus/tenant metadata is attached inconsistently at ingestion, even a filter that does exist can silently miss documents it should have caught. Access control is also enforced only at the application or display layer rather than at the index itself, so the wrong-corpus document is retrieved and scored as a real candidate well before any permission check would have hidden it.
 
 **Example**
 ```

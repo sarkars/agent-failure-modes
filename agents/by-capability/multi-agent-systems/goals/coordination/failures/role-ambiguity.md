@@ -11,7 +11,7 @@
 - Agents ask each other or the user clarifying questions about ownership mid-task ("is this my responsibility or yours?") instead of proceeding.
 
 **Root Cause**
-Agents do not know who owns which responsibility.
+Responsibilities are described to agents in overlapping natural language -- "ensure quality," "handle data issues" -- that gets assigned to more than one agent without ever designating a single owner, so each agent is left to infer from its own prompt whether a given subtask is its job. There is no shared responsibility registry, RACI-style or otherwise, that an agent could query at runtime to resolve that ambiguity, and because agent selection and routing can change dynamically from run to run, the set of participants -- and therefore the implicit boundaries between their roles -- is never fixed long enough to be reliably tested. The more agents a workflow includes, the more combinations of implicit, untested scope overlap become possible, so duplicate or dropped work becomes a matter of probability rather than an edge case.
 
 **Example**
 ```

@@ -11,7 +11,7 @@
 - Behavior varies nondeterministically between runs with identical inputs because of timing-dependent interaction effects between agents.
 
 **Root Cause**
-Interaction creates behavior not seen in isolated tests.
+Test coverage is built around each agent in isolation, exercising it against mocked or scripted counterpart responses rather than a live, unscripted peer, so the actual feedback dynamics between two open-ended agents are never exercised before production. When those agents are wired into a loop -- Agent A's output feeding Agent B, whose output feeds back to Agent A -- with no turn or iteration cap, the open-ended nature of generation means the space of possible exchanges is far larger than anything a scripted test could sample. Without production-scale multi-agent simulation or chaos-style testing standing in for that gap, the first time the real interaction pattern plays out is in front of a live user, and the loop can run unbounded before anyone notices.
 
 **Example**
 ```

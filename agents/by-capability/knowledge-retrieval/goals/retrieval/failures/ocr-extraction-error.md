@@ -11,7 +11,7 @@
 - Agent answers confidently using an OCR'd figure that is objectively wrong when checked against the original scanned image.
 
 **Root Cause**
-Agent misreads scanned, smudged, rotated, or low-quality text.
+Character-level misreads become embedded as unquestioned ground truth because the pipeline runs a single OCR engine with no second pass or ensemble cross-check, and it discards per-word confidence scores that would otherwise let retrieval distinguish a clean transcription from a guess. Poor source scan quality (skew, smudges, low resolution) is exactly the condition that drives OCR error rates up, yet nothing in the ingestion path measures or flags that risk before indexing. Once the original image is not retained or linked alongside the extracted text, there is also no cheap way to catch or correct the error later, so a single misread digit propagates into every future answer drawn from that document.
 
 **Example**
 ```

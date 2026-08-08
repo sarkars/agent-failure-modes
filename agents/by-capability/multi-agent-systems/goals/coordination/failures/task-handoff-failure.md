@@ -11,7 +11,7 @@
 - Downstream agent silently fills gaps in a handoff with default/guessed values instead of the actual upstream-computed values, producing plausible-but-wrong output.
 
 **Root Cause**
-One agent passes incomplete/incorrect state to another.
+Handoffs are implemented as free-text summaries rather than structured, versioned payloads with clearly required fields, so there is nothing forcing the sending agent to include every value the receiving agent will actually need. Context-window truncation between turns can also drop earlier state before it is ever serialized into the handoff, and because no validation layer checks that the fields downstream depends on are present and non-null, a payload missing a critical constraint is accepted and forwarded without complaint. The orchestration framework treats each agent as stateless and relies entirely on the sending agent's memory to include everything relevant, so any single lapse in that recall becomes an invisible, un-caught gap in what the next agent receives.
 
 **Example**
 ```
