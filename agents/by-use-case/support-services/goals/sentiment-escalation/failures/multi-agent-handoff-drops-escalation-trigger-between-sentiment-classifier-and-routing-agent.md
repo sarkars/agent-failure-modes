@@ -5,14 +5,14 @@
 **Frequency**: Occasional
 
 **Symptoms**
-- The sentiment-classification agent's analysis explicitly identifies churn or public-complaint risk language in the ticket, but the structured sentiment score it outputs falls within a numeric range the routing agent treats as standard priority
-- The routing agent, which routes solely on the structured numeric sentiment score, sends the ticket to the standard queue rather than to expedited or specialist handling
-- Re-reading the sentiment-classification agent's analysis transcript clearly shows the escalation-worthy risk was identified and reasoned through; it simply never reached a structured field the routing agent treats as escalation-triggering
-- The gap concentrates on tickets where the risk signal is specific and contextual (a stated intent to post a public review, a mention of switching to a competitor) rather than expressed through generally negative-sounding language that the numeric sentiment score is tuned to detect
-- The escalation gap is caught only when the customer follows through on the stated risk (posting publicly, churning) and a retrospective review traces it back to the original ticket's overlooked analysis
+- The classifier's write-up quotes the customer's exact words announcing an intended action -- posting publicly, canceling -- but the ticket's numeric score reflects the message's overall tone, which reads as only moderately negative once that one sentence is averaged against the rest
+- A routing agent reading only the numeric field cannot distinguish this ticket from any other moderately negative ticket, since both land in the same score band and produce the same standard-queue outcome
+- Tickets that go on to escalate publicly are found, on retrospective review, to have contained a named intent statement whose score fell just short of the routing threshold at a materially higher rate than tickets that don't escalate
+- Lowering the general escalation threshold to catch these cases would also route large volumes of ordinary moderately negative tickets to expedited handling, so the fix isn't a threshold tweak -- it's a missing category of signal entirely
+- Nobody notices the miss until the customer's stated action actually happens and a retrospective review pulls the original transcript
 
 **Root Cause**
-The sentiment-classification agent and the routing agent communicate through a single structured numeric sentiment score, which compresses the classifier's full analysis into one dimension that the routing agent's threshold-based logic acts on. When the classifier's actual risk determination is driven by a specific, contextual signal -- a stated intent rather than generally negative tone -- that signal does not necessarily map to a low enough numeric score to cross the routing agent's escalation threshold, so the specific reasoning behind the risk determination is lost in the compression to a single number.
+The numeric sentiment score is trained to summarize a message's tone as a whole, so a single sentence stating a concrete future action competes for weight against the rest of the message's more neutral phrasing and rarely moves the aggregate score past a fixed threshold on its own. The classifier's narrative reasoning can name that sentence specifically because reasoning operates over discrete statements, but the score is a single averaged number with no mechanism for one clause to override the rest of the message -- so a threshold tuned against typical negative-tone distributions systematically underweights exactly the tickets where the risk is concentrated in one explicit line rather than spread evenly across the whole tone.
 
 **Example**
 ```

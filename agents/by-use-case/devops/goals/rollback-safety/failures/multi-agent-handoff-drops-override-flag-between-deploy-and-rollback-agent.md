@@ -5,14 +5,14 @@
 **Frequency**: Occasional
 
 **Symptoms**
-- An automated rollback, triggered by a metric regression unrelated to a recent hotfix, reverts the hotfix along with the offending change, re-introducing the separate incident the hotfix had just resolved
-- The deploy agent's own logs or commit annotations show free-text language noting the hotfix and its purpose, but the rollback agent's structured deploy-history record it consults contains no corresponding field marking that revision as containing a protected change
-- Re-running the same rollback decision with the hotfix explicitly marked in a structured "do-not-revert" field produces the correct, hotfix-preserving rollback, isolating the failure to the handoff contract rather than the rollback logic itself
-- The dropped flag concentrates on hotfixes applied as small, out-of-band patches layered onto a larger deploy, where the hotfix's purpose is most likely to exist only as a commit message or chat note rather than a structured deploy attribute
-- On-call discovers the re-introduced incident only after the previously resolved symptom reappears, requiring a second hotfix to be applied
+- A regression completely unrelated to a recent hotfix triggers an automated rollback, and the rollback silently takes the hotfix down with it because nothing in the rollback agent's view of deploy history distinguishes that revision from any other
+- The commentary attached to the hotfix names both its purpose and the fact that it should survive an unrelated rollback, in language a person would immediately understand, sitting one field over from the ones the rollback agent actually reads
+- Re-running the identical rollback decision with a structured do-not-revert marker added to that one revision produces the hotfix-preserving outcome, confirming the rollback agent's decision logic itself is not at fault
+- The previously resolved incident reappears the moment the rollback completes, so the team ends up re-diagnosing and re-fixing a problem it had already solved once
+- The same blind spot applies to any revision applied outside the normal release cadence, not just this hotfix, since none of them have a field to be protected in
 
 **Root Cause**
-The deploy agent and rollback agent are separately invoked components that communicate only through the structured deploy-history record, not through each other's free-text reasoning or commit annotations. When the deploy agent's output contract allows it to note a hotfix's protected status only in commentary without requiring a corresponding structured field, that status is available to a human reading the deploy log but invisible to the rollback agent, which is built to act on structured deploy-history fields, not to re-read every prior commit's free-text commentary before deciding what to revert.
+Deploy-history entries are schematized around the normal release path, where every revision goes through the same review process and none needs to be marked differently from any other. An out-of-band hotfix, applied ahead of the scheduled release specifically to firefight a separate incident, is by definition an exception to that normal path, but the deploy-history schema has no way to record that a given entry is an exception -- the only place that distinction gets written down is the commentary field a human would read, not a field the rollback agent's automated decision logic was built to check, because that automation was designed to handle the normal case, where no entry ever needs special protection.
 
 **Example**
 ```

@@ -5,14 +5,14 @@
 **Frequency**: Occasional
 
 **Symptoms**
-- The specialist-consult agent's note explicitly states a specific treatment approach is contraindicated given a finding from the consult, but the structured consult summary handed to the treatment-planning agent contains only the consult's general recommendation field, with no contraindication flag
-- The treatment-planning agent, which builds the care plan from the structured consult summary, includes the contraindicated approach because the summary's schema gives it no reason not to
-- Re-reading the specialist-consult agent's full consult-note transcript clearly shows the contraindication was identified and reasoned through; it simply never reached a structured field the treatment-planning agent reads
-- The gap concentrates on contraindications that are specific to the individual patient's consult findings rather than a standard, widely known contraindication already encoded in general clinical-guideline references the treatment-planning agent might otherwise check
-- The error surfaces only when a clinician manually cross-references the full specialist consult note against the finalized care plan, since the care plan otherwise reads as complete and clinically reasonable
+- The specialist's consult note pairs a real clearance with a specific condition attached to it -- avoid this one technique -- but the structured recommendation field the treatment-planning agent reads only ever encodes "cleared" or "not cleared," with no slot for a condition riding along with a clearance
+- The treatment-planning agent's output looks complete and clinically unremarkable on its own, since a plan using the ruled-out technique doesn't look wrong without also having the specialist's note in view
+- Every other consult of this type that the treatment-planning agent has processed used the recommendation field as an unconditional signal, so there is no precedent in its own history that would prompt a check for a hidden condition
+- Anesthesia or nursing staff catch the conflict only by manually re-reading the full consult transcript shortly before the procedure, not through any automated check
+- The same gap would recur for any conditional clearance, not just an anesthesia technique -- a medication contraindication or an activity restriction attached to an otherwise-clearing consult would be dropped by the same binary field
 
 **Root Cause**
-The specialist-consult agent and the treatment-planning agent communicate through a structured consult-summary schema that captures the consult's general recommendation but has no dedicated field for a patient-specific contraindication identified during that consult, so any such finding exists only in the consult agent's narrative reasoning and is invisible to the treatment-planning agent's plan-generation process. The treatment-planning agent has no mechanism to discover the contraindication because it never consults the specialist agent's full reasoning, only the structured summary the schema permits.
+The consult-summary schema's recommendation field was built around a binary clinical question -- is this patient cleared for the procedure -- because that is what the treatment-planning agent needs in the overwhelming majority of consults. A conditional clearance, where the patient is cleared only if a specific technique is avoided, doesn't fit that binary shape: the specialist agent still writes "cleared," because the patient genuinely is clearable, and the condition attached to that clearance has no field of its own to occupy. The treatment-planning agent's plan-generation step reads the recommendation field literally, as an unconditional green light, because every other consult it has processed used the field that way.
 
 **Example**
 ```

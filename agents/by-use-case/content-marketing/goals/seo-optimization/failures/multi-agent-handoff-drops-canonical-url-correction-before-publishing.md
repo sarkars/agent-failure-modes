@@ -5,14 +5,14 @@
 **Frequency**: Occasional
 
 **Symptoms**
-- A page is published with a canonical tag pointing to a different, lower-priority URL, even though the SEO-review agent's review notes explicitly flagged the duplicate-content issue and specified the correct canonical target before handoff to publishing
-- The structured deploy schema passed to the publishing agent includes fields for page slug, meta title, and meta description, but has no field for a canonical-tag correction noted only in the SEO-review agent's free-text review comments
-- Asking the publishing agent why the correction was not applied shows it received only the standard structured deploy fields and had no input describing the canonical-tag fix from the SEO-review agent's notes
-- The miss concentrates on canonical corrections identified during ad hoc SEO review rather than during the standard page-template configuration, since those are exactly the corrections that fall outside the deploy schema's predefined fields
-- Search-console reporting showing duplicate-content cannibalization between the two URLs is typically how the gap is discovered, well after the page has been live and indexed with the incorrect canonical tag
+- A newly published product-comparison page keeps its self-referencing canonical tag even though the SEO-review agent's own notes, minutes earlier, named the exact competing URL it should point to instead
+- Every field in the deploy schema (slug, meta title, meta description) traces back to a per-page decision the template already anticipated; canonical tag is the one field the template assumes never varies per page, so no slot exists for an override once one is actually needed
+- Pages whose SEO review surfaces a template-level exception show a consistently higher post-publish correction rate than pages whose review simply confirms the template defaults are fine
+- The publishing agent, asked why it didn't apply the correction, reports it received a complete and valid deploy payload by its own schema's standard -- nothing in that payload indicated a correction existed
+- Duplicate-content cannibalization in search-console reporting is typically the first anyone notices, arriving weeks after the page went live, long after the review agent's original note would have been easy to find
 
 **Root Cause**
-The handoff between the SEO-review agent, which reviews a draft page and produces free-text notes flagging issues like a duplicate-content canonical-tag error, and the publishing agent, which deploys the page from a fixed structured schema, has no mechanism for surfacing a correction that does not map to one of the schema's predefined fields. The SEO-review agent's notes record the flagged issue and the correct canonical target, but nothing in the handoff forces a check for "does this page's SEO-review notes contain a canonical-tag correction not represented in the structured deploy fields" before the publishing agent proceeds, so a real, search-ranking-affecting correction is silently dropped at the agent-to-agent boundary.
+The deploy schema treats the canonical tag as a template-level default rather than a per-page attribute, because for the overwhelming majority of pages the template's self-referencing default is correct and no per-page override is ever needed. The SEO-review step was layered on afterward as a quality gate over an already-fixed publishing pipeline, so when that gate produces a genuine per-page exception, there is no field left in the schema to write it into -- extending the schema for a case the template was explicitly designed not to need was never part of either system's original scope.
 
 **Example**
 ```

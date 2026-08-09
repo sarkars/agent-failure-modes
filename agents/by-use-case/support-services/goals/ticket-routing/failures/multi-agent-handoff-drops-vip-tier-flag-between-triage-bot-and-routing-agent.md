@@ -5,14 +5,14 @@
 **Frequency**: Occasional
 
 **Symptoms**
-- Enterprise or VIP-tier customers' tickets land in the standard routing queue despite the triage bot's own transcript showing it identified the account as premium-tier moments earlier
-- The structured ticket object passed from triage bot to routing agent contains category, language, and priority fields, but no field for account tier, even when the triage step's free-text reasoning explicitly notes the account is enterprise
-- Routing agents operating purely from the structured ticket schema show a materially higher standard-queue misroute rate for VIP accounts than routing agents given the full triage transcript alongside the structured fields
-- The mismatch concentrates on accounts whose VIP status is determined by a free-text account-notes lookup (a CRM annotation, a contract-tier note) rather than by a flag already present in a structured account field the routing agent also queries
-- Account managers escalate manually after noticing a premium account's ticket sat in the standard queue past the premium-tier response target, despite the triage transcript clearly identifying the account's tier
+- Enterprise-tier tickets sit in the standard queue's ordinary order despite the triage bot's transcript naming the account's contract tier just before the ticket was created
+- Category, language, and priority all populate correctly on these tickets; tier is the one attribute that never appears anywhere in the structured object, because it was never added to either the ticket schema or the account record the routing agent separately queries
+- Comparing routing outcomes for accounts whose tier lives in a structured account flag against accounts whose tier is only a CRM note shows the note-only group routed to standard queues at a materially higher rate
+- Premium-tier customers contact support asking why they weren't treated as premium; each investigation traces back to the same missing field rather than to a routing-logic error
+- Account managers learn of a specific misroute only when a customer escalates directly, since no monitoring layer checks structured ticket fields against the transcript that produced them
 
 **Root Cause**
-The routing agent's decision logic consumes only the structured ticket schema produced by the triage stage, and that schema was built to carry the fields routing explicitly checks (category, language, priority) rather than every fact the triage stage's free-text reasoning surfaced. When VIP/enterprise status is derived from an account-notes lookup rather than a field already present in a structured account record the routing agent itself queries, that status exists only in the triage bot's free-text output and is lost the moment the handoff narrows to the fixed schema, even though the same model, given the triage transcript, would readily act on it.
+Account tier here is a side effect of a CRM lookup the triage bot performs to confirm contract terms, not a first-class attribute the ticket schema was ever built to carry, so the lookup's output was never wired into the fields routing consumes. The routing agent's queue-selection logic was written once, against a three-field contract (category, language, priority), before tier-aware routing was ever a requirement, and it has no code path that would consult anything outside those fields even if one existed. The gap sits on both ends of the handoff: the ticket schema has no tier field, and the structured account record the routing agent already queries for other purposes was never extended to carry one either.
 
 **Example**
 ```

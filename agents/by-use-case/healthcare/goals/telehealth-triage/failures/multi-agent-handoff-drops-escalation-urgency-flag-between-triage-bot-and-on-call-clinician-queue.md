@@ -5,14 +5,14 @@
 **Frequency**: Occasional
 
 **Symptoms**
-- The triage bot's internal assessment text states the case should be seen "urgently" or "within the hour," but the structured ticket it creates is queued at standard priority alongside routine follow-ups
-- Re-reading the bot's full triage transcript, after the fact, clearly shows it reasoned the case as urgent; the structured ticket fields show no trace of that conclusion
-- The on-call clinician queue sorts and surfaces cases solely by the structured priority field, never by re-parsing the triage bot's narrative assessment
-- The gap concentrates on symptom presentations that do not map to one of the queue's small set of pre-defined high-priority ticket categories, even though the bot's reasoning correctly identified urgency from the specific combination of symptoms described
-- The delay is caught only when a patient calls back to report worsening symptoms, or when a clinician happens to open the ticket and reads the full transcript rather than relying on the queue's priority sort
+- A stroke-consistent symptom combination receives the same "Urgent" ticket priority as a same-day complaint about ear pain, because both are more urgent than routine follow-up and the schema stops distinguishing past that point
+- Within the "Urgent" tier the queue orders strictly by submission time, so a time-critical case submitted after several non-emergent "Urgent" tickets waits behind all of them
+- The bot's own assessment text draws the exact clinical distinction a person would draw -- specific, readable, and correct -- immediately adjacent to the structured field that discards it
+- The patient receives an automated reply to wait for a callback, which reinforces the queue's ordering rather than surfacing any signal that the wait itself is unsafe
+- The gap is unrelated to any single symptom category -- any presentation whose urgency comes from a specific, unusual combination rather than a routine same-day complaint lands in the same undifferentiated top tier
 
 **Root Cause**
-The triage bot and the on-call clinician queue communicate through a structured ticket schema with a small, fixed set of priority values, rather than through the bot's full assessment. When the bot's actual urgency conclusion is more nuanced or specific than the schema's categories capture -- for example, urgency driven by a particular symptom combination the schema has no dedicated flag for -- that conclusion exists only in the bot's narrative reasoning and is never mapped into the structured field the queue actually sorts on, so the downstream system has no way to act on it.
+The queue's priority field was built to differentiate ordinary telehealth demand -- same-day versus next-available versus routine follow-up -- and "Urgent" is its ceiling, covering everything from a minor same-day complaint to a genuine emergency, because until this class of presentation appeared, nothing needed a tier above same-day. Within that top tier the queue falls back to submission-time ordering, since the schema was never asked to differentiate degrees of urgency inside its own top category. The bot's own assessment can and does distinguish a stroke presentation from an ear infection, but that distinction has nowhere to go once it is mapped down into a field that was never designed to carry it.
 
 **Example**
 ```
