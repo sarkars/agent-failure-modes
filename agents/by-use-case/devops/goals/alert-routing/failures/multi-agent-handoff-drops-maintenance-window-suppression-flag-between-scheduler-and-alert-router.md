@@ -8,11 +8,11 @@
 - The scheduling agent's planning notes correctly identify which specific alerts or services should be suppressed during the maintenance window, but the calendar entry it creates contains only a start and end time with no suppression scope
 - The alert-routing agent, which acts solely on structured calendar entries, has no way to determine which alerts the maintenance window was meant to cover, so it pages on-call for every alert firing during the window regardless of relevance
 - Re-reading the scheduling agent's planning transcript clearly shows it had determined the exact suppression scope; that scope simply never reached the structured calendar entry
-- The gap is most visible for maintenance windows covering a subset of a service's alerts (e.g., suppress latency alerts but not error-rate alerts) rather than a full service-down window, since partial suppression has no dedicated structured field
 - On-call engineers report the false pages only after acknowledging several, since the maintenance window's existence is visible in the calendar but its intended suppression scope is not
+- Full service-down windows rarely trigger the problem, since suppressing "everything for this service" fits the existing time-range-plus-service schema; the failure is specific to partial suppression, like replica-3's latency and connection-pool alerts staying quiet while its error-rate alerts stay live
 
 **Root Cause**
-The scheduling agent and the alert-routing agent communicate through a calendar entry schema that captures only time range, not alert scope, so any suppression-scope reasoning the scheduling agent performs exists solely in its own planning output and is never carried into the structured field the router actually consults. The router has no mechanism to recover that reasoning, since it has no access to the scheduling agent's transcript and acts only on the calendar entry's structured fields.
+The calendar entry schema this handoff relies on was borrowed from general-purpose scheduling (start_time, end_time, service), not designed around alerting concepts, so it has no vocabulary for "alert type" at all -- there is no field the scheduling agent's replica-3 determination (suppress latency and connection-pool, keep error-rate active) could populate even if someone tried. Because the agent's structured output is constrained to whatever fields the calendar schema defines, that determination stays trapped in its planning narrative, and the router's alert-matching logic, which was built to key off calendar fields rather than parse planning text, has no path to it.
 
 **Example**
 ```

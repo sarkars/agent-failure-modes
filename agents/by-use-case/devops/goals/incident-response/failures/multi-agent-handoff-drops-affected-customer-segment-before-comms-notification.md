@@ -10,9 +10,10 @@
 - Alternatively, comms agent under-notifies, missing affected customers outside the structured ticket's default audience field
 - Customers outside the actual affected segment file support tickets asking why they received an outage notification for a service they were not using or were not impacted by
 - The scoping information is recoverable by reading the triage agent's full investigation transcript, but the comms agent's workflow does not consume that transcript, only the structured handoff ticket
+- Incidents with a single, service-wide cause rarely trigger the problem, since "notify everyone using this service" is already the schema's default path; the failure needs a cause narrowed to a cross-cutting slice, like EU-plus-v2-plus-enterprise, that the ticket's severity/title pair was never built to carry
 
 **Root Cause**
-The structured incident-ticket schema used for the handoff between the triage agent and the communications agent was not designed with a field for affected-segment scope, only severity and a free-text summary that the comms agent's prompt does not reliably parse for scoping detail. The triage agent's reasoning about scope exists in its own output but is not propagated into a field the downstream agent's workflow actually consumes, so the scoping determination is functionally lost at the handoff boundary even though it was correctly made.
+The incident ticket was designed around what severity and routing require -- how bad, and which on-call rotation -- because those are the fields that drive paging. Customer-facing scope was never part of that design brief, so when the triage agent narrows the impact to EU-region API v2 enterprise clients, it has no ticket field to put that conclusion in and states it only in the investigation summary instead. The comms agent's drafting step was built to turn a ticket into a notification, not to re-derive scope from investigation prose, so absent a structured field it falls back to the only audience it can safely construct from severity alone: everyone.
 
 **Example**
 ```

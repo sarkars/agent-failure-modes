@@ -8,11 +8,11 @@
 - The deployment agent's planning output explicitly states that a feature flag must be set to a specific value before the deploy can proceed safely, but the structured deploy manifest it hands to the configuration agent has no precondition field reflecting that
 - The configuration agent, which acts solely on the structured manifest, applies the deploy without checking or setting the feature flag, since the manifest's schema has no field representing that dependency
 - Re-reading the deployment agent's planning transcript clearly shows the precondition was identified and reasoned through; it simply never reached the structured field the configuration agent reads
-- The gap concentrates on cross-system preconditions -- a flag living in a separate feature-flag service rather than the deploy target itself -- since the manifest schema covers only deploy-target configuration, not external system state
 - The resulting incident (the new code path executing against the old flag state) is diagnosed only after investigation traces back to the missing flag flip, since the deploy itself completes without any error
+- Deploys whose only precondition is deploy-target state (a prior migration, a config value on the same host) rarely trigger this, since the manifest already models that; the failure needs a precondition that lives in a system the manifest was never built to describe, like a flag service's current value
 
 **Root Cause**
-The deployment agent and the configuration agent communicate through a structured deploy manifest schema that covers deploy-target configuration but has no field for preconditions in external systems such as a feature-flag service, so any cross-system precondition the deployment agent's planning identifies exists only in its narrative reasoning and is invisible to the configuration agent's manifest-driven execution. The configuration agent has no mechanism to discover the precondition because it never consults the deployment agent's underlying reasoning, only the structured manifest the schema permits.
+The deploy manifest schema was built to describe the deploy target itself -- artifact, environment, target configuration -- because that is what the configuration agent's job has always been to apply. A precondition that lives in a separate system, like whether "new-schema-reads" is already true in the flag service, falls outside that schema's design entirely, so the deployment agent's reasoning about it can only surface as narrative in its planning output. The configuration agent's execution step was written to apply manifests, not to interpret planning prose, so it proceeds against whatever the manifest's fixed fields say and has no occasion to notice the flag was never checked.
 
 **Example**
 ```

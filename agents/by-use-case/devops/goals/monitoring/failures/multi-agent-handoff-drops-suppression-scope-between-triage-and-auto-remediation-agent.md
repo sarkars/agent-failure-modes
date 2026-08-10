@@ -10,9 +10,10 @@
 - A genuinely new incident sharing the same alert name as the previously-scoped false positive is auto-suppressed and never reaches on-call
 - The suppression's original scoping conditions are recoverable from the triage agent's transcript, but the auto-remediation agent's workflow never consumes that transcript, only the structured suppress flag
 - The pattern surfaces specifically when the same alert name later fires for an unrelated, genuine cause outside the original false-positive's narrow conditions
+- Alert names that are inherently single-purpose, firing for only one known cause, don't exhibit this; the failure needs a generic-sounding alert name like "queue-depth-high" that can legitimately fire for both a known, tolerable cause and an unrelated, genuine one
 
 **Root Cause**
-The structured suppression-record schema used for the handoff between the triage agent and the auto-remediation agent has a field for whether to suppress an alert by name, but no field for the conditions under which that suppression should apply. The triage agent's scoped reasoning -- correct and narrow when it was made -- is reduced to an unconditional boolean at the handoff boundary, so the auto-remediation agent has no way to distinguish "suppress this alert name always" from "suppress this alert name only under these specific conditions," even though the triage agent never intended the former.
+The suppression record was modeled as a standing rule keyed on alert name because most suppression decisions in practice are exactly that -- "this alert is noisy, silence it." The 02:00 UTC data-reindex investigation was different: the triage agent's conclusion was conditional on a time window and a queue-depth range, not on the alert name alone, and the record schema has no slot for "conditional on." Writing { alert_name: "queue-depth-high", suppress: true } was the only way to express the decision in the schema available, which silently converts a two-minute, job-specific finding into a standing rule the auto-remediation agent applies to every future firing of that name, regardless of cause.
 
 **Example**
 ```
