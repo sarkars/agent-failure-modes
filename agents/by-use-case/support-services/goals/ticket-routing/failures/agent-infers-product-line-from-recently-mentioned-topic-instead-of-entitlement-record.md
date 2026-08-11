@@ -31,6 +31,26 @@ Actual need: Standard-tier support agent should handle the rate-limit
   back, adding a full routing cycle of delay
 ```
 
+**Additional Example (structured field already in context, no retrieval gap involved)**
+```
+Resident messages a home-services chatbot: "need someone for a
+  jhaadu-pochha today, quick"
+Matched provider record, already included in the prompt context from
+  the directory search the chatbot just ran: { categoryName:
+  "home-cleaning", subcategoryName: "sweeping-mopping" }
+Chatbot's reply: "Got it, connecting you with a jhaadu-pochha
+  specialist near you" -- the model lifts the resident's own
+  colloquial phrase back into the reply instead of naming the service
+  using the matched provider's subcategory field, even though that
+  field was already sitting in the same context window
+Downstream analytics and the provider's own listing expect the
+  standardized subcategory label; the colloquial phrase now appears
+  in a customer-facing confirmation and in logged analytics as if it
+  were the taxonomy term, which the provider never used and does not
+  recognize on cross-reference
+```
+This variant shows the mechanism is not limited to skipping a retrieval call: even when the authoritative field is already present in the prompt, the model still defaults to echoing the user's own salient wording unless explicitly instructed to prefer the structured field over it.
+
 **Key Statistics**
 | Finding | Context |
 |---|---|
