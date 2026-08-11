@@ -8,11 +8,11 @@
 - Content containing a comparative performance claim is published in a region where local regulation requires an accompanying substantiation disclaimer, even though a legal-review agent's notes show the claim was approved specifically "with the EU disclaimer required," not approved outright
 - The legal-review agent's structured handoff to the publishing agent contains only an "approved" or "rejected" status field, with no field for a conditional requirement attached to the approval
 - Asking the publishing agent why the disclaimer was omitted shows it received only the binary approve/reject status and had no input describing the region-specific condition attached to that approval
-- The miss concentrates on claims approved conditionally rather than outright, since the binary handoff schema has no representation for "approved, but only if X accompanies it"
+- Claims approved conditionally rather than outright account for nearly all the misses, because a binary schema can represent "yes" or "no" but has no slot for "yes, provided X accompanies it"
 - The regulator, a regional compliance reviewer, or a customer complaint catches the missing disclaimer only after the content has already been published in the affected region
 
 **Root Cause**
-The handoff between the legal-review agent and the publishing agent passes only a binary structured status (approved/rejected), with no mechanism for attaching a conditional requirement to an approval. The legal-review agent's free-text reasoning notes the region-specific disclaimer condition, but nothing in the handoff forces a check for "does this approval carry a condition not represented in the binary status field" before the publishing agent treats the content as cleared, so a real regulatory requirement is silently dropped at the agent-to-agent boundary.
+The publishing agent's go/no-go logic is built around a two-valued status field, so any approval the legal-review agent grants necessarily collapses to "approved" or "rejected" by the time it reaches publishing -- there is no third state for "approved with a condition." The legal-review agent's free-text reasoning is where the actual condition lives, but nothing in the pipeline requires the publishing agent to check that reasoning before treating a bare "approved" status as a clean go-ahead, so a real regulatory requirement is silently dropped at the agent-to-agent boundary.
 
 **Example**
 ```

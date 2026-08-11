@@ -7,12 +7,12 @@
 **Symptoms**
 - Final diligence memo omits a risk that the document-review stage's own annotation or commentary on the underlying document explicitly identified, discoverable only by re-reading the review stage's raw output rather than the structured findings it passed downstream
 - The structured findings list consumed by the summary agent shows no entry corresponding to a risk the review agent's free-text commentary on the same document clearly flagged
-- The gap concentrates on documents reviewed early in a large diligence batch, where review-stage output volume is highest and the structured-findings extraction step is most likely to miss an annotation buried in lengthy commentary
+- Documents reviewed early in a large diligence batch are disproportionately affected, since review-stage output volume peaks there and a risk annotation is more likely to get buried in lengthy commentary the structured-findings extraction step has to condense
 - Re-running the same document's review output through the summary agent with the full annotation explicitly included in context (rather than only the structured findings list) correctly surfaces the risk in the memo, isolating the handoff -- not the summary agent's reasoning capability -- as the failure point
 - Post-closing disputes or indemnification claims occasionally trace back to a risk that diligence review had, in fact, identified internally but that never appeared in the memo that informed the deal decision
 
 **Root Cause**
-The due-diligence pipeline's review stage and summary stage are separately invoked agents, with the structured findings list -- not the review stage's full annotation or commentary -- serving as the interface between them. When the review agent's output contract allows it to note a risk in free-text commentary without requiring a corresponding structured findings-list entry, that risk is only available to the review stage itself; the summary agent, built to synthesize the structured findings list into a memo rather than to re-read every document's full annotation, has no way to recover it.
+The summary agent was built to synthesize a memo from the structured findings list, not to re-read every document's full annotation -- so a risk that exists only as free-text commentary is invisible to it by construction, not by oversight. This becomes a problem specifically because the review agent's output contract treats structured findings-list entries and free-text commentary as independent channels: nothing requires a risk noted in commentary to also produce a corresponding structured entry, so the two channels drift apart whenever the reviewer's phrasing doesn't map cleanly onto a predefined findings category.
 
 **Example**
 ```

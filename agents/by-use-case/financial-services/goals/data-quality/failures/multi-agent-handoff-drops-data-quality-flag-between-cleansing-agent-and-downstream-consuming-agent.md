@@ -9,7 +9,7 @@
 - The structured cleansed record handed off to the downstream consuming agent contains the field's final value and a "cleansed" status flag, but no field capturing the cleansing agent's confidence level or method (direct source match vs. inferred/imputed)
 - Downstream agents operating purely from the structured cleansed record show a materially higher reliance rate on low-confidence-cleansed fields than agents given the cleansing agent's full reasoning transcript alongside the record
 - The low-confidence origin of a field surfaces only when a risk or valuation output is later challenged and a reviewer traces the field back through the cleansing agent's transcript, by which point the output has already been used downstream
-- The mismatch concentrates on fields where the cleansing agent had to choose among multiple plausible source values or infer a value from a partial record, since those are the cases where a confidence distinction would matter most
+- Fields requiring the cleansing agent to choose among multiple plausible source values, or to infer a value from a partial record, make up a disproportionate share of the misses, precisely because those are the cases where a confidence distinction would have changed how downstream agents treated the value
 
 **Root Cause**
 The downstream consuming agent's logic operates on the structured cleansed record's fixed schema, and that schema was built to track whether a field was cleansed and what its final value is, not the confidence or method behind that cleansing. Because a low-confidence resolution is expressed through the cleansing agent's free-text reasoning rather than a structured confidence field, it has no corresponding place in the handoff schema and is therefore invisible to the downstream agent, even though the same model, given the full cleansing transcript, would readily flag the value as uncertain.
@@ -41,43 +41,42 @@ Discrepancy surfaces during a quarterly model-validation review when the actual 
 
 ### Prevention
 
-1. **Implement multi-layer entity resolution with hierarchy validation**: Maintain a master entity reference database with parent-subsidiary relationships, guaranteed updater, transaction account mappings. Use persistent unique identifiers (LEI, ISIN, internal ID) instead of name-based matching. On every exposure lookup, resolve through hierarchy graph and validate against current regulatory filings. Root cause: Ensures exposure always attributed to correct legal entity accounting for corporate structure changes.
+1. **Confidence and method fields in the cleansed-record handoff schema**: Extend the structured cleansed record to include `cleansing_confidence: (HIGH|MEDIUM|LOW)` and `resolution_method: (SOURCE_MATCH|INFERRED|IMPUTED)` alongside the final value and cleansed status. Require the cleansing agent to populate both whenever it resolves a field by choosing among conflicting sources or inferring from a partial record, rather than leaving that reasoning in free text only. Root cause: gives the confidence signal a structured home so it cannot be dropped simply because it originated as narrative reasoning.
 
-2. **Establish regulatory compliance gates with before/after checks**: Before any trading decision or exposure update, verify: (1) Counterparty regulatory status (sanctions check, credit rating current), (2) Position size vs. single-name concentration limit at ultimate parent level, (3) Exposure vs. concentration risk limits across correlated counterparties. Abort if any gate fails. Root cause: Prevents trades that violate compliance rules by checking compliance before execution.
+2. **Confidence-aware consumption gate in downstream agents**: Require risk- and pricing-consuming agents to check `cleansing_confidence` before using a field in a calculation; on MEDIUM or LOW, either widen the associated uncertainty band, require a secondary source check, or route the value to human confirmation before it feeds a published output. Root cause: closes the gap where a downstream agent has no incentive to look past the fields its own logic already consumes.
 
-3. **Implement market data freshness validation with latency bounds**: Every market data feed includes timestamp. Before using data for decisions, verify: (1) Timestamp within acceptable age (e.g., <30s for prices, <1d for ratings), (2) Data not marked as stale by upstream provider, (3) Cross-feed consistency check (e.g., bid-ask spread reasonable). Reject stale/inconsistent data with alert. Root cause: Prevents decisions based on outdated market information.
+3. **Multi-source disagreement flag independent of final resolution**: Whenever two or more source feeds disagree on a field's value, record that disagreement as a structured flag (`source_disagreement: true`, with the conflicting values) regardless of how the cleansing agent ultimately resolved it, so downstream agents can see that a choice was made even without reading the reasoning behind it.
 
 ### Detection & Response
 
-1. **Exposure aggregation audit with parent-level rollup**: Daily batch job re-computes all exposure aggregations at ultimate parent level from scratch (not incremental). Compares against operational system. Flags: (1) Missing hierarchy mappings, (2) Exposure misattributed to legal entity instead of parent, (3) Concentration violations only visible at parent level. Reports with detailed reconciliation.
+1. **Cleansing-note-to-schema reconciliation audit**: Periodically scan the cleansing agent's free-text notes for confidence-qualifying language ("resolved to", "inferred from", "pattern match", "feeds disagree") and cross-check that the corresponding structured record has `cleansing_confidence` set below HIGH and `resolution_method` populated accordingly. Flag and log any mismatch as a handoff gap.
 
-2. **Regulatory compliance violation detection**: Monitor all executed trades against post-hoc compliance checks. Flag violations: (1) Counterparty now in breach of sanctions/credit triggers after trade, (2) Concentration limit exceeded at parent level, (3) Position size violates regulatory limits for entity type. Generate audit trail for each violation with decision data.
+2. **Post-hoc confidence-outcome reconciliation**: When a risk or valuation output is challenged or fails model validation, trace the fields it depended on back to their `cleansing_confidence` values; track whether LOW/MEDIUM-confidence fields are disproportionately represented among challenged outputs, independent of whether the specific field in question turns out to have been wrong.
 
 ### Architecture Patterns
 
-1. Corporate Hierarchy Graph Service: Maintains versioned parent-subsidiary-guarantee relationships. API: resolve_to_parent(entity_id, as_of_date) -> parent_id + risk_correlation. Fetches from regulatory filings (daily), M&A feeds (real-time), credit data (weekly). Triggers recomputation on family structure changes. Serves through cache with fallback to DB.
+1. **Confidence-Aware Cleansed Record**: Cleansed record schema carries `value`, `cleansed_status`, `cleansing_confidence`, `resolution_method`, and `source_disagreement` as first-class fields populated at cleansing time, not inferred downstream from a raw value with no accompanying metadata.
 
-2. Pre-Trade Compliance Engine: Rule engine evaluates every proposed trade against: sanctions checks, concentration limits (computed at parent + correlated entities), regulatory position size limits, data freshness gates. Blocks non-compliant trades with detailed audit log of which rule failed why.
+2. **Downstream Confidence Gate**: A consumption-time check in risk/pricing agents that reads `cleansing_confidence` before use; on MEDIUM/LOW, either widens the uncertainty band applied to the value, triggers a secondary-source check, or blocks automated use pending human confirmation, with the action logged for audit.
 
-3. Market Data Freshness Orchestrator: Aggregates feeds from multiple market data providers with explicit 'as of' timestamps. Computes data freshness for each field (bid, ask, last_traded, credit_spread). Feeds below threshold age marked as 'stale'. Risk system rejects decisions using stale feeds with incident log.
+3. **Source-Disagreement Ledger**: An independent log of every field where source feeds disagreed at cleansing time, keyed by field and resolution method, queryable separately from the final cleansed value so a reviewer can audit resolution patterns across many records without re-reading each transcript.
 
 ### Key Metrics
 
 | Metric | Target | Alert Threshold | Measurement Method |
 |--------|--------|-----------------|--------------------|
-| Parent-Level Aggregation Accuracy | >99.5% | <99% | Percentage of counterparty exposure correctly rolled up to ultimate parent vs. attributed to legal entity only |
-| Hierarchy Graph Staleness (Post-Restructuring) | <7 days | >14 days | Max time between corporate restructuring announcement and hierarchy graph update for known counterparties |
-| Compliance Gate Pass Rate | 99.9% | <99.5% | Percentage of proposed trades passing all pre-trade compliance checks |
-| Market Data Freshness Compliance | >98% | <95% | Percentage of market data points within acceptable age bounds before use in decisions |
-| Post-Trade Violation Detection Rate | >95% | <90% | Percentage of actual compliance violations caught by post-trade audit vs. total violations |
+| Confidence-Field Population Rate | 100% | <98% | # of cleansing records where free-text notes contain confidence-qualifying language and `cleansing_confidence`/`resolution_method` are populated / total records with such language |
+| Downstream Confidence-Gate Trigger Rate | tracked, no fixed target | sustained spike vs. trailing baseline | # of downstream uses where a MEDIUM/LOW-confidence field triggered a widened band, secondary check, or hold / total downstream uses of cleansed fields |
+| Challenged-Output Low-Confidence Concentration | tracked, no fixed target | LOW/MEDIUM fields >2x their base rate among challenged outputs | Share of challenged risk/valuation outputs that depended on a LOW/MEDIUM-confidence field, vs. the base rate of such fields across all outputs |
+| Model-Validation Miss Rate | 0% | >0.2% | # of quarterly model-validation discrepancies traced to a cleansed field with no confidence flag set / total discrepancies |
 
 ### Alerts & Escalation
 
 | Alert | Condition | Severity | Response |
 |-------|-----------|----------|----------|
-| Parent-Level Concentration Breach | Ultimate parent exposure exceeds concentration limit while legal-entity-level exposures individually within limits | CRITICAL | Halt new trades to counterparty family; escalate to risk committee; generate audit report |
-| Stale Hierarchy on Restructuring | Known M&A/spin-off event affecting held counterparty with no hierarchy update >7 days | HIGH | Page data team; trigger priority hierarchy refresh; mark affected counterparties for manual review |
-| Stale Market Data in Decision | Market data >30s old used for pricing decision, or >1d old used for risk assessment | HIGH | Reject decision; alert trader; log incident with full decision trace for audit |
+| Confidence Language Not Reflected in Schema | Cleansing notes contain confidence-qualifying language but `cleansing_confidence` is left at HIGH (or unset) in the handed-off record | P1 | Block record from downstream consumption; escalate to data-ops for manual confidence determination |
+| Output Published on Low-Confidence Field | Downstream agent uses a LOW-confidence field without triggering the confidence gate | P1 | Flag the output; require secondary-source confirmation before it is relied upon further |
+| Model-Validation Discrepancy Traced to Unflagged Field | Quarterly model-validation review finds a discrepancy traced to a cleansed field that carried no confidence flag | P2 | Investigate why the confidence gate did not trigger; audit similar fields resolved by the same cleansing pathway |
 
 
 ## References

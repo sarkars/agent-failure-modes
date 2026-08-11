@@ -8,11 +8,11 @@
 - The compliance-review agent's analysis correctly identifies that a specific jurisdiction's exception applies and that a standard disclosure should therefore be omitted or modified, but the structured filing checklist it hands off shows the standard disclosure requirement as still active
 - The filing agent, which builds the submission solely from the structured checklist, includes the standard disclosure language the exception was meant to override
 - Re-reading the compliance-review agent's analysis transcript clearly shows the exception was identified and reasoned through; it simply never reached a structured field the filing agent reads
-- The gap concentrates on less common jurisdiction-specific exceptions that have no dedicated checkbox in the standard filing checklist template, unlike commonly used exceptions that do
+- Less common jurisdiction-specific exceptions are hit hardest, precisely because the standard filing checklist template has a dedicated checkbox for the exceptions filers see often and none for the long tail it doesn't
 - The error surfaces only when a regulator or counterparty flags the filing for including disclosure language inconsistent with the jurisdiction's exception, since the filing itself is internally consistent and well-formed
 
 **Root Cause**
-The compliance-review agent and the filing agent communicate through a fixed checklist schema rather than the review agent's full analysis, so any exception determination that does not map onto an existing checklist field exists only in narrative form and is invisible to the filing agent's checklist-driven generation process. The filing agent has no mechanism to discover the exception because it never consults the review agent's underlying reasoning, only the structured output the schema permits.
+The filing checklist was designed around the exceptions the template's authors anticipated, not around an open-ended representation of "any exception the compliance-review agent might identify." A less common jurisdiction-specific exception therefore has nowhere to go in the schema: it stays in the review agent's narrative analysis, and the filing agent's generation process -- built to drive off the checklist, not to re-derive filing decisions from analysis text -- never has a reason to look for it there.
 
 **Example**
 ```
@@ -89,4 +89,3 @@ Counterparty's compliance team flags the inconsistency, since institutional-exem
 - [Why Do Multi-Agent LLM Systems Fail? (MAST)](https://arxiv.org/abs/2503.13657)
 - [Evaluation of Large Language Models in Legal Applications: Challenges, Methods, and Future Directions](https://arxiv.org/pdf/2601.15267)
 - [Magentic-One: A Generalist Multi-Agent System for Solving Complex Tasks](https://arxiv.org/abs/2411.04468)
-- [Multi-Agent Communication Patterns in Legal AI Systems](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3891234)

@@ -9,7 +9,7 @@
 - The structured handoff between ingestion and valuation agents contains only the last price and its nominal timestamp, with no field for a staleness suspicion the ingestion agent's free-text monitoring notes raised about that same price
 - Valuation agents operating purely from the structured price record show a materially higher reliance rate on suspected-stale prices than valuation agents given the ingestion agent's full monitoring transcript alongside the record
 - The staleness is discovered only when a separate reference feed or end-of-day reconciliation shows the price should have moved, by which point the valuation has already been published or used in a risk calculation
-- The mismatch concentrates on lower-liquidity instruments and after-hours windows, where an unchanged price is more likely to be genuinely stale rather than a genuinely flat market, and where the ingestion agent's staleness suspicion is least likely to be cross-checked downstream
+- Lower-liquidity instruments and after-hours windows account for a disproportionate share of the misses, since an unchanged price there is more plausibly a genuinely stale feed than a genuinely flat market, yet those are exactly the cases least likely to get a downstream cross-check
 
 **Root Cause**
 The valuation agent's pricing logic consumes only the structured price record produced by the ingestion stage, and that record was built to carry the latest price and timestamp, not whether the ingestion agent's own monitoring flagged the feed as suspiciously unchanged. Because a staleness suspicion is expressed through the ingestion agent's free-text monitoring notes rather than a structured staleness field, it has no corresponding place in the handoff schema and is therefore invisible to the valuation agent, even though the same model, given the ingestion transcript, would readily flag the price as suspect.
@@ -41,43 +41,42 @@ Published mark is found to be stale, triggering a restatement and a review of ri
 
 ### Prevention
 
-1. **Implement multi-layer entity resolution with hierarchy validation**: Maintain a master entity reference database with parent-subsidiary relationships, guaranteed updater, transaction account mappings. Use persistent unique identifiers (LEI, ISIN, internal ID) instead of name-based matching. On every exposure lookup, resolve through hierarchy graph and validate against current regulatory filings. Root cause: Ensures exposure always attributed to correct legal entity accounting for corporate structure changes.
+1. **Staleness-suspicion field in the price-record handoff schema**: Extend the structured price record passed from ingestion to valuation to include `staleness_suspected: bool`, `unchanged_update_count: int`, and `unchanged_window_seconds: int`. Require the ingestion agent to populate these fields whenever its own monitoring logic detects an unusually long unchanged run for that instrument's typical update cadence, rather than leaving the observation in free-text notes only. Root cause: gives the staleness signal a structured home so it cannot be dropped simply because it originated as a narrative observation.
 
-2. **Establish regulatory compliance gates with before/after checks**: Before any trading decision or exposure update, verify: (1) Counterparty regulatory status (sanctions check, credit rating current), (2) Position size vs. single-name concentration limit at ultimate parent level, (3) Exposure vs. concentration risk limits across correlated counterparties. Abort if any gate fails. Root cause: Prevents trades that violate compliance rules by checking compliance before execution.
+2. **Instrument-cadence-aware staleness threshold, not a single global timeout**: Compute an expected update-frequency baseline per instrument (or liquidity tier) from historical feed behavior, and flag staleness relative to that baseline rather than a single fixed timeout that works for liquid names but under-triggers for thin ones. Root cause: a flat "no update in N minutes" threshold misses exactly the lower-liquidity instruments where staleness is both more likely and most consequential.
 
-3. **Implement market data freshness validation with latency bounds**: Every market data feed includes timestamp. Before using data for decisions, verify: (1) Timestamp within acceptable age (e.g., <30s for prices, <1d for ratings), (2) Data not marked as stale by upstream provider, (3) Cross-feed consistency check (e.g., bid-ask spread reasonable). Reject stale/inconsistent data with alert. Root cause: Prevents decisions based on outdated market information.
+3. **Valuation-agent read of the staleness field before publishing a mark**: Require the valuation agent to check `staleness_suspected` before treating a price as current; if set, either fall back to a secondary reference feed or hold the mark and route it to a human trader/quant for confirmation rather than publishing silently. Root cause: closes the gap where a downstream agent has no incentive to look past the fields its own logic already consumes.
 
 ### Detection & Response
 
-1. **Exposure aggregation audit with parent-level rollup**: Daily batch job re-computes all exposure aggregations at ultimate parent level from scratch (not incremental). Compares against operational system. Flags: (1) Missing hierarchy mappings, (2) Exposure misattributed to legal entity instead of parent, (3) Concentration violations only visible at parent level. Reports with detailed reconciliation.
+1. **Ingestion-note-to-schema reconciliation audit**: Periodically scan the ingestion agent's free-text monitoring notes for staleness language ("unchanged for", "no update since", "possible feed staleness") and cross-check that the corresponding structured price record has `staleness_suspected` set. Flag and log any mismatch as a handoff gap, independent of whether the price later proves to have actually been stale.
 
-2. **Regulatory compliance violation detection**: Monitor all executed trades against post-hoc compliance checks. Flag violations: (1) Counterparty now in breach of sanctions/credit triggers after trade, (2) Concentration limit exceeded at parent level, (3) Position size violates regulatory limits for entity type. Generate audit trail for each violation with decision data.
+2. **Post-publication staleness reconciliation**: On a rolling basis, compare published marks against an independent reference feed or end-of-day settlement price for the same instrument; where the published mark diverges materially and the instrument had an unusually long unchanged run at publication time, trace back to whether the ingestion agent's monitoring had already raised (but failed to propagate) the suspicion.
 
 ### Architecture Patterns
 
-1. Corporate Hierarchy Graph Service: Maintains versioned parent-subsidiary-guarantee relationships. API: resolve_to_parent(entity_id, as_of_date) -> parent_id + risk_correlation. Fetches from regulatory filings (daily), M&A feeds (real-time), credit data (weekly). Triggers recomputation on family structure changes. Serves through cache with fallback to DB.
+1. **Structured Staleness-Aware Price Record**: Price record schema carries `last_price`, `last_update_ts`, `staleness_suspected`, `unchanged_update_count`, and `source_feed_id` as first-class fields populated at ingestion time, not derived downstream from a raw timestamp diff.
 
-2. Pre-Trade Compliance Engine: Rule engine evaluates every proposed trade against: sanctions checks, concentration limits (computed at parent + correlated entities), regulatory position size limits, data freshness gates. Blocks non-compliant trades with detailed audit log of which rule failed why.
+2. **Cadence-Baseline Service**: A per-instrument (or per-liquidity-tier) expected-update-frequency baseline, refreshed periodically from historical feed behavior, that the ingestion agent's staleness check is computed against instead of a single global timeout.
 
-3. Market Data Freshness Orchestrator: Aggregates feeds from multiple market data providers with explicit 'as of' timestamps. Computes data freshness for each field (bid, ask, last_traded, credit_spread). Feeds below threshold age marked as 'stale'. Risk system rejects decisions using stale feeds with incident log.
+3. **Valuation Fallback Gate**: Valuation pipeline step that checks `staleness_suspected` before using a price; on a flagged price, either substitutes a secondary reference feed or blocks the mark pending human confirmation, with the block/substitution logged for audit.
 
 ### Key Metrics
 
 | Metric | Target | Alert Threshold | Measurement Method |
 |--------|--------|-----------------|--------------------|
-| Parent-Level Aggregation Accuracy | >99.5% | <99% | Percentage of counterparty exposure correctly rolled up to ultimate parent vs. attributed to legal entity only |
-| Hierarchy Graph Staleness (Post-Restructuring) | <7 days | >14 days | Max time between corporate restructuring announcement and hierarchy graph update for known counterparties |
-| Compliance Gate Pass Rate | 99.9% | <99.5% | Percentage of proposed trades passing all pre-trade compliance checks |
-| Market Data Freshness Compliance | >98% | <95% | Percentage of market data points within acceptable age bounds before use in decisions |
-| Post-Trade Violation Detection Rate | >95% | <90% | Percentage of actual compliance violations caught by post-trade audit vs. total violations |
+| Staleness-Field Population Rate | 100% | <98% | # of ingestion records where free-text notes contain staleness language and `staleness_suspected` is set / total records with staleness language in notes |
+| Valuation Fallback Trigger Rate | tracked, no fixed target | sustained spike vs. trailing baseline | # of marks where valuation agent triggered a fallback or hold due to `staleness_suspected` / total marks published |
+| Post-Publication Staleness Miss Rate | 0% | >0.2% | # of published marks later found stale via reconciliation with no prior `staleness_suspected` flag / total published marks |
+| Cadence-Baseline Freshness | <24h stale | >72h stale | Time since a given instrument's expected-update-frequency baseline was last recomputed |
 
 ### Alerts & Escalation
 
 | Alert | Condition | Severity | Response |
 |-------|-----------|----------|----------|
-| Parent-Level Concentration Breach | Ultimate parent exposure exceeds concentration limit while legal-entity-level exposures individually within limits | CRITICAL | Halt new trades to counterparty family; escalate to risk committee; generate audit report |
-| Stale Hierarchy on Restructuring | Known M&A/spin-off event affecting held counterparty with no hierarchy update >7 days | HIGH | Page data team; trigger priority hierarchy refresh; mark affected counterparties for manual review |
-| Stale Market Data in Decision | Market data >30s old used for pricing decision, or >1d old used for risk assessment | HIGH | Reject decision; alert trader; log incident with full decision trace for audit |
+| Staleness Note Not Reflected in Schema | Ingestion notes contain staleness language but `staleness_suspected` is unset in the handed-off price record | P1 | Block record from valuation consumption; escalate to data-ops for manual staleness determination |
+| Mark Published on Suspected-Stale Price | Valuation agent publishes a mark despite `staleness_suspected` being set | P1 | Recall/flag the mark; require secondary-feed confirmation before republishing |
+| Post-Publication Reconciliation Miss | Reconciliation finds a published mark was stale with no prior staleness flag anywhere in the pipeline | P2 | Investigate cadence-baseline accuracy for the affected instrument/tier; recompute baseline if systematically off |
 
 
 ## References

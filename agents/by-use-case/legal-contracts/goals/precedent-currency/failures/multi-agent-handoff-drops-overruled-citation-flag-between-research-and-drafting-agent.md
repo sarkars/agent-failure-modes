@@ -8,11 +8,11 @@
 - The research agent's analysis explicitly notes that a candidate case was overruled or its holding limited on the relevant point, but the structured citation list it hands to the drafting agent contains only case name, citation, and a one-line summary of the original holding
 - The drafting agent cites the case in the brief or memo as supporting authority, with no mention of its overruled status, because that status existed only in the research agent's narrative analysis, not the structured list
 - Re-reading the research agent's full research transcript clearly shows the overruled status was identified and reasoned through; it simply never reached the structured citation-list field the drafting agent reads
-- The gap concentrates on cases that remain good law for some holdings but were specifically overruled or limited on the narrower point being cited, since the structured list's brief summary field does not capture that nuance
+- Cases that remain good law for some holdings but were specifically overruled or limited on the narrower point being cited are the hardest hit, because the structured list's single brief-summary field has no way to represent "good law here, overruled there"
 - The error surfaces only when opposing counsel or a clerk flags the citation as overruled, since the drafted document otherwise reads as a well-supported, confidently cited argument
 
 **Root Cause**
-The research agent and the drafting agent communicate through a structured citation-list schema with fields for case name, citation, and a brief holding summary, but no dedicated field for current-validity status on the specific point cited. When the research agent's overruled-status determination is more specific than "still good law: yes/no" -- for example, overruled on one holding but not another -- that nuance exists only in the research agent's narrative analysis and is never mapped into a structured field the drafting agent's citation-insertion process actually reads.
+Citation validity in this system is not binary, but the handoff schema between research and drafting treats it as if it were: case name, citation, and a brief holding summary, with no field for point-specific current-validity status. A case overruled on one holding while remaining good law on another produces exactly the kind of nuanced determination that fits poorly into a fixed schema, so the research agent's narrative analysis is where that nuance lives -- and the drafting agent's citation-insertion process was built to read the structured list, not to parse narrative analysis for validity caveats before inserting a citation.
 
 **Example**
 ```
