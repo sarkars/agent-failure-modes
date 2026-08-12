@@ -5,14 +5,14 @@
 **Frequency**: Rare
 
 **Symptoms**
-- A claim referred to the Special Investigations Unit (SIU) is triaged and worked as a routine high-dollar-amount referral, even though the initial-review agent's notes flagged a specific suspicion that the reported loss date predates the policy's effective date -- a classic pre-inception-loss fraud indicator
-- The SIU-referral structured schema includes fields for claim amount, claim type, and a generic referral-reason code, but has no field for the specific evidentiary basis (a date conflict) that triggered the referral
-- Asking the SIU-triage agent why it didn't investigate the date conflict shows it received only the generic "high claim amount" referral-reason code, with no input describing the initial reviewer's specific date-conflict observation
-- The miss concentrates on referrals where the underlying suspicion is a specific factual inconsistency (date conflicts, mismatched incident locations) rather than a generic risk-scoring threshold, since the schema only has fields for the latter
-- The date conflict is eventually caught, if at all, only when a human SIU investigator happens to re-read the original claim file notes independently of the structured referral
+- A claim referred to SIU gets worked as a routine large-loss review, even though the initial-review agent's own notes named a specific reason for suspicion: the claimant's reported loss date falls before the policy's effective date
+- The referral schema has fields for claim amount, claim type, and a generic reason code, but nothing for the specific fact pattern -- a date conflict -- that actually drove the initial reviewer to refer the claim in the first place
+- Asked why it didn't chase the date discrepancy, the SIU-triage agent points to the only input it got: a "high claim amount" code, with no trace of the date-conflict reasoning behind it
+- Referrals built on a specific factual inconsistency -- a date conflict, a mismatched incident location -- fall into this gap far more often than referrals built on a simple dollar threshold, since only the threshold has a code to match against
+- Absent a human investigator independently re-reading the original claim notes, the date conflict is never revisited, and the claim proceeds to payment on the strength of a referral that never actually reflected why it was made
 
 **Root Cause**
-The handoff between the initial-review agent and the SIU-triage agent passes only a fixed structured referral schema with generic referral-reason codes, with no mechanism for surfacing the specific factual basis behind a referral when that basis does not map to one of the schema's predefined categories. The initial-review agent's free-text reasoning notes the pre-inception date conflict, but nothing in the handoff forces a check for "does this referral's underlying reasoning contain a specific evidentiary flag not represented in the referral-reason code" before SIU triage proceeds, so the actual basis for suspicion is silently dropped at the agent-to-agent boundary and the referral is worked generically instead.
+SIU referral-reason codes were built around the volume driver of most referrals -- claim amount crossing a threshold -- so the code set covers dollar-based risk tiers well but has nothing for a referral triggered by a specific factual inconsistency the initial-review agent noticed while reading the claimant's own account. When the initial-review agent hits a case like a pre-inception date conflict, it has to force that finding into the nearest available code (here, "high claim amount"), and that forced mapping is where the actual reason for suspicion gets lost -- not because the initial-review agent reasoned incorrectly, but because the code it's required to select was never built to carry a fact pattern instead of a dollar figure.
 
 **Example**
 ```

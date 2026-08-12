@@ -5,14 +5,14 @@
 **Frequency**: Occasional
 
 **Symptoms**
-- The receiving agent's inspection notes clearly state a specific lot is on quality hold pending further testing, but the structured available-to-promise (ATP) quantity it reports includes that lot's full received quantity
-- The replenishment agent, which calculates reorder quantities solely from the structured ATP field, treats the held lot as usable stock and reduces or delays the replacement order it would otherwise place
-- Re-reading the receiving agent's inspection transcript clearly shows the hold was identified and reasoned through; it simply never reached the structured ATP field the replenishment agent reads
-- The gap concentrates on partial holds -- where only a sampled subset of a lot is held pending testing rather than the entire lot being rejected outright -- since the ATP schema has no field for partial-quantity holds
-- The resulting stockout is diagnosed only after the held lot fails inspection and is removed from usable inventory entirely, by which point the replenishment agent's under-ordering has already created a coverage gap
+- The replenishment agent's reorder math counts the full 5,000-unit lot as usable stock as soon as it's received, even though the receiving agent's own inspection notes placed that same lot on hold pending supplier confirmation
+- A lot rejected outright would eventually show up as a shortfall once removed from inventory entirely; the failure instead concentrates on partial holds, where a sampled 30% carton discrepancy puts a whole lot in limbo while the available-to-promise number never reflects any uncertainty
+- The receiving agent's inspection reasoning is accurate and complete at the moment it's written -- the miss happens entirely in what does and doesn't carry into the replenishment agent's input
+- Three days elapse between the hold being noted and the lot's formal rejection, during which the replenishment agent has already trimmed the next order on the assumption the held units were sellable
+- A stockout against already-committed orders is the first sign anything went wrong, surfacing well after the under-ordering decision that caused it
 
 **Root Cause**
-The receiving agent and the replenishment agent communicate through a structured available-to-promise schema that represents inventory as a single usable quantity, with no field for a quality-hold status pending inspection, so any hold determination the receiving agent's inspection reasoning makes exists only in narrative form and is invisible to the replenishment agent's quantity-driven reorder calculation. The replenishment agent has no mechanism to discover the hold because it never consults the receiving agent's inspection notes, only the structured ATP quantity the schema permits.
+Available-to-promise here is a single quantity -- on-hand minus committed -- a design built for stock that is simply present or absent, not for stock that is provisionally present pending a supplier's confirmation. The receiving agent's hold determination is a judgment call captured in its inspection notes, and the replenishment agent's reorder calculation reads the ATP number directly without checking whether any of the quantity behind it carries an open question, so a partial hold on part of a lot has nowhere to register a discount against the quantity it actually affects.
 
 **Example**
 ```

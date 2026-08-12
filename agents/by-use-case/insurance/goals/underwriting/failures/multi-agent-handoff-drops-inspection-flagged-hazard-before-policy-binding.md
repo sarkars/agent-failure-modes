@@ -5,14 +5,14 @@
 **Frequency**: Occasional
 
 **Symptoms**
-- A policy binds and issues with standard coverage, even though the underwriting-assistant agent's risk-assessment narrative explicitly notes that a property inspection flagged an aging electrical system requiring a mandatory exclusion rider before binding
-- The structured binding-instructions schema passed to the policy-issuance agent includes fields for coverage limit, deductible, and base rate, but has no field for a rider requirement noted only in the underwriter's free-text risk narrative
-- Asking the policy-issuance agent why the rider was omitted shows it received only the structured binding fields and had no input describing the inspection-flagged hazard from the underwriting-assistant agent's narrative
-- The miss concentrates on hazards identified during inspection that require a non-standard rider, since the binding schema's predefined fields cover only the most common coverage modifications
-- A claim involving the flagged hazard is the most common way the missing rider is discovered, well after the policy has bound and a loss has occurred
+- A policy binds with standard coverage even though the underwriting-assistant agent's own risk narrative flagged an aging electrical system and required a mandatory exclusion rider before binding could proceed
+- The binding schema carries coverage limit, deductible, and base rate -- the terms that vary on nearly every policy -- but has no field for a rider tied to something specific to this one property's inspection
+- Asked why the rider is missing, the policy-issuance agent can only point to the structured fields it was given; nothing in its input described the electrical hazard the underwriting narrative had already identified
+- The gap shows up specifically on inspection-driven riders, which by nature don't repeat across policies the way coverage limits and deductibles do, and so were never built into the schema's predefined set
+- A claim tied to the exact hazard the underwriting narrative flagged is usually what surfaces the missing rider, by which point the loss the rider was meant to exclude has already occurred
 
 **Root Cause**
-The handoff between the underwriting-assistant agent, which produces a free-text risk-assessment narrative from inspection data, and the policy-issuance agent, which binds the policy from a fixed structured schema, has no mechanism for surfacing a rider requirement that does not map to one of the schema's predefined fields. The underwriting-assistant agent's narrative notes the hazard and the required rider, but nothing in the handoff forces a check for "does this risk narrative contain a rider requirement not represented in the structured binding instructions" before the policy-issuance agent proceeds, so a real underwriting requirement is silently dropped at the agent-to-agent boundary.
+Binding-instructions fields were built around the handful of variables that show up on nearly every policy -- coverage limit, deductible, base rate -- because those are the terms that vary from policy to policy in the ordinary course. A rider triggered by something an inspector found on this specific property doesn't fit that mold: it's not a variation on a standard term, it's an exception outside the standard term set entirely, so the schema that works for the common case has nowhere to hold it. The underwriting-assistant agent writes the rider requirement into its risk narrative because that's the only place its output format allows it to go, and the policy-issuance agent, built to bind from the structured fields alone, binds exactly what those fields say -- which is a policy with no rider, regardless of what the narrative sitting next to those fields says.
 
 **Example**
 ```

@@ -5,14 +5,14 @@
 **Frequency**: Occasional
 
 **Symptoms**
-- The triage or adjudication stage's own transcript explicitly identifies a disqualifying exclusion (e.g., pre-existing-damage exclusion, intentional-act exclusion, lapsed-payment exclusion) in its reasoning, but the structured claim-decision record passed to the payment agent shows no exclusion flag
-- Payment is disbursed on a claim that an earlier pipeline stage's own free-text output had already determined should be denied or reduced, discoverable only by re-reading that stage's full transcript rather than its structured output
-- The gap appears disproportionately on claims that pass through more pipeline stages or more agent-to-agent handoffs, since each additional handoff is another point where free-text context can fail to make it into the structured record the next agent actually consults
-- Re-running the same claim through the full pipeline in a single continuous context (no handoff) correctly carries the exclusion through to denial, isolating the handoff boundary -- not the underlying determination -- as the failure point
-- Post-payment recovery (claw-back) is required on a meaningful share of these cases once the dropped exclusion is caught downstream, well after the funds have already left the claims account
+- Payment is disbursed on a claim that an earlier stage's own transcript had already flagged for denial or reduction -- visible only by re-reading that stage's free-text reasoning, not its structured output
+- The triage or adjudication stage names a specific disqualifying exclusion (pre-existing damage, an intentional act, a lapsed payment) in its own words, but the structured claim-decision record handed to payment carries no exclusion flag at all
+- Claims that pass through more stages, and therefore more agent-to-agent handoffs, show up in this gap more often, since each additional handoff is one more point where a finding written in prose can fail to make the jump into structured state
+- Running the same claim through the full pipeline in one continuous context, without any handoff, correctly carries the exclusion through to denial -- pinning the failure to the boundary between stages rather than to any single stage's judgment
+- Recovering the funds already paid out, once the dropped exclusion is finally caught downstream, becomes its own separate process well after the money has left the claims account
 
 **Root Cause**
-Each stage of the pipeline is implemented as a separately invoked agent with its own bounded context window and its own prompt; the determination an earlier agent makes is only reliably available to the next agent if it is written into the structured claim record that the handoff actually passes forward. When an agent's exclusion finding lives only in its own reasoning trace or response prose -- which is common when the prompt does not explicitly require a structured "exclusions_found" field as part of the stage's output contract -- the next agent in the pipeline has no way to recover that finding, since it does not re-read the prior agent's full transcript and is not designed to.
+Intake, triage, adjudication, and payment run as four separately invoked agents, each reading only the structured claim record its predecessor wrote -- none of them is designed to re-open a prior stage's full transcript, since doing so for every claim would multiply the context each stage has to process by the number of stages behind it. That design is efficient exactly because each stage trusts the structured record to be complete, which means a determination like intake's pre-existing-damage suspicion only survives the pipeline if intake's own output contract requires a field for it; absent that requirement, the finding is real and correctly reasoned, but adjudication has no way to know it exists.
 
 **Example**
 ```

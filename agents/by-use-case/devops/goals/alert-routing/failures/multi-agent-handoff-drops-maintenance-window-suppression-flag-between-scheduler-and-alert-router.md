@@ -5,14 +5,14 @@
 **Frequency**: Frequent
 
 **Symptoms**
-- The scheduling agent's planning notes correctly identify which specific alerts or services should be suppressed during the maintenance window, but the calendar entry it creates contains only a start and end time with no suppression scope
-- The alert-routing agent, which acts solely on structured calendar entries, has no way to determine which alerts the maintenance window was meant to cover, so it pages on-call for every alert firing during the window regardless of relevance
-- Re-reading the scheduling agent's planning transcript clearly shows it had determined the exact suppression scope; that scope simply never reached the structured calendar entry
-- On-call engineers report the false pages only after acknowledging several, since the maintenance window's existence is visible in the calendar but its intended suppression scope is not
-- Full service-down windows rarely trigger the problem, since suppressing "everything for this service" fits the existing time-range-plus-service schema; the failure is specific to partial suppression, like replica-3's latency and connection-pool alerts staying quiet while its error-rate alerts stay live
+- The alert-routing agent pages on-call for every replica-3 alert that fires inside the maintenance window, including the latency and connection-pool alerts the scheduling agent had already reasoned should stay silent
+- Before the window opens, the scheduling agent's planning transcript names the exact alert types to mute; none of that reasoning reaches the calendar entry the router actually reads, which carries only a start time, end time, and service name
+- Muting an entire service for the duration of a window works without incident, because "everything off for replica-3" fits the existing time-range-plus-service fields; the failure surfaces specifically when only some of a service's alert types should go quiet while others stay live
+- On-call engineers acknowledge and begin triaging each page before recognizing it maps to a maintenance window whose suppression scope had already been worked out
+- The calendar system was adopted for this handoff because it already existed for scheduling meetings and generic maintenance windows -- alert-type granularity was never part of what it was built to hold
 
 **Root Cause**
-The calendar entry schema this handoff relies on was borrowed from general-purpose scheduling (start_time, end_time, service), not designed around alerting concepts, so it has no vocabulary for "alert type" at all -- there is no field the scheduling agent's replica-3 determination (suppress latency and connection-pool, keep error-rate active) could populate even if someone tried. Because the agent's structured output is constrained to whatever fields the calendar schema defines, that determination stays trapped in its planning narrative, and the router's alert-matching logic, which was built to key off calendar fields rather than parse planning text, has no path to it.
+The scheduling agent's planning reasons at the level of individual alert types -- keep replica-3's error-rate alerts live, mute its latency and connection-pool alerts -- but writes that determination into a calendar entry whose schema (start_time, end_time, service) was inherited wholesale from generic meeting scheduling, a system that predates alert suppression as one of its uses. The alert-routing agent's matching logic was built against that same inherited schema, so it has no field to check for alert-type scope and no path back to the scheduling agent's planning narrative where that scope actually lives; a distinction the scheduling agent worked out in full is, from the router's perspective, simply absent.
 
 **Example**
 ```
