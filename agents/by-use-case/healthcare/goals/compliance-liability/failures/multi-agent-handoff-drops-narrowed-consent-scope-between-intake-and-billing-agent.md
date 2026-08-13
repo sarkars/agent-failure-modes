@@ -5,14 +5,14 @@
 **Frequency**: Occasional
 
 **Symptoms**
-- A records-release or billing agent submits a claim or shares a record with a third party the patient explicitly excluded during intake, even though the intake transcript shows the restriction was captured
-- Asking the intake agent to summarize the patient's consent status correctly states the narrowed scope, but the downstream agent's structured consent field shows "consent on file" with no scope qualifier
-- The restriction exists nowhere in the structured patient record the billing agent actually queries -- it is recoverable only by re-reading the intake agent's full conversation transcript
-- The gap is most common for less common consent restrictions (e.g., "do not share with employer-sponsored plan") that have no dedicated structured field in the intake form, unlike standard HIPAA authorization checkboxes
-- The violation is caught only when the patient complains after receiving an explanation of benefits or notice from the excluded third party, since the release itself completes without any system-level error
+- The billing agent shares an explanation of benefits with the employer-sponsored plan administrator the patient named by name as excluded, because "consent_on_file" reads as unconditionally true regardless of which recipient is asking
+- The intake conversation summary correctly separates the standard insurer (consented) from the employer plan administrator (excluded), but the patient-status field the billing agent queries collapses that distinction into a single boolean
+- Standard HIPAA authorization checkboxes -- the recipients the intake form anticipated -- pass through the handoff intact; the employer-plan exclusion fails specifically because it was a recipient the form never anticipated, not because consent logic broke generally
+- Nothing about the disclosure looks anomalous to the billing agent at send time -- the field says consent is on file, so the release proceeds and completes without error
+- Discovery happens downstream of the harm: the patient learns about the disclosure only after their employer-plan administrator has already received it, at which point the exclusion they stated during intake is unenforceable after the fact
 
 **Root Cause**
-The intake agent and the billing or records-release agent operate as separate steps that communicate through a structured patient-status handoff rather than a shared, complete representation of consent. When a consent restriction is non-standard enough that it was captured only in the intake agent's narrative reasoning or conversational summary rather than as a structured field the downstream agent's prompt or query explicitly checks, the restriction is invisible to the agent that actually executes the disclosure, regardless of how clearly it was stated during intake.
+The intake agent reasons about consent at the level of named recipients -- standard insurer yes, employer-plan administrator no -- but the only channel it has for passing that determination forward is a boolean "consent_on_file" flag inherited from a workflow built around a single yes/no authorization decision, not per-recipient exclusions. The billing agent's disclosure logic was written against that same boolean, so when it checks consent before releasing a record, recipient identity never enters the check; a patient's explicit, recipient-specific refusal has no representation to be read even in principle, because the field it would need to occupy doesn't exist in the schema either agent operates on.
 
 **Example**
 ```

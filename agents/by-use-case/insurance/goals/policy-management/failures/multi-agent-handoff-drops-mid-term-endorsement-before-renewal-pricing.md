@@ -5,14 +5,14 @@
 **Frequency**: Occasional
 
 **Symptoms**
-- A policy renews at a premium that does not reflect a mid-term endorsement processed earlier in the term, even though the policy-servicing agent's confirmation notes explicitly record the endorsement (e.g., a newly added detached structure increasing insured value, or a removed safety-discount condition) as processed and effective mid-term
-- The structured risk-profile schema passed to the renewal-pricing agent includes fields for base coverage limit, prior-term premium, and claims history, but has no field for a mid-term endorsement that changed the risk profile after the original policy was bound
-- Asking the renewal-pricing agent why the endorsement was not reflected shows it received only the structured risk-profile fields and had no input describing the mid-term change from the policy-servicing agent's confirmation notes
-- The miss concentrates on endorsements processed outside the standard renewal-cycle risk-profile refresh, since those are exactly the changes least likely to have a corresponding field in the pricing schema
-- The pricing gap is typically discovered only when a claim involving the endorsed risk occurs and a coverage-and-pricing review finds the renewal premium never reflected the endorsement
+- The renewal prices off the insured value as it stood before a policyholder added a $45,000 detached workshop mid-term, even though the servicing agent's own confirmation notes record the endorsement, the dollar increase, and the effective date
+- Base coverage limit, prior-term premium, and claims history -- the inputs the risk-profile schema was designed around -- flow into the renewal-pricing agent correctly every time; a mid-term insured-value bump fails specifically because that schema was built to refresh at renewal, not to absorb events that happen between renewals
+- The renewal-pricing agent computes a mathematically consistent premium from what it received -- it isn't miscalculating, it's calculating against a risk profile that stopped being current the day the workshop was added
+- The gap is invisible at renewal time because nothing looks wrong: the policy simply renews, at a premium that happens to be lower than the risk it now covers actually warrants
+- The mismatch only becomes visible when a claim touches the endorsed risk directly -- at which point the underpriced exposure has already been carried for a full renewal term
 
 **Root Cause**
-The handoff between the policy-servicing agent, which processes mid-term endorsements and confirms them in free-text notes, and the renewal-pricing agent, which prices the renewal from a fixed structured risk-profile schema, has no mechanism for surfacing an endorsement that does not map to one of the schema's predefined fields. The policy-servicing agent's notes confirm the endorsement was processed, but nothing in the handoff forces a check for "does this policy's mid-term servicing history contain a risk-profile change not represented in the structured renewal-pricing inputs" before the renewal-pricing agent proceeds, so a real, premium-affecting change is silently dropped at the agent-to-agent boundary.
+The policy-servicing agent's endorsement confirmation is written as a narrative update to the policy file -- what changed, by how much, effective when -- while the renewal-pricing agent consumes a risk-profile schema designed around the standard renewal-cycle refresh, not around mid-cycle events. Because the pricing schema has no field representing "risk profile as of an interim endorsement date," the renewal-pricing agent has no way to distinguish a policy that was endorsed mid-term from one that wasn't; both look identical from inside the schema it's actually reading.
 
 **Example**
 ```

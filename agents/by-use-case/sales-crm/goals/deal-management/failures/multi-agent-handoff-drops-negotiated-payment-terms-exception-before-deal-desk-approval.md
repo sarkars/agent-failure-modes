@@ -5,14 +5,14 @@
 **Frequency**: Common
 
 **Symptoms**
-- A customer is told in an email thread that payment terms will be net-90 instead of the standard net-30 in exchange for a multi-year commitment, but the deal-desk approval record shows the deal approved under standard net-30 terms
-- The deal-management agent's structured approval-request object includes deal value, discount percentage, and contract length, but has no field for a non-standard payment-terms exception
-- Asking the deal-desk agent why it approved standard terms shows it only received the structured approval-request fields and had no input describing the negotiated payment-terms deviation from the AE's email thread
-- The miss concentrates on deals with any negotiated term outside the standard approval-request schema, such as payment terms, early-termination clauses, or non-standard renewal pricing
-- The customer or AE catches the discrepancy only when the contract is generated from the approved deal record, after the deal-desk approval has already been logged
+- The deal-desk approval logs standard net-30 terms for a deal where the AE's email thread shows the customer explicitly accepted a three-year commitment in exchange for net-90
+- Deal value, discount percentage, and contract length -- the levers the approval-request schema was built to carry -- reach the deal-desk agent intact every time; payment terms fail specifically because the schema treats them as fixed, not as something a negotiation can change
+- The deal-desk agent's approval is internally correct given its inputs: nothing in deal value, discount, or contract length signals that payment terms were part of what got negotiated, so it approves the deal at the schema's implicit default
+- The email thread itself is unambiguous -- net-90 offered, three-year term stated, customer confirmed -- but that exchange lives in a channel the deal-desk agent's approval workflow was never wired to read
+- The contradiction only surfaces when the contract is generated from the approved record, by which point the customer has already been told terms the paperwork won't match
 
 **Root Cause**
-The handoff between the deal-management agent tracking the negotiation and the deal-desk agent issuing approval passes only a fixed structured schema of deal parameters, with no mechanism for surfacing a negotiated term that does not map to one of the schema's predefined fields. The negotiation history contains the payment-terms exception in free text, but nothing in the handoff forces a check for "does this deal's negotiation history contain any term not represented in the structured approval request" before deal-desk approval is granted, so a real commitment made to the customer is silently dropped at the agent-to-agent boundary.
+The AE's negotiation happens over email, where payment terms are just another line of agreed text, but the deal-management agent hands that negotiation to deal-desk approval through a schema of deal value, discount, and contract length -- fields chosen for the deals the approval workflow was originally built to gate, none of which was ever payment terms. Because the schema has no slot representing "payment terms," an exception negotiated on that specific axis has nowhere to be written down between the email thread and the approval record, regardless of how explicitly the customer and AE agreed to it.
 
 **Example**
 ```

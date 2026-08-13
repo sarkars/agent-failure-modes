@@ -5,14 +5,14 @@
 **Frequency**: Occasional
 
 **Symptoms**
-- A rep's quota credit for the quarter is calculated using their pre-realignment territory assignment, even though a sales-operations agent approved a mid-quarter territory change (accounts moved between reps) with a documented effective date in free-text approval notes
-- The structured schema passed to the quota-crediting agent includes fields for rep ID, quota target, and closed-deal value, but has no field for a mid-period territory-assignment change with an effective date
-- Asking the quota-crediting agent why the realignment was not reflected shows it received only the structured crediting fields and had no input describing the mid-quarter territory change from the sales-operations agent's approval notes
-- The miss concentrates on realignments approved outside the standard start-of-quarter territory-assignment process, since those are the changes least likely to have a corresponding field in the crediting schema
-- Reps affected by the realignment catch the discrepancy only when reviewing their quota-attainment statement at quarter close, after compensation has already been calculated
+- Rep B closes a large deal on an account reassigned to them mid-quarter but receives zero quota credit for it, while Rep A -- who no longer owns that account as of the effective date -- gets credited as though the realignment never happened
+- Rep ID, quota target, and closed-deal value -- the schema's three fields -- are exactly what the quota-crediting agent needs for a quarter with no mid-period changes; the moment a territory shifts partway through, the schema has nothing to say about which half of the quarter each rep's credit should count from
+- The quota-crediting agent's math is defensible given its inputs: it applies the account-to-rep mapping it was given uniformly across the full quarter, because nothing in its input distinguishes "assigned all quarter" from "assigned as of the 15th"
+- The sales-operations agent's approval notes are specific -- named accounts, named reps, an exact effective date -- but that specificity lives in an approval record the crediting agent's pipeline was never pointed at
+- Both affected reps only discover the error at quarter-close attainment review, after compensation tied to that attainment has already been run
 
 **Root Cause**
-The handoff between the sales-operations agent, which approves territory realignments and records the effective date in free-text approval notes, and the quota-crediting agent, which calculates credit from a fixed structured schema, has no mechanism for surfacing a realignment that does not map to one of the schema's predefined fields. The sales-operations agent's notes record the change and its effective date, but nothing in the handoff forces a check for "does this quarter's approval history contain a territory change not represented in the structured crediting inputs" before the quota-crediting agent proceeds, so a real, comp-affecting change is silently dropped at the agent-to-agent boundary.
+Sales-operations approves realignments as discrete, dated events -- these accounts move from Rep A to Rep B as of this date -- but the quota-crediting agent's schema models territory as a single static assignment per rep per quarter, with no concept of an assignment that changes partway through. An effective-dated change has no field to occupy in a schema that was never designed to represent time-varying account ownership within a single crediting period, so the crediting agent applies whichever assignment it has as if it held for the entire quarter.
 
 **Example**
 ```

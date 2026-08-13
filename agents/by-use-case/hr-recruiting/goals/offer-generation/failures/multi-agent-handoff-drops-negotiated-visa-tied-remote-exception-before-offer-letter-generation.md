@@ -5,14 +5,14 @@
 **Frequency**: Occasional
 
 **Symptoms**
-- A candidate is told in a negotiation chat that they can work remotely for the first six months while a work-visa transfer is pending, but the generated offer letter states the standard in-office work location with no mention of the exception
-- The recruiting-coordinator agent's conversation log contains the negotiated exception in free text, but the structured "offer parameters" object passed to the offer-letter-generation agent has no field corresponding to a temporary or visa-contingent work-location exception
-- Asking the offer-letter-generation agent why the exception was omitted shows it only received the standard structured fields (title, comp, start date, default work location) and had no input describing the negotiated deviation
-- The miss concentrates on offers involving any negotiated term that falls outside the standard offer-parameter schema, such as relocation timing, equipment stipends tied to a specific condition, or visa-contingent arrangements
-- The candidate or hiring manager catches the discrepancy only when comparing the offer letter against the original negotiation conversation, after the letter has already been generated and sometimes sent
+- The offer letter lists the default in-office location for a candidate who was explicitly told their start is contingent on a visa transfer and that they'd work remotely from their current location in the meantime
+- Title, comp, and start date -- the fields the offer-parameters schema was designed to carry -- come through correctly every time; the work-location exception fails specifically because a visa-contingent arrangement was never one of the conditions that schema was built to express
+- The offer-letter-generation agent isn't malfunctioning relative to its own inputs: given title, comp, start date, and default location, it produces exactly the letter those fields specify, with no signal that a condition was attached to any of them
+- The coordinator agent's chat log shows it confirmed the arrangement to the candidate in real time -- the commitment existed and was acknowledged, it just never left the conversation it was made in
+- Because the letter is the candidate's first written artifact from the process, the contradiction reads as the company reneging rather than as a data-transfer gap, even after the letter has already gone out
 
 **Root Cause**
-The handoff between the recruiting-coordinator agent and the offer-letter-generation agent passes only a fixed structured schema of offer parameters, with no mechanism for surfacing a negotiated condition that does not map to one of the schema's predefined fields. The coordinator agent's free-text negotiation notes contain the exception, but nothing in the handoff forces a check for "does this candidate's negotiation history contain any term not represented in the structured offer parameters" before the offer letter is generated, so a real-but-nonstandard commitment is silently dropped at the agent-to-agent boundary.
+The coordinator agent negotiates in open-ended conversation, where a visa-contingent remote exception is just another sentence, but hands off through an offer-parameters object built around what an offer usually needs: title, comp, start date, location. That object has no slot for a condition attached to one of its own fields, so a location that is "in-office, unless visa transfer is pending" cannot be represented as anything other than "in-office" -- the generation agent receives a flattened value with the condition already stripped out, not a condition it failed to check.
 
 **Example**
 ```

@@ -5,14 +5,14 @@
 **Frequency**: Occasional
 
 **Symptoms**
-- A candidate discloses during the phone screen that they will need a live captioner, an ASL interpreter, or extended response time for any video interview, and the screening agent's chat transcript records the request, but the scheduling agent books a standard video-interview link with no accommodation arranged
-- The structured handoff schema passed to the interview-scheduling agent includes fields for role, level, timeslot, and interviewer panel, but has no field for an accommodation request disclosed only in the screening agent's free-text conversation notes
-- Asking the scheduling agent why the accommodation was omitted shows it received only the structured scheduling fields and had no input describing the disclosed accommodation need from the screening agent's transcript
-- The miss concentrates on accommodation types that fall outside the schema's predefined scheduling options (time zone, remote vs. onsite), since those are the only accessibility-adjacent fields the schema was built to carry
-- The gap is most often caught only when the candidate raises the accommodation request again immediately before the interview, or after the interview has already started without it
+- The scheduling agent sends a standard video-conferencing link for a candidate who told the screening agent, by name, that they are deaf and need a live captioner or ASL interpreter for any video round
+- The scheduling schema's fields -- time zone, remote vs. onsite -- cover the accessibility-adjacent cases it was designed for, so time-zone and location accommodations pass through the handoff fine; a captioner or interpreter request fails specifically because no field in that set was ever meant to hold it
+- Querying the scheduling agent about the omission shows it operating exactly as scoped: it received role, level, timeslot, and panel, and had no way to know the screening conversation contained anything more than that
+- The screening agent's own transcript shows it acknowledged the request and told the candidate it would be arranged -- the commitment was made, just not by the agent capable of acting on it
+- The gap surfaces at the worst possible moment: the candidate discovers nothing was arranged the morning of the interview, when a reschedule is the only remaining fix
 
 **Root Cause**
-The handoff between the recruiter-screening agent, which produces free-text conversation notes from the phone screen, and the interview-scheduling agent, which books the interview from a fixed structured schema, has no mechanism for surfacing an accommodation request that does not map to one of the schema's predefined fields. The screening agent's notes record the disclosed need, but nothing in the handoff forces a check for "does this candidate's screening transcript contain an accommodation request not represented in the structured scheduling fields" before the scheduling agent proceeds, so a real, legally significant request is silently dropped at the agent-to-agent boundary.
+The screening agent's phone-screen output is a conversation transcript, and the scheduling agent's input is a fixed set of logistics fields (role, level, timeslot, panel) built for booking, not for accessibility. Because accommodation requests are transmitted as free text embedded in a summary rather than as a field the scheduling agent's booking logic ever reads, a captioner or interpreter request the screening agent explicitly recorded is functionally indistinguishable, from the scheduler's side, from a request that was never made at all.
 
 **Example**
 ```
