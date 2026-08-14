@@ -5,14 +5,14 @@
 **Frequency**: Occasional
 
 **Symptoms**
-- The generated corporate-structure chart includes a subsidiary or affiliate that does not actually belong to the target's ownership chain, linked there because its name closely resembles a genuine subsidiary's name
-- Querying the entity registry directly by registration or tax ID, rather than by name similarity, shows the matched entity has no ownership or control relationship to the target
-- The mismatch concentrates on common business name patterns -- regional naming conventions, generic descriptive names, or holding companies with near-identical names in different jurisdictions -- where many unrelated entities share highly similar names
-- The structure chart presents the erroneous link with the same confidence and formatting as correctly verified relationships, with no indication that the link was established by name similarity rather than registry confirmation
-- The error surfaces only when a reviewer cross-checks a specific entity against the target's actual filed ownership disclosures and finds no relationship recorded
+- A buyer's risk assessment flags litigation or liability exposure that actually belongs to an unrelated company, while the target's real subsidiary -- carrying a different, undisclosed liability -- goes unreviewed because the chart never linked it in
+- The entity the agent linked in has its own registration number and tax ID on file, distinct from the target's genuine subsidiary of a similar name, but the linking step never queried either registry field
+- Because the agent is pulling from filings, a foreign companies registry, and a UCC lien database simultaneously, a name that reads as unique within any single source can collide with an unrelated entity the moment it's cross-referenced against the other two
+- Reviewers treat every link on the chart as equally load-bearing during diligence, since nothing distinguishes a link backed by a filed ownership disclosure from one the agent inferred purely from name overlap
+- Discovery happens only when someone manually traces one specific entity against the target's actual filed ownership disclosures for an unrelated reason (usually because a number downstream looks wrong), not because the chart-building process itself flagged the link as uncertain
 
 **Root Cause**
-Building a corporate-structure chart from heterogeneous filings and registry data by matching entity names via semantic or lexical similarity optimizes for the most textually similar name across sources, not for an entity confirmed to share the same registration identifier or a documented ownership relationship. When two genuinely unrelated entities happen to share a highly similar name -- common in jurisdictions with limited naming conventions or generic industry terms -- the similarity signal driving the match does not distinguish a coincidental match from a true cross-document reference to the same legal entity.
+The agent's entity-linking step treats "same name across sources" and "same legal entity" as interchangeable, because its matching function only ever sees the name string -- it was never given a registration-ID or tax-ID field to check against when a candidate match is proposed across the three source types it ingests. Cross-jurisdictional due diligence compounds this: the same descriptive words ("Logistics," "Holdings," a shared geographic prefix) get reused across genuinely unrelated corporate families far more often than they would within one country's registry, so a matching threshold that would rarely misfire on a single, well-normalized company database misfires routinely once filings, a foreign registry, and a lien database are being reconciled against each other.
 
 **Example**
 ```

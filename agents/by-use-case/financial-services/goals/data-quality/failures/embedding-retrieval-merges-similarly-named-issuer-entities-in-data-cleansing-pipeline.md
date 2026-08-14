@@ -5,14 +5,14 @@
 **Frequency**: Occasional
 
 **Symptoms**
-- A holdings or exposure report aggregates positions from two genuinely distinct issuers under a single merged issuer record, because their names are highly similar across source feeds
-- Querying either source feed by LEI or another unique issuer identifier shows the two issuers have different identifiers and no actual corporate relationship
-- The merge concentrates on issuer name patterns that recur across unrelated entities -- common regional naming conventions, generic holding-company names, or issuers that share a name root after a corporate restructuring of one but not the other
-- The merged record presents combined holdings and exposure figures with the same confidence and formatting as a correctly deduplicated record, with no indication the merge was based on name similarity rather than identifier confirmation
-- The error surfaces only when a risk or compliance reviewer notices an exposure concentration that does not reconcile with either issuer's actual standalone position, prompting a manual identifier-level investigation
+- A single-issuer concentration-limit breach appears in the exposure report even though neither of the two underlying, genuinely distinct issuers individually holds a position anywhere near the limit
+- Pulling either source feed's LEI or issuer code for the merged record shows two different identifiers, not one -- the merge has no identifier-level basis, only a name match
+- Issuers most likely to collide are the ones whose names recur by construction: a parent that spun off a similarly-named affiliate, or a regional holding-company naming convention (e.g. "[Region] [Sector] Holdings") shared by otherwise unrelated groups
+- Nothing in the merged record's formatting distinguishes it from a legitimately deduplicated one -- the pipeline does not tag records as "matched by name" versus "matched by identifier," so the merge looks authoritative downstream
+- A compliance reviewer only catches the error by working backward from an exposure number that doesn't reconcile with either issuer's standalone filings, not from any signal the pipeline itself raised
 
 **Root Cause**
-Deduplicating issuer records across heterogeneous source feeds by matching names via embedding similarity optimizes for the most textually similar name across feeds, not for confirming that two records share the same unique identifier or documented corporate relationship. When two genuinely distinct issuers happen to share a highly similar name -- common in sectors with generic naming conventions or after one issuer's corporate restructuring leaves a name resembling an unrelated entity -- the similarity signal driving the merge does not distinguish a coincidental match from a true cross-feed reference to the same legal entity.
+The deduplication step scores candidate issuer pairs by embedding distance over the name string alone, so its notion of "same issuer" is really "textually closest name in the other feed" -- there is no step that requires the match to also agree on LEI, CUSIP, or another registry-backed identifier before the merge executes. This is a bond-specific failure mode: emerging-markets and holding-company issuer names are drawn from a small vocabulary of sector and geography terms, so the embedding space places unrelated issuers close together far more often than it does for, say, unique corporate legal names in a developed-markets equity universe, and the pipeline's confidence threshold was tuned against the latter, not the former.
 
 **Example**
 ```
