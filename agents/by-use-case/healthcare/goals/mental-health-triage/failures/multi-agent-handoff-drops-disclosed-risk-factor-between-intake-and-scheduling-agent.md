@@ -5,11 +5,11 @@
 **Frequency**: Occasional
 
 **Symptoms**
-- Intake agent's conversation transcript or reasoning trace explicitly references a disclosed risk factor (access to a specific means, a recent significant stressor, a stated plan), but the structured case record passed to the scheduling agent shows a routine or moderate acuity level with no corresponding flag
-- Scheduling agent's output (appointment timing, routing tier) is consistent with a low-acuity case and makes no reference to the risk factor the intake agent's own transcript surfaced
-- Re-reviewing the intake transcript in isolation reliably surfaces the disclosure, confirming the information was captured upstream and lost specifically at the handoff rather than missed during intake
-- The disclosure is only acted on after a human reviewer reads the full intake transcript directly, well after the routine appointment has already been scheduled
-- The structured handoff payload between the two agents has no field for carrying forward a qualitative risk disclosure distinct from the numeric/categorical acuity score
+- A patient's disclosure of a specific risk factor is present in the intake transcript in plain language, but the case record the scheduling agent receives shows a routine or moderate acuity level with nothing to indicate it
+- The scheduling agent's output — appointment timing, routing tier — is exactly what a low-acuity case would produce, with no acknowledgment of a disclosure that exists a level up in the same case
+- The disclosure only gets acted on when a clinician reads the full intake transcript directly, typically during chart prep well after the lower-urgency appointment has already been scheduled and communicated
+- Re-reviewing the intake transcript alone reliably reproduces the disclosure, which rules out the possibility that the information was never captured during intake in the first place
+- The structured record connecting the two agents has no field capable of carrying a qualitative risk narrative — only the acuity score and appointment logistics — so there was nowhere for the disclosure to go even if someone tried to pass it forward
 
 **Example**
 ```
@@ -29,10 +29,10 @@ A clinician reviewing the full transcript during chart prep before the appointme
 | Research on agent-environment failure interactions finds structured handoff interfaces between cooperating agents frequently omit fields needed to carry forward qualitative risk context generated during an upstream conversational phase | [Aegis: Agent-Environment Failures](https://arxiv.org/html/2508.19504) |
 
 **Contributing Factors**
-- Risk disclosure exists only in unstructured conversation transcript and the intake agent's own reasoning, not in a structured field of the case record passed to the scheduling agent
-- Structured handoff schema carries only the numeric/categorical acuity score plus logistics fields, with no field for qualitative risk narrative or unresolved concerns
-- Scheduling agent's prompt instructs it to schedule based on the acuity field it receives, with no instruction to request or check whether the upstream transcript contains content not reflected in that score
-- No automated check comparing risk-relevant entities mentioned in the intake transcript against fields present in the structured handoff payload before the scheduling agent acts
+- The handoff to scheduling carries a numeric acuity score plus logistics fields; it was never built to carry a qualitative disclosure that falls outside what the screening instrument itself measures
+- The disclosure lives only in the conversational transcript the intake agent produced, which the scheduling agent's input does not include or parse — only the computed score and logistics fields cross the boundary
+- Scheduling's logic keys entirely off the acuity field it receives; nothing in its instructions has it check whether the source transcript contains content the score itself didn't capture
+- Because the acuity instrument is structured and validated, it's treated as the complete signal for urgency — there's no independent path for a qualitative disclosure to override a moderate score if the instrument didn't weight it that way
 
 ---
 

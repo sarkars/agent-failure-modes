@@ -5,11 +5,11 @@
 **Frequency**: Common
 
 **Symptoms**
-- Billing agent's opening message asks for account details, order numbers, or a description of the issue that the customer already provided to the triage agent earlier in the same overall conversation
-- Triage agent's own reasoning or transcript explicitly notes the customer's frustration level and which details were already collected, but none of that appears in the structured ticket object the billing agent receives
-- Customer's response to the billing agent expresses frustration at having to repeat themselves immediately after having just explained the situation to a different agent
-- Re-reading the full session transcript (triage plus billing) confirms all the requested information was already stated once, earlier in the same overall interaction, and the loss occurs specifically at the inter-agent handoff
-- The structured handoff ticket contains only a category label and minimal metadata, with no field for carrying forward the verbatim details or de-escalation notes the triage agent gathered
+- The billing agent opens by requesting information — account number, order details, description of the issue — that the same customer already gave the triage agent minutes earlier in the same interaction
+- Triage's transcript explicitly flags the customer's frustration and lists which details are already collected, none of which appears in the structured ticket the billing agent receives
+- The customer reacts by pointing out they just explained this to a different agent, escalating irritation rather than resolving it
+- Reading the full session end to end shows every requested item was already stated once; the information existed, it just didn't survive the handoff
+- The ticket object itself carries only a category label and minimal metadata, confirming there was never a field for verbatim details or a "don't re-ask" list in the first place
 
 **Example**
 ```
@@ -29,10 +29,10 @@ Review of the full session confirms the account number, charge amount, and date 
 | Research on agent-environment failure interactions finds structured handoff interfaces between cooperating agents frequently omit fields needed to carry forward conversational context gathered during an upstream interaction phase | [Aegis: Agent-Environment Failures](https://arxiv.org/html/2508.19504) |
 
 **Contributing Factors**
-- Details and de-escalation notes exist only in the triage agent's own conversational reasoning or transcript, not in a structured field of the ticket object passed to the billing agent
-- Handoff schema carries only a category label and customer identifier, with no field for verbatim collected details or an explicit "do not re-ask" list
-- Billing agent's prompt instructs it to open by gathering the information it needs for its task, with no instruction to first check whether that information was already collected upstream
-- No automated check comparing entities and stated preferences captured by the triage agent against fields present in the structured handoff payload before the billing agent's first message is sent
+- The ticket schema was built to route a case by category, not to carry forward what happened in the conversation that produced that category, so collected details and emotional-state notes have nowhere to go
+- The only structured place the already-provided details and frustration signal exist is the conversational log itself, which the billing agent's input pipeline is not wired to read before responding
+- The billing agent's instructions are self-contained: gather what it needs to resolve the category it was handed, with no step that first checks whether the customer already supplied that information to a prior agent
+- Nothing compares the entities a customer stated during triage against the fields the billing agent is about to ask for, so a repeat request looks identical to a first request from the system's point of view
 
 ---
 

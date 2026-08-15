@@ -5,11 +5,11 @@
 **Frequency**: Occasional
 
 **Symptoms**
-- The triage agent's transcript explicitly states "customer confirms they already received a $15 partial credit from a prior contact for this charge," but the structured dispute-case object passed to the billing agent contains only `disputed_amount: 60.00` and `category: duplicate_charge`, with no field for prior partial credits
-- The billing agent's resolution message offers a full $60 refund with no acknowledgment of, or deduction for, the $15 already credited, because that detail was never represented in the data structure it operates on
-- Finance reconciliation discovers the customer received $15 (from the prior contact) plus $60 (from the billing agent's full resolution) against a $60 disputed charge, a $15 overpayment
-- The triage agent's own summary, read by a human auditing the case after the fact, contains the missing fact in plain text, confirming the information existed in the conversation but did not survive the structured handoff to the next agent
-- Overpayment incidents cluster specifically around disputes that involved a prior partial resolution before being re-escalated or re-opened, rather than disputes resolved in a single agent's conversation
+- Finance reconciliation finds a customer received both an earlier partial credit and a later full-amount refund against the same disputed charge, an amount that exceeds what was actually in dispute
+- The billing agent's resolution message offers the full disputed amount with no deduction for, or mention of, the credit already issued, because the case object it operates on has no field representing prior credits
+- Triage's own case notes state in plain text that a partial credit was already applied and give the correct remaining balance — information that never reaches the structured object passed downstream
+- A human auditing the case after the fact finds the missing fact sitting in triage's summary the whole time, confirming the loss happened at the handoff rather than the information never being captured
+- Overpayments of this kind cluster specifically around disputes that had a prior partial resolution before being reopened, rather than disputes a single agent handled start to finish
 
 **Example**
 ```
@@ -27,10 +27,10 @@ Customer receives $60.00 on top of the earlier $15.00, a $15.00 overpayment caug
 | Failure-mode taxonomies for LLM systems identify multi-agent handoff and state-passing errors as a distinct production failure category, separate from single-agent reasoning errors, arising specifically at the boundary between cooperating agents | [Failure Modes in LLM Systems](https://arxiv.org/abs/2511.19933) |
 
 **Contributing Factors**
-- The structured case object used to hand off from triage to the billing-dispute agent has no field for prior partial credits or partial resolutions, so there is no slot for that fact to occupy even if someone tried to pass it along
-- The triage agent's free-text conversational summary is not parsed or required to populate the structured handoff object; the two representations of the same conversation diverge silently
-- The billing agent's refund-calculation logic computes the full disputed amount from the case object's `disputed_amount` field alone, with no instruction or tool call to check for prior credits issued against the same dispute or charge ID before finalizing an amount
-- No deterministic cross-check queries the credit/refund ledger for prior actions against the same charge ID before a new refund is approved, leaving the only safeguard dependent on information surviving the handoff
+- The dispute-case schema tracks a single current disputed amount, not a running history of partial resolutions against that charge, so a prior credit has no field to occupy even when the triage agent is aware of it
+- Triage's free-text summary and the structured case object are two independent representations of the same conversation that are never reconciled with each other; nothing requires the summary's content to be reflected in the object's fields
+- Refund math is computed directly from the case object's `disputed_amount` field alone, with no step that queries whether any credit has already been issued against the same charge before finalizing a payout
+- The only safeguard against a duplicate payout is the information surviving the handoff, and because no ledger check exists independent of that handoff, an omitted field translates directly into an overpayment rather than being caught downstream
 
 ---
 

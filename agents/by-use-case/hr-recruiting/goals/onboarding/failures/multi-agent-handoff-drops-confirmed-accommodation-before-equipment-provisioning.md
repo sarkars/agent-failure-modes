@@ -5,11 +5,11 @@
 **Frequency**: Occasional
 
 **Symptoms**
-- New hire's day-one equipment shipment matches the standard role-based provisioning template, not the accommodation discussed and confirmed during pre-boarding
-- The recruiting-coordinator agent's chat transcript contains an explicit confirmation ("Yes, we'll have the sit-stand desk and the ergonomic keyboard ready for you") that never appears as a field in the structured onboarding-task record the provisioning agent acted on
-- IT/Facilities ticket created by the provisioning agent shows only default SKU codes for the new hire's role and location, with no accommodation flag set
-- New hire has to re-raise the same accommodation request after start date, which HR has to treat as a new, time-sensitive accessibility request rather than something already settled
-- Re-reading the original pre-boarding conversation confirms the accommodation was discussed, agreed, and not marked tentative or pending
+- The new hire's day-one shipment matches the standard role-based bundle rather than the accommodation that was explicitly discussed and confirmed before their start date
+- The coordinator agent's chat log shows an unambiguous confirmation of the accommodation, and that confirmation is nowhere among the fields of the structured onboarding-task record the provisioning agent acted on
+- The IT/Facilities ticket the provisioning agent generates shows only default SKUs for the role and location, with no accommodation flag set anywhere
+- The new hire has to re-raise the same request after starting, and HR ends up processing it as a new, time-sensitive accessibility case instead of recognizing it as already settled
+- Rereading the original pre-boarding conversation shows the accommodation was discussed and agreed without qualification — it wasn't tentative, it simply never reached the provisioning step
 
 **Example**
 ```
@@ -36,10 +36,10 @@ conversation -- it simply never crossed the agent-to-agent handoff boundary
 | Tool-use error detection research finds agents rarely flag when an upstream input they consumed was incomplete relative to the full available context, instead proceeding as if the structured fields they received were the complete picture | [ToolCritic: Detecting and Correcting Tool-Use Errors in Dialogue Systems](https://arxiv.org/pdf/2510.17052) |
 
 **Contributing Factors**
-- The structured handoff schema between coordinator and provisioning agents has no field for accommodations, exceptions, or any commitment made in free-text conversation
-- The coordinator agent treats confirming the accommodation in chat as equivalent to recording it, with no step that writes the commitment into a field the next agent will actually read
-- The provisioning agent has no instruction to check for an unstructured "exceptions" note before defaulting to the standard equipment bundle
-- No reconciliation step compares what was promised in the pre-boarding conversation against what the provisioning ticket actually requests before it ships
+- The onboarding task schema was built around role, location, and a standard equipment bundle; it has no field representing an exception negotiated during the pre-boarding conversation
+- The coordinator agent treats verbally confirming the accommodation in chat as the end of the task, with no subsequent step that writes the commitment into a field the provisioning agent will actually consult
+- Provisioning defaults to the standard bundle for the hire's role and location unless told otherwise, and nothing in its instructions has it check for an unstructured exceptions note before doing so
+- No step compares what was promised during pre-boarding against what the provisioning ticket actually requests, so a dropped commitment looks identical to a hire who never asked for anything
 
 ---
 

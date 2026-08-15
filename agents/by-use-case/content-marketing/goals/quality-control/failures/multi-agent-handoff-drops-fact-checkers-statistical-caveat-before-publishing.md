@@ -5,11 +5,11 @@
 **Frequency**: Occasional
 
 **Symptoms**
-- Published content states a statistic as a flat, unqualified fact when the fact-checking agent's review notes had approved it only with a specific scope or expiration caveat
-- The fact-checking agent's transcript or reasoning log contains the caveat in free text, but the structured field passed to the publishing agent (typically a simple approved/rejected boolean or status enum) has no field to carry it
-- The publishing agent's own logs show it received only an "approved" status with no qualifier text, confirming the caveat was generated but not transmitted
-- The same statistic, when fact-checked again independently, is flagged by a reviewer as needing the qualifier that was silently dropped the first time
-- The gap reproduces consistently for any caveat attached to an otherwise-approved claim, not just occasionally, because the handoff schema structurally has no slot for it
+- A qualifier the fact-checking agent explicitly attached to an approval — a market restriction, a survey-currency window, a reverify-after date — is absent from the published version of the claim
+- The fact-checking agent's reasoning log contains the caveat in prose, but the structured status field the publishing agent actually reads carries only "approved," with nothing to indicate the approval was conditional
+- The publishing agent's own request/response log shows it received a bare approved status and never received the caveat text, consistent with a schema gap rather than a transmission bug
+- The same claim, fact-checked a second time in a different context, gets flagged by a reviewer for exactly the caveat that was dropped the first time, showing the detection capability exists but doesn't reach the point of use
+- Every caveated approval is affected the same way regardless of which claim or caveat type is involved, because the gap is structural — no schema slot exists — rather than incidental to any one case
 
 **Example**
 ```
@@ -32,10 +32,10 @@ in the fact-checking agent's reasoning log but was never present anywhere in the
 | Broader failure-mode research on LLM systems documents structured-interface bottlenecks between pipeline stages as a recurring mechanism by which a correctly generated finding fails to reach the stage where it needs to take effect | [Failure Modes in LLM Systems](https://arxiv.org/abs/2511.19933) |
 
 **Contributing Factors**
-- The structured handoff schema between fact-checking and publishing agents was designed around a binary approve/reject decision, with no field anticipated for conditional or scoped approvals
-- The fact-checking agent's full reasoning text is logged but not treated as part of the authoritative handoff payload the publishing agent is required to consult
-- No validation step checks whether an "approved" status was accompanied by caveat language in the reasoning log before allowing unscoped publication
-- Caveats are relatively rare compared to flat approvals, so the missing schema field had not surfaced as a problem until a claim with a caveat was reused outside its original scope
+- The approve/reject schema was scoped during design to a single binary outcome; a "yes, but" result — common for time-bound or geography-bound claims — has no slot to occupy, not because a slot was overlooked but because the schema was never built to hold conditional state
+- Fact-checking output splits into two artifacts: a machine-readable status the publishing agent consumes, and a human-readable reasoning log nobody downstream is required to open; the caveat exists exclusively in the second artifact
+- Publishing agent's logic branches purely on the status enum, so an "approved" value alone is sufficient to clear a claim for global release regardless of what accompanying text sits elsewhere in the record
+- Caveated approvals are the minority case relative to flat approvals, so the schema gap ran uneventful for many cycles until a claim scoped to one market surfaced in another
 
 ---
 

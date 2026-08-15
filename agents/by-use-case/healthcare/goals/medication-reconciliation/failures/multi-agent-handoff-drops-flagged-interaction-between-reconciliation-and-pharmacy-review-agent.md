@@ -5,11 +5,11 @@
 **Frequency**: Occasional
 
 **Symptoms**
-- Reconciliation agent's own output or reasoning trace explicitly names a specific drug-drug interaction risk, but the structured medication list passed to the downstream pharmacy-review agent contains no corresponding flag or annotation field for it
-- Pharmacy-review agent's approval or sign-off makes no reference to the interaction the upstream agent identified, proceeding as if the medication list were unremarkable
-- Re-running the reconciliation agent in isolation reliably surfaces the same interaction, confirming the detection capability exists upstream and the loss occurs specifically at the handoff
-- The interaction is only caught when a human pharmacist independently cross-checks the full list against an interaction database after the automated review has already completed
-- Audit of the structured payload passed between the two agents shows no field exists for carrying an unresolved risk flag forward, only the final reconciled drug list itself
+- The pharmacy-review agent's sign-off makes no reference to an interaction the reconciliation agent's own output explicitly named, proceeding as though the list were unremarkable
+- Re-running reconciliation on the same admission in isolation reliably resurfaces the same interaction, showing the detection worked upstream and the loss is specific to the handoff
+- The only thing that catches the interaction is a pharmacist manually cross-checking the full list against a reference tool well after the automated review already cleared it
+- The structured object handed to pharmacy-review carries drug names, doses, and schedules and nothing else — there was never a field capable of carrying a flag forward in the first place
+- The reconciliation agent's own reasoning trace states the interaction and even recommends pharmacy review before dispensing, language with no corresponding structured counterpart anywhere in the payload
 
 **Example**
 ```
@@ -29,10 +29,10 @@ NSAID is dispensed; the interaction is only caught two days later when a unit ph
 | Research on agent-environment failure interactions finds that structured handoff interfaces between agents frequently omit fields needed to carry forward risk annotations generated upstream, causing downstream agents to operate on an incomplete view of the case | [Aegis: Agent-Environment Failures](https://arxiv.org/html/2508.19504) |
 
 **Contributing Factors**
-- Interaction flag exists only in the reconciliation agent's free-text reasoning or conversational summary, not in a structured field of the medication-list object passed downstream
-- No schema requirement that the handoff payload include an explicit risk/flag carryforward field distinct from the plain drug list
-- Pharmacy-review agent's prompt instructs it to assess the medication list it receives, with no instruction to request or verify whether the upstream agent surfaced any unresolved concerns
-- No automated check comparing entities or risks mentioned in the upstream agent's reasoning trace against fields present in the structured handoff payload before the downstream agent proceeds
+- The medication-list object passed downstream is built to represent the reconciled drug list itself — names, doses, schedules — not any risk finding the reconciliation agent generated while producing that list
+- The interaction note is written into the reconciliation agent's own output text, which the pharmacy-review agent's input pipeline does not parse or consume as part of its review
+- Pharmacy-review's task is defined as evaluating the medication list it's handed; nothing in its instructions has it ask whether the upstream agent flagged anything beyond what's in that list
+- There's no step that cross-references what the reconciliation agent actually found against what made it into the structured list before the pharmacy-review agent signs off, so a real finding and a clean list are indistinguishable to the downstream agent
 
 ---
 
