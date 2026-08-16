@@ -1,13 +1,13 @@
-# Conflicting Information
+# Agent Picks Wrong Value When a Document Field Appears Multiple Times: Causes and Fixes
 
-## Issue: Conflicting Information Across Document Locations
+## Issue: The same field appears in multiple document locations with conflicting values, and the agent grabs the first or an arbitrary occurrence instead of the authoritative one
 
 **Frequency**: Common
 
 **Symptoms**
-- Same field appears in multiple places with different values
-- Agent picks arbitrary or first occurrence
-- No reconciliation or flagging of conflicts
+- Same field appears in multiple places in the document with different values
+- Agent picks an arbitrary or first occurrence instead of the authoritative one (e.g. an amendment or final terms section)
+- No reconciliation or flagging of conflicts before the value is used downstream
 
 **Root Cause**
 Long documents may contain draft values, amendments, corrections, or simple errors resulting in the same information appearing multiple times with conflicting values.
@@ -23,6 +23,10 @@ Agent extraction: "$500,000" (grabbed first occurrence)
 
 Result: Agent missed amendment, used superseded value
 ```
+
+## How to Fix Conflicting-Value Extraction
+
+Commonly reported when using frameworks like LlamaIndex or LangChain for document-parsing pipelines, where a single-pass extraction step has no built-in mechanism to compare multiple candidate values before returning one.
 
 ## Mitigation Strategies
 

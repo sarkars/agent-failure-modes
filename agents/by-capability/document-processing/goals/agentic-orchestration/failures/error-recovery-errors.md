@@ -1,13 +1,13 @@
-# Error Recovery Errors
+# Agent "Fixes" Correct Data and Corrupts It: Causes and Fixes
 
-## Issue: Error Recovery Creates New Errors
+## Issue: The agent's own error-recovery step corrects a value that wasn't actually wrong, corrupting good data to satisfy a validation check
 
 **Frequency**: Occasional
 
 **Symptoms**
-- Agent attempts to fix extraction error
-- "Fix" introduces new errors or corrupts good data
-- Cascading corrections worsen overall accuracy
+- Agent attempts to fix a detected extraction error
+- The "fix" introduces new errors or corrupts data that was already correct
+- Cascading corrections worsen overall accuracy instead of improving it
 
 **Root Cause**
 When agents detect errors and attempt corrections without sufficient context, they may "fix" things that weren't broken or make changes that violate constraints.
@@ -23,6 +23,8 @@ Agent "fix": Notices mismatch, adjusts Widget B total to $400 to match
 
 Result: Agent "corrected" good data to match bad extraction
 ```
+
+## How to Fix Agent Self-Correction Errors
 
 ## Mitigation Strategies
 

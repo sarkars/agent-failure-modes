@@ -1,13 +1,13 @@
-# Skew and Rotation
+# OCR Scrambles Text on Skewed or Rotated Scans: Causes and Fixes
 
-## Issue: Skew, Rotation, and Perspective Distortion
+## Issue: Skewed, rotated, or angled document photos cause OCR to merge adjacent lines into scrambled text
 
 **Frequency**: Common
 
 **Symptoms**
-- Line breaks appear in middle of words
-- Characters from different lines merged
-- Entire document text scrambled
+- Line breaks appear in the middle of words
+- Characters from different lines get merged together
+- Entire document text comes out scrambled or out of order
 
 **Root Cause**
 Mobile phone photos, misaligned scans, and documents photographed at angles create geometric distortions that break line detection.
@@ -20,6 +20,8 @@ Line 2: "Date: 2024-01-15"
 
 Extracted: "Invoice Number: 1234Date: 2024-01-15" (lines merged)
 ```
+
+## How to Fix Skew and Rotation Distortion in OCR
 
 ## Mitigation Strategies
 

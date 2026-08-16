@@ -1,13 +1,13 @@
-# Document Reading Bottleneck
+# AI Agent Reasons Correctly But Extracts Wrong Data (Document Reading Bottleneck): Causes and Fixes
 
-## Issue: Document Reading Bottleneck
+## Issue: The agent's reasoning chain is logically sound, but it operates on a misread input value, so the final answer is wrong despite correct reasoning
 
 **Frequency**: Very Common
 
 **Symptoms**
-- Agent reasons correctly but extracts wrong data
-- Logical conclusions based on misread inputs
-- Multi-step workflows fail despite correct reasoning chain
+- Agent reasons correctly but extracts or calculates from the wrong underlying data
+- Logical conclusions are built on misread inputs rather than a reasoning mistake
+- Multi-step workflows fail despite a correct reasoning chain, because reading (not reasoning) was the bottleneck
 
 **Root Cause**
 Agents reason well over clean text but fall apart when faced with real enterprise documents. The bottleneck isn't reasoning - it's reading.
@@ -25,6 +25,10 @@ Result: Financially material error from reading failure, not reasoning failure
 
 **Key Statistic**
 Databricks' OfficeQA benchmark found frontier agents scored below 50% accuracy on real enterprise document reasoning tasks.
+
+## How to Fix Document Reading Bottlenecks in Agent Pipelines
+
+Commonly reported when using frameworks like LlamaIndex or LangChain for agentic document Q&A, where a single agent call both parses raw document content and performs multi-step reasoning over it.
 
 ## Mitigation Strategies
 

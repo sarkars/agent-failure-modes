@@ -1,14 +1,14 @@
-# Tool Parameter Errors
+# AI Agent Calls Tool with Wrong Parameters: Causes and Fixes
 
-## Issue: Tool Parameter Errors
+## Issue: The agent mistranslates its own document understanding into tool call parameters, silently extracting from the wrong page or region
 
 **Frequency**: Common
 
 **Symptoms**
-- Tools called with wrong parameters
-- Page ranges incorrect
-- Region coordinates misspecified
-- Output format mismatches downstream needs
+- Tools called with wrong parameters (off-by-one page numbers, wrong region)
+- Page ranges incorrect relative to the agent's stated intent
+- Region coordinates misspecified, pulling the wrong content
+- Output format mismatches what the downstream step actually needs
 
 **Root Cause**
 Agent must translate document understanding into specific tool parameters. Errors in this translation cause extraction failures.
@@ -23,6 +23,10 @@ Result: Wrong table extracted, agent proceeds with incorrect data
 
 **Key Statistic**
 37% of tool calls have silent parameter mismatches according to developer analysis.
+
+## How to Fix Tool Parameter Errors in Agent Tool Calls
+
+Commonly reported when using MCP-style tool interfaces or frameworks like LangChain/LangGraph for tool-calling agents, where the model must translate document understanding into structured parameters with no built-in bounds checking.
 
 ## Mitigation Strategies
 

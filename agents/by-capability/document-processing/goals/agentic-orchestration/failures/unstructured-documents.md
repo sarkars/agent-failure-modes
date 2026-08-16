@@ -1,13 +1,13 @@
-# Unstructured Documents
+# AI Agent Fails to Extract Data from Unstructured Narrative Text: Causes and Fixes
 
-## Issue: Unstructured Document Confusion
+## Issue: The agent struggles on free-form correspondence and narrative documents where key information isn't in a labeled field
 
 **Frequency**: Common
 
 **Symptoms**
-- Agent cannot determine document structure
-- Important information buried in narrative text
-- No clear extraction schema applies
+- Agent cannot determine the document's structure well enough to extract from it
+- Important information is buried in narrative text rather than a labeled field
+- No clear extraction schema applies, so the agent has nothing to anchor on
 
 **Root Cause**
 Agents work well on structured forms but struggle with free-form documents like correspondence, reports, or legal narratives where key information isn't in labeled fields.
@@ -23,6 +23,10 @@ assuming delivery by end of Q2..."
 Agent task: Extract contract value
 Challenge: Value is in narrative, not labeled field
 ```
+
+## How to Fix Unstructured Document Extraction Failures
+
+Commonly reported when using frameworks like LlamaIndex or LangChain for document Q&A pipelines built around structured field extraction rather than open-ended narrative interpretation.
 
 ## Mitigation Strategies
 

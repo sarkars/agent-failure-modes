@@ -1,13 +1,13 @@
-# Punctuation Errors
+# OCR Swaps Decimal Points and Commas in Invoice Amounts: Causes and Fixes
 
-## Issue: Punctuation and Special Character Errors
+## Issue: OCR misreads punctuation — decimals become commas, currency symbols drop, dashes get interchanged — silently corrupting parsed amounts
 
 **Frequency**: Common
 
 **Symptoms**
-- Decimal points become commas (or vice versa) breaking numeric parsing
-- Currency symbols misread or dropped
-- Hyphens, dashes, and minus signs interchanged
+- Decimal points become commas (or vice versa), breaking numeric parsing
+- Currency symbols misread or dropped from extracted amounts
+- Hyphens, dashes, and minus signs interchanged, flipping signs or breaking ID formats
 
 **Root Cause**
 Small punctuation marks are often damaged in scans or rendered differently across fonts. Regional formatting differences (`.` vs `,` for decimals) add ambiguity.
@@ -20,6 +20,8 @@ Actual: 1.23456 (comma interpreted as decimal)
 
 Result: Invoice processed for wrong amount
 ```
+
+## How to Fix Punctuation and Decimal Misreads in OCR
 
 ## Mitigation Strategies
 

@@ -1,13 +1,14 @@
-# Character Confusion
+# OCR Confuses Similar-Looking Characters (0/O, 1/l/I, 5/S): Causes and Fixes
 
-## Issue: Visually Similar Character Substitution
+## Issue: OCR swaps visually similar characters (0/O, 1/l/I, 5/S, 8/B), so extracted IDs and codes look right but are wrong
 
 **Frequency**: Very Common
 
 **Symptoms**
 - Numbers appear in text fields, letters appear in numeric fields
-- Validation fails on extracted data that "looks correct"
-- Downstream calculations produce unexpected results
+- Validation fails on extracted data that "looks correct" to a human at a glance
+- Downstream calculations or ID lookups produce unexpected results
+- An invoice number, license plate, or account ID that visually matches the source still fails to resolve
 
 **Root Cause**
 Many characters are visually similar, especially in certain fonts or at low resolutions. The model cannot distinguish between them without additional context.
@@ -34,6 +35,8 @@ Actual: INV-2024-01523 (digit 0)
 
 Result: Invoice lookup fails because ID doesn't exist
 ```
+
+## How to Fix Character Confusion in OCR Output
 
 ## Mitigation Strategies
 

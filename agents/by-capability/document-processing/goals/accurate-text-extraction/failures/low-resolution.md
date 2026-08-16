@@ -1,13 +1,13 @@
-# Low Resolution
+# OCR Fails on Low-Resolution Scans and Fax Images: Causes and Fixes
 
-## Issue: Low Resolution and Compression Artifacts
+## Issue: Low DPI scans, faxes, and compressed mobile photos produce fragmented, unreadable OCR output
 
 **Frequency**: Very Common
 
 **Symptoms**
 - Consistent errors on documents from specific sources (fax, mobile upload)
 - Small text (footnotes, fine print) fails completely
-- JPEG artifacts cause character fragmentation
+- JPEG compression artifacts cause characters to fragment or merge
 
 **Root Cause**
 Low DPI scans, aggressive compression, and small original text create images where characters lack sufficient detail for recognition.
@@ -20,6 +20,8 @@ Extracted: "Tenns: Nel 30 drys"
 
 Result: Payment terms not correctly parsed
 ```
+
+## How to Fix Low-Resolution OCR Failures
 
 ## Mitigation Strategies
 

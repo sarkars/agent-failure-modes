@@ -1,13 +1,14 @@
-# Background Interference
+# OCR Garbled Text from Watermarks and Background Interference: Causes and Fixes
 
-## Issue: Background Interference
+## Issue: OCR mixes watermark and background pixels into the extracted text, producing garbled characters
 
 **Frequency**: Common
 
 **Symptoms**
-- Extra characters appear in extracted text
-- Watermarks partially extracted as text
-- Security patterns (guilloche) cause garbled output
+- OCR output has extra, out-of-place characters mixed into words
+- Watermark text ("PAID", "DRAFT", "COPY") gets partially extracted as if it were body text
+- Security patterns (guilloche backgrounds) cause visibly garbled, non-sensical output
+- Downstream parsing fails on fields that overlap a watermark or stamp
 
 **Root Cause**
 Background elements like watermarks, security patterns, colored backgrounds, and stamps are interpreted as text characters.
@@ -19,6 +20,8 @@ Extracted line: "Total Due: $0P.0A0I D"
 
 Result: Amount parsing fails
 ```
+
+## How to Fix Watermark and Background Interference in OCR
 
 ## Mitigation Strategies
 

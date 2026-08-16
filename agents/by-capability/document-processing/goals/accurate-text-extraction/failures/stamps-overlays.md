@@ -1,13 +1,13 @@
-# Stamps and Overlays
+# OCR Mixes Stamp and Annotation Text Into Document Content: Causes and Fixes
 
-## Issue: Stamps, Annotations, and Overlays
+## Issue: Physical stamps and handwritten annotations overlap printed text, so OCR interleaves both into a corrupted field
 
 **Frequency**: Occasional
 
 **Symptoms**
-- Original text corrupted where stamps/annotations overlap
-- Stamp text mixed with document text
-- Dates and reference numbers from stamps extracted incorrectly
+- Original text corrupted where a stamp or annotation overlaps it
+- Stamp text mixed directly into surrounding document text
+- Dates and reference numbers from a stamp extracted incorrectly or merged into an unrelated field
 
 **Root Cause**
 Physical stamps, handwritten annotations, and stickers overlay original text, creating ambiguous regions where multiple text sources compete.
@@ -20,6 +20,8 @@ Extracted: "Widget APPROVED 2024-01-20 A    $50.00"
 
 Result: Line item description corrupted
 ```
+
+## How to Fix Stamp and Annotation Interference in OCR
 
 ## Mitigation Strategies
 

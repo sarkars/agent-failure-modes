@@ -1,13 +1,13 @@
-# Context Window Limits
+# AI Agent Forgets Earlier Document Content (Context Window Limits): Causes and Fixes
 
-## Issue: Context Window Limitations
+## Issue: Long documents exceed the agent's context window, so naive chunking breaks cross-references and the agent loses track of earlier content
 
 **Frequency**: Common
 
 **Symptoms**
-- Agent loses track of earlier content
-- Cross-references not resolved
-- Summary extraction misses details from truncated sections
+- Agent loses track of content read earlier in the document
+- Cross-references ("see Exhibit B", "per Section 3.2") are not resolved
+- Summary or extraction output misses details from sections that got truncated or chunked away
 
 **Root Cause**
 Documents exceeding context window require chunking, but naive chunking breaks cross-references, tables spanning pages, and contextual understanding.
@@ -23,6 +23,10 @@ Chunk 3 (pages 101-150): "Per payment terms in Section 3.2..."
 Agent processing Chunk 1: Cannot resolve Exhibit B reference
 Agent processing Chunk 3: Lost context about what payment terms were
 ```
+
+## How to Fix Context Window Limitations on Long Documents
+
+Commonly reported when using frameworks like LlamaIndex or LangChain for retrieval-augmented document pipelines, where default chunking strategies split on token count rather than document structure.
 
 ## Mitigation Strategies
 

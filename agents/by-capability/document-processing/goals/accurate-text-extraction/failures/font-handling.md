@@ -1,13 +1,13 @@
-# Font and Style Handling
+# OCR Misreads Stylized Fonts and Logos: Causes and Fixes
 
-## Issue: Decorative and Stylized Font Failures
+## Issue: OCR fails on decorative fonts, stylized brand typography, and logos, consistently misreading the same sources
 
 **Frequency**: Occasional
 
 **Symptoms**
-- High error rates on specific document sources
-- Certain company's documents consistently fail extraction
-- Brand names and logos text extracted incorrectly
+- High error rates concentrated on specific document sources or senders
+- One company's documents consistently fail extraction while others succeed
+- Brand names and logo text extracted incorrectly (e.g., a stylized letter read as the wrong character)
 
 **Root Cause**
 Decorative fonts, stylized text, and brand-specific typography differ significantly from standard fonts in training data.
@@ -18,6 +18,8 @@ Input: Company logo with stylized "ACME CORP"
 Expected: ACME CORP
 Actual: RCME CORF (stylized A looks like R, P like F)
 ```
+
+## How to Fix Stylized Font and Logo Misreads
 
 ## Mitigation Strategies
 

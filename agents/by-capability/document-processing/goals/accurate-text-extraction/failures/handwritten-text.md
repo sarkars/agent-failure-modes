@@ -1,13 +1,13 @@
-# Handwritten Text
+# OCR Fails on Handwritten Text and Signatures: Causes and Fixes
 
-## Issue: Handwritten Text Extraction Failures
+## Issue: OCR/ICR returns garbled or nonsensical text on handwritten form fields and signatures
 
 **Frequency**: Common (in forms with handwritten sections)
 
 **Symptoms**
-- Extremely low accuracy on handwritten portions
-- Model returns garbled or nonsensical text
-- High variance in accuracy across documents
+- Extremely low accuracy on handwritten portions of an otherwise clean scan
+- Model returns garbled or nonsensical text instead of the handwritten value, or rejects the field entirely
+- High variance in accuracy across documents depending on the writer's penmanship
 
 **Root Cause**
 Handwriting varies dramatically between individuals. Models trained primarily on printed text struggle with cursive, poor penmanship, and unconventional letterforms.
@@ -18,6 +18,8 @@ Input: Handwritten signature field with printed name "Dr. Smith"
 Expected: Dr. Smith
 Actual: Do Smlte (or rejected entirely)
 ```
+
+## How to Fix Handwritten Text Extraction Failures
 
 ## Mitigation Strategies
 
