@@ -1,6 +1,6 @@
-# Headers and Footers
+# Headers and Footers Leak Into Extracted Body Text: Causes and Fixes
 
-## Issue: Headers/Footers Duplicated or Misplaced
+## Issue: Agent Interleaves Repeating Headers/Footers Into Body Content
 
 **Frequency**: Common
 
@@ -22,6 +22,8 @@ Result: Header content pollutes body text
 ```
 
 ## Mitigation Strategies
+
+How to fix it: classify header/footer bands using cross-page repetition and position, and exclude them from body text before content extraction runs.
 
 ### Prevention
 1. **Position-based header/footer region classification**: Identify the top and bottom page bands as distinct header/footer zones based on consistent y-coordinate position across pages, and extract them separately from body content, rather than treating the entire page as one undifferentiated text flow that lets "Company Name | Confidential | Page 2" bleed into body text mid-sentence. Trade-off: requires multi-page context to establish what counts as a consistent header/footer position, so single-page documents get less benefit.

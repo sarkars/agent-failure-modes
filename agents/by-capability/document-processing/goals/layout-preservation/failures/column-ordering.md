@@ -1,6 +1,6 @@
-# Column Ordering
+# Multi-Column Text Extracted Out of Reading Order: Causes and Fixes
 
-## Issue: Multi-Column Page Reading Order Errors
+## Issue: Agent Interleaves Text From Different Columns Into Nonsensical Output
 
 **Frequency**: Common
 
@@ -28,6 +28,8 @@ Result: Nonsensical text
 ```
 
 ## Mitigation Strategies
+
+How to fix it: detect column boundaries and apply a layout-aware reading-order model before text extraction, rather than scanning the page left-to-right across gutters.
 
 ### Prevention
 1. **Vertical gutter/column-boundary detection**: Analyze whitespace projection profiles to identify vertical gutters separating columns before running text extraction, so each column's text block is extracted as a distinct region rather than the whole page being read left-to-right across column boundaries. Trade-off: irregular layouts (columns of varying width, occasional full-width elements like headlines) can defeat simple gutter detection and need additional layout-model support.

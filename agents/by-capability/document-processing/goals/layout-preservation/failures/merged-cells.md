@@ -1,6 +1,8 @@
-# Merged Cells
+# Merged Table Cells Lose Row Hierarchy During Extraction: Causes and Fixes
 
-## Issue: Merged and Split Cells Mishandled
+## Issue: Agent Flattens Spanning Headers and Merged Cells Into a Grid, Destroying Parent-Child Structure
+
+Commonly reported in table-extraction pipelines built with frameworks like LlamaIndex or LangChain document loaders, where output is forced into a flat row/column grid.
 
 **Frequency**: Common
 
@@ -31,6 +33,8 @@ Actual: Flat list with hierarchy lost
 ```
 
 ## Mitigation Strategies
+
+How to fix it: detect merged-cell spans and indentation cues as a structural pre-pass, and output a tree-structured table instead of forcing a flat grid.
 
 ### Prevention
 1. **Tree-structured table models instead of flat-grid output**: Use extraction models/schemas that natively output a hierarchical tree (parent rows with child rows nested beneath, spanning cells represented as covering multiple child rows/columns) rather than forcing output into a flat row-by-row grid, since flattening is exactly where the parent-child relationship gets destroyed. Trade-off: requires downstream consumers to handle tree-structured data rather than simple flat rows, adding integration complexity.

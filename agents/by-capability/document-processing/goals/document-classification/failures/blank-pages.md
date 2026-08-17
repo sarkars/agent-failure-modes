@@ -1,6 +1,8 @@
-# Blank Pages
+# Blank Pages Misclassified as Documents: Causes and Fixes
 
-## Issue: Blank or Near-Blank Pages
+## Issue: Agent Classifies Blank or Near-Blank Pages as Real Documents
+
+Commonly reported in document-ingestion pipelines built with frameworks like LlamaIndex or LangChain document loaders, where OCR/classification runs on every page without a pre-filter.
 
 **Frequency**: Common
 
@@ -20,6 +22,8 @@ Result: Review queue flooded with blank pages
 ```
 
 ## Mitigation Strategies
+
+How to fix it: gate blank/near-blank pages out before they reach classification, and route only genuinely ambiguous pages to review.
 
 ### Prevention
 1. **Explicit blank-page classifier**: Train a dedicated binary classifier (distinct from the main document-type classifier) to recognize blank/near-blank pages based on ink coverage, connected-component count, and text-region area, rather than relying on the general classifier to assign "unknown" with low confidence. Trade-off: requires labeled blank-page examples across scanner/lighting conditions to avoid false positives on genuinely sparse (but valid) pages.

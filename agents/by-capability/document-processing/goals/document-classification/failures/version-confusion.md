@@ -1,6 +1,6 @@
-# Version Confusion
+# Agent Applies the Wrong Schema to an Old Template Version: Causes and Fixes
 
-## Issue: Version and Variant Confusion
+## Issue: Agent Extracts Fields Using a Schema That Doesn't Match the Document's Template Version
 
 **Frequency**: Occasional
 
@@ -22,6 +22,8 @@ Result: "Total" field moved in 2024, now extracting from wrong position
 ```
 
 ## Mitigation Strategies
+
+How to fix it: detect the template version explicitly (fingerprinting or date-based routing) before selecting an extraction schema, instead of assuming the newest schema always applies.
 
 ### Prevention
 1. **Template fingerprinting for version detection**: Compute a layout hash/fingerprint (based on field positions, header structure, logo placement) for each document and match it against a registry of known template versions per sender, so the pipeline knows it's looking at the "2023 template" vs. "2024 template" before choosing an extraction schema. Trade-off: requires building and maintaining a template registry that's updated whenever a sender changes their document layout.

@@ -1,6 +1,8 @@
-# Embedded Documents
+# Agent Misses Embedded Attachments in Documents: Causes and Fixes
 
-## Issue: Attachments and Embedded Documents
+## Issue: Agent Swallows Attachments and Embedded Documents Into the Parent Document's Classification
+
+Commonly reported in agentic document workflows built with frameworks like LlamaIndex or LangGraph, where a single-pass classifier assigns one label to a multi-part container file.
 
 **Frequency**: Occasional
 
@@ -23,6 +25,8 @@ Better: Classify email + detect and separately process attached invoice
 ```
 
 ## Mitigation Strategies
+
+How to fix it: detect attachment boundaries explicitly and process embedded documents recursively instead of forcing one label onto the whole container.
 
 ### Prevention
 1. **Attachment-boundary detection model**: Train a classifier to detect a change in formatting/style/layout partway through a multi-page file (e.g., an email body followed by an invoice with a completely different template), since the root failure is treating the entire container (email PDF) as a single document type. Trade-off: gradual style transitions (a report with an embedded appendix in matching template) are harder to detect than an abrupt change like email-to-invoice.

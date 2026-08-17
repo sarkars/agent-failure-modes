@@ -1,6 +1,8 @@
-# Table Boundaries
+# Table Boundaries Not Detected, Rows Extracted as Plain Text: Causes and Fixes
 
-## Issue: Table Boundaries Not Detected
+## Issue: Agent Extracts Table Data as Continuous Text Instead of Rows and Columns
+
+Commonly reported in table-extraction pipelines built with frameworks like LlamaIndex or LangChain document loaders, where borderless or inconsistently formatted tables fall back to reading-order extraction.
 
 **Frequency**: Very Common
 
@@ -26,6 +28,8 @@ Result: Cannot parse individual line items
 ```
 
 ## Mitigation Strategies
+
+How to fix it: run dedicated table-region detection before text extraction so column/row structure is known ahead of time, instead of inferring it from reading order.
 
 ### Prevention
 1. **Dedicated table-region detection before text extraction**: Run a specialized table-detection model to identify table boundaries (region, rows, columns) as a distinct step before any text extraction runs, so text extraction operates on a known table structure rather than needing to infer tabular boundaries from reading order alone. Trade-off: table detectors trained on bordered/well-formatted tables can still miss borderless tables with inconsistent whitespace-only column alignment.

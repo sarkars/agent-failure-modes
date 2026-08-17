@@ -1,6 +1,6 @@
-# Footnotes
+# Footnotes Merged Into Body Text or Lost: Causes and Fixes
 
-## Issue: Footnotes and Marginal Notes Misplaced
+## Issue: Agent Appends Footnotes as Inline Text Instead of Linking Them to Their Reference
 
 **Frequency**: Occasional
 
@@ -27,6 +27,8 @@ Actual: Footnote appended as regular text
 ```
 
 ## Mitigation Strategies
+
+How to fix it: classify footnote/margin regions separately from body text and explicitly link superscript markers to their footnote content, instead of relying on reading order to keep them associated.
 
 ### Prevention
 1. **Position/formatting-based footnote region detection**: Identify footnote and margin-note regions by their characteristic position (bottom-of-page band) and formatting (smaller font size, separator rule line) before the general reading-order extraction runs, so these regions are handled as a distinct content class rather than falling into the default in-line text flow. Trade-off: footnote conventions vary by document type (endnotes, side-margin notes, inline parentheticals), so a single positional heuristic won't catch every variant.

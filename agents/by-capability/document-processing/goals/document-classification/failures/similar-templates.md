@@ -1,6 +1,8 @@
-# Similar Templates
+# Agent Confuses Similar Document Templates (Invoice vs. PO): Causes and Fixes
 
-## Issue: Similar Templates Misclassified
+## Issue: Agent Misclassifies Documents That Share Near-Identical Layouts
+
+Commonly reported in classification pipelines built with frameworks like LlamaIndex or LangChain, where layout similarity outweighs weaker textual signals like header terms.
 
 **Frequency**: Common
 
@@ -33,6 +35,8 @@ Result: PO sent to AP workflow, fields misextracted (no "Amount Due" exists on P
 | Credit Memo | Invoice | Identical layout, only headers differ |
 
 ## Mitigation Strategies
+
+How to fix it: weight header terms and type-specific field presence over raw layout similarity, and route close-confidence pairs to review.
 
 ### Prevention
 1. **Key-phrase/header-term detection as a primary signal**: Prioritize distinguishing header text ("INVOICE", "PURCHASE ORDER", "PACKING SLIP") as a high-weight classification signal rather than relying primarily on overall layout similarity, since the root cause is that layout alone cannot distinguish these document pairs (same vendor templates, similar line items). Trade-off: some templates omit or bury the distinguishing term, so this signal alone is insufficient.

@@ -1,6 +1,6 @@
-# Bidirectional Text
+# RTL and Bidirectional Text Extracted Reversed or Garbled: Causes and Fixes
 
-## Issue: Right-to-Left and Mixed Direction Text
+## Issue: Agent Extracts Right-to-Left and Mixed-Direction Text Reversed or Jumbled
 
 **Frequency**: Occasional (common in multilingual contexts)
 
@@ -20,6 +20,8 @@ Actual: "100-VNI# ةروتاف" (reversed and jumbled)
 ```
 
 ## Mitigation Strategies
+
+How to fix it: detect script direction per text run and apply the Unicode BiDi algorithm to recombine segments, rather than assuming one document-wide reading direction.
 
 ### Prevention
 1. **Script detection before direction assignment**: Run script/language detection on each text run before deciding reading direction, rather than assuming a single document-level direction, since a single invoice can mix Arabic body text with embedded English product codes that must each be read in their own direction. Trade-off: script detection on short embedded runs (a 4-character code) can be ambiguous and misclassified.

@@ -1,6 +1,8 @@
-# Page Grouping
+# Multi-Page Documents Split or Merged Incorrectly: Causes and Fixes
 
-## Issue: Page-to-Document Grouping Failures
+## Issue: Agent Groups Batch-Scanned Pages Into the Wrong Documents
+
+Commonly reported in bulk-ingestion pipelines built with frameworks like LlamaIndex or LangChain document loaders, where boundary detection between source documents has to be inferred rather than given.
 
 **Frequency**: Common
 
@@ -21,6 +23,8 @@ Actual: 6 documents (each page separate)
 ```
 
 ## Mitigation Strategies
+
+How to fix it: combine explicit boundary signals (separators, first-page markers, continuity checks) into a single confidence-scored grouping stage before classification runs.
 
 ### Prevention
 1. **Barcode/separator-sheet enforcement**: For batch-scan workflows, require or encourage separator sheets (blank pages, barcoded dividers) between source documents so boundaries are explicit rather than inferred, directly preventing the "3 invoices become 6 or 2 documents" failure. Trade-off: only works when the scanning process is controlled; ad hoc uploads/bulk email attachments have no separator convention.

@@ -1,6 +1,6 @@
-# Quality Rejection
+# Agent Rejects Valid Low-Quality Documents: Causes and Fixes
 
-## Issue: Poor Quality Rejects Valid Documents
+## Issue: Quality Filter Rejects Readable Documents as "Unreadable"
 
 **Frequency**: Occasional
 
@@ -20,6 +20,8 @@ Result: Valid invoice requires manual processing
 ```
 
 ## Mitigation Strategies
+
+How to fix it: replace the binary quality gate with tiered, channel-calibrated routing so readable-but-low-quality documents degrade gracefully instead of being rejected outright.
 
 ### Prevention
 1. **Tiered quality routing instead of binary rejection**: Replace the single reject/accept quality gate with tiers (high quality -> standard pipeline, low quality -> enhanced/manual-assist pipeline, truly unprocessable -> reject) so a readable-but-low-quality fax is degraded gracefully rather than rejected outright. Trade-off: requires building and maintaining a genuinely useful "enhanced" tier rather than just relabeling the same rejection.
