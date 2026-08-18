@@ -1,14 +1,15 @@
-# Relational Hallucination
+# AI Misaligns Table Values to Wrong Columns or Rows: Causes and Fixes
 
-## Issue: Relational Hallucination
+## Issue: Relational Hallucination — Values Attached to the Wrong Header
 
 **Frequency**: Common
 
 **Symptoms**
-- Spatial or logical relationships between elements incorrect
-- Line items assigned to wrong columns
-- Parent-child relationships inverted
-- Table cells matched to wrong headers
+- Spatial or logical relationships between elements come out incorrect
+- Line items get assigned to the wrong columns (e.g. quantity swapped with price)
+- Parent-child relationships between rows are inverted
+- Table cells matched to the wrong headers entirely
+- Commonly reported in LlamaIndex- and LangChain-style table-extraction pipelines that ask a single VLM call to infer grid structure and read values at the same time
 
 **Root Cause**
 VLMs struggle with precise spatial reasoning. They process images as sequences of patches and must infer grid structure implicitly.
@@ -28,6 +29,8 @@ Result: Data integrity failure, downstream calculations wrong
 
 **Key Statistic**
 VLMs lack robust spatial perception because they need to infer the number of rows and columns implicitly on a large two-dimensional cell grid rather than reading it directly.
+
+**How to fix it**: detect table structure explicitly before extracting values, verify each value's type against its column's semantic expectation, and anchor column assignment to header coordinates instead of the model's inferred reading order. See the mitigations below.
 
 ## Mitigation Strategies
 

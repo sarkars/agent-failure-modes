@@ -1,13 +1,14 @@
-# Visual Degradation
+# AI Document Extraction Fails on Blurry or Low-Quality Scans: Causes and Fixes
 
 ## Issue: Performance Collapse Under Visual Noise
 
 **Frequency**: Common
 
 **Symptoms**
-- Accuracy drops dramatically on low-quality scans
-- Model confident but wrong on degraded inputs
-- Blurred, occluded, or low-contrast regions cause errors
+- Accuracy drops dramatically on low-quality or degraded scans
+- Agent stays confident even when it's wrong on degraded input
+- Blurred, occluded, or low-contrast regions cause silent extraction errors
+- Commonly reported in LlamaIndex- and LangChain-style document pipelines ingesting faxed or scanned input without a pre-inference quality gate
 
 **Root Cause**
 VLMs trained primarily on clean images don't recognize when visual quality is too poor for reliable extraction. They produce outputs with high confidence even when input is ambiguous.
@@ -23,6 +24,8 @@ Result: Wrong amount processed with high confidence
 
 **Key Finding**
 Under visual degradation (blur, occlusion, low contrast), the current response paradigm often fails to adequately perceive visual degradation and ambiguity, leading to overreliance on linguistic priors. This difficulty in recognizing uncertainty frequently results in hallucinations.
+
+**How to fix it**: score image quality before inference and route low-quality documents to an alternate path, train or prompt the model to refuse extraction on degraded regions, and use ensemble disagreement as a degradation signal. See the mitigations below.
 
 ## Mitigation Strategies
 

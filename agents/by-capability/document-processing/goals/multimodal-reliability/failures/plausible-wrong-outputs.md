@@ -1,14 +1,15 @@
-# Plausible Wrong Outputs
+# AI Document Extraction Silently Returns Plausible but Wrong Values: Causes and Fixes
 
-## Issue: Plausible but Wrong Outputs
+## Issue: Plausible but Wrong Outputs — Errors That Never Trip an Alarm
 
 **Frequency**: Very Common
 
 **Symptoms**
-- Extracted values look reasonable but are incorrect
-- No errors flagged in pipeline
-- Downstream systems process bad data without alerting
-- Errors discovered only during audits or customer complaints
+- Extracted values look entirely reasonable but are actually incorrect
+- No errors or warnings are flagged anywhere in the pipeline
+- Downstream systems process the bad data without alerting on it
+- Errors are discovered only weeks later, during audits or customer complaints
+- Commonly reported in LangChain- and LlamaIndex-style extraction pipelines that treat "output parsed successfully" as equivalent to "output is correct"
 
 **Root Cause**
 Classical OCR fails loudly - when Tesseract cannot read a character, it produces garbled output or blanks. The failure is visible. MLLMs fail silently - when a multimodal LLM cannot confidently read a digit, it produces the most statistically plausible digit instead of indicating uncertainty.
@@ -24,6 +25,8 @@ Result: Payment processed for wrong amount, no error flagged
 
 **Key Statistic**
 Unlike OCR errors which are often obvious and consistent, LLM errors are plausible and hidden, making them far harder to detect at scale in high-stakes industries.
+
+**How to fix it**: enforce deterministic cross-field arithmetic checks before accepting a value, run dual/ensemble extraction with mandatory agreement, and route high-value documents to human review regardless of confidence. See the mitigations below.
 
 ## Mitigation Strategies
 

@@ -1,13 +1,13 @@
-# Accuracy Regression
+# AI Pipeline Accuracy Regression Goes Undetected After Deployment: Causes and Fixes
 
-## Issue: Accuracy Regression Undetected
+## Issue: Accuracy Regression Undetected — A Bad Deploy Ships Silently
 
 **Frequency**: Occasional
 
 **Symptoms**
-- Model or pipeline update degrades accuracy
-- No automated detection of regression
-- Discovered weeks later through business impact
+- A model or pipeline update quietly degrades extraction accuracy
+- No automated system detects the regression at deploy time
+- The regression is discovered weeks later, only through its business impact
 
 **Root Cause**
 Production monitoring focuses on availability and throughput, not extraction accuracy. Accuracy degradation is a silent failure.
@@ -21,6 +21,8 @@ Detection: 3 weeks later via increased customer complaints
 
 Result: Thousands of documents processed with degraded accuracy
 ```
+
+**How to fix it**: gate every deployment behind a mandatory ground-truth regression test suite, compare accuracy (not just error rate) between canary and control cohorts, and keep rollback fast enough to be the default response. See the mitigations below.
 
 ## Mitigation Strategies
 

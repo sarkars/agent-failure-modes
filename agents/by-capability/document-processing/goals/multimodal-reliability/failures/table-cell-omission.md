@@ -1,13 +1,14 @@
-# Table Cell Omission
+# AI Drops or Merges Table Cells in Sparse Tables: Causes and Fixes
 
-## Issue: Cell Omission and Merging
+## Issue: Cell Omission and Merging — Empty Cells Cause Column Drift
 
 **Frequency**: Very Common
 
 **Symptoms**
-- Table rows or columns missing from output
-- Multiple cells treated as single cell
-- Sparse tables with empty cells cause column misalignment
+- Table rows or columns go missing from the extracted output
+- Multiple distinct cells get treated as a single merged cell
+- Sparse tables with empty cells cause remaining values to shift into the wrong column
+- Commonly reported in LlamaIndex- and LangChain-style table extraction where the model infers column count from however many non-empty values it finds
 
 **Root Cause**
 VLMs sometimes struggle to split multiple cells and mistakenly treat them as a single cell. Spatial perception limitations make grid inference unreliable.
@@ -29,6 +30,8 @@ Result: Q2 and Q4 data lost or misattributed
 
 **Key Statistic**
 Table extraction works effectively in most cases, but sparse tables with multiple empty cells present a unique challenge. The model sometimes mismatches columns, leading to errors in the extracted tabular data.
+
+**How to fix it**: detect the full table grid — including empty cells — before content extraction, model empty cells explicitly rather than letting the model skip them, and validate that every row matches the expected column count. See the mitigations below.
 
 ## Mitigation Strategies
 

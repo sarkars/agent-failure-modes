@@ -1,13 +1,14 @@
-# Fabricated Content
+# AI Document Extraction Fabricates Content Not in the Source: Causes and Fixes
 
 ## Issue: Fabricated Content Not Grounded in Input
 
 **Frequency**: Common
 
 **Symptoms**
-- Extracted fields contain text not present in document
-- Model "completes" partial information with invented data
-- Addresses, names, or codes appear that don't exist in source
+- Extracted fields contain text that never appears in the document
+- Agent "completes" partial or obscured information with invented data
+- Addresses, names, or codes appear that don't exist anywhere in the source
+- Commonly reported in LlamaIndex- and LangChain-style RAG/document pipelines and MCP-connected extraction tools that don't require spatial grounding before accepting a value
 
 **Root Cause**
 When visual input is ambiguous or incomplete, VLMs draw on training data patterns to generate plausible completions rather than admitting uncertainty.
@@ -20,6 +21,8 @@ Actual: "123 Main St, San Francisco, CA 94102" (ZIP fabricated)
 
 Result: Package shipped to wrong address
 ```
+
+**How to fix it**: require every extracted value to be traceable to a specific region of the source document, train or prompt the model to explicitly refuse ambiguous fields instead of completing them, and cross-verify against deterministic OCR. See the mitigations below.
 
 ## Mitigation Strategies
 

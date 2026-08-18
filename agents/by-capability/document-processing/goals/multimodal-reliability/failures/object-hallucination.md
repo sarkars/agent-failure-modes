@@ -1,13 +1,14 @@
-# Object Hallucination
+# AI Invents Fields or Objects Not in the Document: Causes and Fixes
 
-## Issue: Object Hallucination
+## Issue: Object Hallucination — Model Populates Fields the Document Never Contained
 
 **Frequency**: Occasional
 
 **Symptoms**
-- Model describes elements not present in document
-- Phantom tables, signatures, or stamps extracted
-- Non-existent fields populated with values
+- Agent describes elements that aren't actually present in the document
+- Phantom tables, signatures, or stamps get extracted from documents that don't have them
+- Non-existent optional fields (like a PO number) come back populated with values
+- Commonly reported in LlamaIndex- and LangChain-style extraction schemas that mark every field as expected rather than explicitly optional
 
 **Root Cause**
 The model's language prior about "what invoices usually contain" overrides what this specific document actually contains.
@@ -19,6 +20,8 @@ Model output: "PO Number: PO-2024-0892"
 
 Result: Fake PO number causes ERP lookup failure or worse, matches wrong PO
 ```
+
+**How to fix it**: require spatial grounding for every populated field (including optional ones), separate "does this field exist" from "what is its value" as distinct steps, and verify reference values against the system of record. See the mitigations below.
 
 ## Mitigation Strategies
 

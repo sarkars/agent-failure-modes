@@ -1,13 +1,14 @@
-# Attribute Hallucination
+# AI Document Extraction Assigns Wrong Values to Correct Fields: Causes and Fixes
 
-## Issue: Attribute Hallucination
+## Issue: Attribute Hallucination — Model Reads the Right Field but the Wrong Value
 
 **Frequency**: Common
 
 **Symptoms**
-- Correct field identified but wrong value assigned
-- Colors, dates, or quantities slightly off
-- Model "corrects" values to common patterns
+- Agent identifies the correct field but assigns a subtly wrong value
+- Colors, dates, or quantities come back slightly off from the source
+- Model silently "corrects" an extracted value toward a more common pattern
+- Commonly reported in LlamaIndex- and LangChain-style document extraction pipelines that hand raw OCR/VLM output straight to downstream systems without a validation step
 
 **Root Cause**
 Model identifies the right object but assigns properties based on training distribution rather than image content.
@@ -19,6 +20,8 @@ Actual: "2024-02-28" (model "corrects" to common date)
 
 Result: Payment terms calculated from wrong date
 ```
+
+**How to fix it**: validate every extracted date and numeric field against deterministic domain rules, keep the raw extraction alongside any normalized value, and cross-check against a non-generative OCR baseline before trusting the model's "corrected" answer. See the mitigations below.
 
 ## Mitigation Strategies
 

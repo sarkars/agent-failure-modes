@@ -1,19 +1,22 @@
-# Input Quality Gap
+# AI Document Extraction Accuracy Drops in Production vs Benchmarks: Causes and Fixes
 
-## Issue: Input Quality Gap
+## Issue: Input Quality Gap — Real Documents Are Messier Than Benchmark Documents
 
 **Frequency**: Very Common
 
 **Symptoms**
-- Benchmark performance far exceeds production performance
-- Models perform well in demos but fail on real documents
-- Accuracy varies wildly across document sources
+- Benchmark performance far exceeds real production performance
+- Agent performs well in demos but fails on real, messy enterprise documents
+- Accuracy varies wildly across document sources with no single root cause
+- Commonly reported when scaling LlamaIndex- or LangChain-style document ingestion pipelines from a clean demo corpus to real scanned/legacy enterprise input
 
 **Root Cause**
 Enterprise documents include scanned PDFs with inconsistent OCR quality, complex regulatory submissions with nested table structures, CAD drawings and mixed-format engineering packages, handwritten forms, and legacy system exports never designed for machine consumption.
 
 **Key Finding**
 The gap between benchmark performance and production performance in enterprise document environments is not a model gap - it is an input quality gap.
+
+**How to fix it**: normalize inconsistent real-world formats into a standard internal representation before inference, gate low-quality input to a different path, and build source-specific pipelines rather than one generic path. See the mitigations below.
 
 ## Mitigation Strategies
 

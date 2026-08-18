@@ -1,13 +1,13 @@
-# Batch Timing Failures
+# AI Document Pipeline Processes Documents Out of Order: Causes and Fixes
 
-## Issue: Batch Processing Timing Failures
+## Issue: Batch Processing Timing Failures — Arrival Order Isn't Logical Order
 
 **Frequency**: Occasional
 
 **Symptoms**
-- Documents processed out of order
-- Amendments processed before originals
-- Cut-off date violations
+- Documents get processed out of their logical order
+- Amendments are processed before the originals they depend on
+- Cut-off date violations occur because processing order doesn't match business order
 
 **Root Cause**
 Batch processing doesn't guarantee order. Documents may arrive, be scanned, or be processed in unexpected sequences.
@@ -20,6 +20,8 @@ Received: Original Invoice #123 (processed at 4:00 PM)
 Result: Amendment rejected - "Invoice #123 not found"
         Original processed - amendment never applied
 ```
+
+**How to fix it**: detect document dependencies before processing and queue dependents until their prerequisite arrives, make every processing operation idempotent, and prefer explicit sequence numbers over arrival timestamps when the source provides them. See the mitigations below.
 
 ## Mitigation Strategies
 

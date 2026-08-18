@@ -1,13 +1,14 @@
-# Complex Table Structures
+# AI Fails to Parse Merged Cells and Nested Table Headers: Causes and Fixes
 
 ## Issue: Merged Cell and Nested Header Failures
 
 **Frequency**: Common
 
 **Symptoms**
-- Multi-row headers collapsed to single row
-- Spanning cells duplicated or lost
-- Hierarchical structure flattened
+- Agent collapses multi-row headers into a single flat row
+- Spanning/merged cells get duplicated or lost during extraction
+- Hierarchical header structure is flattened, so column meaning is ambiguous
+- Commonly reported in LlamaIndex- and LangChain-style document parsing pipelines and agents built on the OpenAI Agents SDK that pass raw table images straight into a single extraction prompt
 
 **Root Cause**
 Complex table structures with merged cells, nested structures, or multi-row column headers disrupt standard parsing techniques.
@@ -26,6 +27,8 @@ Row 1: ["North", "$100", "$150"]           # Q1/Q2 attribution unclear
 
 Result: Cannot programmatically determine which values belong to which quarter
 ```
+
+**How to fix it**: detect table structure (row/column spans, header hierarchy) as an explicit step before content extraction, enforce a hierarchical output schema instead of a flat list, and validate that every cell resolves to a complete header path. See the mitigations below.
 
 ## Mitigation Strategies
 

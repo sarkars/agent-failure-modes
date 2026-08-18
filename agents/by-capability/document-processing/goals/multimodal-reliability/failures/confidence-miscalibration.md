@@ -1,13 +1,14 @@
-# Confidence Miscalibration
+# AI Document Extraction Shows High Confidence on Wrong Answers: Causes and Fixes
 
-## Issue: Overconfident Wrong Answers
+## Issue: Overconfident Wrong Answers — Model Confidence Doesn't Track Accuracy
 
 **Frequency**: Very Common
 
 **Symptoms**
-- High confidence scores on incorrect extractions
-- Confidence doesn't correlate with accuracy
-- Cannot use confidence to route to human review
+- Agent reports high confidence scores on extractions that are actually wrong
+- Confidence score doesn't correlate with real-world accuracy
+- Confidence can't be used to route documents to human review, since wrong answers hide in the "high confidence" bucket
+- Commonly reported in LlamaIndex- and LangChain-style extraction agents that route on a model's self-reported confidence field without independent calibration
 
 **Root Cause**
 VLMs are trained to produce fluent outputs, not calibrated uncertainty estimates. They express certainty linguistically even when visually uncertain.
@@ -19,6 +20,8 @@ Actual document: "$5,347.00"
 
 Result: High-confidence wrong answer bypasses review queue
 ```
+
+**How to fix it**: never trust the model's raw self-reported confidence — recalibrate it against held-out labeled data, and use cross-field consistency or ensemble disagreement as independent uncertainty signals for routing. See the mitigations below.
 
 ## Mitigation Strategies
 
