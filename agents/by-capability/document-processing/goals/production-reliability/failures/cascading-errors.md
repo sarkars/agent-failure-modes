@@ -1,13 +1,13 @@
-# Cascading Downstream Errors
+# One Bad Extraction Cascades Into Every Downstream System: Causes and Fixes
 
-## Issue: Cascading Downstream Errors
+## Issue: A Single Extraction Error Cascades Across Downstream Systems
 
 **Frequency**: Common
 
 **Symptoms**
-- Single extraction error corrupts multiple downstream systems
-- Error propagates before detection
-- Cleanup requires touching many systems
+- Agent extracts one wrong value and it silently corrupts multiple downstream systems
+- The bad value propagates to other systems before anyone detects the original error
+- Cleanup after the fact requires touching every system the value reached
 
 **Root Cause**
 Automation moves data faster - meaning bad inputs create even bigger issues downstream. Errors in GL coding, invoice matching, or field mapping propagate across financial reports and compliance processes in real time.
@@ -22,6 +22,8 @@ Downstream impact:
 - Tax reporting shows incorrect vendor payments
 - Audit flags unexplained vendor discrepancy
 ```
+
+Fixing this means stopping trust in a single extracted value from carrying unchecked across every system it touches — the strategies below add validation and blast-radius limits at each hop instead of only at the source.
 
 ## Mitigation Strategies
 

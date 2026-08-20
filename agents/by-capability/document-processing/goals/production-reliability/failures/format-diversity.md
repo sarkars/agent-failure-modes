@@ -1,13 +1,13 @@
-# Format Diversity
+# Invoice Automation Breaks on Non-Standard Vendor Formats: Causes and Fixes
 
-## Issue: Format Diversity Overwhelms Rules
+## Issue: Document Format Diversity Overwhelms Rule-Based Extraction
 
 **Frequency**: Very Common
 
 **Symptoms**
-- Works for top vendors, fails for long tail
-- Every new vendor requires manual configuration
-- Maintenance burden grows linearly with vendor count
+- Automation works for top vendors but fails on the long tail of formats
+- Every new vendor format requires manual configuration before it can be automated
+- Maintenance burden grows linearly with the number of vendor formats supported
 
 **Root Cause**
 Invoices arrive in multiple formats - PDFs, Excel files, scanned images, or paper copies. Each may follow a different layout, include varying fields, or use unique terminology. Non-standard invoices hinder automation as systems struggle to extract data from inconsistent formats.
@@ -24,6 +24,8 @@ Result: System configured for A works, B-D require custom handling
 
 **Key Finding**
 More than half of all the work AP does revolves around manual invoice data entry and classification due to format diversity.
+
+Fixing this means moving from per-vendor rule maintenance to semantic, confidence-routed extraction — an approach commonly used in document-ingestion pipelines built with frameworks like LlamaIndex or LangChain. The strategies below cover how to do that without letting long-tail formats degrade overall accuracy.
 
 ## Mitigation Strategies
 

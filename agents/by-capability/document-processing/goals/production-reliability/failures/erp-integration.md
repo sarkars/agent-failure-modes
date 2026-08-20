@@ -1,13 +1,13 @@
-# ERP Integration Errors
+# AI Extraction Writes Data to the Wrong ERP Fields: Causes and Fixes
 
-## Issue: ERP Field Mapping Errors
+## Issue: Extracted Data Lands in the Wrong ERP Fields
 
 **Frequency**: Common
 
 **Symptoms**
-- Extracted data in wrong ERP fields
-- GL codes misassigned
-- Dimension values incorrect
+- Agent writes correctly extracted values into the wrong ERP field
+- GL codes get misassigned even though the source values were read correctly
+- Dimension values (department, cost center) land in the wrong column
 
 **Root Cause**
 Mapping between extracted fields and ERP schema requires configuration. Changes to either side break the mapping without obvious errors.
@@ -19,6 +19,8 @@ ERP mapping (outdated): department -> DEPT_CODE, cost_center -> GL_ACCT
 
 Result: "Sales" written to DEPT_CODE, "CC-100" written to GL_ACCT (wrong field)
 ```
+
+Fixing this means treating the extraction-to-ERP field mapping as a tested, versioned artifact in its own right rather than an implicit assumption — the strategies below cover how to validate and monitor it.
 
 ## Mitigation Strategies
 

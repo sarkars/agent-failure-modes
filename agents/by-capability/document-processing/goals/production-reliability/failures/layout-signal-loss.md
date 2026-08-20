@@ -1,13 +1,13 @@
-# Layout Signal Loss
+# Document Preprocessing Destroys Table and Layout Structure: Causes and Fixes
 
-## Issue: Layout Signal Loss
+## Issue: Preprocessing Strips Layout Structure Before Extraction Ever Runs
 
 **Frequency**: Common
 
 **Symptoms**
-- Document structure lost in preprocessing
-- Spatial relationships between fields destroyed
-- Tables flatten to unstructured text
+- Document structure gets lost during preprocessing, before extraction even starts
+- Spatial relationships between fields (which label goes with which value) are destroyed
+- Tables flatten into unstructured, unrecoverable text
 
 **Root Cause**
 Some preprocessing pipelines strip layout information in the name of "cleaning" documents, losing critical structural context.
@@ -23,6 +23,8 @@ Result: "Product Qty Price" becomes "Product Qty Price Widget 5 $10 Gadget 3 $15
 
 **Key Statistic**
 Legacy OCR pipelines often plateau around 60-70% automation because they break under layout variance.
+
+Fixing this means preserving structural/spatial data as the default preprocessing output instead of an opt-in — layout-aware parsing is standard practice in document-ingestion pipelines built with frameworks like LlamaIndex or LangChain. The strategies below cover how to keep that structure intact through the pipeline.
 
 ## Mitigation Strategies
 

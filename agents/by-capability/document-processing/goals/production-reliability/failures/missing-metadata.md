@@ -1,13 +1,13 @@
-# Missing Document Metadata
+# AI Document Extraction Fails Without Sender and Locale Context: Causes and Fixes
 
-## Issue: Missing Document Metadata
+## Issue: Extraction Guesses Wrong Without Sender, Locale, or Historical Context
 
 **Frequency**: Common
 
 **Symptoms**
-- Extraction accuracy varies unexpectedly across documents
-- Same document type from same vendor fails inconsistently
-- Model lacks context needed for disambiguation
+- Extraction accuracy varies unexpectedly across documents that look similar
+- The same document type from the same vendor fails inconsistently
+- The model lacks the context (sender, locale, history) it needs to disambiguate a field
 
 **Root Cause**
 The deeper pattern across extraction failures is a context engineering problem - what information the extraction model receives (document metadata, layout signals, cross-document state, domain vocabulary) determines output quality more than model size or OCR accuracy alone.
@@ -22,6 +22,8 @@ With historical data: This vendor always uses DD/MM
 
 Result: Without context, 50% chance of wrong date
 ```
+
+Fixing this means treating context assembly (sender metadata, locale, historical patterns) as a first-class pipeline stage, not an afterthought — a discipline commonly called context engineering in agentic RAG/extraction pipelines. The strategies below cover how to build and use that context.
 
 ## Mitigation Strategies
 

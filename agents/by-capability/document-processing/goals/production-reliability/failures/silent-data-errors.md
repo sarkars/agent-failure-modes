@@ -1,14 +1,14 @@
-# Silent Data Errors
+# Document Extraction Produces Correct-Looking but Wrong Data: Causes and Fixes
 
-## Issue: Correct-Looking Wrong Data
+## Issue: Extraction Completes Successfully but the Data Relationships Are Wrong
 
 **Frequency**: Very Common
 
 **Symptoms**
-- Pipeline completes successfully
-- No errors logged or alerts triggered
-- Data appears valid but is incorrect
-- Discovered only through audits or customer complaints
+- The pipeline reports success and completes without any errors
+- No errors are logged and no alerts fire
+- The data looks well-formed and valid, but the relationships between values are wrong
+- The error is only discovered later, through audits or customer complaints
 
 **Root Cause**
 The worst OCR failures are not the ones that throw errors - they are silent failures where the output looks correct, no errors are flagged, and the extraction completes successfully, but the data relationships are wrong.
@@ -30,6 +30,8 @@ Result: Inventory system expects shipment that's actually backordered
 
 **Key Statistic**
 88% of businesses still report errors in their data pipelines, with teams spending six or more hours per week fixing "automated" data.
+
+Fixing this means adding structural/relational validation that can catch a well-formed-but-wrong output, since format checks alone never will — the strategies below cover how to build that safety net.
 
 ## Mitigation Strategies
 

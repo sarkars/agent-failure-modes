@@ -1,14 +1,14 @@
-# Template Drift
+# Vendor Template Changes Silently Break Extraction Accuracy: Causes and Fixes
 
-## Issue: Template Drift Without Detection
+## Issue: A Vendor Changes Their Document Template and Extraction Silently Breaks
 
 **Frequency**: Common
 
 **Symptoms**
-- Extraction accuracy degrades gradually over time
-- No alerts when vendor changes invoice format
-- Fields silently map to wrong positions
-- Vendor changed template without notification
+- Extraction accuracy degrades gradually over time with no obvious trigger
+- No alert fires when a vendor changes their invoice format
+- Fields silently map to the wrong positions after a layout change
+- The vendor changed their template without any notification
 
 **Root Cause**
 In real-world operations, document layouts often change without notice. A vendor might shift a column, rename a label, or reorder fields, and suddenly the trusted template no longer functions as expected.
@@ -28,6 +28,8 @@ Result: All values systematically swapped, pipeline shows no errors
 
 **Key Statistic**
 Up to 30% of invoice requests failed to process correctly in their first iteration due to template incompatibilities.
+
+Fixing this means detecting the template change itself — via fingerprinting or header-semantic matching — rather than relying on position-based extraction that breaks silently. The strategies below cover both.
 
 ## Mitigation Strategies
 

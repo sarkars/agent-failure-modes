@@ -1,13 +1,13 @@
-# Review Queue Overflow
+# Human Review Queue Overflows When Automation Confidence Is Miscalibrated: Causes and Fixes
 
-## Issue: Human Review Queue Overflow
+## Issue: Poorly Calibrated Confidence Thresholds Flood the Review Queue
 
 **Frequency**: Common
 
 **Symptoms**
-- Review queue grows faster than reviewers process
-- SLAs missed on time-sensitive documents
-- Reviewers rubber-stamp to clear backlog
+- The review queue grows faster than reviewers can process it
+- SLAs get missed on time-sensitive documents stuck in the backlog
+- Reviewers start rubber-stamping documents just to clear the backlog
 
 **Root Cause**
 When automation confidence is poorly calibrated or too conservative, too many documents route to human review, overwhelming capacity.
@@ -21,6 +21,8 @@ Reviewer capacity: 600/day
 
 Result: Queue grows by 900/day, 5-day backlog after one week
 ```
+
+Fixing this means calibrating confidence thresholds against measured accuracy and routing at the field level instead of the document level — the strategies below cover how to shrink the queue without accepting more accuracy risk.
 
 ## Mitigation Strategies
 
