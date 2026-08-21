@@ -1,11 +1,11 @@
-# Critical Field Error
+# AI Agent Extracts the Wrong Amount, Date, or ID from a Document: Causes and Fixes
 
-## Issue: Agent extracts wrong amount, date, name, address, account number, or ID.
+## Issue: The agent extracts a wrong amount, date, name, address, account number, or ID and nothing catches it before use.
 
 **Frequency**: Rare but Catastrophic
 
 **Symptoms**
-- Field mismatch against source image/database.
+- Extracted field mismatches the source image or database.
 - Downstream system rejects or silently processes a transposed digit (amount, account number, or date) with no validation catch.
 - Manual audit finds extraction confidence was never checked against a threshold before use.
 
@@ -46,6 +46,8 @@ $135,000.
 | critical_field_eval_extraction_error_rate_percent | < 0.1% | % of eval test cases where extracted critical field doesn't match ground truth |
 
 ---
+
+Fixing this means gating extracted fields on confidence thresholds and cross-referencing a second source before the value is used.
 
 ## Mitigation Strategies
 

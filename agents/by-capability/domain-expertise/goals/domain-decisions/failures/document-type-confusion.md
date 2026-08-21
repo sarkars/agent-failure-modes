@@ -1,6 +1,6 @@
-# Document-Type Confusion
+# AI Agent Misclassifies a Document Type: Causes and Fixes
 
-## Issue: Agent misclassifies paystub, W-2, bank statement, invoice, policy, etc.
+## Issue: The agent misclassifies a paystub, W-2, bank statement, invoice, policy, or similar document, so the wrong extraction schema gets applied.
 
 **Frequency**: Common
 
@@ -46,6 +46,8 @@ underwriting can't reconcile the stated income with the extracted fields.
 | schema_field_completeness_post_classification_percent | > 99% | % of extractions where all required fields for the assigned schema are present and valid |
 
 ---
+
+Fixing this means giving the classifier an abstain path and validating extracted fields against the assumed schema before trusting them.
 
 ## Mitigation Strategies
 

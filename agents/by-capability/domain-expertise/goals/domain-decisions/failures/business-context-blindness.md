@@ -1,11 +1,11 @@
-# Business-Context Blindness
+# AI Agent Gives a Technically Correct but Commercially Wrong Answer: Causes and Fixes
 
-## Issue: Technically correct answer is commercially wrong.
+## Issue: The agent enforces policy to the letter and gets a technically correct answer that is commercially wrong.
 
 **Frequency**: Common
 
 **Symptoms**
-- Customer/business metric harmed despite correctness.
+- Agent's technically correct decision harms a customer or business metric anyway.
 - Agent enforces a policy to the letter in a case where a discretionary exception was commercially obvious.
 - Post-mortem review finds the "correct" decision was technically defensible but a human agent with account context would have chosen differently.
 
@@ -46,6 +46,8 @@ seconds had they seen it.
 | technically_correct_but_business_harmful_rate_percent | 0% | % of eval cases where decision is policy-compliant but scored as commercially wrong by reviewer |
 
 ---
+
+Fixing this means giving the agent business-context signals and feeding decision outcomes back into evaluation, not just policy-compliance rate.
 
 ## Mitigation Strategies
 

@@ -1,6 +1,6 @@
-# Unauthorized Action
+# AI Agent Performs an Action Without Permission: Causes and Fixes
 
-## Issue: Agent performs an action without permission.
+## Issue: The agent performs an action no one actually authorized, because its service credentials are over-scoped and no runtime check confirms the action matches the session's authorization.
 
 **Frequency**: Rare but Catastrophic
 
@@ -8,6 +8,8 @@
 - Action trace lacks user/admin authorization.
 - Agent acts on a resource belonging to a different tenant/customer than the one authenticated in the current session.
 - Service-account credentials used by the agent turn out to be over-scoped, letting an intended read-only task perform writes.
+
+Over-scoped credentials are a common source of this failure in MCP-connected agents, where a tool server exposes more endpoints than a given session actually needs and the agent has no runtime check limiting it to the task's real authorization.
 
 **Root Cause**
 Service and API credentials granted to the agent are typically over-scoped relative to its actual task — provisioned once for convenience rather than tightly matched to what a given session needs — and the only authorization check that happens is a static credential validation at connection time, with no runtime check confirming the specific action requested actually matches what this session was authorized to do. Ambiguous user phrasing then gets interpreted as authorization for whatever action the over-scoped credential happens to permit, and because cross-tenant or cross-resource ownership checks live only at the upstream authentication layer rather than at the point of action execution, a credential that's valid in general is treated as sufficient even when the specific target or operation was never actually approved.
@@ -43,6 +45,8 @@ no human ever explicitly authorized for that session's actual purpose.
 | unauthorized_action_attempts_per_day | 0 | Count actions where target/action scope exceeds the authorization granted for that session |
 
 ---
+
+Fixing this means scoping credentials tightly to the task and adding a runtime check that the requested action matches the session's actual authorization.
 
 ## Mitigation Strategies
 

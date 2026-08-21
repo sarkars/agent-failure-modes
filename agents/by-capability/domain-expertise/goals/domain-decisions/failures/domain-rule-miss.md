@@ -1,6 +1,6 @@
-# Domain Rule Miss
+# AI Agent Misses an Industry-Specific Rule or Exception: Causes and Fixes
 
-## Issue: Agent misses industry-specific rule or exception.
+## Issue: The agent applies the general-case policy and misses an industry-specific rule or exception, producing a wrong decision.
 
 **Frequency**: Common
 
@@ -47,6 +47,8 @@ claims across the affected state.
 | domain_rule_violation_rate_eval_percent | < 0.5% | % of eval decisions that don't match the applicable rule per domain-expert review |
 
 ---
+
+Fixing this means moving domain exceptions into a queryable, versioned rule engine instead of leaving them as tribal knowledge.
 
 ## Mitigation Strategies
 

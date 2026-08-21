@@ -1,11 +1,11 @@
-# Bad Concession/Commitment
+# AI Agent Makes Unauthorized Refunds and Commitments: Causes and Fixes
 
-## Issue: Agent promises refund, waiver, legal/commercial term, or SLA it cannot honor.
+## Issue: The agent promises a refund, waiver, legal/commercial term, or SLA it has no authority to honor.
 
 **Frequency**: Rare but Catastrophic
 
 **Symptoms**
-- Unauthorized promise in transcript.
+- Agent makes an unauthorized promise, visible in the transcript.
 - Finance or legal team must retroactively honor or walk back a commitment the agent had no authority to make.
 - Customer disputes cite the agent's own words as a binding commitment ("your agent told me...").
 
@@ -47,6 +47,8 @@ whether to eat the cost or generate a PR incident.
 | unauthorized_commitment_rate_in_eval_set | 0% | % of eval transcripts where agent makes a commitment outside its allowlist/bounds |
 
 ---
+
+Fixing this means catching commitment-shaped language before it ever reaches the customer.
 
 ## Mitigation Strategies
 

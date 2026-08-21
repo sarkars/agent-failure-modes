@@ -1,13 +1,15 @@
-# Unbounded Action Loop
+# AI Agent Stuck in an Infinite Retry Loop Racks Up Cost or Damage: Causes and Fixes
 
-## Issue: Agent repeats actions until quota/cost/damage accumulates.
+## Issue: The agent gets stuck retrying the same failing action with no retry cap, backoff, or action budget, until quota, cost, or damage accumulates.
 
 **Frequency**: Rare but Catastrophic
 
 **Symptoms**
-- Looping retries with side effects.
+- Agent loops, retrying the same action with side effects each time.
 - Cloud spend or API usage bill spikes because an agent kept retrying a failing tool call with no backoff or cap.
 - A support ticket accumulates dozens of near-identical auto-generated replies from an agent stuck re-attempting the same resolution step.
+
+This is a common agentic-loop failure in orchestration frameworks like LangGraph or CrewAI, where a node or agent can re-enter the same step indefinitely unless the graph itself enforces a step or budget limit.
 
 **Root Cause**
 There is no hard retry limit or backoff strategy on failing tool calls, so the agent's default behavior treats "try again" as always safe rather than as a decision requiring its own justification. When the error-handling logic re-derives the same faulty input on each attempt instead of adjusting the approach or escalating, the retries aren't even exploring alternative fixes — they're mechanically repeating an action already proven not to work. With no per-agent action budget or circuit breaker capping total actions in a time window, and no depth limit on recursive or self-invoking action patterns, nothing external to the agent's own (absent) judgment ever intervenes to stop the loop before cost or damage accumulates.
@@ -43,6 +45,8 @@ on the account.
 | unbounded_loop_detections_per_day | 0 | Count instances of identical action type/target repeated beyond the configured retry cap within a short window |
 
 ---
+
+Fixing this means adding a hard retry cap, backoff, and a per-agent action budget so nothing outside the agent's own judgment has to stop the loop.
 
 ## Mitigation Strategies
 

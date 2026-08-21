@@ -1,11 +1,11 @@
-# Risk Severity Misclassification
+# AI Agent Misclassifies Risk Severity: Causes and Fixes
 
-## Issue: Agent treats critical issue as minor or vice versa.
+## Issue: The agent treats a critical issue as minor, or a minor issue as critical, because its severity rubric relies on loose judgment instead of hard triggers.
 
 **Frequency**: Common
 
 **Symptoms**
-- Escalation severity mismatch.
+- Escalation severity mismatch between what the agent assigned and what a reviewer would assign.
 - A security or safety-relevant report is triaged as low priority and sits in a queue for days before anyone notices.
 - Reviewers repeatedly override the agent's severity classification, but the pattern isn't fed back into the rubric.
 
@@ -47,6 +47,8 @@ account's payment details.
 | p1_misclassification_rate_eval_percent | < 1% | % of eval cases where a true P1 issue is under-classified |
 
 ---
+
+Fixing this means hardcoding unambiguous signals to force specific severity levels instead of leaving classification to a loose rubric.
 
 ## Mitigation Strategies
 

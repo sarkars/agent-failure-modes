@@ -1,13 +1,15 @@
-# Source-Of-Truth Confusion
+# AI Agent Trusts Stale RAG/OCR Text Over the Authoritative Database: Causes and Fixes
 
-## Issue: Agent uses OCR/RAG text when database/source document should win.
+## Issue: The agent answers from OCR- or RAG-retrieved text when the live database or source document should have won.
 
 **Frequency**: Common
 
 **Symptoms**
-- Answer conflicts with authoritative system.
+- Answer conflicts with the authoritative system of record.
 - Agent quotes a value extracted via OCR/RAG that differs from the live database record, and no hierarchy check catches the conflict before the value is used.
 - Investigation finds the authoritative source was queryable and available the whole time, but the agent defaulted to the retrieved/extracted text anyway.
+
+This is a common failure in RAG pipelines built with frameworks like LangChain or LlamaIndex, where retrieval is wired as the default lookup and the authoritative database is only a fallback.
 
 **Root Cause**
 The retrieval pipeline treats RAG/OCR-extracted text and the live authoritative database as equally valid inputs because no explicit source-of-truth hierarchy is encoded anywhere in the system — and in practice the RAG pipeline is queried first by default, with the database treated as a fallback rather than the primary source. Without a conflict-detection step that compares retrieved text against the authoritative source before answering, and with cached extracted content often outliving the freshness window of the data it represents, the agent has no mechanism to notice it is answering from a stale or lower-precedence source even when the correct one was queryable the whole time.
@@ -46,6 +48,8 @@ figure and later disputes a declined transaction.
 | source_hierarchy_violation_rate_eval_percent | 0% | % of eval cases where the answer is based on a lower-precedence source despite a higher-precedence one being available |
 
 ---
+
+Fixing this means encoding an explicit source-of-truth hierarchy so the database wins conflicts instead of whichever source was queried first.
 
 ## Mitigation Strategies
 

@@ -1,11 +1,11 @@
-# Customer-Emotion Misread
+# AI Agent Misreads Customer Emotion and Sounds Tone-Deaf: Causes and Fixes
 
-## Issue: Agent mishandles empathy in debt collection, healthcare, support, or complaints.
+## Issue: The agent mishandles empathy in debt collection, healthcare, support, or complaints and gives a procedurally correct but tone-deaf reply.
 
 **Frequency**: Common
 
 **Symptoms**
-- Sentiment/complaint escalation after response.
+- Sentiment worsens or the customer escalates to a complaint after the agent's response.
 - Agent responds with a procedurally correct but tone-deaf message to a customer expressing grief, anger, or financial distress.
 - Customer explicitly complains about feeling unheard or dismissed rather than about the substance of the resolution offered.
 
@@ -46,6 +46,8 @@ compliance review even though the payment terms cited were accurate.
 | emotion_classifier_precheck_coverage_percent | 100% | % of eval responses where emotion classifier ran before response generation |
 
 ---
+
+Fixing this means classifying emotional signal before generating a response, not just checking the reply for policy accuracy.
 
 ## Mitigation Strategies
 

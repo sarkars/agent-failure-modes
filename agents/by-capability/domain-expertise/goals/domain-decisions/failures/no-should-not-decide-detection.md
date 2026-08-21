@@ -1,6 +1,6 @@
-# No 'Should Not Decide' Detection
+# AI Agent Decides When It Should Have Escalated to a Human Expert: Causes and Fixes
 
-## Issue: Agent decides where human/domain expert should decide.
+## Issue: The agent decides a case that should have gone to a human or domain expert, with no abstention or escalation trigger firing.
 
 **Frequency**: Rare but Catastrophic
 
@@ -44,6 +44,8 @@ potential regulatory complaint about unlicensed benefits interpretation.
 | false_escalation_rate_eval_percent | < 10% | % of eval cases where agent escalates a case that didn't actually require expert judgment |
 
 ---
+
+Fixing this means wiring an abstention classifier and escalation registry into the agent's actual decision flow, not just documenting it on paper.
 
 ## Mitigation Strategies
 

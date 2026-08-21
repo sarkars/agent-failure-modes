@@ -1,11 +1,11 @@
-# Irreversible Action Without Confirmation
+# AI Agent Deletes, Pays, or Deploys Without Confirmation: Causes and Fixes
 
-## Issue: Agent deletes/sends/pays/deploys without approval.
+## Issue: The agent executes a delete, send, payment, or deployment without approval, because the action carries no reversibility classification requiring a confirmation gate.
 
 **Frequency**: Rare but Catastrophic
 
 **Symptoms**
-- Destructive action without confirmation marker.
+- Destructive action executes with no confirmation marker in the log.
 - Agent interprets an ambiguous instruction ("clean that up") as authorization to delete, cancel, or pay without checking back.
 - Audit log shows an irreversible action executed in the same turn it was proposed, with no approval step in between.
 
@@ -42,6 +42,8 @@ invoices' pending-review status was never checked before executing.
 | irreversible_actions_without_confirmation_per_day | 0 | Count irreversible actions in execution log lacking a matching confirmation record |
 
 ---
+
+Fixing this means classifying actions by reversibility and putting the confirmation gate in the agent's own call path, not just the UI.
 
 ## Mitigation Strategies
 

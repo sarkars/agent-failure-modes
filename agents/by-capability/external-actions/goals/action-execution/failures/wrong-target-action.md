@@ -1,11 +1,11 @@
-# Wrong Target Action
+# AI Agent Acts on the Wrong Account, Order, or File: Causes and Fixes
 
-## Issue: Agent acts on wrong account, order, file, or user.
+## Issue: The agent resolves an ambiguous or partial identifier to the wrong record and acts on the wrong account, order, file, or user.
 
 **Frequency**: Rare but Catastrophic
 
 **Symptoms**
-- Entity mismatch between request and tool call.
+- Entity mismatch between what the user asked for and what the tool call actually targeted.
 - Agent resolves a name or partial identifier ("John Doe", "order 123") to the wrong record among several similarly-named matches.
 - Action executed against a cached or stale target ID that no longer corresponds to the resource the user meant.
 
@@ -43,6 +43,8 @@ the cancel action executed.
 | wrong_target_action_attempts_per_day | 0 | Count actions where confirmed_target_id doesn't match executed_target_id |
 
 ---
+
+Fixing this means surfacing disambiguating detail and confirming the target before the action executes, not passing bare IDs silently between calls.
 
 ## Mitigation Strategies
 

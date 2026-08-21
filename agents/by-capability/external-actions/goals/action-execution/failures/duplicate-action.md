@@ -1,13 +1,15 @@
-# Duplicate Action
+# AI Agent Creates Duplicate Orders, Charges, or Tickets: Causes and Fixes
 
-## Issue: Agent creates duplicate tickets/emails/orders/charges.
+## Issue: The agent retries a write-type tool call after a timeout or ambiguous error and ends up creating duplicate tickets, emails, orders, or charges.
 
 **Frequency**: Rare but Catastrophic
 
 **Symptoms**
-- Multiple equivalent writes in same trace.
+- Multiple equivalent writes appear in the same trace.
 - Customer receives 2+ identical order confirmations, charge receipts, or support tickets for a single request.
 - Retry after a timeout or tool-call error re-executes the original write instead of checking whether it already succeeded.
+
+This shows up commonly in agents built on tool-calling protocols like MCP, where a tool call's outcome can go unconfirmed after a timeout and the agent has no built-in way to tell "unknown" apart from "failed."
 
 **Root Cause**
 Write-type tool calls carry no idempotency key, so a retry is indistinguishable at the receiving system from a brand-new request — there is nothing in the request itself that says "this is the same logical operation as the one five seconds ago." The agent compounds this by treating an ambiguous outcome (a timeout, a dropped response) as "definitely failed" rather than "unknown," so it retries by default instead of first checking whether the original call actually succeeded server-side. With no shared lock across parallel execution paths (retry logic racing a user-triggered re-ask, for instance), two logically identical writes can commit independently with no mechanism at any layer positioned to recognize they're the same request.
@@ -43,6 +45,8 @@ idempotency key to link them.
 | duplicate_action_attempts_per_hour | < 0.1 | Count actions sharing (agent_id, action_type, target_id, params) signature within 24h window |
 
 ---
+
+Fixing this means attaching idempotency keys to write calls so a retry is recognized as the same request instead of a new one.
 
 ## Mitigation Strategies
 

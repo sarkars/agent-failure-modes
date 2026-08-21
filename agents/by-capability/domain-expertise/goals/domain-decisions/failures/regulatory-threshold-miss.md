@@ -1,11 +1,11 @@
-# Regulatory Threshold Miss
+# AI Agent Misses a Regulatory Limit or Compliance Deadline: Causes and Fixes
 
-## Issue: Agent misses limits, deadlines, eligibility, or compliance triggers.
+## Issue: The agent misses a regulatory limit, filing deadline, eligibility rule, or other compliance trigger because it wasn't checked in real time.
 
 **Frequency**: Rare but Catastrophic
 
 **Symptoms**
-- Compliance exception discovered after action.
+- Compliance exception discovered after the action was already taken.
 - Agent approves a transaction or action that exceeds a regulatory limit because the limit wasn't checked in real time.
 - A refund, disclosure, or filing deadline passes silently because no deadline-tracking mechanism existed.
 
@@ -46,6 +46,8 @@ audit, triggering a late-filing remediation with the regulator.
 | regulatory_threshold_violation_rate_eval_percent | 0% | % of eval cases where the decision violates a regulatory threshold |
 
 ---
+
+Fixing this means turning regulatory thresholds and deadlines into queryable, enforced rules the validation step actually consults, not policy-document text.
 
 ## Mitigation Strategies
 
