@@ -1,6 +1,6 @@
-# Multi-Agent False Consensus Risk
+# AI Agents Reach False Consensus: Causes and Fixes
 
-## Issue: Multiple agents independently reach same wrong conclusion; system interprets consensus as confidence signal and escalates decision to production; actual error remains undetected because all agents made identical mistake
+## Issue: Multiple independent agents reach the same wrong conclusion, and the system mistakes that agreement for a confidence signal -- escalating the decision to production because all agents making the identical mistake looks like verification, not error.
 
 **Frequency**: Common (especially in critical domains)
 
@@ -162,6 +162,8 @@ Impact: Erosion of trust in moderation; false positives harm innocent users
 - Diverse agent opinions preserved
 - Dissent encouraged and valued
 - False consensus never reported as fact
+
+**How to fix it**: verify consensus against an independent ground-truth source or held-out check rather than treating agent agreement alone as proof of correctness.
 
 ## Mitigation Strategies
 

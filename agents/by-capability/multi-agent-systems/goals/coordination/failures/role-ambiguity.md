@@ -1,6 +1,6 @@
-# Role Ambiguity
+# AI Agent Role Ambiguity: Causes and Fixes
 
-## Issue: Agents do not know who owns which responsibility.
+## Issue: Agents don't have a clear, non-overlapping definition of who owns which responsibility, so work gets duplicated in some areas and dropped entirely in others.
 
 **Frequency**: Common
 
@@ -47,6 +47,8 @@ corrupted row pass through untouched on a run where A skipped the drop.
 | Ownership-query rate | tracked, no fixed target | Count of times agents explicitly query the responsibility registry vs. proceed on assumption, per task |
 
 ---
+
+**How to fix it**: give every agent an explicit, non-overlapping responsibility boundary and validate coverage before deployment.
 
 ## Mitigation Strategies
 

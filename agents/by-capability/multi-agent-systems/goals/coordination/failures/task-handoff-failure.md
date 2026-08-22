@@ -1,6 +1,6 @@
-# Task Handoff Failure
+# AI Agent Task Handoff Failure: Causes and Fixes
 
-## Issue: One agent passes incomplete/incorrect state to another.
+## Issue: An agent hands off incomplete or incorrect state to the next agent in the pipeline -- a common failure in LangGraph/CrewAI-style handoffs -- so the downstream agent works from a gap it doesn't know exists.
 
 **Frequency**: Common
 
@@ -48,6 +48,8 @@ structured constraints, only a vague instruction.
 | Silent-default usage rate | <1% | % of downstream executions where a value traces to a code/prompt default rather than an explicit upstream field |
 
 ---
+
+**How to fix it**: define a required-fields handoff schema and validate it at each transition instead of trusting whatever the upstream agent happened to forward.
 
 ## Mitigation Strategies
 

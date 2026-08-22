@@ -1,6 +1,6 @@
-# Duplicate Work
+# AI Agents Duplicate Work: Causes and Fixes
 
-## Issue: Multiple agents solve the same subtask independently.
+## Issue: Multiple agents independently solve the same subtask -- often calling the same expensive tool or API -- because there's no shared task ledger to prevent redundant work.
 
 **Frequency**: Occasional
 
@@ -49,6 +49,8 @@ and confusing the reader with near-duplicate, slightly conflicting figures.
 | Task Claim Conflict Rate | <1% | Percentage of task-queue dequeues where two agents claim the same item before lock enforcement |
 
 ---
+
+**How to fix it**: maintain a shared, lockable task ledger so agents can see what's already claimed or completed before starting work.
 
 ## Mitigation Strategies
 

@@ -1,6 +1,6 @@
-# Emergent Behavior
+# Multi-Agent Emergent Behavior: Causes and Fixes
 
-## Issue: Interaction creates behavior not seen in isolated tests.
+## Issue: Agents interacting live produce unintended behavior -- loops, oscillation, runaway cost -- that never shows up when each agent is tested in isolation.
 
 **Frequency**: Common
 
@@ -48,6 +48,8 @@ budget before a human notices the conversation never converges.
 | Run-to-Run Determinism | >90% output similarity | Similarity score of outputs across repeated runs of identical input through the full multi-agent system |
 
 ---
+
+**How to fix it**: test agents together under realistic multi-turn interaction, not just individually, and add runtime guardrails that catch feedback loops early.
 
 ## Mitigation Strategies
 

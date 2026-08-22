@@ -1,6 +1,6 @@
-# Cascading Error
+# AI Agent Cascading Error: Causes and Fixes
 
-## Issue: Early error propagates through the multi-agent pipeline.
+## Issue: An early agent's mistake gets treated as ground truth by every downstream agent, so a small error compounds into a badly wrong final answer as it propagates through the pipeline.
 
 **Frequency**: Rare but Catastrophic
 
@@ -48,6 +48,8 @@ agent's output as-is.
 | Cascade Containment Rate | >95% | Percentage of seeded upstream errors caught before reaching the final output |
 
 ---
+
+**How to fix it**: verify each agent's output against its own inputs before forwarding it, so a bad premise can't silently ride downstream.
 
 ## Mitigation Strategies
 

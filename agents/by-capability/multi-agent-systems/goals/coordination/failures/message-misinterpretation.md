@@ -1,6 +1,6 @@
-# Message Misinterpretation
+# AI Agent Message Misinterpretation: Causes and Fixes
 
-## Issue: One agent misunderstands another agent's output.
+## Issue: A receiving agent misreads or misparses another agent's output, so its downstream action contradicts what the upstream agent actually produced.
 
 **Frequency**: Common
 
@@ -47,6 +47,8 @@ paraphrased A's natural-language summary and inverted the sign.
 | Paraphrase-back match rate | >95% | % of handoffs where downstream's confirmation paraphrase is judged (rubric or LLM-judge) equivalent to upstream intent |
 
 ---
+
+**How to fix it**: replace free-text handoffs with a structured schema so the receiving agent can't silently reinterpret meaning.
 
 ## Mitigation Strategies
 

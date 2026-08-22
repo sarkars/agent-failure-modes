@@ -1,6 +1,6 @@
-# Coordinator Failure
+# AI Agent Coordinator Failure: Causes and Fixes
 
-## Issue: Manager agent assigns wrong tasks or fails to synthesize.
+## Issue: The manager/orchestrator agent (the coordinator role in LangGraph supervisor graphs or CrewAI's manager pattern) assigns subtasks to the wrong worker agents, or fails to correctly synthesize their outputs into a coherent final answer.
 
 **Frequency**: Common
 
@@ -49,6 +49,8 @@ reads the first N worker outputs it receives.
 | Assignment Coverage | 100% | Percentage of decomposed subtasks that receive a valid worker assignment |
 
 ---
+
+**How to fix it**: validate task-to-agent assignment against declared capabilities and check the coordinator's synthesis step against each worker's raw output.
 
 ## Mitigation Strategies
 

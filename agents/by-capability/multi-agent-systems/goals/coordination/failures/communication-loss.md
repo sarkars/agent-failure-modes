@@ -1,6 +1,6 @@
-# Communication Loss
+# Multi-Agent Communication Loss: Causes and Fixes
 
-## Issue: Key information is not shared between agents.
+## Issue: Agents lose or drop key information passed between them, so a downstream agent acts without facts that an upstream agent already discovered.
 
 **Frequency**: Common
 
@@ -47,6 +47,8 @@ prior refund request, causing customer frustration and a duplicate support ticke
 | Context Truncation Incidence | <1% | Percentage of handoffs where token-budget truncation removes content from the pre-truncation payload |
 
 ---
+
+**How to fix it**: carry full context (not lossy summaries) across agent handoffs and verify nothing critical was dropped in transit.
 
 ## Mitigation Strategies
 

@@ -1,6 +1,6 @@
-# Handoff Schema Loses Upstream Confidence Signal
+# AI Agent Handoff Loses Upstream Confidence Signal: Causes and Fixes
 
-## Issue: Upstream agent notes low confidence, ambiguity, or uncertain methodology in free-text reasoning, but handoff schema to downstream agent contains only final value and status—confidence/provenance signal is invisible to downstream agent, which uses value with full confidence
+## Issue: An upstream agent flags low confidence or ambiguity in its free-text reasoning, but the structured handoff schema passed to the downstream agent -- a common MCP/tool-call handoff pattern -- carries only the final value and status. The confidence/provenance signal is invisible to the downstream agent, which uses the value with full confidence.
 
 **Frequency**: Common
 
@@ -71,6 +71,8 @@ Downstream impact: Stockout in high-demand scenario; excess inventory in low-dem
 | Confidence-aware state in sequential agent orchestration | [Agentic AI Reliability and Coordination](https://arxiv.org/abs/2502.05439) |
 
 ---
+
+**How to fix it**: add an explicit confidence/provenance field to every handoff schema instead of only carrying the final value.
 
 ## Mitigation Strategies
 

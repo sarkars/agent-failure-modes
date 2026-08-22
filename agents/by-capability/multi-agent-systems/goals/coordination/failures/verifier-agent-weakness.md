@@ -1,6 +1,6 @@
-# Verifier-Agent Weakness
+# AI Verifier Agent Fails to Catch Errors: Causes and Fixes
 
-## Issue: Judge agent fails to catch worker-agent errors.
+## Issue: A judge/verifier agent -- a pattern common to LLM-as-judge and OpenAI Agents SDK guardrail setups -- approves worker-agent output that is actually wrong, because it's checking surface plausibility rather than verifying against ground truth.
 
 **Frequency**: Common
 
@@ -48,6 +48,8 @@ surface structure rather than executing or tracing the actual logic.
 | Verifier evidence-citation rate | >90% | % of verifier decisions whose rationale cites a specific line/fact from the worker trace rather than generic language |
 
 ---
+
+**How to fix it**: benchmark the verifier against known-bad traces and require it to cite specific evidence rather than issue templated approvals.
 
 ## Mitigation Strategies
 

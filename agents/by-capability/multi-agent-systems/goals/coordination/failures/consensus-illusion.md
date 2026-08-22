@@ -1,6 +1,6 @@
-# Consensus Illusion
+# AI Agent Consensus Illusion: Causes and Fixes
 
-## Issue: Agents agree because they share flawed context or bias.
+## Issue: Agents appear to agree, but only because they were all seeded from the same flawed context or bias -- not because they independently verified the answer.
 
 **Frequency**: Occasional
 
@@ -48,6 +48,8 @@ independent confirmations.
 | Dissent Surfacing Rate | >90% of injected errors caught | Percentage of seeded shared-bias test cases where an adversarial/independent check flags the error before final consensus |
 
 ---
+
+**How to fix it**: give agents genuinely independent context/retrieval sources before counting their agreement as a confidence signal.
 
 ## Mitigation Strategies
 

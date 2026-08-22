@@ -1,6 +1,6 @@
-# Premature Consensus
+# AI Agents Reach Premature Consensus: Causes and Fixes
 
-## Issue: Agents converge before evidence is checked.
+## Issue: Agents converge on an answer and stop before gathering enough evidence, so the group agrees quickly but on a weakly supported conclusion.
 
 **Frequency**: Occasional
 
@@ -48,6 +48,8 @@ real cause (a downstream database failover) was never checked.
 | Unresolved-dissent rate | <5% | % of eval cases where a raised objection is absent from the final consensus rationale |
 
 ---
+
+**How to fix it**: require a minimum evidence/tool-call threshold before consensus can be declared, and force dissenting objections to be addressed, not dropped.
 
 ## Mitigation Strategies
 

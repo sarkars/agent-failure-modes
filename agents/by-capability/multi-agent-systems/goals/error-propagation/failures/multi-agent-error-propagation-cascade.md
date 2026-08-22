@@ -1,6 +1,6 @@
-# Multi-Agent Error Propagation Cascade
+# Multi-Agent Error Propagation Cascade: Causes and Fixes
 
-## Issue: Single agent error compounds exponentially through multi-agent pipeline; downstream agents treat upstream errors as ground truth, amplifying impact 17x-20x by final output
+## Issue: A single agent's error compounds exponentially as it moves through a multi-agent pipeline -- common in LangGraph/CrewAI sequential chains -- because downstream agents treat upstream errors as ground truth, amplifying the original mistake 17x-20x by the time it reaches the final output.
 
 **Frequency**: Common
 
@@ -152,6 +152,8 @@ Root cause: 20% error in Agent A cascaded to 60%+ system dysfunction
 - Error amplification <2x through pipeline
 - Intermediate verification catches errors
 - Final accuracy acceptable despite component errors
+
+**How to fix it**: add confidence/error checks at each pipeline stage so a bad upstream result gets flagged before it compounds.
 
 ## Mitigation Strategies
 

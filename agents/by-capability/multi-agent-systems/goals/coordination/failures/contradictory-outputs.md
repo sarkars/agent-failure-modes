@@ -1,6 +1,6 @@
-# Contradictory Outputs
+# AI Agents Give Contradictory Outputs: Causes and Fixes
 
-## Issue: Agents disagree and no resolver exists.
+## Issue: Two or more agents disagree and nothing in the pipeline resolves the conflict, so contradictory answers reach the end user or downstream system.
 
 **Frequency**: Common
 
@@ -48,6 +48,8 @@ invoked.
 | Resolution Consistency | >95% | Percentage of repeated identical-conflict scenarios resolved the same way |
 
 ---
+
+**How to fix it**: add an explicit arbitration step that runs before output is finalized instead of surfacing raw disagreement.
 
 ## Mitigation Strategies
 

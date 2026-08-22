@@ -1,6 +1,6 @@
-# Worker Tunnel Vision
+# AI Agent Tunnel Vision on Local Goals: Causes and Fixes
 
-## Issue: Specialized agents optimize local goals over global success.
+## Issue: A specialized worker agent optimizes its own subtask metric so hard that it ignores or overrides the global plan, so the overall task fails even though each agent's local output looks fine.
 
 **Frequency**: Occasional
 
@@ -48,6 +48,8 @@ only the local proxy (SEO score).
 | Tradeoff escalation rate | >80% of true conflicts | % of eval cases with a genuine local/global conflict where the conflict is surfaced rather than silently resolved locally |
 
 ---
+
+**How to fix it**: score agents against the end-to-end task outcome, not just their local proxy metric, and give them visibility into the global plan.
 
 ## Mitigation Strategies
 

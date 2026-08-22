@@ -1,6 +1,6 @@
-# Authority Confusion
+# AI Agent Authority Confusion: Causes and Fixes
 
-## Issue: System does not know which agent output wins.
+## Issue: Agents disagree on who has final say, and the system silently picks a winner instead of resolving the conflict. This is common in flat multi-agent orchestration (e.g., LangGraph or CrewAI-style peer topologies) where no agent is declared authoritative for a given decision domain.
 
 **Frequency**: Common
 
@@ -47,6 +47,8 @@ precedence rule defines which agent is binding on collateral vs. income criteria
 | Precedence Override Traceability | 100% | Percentage of conflict resolutions with a logged "agent X overrode agent Y because Z" record |
 
 ---
+
+**How to fix it**: declare an explicit authority map and conflict-resolution policy so the system stops guessing which agent's output is binding.
 
 ## Mitigation Strategies
 

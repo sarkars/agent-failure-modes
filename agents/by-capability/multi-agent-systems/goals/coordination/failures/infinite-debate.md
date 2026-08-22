@@ -1,6 +1,6 @@
-# Infinite Debate
+# AI Agents Stuck in an Infinite Debate Loop: Causes and Fixes
 
-## Issue: Agents critique/revise endlessly without termination.
+## Issue: Critic and reviser agents -- a common pattern in LangGraph reflection loops -- keep critiquing and revising each other's work endlessly, with no termination condition to stop once the debate stops making progress.
 
 **Frequency**: Occasional
 
@@ -48,6 +48,8 @@ times out after 2 hours with no accepted output.
 | Critique novelty ratio | >0.7 | Fraction of critique points per round that are semantically new vs. repeated from prior rounds (embedding similarity) |
 
 ---
+
+**How to fix it**: cap debate rounds and add a progress check (e.g., quality score delta) that forces termination once returns diminish.
 
 ## Mitigation Strategies
 
