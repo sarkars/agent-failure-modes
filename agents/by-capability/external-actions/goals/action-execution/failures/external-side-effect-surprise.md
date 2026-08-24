@@ -1,6 +1,6 @@
-# External Side-Effect Surprise
+# AI Agent Triggers Unexpected Side Effects: Causes and Fixes
 
-## Issue: Agent misses that action triggers notifications, billing, shipment, or deployment.
+## Issue: AI agent's action unexpectedly triggers notifications, billing charges, shipments, or deployments it never intended to cause.
 
 **Frequency**: Common
 
@@ -8,6 +8,7 @@
 - Stakeholder receives unexpected alert/change.
 - Support ticket status update silently fires a customer-facing email or SMS the agent didn't intend to send.
 - Updating a config or database field triggers a downstream billing run, shipment, or deployment the agent had no visibility into.
+- Commonly reported in MCP-based tool servers and LangChain/LangGraph tool nodes, where the tool schema documents only the primary effect and gives the agent no way to see the webhook or pipeline it fires downstream.
 
 **Root Cause**
 The action's cascading effects live entirely in a downstream system — a billing webhook, a notification trigger, a fulfillment pipeline — that sits outside the agent's own tool schema, so the tool description documents only the primary, intended effect ("update this field") and has no way to surface what else that write will set in motion. Because there is no side-effect manifest or registry the agent can consult before executing a state change, and shared database fields make an internal correction indistinguishable from a customer-initiated one, the agent has no signal available to it — even in principle — that a seemingly narrow write is about to trigger a much broader downstream consequence.
@@ -42,6 +43,8 @@ field write would trigger, since its task was just "correct the plan field."
 | unintended_side_effects_per_action | 0 | Compare declared side-effect manifest to actual downstream system calls triggered per action |
 
 ---
+
+**How to fix it**: declare every action's downstream side effects up front, gate execution on that declaration, and audit actual system calls against it — see Mitigation Strategies below.
 
 ## Mitigation Strategies
 

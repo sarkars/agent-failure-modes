@@ -1,6 +1,6 @@
-# Context Window Saturation
+# AI Agent Answer Quality Drops When Given Too Much Context: Causes and Fixes
 
-## Issue: Too Much Context Overwhelms Synthesis
+## Issue: Stuffing the context window with more retrieved documents makes the AI agent's answers worse, not better — the "lost in the middle" effect.
 
 **Frequency**: Common
 
@@ -10,6 +10,7 @@
 - Generic responses despite detailed context
 - "Lost in the middle" effect - middle content ignored
 - Slower response times without quality improvement
+- Commonly reported in RAG pipelines (LangChain, LlamaIndex) configured with a large top-k retrieval setting
 
 **Root Cause**
 Models have finite attention capacity. Even with large context windows (100k+ tokens), attention degrades for middle content, relevant information gets diluted, and the model may fall back to generic responses. Stuffing the context window with everything retrieved doesn't improve answers - it often hurts them. There's an optimal context size beyond which quality decreases.
@@ -92,6 +93,7 @@ From Context Research (2026):
 - Measure fact recall from context
 - Analyze position-dependent attention
 
+**How to fix it**: cap retrieved context to the optimal size for the model rather than maximizing top-k, and reorder passages to counter position bias — see Mitigation Strategies below.
 
 ## Mitigation Strategies
 

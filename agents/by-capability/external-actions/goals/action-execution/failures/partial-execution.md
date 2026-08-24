@@ -1,6 +1,6 @@
-# Partial Execution
+# AI Agent Claims Success on a Partially Completed Task: Causes and Fixes
 
-## Issue: Agent completes only some steps but reports full success.
+## Issue: AI agent completes only some steps of a multi-step task but reports full success to the user.
 
 **Frequency**: Common
 
@@ -8,6 +8,7 @@
 - Subtask status incomplete vs final status success.
 - Customer told "your refund and replacement are processed" but only the refund actually completed.
 - Downstream system shows resource in a half-migrated or half-updated state that doesn't match either the before or after expected state.
+- Commonly reported in multi-step orchestration frameworks like LangGraph or CrewAI, where a step that fails silently never registers as a deviation from the plan the final summary describes.
 
 **Root Cause**
 The agent's final summary is generated from the intended plan rather than from verified per-step results, so a step that fails silently — a soft error, a rate limit that doesn't raise an exception the control flow catches — never registers as a deviation from the plan the summary is describing. Because there is no atomic or transactional boundary around the multi-step action, steps are free to partially commit, and with no post-execution check comparing each affected resource's actual state against what that step was supposed to produce, nothing exists between "step silently failed" and "agent reports success" to catch the mismatch.
@@ -43,6 +44,8 @@ refund never actually processed.
 | multi_step_action_completion_rate_percent | 100% | All required subtasks confirmed complete via state check, divided by total multi-step actions |
 
 ---
+
+**How to fix it**: verify each step's actual resulting state before summarizing, and only report success for steps that passed that check — see Mitigation Strategies below.
 
 ## Mitigation Strategies
 

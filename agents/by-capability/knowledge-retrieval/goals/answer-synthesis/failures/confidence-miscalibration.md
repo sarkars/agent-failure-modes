@@ -1,6 +1,6 @@
-# Confidence Miscalibration
+# AI Agent's Confidence Doesn't Match How Reliable Its Answer Is: Causes and Fixes
 
-## Issue: Model Confidence Doesn't Match Answer Reliability
+## Issue: AI agent sounds equally confident whether its answer is well-supported by context or barely grounded at all.
 
 **Frequency**: Very Common
 
@@ -9,6 +9,7 @@
 - Low confidence on well-supported answers
 - Uncertainty not expressed when context is ambiguous
 - All answers have similar confidence regardless of support
+- Reported across both RAG frameworks (LangChain, LlamaIndex) and agent frameworks (LangGraph, OpenAI Agents SDK), since it stems from how LLMs are trained to produce fluent text rather than calibrated uncertainty
 
 **Root Cause**
 LLMs are trained to produce fluent, confident text. They don't naturally express calibrated uncertainty based on context support.
@@ -41,6 +42,7 @@ Result: User misses meeting because they assumed Tuesday
 - User feedback on overconfident wrong answers
 - Test with deliberately uncertain contexts
 
+**How to fix it**: tie expressed confidence to a measured context-support score instead of the model's default fluent tone — see Mitigation Strategies below.
 
 ## Mitigation Strategies
 

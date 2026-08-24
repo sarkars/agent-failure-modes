@@ -1,6 +1,6 @@
-# Policy-Violating Action
+# AI Agent Takes a Technically Allowed But Policy-Violating Action: Causes and Fixes
 
-## Issue: Agent does technically possible but disallowed action.
+## Issue: AI agent performs an action its tool permissions allow but that violates business or regulatory policy.
 
 **Frequency**: Rare but Catastrophic
 
@@ -8,6 +8,7 @@
 - Audit finds policy mismatch.
 - Agent approves a refund past the 30-day policy window because the tool technically allows any refund amount and date.
 - Compliance review flags an action the agent had API permission to perform but that violates a business or regulatory rule never encoded in the tool layer.
+- Commonly reported in MCP-based tool integrations and OpenAI Agents SDK guardrail setups, where tool-level API permissions don't encode business policy at all.
 
 **Root Cause**
 Tool permissions are scoped by what the underlying API technically allows, not by business policy, so "can I call this" and "should I call this" collapse into the same question with no distinct check for the second one. Because policies exist only as static documentation the agent may or may not have retrieved into context, rather than as a real-time engine consulted before execution, and because the agent is implicitly optimizing for satisfying the user's request over adhering to a rule it was never forced to check, an action can be both fully within its API permissions and a clear policy violation with nothing in the execution path distinguishing the two cases.
@@ -43,6 +44,8 @@ a refund that violates the written refund policy.
 | policy_violations_per_hour | < 0.01 | Actions executed where policy engine would have returned deny, detected via post-hoc policy replay |
 
 ---
+
+**How to fix it**: check every action against a live policy engine, not just API-level permissions, before executing — see Mitigation Strategies below.
 
 ## Mitigation Strategies
 

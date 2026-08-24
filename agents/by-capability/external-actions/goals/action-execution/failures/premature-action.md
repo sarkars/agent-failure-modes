@@ -1,6 +1,6 @@
-# Premature Action
+# AI Agent Acts Before Gathering Enough Evidence: Causes and Fixes
 
-## Issue: Agent acts before enough evidence is gathered.
+## Issue: AI agent takes an irreversible action, like banning a user or closing a case, before enough evidence is in.
 
 **Frequency**: Common
 
@@ -8,6 +8,7 @@
 - Low evidence count before irreversible step.
 - Agent bans a user or closes a fraud case after a single ambiguous signal instead of waiting for a corroborating check.
 - Action executed before an in-flight verification (identity check, payment confirmation) has actually returned a result.
+- Commonly reported in agentic workflows built with async tool calling (LangGraph, OpenAI Agents SDK) where a still-pending verification call isn't awaited before the decision step runs.
 
 **Root Cause**
 No explicit evidence threshold is defined for the action, so a single signal — even a borderline or low-confidence one — is treated as sufficient grounds to act rather than as one input among several still-pending checks. Because asynchronous verifications (identity checks, corroborating lookups) can still be in flight when the agent makes its decision, and there is no built-in wait/poll step forcing it to check for outstanding results first, upstream confidence scores get consumed directly as action triggers instead of being gated behind a minimum threshold — the agent isn't wrong about what the signal said, it's acting on an incomplete picture it had no mechanism compelling it to complete first.
@@ -43,6 +44,8 @@ to be a false positive once verification cleared.
 | premature_action_attempts_per_day | < 0.5 | Actions executed with evidence_quality_score below the defined threshold for that action type |
 
 ---
+
+**How to fix it**: set an explicit evidence threshold per action and block execution until pending verifications resolve — see Mitigation Strategies below.
 
 ## Mitigation Strategies
 
