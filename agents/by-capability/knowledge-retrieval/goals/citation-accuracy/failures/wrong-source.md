@@ -1,6 +1,6 @@
-# Wrong Source Cited
+# AI Agent Cites the Wrong Document Among Multiple Retrieved Sources: Causes and Fixes
 
-## Issue: Citation Points to Different Document Than Information Came From
+## Issue: AI agent confuses which retrieved document a fact came from and attaches the citation to the wrong source.
 
 **Frequency**: Common
 
@@ -9,6 +9,7 @@
 - Source attribution confused between similar documents
 - User clicks citation, finds different content
 - Multiple sources retrieved, wrong one cited
+- Commonly reported in RAG pipelines (LangChain, LlamaIndex) retrieving multiple similar documents — e.g. successive quarterly reports — in the same query
 
 **Root Cause**
 When multiple documents are in context, model may confuse which source contained which information, especially with similar documents.
@@ -40,6 +41,7 @@ Result: User references Q2 report but finds 12%, not 18%
 - Track citation accuracy by source count
 - User reports of wrong citations
 
+**How to fix it**: attribute sources while extracting facts rather than after, and validate each citation against its claimed source before output — see Mitigation Strategies below.
 
 ## Mitigation Strategies
 

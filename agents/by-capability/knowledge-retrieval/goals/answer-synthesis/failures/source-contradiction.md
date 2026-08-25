@@ -1,6 +1,6 @@
-# Source Contradiction
+# AI Agent Silently Picks One Answer When Retrieved Sources Disagree: Causes and Fixes
 
-## Issue: Retrieved Documents Contain Conflicting Information
+## Issue: AI agent's retrieved documents contain conflicting information, and the agent picks one arbitrarily instead of surfacing the disagreement.
 
 **Frequency**: Common
 
@@ -9,6 +9,7 @@
 - Conflicting facts not acknowledged
 - User gets wrong information from outdated source
 - No indication that sources disagree
+- Commonly reported in RAG pipelines (LangChain, LlamaIndex) that don't rank or timestamp retrieved documents before synthesis
 
 **Root Cause**
 Multiple documents may contain different information due to updates, errors, different contexts, or legitimate disagreement. Model must reconcile but often ignores conflicts.
@@ -44,6 +45,7 @@ Result: User can't upload files they should be able to
 - User feedback on conflicting information
 - Automated conflict detection in retrieved sets
 
+**How to fix it**: detect contradictions across retrieved sources, then prefer the most authoritative or recent one or surface the disagreement to the user — see Mitigation Strategies below.
 
 ## Mitigation Strategies
 

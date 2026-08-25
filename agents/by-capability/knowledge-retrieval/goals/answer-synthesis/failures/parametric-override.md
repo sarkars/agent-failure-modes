@@ -1,6 +1,6 @@
-# Parametric Override
+# AI Agent Ignores Retrieved Context and Falls Back on Stale Training Data: Causes and Fixes
 
-## Issue: Model Uses Training Data Over Retrieved Context
+## Issue: AI agent's answer reflects its training data instead of the current, retrieved context — even when the two directly conflict.
 
 **Frequency**: Common
 
@@ -9,6 +9,7 @@
 - Outdated information from training data used
 - Domain-specific details replaced with generic knowledge
 - Context contradicts parametric knowledge, model uses latter
+- Commonly reported in RAG pipelines (LangChain, LlamaIndex) whose prompts don't explicitly instruct the model to prefer retrieved context over its own knowledge
 
 **Root Cause**
 LLMs have strong priors from training. When context conflicts with these priors or model is more "confident" in training data, it may override retrieved information.
@@ -43,6 +44,7 @@ Result: User given outdated location
 - Monitor outdated information in answers
 - Test with deliberately conflicting context
 
+**How to fix it**: explicitly instruct the model to trust the provided documents over its own knowledge, and detect when the two disagree — see Mitigation Strategies below.
 
 ## Mitigation Strategies
 

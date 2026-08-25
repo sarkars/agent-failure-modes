@@ -1,6 +1,6 @@
-# Hallucination Despite Context
+# AI Agent Hallucinates Facts Not in Retrieved Context: Causes and Fixes
 
-## Issue: Model Generates Information Not in Retrieved Documents
+## Issue: AI agent generates information that sounds plausible but isn't actually present in the documents it retrieved.
 
 **Frequency**: Common
 
@@ -9,6 +9,7 @@
 - Plausible-sounding additions beyond retrieved content
 - Numbers, dates, or names fabricated
 - Details added that "make sense" but weren't provided
+- Commonly reported in RAG pipelines built with LangChain or LlamaIndex when retrieved context is incomplete and the model fills the gap itself
 
 **Root Cause**
 Even with relevant context, models may fill gaps with generated content, especially when context is incomplete or query asks for specifics not in documents.
@@ -49,6 +50,7 @@ Legal RAG tools hallucinate at rates of 17-33% even with retrieval augmentation.
 - Track fabrication patterns
 - User reports of incorrect information
 
+**How to fix it**: ground every generated claim explicitly in the retrieved text, and train the model to admit gaps rather than fill them in — see Mitigation Strategies below.
 
 ## Mitigation Strategies
 

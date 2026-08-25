@@ -1,6 +1,6 @@
-# Citation Doesn't Support Claim
+# AI Agent's Citation Doesn't Actually Say What the Answer Claims: Causes and Fixes
 
-## Issue: Cited Source Doesn't Actually Support the Claim Made
+## Issue: AI agent attaches a real citation to a claim, but the cited source doesn't actually state what the agent says it does.
 
 **Frequency**: Common
 
@@ -9,6 +9,7 @@
 - Source says something different than claim
 - Claim is inference not stated in source
 - Citation is tangentially related but doesn't support specific claim
+- Commonly reported in RAG pipelines (LangChain, LlamaIndex) when the model paraphrases loosely instead of extracting text directly from the source
 
 **Root Cause**
 Model may make a claim, then attach a citation to a related source that doesn't actually support the specific statement made.
@@ -39,6 +40,7 @@ Result: User believes guarantee exists when it doesn't
 - Track support verification failure rate
 - User reports of misleading citations
 
+**How to fix it**: verify claim-source entailment before output, and prefer extractive quotes over loose paraphrase — see Mitigation Strategies below.
 
 ## Mitigation Strategies
 

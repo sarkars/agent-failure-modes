@@ -1,6 +1,6 @@
-# Fabricated Citations
+# AI Agent Cites Sources That Don't Exist: Causes and Fixes
 
-## Issue: Model Cites Sources That Don't Exist
+## Issue: AI agent invents plausible-sounding citations — studies, articles, or case law — that don't actually exist.
 
 **Frequency**: Occasional
 
@@ -9,6 +9,7 @@
 - Made-up document titles or authors
 - URLs that lead nowhere
 - Plausible-sounding but fake references
+- Commonly reported in RAG and legal-research agents (LangChain, LlamaIndex) when the model generates content beyond what was actually retrieved
 
 **Root Cause**
 When model generates content beyond retrieved context, it may also generate citations for that content, creating entirely fabricated references.
@@ -47,6 +48,7 @@ Result: User can't verify, may cite fake study themselves
 - Cross-reference author/title combinations
 - Flag citations not in retrieved documents
 
+**How to fix it**: restrict citations to sources actually present in retrieved context and validate every reference before output — see Mitigation Strategies below.
 
 ## Mitigation Strategies
 
