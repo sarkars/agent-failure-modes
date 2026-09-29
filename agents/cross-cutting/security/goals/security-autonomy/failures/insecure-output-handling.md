@@ -1,10 +1,10 @@
-# Insecure Output Handling
+# AI Agent Insecure Output Handling: Causes, Examples, and Fixes
 
-## Issue: Downstream system executes unsanitized LLM output.
+## Issue: A downstream system executes or renders unsanitized LLM output — how insecure output handling actually works is that the app trusts model output as if it were developer-authored code instead of treating it as untrusted input
 
 **Frequency**: Rare but Catastrophic
 
-**Symptoms**
+**Symptoms** (examples of insecure output handling)
 - LLM output reaches SQL/HTML/code execution.
 - Model generates SQL query string that is directly executed (no parameterized query).
 - HTML output from model is directly rendered in browser without escaping (XSS).
@@ -109,6 +109,8 @@ JavaScript executes in browser, steals user's session cookie.
 | Output validation schema coverage | 100% | % of model-generated commands/queries checked against an expected output schema before execution |
 
 ---
+
+**How to fix it**: never hand model output to a SQL engine, shell, or browser without the same parameterization or encoding you'd require for any other untrusted input.
 
 ## Mitigation Strategies
 

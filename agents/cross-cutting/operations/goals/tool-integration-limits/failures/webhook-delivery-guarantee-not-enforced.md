@@ -1,7 +1,7 @@
-# Webhook Delivery Guarantee Not Enforced
+# AI Agent Webhook Delivery Guarantee Not Enforced: Causes and Fixes
 
-## Issue
-An agent's architecture assumes a tool's webhook events are delivered reliably — exactly once, or at least once with guaranteed eventual delivery — when the tool's actual delivery model is best-effort with no guarantee at all. Under transient failures on either the vendor's or the agent's side (a brief outage, a deploy causing a 502 on the receiving endpoint, a network blip), the event is simply dropped rather than retried, and the agent never learns the underlying event happened, leading to silently missing state with no error to trigger investigation.
+## Issue: The agent's architecture assumes a vendor's webhooks are delivered exactly-once or at-least-once, when the vendor's actual delivery model is best-effort with no guarantee at all
+Under transient failures on either the vendor's or the agent's side (a brief outage, a deploy causing a 502 on the receiving endpoint, a network blip), the event is simply dropped rather than retried, and the agent never learns the underlying event happened, leading to silently missing state with no error to trigger investigation.
 
 **Frequency**: Common
 
@@ -41,6 +41,8 @@ Many webhook systems are implemented as a simple HTTP POST fired at the moment a
 | Webhook drop rates during receiver-side deploys or brief outages are commonly observed in the low single-digit percentage range of total events during the affected window, but can spike much higher during longer incidents | Consistent with limited-retry-window delivery models common across vendors |
 | Systems that rely solely on webhooks with no reconciliation mechanism take substantially longer to detect missing events, often measured in days, compared to systems with a daily reconciliation job, measured in hours | Because webhook-only architectures have no independent detection signal |
 | Adding a periodic reconciliation/backfill job against the source system's list/query API has been observed to close the large majority of the gap left by best-effort webhook delivery | By providing an independent, guaranteed-eventually-consistent detection path |
+
+**How to fix it**: confirm the vendor's actual delivery guarantee in writing, then add periodic reconciliation against the source of truth — don't rely on webhooks alone to detect what they silently dropped.
 
 ## Mitigations
 1. **Confirm the vendor's actual delivery guarantee before building on it**: Read the vendor's webhook documentation specifically for delivery guarantee language (best-effort vs. at-least-once vs. exactly-once) and design the architecture around the documented reality, not an assumption.

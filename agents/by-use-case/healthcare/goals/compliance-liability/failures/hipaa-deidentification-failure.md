@@ -1,12 +1,13 @@
-# HIPAA De-Identification Failure in Agent-Generated Outputs
+# AI Agent HIPAA De-Identification Failure: Causes and Fixes
 
-## Issue: Agent Produces a "De-Identified" Summary, Research Extract, or Support Ticket That Still Contains Re-Identifiable Information
+## Issue: An agent produces "de-identified" patient samples, clinical samples, or a patient-level database extract for research or analytics that still contains re-identifiable information
 
 **Frequency**: Common
 
 **Symptoms**
-- Agent removes obvious identifiers (name, MRN) per a Safe Harbor-style checklist but leaves rare diagnosis + specific date + small-population geographic detail combinations that are jointly re-identifying
-- Free-text clinical narrative passed to a downstream non-PHI-authorized system (analytics, support ticket, external vendor) retains quasi-identifiers embedded in prose rather than structured fields
+- De-identified patient samples or clinical samples still combine a rare diagnosis, a specific date, and a small-population geographic detail — a combination that's jointly re-identifying even though no single field is
+- A de-identified patient-level database, insurance claims extract, or analytics dataset retains quasi-identifiers embedded in free-text notes rather than structured fields
+- De-identified patient logs, profiles, or support tickets sent to a downstream non-PHI-authorized system (analytics, external vendor) leak identifiers buried in narrative prose that a structured-field checklist never scans
 - De-identification checklist is applied to structured fields only; identifiers embedded in narrative text (e.g., "the patient's daughter, a nurse at County General") are missed
 - No verification step confirms the output is actually non-identifying before it leaves the HIPAA-covered boundary
 
@@ -29,6 +30,8 @@ Impact: HIPAA violation exposure; breach notification obligation if discovered p
 - Expert Determination (statistical re-identification risk assessment) is recommended by regulatory guidance specifically because checklist-based Safe Harbor removal is known to be insufficient for narrative or small-population data
 
 ---
+
+**How to fix it**: don't trust checklist-based field removal alone — score de-identified patient samples and datasets for k-anonymity before release, and suppress or generalize any quasi-identifier combination that falls below the threshold.
 
 ## Mitigation Strategies
 

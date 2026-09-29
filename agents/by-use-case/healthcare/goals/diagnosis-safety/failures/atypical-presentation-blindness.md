@@ -1,6 +1,6 @@
-# Atypical Presentation Blindness
+# AI Agent Atypical Presentation Blindness: Causes and Fixes
 
-## Issue: Model Trained Predominantly on "Textbook" Symptom Presentations Misses Atypical Presentations Common in Women, Elderly, and Diverse Populations
+## Issue: An AI diagnostic model trained predominantly on "textbook" symptom presentations misses the atypical presentation of the same condition, common in women, the elderly, and diverse populations
 
 **Frequency**: Common
 
@@ -28,6 +28,8 @@ Impact: Delayed cardiac workup; treatment delay increases morbidity risk
 - Silent/blunted presentations in elderly patients (afebrile sepsis, painless MI) are systematically under-triaged when symptom checklists assume typical presentation thresholds
 
 ---
+
+**How to fix it**: force inclusion of high-risk diagnoses in the differential for demographics known to present atypically, and lower symptom-severity thresholds accordingly — don't rely on typical-presentation pattern matching alone.
 
 ## Mitigation Strategies
 

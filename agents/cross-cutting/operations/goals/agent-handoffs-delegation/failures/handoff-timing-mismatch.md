@@ -1,7 +1,7 @@
-# Handoff Timing Mismatch
+# AI Agent Handoff Timing Mismatch: Causes and Fixes
 
-## Issue
-A task is handed off before the receiving agent is actually ready to accept it (it's still initializing, mid-way through another task, or hasn't started polling its queue yet), or after the receiving agent's window to act on it has already closed (a deadline passed, a session expired, an external resource is no longer available). In both directions, the handoff is transmitted successfully at the protocol level but arrives at the wrong moment for the receiver to do anything useful with it.
+## Issue: A task is handed off to another agent before it's ready to receive it, or after its action deadline has already passed
+In both directions, the handoff is transmitted successfully at the protocol level (in LangGraph, CrewAI, or a custom message-queue-based orchestration) but arrives at the wrong moment for the receiver to do anything useful with it — the receiving agent might still be cold-starting, mid-way through another task, or the task's validity window may have already elapsed by the time it's actually read.
 
 **Frequency**: Common
 
@@ -42,6 +42,8 @@ the order is already placed.
 | An estimated 5-10% of time-bound handoffs in queue-based multi-agent systems experience delivery delay exceeding the task's validity window during peak load | Typical range observed in queue-backed handoff systems |
 | Adding explicit expiry checks at the point of use (not just at handoff time) eliminates the large majority of stale-task incidents | Reported range across teams adding receiver-side freshness validation |
 | Cold-start-related missed handoffs are disproportionately common in autoscaled agent deployments compared to statically provisioned ones | Estimated from incident data across autoscaled multi-agent pipelines |
+
+**How to fix it**: validate task freshness at the point of use and confirm receiver readiness before handoff, rather than trusting that "sent" means "ready to act on."
 
 ## Mitigations
 1. **Receiver-side freshness validation**: Require the receiving agent to check a task's timestamp and validity window against the current time at the point of use (not just at receipt), and re-fetch or reject if stale.

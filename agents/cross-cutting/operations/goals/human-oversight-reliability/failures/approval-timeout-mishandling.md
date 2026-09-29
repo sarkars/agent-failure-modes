@@ -1,6 +1,6 @@
-# Approval Timeout Mishandling
+# AI Agent Approval Timeout Mishandling: Causes and Fixes
 
-## Issue: Agent Behaves Incorrectly When Human Approval Times Out
+## Issue: The automatic approval review times out while evaluating the requested approval, and the agent then does the wrong thing — auto-approving without real review, or blocking the task forever
 
 **Frequency**: Common
 
@@ -65,6 +65,8 @@ From Workflow Research (2026):
 - Silent timeout without notification
 - Auto-approve as default fallback
 - No timeout based on action risk level
+
+**How to fix it**: scale the timeout and fallback to the action's risk, and escalate to a second approver on timeout instead of defaulting to auto-approve.
 
 ## Mitigation Strategies
 
