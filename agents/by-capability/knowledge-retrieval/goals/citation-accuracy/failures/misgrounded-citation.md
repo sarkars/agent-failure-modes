@@ -1,6 +1,6 @@
-# Misgrounded Citation
+# AI Agent Cites a Real Source That Doesn't Actually Support the Claim: Causes and Fixes
 
-## Issue: Citation Exists But Doesn't Support the Claim
+## Issue: AI agent cites a real, retrievable document, but the document doesn't actually support the specific claim being made — a citation that passes a quick verification while still being wrong.
 
 **Frequency**: Common (contributes to 17-33% hallucination rate in legal RAG)
 
@@ -10,6 +10,7 @@
 - Source may be irrelevant to the topic
 - Source may contradict the claim
 - Users verify citation exists but miss that it's misapplied
+- Commonly reported in legal and compliance RAG pipelines (LangChain, LlamaIndex) built on similarity-based retrieval rather than legal or semantic relevance
 
 **Root Cause**
 RAG system retrieves and cites real documents, but the generation model incorrectly asserts the source supports a claim it doesn't. Unlike fabricated citations (which are easy to catch), misgrounded citations pass basic verification because the source exists - the failure is in the semantic relationship between claim and source.
@@ -69,6 +70,7 @@ From Stanford Legal RAG Hallucinations Study (2025):
 - User feedback on "citation didn't support claim"
 - A/B testing with domain expert evaluation
 
+**How to fix it**: verify that each cited source actually entails the specific claim being made, not just that it's topically related — see Mitigation Strategies below.
 
 ## Mitigation Strategies
 

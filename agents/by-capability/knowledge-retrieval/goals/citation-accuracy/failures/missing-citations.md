@@ -1,6 +1,6 @@
-# Missing Citations
+# AI Agent Makes Claims Without Citing a Source: Causes and Fixes
 
-## Issue: Claims Made Without Attribution
+## Issue: AI agent states factual claims without attaching a citation, so the user can't verify where the information came from.
 
 **Frequency**: Common
 
@@ -9,6 +9,7 @@
 - Some statements cited, others not
 - User can't verify important claims
 - Inconsistent citation coverage
+- Commonly reported in RAG pipelines (LangChain, LlamaIndex) that don't enforce a citation requirement on every generated claim
 
 **Root Cause**
 - Model doesn't consistently apply citation requirement
@@ -44,6 +45,7 @@ Result: User can't verify key detail
 - Flag responses with low citation coverage
 - User feedback on unverifiable claims
 
+**How to fix it**: require every factual claim to carry a citation, and flag or block output that doesn't — see Mitigation Strategies below.
 
 ## Mitigation Strategies
 

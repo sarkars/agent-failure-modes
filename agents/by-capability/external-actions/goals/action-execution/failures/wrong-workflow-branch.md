@@ -1,6 +1,6 @@
-# Wrong Workflow Branch
+# AI Agent Picks the Wrong Workflow Branch (Refund vs. Replacement, Escalate vs. Resolve): Causes and Fixes
 
-## Issue: Agent chooses refund vs replacement, escalation vs resolution incorrectly.
+## Issue: AI agent chooses the wrong path in a decision workflow — refund vs. replacement, escalation vs. resolution — based on surface pattern-matching instead of the applicable rule.
 
 **Frequency**: Common
 
@@ -8,6 +8,7 @@
 - Business rule mismatch in branch decision.
 - Agent offers a replacement for a case that policy says should be a refund (or vice versa), based on surface-level similarity to past cases rather than the actual applicable rule.
 - Case is resolved directly by the agent when the specific combination of factors (value, customer tier, product type) should have triggered escalation.
+- Commonly reported in graph-based orchestration frameworks like LangGraph, where a conditional edge free-forms its branch decision from context instead of evaluating explicit routing rules.
 
 **Root Cause**
 The branch decision is learned from the most frequent historical pattern rather than evaluated against the specific policy conditions (value thresholds, customer tenure, product type) that actually govern the current case, because those conditions are only implicit in training examples rather than queried explicitly at decision time. With no decision-tree or rule engine backing the choice, the agent free-forms a branch from context, and when a case superficially resembles the common pattern but differs on exactly the condition that should redirect it, the surface-level resemblance wins because nothing structurally forces a check against the differentiating rule before the branch is taken.
@@ -44,6 +45,8 @@ should have routed this case to escalation.
 | workflow_branch_policy_misalignment_rate_percent | < 0.1% | Sampled decisions where the branch taken doesn't match the policy engine's expected branch for that case |
 
 ---
+
+**How to fix it**: back the branch decision with an explicit decision-tree or rule engine keyed on the actual policy conditions, not learned surface similarity — see Mitigation Strategies below.
 
 ## Mitigation Strategies
 

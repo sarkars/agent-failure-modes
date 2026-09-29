@@ -1,6 +1,6 @@
-# Synthesis Errors
+# AI Agent Mixes Up Facts When Combining Multiple Sources: Causes and Fixes
 
-## Issue: Model Incorrectly Combines Information from Multiple Sources
+## Issue: AI agent incorrectly merges facts from different documents, attributing details to the wrong entity when synthesizing an answer.
 
 **Frequency**: Common
 
@@ -9,6 +9,7 @@
 - Temporal mixing (past/present confused)
 - Attributes assigned to wrong subjects
 - Calculations or aggregations wrong
+- Commonly reported in RAG pipelines (LangChain, LlamaIndex) answering multi-entity queries across several retrieved documents
 
 **Root Cause**
 When synthesizing from multiple sources, model may incorrectly associate facts with wrong entities or contexts.
@@ -44,6 +45,7 @@ Result: User expects installation that won't be provided
 - Monitor multi-source synthesis errors
 - User reports of mixed-up information
 
+**How to fix it**: track entity-attribute associations explicitly during synthesis and require source attribution per claim — see Mitigation Strategies below.
 
 ## Mitigation Strategies
 

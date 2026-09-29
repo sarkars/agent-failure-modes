@@ -1,6 +1,6 @@
-# Granularity Mismatch
+# AI Agent Citations Point to the Wrong Level of Detail: Causes and Fixes
 
-## Issue: Citation Points to Wrong Level of Specificity
+## Issue: AI agent cites an entire document when a specific section is needed — or vice versa — leaving the user to search for the actual supporting passage.
 
 **Frequency**: Common
 
@@ -9,6 +9,7 @@
 - Page/section numbers missing or wrong
 - User must search within document to find info
 - Too-specific citation misses broader context
+- Commonly reported in RAG pipelines (LangChain, LlamaIndex) that chunk documents without preserving section- or page-level metadata
 
 **Root Cause**
 Citations may be at document level when paragraph-level needed, or vice versa. Model may not track or output precise locations.
@@ -38,6 +39,7 @@ Better citation: "Technical Documentation, Section 4.2.3: Rate Limits"
 - User feedback on citation usefulness
 - Compare citation granularity to claim specificity
 
+**How to fix it**: preserve section- and page-level location metadata through the retrieval pipeline and cite at that granularity — see Mitigation Strategies below.
 
 ## Mitigation Strategies
 

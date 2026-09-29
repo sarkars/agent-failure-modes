@@ -1,6 +1,6 @@
-# Cherry-Picking Evidence
+# AI Agent Cherry-Picks Evidence and Ignores Contradictions: Causes and Fixes
 
-## Issue: Model Selectively Uses Supporting Evidence, Ignores Contradicting
+## Issue: AI agent selectively cites supporting evidence from retrieved context while ignoring information that contradicts it.
 
 **Frequency**: Common
 
@@ -9,6 +9,7 @@
 - Caveats, exceptions, or limitations omitted
 - User gets incomplete picture
 - Decisions made on partial information
+- Commonly reported in RAG pipelines (LangChain, LlamaIndex) where the model favors a coherent narrative over surfacing every retrieved passage
 
 **Root Cause**
 Model may select evidence that best fits a coherent narrative, ignoring qualifying information or exceptions that would complicate the answer.
@@ -45,6 +46,7 @@ Result: User not informed of risks and limitations
 - User feedback on incomplete answers
 - Measure answer comprehensiveness
 
+**How to fix it**: force the model to explicitly weigh contradicting passages before answering and check answer comprehensiveness against all retrieved evidence — see Mitigation Strategies below.
 
 ## Mitigation Strategies
 

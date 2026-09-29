@@ -1,6 +1,6 @@
-# Insufficient Rollback
+# AI Agent Can't Undo a Bad Action: Causes and Fixes
 
-## Issue: Agent cannot undo a bad action.
+## Issue: AI agent executes a destructive action with no way to roll it back or undo it afterward.
 
 **Frequency**: Rare but Catastrophic
 
@@ -8,6 +8,7 @@
 - No revert path after failure.
 - Incident response stalls because engineers must manually reconstruct pre-action state from logs instead of triggering an automated undo.
 - Partial rollback leaves the resource in a state that matches neither the pre-action nor the intended post-action state.
+- Commonly reported in agent frameworks like LangGraph or CrewAI that orchestrate tool calls without built-in compensating-transaction or snapshot support.
 
 **Root Cause**
 The action was implemented as a hard, destructive operation — a permanent delete, a direct overwrite — with no compensating transaction defined and no pre-action snapshot captured specifically for the resource being modified, so once it executes there is no recorded prior state to return to. This typically goes unnoticed until a real incident because the rollback path, if one nominally exists, was never exercised in testing; for multi-step actions the gap is often partial rather than total — some steps have a defined compensation and others don't — which is arguably worse, since it produces a resource stuck in a state matching neither the original nor the intended outcome.
@@ -42,6 +43,8 @@ backup — losing same-day writes for the affected accounts.
 | rollback_success_rate_percent | 100% | Successful rollbacks restoring exact pre-action state, divided by rollback attempts |
 
 ---
+
+**How to fix it**: capture a pre-action snapshot or compensating transaction for every destructive step and verify the revert path in testing — see Mitigation Strategies below.
 
 ## Mitigation Strategies
 

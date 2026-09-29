@@ -1,6 +1,6 @@
-# Broken References
+# AI Agent Cites Links That Are Dead or Moved: Causes and Fixes
 
-## Issue: Citations Link to Unavailable or Moved Content
+## Issue: AI agent's citations point to documents that have been moved, deleted, or made inaccessible since they were indexed.
 
 **Frequency**: Occasional
 
@@ -9,6 +9,7 @@
 - Document has been moved or deleted
 - Permission denied when following citation
 - Link format incorrect
+- Commonly reported in RAG pipelines (LangChain, LlamaIndex) that index document URLs without periodically re-validating them
 
 **Root Cause**
 - Documents moved after indexing
@@ -43,6 +44,7 @@ Result: User can't access cited information
 - Monitor user reports of broken links
 - Regular crawl of cited URLs
 
+**How to fix it**: validate citation links before serving them and use stable, canonical identifiers instead of URLs that shift — see Mitigation Strategies below.
 
 ## Mitigation Strategies
 

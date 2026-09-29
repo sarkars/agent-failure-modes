@@ -1,6 +1,6 @@
-# Noise Corruption
+# AI Agent Answers Get Corrupted by Irrelevant Retrieved Context: Causes and Fixes
 
-## Issue: Irrelevant Context Corrupts the Response
+## Issue: AI agent's answer quality drops when irrelevant documents get mixed into the retrieved context — the agent uses noise it should have ignored.
 
 **Frequency**: Common
 
@@ -10,6 +10,7 @@
 - Model distracted by tangential content
 - Quality degrades as more context added
 - Correct answer available but ignored for noisy content
+- Commonly reported in RAG pipelines (LangChain, LlamaIndex) configured with a high top-k retrieval setting that favors recall over precision
 
 **Root Cause**
 When retrieved context includes irrelevant documents (noise), the model may incorporate that noise into its response. RAGAS Noise Sensitivity metric specifically measures this: how much does adding irrelevant context degrade answer quality? Models struggle to ignore plausible-sounding but irrelevant information, especially when noise is semantically similar to the query topic.
@@ -88,6 +89,7 @@ From Noise Research (RAGAS studies, 2026):
 - Detect off-topic content in answers
 - Measure answer relevance to query
 
+**How to fix it**: retrieve fewer, more relevant documents and filter noise before synthesis rather than trusting the model to ignore it — see Mitigation Strategies below.
 
 ## Mitigation Strategies
 

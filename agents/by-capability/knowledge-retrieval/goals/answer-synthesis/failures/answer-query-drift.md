@@ -1,6 +1,6 @@
-# Answer-Query Drift
+# AI Agent Answers a Different Question Than What Was Asked: Causes and Fixes
 
-## Issue: Answer Doesn't Address the Actual Question
+## Issue: AI agent gives a coherent, accurate answer that doesn't actually address the question the user asked.
 
 **Frequency**: Common
 
@@ -10,6 +10,7 @@
 - Model latches onto context rather than query
 - Factually correct information that's not relevant
 - User must re-ask to get actual answer
+- Commonly reported in RAG pipelines built with LangChain or LlamaIndex, where the model latches onto retrieved context instead of the original query
 
 **Root Cause**
 The model may be distracted by retrieved context and generate an answer about what's in the context rather than what was asked. RAGAS Answer Relevancy metric measures this: is the answer relevant to the query, regardless of whether it's factually correct? This is distinct from hallucination - the answer may be grounded and accurate, just not addressing the actual question.
@@ -84,6 +85,7 @@ From Answer Relevancy Research (RAGAS, 2026):
 - Analyze answer coverage of query intents
 - A/B test query reinforcement techniques
 
+**How to fix it**: reinforce the original query at generation time and score answer relevancy separately from factual accuracy — see Mitigation Strategies below.
 
 ## Mitigation Strategies
 

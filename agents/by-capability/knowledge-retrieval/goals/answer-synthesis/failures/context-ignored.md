@@ -1,6 +1,6 @@
-# Context Ignored
+# AI Agent Ignores Retrieved Context and Answers from Memory Instead: Causes and Fixes
 
-## Issue: Model Ignores Retrieved Context
+## Issue: AI agent answers from its own training knowledge instead of using the specific documents retrieved for it.
 
 **Frequency**: Common
 
@@ -9,6 +9,7 @@
 - Generic response when specific info was available
 - Model responds from parametric knowledge instead
 - Context provided but not reflected in answer
+- Commonly reported in RAG pipelines built with LangChain or LlamaIndex when the prompt buries retrieved context instead of foregrounding it
 
 **Root Cause**
 - Prompt doesn't emphasize context usage
@@ -47,6 +48,7 @@ Result: Generic unhelpful answer instead of specific policy
 - Monitor generic vs. specific response rates
 - Flag answers without context references
 
+**How to fix it**: restructure the prompt to foreground retrieved context and explicitly instruct the model to ground its answer in it — see Mitigation Strategies below.
 
 ## Mitigation Strategies
 

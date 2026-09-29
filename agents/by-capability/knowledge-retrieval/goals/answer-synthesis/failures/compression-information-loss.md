@@ -1,6 +1,6 @@
-# Compression Information Loss
+# AI Agent Loses Critical Information When Compressing Context: Causes and Fixes
 
-## Issue: Context Summarization Loses Critical Information
+## Issue: Summarizing or compressing retrieved context before it reaches the model drops the specific numbers, dates, or conditions the answer needed.
 
 **Frequency**: Occasional
 
@@ -10,6 +10,7 @@
 - Caveats and conditions dropped
 - Compression removes the specific fact needed
 - Summarized context leads to incomplete answers
+- Commonly reported in RAG pipelines (LangChain, LlamaIndex) that insert a context-compression or summarization step ahead of the final LLM call
 
 **Root Cause**
 When context is too long, systems may compress or summarize it before sending to the LLM. This compression can lose critical information - specific numbers, dates, exceptions, or conditions. The summarizer doesn't know which details the query needs, so it may discard exactly what's required. RAGAS Context Recall can detect when relevant information is lost before synthesis.
@@ -90,6 +91,7 @@ From Compression Research (2026):
 - Detect hedging language ("approximately", "around")
 - Audit compression for fact retention
 
+**How to fix it**: make compression query-aware so it knows which details to keep, and audit summaries against source documents for retained facts — see Mitigation Strategies below.
 
 ## Mitigation Strategies
 
