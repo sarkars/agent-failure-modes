@@ -1,6 +1,6 @@
 # AI Agent Handoff Timing Mismatch: Causes and Fixes
 
-## Issue: A task is handed off to another agent before it's ready to receive it, or after its action deadline has already passed
+## Issue: A task is handed off to another agent before it's ready to receive it, or after its action deadline has already passed.
 In both directions, the handoff is transmitted successfully at the protocol level (in LangGraph, CrewAI, or a custom message-queue-based orchestration) but arrives at the wrong moment for the receiver to do anything useful with it — the receiving agent might still be cold-starting, mid-way through another task, or the task's validity window may have already elapsed by the time it's actually read.
 
 **Frequency**: Common

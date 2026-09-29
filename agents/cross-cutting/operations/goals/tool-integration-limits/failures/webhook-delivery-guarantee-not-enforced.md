@@ -1,6 +1,6 @@
 # AI Agent Webhook Delivery Guarantee Not Enforced: Causes and Fixes
 
-## Issue: The agent's architecture assumes a vendor's webhooks are delivered exactly-once or at-least-once, when the vendor's actual delivery model is best-effort with no guarantee at all
+## Issue: The agent's architecture assumes a vendor's webhooks are delivered exactly-once or at-least-once, when the vendor's actual delivery model is best-effort with no guarantee at all.
 Under transient failures on either the vendor's or the agent's side (a brief outage, a deploy causing a 502 on the receiving endpoint, a network blip), the event is simply dropped rather than retried, and the agent never learns the underlying event happened, leading to silently missing state with no error to trigger investigation.
 
 **Frequency**: Common
