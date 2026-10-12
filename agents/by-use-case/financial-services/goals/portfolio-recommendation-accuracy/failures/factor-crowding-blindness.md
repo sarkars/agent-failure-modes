@@ -1,6 +1,6 @@
-# Factor-Crowding Blindness in Portfolio Recommendations
+# AI Agent Factor-Crowding Blindness: Causes and Fixes
 
-## Issue: Model Recommends Factor Exposures Without Awareness of Market-Wide Crowding, Causing Correlated Unwind Risk
+## Issue: A portfolio-recommendation model recommends factor exposures with no awareness of market-wide crowding, causing correlated unwind risk when crowded positions all retreat at once.
 
 **Frequency**: Common
 
@@ -27,6 +27,8 @@ Impact: Portfolio loses far more than factor volatility alone would predict
 - Historical quant quakes (e.g., Aug 2007, 2018, 2026) have produced 3-7 standard-deviation factor moves over single-digit numbers of trading days
 - Crowding-adjusted factor risk models reduce false-confidence in factor Sharpe estimates by an estimated 20-40%
 - Funds with concentrated single-factor exposure see 2-3x higher drawdown volatility during deleveraging events vs. multi-factor diversified peers
+
+**How to fix it**: incorporate market-wide positioning data (13F filings, short interest, ETF flows) as a crowding signal, and cap single-factor exposure regardless of its standalone attractiveness.
 
 ---
 

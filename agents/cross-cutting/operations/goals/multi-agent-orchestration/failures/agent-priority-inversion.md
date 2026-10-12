@@ -1,6 +1,6 @@
-# Agent Priority Inversion
+# AI Agent Priority Inversion: Causes and Fixes
 
-## Issue
+## Issue: A low-priority agent holds a shared resource a high-priority agent needs, and nothing lets the high-priority agent preempt it.
 A low-priority agent acquires a shared resource (a database lock, a rate-limited API slot, a write lease on a document) and then stalls or runs slowly, while a high-priority agent that needs the same resource is forced to wait behind it. The high-priority agent's own urgency provides no mechanism to preempt the lower-priority holder, so the system's effective priority order is inverted: the task that matters least is dictating the pace of the task that matters most.
 
 **Frequency**: Occasional
@@ -41,6 +41,8 @@ triggering an SLA-breach alert and a customer complaint.
 | Priority-blind shared resources are involved in an estimated 15-25% of SLA breaches in mixed-priority multi-agent systems | Typical range observed in production incident reviews |
 | Median wait-time inflation for high-priority agents blocked by low-priority lock holders is reported in the 5-15x range versus uncontended access | Estimated from instrumented lock-wait telemetry |
 | Adding priority inheritance or preemption to shared locks reduces high-priority wait-time outliers by roughly 70-80% in reported deployments | Reported range across teams that implemented priority-aware resource managers |
+
+**How to fix it**: give the resource manager priority inheritance or preemption so a high-priority agent can't be stuck waiting behind a low-priority holder.
 
 ## Mitigations
 1. **Priority inheritance**: When a high-priority agent blocks on a resource held by a low-priority agent, temporarily boost the holder's effective priority (and its resource allocation, e.g. CPU/API quota) so it finishes and releases faster, a well-established technique from real-time operating systems.

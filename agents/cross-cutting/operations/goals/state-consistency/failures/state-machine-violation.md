@@ -1,7 +1,7 @@
-# State Machine Violation
+# AI Agent State Machine Violation: Causes and Fixes
 
-## Issue
-An entity that an agent manages (an order, a support ticket, a workflow run) is meant to move through a defined sequence of states with specific allowed transitions, but the agent — due to a missing guard, a race, or a direct write that bypasses the transition logic — moves it into a state or a state sequence the state machine should have forbidden. The entity ends up in a combination of fields that no valid path through the workflow should ever produce, and downstream logic that assumes the state machine's invariants hold then behaves unpredictably.
+## Issue: An entity the agent manages moves into a state or state sequence the workflow's state machine should have forbidden, because a write bypassed the transition-validation logic.
+The entity ends up in a combination of fields that no valid path through the workflow should ever produce, and downstream logic that assumes the state machine's invariants hold then behaves unpredictably.
 
 **Frequency**: Occasional
 
@@ -44,6 +44,8 @@ reconciliation batch for all 40,000 tickets in the run.
 | 5-12% of "impossible state" incidents in workflow-driven agent systems trace back to a write path that bypassed the primary transition validator | Typical range observed in production agent telemetry |
 | Centralizing all writes through a single transition-guard function reduces illegal-state incidents by an estimated 80-95% | Reported range across teams that consolidated write paths |
 | Illegal states are disproportionately introduced by admin/override tools and retry-after-failure paths rather than the primary happy-path flow | Estimated from incident postmortems in workflow-heavy agent deployments |
+
+**How to fix it**: route every write path — admin tools, retries, agent flow alike — through one shared transition-validation function, and back it with a database-level constraint so a code bug can't physically write an illegal state.
 
 ## Mitigations
 1. **Single enforcement point for all writes**: Route every write to the entity's state field — including admin tools, retries, and compensation logic, not just the primary agent flow — through one shared transition-validation function that rejects illegal transitions.

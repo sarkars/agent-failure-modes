@@ -1,6 +1,6 @@
-# Tool Cost Override Incident
+# AI Agent Tool Cost Override Incident: Causes and Fixes
 
-## Issue
+## Issue: An incident-time override that raises or disables a tool's cost cap is never reverted once the incident closes, because no expiry or revert step was attached to the change.
 During an incident (an outage, a launch under time pressure, a data-quality emergency), an engineer or on-call responder manually raises or disables a tool's cost cap to let the agent push through urgent work unblocked. The override is applied directly in configuration or a feature flag, the incident is resolved, and the override is never reverted — because reverting it isn't part of the incident-closure checklist and no automated expiry was attached to the change. The cap stays effectively uncapped indefinitely, sometimes for months, until an unrelated invoice review discovers it.
 
 **Frequency**: Common
@@ -44,6 +44,8 @@ the $5,000 cap traces back to an incident resolved four months prior.
 | A meaningful share of emergency configuration overrides applied during incidents are never explicitly reverted, persisting until discovered incidentally | Frequently observed pattern in incident postmortem audits |
 | Time-to-discovery for un-reverted cost overrides is commonly measured in months, typically surfaced by finance/billing review rather than engineering monitoring | Typical range absent automated expiry |
 | Overridden budget caps are often set 10-50x above the original approved value to comfortably clear the immediate incident, rather than the minimum needed | Common pattern under incident time pressure |
+
+**How to fix it**: attach a mandatory automatic expiry to every incident-time cap override, so it reverts to the prior value unless someone explicitly renews it.
 
 ## Mitigations
 1. **Mandatory expiry on overrides**: Require every emergency cap override to include an automatic expiry (time-boxed flag, TTL on the config value) that reverts to the prior value unless explicitly renewed, rather than persisting indefinitely by default.

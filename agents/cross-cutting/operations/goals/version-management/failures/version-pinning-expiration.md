@@ -1,6 +1,6 @@
-# Version Pinning Expiration
+# AI Agent Version Pinning Expiration: Causes and Fixes
 
-## Issue
+## Issue: A dependency pinned to an exact version for a good reason at the time is never revisited, and quietly accumulates CVEs and EOL risk.
 A team deliberately pins a dependency, container base image, or OS package to an exact version — for good reasons at the time (avoiding a breaking change, ensuring reproducible builds, working around a bug in a newer release) — and that pin is never revisited afterward. Unlike a range-based dependency that at least stays current within its bounds, an exact pin freezes the version indefinitely by design, so as months or years pass without an explicit review, the pinned version accumulates unpatched CVEs, falls off the vendor's support/EOL calendar, or becomes incompatible with newer tooling in the surrounding ecosystem, entirely because nothing was ever set up to force a periodic look at whether the original reason for pinning still applies.
 
 **Frequency**: Very Common
@@ -47,6 +47,8 @@ libssl issue was fixed upstream.
 | A large share of container base images and package pins in production systems are more than a year past their vendor's last security update for that exact version | Estimated from typical container/dependency security audits |
 | Pins added with an explicit "temporary, revisit later" justification are disproportionately represented among long-expired pins, since no artifact tracks the intended revisit date | Typical finding when auditing pin-related code comments against actual pin age |
 | Teams using automated dependency-update bots (Dependabot/Renovate) configured to also propose exact-pin updates (not just range-based updates) show meaningfully lower average pin age than teams relying on manual review | Typical range reported comparing automated vs. manual pin-maintenance practices |
+
+**How to fix it**: attach an explicit, tracked review date to every exact version pin, so it surfaces for reconsideration automatically instead of relying on someone remembering.
 
 ## Mitigations
 1. **Attach an explicit expiration/review date to every pin**: When adding an exact version pin, require a ticket or tracked annotation with a concrete re-review date (not just a comment saying "revisit later"), so the pin surfaces for reconsideration automatically rather than depending on someone remembering.

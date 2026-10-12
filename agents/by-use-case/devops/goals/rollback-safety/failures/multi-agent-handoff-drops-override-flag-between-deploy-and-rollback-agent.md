@@ -1,6 +1,7 @@
-# Multi-Agent Handoff Drops Override Flag Between Deploy and Rollback Agent
+# AI Agent Handoff Drops Override Flag: Causes and Fixes
 
-## Issue: A Deploy Agent Notes in Its Free-Text Reasoning That a Just-Deployed Change Includes a Manual Hotfix Applied to Address a Separate, Concurrent Incident, but This Note Is Never Written to a Structured Field the Downstream Rollback Agent Reads, So an Automated Rollback Triggered by an Unrelated Regression Reverts the Hotfix Along With the Bad Change
+## Issue: A deploy agent notes a hotfix should survive rollback only in free-text commentary, so an automated rollback for an unrelated regression reverts the hotfix too.
+The protection intent is written in a field a human would read, not the structured field the rollback agent's decision logic actually checks, so nothing stops it treating the hotfix revision like any other.
 
 **Frequency**: Occasional
 
@@ -34,6 +35,8 @@ INC-4821 resurfaces immediately after the rollback completes, requiring a second
 - Deploy agent's output contract permits a protected-change note to exist only in free-text commentary without requiring a corresponding structured "do-not-revert" field
 - Rollback agent is designed to act on the structured deploy-history record only, with no step that re-scans recent commit commentary for protection language before reverting
 - No automated reconciliation compares protection-relevant language in deploy commentary against the structured deploy-history fields actually consulted by the rollback agent
+
+**How to fix it**: require a structured `protected_change` field for any out-of-band hotfix, and make the rollback agent check it before reverting instead of relying on free-text commentary.
 
 ---
 

@@ -1,6 +1,7 @@
-# Stale State Use
+# AI Agent Stale State Use: Causes and Fixes
 
-## Issue: Agent uses old tool results after new data arrives.
+## Issue: An agent acts on an old tool result after the underlying resource has already changed, instead of re-fetching current state before the action.
+Fetched data sits in context for the rest of a multi-turn session with no freshness timestamp or cache-invalidation mechanism, so nothing distinguishes a value read seconds ago from one read twenty minutes ago — and the longer the session runs, the more opportunity an external actor has to change the resource unnoticed.
 
 **Frequency**: Common
 
@@ -89,6 +90,8 @@ checkout.
 
 ### Expected Failure State
 The agent attempts to book a seat based on a 12-minute-old availability snapshot that no longer reflects reality, resulting in a failed booking and a confused customer who was told a seat was available. A correctly defended system enforces a mandatory re-fetch for time-sensitive operations like seat booking, re-checking current availability immediately before the booking call rather than trusting the turn-2 snapshot held in context.
+
+**How to fix it**: tag every fetched value with a freshness timestamp and mandate a re-fetch immediately before any time-sensitive action — don't trust a snapshot taken earlier in the session.
 
 ## Mitigation Strategies
 

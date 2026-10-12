@@ -1,7 +1,7 @@
-# Circuit Breaker False Positive
+# AI Agent Circuit Breaker False Positive: Causes and Fixes
 
-## Issue
-A circuit breaker sitting in front of an agent's backend (the LLM inference endpoint, a tool API, or an internal microservice the agent calls) trips open in response to a short burst of transient errors — a brief upstream GC pause, a single overloaded pod, a momentary network blip — rather than a genuine sustained outage. Once open, the breaker rejects all subsequent calls for its full cooldown period regardless of whether the underlying service has already recovered, so a two-second blip turns into a 30-60 second window where every agent session fails over to a degraded fallback or errors outright, even though the dependency was healthy again within a couple of retries.
+## Issue: A circuit breaker in front of an agent's backend trips open on a short burst of transient errors rather than a genuine sustained outage.
+Once open, the breaker rejects all subsequent calls for its full cooldown period regardless of whether the underlying service has already recovered, so a two-second blip turns into a 30-60 second window where every agent session fails over to a degraded fallback or errors outright, even though the dependency was healthy again within a couple of retries.
 
 **Frequency**: Common
 
@@ -49,6 +49,8 @@ seconds corresponded to an actual upstream issue.
 | A substantial share of circuit breaker trips against LLM and tool-call dependencies are estimated to resolve within a few seconds if probed immediately, well inside the typical fixed cooldown window | Estimated from teams comparing breaker cooldown duration to actual upstream recovery time |
 | Counting request timeout as failure without separating "slow" from "errored" is a common contributor to over-sensitive breakers in high-latency-variance workloads | Typical finding across incident reviews of agent-adjacent circuit breakers |
 | Adaptive/exponential half-open probing (versus fixed cooldown) reduces mean unnecessary-degradation duration substantially in teams that have adopted it | Reported range across teams that moved from fixed to adaptive cooldowns |
+
+**How to fix it**: separate latency from genuine failure in trip criteria, and replace the fixed cooldown with fast adaptive half-open probing so recovery is detected within seconds, not after a flat 30-60s wait.
 
 ## Mitigations
 1. **Separate latency from failure in trip criteria**: Distinguish slow-but-successful calls from actual errors when computing the breaker's failure rate, and size the per-call timeout to reflect realistic LLM/tool latency percentiles (e.g., p99) rather than a generic microservice default.

@@ -1,6 +1,7 @@
-# Perspective & Viewpoint Blindness
+# AI Agent Perspective Blindness: Causes and Fixes
 
-## Issue: Model Fails to Recognize Objects Viewed from Unusual Angles or Perspectives
+## Issue: A vision model recognizes objects from frontal views but fails on the same objects rotated, tilted, or viewed from unusual angles.
+Training data skews heavily toward canonical frontal views, so accuracy drops sharply — sometimes by more than half — the further an object's actual orientation strays from that norm.
 
 **Frequency**: Common
 
@@ -26,6 +27,8 @@ Impact: Robot can't identify object in its current orientation
 - Accuracy variance across 0°-360° rotation: 30-50% variance
 - >30° tilt from canonical: accuracy drops 40%
 - Extreme angles (>60°): often <40% accuracy
+
+**How to fix it**: augment training with random rotations and synthetic 3D views across all angles, and lower confidence thresholds for non-frontal detections.
 
 ---
 

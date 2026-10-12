@@ -1,6 +1,6 @@
-# Memory Fragmentation Allocation Failure
+# AI Agent Memory Fragmentation Allocation Failure: Causes and Fixes
 
-## Issue
+## Issue: An inference server's GPU shows plenty of free memory, yet rejects a new request because that memory is scattered across blocks too small to satisfy it.
 An inference server's GPU has enough total free memory to serve a new request's KV-cache, but that free memory is scattered across many small, non-contiguous blocks left behind by requests of varying sequence lengths finishing and freeing memory at different times. The allocator can't satisfy the new request's contiguous-block requirement and either rejects it (a false-capacity-exhaustion error on a GPU that's nominally 40% free) or triggers an expensive defragmentation/compaction pass that stalls the whole batch — either way, the fleet needs more replicas than total memory usage alone would suggest, directly inflating cost-per-token.
 
 **Frequency**: Occasional
@@ -51,6 +51,8 @@ baseline.
 | Non-paged KV-cache allocators under bimodal or highly variable sequence-length workloads commonly reach 25-45% unusable "free" memory within days of continuous uptime | Typical range observed in custom/legacy serving stacks |
 | Migrating to a paged-attention allocator (fixed-size block allocation) commonly reduces fragmentation-driven allocation failures by 80%+ | Estimated range based on paged-allocator adoption case reports |
 | Fragmentation-driven autoscaling (adding replicas to compensate for unusable free memory rather than genuine capacity shortage) commonly adds 10-20% avoidable fleet cost when unaddressed | Estimated range from postmortems identifying the root cause |
+
+**How to fix it**: migrate to a paged-attention-style allocator, or schedule proactive restarts on long-running nodes so fragmentation never reaches the point of false capacity-exhaustion errors.
 
 ## Mitigations
 1. **Adopt paged/block-based KV-cache allocation**: Use or migrate to serving engines with paged-attention-style memory management (fixed-size pages rather than variable contiguous blocks), which largely eliminates classic external fragmentation by design.

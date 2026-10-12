@@ -1,6 +1,6 @@
-# Version Skipping Unsupported
+# AI Agent Version Skipping: Causes and Fixes
 
-## Issue
+## Issue: An upgrade jumps straight from an old version to a much newer one, skipping intermediate versions the vendor's migration logic assumed would run.
 A system upgrades a component directly from an old version to a much newer one — skipping several intermediate major versions in one jump, often because the intermediate upgrades were deferred for a long time — and the vendor or maintainer only officially supports sequential, one-major-at-a-time upgrade paths (or specific documented multi-version jumps), not the arbitrary skip actually being attempted. The upgrade proceeds anyway, because nothing enforces the supported-path requirement at execution time, and it fails partway through, corrupts state that assumed intermediate migration steps had run, or "succeeds" while leaving the system in an undefined state the vendor never tested or committed to supporting.
 
 **Frequency**: Occasional
@@ -48,6 +48,8 @@ installer itself reported success.
 | A meaningful share of major-version upgrade incidents occur specifically on systems that deferred upgrades long enough to require skipping multiple intermediate versions, rather than on systems upgrading one version at a time | Estimated from vendor support-ticket patterns for large version jumps |
 | Vendors commonly test and officially support only sequential one-major-version upgrade paths, or a small number of explicitly validated fast-path jumps, leaving arbitrary larger skips untested by definition | Typical pattern observed across major-version software release practices |
 | Systems that defer upgrades for multiple release cycles and then attempt a single large jump report substantially higher migration-incident rates than systems upgrading incrementally on each release | Typical range observed comparing incremental vs. deferred-then-batched upgrade strategies |
+
+**How to fix it**: have upgrade tooling verify the current version is on a documented supported path before proceeding, and step through intermediate versions in sequence when it isn't.
 
 ## Mitigations
 1. **Enforce supported-path checks before upgrade execution**: Have upgrade tooling explicitly verify the current version is on a documented supported upgrade path (sequential or an explicitly validated fast path) before proceeding, rather than only checking that the target version is newer.

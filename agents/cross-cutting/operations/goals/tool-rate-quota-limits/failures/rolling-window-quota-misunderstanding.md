@@ -1,7 +1,7 @@
-# Rolling Window Quota Misunderstanding
+# AI Agent Rolling Window Quota Misunderstanding: Causes and Fixes
 
-## Issue
-The agent's pacing logic assumes a tool's quota resets at a fixed clock boundary (e.g., "resets at midnight UTC" or "resets at the top of the hour"), but the tool actually enforces a rolling/sliding window — quota consumed at any given moment doesn't free up until exactly that much time has elapsed since it was consumed, continuously, rather than all at once at a fixed reset point. Because the agent's scheduling strategy is built around a reset-and-refill mental model, it either waits far longer than necessary for capacity to return, or assumes capacity is available at a "reset time" that doesn't actually exist for a rolling window.
+## Issue: The agent's pacing logic assumes a tool's quota resets at a fixed clock boundary, when the tool actually enforces a rolling/sliding window that never resets all at once.
+Quota consumed at any given moment doesn't free up until exactly that much time has elapsed since it was consumed, continuously, rather than all at once at a fixed reset point. Because the agent's scheduling strategy is built around a reset-and-refill mental model, it either waits far longer than necessary for capacity to return, or assumes capacity is available at a "reset time" that doesn't actually exist for a rolling window.
 
 **Frequency**: Common
 
@@ -32,6 +32,8 @@ On a different occasion, the same agent hits the limit at 14:31 (just after what
 | Rolling/sliding window rate limiting is used by an estimated 30-40% of modern rate-limited APIs, particularly those built on token-bucket or sliding-log algorithms, and is increasingly common relative to simple fixed windows | Common in contemporary API gateway implementations |
 | Agents built with fixed-window assumptions against an actually-rolling-window tool see both false waits (delaying longer than necessary) and false starts (assuming full capacity too early) in roughly equal measure | Observed in production integrations with ambiguous vendor documentation |
 | Switching pacing logic to a sliding-log or leaky-bucket client-side model that mirrors the vendor's actual algorithm (once confirmed) eliminates both failure directions simultaneously | Typical outcome of correcting the window-model mismatch |
+
+**How to fix it**: empirically confirm whether the tool's limit is fixed-window or rolling-window, then model pacing with a client-side sliding log that mirrors the vendor's actual algorithm instead of waiting for a reset event that may not exist.
 
 ## Mitigations
 1. **Confirm the window type explicitly before building pacing logic**: Don't infer fixed-vs-rolling from ambiguous documentation language ("per 10 minutes" can mean either) — test empirically by sending a burst, then probing capacity recovery at multiple points to observe whether it returns all-at-once (fixed) or gradually (rolling).
