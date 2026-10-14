@@ -39,11 +39,11 @@
 
 ### Modalities
 - **Chat:** the patterns above. Chat-only mechanics (message length, formatting) are in the [roadmap](roadmap/chat-and-core.md).
-- **Voice:** [planned](modalities/voice/README.md), with 24 patterns in the [voice roadmap](roadmap/voice.md)
+- **Voice:** [planned](modalities/voice/README.md), with the [voice](roadmap/voice.md) and [listening and transcription](roadmap/voice-listening-and-transcription.md) catalogs
 - **Visual:** [planned](modalities/visual/README.md), with 32 patterns in the [visual and oversight roadmap](roadmap/visual-and-oversight.md)
 
 ### Roadmap
-[141 planned patterns](roadmap/README.md) with goals and metrics: [response time](roadmap/response-time.md), [language and locale](roadmap/language-and-locale.md), [conversation frameworks](roadmap/conversation-frameworks.md) (sales, support, style matching), [voice](roadmap/voice.md), [visual and oversight](roadmap/visual-and-oversight.md), and the [rest of chat and core](roadmap/chat-and-core.md).
+[246 catalogued patterns](roadmap/README.md) with goals and metrics, checked against the existing library (130 new, 68 that extend an existing pattern, 48 already covered): [chat and core](roadmap/chat-and-core.md), [response time](roadmap/response-time.md), [response structure and closers](roadmap/response-structure-and-length.md), [language and locale](roadmap/language-and-locale.md), [conversation frameworks](roadmap/conversation-frameworks.md) (sales, support, style matching), [voice](roadmap/voice.md), [voice listening and transcription](roadmap/voice-listening-and-transcription.md), [privacy, governance, and access](roadmap/privacy-governance-and-access.md), [effort, completeness, and memory](roadmap/effort-completeness-and-memory.md), and [visual and oversight](roadmap/visual-and-oversight.md).
 
 ## Goals and metrics
 Each family has a README that states its **goal** and the shared **metrics** its patterns report against. Each pattern repeats its goal and primary metric in its header and lists measurable signals in section 7 (`Metric | Target | How to measure | Alert at`).
