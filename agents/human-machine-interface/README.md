@@ -45,7 +45,11 @@
 ### Roadmap
 A one-page [index of every catalogued failure](roadmap/index.md) shows its library status, root cause, and whether a better model alone would fix it.
 
-[294 catalogued patterns](roadmap/README.md) with goals and metrics, checked against the existing library (112 new, 122 that extend an existing pattern, 60 already covered): [embedded copilots](roadmap/embedded-copilots.md), [emerging surfaces](roadmap/emerging-surfaces.md), [chat and core](roadmap/chat-and-core.md), [response time](roadmap/response-time.md), [response structure and closers](roadmap/response-structure-and-length.md), [language and locale](roadmap/language-and-locale.md), [conversation frameworks](roadmap/conversation-frameworks.md) (sales, support, style matching), [voice](roadmap/voice.md), [voice listening and transcription](roadmap/voice-listening-and-transcription.md), [privacy, governance, and access](roadmap/privacy-governance-and-access.md), [effort, completeness, and memory](roadmap/effort-completeness-and-memory.md), and [visual and oversight](roadmap/visual-and-oversight.md).
+<!-- BEGIN:roadmap-count -->
+[355 catalogued patterns](roadmap/README.md) with goals and metrics, checked against the existing library (0 written, 138 new, 156 that extend an existing pattern, 61 already covered). The [execution plan](roadmap/execution-plan.md) orders the 294 to write.
+<!-- END:roadmap-count -->
+
+Catalog files: [agent types](roadmap/agent-types.md), [embedded copilots](roadmap/embedded-copilots.md), [emerging surfaces](roadmap/emerging-surfaces.md), [chat and core](roadmap/chat-and-core.md), [response time](roadmap/response-time.md), [response structure and closers](roadmap/response-structure-and-length.md), [language and locale](roadmap/language-and-locale.md), [conversation frameworks](roadmap/conversation-frameworks.md) (sales, support, style matching), [voice](roadmap/voice.md), [voice listening and transcription](roadmap/voice-listening-and-transcription.md), [privacy, governance, and access](roadmap/privacy-governance-and-access.md), [effort, completeness, and memory](roadmap/effort-completeness-and-memory.md), and [visual and oversight](roadmap/visual-and-oversight.md).
 
 ## Goals and metrics
 Each family has a README that states its **goal** and the shared **metrics** its patterns report against. Each pattern repeats its goal and primary metric in its header and lists measurable signals in section 7 (`Metric | Target | How to measure | Alert at`).

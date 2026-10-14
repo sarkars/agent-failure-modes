@@ -2,6 +2,8 @@
 
 > **Status: an exhaustive catalog, not written patterns.** Each row names a failure, the goal it protects, and a primary metric with a starting target. The library today has **14 written HMI patterns** (see the [area README](../README.md)) plus about 1,280 older patterns elsewhere in `agents/`. This catalog is checked against that library.
 
+> **Execution plan.** The order in which these get written, and the procedure a scheduled run follows (20 patterns every 5 hours), is in [execution-plan.md](execution-plan.md). The catalog tables stay the source of goals and metrics.
+
 ## Audit: what already exists
 The first version of this roadmap did not check the library, and several rows turned out to duplicate existing patterns (voice turn-taking, ASR names and noise, sycophancy, and more). This version checks **every row** against the library, by file name and keyword search across all failure files, and by reading the closest matches. The last column of each table says what I found:
 
@@ -11,25 +13,29 @@ The first version of this roadmap did not check the library, and several rows tu
 | **Extends** | An existing pattern covers the technical failure | Write only the experience or design angle and a fix, and link to the existing pattern |
 | **New** | No matching pattern found by file-name and keyword search | Search again before writing. This is a name-and-keyword check, not a full read of every file |
 
-**Result: 294 rows, of which 112 are New, 122 Extend an existing pattern, and 60 are already Covered.**
+<!-- BEGIN:result -->
+**Result: 355 rows, of which 0 are Written, 138 are New, 156 Extend an existing pattern, and 61 are already Covered.**
+<!-- END:result -->
 
+<!-- BEGIN:root-cause -->
 ## Root cause and the model question
 Every row carries two extra labels: its **primary root cause**, and whether **a better model alone would fix it**. They are my judgments, one label per row, not measurements. The catalog leans toward human-interface, design, and policy failures, so a catalog of raw model failures would show a higher model share.
 
 | Primary root cause | Rows | Share |
 |---|---|---|
-| Model: a stronger model plausibly reduces it | 85 | 29% |
-| Reliability: state, verification, enforcement, evals, latency | 61 | 21% |
-| Business context: your data, entitlements, rules, workflows, UX | 105 | 36% |
-| Governance: incentives, law, and decisions | 43 | 15% |
+| Model: a stronger model plausibly reduces it | 94 | 26% |
+| Reliability: state, verification, enforcement, evals, latency | 87 | 25% |
+| Business context: your data, entitlements, rules, workflows, UX | 123 | 35% |
+| Governance: incentives, law, and decisions | 51 | 14% |
 
 | Better model alone? | Rows | Share |
 |---|---|---|
 | Yes, largely | 6 | 2% |
-| Partly: helps, residual remains | 114 | 39% |
-| No: persists with a perfect model | 174 | 59% |
+| Partly: helps, residual remains | 137 | 39% |
+| No: persists with a perfect model | 212 | 60% |
 
-If every "Partly" were solved, models would fix up to 41%. If none were, 2%. A one-page list of all rows is in the [index](index.md).
+If every "Partly" were solved, models would fix up to 40%. If none were, 2%. A one-page list of all rows is in the [index](index.md).
+<!-- END:root-cause -->
 
 ## Before writing any pattern
 1. Search the library for the topic (file names and keywords, under `agents/`).
@@ -43,23 +49,28 @@ If every "Partly" were solved, models would fix up to 41%. If none were, 2%. A o
 - **IDs** are stable handles for planning, not file names.
 
 ## What's in the catalog
-| File | Area | Rows | New | Extends | Covered |
-|---|---|---|---|---|---|
-| [chat-and-core.md](chat-and-core.md) | Remaining chat and core families, plus channel selection | 21 | 15 | 5 | 1 |
-| [embedded-copilots.md](embedded-copilots.md) | Embedded copilots: upselling, context, first response, obvious questions | 23 | 10 | 12 | 1 |
-| [response-time.md](response-time.md) | Speed, waiting, and pacing, all channels | 14 | 5 | 8 | 1 |
-| [response-structure-and-length.md](response-structure-and-length.md) | Reply structure, length, chunking, and closers such as 'ok' and 'bye' | 18 | 9 | 9 | 0 |
-| [language-and-locale.md](language-and-locale.md) | Language, reading level, and locale | 16 | 8 | 7 | 1 |
-| [conversation-frameworks.md](conversation-frameworks.md) | Sales, support, style matching, and other frameworks | 32 | 19 | 12 | 1 |
-| [voice.md](voice.md) | Voice agents: timing, speaking, safety, and bridging channels | 24 | 7 | 8 | 9 |
-| [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Voice listening and transcription | 22 | 4 | 11 | 7 |
-| [privacy-governance-and-access.md](privacy-governance-and-access.md) | Privacy, governance, ethics, access control, and external services | 42 | 6 | 13 | 23 |
-| [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Effort, completeness, and memory | 25 | 5 | 10 | 10 |
-| [emerging-surfaces.md](emerging-surfaces.md) | Emerging surfaces: agentic commerce, browser agents, tool ecosystems, meetings, companions, hiring, pricing incentives | 25 | 7 | 15 | 3 |
-| [visual-and-oversight.md](visual-and-oversight.md) | Visual design and human-oversight UI for agents | 32 | 17 | 12 | 3 |
-| | **Total** | **294** | **112** | **122** | **60** |
+<!-- BEGIN:catalog-table -->
+| File | Area | Rows | Written | New | Extends | Covered |
+|---|---|---|---|---|---|---|
+| [chat-and-core.md](chat-and-core.md) | Remaining chat and core families, plus channel selection | 21 | 0 | 15 | 5 | 1 |
+| [embedded-copilots.md](embedded-copilots.md) | Embedded copilots: upselling, context, first response, obvious questions | 23 | 0 | 10 | 12 | 1 |
+| [response-time.md](response-time.md) | Speed, waiting, and pacing, all channels | 14 | 0 | 5 | 8 | 1 |
+| [response-structure-and-length.md](response-structure-and-length.md) | Reply structure, length, chunking, and closers such as 'ok' and 'bye' | 18 | 0 | 9 | 9 | 0 |
+| [language-and-locale.md](language-and-locale.md) | Language, reading level, and locale | 16 | 0 | 8 | 7 | 1 |
+| [conversation-frameworks.md](conversation-frameworks.md) | Sales, support, style matching, and other frameworks | 32 | 0 | 19 | 12 | 1 |
+| [voice.md](voice.md) | Voice agents: timing, speaking, safety, and bridging channels | 24 | 0 | 7 | 8 | 9 |
+| [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Voice listening and transcription | 22 | 0 | 4 | 11 | 7 |
+| [privacy-governance-and-access.md](privacy-governance-and-access.md) | Privacy, governance, ethics, access control, and external services | 42 | 0 | 6 | 13 | 23 |
+| [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Effort, completeness, and memory | 25 | 0 | 5 | 10 | 10 |
+| [emerging-surfaces.md](emerging-surfaces.md) | Emerging surfaces: agentic commerce, browser agents, tool ecosystems, meetings, companions, hiring, pricing incentives | 25 | 0 | 7 | 15 | 3 |
+| [visual-and-oversight.md](visual-and-oversight.md) | Visual design and human-oversight UI for agents | 32 | 0 | 17 | 12 | 3 |
+| [agent-types.md](agent-types.md) | Failures by agent type (coding, data, IT, finance, healthcare, and more) and cross-agent additions | 61 | 0 | 26 | 34 | 1 |
+| | **Total** | **355** | **0** | **138** | **156** | **61** |
+<!-- END:catalog-table -->
 
 ## Suggested priority
+> Superseded for ordering by the [execution plan](execution-plan.md). Kept here as the original rationale.
+
 | Tier | Why | Start with |
 |---|---|---|
 | 1 | High harm, evidence exists, and the library has a gap | Generic first response · re-asking known information · forced re-login · help that turns into a sales pitch · purchases without clear authorisation · browser-agent hijacking · lazy completion and deferring work to the user · no warning of context loss · skipped steps with no receipt · transcription hallucination · non-speech heard as speech · names with no repair path · acknowledgments and closers (RS-14 to RS-16) · answer buried and wall of text · scam victims and romantic or parasocial dependence · slow first response and silent long waits · dark patterns · approval fatigue · pitching before discovery · per-resolution pricing incentives |
@@ -120,6 +131,6 @@ If every "Partly" were solved, models would fix up to 41%. If none were, 2%. A o
 | Grice's maxims, peak-end rule, Hofstede, Culture Map, HEARD, LAST, GDPR Art. 22 | Various | **Not verified in this session** |
 
 ## Next steps
-1. Pick a tier and a family. Run the "before writing" steps for each row.
+1. Follow the [execution plan](execution-plan.md). (Or pick a tier and a family by hand.) Run the "before writing" steps for each row.
 2. For each pattern, research the **R** flags first, and get **L** and **E** reviews before publishing.
 3. Add a family README for each new family when its first pattern lands.
