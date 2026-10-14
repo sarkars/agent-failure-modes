@@ -11,7 +11,7 @@
 
 | Goal | When it fails | Patterns |
 |---|---|---|
-| [Action Execution](action-execution/) | When an agent's decision to act is correct but the act itself — its authorization, target, timing, or mechanics — is not | 11 |
+| Action Execution | When an agent's decision to act is correct but the act itself — its authorization, target, timing, or mechanics — is not | 11 |
 
 **Total: 11 patterns**
 
@@ -19,7 +19,7 @@
 
 ### What's the difference between unauthorized-action and policy-violating-action?
 
-Unauthorized-action means the agent lacks permission for the action or target resource at all — an identity/capability failure caught by a capability token or namespace check. See [Action Execution](action-execution/).
+Unauthorized-action means the agent lacks permission for the action or target resource at all — an identity/capability failure caught by a capability token or namespace check. See Action Execution.
 
 ## Related
 

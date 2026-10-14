@@ -75,9 +75,9 @@ def check_for_failure(session_transcript, final_recommendation, stated_constrain
         if not any(c["id"] in turn.get("rescinds", []) for turn in session_transcript)
     ]
 
-    violated = [
+    violated = 
         c for c in active_constraints
-        if c["exclusion_check"](final_recommendation)
+        if c["exclusion_check"
     ]
 
     return {

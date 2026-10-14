@@ -52,10 +52,10 @@ Compare the original ETA commitment timestamp against your own system's knowledg
 
 | Pattern | Mechanism |
 |---|---|
-| [Stale Cached Traffic Feed Treated as Live in ETA Commitment](failures/stale-cached-traffic-feed-treated-as-live-in-eta-commitment.md) | Traffic tool returns cached response from before disruption event; agent commits ETA without checking cache timestamp against live disruption feed |
-| [Carrier Capacity Blindness in Route Optimization](failures/carrier-capacity-blindness.md) | Route optimization assumes static or historical carrier capacity; actual available capacity varies with peak-period utilization and other shippers' demand |
-| [Embedding Retrieval Selects Wrong Historical Lane as Transit-Time Benchmark for New Route](failures/embedding-retrieval-selects-wrong-historical-lane-as-transit-time-benchmark.md) | Transit-time benchmark for new lane selected by region-pair description similarity; differs in transport mode or border-crossing count from actual new lane |
-| [Multi-Agent Handoff Drops Customs-Hold Flag Before Customer ETA Commitment](failures/multi-agent-handoff-drops-customs-hold-flag-before-customer-eta-commitment.md) | Routing agent notes elevated customs-hold risk; customer-notification agent generates ETA from transit-time fields only, ignoring the risk note |
+| Stale Cached Traffic Feed Treated as Live in ETA Commitment | Traffic tool returns cached response from before disruption event; agent commits ETA without checking cache timestamp against live disruption feed |
+| Carrier Capacity Blindness in Route Optimization | Route optimization assumes static or historical carrier capacity; actual available capacity varies with peak-period utilization and other shippers' demand |
+| Embedding Retrieval Selects Wrong Historical Lane as Transit-Time Benchmark for New Route | Transit-time benchmark for new lane selected by region-pair description similarity; differs in transport mode or border-crossing count from actual new lane |
+| Multi-Agent Handoff Drops Customs-Hold Flag Before Customer ETA Commitment | Routing agent notes elevated customs-hold risk; customer-notification agent generates ETA from transit-time fields only, ignoring the risk note |
 
 **Total: 4 patterns**
 

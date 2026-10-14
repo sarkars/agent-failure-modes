@@ -45,20 +45,20 @@ Approval-chain-break (requests stuck indefinitely with no escalation) and policy
 
 | Pattern | Mechanism |
 |---------|-----------|
-| [Approval Authority Escalation Failure](failures/approval-authority-escalation-failure.md) | Escalation logic broken; request doesn't reach next authority when previous authority doesn't respond |
-| [Approval Chain Break](failures/approval-chain-break.md) | Multi-step chain breaks partway; handoff between stages fails silently; request stalls indefinitely |
-| [Approval Conflict](failures/approval-conflict.md) | Multiple authorities disagree on approval; conflicting decisions both execute, leaving system inconsistent |
-| [Approval Delegation Loop](failures/approval-delegation-loop.md) | Delegation creates loop; request bounces between delegated-to authorities without reaching actual decision-maker |
-| [Approval Scope Mismatch](failures/approval-scope-mismatch.md) | Approver's role scope confused with another role; wrong person approves decision outside their authority |
-| [Approval Timeout Expiration](failures/approval-timeout-expiration.md) | Approval stage reaches SLA timeout; no escalation logic triggers; request stalls pending-forever |
-| [Approval Waiver Abuse](failures/approval-waiver-abuse.md) | Policy exceptions/waivers used repeatedly or outside intended scope, systematically bypassing normal controls |
-| [Policy Ambiguity Exploitation](failures/policy-ambiguity-exploitation.md) | Ambiguous policy language allows exploitative interpretation; intent violated while technically compliant |
-| [Policy Consistency Violation](failures/policy-consistency-violation.md) | Multiple policies applied to same decision contradict; no arbiter for conflicts; contradictory approvals both execute |
-| [Policy Exception Not Authorized](failures/policy-exception-not-authorized.md) | Exception granted by someone without authority to grant it; unauthorized exceptions applied |
-| [Policy Retroactive Application](failures/policy-retroactive-application.md) | New policy applied to decisions from before policy existed; retroactive enforcement violates fairness |
-| [Policy Scope Misunderstanding](failures/policy-scope-misunderstanding.md) | Policy interpreted as applying more broadly than intended (global when regional, permanent when temporary) |
-| [Policy Temporal Violation](failures/policy-temporal-violation.md) | Policy start/end dates unclear; ambiguous whether policy applies to decision from this date or previous version |
-| [Policy Version Mismatch](failures/policy-version-mismatch.md) | Different systems apply different policy versions to same decision; inconsistent treatment |
+| Approval Authority Escalation Failure | Escalation logic broken; request doesn't reach next authority when previous authority doesn't respond |
+| Approval Chain Break | Multi-step chain breaks partway; handoff between stages fails silently; request stalls indefinitely |
+| Approval Conflict | Multiple authorities disagree on approval; conflicting decisions both execute, leaving system inconsistent |
+| Approval Delegation Loop | Delegation creates loop; request bounces between delegated-to authorities without reaching actual decision-maker |
+| Approval Scope Mismatch | Approver's role scope confused with another role; wrong person approves decision outside their authority |
+| Approval Timeout Expiration | Approval stage reaches SLA timeout; no escalation logic triggers; request stalls pending-forever |
+| Approval Waiver Abuse | Policy exceptions/waivers used repeatedly or outside intended scope, systematically bypassing normal controls |
+| Policy Ambiguity Exploitation | Ambiguous policy language allows exploitative interpretation; intent violated while technically compliant |
+| Policy Consistency Violation | Multiple policies applied to same decision contradict; no arbiter for conflicts; contradictory approvals both execute |
+| Policy Exception Not Authorized | Exception granted by someone without authority to grant it; unauthorized exceptions applied |
+| Policy Retroactive Application | New policy applied to decisions from before policy existed; retroactive enforcement violates fairness |
+| Policy Scope Misunderstanding | Policy interpreted as applying more broadly than intended (global when regional, permanent when temporary) |
+| Policy Temporal Violation | Policy start/end dates unclear; ambiguous whether policy applies to decision from this date or previous version |
+| Policy Version Mismatch | Different systems apply different policy versions to same decision; inconsistent treatment |
 
 **Total: 14 patterns**
 

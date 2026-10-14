@@ -34,29 +34,29 @@ Every self-service deflection pattern documented here reflects a measurement or 
 ## Frequently Asked Questions
 
 ### How do you distinguish between successful deflection and customer abandonment from frustration?
-Require an explicit customer-confirmation step ("yes, that resolved it") rather than inferring resolution from the absence of a follow-up message. Cross-channel re-contact rates within a defined window after a "deflected" conversation reveal false deflections. See [Deflection of Unresolved Issues](failures/deflection-of-unresolved-issues.md).
+Require an explicit customer-confirmation step ("yes, that resolved it") rather than inferring resolution from the absence of a follow-up message. Cross-channel re-contact rates within a defined window after a "deflected" conversation reveal false deflections. See Deflection of Unresolved Issues.
 
 ### How do FAQ redirect loops exist if knowledge bases are well maintained?
-Knowledge bases authored incrementally by multiple teams accumulate cross-references without a maintained "shortest path to resolution" structure. A cycle-detection audit can identify closed loops, but such audits are rarely performed systematically. See [Circular FAQ Redirect Loop](failures/circular-faq-redirect-loop.md).
+Knowledge bases authored incrementally by multiple teams accumulate cross-references without a maintained "shortest path to resolution" structure. A cycle-detection audit can identify closed loops, but such audits are rarely performed systematically. See Circular FAQ Redirect Loop.
 
 ### Can semantic similarity retrieval surface outdated help articles?
-Yes. If a knowledge base contains both current and outdated articles on the same topic, semantic similarity ranks them by textual overlap, and an outdated article written in similar language before a product update can score as similar or more similar than a current article rewritten post-update. Currency filtering before similarity ranking prevents this. See [Embedding Retrieval Surfaces Deprecated Help Article in Deflection Suggestion](failures/embedding-retrieval-surfaces-deprecated-help-article-in-deflection-suggestion.md).
+Yes. If a knowledge base contains both current and outdated articles on the same topic, semantic similarity ranks them by textual overlap, and an outdated article written in similar language before a product update can score as similar or more similar than a current article rewritten post-update. Currency filtering before similarity ranking prevents this. See Embedding Retrieval Surfaces Deprecated Help Article in Deflection Suggestion.
 
 ### How many failed suggestions before a deflection agent should escalate?
-Typically 2-3 consecutive "not helpful" responses on the same topic within a single session is the threshold for offering human escalation, though this varies by business model and customer expectations. See [Chatbot Loop Without Human Escalation Path](failures/chatbot-loop-without-human-escalation-path.md).
+Typically 2-3 consecutive "not helpful" responses on the same topic within a single session is the threshold for offering human escalation, though this varies by business model and customer expectations. See Chatbot Loop Without Human Escalation Path.
 
 ### How do you stop a specialist deflection agent from re-suggesting an already-tried remedy?
-Require the intake bot's handoff to include a structured "remedies already attempted" field extracted from the bot's free-text transcript, and display that field prominently to the specialist before any suggestion is composed. See [Multi-Agent Handoff Drops Failed-Resolution-Attempt Detail Between Intake Bot and Specialist Deflection Agent](failures/multi-agent-handoff-drops-failed-resolution-attempt-between-intake-bot-and-specialist-deflection-agent.md).
+Require the intake bot's handoff to include a structured "remedies already attempted" field extracted from the bot's free-text transcript, and display that field prominently to the specialist before any suggestion is composed. See Multi-Agent Handoff Drops Failed-Resolution-Attempt Detail Between Intake Bot and Specialist Deflection Agent.
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [Chatbot Loop Without Human Escalation Path](failures/chatbot-loop-without-human-escalation-path.md) | Deflection agent repeats suggestions without escalation trigger after N failed attempts |
-| [Circular FAQ Redirect Loop](failures/circular-faq-redirect-loop.md) | KB articles cross-reference one another, routing customers through unresolved loops |
-| [Deflection of Unresolved Issues](failures/deflection-of-unresolved-issues.md) | Success measured by "no escalation click" not "issue resolved"; false-deflections conflate abandonment with resolution |
-| [Embedding Retrieval Surfaces Deprecated Help Article in Deflection Suggestion](failures/embedding-retrieval-surfaces-deprecated-help-article-in-deflection-suggestion.md) | Semantic similarity retrieves outdated articles over current ones when textual overlap is high |
-| [Multi-Agent Handoff Drops Failed-Resolution-Attempt Detail Between Intake Bot and Specialist Deflection Agent](failures/multi-agent-handoff-drops-failed-resolution-attempt-between-intake-bot-and-specialist-deflection-agent.md) | Intake bot notes failed remedy; specialist agent receives no structured "already attempted" field |
+| Chatbot Loop Without Human Escalation Path | Deflection agent repeats suggestions without escalation trigger after N failed attempts |
+| Circular FAQ Redirect Loop | KB articles cross-reference one another, routing customers through unresolved loops |
+| Deflection of Unresolved Issues | Success measured by "no escalation click" not "issue resolved"; false-deflections conflate abandonment with resolution |
+| Embedding Retrieval Surfaces Deprecated Help Article in Deflection Suggestion | Semantic similarity retrieves outdated articles over current ones when textual overlap is high |
+| Multi-Agent Handoff Drops Failed-Resolution-Attempt Detail Between Intake Bot and Specialist Deflection Agent | Intake bot notes failed remedy; specialist agent receives no structured "already attempted" field |
 
 **Total: 5 patterns**
 

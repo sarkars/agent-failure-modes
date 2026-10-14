@@ -31,38 +31,38 @@ All 15 coordination patterns point to the same underlying gap: multi-agent syste
 Coordination failures cover the breadth of ways agents fail to work together — authority, roles, communication, consensus. [Error Propagation](../error-propagation/) covers one specific mechanism in depth: how a single upstream error compounds exponentially through a sequential pipeline, with measured amplification factors. Cascading Error in coordination is the same conceptual failure at stub depth; Error Propagation's pattern documents it with worked examples and statistics.
 
 ### How can multi-agent systems fail even when every individual agent passes its own tests?
-Because the failure lives in the interaction, not in any single agent — see [Emergent Behavior](failures/emergent-behavior.md). Agents that behave correctly in isolation can still produce a broken system when their outputs, timing, or assumptions interact in ways no single-agent test exercises.
+Because the failure lives in the interaction, not in any single agent — see Emergent Behavior. Agents that behave correctly in isolation can still produce a broken system when their outputs, timing, or assumptions interact in ways no single-agent test exercises.
 
 ### Can a stronger verifier or judge agent fix consensus-illusion and premature-consensus failures?
-Not by itself. [Verifier-Agent Weakness](failures/verifier-agent-weakness.md) documents that a judge agent can fail to catch worker-agent errors for the same reason the workers made the errors — shared blind spots, insufficient independence, or no access to ground truth the workers lacked. A verifier adds value only when it has a genuinely independent check, not just another model instance reviewing the same evidence.
+Not by itself. Verifier-Agent Weakness documents that a judge agent can fail to catch worker-agent errors for the same reason the workers made the errors — shared blind spots, insufficient independence, or no access to ground truth the workers lacked. A verifier adds value only when it has a genuinely independent check, not just another model instance reviewing the same evidence.
 
 ### Is authority confusion the same problem as role ambiguity?
-They're related but distinct. [Role Ambiguity](failures/role-ambiguity.md) is about agents not knowing who is responsible for which subtask (leading to duplicate or missing work). [Authority Confusion](failures/authority-confusion.md) is about agents each producing an output and the system having no rule for which one wins when they conflict. A system can have clear roles but still lack authority rules, or vice versa.
+They're related but distinct. Role Ambiguity is about agents not knowing who is responsible for which subtask (leading to duplicate or missing work). Authority Confusion is about agents each producing an output and the system having no rule for which one wins when they conflict. A system can have clear roles but still lack authority rules, or vice versa.
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [Authority Confusion](failures/authority-confusion.md) | System has no rule for which agent's output wins when outputs conflict |
-| [Cascading Error](failures/cascading-error.md) | An early agent's error propagates and is amplified by every downstream agent in the pipeline |
-| [Communication Loss](failures/communication-loss.md) | Key information present in one agent's trace never reaches another agent that needs it |
-| [Consensus Illusion](failures/consensus-illusion.md) | Agents agree because they share the same flawed context or bias, not because the answer is correct |
-| [Contradictory Outputs](failures/contradictory-outputs.md) | Agents produce conflicting recommendations and no arbitration mechanism exists |
-| [Coordinator Failure](failures/coordinator-failure.md) | A manager agent assigns subtasks poorly or fails to synthesize worker outputs into a coherent result |
-| [Duplicate Work](failures/duplicate-work.md) | Multiple agents independently solve the same subtask, wasting effort or producing conflicting versions |
-| [Emergent Behavior](failures/emergent-behavior.md) | Agent interaction produces a failure mode not observed when any agent is tested in isolation |
-| [Infinite Debate](failures/infinite-debate.md) | Agents critique and revise each other's output endlessly without a termination condition |
-| [Message Misinterpretation](failures/message-misinterpretation.md) | One agent misreads another agent's output, and downstream action contradicts the upstream result |
-| [Premature Consensus](failures/premature-consensus.md) | Agents converge on an answer before the evidence needed to support that answer has actually been checked |
-| [Role Ambiguity](failures/role-ambiguity.md) | Agents don't know who owns which responsibility, causing duplicate or missing work |
-| [Task Handoff Failure](failures/task-handoff-failure.md) | One agent passes incomplete or incorrect state to the next agent in the workflow |
-| [Verifier-Agent Weakness](failures/verifier-agent-weakness.md) | A judge/verifier agent approves a trace that a worker agent got wrong |
-| [Worker Tunnel Vision](failures/worker-tunnel-vision.md) | A specialized agent optimizes its own local subtask goal at the expense of overall task success |
+| Authority Confusion | System has no rule for which agent's output wins when outputs conflict |
+| Cascading Error | An early agent's error propagates and is amplified by every downstream agent in the pipeline |
+| Communication Loss | Key information present in one agent's trace never reaches another agent that needs it |
+| Consensus Illusion | Agents agree because they share the same flawed context or bias, not because the answer is correct |
+| Contradictory Outputs | Agents produce conflicting recommendations and no arbitration mechanism exists |
+| Coordinator Failure | A manager agent assigns subtasks poorly or fails to synthesize worker outputs into a coherent result |
+| Duplicate Work | Multiple agents independently solve the same subtask, wasting effort or producing conflicting versions |
+| Emergent Behavior | Agent interaction produces a failure mode not observed when any agent is tested in isolation |
+| Infinite Debate | Agents critique and revise each other's output endlessly without a termination condition |
+| Message Misinterpretation | One agent misreads another agent's output, and downstream action contradicts the upstream result |
+| Premature Consensus | Agents converge on an answer before the evidence needed to support that answer has actually been checked |
+| Role Ambiguity | Agents don't know who owns which responsibility, causing duplicate or missing work |
+| Task Handoff Failure | One agent passes incomplete or incorrect state to the next agent in the workflow |
+| Verifier-Agent Weakness | A judge/verifier agent approves a trace that a worker agent got wrong |
+| Worker Tunnel Vision | A specialized agent optimizes its own local subtask goal at the expense of overall task success |
 
 **Total: 15 patterns**
 
 ## Related Goals
 
-- [Error Propagation](../error-propagation/) — the sequential-amplification mechanism behind coordination's Cascading Error pattern, documented in full depth with measured amplification factors
+- Error Propagation — the sequential-amplification mechanism behind coordination's Cascading Error pattern, documented in full depth with measured amplification factors
 - [Handoff Reliability](../handoff-reliability/) — a specific, narrower failure of the handoff mechanism coordination's Task Handoff Failure and Communication Loss patterns describe more broadly
 - [Reasoning Quality](../reasoning-quality/) — why agreement among agents (the signal coordination's Consensus Illusion and Premature Consensus patterns question) doesn't guarantee correctness

@@ -30,16 +30,16 @@ To localize an incident by symptom: a detected object/attribute/scene that isn't
 ## Frequently Asked Questions
 
 ### What's the difference between visual hallucination and spatial reasoning failures?
-Visual Hallucination is about content that doesn't exist at all — a fabricated object, attribute, or scene. Spatial Reasoning is about real content whose position, depth, scale, or occlusion state is misjudged. The two overlap where a model hallucinates hidden structure behind an occluder (a Spatial Reasoning pattern that explicitly borrows the confident-fabrication mechanism from Visual Hallucination) — see [Spatial Reasoning](goals/spatial-reasoning/) and [Visual Hallucination](goals/visual-hallucination/).
+Visual Hallucination is about content that doesn't exist at all — a fabricated object, attribute, or scene. Spatial Reasoning is about real content whose position, depth, scale, or occlusion state is misjudged. The two overlap where a model hallucinates hidden structure behind an occluder (a Spatial Reasoning pattern that explicitly borrows the confident-fabrication mechanism from Visual Hallucination) — see Spatial Reasoning and Visual Hallucination.
 
 ### What makes Spatial Reasoning have more than twice as many patterns as any other goal?
-Because 2D-to-3D inference is underdetermined at every stage — precise localization, depth, 3D shape, occlusion, viewpoint correction, absolute/relative scale, and multi-view consistency are each separately failure-prone, and each requires a distinct mitigation (stereo confirmation, occlusion-aware confidence, perspective correction, reference-object scale cues). See [Spatial Reasoning](goals/spatial-reasoning/) for the full 14-pattern breakdown into four mechanism clusters.
+Because 2D-to-3D inference is underdetermined at every stage — precise localization, depth, 3D shape, occlusion, viewpoint correction, absolute/relative scale, and multi-view consistency are each separately failure-prone, and each requires a distinct mitigation (stereo confirmation, occlusion-aware confidence, perspective correction, reference-object scale cues). See Spatial Reasoning for the full 14-pattern breakdown into four mechanism clusters.
 
 ### Can a single model fix all 43 patterns in vision-and-images?
 No. The patterns split between input-robustness problems (Adversarial Robustness) that require augmentation and detection layers around the model, and reasoning-accuracy problems (the other four goals) that require architectural changes — multi-view fusion, confidence-per-claim tracking, and explicit consistency constraints — none of which are solved simply by scaling up or fine-tuning a single vision-language model.
 
 ### Which goal should a developer check first when a vision-based agent misbehaves?
-Match the symptom to the goal using the routing list above. If the failure only appears on certain input conditions (low light, low resolution, compressed video, an unfamiliar object class), start with [Adversarial Robustness](goals/adversarial-robustness/) before assuming the model's reasoning itself is broken — many Spatial Reasoning and Visual Hallucination symptoms are actually downstream consequences of degraded input the model was never trained to handle.
+Match the symptom to the goal using the routing list above. If the failure only appears on certain input conditions (low light, low resolution, compressed video, an unfamiliar object class), start with Adversarial Robustness before assuming the model's reasoning itself is broken — many Spatial Reasoning and Visual Hallucination symptoms are actually downstream consequences of degraded input the model was never trained to handle.
 
 ## Related Categories
 

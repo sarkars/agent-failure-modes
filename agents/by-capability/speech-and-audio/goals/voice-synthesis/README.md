@@ -28,29 +28,29 @@ The dominant mitigation across all 8 patterns is making an implicit rendering de
 ## Frequently Asked Questions
 
 ### What's the difference between brand-term mispronunciation and general pronunciation errors?
-[Brand-term-mispronunciation](failures/brand-term-mispronunciation.md) focuses specifically on brand names, acronyms, and version/number formats unique to a product or company. [Pronunciation-errors](failures/pronunciation-errors.md) covers the broader class — personal names, heteronyms (read/read), foreign words — that any TTS deployment encounters regardless of brand. Both are fixed the same way: custom lexicons and SSML phoneme overrides checked before default synthesis.
+Brand-term-mispronunciation focuses specifically on brand names, acronyms, and version/number formats unique to a product or company. Pronunciation-errors covers the broader class — personal names, heteronyms (read/read), foreign words — that any TTS deployment encounters regardless of brand. Both are fixed the same way: custom lexicons and SSML phoneme overrides checked before default synthesis.
 
 ### What causes SSML markup to sometimes get read aloud instead of applied?
-[SSML-markup-failures](failures/ssml-markup-failures.md) attributes literal-tag-spoken failures to malformed tags, unsupported engine features, or encoding/escaping issues in dynamically inserted content — the pattern reports 5-10% of SSML usage incidents result in literal tags being spoken, and recommends pre-send validation against an engine-specific capability matrix rather than assuming one SSML dialect works everywhere.
+SSML-markup-failures attributes literal-tag-spoken failures to malformed tags, unsupported engine features, or encoding/escaping issues in dynamically inserted content — the pattern reports 5-10% of SSML usage incidents result in literal tags being spoken, and recommends pre-send validation against an engine-specific capability matrix rather than assuming one SSML dialect works everywhere.
 
 ### Can a single TTS voice handle both good news and bad news appropriately?
-Not without explicit emotion tagging. [Emotional-tone-mismatch](failures/emotional-tone-mismatch.md) documents cheerful delivery of fraud alerts and flat delivery of approvals as a common failure, with emotional appropriateness in production running only 50-70% — the fix is classifying each message's required emotional register at template-authoring time, not relying on the TTS engine to infer it from content alone.
+Not without explicit emotion tagging. Emotional-tone-mismatch documents cheerful delivery of fraud alerts and flat delivery of approvals as a common failure, with emotional appropriateness in production running only 50-70% — the fix is classifying each message's required emotional register at template-authoring time, not relying on the TTS engine to infer it from content alone.
 
 ### What can cause a voice agent's voice to change mid-conversation?
-Usually unintentional infrastructure behavior: different TTS instances behind a load balancer, a language switch without matched cross-language persona settings, or a different voice hardcoded for error messages versus success messages. [Voice-consistency-issues](failures/voice-consistency-issues.md) reports 80%+ of users detect voice changes and 60% of those report confusion, recommending session-pinned TTS routing and a centralized voice-persona configuration all code paths must use.
+Usually unintentional infrastructure behavior: different TTS instances behind a load balancer, a language switch without matched cross-language persona settings, or a different voice hardcoded for error messages versus success messages. Voice-consistency-issues reports 80%+ of users detect voice changes and 60% of those report confusion, recommending session-pinned TTS routing and a centralized voice-persona configuration all code paths must use.
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [Audio Artifact Generation](failures/audio-artifact-generation.md) | Clicks, pops, and distortion from segment-boundary discontinuities or low-bitrate encoding |
-| [Brand Term Mispronunciation](failures/brand-term-mispronunciation.md) | Brand names, acronyms, and version numbers misread by default grapheme-to-phoneme rules |
-| [Disfluency Calibration Failures](failures/disfluency-calibration-failures.md) | Filler words and hesitations mismatched to persona or context (too casual for fraud alerts, too robotic for casual sales) |
-| [Emotional Tone Mismatch](failures/emotional-tone-mismatch.md) | Voice emotion doesn't match message content, e.g. cheerful delivery of bad news |
-| [Pronunciation Errors](failures/pronunciation-errors.md) | Names, acronyms, foreign words, and heteronyms mispronounced absent a custom lexicon |
-| [Prosody Mismatch](failures/prosody-mismatch.md) | Flat intonation, missing emphasis, and wrong pacing make speech sound robotic or ambiguous |
-| [Ssml Markup Failures](failures/ssml-markup-failures.md) | Markup tags spoken aloud, ignored, or partially processed due to malformed or unsupported SSML |
-| [Voice Consistency Issues](failures/voice-consistency-issues.md) | Voice characteristics shift unexpectedly across languages, error states, or load-balanced instances |
+| Audio Artifact Generation | Clicks, pops, and distortion from segment-boundary discontinuities or low-bitrate encoding |
+| Brand Term Mispronunciation | Brand names, acronyms, and version numbers misread by default grapheme-to-phoneme rules |
+| Disfluency Calibration Failures | Filler words and hesitations mismatched to persona or context (too casual for fraud alerts, too robotic for casual sales) |
+| Emotional Tone Mismatch | Voice emotion doesn't match message content, e.g. cheerful delivery of bad news |
+| Pronunciation Errors | Names, acronyms, foreign words, and heteronyms mispronounced absent a custom lexicon |
+| Prosody Mismatch | Flat intonation, missing emphasis, and wrong pacing make speech sound robotic or ambiguous |
+| Ssml Markup Failures | Markup tags spoken aloud, ignored, or partially processed due to malformed or unsupported SSML |
+| Voice Consistency Issues | Voice characteristics shift unexpectedly across languages, error states, or load-balanced instances |
 
 **Total: 8 patterns**
 

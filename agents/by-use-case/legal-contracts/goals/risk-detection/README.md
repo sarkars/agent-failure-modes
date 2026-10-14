@@ -12,7 +12,7 @@
 ## Scope
 
 - **Clause-Presence Without Scope** — [Indemnification Cap Blindness](failures/indemnification-cap-blindness.md), [Liability Clause Blindness](failures/liability-clause-blindness.md). Clauses flagged as present without evaluating caps, carve-outs, directionality.
-- **Cross-Clause Interaction** — [Contract Ambiguity Detection Failure](failures/contract-ambiguity-misses.md) treats ambiguities caused by clause conflicts; [Indemnification Cap Blindness](failures/indemnification-cap-blindness.md) treats carve-outs.
+- **Cross-Clause Interaction** — [Contract Ambiguity Detection Failure](failures/contract-ambiguity-misses.md) treats ambiguities caused by clause conflicts; Indemnification Cap Blindness treats carve-outs.
 - **Multi-Party Reasoning** — [Multi-Party Obligation Tracking Failure](failures/multi-party-obligation-tracking.md). Obligation flows across 3+ parties become unclear; pronouns confuse obligors.
 - **Temporal/Conditional Reasoning** — [Termination Clause Misinterpretation](failures/termination-clause-misinterpretation.md). Notice periods, cure periods, auto-renewal triggers, and survival obligations are not reconciled.
 
@@ -30,26 +30,26 @@ Risk-detection failures are failures of cross-validation and structural reasonin
 ## Frequently Asked Questions
 
 ### How do you evaluate indemnification risk beyond clause presence?
-Build a structured indemnification analyzer: (1) locate indemnification clause and extract scope/direction, (2) locate limitation-of-liability clause, (3) extract all carve-outs from limitation, (4) for each carve-out, determine whether indemnification is carved out (uncapped) or capped, (5) quantify effective exposure. Never report "indemnification present" without reporting direction (unilateral/mutual), cap status (capped/uncapped), and carve-outs — see [Indemnification Cap Blindness](failures/indemnification-cap-blindness.md).
+Build a structured indemnification analyzer: (1) locate indemnification clause and extract scope/direction, (2) locate limitation-of-liability clause, (3) extract all carve-outs from limitation, (4) for each carve-out, determine whether indemnification is carved out (uncapped) or capped, (5) quantify effective exposure. Never report "indemnification present" without reporting direction (unilateral/mutual), cap status (capped/uncapped), and carve-outs — see Indemnification Cap Blindness.
 
 ### How do you surface ambiguous clauses before disputes arise?
-Generate multiple plausible interpretations for clauses with temporal or conditional language; create a dispute-scenario map showing what happens in each interpretation; require explicit interpretation alignment by both parties before execution. Maintain a definitions section with context-specific terms; verify all defined terms have explicit definitions — see [Contract Ambiguity Detection Failure](failures/contract-ambiguity-misses.md).
+Generate multiple plausible interpretations for clauses with temporal or conditional language; create a dispute-scenario map showing what happens in each interpretation; require explicit interpretation alignment by both parties before execution. Maintain a definitions section with context-specific terms; verify all defined terms have explicit definitions — see Contract Ambiguity Detection Failure.
 
 ### How do you track obligations across multiple parties without confusion?
-Identify all parties explicitly via contract header. For each obligation, extract tuple {obligor, obligee, obligation, timing, condition, prerequisites}. Build a directed acyclic graph (DAG) of obligation dependencies. Validate: every obligation names obligor/obligee explicitly; prerequisites are marked; circular dependencies are detected. Visualize the obligation graph for attorney review before execution — see [Multi-Party Obligation Tracking Failure](failures/multi-party-obligation-tracking.md).
+Identify all parties explicitly via contract header. For each obligation, extract tuple {obligor, obligee, obligation, timing, condition, prerequisites}. Build a directed acyclic graph (DAG) of obligation dependencies. Validate: every obligation names obligor/obligee explicitly; prerequisites are marked; circular dependencies are detected. Visualize the obligation graph for attorney review before execution — see Multi-Party Obligation Tracking Failure.
 
 ### How do you prevent termination-related auto-renewals?
-Build explicit deadline timeline: (1) extract termination-for-cause notice/cure terms, (2) extract termination-for-convenience notice, (3) locate auto-renewal clause and renewal date, (4) compute pre-renewal notice deadline, (5) determine interaction: can convenience termination beat auto-renewal? (6) identify critical decision dates and alert procurement. Cross-reference survival clauses for post-termination obligations — see [Termination Clause Misinterpretation](failures/termination-clause-misinterpretation.md).
+Build explicit deadline timeline: (1) extract termination-for-cause notice/cure terms, (2) extract termination-for-convenience notice, (3) locate auto-renewal clause and renewal date, (4) compute pre-renewal notice deadline, (5) determine interaction: can convenience termination beat auto-renewal? (6) identify critical decision dates and alert procurement. Cross-reference survival clauses for post-termination obligations — see Termination Clause Misinterpretation.
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [Contract Ambiguity Detection Failure](failures/contract-ambiguity-misses.md) | Clause has multiple plausible interpretations; agent misses the ambiguity or treats it as resolved when parties haven't explicitly aligned |
-| [Indemnification Cap Blindness](failures/indemnification-cap-blindness.md) | Indemnification clause present but cap status (capped/uncapped), carve-outs, or directionality not evaluated |
-| [Liability Clause Blindness](failures/liability-clause-blindness.md) | Unlimited or materially risky liability clause not flagged; exposure not quantified |
-| [Multi-Party Obligation Tracking Failure](failures/multi-party-obligation-tracking.md) | Obligations across 3+ parties become confused due to pronouns, missing dependencies, or unclear obligor/obligee |
-| [Termination Clause Misinterpretation](failures/termination-clause-misinterpretation.md) | Termination notice period misread; interaction with auto-renewal, survival, and cure periods not reconciled |
+| Contract Ambiguity Detection Failure | Clause has multiple plausible interpretations; agent misses the ambiguity or treats it as resolved when parties haven't explicitly aligned |
+| Indemnification Cap Blindness | Indemnification clause present but cap status (capped/uncapped), carve-outs, or directionality not evaluated |
+| Liability Clause Blindness | Unlimited or materially risky liability clause not flagged; exposure not quantified |
+| Multi-Party Obligation Tracking Failure | Obligations across 3+ parties become confused due to pronouns, missing dependencies, or unclear obligor/obligee |
+| Termination Clause Misinterpretation | Termination notice period misread; interaction with auto-renewal, survival, and cure periods not reconciled |
 
 **Total: 5 patterns**
 

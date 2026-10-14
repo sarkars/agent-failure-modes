@@ -51,10 +51,10 @@ Once the new SKU accumulates enough sales history (typically 4-8 weeks), compute
 
 | Pattern | Mechanism |
 |---|---|
-| [Safety Stock Miscalibration from Demand Variance Underestimation](failures/safety-stock-miscalibration.md) | Variance computed at monthly aggregation instead of weekly replenishment cycle; lead-time variance held constant instead of estimated |
-| [Embedding Retrieval Pulls Wrong Substitute SKU as Safety-Stock Variance Proxy](failures/embedding-retrieval-pulls-wrong-substitute-sku-as-safety-stock-variance-proxy.md) | Variance-proxy selection by description similarity instead of demand-driver classification; topically similar SKU has different volatility profile |
-| [Multi-Agent Handoff Drops Quality-Hold Flag Between Receiving Agent and Replenishment Agent](failures/multi-agent-handoff-drops-quality-hold-flag-between-receiving-agent-and-replenishment-agent.md) | Quality-hold status exists in inspection notes but not in available-to-promise schema; replenishment counts held lot as usable |
-| [Unit-Conversion Arithmetic Drift in LLM-Generated Reorder Quantity](failures/unit-conversion-arithmetic-drift-in-llm-generated-reorder-quantity.md) | Reorder quantity computed via free-text reasoning over forecast/lead-time/pack-size instead of deterministic formula; arithmetic drifts 1-5 units on non-round packs |
+| Safety Stock Miscalibration from Demand Variance Underestimation | Variance computed at monthly aggregation instead of weekly replenishment cycle; lead-time variance held constant instead of estimated |
+| Embedding Retrieval Pulls Wrong Substitute SKU as Safety-Stock Variance Proxy | Variance-proxy selection by description similarity instead of demand-driver classification; topically similar SKU has different volatility profile |
+| Multi-Agent Handoff Drops Quality-Hold Flag Between Receiving Agent and Replenishment Agent | Quality-hold status exists in inspection notes but not in available-to-promise schema; replenishment counts held lot as usable |
+| Unit-Conversion Arithmetic Drift in LLM-Generated Reorder Quantity | Reorder quantity computed via free-text reasoning over forecast/lead-time/pack-size instead of deterministic formula; arithmetic drifts 1-5 units on non-round packs |
 
 **Total: 4 patterns**
 

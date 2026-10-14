@@ -169,7 +169,7 @@ Root cause: Perspective inconsistency not resolved; model doesn't enforce 3D con
 
 ## Related Patterns
 - [Spatial Reasoning Failures in 3D](./spatial-reasoning-failures-in-3d-environments.md) — Related: 3D consistency
-- [The Vision Wormhole: Latent-Space Communication](../../../../../by-capability/multi-agent-systems/goals/communication-reliability/failures/vision-agent-communication-failure.md) — Multi-agent coordination
+- The Vision Wormhole: Latent-Space Communication — Multi-agent coordination
 - [Confident Fabrication](../../../../../cross-cutting/accuracy/goals/output-accuracy/failures/confident-fabrication.md) — Confident about inconsistent data
 
 ---

@@ -34,6 +34,6 @@ Start with what kind of "wrong" it was: if the agent misread the input, check cr
 
 ## Related Categories
 
-- [Document Processing](../document-processing/) — upstream failures in reading and classifying the documents that domain decisions are made from
+- Document Processing — upstream failures in reading and classifying the documents that domain decisions are made from
 - [External Actions](../external-actions/) — downstream failures in executing the action a domain decision produces
 - [Task Planning](../task-planning/) — goal- and plan-level failures that operate one layer above domain-specific rule application

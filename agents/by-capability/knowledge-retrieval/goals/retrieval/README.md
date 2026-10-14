@@ -29,33 +29,33 @@ The 12 retrieval patterns describe a pipeline where an error at any stage is inv
 ## Frequently Asked Questions
 
 ### How much does a wrong-corpus retrieval matter compared to an ordinary low-relevance result?
-Considerably more in a multi-tenant or multi-product system — per [Wrong Corpus Retrieval](failures/wrong-corpus-retrieval.md), retrieving from the wrong corpus can mean surfacing one customer's or one product line's documents to a different customer's query, a tenant-isolation violation and potential security/compliance incident rather than merely a quality miss. The pattern's documented target is 0% cross-tenant leakage, treated as a P1 incident on any nonzero occurrence.
+Considerably more in a multi-tenant or multi-product system — per Wrong Corpus Retrieval, retrieving from the wrong corpus can mean surfacing one customer's or one product line's documents to a different customer's query, a tenant-isolation violation and potential security/compliance incident rather than merely a quality miss. The pattern's documented target is 0% cross-tenant leakage, treated as a P1 incident on any nonzero occurrence.
 
 ### What is the difference between low-precision and low-recall retrieval?
-[Low-Precision Retrieval](failures/low-precision-retrieval.md) means the retrieved set contains irrelevant chunks (the threshold or top-k is too permissive), corrupting synthesis with noise. [Low-Recall Retrieval](failures/low-recall-retrieval.md) means relevant chunks exist in the corpus but weren't retrieved (the threshold is too strict), which typically manifests as an incorrect "I don't have information about that" or a hallucinated answer filling the gap retrieval should have filled.
+Low-Precision Retrieval means the retrieved set contains irrelevant chunks (the threshold or top-k is too permissive), corrupting synthesis with noise. Low-Recall Retrieval means relevant chunks exist in the corpus but weren't retrieved (the threshold is too strict), which typically manifests as an incorrect "I don't have information about that" or a hallucinated answer filling the gap retrieval should have filled.
 
 ### How do you catch a citation that doesn't actually support its claim?
-Per [Citation Mismatch](failures/citation-mismatch.md), run an NLI (natural language inference) entailment check between the generated claim and the retrieved chunk it cites before the answer is finalized, and block or flag any claim whose cited source doesn't actually entail it — a naive check that only confirms the citation exists will miss a claim-source mismatch entirely.
+Per Citation Mismatch, run an NLI (natural language inference) entailment check between the generated claim and the retrieved chunk it cites before the answer is finalized, and block or flag any claim whose cited source doesn't actually entail it — a naive check that only confirms the citation exists will miss a claim-source mismatch entirely.
 
 ### Can better OCR alone fix table and figure blindness?
-No — [Table/Figure Blindness](failures/tablefigure-blindness.md) and [OCR Extraction Error](failures/ocr-extraction-error.md) are related but distinct: OCR failures are about misread text, while table/figure blindness is about structurally-formatted data (rows, columns, chart values) that text-only extraction never captures as queryable content regardless of OCR accuracy. The fix requires a separate table/figure extraction pipeline (structure detection plus table-specific OCR into a queryable representation), not just a better general-purpose OCR engine.
+No — Table/Figure Blindness and OCR Extraction Error are related but distinct: OCR failures are about misread text, while table/figure blindness is about structurally-formatted data (rows, columns, chart values) that text-only extraction never captures as queryable content regardless of OCR accuracy. The fix requires a separate table/figure extraction pipeline (structure detection plus table-specific OCR into a queryable representation), not just a better general-purpose OCR engine.
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [Answer Synthesis Failure](failures/answer-synthesis-failure.md) | Correctly retrieved information is summarized or paraphrased incorrectly during synthesis |
-| [Chunk Boundary Failure](failures/chunk-boundary-failure.md) | A fact needed to answer the query is split across two chunks and never assembled together |
-| [Citation Mismatch](failures/citation-mismatch.md) | Agent cites a retrieved source that doesn't actually support the claim attached to it |
-| [Conflicting Source Failure](failures/conflicting-source-failure.md) | Two retrieved documents disagree and the agent picks one without reconciling or disclosing the conflict |
-| [Context Stuffing Failure](failures/context-stuffing-failure.md) | Too many retrieved chunks dilute the synthesis context, burying the one that actually answers the query |
-| [Low-Precision Retrieval](failures/low-precision-retrieval.md) | Retrieval threshold or top-k too permissive, pulling in irrelevant chunks that corrupt the synthesized answer |
-| [Low-Recall Retrieval](failures/low-recall-retrieval.md) | Retrieval threshold or top-k too strict, missing relevant documents that exist in the corpus |
-| [Metadata Filter Error](failures/metadata-filter-error.md) | Wrong or overly strict date, version, region, or role filter excludes a document that should have matched |
-| [OCR Extraction Error](failures/ocr-extraction-error.md) | Agent misreads scanned, smudged, rotated, or low-quality source text |
-| [Stale Document Use](failures/stale-document-use.md) | Agent retrieves and relies on an outdated policy, document, or version instead of its current replacement |
-| [Table/Figure Blindness](failures/tablefigure-blindness.md) | Agent misses data embedded in tables, charts, images, or PDFs that text-only extraction never captured |
-| [Wrong Corpus Retrieval](failures/wrong-corpus-retrieval.md) | Agent searches the wrong knowledge base or tenant corpus entirely |
+| Answer Synthesis Failure | Correctly retrieved information is summarized or paraphrased incorrectly during synthesis |
+| Chunk Boundary Failure | A fact needed to answer the query is split across two chunks and never assembled together |
+| Citation Mismatch | Agent cites a retrieved source that doesn't actually support the claim attached to it |
+| Conflicting Source Failure | Two retrieved documents disagree and the agent picks one without reconciling or disclosing the conflict |
+| Context Stuffing Failure | Too many retrieved chunks dilute the synthesis context, burying the one that actually answers the query |
+| Low-Precision Retrieval | Retrieval threshold or top-k too permissive, pulling in irrelevant chunks that corrupt the synthesized answer |
+| Low-Recall Retrieval | Retrieval threshold or top-k too strict, missing relevant documents that exist in the corpus |
+| Metadata Filter Error | Wrong or overly strict date, version, region, or role filter excludes a document that should have matched |
+| OCR Extraction Error | Agent misreads scanned, smudged, rotated, or low-quality source text |
+| Stale Document Use | Agent retrieves and relies on an outdated policy, document, or version instead of its current replacement |
+| Table/Figure Blindness | Agent misses data embedded in tables, charts, images, or PDFs that text-only extraction never captured |
+| Wrong Corpus Retrieval | Agent searches the wrong knowledge base or tenant corpus entirely |
 
 **Total: 12 patterns**
 

@@ -30,33 +30,33 @@ The 12 performance patterns describe a system where latency is additive, composa
 ## Frequently Asked Questions
 
 ### How do you distinguish between a cold start and a normal inference variance?
-[Cold Start Latency](failures/cold-start-latency.md) creates a one-time delay per idle period or scale event (5-30x baseline), visible as a spike immediately after deployment or when traffic suddenly appears after idle time, while [Inference Latency Variance](failures/inference-latency-variance.md) is per-request noise within a normal range. Check logs for model-loading messages, container initialization, or connection-pool warmup; if you see those, it's a cold start. If latency is consistently high per request but startup logs don't appear, it's inference variance or cascade effects.
+Cold Start Latency creates a one-time delay per idle period or scale event (5-30x baseline), visible as a spike immediately after deployment or when traffic suddenly appears after idle time, while Inference Latency Variance is per-request noise within a normal range. Check logs for model-loading messages, container initialization, or connection-pool warmup; if you see those, it's a cold start. If latency is consistently high per request but startup logs don't appear, it's inference variance or cascade effects.
 
 ### What's the difference between batching delays and queue backpressure?
-[Batching Delays](failures/batching-delays.md) are introduced by the batching layer itself — requests wait for the batch to fill or timeout before processing begins. [Queue Backpressure](failures/queue-backpressure.md) is when the queue depth grows faster than the system can drain it, signaling that downstream capacity is saturated. Batching is a deliberate tradeoff (throughput for latency); backpressure is a symptom that capacity is exceeded. High queue depth + low service rate = backpressure. Stable queue depth + periodic batch timeouts = batching latency.
+Batching Delays are introduced by the batching layer itself — requests wait for the batch to fill or timeout before processing begins. Queue Backpressure is when the queue depth grows faster than the system can drain it, signaling that downstream capacity is saturated. Batching is a deliberate tradeoff (throughput for latency); backpressure is a symptom that capacity is exceeded. High queue depth + low service rate = backpressure. Stable queue depth + periodic batch timeouts = batching latency.
 
 ### How do you catch cascading multi-agent latency before it becomes an SLA breach?
-Per [Cascading Multi-Agent Latency](failures/cascading-multi-agent-latency.md) and [Tool Call Latency Accumulation](failures/tool-call-latency-accumulation.md), trace end-to-end latency and break it down by agent, tool, and hop: measure latency for agent 1 alone, then agent 1 → agent 2, then agent 1 → agent 2 → tool call. If latency grows linearly with hops rather than staying constant, cascade effects are present. Set per-hop timeout budgets (e.g., 500ms per agent, 2s per tool call) and alert if any hop exceeds its budget before the end-to-end SLA is breached.
+Per Cascading Multi-Agent Latency and Tool Call Latency Accumulation, trace end-to-end latency and break it down by agent, tool, and hop: measure latency for agent 1 alone, then agent 1 → agent 2, then agent 1 → agent 2 → tool call. If latency grows linearly with hops rather than staying constant, cascade effects are present. Set per-hop timeout budgets (e.g., 500ms per agent, 2s per tool call) and alert if any hop exceeds its budget before the end-to-end SLA is breached.
 
 ### Can timeout reconfiguration alone fix timeout misconfiguration?
-No — per [Timeout Misconfiguration](failures/timeout-misconfiguration.md), timeouts are a symptom, not the root cause. If actual latency exceeds configured timeouts, simply raising timeouts masks the real performance problem (cold starts, backpressure, cascading effects). Instead, measure actual end-to-end latency distribution, identify the stage that's slow, fix that stage, and then set timeouts to match the fixed behavior. If you keep raising timeouts, you're chasing a moving target.
+No — per Timeout Misconfiguration, timeouts are a symptom, not the root cause. If actual latency exceeds configured timeouts, simply raising timeouts masks the real performance problem (cold starts, backpressure, cascading effects). Instead, measure actual end-to-end latency distribution, identify the stage that's slow, fix that stage, and then set timeouts to match the fixed behavior. If you keep raising timeouts, you're chasing a moving target.
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [Batching Delays](failures/batching-delays.md) | Request batching adds wait time; low-traffic periods incur batch timeout delay that high-traffic periods avoid |
-| [Cascading Multi-Agent Latency](failures/cascading-multi-agent-latency.md) | Multiple agents in sequence compound latency; each agent's latency is not independent, one slow agent slows downstream agents |
-| [Cold Start Latency](failures/cold-start-latency.md) | First request after idle or deployment incurs model loading, container init, and connection pool warmup delays (5-30x baseline) |
-| [Context Size Latency Impact](failures/context-size-latency-impact.md) | Inference latency grows with context window size; accumulated context triggers latency spikes and SLA breaches |
-| [Inference Latency Variance](failures/inference-latency-variance.md) | Inference latency varies request-to-request; average is acceptable but tail latency (p99) exceeds SLA |
-| [Network Latency Blindness](failures/network-latency-blindness.md) | System measures inference latency but misses network hops; total latency is sum of inference + network which may exceed SLA |
-| [Queue Backpressure](failures/queue-backpressure.md) | Request queue grows faster than system can drain; backpressure event signals capacity is exceeded and latency will spike |
-| [Response Time SLA Breach](failures/response-time-sla-breach.md) | End-to-end latency exceeds configured SLA, often due to compounded per-stage delays not apparent in component-level testing |
-| [Retry Latency Amplification](failures/retry-latency-amplification.md) | Transient timeout errors trigger retries; retries amplify latency and can cascade into retry storms |
-| [Streaming Stalls](failures/streaming-stalls.md) | Streaming response stalls mid-stream; token generation delay looks like network hang to client |
-| [Timeout Misconfiguration](failures/timeout-misconfiguration.md) | Timeouts don't match actual system latency; set too short they cause cascading retries, set too long they mask real problems |
-| [Tool Call Latency Accumulation](failures/tool-call-latency-accumulation.md) | Each tool call adds latency; multiple tool calls per agent turn compound latency across turns |
+| Batching Delays | Request batching adds wait time; low-traffic periods incur batch timeout delay that high-traffic periods avoid |
+| Cascading Multi-Agent Latency | Multiple agents in sequence compound latency; each agent's latency is not independent, one slow agent slows downstream agents |
+| Cold Start Latency | First request after idle or deployment incurs model loading, container init, and connection pool warmup delays (5-30x baseline) |
+| Context Size Latency Impact | Inference latency grows with context window size; accumulated context triggers latency spikes and SLA breaches |
+| Inference Latency Variance | Inference latency varies request-to-request; average is acceptable but tail latency (p99) exceeds SLA |
+| Network Latency Blindness | System measures inference latency but misses network hops; total latency is sum of inference + network which may exceed SLA |
+| Queue Backpressure | Request queue grows faster than system can drain; backpressure event signals capacity is exceeded and latency will spike |
+| Response Time SLA Breach | End-to-end latency exceeds configured SLA, often due to compounded per-stage delays not apparent in component-level testing |
+| Retry Latency Amplification | Transient timeout errors trigger retries; retries amplify latency and can cascade into retry storms |
+| Streaming Stalls | Streaming response stalls mid-stream; token generation delay looks like network hang to client |
+| Timeout Misconfiguration | Timeouts don't match actual system latency; set too short they cause cascading retries, set too long they mask real problems |
+| Tool Call Latency Accumulation | Each tool call adds latency; multiple tool calls per agent turn compound latency across turns |
 
 **Total: 12 patterns**
 

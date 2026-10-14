@@ -45,19 +45,19 @@ Disaggregate production performance by the metric you care about and compare aga
 
 | Pattern | Mechanism |
 |---------|-----------|
-| [Distribution Shift](failures/distribution-shift.md) | Production queries differ from golden-set distribution; coverage perfect for old distribution but gaps emerging for new |
-| [Evaluation Data Leakage](failures/evaluation-data-leakage.md) | Test data contaminated by training data; evaluation score is optimistic because model saw test examples during training |
-| [Evaluation Metric Mismatch](failures/evaluation-metric-mismatch.md) | Evaluation uses wrong metric; high score on metric doesn't predict success on actual production goal |
-| [Golden Data Coverage Gaps](failures/golden-data-coverage-gaps.md) | Test set missing critical scenarios (edge cases, rare conditions, minorities); good eval score, poor production performance |
-| [Golden Data Staleness](failures/golden-data-staleness.md) | Test data created months ago; production evolved (new features, trend changes, policy updates) but golden set unchanged |
-| [Label Noise and Errors](failures/label-noise-and-errors.md) | Golden-set labels incorrect or inconsistently applied; evaluation score reflects label quality, not agent quality |
-| [Overfitting to Evaluation](failures/overfitting-to-evaluation.md) | Agent optimizes for evaluation metric rather than production goal; high eval score masks misalignment between metric and actual value |
-| [Semantic Equivalence Failures](failures/semantic-equivalence-failures.md) | Metric treats semantically different outputs as equivalent; evaluation score hides quality gaps the metric doesn't capture |
+| Distribution Shift | Production queries differ from golden-set distribution; coverage perfect for old distribution but gaps emerging for new |
+| Evaluation Data Leakage | Test data contaminated by training data; evaluation score is optimistic because model saw test examples during training |
+| Evaluation Metric Mismatch | Evaluation uses wrong metric; high score on metric doesn't predict success on actual production goal |
+| Golden Data Coverage Gaps | Test set missing critical scenarios (edge cases, rare conditions, minorities); good eval score, poor production performance |
+| Golden Data Staleness | Test data created months ago; production evolved (new features, trend changes, policy updates) but golden set unchanged |
+| Label Noise and Errors | Golden-set labels incorrect or inconsistently applied; evaluation score reflects label quality, not agent quality |
+| Overfitting to Evaluation | Agent optimizes for evaluation metric rather than production goal; high eval score masks misalignment between metric and actual value |
+| Semantic Equivalence Failures | Metric treats semantically different outputs as equivalent; evaluation score hides quality gaps the metric doesn't capture |
 
 **Total: 8 patterns**
 
 ## Related Goals
 
-- [Verification](../verification/) — test-time evaluation methodology and validation approaches that can catch evaluation-reliability gaps
+- Verification — test-time evaluation methodology and validation approaches that can catch evaluation-reliability gaps
 - [Output Accuracy](../output-accuracy/) — hallucination and fabrication issues that evaluation should detect but often misses
 - [Reasoning Quality](../reasoning-quality/) — reasoning failures that evaluation metrics may not measure

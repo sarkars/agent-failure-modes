@@ -233,9 +233,9 @@ HAVING halluc_count / total_claims > 0.15 THEN ALERT "Hallucination rate exceede
 
 This is the universal hallucination mechanism. See domain-specific variants for implementation guidance in particular contexts:
 
-- **[Hallucination in RAG/Answer Synthesis](../../../by-capability/knowledge-retrieval/goals/answer-synthesis/failures/confidence-miscalibration.md)** — Hallucinations in LLM-generated answers from retrieved documents
-- **[Hallucination in Document Processing](../../../by-capability/document-processing/goals/multimodal-reliability/failures/object-hallucination.md)** — Hallucinations in VLM-based document extraction (phantom fields, wrong values)
-- **[Hallucination in Vision-Based Tasks](../../../by-capability/vision-and-images/goals/visual-hallucination/failures/object-hallucination.md)** — Hallucinations in object detection and scene understanding
+- **Hallucination in RAG/Answer Synthesis** — Hallucinations in LLM-generated answers from retrieved documents
+- **Hallucination in Document Processing** — Hallucinations in VLM-based document extraction (phantom fields, wrong values)
+- **Hallucination in Vision-Based Tasks** — Hallucinations in object detection and scene understanding
 
 ---
 

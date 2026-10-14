@@ -43,9 +43,9 @@ Automated: implement a pre-approval reconciliation check that compares the deal'
 
 | Pattern | Mechanism |
 |---|---|
-| [Embedding Retrieval Pulls Wrong Contract Clause](failures/embedding-retrieval-pulls-wrong-contract-clause-by-lexical-similarity-across-boilerplate-agreements.md) | Clause retrieved from different customer's contract by boilerplate language similarity instead of canonical template |
-| [Stale Cached Discount-Tier Tool Result](failures/stale-cached-discount-tier-tool-result-trusted-in-quote-approval.md) | Discount-approval tool cache not invalidated after policy change; agent approves at old (unauthorized) discount ceiling |
-| [Multi-Agent Handoff Drops Negotiated Payment-Terms Exception](failures/multi-agent-handoff-drops-negotiated-payment-terms-exception-before-deal-desk-approval.md) | AE negotiates non-standard payment terms; exception in free-text email; absent from structured approval handoff; deal-desk approves standard terms |
+| Embedding Retrieval Pulls Wrong Contract Clause | Clause retrieved from different customer's contract by boilerplate language similarity instead of canonical template |
+| Stale Cached Discount-Tier Tool Result | Discount-approval tool cache not invalidated after policy change; agent approves at old (unauthorized) discount ceiling |
+| Multi-Agent Handoff Drops Negotiated Payment-Terms Exception | AE negotiates non-standard payment terms; exception in free-text email; absent from structured approval handoff; deal-desk approves standard terms |
 
 **Total: 3 patterns**
 

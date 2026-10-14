@@ -33,7 +33,7 @@ Every treatment-planning pattern documented here reflects a gap between what a s
 Store goals as persistent structured objects, separate from the per-visit problem list, and explicitly carry patient-specific goals forward into every visit's plan generation. Before proposing plan changes that contradict a prior agreed goal, require explicit justification and patient re-discussion rather than silent replacement.
 
 ### What's the difference between comorbidity-neglect and drug-interaction failures?
-Adverse-drug-interaction failures focus on pairwise or multi-way medication combinations. Comorbidity-neglect is one level higher: a treatment (or class of treatment) chosen optimally for the primary diagnosis but contraindicated or worsened by a coexisting disease. See [Comorbidity Neglect](failures/comorbidity-neglect.md).
+Adverse-drug-interaction failures focus on pairwise or multi-way medication combinations. Comorbidity-neglect is one level higher: a treatment (or class of treatment) chosen optimally for the primary diagnosis but contraindicated or worsened by a coexisting disease. See Comorbidity Neglect.
 
 ### How do you handle conflicting guideline recommendations?
 Retrieve from multiple major guideline bodies for any query touching a known discordant topic; explicitly compare recommendations and surface the conflict to the clinician for decision-making; require source attribution (which guideline body, what publication year) for every recommendation; present conflicting options side-by-side rather than the agent silently choosing one.
@@ -48,12 +48,12 @@ Subscribe to guideline updates and monitor for changes; retrain or fine-tune qua
 
 | Pattern | Mechanism |
 |---|---|
-| [Care Plan Goal Drift](failures/care-plan-goal-drift.md) | Care plan regenerated at each visit from current problem list; patient-specific goals from prior visits silently lost |
-| [Comorbidity Neglect](failures/comorbidity-neglect.md) | Treatment optimal for primary diagnosis but contraindicated or worsened by comorbidities; not checked |
-| [Guideline Conflict Resolution Failure](failures/guideline-conflict-resolution-failure.md) | Multiple major guideline bodies disagree on threshold or first-line; agent presents one as definitive without disclosing conflict |
-| [Multi-Agent Handoff Drops Specialist-Noted Contraindication](failures/multi-agent-handoff-drops-specialist-noted-contraindication-before-care-plan-finalization.md) | Specialist identifies patient-specific contraindication; finding exists only in consult note, never reaches structured field treatment-planning agent reads |
-| [Outdated Medical Guidelines](failures/outdated-medical-guidelines.md) | Model trained on 2020 guidelines; newer research shows alternative treatment superior; model recommends outdated approach |
-| [Pediatric Dosing Extrapolation Error](failures/pediatric-dosing-extrapolation-error.md) | Pediatric dose calculated by naive linear adult-weight scaling, ignoring nonlinear pediatric pharmacokinetics and age-band-specific dosing |
+| Care Plan Goal Drift | Care plan regenerated at each visit from current problem list; patient-specific goals from prior visits silently lost |
+| Comorbidity Neglect | Treatment optimal for primary diagnosis but contraindicated or worsened by comorbidities; not checked |
+| Guideline Conflict Resolution Failure | Multiple major guideline bodies disagree on threshold or first-line; agent presents one as definitive without disclosing conflict |
+| Multi-Agent Handoff Drops Specialist-Noted Contraindication | Specialist identifies patient-specific contraindication; finding exists only in consult note, never reaches structured field treatment-planning agent reads |
+| Outdated Medical Guidelines | Model trained on 2020 guidelines; newer research shows alternative treatment superior; model recommends outdated approach |
+| Pediatric Dosing Extrapolation Error | Pediatric dose calculated by naive linear adult-weight scaling, ignoring nonlinear pediatric pharmacokinetics and age-band-specific dosing |
 
 **Total: 6 patterns**
 

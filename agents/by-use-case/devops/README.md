@@ -34,7 +34,7 @@ DevOps goals are mostly parallel failure surfaces rather than a strict pipeline:
 None form a strict pipeline; all eight are parallel concerns. A perfectly-working monitoring and alerting system can still route alerts to the wrong team (Alert Routing), and a perfectly-correct incident response can still depend on a bad deploy that should have been caught (Deployment Safety). Conversely, perfect deployment safety does not prevent capacity problems later (Capacity Planning). Each goal must be monitored and validated independently.
 
 ### What is the difference between Anomaly Detection and Monitoring?
-[Monitoring](goals/monitoring/) encompasses signal collection (sampling, cardinality, schema versioning) — what data is available at all and in what quality. [Anomaly Detection](goals/anomaly-detection/) assumes signal availability and focuses on decision-making (baselining, threshold setting, distinguishing correlation from causation). Monitoring failures prevent data from reaching the detector; anomaly-detection failures misinterpret data that did arrive.
+Monitoring encompasses signal collection (sampling, cardinality, schema versioning) — what data is available at all and in what quality. Anomaly Detection assumes signal availability and focuses on decision-making (baselining, threshold setting, distinguishing correlation from causation). Monitoring failures prevent data from reaching the detector; anomaly-detection failures misinterpret data that did arrive.
 
 ### What causes the same failure pattern to appear in multiple goals?
 Multi-agent handoff losses and retrieval-augmented mismatches are structural problems that appear wherever multiple agents exchange information or where similarity-based retrieval substitutes for structured filtering. These patterns appear in alert suppression scoping, maintenance window scoping, checklist selection, playbook selection, deployment preconditions, protection flags, and affected-customer scoping — distinct operational concerns but the same underlying failure mechanism. Fixing one instance does not automatically fix others; each handoff schema and each retrieval step must be independently audited for the same gap.
@@ -97,5 +97,5 @@ All 30 patterns, grouped by goal:
 
 ## Related Categories
 
-- [Document Processing](../document-processing/) — the upstream of DevOps when automation includes analyzing runbooks, architecture docs, or change logs as unstructured text
-- [Knowledge Retrieval](../knowledge-retrieval/) — the underlying retrieval-augmented generation patterns that affect multiple DevOps goals
+- [Document Processing](../../by-capability/document-processing/) — the upstream of DevOps when automation includes analyzing runbooks, architecture docs, or change logs as unstructured text
+- [Knowledge Retrieval](../../by-capability/knowledge-retrieval/) — the underlying retrieval-augmented generation patterns that affect multiple DevOps goals

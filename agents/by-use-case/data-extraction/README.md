@@ -6,10 +6,10 @@ Data Extraction Agents pull structured data from unstructured or semi-structured
 
 | Goal | Description | Status |
 |------|-------------|--------|
-| [Field Mapping](field-mapping.md) | Extracting values to correct schema fields | Planned |
-| [Data Validation](data-validation.md) | Ensuring extracted data meets constraints | Planned |
-| [Schema Handling](schema-handling.md) | Adapting to different data structures | Planned |
-| [Normalization](normalization.md) | Converting values to standard formats | Planned |
+| Field Mapping | Extracting values to correct schema fields | Planned |
+| Data Validation | Ensuring extracted data meets constraints | Planned |
+| Schema Handling | Adapting to different data structures | Planned |
+| Normalization | Converting values to standard formats | Planned |
 
 ## Key Challenges
 

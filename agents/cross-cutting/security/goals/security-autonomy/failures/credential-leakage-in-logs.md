@@ -142,7 +142,7 @@ Impact: Attacker with log access can use the key to make API calls as the agent
 
 For a broader view of credential exposure across all vectors (code, memory, API calls), see:
 - **[Secret Exposure](./secret-exposure.md)** — Secrets hardcoded or exposed in code
-- **[Credential Exposure](../safety-security/failures/credential-exposure.md)** — Generic credential exposure vectors
+- **[Credential Exposure](../../safety-security/failures/credential-exposure.md)** — Generic credential exposure vectors
 - **[Credential Leakage](../../data-loss-prevention/failures/credential-leakage.md)** — Credentials exposed through data leakage
 
 For over-scoped credentials that increase attack surface, see:

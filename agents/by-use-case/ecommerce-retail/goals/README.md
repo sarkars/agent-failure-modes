@@ -18,7 +18,7 @@
 
 ### Where do I start with ecommerce retail failures?
 
-Open [Recommendation Quality](recommendation-quality/) once it is written; it is the only planned goal.
+Open Recommendation Quality once it is written; it is the only planned goal.
 
 ## Related
 

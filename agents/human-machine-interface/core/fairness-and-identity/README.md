@@ -10,12 +10,12 @@ Shared metrics the patterns below report against. Targets are starting points to
 | Metric | Target | Defined in |
 |---|---|---|
 | Paired-test parity ratio | Within about 0.9 to 1.1 (a heuristic) | [dialect and name quality gap](failures/dialect-and-name-quality-gap.md) |
-| Parity regressions after changes | 0 | [dialect and name quality gap](failures/dialect-and-name-quality-gap.md) |
+| Parity regressions after changes | 0 | dialect and name quality gap |
 
 ## Patterns
 | Pattern | One line |
 |---|---|
-| [Dialect and name quality gap](failures/dialect-and-name-quality-gap.md) | Unequal service by dialect, name, or identity cues |
+| Dialect and name quality gap | Unequal service by dialect, name, or identity cues |
 
 ## Planned (not yet written)
 - Accessibility and disability

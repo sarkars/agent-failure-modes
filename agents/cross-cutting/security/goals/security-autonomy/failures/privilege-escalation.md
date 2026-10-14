@@ -172,7 +172,7 @@ Impact:
 **This pattern focuses on DETECTION & RESPONSE (attack scenarios and recovery).**
 
 For architectural prevention and defense-in-depth, see the complementary pattern:
-**[Privilege Escalation: Prevention & Architecture (Safety-Security)](../safety-security/failures/privilege-escalation.md)**
+**Privilege Escalation: Prevention & Architecture (Safety-Security)**
 
 The safety-security pattern covers:
 - Architectural defenses to prevent escalation

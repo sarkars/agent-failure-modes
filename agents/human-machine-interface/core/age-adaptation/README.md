@@ -10,12 +10,12 @@ Shared metrics the patterns below report against. Targets are starting points to
 | Metric | Target | Defined in |
 |---|---|---|
 | Personal-data requests in minor mode | 0 | [child user treated as adult](failures/child-user-treated-as-adult.md) |
-| Strong-signal detection recall | Over 90% | [child user treated as adult](failures/child-user-treated-as-adult.md) |
+| Strong-signal detection recall | Over 90% | child user treated as adult |
 
 ## Patterns
 | Pattern | One line |
 |---|---|
-| [Child user treated as adult](failures/child-user-treated-as-adult.md) | Collects data and pushes sales on a likely child |
+| Child user treated as adult | Collects data and pushes sales on a likely child |
 
 ## Planned (not yet written)
 - Seniors

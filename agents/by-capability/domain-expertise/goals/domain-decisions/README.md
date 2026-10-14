@@ -44,16 +44,16 @@ Regulatory threshold miss, domain rule miss, and source-of-truth confusion are t
 
 | Pattern | Mechanism |
 |---|---|
-| [Bad Concession/Commitment](failures/bad-concessioncommitment.md) | Agent promises a refund, waiver, or SLA term it has no authority to honor |
-| [Business-Context Blindness](failures/business-context-blindness.md) | A technically correct answer harms a business metric (LTV, churn, satisfaction) |
-| [Critical Field Error](failures/critical-field-error.md) | Agent extracts the wrong amount, date, name, address, or ID |
-| [Customer-Emotion Misread](failures/customer-emotion-misread.md) | Agent mishandles empathy in debt collection, healthcare, or complaint scenarios |
-| [Document-Type Confusion](failures/document-type-confusion.md) | Agent misclassifies a paystub, W-2, bank statement, invoice, or policy document |
-| [Domain Rule Miss](failures/domain-rule-miss.md) | Agent misses an industry-specific rule or its exception |
-| [No 'Should Not Decide' Detection](failures/no-should-not-decide-detection.md) | Agent decides a case where a human or domain expert should have decided |
-| [Regulatory Threshold Miss](failures/regulatory-threshold-miss.md) | Agent misses a compliance limit, deadline, or eligibility trigger |
-| [Risk Severity Misclassification](failures/risk-severity-misclassification.md) | Agent treats a critical issue as minor, or a minor issue as critical |
-| [Source-Of-Truth Confusion](failures/source-of-truth-confusion.md) | Agent trusts OCR/RAG text over the authoritative database or source document |
+| Bad Concession/Commitment | Agent promises a refund, waiver, or SLA term it has no authority to honor |
+| Business-Context Blindness | A technically correct answer harms a business metric (LTV, churn, satisfaction) |
+| Critical Field Error | Agent extracts the wrong amount, date, name, address, or ID |
+| Customer-Emotion Misread | Agent mishandles empathy in debt collection, healthcare, or complaint scenarios |
+| Document-Type Confusion | Agent misclassifies a paystub, W-2, bank statement, invoice, or policy document |
+| Domain Rule Miss | Agent misses an industry-specific rule or its exception |
+| No 'Should Not Decide' Detection | Agent decides a case where a human or domain expert should have decided |
+| Regulatory Threshold Miss | Agent misses a compliance limit, deadline, or eligibility trigger |
+| Risk Severity Misclassification | Agent treats a critical issue as minor, or a minor issue as critical |
+| Source-Of-Truth Confusion | Agent trusts OCR/RAG text over the authoritative database or source document |
 
 **Total: 10 patterns**
 

@@ -18,7 +18,7 @@
 | [Jurisdiction Handling](jurisdiction-handling/) | When a contract-drafting or compliance agent applies a rule from the wrong jurisdiction without detecting the mismatch | 3 |
 | [Litigation Support](litigation-support/) | When vocabulary shifts (code names, abbreviations, terminology drift over time) cause the classifier to miss genuinely responsive documents | 3 |
 | [Precedent Currency](precedent-currency/) | When a legal research agent cites a case as controlling law without checking whether it has been overruled | 3 |
-| [Risk Detection](risk-detection/) | When an agent confirms the presence of a risk-mitigating clause (limitation-of-liability, indemnification, termination terms) without evaluating its actual scope, cap, or enforceability | 5 |
+| Risk Detection | When an agent confirms the presence of a risk-mitigating clause (limitation-of-liability, indemnification, termination terms) without evaluating its actual scope, cap, or enforceability | 5 |
 
 **Total: 30 patterns**
 
@@ -26,15 +26,15 @@
 
 ### How do you evaluate indemnification risk beyond clause presence?
 
-Build a structured indemnification analyzer: (1) locate indemnification clause and extract scope/direction, (2) locate limitation-of-liability clause, (3) extract all carve-outs from limitation, (4) for each carve-out, determine whether indemnification is carved out (uncapped) or capped, (5) quantify effective exposure. See [Risk Detection](risk-detection/).
+Build a structured indemnification analyzer: (1) locate indemnification clause and extract scope/direction, (2) locate limitation-of-liability clause, (3) extract all carve-outs from limitation, (4) for each carve-out, determine whether indemnification is carved out (uncapped) or capped, (5) quantify effective exposure. See Risk Detection.
 
 ### What causes a compliance agent to apply an outdated regulatory requirement?
 
-A training-data cutoff combined with no retrieval step against a current, authoritative regulatory text source. See [Compliance](compliance/).
+A training-data cutoff combined with no retrieval step against a current, authoritative regulatory text source. See Compliance.
 
 ### How do you distinguish a clause version retrieved correctly from one that's just lexically similar?
 
-Apply a deterministic lookup keyed to the clause's canonical version ID and context (jurisdiction, deal size) before attempting similarity ranking. See [Contract Drafting](contract-drafting/).
+Apply a deterministic lookup keyed to the clause's canonical version ID and context (jurisdiction, deal size) before attempting similarity ranking. See Contract Drafting.
 
 ## Related
 

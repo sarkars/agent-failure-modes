@@ -29,7 +29,7 @@ The core lesson from the single documented pattern generalizes past its four ill
 [Retrieval Relevance](.) is specifically about structural-attribute mismatch hiding behind high textual similarity — the retrieved item is topically on point but structurally wrong. [Retrieval Quality](../retrieval-quality/) covers a broader set of ranking, chunking, and index-freshness failures where the retrieved item may be topically wrong, outdated, or poorly ranked for reasons unrelated to structural attributes.
 
 ### How do you detect a structural-attribute mismatch that a similarity score won't reveal?
-Per [Semantic Similarity Retrieval Misses Structural Attributes](failures/semantic-similarity-retrieval-misses-structural-attributes.md), require items selected via similarity search to pass an explicit attribute-verification check (category, jurisdiction, tier match) before being used downstream, and flag items with sparse or generic descriptions for mandatory verification since they carry the least distinguishing signal.
+Per Semantic Similarity Retrieval Misses Structural Attributes, require items selected via similarity search to pass an explicit attribute-verification check (category, jurisdiction, tier match) before being used downstream, and flag items with sparse or generic descriptions for mandatory verification since they carry the least distinguishing signal.
 
 ### Can improving the embedding model fix structural-attribute mismatches?
 No — a better embedding model still optimizes for textual resemblance, not structural correctness. The fix documented in the pattern is architectural: match on structured attributes first and use text similarity only as a fallback, rather than expecting a stronger embedding model to somehow learn jurisdiction or tier compatibility from prose alone.
@@ -38,12 +38,12 @@ No — a better embedding model still optimizes for textual resemblance, not str
 
 | Pattern | Mechanism |
 |---|---|
-| [Semantic Similarity Retrieval Misses Structural Attributes](failures/semantic-similarity-retrieval-misses-structural-attributes.md) | Embedding similarity matches on textual resemblance while structured attributes (category, jurisdiction, tier) that determine true compatibility go unchecked |
+| Semantic Similarity Retrieval Misses Structural Attributes | Embedding similarity matches on textual resemblance while structured attributes (category, jurisdiction, tier) that determine true compatibility go unchecked |
 
 **Total: 1 pattern**
 
 ## Related Goals
 
-- [Retrieval Quality](../retrieval-quality/) — broader ranking, chunking, and freshness failures beyond structural-attribute mismatch
+- Retrieval Quality — broader ranking, chunking, and freshness failures beyond structural-attribute mismatch
 - [Retrieval](../retrieval/) — the underlying recall/precision and corpus-selection failures that structural mismatch compounds on top of
 - [Knowledge Freshness](../knowledge-freshness/) — the scope-assumption patterns there (jurisdiction, version) share the same "wrong scope, right topic" shape as retrieval relevance's structural-attribute mismatch

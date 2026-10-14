@@ -47,12 +47,12 @@ Target: list age <30 minutes during business hours (10 AM - 6 PM). Alert thresho
 
 | Pattern | Mechanism |
 |---|---|
-| [Outdated Regulatory Guidance Reliance](failures/outdated-guidance-reliance.md) | Model uses old rules; recommendations violate new regulations effective months ago |
-| [Multi-Jurisdiction Regulatory Conflict](failures/multi-jurisdiction-conflict.md) | Strategy compliant in one jurisdiction violates rules in another; agent applies only one rule set |
-| [Embedding Retrieval Maps New Product to Wrong Rule](failures/embedding-retrieval-maps-new-product-to-wrong-regulatory-rule-by-lexical-similarity.md) | Product classification by description similarity instead of regulatory classification code |
-| [KYC Refresh Staleness](failures/kyc-refresh-staleness.md) | Customer risk tier static despite behavioral drift; monitoring thresholds unchanged until next scheduled refresh |
-| [Sanctions-List Staleness](failures/sanctions-list-staleness.md) | Sanctions list cached; newly sanctioned entities not flagged for days after official update |
-| [Multi-Agent Handoff Drops Jurisdiction Flag](failures/multi-agent-handoff-drops-jurisdiction-flag-between-account-opening-and-compliance-screening-agents.md) | Account-opening agent notes funding-source jurisdiction mismatch; screening agent never receives it in structured input |
+| Outdated Regulatory Guidance Reliance | Model uses old rules; recommendations violate new regulations effective months ago |
+| Multi-Jurisdiction Regulatory Conflict | Strategy compliant in one jurisdiction violates rules in another; agent applies only one rule set |
+| Embedding Retrieval Maps New Product to Wrong Rule | Product classification by description similarity instead of regulatory classification code |
+| KYC Refresh Staleness | Customer risk tier static despite behavioral drift; monitoring thresholds unchanged until next scheduled refresh |
+| Sanctions-List Staleness | Sanctions list cached; newly sanctioned entities not flagged for days after official update |
+| Multi-Agent Handoff Drops Jurisdiction Flag | Account-opening agent notes funding-source jurisdiction mismatch; screening agent never receives it in structured input |
 
 **Total: 6 patterns**
 

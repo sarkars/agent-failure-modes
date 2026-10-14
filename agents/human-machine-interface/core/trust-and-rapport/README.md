@@ -10,12 +10,12 @@ Shared metrics the patterns below report against. Targets are starting points to
 | Metric | Target | Defined in |
 |---|---|---|
 | Truthful identity answer rate | 100% | [undisclosed bot identity](failures/undisclosed-bot-identity.md) |
-| Claimed-done vs. actually-done mismatch | About 0 | [undisclosed bot identity](failures/undisclosed-bot-identity.md) |
+| Claimed-done vs. actually-done mismatch | About 0 | undisclosed bot identity |
 
 ## Patterns
 | Pattern | One line |
 |---|---|
-| [Undisclosed bot identity](failures/undisclosed-bot-identity.md) | Hides that it is an AI, or what it cannot do |
+| Undisclosed bot identity | Hides that it is an AI, or what it cannot do |
 
 ## Planned (not yet written)
 - No follow-through

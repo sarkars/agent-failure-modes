@@ -33,30 +33,30 @@ The 9 state-tracking patterns describe systems where state is implicit, largely 
 ## Frequently Asked Questions
 
 ### How do you distinguish between stale state and lost state?
-Per [Stale State Use](failures/stale-state-use.md) and [State Loss](failures/state-loss.md), stale state is retrievable but outdated (you can find it, but its timestamp shows it's old), while lost state can't be found at all (you look for it and it's not there). Use timestamps and versions on all state: retrieve state, check its version/timestamp, reject if older than acceptable, and only then use it. If state is completely missing, treat it as lost and fail or request it explicitly.
+Per Stale State Use and State Loss, stale state is retrievable but outdated (you can find it, but its timestamp shows it's old), while lost state can't be found at all (you look for it and it's not there). Use timestamps and versions on all state: retrieve state, check its version/timestamp, reject if older than acceptable, and only then use it. If state is completely missing, treat it as lost and fail or request it explicitly.
 
 ### How do you prevent variable binding errors in a multi-agent or multi-tool environment?
-Per [Variable Binding Error](failures/variable-binding-error.md), use namespacing or explicit scoping: prefix variables with agent ID or tool ID (e.g., `tool_A_result`, not just `result`), use structured data types (dicts/objects) not just string keys, and validate that the variable you're reading has the expected type and schema before using it.
+Per Variable Binding Error, use namespacing or explicit scoping: prefix variables with agent ID or tool ID (e.g., `tool_A_result`, not just `result`), use structured data types (dicts/objects) not just string keys, and validate that the variable you're reading has the expected type and schema before using it.
 
 ### Can tooling prevent cross-turn contamination?
-Partially — per [Cross-Turn Contamination](failures/cross-turn-contamination.md), use strict isolation at the agent or conversation level: separate agents or conversation threads should not share state storage or memory contexts unless explicitly intended. Tooling can enforce this (e.g., sandbox each agent's state, require explicit sharing to pass state between threads), but human design still matters — state sharing must be intentional, not accidental.
+Partially — per Cross-Turn Contamination, use strict isolation at the agent or conversation level: separate agents or conversation threads should not share state storage or memory contexts unless explicitly intended. Tooling can enforce this (e.g., sandbox each agent's state, require explicit sharing to pass state between threads), but human design still matters — state sharing must be intentional, not accidental.
 
 ### What should an agent do if it detects that a critical state assumption is violated?
-Per [Untracked Assumptions](failures/untracked-assumptions.md), fail explicitly with clear error messaging rather than attempting to recover or hallucinate: "State variable X is missing (expected from turn 5). Cannot proceed without it. Request: restart conversation or provide X explicitly." Explicit failure enables operators to fix the issue; silent hallucination causes cascading errors downstream.
+Per Untracked Assumptions, fail explicitly with clear error messaging rather than attempting to recover or hallucinate: "State variable X is missing (expected from turn 5). Cannot proceed without it. Request: restart conversation or provide X explicitly." Explicit failure enables operators to fix the issue; silent hallucination causes cascading errors downstream.
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [Concurrent State Conflict](failures/concurrent-state-conflict.md) | Multiple agents update the same state variable simultaneously; final state reflects only one update, other agent's changes are lost |
-| [Cross-Turn Contamination](failures/cross-turn-contamination.md) | State or variables from one agent turn or conversation thread bleed into another turn |
-| [Intermediate Result Corruption](failures/intermediate-result-corruption.md) | Tool result is corrupted during variable binding or state storage; agent operates on corrupted data |
-| [Lost Failure Signal](failures/lost-failure-signal.md) | Tool call fails but failure signal is not propagated; downstream agent proceeds as if operation succeeded |
-| [Stale State Use](failures/stale-state-use.md) | Agent retrieves state from time T1 and uses it as if it's current at time T2; state has been updated by another agent in between |
-| [State Hallucination](failures/state-hallucination.md) | When state is lost or unavailable, agent generates a plausible-looking value rather than requesting it or failing |
-| [State Loss](failures/state-loss.md) | Agent sets state on turn N but it's lost by turn M (not persisted, garbage-collected, or lost in serialization) |
-| [Untracked Assumptions](failures/untracked-assumptions.md) | Agent assumes state is available or has specific properties without explicit validation; behavior is undefined when assumptions fail |
-| [Variable Binding Error](failures/variable-binding-error.md) | Variable gets bound to wrong value due to naming collisions, scoping errors, or cardinality mismatches |
+| Concurrent State Conflict | Multiple agents update the same state variable simultaneously; final state reflects only one update, other agent's changes are lost |
+| Cross-Turn Contamination | State or variables from one agent turn or conversation thread bleed into another turn |
+| Intermediate Result Corruption | Tool result is corrupted during variable binding or state storage; agent operates on corrupted data |
+| Lost Failure Signal | Tool call fails but failure signal is not propagated; downstream agent proceeds as if operation succeeded |
+| Stale State Use | Agent retrieves state from time T1 and uses it as if it's current at time T2; state has been updated by another agent in between |
+| State Hallucination | When state is lost or unavailable, agent generates a plausible-looking value rather than requesting it or failing |
+| State Loss | Agent sets state on turn N but it's lost by turn M (not persisted, garbage-collected, or lost in serialization) |
+| Untracked Assumptions | Agent assumes state is available or has specific properties without explicit validation; behavior is undefined when assumptions fail |
+| Variable Binding Error | Variable gets bound to wrong value due to naming collisions, scoping errors, or cardinality mismatches |
 
 **Total: 9 patterns**
 

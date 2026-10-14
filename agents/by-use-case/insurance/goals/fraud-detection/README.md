@@ -28,13 +28,13 @@ Every fraud-detection pattern documented here recurs from claim processing with 
 ## Frequently Asked Questions
 
 ### Can an agent detect a fraud-ring member purely from name and address similarity?
-No. Shared names and shared high-density addresses (apartment complexes, mail services) are common and uncorrelated with actual fraud-ring membership; the reliable signal is a structured relational data point (shared financial account, shared phone, shared vendor). Embedding similarity alone produces false positives. See [Embedding Retrieval Flags Unrelated Claimant as Fraud-Ring Match](failures/embedding-retrieval-flags-unrelated-claimant-as-fraud-ring-match.md).
+No. Shared names and shared high-density addresses (apartment complexes, mail services) are common and uncorrelated with actual fraud-ring membership; the reliable signal is a structured relational data point (shared financial account, shared phone, shared vendor). Embedding similarity alone produces false positives. See Embedding Retrieval Flags Unrelated Claimant as Fraud-Ring Match.
 
 ### How do you stop a specific fraud indicator from disappearing between triage and SIU investigation?
-Require the initial-review agent to populate a structured field for any specific factual inconsistency it identifies (date conflicts, location mismatches), separate from a generic referral-reason code, and route any referral with a populated inconsistency field to investigation targeting that specific indicator. See [Multi-Agent Handoff Drops Pre-Inception Loss-Date Conflict Before SIU Triage](failures/multi-agent-handoff-drops-pre-inception-loss-date-conflict-before-siu-triage.md).
+Require the initial-review agent to populate a structured field for any specific factual inconsistency it identifies (date conflicts, location mismatches), separate from a generic referral-reason code, and route any referral with a populated inconsistency field to investigation targeting that specific indicator. See Multi-Agent Handoff Drops Pre-Inception Loss-Date Conflict Before SIU Triage.
 
 ### Should fraud-detection agents rely on patterns memorized during training?
-No. Fraud typologies evolve and patterns the SIU actively tracks change as new rings emerge and old ones are disrupted; the agent must query the live red-flag list on every screening decision, not default to general-knowledge fraud patterns. See [Stale Training-Corpus Fraud Typology Overrides Current SIU Red-Flag List](failures/stale-training-corpus-fraud-typology-overrides-current-siu-red-flag-list.md).
+No. Fraud typologies evolve and patterns the SIU actively tracks change as new rings emerge and old ones are disrupted; the agent must query the live red-flag list on every screening decision, not default to general-knowledge fraud patterns. See Stale Training-Corpus Fraud Typology Overrides Current SIU Red-Flag List.
 
 ### How do you know if a fraud-detection agent is producing false positives?
 Compare SIU investigation outcomes for escalations driven by embedding-retrieval similarity alone against escalations supported by a corroborating structured relational signal; if the retrieval-driven escalations show measurably higher false-positive rates on investigation, the retrieval step is the precision problem to fix.
@@ -43,9 +43,9 @@ Compare SIU investigation outcomes for escalations driven by embedding-retrieval
 
 | Pattern | Mechanism |
 |---|---|
-| [Embedding Retrieval Flags Unrelated Claimant as Fraud-Ring Match](failures/embedding-retrieval-flags-unrelated-claimant-as-fraud-ring-match.md) | Link-analysis retrieval matches claimant to known ring member on free-text similarity alone, without structured relational signal |
-| [Multi-Agent Handoff Drops Pre-Inception Loss-Date Conflict Before SIU Triage](failures/multi-agent-handoff-drops-pre-inception-loss-date-conflict-before-siu-triage.md) | Initial reviewer identifies disqualifying date conflict; SIU schema has no field for specific factual inconsistencies |
-| [Stale Training-Corpus Fraud Typology Overrides Current SIU Red-Flag List](failures/stale-training-corpus-fraud-typology-overrides-current-siu-red-flag-list.md) | Agent applies memorized fraud patterns instead of querying live SIU red-flag list; retired and new flags both missed |
+| Embedding Retrieval Flags Unrelated Claimant as Fraud-Ring Match | Link-analysis retrieval matches claimant to known ring member on free-text similarity alone, without structured relational signal |
+| Multi-Agent Handoff Drops Pre-Inception Loss-Date Conflict Before SIU Triage | Initial reviewer identifies disqualifying date conflict; SIU schema has no field for specific factual inconsistencies |
+| Stale Training-Corpus Fraud Typology Overrides Current SIU Red-Flag List | Agent applies memorized fraud patterns instead of querying live SIU red-flag list; retired and new flags both missed |
 
 **Total: 3 patterns**
 

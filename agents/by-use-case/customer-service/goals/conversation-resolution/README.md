@@ -11,11 +11,11 @@
 
 ## Scope
 
-- **Canned-Response Selection** — [embedding-retrieval-selects-similar-but-wrong-canned-response](failures/embedding-retrieval-selects-similar-but-wrong-canned-response.md). Retrieval by text similarity ranks a topically-similar but precondition-wrong response above the correct one.
-- **Clarification and Information Gathering** — [bad-clarification-behavior](failures/bad-clarification-behavior.md), [repeated-question-loop](failures/repeated-question-loop.md), [unclear-next-step](failures/unclear-next-step.md). All three involve asking too much, asking redundantly, or leaving the customer without a clear next action.
-- **Escalation Timing and Quality** — [escalation-too-early](failures/escalation-too-early.md), [poor-escalation](failures/poor-escalation.md). One is escalating before attempting a solvable request; the other is escalating but without clear handoff context so the escalation itself fails.
-- **Tone and Emotional State** — [tone-mismatch](failures/tone-mismatch.md), [over-apology-loop](failures/over-apology-loop.md), [user-frustration-escalation](failures/user-frustration-escalation.md), [conversation-mood-whiplash](failures/conversation-mood-whiplash.md). All four involve register/emotional tone, but applied to support-specific scenarios (apologizing instead of solving, missing escalating frustration).
-- **Multi-Agent Handoff** — [multi-agent-handoff-drops-de-escalation-context-between-triage-and-billing-agent](failures/multi-agent-handoff-drops-de-escalation-context-between-triage-and-billing-agent.md), [bad-refusal](failures/bad-refusal.md), [false-completion-claim](failures/false-completion-claim.md), [inconsistent-answers](failures/inconsistent-answers.md).
+- **Canned-Response Selection** — embedding-retrieval-selects-similar-but-wrong-canned-response. Retrieval by text similarity ranks a topically-similar but precondition-wrong response above the correct one.
+- **Clarification and Information Gathering** — bad-clarification-behavior, repeated-question-loop, [unclear-next-step](failures/unclear-next-step.md). All three involve asking too much, asking redundantly, or leaving the customer without a clear next action.
+- **Escalation Timing and Quality** — escalation-too-early, [poor-escalation](failures/poor-escalation.md). One is escalating before attempting a solvable request; the other is escalating but without clear handoff context so the escalation itself fails.
+- **Tone and Emotional State** — [tone-mismatch](failures/tone-mismatch.md), [over-apology-loop](failures/over-apology-loop.md), [user-frustration-escalation](../../../agent-interaction/goals/conversation-quality/failures/user-frustration-escalation.md), [conversation-mood-whiplash](../../../agent-interaction/goals/conversation-quality/failures/conversation-mood-whiplash.md). All four involve register/emotional tone, but applied to support-specific scenarios (apologizing instead of solving, missing escalating frustration).
+- **Multi-Agent Handoff** — multi-agent-handoff-drops-de-escalation-context-between-triage-and-billing-agent, [bad-refusal](failures/bad-refusal.md), [false-completion-claim](failures/false-completion-claim.md), [inconsistent-answers](failures/inconsistent-answers.md).
 
 ## When Conversation Resolution Matters
 
@@ -30,35 +30,35 @@ Support conversation-resolution failures are the same underlying problems as gen
 ## Frequently Asked Questions
 
 ### How do you select the correct canned response when multiple responses are topically similar?
-[Embedding retrieval selects similar-but-wrong canned response](failures/embedding-retrieval-selects-similar-but-wrong-canned-response.md) shows pure text-similarity ranking can fail when the canned-response library contains responses for similar-but-distinct scenarios. The fix is to pre-filter the candidate set by account-state metadata (plan tier, region, prior ticket history) before applying embedding-similarity ranking, so a precondition-wrong response cannot outrank a precondition-correct one on pure text similarity.
+Embedding retrieval selects similar-but-wrong canned response shows pure text-similarity ranking can fail when the canned-response library contains responses for similar-but-distinct scenarios. The fix is to pre-filter the candidate set by account-state metadata (plan tier, region, prior ticket history) before applying embedding-similarity ranking, so a precondition-wrong response cannot outrank a precondition-correct one on pure text similarity.
 
 ### If a customer has escalating frustration signals, what should the agent do?
-[User frustration escalation](failures/user-frustration-escalation.md) documents that agents often fail to detect escalating frustration or continue with the same approach that caused it. The fix is real-time sentiment tracking, explicit acknowledgment of detected frustration, and a forced change in response strategy (different question, different assumption, escalation to human) when frustration is rising. The most common mistake is apologizing repeatedly without changing approach.
+User frustration escalation documents that agents often fail to detect escalating frustration or continue with the same approach that caused it. The fix is real-time sentiment tracking, explicit acknowledgment of detected frustration, and a forced change in response strategy (different question, different assumption, escalation to human) when frustration is rising. The most common mistake is apologizing repeatedly without changing approach.
 
 ### What is the difference between "escalation too early" and "poor escalation"?
-[Escalation too early](failures/escalation-too-early.md) is refusing a solvable request without attempting it. [Poor escalation](failures/poor-escalation.md) is escalating the conversation, but without clear handoff context, so the human agent has to re-ask everything the bot already gathered. Both are escalation-related failures but at different points in the flow.
+Escalation too early is refusing a solvable request without attempting it. Poor escalation is escalating the conversation, but without clear handoff context, so the human agent has to re-ask everything the bot already gathered. Both are escalation-related failures but at different points in the flow.
 
 ### Should a support agent verify a completion claim with a tool call, or assume it worked?
-[False completion claim](failures/false-completion-claim.md) documents that agents often claim an action was completed (refund issued, setting changed) without checking that the action actually persisted. For critical actions, a verification call (re-fetch the account status) before claiming done is required. Completion claims without tool-proof are a documented failure.
+False completion claim documents that agents often claim an action was completed (refund issued, setting changed) without checking that the action actually persisted. For critical actions, a verification call (re-fetch the account status) before claiming done is required. Completion claims without tool-proof are a documented failure.
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [Embedding-Retrieval Selects Similar But Wrong Canned Response](failures/embedding-retrieval-selects-similar-but-wrong-canned-response.md) | Response selected by topic similarity doesn't match customer's account state or preconditions |
-| [Bad Clarification Behavior](failures/bad-clarification-behavior.md) | Asks unnecessary questions or misses critical clarifications |
-| [Repeated Question Loop](failures/repeated-question-loop.md) | Asks for information already provided earlier in the conversation |
-| [Escalation Too Early](failures/escalation-too-early.md) | Escalates a solvable request without attempting resolution |
-| [Poor Escalation](failures/poor-escalation.md) | Escalates but without clear handoff context, forcing human agent to re-gather information |
-| [Tone Mismatch](failures/tone-mismatch.md) | Register (formal, casual, empathetic) doesn't match the context or customer's own tone |
-| [Over-Apology Loop](failures/over-apology-loop.md) | Apologizes repeatedly without changing approach or solving the problem |
-| [User Frustration Escalation](failures/user-frustration-escalation.md) | Fails to detect and adjust to customer's escalating frustration across turns |
-| [Conversation Mood Whiplash](failures/conversation-mood-whiplash.md) | Emotional tone swings sharply between adjacent turns without justification |
-| [False Completion Claim](failures/false-completion-claim.md) | Claims an action was completed without tool proof it actually persisted |
-| [Inconsistent Answers](failures/inconsistent-answers.md) | Gives contradictory answers to the same policy or fact question across turns |
-| [Multi-Agent Handoff Drops De-Escalation Context](failures/multi-agent-handoff-drops-de-escalation-context-between-triage-and-billing-agent.md) | Frustration level and already-gathered details are lost when conversation is routed from triage to specialized downstream agent |
-| [Bad Refusal](failures/bad-refusal.md) | Refuses safe requests or gives unsafe help due to calibration failure in safety classifier |
-| [Unclear Next Step](failures/unclear-next-step.md) | Customer doesn't know what happens next after agent's response |
+| Embedding-Retrieval Selects Similar But Wrong Canned Response | Response selected by topic similarity doesn't match customer's account state or preconditions |
+| Bad Clarification Behavior | Asks unnecessary questions or misses critical clarifications |
+| Repeated Question Loop | Asks for information already provided earlier in the conversation |
+| Escalation Too Early | Escalates a solvable request without attempting resolution |
+| Poor Escalation | Escalates but without clear handoff context, forcing human agent to re-gather information |
+| Tone Mismatch | Register (formal, casual, empathetic) doesn't match the context or customer's own tone |
+| Over-Apology Loop | Apologizes repeatedly without changing approach or solving the problem |
+| User Frustration Escalation | Fails to detect and adjust to customer's escalating frustration across turns |
+| Conversation Mood Whiplash | Emotional tone swings sharply between adjacent turns without justification |
+| False Completion Claim | Claims an action was completed without tool proof it actually persisted |
+| Inconsistent Answers | Gives contradictory answers to the same policy or fact question across turns |
+| Multi-Agent Handoff Drops De-Escalation Context | Frustration level and already-gathered details are lost when conversation is routed from triage to specialized downstream agent |
+| Bad Refusal | Refuses safe requests or gives unsafe help due to calibration failure in safety classifier |
+| Unclear Next Step | Customer doesn't know what happens next after agent's response |
 
 **Total: 12 patterns**
 
@@ -66,4 +66,4 @@ Support conversation-resolution failures are the same underlying problems as gen
 
 - [Proactive Retention Outreach](../proactive-retention-outreach/) — proactive agent reaching out to at-risk customers, versus reactive support handling inbound requests
 - [Refund and Billing Disputes](../refund-and-billing-disputes/) — specialized domain for financial-risk resolution, applying general conversation-resolution principles to billing-specific scenarios
-- [Conversation Quality](../../agent-interaction/goals/conversation-quality/) — general conversation quality failures that apply across all use cases, not just support
+- [Conversation Quality](../../../agent-interaction/goals/conversation-quality/) — general conversation quality failures that apply across all use cases, not just support

@@ -11,7 +11,7 @@
 
 | Goal | When it fails | Patterns |
 |---|---|---|
-| [Goal Understanding](goal-understanding/) | When an agent optimizes for the wrong version of what it was asked to do | 10 |
+| Goal Understanding | When an agent optimizes for the wrong version of what it was asked to do | 10 |
 | [Planning](planning/) | When the plan an agent builds — or its absence — doesn't match what the task actually requires | 10 |
 
 **Total: 20 patterns**
@@ -20,11 +20,11 @@
 
 ### What's the difference between goal drift and scope creep?
 
-Goal-drift-across-turns is the original objective itself eroding or shifting over a long session — later actions no longer match the initial goal statement. See [Goal Understanding](goal-understanding/).
+Goal-drift-across-turns is the original objective itself eroding or shifting over a long session — later actions no longer match the initial goal statement. See Goal Understanding.
 
 ### What's the difference between no-plan-before-action and bad-task-decomposition?
 
-No-plan-before-action is skipping planning altogether — the agent jumps straight into tool calls on a complex task with no decomposition step at all. See [Planning](planning/).
+No-plan-before-action is skipping planning altogether — the agent jumps straight into tool calls on a complex task with no decomposition step at all. See Planning.
 
 ## Related
 

@@ -48,14 +48,14 @@ Not without structural change. The issue is not data coverage but the fundamenta
 
 | Pattern | Mechanism |
 |---|---|
-| [Slippage Underestimation](failures/slippage-underestimation.md) | Cost models linear/static; realized slippage 2-4x estimate for orders >1% ADV |
-| [Market-Impact Blindness](failures/market-impact-blindness.md) | Multi-account platform aggregate flow 15% of ADV; execution agents unaware; self-inflicted impact compounds |
-| [Venue-Selection Blindness](failures/venue-selection-blindness.md) | Routing selects best-quoted venue; ignores realized fill probability and information leakage |
-| [Fill-Confirmation Status Trusted Without Diffing](failures/fill-confirmation-status-trusted-without-diffing-against-submitted-order-intent.md) | Confirmation status "filled" trusted; actual instrument/quantity/side differs; position system corrupted |
-| [Embedding Retrieval Selects Wrong Historical Benchmark](failures/embedding-retrieval-selects-wrong-historical-benchmark-order-for-tca-comparison.md) | TCA historical comparable via text similarity; differs in size/liquidity regime; benchmark cost wrong |
-| [Spurious Causal Narrative in Slippage Explanation](failures/spurious-causal-narrative-from-coincident-news-event-in-slippage-explanation.md) | TCA narrative attributes slippage to news event; news unrelated to actual instrument movement; narrative artifact |
-| [Multi-Agent Handoff Drops Risk-Limit-Breach Flag](failures/multi-agent-handoff-drops-risk-limit-breach-flag-between-pre-trade-risk-agent-and-execution-agent.md) | Pre-trade risk flags marginal-breach scenario; execution agent receives only pass/fail, routes order |
-| [Wash-Trade Detection Gap](failures/wash-trade-detection-gap.md) | Multi-strategy execution; offsetting buy/sell orders cross without pre-trade detection; regulatory exposure |
+| Slippage Underestimation | Cost models linear/static; realized slippage 2-4x estimate for orders >1% ADV |
+| Market-Impact Blindness | Multi-account platform aggregate flow 15% of ADV; execution agents unaware; self-inflicted impact compounds |
+| Venue-Selection Blindness | Routing selects best-quoted venue; ignores realized fill probability and information leakage |
+| Fill-Confirmation Status Trusted Without Diffing | Confirmation status "filled" trusted; actual instrument/quantity/side differs; position system corrupted |
+| Embedding Retrieval Selects Wrong Historical Benchmark | TCA historical comparable via text similarity; differs in size/liquidity regime; benchmark cost wrong |
+| Spurious Causal Narrative in Slippage Explanation | TCA narrative attributes slippage to news event; news unrelated to actual instrument movement; narrative artifact |
+| Multi-Agent Handoff Drops Risk-Limit-Breach Flag | Pre-trade risk flags marginal-breach scenario; execution agent receives only pass/fail, routes order |
+| Wash-Trade Detection Gap | Multi-strategy execution; offsetting buy/sell orders cross without pre-trade detection; regulatory exposure |
 
 **Total: 8 patterns**
 

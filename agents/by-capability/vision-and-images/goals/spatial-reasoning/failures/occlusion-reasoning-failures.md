@@ -165,7 +165,7 @@ Root cause: Hallucinated body position from visible head motion
 ## Related Patterns
 - [Spatial Reasoning Failures in 3D](./spatial-reasoning-failures-in-3d-environments.md) — Related: inferring structure
 - [Confident Fabrication](../../../../../cross-cutting/accuracy/goals/output-accuracy/failures/confident-fabrication.md) — High confidence about unseen parts
-- [Vision Model Patch Tokenization Boundary](../../../vision-and-images/goals/visual-hallucination/failures/vision-model-patch-tokenization-boundary-failure.md) — Related: missing information at boundaries
+- [Vision Model Patch Tokenization Boundary](../../visual-hallucination/failures/vision-model-patch-tokenization-boundary-failure.md) — Related: missing information at boundaries
 
 ---
 

@@ -46,12 +46,12 @@ Audit-logging-not-enforced (actions with no record) and PII-retention-violations
 
 | Pattern | Mechanism |
 |---------|-----------|
-| [Audit Log Tampering](failures/audit-log-tampering.md) | Audit logs created but can be modified, deleted, or fabricated after the fact; no immutability enforcement |
-| [Audit Logging Not Enforced](failures/audit-logging-not-enforced.md) | Sensitive actions don't create audit records because logging is per-tool, not mandatory at dispatch |
-| [Audit Retention Policy](failures/audit-retention-policy.md) | Audit logs deleted before retention period expires; evidence of past actions destroyed |
-| [Data Deletion Compliance](failures/data-deletion-compliance.md) | Data marked for deletion is not deleted, or deletion happens without audit trail |
-| [Data Residency Violation](failures/data-residency-violation.md) | Data processed or stored in geographic locations violating residency requirements (GDPR, data sovereignty) |
-| [PII Retention Policy Violation](failures/pii-retention-policy-violation.md) | PII data retained past policy expiration; sensitive data not deleted when required |
+| Audit Log Tampering | Audit logs created but can be modified, deleted, or fabricated after the fact; no immutability enforcement |
+| Audit Logging Not Enforced | Sensitive actions don't create audit records because logging is per-tool, not mandatory at dispatch |
+| Audit Retention Policy | Audit logs deleted before retention period expires; evidence of past actions destroyed |
+| Data Deletion Compliance | Data marked for deletion is not deleted, or deletion happens without audit trail |
+| Data Residency Violation | Data processed or stored in geographic locations violating residency requirements (GDPR, data sovereignty) |
+| PII Retention Policy Violation | PII data retained past policy expiration; sensitive data not deleted when required |
 
 **Total: 6 patterns**
 

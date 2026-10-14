@@ -48,10 +48,10 @@ Liquid equities/FX during market hours: <30 seconds. Illiquid equities/corporate
 
 | Pattern | Mechanism |
 |---|---|
-| [Stale Price Feed Reliance](failures/stale-price-feed-reliance.md) | Cached/delayed prices used without staleness detection; silent failover undetected |
-| [Corporate Action Blindness](failures/corporate-action-blindness.md) | Splits, dividends, mergers not adjusted; false anomalies or position misstatements result |
-| [Embedding Retrieval Selects Wrong Reference Instrument](failures/embedding-retrieval-selects-wrong-reference-instrument-for-freshness-benchmark.md) | Freshness check for illiquid instrument benchmarks against textually similar but structurally unrelated comparable |
-| [Multi-Agent Handoff Drops Stale-Feed Flag](failures/multi-agent-handoff-drops-stale-feed-flag-between-ingestion-agent-and-valuation-agent.md) | Ingestion agent's free-text staleness suspicion omitted from structured price record passed to valuation agent |
+| Stale Price Feed Reliance | Cached/delayed prices used without staleness detection; silent failover undetected |
+| Corporate Action Blindness | Splits, dividends, mergers not adjusted; false anomalies or position misstatements result |
+| Embedding Retrieval Selects Wrong Reference Instrument | Freshness check for illiquid instrument benchmarks against textually similar but structurally unrelated comparable |
+| Multi-Agent Handoff Drops Stale-Feed Flag | Ingestion agent's free-text staleness suspicion omitted from structured price record passed to valuation agent |
 
 **Total: 4 patterns**
 

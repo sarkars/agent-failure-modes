@@ -29,25 +29,25 @@ All 4 drafting patterns share a single failure mode: the agent treats a local st
 ## Frequently Asked Questions
 
 ### How do you distinguish a clause version retrieved correctly from one that's just lexically similar?
-Apply a deterministic lookup keyed to the clause's canonical version ID and context (jurisdiction, deal size) before attempting similarity ranking. If a version exists for the required context, retrieve it by ID. Only fall back to similarity search if no canonical version exists — see [Embedding-Retrieval Pulls Wrong Clause Version from Template Library](failures/embedding-retrieval-pulls-wrong-clause-version-from-template-library.md).
+Apply a deterministic lookup keyed to the clause's canonical version ID and context (jurisdiction, deal size) before attempting similarity ranking. If a version exists for the required context, retrieve it by ID. Only fall back to similarity search if no canonical version exists — see Embedding-Retrieval Pulls Wrong Clause Version from Template Library.
 
 ### Does a full-document consistency check catch all boilerplate-negotiated conflicts?
-Yes, if it scans the entire assembled document for terms appearing in both boilerplate and negotiated sections, flags conflicting values, and applies a precedence rule (negotiated terms override boilerplate). The consistency check must run after assembly and before finalization, as detailed in [Boilerplate Clause Misapplication](failures/boilerplate-clause-misapplication.md).
+Yes, if it scans the entire assembled document for terms appearing in both boilerplate and negotiated sections, flags conflicting values, and applies a precedence rule (negotiated terms override boilerplate). The consistency check must run after assembly and before finalization, as detailed in Boilerplate Clause Misapplication.
 
 ### What information needs to flow from a redline agent to an assembly agent to preserve negotiated values?
-The structured handoff must include a dedicated "Negotiated Overrides" field with explicit value-specific entries: {clause_id, default_value, negotiated_value, override_status}. A template-ID-only handoff is insufficient for clauses with negotiated deviations — see [Multi-Agent Handoff Drops Negotiated Deviation Between Redline and Final-Assembly Agent](failures/multi-agent-handoff-drops-negotiated-deviation-between-redline-and-assembly-agent.md).
+The structured handoff must include a dedicated "Negotiated Overrides" field with explicit value-specific entries: {clause_id, default_value, negotiated_value, override_status}. A template-ID-only handoff is insufficient for clauses with negotiated deviations — see Multi-Agent Handoff Drops Negotiated Deviation Between Redline and Final-Assembly Agent.
 
 ### When should an agent verify that a rendered export matches edited clause text?
-Before the agent declares the contract finalized or sends it for signature. The verification must extract the actual clause text from the rendered document and compare it against the edited values in the data model — a data-model edit being "successful" is never sufficient on its own — see [Rendered Export Not Verified Against Edited Clause Text](failures/rendered-export-not-verified-against-edited-clause-text.md).
+Before the agent declares the contract finalized or sends it for signature. The verification must extract the actual clause text from the rendered document and compare it against the edited values in the data model — a data-model edit being "successful" is never sufficient on its own — see Rendered Export Not Verified Against Edited Clause Text.
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [Boilerplate Clause Misapplication](failures/boilerplate-clause-misapplication.md) | Boilerplate defaults inserted without reconciling against deal-specific negotiated terms in the same document |
-| [Embedding-Retrieval Pulls Wrong Clause Version from Template Library](failures/embedding-retrieval-pulls-wrong-clause-version-from-template-library.md) | Similarity search over clause library returns a near-duplicate with different liability cap, enforceability language, or jurisdiction |
-| [Multi-Agent Handoff Drops Negotiated Deviation Between Redline and Final-Assembly Agent](failures/multi-agent-handoff-drops-negotiated-deviation-between-redline-and-assembly-agent.md) | Redline agent negotiates a specific parameter value, but structured handoff to assembly agent captures only clause ID, not the override value |
-| [Rendered Export Not Verified Against Edited Clause Text](failures/rendered-export-not-verified-against-edited-clause-text.md) | Edit succeeds against data model but rendered/exported document contains stale clause text from a cached template |
+| Boilerplate Clause Misapplication | Boilerplate defaults inserted without reconciling against deal-specific negotiated terms in the same document |
+| Embedding-Retrieval Pulls Wrong Clause Version from Template Library | Similarity search over clause library returns a near-duplicate with different liability cap, enforceability language, or jurisdiction |
+| Multi-Agent Handoff Drops Negotiated Deviation Between Redline and Final-Assembly Agent | Redline agent negotiates a specific parameter value, but structured handoff to assembly agent captures only clause ID, not the override value |
+| Rendered Export Not Verified Against Edited Clause Text | Edit succeeds against data model but rendered/exported document contains stale clause text from a cached template |
 
 **Total: 4 patterns**
 

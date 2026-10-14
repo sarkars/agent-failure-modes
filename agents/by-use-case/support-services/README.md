@@ -42,6 +42,6 @@ Several patterns are measurable and correctable without code changes: dual-metri
 
 ## Related Categories
 
-- [Customer Experience Workflows](../by-capability/) — broader capability-level failures that compound support-services issues (knowledge retrieval staleness, reasoning-and-thought model drift)
-- [Document Processing](../by-capability/document-processing/) — upstream; document classification and extraction failures feed ticket routing and deflection decisions
-- [Knowledge Retrieval](../by-capability/knowledge-retrieval/) — upstream; retrieval failures in knowledge bases directly affect self-service deflection and issue-resolution quality
+- [Customer Experience Workflows](../../by-capability/) — broader capability-level failures that compound support-services issues (knowledge retrieval staleness, reasoning-and-thought model drift)
+- [Document Processing](../../by-capability/document-processing/) — upstream; document classification and extraction failures feed ticket routing and deflection decisions
+- [Knowledge Retrieval](../../by-capability/knowledge-retrieval/) — upstream; retrieval failures in knowledge bases directly affect self-service deflection and issue-resolution quality

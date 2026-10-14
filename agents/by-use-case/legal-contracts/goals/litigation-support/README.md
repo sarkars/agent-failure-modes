@@ -28,21 +28,21 @@ Litigation-support failures are particularly high-stakes because litigation arti
 ## Frequently Asked Questions
 
 ### How do you find missed responsive documents caused by vocabulary mismatch?
-Before classification runs, conduct vocabulary discovery: custodian interviews, document sampling, and codename-identification to build a codename-to-standard-term map. Seed the classifier with expanded vocabulary. After classification, sample borderline cases (confidence 40-60%) plus a random 5% for attorney review, feeding corrections back to the classifier iteratively until misclassification rates stabilize — see [Discovery Document Relevance Misclassification](failures/discovery-document-relevance-misclassification.md).
+Before classification runs, conduct vocabulary discovery: custodian interviews, document sampling, and codename-identification to build a codename-to-standard-term map. Seed the classifier with expanded vocabulary. After classification, sample borderline cases (confidence 40-60%) plus a random 5% for attorney review, feeding corrections back to the classifier iteratively until misclassification rates stabilize — see Discovery Document Relevance Misclassification.
 
 ### Can you prevent positional bias in deposition summaries?
-The documented mitigation is to split long documents into overlapping chunks smaller than the length at which positional degradation occurs, summarize each chunk independently, then merge chunk summaries — the chunked approach prevents any passage from being structurally disadvantaged by its position in the document. Additionally, run a deterministic keyword/entity sweep across the entire document in parallel, and flag any sweep hit not in the summary for attorney review — see [Positional Bias Omits Mid-Document Admission in Deposition Summary](failures/positional-bias-omits-mid-document-admission-in-deposition-summary.md).
+The documented mitigation is to split long documents into overlapping chunks smaller than the length at which positional degradation occurs, summarize each chunk independently, then merge chunk summaries — the chunked approach prevents any passage from being structurally disadvantaged by its position in the document. Additionally, run a deterministic keyword/entity sweep across the entire document in parallel, and flag any sweep hit not in the summary for attorney review — see Positional Bias Omits Mid-Document Admission in Deposition Summary.
 
 ### How do you prevent inadvertent privilege waiver in discovery production?
-Use purpose-driven classification, not metadata-only heuristics: scan all documents for advice-seeking language and legal-risk content regardless of sender; identify privilege-by-reference (business communications relaying legal advice), work product (litigation strategy memos), and litigation-preparation language. Then mandatory multi-pass attorney sampling: sample 10%+ of agent-classified-as-non-privileged documents, have licensed attorney review, calculate false-negative rate. If >2%, expand sample or re-classify entire set. Before production, require attorney sign-off on privilege log with specific, defensible basis statements — see [Privilege Waiver Risk in AI-Assisted Document Review](failures/privilege-waiver-risk.md).
+Use purpose-driven classification, not metadata-only heuristics: scan all documents for advice-seeking language and legal-risk content regardless of sender; identify privilege-by-reference (business communications relaying legal advice), work product (litigation strategy memos), and litigation-preparation language. Then mandatory multi-pass attorney sampling: sample 10%+ of agent-classified-as-non-privileged documents, have licensed attorney review, calculate false-negative rate. If >2%, expand sample or re-classify entire set. Before production, require attorney sign-off on privilege log with specific, defensible basis statements — see Privilege Waiver Risk in AI-Assisted Document Review.
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [Discovery Document Relevance Misclassification](failures/discovery-document-relevance-misclassification.md) | Vocabulary mismatch from code names and abbreviations causes classifier to miss responsive documents using internal terminology |
-| [Positional Bias Omits Mid-Document Admission in Deposition Summary](failures/positional-bias-omits-mid-document-admission-in-deposition-summary.md) | Long-document summarization systematically under-weights middle-third content, omitting material admissions despite full in-context availability |
-| [Privilege Waiver Risk in AI-Assisted Document Review](failures/privilege-waiver-risk.md) | Metadata-heuristic privilege classification misses privilege-by-reference and work-product protected communications arriving through indirect channels |
+| Discovery Document Relevance Misclassification | Vocabulary mismatch from code names and abbreviations causes classifier to miss responsive documents using internal terminology |
+| Positional Bias Omits Mid-Document Admission in Deposition Summary | Long-document summarization systematically under-weights middle-third content, omitting material admissions despite full in-context availability |
+| Privilege Waiver Risk in AI-Assisted Document Review | Metadata-heuristic privilege classification misses privilege-by-reference and work-product protected communications arriving through indirect channels |
 
 **Total: 3 patterns**
 

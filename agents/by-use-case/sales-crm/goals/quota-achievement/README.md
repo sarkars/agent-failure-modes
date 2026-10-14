@@ -11,7 +11,7 @@
 
 ## Scope
 
-- **Discount Policy Staleness and Tool Cache Lag** — [stale-cached-discount-tier-tool-result](../../deal-management/failures/stale-cached-discount-tier-tool-result-trusted-in-quote-approval.md). Discount-approval tool cache not invalidated after policy change; agent approves at old (now-unauthorized) ceiling, leading to under-margin deals.
+- **Discount Policy Staleness and Tool Cache Lag** — [stale-cached-discount-tier-tool-result](../deal-management/failures/stale-cached-discount-tier-tool-result-trusted-in-quote-approval.md). Discount-approval tool cache not invalidated after policy change; agent approves at old (now-unauthorized) ceiling, leading to under-margin deals.
 - **Approval Fabrication on Missing Records** — [agent-fabricates-manager-exception-approval](failures/agent-fabricates-manager-exception-approval-when-approval-tool-returns-no-record.md). Approvals-tracking tool returns empty; agent invents plausible approval record (real manager name, realistic date) rather than reporting missing record.
 - **Coaching Playbook Mismatches** — [embedding-retrieval-pulls-mismatched-rep-playbook](failures/embedding-retrieval-pulls-mismatched-rep-playbook-for-quota-coaching.md). Coaching playbook retrieved by rep-profile similarity; differs in segment or territory; recommendation (discount aggressiveness for SMB) doesn't apply to enterprise rep.
 - **Territory Realignment Handoff Drops** — [multi-agent-handoff-drops-mid-quarter-territory-realignment](failures/multi-agent-handoff-drops-mid-quarter-territory-realignment-before-quota-credit-calculation.md). Sales-ops approves mid-quarter account realignment; records in free-text notes; structured quota-crediting handoff has no field for effective-dated territory changes; quota calculation uses stale territory map.
@@ -50,11 +50,11 @@ Require the agent to parse and validate every per-rep (or per-item) status field
 
 | Pattern | Mechanism |
 |---|---|
-| [Agent Fabricates Manager Exception-Approval When Tool Returns Empty](failures/agent-fabricates-manager-exception-approval-when-approval-tool-returns-no-record.md) | Approvals tool returns empty; agent invents specific approval (manager name, date) rather than reporting missing record |
-| [Embedding Retrieval Pulls Mismatched Rep Playbook](failures/embedding-retrieval-pulls-mismatched-rep-playbook-for-quota-coaching.md) | Coaching playbook retrieved by rep-profile similarity; differs in segment; recommendation doesn't transfer |
-| [Multi-Agent Handoff Drops Mid-Quarter Territory Realignment](failures/multi-agent-handoff-drops-mid-quarter-territory-realignment-before-quota-credit-calculation.md) | Territory realignment approval in free-text notes; no structured field in quota-crediting handoff; calculation uses stale territory map |
-| [Quota Agent Auto-Applies Credit Without Verifying Tool Output](failures/quota-agent-auto-applies-credit-adjustment-without-verifying-crediting-tool-output.md) | Split-credit tool response shows per-rep status (one success, one failure); agent treats as full success without inspecting status field |
-| [Spurious Causal Narrative from Correlated CRM Fields](failures/spurious-causal-narrative-from-correlated-crm-fields-treated-as-rule.md) | Coaching narrative attributes quota gap to CRM-field correlation without grounding in scoring-model feature importance; reps adopt as "rule" |
+| Agent Fabricates Manager Exception-Approval When Tool Returns Empty | Approvals tool returns empty; agent invents specific approval (manager name, date) rather than reporting missing record |
+| Embedding Retrieval Pulls Mismatched Rep Playbook | Coaching playbook retrieved by rep-profile similarity; differs in segment; recommendation doesn't transfer |
+| Multi-Agent Handoff Drops Mid-Quarter Territory Realignment | Territory realignment approval in free-text notes; no structured field in quota-crediting handoff; calculation uses stale territory map |
+| Quota Agent Auto-Applies Credit Without Verifying Tool Output | Split-credit tool response shows per-rep status (one success, one failure); agent treats as full success without inspecting status field |
+| Spurious Causal Narrative from Correlated CRM Fields | Coaching narrative attributes quota gap to CRM-field correlation without grounding in scoring-model feature importance; reps adopt as "rule" |
 
 **Total: 5 patterns**
 

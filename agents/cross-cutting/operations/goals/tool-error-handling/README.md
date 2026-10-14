@@ -27,10 +27,10 @@ The 2 error-handling patterns describe systems where error semantics are implici
 ## Frequently Asked Questions
 
 ### How do you distinguish between transient and permanent errors?
-Per [Error Code Semantic Drift](failures/error-code-semantic-drift.md), transient errors (network timeouts, 503 temporarily unavailable) warrant retry; permanent errors (401 unauthorized, 404 not found, 400 bad request) don't. Create an explicit error taxonomy that maps service-specific codes to error types (transient, permanent, quota, auth, etc.), and use the taxonomy to decide retry strategy. Don't guess based on error message — map explicitly.
+Per Error Code Semantic Drift, transient errors (network timeouts, 503 temporarily unavailable) warrant retry; permanent errors (401 unauthorized, 404 not found, 400 bad request) don't. Create an explicit error taxonomy that maps service-specific codes to error types (transient, permanent, quota, auth, etc.), and use the taxonomy to decide retry strategy. Don't guess based on error message — map explicitly.
 
 ### What should an agent do if error format is inconsistent across services?
-Per [Error Response Format Inconsistency](failures/error-response-format-inconsistency.md), wrap each service call with a consistent error-handling interface: normalize responses to a common format (e.g., structured error objects with code, message, type fields), and parse only what you need from that normalized format. This isolates agents from service-specific format changes.
+Per Error Response Format Inconsistency, wrap each service call with a consistent error-handling interface: normalize responses to a common format (e.g., structured error objects with code, message, type fields), and parse only what you need from that normalized format. This isolates agents from service-specific format changes.
 
 ### Can error-handling libraries prevent these failures?
 Partially — a library can standardize error handling for one service, but won't catch semantic drift when services change or new services are added. Use libraries as a foundation, then layer standardization: map error codes to a common taxonomy, and update the mapping as services change.
@@ -39,8 +39,8 @@ Partially — a library can standardize error handling for one service, but won'
 
 | Pattern | Mechanism |
 |---|---|
-| [Error Code Semantic Drift](failures/error-code-semantic-drift.md) | Same error code means different things in different services or API versions; recovery strategy is inappropriate |
-| [Error Response Format Inconsistency](failures/error-response-format-inconsistency.md) | Different services return errors in different formats (JSON vs text, body vs headers); parsing fails for service with different format |
+| Error Code Semantic Drift | Same error code means different things in different services or API versions; recovery strategy is inappropriate |
+| Error Response Format Inconsistency | Different services return errors in different formats (JSON vs text, body vs headers); parsing fails for service with different format |
 
 **Total: 2 patterns**
 

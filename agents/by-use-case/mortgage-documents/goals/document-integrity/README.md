@@ -51,14 +51,14 @@ An outdated tax-return template (correct format but old form version) is not fra
 
 | Pattern | Mechanism |
 |---|---|
-| [PDF Modification Detection](failures/pdf-modification-detection.md) | Post-creation edit detection via PDF revision streams, metadata date mismatch with document dates, modified streams in encryption dictionary |
-| [Metadata Timestamp Anomalies](failures/metadata-timestamp-anomalies.md) | Creation date after claimed document date, modification date inconsistent with document date, timezone anomalies |
-| [Font Substitution Detection](failures/font-substitution-detection.md) | Text fields use different fonts than document standard, font list includes embedded fonts not in original, character encoding inconsistency |
-| [Image Forensics Failures](failures/image-forensics-failures.md) | Signature image shows copy/paste artifact, photo composite detection failure, resolution/compression inconsistency with authenticity |
-| [Digital Signature Validation](failures/digital-signature-validation.md) | Missing or invalid digital signature on e-filed documents, signature verification failure, signature timestamp anomaly |
-| [Barcode Data Mismatch](failures/barcode-data-mismatch.md) | Visible document data doesn't encode to barcode, barcode missing on claimed e-filed return, barcode checksum invalid |
-| [Document Template Validation](failures/document-template-validation.md) | Document layout doesn't match known institution template, missing expected form fields, graphic elements misaligned or missing |
-| [Embedded Object Analysis](failures/embedded-object-analysis.md) | Hidden or suspicious embedded objects (scripts, forms, launch actions), embedded files with suspicious extensions, suspicious object encoding |
+| PDF Modification Detection | Post-creation edit detection via PDF revision streams, metadata date mismatch with document dates, modified streams in encryption dictionary |
+| Metadata Timestamp Anomalies | Creation date after claimed document date, modification date inconsistent with document date, timezone anomalies |
+| Font Substitution Detection | Text fields use different fonts than document standard, font list includes embedded fonts not in original, character encoding inconsistency |
+| Image Forensics Failures | Signature image shows copy/paste artifact, photo composite detection failure, resolution/compression inconsistency with authenticity |
+| Digital Signature Validation | Missing or invalid digital signature on e-filed documents, signature verification failure, signature timestamp anomaly |
+| Barcode Data Mismatch | Visible document data doesn't encode to barcode, barcode missing on claimed e-filed return, barcode checksum invalid |
+| Document Template Validation | Document layout doesn't match known institution template, missing expected form fields, graphic elements misaligned or missing |
+| Embedded Object Analysis | Hidden or suspicious embedded objects (scripts, forms, launch actions), embedded files with suspicious extensions, suspicious object encoding |
 
 **Total: 8 patterns**
 

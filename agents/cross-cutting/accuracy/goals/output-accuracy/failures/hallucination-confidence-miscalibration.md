@@ -244,9 +244,9 @@ HAVING overconfidence_ratio > 1.2 OR confidence_accuracy_correlation < 0.6
 **Parent Pattern**: [Hallucination: Base Mechanism](hallucination-base-mechanism.md) — This is a sub-pattern of the universal hallucination mechanism. The base pattern covers why models generate false content; this pattern focuses on the confidence miscalibration aspect.
 
 **Domain-Specific Variants**:
-- **[Hallucination in RAG](../../../by-capability/knowledge-retrieval/goals/answer-synthesis/failures/confidence-miscalibration.md)** — Confidence miscalibration in answer synthesis from retrieved documents
-- **[Hallucination in Document Processing](../../../by-capability/document-processing/goals/multimodal-reliability/failures/confidence-miscalibration.md)** — VLM confidence errors in document extraction
-- **[Hallucination in Vision](../../../by-capability/vision-and-images/goals/visual-hallucination/failures/confidence-miscalibration.md)** — Vision model confidence on hallucinated objects and attributes
+- **Hallucination in RAG** — Confidence miscalibration in answer synthesis from retrieved documents
+- **Hallucination in Document Processing** — VLM confidence errors in document extraction
+- **Hallucination in Vision** — Vision model confidence on hallucinated objects and attributes
 
 **Related Patterns**:
 - [Attribute Hallucination](hallucination-attribute.md) — Hallucinated attributes on correct objects

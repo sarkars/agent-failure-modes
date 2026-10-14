@@ -29,13 +29,13 @@ Document Classification runs first. Accurate Text Extraction and Layout Preserva
 ## Frequently Asked Questions
 
 ### What's the difference between document classification and text extraction failures?
-Document classification failures happen before extraction — a pipeline misidentifies, mis-splits, or misroutes a document, such as failing to detect a blank page or an embedded sub-document. Text extraction failures happen after a document is correctly identified, when the OCR or vision-language model misreads the actual characters. See [Document Classification](goals/document-classification/) and [Accurate Text Extraction](goals/accurate-text-extraction/).
+Document classification failures happen before extraction — a pipeline misidentifies, mis-splits, or misroutes a document, such as failing to detect a blank page or an embedded sub-document. Text extraction failures happen after a document is correctly identified, when the OCR or vision-language model misreads the actual characters. See Document Classification and Accurate Text Extraction.
 
 ### Can document processing failures be fixed with a better model or better prompting alone?
 Rarely. Most document-processing patterns are architectural gaps — missing validation, no confidence-gated review, no template-drift monitoring — rather than pure model-capability problems. A stronger model reduces incidence but does not remove the need for preprocessing, validation, and monitoring architecture.
 
 ### Which goal should a developer check first when debugging a document-processing agent?
-Match the symptom to the goal: garbled or wrong characters → [Accurate Text Extraction](goals/accurate-text-extraction/); correct characters but scrambled structure → [Layout Preservation](goals/layout-preservation/); confidently wrong values from a vision-language model → [Multimodal Reliability](goals/multimodal-reliability/); an agent losing track of multi-page context → [Agentic Orchestration](goals/agentic-orchestration/); a pipeline that works in staging but degrades in production → [Production Reliability](goals/production-reliability/).
+Match the symptom to the goal: garbled or wrong characters → Accurate Text Extraction; correct characters but scrambled structure → Layout Preservation; confidently wrong values from a vision-language model → Multimodal Reliability; an agent losing track of multi-page context → Agentic Orchestration; a pipeline that works in staging but degrades in production → Production Reliability.
 
 ### How is agentic document processing different from generic, non-agentic OCR failure modes?
 Agentic document processing shares the same underlying image-quality and character-recognition problems as classical OCR, but agentic document processing adds failure surface classical OCR pipelines do not have: an agent reasoning over extracted content across a long document, calling tools into other systems, and orchestrating multi-step document workflows without human correction at every step.

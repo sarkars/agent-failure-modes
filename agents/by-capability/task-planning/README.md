@@ -31,7 +31,7 @@ Goal-understanding failures happen before any plan exists — the agent misreads
 No. Both goals' Prevention sections rely on external structure the model can't provide by itself — a goal-contract object checked by a drift detector, a plan-validator microservice that resolves tool references against a live registry, a DAG engine that enforces safe ordering. A stronger model may make fewer individual mistakes, but the two goals' mitigations exist because the failure mode is architectural (no independent check on the model's own claim about the goal or plan), not a capability gap.
 
 ### Which goal should a developer check first when an agent's output is clearly wrong?
-Ask whether the agent solved the right problem at all: if it answered a different question than intended, expanded scope unasked, or declared success without the real-world state changing, check [Goal Understanding](goals/goal-understanding/). If it correctly understood the ask but the steps taken were incomplete, wrongly ordered, or built on a hallucinated tool, check [Planning](goals/planning/).
+Ask whether the agent solved the right problem at all: if it answered a different question than intended, expanded scope unasked, or declared success without the real-world state changing, check Goal Understanding. If it correctly understood the ask but the steps taken were incomplete, wrongly ordered, or built on a hallucinated tool, check Planning.
 
 ### How does task planning differ from long-horizon execution?
 Task planning covers the correctness of the plan and the understanding of the goal driving it at any timescale, including single-session tasks. Long-horizon execution is specifically about compounding errors that only emerge over many hours or days of autonomous operation — a different failure surface even though a planning mistake early in a long-horizon task can be the seed of a later compounding failure. See [Long-Horizon Execution](../long-horizon-execution/).
@@ -40,4 +40,4 @@ Task planning covers the correctness of the plan and the understanding of the go
 
 - [External Actions](../external-actions/) — where a correctly understood goal and validated plan get executed against real systems, and where planning-time gaps like missing-prerequisite-step and no-rollback-plan surface as action-execution failures
 - [Domain Expertise](../domain-expertise/) — the domain-specific judgment layer that a plan's individual steps often depend on getting right
-- [Long-Horizon Execution](../long-horizon-execution/) — compounding failures specific to multi-hour or multi-day autonomous execution, distinct from single-session planning correctness
+- Long-Horizon Execution — compounding failures specific to multi-hour or multi-day autonomous execution, distinct from single-session planning correctness

@@ -6,10 +6,10 @@ Agents routing tickets, retrieving solutions, and managing escalations face chal
 
 | Goal | Description | Patterns |
 |------|-------------|----------|
-| [Knowledge Retrieval](goals/knowledge-retrieval/) | KB staleness, solution hallucination, relevance drift | In progress |
-| [Ticket Routing](goals/ticket-routing/) | Misrouting, skill mismatch, workload distribution | In progress |
-| [Escalation Management](goals/escalation-management/) | Threshold miscalibration, severity underestimation, SLA tracking | In progress |
-| [Resolution Quality](goals/resolution-quality/) | First-contact resolution overestimate, repeat issues | In progress |
+| [Knowledge Retrieval](../../by-capability/knowledge-retrieval/) | KB staleness, solution hallucination, relevance drift | In progress |
+| [Ticket Routing](../support-services/goals/ticket-routing/) | Misrouting, skill mismatch, workload distribution | In progress |
+| Escalation Management | Threshold miscalibration, severity underestimation, SLA tracking | In progress |
+| Resolution Quality | First-contact resolution overestimate, repeat issues | In progress |
 
 **Status**: ~35 patterns planned
 

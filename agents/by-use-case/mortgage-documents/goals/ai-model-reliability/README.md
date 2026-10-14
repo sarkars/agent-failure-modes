@@ -46,9 +46,9 @@ No—the research consensus is that hallucinated values often carry high confide
 
 | Pattern | Mechanism |
 |---|---|
-| [Extraction Hallucination](failures/extraction-hallucination.md) | LLMs fabricate coherent but incorrect values (arithmetic combinations, contamination, plausible generation) with high confidence |
-| [Vendor Promise Gap](failures/vendor-promise-gap.md) | Marketed accuracy (98–100%) vs. production reality (80–90%) due to demo curation and STP metric conflation |
-| [Verification Collapse](failures/verification-collapse.md) | AI validates its own extracted outputs without independent verification, creating circular loops where errors propagate silently |
+| Extraction Hallucination | LLMs fabricate coherent but incorrect values (arithmetic combinations, contamination, plausible generation) with high confidence |
+| Vendor Promise Gap | Marketed accuracy (98–100%) vs. production reality (80–90%) due to demo curation and STP metric conflation |
+| Verification Collapse | AI validates its own extracted outputs without independent verification, creating circular loops where errors propagate silently |
 
 **Total: 3 patterns**
 

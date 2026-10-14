@@ -11,7 +11,7 @@
 
 | Goal | When it fails | Patterns |
 |---|---|---|
-| [Coordination](coordination/) | Multi-agent AI systems fail to coordinate because the system-design layer — who owns which decision, how messages are validated at handoffs, and how disagreement gets resolved — is left implicit | 15 |
+| Coordination | Multi-agent AI systems fail to coordinate because the system-design layer — who owns which decision, how messages are validated at handoffs, and how disagreement gets resolved — is left implicit | 15 |
 | [Error Propagation](error-propagation/) | One agent's error amplifies across a multi-agent pipeline because each downstream agent treats the previous agent's output as ground truth rather than an uncertain input to verify | 1 |
 | [Handoff Reliability](handoff-reliability/) | A multi-agent handoff loses the upstream agent's confidence signal because the handoff schema is designed to carry only a final value and a status flag | 1 |
 | [Reasoning Quality](reasoning-quality/) | Agreement among multiple AI agents does not guarantee a correct answer because agents built from the same base model, training data, or context inherit the same systematic biases | 1 |
@@ -22,15 +22,15 @@
 
 ### What's the difference between coordination failures and error propagation in multi-agent systems?
 
-Coordination failures cover the breadth of ways agents fail to work together — authority, roles, communication, consensus. See [Coordination](coordination/).
+Coordination failures cover the breadth of ways agents fail to work together — authority, roles, communication, consensus. See Coordination.
 
 ### How is error propagation different from cascading error in the Coordination goal?
 
-They describe the same underlying mechanism. See [Error Propagation](error-propagation/).
+They describe the same underlying mechanism. See Error Propagation.
 
 ### Can the downstream agent just read the upstream agent's full reasoning instead?
 
-In practice, downstream agents are built to consume a structured handoff record for reliability and parseability, not to re-parse another agent's free-text chain of reasoning. See [Handoff Reliability](handoff-reliability/).
+In practice, downstream agents are built to consume a structured handoff record for reliability and parseability, not to re-parse another agent's free-text chain of reasoning. See Handoff Reliability.
 
 ## Related
 

@@ -15,7 +15,7 @@
 | [Agentic Orchestration](agentic-orchestration/) | When an agent's document reasoning is sound but the surrounding machinery — context management, tool calls, and self-correction — corrupts or loses the information the reasoning depends on. | 6 |
 | [Document Classification](document-classification/) | When a pipeline cannot correctly determine what a document is, where it starts and ends, or which schema applies, before extraction ever begins. | 6 |
 | [Layout Preservation](layout-preservation/) | When an agent reads every character correctly but flattens the document's two-dimensional structure into the wrong one-dimensional text stream. | 6 |
-| [Multimodal Reliability](multimodal-reliability/) | When a vision-language model produces a fluent, confident-sounding extraction that isn't actually grounded in what the document shows. | 10 |
+| Multimodal Reliability | When a vision-language model produces a fluent, confident-sounding extraction that isn't actually grounded in what the document shows. | 10 |
 | [Production Reliability](production-reliability/) | When a document-processing pipeline that worked in testing degrades, silently or operationally, once it runs continuously at real-world scale. | 10 |
 
 **Total: 46 patterns**
@@ -24,15 +24,15 @@
 
 ### What makes VLM hallucinations harder to catch than classical OCR errors?
 
-Because classical OCR fails loudly — an unreadable character produces garbled output or a blank, which is visibly wrong. See [Multimodal Reliability](multimodal-reliability/).
+Because classical OCR fails loudly — an unreadable character produces garbled output or a blank, which is visibly wrong. See Multimodal Reliability.
 
 ### What's the difference between accuracy-regression and template-drift?
 
-Accuracy-regression is caused by a pipeline-side change — a new model or prompt version deployed by the team running the pipeline. See [Production Reliability](production-reliability/).
+Accuracy-regression is caused by a pipeline-side change — a new model or prompt version deployed by the team running the pipeline. See Production Reliability.
 
 ### What's the difference between accurate text extraction and multimodal reliability failures?
 
-Text extraction failures are character-level misreads — the model gets individual glyphs or words wrong, such as a `0` read as `O`. See [Accurate Text Extraction](accurate-text-extraction/).
+Text extraction failures are character-level misreads — the model gets individual glyphs or words wrong, such as a `0` read as `O`. See Accurate Text Extraction.
 
 ## Related
 

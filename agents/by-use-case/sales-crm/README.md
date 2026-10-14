@@ -51,6 +51,6 @@ Run a synthetic test: create 50-100 test leads with known characteristics and kn
 ## Related Categories
 
 - [Financial Services](../financial-services/) — similar patterns (handoff information loss, configuration drift, tool-cache staleness) but financial-services also adds data-quality and regulatory dimensions
-- [Knowledge Retrieval](../../../by-capability/knowledge-retrieval/) — lead precedents, coaching playbooks, and discount policies are knowledge that agents retrieve; retrieval accuracy and staleness directly affect sales outcomes
-- [External Actions](../../../by-capability/external-actions/) — sales agents take external actions (approvals, deal-desk routing, territory assignment) whose consequences are high-stakes and audit-visible
+- [Knowledge Retrieval](../../by-capability/knowledge-retrieval/) — lead precedents, coaching playbooks, and discount policies are knowledge that agents retrieve; retrieval accuracy and staleness directly affect sales outcomes
+- [External Actions](../../by-capability/external-actions/) — sales agents take external actions (approvals, deal-desk routing, territory assignment) whose consequences are high-stakes and audit-visible
 

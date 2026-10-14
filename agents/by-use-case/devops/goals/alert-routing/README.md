@@ -28,7 +28,7 @@ All three alert-routing patterns share the same underlying gap: the routing agen
 ## Frequently Asked Questions
 
 ### What causes an alert to be routed to the wrong on-call team?
-Most commonly, a service-ownership mapping that was correct when created but never updated after a team reorganization or ownership transfer — the routing agent finds an exact service-name match and routes with high confidence, with no signal that the mapping itself has drifted out of date. See [On-Call Escalation Misroute](failures/on-call-escalation-misroute.md).
+Most commonly, a service-ownership mapping that was correct when created but never updated after a team reorganization or ownership transfer — the routing agent finds an exact service-name match and routes with high confidence, with no signal that the mapping itself has drifted out of date. See On-Call Escalation Misroute.
 
 ### How do you detect a stale ownership mapping before it causes a misroute?
 Attach a last-validated timestamp to every ownership-mapping entry, cross-check it on a recurring schedule against an authoritative source (org chart, service catalog, deploy-pipeline ownership tags), and surface low freshness confidence separately from exact-name-match confidence rather than folding both into a single score.
@@ -43,9 +43,9 @@ No — in the documented case the scheduling agent's planning output correctly i
 
 | Pattern | Mechanism |
 |---|---|
-| [Embedding Retrieval Misroutes Alert via Similar Runbook Match](failures/embedding-retrieval-misroutes-alert-via-similar-runbook-match.md) | Free-text similarity retrieval pulls a lexically similar runbook for the wrong service |
-| [Multi-Agent Handoff Drops Maintenance-Window Suppression Flag](failures/multi-agent-handoff-drops-maintenance-window-suppression-flag-between-scheduler-and-alert-router.md) | Scheduling agent's suppression-scope reasoning never reaches the structured calendar field the router reads |
-| [On-Call Escalation Misroute](failures/on-call-escalation-misroute.md) | Static service-ownership mapping drifts stale after reorg, routed with false confidence |
+| Embedding Retrieval Misroutes Alert via Similar Runbook Match | Free-text similarity retrieval pulls a lexically similar runbook for the wrong service |
+| Multi-Agent Handoff Drops Maintenance-Window Suppression Flag | Scheduling agent's suppression-scope reasoning never reaches the structured calendar field the router reads |
+| On-Call Escalation Misroute | Static service-ownership mapping drifts stale after reorg, routed with false confidence |
 
 **Total: 3 patterns**
 

@@ -63,8 +63,8 @@ No specific failure patterns have been documented for data-pipeline-integration 
 
 ## Related Goals
 
-- [Dependency-Management](../dependency-management/README.md) — includes data-pipeline-lossy-transformation, data-pipeline-schema-drift, and other pipeline-specific patterns
-- [Input-Output-Handling](../input-output-handling/README.md) — schema evolution and validation at stage boundaries
+- Dependency-Management — includes data-pipeline-lossy-transformation, data-pipeline-schema-drift, and other pipeline-specific patterns
+- Input-Output-Handling — schema evolution and validation at stage boundaries
 - [State-Tracking](../state-tracking/README.md) — tracking data transformation state through the pipeline
 - [Monitoring-and-Alerting](../monitoring-and-alerting/README.md) — data quality monitoring is critical for detecting corruption early
 - [Observability-Monitoring](../observability-monitoring/README.md) — end-to-end pipeline tracing enables diagnosis of data corruption

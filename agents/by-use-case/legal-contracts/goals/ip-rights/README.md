@@ -30,25 +30,25 @@ All 4 IP-rights patterns share a single structural gap: the agent stops short of
 ## Frequently Asked Questions
 
 ### How do you verify that an IP-assignment clause covers the specific work category and jurisdiction?
-Maintain a reference database mapping jurisdiction + work category to required IP mechanisms (work-for-hire applicability, present-assignment fallback requirement, moral-rights waiver). On contract review, extract the work category and jurisdiction, query the database, and verify the contract includes all required mechanisms — a single presence check is insufficient — see [IP Assignment Gap in Contractor Agreements](failures/ip-assignment-gap-in-contractor-agreements.md).
+Maintain a reference database mapping jurisdiction + work category to required IP mechanisms (work-for-hire applicability, present-assignment fallback requirement, moral-rights waiver). On contract review, extract the work category and jurisdiction, query the database, and verify the contract includes all required mechanisms — a single presence check is insufficient — see IP Assignment Gap in Contractor Agreements.
 
 ### Can you distinguish a work-for-hire assignment template from an OSS-license template using embedding similarity alone?
-No — both templates use dense overlapping IP vocabulary, so similarity ranking doesn't distinguish between work-for-hire assignments and OSS-license templates. The reliable approach is to tag every template with structured metadata (legal_effect: full-assignment, limited-license, etc.) and filter by legal effect before similarity ranking, confirmed by a defined-terms consistency check — see [Embedding Retrieval Pulls Generic OSS License as IP Assignment Template](failures/embedding-retrieval-pulls-generic-oss-license-as-ip-assignment-template.md).
+No — both templates use dense overlapping IP vocabulary, so similarity ranking doesn't distinguish between work-for-hire assignments and OSS-license templates. The reliable approach is to tag every template with structured metadata (legal_effect: full-assignment, limited-license, etc.) and filter by legal effect before similarity ranking, confirmed by a defined-terms consistency check — see Embedding Retrieval Pulls Generic OSS License as IP Assignment Template.
 
 ### What information must be preserved when handing off a clearance determination to a licensing agent?
-The structured handoff must include a dedicated field for scope limitations: field-of-use restrictions, product-line restrictions, geographic scope, time limits. The licensing agent must never issue a blanket authorization; every authorization must check the requesting division/product against the scope limits and issue only a scoped authorization or deny if out of scope — see [Multi-Agent Handoff Drops Field-of-Use Limitation Between Clearance Agent and Licensing Agent](failures/multi-agent-handoff-drops-field-of-use-limitation-between-clearance-and-licensing-agent.md).
+The structured handoff must include a dedicated field for scope limitations: field-of-use restrictions, product-line restrictions, geographic scope, time limits. The licensing agent must never issue a blanket authorization; every authorization must check the requesting division/product against the scope limits and issue only a scoped authorization or deny if out of scope — see Multi-Agent Handoff Drops Field-of-Use Limitation Between Clearance Agent and Licensing Agent.
 
 ### How do you prevent a clearance opinion from citing a clause incorrectly without re-reading the source?
-Separate the opinion-generation step from verification: after generation, run an independent verification pass that re-reads the source license without seeing the draft opinion and generates an independent characterization. Auto-diff the two characterizations; flag any drift as an unverified claim, blocking the opinion from filing until drift is reconciled — see [Unverified Clearance Opinion Filed Without Checking Cited Clause Against Source Agreement](failures/unverified-clearance-opinion-filed-without-checking-cited-clause-against-source-agreement.md).
+Separate the opinion-generation step from verification: after generation, run an independent verification pass that re-reads the source license without seeing the draft opinion and generates an independent characterization. Auto-diff the two characterizations; flag any drift as an unverified claim, blocking the opinion from filing until drift is reconciled — see Unverified Clearance Opinion Filed Without Checking Cited Clause Against Source Agreement.
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [Embedding Retrieval Pulls Generic OSS License as IP Assignment Template](failures/embedding-retrieval-pulls-generic-oss-license-as-ip-assignment-template.md) | Similarity search confuses OSS-contributor-license with work-for-hire assignment due to overlapping IP vocabulary |
-| [IP Assignment Gap in Contractor Agreements](failures/ip-assignment-gap-in-contractor-agreements.md) | Presence of assignment language doesn't verify mechanism covers work category under applicable jurisdiction's law |
-| [Multi-Agent Handoff Drops Field-of-Use Limitation Between Clearance Agent and Licensing Agent](failures/multi-agent-handoff-drops-field-of-use-limitation-between-clearance-and-licensing-agent.md) | Field-of-use scope identified in clearance analysis never reaches licensing agent's structured handoff |
-| [Unverified Clearance Opinion Filed Without Checking Cited Clause Against Source Agreement](failures/unverified-clearance-opinion-filed-without-checking-cited-clause-against-source-agreement.md) | Clearance opinion cites a clause paraphrased from memory rather than re-read and verified verbatim |
+| Embedding Retrieval Pulls Generic OSS License as IP Assignment Template | Similarity search confuses OSS-contributor-license with work-for-hire assignment due to overlapping IP vocabulary |
+| IP Assignment Gap in Contractor Agreements | Presence of assignment language doesn't verify mechanism covers work category under applicable jurisdiction's law |
+| Multi-Agent Handoff Drops Field-of-Use Limitation Between Clearance Agent and Licensing Agent | Field-of-use scope identified in clearance analysis never reaches licensing agent's structured handoff |
+| Unverified Clearance Opinion Filed Without Checking Cited Clause Against Source Agreement | Clearance opinion cites a clause paraphrased from memory rather than re-read and verified verbatim |
 
 **Total: 4 patterns**
 

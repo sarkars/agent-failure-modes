@@ -90,13 +90,13 @@ Result: User misses meeting because they assumed Tuesday
 ## Universal Pattern Reference
 
 This is a domain-specific implementation of the universal pattern:
-**[Hallucination and Confidence Miscalibration (Cross-Cutting)](../../../cross-cutting/accuracy/goals/output-accuracy/failures/hallucination-confidence-miscalibration.md)**
+**[Hallucination and Confidence Miscalibration (Cross-Cutting)](../../../../../cross-cutting/accuracy/goals/output-accuracy/failures/hallucination-confidence-miscalibration.md)**
 
 The universal pattern covers why LLMs produce confident but false content. This variant focuses on **RAG/answer synthesis** where confidence miscalibration prevents routing hallucinations to human review.
 
 ### Related Domain Variants
-- [Document Processing: Confidence Miscalibration](../../../document-processing/goals/multimodal-reliability/failures/confidence-miscalibration.md) — VLM overconfidence on extracted values
-- [Vision: Confidence Miscalibration](../../../vision-and-images/goals/visual-hallucination/failures/confidence-miscalibration.md) — Vision model overconfidence on hallucinated objects
+- Document Processing: Confidence Miscalibration — VLM overconfidence on extracted values
+- Vision: Confidence Miscalibration — Vision model overconfidence on hallucinated objects
 
 ---
 

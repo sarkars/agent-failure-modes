@@ -28,27 +28,27 @@ Across all six patterns, the fix is never "use a better pretrained model" alone 
 ## Frequently Asked Questions
 
 ### Is adversarial robustness only about deliberate attacks?
-No. Only [adversarial-perturbation](failures/adversarial-perturbation.md) involves an adversary; the other five patterns in adversarial robustness — compression, low resolution, lighting shift, rotation/perspective, and OOD blindness — are ordinary consequences of deploying a vision model outside the exact conditions of its training data.
+No. Only adversarial-perturbation involves an adversary; the other five patterns in adversarial robustness — compression, low resolution, lighting shift, rotation/perspective, and OOD blindness — are ordinary consequences of deploying a vision model outside the exact conditions of its training data.
 
 ### Is out-of-distribution blindness a robustness failure or an accuracy failure?
-Because the failure mode isn't "wrong answer with appropriately low confidence" — baseline models assign >50% confidence to 80-90% of OOD examples. The model isn't uncertain about an unfamiliar input; it's confidently wrong, which is what makes [ood-blindness](failures/ood-blindness.md) dangerous in ways a calibrated low-confidence error would not be.
+Because the failure mode isn't "wrong answer with appropriately low confidence" — baseline models assign >50% confidence to 80-90% of OOD examples. The model isn't uncertain about an unfamiliar input; it's confidently wrong, which is what makes ood-blindness dangerous in ways a calibrated low-confidence error would not be.
 
 ### Do adversarial-robustness patterns compound with each other?
 Yes. A compressed, poorly lit, rotated photo of a genuinely novel object combines four of adversarial robustness's six patterns at once, and the mitigations are not mutually exclusive — augmentation for compression, lighting, and rotation can be applied in the same training pipeline, while OOD and adversarial detectors can run as parallel runtime checks on the same inference call.
 
 ### Which pattern has the most transferable mitigation architecture?
-Ensemble-based detection. [adversarial-perturbation](failures/adversarial-perturbation.md), [ood-blindness](failures/ood-blindness.md), and [rotation-perspective-variance](failures/rotation-perspective-variance.md) all converge independently on running multiple models or multiple transformed views of the same input and requiring agreement before accepting a prediction — the same pattern applied to three different root causes.
+Ensemble-based detection. adversarial-perturbation, ood-blindness, and rotation-perspective-variance all converge independently on running multiple models or multiple transformed views of the same input and requiring agreement before accepting a prediction — the same pattern applied to three different root causes.
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [Adversarial Perturbation](failures/adversarial-perturbation.md) | Imperceptible crafted noise flips predictions via brittle, high-dimensional decision boundaries |
-| [Compression Sensitivity](failures/compression-sensitivity.md) | JPEG/WebP artifacts differ statistically from uncompressed training images, eroding fine detail |
-| [Lighting & Color Shift](failures/lighting-color-shift.md) | Illumination is learned as a feature rather than treated as a nuisance variable, so models overfit to training-set lighting |
-| [Low-Resolution Failure](failures/low-resolution-failure.md) | Downsampling destroys detail the model's receptive fields depend on, causing cliffs below training resolution |
-| [Out-of-Distribution Blindness](failures/ood-blindness.md) | Softmax always outputs a class distribution; there is no built-in mechanism to reject unknown inputs |
-| [Rotation & Perspective Variance](failures/rotation-perspective-variance.md) | CNNs lack rotational invariance (only approximate equivariance), so canonical-view training fails to generalize to rotated or skewed views |
+| Adversarial Perturbation | Imperceptible crafted noise flips predictions via brittle, high-dimensional decision boundaries |
+| Compression Sensitivity | JPEG/WebP artifacts differ statistically from uncompressed training images, eroding fine detail |
+| Lighting & Color Shift | Illumination is learned as a feature rather than treated as a nuisance variable, so models overfit to training-set lighting |
+| Low-Resolution Failure | Downsampling destroys detail the model's receptive fields depend on, causing cliffs below training resolution |
+| Out-of-Distribution Blindness | Softmax always outputs a class distribution; there is no built-in mechanism to reject unknown inputs |
+| Rotation & Perspective Variance | CNNs lack rotational invariance (only approximate equivariance), so canonical-view training fails to generalize to rotated or skewed views |
 
 **Total: 6 patterns**
 

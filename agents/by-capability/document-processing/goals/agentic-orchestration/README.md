@@ -46,12 +46,12 @@ Not reliably. The tool-parameter-errors pattern notes tool-parameter mismatches 
 
 | Pattern | Mechanism |
 |---|---|
-| [Conflicting Information](failures/conflicting-information.md) | Same field has different values across document locations; agent picks arbitrary/first occurrence |
-| [Context Window Limits](failures/context-window-limits.md) | Naive chunking breaks cross-references and tables spanning pages |
-| [Error Recovery Errors](failures/error-recovery-errors.md) | Agent's own correction "fixes" good data to match a bad extraction |
-| [Reading Bottleneck](failures/reading-bottleneck.md) | Correct reasoning chain built on a misread input value |
-| [Tool Parameter Errors](failures/tool-parameter-errors.md) | Off-by-one or misspecified page/region parameters passed to extraction tools |
-| [Unstructured Documents](failures/unstructured-documents.md) | Key values sit in narrative text with no labeled field to extract from |
+| Conflicting Information | Same field has different values across document locations; agent picks arbitrary/first occurrence |
+| Context Window Limits | Naive chunking breaks cross-references and tables spanning pages |
+| Error Recovery Errors | Agent's own correction "fixes" good data to match a bad extraction |
+| Reading Bottleneck | Correct reasoning chain built on a misread input value |
+| Tool Parameter Errors | Off-by-one or misspecified page/region parameters passed to extraction tools |
+| Unstructured Documents | Key values sit in narrative text with no labeled field to extract from |
 
 **Total: 6 patterns**
 

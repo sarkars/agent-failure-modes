@@ -46,11 +46,11 @@ Missing abstention (fabrication under insufficient grounding) and confidence mis
 
 | Pattern | Mechanism |
 |---------|-----------|
-| [Confidence Calibration Failure](failures/confidence-calibration-failure.md) | Model confidence doesn't correlate with accuracy; high-confidence answers are no more reliable than medium-confidence ones |
-| [Deterministic Verification Bypassed](failures/deterministic-verification-bypassed.md) | Deterministic checks exist (format, checksum, business rule) but aren't applied; invalid output ships without verification |
-| [Missing Abstention Affordance](failures/missing-abstention-affordance.md) | Response schema has no "insufficient information" option; agent best-guesses even when grounding inadequate |
-| [Missing Self-Reflection for High-Stakes Output](failures/missing-self-reflection-for-high-stakes-output.md) | High-stakes decisions treated same as low-stakes; agent doesn't pause to reflect or verify before decision output |
-| [Repetitive Degenerate Generation](failures/repetitive-degenerate-generation.md) | Output quality degrades; model produces repetitive or degraded output; diversity control weak or missing |
+| Confidence Calibration Failure | Model confidence doesn't correlate with accuracy; high-confidence answers are no more reliable than medium-confidence ones |
+| Deterministic Verification Bypassed | Deterministic checks exist (format, checksum, business rule) but aren't applied; invalid output ships without verification |
+| Missing Abstention Affordance | Response schema has no "insufficient information" option; agent best-guesses even when grounding inadequate |
+| Missing Self-Reflection for High-Stakes Output | High-stakes decisions treated same as low-stakes; agent doesn't pause to reflect or verify before decision output |
+| Repetitive Degenerate Generation | Output quality degrades; model produces repetitive or degraded output; diversity control weak or missing |
 
 **Total: 5 patterns**
 

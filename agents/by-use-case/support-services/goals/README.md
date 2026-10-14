@@ -15,7 +15,7 @@
 | [Self Service Deflection](self-service-deflection/) | When they offer the same unhelpful suggestion repeatedly without escalating, when they direct customers through closed loops of cross-referencing FAQ articles | 6 |
 | [Sentiment Escalation](sentiment-escalation/) | When they select an escalation playbook by textual similarity rather than by confirming the ticket's actual severity tier | 6 |
 | [Sla Management](sla-management/) | When they apply an incorrect SLA tier because retrieval selected a boilerplate-heavy but wrong-tier policy document | 4 |
-| [Ticket Routing](ticket-routing/) | When they classify a ticket's product category by embedding similarity to a taxonomy node without verifying the account actually has that product | 8 |
+| Ticket Routing | When they classify a ticket's product category by embedding similarity to a taxonomy node without verifying the account actually has that product | 8 |
 
 **Total: 31 patterns**
 
@@ -23,15 +23,15 @@
 
 ### How do you verify a ticket is routed to a provisioned product line?
 
-Query the account's provisioning record against the classified product line before routing finalizes; block routing to unprovisioned products regardless of taxonomy-similarity scores. See [Ticket Routing](ticket-routing/).
+Query the account's provisioning record against the classified product line before routing finalizes; block routing to unprovisioned products regardless of taxonomy-similarity scores. See Ticket Routing.
 
 ### How do you know when a canned response is situationally inappropriate?
 
-Track first-contact-resolution rate and escalation rate separately for macro-resolved versus fully custom-written responses. See [Issue Resolution](issue-resolution/).
+Track first-contact-resolution rate and escalation rate separately for macro-resolved versus fully custom-written responses. See Issue Resolution.
 
 ### How do you distinguish between successful deflection and customer abandonment from frustration?
 
-Require an explicit customer-confirmation step ("yes, that resolved it") rather than inferring resolution from the absence of a follow-up message. See [Self Service Deflection](self-service-deflection/).
+Require an explicit customer-confirmation step ("yes, that resolved it") rather than inferring resolution from the absence of a follow-up message. See Self Service Deflection.
 
 ## Related
 

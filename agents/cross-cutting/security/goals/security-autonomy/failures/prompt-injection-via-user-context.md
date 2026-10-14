@@ -239,7 +239,7 @@ HAVING injections_detected > 0
 **Other prompt injection patterns:**
 - **[Direct Prompt Injection](./direct-prompt-injection.md)** — Direct attacks in user messages (broader attack/response patterns, attack techniques)
 - **[Indirect Prompt Injection](./indirect-prompt-injection.md)** — Attacker embeds instructions in documents/emails agent retrieves (external content sources)
-- **[Prompt Injection](../safety-security/failures/prompt-injection.md)** — General prompt injection defenses (canonical pattern)
+- **[Prompt Injection](../../safety-security/failures/prompt-injection.md)** — General prompt injection defenses (canonical pattern)
 
 **Key distinctions:**
 - `via-user-context` = INPUT VALIDATION focus: unvalidated user input in conversation
@@ -247,11 +247,11 @@ HAVING injections_detected > 0
 - `indirect-prompt-injection` = EXTERNAL SOURCE focus: retrieved documents, emails, web content
 
 **Related attack patterns**:
-- [Tool Abuse via Instruction Override](./tool-abuse-via-instruction-override.md) — Using injection to misuse agent tools
-- [Data Exfiltration via Prompt Injection](../../../learning/goals/safe-learning/failures/data-exfiltration-via-model-queries.md) — Extracting data via injection
+- Tool Abuse via Instruction Override — Using injection to misuse agent tools
+- Data Exfiltration via Prompt Injection — Extracting data via injection
 
 **General input validation**:
-- [Input Validation Framework](../../../operations/goals/tool-reliability/failures/untrusted-input-handling.md) — Generic input sanitization strategies
+- Input Validation Framework — Generic input sanitization strategies
 
 ---
 

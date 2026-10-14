@@ -28,21 +28,21 @@ Incident-response failures occur because an agent makes a sound local determinat
 ## Frequently Asked Questions
 
 ### How do you select the right resolution steps for an incident?
-Match on root-cause signature (affected dependency, error code pattern, affected subsystem) rather than symptom-description similarity. When no structured-signature match exists, symptom-description similarity is a fallback, but that fallback should be flagged and validated against the current incident's actual root cause before the precedent's fix is applied. See [Embedding Retrieval Pulls Similar-but-Unrelated Past Incident as Resolution Precedent](failures/embedding-retrieval-pulls-similar-but-unrelated-past-incident-as-resolution-precedent.md).
+Match on root-cause signature (affected dependency, error code pattern, affected subsystem) rather than symptom-description similarity. When no structured-signature match exists, symptom-description similarity is a fallback, but that fallback should be flagged and validated against the current incident's actual root cause before the precedent's fix is applied. See Embedding Retrieval Pulls Similar-but-Unrelated Past Incident as Resolution Precedent.
 
 ### Can you identify the root cause by finding the most recent change?
-Not on its own. Temporal proximity to a deploy is a heuristic, not a causal check — it produces false attributions whenever an unrelated deploy coincides with the incident. Root-cause identification requires checking whether the deploy's actual changes plausibly affect the observed symptoms, not just whether the deploy was recent. See [Root Cause Misattribution in Agent-Drafted Postmortems](failures/root-cause-misattribution-in-postmortems.md).
+Not on its own. Temporal proximity to a deploy is a heuristic, not a causal check — it produces false attributions whenever an unrelated deploy coincides with the incident. Root-cause identification requires checking whether the deploy's actual changes plausibly affect the observed symptoms, not just whether the deploy was recent. See Root Cause Misattribution in Agent-Drafted Postmortems.
 
 ### What happens if incident scope is noted but never reaches the comms team?
-The comms team broadcasts either to all customers (if they default to over-broad notification) or to the wrong subset (if they try to infer scope from the incident title). Unaffected customers receive false outage notifications while affected customers may go unnotified. The scope was correctly determined but never carried into a field the comms workflow reads, so the communication action is decoupled from the triage determination. See [Multi-Agent Handoff Drops Affected-Customer Segment Before Comms Notification](failures/multi-agent-handoff-drops-affected-customer-segment-before-comms-notification.md).
+The comms team broadcasts either to all customers (if they default to over-broad notification) or to the wrong subset (if they try to infer scope from the incident title). Unaffected customers receive false outage notifications while affected customers may go unnotified. The scope was correctly determined but never carried into a field the comms workflow reads, so the communication action is decoupled from the triage determination. See Multi-Agent Handoff Drops Affected-Customer Segment Before Comms Notification.
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [Embedding Retrieval Pulls Similar-but-Unrelated Past Incident as Resolution Precedent](failures/embedding-retrieval-pulls-similar-but-unrelated-past-incident-as-resolution-precedent.md) | Precedent retrieved by symptom similarity without validating root-cause match |
-| [Multi-Agent Handoff Drops Affected-Customer Segment Before Comms Notification](failures/multi-agent-handoff-drops-affected-customer-segment-before-comms-notification.md) | Affected scope determined by triage but not carried into the incident ticket's structured fields that comms reads |
-| [Root Cause Misattribution in Agent-Drafted Postmortems](failures/root-cause-misattribution-in-postmortems.md) | Root cause attributed to most recent deploy by temporal proximity, without mechanistic verification |
+| Embedding Retrieval Pulls Similar-but-Unrelated Past Incident as Resolution Precedent | Precedent retrieved by symptom similarity without validating root-cause match |
+| Multi-Agent Handoff Drops Affected-Customer Segment Before Comms Notification | Affected scope determined by triage but not carried into the incident ticket's structured fields that comms reads |
+| Root Cause Misattribution in Agent-Drafted Postmortems | Root cause attributed to most recent deploy by temporal proximity, without mechanistic verification |
 
 **Total: 3 patterns**
 

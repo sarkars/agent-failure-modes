@@ -51,21 +51,21 @@ Audit the supply chain: identify all external dependencies (model weights, packa
 
 | Goal | Patterns | Mechanism |
 |---|---|---|
-| [Agent Trust](goals/agent-trust/) | 11 | Inter-agent identity, capability proof, output validation |
-| [Data Loss Prevention](goals/data-loss-prevention/) | 8 | Data classification, exfiltration prevention, redaction |
-| [Runtime Security](goals/runtime-security/) | 8 | Input isolation, tool verification, credential management |
-| [Safety & Security](goals/safety-security/) | 19 | Prompt injection, excessive agency, audit evasion defense |
-| [Security & Autonomy](goals/security-autonomy/) | 19 | Autonomous action security, injection prevention, permission scoping |
-| [Tool Authorization Limits](goals/tool-authorization-limits/) | 10 | Tool access control, parameter authorization, least-privilege |
-| [Jailbreak Resistance](goals/jailbreak-resistance/) | — | Safety constraint resistance to persuasion and adversarial attack |
-| [Output Filtering & Moderation](goals/output-filtering-moderation/) | — | Harmful content detection, data redaction, format validation |
-| [Value Alignment](goals/value-alignment/) | — | Objective specification, metric divergence, constraint satisfaction |
+| Agent Trust | 11 | Inter-agent identity, capability proof, output validation |
+| Data Loss Prevention | 8 | Data classification, exfiltration prevention, redaction |
+| Runtime Security | 8 | Input isolation, tool verification, credential management |
+| Safety & Security | 19 | Prompt injection, excessive agency, audit evasion defense |
+| Security & Autonomy | 19 | Autonomous action security, injection prevention, permission scoping |
+| Tool Authorization Limits | 10 | Tool access control, parameter authorization, least-privilege |
+| Jailbreak Resistance | — | Safety constraint resistance to persuasion and adversarial attack |
+| Output Filtering & Moderation | — | Harmful content detection, data redaction, format validation |
+| Value Alignment | — | Objective specification, metric divergence, constraint satisfaction |
 
 **Total: 75 documented patterns**
 
 ## Related Categories
 
 - [Accuracy](../) — accuracy failures combine with security failures to create compound risk: a system that is accurate but compromised is worse than a system that is both inaccurate and secure.
-- [Governance](../) — governance and oversight mechanisms form part of security defense-in-depth: audit logging, human approval, and oversight enable detection and response to security failures.
-- [Operations](../) — operational concerns (monitoring, alerting, incident response) are critical to security: a compromise detected and remediated quickly is less damaging than one that propagates undetected for weeks.
-- [Learning](../) — learning mechanisms can introduce security risks: feedback-based updates can be poisoned, self-improvement can be exploited. Learning-system security is part of overall agent security.
+- Governance — governance and oversight mechanisms form part of security defense-in-depth: audit logging, human approval, and oversight enable detection and response to security failures.
+- Operations — operational concerns (monitoring, alerting, incident response) are critical to security: a compromise detected and remediated quickly is less damaging than one that propagates undetected for weeks.
+- Learning — learning mechanisms can introduce security risks: feedback-based updates can be poisoned, self-improvement can be exploited. Learning-system security is part of overall agent security.

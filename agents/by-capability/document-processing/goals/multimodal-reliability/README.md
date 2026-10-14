@@ -47,16 +47,16 @@ Relational-hallucination is a wrong-assignment error — values are read correct
 
 | Pattern | Mechanism |
 |---|---|
-| [Attribute Hallucination](failures/attribute-hallucination.md) | Correct field identified but value "corrected" toward a common training-distribution pattern |
-| [Complex Tables](failures/complex-tables.md) | Multi-row headers and spanning cells collapsed, losing hierarchy |
-| [Confidence Miscalibration](failures/confidence-miscalibration.md) | High self-reported confidence on incorrect extractions; confidence doesn't track accuracy |
-| [Fabricated Content](failures/fabricated-content.md) | Obscured or ambiguous regions completed with invented, ungrounded content |
-| [Input Quality Gap](failures/input-quality-gap.md) | Real enterprise documents fall outside the clean-image distribution benchmarks measure |
-| [Object Hallucination](failures/object-hallucination.md) | Language prior invents an entire field/element the document doesn't contain |
-| [Plausible Wrong Outputs](failures/plausible-wrong-outputs.md) | Model silently substitutes a statistically plausible value instead of flagging uncertainty |
-| [Relational Hallucination](failures/relational-hallucination.md) | Spatial/logical relationships wrong — values assigned to the wrong column or row |
-| [Table Cell Omission](failures/table-cell-omission.md) | Empty cells in sparse tables cause column misalignment and dropped values |
-| [Visual Degradation](failures/visual-degradation.md) | Blur, occlusion, or low contrast causes overconfident, linguistic-prior-driven guesses |
+| Attribute Hallucination | Correct field identified but value "corrected" toward a common training-distribution pattern |
+| Complex Tables | Multi-row headers and spanning cells collapsed, losing hierarchy |
+| Confidence Miscalibration | High self-reported confidence on incorrect extractions; confidence doesn't track accuracy |
+| Fabricated Content | Obscured or ambiguous regions completed with invented, ungrounded content |
+| Input Quality Gap | Real enterprise documents fall outside the clean-image distribution benchmarks measure |
+| Object Hallucination | Language prior invents an entire field/element the document doesn't contain |
+| Plausible Wrong Outputs | Model silently substitutes a statistically plausible value instead of flagging uncertainty |
+| Relational Hallucination | Spatial/logical relationships wrong — values assigned to the wrong column or row |
+| Table Cell Omission | Empty cells in sparse tables cause column misalignment and dropped values |
+| Visual Degradation | Blur, occlusion, or low contrast causes overconfident, linguistic-prior-driven guesses |
 
 **Total: 10 patterns**
 

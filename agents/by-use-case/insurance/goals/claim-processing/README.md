@@ -28,13 +28,13 @@ Every claim-processing pattern documented here shares a single structural gap: t
 ## Frequently Asked Questions
 
 ### What causes a claims-adjudication agent to apply the wrong coverage terms?
-Most commonly, a retrieval step selects a policy endorsement or clause by embedding similarity rather than by a deterministic match on form number and effective date, so a superseded or wrong-jurisdiction version with near-identical boilerplate gets applied instead of the version actually attached to the policy. See [Embedding-Retrieval Wrong Endorsement Version Applied](failures/embedding-retrieval-wrong-endorsement-version-applied.md).
+Most commonly, a retrieval step selects a policy endorsement or clause by embedding similarity rather than by a deterministic match on form number and effective date, so a superseded or wrong-jurisdiction version with near-identical boilerplate gets applied instead of the version actually attached to the policy. See Embedding-Retrieval Wrong Endorsement Version Applied.
 
 ### How do you stop an exclusion from disappearing between claims pipeline stages?
-Require every pipeline stage to emit a structured exclusion field, even when empty, and block the handoff to the next stage if the field is missing rather than inferring an exclusion from prose. See [Multi-Agent Handoff Drops Noted Exclusion Before Payment Step](failures/multi-agent-handoff-drops-noted-exclusion-before-payment-step.md).
+Require every pipeline stage to emit a structured exclusion field, even when empty, and block the handoff to the next stage if the field is missing rather than inferring an exclusion from prose. See Multi-Agent Handoff Drops Noted Exclusion Before Payment Step.
 
 ### Can a claims agent be trusted to know current state prompt-payment deadlines on its own?
-No. State prompt-payment statutes are independently and frequently amended, and a general-purpose model's memorized sense of "typical" deadlines will not reflect a recent amendment; the reliable fix is a forced regulatory-tool-call gate before any deadline is set, not improved memorization. See [Stale Training-Corpus Prompt-Payment Deadline Overrides Current State Statute](failures/stale-training-corpus-prompt-payment-deadline-overrides-current-state-statute.md).
+No. State prompt-payment statutes are independently and frequently amended, and a general-purpose model's memorized sense of "typical" deadlines will not reflect a recent amendment; the reliable fix is a forced regulatory-tool-call gate before any deadline is set, not improved memorization. See Stale Training-Corpus Prompt-Payment Deadline Overrides Current State Statute.
 
 ### Is claim-processing the same goal as claims-processing?
 No, despite the near-identical name. Claim Processing documents three agentic-mechanism failures (retrieval mismatch, handoff loss, stale-corpus override) in a claims-adjudication pipeline, while [Claims Processing](../claims-processing/) documents a single, differently-scoped pattern about catastrophe-correlation blindness in reserve modeling — an actuarial assumption failure rather than an agent-mechanism failure. The overlap is in name only; a human maintainer may want to rename one folder to avoid confusion, since the content does not overlap.
@@ -43,14 +43,14 @@ No, despite the near-identical name. Claim Processing documents three agentic-me
 
 | Pattern | Mechanism |
 |---|---|
-| [Embedding-Retrieval Wrong Endorsement Version Applied](failures/embedding-retrieval-wrong-endorsement-version-applied.md) | RAG retrieval ranks endorsement forms by textual similarity, returning a superseded revision with different sub-limits |
-| [Multi-Agent Handoff Drops Noted Exclusion Before Payment Step](failures/multi-agent-handoff-drops-noted-exclusion-before-payment-step.md) | An upstream stage's free-text exclusion finding never reaches the structured field the payment agent reads |
-| [Stale Training-Corpus Prompt-Payment Deadline Overrides Current State Statute](failures/stale-training-corpus-prompt-payment-deadline-overrides-current-state-statute.md) | Agent answers a jurisdiction-specific deadline from memorized knowledge instead of calling the live regulatory tool |
+| Embedding-Retrieval Wrong Endorsement Version Applied | RAG retrieval ranks endorsement forms by textual similarity, returning a superseded revision with different sub-limits |
+| Multi-Agent Handoff Drops Noted Exclusion Before Payment Step | An upstream stage's free-text exclusion finding never reaches the structured field the payment agent reads |
+| Stale Training-Corpus Prompt-Payment Deadline Overrides Current State Statute | Agent answers a jurisdiction-specific deadline from memorized knowledge instead of calling the live regulatory tool |
 
 **Total: 3 patterns**
 
 ## Related Goals
 
-- [Claims Processing](../claims-processing/) — same-sounding name, but documents a distinct actuarial reserve-modeling failure rather than an agentic-mechanism failure
+- Claims Processing — same-sounding name, but documents a distinct actuarial reserve-modeling failure rather than an agentic-mechanism failure
 - [Fraud Detection](../fraud-detection/) — the same three mechanism clusters recur in SIU referral and fraud-screening workflows
 - [Policy Management](../policy-management/) — the same three mechanism clusters recur in renewal and endorsement-servicing workflows

@@ -13,7 +13,7 @@
 
 - **Conversational Adjustment Architecture** — [conversational-forecast-adjustment-discards-structured-model-baseline](failures/conversational-forecast-adjustment-discards-structured-model-baseline.md). When planners request forecast adjustments conversationally, agents regenerate new numbers via free-text reasoning instead of applying a bounded delta to the baseline's structured components (seasonality, trend, base rate).
 - **Analog Selection & Anomaly Blindness** — [embedding-retrieval-pulls-discontinued-sku-as-demand-analog-for-new-product](failures/embedding-retrieval-pulls-discontinued-sku-as-demand-analog-for-new-product.md), [new-product-cold-start-misforecast](failures/new-product-cold-start-misforecast.md). Cold-start demand estimation selects topically similar historical SKUs without screening for demand anomalies or uses a single global ramp curve instead of category/channel-segmented curves.
-- **Multi-Agent Constraint Loss** — [multi-agent-handoff-drops-promotion-cancellation-update-before-demand-forecast-run](failures/multi-agent-handoff-drops-promotion-cancellation-update-before-demand-forecast-run.md). Promotion-planning agent cancels a promotion recorded in free-text notes but does not update the structured promotional calendar the forecasting agent reads, so forecast still includes cancelled-promotion lift.
+- **Multi-Agent Constraint Loss** — multi-agent-handoff-drops-promotion-cancellation-update-before-demand-forecast-run. Promotion-planning agent cancels a promotion recorded in free-text notes but does not update the structured promotional calendar the forecasting agent reads, so forecast still includes cancelled-promotion lift.
 - **Structural Demand Dynamics** — [bullwhip-effect](failures/bullwhip-effect.md), [seasonal-demand-misses](failures/seasonal-demand-misses.md). Small downstream demand variations cascade upstream; seasonal patterns not learned from insufficient historical data; lead-time variance not modeled.
 - **Lift & Elasticity Modeling** — [promotion-lift-overestimation](failures/promotion-lift-overestimation.md). Flat historical lift multipliers applied universally do not account for category-specific elasticity, pull-forward, cannibalization, or discount depth.
 
@@ -53,13 +53,13 @@ Compare forecast error for seasonal periods against non-seasonal periods on a ho
 
 | Pattern | Mechanism |
 |---|---|
-| [Bullwhip Effect & Cascading Forecast Error](failures/bullwhip-effect.md) | Small downstream demand variation amplifies upstream; each tier adds safety stock based on orders, not actual consumer demand |
-| [Conversational Forecast Adjustment Discards Structured Model Baseline](failures/conversational-forecast-adjustment-discards-structured-model-baseline.md) | Conversational adjustment request generates new absolute number via free-text reasoning instead of applying bounded delta to baseline |
-| [Embedding Retrieval Pulls Discontinued SKU as Demand Analog for New Product](failures/embedding-retrieval-pulls-discontinued-sku-as-demand-analog-for-new-product.md) | Cold-start analog selected by description similarity without screening for demand anomalies (recalls, pricing errors) that shaped the analog's history |
-| [Multi-Agent Handoff Drops Promotion-Cancellation Update Before Demand-Forecast Run](failures/multi-agent-handoff-drops-promotion-cancellation-update-before-demand-forecast-run.md) | Promotion-planning agent cancels promotion in free text; structured calendar not updated; forecast still applies lift for cancelled promotion |
-| [New Product Cold-Start Misforecast](failures/new-product-cold-start-misforecast.md) | Cold-start ramp curve not segmented by category/channel; generic average curve misses category-specific and channel-specific adoption patterns |
-| [Promotion Lift Overestimation](failures/promotion-lift-overestimation.md) | Flat historical lift multiplier applied universally without accounting for category-specific elasticity, pull-forward, or cannibalization |
-| [Seasonal Demand Misses & Holiday Blindness](failures/seasonal-demand-misses.md) | Model trained on insufficient historical window misses multi-year seasonality; peak season stockouts and off-season overstock |
+| Bullwhip Effect & Cascading Forecast Error | Small downstream demand variation amplifies upstream; each tier adds safety stock based on orders, not actual consumer demand |
+| Conversational Forecast Adjustment Discards Structured Model Baseline | Conversational adjustment request generates new absolute number via free-text reasoning instead of applying bounded delta to baseline |
+| Embedding Retrieval Pulls Discontinued SKU as Demand Analog for New Product | Cold-start analog selected by description similarity without screening for demand anomalies (recalls, pricing errors) that shaped the analog's history |
+| Multi-Agent Handoff Drops Promotion-Cancellation Update Before Demand-Forecast Run | Promotion-planning agent cancels promotion in free text; structured calendar not updated; forecast still applies lift for cancelled promotion |
+| New Product Cold-Start Misforecast | Cold-start ramp curve not segmented by category/channel; generic average curve misses category-specific and channel-specific adoption patterns |
+| Promotion Lift Overestimation | Flat historical lift multiplier applied universally without accounting for category-specific elasticity, pull-forward, or cannibalization |
+| Seasonal Demand Misses & Holiday Blindness | Model trained on insufficient historical window misses multi-year seasonality; peak season stockouts and off-season overstock |
 
 **Total: 7 patterns**
 

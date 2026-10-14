@@ -44,16 +44,16 @@ A decoupled plan-validator or gate service — see the Cross-Pattern Insight abo
 
 | Pattern | Mechanism |
 |---|---|
-| [Bad Task Decomposition](failures/bad-task-decomposition.md) | Agent splits a task into the wrong subtasks, causing missed work |
-| [Missing Prerequisite Step](failures/missing-prerequisite-step.md) | Agent skips a required validation, lookup, permission check, or confirmation |
-| [No Plan Before Action](failures/no-plan-before-action.md) | Agent jumps into tool calls without decomposing the workflow first |
-| [No Rollback Plan](failures/no-rollback-plan.md) | Agent performs irreversible actions without a defined recovery strategy |
-| [Over-Planning](failures/over-planning.md) | Agent spends excessive time re-planning instead of acting |
-| [Plan Hallucination](failures/plan-hallucination.md) | Agent invents tools, data, permissions, or workflow steps that don't exist |
-| [Plan-State Mismatch](failures/plan-state-mismatch.md) | Agent continues executing an old plan after new evidence has invalidated it |
-| [Premature Finalization](failures/premature-finalization.md) | Agent returns a final answer before completing required subtasks |
-| [Single-Path Planning](failures/single-path-planning.md) | Agent has no fallback strategy when its first route fails |
-| [Wrong Order Of Operations](failures/wrong-order-of-operations.md) | Agent executes steps in an unsafe or ineffective order |
+| Bad Task Decomposition | Agent splits a task into the wrong subtasks, causing missed work |
+| Missing Prerequisite Step | Agent skips a required validation, lookup, permission check, or confirmation |
+| No Plan Before Action | Agent jumps into tool calls without decomposing the workflow first |
+| No Rollback Plan | Agent performs irreversible actions without a defined recovery strategy |
+| Over-Planning | Agent spends excessive time re-planning instead of acting |
+| Plan Hallucination | Agent invents tools, data, permissions, or workflow steps that don't exist |
+| Plan-State Mismatch | Agent continues executing an old plan after new evidence has invalidated it |
+| Premature Finalization | Agent returns a final answer before completing required subtasks |
+| Single-Path Planning | Agent has no fallback strategy when its first route fails |
+| Wrong Order Of Operations | Agent executes steps in an unsafe or ineffective order |
 
 **Total: 10 patterns**
 

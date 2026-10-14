@@ -13,7 +13,7 @@
 |---|---|---|
 | [AI Model Reliability](ai-model-reliability/) | AI models used in mortgage processing hallucinate values, validate their own outputs in circular loops, and deliver production accuracy far below vendor promises | 3 |
 | [Compliance Validation](compliance-validation/) | AI systems fail to detect regulatory violations—TRID timing breaches, APR calculation errors, missing disclosures, fair lending red flags, QM/ATR violations | 6 |
-| [Cross Document Validation](cross-document-validation/) | When multiple sources are compared against each other. | 10 |
+| Cross Document Validation | When multiple sources are compared against each other. | 10 |
 | [Data Extraction](data-extraction/) | AI systems fail to extract structured data from mortgage documents accurately because the documents themselves are inconsistent—income appears in multiple formats across tax returns and pay stubs | 10 |
 | [Document Integrity](document-integrity/) | AI systems fail to detect document tampering and forgery because technical integrity checks—PDF modification detection, metadata timestamp validation, font-substitution analysis | 8 |
 | [Document Verification](document-verification/) | AI systems fail to verify that required documents exist, are authentic, complete,… | 8 |
@@ -26,15 +26,15 @@
 
 ### How much income variance is acceptable across W-2, tax return, and pay stubs?
 
-W-2 Box 1 should reconcile within 5% to tax-return line 1, as the difference is usually just timing (estimated tax amendments, late-year adjustments). See [Cross Document Validation](cross-document-validation/).
+W-2 Box 1 should reconcile within 5% to tax-return line 1, as the difference is usually just timing (estimated tax amendments, late-year adjustments). See Cross Document Validation.
 
 ### How should income from multiple W-2s be handled if an employee had two jobs?
 
-Each W-2 Box 1 should be extracted and summed for total W-2 income. See [Data Extraction](data-extraction/).
+Each W-2 Box 1 should be extracted and summed for total W-2 income. See Data Extraction.
 
 ### How can AI detect whether a PDF has been edited after creation?
 
-PDF files contain modification metadata and revision streams. See [Document Integrity](document-integrity/).
+PDF files contain modification metadata and revision streams. See Document Integrity.
 
 ## Related
 

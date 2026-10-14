@@ -6,9 +6,9 @@ Failures in multi-step, multi-turn autonomous workflows where compounding errors
 
 | Goal | Description | Patterns |
 |------|-------------|----------|
-| [World State Divergence](goals/world-state-divergence/) | Agent's model of world diverges from reality | In progress |
-| [Goal Memory Loss](goals/goal-memory-loss/) | Original objective forgotten mid-workflow | In progress |
-| [Cascading Errors](goals/cascading-errors/) | Small errors amplify exponentially through steps | In progress |
+| World State Divergence | Agent's model of world diverges from reality | In progress |
+| Goal Memory Loss | Original objective forgotten mid-workflow | In progress |
+| Cascading Errors | Small errors amplify exponentially through steps | In progress |
 
 **Status**: ~30 patterns planned
 

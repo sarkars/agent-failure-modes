@@ -47,12 +47,12 @@ HMDA distinguishes them based on loan amount: if the new loan exceeds the payoff
 
 | Pattern | Mechanism |
 |---|---|
-| [TRID Timing Violations](failures/trid-timing-violations.md) | Business-day miscalculation, holiday omission, mail-receipt rule failure, invalid changed-circumstance documentation |
-| [APR Calculation Errors](failures/apr-calculation-errors.md) | Finance-charge component omission, tolerance violation (regular 0.125%, irregular 0.25%), prepaid-interest miscalculation |
-| [Disclosure Document Gaps](failures/disclosure-document-gaps.md) | Missing required forms by loan type/state, outdated form versions, receipt acknowledgment absent, content incomplete |
-| [Fair Lending Red Flags](failures/fair-lending-red-flags.md) | Pricing disparity, underwriting exception inconsistency, steering to higher-cost products, documentation-burden variance by protected class |
-| [QM/ATR Validation](failures/qm-atr-validation.md) | DTI limit exceeded, points/fees overage, prohibited features present, ARM not underwritten at max rate, non-QM documentation gap |
-| [HMDA Data Extraction](failures/hmda-data-extraction.md) | Census tract geocoding error, loan-purpose misclassification, ethnicity/race extraction failure, action-taken code error, rate-spread miscalculation |
+| TRID Timing Violations | Business-day miscalculation, holiday omission, mail-receipt rule failure, invalid changed-circumstance documentation |
+| APR Calculation Errors | Finance-charge component omission, tolerance violation (regular 0.125%, irregular 0.25%), prepaid-interest miscalculation |
+| Disclosure Document Gaps | Missing required forms by loan type/state, outdated form versions, receipt acknowledgment absent, content incomplete |
+| Fair Lending Red Flags | Pricing disparity, underwriting exception inconsistency, steering to higher-cost products, documentation-burden variance by protected class |
+| QM/ATR Validation | DTI limit exceeded, points/fees overage, prohibited features present, ARM not underwritten at max rate, non-QM documentation gap |
+| HMDA Data Extraction | Census tract geocoding error, loan-purpose misclassification, ethnicity/race extraction failure, action-taken code error, rate-spread miscalculation |
 
 **Total: 6 patterns**
 

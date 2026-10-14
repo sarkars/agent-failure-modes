@@ -11,7 +11,7 @@
 
 ## Scope
 
-The single mechanism error propagation covers is **sequential error compounding without intermediate verification**: agents are chained so that agent B's input is agent A's output, agent B has no way to detect that agent A's output was wrong, and agent B's own error rate is added on top rather than caught. See [Multi-Agent Error Propagation Cascade](failures/multi-agent-error-propagation-cascade.md) for worked examples across data extraction, legal document processing, customer service escalation, and supply chain optimization pipelines.
+The single mechanism error propagation covers is **sequential error compounding without intermediate verification**: agents are chained so that agent B's input is agent A's output, agent B has no way to detect that agent A's output was wrong, and agent B's own error rate is added on top rather than caught. See Multi-Agent Error Propagation Cascade for worked examples across data extraction, legal document processing, customer service escalation, and supply chain optimization pipelines.
 
 ## When Error Propagation Matters
 
@@ -38,12 +38,12 @@ Per the pattern's symptoms list: if disabling one agent in the pipeline improves
 
 | Pattern | Mechanism |
 |---|---|
-| [Multi-Agent Error Propagation Cascade](failures/multi-agent-error-propagation-cascade.md) | Downstream agents treat upstream output as ground truth, compounding rather than catching upstream errors |
+| Multi-Agent Error Propagation Cascade | Downstream agents treat upstream output as ground truth, compounding rather than catching upstream errors |
 
 **Total: 1 pattern**
 
 ## Related Goals
 
-- [Coordination](../coordination/) — the broader taxonomy of multi-agent coordination failures, including a short-form version of the same cascade mechanism
+- Coordination — the broader taxonomy of multi-agent coordination failures, including a short-form version of the same cascade mechanism
 - [Reasoning Quality](../reasoning-quality/) — a parallel failure mode where agents agree (rather than chain) on the same wrong answer, and consensus amplifies the error instead of a pipeline stage doing so
 - [Handoff Reliability](../handoff-reliability/) — a narrower handoff-schema failure (losing confidence signal) that can itself be the point where an error starts propagating uncaught

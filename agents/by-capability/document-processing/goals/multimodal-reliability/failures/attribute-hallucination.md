@@ -54,15 +54,15 @@ Result: Payment terms calculated from wrong date
 ## Universal Pattern Reference
 
 This is a domain-specific implementation of the universal pattern:
-**[Hallucination: Attributes (Cross-Cutting)](../../../cross-cutting/accuracy/goals/output-accuracy/failures/hallucination-attribute.md)**
+**[Hallucination: Attributes (Cross-Cutting)](../../../../../cross-cutting/accuracy/goals/output-accuracy/failures/hallucination-attribute.md)**
 
 The universal pattern covers why models hallucinate object attributes. This variant focuses on **document processing** where VLMs "correct" extracted field values toward common patterns (e.g., rounding numbers, normalizing dates).
 
 ### Related Domain Variants
-- [Vision: Attribute Hallucination](../../../vision-and-images/goals/visual-hallucination/failures/attribute-hallucination.md) — Hallucinated colors, sizes, materials in object detection
+- Vision: Attribute Hallucination — Hallucinated colors, sizes, materials in object detection
 
 ### Related Base Pattern
-- [Hallucination: Base Mechanism](../../../cross-cutting/accuracy/goals/output-accuracy/failures/hallucination-base-mechanism.md) — Universal root cause of all hallucinations
+- [Hallucination: Base Mechanism](../../../../../cross-cutting/accuracy/goals/output-accuracy/failures/hallucination-base-mechanism.md) — Universal root cause of all hallucinations
 
 ---
 

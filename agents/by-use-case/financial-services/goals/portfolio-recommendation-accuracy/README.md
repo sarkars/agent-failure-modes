@@ -11,7 +11,7 @@
 
 ## Scope
 
-- **Backtesting and Historical-Data Bias** — [look-ahead-bias](failures/look-ahead-bias.md), [overfitting-to-market-regime](failures/overfitting-to-market-regime.md), [survivorship-bias](failures/survivorship-bias.md), [point-in-time-data-violations](../../data-quality/failures/point-in-time-data-violations.md). Backtests using future information, trained on bull-market data only, or missing delisted assets, systematically overstate expected returns.
+- **Backtesting and Historical-Data Bias** — [look-ahead-bias](failures/look-ahead-bias.md), [overfitting-to-market-regime](failures/overfitting-to-market-regime.md), [survivorship-bias](failures/survivorship-bias.md), [point-in-time-data-violations](../data-quality/failures/point-in-time-data-violations.md). Backtests using future information, trained on bull-market data only, or missing delisted assets, systematically overstate expected returns.
 - **Risk Modeling and Correlation Blind Spots** — [correlation-breakdown](failures/correlation-breakdown.md), [tail-risk-underestimation](failures/tail-risk-underestimation.md), [leverage-risk-underestimation](failures/leverage-risk-underestimation.md), [factor-crowding-blindness](failures/factor-crowding-blindness.md). Mean-variance optimization ignores tail dependence, leverage amplification, and crowding-driven unwind risk.
 - **Portfolio Construction Misspecification** — [benchmark-misalignment](failures/benchmark-misalignment.md), [currency-exposure-blindness](failures/currency-exposure-blindness.md), [esg-data-greenwashing-blindness](failures/esg-data-greenwashing-blindness.md), [liquidity-mispricing](failures/liquidity-mispricing.md). Recommendations optimize against the wrong benchmark, ignore FX/liquidity costs, or use unverified ESG data.
 - **Implementation and Execution Gaps** — [rebalancing-lag](failures/rebalancing-lag.md), [tax-efficiency-blindness](failures/tax-efficiency-blindness.md), [recency-bias](failures/recency-bias.md), [fabricated-disclosure-figure-fills-a-retrieval-gap](failures/fabricated-disclosure-figure-fills-a-retrieval-gap-in-fund-comparison.md). Live portfolios drift from recommendations, tax costs erode alpha, trend-chasing inflates turnover.
@@ -48,21 +48,21 @@ Mean-variance optimization assumes correlations and volatilities are constant an
 
 | Pattern | Mechanism |
 |---|---|
-| [Benchmark Misalignment](failures/benchmark-misalignment.md) | Recommended allocation optimized for generic benchmark (S&P 500) instead of client's actual liabilities/goals |
-| [Correlation Breakdown](failures/correlation-breakdown.md) | Assumed low correlations spike during crises; portfolio volatility 2-3x predicted |
-| [Currency Exposure Blindness](failures/currency-exposure-blindness.md) | Foreign assets recommended without hedging FX; currency moves dwarf asset returns |
-| [ESG Data Greenwashing Blindness](failures/esg-data-greenwashing-blindness.md) | Self-reported ESG disclosures weighted equally to audited data; greenwashing inflates scores |
-| [Fabricated Disclosure Figure in Fund Comparison](failures/fabricated-disclosure-figure-fills-a-retrieval-gap-in-fund-comparison.md) | Missing retrieval result filled with plausible number; incorrect expense ratio used in fund selection |
-| [Factor Crowding Blindness](failures/factor-crowding-blindness.md) | Recommended factors (value, momentum) concentrated across many funds; crowding unwind risk ignored |
-| [Leverage Risk Underestimation](failures/leverage-risk-underestimation.md) | Leverage amplifies returns in bull market (backtest looks good); amplifies losses in bear market (margin calls) |
-| [Liquidity Mispricing](failures/liquidity-mispricing.md) | Backtest assumes frictionless trading; live bid-ask spreads destroy alpha on illiquid assets |
-| [Look-Ahead Bias](failures/look-ahead-bias.md) | Backtest uses future data (next day's close, later restatements); inflates performance 5-25% |
-| [Overfitting to Market Regime](failures/overfitting-to-market-regime.md) | Model trained on bull market; fails in bear market; Sharpe ratio 0.3 vs backtest 1.2 |
-| [Rebalancing Lag](failures/rebalancing-lag.md) | Portfolio drifts 5-15% from target between rebalancing; risk dashboard stale; tax opportunities missed |
-| [Recency Bias](failures/recency-bias.md) | Overweights recent winners; high turnover chases trends; forward period returns poor |
-| [Survivorship Bias](failures/survivorship-bias.md) | Training data omits delisted companies; returns overstated 1-3% annually; volatility understated 15-30% |
-| [Tail Risk Underestimation](failures/tail-risk-underestimation.md) | Mean-variance VaR 3-8x lower than realized drawdowns in crises; mandates breached |
-| [Tax Efficiency Blindness](failures/tax-efficiency-blindness.md) | Pre-tax return 8%; after-tax return 4-5% (tax drag ~1-3% annually not modeled) |
+| Benchmark Misalignment | Recommended allocation optimized for generic benchmark (S&P 500) instead of client's actual liabilities/goals |
+| Correlation Breakdown | Assumed low correlations spike during crises; portfolio volatility 2-3x predicted |
+| Currency Exposure Blindness | Foreign assets recommended without hedging FX; currency moves dwarf asset returns |
+| ESG Data Greenwashing Blindness | Self-reported ESG disclosures weighted equally to audited data; greenwashing inflates scores |
+| Fabricated Disclosure Figure in Fund Comparison | Missing retrieval result filled with plausible number; incorrect expense ratio used in fund selection |
+| Factor Crowding Blindness | Recommended factors (value, momentum) concentrated across many funds; crowding unwind risk ignored |
+| Leverage Risk Underestimation | Leverage amplifies returns in bull market (backtest looks good); amplifies losses in bear market (margin calls) |
+| Liquidity Mispricing | Backtest assumes frictionless trading; live bid-ask spreads destroy alpha on illiquid assets |
+| Look-Ahead Bias | Backtest uses future data (next day's close, later restatements); inflates performance 5-25% |
+| Overfitting to Market Regime | Model trained on bull market; fails in bear market; Sharpe ratio 0.3 vs backtest 1.2 |
+| Rebalancing Lag | Portfolio drifts 5-15% from target between rebalancing; risk dashboard stale; tax opportunities missed |
+| Recency Bias | Overweights recent winners; high turnover chases trends; forward period returns poor |
+| Survivorship Bias | Training data omits delisted companies; returns overstated 1-3% annually; volatility understated 15-30% |
+| Tail Risk Underestimation | Mean-variance VaR 3-8x lower than realized drawdowns in crises; mandates breached |
+| Tax Efficiency Blindness | Pre-tax return 8%; after-tax return 4-5% (tax drag ~1-3% annually not modeled) |
 
 **Total: 15 patterns**
 

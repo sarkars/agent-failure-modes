@@ -11,8 +11,8 @@
 
 ## Scope
 
-- **Fact-Checking Gaps** — [fact-check-skipped-on-statistical-claims](failures/fact-check-skipped-on-statistical-claims.md), [embedding-retrieval-treats-mismatched-prior-claim-as-confirming-precedent](failures/embedding-retrieval-treats-mismatched-prior-claim-as-confirming-precedent.md). Both involve statistical accuracy without legal mandates, where QC often treats them as lower-priority than substantiation-for-comparative-claims checks.
-- **Policy and Requirement Updates** — [stale-training-corpus-quality-threshold-overrides-live-qc-policy-tool](failures/stale-training-corpus-quality-threshold-overrides-live-qc-policy-tool.md), [ai-generated-content-disclosure-omission](failures/ai-generated-content-disclosure-omission.md). Both require live policy queries or maintained reference tables that reflect current rules, not generic best-practices or older guidance.
+- **Fact-Checking Gaps** — fact-check-skipped-on-statistical-claims, embedding-retrieval-treats-mismatched-prior-claim-as-confirming-precedent. Both involve statistical accuracy without legal mandates, where QC often treats them as lower-priority than substantiation-for-comparative-claims checks.
+- **Policy and Requirement Updates** — stale-training-corpus-quality-threshold-overrides-live-qc-policy-tool, ai-generated-content-disclosure-omission. Both require live policy queries or maintained reference tables that reflect current rules, not generic best-practices or older guidance.
 - **Handoff and Caveat Loss** — [multi-agent-handoff-drops-fact-checkers-statistical-caveat-before-publishing](failures/multi-agent-handoff-drops-fact-checkers-statistical-caveat-before-publishing.md). A fact-checking agent's caveat (time window, population scope) is dropped because the handoff schema has no field for it.
 
 ## When Quality Control Matters
@@ -28,26 +28,26 @@ All five quality-control patterns center on the same architectural gap: QC is tr
 ## Frequently Asked Questions
 
 ### Should general statistical fact-checking be as rigorous as comparative-claim substantiation?
-[Fact-check skipped on statistical claims](failures/fact-check-skipped-on-statistical-claims.md) argues yes. While comparative and superiority claims are legally mandated to be substantiated in regulated industries, general statistical claims carry comparable reputational risk if wrong — a false adoption metric or misattributed research propagates as freely as a false comparative claim. A fact-checking gate that prioritizes comparative claims only is leaving a documented quality gap.
+Fact-check skipped on statistical claims argues yes. While comparative and superiority claims are legally mandated to be substantiated in regulated industries, general statistical claims carry comparable reputational risk if wrong — a false adoption metric or misattributed research propagates as freely as a false comparative claim. A fact-checking gate that prioritizes comparative claims only is leaving a documented quality gap.
 
 ### Can a previously-approved similar claim be used to confirm a new claim?
-No. [Embedding retrieval treats mismatched prior claim as confirming precedent](failures/embedding-retrieval-treats-mismatched-prior-claim-as-confirming-precedent.md) shows that confirming a new claim based on similarity to a prior approved claim only verifies the structure and phrasing are correct; it does not verify the underlying numbers are current or applicable. Recurring claim templates (year-over-year statements) produce near-identical embeddings despite year-over-year number changes, so a precedent check is no substitute for an independent source-data verification of the new claim.
+No. Embedding retrieval treats mismatched prior claim as confirming precedent shows that confirming a new claim based on similarity to a prior approved claim only verifies the structure and phrasing are correct; it does not verify the underlying numbers are current or applicable. Recurring claim templates (year-over-year statements) produce near-identical embeddings despite year-over-year number changes, so a precedent check is no substitute for an independent source-data verification of the new claim.
 
 ### If a quality-control policy tool is available, should it always be called?
-Yes. [Stale training-corpus quality threshold overrides live QC policy tool](failures/stale-training-corpus-quality-threshold-overrides-live-qc-policy-tool.md) shows agents often substitute their own understanding (absorbed from training or from an earlier project phase) for a fresh tool call, applying thresholds the live policy has since tightened. The only reliable fix is to make the policy-tool call mandatory and non-optional, logged and auditable, for every QC judgment.
+Yes. Stale training-corpus quality threshold overrides live QC policy tool shows agents often substitute their own understanding (absorbed from training or from an earlier project phase) for a fresh tool call, applying thresholds the live policy has since tightened. The only reliable fix is to make the policy-tool call mandatory and non-optional, logged and auditable, for every QC judgment.
 
 ### What happens to a statistical caveat that was approved conditionally?
-[Multi-agent handoff drops fact-checkers statistical caveat before publishing](failures/multi-agent-handoff-drops-fact-checkers-statistical-caveat-before-publishing.md) documents exactly this failure: a fact-check approves a statistic only with a caveat (time window, population scope), but the handoff schema has no field for caveats, so the publishing agent never sees it. The fix is extending the schema to carry caveat information explicitly, with a human review gate on any handoff with a populated caveat field.
+Multi-agent handoff drops fact-checkers statistical caveat before publishing documents exactly this failure: a fact-check approves a statistic only with a caveat (time window, population scope), but the handoff schema has no field for caveats, so the publishing agent never sees it. The fix is extending the schema to carry caveat information explicitly, with a human review gate on any handoff with a populated caveat field.
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [Fact-Check Skipped on Statistical Claims](failures/fact-check-skipped-on-statistical-claims.md) | Quantitative claim is approved without verifying a source or checking the claim's accuracy |
-| [Embedding Retrieval Treats Mismatched Prior Claim as Confirming Precedent](failures/embedding-retrieval-treats-mismatched-prior-claim-as-confirming-precedent.md) | New claim is treated as confirmed by a similar prior-approved claim with different underlying data |
-| [AI-Generated Content Disclosure Omission](failures/ai-generated-content-disclosure-omission.md) | Content published without required AI-disclosure label because QC checklist had no gate for disclosure-requirement applicability |
-| [Multi-Agent Handoff Drops Fact-Checker's Statistical Caveat Before Publishing](failures/multi-agent-handoff-drops-fact-checkers-statistical-caveat-before-publishing.md) | Fact-checker approves a claim only with a caveat (scope, time window, expiration); the caveat is not represented in the handoff schema so is dropped downstream |
-| [Stale Training-Corpus Quality Threshold Overrides Live QC Policy Tool](failures/stale-training-corpus-quality-threshold-overrides-live-qc-policy-tool.md) | QC agent applies quality standards from stale knowledge rather than calling a live policy tool that has since been updated |
+| Fact-Check Skipped on Statistical Claims | Quantitative claim is approved without verifying a source or checking the claim's accuracy |
+| Embedding Retrieval Treats Mismatched Prior Claim as Confirming Precedent | New claim is treated as confirmed by a similar prior-approved claim with different underlying data |
+| AI-Generated Content Disclosure Omission | Content published without required AI-disclosure label because QC checklist had no gate for disclosure-requirement applicability |
+| Multi-Agent Handoff Drops Fact-Checker's Statistical Caveat Before Publishing | Fact-checker approves a claim only with a caveat (scope, time window, expiration); the caveat is not represented in the handoff schema so is dropped downstream |
+| Stale Training-Corpus Quality Threshold Overrides Live QC Policy Tool | QC agent applies quality standards from stale knowledge rather than calling a live policy tool that has since been updated |
 
 **Total: 5 patterns**
 

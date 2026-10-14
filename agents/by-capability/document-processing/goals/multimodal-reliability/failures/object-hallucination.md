@@ -54,15 +54,15 @@ Result: Fake PO number causes ERP lookup failure or worse, matches wrong PO
 ## Universal Pattern Reference
 
 This is a domain-specific implementation of the universal pattern:
-**[Hallucination: Objects (Cross-Cutting)](../../../cross-cutting/accuracy/goals/output-accuracy/failures/hallucination-object.md)**
+**[Hallucination: Objects (Cross-Cutting)](../../../../../cross-cutting/accuracy/goals/output-accuracy/failures/hallucination-object.md)**
 
 The universal pattern covers why models hallucinate objects/fields. This variant focuses on **document processing** where models invent fields that don't exist (phantom PO numbers, phantom tables, phantom signatures).
 
 ### Related Domain Variants
-- [Vision: Object Hallucination](../../../vision-and-images/goals/visual-hallucination/failures/object-hallucination.md) — Hallucinated objects in cluttered or empty scenes
+- Vision: Object Hallucination — Hallucinated objects in cluttered or empty scenes
 
 ### Related Base Pattern
-- [Hallucination: Base Mechanism](../../../cross-cutting/accuracy/goals/output-accuracy/failures/hallucination-base-mechanism.md) — Universal root cause of all hallucinations
+- [Hallucination: Base Mechanism](../../../../../cross-cutting/accuracy/goals/output-accuracy/failures/hallucination-base-mechanism.md) — Universal root cause of all hallucinations
 
 ---
 

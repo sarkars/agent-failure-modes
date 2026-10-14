@@ -11,7 +11,7 @@
 
 | Goal | When it fails | Patterns |
 |---|---|---|
-| [Conversation Quality](conversation-quality/) | When an agent mismanages the ask-vs-act decision on ambiguous requests, loses track of its own conversational state over many turns, miscalibrates register to context | 23 |
+| Conversation Quality | When an agent mismanages the ask-vs-act decision on ambiguous requests, loses track of its own conversational state over many turns, miscalibrates register to context | 23 |
 
 **Total: 23 patterns**
 
@@ -19,7 +19,7 @@
 
 ### What causes a conversation to feel "off" even when every individual response seems reasonable?
 
-Most conversation-quality failures are only visible in aggregate: a single clarifying question, tone shift, or satisfied rating looks fine on its own, but [conversation coherence loss](conversation-quality/failures/conversation-coherence-loss.md), [user trust degradation](conversation-quality/failures/user-trust-degradation.md), and [user retention decline](conversation-quality/failures/user-retention-decline.md) all describe damage that compounds silently across turns or sessions precisely because no single instance crosses a per-response quality bar. See [Conversation Quality](conversation-quality/).
+Most conversation-quality failures are only visible in aggregate: a single clarifying question, tone shift, or satisfied rating looks fine on its own, but [conversation coherence loss](conversation-quality/failures/conversation-coherence-loss.md), [user trust degradation](conversation-quality/failures/user-trust-degradation.md), and [user retention decline](conversation-quality/failures/user-retention-decline.md) all describe damage that compounds silently across turns or sessions precisely because no single instance crosses a per-response quality bar. See Conversation Quality.
 
 ## Related
 

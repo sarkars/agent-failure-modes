@@ -11,7 +11,7 @@
 
 ## Scope
 
-The single mechanism reasoning quality covers is **false consensus from correlated (not independent) agent judgments**: when multiple agents share a base model, training data, or context, agreement among the agents reflects a shared bias rather than convergent, independently-derived evidence. See [Multi-Agent False Consensus Risk](failures/multi-agent-false-consensus-risk.md) for the medical, lending, supply-chain, and content-moderation examples.
+The single mechanism reasoning quality covers is **false consensus from correlated (not independent) agent judgments**: when multiple agents share a base model, training data, or context, agreement among the agents reflects a shared bias rather than convergent, independently-derived evidence. See Multi-Agent False Consensus Risk for the medical, lending, supply-chain, and content-moderation examples.
 
 ## When Reasoning Quality Matters
 
@@ -38,12 +38,12 @@ Per the pattern's examples, critical domains where training data has a known ske
 
 | Pattern | Mechanism |
 |---|---|
-| [Multi-Agent False Consensus Risk](failures/multi-agent-false-consensus-risk.md) | Agents sharing a base model/training/context reach the same wrong conclusion; system treats their correlated agreement as an independent confidence signal |
+| Multi-Agent False Consensus Risk | Agents sharing a base model/training/context reach the same wrong conclusion; system treats their correlated agreement as an independent confidence signal |
 
 **Total: 1 pattern**
 
 ## Related Goals
 
 - [Coordination](../coordination/) — Consensus Illusion and Premature Consensus in that goal describe closely related convergence failures at shorter documentation depth
-- [Error Propagation](../error-propagation/) — the sequential-pipeline counterpart to reasoning quality's parallel-consensus failure mode
+- Error Propagation — the sequential-pipeline counterpart to reasoning quality's parallel-consensus failure mode
 - [Handoff Reliability](../handoff-reliability/) — a related trust failure where the problem is a lost confidence signal rather than a false consensus signal

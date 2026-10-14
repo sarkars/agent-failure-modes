@@ -30,16 +30,16 @@ The 7 goals in knowledge retrieval are mostly parallel concerns rather than a st
 ## Frequently Asked Questions
 
 ### Which goal should be checked first when a RAG agent gives a wrong answer?
-Work backward through the pipeline: first confirm [Query Understanding](goals/query-understanding/) correctly parsed the actual question, then check whether [Retrieval](goals/retrieval/) or [Retrieval Quality](goals/retrieval-quality/) found the right documents, then check whether [Answer Synthesis](goals/answer-synthesis/) faithfully used what was retrieved. If every stage checks out and the answer is still wrong, the fact itself was likely stale or misapplied — check [Knowledge Freshness](goals/knowledge-freshness/).
+Work backward through the pipeline: first confirm Query Understanding correctly parsed the actual question, then check whether Retrieval or Retrieval Quality found the right documents, then check whether Answer Synthesis faithfully used what was retrieved. If every stage checks out and the answer is still wrong, the fact itself was likely stale or misapplied — check Knowledge Freshness.
 
 ### Do the 7 goals form a strict pipeline where fixing an earlier stage fixes everything downstream?
 No. Because each goal documents an independent failure surface, a RAG system can have perfect query understanding, perfect retrieval, and still fail at synthesis or citation — or have flawless synthesis of a document that was itself stale. Fixing one goal's patterns doesn't guarantee the remaining goals are covered; a production-grade pipeline needs monitoring across all 7 simultaneously.
 
 ### What is the difference between Retrieval and Retrieval Quality?
-[Retrieval](goals/retrieval/) takes a pipeline-stage view — corpus selection, precision/recall threshold tuning, content-extraction blind spots (OCR, tables), context assembly, and downstream synthesis/citation. [Retrieval Quality](goals/retrieval-quality/) covers a complementary, finer-grained set of concerns within an already-correctly-scoped search — ranking errors, reranker degradation, embedding-model version drift, and temporal/jurisdictional validity of otherwise well-matched documents.
+Retrieval takes a pipeline-stage view — corpus selection, precision/recall threshold tuning, content-extraction blind spots (OCR, tables), context assembly, and downstream synthesis/citation. Retrieval Quality covers a complementary, finer-grained set of concerns within an already-correctly-scoped search — ranking errors, reranker degradation, embedding-model version drift, and temporal/jurisdictional validity of otherwise well-matched documents.
 
 ### Can retrieval augmentation alone eliminate hallucination?
-No — the Stanford Legal RAG Hallucinations study documents a 17-33% hallucination rate even in retrieval-augmented legal tools, a finding echoed across [Answer Synthesis](goals/answer-synthesis/)'s Hallucination Despite Context pattern and [Citation Accuracy](goals/citation-accuracy/)'s Misgrounded Citation pattern. Retrieval reduces hallucination risk relative to a closed-book model, but doesn't eliminate the model's tendency to fill gaps or misapply retrieved content with confidence.
+No — the Stanford Legal RAG Hallucinations study documents a 17-33% hallucination rate even in retrieval-augmented legal tools, a finding echoed across Answer Synthesis's Hallucination Despite Context pattern and Citation Accuracy's Misgrounded Citation pattern. Retrieval reduces hallucination risk relative to a closed-book model, but doesn't eliminate the model's tendency to fill gaps or misapply retrieved content with confidence.
 
 ## Related Categories
 

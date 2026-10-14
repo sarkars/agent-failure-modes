@@ -28,27 +28,27 @@ The 6 integration-limit patterns describe systems where integration is assumed t
 ## Frequently Asked Questions
 
 ### How do you manage SDK version compatibility?
-Per [SDK Version Incompatibility](failures/sdk-version-incompatibility.md), maintain a compatibility matrix (which SDK versions work with which agent versions), test against all supported SDK versions, and fail deployment if incompatibilities are detected. Don't assume new SDK versions are backward-compatible — they often aren't.
+Per SDK Version Incompatibility, maintain a compatibility matrix (which SDK versions work with which agent versions), test against all supported SDK versions, and fail deployment if incompatibilities are detected. Don't assume new SDK versions are backward-compatible — they often aren't.
 
 ### What should an agent do if a webhook fails to deliver?
-Per [Webhook Delivery Guarantee Not Enforced](failures/webhook-delivery-guarantee-not-enforced.md), verify webhook delivery semantics in the tool's documentation (at-least-once, at-most-once, ordered). If semantics are "at-least-once", expect duplicate webhooks and handle idempotently. If semantics are "at-most-once", expect occasional loss and have a fallback (polling, reconciliation).
+Per Webhook Delivery Guarantee Not Enforced, verify webhook delivery semantics in the tool's documentation (at-least-once, at-most-once, ordered). If semantics are "at-least-once", expect duplicate webhooks and handle idempotently. If semantics are "at-most-once", expect occasional loss and have a fallback (polling, reconciliation).
 
 ### How do you handle webhooks that arrive out-of-order?
-Per [Webhook Order Not Guaranteed](failures/webhook-order-not-guaranteed.md), add sequence numbers or timestamps to webhooks and reorder them in agent before processing. Don't assume webhooks arrive in the order they were sent — they won't, especially under load or in distributed systems.
+Per Webhook Order Not Guaranteed, add sequence numbers or timestamps to webhooks and reorder them in agent before processing. Don't assume webhooks arrive in the order they were sent — they won't, especially under load or in distributed systems.
 
 ### Can testing prevent undocumented API behavior issues?
-Partially — per [Undocumented API Behavior](failures/undocumented-api-behavior.md), test against real API instances (not just documentation) and document unexpected behavior. When you discover undocumented behavior, add it to your own documentation and update agent code to handle it.
+Partially — per Undocumented API Behavior, test against real API instances (not just documentation) and document unexpected behavior. When you discover undocumented behavior, add it to your own documentation and update agent code to handle it.
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [Plugin Compatibility Matrix](failures/plugin-compatibility-matrix.md) | Multiple plugins must be compatible; version incompatibilities cause conflicts or crashes |
-| [SDK Version Incompatibility](failures/sdk-version-incompatibility.md) | Agent uses SDK version A, tool requires version B incompatible with A; incompatibility causes crashes or parse errors |
-| [Undocumented API Behavior](failures/undocumented-api-behavior.md) | API behaves differently than documented; agents built on documentation fail when real behavior differs |
-| [Webhook Delivery Guarantee Not Enforced](failures/webhook-delivery-guarantee-not-enforced.md) | Webhook delivery semantics (at-least-once, at-most-once) are not guaranteed; webhooks are lost or duplicated |
-| [Webhook Order Not Guaranteed](failures/webhook-order-not-guaranteed.md) | Webhooks arrive out-of-order; agent processes events in wrong order causing incorrect state |
-| [Webhook Retry Exhaustion](failures/webhook-retry-exhaustion.md) | Webhook delivery fails and retries exhaust; critical events are lost |
+| Plugin Compatibility Matrix | Multiple plugins must be compatible; version incompatibilities cause conflicts or crashes |
+| SDK Version Incompatibility | Agent uses SDK version A, tool requires version B incompatible with A; incompatibility causes crashes or parse errors |
+| Undocumented API Behavior | API behaves differently than documented; agents built on documentation fail when real behavior differs |
+| Webhook Delivery Guarantee Not Enforced | Webhook delivery semantics (at-least-once, at-most-once) are not guaranteed; webhooks are lost or duplicated |
+| Webhook Order Not Guaranteed | Webhooks arrive out-of-order; agent processes events in wrong order causing incorrect state |
+| Webhook Retry Exhaustion | Webhook delivery fails and retries exhaust; critical events are lost |
 
 **Total: 6 patterns**
 

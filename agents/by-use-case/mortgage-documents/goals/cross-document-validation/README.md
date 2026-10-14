@@ -51,16 +51,16 @@ Co-borrower confusion occurs when income, assets, and liabilities are inadverten
 
 | Pattern | Mechanism |
 |---|---|
-| [Name Variation Mishandling](failures/name-variation-mishandling.md) | Middle-name/suffix variation, nickname usage, hyphenation without explanation or SSN match |
-| [Name Change Documentation](failures/name-change-documentation.md) | Legal name change without court-order evidence, marriage/divorce name change without supporting documentation |
-| [Income Triangulation Failures](failures/income-triangulation-failures.md) | W-2 vs. tax-return vs. pay-stub income variance, self-employment business-expense allocation, YTD commission not yet on W-2 |
-| [SSN Cross-Reference Errors](failures/ssn-cross-reference-errors.md) | SSN extraction errors, SSN mismatch across documents, partial SSN match (last-4 match, full mismatch) |
-| [Address History Gaps](failures/address-history-gaps.md) | Address inconsistency without documented move, address not traceable through loan timeline, prior address not on bank statements |
-| [Employment Timeline Conflicts](failures/employment-timeline-conflicts.md) | Employment end date mismatch between W-2 and pay-stub/VOE, gaps >60 days without explanation, employer name variation |
-| [Co-Borrower Data Mixing](failures/co-borrower-data-mixing.md) | Borrower/co-borrower income combined, co-borrower debt not attributed correctly, co-borrower employment used for primary borrower qualification |
-| [Asset Source Tracing](failures/asset-source-tracing.md) | Down payment source not documented in bank statements, gifted-down payment without gift letter, assets not traceable to bank statement |
-| [Document Date Correlation](failures/document-date-correlation.md) | Document dated after closing, tax return date mismatch with tax year, pay stub dated before employment start date |
-| [Prior Loan Reference Mismatches](failures/prior-loan-reference-mismatches.md) | Prior loan on credit report not referenced in application, prior loan payoff amount mismatch, refinance purpose not documented |
+| Name Variation Mishandling | Middle-name/suffix variation, nickname usage, hyphenation without explanation or SSN match |
+| Name Change Documentation | Legal name change without court-order evidence, marriage/divorce name change without supporting documentation |
+| Income Triangulation Failures | W-2 vs. tax-return vs. pay-stub income variance, self-employment business-expense allocation, YTD commission not yet on W-2 |
+| SSN Cross-Reference Errors | SSN extraction errors, SSN mismatch across documents, partial SSN match (last-4 match, full mismatch) |
+| Address History Gaps | Address inconsistency without documented move, address not traceable through loan timeline, prior address not on bank statements |
+| Employment Timeline Conflicts | Employment end date mismatch between W-2 and pay-stub/VOE, gaps >60 days without explanation, employer name variation |
+| Co-Borrower Data Mixing | Borrower/co-borrower income combined, co-borrower debt not attributed correctly, co-borrower employment used for primary borrower qualification |
+| Asset Source Tracing | Down payment source not documented in bank statements, gifted-down payment without gift letter, assets not traceable to bank statement |
+| Document Date Correlation | Document dated after closing, tax return date mismatch with tax year, pay stub dated before employment start date |
+| Prior Loan Reference Mismatches | Prior loan on credit report not referenced in application, prior loan payoff amount mismatch, refinance purpose not documented |
 
 **Total: 10 patterns**
 

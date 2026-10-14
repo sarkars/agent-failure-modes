@@ -28,46 +28,46 @@ The throughline across all three levels of knowledge freshness is that standard 
 ## Frequently Asked Questions
 
 ### What is the difference between a fact-level distortion and a domain-level misapplication?
-A single-fact distortion (like [Fact Inversion](failures/fact-inversion.md) or [Fact Context Loss](failures/fact-context-loss.md)) happens to one specific retrieved statement during retrieval or generation — the direction gets flipped, or a qualifying clause gets dropped. A domain-level misapplication (like [Domain Exception Not Handled](failures/domain-exception-not-handled.md) or [Domain Rule Misunderstanding](failures/domain-rule-misunderstanding.md)) happens even when every individual fact is retrieved and stated correctly — the error is in applying correct domain judgment (which exception governs, which scope boundary applies) on top of accurate facts.
+A single-fact distortion (like Fact Inversion or Fact Context Loss) happens to one specific retrieved statement during retrieval or generation — the direction gets flipped, or a qualifying clause gets dropped. A domain-level misapplication (like Domain Exception Not Handled or Domain Rule Misunderstanding) happens even when every individual fact is retrieved and stated correctly — the error is in applying correct domain judgment (which exception governs, which scope boundary applies) on top of accurate facts.
 
 ### How do you catch a fact that is accurate but incomplete?
-Per [Fact Partial Truth](failures/fact-partial-truth.md), standard per-claim fact-checking won't catch a partial-truth omission, since every stated claim passes verification against the source — the omission is invisible to methods built to catch commission (a false claim) rather than exclusion (a true but incomplete one). The documented fix is a dedicated completeness check that compares what the source says relevant to the query against what the response actually includes, rather than relying on accuracy scoring alone.
+Per Fact Partial Truth, standard per-claim fact-checking won't catch a partial-truth omission, since every stated claim passes verification against the source — the omission is invisible to methods built to catch commission (a false claim) rather than exclusion (a true but incomplete one). The documented fix is a dedicated completeness check that compares what the source says relevant to the query against what the response actually includes, rather than relying on accuracy scoring alone.
 
 ### Does pinning a knowledge base to "the most recent document" solve staleness?
-Not on its own. [Knowledge Update Lag](failures/knowledge-update-lag.md) shows the index itself can lag the actual source-of-truth system regardless of how recency is weighted in ranking, and [Knowledge Expiration Not Enforced](failures/knowledge-expiration-not-enforced.md) shows that without an explicit TTL or deprecation mechanism, an old and a new version of the same fact can coexist as equally retrievable, with recency-weighting only helping if the freshness metadata itself is tracked and enforced.
+Not on its own. Knowledge Update Lag shows the index itself can lag the actual source-of-truth system regardless of how recency is weighted in ranking, and Knowledge Expiration Not Enforced shows that without an explicit TTL or deprecation mechanism, an old and a new version of the same fact can coexist as equally retrievable, with recency-weighting only helping if the freshness metadata itself is tracked and enforced.
 
 ### Can a single retrieval pipeline fix knowledge scope errors across jurisdiction, version, and time simultaneously?
-The mechanism is shared but the fix needs distinct metadata per scope dimension: [Knowledge Scope Assumption Wrong](failures/knowledge-scope-assumption-wrong.md) covers jurisdiction/unit/version scope broadly, [Knowledge Version Mismatch](failures/knowledge-version-mismatch.md) is the product-version-specific case, and [Fact Timestamp Error](failures/fact-timestamp-error.md)/[Knowledge Temporal Context Lost](failures/knowledge-temporal-context-lost.md) cover the time-validity case specifically. A single generic "check the scope" step won't work without each dimension's metadata (jurisdiction tags, version tags, effective-date windows) captured separately at ingestion.
+The mechanism is shared but the fix needs distinct metadata per scope dimension: Knowledge Scope Assumption Wrong covers jurisdiction/unit/version scope broadly, Knowledge Version Mismatch is the product-version-specific case, and Fact Timestamp Error/Knowledge Temporal Context Lost cover the time-validity case specifically. A single generic "check the scope" step won't work without each dimension's metadata (jurisdiction tags, version tags, effective-date windows) captured separately at ingestion.
 
 ### What causes domain best practices to go stale even when the underlying facts stay true?
-Per [Domain Best-Practice Ignorance](failures/domain-best-practice-ignorance.md), best practice is a "currently endorsed approach" judgment, not a truth judgment — a historically correct method can remain factually accurate while the field's consensus moves past it, and no single retrieved passage contradicts the old advice, so ordinary fact-checking and consistency checks never flag the staleness. Only an explicit currency check against the domain's current guidance catches it.
+Per Domain Best-Practice Ignorance, best practice is a "currently endorsed approach" judgment, not a truth judgment — a historically correct method can remain factually accurate while the field's consensus moves past it, and no single retrieved passage contradicts the old advice, so ordinary fact-checking and consistency checks never flag the staleness. Only an explicit currency check against the domain's current guidance catches it.
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [Domain Best-Practice Ignorance](failures/domain-best-practice-ignorance.md) | Retrieved advice was correct best practice at indexing time but has since been superseded by the field's current consensus |
-| [Domain Constraint Violation](failures/domain-constraint-violation.md) | A hard regulatory or safety constraint loses the relevance-ranking competition against more topically prominent but non-binding content |
-| [Domain Context Loss](failures/domain-context-loss.md) | Domain framing established early in a session decays as the conversation grows, with nothing re-asserting it |
-| [Domain Exception Not Handled](failures/domain-exception-not-handled.md) | A documented exception to a general rule is under-retrieved relative to the more prominent general rule it modifies |
-| [Domain Risk Blindness](failures/domain-risk-blindness.md) | A domain-standard risk pattern arising from a combination of facts isn't flagged, even though each individual fact is stated correctly |
-| [Domain Rule Misunderstanding](failures/domain-rule-misunderstanding.md) | A correctly-quoted rule is misapplied because compound or negated qualifying conditions are misread |
-| [Domain Terminology Confusion](failures/domain-terminology-confusion.md) | A term with a specialized in-domain meaning is interpreted using its general-language sense instead |
-| [Fact Context Loss](failures/fact-context-loss.md) | A fact and its qualifying clause fall into separate chunks, so only the unqualified fact reaches generation |
-| [Fact Generalization Error](failures/fact-generalization-error.md) | A narrowly-scoped fact (specific population, configuration, jurisdiction) is stripped of its scope and presented as a general truth |
-| [Fact Inversion](failures/fact-inversion.md) | A fact's direction or polarity is flipped during summarization, stating the opposite of the source |
-| [Fact Negation Confusion](failures/fact-negation-confusion.md) | A negation word is dropped, added, or misplaced during paraphrase, inverting a clause's meaning |
-| [Fact Partial Truth](failures/fact-partial-truth.md) | A response states only individually-accurate claims while omitting a qualifier that materially changes what a user should do |
-| [Fact Probabilistic Mismatch](failures/fact-probabilistic-mismatch.md) | A source's probability or confidence framing is dropped, turning a likelihood into a stated certainty |
-| [Fact Source Confusion](failures/fact-source-confusion.md) | Facts about two similarly-named entities are conflated because retrieval matched on name similarity rather than disambiguated identity |
-| [Fact Timestamp Error](failures/fact-timestamp-error.md) | A fact's time-bound validity window is mismanaged, applying an outdated or future value as though currently valid |
-| [Knowledge Contradiction Unresolved](failures/knowledge-contradiction-unresolved.md) | Two retrieved sources directly disagree and the response answers from one without noticing or disclosing the conflict |
-| [Knowledge Expiration Not Enforced](failures/knowledge-expiration-not-enforced.md) | The knowledge base has no TTL or expiration mechanism, so content is retrievable indefinitely regardless of shelf life |
-| [Knowledge Scope Assumption Wrong](failures/knowledge-scope-assumption-wrong.md) | The system silently assumes a default jurisdiction, version, or unit instead of confirming the scope the user's situation actually falls under |
-| [Knowledge Source Reliability Unknown](failures/knowledge-source-reliability-unknown.md) | Every indexed source is treated as equally trustworthy, with no weighting distinguishing official content from unreviewed content |
-| [Knowledge Temporal Context Lost](failures/knowledge-temporal-context-lost.md) | An explicit "as of [date]" anchor from the source is stripped during generation, presenting a time-bound fact as timeless |
-| [Knowledge Update Lag](failures/knowledge-update-lag.md) | The re-indexing pipeline runs on a cadence slower than the source system's actual rate of change |
-| [Knowledge Version Mismatch](failures/knowledge-version-mismatch.md) | An answer is scoped to whichever product/policy version dominates the knowledge base rather than the version the user is actually on |
+| Domain Best-Practice Ignorance | Retrieved advice was correct best practice at indexing time but has since been superseded by the field's current consensus |
+| Domain Constraint Violation | A hard regulatory or safety constraint loses the relevance-ranking competition against more topically prominent but non-binding content |
+| Domain Context Loss | Domain framing established early in a session decays as the conversation grows, with nothing re-asserting it |
+| Domain Exception Not Handled | A documented exception to a general rule is under-retrieved relative to the more prominent general rule it modifies |
+| Domain Risk Blindness | A domain-standard risk pattern arising from a combination of facts isn't flagged, even though each individual fact is stated correctly |
+| Domain Rule Misunderstanding | A correctly-quoted rule is misapplied because compound or negated qualifying conditions are misread |
+| Domain Terminology Confusion | A term with a specialized in-domain meaning is interpreted using its general-language sense instead |
+| Fact Context Loss | A fact and its qualifying clause fall into separate chunks, so only the unqualified fact reaches generation |
+| Fact Generalization Error | A narrowly-scoped fact (specific population, configuration, jurisdiction) is stripped of its scope and presented as a general truth |
+| Fact Inversion | A fact's direction or polarity is flipped during summarization, stating the opposite of the source |
+| Fact Negation Confusion | A negation word is dropped, added, or misplaced during paraphrase, inverting a clause's meaning |
+| Fact Partial Truth | A response states only individually-accurate claims while omitting a qualifier that materially changes what a user should do |
+| Fact Probabilistic Mismatch | A source's probability or confidence framing is dropped, turning a likelihood into a stated certainty |
+| Fact Source Confusion | Facts about two similarly-named entities are conflated because retrieval matched on name similarity rather than disambiguated identity |
+| Fact Timestamp Error | A fact's time-bound validity window is mismanaged, applying an outdated or future value as though currently valid |
+| Knowledge Contradiction Unresolved | Two retrieved sources directly disagree and the response answers from one without noticing or disclosing the conflict |
+| Knowledge Expiration Not Enforced | The knowledge base has no TTL or expiration mechanism, so content is retrievable indefinitely regardless of shelf life |
+| Knowledge Scope Assumption Wrong | The system silently assumes a default jurisdiction, version, or unit instead of confirming the scope the user's situation actually falls under |
+| Knowledge Source Reliability Unknown | Every indexed source is treated as equally trustworthy, with no weighting distinguishing official content from unreviewed content |
+| Knowledge Temporal Context Lost | An explicit "as of [date]" anchor from the source is stripped during generation, presenting a time-bound fact as timeless |
+| Knowledge Update Lag | The re-indexing pipeline runs on a cadence slower than the source system's actual rate of change |
+| Knowledge Version Mismatch | An answer is scoped to whichever product/policy version dominates the knowledge base rather than the version the user is actually on |
 
 **Total: 22 patterns**
 

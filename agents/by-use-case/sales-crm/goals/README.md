@@ -14,7 +14,7 @@
 | [Deal Management](deal-management/) | When agents assemble contract clauses, track negotiated terms, or approve deals using stale pricing data, wrong contract templates, or missing handoff fields that capture negotiated exceptions | 3 |
 | [Lead Scoring](lead-scoring/) | When agents compute a lead's likelihood-to-close using stale scoring rules, fabricated data when tool results are unavailable | 4 |
 | [Pipeline Forecasting](pipeline-forecasting/) | Pipeline-forecasting failures occur across multiple independent dimensions: agents apply outdated stage-probability weights instead of current configuration | 4 |
-| [Quota Achievement](quota-achievement/) | When agents calculate rep quota attainment using stale discount policies, fabricated approval records, mismatched coaching recommendations, or unverified credit adjustments | 5 |
+| Quota Achievement | When agents calculate rep quota attainment using stale discount policies, fabricated approval records, mismatched coaching recommendations, or unverified credit adjustments | 5 |
 
 **Total: 16 patterns**
 
@@ -22,15 +22,15 @@
 
 ### How do you prevent discount-policy cache lag from causing unauthorized approvals?
 
-Implement event-coupled cache invalidation: when RevOps publishes a discount-policy change, immediately trigger cache-invalidation events that clear the discount-tool's cache within the same transaction. See [Quota Achievement](quota-achievement/).
+Implement event-coupled cache invalidation: when RevOps publishes a discount-policy change, immediately trigger cache-invalidation events that clear the discount-tool's cache within the same transaction. See Quota Achievement.
 
 ### Can reps be trained to ignore stale-heuristic explanations even if an agent provides them with high confidence?
 
-Partially. See [Lead Scoring](lead-scoring/).
+Partially. See Lead Scoring.
 
 ### How much probability calibration discount should be applied to sales-rep estimates?
 
-Typical empirical finding: reps estimate 40-60% higher probability than actual close rates. See [Pipeline Forecasting](pipeline-forecasting/).
+Typical empirical finding: reps estimate 40-60% higher probability than actual close rates. See Pipeline Forecasting.
 
 ## Related
 

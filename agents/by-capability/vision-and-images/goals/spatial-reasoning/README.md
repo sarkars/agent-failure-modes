@@ -29,35 +29,35 @@ The unifying theme across all 14 patterns is that 2D-to-3D inference is an under
 ## Frequently Asked Questions
 
 ### How is depth estimation split across four different patterns in spatial reasoning?
-Because "depth fails" breaks down into distinguishable sub-mechanisms with different mitigations: [depth-estimation-failure](failures/depth-estimation-failure.md) covers the general monocular-ambiguity problem, [depth-estimation-hallucination-monocular-vision](failures/depth-estimation-hallucination-monocular-vision.md) focuses specifically on hallucinating depth structure in featureless/flat regions, [3d-reasoning-collapse](failures/3d-reasoning-collapse.md) covers volume/shape inference rather than distance, and [spatial-reasoning-failures-in-3d-environments](failures/spatial-reasoning-failures-in-3d-environments.md) covers relational 3D claims (above/below/inside) built on top of those depth estimates.
+Because "depth fails" breaks down into distinguishable sub-mechanisms with different mitigations: depth-estimation-failure covers the general monocular-ambiguity problem, depth-estimation-hallucination-monocular-vision focuses specifically on hallucinating depth structure in featureless/flat regions, 3d-reasoning-collapse covers volume/shape inference rather than distance, and spatial-reasoning-failures-in-3d-environments covers relational 3D claims (above/below/inside) built on top of those depth estimates.
 
 ### What's the difference between perspective-blindness and perspective-distortion-misunderstanding?
-[perspective-blindness](failures/perspective-blindness.md) is a recognition failure — the model can't identify the object at all from an unfamiliar angle (accuracy drops from 95% frontal to 20% upside-down). [perspective-distortion-misunderstanding](failures/perspective-distortion-misunderstanding.md) is a reasoning failure one step further — the model does recognize the object but misinterprets the perspective-induced foreshortening as actual physical deformation (calling a normal box "damaged" because it looks trapezoidal from an angle).
+perspective-blindness is a recognition failure — the model can't identify the object at all from an unfamiliar angle (accuracy drops from 95% frontal to 20% upside-down). perspective-distortion-misunderstanding is a reasoning failure one step further — the model does recognize the object but misinterprets the perspective-induced foreshortening as actual physical deformation (calling a normal box "damaged" because it looks trapezoidal from an angle).
 
 ### Are scale-confusion and size-scale-miscalibration the same pattern?
-No. [scale-confusion](failures/scale-confusion.md) covers confusing objects at different physical scales that look visually similar (a toy car mistaken for a real one, since texture/color features are scale-invariant). [size-scale-miscalibration](failures/size-scale-miscalibration.md) is specifically about estimating an object's absolute dimensions (mm/cm/meters) with no visible reference object present, which produces 2x-10x errors even for objects the model correctly identifies.
+No. scale-confusion covers confusing objects at different physical scales that look visually similar (a toy car mistaken for a real one, since texture/color features are scale-invariant). size-scale-miscalibration is specifically about estimating an object's absolute dimensions (mm/cm/meters) with no visible reference object present, which produces 2x-10x errors even for objects the model correctly identifies.
 
 ### How much does occlusion alone degrade spatial-reasoning accuracy?
-Substantially and non-linearly. Per [occlusion-mishandling](failures/occlusion-mishandling.md), accuracy stays above 95% at 0-20% occlusion, drops to 60-80% at 20-50%, and falls below 40% past 50% occlusion — and per [occlusion-reasoning-failures](failures/occlusion-reasoning-failures.md), the model's confidence does not fall proportionally, producing exactly the high-confidence/low-accuracy gap that makes occlusion dangerous in safety-critical pipelines.
+Substantially and non-linearly. Per occlusion-mishandling, accuracy stays above 95% at 0-20% occlusion, drops to 60-80% at 20-50%, and falls below 40% past 50% occlusion — and per occlusion-reasoning-failures, the model's confidence does not fall proportionally, producing exactly the high-confidence/low-accuracy gap that makes occlusion dangerous in safety-critical pipelines.
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [3D Reasoning Collapse](failures/3d-reasoning-collapse.md) | Single-image models trained for classification never learn 3D volume/shape, only surface texture, so grasp-relevant volume estimates are wrong 40-60% of the time |
-| [Bounding Box Errors](failures/bounding-box-errors.md) | Localization is a regression task orthogonal to classification; coarse feature maps and imprecise training annotations produce 10-15% box-size error |
-| [Depth Estimation Failure](failures/depth-estimation-failure.md) | Monocular depth is inherently ambiguous without stereo/temporal cues; models fall back on size-based priors that fail on atypical scale combinations |
-| [Depth Estimation Hallucination (Monocular Vision)](failures/depth-estimation-hallucination-monocular-vision.md) | When shadows, texture, and perspective cues are minimal, the model hallucinates plausible depth structure instead of reporting ambiguity |
-| [Multi-Image Spatial Inconsistencies](failures/multi-image-spatial-inconsistencies.md) | Each image is reconstructed independently with no cross-view consistency constraint, so the same object's position/size contradicts across views |
-| [Occlusion Mishandling](failures/occlusion-mishandling.md) | Training data underrepresents occluded objects, so detection accuracy collapses (<40%) once occlusion exceeds 50% |
-| [Occlusion Reasoning Failures](failures/occlusion-reasoning-failures.md) | Models hallucinate hidden structure, color, or count from learned priors and stay confident despite having no visual basis for the hidden portion |
-| [Perspective Blindness](failures/perspective-blindness.md) | Training data is biased toward frontal/canonical views, so recognition accuracy collapses for rotated, upside-down, or extreme-angle objects |
-| [Perspective Distortion Misunderstanding](failures/perspective-distortion-misunderstanding.md) | Perspective-projection foreshortening is misread as physical object deformation, or converging parallel lines are misread as non-parallel geometry |
-| [Relative Position Confusion](failures/relative-position-confusion.md) | Models learn statistical shortcuts about typical object arrangements instead of genuine relational reasoning, causing left/right and containment errors |
-| [Scale Confusion](failures/scale-confusion.md) | Texture and color features used for recognition are scale-invariant, so models can't distinguish a miniature object from a full-size one |
-| [Size/Scale Miscalibration](failures/size-scale-miscalibration.md) | Absolute size requires a distance or reference cue; without one, the model defaults to a learned "typical size" prior, causing 2x-10x errors |
-| [Spatial Attention Bias](failures/spatial-attention-bias.md) | Convolutional architecture and center-composed training photos bias detection toward the image center, dropping to 20-40% accuracy at the corners |
-| [Spatial Reasoning Failures in 3D Environments](failures/spatial-reasoning-failures-in-3d-environments.md) | Complex scenes with occlusion and non-frontal angles compound depth and relational errors, hitting 40-60% error versus <10% in simple frontal scenes |
+| 3D Reasoning Collapse | Single-image models trained for classification never learn 3D volume/shape, only surface texture, so grasp-relevant volume estimates are wrong 40-60% of the time |
+| Bounding Box Errors | Localization is a regression task orthogonal to classification; coarse feature maps and imprecise training annotations produce 10-15% box-size error |
+| Depth Estimation Failure | Monocular depth is inherently ambiguous without stereo/temporal cues; models fall back on size-based priors that fail on atypical scale combinations |
+| Depth Estimation Hallucination (Monocular Vision) | When shadows, texture, and perspective cues are minimal, the model hallucinates plausible depth structure instead of reporting ambiguity |
+| Multi-Image Spatial Inconsistencies | Each image is reconstructed independently with no cross-view consistency constraint, so the same object's position/size contradicts across views |
+| Occlusion Mishandling | Training data underrepresents occluded objects, so detection accuracy collapses (<40%) once occlusion exceeds 50% |
+| Occlusion Reasoning Failures | Models hallucinate hidden structure, color, or count from learned priors and stay confident despite having no visual basis for the hidden portion |
+| Perspective Blindness | Training data is biased toward frontal/canonical views, so recognition accuracy collapses for rotated, upside-down, or extreme-angle objects |
+| Perspective Distortion Misunderstanding | Perspective-projection foreshortening is misread as physical object deformation, or converging parallel lines are misread as non-parallel geometry |
+| Relative Position Confusion | Models learn statistical shortcuts about typical object arrangements instead of genuine relational reasoning, causing left/right and containment errors |
+| Scale Confusion | Texture and color features used for recognition are scale-invariant, so models can't distinguish a miniature object from a full-size one |
+| Size/Scale Miscalibration | Absolute size requires a distance or reference cue; without one, the model defaults to a learned "typical size" prior, causing 2x-10x errors |
+| Spatial Attention Bias | Convolutional architecture and center-composed training photos bias detection toward the image center, dropping to 20-40% accuracy at the corners |
+| Spatial Reasoning Failures in 3D Environments | Complex scenes with occlusion and non-frontal angles compound depth and relational errors, hitting 40-60% error versus <10% in simple frontal scenes |
 
 **Total: 14 patterns**
 

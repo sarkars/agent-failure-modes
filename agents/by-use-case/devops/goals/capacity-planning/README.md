@@ -28,29 +28,29 @@ The three capacity-planning patterns all share the same operational risk: an age
 ## Frequently Asked Questions
 
 ### What causes autoscaling to continuously add and remove capacity rather than stabilize?
-When provisioning lag (time for new instances to boot and come online) is comparable to load-fluctuation timescale, reactive scaling based on instantaneous metric values produces systematic late decisions — new capacity comes online after the spike has passed, triggering immediate scale-down, then the cycle repeats. See [Autoscaling Thrash from Reactive Agent Decisions](failures/autoscaling-thrash.md).
+When provisioning lag (time for new instances to boot and come online) is comparable to load-fluctuation timescale, reactive scaling based on instantaneous metric values produces systematic late decisions — new capacity comes online after the spike has passed, triggering immediate scale-down, then the cycle repeats. See Autoscaling Thrash from Reactive Agent Decisions.
 
 ### How do you select the right capacity profile or strategy for a service?
-Use structured service-architecture attributes (is the service stateless, stateful, single-writer, sharded? what's the scaling mechanism?) to filter candidate profiles before ranking by similarity. Name and description similarity are poor predictors of whether a profile's strategy actually applies. See [Embedding Retrieval Applies Wrong Service's Capacity Profile by Name Similarity](failures/embedding-retrieval-applies-wrong-services-capacity-profile-by-name-similarity.md).
+Use structured service-architecture attributes (is the service stateless, stateful, single-writer, sharded? what's the scaling mechanism?) to filter candidate profiles before ranking by similarity. Name and description similarity are poor predictors of whether a profile's strategy actually applies. See Embedding Retrieval Applies Wrong Service's Capacity Profile by Name Similarity.
 
 ### Does average utilization alone predict whether a service is over- or under-provisioned?
 No — average utilization is a misleading signal when a service has peaks that briefly exceed average by a factor of 2-5x. Capacity must be sized for the peak, not the average; a rightsizing recommendation based on average alone systematically under-provisions workloads with peaks. See [Capacity Optimization](../cost-optimization/) for related rightsizing failures.
 
 ### Can scaling decisions be made instantly once a load increase is detected?
-No — cloud instances require 2-5 minutes to boot and start application code, so decisions must be made predictively (scaling ahead of expected load) or account for a lag window where capacity is being provisioned but not yet serving. Reactive scaling that assumes instant availability produces under-provisioning during every real spike. See [Hyperscaler Cold Start Lag in Auto-Scaling](failures/hyperscaler-cold-start-lag.md).
+No — cloud instances require 2-5 minutes to boot and start application code, so decisions must be made predictively (scaling ahead of expected load) or account for a lag window where capacity is being provisioned but not yet serving. Reactive scaling that assumes instant availability produces under-provisioning during every real spike. See Hyperscaler Cold Start Lag in Auto-Scaling.
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [Autoscaling Thrash from Reactive Agent Decisions](failures/autoscaling-thrash.md) | Reactive scaling without lag modeling produces oscillation when provisioning lag is comparable to spike timescale |
-| [Embedding Retrieval Applies Wrong Service's Capacity Profile by Name Similarity](failures/embedding-retrieval-applies-wrong-services-capacity-profile-by-name-similarity.md) | Reference profile selected by name similarity without checking architectural compatibility |
-| [Hyperscaler Cold Start Lag in Auto-Scaling](failures/hyperscaler-cold-start-lag.md) | Scaling decisions assume instant instance availability, but cloud startup takes 2-5 minutes |
+| Autoscaling Thrash from Reactive Agent Decisions | Reactive scaling without lag modeling produces oscillation when provisioning lag is comparable to spike timescale |
+| Embedding Retrieval Applies Wrong Service's Capacity Profile by Name Similarity | Reference profile selected by name similarity without checking architectural compatibility |
+| Hyperscaler Cold Start Lag in Auto-Scaling | Scaling decisions assume instant instance availability, but cloud startup takes 2-5 minutes |
 
 **Total: 3 patterns**
 
 ## Related Goals
 
-- [Cost Optimization](../cost-optimization/) — rightsizing and resource-trimming decisions that depend on accurately modeling which capacity is actually needed
+- Cost Optimization — rightsizing and resource-trimming decisions that depend on accurately modeling which capacity is actually needed
 - [Monitoring](../monitoring/) — metric quality and availability that feed into capacity-planning decisions
 - [Deployment Safety](../deployment-safety/) — infrastructure compatibility validation that runs alongside capacity changes

@@ -28,7 +28,7 @@ The five insurance goals are organized by workflow stage rather than mechanism, 
 ## Frequently Asked Questions
 
 ### What is the difference between claim processing and claims processing?
-[Claim Processing](goals/claim-processing/) documents three agentic-mechanism failures in the per-claim adjudication pipeline (how individual claims are evaluated and paid). [Claims Processing](goals/claims-processing/) documents a reserve-modeling assumption failure (how a carrier provisions reserves for the aggregate claim population) — a fundamentally different level of analysis and a different kind of failure altogether. The folders have confusingly similar names; a human maintainer should consider renaming one to clarify the distinction.
+Claim Processing documents three agentic-mechanism failures in the per-claim adjudication pipeline (how individual claims are evaluated and paid). Claims Processing documents a reserve-modeling assumption failure (how a carrier provisions reserves for the aggregate claim population) — a fundamentally different level of analysis and a different kind of failure altogether. The folders have confusingly similar names; a human maintainer should consider renaming one to clarify the distinction.
 
 ### Do the same three mechanisms fail agents across all insurance workflows?
 Yes. Every goal except Claims Processing documents the same three patterns (retrieval mismatch, handoff loss, stale-corpus override) repeated across different workflows. The consistency of these mechanisms across workflows suggests they are structural rather than domain-specific, and that fixing them requires architectural changes to how agents are built rather than workflow-specific tuning.
@@ -41,5 +41,5 @@ Handoff schemas are typically built to carry the most common fields a downstream
 
 ## Related Categories
 
-- [Knowledge Retrieval](../by-capability/knowledge-retrieval/) — upstream of all insurance workflows; retrieval failures in knowledge bases feed downstream failures in claim adjudication, fraud detection, and policy management
-- [Document Processing](../by-capability/document-processing/) — upstream of insurance workflows; text extraction and classification failures feed downstream insurance agent decisions
+- [Knowledge Retrieval](../../by-capability/knowledge-retrieval/) — upstream of all insurance workflows; retrieval failures in knowledge bases feed downstream failures in claim adjudication, fraud detection, and policy management
+- [Document Processing](../../by-capability/document-processing/) — upstream of insurance workflows; text extraction and classification failures feed downstream insurance agent decisions

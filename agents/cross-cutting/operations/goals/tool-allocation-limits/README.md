@@ -29,13 +29,13 @@ The 8 allocation-limit patterns describe systems where quotas are assumed to be 
 ## Frequently Asked Questions
 
 ### How do you prevent one agent from starving others when quotas are shared?
-Per [Concurrent User Quota](failures/concurrent-user-quota.md) and [Storage Quota Shared Across Agents](failures/storage-quota-shared-across-agents.md), allocate separate quotas to each agent (not a shared pool), or implement quota-pooling with fair-share algorithms (each agent gets max_quota / num_agents, and unused quota doesn't carryover to next agent). Never let one agent consume unlimited quota because the contract assumes other agents won't consume their share.
+Per Concurrent User Quota and Storage Quota Shared Across Agents, allocate separate quotas to each agent (not a shared pool), or implement quota-pooling with fair-share algorithms (each agent gets max_quota / num_agents, and unused quota doesn't carryover to next agent). Never let one agent consume unlimited quota because the contract assumes other agents won't consume their share.
 
 ### What should an agent do when a quota is exhausted mid-operation?
-Per [Execution Time Quota](failures/execution-time-quota.md) and [CPU Quota Per Job](failures/cpu-quota-per-job.md), the agent should fail gracefully: check quota availability before starting the operation (don't start if insufficient quota remains), and if quota is exhausted mid-operation, stop and fail with clear messaging rather than returning partial/corrupted results. Partial completion is worse than no completion because downstream operations assume all-or-nothing semantics.
+Per Execution Time Quota and CPU Quota Per Job, the agent should fail gracefully: check quota availability before starting the operation (don't start if insufficient quota remains), and if quota is exhausted mid-operation, stop and fail with clear messaging rather than returning partial/corrupted results. Partial completion is worse than no completion because downstream operations assume all-or-nothing semantics.
 
 ### Are soft limits enough to prevent quota exhaustion?
-No — per [Storage Quota Soft Limit](failures/storage-quota-soft-limit.md), soft limits (warnings, alerts) tell operators that a quota is being approached but don't stop agents from exceeding the quota. Agents will proceed anyway if they don't encounter a hard limit. Use hard limits (operations fail when quota is exceeded) for quotas that have hard upper bounds (concurrent users, total storage), and soft limits only for quotas that are strictly advisory (performance budget, non-critical resource).
+No — per Storage Quota Soft Limit, soft limits (warnings, alerts) tell operators that a quota is being approached but don't stop agents from exceeding the quota. Agents will proceed anyway if they don't encounter a hard limit. Use hard limits (operations fail when quota is exceeded) for quotas that have hard upper bounds (concurrent users, total storage), and soft limits only for quotas that are strictly advisory (performance budget, non-critical resource).
 
 ### How do you handle quota-overages due to unavoidable spikes?
 Plan for the spike: if you know traffic will spike to N concurrent users, allocate quota for N not average-case. If spikes are unpredictable, implement quota-borrowing (allow brief overages, then deduct from next period), or request temporary quota increase from service, rather than relying on lucky timing or hoping the spike goes unnoticed.
@@ -44,14 +44,14 @@ Plan for the spike: if you know traffic will spike to N concurrent users, alloca
 
 | Pattern | Mechanism |
 |---|---|
-| [API Key Quota Per Account](failures/api-key-quota-per-account.md) | Account has per-API key quota; multiple agents on same account share quota, one agent starves others |
-| [Concurrent User Quota](failures/concurrent-user-quota.md) | Concurrent user limit is per-account; multiple agents make concurrent requests, exhausting limit faster than single-agent scenario |
-| [CPU Quota Per Job](failures/cpu-quota-per-job.md) | Per-operation CPU limit is exceeded; operation aborted or throttled, operation fails or completes incorrectly |
-| [Execution Time Quota](failures/execution-time-quota.md) | Per-operation time limit is exceeded; operation timeout-killed mid-execution leaving incomplete state |
-| [Memory Quota Per Operation](failures/memory-quota-per-operation.md) | Per-operation memory limit is exceeded; operation crashes with out-of-memory, partial state left behind |
-| [Storage Quota Exceeded](failures/storage-quota-exceeded.md) | Total-account storage quota is exceeded; new operations fail until storage is deleted |
-| [Storage Quota Shared Across Agents](failures/storage-quota-shared-across-agents.md) | Multiple agents share single storage quota; one agent's large operation exhausts quota for all agents |
-| [Storage Quota Soft Limit](failures/storage-quota-soft-limit.md) | Storage quota has soft limit (warning) and hard limit; agents ignore warnings and exhaust hard limit |
+| API Key Quota Per Account | Account has per-API key quota; multiple agents on same account share quota, one agent starves others |
+| Concurrent User Quota | Concurrent user limit is per-account; multiple agents make concurrent requests, exhausting limit faster than single-agent scenario |
+| CPU Quota Per Job | Per-operation CPU limit is exceeded; operation aborted or throttled, operation fails or completes incorrectly |
+| Execution Time Quota | Per-operation time limit is exceeded; operation timeout-killed mid-execution leaving incomplete state |
+| Memory Quota Per Operation | Per-operation memory limit is exceeded; operation crashes with out-of-memory, partial state left behind |
+| Storage Quota Exceeded | Total-account storage quota is exceeded; new operations fail until storage is deleted |
+| Storage Quota Shared Across Agents | Multiple agents share single storage quota; one agent's large operation exhausts quota for all agents |
+| Storage Quota Soft Limit | Storage quota has soft limit (warning) and hard limit; agents ignore warnings and exhaust hard limit |
 
 **Total: 8 patterns**
 

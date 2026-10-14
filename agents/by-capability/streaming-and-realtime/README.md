@@ -6,9 +6,9 @@ Failures specific to continuous, streaming execution of agent inference as oppos
 
 | Goal | Description | Patterns |
 |------|-------------|----------|
-| [Interruption Recovery](goals/interruption-recovery/) | Connection drops, partial completions | In progress |
-| [Real-Time Consistency](goals/real-time-consistency/) | State consistency under time pressure | In progress |
-| [Token Limits](goals/token-limits/) | Context/token overflow during streaming | In progress |
+| Interruption Recovery | Connection drops, partial completions | In progress |
+| Real-Time Consistency | State consistency under time pressure | In progress |
+| Token Limits | Context/token overflow during streaming | In progress |
 
 **Status**: ~25 patterns planned
 

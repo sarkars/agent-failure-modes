@@ -1,16 +1,31 @@
-# Search Space Explosion
+# Search Space Explosion in AI Reasoning: Planned Failure Patterns
 
-Failures where reasoning token generation expands unboundedly, exceeding limits or causing memory exhaustion.
+**Status: planned.** No pattern pages are written for this goal yet. Failures where reasoning token generation expands unboundedly, exceeding limits or causing memory exhaustion.
 
-## Failure Patterns
+## Key Takeaways
 
-| Pattern |
-|---------|
-| [Unbounded Token Generation](failures/unbounded-generation.md) |
-| [Infinite Loop in Reasoning](failures/infinite-loop.md) |
-| [Memory Exhaustion](failures/memory-exhaustion.md) |
-| [Reasoning Tree Explosion](failures/tree-explosion.md) |
-| [No Convergence](failures/no-convergence.md) |
-| [Early Stopping Failure](failures/early-stopping-failure.md) |
+- This goal covers cases where reasoning keeps expanding instead of converging.
+- 6 patterns are planned; they are listed below without links until their pages exist.
+- Planned patterns will follow the same format as the written ones: symptoms, example, root cause, and fixes.
+
+## Planned patterns
+
+- Unbounded Token Generation
+- Infinite Loop in Reasoning
+- Memory Exhaustion
+- Reasoning Tree Explosion
+- No Convergence
+- Early Stopping Failure
 
 **Total: 6 patterns (planned)**
+
+## Frequently Asked Questions
+
+### Where can I find fixes for search space explosion today?
+
+Not here yet. Check the other goals under [Reasoning and thought](../), and watch this page: the planned patterns above will be linked when written.
+
+## Related
+
+- All reasoning and thought goals
+- [All agent failure patterns](../../../../)

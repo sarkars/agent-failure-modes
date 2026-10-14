@@ -51,10 +51,10 @@ Pricing 30%+ below market for a component category is a red flag for either coun
 
 | Pattern | Mechanism |
 |---|---|
-| [Certification Extraction Treated as Verification in Supplier Onboarding](failures/certification-extraction-treated-as-verification-in-supplier-onboarding.md) | Document extraction confirms certificate number is well-formed; issuing-authority verification not called; fabricated or expired certificates approved |
-| [Embedding Retrieval Matches New Supplier to Wrong Certification Template](failures/embedding-retrieval-matches-new-supplier-to-wrong-certification-template.md) | Template selection by description-text similarity matches boilerplate language; category-determining clauses missed; wrong checklist applied |
-| [Counterfeit Supplier Verification Gap](failures/counterfeit-supplier-verification-gap.md) | Onboarding verifies business legitimacy (registration, tax ID) but not component authenticity or sub-tier sourcing; counterfeit or gray-market components not detected |
-| [Multi-Agent Handoff Drops Beneficial-Ownership Discrepancy Before Onboarding Approval](failures/multi-agent-handoff-drops-beneficial-ownership-discrepancy-before-onboarding-approval.md) | Document-review agent flags beneficial-owner mismatch in free text; structured handoff has no cross-document-discrepancy field; approval ignores the flag |
+| Certification Extraction Treated as Verification in Supplier Onboarding | Document extraction confirms certificate number is well-formed; issuing-authority verification not called; fabricated or expired certificates approved |
+| Embedding Retrieval Matches New Supplier to Wrong Certification Template | Template selection by description-text similarity matches boilerplate language; category-determining clauses missed; wrong checklist applied |
+| Counterfeit Supplier Verification Gap | Onboarding verifies business legitimacy (registration, tax ID) but not component authenticity or sub-tier sourcing; counterfeit or gray-market components not detected |
+| Multi-Agent Handoff Drops Beneficial-Ownership Discrepancy Before Onboarding Approval | Document-review agent flags beneficial-owner mismatch in free text; structured handoff has no cross-document-discrepancy field; approval ignores the flag |
 
 **Total: 4 patterns**
 

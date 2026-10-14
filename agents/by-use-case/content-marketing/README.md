@@ -13,10 +13,10 @@
 
 | Goal | Covers | Patterns |
 |------|--------|----------|
-| [Brand Consistency](goals/brand-consistency/) | Voice drift from model upgrades, deprecated knowledge-base versions, stale training-corpus rules, mid-campaign corrections lost at pipeline handoffs | 4 |
-| [Compliance](goals/compliance/) | Unsubstantiated comparative claims, missing region-specific disclaimers, stale regulatory guidance, retrieval-mismatched substantiation sources | 4 |
-| [Quality Control](goals/quality-control/) | Statistical facts without traced sources, false confirmation via similar prior claims, outdated quality-control policy thresholds, dropped statistical caveats at handoffs | 5 |
-| [SEO Optimization](goals/seo-optimization/) | Competitor claims incorporated as brand facts, negative-keyword constraints forgotten over long sessions, SEO corrections dropped at handoffs, incomplete rank-tracking results, stale meta-tag guidance | 5 |
+| Brand Consistency | Voice drift from model upgrades, deprecated knowledge-base versions, stale training-corpus rules, mid-campaign corrections lost at pipeline handoffs | 4 |
+| Compliance | Unsubstantiated comparative claims, missing region-specific disclaimers, stale regulatory guidance, retrieval-mismatched substantiation sources | 4 |
+| Quality Control | Statistical facts without traced sources, false confirmation via similar prior claims, outdated quality-control policy thresholds, dropped statistical caveats at handoffs | 5 |
+| SEO Optimization | Competitor claims incorporated as brand facts, negative-keyword constraints forgotten over long sessions, SEO corrections dropped at handoffs, incomplete rank-tracking results, stale meta-tag guidance | 5 |
 
 **Total: 18 patterns**
 

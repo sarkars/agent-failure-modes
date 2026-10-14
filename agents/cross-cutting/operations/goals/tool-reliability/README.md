@@ -32,37 +32,37 @@ The 19 patterns describe systems where tool reliability is assumed: tools are as
 ## Frequently Asked Questions
 
 ### How do you prevent silent tool failures?
-Per [Silent Failures](failures/silent-failures.md), tools should return explicit success/failure signals, and agents should check those signals before proceeding. Never assume a tool succeeded because it didn't return an error — verify success explicitly.
+Per Silent Failures, tools should return explicit success/failure signals, and agents should check those signals before proceeding. Never assume a tool succeeded because it didn't return an error — verify success explicitly.
 
 ### What should an agent do when tool API changes?
-Per [Tool Version Incompatibility](failures/tool-version-incompatibility.md) and [Schema Drift](failures/schema-drift.md), maintain tool API contracts and validate against them at deployment time. When APIs change, update contracts and agents together, never one without the other.
+Per Tool Version Incompatibility and Schema Drift, maintain tool API contracts and validate against them at deployment time. When APIs change, update contracts and agents together, never one without the other.
 
 ### How do you handle tool outputs that need complex parsing?
-Per [Output Misinterpretation](failures/output-misinterpretation.md) and [Output Processing Errors](failures/output-processing-errors.md), validate output format against expected schema before parsing, handle parsing errors explicitly, and test with real tool outputs not just examples.
+Per Output Misinterpretation and Output Processing Errors, validate output format against expected schema before parsing, handle parsing errors explicitly, and test with real tool outputs not just examples.
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [Action-Completion Claimed Without Status Check](failures/action-completion-claimed-without-status-check.md) | Tool action initiated but completion status not verified; agent assumes success |
-| [Blocking Tool Operations](failures/blocking-tool-operations.md) | Tool operation blocks indefinitely or for unexpectedly long time; agent cannot proceed |
-| [Error Information Leakage](failures/error-information-leakage.md) | Tool errors expose sensitive information; agent or user sees information that should be hidden |
-| [External System Failures](failures/external-system-failures.md) | Tool depends on external service that fails; tool failure cascades from external system |
-| [Missing Parameters](failures/missing-parameters.md) | Tool requires parameters; agent doesn't provide them; call fails |
-| [Output Misinterpretation](failures/output-misinterpretation.md) | Tool output is correct but agent interprets it wrong; agent acts on misunderstood data |
-| [Output Processing Errors](failures/output-processing-errors.md) | Tool output format is unexpected; parsing fails; agent errors |
-| [Parameter Mismatches](failures/parameter-mismatches.md) | Agent passes parameters of wrong type or format; tool parsing fails |
-| [Schema Drift](failures/schema-drift.md) | Tool response schema changes; agent parsing breaks |
-| [Sequencing Errors](failures/sequencing-errors.md) | Tools must be called in specific order; agent calls in wrong order; fails or produces wrong results |
-| [Silent Failures](failures/silent-failures.md) | Tool call fails but returns no error signal; agent unaware of failure |
-| [Silent Type Coercion](failures/silent-type-coercion.md) | Tool implicitly coerces types (string to number); coercion fails silently or produces wrong results |
-| [Stale Tool Confirmation After Revision](failures/stale-tool-confirmation-after-revision.md) | Tool confirmation message outdated after tool revision; agent acts on stale confirmation |
-| [State Space Navigation](failures/state-space-navigation.md) | Tool has complex state space; agent doesn't navigate correctly; reaches invalid or unexpected states |
-| [Tool Availability Assumptions](failures/tool-availability-assumptions.md) | Agent assumes tool is always available; tool downtime causes agent failure |
-| [Tool Capability Overestimation](failures/tool-capability-overestimation.md) | Agent assumes tool has capabilities it doesn't; calls fail or produce wrong results |
-| [Tool Version Incompatibility](failures/tool-version-incompatibility.md) | Tool version changes; API incompatibility breaks agent |
-| [Vague Tool Descriptions](failures/vague-tool-descriptions.md) | Tool documentation is unclear; agent misunderstands tool purpose or behavior |
-| [Wrong Tool Selection](failures/wrong-tool-selection.md) | Agent selects wrong tool for task; tool call fails or produces irrelevant results |
+| Action-Completion Claimed Without Status Check | Tool action initiated but completion status not verified; agent assumes success |
+| Blocking Tool Operations | Tool operation blocks indefinitely or for unexpectedly long time; agent cannot proceed |
+| Error Information Leakage | Tool errors expose sensitive information; agent or user sees information that should be hidden |
+| External System Failures | Tool depends on external service that fails; tool failure cascades from external system |
+| Missing Parameters | Tool requires parameters; agent doesn't provide them; call fails |
+| Output Misinterpretation | Tool output is correct but agent interprets it wrong; agent acts on misunderstood data |
+| Output Processing Errors | Tool output format is unexpected; parsing fails; agent errors |
+| Parameter Mismatches | Agent passes parameters of wrong type or format; tool parsing fails |
+| Schema Drift | Tool response schema changes; agent parsing breaks |
+| Sequencing Errors | Tools must be called in specific order; agent calls in wrong order; fails or produces wrong results |
+| Silent Failures | Tool call fails but returns no error signal; agent unaware of failure |
+| Silent Type Coercion | Tool implicitly coerces types (string to number); coercion fails silently or produces wrong results |
+| Stale Tool Confirmation After Revision | Tool confirmation message outdated after tool revision; agent acts on stale confirmation |
+| State Space Navigation | Tool has complex state space; agent doesn't navigate correctly; reaches invalid or unexpected states |
+| Tool Availability Assumptions | Agent assumes tool is always available; tool downtime causes agent failure |
+| Tool Capability Overestimation | Agent assumes tool has capabilities it doesn't; calls fail or produce wrong results |
+| Tool Version Incompatibility | Tool version changes; API incompatibility breaks agent |
+| Vague Tool Descriptions | Tool documentation is unclear; agent misunderstands tool purpose or behavior |
+| Wrong Tool Selection | Agent selects wrong tool for task; tool call fails or produces irrelevant results |
 
 **Total: 19 patterns**
 

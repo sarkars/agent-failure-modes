@@ -14,9 +14,9 @@
 | Goal | Covers | Patterns |
 |------|--------|----------|
 | [Coordination](goals/coordination/) | The full breadth of coordination breakdowns — authority, roles, communication, consensus, and verification across a multi-agent system | 15 |
-| [Error Propagation](goals/error-propagation/) | How a single agent's error compounds exponentially through a sequential, unverified pipeline | 1 |
+| Error Propagation | How a single agent's error compounds exponentially through a sequential, unverified pipeline | 1 |
 | [Handoff Reliability](goals/handoff-reliability/) | Why a structured handoff schema can lose an upstream agent's confidence or methodology signal | 1 |
-| [Reasoning Quality](goals/reasoning-quality/) | Why multiple agents agreeing on an answer doesn't mean the answer is correct | 1 |
+| Reasoning Quality | Why multiple agents agreeing on an answer doesn't mean the answer is correct | 1 |
 
 **Total: 18 patterns**
 
@@ -33,7 +33,7 @@ Coordination is the broad taxonomy covering 15 distinct failure patterns across 
 No single fix, but a consistent architecture recurs across all 18 patterns: schema-validated handoffs, consensus checkpoints at agent transitions, and saga-pattern compensating actions for error isolation. What differs by goal is where in the pipeline the check needs to sit — at every inter-agent message for Coordination and Handoff Reliability, at each pipeline stage for Error Propagation, and at the point where agreement is treated as a decision signal for Reasoning Quality.
 
 ### Which goal should be checked first when a multi-agent pipeline misbehaves in production?
-Start with [Coordination](goals/coordination/) — its 15 patterns cover the widest range of symptoms and will usually narrow down which specific mechanism is at play. If the symptom is specifically "a small error became a huge one" or "agents agreed but were all wrong," jump directly to [Error Propagation](goals/error-propagation/) or [Reasoning Quality](goals/reasoning-quality/) respectively, since those goals document the exact amplification statistics and reproduction protocols.
+Start with Coordination — its 15 patterns cover the widest range of symptoms and will usually narrow down which specific mechanism is at play. If the symptom is specifically "a small error became a huge one" or "agents agreed but were all wrong," jump directly to Error Propagation or Reasoning Quality respectively, since those goals document the exact amplification statistics and reproduction protocols.
 
 ## Related Categories
 

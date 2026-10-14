@@ -69,7 +69,7 @@ If every "Partly" were solved, models would fix up to 40%. If none were, 2%. A o
 <!-- END:catalog-table -->
 
 ## Suggested priority
-> Superseded for ordering by the [execution plan](execution-plan.md). Kept here as the original rationale.
+> Superseded for ordering by the execution plan. Kept here as the original rationale.
 
 | Tier | Why | Start with |
 |---|---|---|
@@ -131,6 +131,6 @@ If every "Partly" were solved, models would fix up to 40%. If none were, 2%. A o
 | Grice's maxims, peak-end rule, Hofstede, Culture Map, HEARD, LAST, GDPR Art. 22 | Various | **Not verified in this session** |
 
 ## Next steps
-1. Follow the [execution plan](execution-plan.md). (Or pick a tier and a family by hand.) Run the "before writing" steps for each row.
+1. Follow the execution plan. (Or pick a tier and a family by hand.) Run the "before writing" steps for each row.
 2. For each pattern, research the **R** flags first, and get **L** and **E** reviews before publishing.
 3. Add a family README for each new family when its first pattern lands.

@@ -46,17 +46,17 @@ Primarily, but the failure also appears in mixed-script documents like an Arabic
 
 | Pattern | Mechanism |
 |---|---|
-| [Bidirectional Text](failures/bidirectional-text.md) | RTL/LTR script mixing reversed or jumbled without proper BiDi-algorithm handling |
-| [Column Ordering](failures/column-ordering.md) | Multi-column pages read across columns instead of down each column, interleaving unrelated text |
-| [Footnotes](failures/footnotes.md) | Footnote/margin content appended as inline body text, losing its reference link |
-| [Headers Footers](failures/headers-footers.md) | Repeating headers/footers and page numbers bleed into body content mid-paragraph |
-| [Merged Cells](failures/merged-cells.md) | Spanning headers and nested rows flattened into a sibling list, losing parent-child hierarchy |
-| [Table Boundaries](failures/table-boundaries.md) | Borderless/inconsistent tables extracted as continuous text with misaligned columns |
+| Bidirectional Text | RTL/LTR script mixing reversed or jumbled without proper BiDi-algorithm handling |
+| Column Ordering | Multi-column pages read across columns instead of down each column, interleaving unrelated text |
+| Footnotes | Footnote/margin content appended as inline body text, losing its reference link |
+| Headers Footers | Repeating headers/footers and page numbers bleed into body content mid-paragraph |
+| Merged Cells | Spanning headers and nested rows flattened into a sibling list, losing parent-child hierarchy |
+| Table Boundaries | Borderless/inconsistent tables extracted as continuous text with misaligned columns |
 
 **Total: 6 patterns**
 
 ## Related Goals
 
-- [Accurate Text Extraction](../accurate-text-extraction/) — character-level misreads versus structural relationships lost here
+- Accurate Text Extraction — character-level misreads versus structural relationships lost here
 - [Multimodal Reliability](../multimodal-reliability/) — complex-tables and table-cell-omission cover VLM-specific table failures (hallucinated/omitted cells) rather than reading-order/structure detection
 - [Document Classification](../document-classification/) — page-grouping and embedded-documents run upstream, determining document boundaries before layout preservation even begins

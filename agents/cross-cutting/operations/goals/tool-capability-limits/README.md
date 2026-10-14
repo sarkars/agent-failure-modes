@@ -31,27 +31,27 @@ The 6 capability-limit patterns describe systems where capability information is
 ## Frequently Asked Questions
 
 ### How do you handle APIs that have multiple versions in production simultaneously?
-Per [API Version Schema Mismatch](failures/api-version-schema-mismatch.md), require agents to explicitly specify API version in each call, and test agents against all supported versions. Never assume all instances are on the same version — they won't be. Use API contracts (OpenAPI, schema definitions) to detect compatibility before deploying.
+Per API Version Schema Mismatch, require agents to explicitly specify API version in each call, and test agents against all supported versions. Never assume all instances are on the same version — they won't be. Use API contracts (OpenAPI, schema definitions) to detect compatibility before deploying.
 
 ### Should agents call deprecated endpoints for backward compatibility?
-No — per [Deprecated Endpoint Retirement](failures/deprecated-endpoint-retirement.md), deprecated endpoints should be migrated away from before retirement. If deprecation is announced, plan migration and update agents before the endpoint is removed. Don't keep calling deprecated endpoints because they'll eventually be gone.
+No — per Deprecated Endpoint Retirement, deprecated endpoints should be migrated away from before retirement. If deprecation is announced, plan migration and update agents before the endpoint is removed. Don't keep calling deprecated endpoints because they'll eventually be gone.
 
 ### How do you test agents for beta-feature instability?
-Per [Beta Feature Instability](failures/beta-feature-instability.md), test agents against beta features under realistic load (not just happy-path), and have an explicit degradation strategy if beta features fail: either don't use them in production, or wrap calls in try-catch with fallback behavior. Beta features are "caveat emptor" — expect them to be unstable.
+Per Beta Feature Instability, test agents against beta features under realistic load (not just happy-path), and have an explicit degradation strategy if beta features fail: either don't use them in production, or wrap calls in try-catch with fallback behavior. Beta features are "caveat emptor" — expect them to be unstable.
 
 ### How do you prevent feature-flag-related failures?
-Per [Feature Flag Disabled](failures/feature-flag-disabled.md), agents should query feature-flag state before calling disabled features: `if feature_enabled('critical_feature'): call_feature() else: fail with 'feature disabled'`. Don't call the feature and hope it's enabled — discover the flag state first.
+Per Feature Flag Disabled, agents should query feature-flag state before calling disabled features: `if feature_enabled('critical_feature'): call_feature() else: fail with 'feature disabled'`. Don't call the feature and hope it's enabled — discover the flag state first.
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [API Version Schema Mismatch](failures/api-version-schema-mismatch.md) | Agent written for API v1.0, production runs v2.0 with incompatible schema; parsing fails or returns wrong data |
-| [Beta Feature Instability](failures/beta-feature-instability.md) | Beta features appear available but are unstable; they fail unpredictably or change behavior under real load |
-| [Deprecated Endpoint Retirement](failures/deprecated-endpoint-retirement.md) | Agent calls deprecated endpoint that has been removed; gets 404 or error |
-| [Feature Flag Disabled](failures/feature-flag-disabled.md) | Agent calls feature controlled by feature flag, but flag is disabled and call fails instead of being prevented upfront |
-| [Paid Feature Cost Not Disclosed](failures/paid-feature-cost-not-disclosed.md) | Feature requires paid tier; agent calls it without knowing cost impact |
-| [Regional Feature Not Available](failures/regional-feature-not-available.md) | Feature is regional-only; agent in unsupported region calls it and gets error |
+| API Version Schema Mismatch | Agent written for API v1.0, production runs v2.0 with incompatible schema; parsing fails or returns wrong data |
+| Beta Feature Instability | Beta features appear available but are unstable; they fail unpredictably or change behavior under real load |
+| Deprecated Endpoint Retirement | Agent calls deprecated endpoint that has been removed; gets 404 or error |
+| Feature Flag Disabled | Agent calls feature controlled by feature flag, but flag is disabled and call fails instead of being prevented upfront |
+| Paid Feature Cost Not Disclosed | Feature requires paid tier; agent calls it without knowing cost impact |
+| Regional Feature Not Available | Feature is regional-only; agent in unsupported region calls it and gets error |
 
 **Total: 6 patterns**
 

@@ -27,7 +27,7 @@ The single most reliable mitigation across the one documented pattern is explici
 ## Frequently Asked Questions
 
 ### How does agent oversight differ from reasoning quality or context management failures?
-Agent oversight covers goal drift from feedback/learning, not goal drift from instruction conflicts or context degradation. A reasoning failure is a single-point mistake; oversight failure is gradual drift over weeks of learning. See [Reasoning Quality](../reasoning-quality/) for single-action planning errors and [Context Management](../../accuracy/goals/context-management/) for instruction-handling failures.
+Agent oversight covers goal drift from feedback/learning, not goal drift from instruction conflicts or context degradation. A reasoning failure is a single-point mistake; oversight failure is gradual drift over weeks of learning. See Reasoning Quality for single-action planning errors and [Context Management](../../../accuracy/goals/context-management/) for instruction-handling failures.
 
 ### Can prompt engineering prevent goal drift?
 Prompt engineering works for static models. Goal drift emerges from the learning process itself — prompting can't control what behaviors the feedback signal teaches an agent to learn. Preventing drift requires reward-function design and multi-metric monitoring, not prompt changes.
@@ -42,7 +42,7 @@ The single documented pattern — reward hacking or goal drift from incomplete r
 
 | Pattern | Mechanism |
 |---------|-----------|
-| [Goal Drift and Task Mutation](failures/goal-drift-and-task-mutation.md) | Agent using feedback/RLHF gradually drifts from original goal toward unintended behaviors; learns reward-hacked shortcuts |
+| Goal Drift and Task Mutation | Agent using feedback/RLHF gradually drifts from original goal toward unintended behaviors; learns reward-hacked shortcuts |
 
 **Total: 1 pattern**
 

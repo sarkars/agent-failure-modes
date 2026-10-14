@@ -26,13 +26,13 @@
 ## Frequently asked questions
 
 ### Why does my chatbot feel boring and generic?
-Usually it answers the question and stops. See [answer-and-go conversation](conversation-leadership/failures/answer-and-go-conversation.md) for how to add a next step and a close.
+Usually it answers the question and stops. See answer-and-go conversation for how to add a next step and a close.
 
 ### How do I make a chatbot sound empathetic without being fake?
-Name the specific problem, then act on it. [Hollow empathy](emotional-intelligence/failures/hollow-empathy.md) shows the before and after.
+Name the specific problem, then act on it. Hollow empathy shows the before and after.
 
 ### How should a bot handle an angry customer?
-Change tactics instead of repeating policy. See [no de-escalation strategy](difficult-customers/failures/no-de-escalation-strategy.md).
+Change tactics instead of repeating policy. See no de-escalation strategy.
 
 ### Is this legal or clinical advice?
 No. Crisis, children, privacy, and disclosure patterns are design guidance. Get expert and legal review.

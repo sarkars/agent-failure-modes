@@ -6,10 +6,10 @@ Agents managing auto-scaling, incident response, deployments, and capacity plann
 
 | Goal | Description | Patterns |
 |------|-------------|----------|
-| [Auto-Scaling](goals/auto-scaling/) | Thrashing, overshooting, under-provisioning | In progress |
-| [Incident Response](goals/incident-response/) | Severity miscalibration, cascading failures, alert noise | In progress |
-| [Deployment Safety](goals/deployment-safety/) | Rollback failures, quota violations, safety checks | In progress |
-| [Capacity Planning](goals/capacity-planning/) | Forecast misses, resource exhaustion, quota tracking | In progress |
+| Auto-Scaling | Thrashing, overshooting, under-provisioning | In progress |
+| [Incident Response](../devops/goals/incident-response/) | Severity miscalibration, cascading failures, alert noise | In progress |
+| [Deployment Safety](../devops/goals/deployment-safety/) | Rollback failures, quota violations, safety checks | In progress |
+| [Capacity Planning](../devops/goals/capacity-planning/) | Forecast misses, resource exhaustion, quota tracking | In progress |
 
 **Status**: ~35 patterns planned
 

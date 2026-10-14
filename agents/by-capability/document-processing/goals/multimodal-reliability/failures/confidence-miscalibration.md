@@ -54,13 +54,13 @@ Result: High-confidence wrong answer bypasses review queue
 ## Universal Pattern Reference
 
 This is a domain-specific implementation of the universal pattern:
-**[Hallucination and Confidence Miscalibration (Cross-Cutting)](../../../cross-cutting/accuracy/goals/output-accuracy/failures/hallucination-confidence-miscalibration.md)**
+**[Hallucination and Confidence Miscalibration (Cross-Cutting)](../../../../../cross-cutting/accuracy/goals/output-accuracy/failures/hallucination-confidence-miscalibration.md)**
 
 The universal pattern covers why LLMs/VLMs produce confident but false content. This variant focuses on **document processing** where VLM overconfidence on extracted field values prevents routing hallucinations to human review.
 
 ### Related Domain Variants
-- [Knowledge Retrieval: Confidence Miscalibration](../../../knowledge-retrieval/goals/answer-synthesis/failures/confidence-miscalibration.md) — LLM overconfidence on RAG answers
-- [Vision: Confidence Miscalibration](../../../vision-and-images/goals/visual-hallucination/failures/confidence-miscalibration.md) — Vision model overconfidence on hallucinated objects
+- Knowledge Retrieval: Confidence Miscalibration — LLM overconfidence on RAG answers
+- Vision: Confidence Miscalibration — Vision model overconfidence on hallucinated objects
 
 ---
 

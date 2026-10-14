@@ -116,5 +116,5 @@ Implement failure injection and chaos engineering: (1) Inject tool failures (tim
 
 ## Related Categories
 
-- [By-Capability](../../../by-capability/) — Capability-specific goals complementary to operations
-- [Core Challenges](../../core-challenges/) — Fundamental challenges that operations supports
+- [By-Capability](../../by-capability/) — Capability-specific goals complementary to operations
+- Core Challenges — Fundamental challenges that operations supports

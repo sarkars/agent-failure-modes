@@ -10,8 +10,8 @@
 
 ## Scope
 
-- **Document and Template Selection** — [document-level-retrieval-mismatch-pulls-wrong-billing-dispute-template](failures/document-level-retrieval-mismatch-pulls-wrong-billing-dispute-template.md). The knowledge base contains near-duplicate articles for different tiers/regions; similarity-ranked retrieval surfaces the wrong one because tier metadata is not weighted in ranking.
-- **Multi-Agent Handoff and State Loss** — [multi-agent-handoff-drops-partial-credit-already-issued-flag](failures/multi-agent-handoff-drops-partial-credit-already-issued-between-triage-and-billing-agent.md). A critical fact (prior credit issued) is present in triage's free-text notes but absent from the structured handoff object passed to the billing-dispute agent.
+- **Document and Template Selection** — document-level-retrieval-mismatch-pulls-wrong-billing-dispute-template. The knowledge base contains near-duplicate articles for different tiers/regions; similarity-ranked retrieval surfaces the wrong one because tier metadata is not weighted in ranking.
+- **Multi-Agent Handoff and State Loss** — multi-agent-handoff-drops-partial-credit-already-issued-flag. A critical fact (prior credit issued) is present in triage's free-text notes but absent from the structured handoff object passed to the billing-dispute agent.
 
 ## When Refund and Billing-Dispute Matters
 
@@ -26,10 +26,10 @@ Both patterns pivot on the same architectural gap: the downstream agent (billing
 ## Frequently Asked Questions
 
 ### If the knowledge base has multiple billing-dispute articles for different tiers, how should retrieval be done?
-[Document-level retrieval mismatch](failures/document-level-retrieval-mismatch-pulls-wrong-billing-dispute-template.md) argues for a two-step retrieval: (1) pre-filter candidate articles by account tier/region/product metadata, narrowing to articles actually applicable to the customer's account, (2) rank the filtered set by embedding similarity. Pure similarity ranking on the full corpus will surface the wrong article whenever multiple near-duplicate articles use overlapping dispute-category language.
+Document-level retrieval mismatch argues for a two-step retrieval: (1) pre-filter candidate articles by account tier/region/product metadata, narrowing to articles actually applicable to the customer's account, (2) rank the filtered set by embedding similarity. Pure similarity ranking on the full corpus will surface the wrong article whenever multiple near-duplicate articles use overlapping dispute-category language.
 
 ### If the triage agent discovers a prior credit was issued, how does that information reach the billing agent?
-[Multi-agent handoff drops partial-credit-already-issued flag](failures/multi-agent-handoff-drops-partial-credit-already-issued-between-triage-and-billing-agent.md) shows the current approach loses that information at the handoff boundary. The fix requires: (1) adding a `prior_credits_issued` field to the structured dispute-case object, (2) requiring the billing agent to query the credit/refund ledger directly by charge ID (not relying on the handoff object alone), and (3) requiring refund-calculation logic to compute `disputed_amount - prior_credits_issued` before approving any refund.
+Multi-agent handoff drops partial-credit-already-issued flag shows the current approach loses that information at the handoff boundary. The fix requires: (1) adding a `prior_credits_issued` field to the structured dispute-case object, (2) requiring the billing agent to query the credit/refund ledger directly by charge ID (not relying on the handoff object alone), and (3) requiring refund-calculation logic to compute `disputed_amount - prior_credits_issued` before approving any refund.
 
 ### Is a ledger query sufficient to prevent duplicate credits, or does the handoff schema need to carry the prior-credit info?
 Both are needed. Ledger queries catch cases where information was lost at handoff, but that is a defensive check, not the primary mitigation. The primary fix is the handoff schema explicitly carrying prior-credit information so the billing agent has immediate visibility; the ledger query is a backup sanity check.
@@ -38,8 +38,8 @@ Both are needed. Ledger queries catch cases where information was lost at handof
 
 | Pattern | Mechanism |
 |---|---|
-| [Document-Level Retrieval Mismatch Pulls Wrong Billing-Dispute Template](failures/document-level-retrieval-mismatch-pulls-wrong-billing-dispute-template.md) | Embedding-similarity retrieval surfaces a billing-dispute article for a different tier/region/product than the customer's, because articles use overlapping category language and tier metadata is not pre-filtered |
-| [Multi-Agent Handoff Drops Partial-Credit-Already-Issued Flag Between Triage and Billing Agent](failures/multi-agent-handoff-drops-partial-credit-already-issued-between-triage-and-billing-agent.md) | Triage agent records that a customer already received $15 partial credit, but this detail is lost in the structured handoff to billing agent, leading to a full refund approval on top of the existing credit |
+| Document-Level Retrieval Mismatch Pulls Wrong Billing-Dispute Template | Embedding-similarity retrieval surfaces a billing-dispute article for a different tier/region/product than the customer's, because articles use overlapping category language and tier metadata is not pre-filtered |
+| Multi-Agent Handoff Drops Partial-Credit-Already-Issued Flag Between Triage and Billing Agent | Triage agent records that a customer already received $15 partial credit, but this detail is lost in the structured handoff to billing agent, leading to a full refund approval on top of the existing credit |
 
 **Total: 2 patterns**
 

@@ -28,25 +28,25 @@ All 4 compliance patterns share a single structural gap: nothing in the pipeline
 ## Frequently Asked Questions
 
 ### What causes a compliance agent to apply an outdated regulatory requirement?
-A training-data cutoff combined with no retrieval step against a current, authoritative regulatory text source. The compliance agent has no inherent signal that a regulation was amended after that cutoff, so it applies a stale threshold or deadline with the same confidence as a current one — see [Regulatory Update Lag](failures/regulatory-update-lag.md).
+A training-data cutoff combined with no retrieval step against a current, authoritative regulatory text source. The compliance agent has no inherent signal that a regulation was amended after that cutoff, so it applies a stale threshold or deadline with the same confidence as a current one — see Regulatory Update Lag.
 
 ### How do you detect that a contract amendment was missed before it causes a billing or compliance dispute?
-Consolidate the original contract and all discoverable amendments into a single "current state" document before analysis, tag each clause with its amendment-origin and effective date, and fail safe by flagging incomplete amendment discovery rather than proceeding silently — the mitigation detailed in [Amendment Tracking Failure](failures/amendment-tracking-failure.md).
+Consolidate the original contract and all discoverable amendments into a single "current state" document before analysis, tag each clause with its amendment-origin and effective date, and fail safe by flagging incomplete amendment discovery rather than proceeding silently — the mitigation detailed in Amendment Tracking Failure.
 
 ### Can jurisdiction metadata alone prevent embedding-retrieval template mismatches?
-No — metadata that exists in the template library but isn't used as a mandatory pre-filter doesn't stop similarity ranking from surfacing a wrong-jurisdiction template first. The reliable fix filters candidate templates to the filing's controlling jurisdiction before any similarity ranking runs at all, per [Embedding Retrieval Applies Wrong Jurisdiction's Disclosure Template by Name Similarity](failures/embedding-retrieval-applies-wrong-jurisdictions-disclosure-template-by-name-similarity.md).
+No — metadata that exists in the template library but isn't used as a mandatory pre-filter doesn't stop similarity ranking from surfacing a wrong-jurisdiction template first. The reliable fix filters candidate templates to the filing's controlling jurisdiction before any similarity ranking runs at all, per Embedding Retrieval Applies Wrong Jurisdiction's Disclosure Template by Name Similarity.
 
 ### Does a multi-agent compliance pipeline need to expose the review agent's full reasoning to the filing agent?
-Yes, whenever the review agent's determination doesn't map onto an existing structured field. A boolean or fixed-schema checklist cannot represent a jurisdiction-specific exception it was never designed to hold, so the exception exists only in narrative form and never reaches the filing agent — see [Multi-Agent Handoff Drops Jurisdiction-Specific Exception Between Compliance-Review and Filing Agent](failures/multi-agent-handoff-drops-jurisdiction-specific-exception-between-compliance-review-and-filing-agent.md).
+Yes, whenever the review agent's determination doesn't map onto an existing structured field. A boolean or fixed-schema checklist cannot represent a jurisdiction-specific exception it was never designed to hold, so the exception exists only in narrative form and never reaches the filing agent — see Multi-Agent Handoff Drops Jurisdiction-Specific Exception Between Compliance-Review and Filing Agent.
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [Amendment Tracking Failure](failures/amendment-tracking-failure.md) | Model analyzes the original contract while separately filed amendments go unconsolidated and unread |
-| [Embedding Retrieval Applies Wrong Jurisdiction's Disclosure Template by Name Similarity](failures/embedding-retrieval-applies-wrong-jurisdictions-disclosure-template-by-name-similarity.md) | Similarity ranking over regulation name/subject matter surfaces a lexically close but wrong-jurisdiction disclosure template |
-| [Multi-Agent Handoff Drops Jurisdiction-Specific Exception Between Compliance-Review and Filing Agent](failures/multi-agent-handoff-drops-jurisdiction-specific-exception-between-compliance-review-and-filing-agent.md) | A checklist schema has no field for an exception the review agent identified only in narrative analysis |
-| [Regulatory Update Lag](failures/regulatory-update-lag.md) | Parametric training-time knowledge of a regulation is applied without retrieving whether it has since been amended |
+| Amendment Tracking Failure | Model analyzes the original contract while separately filed amendments go unconsolidated and unread |
+| Embedding Retrieval Applies Wrong Jurisdiction's Disclosure Template by Name Similarity | Similarity ranking over regulation name/subject matter surfaces a lexically close but wrong-jurisdiction disclosure template |
+| Multi-Agent Handoff Drops Jurisdiction-Specific Exception Between Compliance-Review and Filing Agent | A checklist schema has no field for an exception the review agent identified only in narrative analysis |
+| Regulatory Update Lag | Parametric training-time knowledge of a regulation is applied without retrieving whether it has since been amended |
 
 **Total: 4 patterns**
 

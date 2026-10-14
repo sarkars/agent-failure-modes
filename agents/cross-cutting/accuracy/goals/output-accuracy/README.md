@@ -48,20 +48,20 @@ Confident fabrication (high confidence on completely false answers) and bias amp
 
 | Pattern | Mechanism |
 |---------|-----------|
-| [Algorithmic Discrimination](failures/algorithmic-discrimination.md) | Model systematically generates wrong answers for certain entities, demographics, or groups |
-| [Bias Amplification](failures/bias-amplification.md) | Model learns and reinforces historical biases from training data, amplifying minority-group errors |
-| [Confident Fabrication](failures/confident-fabrication.md) | Agent generates entirely false answers with high confidence despite having no knowledge |
-| [Content Fabrication](failures/content-fabrication.md) | Agent generates false content not supported by sources or reasoning |
-| [Domain Mismatch](failures/domain-mismatch.md) | Agent applies training knowledge outside its valid scope without recognizing domain boundary |
-| [Entity Confusion](failures/entity-confusion.md) | Agent confuses entity identity and mixes properties from different entities |
-| [Extrapolation](failures/extrapolation.md) | Agent extrapolates beyond training domain with false confidence |
-| [Hallucination: Attributes](failures/hallucination-attribute.md) | Agent adds false properties to correct objects/entities |
-| [Hallucination: Base Mechanism](failures/hallucination-base-mechanism.md) | Models generate plausible content based on patterns when input is ambiguous or outside training distribution |
-| [Hallucination: Confidence Miscalibration](failures/hallucination-confidence-miscalibration.md) | Confidence scores don't correlate with accuracy; model confident on false hallucinations |
-| [Hallucination: Objects](failures/hallucination-object.md) | Agent generates false entities, fields, or references not in input |
-| [Inherited Errors](failures/inherited-errors.md) | Agent inherits errors from upstream sources without catching or correcting them |
-| [Source Misattribution](failures/source-misattribution.md) | Agent attributes facts to wrong sources; mixes citations |
-| [Verification Failure](failures/verification-failure.md) | Agent fails to verify extracted values; false values propagate as verified |
+| Algorithmic Discrimination | Model systematically generates wrong answers for certain entities, demographics, or groups |
+| Bias Amplification | Model learns and reinforces historical biases from training data, amplifying minority-group errors |
+| Confident Fabrication | Agent generates entirely false answers with high confidence despite having no knowledge |
+| Content Fabrication | Agent generates false content not supported by sources or reasoning |
+| Domain Mismatch | Agent applies training knowledge outside its valid scope without recognizing domain boundary |
+| Entity Confusion | Agent confuses entity identity and mixes properties from different entities |
+| Extrapolation | Agent extrapolates beyond training domain with false confidence |
+| Hallucination: Attributes | Agent adds false properties to correct objects/entities |
+| Hallucination: Base Mechanism | Models generate plausible content based on patterns when input is ambiguous or outside training distribution |
+| Hallucination: Confidence Miscalibration | Confidence scores don't correlate with accuracy; model confident on false hallucinations |
+| Hallucination: Objects | Agent generates false entities, fields, or references not in input |
+| Inherited Errors | Agent inherits errors from upstream sources without catching or correcting them |
+| Source Misattribution | Agent attributes facts to wrong sources; mixes citations |
+| Verification Failure | Agent fails to verify extracted values; false values propagate as verified |
 
 **Total: 16 patterns**
 

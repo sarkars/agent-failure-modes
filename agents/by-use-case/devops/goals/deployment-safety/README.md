@@ -30,25 +30,25 @@ Deployment-safety failures all occur because an agent authorizes a deploy based 
 ## Frequently Asked Questions
 
 ### What causes a deploy checklist to omit a critical safety gate?
-When checklist selection is based on semantic similarity over service description rather than structured service attributes, two checklists with similar prose (both describing "a standard deploy review") can score equally in embedding space despite one being missing a section required for stateful services. The retrieval step has no signal distinguishing "describes a similar deploy process" from "actually applies to this service's class." See [Embedding Retrieval Applies Wrong Service's Deployment Checklist](failures/embedding-retrieval-applies-wrong-services-deployment-checklist.md).
+When checklist selection is based on semantic similarity over service description rather than structured service attributes, two checklists with similar prose (both describing "a standard deploy review") can score equally in embedding space despite one being missing a section required for stateful services. The retrieval step has no signal distinguishing "describes a similar deploy process" from "actually applies to this service's class." See Embedding Retrieval Applies Wrong Service's Deployment Checklist.
 
 ### Can you assume a "minor" version bump is safe due to semantic versioning?
-No — semver is a convention, not enforced by package managers. An estimated 10-30% of packages violate semver and include breaking changes in "minor" versions. Deployment safety requires either locked dependencies to ensure staging and prod use the same version, or automated breaking-change detection before deployment. See [Dependency Hell & Version Compatibility Blindness](failures/dependency-hell-blindness.md).
+No — semver is a convention, not enforced by package managers. An estimated 10-30% of packages violate semver and include breaking changes in "minor" versions. Deployment safety requires either locked dependencies to ensure staging and prod use the same version, or automated breaking-change detection before deployment. See Dependency Hell & Version Compatibility Blindness.
 
 ### How do you catch a regression that affects only a specific user segment in canary testing?
-Require canary analysis to break down health metrics by the highest-cardinality dimensions relevant to the service (client version, region, request type, customer tier), not aggregate-only. A severe regression concentrated in a 5% traffic segment will be diluted below detection thresholds if only aggregate metrics are compared. See [Canary Analysis False Pass](failures/canary-analysis-false-pass.md).
+Require canary analysis to break down health metrics by the highest-cardinality dimensions relevant to the service (client version, region, request type, customer tier), not aggregate-only. A severe regression concentrated in a 5% traffic segment will be diluted below detection thresholds if only aggregate metrics are compared. See Canary Analysis False Pass.
 
 ### What happens if a deploy requires a feature flag to be set first, but that requirement is only mentioned in planning notes?
-The flag flip never happens. If the deploy manifest has no field for preconditions, and the configuration agent acts only on the manifest, the prerequisite dependency is invisible to the downstream executor. The deploy proceeds with the flag in the wrong state, causing the new code path to execute against old assumptions. See [Multi-Agent Handoff Drops Feature-Flag Precondition Between Deploy Agent and Config Agent](failures/multi-agent-handoff-drops-feature-flag-precondition-between-deploy-agent-and-config-agent.md).
+The flag flip never happens. If the deploy manifest has no field for preconditions, and the configuration agent acts only on the manifest, the prerequisite dependency is invisible to the downstream executor. The deploy proceeds with the flag in the wrong state, causing the new code path to execute against old assumptions. See Multi-Agent Handoff Drops Feature-Flag Precondition Between Deploy Agent and Config Agent.
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [Canary Analysis False Pass](failures/canary-analysis-false-pass.md) | Aggregate metrics pass, but a regression concentrated in a low-traffic segment is invisible to aggregate-only analysis |
-| [Dependency Hell & Version Compatibility Blindness](failures/dependency-hell-blindness.md) | Deploy proceeds with a dependency update that contains a breaking change, violating semver |
-| [Embedding Retrieval Applies Wrong Service's Deployment Checklist](failures/embedding-retrieval-applies-wrong-services-deployment-checklist.md) | Checklist selected by name similarity, omitting a section required for the service's actual structural class |
-| [Multi-Agent Handoff Drops Feature-Flag Precondition Between Deploy Agent and Config Agent](failures/multi-agent-handoff-drops-feature-flag-precondition-between-deploy-agent-and-config-agent.md) | Deploy precondition exists only in deployment agent's reasoning, not in the structured deploy manifest config agent reads |
+| Canary Analysis False Pass | Aggregate metrics pass, but a regression concentrated in a low-traffic segment is invisible to aggregate-only analysis |
+| Dependency Hell & Version Compatibility Blindness | Deploy proceeds with a dependency update that contains a breaking change, violating semver |
+| Embedding Retrieval Applies Wrong Service's Deployment Checklist | Checklist selected by name similarity, omitting a section required for the service's actual structural class |
+| Multi-Agent Handoff Drops Feature-Flag Precondition Between Deploy Agent and Config Agent | Deploy precondition exists only in deployment agent's reasoning, not in the structured deploy manifest config agent reads |
 
 **Total: 4 patterns**
 

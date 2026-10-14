@@ -90,7 +90,7 @@ agents/
 | ├─ [Governance](agents/cross-cutting/governance/) | Compliance, audit, accountability | 1 | 12 |
 | └─ [Learning](agents/cross-cutting/learning/) | Self-improvement, feedback loops | 1 | 12 |
 
-> **New (2026-07)**: Added 4 canonical hallucination patterns (Base Mechanism, Confidence Miscalibration, Attributes, Objects) with 50+ domain-variant cross-references. See [Categorization Updates](CATEGORIZATION_UPDATES.md) for details.
+> **New (2026-07)**: Added 4 canonical hallucination patterns (Base Mechanism, Confidence Miscalibration, Attributes, Objects) with 50+ domain-variant cross-references. See Categorization Updates for details.
 
 ### By Capability (Design-Driven Failure Modes)
 
@@ -217,7 +217,7 @@ These failures appear across multiple AI systems. See [Cross-Cutting Patterns](a
 | Pattern | Category | Goal | Description |
 |---------|----------|------|-------------|
 | [Prompt Injection](agents/cross-cutting/security/goals/safety-security/failures/prompt-injection.md) | Security | Safety & Security | Malicious input hijacks system behavior |
-| [Memory Poisoning](agents/cross-cutting/security/goals/safety-security/failures/memory-poisoning.md) | Security | Safety & Security | Malicious instructions injected into memory |
+| [Memory Poisoning](agents/cross-cutting/operations/goals/memory-safety/failures/memory-poisoning.md) | Security | Safety & Security | Malicious instructions injected into memory |
 | [MCP Protocol Exploitation](agents/cross-cutting/security/goals/runtime-security/failures/mcp-protocol-exploitation.md) | Security | Runtime Security | MCP vulnerabilities enable RCE on 200K+ servers |
 | [Unverified Output](agents/cross-cutting/security/goals/agent-trust/failures/unverified-agent-output.md) | Security | Agent Trust | Accepting outputs without verification |
 | [Confident Fabrication](agents/cross-cutting/accuracy/goals/output-accuracy/failures/confident-fabrication.md) | Accuracy | Output Accuracy | False information stated with high confidence |

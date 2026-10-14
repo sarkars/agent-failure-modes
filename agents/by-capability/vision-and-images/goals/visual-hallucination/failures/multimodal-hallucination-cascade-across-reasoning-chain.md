@@ -198,7 +198,7 @@ Root cause: VLM hallucinated single word ("Worldwide" instead of "LOCAL")
 ## Related Patterns
 - [Confident Fabrication](../../../../../cross-cutting/accuracy/goals/output-accuracy/failures/confident-fabrication.md) — Root cause: hallucinations stated with high confidence
 - [Long-Session Context Loss Violates Earlier Constraints](../../../../../cross-cutting/accuracy/goals/context-management/failures/long-session-context-loss-violates-earlier-constraints.md) — Multi-step memory loss can amplify errors
-- [Why Do Multi-Agent LLM Systems Fail?](../../../../../by-capability/multi-agent-systems/goals/handoff-reliability/failures/multi-agent-failure-taxonomy.md) — Error propagation in multi-step systems
+- Why Do Multi-Agent LLM Systems Fail? — Error propagation in multi-step systems
 - [Self-Verification Cannot Catch Upstream Errors](../../../../../cross-cutting/accuracy/goals/output-verification/failures/self-verification-cannot-catch-upstream-errors.md) — Verification doesn't catch upstream hallucinations
 
 ---

@@ -58,12 +58,12 @@ Every purchase-order-generation task must include a mandatory query of the suppl
 
 | Pattern | Mechanism |
 |---|---|
-| [Embedding Retrieval Pulls Wrong Analog Supplier's Risk Profile by Name Similarity](failures/embedding-retrieval-pulls-wrong-analog-suppliers-risk-profile-by-name-similarity.md) | Risk score anchored to retrieved analog selected by name/description similarity; analog differs on industry, country, or ownership; score is mismatched |
-| [Financial Distress Signal Blindness](failures/financial-distress-signal-blindness.md) | Risk monitoring relies on quarterly/annual financial statements; faster-moving operational signals (payment delays, delivery delays, key departures) not ingested between disclosures |
-| [Geopolitical Risk Blindness in Supplier Risk Scoring](failures/geopolitical-risk-blindness.md) | Risk model based on historical performance is blind to forward-looking geopolitical exposure; single-region suppliers with perfect records receive low scores despite trade/conflict risk |
-| [Single Supplier Bottleneck Risk](failures/single-supplier-bottleneck.md) | Optimization concentrates sourcing on lowest-cost supplier without resilience constraints; single-supplier and single-region concentration not flagged as risk factors independent of supplier performance |
-| [Spurious Causal Narrative from Unrelated News Event in Risk-Score Justification](failures/spurious-causal-narrative-from-unrelated-news-event-in-risk-score-justification.md) | Risk narrative constructs plausible causal link between co-occurring news event and score elevation; event is not an actual model input or feature-attributed driver |
-| [Multi-Agent Handoff Drops Elevated-Risk Flag Before Purchase-Order Finalization](failures/multi-agent-handoff-drops-elevated-risk-flag-before-purchase-order-finalization.md) | Supplier-risk agent raises flag; purchase-order task description does not query risk-system status; order finalized against flagged supplier |
+| Embedding Retrieval Pulls Wrong Analog Supplier's Risk Profile by Name Similarity | Risk score anchored to retrieved analog selected by name/description similarity; analog differs on industry, country, or ownership; score is mismatched |
+| Financial Distress Signal Blindness | Risk monitoring relies on quarterly/annual financial statements; faster-moving operational signals (payment delays, delivery delays, key departures) not ingested between disclosures |
+| Geopolitical Risk Blindness in Supplier Risk Scoring | Risk model based on historical performance is blind to forward-looking geopolitical exposure; single-region suppliers with perfect records receive low scores despite trade/conflict risk |
+| Single Supplier Bottleneck Risk | Optimization concentrates sourcing on lowest-cost supplier without resilience constraints; single-supplier and single-region concentration not flagged as risk factors independent of supplier performance |
+| Spurious Causal Narrative from Unrelated News Event in Risk-Score Justification | Risk narrative constructs plausible causal link between co-occurring news event and score elevation; event is not an actual model input or feature-attributed driver |
+| Multi-Agent Handoff Drops Elevated-Risk Flag Before Purchase-Order Finalization | Supplier-risk agent raises flag; purchase-order task description does not query risk-system status; order finalized against flagged supplier |
 
 **Total: 6 patterns**
 

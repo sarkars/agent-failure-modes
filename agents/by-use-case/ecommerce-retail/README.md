@@ -7,9 +7,9 @@ Agents managing product recommendations, inventory, pricing, and fraud detection
 | Goal | Description | Patterns |
 |------|-------------|----------|
 | [Recommendation Quality](goals/recommendation-quality/) | Diversity, relevance, filter bubble, cold-start | In progress |
-| [Inventory Management](goals/inventory-management/) | Stock-outs, cascade failures, cross-warehouse sync | In progress |
-| [Pricing Optimization](goals/pricing-optimization/) | Dynamic pricing, margin protection, competitor tracking | In progress |
-| [Fraud Prevention](goals/fraud-prevention/) | Transaction fraud, return fraud, account takeover | In progress |
+| Inventory Management | Stock-outs, cascade failures, cross-warehouse sync | In progress |
+| Pricing Optimization | Dynamic pricing, margin protection, competitor tracking | In progress |
+| Fraud Prevention | Transaction fraud, return fraud, account takeover | In progress |
 
 **Status**: ~45 patterns planned
 

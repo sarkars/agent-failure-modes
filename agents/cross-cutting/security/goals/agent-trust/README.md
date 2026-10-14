@@ -47,16 +47,16 @@ Temporally-decoupled-poison-execution injects malicious instructions that remain
 
 | Pattern | Mechanism | Frequency |
 |---|---|---|
-| [Agent Impersonation](failures/agent-impersonation.md) | Attacker poses as trusted agent in communication channel | Occasional |
-| [Blind Delegation](failures/blind-delegation.md) | Orchestrator delegates to agents without verifying capabilities | Common |
-| [Capability Misrepresentation](failures/capability-misrepresentation.md) | Agents claim capabilities they don't actually possess | Common |
-| [Corrupted Agent State](failures/corrupted-agent-state.md) | Agent state compromised, affecting all downstream interactions | Occasional |
-| [Memory Poison Defense Gap](failures/memory-poison-defense-gap-existing-tools-insufficient.md) | Standard defenses miss memory poisoning attacks on belief systems | Critical Gap |
-| [Memory Poisoning Attack](failures/memory-poisoning-attack-95-percent-success-rate.md) | Attackers inject malicious instructions into agent memory | Common in Production |
-| [Output Provenance Loss](failures/output-provenance-loss.md) | Cannot trace which agent produced which part of output | Common |
-| [Sybil Agent Attack](failures/sybil-agent-attack.md) | Attacker creates multiple fake agents to manipulate consensus | Rare |
-| [Temporally Decoupled Poison](failures/temporally-decoupled-poison-execution.md) | Malicious instructions remain dormant, activate after delay | Uncommon but High-Impact |
-| [Trust Transitivity Abuse](failures/trust-transitivity-abuse.md) | Trust relationship incorrectly extended through agent chains | Occasional |
+| Agent Impersonation | Attacker poses as trusted agent in communication channel | Occasional |
+| Blind Delegation | Orchestrator delegates to agents without verifying capabilities | Common |
+| Capability Misrepresentation | Agents claim capabilities they don't actually possess | Common |
+| Corrupted Agent State | Agent state compromised, affecting all downstream interactions | Occasional |
+| Memory Poison Defense Gap | Standard defenses miss memory poisoning attacks on belief systems | Critical Gap |
+| Memory Poisoning Attack | Attackers inject malicious instructions into agent memory | Common in Production |
+| Output Provenance Loss | Cannot trace which agent produced which part of output | Common |
+| Sybil Agent Attack | Attacker creates multiple fake agents to manipulate consensus | Rare |
+| Temporally Decoupled Poison | Malicious instructions remain dormant, activate after delay | Uncommon but High-Impact |
+| Trust Transitivity Abuse | Trust relationship incorrectly extended through agent chains | Occasional |
 | [Unverified Agent Output](failures/unverified-agent-output.md) | Agents accept other agents' outputs without verification | Very Common |
 
 **Total: 11 patterns**

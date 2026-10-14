@@ -52,11 +52,11 @@ Require the agent sending a clearance notification to make a fresh, synchronous 
 
 | Pattern | Mechanism |
 |---|---|
-| [Multi-Step Onboarding Agent Loses Context on Conditional Task Across Sessions](failures/multi-step-onboarding-agent-loses-context-on-conditional-task-across-sessions.md) | Conditional fact (international hire, remote in new state) established conversationally in one session is not written to structured field; later session's checklist omits the conditional task |
-| [Embedding Retrieval Pulls Wrong-Jurisdiction Benefits Policy During Onboarding](failures/embedding-retrieval-pulls-wrong-jurisdiction-benefits-policy-during-onboarding.md) | Template-derived policies for different jurisdictions share boilerplate; embedding similarity retrieves dominant domestic policy instead of classification-specific one |
-| [Stale Training-Corpus Visa-Sponsorship Rule Overrides Live Immigration-Policy Tool](failures/stale-training-corpus-visa-sponsorship-rule-overrides-live-immigration-policy-tool.md) | Agent answers visa/sponsorship questions from pretraining knowledge instead of calling live immigration-policy tool, producing outdated document lists and timelines |
-| [Multi-Agent Handoff Drops Confirmed Accommodation Before Equipment Provisioning](failures/multi-agent-handoff-drops-confirmed-accommodation-before-equipment-provisioning.md) | Accessibility accommodation confirmed in recruiting-coordinator pre-boarding chat is not captured in structured handoff to provisioning agent; standard equipment ships |
-| [Onboarding Agent Notifies Manager of Background-Check Clearance Without Verifying Source Status](failures/onboarding-agent-notifies-manager-of-background-check-clearance-without-verifying-source-status.md) | Access-approval notification sent based on background-check item disappearing from agent's task list, not a re-query of vendor's live "clear" status |
+| Multi-Step Onboarding Agent Loses Context on Conditional Task Across Sessions | Conditional fact (international hire, remote in new state) established conversationally in one session is not written to structured field; later session's checklist omits the conditional task |
+| Embedding Retrieval Pulls Wrong-Jurisdiction Benefits Policy During Onboarding | Template-derived policies for different jurisdictions share boilerplate; embedding similarity retrieves dominant domestic policy instead of classification-specific one |
+| Stale Training-Corpus Visa-Sponsorship Rule Overrides Live Immigration-Policy Tool | Agent answers visa/sponsorship questions from pretraining knowledge instead of calling live immigration-policy tool, producing outdated document lists and timelines |
+| Multi-Agent Handoff Drops Confirmed Accommodation Before Equipment Provisioning | Accessibility accommodation confirmed in recruiting-coordinator pre-boarding chat is not captured in structured handoff to provisioning agent; standard equipment ships |
+| Onboarding Agent Notifies Manager of Background-Check Clearance Without Verifying Source Status | Access-approval notification sent based on background-check item disappearing from agent's task list, not a re-query of vendor's live "clear" status |
 
 **Total: 5 patterns**
 
