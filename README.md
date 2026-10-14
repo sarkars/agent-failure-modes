@@ -103,6 +103,7 @@ agents/
 | [Document Processing](agents/by-capability/document-processing/) | OCR and document text extraction | 6 | 48 |
 | [Knowledge Retrieval](agents/by-capability/knowledge-retrieval/) | RAG, retrieval relevance, semantic matching | 6 | 60 |
 | [Multi-Agent Systems](agents/by-capability/multi-agent-systems/) | Coordination, orchestration, handoff reliability | 2 | 25 |
+| [Human-Machine Interface](agents/by-capability/human-machine-interface/) | How chat, voice, and visual agents talk to people: tone, empathy, channel choice | 11 | 14 |
 
 ### By Use Case (Domain-Specific)
 

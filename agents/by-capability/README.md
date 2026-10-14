@@ -8,6 +8,7 @@ Use this section when debugging production issues:
 - **Two agents coordinate but keep issuing conflicting commands?** → Check [Multi-Agent Systems](multi-agent-systems/)
 - **External API calls sometimes succeed and sometimes silently fail?** → Check [External Actions](external-actions/)
 - **Speech-based agent misunderstands accented speech at scale?** → Check [Speech & Audio](speech-and-audio/)
+- **Chatbot is boring, tone-deaf, or picks the wrong channel?** → Check [Human-Machine Interface](human-machine-interface/)
 
 ## By-Capability Categories
 
@@ -22,8 +23,9 @@ Use this section when debugging production issues:
 | Multi-Agent Systems | Agent coordination, handoff reliability, message passing, role clarity | Agent misalignment, context loss in handoff, conflicting objectives | 23 |
 | [Domain Expertise](domain-expertise/) | Domain-specific judgment, regulation compliance, context-aware decision-making | Regulatory misses, domain hallucination, compliance gaps | 12 |
 | External Actions | External system calls, API execution, state mutation, rollback handling | Wrong target selection, no rollback, transaction failures, race conditions | 13 |
+| [Human-Machine Interface](human-machine-interface/) | Chat, voice, and visual conversation skill: leading, tone, empathy, fairness, channel choice | Boring or tone-deaf bots, missed crisis signals, wrong channel, lost context | 14 |
 
-**Total: 357 patterns**
+**Total: 371 patterns**
 
 ## How to Use This Section
 
