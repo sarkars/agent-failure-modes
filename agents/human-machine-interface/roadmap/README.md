@@ -11,7 +11,25 @@ The first version of this roadmap did not check the library, and several rows tu
 | **Extends** | An existing pattern covers the technical failure | Write only the experience or design angle and a fix, and link to the existing pattern |
 | **New** | No matching pattern found by file-name and keyword search | Search again before writing. This is a name-and-keyword check, not a full read of every file |
 
-**Result: 294 rows, of which 147 are New, 95 Extend an existing pattern, and 52 are already Covered.**
+**Result: 294 rows, of which 112 are New, 122 Extend an existing pattern, and 60 are already Covered.**
+
+## Root cause and the model question
+Every row carries two extra labels: its **primary root cause**, and whether **a better model alone would fix it**. They are my judgments, one label per row, not measurements. The catalog leans toward human-interface, design, and policy failures, so a catalog of raw model failures would show a higher model share.
+
+| Primary root cause | Rows | Share |
+|---|---|---|
+| Model: a stronger model plausibly reduces it | 85 | 29% |
+| Reliability: state, verification, enforcement, evals, latency | 61 | 21% |
+| Business context: your data, entitlements, rules, workflows, UX | 105 | 36% |
+| Governance: incentives, law, and decisions | 43 | 15% |
+
+| Better model alone? | Rows | Share |
+|---|---|---|
+| Yes, largely | 6 | 2% |
+| Partly: helps, residual remains | 114 | 39% |
+| No: persists with a perfect model | 174 | 59% |
+
+If every "Partly" were solved, models would fix up to 41%. If none were, 2%. A one-page list of all rows is in the [index](index.md).
 
 ## Before writing any pattern
 1. Search the library for the topic (file names and keywords, under `agents/`).
@@ -27,19 +45,19 @@ The first version of this roadmap did not check the library, and several rows tu
 ## What's in the catalog
 | File | Area | Rows | New | Extends | Covered |
 |---|---|---|---|---|---|
-| [chat-and-core.md](chat-and-core.md) | Remaining chat and core families, plus channel selection | 21 | 18 | 2 | 1 |
+| [chat-and-core.md](chat-and-core.md) | Remaining chat and core families, plus channel selection | 21 | 15 | 5 | 1 |
 | [embedded-copilots.md](embedded-copilots.md) | Embedded copilots: upselling, context, first response, obvious questions | 23 | 10 | 12 | 1 |
-| [response-time.md](response-time.md) | Speed, waiting, and pacing, all channels | 14 | 10 | 4 | 0 |
+| [response-time.md](response-time.md) | Speed, waiting, and pacing, all channels | 14 | 5 | 8 | 1 |
 | [response-structure-and-length.md](response-structure-and-length.md) | Reply structure, length, chunking, and closers such as 'ok' and 'bye' | 18 | 9 | 9 | 0 |
-| [language-and-locale.md](language-and-locale.md) | Language, reading level, and locale | 16 | 14 | 1 | 1 |
-| [conversation-frameworks.md](conversation-frameworks.md) | Sales, support, style matching, and other frameworks | 32 | 24 | 7 | 1 |
-| [voice.md](voice.md) | Voice agents: timing, speaking, safety, and bridging channels | 24 | 15 | 5 | 4 |
+| [language-and-locale.md](language-and-locale.md) | Language, reading level, and locale | 16 | 8 | 7 | 1 |
+| [conversation-frameworks.md](conversation-frameworks.md) | Sales, support, style matching, and other frameworks | 32 | 19 | 12 | 1 |
+| [voice.md](voice.md) | Voice agents: timing, speaking, safety, and bridging channels | 24 | 7 | 8 | 9 |
 | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Voice listening and transcription | 22 | 4 | 11 | 7 |
 | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Privacy, governance, ethics, access control, and external services | 42 | 6 | 13 | 23 |
 | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Effort, completeness, and memory | 25 | 5 | 10 | 10 |
 | [emerging-surfaces.md](emerging-surfaces.md) | Emerging surfaces: agentic commerce, browser agents, tool ecosystems, meetings, companions, hiring, pricing incentives | 25 | 7 | 15 | 3 |
-| [visual-and-oversight.md](visual-and-oversight.md) | Visual design and human-oversight UI for agents | 32 | 25 | 6 | 1 |
-| | **Total** | **294** | **147** | **95** | **52** |
+| [visual-and-oversight.md](visual-and-oversight.md) | Visual design and human-oversight UI for agents | 32 | 17 | 12 | 3 |
+| | **Total** | **294** | **112** | **122** | **60** |
 
 ## Suggested priority
 | Tier | Why | Start with |
