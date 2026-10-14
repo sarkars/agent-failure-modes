@@ -62,8 +62,8 @@ No specific failure patterns have been documented for cascading-failures yet. Ho
 
 ## Related Goals
 
-- [Fault-Tolerance](../fault-tolerance/README.md) — cascade prevention is a core fault-tolerance concern; timeouts, circuit breakers, and bulkheads are key mitigations
-- [Multi-Agent-Orchestration](../multi-agent-orchestration/README.md) — orchestration must enforce isolation boundaries to prevent cascade propagation
+- Fault-Tolerance — cascade prevention is a core fault-tolerance concern; timeouts, circuit breakers, and bulkheads are key mitigations
+- Multi-Agent-Orchestration — orchestration must enforce isolation boundaries to prevent cascade propagation
 - [Dependency-Management](../dependency-management/README.md) — understanding dependency relationships helps predict cascade paths
-- [Monitoring-and-Alerting](../monitoring-and-alerting/README.md) — early detection of cascades is critical to preventing cascades before system-wide impact occurs
+- Monitoring-and-Alerting — early detection of cascades is critical to preventing cascades before system-wide impact occurs
 - [Resource-Consumption-Management](../resource-consumption-management/README.md) — resource exhaustion is a common cascade trigger; quota management prevents resource-based cascades

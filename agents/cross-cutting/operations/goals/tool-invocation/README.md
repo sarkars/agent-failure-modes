@@ -30,33 +30,33 @@ The 12 invocation patterns describe systems where tool semantics are implicit: a
 ## Frequently Asked Questions
 
 ### How do you prevent wrong-argument-format errors?
-Per [Wrong Argument Format](failures/wrong-argument-format.md), validate argument types and formats before calling tools: check that IDs are strings not integers, dates are ISO 8601 not user-locale format, amounts are in correct currency. Use API contracts (OpenAPI, schema) to specify expected formats and validate against them.
+Per Wrong Argument Format, validate argument types and formats before calling tools: check that IDs are strings not integers, dates are ISO 8601 not user-locale format, amounts are in correct currency. Use API contracts (OpenAPI, schema) to specify expected formats and validate against them.
 
 ### What should an agent do if pagination is required?
-Per [Pagination Failure](failures/pagination-failure.md), agents should check for pagination metadata (e.g., `has_next`, `next_token`), and iterate through all pages rather than assuming first page is complete. Test pagination by requesting large result sets and verifying all results are retrieved.
+Per Pagination Failure, agents should check for pagination metadata (e.g., `has_next`, `next_token`), and iterate through all pages rather than assuming first page is complete. Test pagination by requesting large result sets and verifying all results are retrieved.
 
 ### How do you understand tool idempotency?
-Per [Idempotency Failure](failures/idempotency-failure.md), ask the tool documentation: is calling this operation twice with same parameters safe? If yes, idempotent; if no, non-idempotent. Never retry non-idempotent operations automatically — log the failure and require manual intervention or explicit retry logic that accounts for side effects.
+Per Idempotency Failure, ask the tool documentation: is calling this operation twice with same parameters safe? If yes, idempotent; if no, non-idempotent. Never retry non-idempotent operations automatically — log the failure and require manual intervention or explicit retry logic that accounts for side effects.
 
 ### Can over-broad queries be optimized after the fact?
-Partially — per [Over Broad Query](failures/over-broad-query.md), agents should scope queries before calling (filter by date range, category, etc.) rather than retrieving everything and filtering client-side. Over-broad queries waste resources and cost; filter server-side first.
+Partially — per Over Broad Query, agents should scope queries before calling (filter by date range, category, etc.) rather than retrieving everything and filtering client-side. Over-broad queries waste resources and cost; filter server-side first.
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [Idempotency Failure](failures/idempotency-failure.md) | Non-idempotent operation is retried; retries cause duplicate writes or state corruption |
-| [Missing Required Parameter](failures/missing-required-parameter.md) | Tool requires a parameter; agent doesn't provide it; call fails |
-| [Over Broad Query](failures/over-broad-query.md) | Query is not scoped; returns expensive results; agent wastes resources and cost |
-| [Over Narrow Query](failures/over-narrow-query.md) | Query is over-scoped; misses relevant results; agent gets incomplete data |
-| [Pagination Failure](failures/pagination-failure.md) | Results are paginated; agent doesn't iterate through pages; misses data |
-| [Partial Result Misuse](failures/partial-result-misuse.md) | First page of paginated results is used as if it's complete; missing data treated as not-found |
-| [Rate Limit/Timeout Mishandling](failures/rate-limittimeout-mishandling.md) | Tool returns rate-limit or timeout error; agent doesn't backoff appropriately |
-| [Side Effect Misunderstanding](failures/side-effect-misunderstanding.md) | Agent doesn't understand or underestimates operation side effects; cascading failures result |
-| [Wrong Argument Format](failures/wrong-argument-format.md) | Argument format is wrong (string vs integer, ISO date vs locale date); tool parsing fails |
-| [Wrong Date Range/Timezone](failures/wrong-date-rangetimezone.md) | Date range is wrong timezone; agent retrieves data from wrong time period |
-| [Wrong ID/Key Usage](failures/wrong-idkey-usage.md) | Agent uses wrong ID format or references wrong ID; retrieves wrong record |
-| [Wrong Units/Currency](failures/wrong-unitscurrency.md) | Units or currency are mismatched; calculations are incorrect |
+| Idempotency Failure | Non-idempotent operation is retried; retries cause duplicate writes or state corruption |
+| Missing Required Parameter | Tool requires a parameter; agent doesn't provide it; call fails |
+| Over Broad Query | Query is not scoped; returns expensive results; agent wastes resources and cost |
+| Over Narrow Query | Query is over-scoped; misses relevant results; agent gets incomplete data |
+| Pagination Failure | Results are paginated; agent doesn't iterate through pages; misses data |
+| Partial Result Misuse | First page of paginated results is used as if it's complete; missing data treated as not-found |
+| Rate Limit/Timeout Mishandling | Tool returns rate-limit or timeout error; agent doesn't backoff appropriately |
+| Side Effect Misunderstanding | Agent doesn't understand or underestimates operation side effects; cascading failures result |
+| Wrong Argument Format | Argument format is wrong (string vs integer, ISO date vs locale date); tool parsing fails |
+| Wrong Date Range/Timezone | Date range is wrong timezone; agent retrieves data from wrong time period |
+| Wrong ID/Key Usage | Agent uses wrong ID format or references wrong ID; retrieves wrong record |
+| Wrong Units/Currency | Units or currency are mismatched; calculations are incorrect |
 
 **Total: 12 patterns**
 

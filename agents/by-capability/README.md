@@ -13,15 +13,15 @@ Use this section when debugging production issues:
 
 | Capability | Description | Focus | Patterns |
 |------------|-------------|-------|----------|
-| [Document Processing](document-processing/) | OCR, text extraction, layout preservation, multimodal reliability | Character accuracy, field hallucination, structure loss, production drift | 53 |
-| [Knowledge Retrieval](knowledge-retrieval/) | RAG, embedding-based retrieval, context management, relevance ranking | Context precision, false positives, semantic drift, knowledge staleness | 82 |
-| [Speech & Audio](speech-and-audio/) | Speech recognition, synthesis, accent handling, interruption detection | ASR errors, audio quality degradation, accent bias, context in voice | 71 |
+| Document Processing | OCR, text extraction, layout preservation, multimodal reliability | Character accuracy, field hallucination, structure loss, production drift | 53 |
+| Knowledge Retrieval | RAG, embedding-based retrieval, context management, relevance ranking | Context precision, false positives, semantic drift, knowledge staleness | 82 |
+| Speech & Audio | Speech recognition, synthesis, accent handling, interruption detection | ASR errors, audio quality degradation, accent bias, context in voice | 71 |
 | [Vision & Images](vision-and-images/) | Image understanding, object detection, multimodal reasoning | Confidence miscalibration, adversarial robustness, hallucination in vision | 49 |
-| [Reasoning & Thought](reasoning-and-thought/) | Step-by-step reasoning, chain-of-thought, thought verification | Circular reasoning, reasoning shortcuts, backtracking failures | 31 |
+| Reasoning & Thought | Step-by-step reasoning, chain-of-thought, thought verification | Circular reasoning, reasoning shortcuts, backtracking failures | 31 |
 | [Task Planning](task-planning/) | Goal decomposition, subtask ordering, prerequisite handling | Bad decomposition, missing prerequisites, plan abandonment | 23 |
-| [Multi-Agent Systems](multi-agent-systems/) | Agent coordination, handoff reliability, message passing, role clarity | Agent misalignment, context loss in handoff, conflicting objectives | 23 |
+| Multi-Agent Systems | Agent coordination, handoff reliability, message passing, role clarity | Agent misalignment, context loss in handoff, conflicting objectives | 23 |
 | [Domain Expertise](domain-expertise/) | Domain-specific judgment, regulation compliance, context-aware decision-making | Regulatory misses, domain hallucination, compliance gaps | 12 |
-| [External Actions](external-actions/) | External system calls, API execution, state mutation, rollback handling | Wrong target selection, no rollback, transaction failures, race conditions | 13 |
+| External Actions | External system calls, API execution, state mutation, rollback handling | Wrong target selection, no rollback, transaction failures, race conditions | 13 |
 
 **Total: 357 patterns**
 
@@ -30,13 +30,13 @@ Use this section when debugging production issues:
 ### Step 1: Match Your Symptom to a Capability
 
 **Symptom: "Agent keeps asking for the same information the user already provided"**  
-→ This is a [Knowledge Retrieval](knowledge-retrieval/) failure. The agent's context management or retrieval ranking is losing relevance. See [Context Overflow](knowledge-retrieval/goals/) patterns.
+→ This is a Knowledge Retrieval failure. The agent's context management or retrieval ranking is losing relevance. See [Context Overflow](knowledge-retrieval/goals/) patterns.
 
 **Symptom: "Extracted document fields are correct individually but don't make sense together"**  
-→ This is a [Document Processing](document-processing/) + [Reasoning & Thought](reasoning-and-thought/) failure. The extraction pipeline succeeds at individual fields, but reasoning over multiple fields fails. See [Agentic Orchestration](document-processing/goals/agentic-orchestration/).
+→ This is a Document Processing + Reasoning & Thought failure. The extraction pipeline succeeds at individual fields, but reasoning over multiple fields fails. See [Agentic Orchestration](document-processing/goals/agentic-orchestration/).
 
 **Symptom: "Agent sends a command to System A, then System B doesn't know what happened"**  
-→ This is a [Multi-Agent Systems](multi-agent-systems/) failure. The handoff schema is losing state. See coordination and communication patterns.
+→ This is a Multi-Agent Systems failure. The handoff schema is losing state. See coordination and communication patterns.
 
 ### Step 2: Understand the Design Trade-offs
 
@@ -70,10 +70,10 @@ Both patterns exist. The first helps you design the extraction pipeline; the sec
 
 ### Which capability should a developer check first?
 
-1. If the agent **retrieves external knowledge** (documents, databases, web) → Start with [Knowledge Retrieval](knowledge-retrieval/)
-2. If the agent **processes unstructured input** (documents, speech, images) → Start with [Document Processing](document-processing/), [Speech & Audio](speech-and-audio/), or [Vision & Images](vision-and-images/)
-3. If the agent **coordinates with other agents or systems** → Start with [Multi-Agent Systems](multi-agent-systems/) or [External Actions](external-actions/)
-4. If the agent **reasons over multiple steps** → Start with [Reasoning & Thought](reasoning-and-thought/) and [Task Planning](task-planning/)
+1. If the agent **retrieves external knowledge** (documents, databases, web) → Start with Knowledge Retrieval
+2. If the agent **processes unstructured input** (documents, speech, images) → Start with Document Processing, Speech & Audio, or Vision & Images
+3. If the agent **coordinates with other agents or systems** → Start with Multi-Agent Systems or External Actions
+4. If the agent **reasons over multiple steps** → Start with Reasoning & Thought and Task Planning
 
 ### Is a better model the answer for capability failures?
 

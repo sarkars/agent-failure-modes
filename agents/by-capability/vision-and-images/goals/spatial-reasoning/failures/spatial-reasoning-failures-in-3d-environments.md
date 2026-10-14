@@ -165,7 +165,7 @@ Root cause: Spatial relationship inferred without full scene visibility
 ## Related Patterns
 - [Depth Estimation Hallucination](./depth-estimation-hallucination-monocular-vision.md) — Related: inferring 3D from 2D
 - [Occlusion Reasoning Failures](./occlusion-reasoning-failures.md) — Specific to occluded objects
-- [Vision Model Patch Tokenization Boundary](../../../vision-and-images/goals/visual-hallucination/failures/vision-model-patch-tokenization-boundary-failure.md) — Related: missing structure
+- [Vision Model Patch Tokenization Boundary](../../visual-hallucination/failures/vision-model-patch-tokenization-boundary-failure.md) — Related: missing structure
 
 ---
 

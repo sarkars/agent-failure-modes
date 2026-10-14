@@ -55,13 +55,13 @@ Cost and turn-time constraints mean most lenders use risk-based verification: hi
 
 | Pattern | Mechanism |
 |---|---|
-| [Synthetic Identity Detection](failures/synthetic-identity-detection.md) | Fabricated identities with mixed real/fake data, credit-building patterns suspicious, address/phone variations indicating coordination |
-| [AI-Generated Forgery](failures/ai-generated-forgery.md) | AI-generated pay stubs, tax documents, bank statements passing visual/technical checks, internal consistency but external mismatch |
-| [Deepfake Impersonation](failures/deepfake-impersonation.md) | Video/voice deepfakes in remote closings, facial-recognition bypass, voice-pattern mimicry |
-| [Behavioral Anomaly Blindness](failures/behavioral-anomaly-blindness.md) | Rapid credit-file creation, unusual employment history, large income variance, application patterns suggesting third-party involvement |
-| [Straw Buyer Detection](failures/straw-buyer-detection.md) | Qualified person borrowing for ineligible borrower, mismatch between borrower profile and property, suspicious property disposition (quick sale/refinance) |
-| [Occupancy Fraud Signals](failures/occupancy-fraud-signals.md) | False owner-occupancy claims for investment property, income-to-property-value mismatch, mailing-address discrepancy from property address |
-| [Employment Fabrication](failures/employment-fabrication.md) | Fake employers with fake VOE systems, employment not verifiable via IRS records, W-2 mismatches with claimed employment |
+| Synthetic Identity Detection | Fabricated identities with mixed real/fake data, credit-building patterns suspicious, address/phone variations indicating coordination |
+| AI-Generated Forgery | AI-generated pay stubs, tax documents, bank statements passing visual/technical checks, internal consistency but external mismatch |
+| Deepfake Impersonation | Video/voice deepfakes in remote closings, facial-recognition bypass, voice-pattern mimicry |
+| Behavioral Anomaly Blindness | Rapid credit-file creation, unusual employment history, large income variance, application patterns suggesting third-party involvement |
+| Straw Buyer Detection | Qualified person borrowing for ineligible borrower, mismatch between borrower profile and property, suspicious property disposition (quick sale/refinance) |
+| Occupancy Fraud Signals | False owner-occupancy claims for investment property, income-to-property-value mismatch, mailing-address discrepancy from property address |
+| Employment Fabrication | Fake employers with fake VOE systems, employment not verifiable via IRS records, W-2 mismatches with claimed employment |
 
 **Total: 7 patterns**
 

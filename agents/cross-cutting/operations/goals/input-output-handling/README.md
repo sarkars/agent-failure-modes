@@ -86,4 +86,4 @@ Fail fast and explicitly. Return a clear error message indicating what validatio
 - [Dependency-Management](../dependency-management/README.md) — API contract violations (wrong input format, unexpected output format) are input-output-handling failures
 - [Data-Pipeline-Integration](../data-pipeline-integration/README.md) — schema evolution and encoding mismatches are pipeline integration failures that stem from input-output handling
 - [Observability-Monitoring](../observability-monitoring/README.md) — input/output handling failures often go undetected; visibility into data flow is critical
-- [Security](../security) — input injection, output sanitization, and type coercion are security concerns alongside functional correctness
+- [Security](../../../security/) — input injection, output sanitization, and type coercion are security concerns alongside functional correctness

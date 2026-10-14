@@ -58,6 +58,6 @@ Data Quality has highest leverage: almost every downstream failure in compliance
 
 ## Related Categories
 
-- [Document Processing](../../../by-capability/document-processing/) — financial documents (prospectuses, regulatory filings) are the source of data flowing into financial systems
-- [Knowledge Retrieval](../../../by-capability/knowledge-retrieval/) — regulatory guidance, compliance rules, and market data are knowledge agents retrieve; retrieval accuracy directly affects decisions
-- [Reasoning and Thought](../../../by-capability/reasoning-and-thought/) — financial recommendations depend on multi-step reasoning; reasoning failures compound independently of data quality
+- [Document Processing](../../by-capability/document-processing/) — financial documents (prospectuses, regulatory filings) are the source of data flowing into financial systems
+- [Knowledge Retrieval](../../by-capability/knowledge-retrieval/) — regulatory guidance, compliance rules, and market data are knowledge agents retrieve; retrieval accuracy directly affects decisions
+- [Reasoning and Thought](../../by-capability/reasoning-and-thought/) — financial recommendations depend on multi-step reasoning; reasoning failures compound independently of data quality

@@ -28,25 +28,25 @@ All 4 due-diligence patterns are failures of independent verification at the poi
 ## Frequently Asked Questions
 
 ### How do you distinguish a correlational relationship from a causal one in disclosed financial facts?
-Require every causal claim (driven by, caused by, resulted from) to cite a specific transaction-level or documentary source establishing that link, not just temporal proximity. A separate fact-listing pass followed by a causal-claim verification pass can flag any causal connection introduced in synthesis prose that lacks underlying evidence — see [Correlation Narrated as Causation in Financial Due-Diligence Risk Memo](failures/correlation-narrated-as-causation-in-financial-risk-memo.md).
+Require every causal claim (driven by, caused by, resulted from) to cite a specific transaction-level or documentary source establishing that link, not just temporal proximity. A separate fact-listing pass followed by a causal-claim verification pass can flag any causal connection introduced in synthesis prose that lacks underlying evidence — see Correlation Narrated as Causation in Financial Due-Diligence Risk Memo.
 
 ### Can identifier-based entity matching eliminate false positives from name-similarity matching?
-Yes — enforce a mandatory pre-filter: all entity matches must first attempt lookup via registration number, tax ID, or LEI against authoritative registries. Only if no identifier match is found should similarity-based matching be used as a fallback, always with explicit confidence flags and mandatory human verification before chart inclusion — see [Embedding Retrieval Surfaces Similarly Named, Unrelated Subsidiary in Corporate-Structure Chart](failures/embedding-retrieval-surfaces-similarly-named-unrelated-subsidiary-in-corporate-structure-chart.md).
+Yes — enforce a mandatory pre-filter: all entity matches must first attempt lookup via registration number, tax ID, or LEI against authoritative registries. Only if no identifier match is found should similarity-based matching be used as a fallback, always with explicit confidence flags and mandatory human verification before chart inclusion — see Embedding Retrieval Surfaces Similarly Named, Unrelated Subsidiary in Corporate-Structure Chart.
 
 ### How do you prevent a change-of-control risk from going undetected during a due-diligence review?
-Scan for both explicit change-of-control language ("change of control," "change in ownership") and functionally equivalent implicit triggers (assignment-clause language like "any transfer of ownership without consent"). Build a consolidated change-of-control risk register mapping each identified trigger to its consent deadlines and termination risks, crossed against the deal closing timeline — see [Change-of-Control Clause Omission in M&A Due Diligence](failures/change-of-control-clause-omission.md).
+Scan for both explicit change-of-control language ("change of control," "change in ownership") and functionally equivalent implicit triggers (assignment-clause language like "any transfer of ownership without consent"). Build a consolidated change-of-control risk register mapping each identified trigger to its consent deadlines and termination risks, crossed against the deal closing timeline — see Change-of-Control Clause Omission in M&A Due Diligence.
 
 ### What prevents a material risk identified during document review from disappearing between review and memo stages?
-Require the review agent to populate mandatory structured risk-flag fields with material risks it identifies. Before the memo is published, run a reconciliation: check whether every risk flag from the review stage appears somewhere in the memo. Any flagged risk not mentioned in the memo must be explicitly acknowledged by the deal team before memo release — see [Multi-Agent Handoff Drops Flagged Risk Between Review and Summary Agent](failures/multi-agent-handoff-drops-flagged-risk-between-review-and-summary-agent.md).
+Require the review agent to populate mandatory structured risk-flag fields with material risks it identifies. Before the memo is published, run a reconciliation: check whether every risk flag from the review stage appears somewhere in the memo. Any flagged risk not mentioned in the memo must be explicitly acknowledged by the deal team before memo release — see Multi-Agent Handoff Drops Flagged Risk Between Review and Summary Agent.
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [Change-of-Control Clause Omission in M&A Due Diligence](failures/change-of-control-clause-omission.md) | Change-of-control triggers phrased indirectly (as assignment clauses) are not recognized as functionally equivalent to explicit change-of-control language |
-| [Correlation Narrated as Causation in Financial Due-Diligence Risk Memo](failures/correlation-narrated-as-causation-in-financial-risk-memo.md) | Temporal adjacency between two disclosed facts drives causal narrative language without transaction-level evidence supporting the causal link |
-| [Embedding Retrieval Surfaces Similarly Named, Unrelated Subsidiary in Corporate-Structure Chart](failures/embedding-retrieval-surfaces-similarly-named-unrelated-subsidiary-in-corporate-structure-chart.md) | Name similarity across heterogeneous sources (SEC filings, foreign registries) merges an unrelated entity into the target's structure chart |
-| [Multi-Agent Handoff Drops Flagged Risk Between Review and Summary Agent](failures/multi-agent-handoff-drops-flagged-risk-between-review-and-summary-agent.md) | Material risk identified in review-stage annotation prose never reaches structured findings list that memo-synthesis agent consumes |
+| Change-of-Control Clause Omission in M&A Due Diligence | Change-of-control triggers phrased indirectly (as assignment clauses) are not recognized as functionally equivalent to explicit change-of-control language |
+| Correlation Narrated as Causation in Financial Due-Diligence Risk Memo | Temporal adjacency between two disclosed facts drives causal narrative language without transaction-level evidence supporting the causal link |
+| Embedding Retrieval Surfaces Similarly Named, Unrelated Subsidiary in Corporate-Structure Chart | Name similarity across heterogeneous sources (SEC filings, foreign registries) merges an unrelated entity into the target's structure chart |
+| Multi-Agent Handoff Drops Flagged Risk Between Review and Summary Agent | Material risk identified in review-stage annotation prose never reaches structured findings list that memo-synthesis agent consumes |
 
 **Total: 4 patterns**
 

@@ -10,12 +10,12 @@ Shared metrics the patterns below report against. Targets are starting points to
 | Metric | Target | Defined in |
 |---|---|---|
 | Style-match rate | Over 90% (human-rated) | [one size communication style](failures/one-size-communication-style.md) |
-| Name-swap style consistency | 100% | [one size communication style](failures/one-size-communication-style.md) |
+| Name-swap style consistency | 100% | one size communication style |
 
 ## Patterns
 | Pattern | One line |
 |---|---|
-| [One-size communication style](failures/one-size-communication-style.md) | Same directness, idioms, and formality for everyone |
+| One-size communication style | Same directness, idioms, and formality for everyone |
 
 ## Planned (not yet written)
 - Language switching and English learners

@@ -44,10 +44,10 @@ Structurally filter them out: a deal with a known disqualifying signal (no budge
 
 | Pattern | Mechanism |
 |---|---|
-| [Agent Applies Remembered Stage-Weighting Instead of Current Config](failures/agent-applies-remembered-stage-weighting-instead-of-current-forecasting-config.md) | RevOps updates stage-probability weighting; agent applies retired scheme from prior period; forecast reflects old methodology |
-| [Best-Case Projection Bias](failures/best-case-projection-bias.md) | Sales rep estimates probability optimistically (90% when actual is 30%); forecast 40-60% over-optimistic |
-| [Embedding Retrieval Pulls Mismatched Historical Deal Cohort](failures/embedding-retrieval-pulls-mismatched-historical-deal-cohort-as-stage-conversion-benchmark.md) | Historical comparable retrieved by industry keyword; differs in deal-cycle or buying-committee structure; benchmark close rate doesn't apply |
-| [SDR-to-AE Handoff Drops Unstructured Disqualifying Signal](failures/sdr-to-ae-handoff-drops-unstructured-disqualifying-signal.md) | Disqualifying signal in SDR transcript (no budget, competitor selected); no structured disqualification field; forecasting counts at full weight |
+| Agent Applies Remembered Stage-Weighting Instead of Current Config | RevOps updates stage-probability weighting; agent applies retired scheme from prior period; forecast reflects old methodology |
+| Best-Case Projection Bias | Sales rep estimates probability optimistically (90% when actual is 30%); forecast 40-60% over-optimistic |
+| Embedding Retrieval Pulls Mismatched Historical Deal Cohort | Historical comparable retrieved by industry keyword; differs in deal-cycle or buying-committee structure; benchmark close rate doesn't apply |
+| SDR-to-AE Handoff Drops Unstructured Disqualifying Signal | Disqualifying signal in SDR transcript (no budget, competitor selected); no structured disqualification field; forecasting counts at full weight |
 
 **Total: 4 patterns**
 

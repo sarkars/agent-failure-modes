@@ -43,19 +43,19 @@ Validate every extracted value against the field's expected shape, checksum, or 
 
 | Pattern | Mechanism |
 |---|---|
-| [Background Interference](failures/background-interference.md) | Watermarks/security patterns read as text characters |
-| [Character Confusion](failures/character-confusion.md) | Visually similar glyphs (`0`/`O`, `1`/`l`/`I`) substituted in IDs/codes |
-| [Font Handling](failures/font-handling.md) | Decorative/brand typography misread, especially logos and letterheads |
-| [Handwritten Text](failures/handwritten-text.md) | Handwriting variance defeats models trained mainly on printed text |
-| [Low Resolution](failures/low-resolution.md) | Fax/mobile/compression artifacts erase the detail needed for small text |
-| [Punctuation Errors](failures/punctuation-errors.md) | Decimal/comma/currency-symbol misreads corrupt numeric fields |
-| [Skew Rotation](failures/skew-rotation.md) | Angled capture breaks line detection, merging or scrambling text |
-| [Stamps Overlays](failures/stamps-overlays.md) | Approval stamps/annotations overlap and corrupt printed text |
+| Background Interference | Watermarks/security patterns read as text characters |
+| Character Confusion | Visually similar glyphs (`0`/`O`, `1`/`l`/`I`) substituted in IDs/codes |
+| Font Handling | Decorative/brand typography misread, especially logos and letterheads |
+| Handwritten Text | Handwriting variance defeats models trained mainly on printed text |
+| Low Resolution | Fax/mobile/compression artifacts erase the detail needed for small text |
+| Punctuation Errors | Decimal/comma/currency-symbol misreads corrupt numeric fields |
+| Skew Rotation | Angled capture breaks line detection, merging or scrambling text |
+| Stamps Overlays | Approval stamps/annotations overlap and corrupt printed text |
 
 **Total: 8 patterns**
 
 ## Related Goals
 
-- [Multimodal Reliability](../multimodal-reliability/) — hallucination and confidence-calibration failures one layer above character-level OCR
+- Multimodal Reliability — hallucination and confidence-calibration failures one layer above character-level OCR
 - [Layout Preservation](../layout-preservation/) — characters read correctly but document structure (tables, reading order) lost
 - [Document Classification](../document-classification/) — routing and splitting, upstream of extraction

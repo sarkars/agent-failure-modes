@@ -10,12 +10,12 @@ Shared metrics the patterns below report against. Targets are starting points to
 | Metric | Target | Defined in |
 |---|---|---|
 | Specificity rate of empathy lines | Over 90% on complaint messages | [hollow empathy](failures/hollow-empathy.md) |
-| Repeated empathy phrase rate | Under 2% | [hollow empathy](failures/hollow-empathy.md) |
+| Repeated empathy phrase rate | Under 2% | hollow empathy |
 
 ## Patterns
 | Pattern | One line |
 |---|---|
-| [Hollow empathy](failures/hollow-empathy.md) | 'I understand your frustration', on repeat, with no action |
+| Hollow empathy | 'I understand your frustration', on repeat, with no action |
 
 ## Planned (not yet written)
 - Missed subtext

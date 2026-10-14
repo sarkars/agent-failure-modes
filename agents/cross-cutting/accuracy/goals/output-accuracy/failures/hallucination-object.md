@@ -250,8 +250,8 @@ HAVING ungrounded_count > 0 OR hallucination_rate > 0.05
 - [Hallucination: Confidence Miscalibration](hallucination-confidence-miscalibration.md) — Why hallucinated objects come with high confidence
 
 **Domain-Specific Variants**:
-- **[Document Processing: Object Hallucination](../../../by-capability/document-processing/goals/multimodal-reliability/failures/object-hallucination.md)** — Phantom fields and phantom table hallucinations
-- **[Vision: Object Hallucination](../../../by-capability/vision-and-images/goals/visual-hallucination/failures/object-hallucination.md)** — False object detection in cluttered or empty scenes
+- **Document Processing: Object Hallucination** — Phantom fields and phantom table hallucinations
+- **Vision: Object Hallucination** — False object detection in cluttered or empty scenes
 
 ---
 

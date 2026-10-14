@@ -47,16 +47,16 @@ Track queue net-growth-rate against reviewer capacity, not just current queue de
 
 | Pattern | Mechanism |
 |---|---|
-| [Accuracy Regression](failures/accuracy-regression.md) | Model/pipeline update silently degrades accuracy with no automated detection |
-| [Batch Timing](failures/batch-timing.md) | Documents processed out of logical order (amendment before original) |
-| [Cascading Errors](failures/cascading-errors.md) | A single extraction error propagates across multiple trusted downstream systems |
-| [ERP Integration](failures/erp-integration.md) | Extraction-to-ERP field mapping breaks silently as either schema changes |
-| [Format Diversity](failures/format-diversity.md) | Heterogeneous vendor formats overwhelm rule-based handling; long tail stays manual |
-| [Layout Signal Loss](failures/layout-signal-loss.md) | Preprocessing strips structural/layout signal before extraction runs |
-| [Missing Metadata](failures/missing-metadata.md) | Absent sender/locale context leaves genuinely ambiguous fields unresolved |
-| [Review Queue Overflow](failures/review-queue-overflow.md) | Miscalibrated confidence thresholds route too much volume to human review |
-| [Silent Data Errors](failures/silent-data-errors.md) | Well-formed output with wrong structural relationships, no error flagged |
-| [Template Drift](failures/template-drift.md) | Vendor changes document layout without notice; positional extraction silently swaps values |
+| Accuracy Regression | Model/pipeline update silently degrades accuracy with no automated detection |
+| Batch Timing | Documents processed out of logical order (amendment before original) |
+| Cascading Errors | A single extraction error propagates across multiple trusted downstream systems |
+| ERP Integration | Extraction-to-ERP field mapping breaks silently as either schema changes |
+| Format Diversity | Heterogeneous vendor formats overwhelm rule-based handling; long tail stays manual |
+| Layout Signal Loss | Preprocessing strips structural/layout signal before extraction runs |
+| Missing Metadata | Absent sender/locale context leaves genuinely ambiguous fields unresolved |
+| Review Queue Overflow | Miscalibrated confidence thresholds route too much volume to human review |
+| Silent Data Errors | Well-formed output with wrong structural relationships, no error flagged |
+| Template Drift | Vendor changes document layout without notice; positional extraction silently swaps values |
 
 **Total: 10 patterns**
 

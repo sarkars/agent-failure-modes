@@ -31,9 +31,9 @@
 
 ## How These Patterns Group
 
-- **Reuse not applied:** [No Preplanned Workflow for Frequent Operations](failures/no-preplanned-workflow-for-frequent-operations.md), [Non-Generalized Plan Template](failures/non-generalized-plan-template.md), [Prompt Caching Underutilization](failures/prompt-caching-underutilization.md), [Prompt Compression Not Applied](failures/prompt-compression-not-applied.md), [Full Reprocessing on Incremental Change](failures/full-reprocessing-on-incremental-change.md), [Repeated Regeneration of Known-Incorrect Answer](failures/repeated-regeneration-of-known-incorrect-answer.md)
-- **Too much processing:** [Unnecessary Planning Step](failures/unnecessary-planning-step.md), [Redundant Self-Reflection Passes](failures/redundant-self-reflection-passes.md), [Unnecessary Ensemble Voting Overhead](failures/unnecessary-ensemble-voting-overhead.md), [Unbounded Context Growth Across Turns](failures/unbounded-context-growth-across-turns.md), [Multi-Agent Context Broadcast Waste](failures/multi-agent-context-broadcast-waste.md)
-- **Wrong amount of planning or specialization:** [Under-Planning Costly Rework](failures/under-planning-costly-rework.md), [Missing Task Specialization](failures/missing-task-specialization.md)
+- **Reuse not applied:** No Preplanned Workflow for Frequent Operations, Non-Generalized Plan Template, Prompt Caching Underutilization, Prompt Compression Not Applied, Full Reprocessing on Incremental Change, Repeated Regeneration of Known-Incorrect Answer
+- **Too much processing:** Unnecessary Planning Step, Redundant Self-Reflection Passes, Unnecessary Ensemble Voting Overhead, Unbounded Context Growth Across Turns, Multi-Agent Context Broadcast Waste
+- **Wrong amount of planning or specialization:** Under-Planning Costly Rework, Missing Task Specialization
 
 ## When This Matters
 
@@ -45,11 +45,11 @@
 
 ### How do I reduce LLM costs without changing models?
 
-Look at [prompt caching underutilization](failures/prompt-caching-underutilization.md), [prompt compression not applied](failures/prompt-compression-not-applied.md), and [unbounded context growth](failures/unbounded-context-growth-across-turns.md).
+Look at prompt caching underutilization, prompt compression not applied, and unbounded context growth.
 
 ### Should every agent plan before it acts?
 
-Not necessarily. [Unnecessary planning step](failures/unnecessary-planning-step.md) and [under-planning costly rework](failures/under-planning-costly-rework.md) describe the cost of getting this wrong in either direction.
+Not necessarily. Unnecessary planning step and under-planning costly rework describe the cost of getting this wrong in either direction.
 
 ### What is the difference between cost optimization and cost efficiency?
 

@@ -28,29 +28,29 @@ Every speech-recognition pattern converges on the same architectural fix: constr
 ## Frequently Asked Questions
 
 ### What makes voice agents perform worse for some accents or names than others?
-Because ASR acoustic and language models are trained predominantly on standard accents and common Western names — [accent-dialect-bias](failures/accent-dialect-bias.md) documents a 10-20 point WER gap for non-standard accents, and [name-recognition-failures](failures/name-recognition-failures.md) documents 20-40% name WER (2-4x higher for ethnic names) versus 5-10% for common words, both traceable to training-data underrepresentation.
+Because ASR acoustic and language models are trained predominantly on standard accents and common Western names — accent-dialect-bias documents a 10-20 point WER gap for non-standard accents, and name-recognition-failures documents 20-40% name WER (2-4x higher for ethnic names) versus 5-10% for common words, both traceable to training-data underrepresentation.
 
 ### Should a voice agent act on a low-confidence ASR transcript?
-No. [Low-confidence-mishandling](failures/low-confidence-mishandling.md) shows accuracy at confidence <0.6 running 50-70% versus 97% at confidence >0.9, yet many systems apply no threshold at all — the fix is a tiered confidence ladder that routes low-confidence results to confirmation or repeat-request rather than auto-execution.
+No. Low-confidence-mishandling shows accuracy at confidence <0.6 running 50-70% versus 97% at confidence >0.9, yet many systems apply no threshold at all — the fix is a tiered confidence ladder that routes low-confidence results to confirmation or repeat-request rather than auto-execution.
 
 ### Is it safe to act on streaming ASR interim results before the final transcript arrives?
-Not for consequential actions. [Streaming-asr-instability](failures/streaming-asr-instability.md) documents 20-30% of utterances having significant interim-to-final changes, including negation flips ("cancel" without "don't" appearing until later) — critical actions should wait for the final result or a stability-gated interim.
+Not for consequential actions. Streaming-asr-instability documents 20-30% of utterances having significant interim-to-final changes, including negation flips ("cancel" without "don't" appearing until later) — critical actions should wait for the final result or a stability-gated interim.
 
 ### How much does domain-specific vocabulary customization actually help?
-Substantially — [domain-vocabulary-gaps](failures/domain-vocabulary-gaps.md) reports general ASR at 70-80% accuracy on medical terminology versus 92-97% for domain-adapted ASR, a gap large enough to be a patient-safety issue for drug names and dosages specifically.
+Substantially — domain-vocabulary-gaps reports general ASR at 70-80% accuracy on medical terminology versus 92-97% for domain-adapted ASR, a gap large enough to be a patient-safety issue for drug names and dosages specifically.
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [Accent Dialect Bias](failures/accent-dialect-bias.md) | Non-standard accents see 10-20 point WER increases from training-data underrepresentation |
-| [Domain Vocabulary Gaps](failures/domain-vocabulary-gaps.md) | Medical/legal/financial jargon substituted with phonetically similar common words |
-| [Filler Word Mishandling](failures/filler-word-mishandling.md) | "Um," "like," and other disfluencies transcribed literally and misread as semantic content |
-| [Homophones Confusion](failures/homophones-confusion.md) | Sound-alike words (to/two/too, there/their) resolved wrong without sufficient context |
-| [Low Confidence Mishandling](failures/low-confidence-mishandling.md) | Confidence scores available but unused, so uncertain transcripts are acted on as if certain |
-| [Name Recognition Failures](failures/name-recognition-failures.md) | Open-vocabulary personal/business names misheard, breaking identity and account lookups |
-| [Number Date Errors](failures/number-date-errors.md) | Similar-sounding digits and ambiguous date/time formats corrupt quantities, phone numbers, and cards |
-| [Streaming Asr Instability](failures/streaming-asr-instability.md) | Real-time transcription changes mid-utterance, risking action on a not-yet-final hypothesis |
+| Accent Dialect Bias | Non-standard accents see 10-20 point WER increases from training-data underrepresentation |
+| Domain Vocabulary Gaps | Medical/legal/financial jargon substituted with phonetically similar common words |
+| Filler Word Mishandling | "Um," "like," and other disfluencies transcribed literally and misread as semantic content |
+| Homophones Confusion | Sound-alike words (to/two/too, there/their) resolved wrong without sufficient context |
+| Low Confidence Mishandling | Confidence scores available but unused, so uncertain transcripts are acted on as if certain |
+| Name Recognition Failures | Open-vocabulary personal/business names misheard, breaking identity and account lookups |
+| Number Date Errors | Similar-sounding digits and ambiguous date/time formats corrupt quantities, phone numbers, and cards |
+| Streaming Asr Instability | Real-time transcription changes mid-utterance, risking action on a not-yet-final hypothesis |
 
 **Total: 8 patterns**
 

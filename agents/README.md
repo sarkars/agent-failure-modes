@@ -29,7 +29,7 @@
 ### Scenario: "We're Building an OCR Pipeline and Want to Avoid Known Pitfalls"
 
 1. **By Capability** — Start here. [Document Processing](by-capability/document-processing/) covers 6 goals across the OCR pipeline: classification, text extraction, layout preservation, multimodal reliability, orchestration, and production monitoring.
-2. **Cross-Cutting** — Layer in [Accuracy](cross-cutting/accuracy/) for evaluation and [Operations](cross-cutting/operations/) for cost and reliability at scale.
+2. **Cross-Cutting** — Layer in Accuracy for evaluation and Operations for cost and reliability at scale.
 3. **By Use Case** — If your OCR serves a specific domain (mortgage documents, legal contracts, healthcare records), check the domain-specific section to find industry-specific failure patterns not captured in generic OCR.
 
 ### Scenario: "Security Audit—What Can Go Wrong?"

@@ -41,12 +41,12 @@ Authoritative master data stores (regulatory reference databases, official excha
 
 | Pattern | Mechanism |
 |---------|-----------|
-| [Self-Verification Cannot Catch Upstream Errors](failures/self-verification-cannot-catch-upstream-errors.md) | Agent queries same source twice to verify; finds no discrepancy because source itself is stale/wrong, not the agent's extraction |
+| Self-Verification Cannot Catch Upstream Errors | Agent queries same source twice to verify; finds no discrepancy because source itself is stale/wrong, not the agent's extraction |
 
 **Total: 1 pattern**
 
 ## Related Goals
 
-- [Output Accuracy](../output-accuracy/) — hallucination and fabrication, contrasted with extraction-from-correct-source scenarios
+- Output Accuracy — hallucination and fabrication, contrasted with extraction-from-correct-source scenarios
 - [Verification](../verification/) — test-time evaluation and validation, upstream of production verification
 - [Evaluation Reliability](../evaluation-reliability/) — golden-data problems that can surface circular-verification issues in testing

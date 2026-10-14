@@ -28,26 +28,26 @@ Every anomaly-detection pattern documented here reduces to the same tension: the
 ## Frequently Asked Questions
 
 ### What causes an anomaly detector to flag normal seasonal traffic as an incident?
-A statistical baseline built on a simple mean-and-standard-deviation model with no explicit seasonal component — daily, weekly, and yearly traffic cycles look identical to a real spike unless the model decomposes trend and seasonality first. See [Seasonal Blindness](failures/seasonal-blindness.md).
+A statistical baseline built on a simple mean-and-standard-deviation model with no explicit seasonal component — daily, weekly, and yearly traffic cycles look identical to a real spike unless the model decomposes trend and seasonality first. See Seasonal Blindness.
 
 ### How do you tell a cascading failure from a coordinated multi-system attack?
-Trace the correlated spikes to a single root cause rather than trusting the correlation itself — metrics that are highly correlated in normal operation stay highly correlated during a cascade, so correlation strength alone cannot distinguish "one failure with many effects" from "several independent failures." [Correlation-Induced False Positives](failures/correlation-induced-false-positives.md) documents the 0.7-0.95 correlation range spanning both cases.
+Trace the correlated spikes to a single root cause rather than trusting the correlation itself — metrics that are highly correlated in normal operation stay highly correlated during a cascade, so correlation strength alone cannot distinguish "one failure with many effects" from "several independent failures." Correlation-Induced False Positives documents the 0.7-0.95 correlation range spanning both cases.
 
 ### Can auto-tuned alert thresholds silently make a detector worse over time?
-Yes — if tuning optimizes only false-positive rate against recent history with no recall floor against known rare-incident signatures, every widening pass makes the detector marginally worse at catching real incidents that resemble the noise it just learned to ignore, and without versioned threshold history this drift is invisible until a real incident is missed. See [Alert Fatigue from Threshold Misconfiguration](failures/alert-fatigue-from-threshold-misconfiguration.md).
+Yes — if tuning optimizes only false-positive rate against recent history with no recall floor against known rare-incident signatures, every widening pass makes the detector marginally worse at catching real incidents that resemble the noise it just learned to ignore, and without versioned threshold history this drift is invisible until a real incident is missed. See Alert Fatigue from Threshold Misconfiguration.
 
 ### Does attributing an anomaly to the most recent deploy count as root-cause analysis?
-Not on its own. Temporal proximity to a deploy is a low-cost heuristic, not a causal check — it produces false attributions whenever an unrelated deploy happens to precede the anomaly, especially in environments with frequent, concurrent deploys across many services. [Deploy-Correlated Anomaly Misattribution](failures/deploy-correlated-anomaly-misattribution.md) requires checking whether the deploy's actual diff touches the affected component before attributing cause.
+Not on its own. Temporal proximity to a deploy is a low-cost heuristic, not a causal check — it produces false attributions whenever an unrelated deploy happens to precede the anomaly, especially in environments with frequent, concurrent deploys across many services. Deploy-Correlated Anomaly Misattribution requires checking whether the deploy's actual diff touches the affected component before attributing cause.
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [Alert Fatigue from Threshold Misconfiguration](failures/alert-fatigue-from-threshold-misconfiguration.md) | Auto-tuning widens thresholds against recent noise with no recall floor, suppressing rare real incidents |
-| [Correlation-Induced False Positives](failures/correlation-induced-false-positives.md) | Simultaneous correlated-metric spikes read as coordinated attack instead of single-root-cause cascade |
-| [Deploy-Correlated Anomaly Misattribution](failures/deploy-correlated-anomaly-misattribution.md) | Anomaly attributed to the most recent deploy by timestamp proximity, not content relevance |
-| [Multi-Agent Handoff Drops Baseline Adjustment Between Tuning Agent and Detection Agent](failures/multi-agent-handoff-drops-baseline-adjustment-between-tuning-agent-and-detection-agent.md) | Tuning agent's time-bound, event-specific adjustment reasoning never reaches the detection agent's structured threshold |
-| [Seasonal Blindness](failures/seasonal-blindness.md) | Static statistical baseline flags predictable daily/weekly/seasonal variation as anomalous |
+| Alert Fatigue from Threshold Misconfiguration | Auto-tuning widens thresholds against recent noise with no recall floor, suppressing rare real incidents |
+| Correlation-Induced False Positives | Simultaneous correlated-metric spikes read as coordinated attack instead of single-root-cause cascade |
+| Deploy-Correlated Anomaly Misattribution | Anomaly attributed to the most recent deploy by timestamp proximity, not content relevance |
+| Multi-Agent Handoff Drops Baseline Adjustment Between Tuning Agent and Detection Agent | Tuning agent's time-bound, event-specific adjustment reasoning never reaches the detection agent's structured threshold |
+| Seasonal Blindness | Static statistical baseline flags predictable daily/weekly/seasonal variation as anomalous |
 
 **Total: 5 patterns**
 

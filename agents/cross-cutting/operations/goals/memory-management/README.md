@@ -40,11 +40,11 @@
 
 ## How These Patterns Group
 
-- **Summarizing and compacting:** [Compaction Information Loss](failures/compaction-information-loss.md), [Memory Summarization Lossy](failures/memory-summarization-lossy.md), [Summary Drift](failures/summary-drift.md)
-- **Retrieval quality:** [Memory Retrieval Failures](failures/memory-retrieval-failures.md), [Memory Not Updated Stale Retrieval](failures/memory-not-updated-stale-retrieval.md), [Retrieval Confidence Miscalibration](failures/retrieval-confidence-miscalibration.md), [Retrieval Deduplication Failure](failures/retrieval-deduplication-failure.md), [Retrieval Temporal Ordering Failure](failures/retrieval-temporal-ordering-failure.md), [Working Memory Overflow](failures/working-memory-overflow.md), [Memory Priority Inversion](failures/memory-priority-inversion.md)
-- **Coherence and consistency:** [Context Coherence Loss](failures/context-coherence-loss.md), [Context Refresh Stale State](failures/context-refresh-stale-state.md), [Context Window Awareness Failure](failures/context-window-awareness-failure.md), [Memory Coherence Breakdown](failures/memory-coherence-breakdown.md), [Memory Inconsistency Between Agents](failures/memory-inconsistency-between-agents.md), [Memory Interleaving Corruption](failures/memory-interleaving-corruption.md)
-- **Storage and index health:** [Memory Fragmentation](failures/memory-fragmentation.md), [Memory Corruption Detection Failure](failures/memory-corruption-detection-failure.md), [Memory Loss on Reboot](failures/memory-loss-on-reboot.md), [Retrieval Index Corruption](failures/retrieval-index-corruption.md), [Semantic Drift in Embeddings](failures/semantic-drift-in-embeddings.md)
-- **Privacy:** [Memory Privacy Boundary Violation](failures/memory-privacy-boundary-violation.md)
+- **Summarizing and compacting:** Compaction Information Loss, Memory Summarization Lossy, Summary Drift
+- **Retrieval quality:** Memory Retrieval Failures, Memory Not Updated Stale Retrieval, Retrieval Confidence Miscalibration, Retrieval Deduplication Failure, Retrieval Temporal Ordering Failure, Working Memory Overflow, Memory Priority Inversion
+- **Coherence and consistency:** Context Coherence Loss, Context Refresh Stale State, Context Window Awareness Failure, Memory Coherence Breakdown, Memory Inconsistency Between Agents, Memory Interleaving Corruption
+- **Storage and index health:** Memory Fragmentation, Memory Corruption Detection Failure, Memory Loss on Reboot, Retrieval Index Corruption, Semantic Drift in Embeddings
+- **Privacy:** Memory Privacy Boundary Violation
 
 ## When This Matters
 
@@ -56,15 +56,15 @@
 
 ### Why does my agent contradict itself in a long session?
 
-See [context coherence loss](failures/context-coherence-loss.md) and [memory coherence breakdown](failures/memory-coherence-breakdown.md).
+See context coherence loss and memory coherence breakdown.
 
 ### Why did retrieval quality drop after an embedding model upgrade?
 
-See [semantic drift in embeddings](failures/semantic-drift-in-embeddings.md).
+See semantic drift in embeddings.
 
 ### How can one user's memory leak into another's session?
 
-Usually a missing scope filter on retrieval. See [memory privacy boundary violation](failures/memory-privacy-boundary-violation.md).
+Usually a missing scope filter on retrieval. See memory privacy boundary violation.
 
 ### What is the difference between memory management and memory safety?
 

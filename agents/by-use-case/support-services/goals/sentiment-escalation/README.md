@@ -34,29 +34,29 @@ Every sentiment-escalation pattern documented here reflects a mismatch between a
 ## Frequently Asked Questions
 
 ### How do you select an escalation playbook correctly?
-Use a structured severity-tier classification of the ticket's actual content as the primary routing signal, restricting playbook-similarity matching to disambiguation within that tier rather than across the full playbook index. See [Embedding Retrieval Selects Wrong Escalation Playbook by Keyword Similarity](failures/embedding-retrieval-selects-wrong-escalation-playbook-by-keyword-similarity.md).
+Use a structured severity-tier classification of the ticket's actual content as the primary routing signal, restricting playbook-similarity matching to disambiguation within that tier rather than across the full playbook index. See Embedding Retrieval Selects Wrong Escalation Playbook by Keyword Similarity.
 
 ### How does a specific risk signal (churn intent) disappear in a single numeric score?
-Because the handoff schema compresses all escalation information into one sentiment score, with no separate structured field for named risk signals. A specific statement like "I'm switching providers" may not map to a low enough general sentiment score to cross the routing threshold. The fix is a separate "named risk signal" field in the handoff. See [Multi-Agent Handoff Drops Escalation Trigger Between Sentiment Classifier and Routing Agent](failures/multi-agent-handoff-drops-escalation-trigger-between-sentiment-classifier-and-routing-agent.md).
+Because the handoff schema compresses all escalation information into one sentiment score, with no separate structured field for named risk signals. A specific statement like "I'm switching providers" may not map to a low enough general sentiment score to cross the routing threshold. The fix is a separate "named risk signal" field in the handoff. See Multi-Agent Handoff Drops Escalation Trigger Between Sentiment Classifier and Routing Agent.
 
 ### Can sentiment classifiers detect sarcasm reliably?
-No. Sarcasm detection remains a hard subproblem with 15-30+ percentage point accuracy gaps versus direct-sentiment accuracy. Tonal incongruity detection (positive words + negative context, exclamation patterns) can help, as can escalation history weighting (repeat contacts escalate more easily). See [Sarcasm Misread as Satisfaction](failures/sarcasm-misread-as-satisfaction.md).
+No. Sarcasm detection remains a hard subproblem with 15-30+ percentage point accuracy gaps versus direct-sentiment accuracy. Tonal incongruity detection (positive words + negative context, exclamation patterns) can help, as can escalation history weighting (repeat contacts escalate more easily). See Sarcasm Misread as Satisfaction.
 
 ### Should escalation thresholds be the same for all customers?
-No. High-value or enterprise accounts should have lower escalation thresholds because the cost of missing a real escalation signal scales with account value. Additionally, formal language should not suppress escalation; content-based risk classifiers should operate independently of tone. See [Sentiment Misclassification Delays Escalation](failures/sentiment-misclassification-delays-escalation.md).
+No. High-value or enterprise accounts should have lower escalation thresholds because the cost of missing a real escalation signal scales with account value. Additionally, formal language should not suppress escalation; content-based risk classifiers should operate independently of tone. See Sentiment Misclassification Delays Escalation.
 
 ### How do you verify an escalation-rationale claim?
-Check whether the cited claim can be matched to a corresponding feature-importance signal in the actual sentiment or risk model, or run a controlled outcome test: do tickets matching the agent-generated trigger phrase actually show elevated risk compared to matched samples without it? See [Spurious Causal Narrative from Keyword Co-Occurrence](failures/spurious-causal-narrative-from-keyword-co-occurrence.md).
+Check whether the cited claim can be matched to a corresponding feature-importance signal in the actual sentiment or risk model, or run a controlled outcome test: do tickets matching the agent-generated trigger phrase actually show elevated risk compared to matched samples without it? See Spurious Causal Narrative from Keyword Co-Occurrence.
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [Embedding Retrieval Selects Wrong Escalation Playbook by Keyword Similarity](failures/embedding-retrieval-selects-wrong-escalation-playbook-by-keyword-similarity.md) | Playbook selected by text similarity without structured severity-tier confirmation |
-| [Multi-Agent Handoff Drops Escalation Trigger Between Sentiment Classifier and Routing Agent](failures/multi-agent-handoff-drops-escalation-trigger-between-sentiment-classifier-and-routing-agent.md) | Named risk signal identified in classifier; single numeric score in handoff fails to trigger escalation |
-| [Sarcasm Misread as Satisfaction](failures/sarcasm-misread-as-satisfaction.md) | Sarcastic or passive-aggressive phrasing scored as positive/neutral because positive words are lexically present |
-| [Sentiment Misclassification Delays Escalation](failures/sentiment-misclassification-delays-escalation.md) | Formal high-risk language (cancellation, legal references) scored as neutral tone, missing content-based escalation signal |
-| [Spurious Causal Narrative from Keyword Co-Occurrence](failures/spurious-causal-narrative-from-keyword-co-occurrence.md) | Agent generates unvalidated causal explanation ("this phrase predicts X") ungrounded in model feature weights |
+| Embedding Retrieval Selects Wrong Escalation Playbook by Keyword Similarity | Playbook selected by text similarity without structured severity-tier confirmation |
+| Multi-Agent Handoff Drops Escalation Trigger Between Sentiment Classifier and Routing Agent | Named risk signal identified in classifier; single numeric score in handoff fails to trigger escalation |
+| Sarcasm Misread as Satisfaction | Sarcastic or passive-aggressive phrasing scored as positive/neutral because positive words are lexically present |
+| Sentiment Misclassification Delays Escalation | Formal high-risk language (cancellation, legal references) scored as neutral tone, missing content-based escalation signal |
+| Spurious Causal Narrative from Keyword Co-Occurrence | Agent generates unvalidated causal explanation ("this phrase predicts X") ungrounded in model feature weights |
 
 **Total: 5 patterns**
 

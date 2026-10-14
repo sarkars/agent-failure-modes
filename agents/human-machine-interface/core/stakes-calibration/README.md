@@ -10,13 +10,13 @@ Shared metrics the patterns below report against. Targets are starting points to
 | Metric | Target | Defined in |
 |---|---|---|
 | High-stakes register compliance | Over 95% | [stakes blind register](failures/stakes-blind-register.md) |
-| Sourced high-stakes claims | 100% | [stakes blind register](failures/stakes-blind-register.md) |
-| Human offered at high stakes | Over 90% | [stakes blind register](failures/stakes-blind-register.md) |
+| Sourced high-stakes claims | 100% | stakes blind register |
+| Human offered at high stakes | Over 90% | stakes blind register |
 
 ## Patterns
 | Pattern | One line |
 |---|---|
-| [Stakes-blind register](failures/stakes-blind-register.md) | Same breezy tone and improvised facts for a funeral as for store hours |
+| Stakes-blind register | Same breezy tone and improvised facts for a funeral as for store hours |
 
 ## Planned (not yet written)
 - Over-solemn handling of low-stakes requests

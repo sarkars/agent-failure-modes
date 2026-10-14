@@ -28,21 +28,21 @@ All 3 jurisdiction patterns share a single failure mechanism: the agent treats j
 ## Frequently Asked Questions
 
 ### How do you verify that substantive legal analysis applied the correct jurisdiction's rules?
-Extract choice-of-law clause deterministically, map to canonical jurisdiction ID, then query a jurisdiction-specific rule library for each substantive claim (non-compete enforceability, statute of limitations, damages caps). Report analysis under the controlling jurisdiction explicitly, with flagged alternatives if the same jurisdiction-dependent topic has different rules across relevant jurisdictions — see [Choice-of-Law & Jurisdiction Mishandling](failures/choice-of-law-mishandling.md).
+Extract choice-of-law clause deterministically, map to canonical jurisdiction ID, then query a jurisdiction-specific rule library for each substantive claim (non-compete enforceability, statute of limitations, damages caps). Report analysis under the controlling jurisdiction explicitly, with flagged alternatives if the same jurisdiction-dependent topic has different rules across relevant jurisdictions — see Choice-of-Law & Jurisdiction Mishandling.
 
 ### Can you prevent wrong-jurisdiction clause retrieval without pre-filtering by jurisdiction?
-No — open-ended similarity search across all jurisdictions' templates will surface high-similarity near-duplicates before jurisdiction-correct templates. The reliable approach filters candidate templates to the contract's controlling jurisdiction before applying similarity ranking at all — see [Embedding Retrieval Applies Wrong Jurisdiction's Clause Template by Name Similarity](failures/embedding-retrieval-applies-wrong-jurisdictions-clause-template-by-name-similarity.md).
+No — open-ended similarity search across all jurisdictions' templates will surface high-similarity near-duplicates before jurisdiction-correct templates. The reliable approach filters candidate templates to the contract's controlling jurisdiction before applying similarity ranking at all — see Embedding Retrieval Applies Wrong Jurisdiction's Clause Template by Name Similarity.
 
 ### What needs to be checked before approving a contract with cross-border data flows?
-Build an explicit data-flow map: (1) identify data-subject jurisdiction(s), (2) identify all data destinations (primary processor, all sub-processors, backup locations), (3) for each data hop, identify the required transfer mechanism under the originating jurisdiction's law, (4) verify the contract actually includes that mechanism or adequate alternative. Missing or incomplete sub-processor disclosure blocks approval — see [Cross-Border Data Transfer Clause Miss](failures/cross-border-data-transfer-clause-miss.md).
+Build an explicit data-flow map: (1) identify data-subject jurisdiction(s), (2) identify all data destinations (primary processor, all sub-processors, backup locations), (3) for each data hop, identify the required transfer mechanism under the originating jurisdiction's law, (4) verify the contract actually includes that mechanism or adequate alternative. Missing or incomplete sub-processor disclosure blocks approval — see Cross-Border Data Transfer Clause Miss.
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [Choice-of-Law & Jurisdiction Mishandling](failures/choice-of-law-mishandling.md) | Extracted governing-law jurisdiction is applied incorrectly; substantive rules applied are from a different jurisdiction or generic/default rules |
-| [Embedding Retrieval Applies Wrong Jurisdiction's Clause Template by Name Similarity](failures/embedding-retrieval-applies-wrong-jurisdictions-clause-template-by-name-similarity.md) | Jurisdiction-specific clause retrieved from wrong jurisdiction's template library due to subject-matter similarity, rendering the clause unenforceable or ineffective under actual governing law |
-| [Cross-Border Data Transfer Clause Miss](failures/cross-border-data-transfer-clause-miss.md) | Contract involves cross-border data flows but lacks required transfer mechanism (SCCs, adequacy reliance) or has incomplete sub-processor disclosure preventing compliance verification |
+| Choice-of-Law & Jurisdiction Mishandling | Extracted governing-law jurisdiction is applied incorrectly; substantive rules applied are from a different jurisdiction or generic/default rules |
+| Embedding Retrieval Applies Wrong Jurisdiction's Clause Template by Name Similarity | Jurisdiction-specific clause retrieved from wrong jurisdiction's template library due to subject-matter similarity, rendering the clause unenforceable or ineffective under actual governing law |
+| Cross-Border Data Transfer Clause Miss | Contract involves cross-border data flows but lacks required transfer mechanism (SCCs, adequacy reliance) or has incomplete sub-processor disclosure preventing compliance verification |
 
 **Total: 3 patterns**
 

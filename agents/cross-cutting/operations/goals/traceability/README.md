@@ -29,26 +29,26 @@ Traceability failures result from treating logging as optional instrumentation r
 ## Frequently Asked Questions
 
 ### What should be logged for traceability?
-Per [Incomplete Action Logging](failures/incomplete-action-logging.md) and [Missing Audit Trail](failures/missing-audit-trail.md), log: every tool call (input, output, result), every decision (rule applied, criteria met), every state change (what changed, why). Include timestamp, request ID, and context with every log entry.
+Per Incomplete Action Logging and Missing Audit Trail, log: every tool call (input, output, result), every decision (rule applied, criteria met), every state change (what changed, why). Include timestamp, request ID, and context with every log entry.
 
 ### How do you make execution reproducible?
-Per [Non Reproducible Execution](failures/non-reproducible-execution.md), log all non-deterministic inputs (random seeds, current time, external data) and decisions. Execution replay with same inputs should produce same outputs.
+Per Non Reproducible Execution, log all non-deterministic inputs (random seeds, current time, external data) and decisions. Execution replay with same inputs should produce same outputs.
 
 ### How do you prevent debug information loss?
-Per [Debug Information Loss](failures/debug-information-loss.md), log debug info in non-ephemeral storage (not in-memory, not in transient log files). Use centralized logging that persists debug info for post-incident investigation.
+Per Debug Information Loss, log debug info in non-ephemeral storage (not in-memory, not in transient log files). Use centralized logging that persists debug info for post-incident investigation.
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [Debug Information Loss](failures/debug-information-loss.md) | Debug data is logged but lost before investigation; not persisted or pruned too aggressively |
-| [Incomplete Action Logging](failures/incomplete-action-logging.md) | Actions are partially logged; input or output is missing; investigation incomplete |
-| [Lost Decision Context](failures/lost-decision-context.md) | Decision is logged but context (why the decision was made) is missing |
-| [Missing Audit Trail](failures/missing-audit-trail.md) | Actions are taken but not logged; no audit trail to investigate |
-| [Missing Timestamps](failures/missing-timestamps.md) | Events logged without timestamps; impossible to determine order or timing |
-| [Non Reproducible Execution](failures/non-reproducible-execution.md) | Execution uses non-deterministic inputs but doesn't log them; execution can't be replayed |
-| [Orphaned Operations](failures/orphaned-operations.md) | Operations start but completion is not logged; impossible to tell if operation succeeded |
-| [Untraceable Data Flow](failures/untraceable-data-flow.md) | Data transformations are not logged; impossible to trace data provenance or find where corruption occurred |
+| Debug Information Loss | Debug data is logged but lost before investigation; not persisted or pruned too aggressively |
+| Incomplete Action Logging | Actions are partially logged; input or output is missing; investigation incomplete |
+| Lost Decision Context | Decision is logged but context (why the decision was made) is missing |
+| Missing Audit Trail | Actions are taken but not logged; no audit trail to investigate |
+| Missing Timestamps | Events logged without timestamps; impossible to determine order or timing |
+| Non Reproducible Execution | Execution uses non-deterministic inputs but doesn't log them; execution can't be replayed |
+| Orphaned Operations | Operations start but completion is not logged; impossible to tell if operation succeeded |
+| Untraceable Data Flow | Data transformations are not logged; impossible to trace data provenance or find where corruption occurred |
 
 **Total: 8 patterns**
 

@@ -11,7 +11,7 @@
 
 ## Scope
 
-The single mechanism handoff reliability covers is **narrow handoff schemas that carry a final value and status but no confidence, methodology, or provenance field**, so a downstream agent's decision logic — built to operate on the fixed schema — has no structured path to the upstream agent's own uncertainty. See [Handoff Schema Loses Upstream Confidence Signal](failures/handoff-schema-loses-upstream-confidence-signal.md) for four worked examples: a bond maturity-date reconciliation, a diagnosis confidence handoff, a contract-ambiguity handoff, and a demand-forecast handoff.
+The single mechanism handoff reliability covers is **narrow handoff schemas that carry a final value and status but no confidence, methodology, or provenance field**, so a downstream agent's decision logic — built to operate on the fixed schema — has no structured path to the upstream agent's own uncertainty. See Handoff Schema Loses Upstream Confidence Signal for four worked examples: a bond maturity-date reconciliation, a diagnosis confidence handoff, a contract-ambiguity handoff, and a demand-forecast handoff.
 
 ## When Handoff Reliability Matters
 
@@ -38,12 +38,12 @@ Add explicit confidence and methodology fields to the handoff schema itself — 
 
 | Pattern | Mechanism |
 |---|---|
-| [Handoff Schema Loses Upstream Confidence Signal](failures/handoff-schema-loses-upstream-confidence-signal.md) | Handoff schema carries only final value and status, so upstream confidence/methodology caveats never reach the downstream agent |
+| Handoff Schema Loses Upstream Confidence Signal | Handoff schema carries only final value and status, so upstream confidence/methodology caveats never reach the downstream agent |
 
 **Total: 1 pattern**
 
 ## Related Goals
 
-- [Coordination](../coordination/) — the broader set of handoff and communication failures, including Task Handoff Failure and Communication Loss, that handoff reliability's pattern specializes
+- Coordination — the broader set of handoff and communication failures, including Task Handoff Failure and Communication Loss, that handoff reliability's pattern specializes
 - [Error Propagation](../error-propagation/) — what happens next if a low-confidence value silently accepted at handoff turns out to be wrong and compounds downstream
 - [Reasoning Quality](../reasoning-quality/) — a related trust failure where the problem is agents agreeing on a wrong answer rather than a confidence signal getting lost in transit

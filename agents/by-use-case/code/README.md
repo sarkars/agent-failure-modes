@@ -6,10 +6,10 @@ Code Agents assist with code generation, review, bug fixing, and refactoring. Th
 
 | Goal | Description | Status |
 |------|-------------|--------|
-| [Code Generation](code-generation.md) | Writing new code from specifications | Planned |
-| [Bug Fixing](bug-fixing.md) | Identifying and correcting defects | Planned |
-| [Refactoring](refactoring.md) | Improving code structure without changing behavior | Planned |
-| [Code Review](code-review.md) | Analyzing code for issues and improvements | Planned |
+| Code Generation | Writing new code from specifications | Planned |
+| Bug Fixing | Identifying and correcting defects | Planned |
+| Refactoring | Improving code structure without changing behavior | Planned |
+| Code Review | Analyzing code for issues and improvements | Planned |
 
 ## Key Challenges
 

@@ -91,7 +91,7 @@ Result: Viewer modified data they should only read
 **This pattern focuses on PREVENTION (architectural controls).**
 
 For incident response and attack recovery procedures, see the complementary pattern:
-**[Privilege Escalation: Attack & Response (Security-Autonomy)](../security-autonomy/failures/privilege-escalation.md)**
+**Privilege Escalation: Attack & Response (Security-Autonomy)**
 
 The security-autonomy pattern covers:
 - Attack scenarios and how agents can be socially engineered to escalate

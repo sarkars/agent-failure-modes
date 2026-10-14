@@ -13,7 +13,7 @@
 
 - **Retrieval mismatch** — [Embedding Retrieval Pulls Mismatched Rating-Territory Policy Precedent for Renewal](failures/embedding-retrieval-pulls-mismatched-rating-territory-policy-precedent-for-renewal.md). Renewal-pricing retrieval ranks precedent policies by embedding similarity without filtering by rating territory first, defaulting to the dominant territory in the corpus regardless of the actual policy's territory.
 - **Handoff information loss** — [Multi-Agent Handoff Drops Mid-Term Endorsement Before Renewal-Pricing Agent Runs](failures/multi-agent-handoff-drops-mid-term-endorsement-before-renewal-pricing.md). A policy-servicing agent processes a mid-term endorsement and records it in free text, but the structured risk-profile schema passed to the renewal-pricing agent has no field for mid-term changes.
-- **Stale parametric override** — [Stale Training-Corpus Cancellation-Notice Rule Overrides Live State-Lookup Tool](failures/stale-training-corpus-cancellation-notice-rule-overrides-live-state-lookup-tool.md). An agent generates a cancellation or non-renewal notice citing a memorized generic notice period instead of querying the live regulatory-requirements tool for the state's current requirement.
+- **Stale parametric override** — Stale Training-Corpus Cancellation-Notice Rule Overrides Live State-Lookup Tool. An agent generates a cancellation or non-renewal notice citing a memorized generic notice period instead of querying the live regulatory-requirements tool for the state's current requirement.
 
 ## When Policy Management Matters
 
@@ -28,13 +28,13 @@ The same three structural failures that recur in claim processing and fraud dete
 ## Frequently Asked Questions
 
 ### How does a renewal-pricing precedent lookup retrieve the wrong rating territory?
-Renewal-pricing retrieval matches the query policy against a corpus of prior renewals by embedding similarity over shared attributes (construction type, coverage limits, property age), which look similar across all territories. Without a pre-filter on rating territory, the similarity-ranked result defaults to the most common territory in the corpus rather than the policy's actual territory. See [Embedding Retrieval Pulls Mismatched Rating-Territory Policy Precedent for Renewal](failures/embedding-retrieval-pulls-mismatched-rating-territory-policy-precedent-for-renewal.md).
+Renewal-pricing retrieval matches the query policy against a corpus of prior renewals by embedding similarity over shared attributes (construction type, coverage limits, property age), which look similar across all territories. Without a pre-filter on rating territory, the similarity-ranked result defaults to the most common territory in the corpus rather than the policy's actual territory. See Embedding Retrieval Pulls Mismatched Rating-Territory Policy Precedent for Renewal.
 
 ### Can a mid-term endorsement be lost if the policy-servicing agent recorded it in free text?
-Yes. If the structured schema the renewal-pricing agent reads has no field for mid-term endorsements, the finding remains invisible even though it was correctly noted earlier in the pipeline. The fix is adding a structured "mid-term risk change" field and reconciliation against upstream free text. See [Multi-Agent Handoff Drops Mid-Term Endorsement Before Renewal-Pricing Agent Runs](failures/multi-agent-handoff-drops-mid-term-endorsement-before-renewal-pricing.md).
+Yes. If the structured schema the renewal-pricing agent reads has no field for mid-term endorsements, the finding remains invisible even though it was correctly noted earlier in the pipeline. The fix is adding a structured "mid-term risk change" field and reconciliation against upstream free text. See Multi-Agent Handoff Drops Mid-Term Endorsement Before Renewal-Pricing Agent Runs.
 
 ### Should a policy-servicing agent know state cancellation notice requirements without looking them up?
-No. State notice-period requirements are independently and frequently amended (especially post-catastrophe), and the agent's memorized sense of "typical" rules will not reflect a recent amendment. The fix is a forced regulatory-tool-call gate before any notice is generated. See [Stale Training-Corpus Cancellation-Notice Rule Overrides Live State-Lookup Tool](failures/stale-training-corpus-cancellation-notice-rule-overrides-live-state-lookup-tool.md).
+No. State notice-period requirements are independently and frequently amended (especially post-catastrophe), and the agent's memorized sense of "typical" rules will not reflect a recent amendment. The fix is a forced regulatory-tool-call gate before any notice is generated. See Stale Training-Corpus Cancellation-Notice Rule Overrides Live State-Lookup Tool.
 
 ### How do you catch a renewal mispriced due to the wrong territory precedent?
 Audit renewal-pricing calculations specifically for less common rating territories (the population most likely to be overridden by the dominant territory's precedent), and compare the precedent's territory against the policy's actual territory for every priced renewal.
@@ -43,9 +43,9 @@ Audit renewal-pricing calculations specifically for less common rating territori
 
 | Pattern | Mechanism |
 |---|---|
-| [Embedding Retrieval Pulls Mismatched Rating-Territory Policy Precedent for Renewal](failures/embedding-retrieval-pulls-mismatched-rating-territory-policy-precedent-for-renewal.md) | Renewal precedent retrieved by textual similarity across territories without filtering to territory match |
-| [Multi-Agent Handoff Drops Mid-Term Endorsement Before Renewal-Pricing Agent Runs](failures/multi-agent-handoff-drops-mid-term-endorsement-before-renewal-pricing.md) | Policy-servicing agent notes mid-term endorsement in free text; renewal-pricing schema has no field for mid-term changes |
-| [Stale Training-Corpus Cancellation-Notice Rule Overrides Live State-Lookup Tool](failures/stale-training-corpus-cancellation-notice-rule-overrides-live-state-lookup-tool.md) | Agent cites memorized notice period instead of calling live regulatory-requirements tool for state's current rule |
+| Embedding Retrieval Pulls Mismatched Rating-Territory Policy Precedent for Renewal | Renewal precedent retrieved by textual similarity across territories without filtering to territory match |
+| Multi-Agent Handoff Drops Mid-Term Endorsement Before Renewal-Pricing Agent Runs | Policy-servicing agent notes mid-term endorsement in free text; renewal-pricing schema has no field for mid-term changes |
+| Stale Training-Corpus Cancellation-Notice Rule Overrides Live State-Lookup Tool | Agent cites memorized notice period instead of calling live regulatory-requirements tool for state's current rule |
 
 **Total: 3 patterns**
 

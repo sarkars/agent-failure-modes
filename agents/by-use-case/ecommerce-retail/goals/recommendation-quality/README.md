@@ -28,5 +28,5 @@ Not here yet. Check the other goals under [Ecommerce and retail](../), and watch
 
 ## Related
 
-- [All ecommerce and retail goals](../)
+- All ecommerce and retail goals
 - [All agent failure patterns](../../../../)

@@ -27,10 +27,10 @@ The four goals map onto the voice-agent pipeline in order: **Audio Handling** go
 ## Frequently Asked Questions
 
 ### What makes conversation-flow have so many more patterns than the other three goals combined?
-Conversation-flow sits at the intersection of two large problem spaces that don't overlap elsewhere: real-time audio turn-taking (a problem unique to voice, with no text-chatbot equivalent) and multi-turn business-logic dialog management (a problem any structured conversational agent faces, voice or text). See [Conversation Flow](goals/conversation-flow/) for the full breakdown into sub-clusters.
+Conversation-flow sits at the intersection of two large problem spaces that don't overlap elsewhere: real-time audio turn-taking (a problem unique to voice, with no text-chatbot equivalent) and multi-turn business-logic dialog management (a problem any structured conversational agent faces, voice or text). See Conversation Flow for the full breakdown into sub-clusters.
 
 ### If a caller says the AI "misheard" the caller, which goal should be checked first?
-Check [Audio Handling](goals/audio-handling/) first — background noise, packet loss, or echo frequently produces exactly the symptom of "misheard me" and is the more common root cause than the ASR model itself. Only move to [Speech Recognition](goals/speech-recognition/) once audio quality is confirmed clean, since accent bias, homophones, and domain vocabulary gaps are the ASR-layer explanations for the same complaint.
+Check Audio Handling first — background noise, packet loss, or echo frequently produces exactly the symptom of "misheard me" and is the more common root cause than the ASR model itself. Only move to Speech Recognition once audio quality is confirmed clean, since accent bias, homophones, and domain vocabulary gaps are the ASR-layer explanations for the same complaint.
 
 ### Can a single better model (ASR, LLM, or TTS) fix most speech-and-audio failures?
 Rarely on its own. Across all four goals, the documented pattern is that a stronger model narrows the failure rate but doesn't eliminate it — the reliable fixes are architectural: audio pre-processing paired with confidence-gated confirmation, custom pronunciation lexicons paired with SSML overrides, and dialog-state validation gates paired with explicit business-logic checks.
@@ -39,7 +39,7 @@ Rarely on its own. Across all four goals, the documented pattern is that a stron
 Audio-handling failures are signal-quality problems that occur before ASR ever runs — packet loss, noise, echo, device variance. Speech-recognition failures are what happens when ASR runs on a signal (clean or not) and still mishears specific content classes — names, accents, homophones, numbers. A noisy recording that gets mistranscribed is an audio-handling problem with a speech-recognition symptom; a clean recording that still mishears a caller's name is a pure speech-recognition problem.
 
 ### Which goal should be checked if the agent's voice itself sounds wrong?
-[Voice Synthesis](goals/voice-synthesis/) — mispronunciation, flat or mismatched emotional tone, audio artifacts (clicks/pops), and voice-persona drift across a session are all synthesis-side failures distinct from anything happening on the recognition or dialog-management side of the pipeline.
+Voice Synthesis — mispronunciation, flat or mismatched emotional tone, audio artifacts (clicks/pops), and voice-persona drift across a session are all synthesis-side failures distinct from anything happening on the recognition or dialog-management side of the pipeline.
 
 ## Related Categories
 

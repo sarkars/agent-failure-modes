@@ -28,21 +28,21 @@ Precedent-currency failures are failures of independent verification at the outp
 ## Frequently Asked Questions
 
 ### How do you verify a citation's current legal status before using it in a filing?
-Implement a real-time citator-check gate before output: after the research agent generates candidate citations, pass all citations through a live citator service (Shepard's, KeyCite, LexisNexis) to check for overruling, limiting, or negative treatment. Capture the citator status (good law, overruled, limited, questioned) and include it in the output. If citator is unavailable, mark as UNVERIFIED and require attorney confirmation before use — see [Superseded Case-Law Citation](failures/superseded-case-law-citation.md).
+Implement a real-time citator-check gate before output: after the research agent generates candidate citations, pass all citations through a live citator service (Shepard's, KeyCite, LexisNexis) to check for overruling, limiting, or negative treatment. Capture the citator status (good law, overruled, limited, questioned) and include it in the output. If citator is unavailable, mark as UNVERIFIED and require attorney confirmation before use — see Superseded Case-Law Citation.
 
 ### How do you find and surface contrary authority in a circuit-split situation?
-Implement dual-path research: Path 1 does primary topical search ranked by relevance; Path 2 runs explicit contrary-authority queries using negation terms and opposite-holding indicators. Cross-reference results against a Circuit-Split Registry of known splits. For any citation on a question with known splits, output must explicitly disclose the split, list all known split positions, and specify which jurisdiction's rule is binding and which are persuasive — see [Circuit Split Blindness in Citation Selection](failures/circuit-split-blindness-in-citation-selection.md).
+Implement dual-path research: Path 1 does primary topical search ranked by relevance; Path 2 runs explicit contrary-authority queries using negation terms and opposite-holding indicators. Cross-reference results against a Circuit-Split Registry of known splits. For any citation on a question with known splits, output must explicitly disclose the split, list all known split positions, and specify which jurisdiction's rule is binding and which are persuasive — see Circuit Split Blindness in Citation Selection.
 
 ### How do you prevent a research agent from identifying overruled status that never reaches a drafting agent?
-Extend the citation-list handoff schema to include point-specific validity fields: {case_id, citation, original_holding, validity_status: {overall_status, point_specificity: [{proposition, validity_on_point, overruling_authority}]}}.  Validation gate: if research analysis contains validity-limitation language, require population of all point_specificity entries before handoff. Reconciliation check: scan research analysis for validity keywords; if found, verify corresponding entries in schema. If mismatch, escalate for correction — see [Multi-Agent Handoff Drops Overruled-Citation Flag Between Research and Drafting Agent](failures/multi-agent-handoff-drops-overruled-citation-flag-between-research-and-drafting-agent.md).
+Extend the citation-list handoff schema to include point-specific validity fields: {case_id, citation, original_holding, validity_status: {overall_status, point_specificity: [{proposition, validity_on_point, overruling_authority}]}}.  Validation gate: if research analysis contains validity-limitation language, require population of all point_specificity entries before handoff. Reconciliation check: scan research analysis for validity keywords; if found, verify corresponding entries in schema. If mismatch, escalate for correction — see Multi-Agent Handoff Drops Overruled-Citation Flag Between Research and Drafting Agent.
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [Circuit Split Blindness in Citation Selection](failures/circuit-split-blindness-in-citation-selection.md) | Contrary authority across multiple circuits exists but research does not surface it; brief presents holding as settled law when split actually exists |
-| [Multi-Agent Handoff Drops Overruled-Citation Flag Between Research and Drafting Agent](failures/multi-agent-handoff-drops-overruled-citation-flag-between-research-and-drafting-agent.md) | Research agent identifies overruled status in analysis but structured citation-list schema has no validity field; drafting agent cites case as good law |
-| [Superseded Case-Law Citation](failures/superseded-case-law-citation.md) | Case cited as controlling precedent has been overruled, vacated, limited, or superseded without agent detecting current legal status |
+| Circuit Split Blindness in Citation Selection | Contrary authority across multiple circuits exists but research does not surface it; brief presents holding as settled law when split actually exists |
+| Multi-Agent Handoff Drops Overruled-Citation Flag Between Research and Drafting Agent | Research agent identifies overruled status in analysis but structured citation-list schema has no validity field; drafting agent cites case as good law |
+| Superseded Case-Law Citation | Case cited as controlling precedent has been overruled, vacated, limited, or superseded without agent detecting current legal status |
 
 **Total: 3 patterns**
 

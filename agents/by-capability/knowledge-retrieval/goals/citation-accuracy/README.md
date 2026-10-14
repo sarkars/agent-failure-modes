@@ -29,28 +29,28 @@ The through-line across all 7 citation-accuracy patterns is that citation verifi
 ## Frequently Asked Questions
 
 ### What is the difference between a fabricated citation and a misgrounded citation?
-A [Fabricated Citation](failures/fabricated-citations.md) points to a document that doesn't exist at all — a made-up study, case, or URL. A [Misgrounded Citation](failures/misgrounded-citation.md) points to a real, correctly-formatted, verifiable document that simply doesn't support the claim attached to it — the Stanford study's example is citing the real case Planned Parenthood v. Casey for a legal standard that was overruled by Dobbs. The second is harder to catch because the source passes existence verification.
+A Fabricated Citation points to a document that doesn't exist at all — a made-up study, case, or URL. A Misgrounded Citation points to a real, correctly-formatted, verifiable document that simply doesn't support the claim attached to it — the Stanford study's example is citing the real case Planned Parenthood v. Casey for a legal standard that was overruled by Dobbs. The second is harder to catch because the source passes existence verification.
 
 ### How do you catch a citation that supports the wrong claim?
-Per [Unsupported Claim](failures/unsupported-claim.md) and [Wrong Source](failures/wrong-source.md), use an NLI (natural language inference) entailment check between the generated claim and the cited passage's actual text, and require an extractive quote alongside any generated citation so a mismatch between claim and source text is visible rather than implicit.
+Per Unsupported Claim and Wrong Source, use an NLI (natural language inference) entailment check between the generated claim and the cited passage's actual text, and require an extractive quote alongside any generated citation so a mismatch between claim and source text is visible rather than implicit.
 
 ### Does citing the correct document guarantee the citation is accurate?
-No. [Granularity Mismatch](failures/granularity-mismatch.md) shows a citation can point at a technically correct but practically useless level of specificity — an entire 500-page document when the claim is supported by one paragraph — forcing the user to search for the actual support. Correct-document citation and correctly-scoped citation are separate accuracy dimensions.
+No. Granularity Mismatch shows a citation can point at a technically correct but practically useless level of specificity — an entire 500-page document when the claim is supported by one paragraph — forcing the user to search for the actual support. Correct-document citation and correctly-scoped citation are separate accuracy dimensions.
 
 ### Can citation problems be fixed by only citing from retrieved content?
-It substantially reduces fabrication (per [Fabricated Citations](failures/fabricated-citations.md)) but does not fix misgrounding, wrong-source attribution, or granularity mismatch, since those three patterns involve citations to genuinely retrieved documents that are still wrong in their relationship to the claim. Closed-book citation generation is a necessary but not sufficient mitigation.
+It substantially reduces fabrication (per Fabricated Citations) but does not fix misgrounding, wrong-source attribution, or granularity mismatch, since those three patterns involve citations to genuinely retrieved documents that are still wrong in their relationship to the claim. Closed-book citation generation is a necessary but not sufficient mitigation.
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [Broken References](failures/broken-references.md) | Cited URL or document has moved, been deleted, or had permissions changed since the citation was generated |
-| [Fabricated Citations](failures/fabricated-citations.md) | Model generates content beyond retrieved context and invents a matching but nonexistent citation |
-| [Granularity Mismatch](failures/granularity-mismatch.md) | Citation points at an entire document instead of the specific section/paragraph that supports the claim |
-| [Misgrounded Citation](failures/misgrounded-citation.md) | A real, correctly-cited source doesn't actually support the claim — often because it's overruled, superseded, or off-topic |
-| [Missing Citations](failures/missing-citations.md) | Citation practice is applied inconsistently, leaving some factual claims with no attribution at all |
-| [Unsupported Claim](failures/unsupported-claim.md) | Cited source exists and is topically related but doesn't state the specific claim attached to it |
-| [Wrong Source](failures/wrong-source.md) | Model confuses which of several retrieved documents actually contained the cited information |
+| Broken References | Cited URL or document has moved, been deleted, or had permissions changed since the citation was generated |
+| Fabricated Citations | Model generates content beyond retrieved context and invents a matching but nonexistent citation |
+| Granularity Mismatch | Citation points at an entire document instead of the specific section/paragraph that supports the claim |
+| Misgrounded Citation | A real, correctly-cited source doesn't actually support the claim — often because it's overruled, superseded, or off-topic |
+| Missing Citations | Citation practice is applied inconsistently, leaving some factual claims with no attribution at all |
+| Unsupported Claim | Cited source exists and is topically related but doesn't state the specific claim attached to it |
+| Wrong Source | Model confuses which of several retrieved documents actually contained the cited information |
 
 **Total: 7 patterns**
 

@@ -23,8 +23,8 @@
 
 ## How These Patterns Group
 
-- **Safety and security:** [Missing PII Detection Framework](failures/missing-pii-detection-framework.md), [Missing Prompt Injection Guardrails Framework](failures/missing-prompt-injection-guardrails-framework.md), [Missing Secrets Detection Framework](failures/missing-secrets-detection-framework.md)
-- **Quality and operations:** [Missing Agent Eval Framework](failures/missing-agent-eval-framework.md), [Missing RAG Framework Adoption](failures/missing-rag-framework-adoption.md), [Missing Cost Observability Framework](failures/missing-cost-observability-framework.md)
+- **Safety and security:** Missing PII Detection Framework, Missing Prompt Injection Guardrails Framework, Missing Secrets Detection Framework
+- **Quality and operations:** Missing Agent Eval Framework, Missing RAG Framework Adoption, Missing Cost Observability Framework
 
 ## When This Matters
 
@@ -36,15 +36,15 @@
 
 ### Should I build my own PII detection?
 
-Ad-hoc regex tends to miss entity types a maintained framework covers. See [missing PII detection framework](failures/missing-pii-detection-framework.md).
+Ad-hoc regex tends to miss entity types a maintained framework covers. See missing PII detection framework.
 
 ### Are system prompt instructions enough to stop prompt injection?
 
-The pattern argues no: they hold up in casual testing but not under adversarial testing. See [missing prompt injection guardrails framework](failures/missing-prompt-injection-guardrails-framework.md).
+The pattern argues no: they hold up in casual testing but not under adversarial testing. See missing prompt injection guardrails framework.
 
 ### Where should I scan for leaked secrets?
 
-Not only in source code: logs, transcripts, and tool-call payloads too. See [missing secrets detection framework](failures/missing-secrets-detection-framework.md).
+Not only in source code: logs, transcripts, and tool-call payloads too. See missing secrets detection framework.
 
 ## Related
 

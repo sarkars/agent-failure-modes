@@ -44,10 +44,10 @@ Match on at least two structured attributes: (company size band ±50%, deal-cycl
 
 | Pattern | Mechanism |
 |---|---|
-| [Agent Applies Remembered Scoring Heuristic Instead of Live Tool](failures/agent-applies-remembered-scoring-heuristic-instead-of-querying-live-scoring-rules-tool.md) | Scoring-rules tool available; agent cites generic firmographic weights instead; explanation stale post-update |
-| [Agent Fabricates Stated Objection When Transcript Tool Empty](failures/agent-fabricates-stated-objection-when-call-transcript-tool-returns-empty.md) | Call-transcript tool returns empty; agent invents plausible objection rather than reporting unavailable data |
-| [Embedding-Similarity Retrieves Superficially-Similar Deal as Precedent](failures/embedding-similarity-retrieves-superficially-similar-deal-as-precedent.md) | Historical comparable via text similarity; differs in deal-cycle length or size; precedent produces inflated score |
-| [SDR-Qualification Handoff Drops Disclosed Budget Ceiling](failures/sdr-qualification-handoff-drops-disclosed-budget-ceiling-before-scoring.md) | SDR learns budget ceiling from prospect; noted in free text; scoring agent never sees it; score inflated by firmographic inference |
+| Agent Applies Remembered Scoring Heuristic Instead of Live Tool | Scoring-rules tool available; agent cites generic firmographic weights instead; explanation stale post-update |
+| Agent Fabricates Stated Objection When Transcript Tool Empty | Call-transcript tool returns empty; agent invents plausible objection rather than reporting unavailable data |
+| Embedding-Similarity Retrieves Superficially-Similar Deal as Precedent | Historical comparable via text similarity; differs in deal-cycle length or size; precedent produces inflated score |
+| SDR-Qualification Handoff Drops Disclosed Budget Ceiling | SDR learns budget ceiling from prospect; noted in free text; scoring agent never sees it; score inflated by firmographic inference |
 
 **Total: 4 patterns**
 

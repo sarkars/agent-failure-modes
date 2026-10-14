@@ -32,26 +32,26 @@ Cost optimization failures all hinge on an agent making a decision based on inco
 ## Frequently Asked Questions
 
 ### What causes a cost-optimization agent to act on data that is already out of date?
-Billing/cost-export data is commonly delivered on a batch cycle (hours to a day) rather than in real time, and the agent's prompt and decision logic do not distinguish between "this export reflects current spend" and "this export is the most recent available snapshot." Without cross-checking the export's timestamp against a faster-refreshing live signal (current utilization, recent traffic), the agent can act on a snapshot that was already hours old at the time of decision. See [Stale Billing Export Treated as Current Spend](failures/stale-billing-export-treated-as-current-spend.md).
+Billing/cost-export data is commonly delivered on a batch cycle (hours to a day) rather than in real time, and the agent's prompt and decision logic do not distinguish between "this export reflects current spend" and "this export is the most recent available snapshot." Without cross-checking the export's timestamp against a faster-refreshing live signal (current utilization, recent traffic), the agent can act on a snapshot that was already hours old at the time of decision. See Stale Billing Export Treated as Current Spend.
 
 ### Can you trust a cloud resize/terminate API response indicating the action succeeded?
-No — cloud control-plane APIs are commonly asynchronous. The synchronous response confirms only that a request was accepted and queued, not that the async worker will successfully complete it. The agent must poll the resource's actual post-action state (instance type, lifecycle state, attached permissions) before reporting the action as complete. See [Cloud API Acknowledgment Mistaken for Completed Resize/Termination](failures/cloud-action-acknowledgment-mistaken-for-completed-resize.md).
+No — cloud control-plane APIs are commonly asynchronous. The synchronous response confirms only that a request was accepted and queued, not that the async worker will successfully complete it. The agent must poll the resource's actual post-action state (instance type, lifecycle state, attached permissions) before reporting the action as complete. See Cloud API Acknowledgment Mistaken for Completed Resize/Termination.
 
 ### How do you select a safe cost-reduction playbook for a workload?
-Use structured workload attributes (interruption tolerance, latency SLA, checkpoint/resume capability) to filter applicable playbooks before tag or description similarity is used to rank among compatible ones. Tag-based matching alone cannot distinguish a fault-tolerant batch job from a latency-sensitive request path. See [Embedding Retrieval Applies Wrong Workload's Cost Playbook by Tag Similarity](failures/embedding-retrieval-applies-wrong-workloads-cost-playbook-by-tag-similarity.md).
+Use structured workload attributes (interruption tolerance, latency SLA, checkpoint/resume capability) to filter applicable playbooks before tag or description similarity is used to rank among compatible ones. Tag-based matching alone cannot distinguish a fault-tolerant batch job from a latency-sensitive request path. See Embedding Retrieval Applies Wrong Workload's Cost Playbook by Tag Similarity.
 
 ### Can you rightsize a workload based on its average CPU utilization?
-Not on its own — average utilization is misleading when a workload has periodic peaks. Rightsizing must account for the peak-to-average ratio and whether the service's SLA requires meeting peak load; many critical workloads have a 2-5x peak-to-average gap, and downsizing to average capacity sacrifices that headroom. See [Rightsizing Recommendation Overcorrection](failures/rightsizing-recommendation-overcorrection.md).
+Not on its own — average utilization is misleading when a workload has periodic peaks. Rightsizing must account for the peak-to-average ratio and whether the service's SLA requires meeting peak load; many critical workloads have a 2-5x peak-to-average gap, and downsizing to average capacity sacrifices that headroom. See Rightsizing Recommendation Overcorrection.
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [Cloud API Acknowledgment Mistaken for Completed Resize/Termination](failures/cloud-action-acknowledgment-mistaken-for-completed-resize.md) | Async cloud operation reported as complete based on synchronous acceptance, not post-action state verification |
-| [Embedding Retrieval Applies Wrong Workload's Cost Playbook by Tag Similarity](failures/embedding-retrieval-applies-wrong-workloads-cost-playbook-by-tag-similarity.md) | Cost playbook selected by tag similarity without checking interruption-tolerance or latency-requirement compatibility |
-| [Multi-Agent Handoff Drops "Do Not Resize" Safety Constraint](failures/multi-agent-handoff-drops-do-not-resize-safety-constraint.md) | Cost-analysis exclusion note exists only in commentary, never reaches the execution agent's structured input |
-| [Rightsizing Recommendation Overcorrection](failures/rightsizing-recommendation-overcorrection.md) | Downsize recommendation based on average utilization, ignoring peak load that drives actual capacity need |
-| [Stale Billing Export Treated as Current Spend](failures/stale-billing-export-treated-as-current-spend.md) | Billing-export data from hours ago acted on as if reflecting current workload state, without cross-check against live signals |
+| Cloud API Acknowledgment Mistaken for Completed Resize/Termination | Async cloud operation reported as complete based on synchronous acceptance, not post-action state verification |
+| Embedding Retrieval Applies Wrong Workload's Cost Playbook by Tag Similarity | Cost playbook selected by tag similarity without checking interruption-tolerance or latency-requirement compatibility |
+| Multi-Agent Handoff Drops "Do Not Resize" Safety Constraint | Cost-analysis exclusion note exists only in commentary, never reaches the execution agent's structured input |
+| Rightsizing Recommendation Overcorrection | Downsize recommendation based on average utilization, ignoring peak load that drives actual capacity need |
+| Stale Billing Export Treated as Current Spend | Billing-export data from hours ago acted on as if reflecting current workload state, without cross-check against live signals |
 
 **Total: 5 patterns**
 

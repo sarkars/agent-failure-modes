@@ -11,7 +11,7 @@
 
 | Goal | When it fails | Patterns |
 |---|---|---|
-| [Domain Decisions](domain-decisions/) | When an agent has the right facts in front of it but applies the wrong rule, authority, or judgment to the facts | 10 |
+| Domain Decisions | When an agent has the right facts in front of it but applies the wrong rule, authority, or judgment to the facts | 10 |
 
 **Total: 10 patterns**
 
@@ -19,7 +19,7 @@
 
 ### What's the difference between domain rule miss and regulatory threshold miss?
 
-Domain rule miss is about industry-specific rules and their exceptions (e.g., a 60-day return window for defective products versus the standard 30 days); regulatory threshold miss is specifically about numeric limits, deadlines, and eligibility triggers required by compliance (credit limits, refund deadlines, age minimums). See [Domain Decisions](domain-decisions/).
+Domain rule miss is about industry-specific rules and their exceptions (e.g., a 60-day return window for defective products versus the standard 30 days); regulatory threshold miss is specifically about numeric limits, deadlines, and eligibility triggers required by compliance (credit limits, refund deadlines, age minimums). See Domain Decisions.
 
 ## Related
 

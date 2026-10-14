@@ -13,7 +13,7 @@
 |---|---|---|
 | [Brand Consistency](brand-consistency/) | When an agent generates content that drifts from the established voice, tone, terminology, or style without any change to the guidelines themselves — because a model was upgraded | 4 |
 | [Compliance](compliance/) | When marketing copy contains an unsubstantiated comparative claim, a missing legally-required disclaimer, a region-specific condition required by regulation | 4 |
-| [Quality Control](quality-control/) | When a content-generation pipeline skips fact-checking for statistical claims, treats a previously-approved similar claim as confirming evidence for a new claim with different underlying numbers | 5 |
+| Quality Control | When a content-generation pipeline skips fact-checking for statistical claims, treats a previously-approved similar claim as confirming evidence for a new claim with different underlying numbers | 5 |
 | [Seo Optimization](seo-optimization/) | When an agent retrieves a competitor's claim from a content corpus and incorporates it into the brand's own content, loses a negative-keyword exclusion constraint over a long planning session | 5 |
 
 **Total: 18 patterns**
@@ -22,15 +22,15 @@
 
 ### Should general statistical fact-checking be as rigorous as comparative-claim substantiation?
 
-[Fact-check skipped on statistical claims](quality-control/failures/fact-check-skipped-on-statistical-claims.md) argues yes. See [Quality Control](quality-control/).
+[Fact-check skipped on statistical claims](quality-control/failures/fact-check-skipped-on-statistical-claims.md) argues yes. See Quality Control.
 
 ### Can a broadly-crawled content corpus be used safely for content-grounding if source-provenance is tracked?
 
-Yes, with caveats. See [Seo Optimization](seo-optimization/).
+Yes, with caveats. See Seo Optimization.
 
 ### How is brand-voice drift different from brand-voice miscalibration?
 
-Brand-consistency failures are about maintaining a rule or style that exists and is currently known; drift is when the output changes even though the rule hasn't. See [Brand Consistency](brand-consistency/).
+Brand-consistency failures are about maintaining a rule or style that exists and is currently known; drift is when the output changes even though the rule hasn't. See Brand Consistency.
 
 ## Related
 

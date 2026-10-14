@@ -17,10 +17,10 @@ Shared metrics the patterns below report against. Targets are starting points to
 ## Patterns
 | Pattern | One line |
 |---|---|
-| [Visual product sold by text or voice](failures/visual-product-sold-by-text-or-voice.md) | Selling fashion or furniture with words only |
-| [Complex or emotional discussion forced into chat](failures/complex-or-emotional-discussion-forced-into-chat.md) | A hard conversation stuck in a chat window |
-| [No channel switch, or context lost on switch](failures/no-channel-switch-or-context-lost.md) | Customers repeat themselves after a handoff |
-| [Sensitive data collected in chat](failures/sensitive-data-collected-in-chat.md) | Card numbers and SSNs typed into a chat or spoken to a bot |
+| Visual product sold by text or voice | Selling fashion or furniture with words only |
+| Complex or emotional discussion forced into chat | A hard conversation stuck in a chat window |
+| No channel switch, or context lost on switch | Customers repeat themselves after a handoff |
+| Sensitive data collected in chat | Card numbers and SSNs typed into a chat or spoken to a bot |
 
 ## Planned (not yet written)
 - Channel chosen for organisational convenience

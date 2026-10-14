@@ -15,10 +15,10 @@
 | [Cascading Failures](cascading-failures/) | When there is insufficient isolation between agents, missing bulkheads or circuit breakers to prevent failure propagation | 0 |
 | [Context Lifecycle](context-lifecycle/) | Context assembly and truncation | 6 |
 | [Cost Efficiency](cost-efficiency/) | Token and API cost management | 15 |
-| [Cost Optimization](cost-optimization/) | Agentic planning, learning, and architecture-level cost waste — distinct from [Cost Efficiency](cost-efficiency/)'s execution-level patterns (batching, retries, model routing) | 13 |
+| [Cost Optimization](cost-optimization/) | Agentic planning, learning, and architecture-level cost waste — distinct from Cost Efficiency's execution-level patterns (batching, retries, model routing) | 13 |
 | [Cost Tracking](cost-tracking/) | Budget enforcement and attribution | 6 |
 | [Data Pipeline Integration](data-pipeline-integration/) | When stages are not coordinated, schemas evolve without synchronization, data ordering is not preserved, or end-to-end data consistency is not maintained, resulting in data loss, corruption | 0 |
-| [Dependency Management](dependency-management/) | When versions conflict, APIs change incompatibly, circular dependencies deadlock the system, or transitive dependencies bring in security vulnerabilities, licensing conflicts | 23 |
+| Dependency Management | When versions conflict, APIs change incompatibly, circular dependencies deadlock the system, or transitive dependencies bring in security vulnerabilities, licensing conflicts | 23 |
 | [Deployment and Rollback](deployment-and-rollback/) | When deployments introduce incompatibilities, rollbacks leave the system in an inconsistent state, or deployment procedures themselves fail or are incomplete | 0 |
 | [Established Framework Adoption](established-framework-adoption/) | The recurring mechanism across every pattern here: a well-solved problem | 6 |
 | [Explainability and Debugging](explainability-and-debugging/) | When agents don't expose their reasoning, don't log enough information to reconstruct what happened, don't provide reproducible failure cases, or don't allow inspection of internal state | 0 |
@@ -65,15 +65,15 @@
 
 ### How do you handle breaking changes without downtime?
 
-Use a versioning strategy: (1) Deploy new API version alongside old version (both respond), (2) Migrate clients gradually to new version, (3) Only deprecate old version after all clients have migrated. See [Version Management](version-management/).
+Use a versioning strategy: (1) Deploy new API version alongside old version (both respond), (2) Migrate clients gradually to new version, (3) Only deprecate old version after all clients have migrated. See Version Management.
 
 ### How do you prevent silent tool failures?
 
-Per [Silent Failures](tool-reliability/failures/silent-failures.md), tools should return explicit success/failure signals, and agents should check those signals before proceeding. See [Tool Reliability](tool-reliability/).
+Per [Silent Failures](tool-reliability/failures/silent-failures.md), tools should return explicit success/failure signals, and agents should check those signals before proceeding. See Tool Reliability.
 
 ### How do you prevent PII leakage when tools return full records?
 
-Per [PII Field Exposure](tool-access-scope-limits/failures/pii-field-exposure.md) and [Sensitive Field Access Not Restricted](tool-access-scope-limits/failures/sensitive-field-access-not-restricted.md), tools should filter responses based on caller's access level: classify each field (public, internal, sensitive, PII), check caller's access level, and return only fields the caller can access. See [Tool Access Scope Limits](tool-access-scope-limits/).
+Per [PII Field Exposure](tool-access-scope-limits/failures/pii-field-exposure.md) and [Sensitive Field Access Not Restricted](tool-access-scope-limits/failures/sensitive-field-access-not-restricted.md), tools should filter responses based on caller's access level: classify each field (public, internal, sensitive, PII), check caller's access level, and return only fields the caller can access. See Tool Access Scope Limits.
 
 ## Related
 

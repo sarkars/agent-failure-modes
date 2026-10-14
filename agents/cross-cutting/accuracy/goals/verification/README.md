@@ -46,21 +46,21 @@ No-verification (no check at all) and self-verification-bias (agent checks its o
 
 | Pattern | Mechanism |
 |---------|-----------|
-| [Eval Data Mismatch](failures/eval-data-mismatch.md) | Evaluation data doesn't match production data; agent tested on one distribution, deployed on another |
-| [Happy Path Only Evals](failures/happy-path-only-evals.md) | Testing covers only success cases; edge cases, error conditions, adversarial inputs untested |
-| [Metric Gaming](failures/metric-gaming.md) | Agent optimizes for evaluation metric rather than business goal; high metric score masks misalignment with actual value |
-| [No Adversarial Testing](failures/no-adversarial-testing.md) | Verification doesn't test malformed, tricky, or adversarial inputs; agent fails on edge cases |
-| [No Business KPI Validation](failures/no-business-kpi-validation.md) | Verification checks technical metrics but not business impact; improvement in metrics doesn't translate to business value |
-| [No Ground Truth Comparison](failures/no-ground-truth-comparison.md) | Output not compared against authoritative ground truth; verification passes but output is still wrong |
-| [No Human Review Trigger](failures/no-human-review-trigger.md) | High-stakes output not routed to human review; no mechanism to flag uncertain or risky decisions |
-| [No Long Horizon Evaluation](failures/no-long-horizon-evaluation.md) | Testing covers single steps; multi-step outcomes, compounding errors, long-term consequences untested |
-| [No Regression Testing](failures/no-regression-testing.md) | No regression suite; previously-working functionality breaks silently on model or system updates |
-| [No Verification](failures/no-verification.md) | No verification step at all; state-changing actions ship without checking that action succeeded |
-| [Over-Trusting Confidence Score](failures/over-trusting-confidence-score.md) | Verification relies solely on model confidence; high confidence treated as equivalent to correctness |
-| [Self Verification Bias](failures/self-verification-bias.md) | Agent verifies its own work and finds no errors; independent verification catches errors self-check missed |
-| [Surface Level Validation](failures/surface-level-validation.md) | Verification checks format (schema, field presence) but not correctness (value accuracy, business logic) |
-| [Verifier Hallucination](failures/verifier-hallucination.md) | Verification component itself hallucinates; reports correct output even when output is wrong |
-| [Wrong Verifier](failures/wrong-verifier.md) | Verification checks irrelevant criteria; verifier doesn't match task requirements or business goal |
+| Eval Data Mismatch | Evaluation data doesn't match production data; agent tested on one distribution, deployed on another |
+| Happy Path Only Evals | Testing covers only success cases; edge cases, error conditions, adversarial inputs untested |
+| Metric Gaming | Agent optimizes for evaluation metric rather than business goal; high metric score masks misalignment with actual value |
+| No Adversarial Testing | Verification doesn't test malformed, tricky, or adversarial inputs; agent fails on edge cases |
+| No Business KPI Validation | Verification checks technical metrics but not business impact; improvement in metrics doesn't translate to business value |
+| No Ground Truth Comparison | Output not compared against authoritative ground truth; verification passes but output is still wrong |
+| No Human Review Trigger | High-stakes output not routed to human review; no mechanism to flag uncertain or risky decisions |
+| No Long Horizon Evaluation | Testing covers single steps; multi-step outcomes, compounding errors, long-term consequences untested |
+| No Regression Testing | No regression suite; previously-working functionality breaks silently on model or system updates |
+| No Verification | No verification step at all; state-changing actions ship without checking that action succeeded |
+| Over-Trusting Confidence Score | Verification relies solely on model confidence; high confidence treated as equivalent to correctness |
+| Self Verification Bias | Agent verifies its own work and finds no errors; independent verification catches errors self-check missed |
+| Surface Level Validation | Verification checks format (schema, field presence) but not correctness (value accuracy, business logic) |
+| Verifier Hallucination | Verification component itself hallucinates; reports correct output even when output is wrong |
+| Wrong Verifier | Verification checks irrelevant criteria; verifier doesn't match task requirements or business goal |
 
 **Total: 15 patterns**
 

@@ -48,5 +48,5 @@ Implement stratified outcome monitoring across all nine domains: diagnostic accu
 
 ## Related Categories
 
-- [Document Processing](../document-processing/) — covers OCR and multimodal failures that upstream feed into clinical note extraction and EHR data quality
-- [Knowledge Retrieval](../knowledge-retrieval/) — covers guideline retrieval, knowledge freshness, and citation accuracy failures that treatment-planning and diagnosis agents depend on
+- [Document Processing](../../by-capability/document-processing/) — covers OCR and multimodal failures that upstream feed into clinical note extraction and EHR data quality
+- [Knowledge Retrieval](../../by-capability/knowledge-retrieval/) — covers guideline retrieval, knowledge freshness, and citation accuracy failures that treatment-planning and diagnosis agents depend on

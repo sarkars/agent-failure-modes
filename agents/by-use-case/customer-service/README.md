@@ -13,9 +13,9 @@
 
 | Goal | Covers | Patterns |
 |------|--------|----------|
-| [Conversation Resolution](goals/conversation-resolution/) | Canned-response selection, clarification behavior, escalation timing, tone and emotional state, multi-agent handoff quality | 12 |
-| [Proactive Retention Outreach](goals/proactive-retention-outreach/) | Fabricated personalization when usage-analytics data is unavailable, overriding the fallback-to-generic-messaging policy | 1 |
-| [Refund and Billing Disputes](goals/refund-and-billing-disputes/) | Retrieval-mismatched billing-dispute templates, dropped prior-credit information at handoffs | 2 |
+| Conversation Resolution | Canned-response selection, clarification behavior, escalation timing, tone and emotional state, multi-agent handoff quality | 12 |
+| Proactive Retention Outreach | Fabricated personalization when usage-analytics data is unavailable, overriding the fallback-to-generic-messaging policy | 1 |
+| Refund and Billing Disputes | Retrieval-mismatched billing-dispute templates, dropped prior-credit information at handoffs | 2 |
 
 **Total: 15 patterns**
 
@@ -26,13 +26,13 @@ The three goals represent different support workflows: Conversation Resolution h
 ## Frequently Asked Questions
 
 ### How are conversation-resolution support failures different from general conversation-quality failures?
-Support-specific failures add domain constraints: canned-response libraries (selection must match account state), escalation thresholds (must be calibrated per request category, not uniformly conservative), and financial claims (carry real money at stake). [Embedding retrieval selects similar-but-wrong-canned-response](goals/conversation-resolution/failures/embedding-retrieval-selects-similar-but-wrong-canned-response.md) and [multi-agent handoff drops de-escalation context](goals/conversation-resolution/failures/multi-agent-handoff-drops-de-escalation-context-between-triage-and-billing-agent.md) are support-specific because they involve structured handoff schemas and account-state matching, not just conversation quality.
+Support-specific failures add domain constraints: canned-response libraries (selection must match account state), escalation thresholds (must be calibrated per request category, not uniformly conservative), and financial claims (carry real money at stake). Embedding retrieval selects similar-but-wrong-canned-response and multi-agent handoff drops de-escalation context are support-specific because they involve structured handoff schemas and account-state matching, not just conversation quality.
 
 ### Can proactive retention outreach use a generic message instead of personalization?
 Yes. [Fabricated usage-decline justification](goals/proactive-retention-outreach/failures/fabricated-usage-decline-justification-when-analytics-tool-returns-empty.md) argues for exactly that when analytics data is unavailable. Generic outreach ("we value your business") loses personalization but retains credibility; fabricated personalization gains apparent specificity but damages trust if the customer knows it's inaccurate.
 
 ### What is the highest-severity customer-service failure?
-[Multi-agent handoff drops partial-credit-already-issued](goals/refund-and-billing-disputes/failures/multi-agent-handoff-drops-partial-credit-already-issued-between-triage-and-billing-agent.md) creates direct financial loss (duplicate refunds, overpayments). Conversation Resolution failures affect customer trust and escalation volume; Proactive Retention failures affect churn. Refund/Billing failures have immediate monetary impact.
+Multi-agent handoff drops partial-credit-already-issued creates direct financial loss (duplicate refunds, overpayments). Conversation Resolution failures affect customer trust and escalation volume; Proactive Retention failures affect churn. Refund/Billing failures have immediate monetary impact.
 
 ### Are all customer-service failures about agent capability, or are some about configuration?
 Most are about configuration and architecture: canned-response retrieval needs account-state filtering (configuration), escalation thresholds need calibration per request type (configuration), handoff schemas need conditional fields (architecture). A support agent with good conversation quality can fail at all three if configuration is wrong.

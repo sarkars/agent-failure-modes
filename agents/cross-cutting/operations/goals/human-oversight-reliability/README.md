@@ -26,10 +26,10 @@
 
 ## How These Patterns Group
 
-- **Gates and authority:** [Missing Approval Gates](failures/missing-approval-gates.md), [Authority Mismatch](failures/authority-mismatch.md), [Escalation Not Triggered](failures/escalation-not-triggered.md)
-- **Approval validity:** [Stale Approval Reuse](failures/stale-approval-reuse.md), [AI Agent Approval Timeout Mishandling](failures/approval-timeout-mishandling.md)
-- **Capacity and availability:** [Approval Queue Overflow](failures/approval-queue-overflow.md), [Human Unavailability](failures/human-unavailability.md)
-- **Learning from humans:** [Feedback Not Incorporated](failures/feedback-not-incorporated.md)
+- **Gates and authority:** Missing Approval Gates, Authority Mismatch, Escalation Not Triggered
+- **Approval validity:** Stale Approval Reuse, AI Agent Approval Timeout Mishandling
+- **Capacity and availability:** Approval Queue Overflow, Human Unavailability
+- **Learning from humans:** Feedback Not Incorporated
 
 ## When This Matters
 
@@ -41,15 +41,15 @@
 
 ### When should an AI agent escalate to a human?
 
-See [escalation not triggered](failures/escalation-not-triggered.md) for what goes wrong when it does not.
+See escalation not triggered for what goes wrong when it does not.
 
 ### What happens when no approver is available?
 
-See [human unavailability](failures/human-unavailability.md) and [approval timeout mishandling](failures/approval-timeout-mishandling.md).
+See human unavailability and approval timeout mishandling.
 
 ### Can an old approval cover a new action?
 
-No. See [stale approval reuse](failures/stale-approval-reuse.md).
+No. See stale approval reuse.
 
 ## Related
 

@@ -28,21 +28,21 @@ Rollback failures occur because an agent treats a proxy signal (orchestrator sta
 ## Frequently Asked Questions
 
 ### What does it mean when a rollback is marked successful but the problem persists?
-Rollback agents commonly use orchestrator state (replicas at target revision, readiness probe passing) as the success criterion, but orchestrator state describes only whether the artifact was successfully reverted — not whether the application is actually healthy. If the application depends on state not reset by artifact-only rollback (an in-process cache, a feature flag set at startup, an unrolled-back dependency), the orchestrator success is premature. See [Orchestrator Status Mistaken for Application Health After Rollback](failures/orchestrator-status-mistaken-for-application-health-after-rollback.md).
+Rollback agents commonly use orchestrator state (replicas at target revision, readiness probe passing) as the success criterion, but orchestrator state describes only whether the artifact was successfully reverted — not whether the application is actually healthy. If the application depends on state not reset by artifact-only rollback (an in-process cache, a feature flag set at startup, an unrolled-back dependency), the orchestrator success is premature. See Orchestrator Status Mistaken for Application Health After Rollback.
 
 ### Can you safely roll back a deploy that included a database migration?
-Not with artifact rollback alone. Code rollback reverts the artifact, but schema changes persist, leaving the rolled-back code incompatible with the schema the bad version introduced. A safe rollback plan must include either reverting the migration (if safe) or validating schema backward-compatibility. See [Partial Rollback State Corruption](failures/partial-rollback-state-corruption.md).
+Not with artifact rollback alone. Code rollback reverts the artifact, but schema changes persist, leaving the rolled-back code incompatible with the schema the bad version introduced. A safe rollback plan must include either reverting the migration (if safe) or validating schema backward-compatibility. See Partial Rollback State Corruption.
 
 ### What happens if an automated rollback reverts a concurrent hotfix?
-If the hotfix is marked with a do-not-revert flag only in deploy commentary, not in a structured field the rollback agent reads, the rollback will revert the hotfix along with the bad change, re-introducing the separate incident the hotfix had just fixed. The deploy agent's protection note is lost at the handoff boundary. See [Multi-Agent Handoff Drops Override Flag Between Deploy and Rollback Agent](failures/multi-agent-handoff-drops-override-flag-between-deploy-and-rollback-agent.md).
+If the hotfix is marked with a do-not-revert flag only in deploy commentary, not in a structured field the rollback agent reads, the rollback will revert the hotfix along with the bad change, re-introducing the separate incident the hotfix had just fixed. The deploy agent's protection note is lost at the handoff boundary. See Multi-Agent Handoff Drops Override Flag Between Deploy and Rollback Agent.
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [Multi-Agent Handoff Drops Override Flag Between Deploy and Rollback Agent](failures/multi-agent-handoff-drops-override-flag-between-deploy-and-rollback-agent.md) | Deploy agent's protection note exists only in commentary, invisible to rollback agent's structured decision logic |
-| [Orchestrator Status Mistaken for Application Health After Rollback](failures/orchestrator-status-mistaken-for-application-health-after-rollback.md) | Rollback marked successful based on orchestrator status, without confirming the original symptom metric has recovered |
-| [Partial Rollback State Corruption](failures/partial-rollback-state-corruption.md) | Code rolled back but stateful side effects (schema changes, message-format changes) from bad version persist, corrupting state |
+| Multi-Agent Handoff Drops Override Flag Between Deploy and Rollback Agent | Deploy agent's protection note exists only in commentary, invisible to rollback agent's structured decision logic |
+| Orchestrator Status Mistaken for Application Health After Rollback | Rollback marked successful based on orchestrator status, without confirming the original symptom metric has recovered |
+| Partial Rollback State Corruption | Code rolled back but stateful side effects (schema changes, message-format changes) from bad version persist, corrupting state |
 
 **Total: 3 patterns**
 

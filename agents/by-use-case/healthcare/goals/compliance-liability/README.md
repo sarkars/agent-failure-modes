@@ -40,7 +40,7 @@ The intake agent captures a narrowed consent (e.g., "do not share with employer 
 |---|---|
 | [HIPAA De-Identification Failure](failures/hipaa-deidentification-failure.md) | Checklist-based Safe Harbor removal leaves quasi-identifier combinations that re-identify individuals in small populations |
 | [Informed-Consent Documentation Gap](failures/informed-consent-documentation-gap.md) | AI-generated note includes detailed risk/benefit discussion not actually covered in the encounter |
-| [Multi-Agent Handoff Drops Narrowed Consent Scope](failures/multi-agent-handoff-drops-narrowed-consent-scope-between-intake-and-billing-agent.md) | Narrowed consent restriction captured by intake agent exists only in free text and is invisible to downstream billing/records-release agent |
+| Multi-Agent Handoff Drops Narrowed Consent Scope | Narrowed consent restriction captured by intake agent exists only in free text and is invisible to downstream billing/records-release agent |
 
 **Total: 3 patterns**
 

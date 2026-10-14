@@ -38,7 +38,7 @@ Conversation flow sits at the intersection of real-time audio mechanics (turn-ta
 Ten patterns — barge-in, end-of-turn detection, interruption mishandling, turn-taking errors, silence misinterpretation, backchannel timing, response latency, slow-tool silence, opening timing mismatch, and prompt-bloat latency — are governed by audio pipeline mechanics (VAD, endpointing, TTS streaming). The remaining patterns are dialog-logic problems that would also occur in a text-based multi-turn agent, just without the millisecond stakes.
 
 ### Can better prompting alone fix conversation-flow failures?
-For some patterns, yes and the fix is well-documented — [negative-banlist-priming](failures/negative-banlist-priming.md) and [prompt-bloat-latency](failures/prompt-bloat-latency.md) are pure prompt-design anti-patterns with a straightforward rewrite. For most others — turn-taking, slot extraction, qualification-flow sequencing, scope boundaries — the documented mitigation is architectural: a state machine, a validation gate, or a classifier layer sitting between the caller's utterance and the agent's next response, not a prompt tweak alone.
+For some patterns, yes and the fix is well-documented — negative-banlist-priming and prompt-bloat-latency are pure prompt-design anti-patterns with a straightforward rewrite. For most others — turn-taking, slot extraction, qualification-flow sequencing, scope boundaries — the documented mitigation is architectural: a state machine, a validation gate, or a classifier layer sitting between the caller's utterance and the agent's next response, not a prompt tweak alone.
 
 ### What's the single most common root cause across the 44 patterns?
 The agent executing its next planned action (a script step, a silence-based turn transition, a scripted question) without first checking whether the caller's most recent input changes what that next action should be — whether that input is an interruption, a question, a hesitation, an implicit correction, or an override signal like "I'm driving."
@@ -50,50 +50,50 @@ Conversation flow assumes speech has already been captured (audio-handling) and 
 
 | Pattern | Mechanism |
 |---|---|
-| [Agent Self Attribution Errors](failures/agent-self-attribution-errors.md) | Agent uses first-person "I'll send/schedule" language for actions it doesn't actually perform, creating false accountability |
-| [AI Disclosure Failures](failures/ai-disclosure-failures.md) | Agent denies, evades, or over-explains when directly asked "are you AI/a bot?" |
-| [Backchannel Timing Errors](failures/backchannel-timing-errors.md) | Acknowledgment cues ("uh-huh," "right") land mid-sentence or miss the emotional register of what was said |
-| [Emotional Expression Overuse](failures/emotional-expression-overuse.md) | Laughter and exclamations fire on nearly every turn regardless of genuine trigger, reading as manic |
-| [Graceless Call Ending](failures/graceless-call-ending.md) | Calls end abruptly, add content after goodbye, or loop through multiple false endings |
-| [Hesitation Mishandling](failures/hesitation-mishandling.md) | Uncertain responses ("maybe," "let me think") get re-pitched instead of offered a low-pressure option |
-| [Identity Manipulation](failures/identity-manipulation.md) | Agent can be jailbroken into a different persona or prompt disclosure via "dev mode"/roleplay claims |
-| [Incremental Capture Failures](failures/incremental-capture-failures.md) | Data is saved only at conversation end, losing everything captured so far on a mid-call disconnect |
-| [Internal Process Leakage](failures/internal-process-leakage.md) | Agent reveals CRM fields, routing logic, or internal tool/team names to the caller |
-| [Language Barrier Failures](failures/language-barrier-failures.md) | An unsupported language or heavy dialect produces garbage ASR with no negotiation or handoff path |
-| [Monologue Without Engagement](failures/monologue-without-engagement.md) | Five or more items or steps delivered in one breath without a pause for engagement checks |
-| [Multilingual Code-Switching Failures](failures/multilingual-code-switching.md) | Agent fails to detect or maintain the caller's chosen language consistently across turns |
-| [Negative Banlist Priming](failures/negative-banlist-priming.md) | Long "never say X" lists prime the model to output the exact banned phrases under output pressure |
-| [Opening Timing Mismatch](failures/opening-timing-mismatch.md) | Scripted opening ignores the caller's greeting, tone, or "who is this" question |
-| [Outcome Classification Errors](failures/outcome-classification-errors.md) | Call outcomes (qualified/callback/DNC) get assigned without required fields or contradict captured data |
-| [Premature Call Ending](failures/premature-call-ending.md) | Brief silence, an interruption, or a confused fragment gets misread as a goodbye signal |
-| [Prompt Bloat Latency](failures/prompt-bloat-latency.md) | Oversized system prompts reloaded every turn add time-to-first-token that surfaces as audible dead air |
-| [Rapport Absence](failures/rapport-absence.md) | Personal or emotional comments from the caller go unacknowledged as the script continues unchanged |
-| [Script Compliance Drift](failures/script-compliance-drift.md) | Model elaborates, softens, or varies required exact phrases, banned words, or stated boundaries |
-| [Slot Extraction Errors](failures/slot-extraction-errors.md) | Implicit confirmations, hesitant permissions, and mid-conversation corrections get mis-captured into structured fields |
-| [Slow Tool Silence](failures/slow-tool-silence.md) | Agent goes silent during tool/API execution with no acknowledgment, reading to callers as a dropped call |
-| [Spoken Form Failures](failures/spoken-form-failures.md) | Numbers, dates, currency, and addresses get read in written form instead of natural spoken form |
-| [Tool Description Failures](failures/tool-description-failures.md) | Vague or empty tool descriptions cause the wrong tool to be selected or malformed parameters to be passed |
-| [Unnatural Conversational Style](failures/unnatural-conversational-style.md) | Overly formal or overly enthusiastic phrasing reads as scripted or salesy rather than conversational |
-| [Unnecessary Data Collection](failures/unnecessary-data-collection.md) | Agent requests personal fields (name, email) beyond what the task actually requires |
-| [Verbosity Despite Brevity Instructions](failures/verbosity-despite-brevity-instructions.md) | Responses exceed explicit word- and duration-count limits by multiples despite direct instruction |
-| [Wrong Number / Wrong Person Handling](failures/wrong-number-wrong-person.md) | Agent fails to detect or gracefully exit when an outbound call reaches an unintended recipient |
-| [Text Prompt Voice Failure](failures/text-prompt-voice-failure.md) | Markdown, lists, and text-chatbot phrasing leak into spoken TTS output in cascaded (non-voice-native) pipelines |
-| [Barge-In Failures](failures/barge-in-failures.md) | User cannot interrupt agent speech due to half-duplex audio design or missing TTS cancellation |
-| [End-of-Turn Detection](failures/end-of-turn-detection.md) | Silence-only endpointing misreads compound sentences and enumerated lists as a finished turn |
-| [Interruption Mishandling](failures/interruption-mishandling.md) | Corrections ("no, I said...") aren't recognized, are partially captured, or don't update dialog state |
-| [Multi-Turn Context Loss](failures/multi-turn-context-loss.md) | Pronouns and ordinal references ("the second one," "book it") aren't resolved across conversation turns |
-| [Response Latency Issues](failures/response-latency-issues.md) | Cumulative ASR/LLM/TTS pipeline delay exceeds the roughly 500ms conversational expectation |
-| [Silence Misinterpretation](failures/silence-misinterpretation.md) | Fixed silence thresholds can't distinguish a thinking pause from end-of-turn or a task-related lookup |
-| [Turn-Taking Errors](failures/turn-taking-errors.md) | Agent and caller speak over each other from missed prosodic turn-completion cues |
-| [Multi-Field Collection Overload](failures/multi-field-collection-overload.md) | Asking for multiple data fields in one turn drops first-try success from 92% to 48% |
-| [Scope Boundary Violations](failures/scope-boundary-violations.md) | Agent fabricates plausible-sounding answers to questions outside its approved knowledge scope |
-| [Unauthorized Commitments](failures/unauthorized-commitments.md) | Agent promises things outside its authority — no spam, delivery dates, data-handling guarantees |
-| [Override Signal Failures](failures/override-signal-failures.md) | "Busy," "driving," or "stop" signals fail to halt the agent's scripted flow |
-| [Intent Boundary Confusion](failures/intent-boundary-confusion.md) | Adjacent intents (not-interested vs. do-not-contact, busy vs. decline) get misclassified |
-| [Qualification Flow Violations](failures/qualification-flow-violations.md) | Required steps get skipped, combined, or reordered, or the call closes with fields still missing |
-| [Unverified Data Usage](failures/unverified-data-usage.md) | Caller-stated names or CRM data get used or addressed without verifying the right person answered |
-| [Vague Consent Exploitation](failures/vague-consent-exploitation.md) | Ambiguous responses ("fine," "whatever," silence) get recorded as explicit consent |
-| [Response Adaptation Failure](failures/response-adaptation-failure.md) | Agent continues its planned script instead of addressing a question, concern, or condition just raised |
+| Agent Self Attribution Errors | Agent uses first-person "I'll send/schedule" language for actions it doesn't actually perform, creating false accountability |
+| AI Disclosure Failures | Agent denies, evades, or over-explains when directly asked "are you AI/a bot?" |
+| Backchannel Timing Errors | Acknowledgment cues ("uh-huh," "right") land mid-sentence or miss the emotional register of what was said |
+| Emotional Expression Overuse | Laughter and exclamations fire on nearly every turn regardless of genuine trigger, reading as manic |
+| Graceless Call Ending | Calls end abruptly, add content after goodbye, or loop through multiple false endings |
+| Hesitation Mishandling | Uncertain responses ("maybe," "let me think") get re-pitched instead of offered a low-pressure option |
+| Identity Manipulation | Agent can be jailbroken into a different persona or prompt disclosure via "dev mode"/roleplay claims |
+| Incremental Capture Failures | Data is saved only at conversation end, losing everything captured so far on a mid-call disconnect |
+| Internal Process Leakage | Agent reveals CRM fields, routing logic, or internal tool/team names to the caller |
+| Language Barrier Failures | An unsupported language or heavy dialect produces garbage ASR with no negotiation or handoff path |
+| Monologue Without Engagement | Five or more items or steps delivered in one breath without a pause for engagement checks |
+| Multilingual Code-Switching Failures | Agent fails to detect or maintain the caller's chosen language consistently across turns |
+| Negative Banlist Priming | Long "never say X" lists prime the model to output the exact banned phrases under output pressure |
+| Opening Timing Mismatch | Scripted opening ignores the caller's greeting, tone, or "who is this" question |
+| Outcome Classification Errors | Call outcomes (qualified/callback/DNC) get assigned without required fields or contradict captured data |
+| Premature Call Ending | Brief silence, an interruption, or a confused fragment gets misread as a goodbye signal |
+| Prompt Bloat Latency | Oversized system prompts reloaded every turn add time-to-first-token that surfaces as audible dead air |
+| Rapport Absence | Personal or emotional comments from the caller go unacknowledged as the script continues unchanged |
+| Script Compliance Drift | Model elaborates, softens, or varies required exact phrases, banned words, or stated boundaries |
+| Slot Extraction Errors | Implicit confirmations, hesitant permissions, and mid-conversation corrections get mis-captured into structured fields |
+| Slow Tool Silence | Agent goes silent during tool/API execution with no acknowledgment, reading to callers as a dropped call |
+| Spoken Form Failures | Numbers, dates, currency, and addresses get read in written form instead of natural spoken form |
+| Tool Description Failures | Vague or empty tool descriptions cause the wrong tool to be selected or malformed parameters to be passed |
+| Unnatural Conversational Style | Overly formal or overly enthusiastic phrasing reads as scripted or salesy rather than conversational |
+| Unnecessary Data Collection | Agent requests personal fields (name, email) beyond what the task actually requires |
+| Verbosity Despite Brevity Instructions | Responses exceed explicit word- and duration-count limits by multiples despite direct instruction |
+| Wrong Number / Wrong Person Handling | Agent fails to detect or gracefully exit when an outbound call reaches an unintended recipient |
+| Text Prompt Voice Failure | Markdown, lists, and text-chatbot phrasing leak into spoken TTS output in cascaded (non-voice-native) pipelines |
+| Barge-In Failures | User cannot interrupt agent speech due to half-duplex audio design or missing TTS cancellation |
+| End-of-Turn Detection | Silence-only endpointing misreads compound sentences and enumerated lists as a finished turn |
+| Interruption Mishandling | Corrections ("no, I said...") aren't recognized, are partially captured, or don't update dialog state |
+| Multi-Turn Context Loss | Pronouns and ordinal references ("the second one," "book it") aren't resolved across conversation turns |
+| Response Latency Issues | Cumulative ASR/LLM/TTS pipeline delay exceeds the roughly 500ms conversational expectation |
+| Silence Misinterpretation | Fixed silence thresholds can't distinguish a thinking pause from end-of-turn or a task-related lookup |
+| Turn-Taking Errors | Agent and caller speak over each other from missed prosodic turn-completion cues |
+| Multi-Field Collection Overload | Asking for multiple data fields in one turn drops first-try success from 92% to 48% |
+| Scope Boundary Violations | Agent fabricates plausible-sounding answers to questions outside its approved knowledge scope |
+| Unauthorized Commitments | Agent promises things outside its authority — no spam, delivery dates, data-handling guarantees |
+| Override Signal Failures | "Busy," "driving," or "stop" signals fail to halt the agent's scripted flow |
+| Intent Boundary Confusion | Adjacent intents (not-interested vs. do-not-contact, busy vs. decline) get misclassified |
+| Qualification Flow Violations | Required steps get skipped, combined, or reordered, or the call closes with fields still missing |
+| Unverified Data Usage | Caller-stated names or CRM data get used or addressed without verifying the right person answered |
+| Vague Consent Exploitation | Ambiguous responses ("fine," "whatever," silence) get recorded as explicit consent |
+| Response Adaptation Failure | Agent continues its planned script instead of addressing a question, concern, or condition just raised |
 
 **Total: 44 patterns**
 

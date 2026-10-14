@@ -32,37 +32,37 @@ The 16 access-scope patterns describe systems where data security is assumed to 
 ## Frequently Asked Questions
 
 ### How do you prevent PII leakage when tools return full records?
-Per [PII Field Exposure](failures/pii-field-exposure.md) and [Sensitive Field Access Not Restricted](failures/sensitive-field-access-not-restricted.md), tools should filter responses based on caller's access level: classify each field (public, internal, sensitive, PII), check caller's access level, and return only fields the caller can access. Don't rely on agents to filter — they will leak fields unless explicitly trained not to.
+Per PII Field Exposure and Sensitive Field Access Not Restricted, tools should filter responses based on caller's access level: classify each field (public, internal, sensitive, PII), check caller's access level, and return only fields the caller can access. Don't rely on agents to filter — they will leak fields unless explicitly trained not to.
 
 ### What's the difference between record-level and field-level access control?
 Record-level access control determines whether you can access a record at all (e.g., can agent A access customer 123's record?). Field-level access control determines which fields within that record you can see (e.g., can agent A see customer 123's SSN field?). Both are necessary — record-level alone is insufficient because you can access the record but see restricted fields within it.
 
 ### How do you test access control comprehensively?
-Per [Access Control Inheritance Wrong](failures/access-control-inheritance-wrong.md) and [Workspace Isolation Bypass](failures/workspace-isolation-bypass.md), test access control with multiple agents in different roles/workspaces accessing the same tool and verifying that each agent sees only the fields they should. Use property-based testing: for each agent and field combination, verify that access is either granted or denied consistently, and access decisions are based on explicit rules, not absence of restriction.
+Per Access Control Inheritance Wrong and Workspace Isolation Bypass, test access control with multiple agents in different roles/workspaces accessing the same tool and verifying that each agent sees only the fields they should. Use property-based testing: for each agent and field combination, verify that access is either granted or denied consistently, and access decisions are based on explicit rules, not absence of restriction.
 
 ### Can masking alone prevent PII leakage?
-Partially — per [Masked Field Unmasking](failures/masked-field-unmasking.md), masking at the API level (tool returns masked values) is insufficient if agents reason over cached or logged data. Mask at the storage layer (tools never see unmasked values) or implement masking at multiple layers (API + cache + logs). Don't assume masking at one layer protects you everywhere.
+Partially — per Masked Field Unmasking, masking at the API level (tool returns masked values) is insufficient if agents reason over cached or logged data. Mask at the storage layer (tools never see unmasked values) or implement masking at multiple layers (API + cache + logs). Don't assume masking at one layer protects you everywhere.
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [Access Control Inheritance Wrong](failures/access-control-inheritance-wrong.md) | Child records inherit parent access rules incorrectly; sibling or unrelated records become accessible when hierarchy is traversed |
-| [Account Level Data Scope](failures/account-level-data-scope.md) | Multi-tenant system returns data from wrong account; agent accessing account A retrieves data from account B |
-| [Computed Field Cost Not Disclosed](failures/computed-field-cost-not-disclosed.md) | Accessing a field requires computation with hidden costs; agent calls field repeatedly unaware of resource/financial impact |
-| [Data Classification Access Not Enforced](failures/data-classification-access-not-enforced.md) | Tool returns fields marked as sensitive or restricted without checking whether caller has access |
-| [Data Scope Boundary Violation](failures/data-scope-boundary-violation.md) | Agent accesses data outside its scope (different tenant, different workspace, different geography) |
-| [Field Level Access Not Restricted](failures/field-level-access-not-restricted.md) | Tool returns all record fields without restricting access to sensitive fields caller shouldn't see |
-| [Geographic Data Access Restriction](failures/geographic-data-access-restriction.md) | Geographic access rules not enforced; agent in region A accesses data restricted to region B |
-| [Masked Field Unmasking](failures/masked-field-unmasking.md) | Masking applied at API level but agent reasoning or cached data unmasks sensitive values |
-| [PII Field Exposure](failures/pii-field-exposure.md) | Personally identifiable information is returned in tool responses to agents without authorization |
-| [PII Field Leakage in Responses](failures/pii-field-leakage-in-responses.md) | PII from tool responses leaks into agent's output to user or downstream systems |
-| [Record Level Access Not Enforced](failures/record-level-access-not-enforced.md) | Tool returns records without checking whether caller has permission to access that record |
-| [Record Ownership Not Validated](failures/record-ownership-not-validated.md) | Tool assumes caller owns record being accessed; no validation of ownership or relationship |
-| [Scope Downgrade Not Enforced](failures/scope-downgrade-not-enforced.md) | When agent delegates to sub-agent, access scope should reduce but remains unchanged; scope creep |
-| [Sensitive Field Access Not Restricted](failures/sensitive-field-access-not-restricted.md) | Tool returns sensitive fields (passwords, tokens, keys) without access checks |
-| [Time Based Data Access Not Enforced](failures/time-based-data-access-not-enforced.md) | Temporal access rules not enforced; agent accesses archived data older than allowed, or future-dated data |
-| [Workspace Isolation Bypass](failures/workspace-isolation-bypass.md) | Agent from one workspace accesses data from different workspace; isolation boundary violated |
+| Access Control Inheritance Wrong | Child records inherit parent access rules incorrectly; sibling or unrelated records become accessible when hierarchy is traversed |
+| Account Level Data Scope | Multi-tenant system returns data from wrong account; agent accessing account A retrieves data from account B |
+| Computed Field Cost Not Disclosed | Accessing a field requires computation with hidden costs; agent calls field repeatedly unaware of resource/financial impact |
+| Data Classification Access Not Enforced | Tool returns fields marked as sensitive or restricted without checking whether caller has access |
+| Data Scope Boundary Violation | Agent accesses data outside its scope (different tenant, different workspace, different geography) |
+| Field Level Access Not Restricted | Tool returns all record fields without restricting access to sensitive fields caller shouldn't see |
+| Geographic Data Access Restriction | Geographic access rules not enforced; agent in region A accesses data restricted to region B |
+| Masked Field Unmasking | Masking applied at API level but agent reasoning or cached data unmasks sensitive values |
+| PII Field Exposure | Personally identifiable information is returned in tool responses to agents without authorization |
+| PII Field Leakage in Responses | PII from tool responses leaks into agent's output to user or downstream systems |
+| Record Level Access Not Enforced | Tool returns records without checking whether caller has permission to access that record |
+| Record Ownership Not Validated | Tool assumes caller owns record being accessed; no validation of ownership or relationship |
+| Scope Downgrade Not Enforced | When agent delegates to sub-agent, access scope should reduce but remains unchanged; scope creep |
+| Sensitive Field Access Not Restricted | Tool returns sensitive fields (passwords, tokens, keys) without access checks |
+| Time Based Data Access Not Enforced | Temporal access rules not enforced; agent accesses archived data older than allowed, or future-dated data |
+| Workspace Isolation Bypass | Agent from one workspace accesses data from different workspace; isolation boundary violated |
 
 **Total: 16 patterns**
 

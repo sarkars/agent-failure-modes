@@ -28,10 +28,10 @@
 
 ## How These Patterns Group
 
-- **Roles and goals:** [Agent Misalignment](failures/agent-misalignment.md), [Specification Ambiguity Causing Multi-Agent Role Misalignment](failures/specification-ambiguity-causing-misalignment.md)
-- **Communication and handoffs:** [Communication Breakdown](failures/communication-breakdown.md), [Task Handoff Errors](failures/task-handoff-errors.md), [Routing Failures](failures/routing-failures.md)
-- **Structure and scale:** [Orchestrator Bottleneck](failures/orchestrator-bottleneck.md), [Delegation Depth Explosion](failures/delegation-depth-explosion.md), [Parallel Execution Failures](failures/parallel-execution-failures.md)
-- **Agreement and stopping:** [Consensus Deadlock](failures/consensus-deadlock.md), [Termination Condition Unawareness](failures/termination-unawareness.md)
+- **Roles and goals:** Agent Misalignment, Specification Ambiguity Causing Multi-Agent Role Misalignment
+- **Communication and handoffs:** Communication Breakdown, Task Handoff Errors, Routing Failures
+- **Structure and scale:** Orchestrator Bottleneck, Delegation Depth Explosion, Parallel Execution Failures
+- **Agreement and stopping:** Consensus Deadlock, Termination Condition Unawareness
 
 ## When This Matters
 
@@ -43,19 +43,19 @@
 
 ### Why do my agents lose information when passing work to each other?
 
-See [task handoff errors](failures/task-handoff-errors.md) and [communication breakdown](failures/communication-breakdown.md).
+See task handoff errors and communication breakdown.
 
 ### How do I stop agents from delegating endlessly?
 
-See [delegation depth explosion](failures/delegation-depth-explosion.md).
+See delegation depth explosion.
 
 ### Why does the wrong agent get my task?
 
-See [routing failures](failures/routing-failures.md).
+See routing failures.
 
 ### How do agents know when to stop?
 
-See [termination unawareness](failures/termination-unawareness.md).
+See termination unawareness.
 
 ## Related
 

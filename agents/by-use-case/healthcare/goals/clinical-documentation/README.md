@@ -38,7 +38,7 @@ Yes. Ground every documented element in a source signal (transcript timestamp, s
 | Pattern | Mechanism |
 |---|---|
 | [Empty Allergy-Query Result Documented as Confirmed No-Known-Allergies](failures/empty-allergy-query-result-documented-as-confirmed-no-known-allergies.md) | Never-populated allergy field rendered as affirmatively confirmed negative, not flagged as unverified |
-| [Documentation-Driven Upcoding/Downcoding Risk](failures/upcoding-downcoding-risk.md) | Agent-generated note language inflates or deflates billing code level independent of actual encounter content |
+| Documentation-Driven Upcoding/Downcoding Risk | Agent-generated note language inflates or deflates billing code level independent of actual encounter content |
 
 **Total: 2 patterns**
 

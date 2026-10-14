@@ -45,18 +45,18 @@ No-audit-log (no record of decisions) and no-human-owner (no accountability) are
 
 | Pattern | Mechanism |
 |---------|-----------|
-| [No Access Review](failures/no-access-review.md) | No mechanism to review who accessed what data or when; access patterns invisible |
+| No Access Review | No mechanism to review who accessed what data or when; access patterns invisible |
 | [No Approval Boundary](failures/no-approval-boundary.md) | No clear definition of what decisions require approval; all decisions treated identically |
-| [No Audit Log](failures/no-audit-log.md) | No record of actions taken or decisions made; compliance audits cannot reconstruct decision history |
-| [No Change Management](failures/no-change-management.md) | Agent changes ship without approval or rollback plan; failures can't be rolled back |
-| [No Data Retention Control](failures/no-data-retention-control.md) | Data is not deleted when retention period expires; regulatory violation |
-| [No Human Owner](failures/no-human-owner.md) | No one is accountable for agent decisions; incident root-cause analysis impossible |
-| [No Incident Process](failures/no-incident-process.md) | No defined response process when failures occur; learning from incidents impossible |
-| [No Policy Mapping](failures/no-policy-mapping.md) | Business policies defined in documentation but not mapped to technical controls; gaps between policy and enforcement |
-| [No Risk Tiering](failures/no-risk-tiering.md) | All decisions treated identically regardless of risk/impact; high-stakes decisions not tagged for extra review |
-| [No Rollback Process](failures/no-rollback-process.md) | No way to undo bad decisions; false positives or incorrect decisions are permanent |
-| [No User Notification Rule](failures/no-user-notification-rule.md) | Users affected by agent decisions not notified; transparency and fairness violated |
-| [No Vendor Risk Control](failures/no-vendor-risk-control.md) | Third-party vendors integrated without risk assessment or controls; supply-chain risk ignored |
+| No Audit Log | No record of actions taken or decisions made; compliance audits cannot reconstruct decision history |
+| No Change Management | Agent changes ship without approval or rollback plan; failures can't be rolled back |
+| No Data Retention Control | Data is not deleted when retention period expires; regulatory violation |
+| No Human Owner | No one is accountable for agent decisions; incident root-cause analysis impossible |
+| No Incident Process | No defined response process when failures occur; learning from incidents impossible |
+| No Policy Mapping | Business policies defined in documentation but not mapped to technical controls; gaps between policy and enforcement |
+| No Risk Tiering | All decisions treated identically regardless of risk/impact; high-stakes decisions not tagged for extra review |
+| No Rollback Process | No way to undo bad decisions; false positives or incorrect decisions are permanent |
+| No User Notification Rule | Users affected by agent decisions not notified; transparency and fairness violated |
+| No Vendor Risk Control | Third-party vendors integrated without risk assessment or controls; supply-chain risk ignored |
 
 **Total: 12 patterns**
 

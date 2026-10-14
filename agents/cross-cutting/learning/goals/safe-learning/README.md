@@ -47,18 +47,18 @@ Feedback-ambiguity describes feedback that says "bad" or "wrong" but provides no
 
 | Pattern | Mechanism | Frequency |
 |---|---|---|
-| [Conflicting Feedback](failures/conflicting-feedback.md) | Different reviewers prefer different behaviors, averaging into confused updates | Occasional |
-| [Delayed Outcome Attribution](failures/delayed-outcome-attribution.md) | Business outcome arrives too late to attribute causally to agent action | Occasional |
-| [Feedback Ambiguity](failures/feedback-ambiguity.md) | Feedback signal is insufficient to guide improvement without explicit direction | Occasional |
-| [Feedback Sparsity](failures/feedback-sparsity.md) | Agent actions get labeled too infrequently to provide learning signal | Occasional |
-| [Learning From Bad Feedback](failures/learning-from-bad-feedback.md) | Agent optimizes behavior toward incorrect or noisy feedback | Common |
-| [Metric-Only Learning](failures/metric-only-learning.md) | Agent optimizes metrics while violating policy or quality constraints | Rare but Catastrophic |
-| [No Improvement Audit](failures/no-improvement-audit.md) | Cannot explain what changed and why after an update ships | Common |
-| [No Root-Cause Separation](failures/no-root-cause-separation.md) | Fix targets symptom (prompt) when root cause was different (retrieval, policy) | Common |
-| [Overfitting To Incidents](failures/overfitting-to-incidents.md) | Single-case fix damages unrelated general behavior | Common |
-| [Unsafe Auto-Update](failures/unsafe-auto-update.md) | Agent self-updates behavior without approval or validation | Rare but Catastrophic |
-| [Unvalidated Improvement](failures/unvalidated-improvement.md) | Update deploys to production without regression proof or pre-deployment eval | Rare but Catastrophic |
-| [Wrong Fix Target](failures/wrong-fix-target.md) | Update targets wrong component; root-cause was in data, retrieval, or schema | Common |
+| Conflicting Feedback | Different reviewers prefer different behaviors, averaging into confused updates | Occasional |
+| Delayed Outcome Attribution | Business outcome arrives too late to attribute causally to agent action | Occasional |
+| Feedback Ambiguity | Feedback signal is insufficient to guide improvement without explicit direction | Occasional |
+| Feedback Sparsity | Agent actions get labeled too infrequently to provide learning signal | Occasional |
+| Learning From Bad Feedback | Agent optimizes behavior toward incorrect or noisy feedback | Common |
+| Metric-Only Learning | Agent optimizes metrics while violating policy or quality constraints | Rare but Catastrophic |
+| No Improvement Audit | Cannot explain what changed and why after an update ships | Common |
+| No Root-Cause Separation | Fix targets symptom (prompt) when root cause was different (retrieval, policy) | Common |
+| Overfitting To Incidents | Single-case fix damages unrelated general behavior | Common |
+| Unsafe Auto-Update | Agent self-updates behavior without approval or validation | Rare but Catastrophic |
+| Unvalidated Improvement | Update deploys to production without regression proof or pre-deployment eval | Rare but Catastrophic |
+| Wrong Fix Target | Update targets wrong component; root-cause was in data, retrieval, or schema | Common |
 
 **Total: 12 patterns**
 

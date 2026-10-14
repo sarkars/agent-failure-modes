@@ -50,10 +50,10 @@ Leveling-framework errors affect the computed band (wrong precedent selection, w
 
 | Pattern | Mechanism |
 |---|---|
-| [Stale Training-Corpus Comp Benchmarks Override Live Market Data](failures/stale-training-corpus-comp-benchmarks-override-live-market-data.md) | Agent answers market-rate questions from pretraining knowledge instead of calling live benchmarking tool, producing offers anchored to outdated figures |
-| [Embedding Retrieval Pulls Mismatched Job-Family Leveling Precedent for Offer Band](failures/embedding-retrieval-pulls-mismatched-job-family-leveling-precedent-for-offer-band.md) | Precedent retrieval by text similarity surfaces a role from a different leveling framework, misaligning the computed offer band |
-| [Multi-Agent Handoff Drops Negotiated Visa-Tied Remote Exception Before Offer-Letter Generation](failures/multi-agent-handoff-drops-negotiated-visa-tied-remote-exception-before-offer-letter-generation.md) | Recruiting coordinator negotiates a visa-contingent remote-work exception that exists only in free-text notes, not in structured offer parameters; offer letter omits it |
-| [Offer Letter Auto-Sent Without Rechecking Live Background-Check Gate Status](failures/offer-letter-auto-sent-without-rechecking-live-background-check-gate-status.md) | Offer sent based on background-check item disappearing from agent's task list (not re-queried) rather than confirming actual "clear" status from vendor's live API |
+| Stale Training-Corpus Comp Benchmarks Override Live Market Data | Agent answers market-rate questions from pretraining knowledge instead of calling live benchmarking tool, producing offers anchored to outdated figures |
+| Embedding Retrieval Pulls Mismatched Job-Family Leveling Precedent for Offer Band | Precedent retrieval by text similarity surfaces a role from a different leveling framework, misaligning the computed offer band |
+| Multi-Agent Handoff Drops Negotiated Visa-Tied Remote Exception Before Offer-Letter Generation | Recruiting coordinator negotiates a visa-contingent remote-work exception that exists only in free-text notes, not in structured offer parameters; offer letter omits it |
+| Offer Letter Auto-Sent Without Rechecking Live Background-Check Gate Status | Offer sent based on background-check item disappearing from agent's task list (not re-queried) rather than confirming actual "clear" status from vendor's live API |
 
 **Total: 4 patterns**
 

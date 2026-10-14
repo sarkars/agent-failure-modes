@@ -10,12 +10,12 @@ Shared metrics the patterns below report against. Targets are starting points to
 | Metric | Target | Defined in |
 |---|---|---|
 | Expert-audited recall on true crisis cases | Set with clinicians; start over 95% | [missed crisis signals](failures/missed-crisis-signals.md) |
-| Crisis activations that reached a human | Over 95% | [missed crisis signals](failures/missed-crisis-signals.md) |
+| Crisis activations that reached a human | Over 95% | missed crisis signals |
 
 ## Patterns
 | Pattern | One line |
 |---|---|
-| [Missed crisis signals](failures/missed-crisis-signals.md) | Carries on with the task while a user signals crisis |
+| Missed crisis signals | Carries on with the task while a user signals crisis |
 
 ## Planned (not yet written)
 - Elderly or cognitively impaired users

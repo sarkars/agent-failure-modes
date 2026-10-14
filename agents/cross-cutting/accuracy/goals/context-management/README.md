@@ -45,14 +45,14 @@ Instruction conflicts (safety constraints violated due to user-level contradicti
 
 | Pattern | Mechanism |
 |---------|-----------|
-| [Conflicting Instructions](failures/conflicting-instructions.md) | Multiple instruction sources contradict; agent resolves unpredictably without declared hierarchy |
-| [Context Overflow](failures/context-overflow.md) | Document or conversation exceeds window limit; early critical requirements forgotten |
-| [Cross-Session Confusion](failures/cross-session-confusion.md) | Context from prior session leaks into new conversation; agent applies outdated decisions |
-| [Instruction Drift](failures/instruction-drift.md) | Constraint weakens gradually over long conversation as instructions become proportionally smaller in context |
-| [Long-Session Context Loss](failures/long-session-context-loss-violates-earlier-constraints.md) | Explicit constraints from early turns are truncated; agent violates them later in long sessions |
-| [Lost State](failures/lost-state.md) | Agent loses track of decisions/state made earlier in conversation; repeats questions or contradicts earlier answers |
-| [Memory Corruption](failures/memory-corruption.md) | Agent's tracked state becomes inconsistent or wrong; downstream logic that depends on state produces errors |
-| [State Awareness](failures/state-awareness.md) | Agent loses awareness of its own state or role; becomes confused about what it's supposed to be tracking or doing |
+| Conflicting Instructions | Multiple instruction sources contradict; agent resolves unpredictably without declared hierarchy |
+| Context Overflow | Document or conversation exceeds window limit; early critical requirements forgotten |
+| Cross-Session Confusion | Context from prior session leaks into new conversation; agent applies outdated decisions |
+| Instruction Drift | Constraint weakens gradually over long conversation as instructions become proportionally smaller in context |
+| Long-Session Context Loss | Explicit constraints from early turns are truncated; agent violates them later in long sessions |
+| Lost State | Agent loses track of decisions/state made earlier in conversation; repeats questions or contradicts earlier answers |
+| Memory Corruption | Agent's tracked state becomes inconsistent or wrong; downstream logic that depends on state produces errors |
+| State Awareness | Agent loses awareness of its own state or role; becomes confused about what it's supposed to be tracking or doing |
 
 **Total: 8 patterns**
 
@@ -60,4 +60,4 @@ Instruction conflicts (safety constraints violated due to user-level contradicti
 
 - [Evaluation Reliability](../evaluation-reliability/) — golden-data problems that can surface context-management issues in testing
 - [Verification](../verification/) — testing approaches that catch context-management failures
-- [Output Accuracy](../output-accuracy/) — hallucination and confidence issues, separate from context-handling problems
+- Output Accuracy — hallucination and confidence issues, separate from context-handling problems

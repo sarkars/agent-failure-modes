@@ -13,7 +13,7 @@
 
 - **Prompt Injection and Jailbreak** — [chatbot-manipulation](failures/chatbot-manipulation.md), [prompt-injection](failures/prompt-injection.md), [agent-injection](failures/agent-injection.md). Adversarial input in user messages convinces agents to ignore safety guidelines, execute unauthorized operations, or reveal sensitive information.
 - **Excessive Agency and Permission Escalation** — [excessive-agency](failures/excessive-agency.md), [privilege-escalation](failures/privilege-escalation.md), [over-scoped-permissions](failures/over-scoped-permissions.md), [unauthorized-actions](failures/unauthorized-actions.md). Agents take actions, escalate permissions, or invoke tools without proper authorization checks, discovered only post-hoc via audit.
-- **Memory Poisoning and Autonomous Attack** — [memory-poisoning](failures/memory-poisoning.md), [autonomous-system-safety](failures/autonomous-system-safety.md). Attackers inject malicious instructions into agent memory/knowledge-base that agents execute autonomously without user oversight.
+- **Memory Poisoning and Autonomous Attack** — [memory-poisoning](../../../operations/goals/memory-safety/failures/memory-poisoning.md), [autonomous-system-safety](failures/autonomous-system-safety.md). Attackers inject malicious instructions into agent memory/knowledge-base that agents execute autonomously without user oversight.
 - **Audit Evasion and Log Manipulation** — [audit-evasion](failures/audit-evasion.md), [output-manipulation](failures/output-manipulation.md). Agents or attackers manipulate audit logs to hide unauthorized operations, preventing detection of safety violations.
 - **Human-Loop Bypass** — [human-loop-bypass](failures/human-loop-bypass.md), [insufficient-isolation](failures/insufficient-isolation.md). Agents designed to require human approval for sensitive operations instead bypass approval workflows via state corruption or permission escalation.
 - **Supply-Chain and Data Integrity** — [supply-chain](failures/supply-chain.md), [data-provenance-loss](failures/data-provenance-loss.md), [credential-exposure](failures/credential-exposure.md), [data-leakage](failures/data-leakage.md), [shadow-ai-exposure](failures/shadow-ai-exposure.md), [shutdown-resistance](failures/shutdown-resistance.md). Malicious dependencies, poisoned model weights, compromised knowledge-base sources, or exposed credentials introduce unsafe behavior.
@@ -46,25 +46,25 @@ Log integrity checks (cryptographic signing, append-only logs, out-of-process lo
 
 | Pattern | Mechanism | Frequency |
 |---|---|---|
-| [Agent Injection](failures/agent-injection.md) | Attackers inject malicious instructions via agent communication | Common |
-| [Audit Evasion](failures/audit-evasion.md) | Agent or attacker manipulates audit logs to hide operations | Occasional |
-| [Autonomous System Safety](failures/autonomous-system-safety.md) | Autonomous agent violates safety constraints without human oversight | Occasional |
-| [Chatbot Manipulation](failures/chatbot-manipulation.md) | Attackers manipulate chatbot via prompt injection or jailbreak | Common |
-| [Credential Exposure](failures/credential-exposure.md) | Credentials leak via agent reasoning, logs, or error messages | Common |
-| [Data Leakage](failures/data-leakage.md) | Agent reveals sensitive data via output, logs, or side-channels | Common |
-| [Data Provenance Loss](failures/data-provenance-loss.md) | Cannot trace origin of data in agent reasoning or output | Occasional |
-| [Excessive Agency](failures/excessive-agency.md) | Agent takes unauthorized actions without approval checks | Common |
-| [Human Loop Bypass](failures/human-loop-bypass.md) | Agent bypasses required human approval for sensitive operations | Occasional |
-| [Insufficient Isolation](failures/insufficient-isolation.md) | Agent state not isolated from untrusted input or other agents | Occasional |
-| [Memory Poisoning](failures/memory-poisoning.md) | Attackers poison agent memory to manipulate behavior | Common |
-| [Output Manipulation](failures/output-manipulation.md) | Agent output is manipulated without detection | Occasional |
-| [Over Scoped Permissions](failures/over-scoped-permissions.md) | Agents have overly broad permissions enabling unauthorized actions | Common |
-| [Privilege Escalation](failures/privilege-escalation.md) | Agent escalates permissions to perform unauthorized operations | Occasional |
-| [Prompt Injection](failures/prompt-injection.md) | Adversarial input causes agent to ignore safety guidelines | Common |
-| [Shadow AI Exposure](failures/shadow-ai-exposure.md) | Unregistered or unauthorized agents operate outside oversight | Occasional |
-| [Shutdown Resistance](failures/shutdown-resistance.md) | Agent resists or circumvents shutdown commands | Rare |
-| [Supply Chain](failures/supply-chain.md) | Malicious dependencies or compromised weights introduce unsafe behavior | Occasional |
-| [Unauthorized Actions](failures/unauthorized-actions.md) | Agent performs actions without proper authorization | Common |
+| Agent Injection | Attackers inject malicious instructions via agent communication | Common |
+| Audit Evasion | Agent or attacker manipulates audit logs to hide operations | Occasional |
+| Autonomous System Safety | Autonomous agent violates safety constraints without human oversight | Occasional |
+| Chatbot Manipulation | Attackers manipulate chatbot via prompt injection or jailbreak | Common |
+| Credential Exposure | Credentials leak via agent reasoning, logs, or error messages | Common |
+| Data Leakage | Agent reveals sensitive data via output, logs, or side-channels | Common |
+| Data Provenance Loss | Cannot trace origin of data in agent reasoning or output | Occasional |
+| Excessive Agency | Agent takes unauthorized actions without approval checks | Common |
+| Human Loop Bypass | Agent bypasses required human approval for sensitive operations | Occasional |
+| Insufficient Isolation | Agent state not isolated from untrusted input or other agents | Occasional |
+| Memory Poisoning | Attackers poison agent memory to manipulate behavior | Common |
+| Output Manipulation | Agent output is manipulated without detection | Occasional |
+| Over Scoped Permissions | Agents have overly broad permissions enabling unauthorized actions | Common |
+| Privilege Escalation | Agent escalates permissions to perform unauthorized operations | Occasional |
+| Prompt Injection | Adversarial input causes agent to ignore safety guidelines | Common |
+| Shadow AI Exposure | Unregistered or unauthorized agents operate outside oversight | Occasional |
+| Shutdown Resistance | Agent resists or circumvents shutdown commands | Rare |
+| Supply Chain | Malicious dependencies or compromised weights introduce unsafe behavior | Occasional |
+| Unauthorized Actions | Agent performs actions without proper authorization | Common |
 
 **Total: 19 patterns**
 

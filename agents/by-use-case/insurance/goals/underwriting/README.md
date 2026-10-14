@@ -28,13 +28,13 @@ The same three structural failures documented across claim processing, fraud det
 ## Frequently Asked Questions
 
 ### Can two occupations with similar job titles belong to different risk classes?
-Yes. "Field service technician" can refer to a low-hazard role (telecom cabling, indoor work) or a high-hazard role (industrial refrigeration repair with platform work and hazardous materials). Classification by job-title lexical similarity alone misses the hazard-profile differences and can misapply rate factors. See [Embedding-Retrieval Applies Wrong Occupation-Class Rate Precedent by Lexical Similarity](failures/embedding-retrieval-applies-wrong-occupation-class-rate-precedent-by-lexical-similarity.md).
+Yes. "Field service technician" can refer to a low-hazard role (telecom cabling, indoor work) or a high-hazard role (industrial refrigeration repair with platform work and hazardous materials). Classification by job-title lexical similarity alone misses the hazard-profile differences and can misapply rate factors. See Embedding-Retrieval Applies Wrong Occupation-Class Rate Precedent by Lexical Similarity.
 
 ### How does an inspection-flagged hazard get lost between underwriting and policy binding?
-If the underwriting agent's risk narrative notes a flagged hazard requiring a rider, but the structured binding schema has no field for "inspection-identified riders," the finding never reaches the policy-issuance agent. The fix is adding a structured rider-requirement field and reconciliation against upstream narratives. See [Multi-Agent Handoff Drops Inspection-Flagged Hazard Before Policy Binding](failures/multi-agent-handoff-drops-inspection-flagged-hazard-before-policy-binding.md).
+If the underwriting agent's risk narrative notes a flagged hazard requiring a rider, but the structured binding schema has no field for "inspection-identified riders," the finding never reaches the policy-issuance agent. The fix is adding a structured rider-requirement field and reconciliation against upstream narratives. See Multi-Agent Handoff Drops Inspection-Flagged Hazard Before Policy Binding.
 
 ### Should an underwriting agent know a property's flood zone without looking it up?
-No. Flood zones, wildfire tiers, and hurricane exposure bands are remapped periodically by authoritative sources (FEMA, state agencies), and the agent's memorized geographic knowledge reflects data from its training cutoff. The fix is a forced mapping/catastrophe-model tool call for every risk-zone-relevant field. See [Stale Training-Corpus Catastrophe-Zone Data Overrides Live Feed](failures/stale-training-corpus-catastrophe-zone-data-overrides-live-feed.md).
+No. Flood zones, wildfire tiers, and hurricane exposure bands are remapped periodically by authoritative sources (FEMA, state agencies), and the agent's memorized geographic knowledge reflects data from its training cutoff. The fix is a forced mapping/catastrophe-model tool call for every risk-zone-relevant field. See Stale Training-Corpus Catastrophe-Zone Data Overrides Live Feed.
 
 ### How do you verify an occupational classification is hazard-appropriate?
 Compare the applicant's stated duty description against the retrieved precedent case's duty description using structured hazard-attribute tags (work environment, hazard exposure category, equipment handled), not just job-title text similarity.
@@ -43,9 +43,9 @@ Compare the applicant's stated duty description against the retrieved precedent 
 
 | Pattern | Mechanism |
 |---|---|
-| [Embedding-Retrieval Applies Wrong Occupation-Class Rate Precedent by Lexical Similarity](failures/embedding-retrieval-applies-wrong-occupation-class-rate-precedent-by-lexical-similarity.md) | Occupation retrieved by job-title text similarity without verifying hazard-attribute match against applicant's duties |
-| [Multi-Agent Handoff Drops Inspection-Flagged Hazard Before Policy Binding](failures/multi-agent-handoff-drops-inspection-flagged-hazard-before-policy-binding.md) | Underwriting-assistant identifies hazard in risk narrative; binding schema has no field for inspection-flagged riders |
-| [Stale Training-Corpus Catastrophe-Zone Data Overrides Live Feed](failures/stale-training-corpus-catastrophe-zone-data-overrides-live-feed.md) | Agent assigns risk zone from memorized training-era data instead of querying live catastrophe-modeling or mapping tool |
+| Embedding-Retrieval Applies Wrong Occupation-Class Rate Precedent by Lexical Similarity | Occupation retrieved by job-title text similarity without verifying hazard-attribute match against applicant's duties |
+| Multi-Agent Handoff Drops Inspection-Flagged Hazard Before Policy Binding | Underwriting-assistant identifies hazard in risk narrative; binding schema has no field for inspection-flagged riders |
+| Stale Training-Corpus Catastrophe-Zone Data Overrides Live Feed | Agent assigns risk zone from memorized training-era data instead of querying live catastrophe-modeling or mapping tool |
 
 **Total: 3 patterns**
 

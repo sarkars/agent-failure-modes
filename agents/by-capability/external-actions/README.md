@@ -34,6 +34,6 @@ Start with what went wrong: if the agent shouldn't have been able to act at all,
 
 ## Related Categories
 
-- [Domain Expertise](../domain-expertise/) — the judgment failures (rule misses, authority overreach) that often precede a policy-violating or unauthorized action
+- Domain Expertise — the judgment failures (rule misses, authority overreach) that often precede a policy-violating or unauthorized action
 - [Task Planning](../task-planning/) — the planning-time gaps (no-rollback-plan, missing-prerequisite-step) that directly cause several action-execution failures downstream
 - [Multi-Agent Systems](../multi-agent-systems/) — coordination failures between multiple agents that can independently trigger the same external action, compounding duplicate-action risk

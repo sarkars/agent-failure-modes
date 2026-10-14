@@ -51,16 +51,16 @@ Debt obligations should be extracted from three sources: (1) credit report (most
 
 | Pattern | Mechanism |
 |---|---|
-| [Income Calculation Errors](failures/income-calculation-errors.md) | W-2 annualization, YTD pay-stub annualization bias, self-employment income averaging, commission/bonus handling, seasonal income interpretation |
-| [Asset Verification Failures](failures/asset-verification-failures.md) | Bank-balance extraction, account-type misclassification (liquid vs. retirement), gifted-down-payment source undocumented, asset value extraction from statements |
-| [Employment History Gaps](failures/employment-history-gaps.md) | Gap identification >60 days, employment-date extraction (start/end), employer-name variation, gap-explanation documentation |
-| [Property Value Extraction](failures/property-value-extraction.md) | Appraised-value extraction error, appraisal-date outdatedness, property-address extraction, prior-sale-price confusion |
-| [Tax Return Parsing Errors](failures/tax-return-parsing-errors.md) | Form-type variation (1040, 1040-SR, 1040-NR), schedule-extraction errors (Schedule C, Schedule E), income-line misidentification, deduction-line confusion |
-| [Bank Statement Misreads](failures/bank-statement-misreads.md) | Balance-extraction error, statement-date misidentification, account-number extraction, transaction-type misclassification |
-| [W-2 Form Extraction Failures](failures/w2-form-extraction.md) | Box-1-income extraction OCR error, Box-2-withholding misread, employer-name extraction, state-tax discrepancy |
-| [Debt Obligation Detection](failures/debt-obligation-detection.md) | Mortgage-liability not detected (omitted from credit report), lien-amount mismatch, existing-debt undisclosed, HELOC balance overlooked |
-| [Name and SSN Mismatches](failures/name-ssn-mismatches.md) | SSN extraction error (digit reversal, partial read), name-variation extraction (maiden name, suffix), OCR confidence on high-risk fields |
-| [Address Standardization Failures](failures/address-standardization.md) | Mailing vs. property address confusion, prior-address extraction, address-parsing error (street/city/state/zip), suffix standardization (St. vs. Street) |
+| Income Calculation Errors | W-2 annualization, YTD pay-stub annualization bias, self-employment income averaging, commission/bonus handling, seasonal income interpretation |
+| Asset Verification Failures | Bank-balance extraction, account-type misclassification (liquid vs. retirement), gifted-down-payment source undocumented, asset value extraction from statements |
+| Employment History Gaps | Gap identification >60 days, employment-date extraction (start/end), employer-name variation, gap-explanation documentation |
+| Property Value Extraction | Appraised-value extraction error, appraisal-date outdatedness, property-address extraction, prior-sale-price confusion |
+| Tax Return Parsing Errors | Form-type variation (1040, 1040-SR, 1040-NR), schedule-extraction errors (Schedule C, Schedule E), income-line misidentification, deduction-line confusion |
+| Bank Statement Misreads | Balance-extraction error, statement-date misidentification, account-number extraction, transaction-type misclassification |
+| W-2 Form Extraction Failures | Box-1-income extraction OCR error, Box-2-withholding misread, employer-name extraction, state-tax discrepancy |
+| Debt Obligation Detection | Mortgage-liability not detected (omitted from credit report), lien-amount mismatch, existing-debt undisclosed, HELOC balance overlooked |
+| Name and SSN Mismatches | SSN extraction error (digit reversal, partial read), name-variation extraction (maiden name, suffix), OCR confidence on high-risk fields |
+| Address Standardization Failures | Mailing vs. property address confusion, prior-address extraction, address-parsing error (street/city/state/zip), suffix standardization (St. vs. Street) |
 
 **Total: 10 patterns**
 

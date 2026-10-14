@@ -48,9 +48,9 @@ Automatic rollback can catch acute regressions post-deployment, but many safe-le
 
 | Goal | Patterns | Focus |
 |---|---|---|
-| [Safe Learning](goals/safe-learning/) | 12 | Persistent behavior updates driven by feedback, metrics, or self-improvement; validation gates and audit trails |
-| [Feedback and Adaptation](goals/feedback-and-adaptation/) | — | Iterative refinement through explicit corrections; feedback interpretation and consistency |
-| [In-Context Learning](goals/in-context-learning/) | — | Example-based pattern learning within conversation; example attendance and context-window awareness |
+| Safe Learning | 12 | Persistent behavior updates driven by feedback, metrics, or self-improvement; validation gates and audit trails |
+| Feedback and Adaptation | — | Iterative refinement through explicit corrections; feedback interpretation and consistency |
+| In-Context Learning | — | Example-based pattern learning within conversation; example attendance and context-window awareness |
 
 **Total: 12 documented patterns**
 
@@ -59,5 +59,5 @@ Empty scaffold folders with no patterns yet: Jailbreak-Resistance, Output-Filter
 ## Related Categories
 
 - [Accuracy](../) — how agents produce correct outputs; learning failures are a cause of accuracy loss when agents adapt to wrong signals.
-- [Safety & Security](../) — security-specific attack vectors; safe-learning failures can be weaponized by adversaries injecting corrupted feedback or training data.
-- [Operations](../) — monitoring and observability; learning requires instrumentation to detect failures early, which overlaps with operational monitoring and alerting.
+- Safety & Security — security-specific attack vectors; safe-learning failures can be weaponized by adversaries injecting corrupted feedback or training data.
+- Operations — monitoring and observability; learning requires instrumentation to detect failures early, which overlaps with operational monitoring and alerting.

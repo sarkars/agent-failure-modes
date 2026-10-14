@@ -30,25 +30,25 @@ Monitoring failures occur because the agent treats a gap in signal availability 
 ## Frequently Asked Questions
 
 ### How do you catch rare but critical errors when logs are sampled?
-Use adaptive, error-aware sampling that retains error-level and anomalous events at much higher rates than routine logs, rather than uniform sampling. Sampled pipelines should attach sampling-rate metadata to query results so downstream consumers (humans or agents) can see how much data may have been dropped. See [Log Sampling Blind Spot in Agent-Driven Root Cause Analysis](failures/log-sampling-blind-spot.md).
+Use adaptive, error-aware sampling that retains error-level and anomalous events at much higher rates than routine logs, rather than uniform sampling. Sampled pipelines should attach sampling-rate metadata to query results so downstream consumers (humans or agents) can see how much data may have been dropped. See Log Sampling Blind Spot in Agent-Driven Root Cause Analysis.
 
 ### What causes a metric storage system to crash or become unusable?
-Unbounded label values create combinatorial explosion — a single metric with a few labels and millions of unique values in one dimension grows from kilobytes to gigabytes without any indication until storage runs out. Cardinality must be bounded by policy and monitored with alerts well before system limits are approached. See [Metric Cardinality Explosion & Storage Overflow](failures/metric-cardinality-explosion.md).
+Unbounded label values create combinatorial explosion — a single metric with a few labels and millions of unique values in one dimension grows from kilobytes to gigabytes without any indication until storage runs out. Cardinality must be bounded by policy and monitored with alerts well before system limits are approached. See Metric Cardinality Explosion & Storage Overflow.
 
 ### Can you suppress a false-positive alert by name without affecting genuine incidents?
-Only if the suppression is scoped to specific conditions (time window, source job, threshold range) and automatically expires or requires re-validation. A blanket suppress-by-name flag will silence any future firing of that alert name, including when the same-named alert fires for a completely different, genuine cause. See [Multi-Agent Handoff Drops Suppression Scope Between Triage and Auto-Remediation Agent](failures/multi-agent-handoff-drops-suppression-scope-between-triage-and-auto-remediation-agent.md).
+Only if the suppression is scoped to specific conditions (time window, source job, threshold range) and automatically expires or requires re-validation. A blanket suppress-by-name flag will silence any future firing of that alert name, including when the same-named alert fires for a completely different, genuine cause. See Multi-Agent Handoff Drops Suppression Scope Between Triage and Auto-Remediation Agent.
 
 ### What happens to an alert when the metric it monitors is renamed?
-The alert rule continues querying the old name, gets an empty result set, and the agent's logic (if it does not distinguish "empty result" from "value is zero") treats it as healthy. The alert becomes silently disabled until either a downstream effect surfaces the miss or an audit detects the query mismatch. See [Renamed Metric Empty Result Read as Healthy Zero](failures/renamed-metric-empty-result-read-as-healthy-zero.md).
+The alert rule continues querying the old name, gets an empty result set, and the agent's logic (if it does not distinguish "empty result" from "value is zero") treats it as healthy. The alert becomes silently disabled until either a downstream effect surfaces the miss or an audit detects the query mismatch. See Renamed Metric Empty Result Read as Healthy Zero.
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [Log Sampling Blind Spot in Agent-Driven Root Cause Analysis](failures/log-sampling-blind-spot.md) | Uniform log sampling drops rare, high-signal errors disproportionately, producing incomplete RCA |
-| [Metric Cardinality Explosion & Storage Overflow](failures/metric-cardinality-explosion.md) | Unbounded label values create combinatorial explosion, overwhelming storage and making monitoring unusable |
-| [Multi-Agent Handoff Drops Suppression Scope Between Triage and Auto-Remediation Agent](failures/multi-agent-handoff-drops-suppression-scope-between-triage-and-auto-remediation-agent.md) | Triage determines narrow false-positive scope but suppression record carries only alert name, applied unconditionally |
-| [Renamed Metric Empty Result Read as Healthy Zero](failures/renamed-metric-empty-result-read-as-healthy-zero.md) | Metric renamed during schema migration; agent conflates empty query result with healthy zero value |
+| Log Sampling Blind Spot in Agent-Driven Root Cause Analysis | Uniform log sampling drops rare, high-signal errors disproportionately, producing incomplete RCA |
+| Metric Cardinality Explosion & Storage Overflow | Unbounded label values create combinatorial explosion, overwhelming storage and making monitoring unusable |
+| Multi-Agent Handoff Drops Suppression Scope Between Triage and Auto-Remediation Agent | Triage determines narrow false-positive scope but suppression record carries only alert name, applied unconditionally |
+| Renamed Metric Empty Result Read as Healthy Zero | Metric renamed during schema migration; agent conflates empty query result with healthy zero value |
 
 **Total: 4 patterns**
 

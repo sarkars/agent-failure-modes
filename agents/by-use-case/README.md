@@ -12,12 +12,12 @@ Use this section when planning for a specific domain:
 
 | Industry / Domain | Description | Key Risks | Patterns |
 |---|---|---|---|
-| [Healthcare](healthcare/) | Diagnosis, treatment planning, drug interactions, clinical safety | Patient safety, liability, regulatory compliance, treatment contraindications | 48 |
+| Healthcare | Diagnosis, treatment planning, drug interactions, clinical safety | Patient safety, liability, regulatory compliance, treatment contraindications | 48 |
 | [Mortgage Documents](mortgage-documents/) | Document OCR, fraud detection, income verification, compliance validation | Loan qualification errors, fraud, TRID timing, income miscalculation | 62 |
-| [Financial Services](financial-services/) | Portfolio analysis, trading, market data, regulatory compliance | Market bias, regulatory breaches, position mismatches, trading errors | 44 |
-| [Support Services](support-services/) | Ticket routing, KB freshness, escalation, SLA management | Routing misses, KB staleness, escalation miscalibration, over-automation | 32 |
+| Financial Services | Portfolio analysis, trading, market data, regulatory compliance | Market bias, regulatory breaches, position mismatches, trading errors | 44 |
+| Support Services | Ticket routing, KB freshness, escalation, SLA management | Routing misses, KB staleness, escalation miscalibration, over-automation | 32 |
 | [Supply Chain](supply-chain/) | Demand forecasting, supplier risk, inventory optimization | Bullwhip effect, forecast drift, supplier bias, planning cascades | 31 |
-| [Legal Contracts](legal-contracts/) | Risk detection, jurisdiction handling, amendment compliance | Missed clauses, jurisdiction traps, regulatory misses, liability exposure | 39 |
+| Legal Contracts | Risk detection, jurisdiction handling, amendment compliance | Missed clauses, jurisdiction traps, regulatory misses, liability exposure | 39 |
 | [Content Marketing](content-marketing/) | Engagement prediction, trending topics, SEO, content decay | Trending drift, engagement hallucination, SEO miscalibration, staleness | 23 |
 | [HR Recruiting](hr-recruiting/) | Resume screening, candidate assessment, bias detection, culture fit | Screening bias, skill miscalibration, discrimination, undervaluation | 24 |
 | [Sales CRM](sales-crm/) | Lead qualification, pipeline forecasting, discount pressure | Qualification gaming, forecast inflation, discount authorization drift | 21 |
@@ -32,7 +32,7 @@ Use this section when planning for a specific domain:
 
 ### Scenario: "I'm Building an AI Agent for Healthcare — Where Do I Start?"
 
-1. **Start with your domain** — [Healthcare](healthcare/) has 48 patterns covering diagnosis, treatment planning, drug interactions, and safety-specific failures.
+1. **Start with your domain** — Healthcare has 48 patterns covering diagnosis, treatment planning, drug interactions, and safety-specific failures.
 2. **Match your specific function** — Is your agent diagnosing, recommending treatment, or checking drug interactions? Each has distinct failure patterns.
 3. **Layer in capability patterns** — Your healthcare agent likely uses [Knowledge Retrieval](../by-capability/knowledge-retrieval/) (medical literature), [Reasoning & Thought](../by-capability/reasoning-and-thought/) (differential diagnosis), or [External Actions](../by-capability/external-actions/) (EHR queries). Check those sections too.
 4. **Add cross-cutting foundation** — Layer in [Accuracy](../cross-cutting/accuracy/) (hallucination, knowledge staleness), [Security](../cross-cutting/security/) (patient data protection), and [Operations](../cross-cutting/operations/) (cost, monitoring).
@@ -41,7 +41,7 @@ Use this section when planning for a specific domain:
 
 ### Scenario: "We're Building a Mortgage-Processing Agent. What Can Go Wrong?"
 
-1. **Start with domain** — [Mortgage Documents](mortgage-documents/) has 62 patterns covering document OCR, income verification, fraud detection, and compliance.
+1. **Start with domain** — Mortgage Documents has 62 patterns covering document OCR, income verification, fraud detection, and compliance.
 2. **Identify the sub-domain** — Are you focusing on document OCR (extraction failures), fraud detection (model gaming), income verification (data accuracy), or compliance (TRID timing)?
 3. **Layer in capability patterns** — Mortgage processing is heavily [Document Processing](../by-capability/document-processing/) (OCR, layout preservation, multimodal reliability).
 4. **Consider regulatory risk** — [Governance](../cross-cutting/governance/) covers compliance auditing and liability.
@@ -50,9 +50,9 @@ Use this section when planning for a specific domain:
 
 ### Scenario: "Our Support Agent Keeps Routing Tickets Wrong. What's Happening?"
 
-1. **Start with domain** — [Support Services](support-services/) covers routing misses, KB staleness, and escalation patterns.
-2. **Check the pattern** — [Routing mismatch](support-services/) typically involves [Knowledge Retrieval](../by-capability/knowledge-retrieval/) (KB ranking) or [Reasoning & Thought](../by-capability/reasoning-and-thought/) (ticket complexity estimation).
-3. **Cross-reference** — [Customer Service](customer-service/) has specific patterns for canned-response selection that may apply to your routing problem.
+1. **Start with domain** — Support Services covers routing misses, KB staleness, and escalation patterns.
+2. **Check the pattern** — Routing mismatch typically involves Knowledge Retrieval (KB ranking) or Reasoning & Thought (ticket complexity estimation).
+3. **Cross-reference** — Customer Service has specific patterns for canned-response selection that may apply to your routing problem.
 
 **Result**: You diagnose whether the issue is KB staleness, ranking algorithm failure, or skill-based routing miscalibration.
 
@@ -62,12 +62,12 @@ Use this section when planning for a specific domain:
 
 | Primary Risk | Entry Point |
 |---|---|
-| Patient or customer safety | [Healthcare](healthcare/), [Financial Services](financial-services/), [Legal Contracts](legal-contracts/) |
-| Regulatory compliance or audit | [Financial Services](financial-services/), [Mortgage Documents](mortgage-documents/), [Legal Contracts](legal-contracts/) |
-| Financial loss (fraud, miscalibration) | [Financial Services](financial-services/), [Insurance](insurance/), [Mortgage Documents](mortgage-documents/) |
-| Operational efficiency (routing, automation) | [Support Services](support-services/), [HR Recruiting](hr-recruiting/), [Sales CRM](sales-crm/) |
-| Content quality or engagement | [Content Marketing](content-marketing/), [Customer Service](customer-service/), [Agent Interaction](agent-interaction/) |
-| Supply chain or infrastructure | [Supply Chain](supply-chain/), [DevOps](devops/) |
+| Patient or customer safety | Healthcare, Financial Services, Legal Contracts |
+| Regulatory compliance or audit | Financial Services, Mortgage Documents, Legal Contracts |
+| Financial loss (fraud, miscalibration) | Financial Services, Insurance, Mortgage Documents |
+| Operational efficiency (routing, automation) | Support Services, HR Recruiting, Sales CRM |
+| Content quality or engagement | Content Marketing, Customer Service, Agent Interaction |
+| Supply chain or infrastructure | Supply Chain, DevOps |
 
 ## Frequently Asked Questions
 
@@ -102,9 +102,9 @@ The pattern applies everywhere; the configuration is domain-specific.
 
 No. Complexity varies by regulatory burden, financial stakes, and multi-step orchestration:
 
-- [Mortgage Documents](mortgage-documents/) (62 patterns) — High regulatory burden, financial stakes, document complexity
-- [Healthcare](healthcare/) (48 patterns) — High safety stakes, complex clinical reasoning
-- [Financial Services](financial-services/) (44 patterns) — Regulatory compliance, market dynamics, portfolio complexity
+- Mortgage Documents (62 patterns) — High regulatory burden, financial stakes, document complexity
+- Healthcare (48 patterns) — High safety stakes, complex clinical reasoning
+- Financial Services (44 patterns) — Regulatory compliance, market dynamics, portfolio complexity
 
 Simpler domains may have fewer documented patterns not because they're safer, but because the failure modes are more obvious or less extensively studied.
 

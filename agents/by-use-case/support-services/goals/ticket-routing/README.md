@@ -36,33 +36,33 @@ Every ticket-routing pattern documented here reflects a mismatch between what th
 ## Frequently Asked Questions
 
 ### How do you verify a ticket is routed to a provisioned product line?
-Query the account's provisioning record against the classified product line before routing finalizes; block routing to unprovisioned products regardless of taxonomy-similarity scores. See [Embedding Retrieval Misroutes Ticket via Similarity to Wrong Product-Line Taxonomy Node](failures/embedding-retrieval-misroutes-ticket-via-similarity-to-wrong-product-line-taxonomy-node.md).
+Query the account's provisioning record against the classified product line before routing finalizes; block routing to unprovisioned products regardless of taxonomy-similarity scores. See Embedding Retrieval Misroutes Ticket via Similarity to Wrong Product-Line Taxonomy Node.
 
 ### Can keyword-based complexity prediction route high-effort tickets correctly?
-No. Routing models trained on successfully-resolved tickets develop a baseline bias toward the most common resolution path (tier-1). A separate effort-estimation model trained on resolution time, not just keywords, is needed. See [High-Effort Ticket Misrouting](failures/high-effort-ticket-misrouting.md).
+No. Routing models trained on successfully-resolved tickets develop a baseline bias toward the most common resolution path (tier-1). A separate effort-estimation model trained on resolution time, not just keywords, is needed. See High-Effort Ticket Misrouting.
 
 ### How do you avoid routing non-English tickets to English-only teams?
-Treat detected language and required team expertise as a joint constraint, not independent filters. Maintain a registry of which languages each team handles and validate every routing decision against it. See [Language Mismatch Misroute](failures/language-mismatch-misroute.md).
+Treat detected language and required team expertise as a joint constraint, not independent filters. Maintain a registry of which languages each team handles and validate every routing decision against it. See Language Mismatch Misroute.
 
 ### How does a ticket get silently reassigned mid-conversation?
-Because routing agents that re-run full-context intent classification on every new message have no ownership-state check before executing reassignment. The new message shifts the topic classification, triggering a reroute, without any verification that a human is already mid-resolution. The fix is an ownership check gating the reroute. See [Mid-Conversation Reclassification Reroutes Actively-Owned Ticket](failures/mid-conversation-reclassification-reroutes-actively-owned-ticket.md).
+Because routing agents that re-run full-context intent classification on every new message have no ownership-state check before executing reassignment. The new message shifts the topic classification, triggering a reroute, without any verification that a human is already mid-resolution. The fix is an ownership check gating the reroute. See Mid-Conversation Reclassification Reroutes Actively-Owned Ticket.
 
 ### How do you prevent VIP account status from being lost at routing time?
-Add a structured account-tier field to the triage-to-routing handoff and require triage to populate it directly. Alternatively, have routing independently query the account's tier from the CRM record it has access to. See [Multi-Agent Handoff Drops VIP-Tier Flag Between Triage Bot and Routing Agent](failures/multi-agent-handoff-drops-vip-tier-flag-between-triage-bot-and-routing-agent.md).
+Add a structured account-tier field to the triage-to-routing handoff and require triage to populate it directly. Alternatively, have routing independently query the account's tier from the CRM record it has access to. See Multi-Agent Handoff Drops VIP-Tier Flag Between Triage Bot and Routing Agent.
 
 ### How do you detect priority-classifier gaming?
-Track whether specific trigger phrases correlate with priority escalation and then check whether those phrases correlate with independently-validated actual severity. If gaming is happening, the language-priority correlation diverges from the language-severity correlation. See [Priority Inflation Gaming](failures/priority-inflation-gaming.md).
+Track whether specific trigger phrases correlate with priority escalation and then check whether those phrases correlate with independently-validated actual severity. If gaming is happening, the language-priority correlation diverges from the language-severity correlation. See Priority Inflation Gaming.
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [Embedding Retrieval Misroutes Ticket via Similarity to Wrong Product-Line Taxonomy Node](failures/embedding-retrieval-misroutes-ticket-via-similarity-to-wrong-product-line-taxonomy-node.md) | Product category matched by text similarity without provisioning-record verification |
-| [High-Effort Ticket Misrouting](failures/high-effort-ticket-misrouting.md) | Routing model trained on successful cases develops baseline bias toward tier-1, underestimating complex-ticket effort |
-| [Language Mismatch Misroute](failures/language-mismatch-misroute.md) | Ticket routed by topic without joint language-capability constraint checking |
-| [Mid-Conversation Reclassification Reroutes Actively-Owned Ticket](failures/mid-conversation-reclassification-reroutes-actively-owned-ticket.md) | Per-message reclassification silently reassigns claimed tickets without ownership-state check |
-| [Multi-Agent Handoff Drops VIP-Tier Flag Between Triage Bot and Routing Agent](failures/multi-agent-handoff-drops-vip-tier-flag-between-triage-bot-and-routing-agent.md) | VIP status determined in triage; structured handoff omits account-tier field |
-| [Priority Inflation Gaming](failures/priority-inflation-gaming.md) | Priority classifier trained on its own prior outputs, reinforcing gamed phrasing patterns |
+| Embedding Retrieval Misroutes Ticket via Similarity to Wrong Product-Line Taxonomy Node | Product category matched by text similarity without provisioning-record verification |
+| High-Effort Ticket Misrouting | Routing model trained on successful cases develops baseline bias toward tier-1, underestimating complex-ticket effort |
+| Language Mismatch Misroute | Ticket routed by topic without joint language-capability constraint checking |
+| Mid-Conversation Reclassification Reroutes Actively-Owned Ticket | Per-message reclassification silently reassigns claimed tickets without ownership-state check |
+| Multi-Agent Handoff Drops VIP-Tier Flag Between Triage Bot and Routing Agent | VIP status determined in triage; structured handoff omits account-tier field |
+| Priority Inflation Gaming | Priority classifier trained on its own prior outputs, reinforcing gamed phrasing patterns |
 
 **Total: 6 patterns**
 

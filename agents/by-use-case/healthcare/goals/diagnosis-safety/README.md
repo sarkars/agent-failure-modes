@@ -44,16 +44,16 @@ Atypical presentations — common in women, elderly, and underrepresented popula
 
 | Pattern | Mechanism |
 |---|---|
-| [Age Bias in Symptom Interpretation](failures/age-bias-in-symptoms.md) | Diagnosis probability shifts substantially based on age alone, without epidemiologic justification |
-| [Anchoring Bias on First Diagnosis](failures/anchoring-bias-first-diagnosis.md) | Model fixates on initial diagnosis despite contradicting later evidence; differential ranking never re-opened |
-| [Atypical Presentation Blindness](failures/atypical-presentation-blindness.md) | Atypical but correct presentations missed because training data over-represents textbook cases |
-| [Confirmation Bias from Prior Notes](failures/confirmation-bias-from-prior-notes.md) | Prior visit diagnosis label anchors agent; new contradictory findings reinterpreted as consistent with prior |
-| [Demographic Bias](failures/demographic-bias.md) | Diagnostic accuracy differs substantially across demographic groups due to training-data skew |
-| [Imaging Report Discrepancy Blindness](failures/imaging-report-discrepancy-blindness.md) | Radiology impression extracted but qualifying language, follow-up recommendations, and comparison-to-prior changes dropped |
-| [Lab-Value Reference-Range Misapplication](failures/lab-value-reference-range-misapplication.md) | Generic adult reference ranges applied to pediatric, geriatric, or pregnant patients without adjustment |
-| [Patient History Truncation & Context Loss](failures/patient-history-truncation.md) | Limited access to longitudinal history misses chronic patterns evident only in full decade-long records |
-| [Rare Disease Misses](failures/rare-disease-misses.md) | Model confident on common diagnosis for rare disease; rare-disease patterns underrepresented in training |
-| [Symptom Attribution Bias](failures/symptom-attribution-bias.md) | Model overweights early symptom evidence; fails to properly update differential as new contradictory symptoms arrive |
+| Age Bias in Symptom Interpretation | Diagnosis probability shifts substantially based on age alone, without epidemiologic justification |
+| Anchoring Bias on First Diagnosis | Model fixates on initial diagnosis despite contradicting later evidence; differential ranking never re-opened |
+| Atypical Presentation Blindness | Atypical but correct presentations missed because training data over-represents textbook cases |
+| Confirmation Bias from Prior Notes | Prior visit diagnosis label anchors agent; new contradictory findings reinterpreted as consistent with prior |
+| Demographic Bias | Diagnostic accuracy differs substantially across demographic groups due to training-data skew |
+| Imaging Report Discrepancy Blindness | Radiology impression extracted but qualifying language, follow-up recommendations, and comparison-to-prior changes dropped |
+| Lab-Value Reference-Range Misapplication | Generic adult reference ranges applied to pediatric, geriatric, or pregnant patients without adjustment |
+| Patient History Truncation & Context Loss | Limited access to longitudinal history misses chronic patterns evident only in full decade-long records |
+| Rare Disease Misses | Model confident on common diagnosis for rare disease; rare-disease patterns underrepresented in training |
+| Symptom Attribution Bias | Model overweights early symptom evidence; fails to properly update differential as new contradictory symptoms arrive |
 
 **Total: 10 patterns**
 

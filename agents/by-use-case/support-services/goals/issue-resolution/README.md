@@ -34,30 +34,30 @@ Every issue-resolution pattern documented here shares a single structural gap: t
 ## Frequently Asked Questions
 
 ### How do you know when a canned response is situationally inappropriate?
-Track first-contact-resolution rate and escalation rate separately for macro-resolved versus fully custom-written responses. If macro-resolved tickets show measurably higher re-contact or escalation rates, the macro selection is the precision problem to fix. See [Canned Response Context Mismatch](failures/canned-response-context-mismatch.md) and [Macro Response Misapplication](failures/macro-response-misapplication.md).
+Track first-contact-resolution rate and escalation rate separately for macro-resolved versus fully custom-written responses. If macro-resolved tickets show measurably higher re-contact or escalation rates, the macro selection is the precision problem to fix. See Canned Response Context Mismatch and Macro Response Misapplication.
 
 ### How does a human agent re-suggest a troubleshooting step the bot already tried?
-Because the bot-to-human handoff uses a structured summary that may lack a "steps already attempted" field. The human agent reasonably relies on the structured summary rather than re-reading the full bot transcript under time pressure, so task-relevant context in free text never reaches the human's working context. See [Multi-Agent Handoff Drops Prior Attempted Fix Between Bot and Human Agent](failures/multi-agent-handoff-drops-prior-attempted-fix-between-bot-and-human-agent.md).
+Because the bot-to-human handoff uses a structured summary that may lack a "steps already attempted" field. The human agent reasonably relies on the structured summary rather than re-reading the full bot transcript under time pressure, so task-relevant context in free text never reaches the human's working context. See Multi-Agent Handoff Drops Prior Attempted Fix Between Bot and Human Agent.
 
 ### How do you detect when the same customer's problem is recurring rather than resolved?
-Implement a cross-ticket pattern detection that flags when the same customer (or a cluster of customers) reports the same symptom more than a threshold number of times within a window. Per-ticket resolution metrics alone will miss these patterns. See [Repeat Contact Loop](failures/repeat-contact-loop.md).
+Implement a cross-ticket pattern detection that flags when the same customer (or a cluster of customers) reports the same symptom more than a threshold number of times within a window. Per-ticket resolution metrics alone will miss these patterns. See Repeat Contact Loop.
 
 ### Can a customer's claim alone justify an autonomous refund without ledger verification?
-No. Fluent, policy-matching phrasing produces the highest refund-approval rates but is uncorrelated with actual claim validity; the reliable signal is a verified ledger or tracking record. Without a mandatory verification-tool call before the refund action executes, approval rates cluster on phrasing rather than evidence. See [Unverified Customer Claim Triggers Autonomous Refund](failures/unverified-customer-claim-triggers-autonomous-refund.md).
+No. Fluent, policy-matching phrasing produces the highest refund-approval rates but is uncorrelated with actual claim validity; the reliable signal is a verified ledger or tracking record. Without a mandatory verification-tool call before the refund action executes, approval rates cluster on phrasing rather than evidence. See Unverified Customer Claim Triggers Autonomous Refund.
 
 ### How stale does a knowledge-base article need to be before it becomes unreliable?
-Articles older than 6 months warrant review, and 20-40% of articles go unreviewd beyond that window in practice. Currency audit is the most reliable check, but a structured "last reviewed" date with an automatic staleness flag is also common. See [Knowledge Base Staleness in Support Chatbots](failures/knowledgebase-staleness.md).
+Articles older than 6 months warrant review, and 20-40% of articles go unreviewd beyond that window in practice. Currency audit is the most reliable check, but a structured "last reviewed" date with an automatic staleness flag is also common. See Knowledge Base Staleness in Support Chatbots.
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [Canned Response Context Mismatch](failures/canned-response-context-mismatch.md) | Canned response selected by keyword match, not situational precondition verification |
-| [Macro Response Misapplication](failures/macro-response-misapplication.md) | Macro sent based on surface keyword match without checking applicability to customer's specific scenario |
-| [Multi-Agent Handoff Drops Prior Attempted Fix Between Bot and Human Agent](failures/multi-agent-handoff-drops-prior-attempted-fix-between-bot-and-human-agent.md) | Bot's transcript records attempted steps; human-agent handoff lacks structured "steps attempted" field |
-| [Repeat Contact Loop](failures/repeat-contact-loop.md) | Each support contact resolved independently; repeat contacts for same issue treated as separate successes |
-| [Unverified Customer Claim Triggers Autonomous Refund](failures/unverified-customer-claim-triggers-autonomous-refund.md) | Agent processes refund based on fluent claim without verification-tool call to confirm claim against ledger |
-| [Knowledge Base Staleness in Support Chatbots](failures/knowledgebase-staleness.md) | Chatbot uses outdated KB articles that reference removed UI elements or deprecated steps |
+| Canned Response Context Mismatch | Canned response selected by keyword match, not situational precondition verification |
+| Macro Response Misapplication | Macro sent based on surface keyword match without checking applicability to customer's specific scenario |
+| Multi-Agent Handoff Drops Prior Attempted Fix Between Bot and Human Agent | Bot's transcript records attempted steps; human-agent handoff lacks structured "steps attempted" field |
+| Repeat Contact Loop | Each support contact resolved independently; repeat contacts for same issue treated as separate successes |
+| Unverified Customer Claim Triggers Autonomous Refund | Agent processes refund based on fluent claim without verification-tool call to confirm claim against ledger |
+| Knowledge Base Staleness in Support Chatbots | Chatbot uses outdated KB articles that reference removed UI elements or deprecated steps |
 
 **Total: 6 patterns**
 

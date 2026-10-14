@@ -29,31 +29,31 @@ Every model-updates-and-versioning pattern is a variation on the same fix: give 
 ## Frequently Asked Questions
 
 ### What is the difference between Model Update Accuracy Regression and Model Behavior Change Detection Failure?
-[Model Update Accuracy Regression](failures/model-update-accuracy-regression.md) describes the regression itself — a retrained model trades away a narrow, task-specific capability as an inherent consequence of multi-objective training, even while its aggregate benchmark scores improve. [Model Behavior Change Detection Failure](failures/model-behavior-change-detection-failure.md) describes why that regression wasn't caught before launch — the team's own eval suite lacks coverage for the specific task type or reports only an aggregate score that dilutes a regression concentrated in a narrow slice of traffic.
+Model Update Accuracy Regression describes the regression itself — a retrained model trades away a narrow, task-specific capability as an inherent consequence of multi-objective training, even while its aggregate benchmark scores improve. Model Behavior Change Detection Failure describes why that regression wasn't caught before launch — the team's own eval suite lacks coverage for the specific task type or reports only an aggregate score that dilutes a regression concentrated in a narrow slice of traffic.
 
 ### How do you decide between pinning a model version and using a floating alias?
-Per [Silent Model Update](failures/silent-model-update.md) and [Model Version Pinning Expiration](failures/model-version-pinning-expiration.md), there is no option free of an ongoing tracking obligation. A floating alias avoids expiration-driven forced migrations but risks invisible behavior drift with no local deploy record to explain it. A pinned snapshot avoids drift but must be tracked against the provider's sunset calendar the same way a certificate expiration would be tracked, or the team discovers the deprecation from a failed production request.
+Per Silent Model Update and Model Version Pinning Expiration, there is no option free of an ongoing tracking obligation. A floating alias avoids expiration-driven forced migrations but risks invisible behavior drift with no local deploy record to explain it. A pinned snapshot avoids drift but must be tracked against the provider's sunset calendar the same way a certificate expiration would be tracked, or the team discovers the deprecation from a failed production request.
 
 ### Can a rollback really take longer than the original rollout?
-Yes — per [Model Update Rollback Delay](failures/model-update-rollback-delay.md), reverting application code is fast because it's a well-practiced, often-automated action, but reverting a model version can require re-requesting access to a snapshot the provider is already sunsetting, or routing through the same approval chain used for the original forward change because the tooling doesn't distinguish an emergency revert from a new change. Rollback times measured in hours to days, against a code-rollback baseline measured in minutes, are the documented pattern.
+Yes — per Model Update Rollback Delay, reverting application code is fast because it's a well-practiced, often-automated action, but reverting a model version can require re-requesting access to a snapshot the provider is already sunsetting, or routing through the same approval chain used for the original forward change because the tooling doesn't distinguish an emergency revert from a new change. Rollback times measured in hours to days, against a code-rollback baseline measured in minutes, are the documented pattern.
 
 ### Does passing a provider's benchmark suite mean a new model version is safe to adopt?
-No. [Model Update Accuracy Regression](failures/model-update-accuracy-regression.md) documents that improving a weighted-average benchmark score necessarily trades off some narrower capabilities the provider's benchmark suite was never built to measure — a capability that matters enormously to one agent's specific prompts, tool schemas, or output-parsing assumptions can regress invisibly behind an aggregate score improvement.
+No. Model Update Accuracy Regression documents that improving a weighted-average benchmark score necessarily trades off some narrower capabilities the provider's benchmark suite was never built to measure — a capability that matters enormously to one agent's specific prompts, tool schemas, or output-parsing assumptions can regress invisibly behind an aggregate score improvement.
 
 ### Can two unrelated experiments really interfere with each other through model selection alone?
-Yes — per [Model AB Test Interference](failures/model-ab-test-interference.md), when two independently-randomized experiments both touch which model or configuration serves a request, their combined effect on the intersection of both cohorts isn't simply additive, and neither experiment's own dashboard is built to segment and detect an anomaly specific to that intersection.
+Yes — per Model AB Test Interference, when two independently-randomized experiments both touch which model or configuration serves a request, their combined effect on the intersection of both cohorts isn't simply additive, and neither experiment's own dashboard is built to segment and detect an anomaly specific to that intersection.
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [Model AB Test Interference](failures/model-ab-test-interference.md) | Two concurrent experiments both touching model selection interact in a way neither experiment's isolated dashboard is built to detect |
-| [Model Behavior Change Detection Failure](failures/model-behavior-change-detection-failure.md) | Eval suite coverage reflects historical failure modes and dilutes a narrow-slice regression into a flat or improved aggregate score |
-| [Model Release Cycle Timing Mismatch](failures/model-release-cycle-timing-mismatch.md) | Provider release/deprecation cadence outpaces the team's validation cycle, forcing rushed or skipped review |
-| [Model Update Accuracy Regression](failures/model-update-accuracy-regression.md) | Multi-objective retraining trades away a narrow, task-specific capability even as aggregate benchmarks improve |
-| [Model Update Rollback Delay](failures/model-update-rollback-delay.md) | Reverting a model version routes through the same approval chain as a forward change, unlike a fast code rollback |
-| [Model Version Pinning Expiration](failures/model-version-pinning-expiration.md) | A pinned snapshot is a lease with a provider-controlled expiration the team must track or be forced into an unplanned migration |
-| [Silent Model Update](failures/silent-model-update.md) | A floating alias resolves to a different model version with no local commit, deploy, or config change to explain the drift |
+| Model AB Test Interference | Two concurrent experiments both touching model selection interact in a way neither experiment's isolated dashboard is built to detect |
+| Model Behavior Change Detection Failure | Eval suite coverage reflects historical failure modes and dilutes a narrow-slice regression into a flat or improved aggregate score |
+| Model Release Cycle Timing Mismatch | Provider release/deprecation cadence outpaces the team's validation cycle, forcing rushed or skipped review |
+| Model Update Accuracy Regression | Multi-objective retraining trades away a narrow, task-specific capability even as aggregate benchmarks improve |
+| Model Update Rollback Delay | Reverting a model version routes through the same approval chain as a forward change, unlike a fast code rollback |
+| Model Version Pinning Expiration | A pinned snapshot is a lease with a provider-controlled expiration the team must track or be forced into an unplanned migration |
+| Silent Model Update | A floating alias resolves to a different model version with no local commit, deploy, or config change to explain the drift |
 
 **Total: 7 patterns**
 

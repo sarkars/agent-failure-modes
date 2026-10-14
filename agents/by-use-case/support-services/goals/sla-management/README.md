@@ -32,25 +32,25 @@ Every SLA-management pattern documented here reflects a gap between what the age
 ## Frequently Asked Questions
 
 ### How do you apply the correct SLA tier to a ticket?
-Use a deterministic lookup against the billing/contract system to resolve the account's contracted tier first, using that tier to select the applicable SLA document. Do not rely on free-text similarity to select the document. See [Embedding-Retrieval Matches Wrong SLA-Tier Policy Document](failures/embedding-retrieval-matches-wrong-sla-tier-policy-document.md).
+Use a deterministic lookup against the billing/contract system to resolve the account's contracted tier first, using that tier to select the applicable SLA document. Do not rely on free-text similarity to select the document. See Embedding-Retrieval Matches Wrong SLA-Tier Policy Document.
 
 ### How do you prevent an SLA override from being lost between support and billing?
-Add a structured, time-bound SLA-override field to the account record and require any support agent that negotiates an override to populate it directly, rather than leaving it only in a free-text conversation summary. See [Multi-Agent Handoff Drops Customer-Specific SLA Override Between Intake Bot and Billing Agent](failures/multi-agent-handoff-drops-customer-specific-sla-override-between-intake-bot-and-billing-agent.md).
+Add a structured, time-bound SLA-override field to the account record and require any support agent that negotiates an override to populate it directly, rather than leaving it only in a free-text conversation summary. See Multi-Agent Handoff Drops Customer-Specific SLA Override Between Intake Bot and Billing Agent.
 
 ### Should an SLA breach apology state a specific cause without verification?
-No. Every cause statement in a customer-facing breach communication should be grounded in an incident-tracking tool call. Without a mandatory verification step, agents will generate plausible-sounding causes that may not match the actual logged cause, exposing the company to liability. See [SLA Agent Fabricates Breach Root Cause in Customer Communication](failures/sla-agent-fabricates-breach-root-cause-in-customer-communication.md).
+No. Every cause statement in a customer-facing breach communication should be grounded in an incident-tracking tool call. Without a mandatory verification step, agents will generate plausible-sounding causes that may not match the actual logged cause, exposing the company to liability. See SLA Agent Fabricates Breach Root Cause in Customer Communication.
 
 ### How reliable are SLA compliance metrics based on status-field clocks?
-Not reliable. Status-field-based clock pause/resume logic measures what the system recorded, not what the customer actually experienced. Internal delays hidden by "waiting on customer" status inflate SLA compliance metrics. Dual reporting (status-based and actual-elapsed-time) reveals the gap. See [SLA Breach Blindness from Clock-Pause Errors](failures/sla-breach-blindness-from-clock-pause-errors.md).
+Not reliable. Status-field-based clock pause/resume logic measures what the system recorded, not what the customer actually experienced. Internal delays hidden by "waiting on customer" status inflate SLA compliance metrics. Dual reporting (status-based and actual-elapsed-time) reveals the gap. See SLA Breach Blindness from Clock-Pause Errors.
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [Embedding-Retrieval Matches Wrong SLA-Tier Policy Document](failures/embedding-retrieval-matches-wrong-sla-tier-policy-document.md) | SLA tier retrieved by boilerplate similarity without structural tier filtering |
-| [Multi-Agent Handoff Drops Customer-Specific SLA Override Between Intake Bot and Billing Agent](failures/multi-agent-handoff-drops-customer-specific-sla-override-between-intake-bot-and-billing-agent.md) | Override negotiated in support; structured account record has no override field |
-| [SLA Agent Fabricates Breach Root Cause in Customer Communication](failures/sla-agent-fabricates-breach-root-cause-in-customer-communication.md) | Breach cause generated without incident-tracking tool call to verify actual logged cause |
-| [SLA Breach Blindness from Clock-Pause Errors](failures/sla-breach-blindness-from-clock-pause-errors.md) | Clock pause/resume based on status fields rather than verified causality, masking internal delays |
+| Embedding-Retrieval Matches Wrong SLA-Tier Policy Document | SLA tier retrieved by boilerplate similarity without structural tier filtering |
+| Multi-Agent Handoff Drops Customer-Specific SLA Override Between Intake Bot and Billing Agent | Override negotiated in support; structured account record has no override field |
+| SLA Agent Fabricates Breach Root Cause in Customer Communication | Breach cause generated without incident-tracking tool call to verify actual logged cause |
+| SLA Breach Blindness from Clock-Pause Errors | Clock pause/resume based on status fields rather than verified causality, masking internal delays |
 
 **Total: 4 patterns**
 

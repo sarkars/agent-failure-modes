@@ -44,17 +44,17 @@ Irreversible-action-without-confirmation is explicitly built around mandatory hu
 
 | Pattern | Mechanism |
 |---|---|
-| [Duplicate Action](failures/duplicate-action.md) | Agent creates duplicate tickets, emails, orders, or charges |
-| [External Side-Effect Surprise](failures/external-side-effect-surprise.md) | Agent misses that an action triggers notifications, billing, shipment, or deployment |
-| [Insufficient Rollback](failures/insufficient-rollback.md) | Agent cannot undo a bad action once executed |
-| [Irreversible Action Without Confirmation](failures/irreversible-action-without-confirmation.md) | Agent deletes, sends, pays, or deploys without required approval |
-| [Partial Execution](failures/partial-execution.md) | Agent completes only some steps of a multi-step action but reports full success |
-| [Policy-Violating Action](failures/policy-violating-action.md) | Agent performs a technically possible but disallowed action |
-| [Premature Action](failures/premature-action.md) | Agent acts before enough evidence is gathered |
-| [Unauthorized Action](failures/unauthorized-action.md) | Agent performs an action without permission |
-| [Unbounded Action Loop](failures/unbounded-action-loop.md) | Agent repeats an action until quota, cost, or damage accumulates |
-| [Wrong Target Action](failures/wrong-target-action.md) | Agent acts on the wrong account, order, file, or user |
-| [Wrong Workflow Branch](failures/wrong-workflow-branch.md) | Agent chooses the wrong branch — refund vs. replacement, escalation vs. resolution |
+| Duplicate Action | Agent creates duplicate tickets, emails, orders, or charges |
+| External Side-Effect Surprise | Agent misses that an action triggers notifications, billing, shipment, or deployment |
+| Insufficient Rollback | Agent cannot undo a bad action once executed |
+| Irreversible Action Without Confirmation | Agent deletes, sends, pays, or deploys without required approval |
+| Partial Execution | Agent completes only some steps of a multi-step action but reports full success |
+| Policy-Violating Action | Agent performs a technically possible but disallowed action |
+| Premature Action | Agent acts before enough evidence is gathered |
+| Unauthorized Action | Agent performs an action without permission |
+| Unbounded Action Loop | Agent repeats an action until quota, cost, or damage accumulates |
+| Wrong Target Action | Agent acts on the wrong account, order, file, or user |
+| Wrong Workflow Branch | Agent chooses the wrong branch — refund vs. replacement, escalation vs. resolution |
 
 **Total: 11 patterns**
 

@@ -28,7 +28,7 @@
 
 Legal-contracts goals span the full contract lifecycle and operate at two distinct layers. At the assembly and analysis layer, contracts are written, reviewed, and analyzed for compliance and risk: Drafting creates contracts from templates and negotiated terms; Compliance verifies filings against regulatory requirements; Due Diligence assesses target companies and risk; Risk Detection identifies obligations and exposure in existing contracts. At the usage layer, assembled or analyzed contracts are put into effect: IP-Rights and Jurisdiction Handling verify that contract terms are enforced as written; Litigation Support handles evidentiary and procedural aspects when disputes arise; Precedent Currency ensures legal reasoning stands on current authority. 
 
-To troubleshoot an error by symptom: if a contract contains wrong terms or conflicting boilerplate → [Contract Drafting](goals/contract-drafting/); if regulatory filing is non-compliant or uses wrong jurisdiction's template → [Compliance](goals/compliance/); if deal risk is understated or material risks are missed → [Risk Detection](goals/risk-detection/) or [Due Diligence](goals/due-diligence/); if a dispute surfaces an overlooked amendment or misapplied legal rule → [Jurisdiction Handling](goals/jurisdiction-handling/); if IP rights are unclear or usage unauthorized → [IP-Rights](goals/ip-rights/); if litigation discovery is incomplete or privilege was waived → [Litigation Support](goals/litigation-support/); if a brief relies on bad authority → [Precedent Currency](goals/precedent-currency/).
+To troubleshoot an error by symptom: if a contract contains wrong terms or conflicting boilerplate → Contract Drafting; if regulatory filing is non-compliant or uses wrong jurisdiction's template → Compliance; if deal risk is understated or material risks are missed → Risk Detection or Due Diligence; if a dispute surfaces an overlooked amendment or misapplied legal rule → Jurisdiction Handling; if IP rights are unclear or usage unauthorized → IP-Rights; if litigation discovery is incomplete or privilege was waived → Litigation Support; if a brief relies on bad authority → Precedent Currency.
 
 ## Frequently Asked Questions
 
@@ -56,6 +56,6 @@ Very few. Most patterns are not reasoning errors but verification gaps: the agen
 
 ## Related Categories
 
-- [Document Processing](../document-processing/) — the upstream problem of turning legal documents into usable text without OCR, layout, or extraction errors that feed into contract analysis
-- [Knowledge Retrieval](../knowledge-retrieval/) — the cross-cutting RAG and retrieval problem that recurs across legal and all other domains
-- [Reasoning and Thought](../reasoning-and-thought/) — model degradation, version drift, and confidence miscalibration that compound with legal-domain-specific failures
+- [Document Processing](../../by-capability/document-processing/) — the upstream problem of turning legal documents into usable text without OCR, layout, or extraction errors that feed into contract analysis
+- [Knowledge Retrieval](../../by-capability/knowledge-retrieval/) — the cross-cutting RAG and retrieval problem that recurs across legal and all other domains
+- [Reasoning and Thought](../../by-capability/reasoning-and-thought/) — model degradation, version drift, and confidence miscalibration that compound with legal-domain-specific failures

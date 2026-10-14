@@ -28,27 +28,27 @@ Every multi-image-understanding pattern traces back to the same architectural ga
 ## Frequently Asked Questions
 
 ### Does image-contradiction detection matter if each individual image is read correctly?
-Because per-image accuracy says nothing about cross-image logical consistency. A model can correctly read "red" in image 1 and correctly read "blue" in image 2 of the same object and still fail the task if it never checks whether those two correct individual readings are compatible — that check is a separate capability the model doesn't have by default, per [image-contradiction](failures/image-contradiction.md).
+Because per-image accuracy says nothing about cross-image logical consistency. A model can correctly read "red" in image 1 and correctly read "blue" in image 2 of the same object and still fail the task if it never checks whether those two correct individual readings are compatible — that check is a separate capability the model doesn't have by default, per image-contradiction.
 
 ### What's the difference between temporal-inconsistency and object-tracking-failure?
-[temporal-inconsistency](failures/temporal-inconsistency.md) describes the general failure to treat frames as a continuous sequence (jittery positions, lost objects between frames); [object-tracking-failure](failures/object-tracking-failure.md) is the more specific, better-studied failure mode of ID switches and fragmentation, particularly under occlusion in crowded multi-object scenes, measured with tracking-specific metrics like MOTA and ID switches.
+temporal-inconsistency describes the general failure to treat frames as a continuous sequence (jittery positions, lost objects between frames); object-tracking-failure is the more specific, better-studied failure mode of ID switches and fragmentation, particularly under occlusion in crowded multi-object scenes, measured with tracking-specific metrics like MOTA and ID switches.
 
 ### Does adding more images always improve multi-image reasoning?
-No — see [multi-frame-fusion-failure](failures/multi-frame-fusion-failure.md), where naive fusion (e.g., averaging three views) produced 75% accuracy versus 85% for the single best frame alone; only learned, confidence-weighted fusion (92%) beat the best single frame. Unweighted aggregation can dilute a good signal with noisy or misaligned inputs.
+No — see multi-frame-fusion-failure, where naive fusion (e.g., averaging three views) produced 75% accuracy versus 85% for the single best frame alone; only learned, confidence-weighted fusion (92%) beat the best single frame. Unweighted aggregation can dilute a good signal with noisy or misaligned inputs.
 
 ### How should a system handle a multi-image task when not all expected images are available?
-Per [context-aggregation-error](failures/context-aggregation-error.md), the failure mode to design against is silent hallucination — the model claiming information that was never in the provided images (10-15% baseline rate) rather than degrading gracefully or asking for the missing image. Explicit context tracking (what's been seen vs. not) and calibrated uncertainty are the documented mitigations.
+Per context-aggregation-error, the failure mode to design against is silent hallucination — the model claiming information that was never in the provided images (10-15% baseline rate) rather than degrading gracefully or asking for the missing image. Explicit context tracking (what's been seen vs. not) and calibrated uncertainty are the documented mitigations.
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [Context Aggregation Error](failures/context-aggregation-error.md) | Model can't track what it has/hasn't seen across images and hallucinates rather than reporting missing evidence |
-| [Cross-Image Reference Loss](failures/cross-image-reference-loss.md) | No discriminative, viewpoint-invariant embedding to match the same object's identity across separate images |
-| [Image Contradiction](failures/image-contradiction.md) | Independent per-image processing means logically conflicting properties across images go unflagged |
-| [Multi-Frame Fusion Failure](failures/multi-frame-fusion-failure.md) | Naive fusion (averaging/concatenation) of misaligned or conflicting views can underperform the single best view |
-| [Object Tracking Failure](failures/object-tracking-failure.md) | Frame-by-frame detection without motion/appearance modeling causes ID switches and track fragmentation, worst under occlusion |
-| [Temporal Inconsistency](failures/temporal-inconsistency.md) | Frames analyzed independently ignore motion continuity, so object identity and position jitter or drop between frames |
+| Context Aggregation Error | Model can't track what it has/hasn't seen across images and hallucinates rather than reporting missing evidence |
+| Cross-Image Reference Loss | No discriminative, viewpoint-invariant embedding to match the same object's identity across separate images |
+| Image Contradiction | Independent per-image processing means logically conflicting properties across images go unflagged |
+| Multi-Frame Fusion Failure | Naive fusion (averaging/concatenation) of misaligned or conflicting views can underperform the single best view |
+| Object Tracking Failure | Frame-by-frame detection without motion/appearance modeling causes ID switches and track fragmentation, worst under occlusion |
+| Temporal Inconsistency | Frames analyzed independently ignore motion continuity, so object identity and position jitter or drop between frames |
 
 **Total: 6 patterns**
 

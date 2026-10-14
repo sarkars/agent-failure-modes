@@ -10,13 +10,13 @@ Shared metrics the patterns below report against. Targets are starting points to
 | Metric | Target | Defined in |
 |---|---|---|
 | Correct escalation on trigger cases | Over 95% | [no de escalation strategy](failures/no-de-escalation-strategy.md) |
-| Policy-first replies in angry threads | Under 2% | [no de escalation strategy](failures/no-de-escalation-strategy.md) |
-| Handoff after 3 or more negative turns | Over 90% | [no de escalation strategy](failures/no-de-escalation-strategy.md) |
+| Policy-first replies in angry threads | Under 2% | no de escalation strategy |
+| Handoff after 3 or more negative turns | Over 90% | no de escalation strategy |
 
 ## Patterns
 | Pattern | One line |
 |---|---|
-| [No de-escalation strategy](failures/no-de-escalation-strategy.md) | Quotes policy at angry customers and never changes tactics |
+| No de-escalation strategy | Quotes policy at angry customers and never changes tactics |
 
 ## Planned (not yet written)
 - Abusive-user boundaries

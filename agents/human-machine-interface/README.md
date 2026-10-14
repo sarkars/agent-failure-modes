@@ -51,24 +51,24 @@
 A one-page [index of every catalogued failure](roadmap/index.md) shows its library status, root cause, and whether a better model alone would fix it.
 
 <!-- BEGIN:roadmap-count -->
-[355 catalogued patterns](roadmap/README.md) with goals and metrics, checked against the existing library (0 written, 138 new, 156 that extend an existing pattern, 61 already covered). The [execution plan](roadmap/execution-plan.md) orders the 294 to write.
+355 catalogued patterns with goals and metrics, checked against the existing library (0 written, 138 new, 156 that extend an existing pattern, 61 already covered). The [execution plan](roadmap/execution-plan.md) orders the 294 to write.
 <!-- END:roadmap-count -->
 
-Catalog files: [agent types](roadmap/agent-types.md), [embedded copilots](roadmap/embedded-copilots.md), [emerging surfaces](roadmap/emerging-surfaces.md), [chat and core](roadmap/chat-and-core.md), [response time](roadmap/response-time.md), [response structure and closers](roadmap/response-structure-and-length.md), [language and locale](roadmap/language-and-locale.md), [conversation frameworks](roadmap/conversation-frameworks.md) (sales, support, style matching), [voice](roadmap/voice.md), [voice listening and transcription](roadmap/voice-listening-and-transcription.md), [privacy, governance, and access](roadmap/privacy-governance-and-access.md), [effort, completeness, and memory](roadmap/effort-completeness-and-memory.md), and [visual and oversight](roadmap/visual-and-oversight.md).
+Catalog files: [agent types](roadmap/agent-types.md), [embedded copilots](roadmap/embedded-copilots.md), [emerging surfaces](roadmap/emerging-surfaces.md), chat and core, [response time](roadmap/response-time.md), [response structure and closers](roadmap/response-structure-and-length.md), [language and locale](roadmap/language-and-locale.md), [conversation frameworks](roadmap/conversation-frameworks.md) (sales, support, style matching), voice, voice listening and transcription, [privacy, governance, and access](roadmap/privacy-governance-and-access.md), [effort, completeness, and memory](roadmap/effort-completeness-and-memory.md), and visual and oversight.
 
 ## Frequently asked questions
 
 ### Why does my chatbot feel boring and generic?
-Most bots answer and stop. See [answer-and-go conversation](core/conversation-leadership/failures/answer-and-go-conversation.md).
+Most bots answer and stop. See answer-and-go conversation.
 
 ### How do I stop a chatbot from sounding fake-empathetic?
-See [hollow empathy](core/emotional-intelligence/failures/hollow-empathy.md).
+See hollow empathy.
 
 ### Should this be chat, voice, a visual page, or a person?
-See [channel selection](channel-selection/) and the [channel-fit matrix](solutions-library/channel-fit-matrix.md).
+See [channel selection](channel-selection/) and the channel-fit matrix.
 
 ### Is a better model enough to fix these?
-Usually not. Context, handoffs, and policy decide most outcomes. The [roadmap](roadmap/README.md#root-cause-and-the-model-question) breaks this down.
+Usually not. Context, handoffs, and policy decide most outcomes. The roadmap breaks this down.
 
 ## Goals and metrics
 Each family has a README that states its **goal** and the shared **metrics** its patterns report against. Each pattern repeats its goal and primary metric in its header and lists measurable signals in section 7 (`Metric | Target | How to measure | Alert at`).
@@ -83,7 +83,7 @@ Every pattern opens with a one-line summary and a before-and-after transcript, t
 - **Legal and clinical areas** (crisis, children, privacy, disclosure) are design guidance, not advice. Get experts.
 
 ## Contributing
-1. Copy the [template](_templates/hmi-pattern.md).
+1. Copy the template.
 2. A pattern **must include a fix** with a reference design someone can copy.
 3. Write the way people search: use their words for the problem, and answer in the first two sentences.
 4. Add it to the tables above.

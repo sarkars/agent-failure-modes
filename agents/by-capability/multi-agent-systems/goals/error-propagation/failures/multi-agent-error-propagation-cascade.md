@@ -199,10 +199,10 @@ Root cause: 20% error in Agent A cascaded to 60%+ system dysfunction
 
 
 ## Related Patterns
-- [Multi-Agent Collective Reasoning Collapse](./multi-agent-false-consensus-risk.md) — Consensus amplifies errors (related mechanism)
-- [Monolithic Agent Entanglement](./multi-agent-monolithic-entanglement.md) — Tight coupling enables error propagation
+- [Multi-Agent Collective Reasoning Collapse](../../reasoning-quality/failures/multi-agent-false-consensus-risk.md) — Consensus amplifies errors (related mechanism)
+- Monolithic Agent Entanglement — Tight coupling enables error propagation
 - [Hallucinated Completion When Upstream Dependency Fails](../../../../../cross-cutting/accuracy/goals/output-accuracy/failures/hallucinated-completion-when-upstream-dependency-fails.md) — Agents hallucinate when upstream data is bad
-- [Long-Horizon Goal Drift](../../../../../by-capability/long-horizon-execution/goals/goal-maintenance/failures/long-horizon-goal-drift.md) — Similar cascading mechanism over time
+- Long-Horizon Goal Drift — Similar cascading mechanism over time
 
 ---
 

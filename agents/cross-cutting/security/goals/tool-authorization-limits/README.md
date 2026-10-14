@@ -41,16 +41,16 @@ Least-privilege requires starting minimal: give agents only the tools absolutely
 
 | Pattern | Mechanism | Frequency |
 |---|---|---|
-| [Tool Access Scope Limits](failures/tool-access-scope-limits.md) | Agent accesses tools beyond its authorized scope | Occasional |
-| [Tool Capability Limits](failures/tool-capability-limits.md) | Agent invokes tool capabilities beyond authorized operations | Occasional |
-| [Tool Financial Limits](failures/tool-financial-limits.md) | Agent invokes paid tools exceeding budget or cost limits | Occasional |
-| [Tool Integration Limits](failures/tool-integration-limits.md) | Agent integrates tool incorrectly or with unsafe configuration | Occasional |
-| [Tool Invocation](failures/tool-invocation.md) | Agent invokes tool without proper context or prerequisites | Occasional |
-| [Tool Operational Limits](failures/tool-operational-limits.md) | Agent exceeds tool operational limits (rate limits, timeout, quotas) | Common |
-| [Tool Rate Quota Limits](failures/tool-rate-quota-limits.md) | Agent exceeds tool rate limits or quota allocations | Common |
-| [Tool Reliability](failures/tool-reliability.md) | Tool fails or times out; agent lacks error handling | Occasional |
-| [Tool Selection](failures/tool-selection.md) | Agent selects wrong tool or incorrect tool version | Occasional |
-| [Tool SLA Quality Limits](failures/tool-sla-quality-limits.md) | Tool performance degrades below SLA; agent unaware of degradation | Occasional |
+| Tool Access Scope Limits | Agent accesses tools beyond its authorized scope | Occasional |
+| Tool Capability Limits | Agent invokes tool capabilities beyond authorized operations | Occasional |
+| Tool Financial Limits | Agent invokes paid tools exceeding budget or cost limits | Occasional |
+| Tool Integration Limits | Agent integrates tool incorrectly or with unsafe configuration | Occasional |
+| Tool Invocation | Agent invokes tool without proper context or prerequisites | Occasional |
+| Tool Operational Limits | Agent exceeds tool operational limits (rate limits, timeout, quotas) | Common |
+| Tool Rate Quota Limits | Agent exceeds tool rate limits or quota allocations | Common |
+| Tool Reliability | Tool fails or times out; agent lacks error handling | Occasional |
+| Tool Selection | Agent selects wrong tool or incorrect tool version | Occasional |
+| Tool SLA Quality Limits | Tool performance degrades below SLA; agent unaware of degradation | Occasional |
 
 **Total: 10 patterns**
 

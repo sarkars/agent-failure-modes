@@ -209,9 +209,9 @@ Impact: Erosion of trust in moderation; false positives harm innocent users
 
 
 ## Related Patterns
-- [Multi-Agent Error Propagation Cascade](./multi-agent-error-propagation-cascade.md) — Sequential error amplification (vs. parallel consensus)
+- [Multi-Agent Error Propagation Cascade](../../error-propagation/failures/multi-agent-error-propagation-cascade.md) — Sequential error amplification (vs. parallel consensus)
 - [Confident Fabrication](../../../../../cross-cutting/accuracy/goals/output-accuracy/failures/confident-fabrication.md) — Individual hallucination; consensus amplifies it
-- [Collective Reasoning Failure Under Partial Information](../../../../../by-capability/multi-agent-systems/goals/reasoning-quality/failures/collective-reasoning-under-partial-information-failure.md) — Similar failure in distributed decision-making
+- Collective Reasoning Failure Under Partial Information — Similar failure in distributed decision-making
 
 ---
 

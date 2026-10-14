@@ -123,15 +123,15 @@ def check_attribute_hallucination(model, images_with_gt_attributes):
 ## Universal Pattern Reference
 
 This is a domain-specific implementation of the universal pattern:
-**[Hallucination: Attributes (Cross-Cutting)](../../../cross-cutting/accuracy/goals/output-accuracy/failures/hallucination-attribute.md)**
+**[Hallucination: Attributes (Cross-Cutting)](../../../../../cross-cutting/accuracy/goals/output-accuracy/failures/hallucination-attribute.md)**
 
 The universal pattern covers why models hallucinate object attributes. This variant focuses on **vision-based tasks** where models misidentify colors, sizes, and materials due to ambiguous visual evidence.
 
 ### Related Domain Variants
-- [Document Processing: Attribute Hallucination](../../../document-processing/goals/multimodal-reliability/failures/attribute-hallucination.md) — Value correction in document extraction (dates, amounts)
+- Document Processing: Attribute Hallucination — Value correction in document extraction (dates, amounts)
 
 ### Related Base Pattern
-- [Hallucination: Base Mechanism](../../../cross-cutting/accuracy/goals/output-accuracy/failures/hallucination-base-mechanism.md) — Universal root cause of all hallucinations
+- [Hallucination: Base Mechanism](../../../../../cross-cutting/accuracy/goals/output-accuracy/failures/hallucination-base-mechanism.md) — Universal root cause of all hallucinations
 
 ---
 

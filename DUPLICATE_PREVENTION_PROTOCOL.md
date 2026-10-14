@@ -30,7 +30,7 @@ This protocol prevents duplicate pattern creation during new authorship. It uses
 
 **Action**: Single cross-cutting pattern with domain-specific examples
 
-**Existing Pattern**: [agents/cross-cutting/operations/goals/tool-reliability/failures/parameter-mismatches.md](../agents/cross-cutting/operations/goals/tool-reliability/failures/parameter-mismatches.md)
+**Existing Pattern**: [agents/cross-cutting/operations/goals/tool-reliability/failures/parameter-mismatches.md](agents/cross-cutting/operations/goals/tool-reliability/failures/parameter-mismatches.md)
 
 ---
 
@@ -68,7 +68,7 @@ This protocol prevents duplicate pattern creation during new authorship. It uses
 
 **Action**: One parent pattern + examples cover subspecializations; don't create separate patterns
 
-**Existing**: [agents/cross-cutting/accuracy/goals/output-accuracy/failures/hallucinated-completion-when-upstream-dependency-fails.md](../agents/cross-cutting/accuracy/goals/output-accuracy/failures/hallucinated-completion-when-upstream-dependency-fails.md)
+**Existing**: [agents/cross-cutting/accuracy/goals/output-accuracy/failures/hallucinated-completion-when-upstream-dependency-fails.md](agents/cross-cutting/accuracy/goals/output-accuracy/failures/hallucinated-completion-when-upstream-dependency-fails.md)
 
 ---
 
@@ -260,8 +260,8 @@ grep -r "hallucination" agents/by-capability/vision-and-images/goals/*/failures/
 **STEP 6: Add cross-references**
 ```markdown
 ## Related Patterns
-- [Confident Fabrication](../../../cross-cutting/accuracy/goals/output-accuracy/failures/confident-fabrication.md) — Hallucination mechanism (different domain)
-- [Vision Model Confidence Miscalibration](./vision-hallucination-confidence-miscalibration.md) — Related VLM failure
+- [Confident Fabrication](agents/cross-cutting/accuracy/goals/output-accuracy/failures/confident-fabrication.md) — Hallucination mechanism (different domain)
+- Vision Model Confidence Miscalibration — Related VLM failure
 ```
 
 ---

@@ -62,8 +62,8 @@ No specific failure patterns have been documented for deployment-and-rollback ye
 
 ## Related Goals
 
-- [Dependency-Management](../dependency-management/README.md) — breaking-change and version-conflict patterns are deployment concerns
+- Dependency-Management — breaking-change and version-conflict patterns are deployment concerns
 - [Monitoring-and-Alerting](../monitoring-and-alerting/README.md) — post-deployment validation requires monitoring to detect incompatibilities
-- [State-Consistency](../state-consistency/README.md) — rollback procedures must maintain consistency; partial rollbacks violate consistency
+- State-Consistency — rollback procedures must maintain consistency; partial rollbacks violate consistency
 - [Version-Management](../version-management/README.md) — dedicated to versioning of agents, APIs, and data formats
-- [Multi-Agent-Orchestration](../multi-agent-orchestration/README.md) — orchestration layer coordinates deployment ordering and safety checks
+- Multi-Agent-Orchestration — orchestration layer coordinates deployment ordering and safety checks

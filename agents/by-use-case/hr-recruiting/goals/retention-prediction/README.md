@@ -53,11 +53,11 @@ When a justification-generation step has access to broad contextual information 
 
 | Pattern | Mechanism |
 |---|---|
-| [Retention Agent Fabricates Manager-Conversation Detail Not Present in Any Source Note](failures/retention-agent-fabricates-manager-conversation-detail-not-present-in-any-source-note.md) | Narrative explanation generates specific conversation details (quotes, dated 1:1 notes) not grounded in any actual manager note or survey data retrieved |
-| [Stale Training-Corpus Industry-Attrition Benchmark Overrides Live Cohort Tool](failures/stale-training-corpus-industry-attrition-benchmark-overrides-live-cohort-tool.md) | Relative-risk contextualization uses generic industry average instead of calling live internal cohort-comparison tool, producing mischaracterized peer comparison |
-| [Embedding Retrieval Pulls Mismatched Historical-Attrition Cohort as Comparable](failures/embedding-retrieval-pulls-mismatched-historical-attrition-cohort-as-comparable.md) | Retrieved departed-employee analog is selected by name/role-title similarity but differs in actual attrition drivers (relocation vs. compensation vs. management change) |
-| [Multi-Agent Handoff Drops Confirmed Comp Adjustment Before Retention-Risk Rescoring](failures/multi-agent-handoff-drops-confirmed-comp-adjustment-before-retention-risk-rescoring.md) | Compensation-review agent confirms off-cycle pay adjustment but handoff to retention agent lacks updated compensation data; score still cites below-market pay as risk driver |
-| [Attrition-Risk-Score Feedback Loop Self-Fulfilling](failures/attrition-risk-score-feedback-loop-self-fulfilling.md) | Employees flagged high-risk are deprioritized for growth opportunities by managers, causing actual attrition as a consequence of manager behavior, not original risk factors |
+| Retention Agent Fabricates Manager-Conversation Detail Not Present in Any Source Note | Narrative explanation generates specific conversation details (quotes, dated 1:1 notes) not grounded in any actual manager note or survey data retrieved |
+| Stale Training-Corpus Industry-Attrition Benchmark Overrides Live Cohort Tool | Relative-risk contextualization uses generic industry average instead of calling live internal cohort-comparison tool, producing mischaracterized peer comparison |
+| Embedding Retrieval Pulls Mismatched Historical-Attrition Cohort as Comparable | Retrieved departed-employee analog is selected by name/role-title similarity but differs in actual attrition drivers (relocation vs. compensation vs. management change) |
+| Multi-Agent Handoff Drops Confirmed Comp Adjustment Before Retention-Risk Rescoring | Compensation-review agent confirms off-cycle pay adjustment but handoff to retention agent lacks updated compensation data; score still cites below-market pay as risk driver |
+| Attrition-Risk-Score Feedback Loop Self-Fulfilling | Employees flagged high-risk are deprioritized for growth opportunities by managers, causing actual attrition as a consequence of manager behavior, not original risk factors |
 
 **Total: 5 patterns**
 

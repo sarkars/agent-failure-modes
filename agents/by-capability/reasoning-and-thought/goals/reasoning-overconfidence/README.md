@@ -27,5 +27,5 @@ Not here yet. Check the other goals under [Reasoning and thought](../), and watc
 
 ## Related
 
-- [All reasoning and thought goals](../)
+- All reasoning and thought goals
 - [All agent failure patterns](../../../../)

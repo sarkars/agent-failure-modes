@@ -54,13 +54,13 @@ Mortgage documents are a specialized use case of the broader document-processing
 | Goal | Focus | Key Patterns | Cross-Links |
 |------|-------|--------------|-------------|
 | [AI Model Reliability](goals/ai-model-reliability/) | Hallucination, vendor accuracy, verification independence | 3 patterns | Feeds [Data Extraction](goals/data-extraction/), [Cross-Document Validation](goals/cross-document-validation/), [Fraud Detection](goals/fraud-detection/) |
-| [Data Extraction](goals/data-extraction/) | Income, assets, employment, property accuracy | 10 patterns | Upstream of [Cross-Document Validation](goals/cross-document-validation/), [Compliance Validation](goals/compliance-validation/), [Quality Control](goals/quality-control/) |
-| [Cross-Document Validation](goals/cross-document-validation/) | Identity, income, employment consistency across files | 10 patterns | Depends on [Data Extraction](goals/data-extraction/), informs [Fraud Detection](goals/fraud-detection/), [Compliance Validation](goals/compliance-validation/) |
-| [Document Integrity](goals/document-integrity/) | PDF tampering, font analysis, barcode, metadata, signatures | 8 patterns | Upstream of [Document Verification](goals/document-verification/), [Data Extraction](goals/data-extraction/) |
-| [Document Verification](goals/document-verification/) | Authenticity, completeness, signatures, staleness | 8 patterns | Gates [Data Extraction](goals/data-extraction/), complements [Document Integrity](goals/document-integrity/), informs [Fraud Detection](goals/fraud-detection/) |
-| [Compliance Validation](goals/compliance-validation/) | TRID, APR, fair lending, QM/ATR, HMDA | 6 patterns | Depends on [Data Extraction](goals/data-extraction/), [Cross-Document Validation](goals/cross-document-validation/), informs [Quality Control](goals/quality-control/) |
-| [Fraud Detection](goals/fraud-detection/) | Synthetic identities, AI forgery, employment fabrication, behavioral anomalies | 7 patterns | Uses signals from [Data Extraction](goals/data-extraction/), [Cross-Document Validation](goals/cross-document-validation/), [Document Integrity](goals/document-integrity/) |
-| [Quality Control](goals/quality-control/) | Appraisal defects, GSE compliance, repurchase risk | 1 pattern | Downstream audit of [Data Extraction](goals/data-extraction/), [Compliance Validation](goals/compliance-validation/), [Fraud Detection](goals/fraud-detection/) |
+| Data Extraction | Income, assets, employment, property accuracy | 10 patterns | Upstream of Cross-Document Validation, [Compliance Validation](goals/compliance-validation/), [Quality Control](goals/quality-control/) |
+| Cross-Document Validation | Identity, income, employment consistency across files | 10 patterns | Depends on Data Extraction, informs Fraud Detection, Compliance Validation |
+| [Document Integrity](goals/document-integrity/) | PDF tampering, font analysis, barcode, metadata, signatures | 8 patterns | Upstream of [Document Verification](goals/document-verification/), Data Extraction |
+| Document Verification | Authenticity, completeness, signatures, staleness | 8 patterns | Gates Data Extraction, complements Document Integrity, informs Fraud Detection |
+| Compliance Validation | TRID, APR, fair lending, QM/ATR, HMDA | 6 patterns | Depends on Data Extraction, Cross-Document Validation, informs Quality Control |
+| Fraud Detection | Synthetic identities, AI forgery, employment fabrication, behavioral anomalies | 7 patterns | Uses signals from Data Extraction, Cross-Document Validation, Document Integrity |
+| Quality Control | Appraisal defects, GSE compliance, repurchase risk | 1 pattern | Downstream audit of Data Extraction, Compliance Validation, Fraud Detection |
 
 **Total: 8 goals, 62 patterns**
 

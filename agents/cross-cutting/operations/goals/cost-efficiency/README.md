@@ -33,9 +33,9 @@
 
 ## How These Patterns Group
 
-- **Wasted calls:** [Batch Optimization Failures](failures/batch-optimization-failures.md), [Caching Failures](failures/caching-failures.md), [Unnecessary Tool Calls](failures/unnecessary-tool-calls.md), [Step Repetition](failures/step-repetition.md), [Infinite Loops](failures/infinite-loops.md), [Retry Storms](failures/retry-storms.md), [Retry Amplification of Costs](failures/retry-amplification-of-costs.md)
-- **Oversized calls:** [Context Stuffing](failures/context-stuffing.md), [Token Explosion](failures/token-explosion.md), [Verbose Reasoning](failures/verbose-reasoning.md)
-- **Wrong model or budget:** [Expensive Model Cascade](failures/expensive-model-cascade.md), [Model Selection Waste](failures/model-selection-waste.md), [Cost-Quality Tradeoff](failures/cost-quality-tradeoff.md), [Resource Exhaustion](failures/resource-exhaustion.md), [Token Budget Overflow Attack](failures/token-budget-overflow-attack.md)
+- **Wasted calls:** Batch Optimization Failures, Caching Failures, Unnecessary Tool Calls, Step Repetition, Infinite Loops, Retry Storms, Retry Amplification of Costs
+- **Oversized calls:** Context Stuffing, Token Explosion, Verbose Reasoning
+- **Wrong model or budget:** Expensive Model Cascade, Model Selection Waste, Cost-Quality Tradeoff, Resource Exhaustion, Token Budget Overflow Attack
 
 ## When This Matters
 
@@ -47,15 +47,15 @@
 
 ### Why is my AI agent so expensive to run?
 
-Common causes: [model selection waste](failures/model-selection-waste.md), [token explosion](failures/token-explosion.md), and [retry storms](failures/retry-storms.md). Check which one matches your cost breakdown first.
+Common causes: model selection waste, token explosion, and retry storms. Check which one matches your cost breakdown first.
 
 ### How do I stop an agent from looping and burning tokens?
 
-See [infinite loops](failures/infinite-loops.md) and [step repetition](failures/step-repetition.md). Both need limits on turns and repeated steps.
+See infinite loops and step repetition. Both need limits on turns and repeated steps.
 
 ### Does cutting cost hurt quality?
 
-It can. See [cost-quality tradeoff](failures/cost-quality-tradeoff.md).
+It can. See cost-quality tradeoff.
 
 ### What is the difference between cost efficiency and cost tracking?
 

@@ -46,18 +46,18 @@ Faulty decomposition (missing critical steps in complex tasks) and domain-rule v
 
 | Pattern | Mechanism |
 |---------|-----------|
-| [Clarification Failure](failures/clarification-failure.md) | Agent proceeds with ambiguous requirements without asking clarifying questions |
-| [Domain Rule Violation](failures/domain-rule-violation.md) | Agent violates explicit domain constraints (business rules, regulatory rules, technical constraints) |
-| [Faulty Decomposition](failures/faulty-decomposition.md) | Agent breaks down complex task incompletely; misses critical dependencies or non-obvious required steps |
-| [Goal Drift](failures/goal-drift.md) | Agent gradually deviates from original goal or optimization criteria toward alternative objectives |
-| [Instruction Following](failures/instruction-following.md) | Agent fails to follow explicit instructions; violates stated requirements or constraints |
-| [Organizational Knowledge Loss](failures/organizational-knowledge-loss.md) | Agent loses access to essential domain knowledge or organizational context needed for correct reasoning |
-| [Overconfident Planning](failures/overconfident-planning.md) | Agent commits to plan without sufficient evidence or error margin; assumes dependencies will hold without validation |
-| [Premature Conclusion](failures/premature-conclusion.md) | Agent reaches conclusions with insufficient evidence; draws final answers before required information is gathered |
-| [Reasoning Action Mismatch](failures/reasoning-action-mismatch.md) | Agent's reasoning identifies a problem but doesn't act on it; produces reasoning but doesn't execute corresponding action |
-| [Role Specification Violation](failures/role-specification-violation.md) | Agent violates specified role or persona boundaries; acts outside intended authority or scope |
-| [Self Correction Failure](failures/self-correction-failure.md) | Agent cannot identify when its own reasoning is wrong or incomplete; fails to correct itself when given evidence of error |
-| [Sycophancy](failures/sycophancy.md) | Agent prioritizes user preferences or mirroring user views over maintaining objectivity or pursuing stated goal |
+| Clarification Failure | Agent proceeds with ambiguous requirements without asking clarifying questions |
+| Domain Rule Violation | Agent violates explicit domain constraints (business rules, regulatory rules, technical constraints) |
+| Faulty Decomposition | Agent breaks down complex task incompletely; misses critical dependencies or non-obvious required steps |
+| Goal Drift | Agent gradually deviates from original goal or optimization criteria toward alternative objectives |
+| Instruction Following | Agent fails to follow explicit instructions; violates stated requirements or constraints |
+| Organizational Knowledge Loss | Agent loses access to essential domain knowledge or organizational context needed for correct reasoning |
+| Overconfident Planning | Agent commits to plan without sufficient evidence or error margin; assumes dependencies will hold without validation |
+| Premature Conclusion | Agent reaches conclusions with insufficient evidence; draws final answers before required information is gathered |
+| Reasoning Action Mismatch | Agent's reasoning identifies a problem but doesn't act on it; produces reasoning but doesn't execute corresponding action |
+| Role Specification Violation | Agent violates specified role or persona boundaries; acts outside intended authority or scope |
+| Self Correction Failure | Agent cannot identify when its own reasoning is wrong or incomplete; fails to correct itself when given evidence of error |
+| Sycophancy | Agent prioritizes user preferences or mirroring user views over maintaining objectivity or pursuing stated goal |
 
 **Total: 12 patterns**
 

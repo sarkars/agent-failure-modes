@@ -15,9 +15,9 @@
 - **Replication and Consistency** — [State Replication Lag](failures/state-replication-lag.md). In replicated systems, a replica may lag behind primary state, serving stale data to agents that make decisions based on it; agent sees v1 data but acts as if v2 data is in effect, causing inconsistent behavior.
 - **Serialization and Encoding** — [State Serialization Failure](failures/state-serialization-failure.md), [State Encoding Mismatch](failures/state-encoding-mismatch.md). State is stored as bytes; serialization/deserialization must be consistent and bidirectional, or data corruption occurs silently without errors thrown.
 - **Schema and Versioning** — [State Version Incompatibility](failures/state-version-incompatibility.md). When agents upgrade but data schema doesn't, old-format data may be misinterpreted as new-format data, or new data may be truncated when read by old agents.
-- **Transaction and Isolation** — [Transaction Isolation Failure](failures/transaction-isolation-failure.md). Without proper isolation levels, one transaction may see partial results of another transaction mid-commit, violating ACID guarantees.
-- **Consensus and Distributed State** — [Consensus Protocol Failure](failures/consensus-protocol-failure.md). In multi-leader or Raft-based systems, consensus protocols may deadlock, split-brain, or choose a stale value due to timing bugs.
-- **Atomicity and Rollback** — [Rollback Atomicity Failure](failures/rollback-atomicity-failure.md). When recovery requires reverting a partial state change, rollback itself must be atomic; a failed rollback leaves state in a worse position than the original failure.
+- **Transaction and Isolation** — Transaction Isolation Failure. Without proper isolation levels, one transaction may see partial results of another transaction mid-commit, violating ACID guarantees.
+- **Consensus and Distributed State** — Consensus Protocol Failure. In multi-leader or Raft-based systems, consensus protocols may deadlock, split-brain, or choose a stale value due to timing bugs.
+- **Atomicity and Rollback** — Rollback Atomicity Failure. When recovery requires reverting a partial state change, rollback itself must be atomic; a failed rollback leaves state in a worse position than the original failure.
 - **Lifecycle Management** — [State Garbage Collection Failure](failures/state-garbage-collection-failure.md). Expired or deleted state that should be cleaned up persists or is prematurely garbage-collected, causing stale data or resurrection of deleted data.
 - **Timeout-Based Consistency** — [State Consistency Timeout](failures/state-consistency-timeout.md). Systems that rely on timeouts to detect failures and trigger consistency checks may incorrectly assume a timeout always means failure (when it might just be slow) or may not timeout at all (when failure detection is needed).
 
@@ -34,32 +34,32 @@ The 8 state-consistency patterns describe systems where state correctness is fra
 ## Frequently Asked Questions
 
 ### How do you detect a concurrent-update conflict if both writes succeed?
-Per [Concurrent State Modification](failures/concurrent-state-modification.md), use optimistic locking (version number or timestamp on the record) and compare-and-swap semantics: when updating, include the version you read and update only if version hasn't changed. If version changed (another agent updated), the update fails and you must retry. Pessimistic locking (holding a lock for the entire operation) prevents concurrency and causes performance issues; optimistic locking detects conflicts but allows concurrency.
+Per Concurrent State Modification, use optimistic locking (version number or timestamp on the record) and compare-and-swap semantics: when updating, include the version you read and update only if version hasn't changed. If version changed (another agent updated), the update fails and you must retry. Pessimistic locking (holding a lock for the entire operation) prevents concurrency and causes performance issues; optimistic locking detects conflicts but allows concurrency.
 
 ### How long can replication lag before it causes inconsistency?
-Per [State Replication Lag](failures/state-replication-lag.md), it depends on the agent's tolerance for stale data. A read-only query can tolerate seconds of lag, but an update operation that reads then writes must see consistent data, so lag must be < time between read and write (typically milliseconds). Use read-your-write consistency (route reads to replica that has seen your write) or strong consistency (read from primary only) for operations that cannot tolerate lag.
+Per State Replication Lag, it depends on the agent's tolerance for stale data. A read-only query can tolerate seconds of lag, but an update operation that reads then writes must see consistent data, so lag must be < time between read and write (typically milliseconds). Use read-your-write consistency (route reads to replica that has seen your write) or strong consistency (read from primary only) for operations that cannot tolerate lag.
 
 ### Can serialization be tested or is it trial-and-error?
-Per [State Serialization Failure](failures/state-serialization-failure.md), test serialization explicitly: serialize an object, deserialize it, and verify the result equals the original (round-trip testing). Test with all data types, edge cases, and future schema versions to catch incompatibilities before production.
+Per State Serialization Failure, test serialization explicitly: serialize an object, deserialize it, and verify the result equals the original (round-trip testing). Test with all data types, edge cases, and future schema versions to catch incompatibilities before production.
 
 ### How do you recover from a failed rollback?
-Per [Rollback Atomicity Failure](failures/rollback-atomicity-failure.md), the best recovery is to avoid failed rollbacks in the first place: make rollback operations idempotent (safe to retry) and atomic (all-or-nothing), and test rollback as thoroughly as you test normal operations. If a rollback fails, manual intervention is often required to restore consistent state; minimize this need by designing rollback to be simpler and safer than the original operation.
+Per Rollback Atomicity Failure, the best recovery is to avoid failed rollbacks in the first place: make rollback operations idempotent (safe to retry) and atomic (all-or-nothing), and test rollback as thoroughly as you test normal operations. If a rollback fails, manual intervention is often required to restore consistent state; minimize this need by designing rollback to be simpler and safer than the original operation.
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [Concurrent State Modification](failures/concurrent-state-modification.md) | Two agents update the same state simultaneously; without optimistic locking or compare-and-swap, one write silently overwrites the other |
-| [Consensus Protocol Failure](failures/consensus-protocol-failure.md) | Multi-leader or Raft consensus deadlocks, splits brain, or chooses stale value due to timing bugs |
-| [Rollback Atomicity Failure](failures/rollback-atomicity-failure.md) | When recovery requires reverting a partial state change, rollback itself fails and leaves state in worse position |
-| [State Consistency Timeout](failures/state-consistency-timeout.md) | Timeout-based failure detection incorrectly assumes timeout always means failure; incorrect timeout values cause false positives or negatives |
-| [State Encoding Mismatch](failures/state-encoding-mismatch.md) | Same bytes deserialize differently depending on encoding assumptions; UTF-8 vs UTF-16 or little-endian vs big-endian cause data corruption |
-| [State Garbage Collection Failure](failures/state-garbage-collection-failure.md) | Expired or deleted state persists or is prematurely garbage-collected, causing stale data or resurrection of deleted data |
+| Concurrent State Modification | Two agents update the same state simultaneously; without optimistic locking or compare-and-swap, one write silently overwrites the other |
+| Consensus Protocol Failure | Multi-leader or Raft consensus deadlocks, splits brain, or chooses stale value due to timing bugs |
+| Rollback Atomicity Failure | When recovery requires reverting a partial state change, rollback itself fails and leaves state in worse position |
+| State Consistency Timeout | Timeout-based failure detection incorrectly assumes timeout always means failure; incorrect timeout values cause false positives or negatives |
+| State Encoding Mismatch | Same bytes deserialize differently depending on encoding assumptions; UTF-8 vs UTF-16 or little-endian vs big-endian cause data corruption |
+| State Garbage Collection Failure | Expired or deleted state persists or is prematurely garbage-collected, causing stale data or resurrection of deleted data |
 | [State Machine Violation](failures/state-machine-violation.md) | State transitions violate invariants; agent transitions to invalid state that should only be reachable from specific prior states |
-| [State Replication Lag](failures/state-replication-lag.md) | In replicated systems, lag between primary and replica causes stale reads; agent sees v1 data but acts as if v2 is in effect |
-| [State Serialization Failure](failures/state-serialization-failure.md) | Serialization/deserialization is inconsistent or non-bidirectional; data corruption occurs silently without errors |
-| [State Version Incompatibility](failures/state-version-incompatibility.md) | Old-format state misinterpreted as new-format; new data truncated or lost when read by old agents |
-| [Transaction Isolation Failure](failures/transaction-isolation-failure.md) | Without proper isolation, one transaction reads partial results of another mid-commit, violating ACID guarantees |
+| State Replication Lag | In replicated systems, lag between primary and replica causes stale reads; agent sees v1 data but acts as if v2 is in effect |
+| State Serialization Failure | Serialization/deserialization is inconsistent or non-bidirectional; data corruption occurs silently without errors |
+| State Version Incompatibility | Old-format state misinterpreted as new-format; new data truncated or lost when read by old agents |
+| Transaction Isolation Failure | Without proper isolation, one transaction reads partial results of another mid-commit, violating ACID guarantees |
 
 **Total: 8 patterns**
 

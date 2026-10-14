@@ -29,31 +29,31 @@ Every query-understanding pattern traces back to the same asymmetry: silently pi
 ## Frequently Asked Questions
 
 ### What causes an agent to answer a completely different topic than what a user asked?
-Per [Ambiguity Mishandling](failures/ambiguity-mishandling.md), a query term with multiple valid interpretations (e.g. "Mercury" the planet, element, insurer, or car brand) gets silently resolved to whichever interpretation the model's training distribution favors, with no clarifying question asked and no acknowledgment that other interpretations existed.
+Per Ambiguity Mishandling, a query term with multiple valid interpretations (e.g. "Mercury" the planet, element, insurer, or car brand) gets silently resolved to whichever interpretation the model's training distribution favors, with no clarifying question asked and no acknowledgment that other interpretations existed.
 
 ### How do you fix an agent that accepts a user's factually wrong assumption?
-Per [False Premise Acceptance](failures/false-premise-acceptance.md), add an explicit premise-verification step that checks key factual claims and entities in the query against retrieved knowledge before generating an answer, and have the agent flag or gently correct a contradicted premise rather than building a plausible-sounding answer on top of it.
+Per False Premise Acceptance, add an explicit premise-verification step that checks key factual claims and entities in the query against retrieved knowledge before generating an answer, and have the agent flag or gently correct a contradicted premise rather than building a plausible-sounding answer on top of it.
 
 ### Can query decomposition make a complex query easier or harder to answer correctly?
-Both — [Query Decomposition Failure](failures/query-decomposition-failure.md) shows decomposition helps when subqueries preserve every constraint from the original question, but hurts when the split drops a constraint (a region, a timeframe, a comparison group) at a subquery boundary, since each subquery then retrieves for a broader, wrong-scoped question than the one actually asked.
+Both — Query Decomposition Failure shows decomposition helps when subqueries preserve every constraint from the original question, but hurts when the split drops a constraint (a region, a timeframe, a comparison group) at a subquery boundary, since each subquery then retrieves for a broader, wrong-scoped question than the one actually asked.
 ### Does a longer conversation make query understanding better or worse?
-Worse by default, per [Follow-Up Context Loss](failures/follow-up-context-loss.md) — retrieval typically runs per-turn on the literal text of the latest message, so a pronoun or implicit topic reference from several turns earlier isn't resolved unless the pipeline explicitly rewrites the query or carries forward conversational state.
+Worse by default, per Follow-Up Context Loss — retrieval typically runs per-turn on the literal text of the latest message, so a pronoun or implicit topic reference from several turns earlier isn't resolved unless the pipeline explicitly rewrites the query or carries forward conversational state.
 
 ### Is scope misunderstanding a query-understanding failure or a retrieval failure?
-It starts as query understanding (the agent doesn't establish or confirm the applicable platform, version, or timeframe before retrieving) but manifests as a retrieval failure, since the wrong-scope document then gets retrieved and treated as correct. [Scope Misunderstanding](failures/scope-misunderstanding.md) recommends resolving scope before retrieval runs, rather than trying to filter it out afterward.
+It starts as query understanding (the agent doesn't establish or confirm the applicable platform, version, or timeframe before retrieving) but manifests as a retrieval failure, since the wrong-scope document then gets retrieved and treated as correct. Scope Misunderstanding recommends resolving scope before retrieval runs, rather than trying to filter it out afterward.
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [Ambiguity Mishandling](failures/ambiguity-mishandling.md) | Agent silently picks one interpretation of an ambiguous query instead of asking for clarification |
-| [False Premise Acceptance](failures/false-premise-acceptance.md) | System builds a response on a user's factually wrong assumption instead of verifying or correcting it |
-| [Follow-Up Context Loss](failures/follow-up-context-loss.md) | Per-turn retrieval doesn't resolve pronouns or implicit topic references from earlier in the conversation |
-| [Implicit Requirements](failures/implicit-requirements.md) | Agent answers the literal query while missing unstated but obviously-expected related information |
-| [Intent Misclassification](failures/intent-misclassification.md) | Agent misreads the user's underlying goal (action vs. information) despite understanding the literal query |
-| [Multi-Part Fragmentation](failures/multi-part-fragmentation.md) | Agent answers only the first clause of a compound question, dropping the remaining parts |
-| [Query Decomposition Failure](failures/query-decomposition-failure.md) | Splitting a complex query into subqueries drops constraints that scoped the original question |
-| [Scope Misunderstanding](failures/scope-misunderstanding.md) | Agent assumes the wrong platform, version, or timeframe when the query doesn't explicitly specify one |
+| Ambiguity Mishandling | Agent silently picks one interpretation of an ambiguous query instead of asking for clarification |
+| False Premise Acceptance | System builds a response on a user's factually wrong assumption instead of verifying or correcting it |
+| Follow-Up Context Loss | Per-turn retrieval doesn't resolve pronouns or implicit topic references from earlier in the conversation |
+| Implicit Requirements | Agent answers the literal query while missing unstated but obviously-expected related information |
+| Intent Misclassification | Agent misreads the user's underlying goal (action vs. information) despite understanding the literal query |
+| Multi-Part Fragmentation | Agent answers only the first clause of a compound question, dropping the remaining parts |
+| Query Decomposition Failure | Splitting a complex query into subqueries drops constraints that scoped the original question |
+| Scope Misunderstanding | Agent assumes the wrong platform, version, or timeframe when the query doesn't explicitly specify one |
 
 **Total: 8 patterns**
 

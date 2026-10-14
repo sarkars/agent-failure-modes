@@ -24,9 +24,9 @@
 
 ## How These Patterns Group
 
-- **Assembly:** [Context Assembly Race](failures/context-assembly-race.md), [Context Priority Inversion](failures/context-priority-inversion.md)
-- **Truncation:** [Truncation Information Loss](failures/truncation-information-loss.md), [System Prompt Displacement](failures/system-prompt-displacement.md), [Window Boundary Artifacts](failures/window-boundary-artifacts.md)
-- **Freshness:** [Stale Context Retention](failures/stale-context-retention.md)
+- **Assembly:** Context Assembly Race, Context Priority Inversion
+- **Truncation:** Truncation Information Loss, System Prompt Displacement, Window Boundary Artifacts
+- **Freshness:** Stale Context Retention
 
 ## When This Matters
 
@@ -38,11 +38,11 @@
 
 ### Why does my agent forget instructions in a long conversation?
 
-Usually truncation. If the oldest content is dropped first, early instructions and preferences go with it. See [truncation information loss](failures/truncation-information-loss.md) and [system prompt displacement](failures/system-prompt-displacement.md).
+Usually truncation. If the oldest content is dropped first, early instructions and preferences go with it. See truncation information loss and system prompt displacement.
 
 ### Why does my agent keep using information the user already corrected?
 
-Truncation by age can keep the old version longer than the correction. See [stale context retention](failures/stale-context-retention.md).
+Truncation by age can keep the old version longer than the correction. See stale context retention.
 
 ### How is context lifecycle different from memory management?
 

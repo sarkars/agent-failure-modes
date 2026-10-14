@@ -46,12 +46,12 @@ Similar-templates misclassification is typically the most damaging because it do
 
 | Pattern | Mechanism |
 |---|---|
-| [Blank Pages](failures/blank-pages.md) | Blank/near-blank or signature-only pages classified as a document type or flooding review |
-| [Embedded Documents](failures/embedded-documents.md) | Attachment inside a container file classified only as the container, swallowing the nested document |
-| [Page Grouping](failures/page-grouping.md) | Batch-scan pages incorrectly split, merged, or scrambled across document boundaries |
-| [Quality Rejection](failures/quality-rejection.md) | Overly aggressive quality gate rejects legitimate low-fidelity (fax, copy) documents |
-| [Similar Templates](failures/similar-templates.md) | Shared layout/logo across document types (invoice vs. PO) defeats classification |
-| [Version Confusion](failures/version-confusion.md) | Correct type, wrong template-version schema applied to a drifted document layout |
+| Blank Pages | Blank/near-blank or signature-only pages classified as a document type or flooding review |
+| Embedded Documents | Attachment inside a container file classified only as the container, swallowing the nested document |
+| Page Grouping | Batch-scan pages incorrectly split, merged, or scrambled across document boundaries |
+| Quality Rejection | Overly aggressive quality gate rejects legitimate low-fidelity (fax, copy) documents |
+| Similar Templates | Shared layout/logo across document types (invoice vs. PO) defeats classification |
+| Version Confusion | Correct type, wrong template-version schema applied to a drifted document layout |
 
 **Total: 6 patterns**
 

@@ -32,7 +32,7 @@ Because catastrophe events are exactly the low-frequency, high-impact tail event
 Run stress tests against historically known disaster scenarios (major hurricanes, earthquakes in your portfolio's geography) and compare the modeled reserve adequacy under those scenarios against the actual claimed amounts from those events. Large mismatches indicate catastrophe blindness.
 
 ### Is claims processing the same as claim processing?
-No. [Claim Processing](../claim-processing/) documents three agentic-mechanism failures in per-claim adjudication (retrieval mismatch, handoff loss, stale-knowledge override), while Claims Processing documents a reserve-modeling assumption failure — a single-mechanism actuarial problem at a different level of abstraction. The folders have confusingly similar names; a human maintainer may want to rename one to clarify the distinction.
+No. Claim Processing documents three agentic-mechanism failures in per-claim adjudication (retrieval mismatch, handoff loss, stale-knowledge override), while Claims Processing documents a reserve-modeling assumption failure — a single-mechanism actuarial problem at a different level of abstraction. The folders have confusingly similar names; a human maintainer may want to rename one to clarify the distinction.
 
 ### Can a machine learning model alone fix catastrophe blindness?
 No. The blindness is structural: a model trained to predict average annual claims cannot be tuned to predict 100-year or 500-year tail events; those require a separate, explicitly designed catastrophe-risk model that operates under different assumptions and granularity.
@@ -41,12 +41,12 @@ No. The blindness is structural: a model trained to predict average annual claim
 
 | Pattern | Mechanism |
 |---|---|
-| [Catastrophe Correlation Blindness](failures/catastrophe-correlation-blindness.md) | Reserve model assumes independent claims; catastrophe creates correlated spike, depleting reserves designed for average-scenario timeline |
+| Catastrophe Correlation Blindness | Reserve model assumes independent claims; catastrophe creates correlated spike, depleting reserves designed for average-scenario timeline |
 
 **Total: 1 pattern**
 
 ## Related Goals
 
-- [Claim Processing](../claim-processing/) — different goal, despite similar name; documents three agentic-mechanism failures in per-claim adjudication pipelines rather than reserve-modeling assumption failures
+- Claim Processing — different goal, despite similar name; documents three agentic-mechanism failures in per-claim adjudication pipelines rather than reserve-modeling assumption failures
 - [Fraud Detection](../fraud-detection/) — different failure domain; fraud patterns are neither agentic-mechanisms nor actuarial-assumptions but rather fraud-detection-specific pattern-matching and tool-use failures
 - [Underwriting](../underwriting/) — risk assessment at binding time, distinct from reserve calculation at portfolio level

@@ -157,7 +157,7 @@ Root cause: Model learned that art objects are 3D; hallucinated depth from textu
 
 ## Related Patterns
 - [Confident Fabrication](../../../../../cross-cutting/accuracy/goals/output-accuracy/failures/confident-fabrication.md) — High confidence despite depth hallucination
-- [Vision Model Patch Tokenization Boundary Failure](../../../vision-and-images/goals/visual-hallucination/failures/vision-model-patch-tokenization-boundary-failure.md) — Related: missing depth cues
+- [Vision Model Patch Tokenization Boundary Failure](../../visual-hallucination/failures/vision-model-patch-tokenization-boundary-failure.md) — Related: missing depth cues
 - [Spatial Reasoning Failures in 3D](./spatial-reasoning-failures-in-3d-environments.md) — Related: geometric reasoning
 
 ---

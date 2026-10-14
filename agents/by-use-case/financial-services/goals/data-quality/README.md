@@ -12,7 +12,7 @@
 ## Scope
 
 - **Entity and Hierarchy Resolution** — [corporate-hierarchy-misattribution](failures/corporate-hierarchy-misattribution.md), [embedding-retrieval-merges-similarly-named-issuer-entities](failures/embedding-retrieval-merges-similarly-named-issuer-entities-in-data-cleansing-pipeline.md). Entity deduplication and parent-subsidiary mapping failures where embedding similarity or name-based matching incorrectly merges or splits distinct entities or misattributes exposure.
-- **Data Imputation and Gap Handling** — [missing-data-handling](failures/missing-data-mishandling-in-financial-models.md). Naive imputation (mean, forward-fill) or deletion introducing bias, reduced volatility, or survivor bias into time series and fundamental data.
+- **Data Imputation and Gap Handling** — missing-data-handling. Naive imputation (mean, forward-fill) or deletion introducing bias, reduced volatility, or survivor bias into time series and fundamental data.
 - **Multi-Agent Handoff Gaps** — [multi-agent-handoff-drops-data-quality-flag](failures/multi-agent-handoff-drops-data-quality-flag-between-cleansing-agent-and-downstream-consuming-agent.md). Cleansing agent's free-text confidence or method notes dropped at the schema boundary, leaving downstream agents blind to whether a field is source-confirmed or inferred.
 - **Temporal Data Violations** — [point-in-time-data-violations](failures/point-in-time-data-violations.md). Backtests and live recommendations using data (restatements, later-released earnings, retroactive index membership) that was not actually available at decision time.
 
@@ -48,11 +48,11 @@ Embedding similarity is dominated by shared vocabulary (industry terms, company-
 
 | Pattern | Mechanism |
 |---|---|
-| [Corporate Hierarchy Misattribution](failures/corporate-hierarchy-misattribution.md) | Risk/exposure attributed to legal entity instead of ultimate parent; hierarchy mapping stale post-M&A |
-| [Embedding Retrieval Merges Similarly-Named Issuers](failures/embedding-retrieval-merges-similarly-named-issuer-entities-in-data-cleansing-pipeline.md) | Two distinct issuers merged by name similarity without identifier confirmation; exposure concentrates incorrectly |
-| [Missing Data Mishandling](failures/missing-data-mishandling-in-financial-models.md) | Mean imputation reduces volatility; forward-fill introduces lookahead bias; deletion creates survivor bias |
-| [Multi-Agent Handoff Drops Data-Quality Flag](failures/multi-agent-handoff-drops-data-quality-flag-between-cleansing-agent-and-downstream-consuming-agent.md) | Cleansing confidence/method in free text not carried to downstream agent's structured input; field treated as reliable |
-| [Point-in-Time Data Violations](failures/point-in-time-data-violations.md) | Backtest uses restated/later-released data unavailable at decision time; inflates backtest performance |
+| Corporate Hierarchy Misattribution | Risk/exposure attributed to legal entity instead of ultimate parent; hierarchy mapping stale post-M&A |
+| Embedding Retrieval Merges Similarly-Named Issuers | Two distinct issuers merged by name similarity without identifier confirmation; exposure concentrates incorrectly |
+| Missing Data Mishandling | Mean imputation reduces volatility; forward-fill introduces lookahead bias; deletion creates survivor bias |
+| Multi-Agent Handoff Drops Data-Quality Flag | Cleansing confidence/method in free text not carried to downstream agent's structured input; field treated as reliable |
+| Point-in-Time Data Violations | Backtest uses restated/later-released data unavailable at decision time; inflates backtest performance |
 
 **Total: 5 patterns**
 

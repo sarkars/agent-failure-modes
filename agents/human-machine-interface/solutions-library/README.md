@@ -12,10 +12,10 @@
 ## Frequently asked questions
 
 ### How do I make a sales chatbot ask better questions?
-Use [SPIN questioning](spin-questioning.md): it gives question types and chat-sized examples.
+Use SPIN questioning: it gives question types and chat-sized examples.
 
 ### How do I decide whether a task belongs in chat?
-Use the [channel-fit matrix](channel-fit-matrix.md).
+Use the channel-fit matrix.
 
 ## Related
 

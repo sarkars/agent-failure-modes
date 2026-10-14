@@ -28,7 +28,7 @@ The through-line across all 7 patterns is that stochastic, iterative sampling ha
 ## Frequently Asked Questions
 
 ### Does regenerating an image multiple times improve quality?
-No — the data shows the opposite. Artifact detection rises from 10% at the first generation to 40% by the third regeneration round, and user rejection rate triples over the same span (see [artifact-accumulation](failures/artifact-accumulation.md)). Most mitigation guidance in generation artifacts recommends capping regeneration rounds at 2-3 or preferring one-shot generation.
+No — the data shows the opposite. Artifact detection rises from 10% at the first generation to 40% by the third regeneration round, and user rejection rate triples over the same span (see artifact-accumulation). Most mitigation guidance in generation artifacts recommends capping regeneration rounds at 2-3 or preferring one-shot generation.
 
 ### What's the difference between semantic shift and consistency failure?
 Semantic shift is drift away from the original prompt's specification (a "red leather wallet" becoming a "brown fabric" one over iterations); consistency failure is drift in subject identity across generations that are each individually valid (a character's hair or shirt color changing frame to frame). Both stem from the same stochastic-sampling root cause but require different anchors to fix — CLIP-prompt similarity for semantic shift, identity embeddings or reference-conditioning for consistency failure.
@@ -43,13 +43,13 @@ Only partially. The pattern's root cause is architectural: the safety classifier
 
 | Pattern | Mechanism |
 |---|---|
-| [Quality Drift](failures/quality-drift.md) | Iterative diffusion/autoregressive steps accumulate uncorrected noise, degrading later outputs in a sequence |
-| [Artifact Accumulation](failures/artifact-accumulation.md) | Regenerating already-generated content feeds the model its own out-of-distribution outputs, compounding synthetic distortion |
-| [Semantic Shift](failures/semantic-shift.md) | Stochastic re-sampling with no anchor to the original prompt causes gradual deviation from specified attributes |
-| [Model Collapse](failures/model-collapse.md) | Misaligned training objective or narrow fine-tuning data causes the generator to collapse to a small set of high-probability outputs |
-| [Consistency Failure](failures/consistency-failure.md) | No built-in mechanism ties independent samples to a shared identity, so subject appearance shifts across generations |
-| [Safety Filter Bypass](failures/safety-filter-bypass.md) | Independently-trained safety classifiers are fooled by adversarially-phrased prompts the generator itself will still render |
-| [Token Limit Artifacts](failures/token-limit-artifacts.md) | Prompt truncation at the text encoder's token limit forces the model to hallucinate the missing conditioning detail |
+| Quality Drift | Iterative diffusion/autoregressive steps accumulate uncorrected noise, degrading later outputs in a sequence |
+| Artifact Accumulation | Regenerating already-generated content feeds the model its own out-of-distribution outputs, compounding synthetic distortion |
+| Semantic Shift | Stochastic re-sampling with no anchor to the original prompt causes gradual deviation from specified attributes |
+| Model Collapse | Misaligned training objective or narrow fine-tuning data causes the generator to collapse to a small set of high-probability outputs |
+| Consistency Failure | No built-in mechanism ties independent samples to a shared identity, so subject appearance shifts across generations |
+| Safety Filter Bypass | Independently-trained safety classifiers are fooled by adversarially-phrased prompts the generator itself will still render |
+| Token Limit Artifacts | Prompt truncation at the text encoder's token limit forces the model to hallucinate the missing conditioning detail |
 
 **Total: 7 patterns**
 

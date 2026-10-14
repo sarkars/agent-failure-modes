@@ -29,34 +29,34 @@ Every pattern in retrieval quality documents a case where semantic similarity wa
 ## Frequently Asked Questions
 
 ### How is a reranker able to make retrieval quality worse instead of better?
-Per [Reranking Degradation](failures/reranking-degradation.md), a cross-encoder or LLM-based reranker trained on general web data learns biases toward fluency, length, and typical document formatting that don't track actual task relevance — the documented example shows a reranker demoting a terse, correct technical spec sheet below a well-written but useless marketing document, a -27% Context Precision drop. The fix is to require a reranker to beat a baseline on a domain benchmark before deployment, not just deploy it and assume reranking helps by default.
+Per Reranking Degradation, a cross-encoder or LLM-based reranker trained on general web data learns biases toward fluency, length, and typical document formatting that don't track actual task relevance — the documented example shows a reranker demoting a terse, correct technical spec sheet below a well-written but useless marketing document, a -27% Context Precision drop. The fix is to require a reranker to beat a baseline on a domain benchmark before deployment, not just deploy it and assume reranking helps by default.
 
 ### What is the difference between temporal relevance and index staleness?
-[Temporal Relevance](failures/temporal-relevance.md) is about retrieval finding a document that was once correct but has since been superseded (an overruled legal precedent, a repealed statute) with no supersession-awareness in the ranking. [Index Staleness](failures/index-staleness.md) is the systems-level cause behind many such cases — the index simply hasn't been re-synced with the source-of-truth system, so an outdated version is what's available to retrieve at all.
+Temporal Relevance is about retrieval finding a document that was once correct but has since been superseded (an overruled legal precedent, a repealed statute) with no supersession-awareness in the ranking. Index Staleness is the systems-level cause behind many such cases — the index simply hasn't been re-synced with the source-of-truth system, so an outdated version is what's available to retrieve at all.
 
 ### Can a better embedding model fix semantic mismatch on its own?
-Partially — [Semantic Mismatch](failures/semantic-mismatch.md) recommends fine-tuning embeddings on domain-specific query-document pairs, but the documented mitigation set also includes hybrid dense-plus-sparse retrieval and HyDE (hypothetical document embeddings) precisely because no single embedding model fully closes the gap between casual user phrasing and formal document language — the fix is architectural (multiple retrieval signals), not just a model swap.
+Partially — Semantic Mismatch recommends fine-tuning embeddings on domain-specific query-document pairs, but the documented mitigation set also includes hybrid dense-plus-sparse retrieval and HyDE (hypothetical document embeddings) precisely because no single embedding model fully closes the gap between casual user phrasing and formal document language — the fix is architectural (multiple retrieval signals), not just a model swap.
 
 ### Does adding a reranker or query expansion always improve retrieval quality?
-No — both [Reranking Degradation](failures/reranking-degradation.md) and [Query Expansion Noise](failures/query-expansion-noise.md) document cases where the added step actively hurts: reranking can demote correct-but-terse results, and query expansion can introduce wrong-sense terms (like "Mercury" the planet when the query meant the element) that pull in off-topic documents. Both patterns recommend baseline-guarded rollout — proving the addition helps on a domain benchmark before trusting it in production.
+No — both Reranking Degradation and Query Expansion Noise document cases where the added step actively hurts: reranking can demote correct-but-terse results, and query expansion can introduce wrong-sense terms (like "Mercury" the planet when the query meant the element) that pull in off-topic documents. Both patterns recommend baseline-guarded rollout — proving the addition helps on a domain benchmark before trusting it in production.
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [Chunk Boundary](failures/chunk-boundary.md) | Document splits don't respect semantic boundaries, separating a fact from the context it needs |
-| [Embedding Drift](failures/embedding-drift.md) | An embedding model version change creates incompatible vector spaces between queries and previously-indexed documents |
-| [Index Staleness](failures/index-staleness.md) | Index isn't updated when source documents change, so superseded versions remain retrievable |
-| [Jurisdictional Mismatch](failures/jurisdictional-mismatch.md) | Text similarity retrieves content from the wrong jurisdiction, since embeddings can't distinguish governing law by topic alone |
-| [Knowledge Base Poisoning](failures/knowledge-base-poisoning.md) | Malicious or manipulated content is injected into a knowledge base and retrieved with the same trust as legitimate content |
-| [Metadata Filtering](failures/metadata-filtering.md) | Pre-retrieval filters exclude relevant documents due to schema mismatches (type, taxonomy) between filter and metadata |
-| [Over-Retrieval](failures/over-retrieval.md) | Too many marginally-relevant documents dilute the context and bury the genuinely relevant ones |
-| [Query Expansion Noise](failures/query-expansion-noise.md) | Synonym/LLM-based query expansion introduces off-topic terms that shift the query's meaning |
-| [Reranking Degradation](failures/reranking-degradation.md) | A reranker trained on general data demotes correct-but-terse results in favor of fluent but less relevant ones |
-| [Retrieval Ranking Errors](failures/retrieval-ranking-errors.md) | Relevant documents are retrieved but ranked too low for a fixed top-k cutoff to capture |
-| [Semantic Mismatch](failures/semantic-mismatch.md) | User phrasing and document vocabulary diverge enough that embedding similarity falls below the retrieval threshold |
-| [Temporal Relevance](failures/temporal-relevance.md) | Retrieval finds a document that was accurate at indexing time but has since been superseded or overruled |
-| [Under-Retrieval](failures/under-retrieval.md) | Threshold or top-k too strict, dropping true positives that sit just below the cutoff |
+| Chunk Boundary | Document splits don't respect semantic boundaries, separating a fact from the context it needs |
+| Embedding Drift | An embedding model version change creates incompatible vector spaces between queries and previously-indexed documents |
+| Index Staleness | Index isn't updated when source documents change, so superseded versions remain retrievable |
+| Jurisdictional Mismatch | Text similarity retrieves content from the wrong jurisdiction, since embeddings can't distinguish governing law by topic alone |
+| Knowledge Base Poisoning | Malicious or manipulated content is injected into a knowledge base and retrieved with the same trust as legitimate content |
+| Metadata Filtering | Pre-retrieval filters exclude relevant documents due to schema mismatches (type, taxonomy) between filter and metadata |
+| Over-Retrieval | Too many marginally-relevant documents dilute the context and bury the genuinely relevant ones |
+| Query Expansion Noise | Synonym/LLM-based query expansion introduces off-topic terms that shift the query's meaning |
+| Reranking Degradation | A reranker trained on general data demotes correct-but-terse results in favor of fluent but less relevant ones |
+| Retrieval Ranking Errors | Relevant documents are retrieved but ranked too low for a fixed top-k cutoff to capture |
+| Semantic Mismatch | User phrasing and document vocabulary diverge enough that embedding similarity falls below the retrieval threshold |
+| Temporal Relevance | Retrieval finds a document that was accurate at indexing time but has since been superseded or overruled |
+| Under-Retrieval | Threshold or top-k too strict, dropping true positives that sit just below the cutoff |
 
 **Total: 13 patterns**
 

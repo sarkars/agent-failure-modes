@@ -10,12 +10,12 @@ Shared metrics the patterns below report against. Targets are starting points to
 | Metric | Target | Defined in |
 |---|---|---|
 | Unauthorised price or term accepted | 0 | [negotiation capitulation](failures/negotiation-capitulation.md) |
-| 'Binding' or 'guarantee' language in replies | 0 | [negotiation capitulation](failures/negotiation-capitulation.md) |
+| 'Binding' or 'guarantee' language in replies | 0 | negotiation capitulation |
 
 ## Patterns
 | Pattern | One line |
 |---|---|
-| [Negotiation capitulation](failures/negotiation-capitulation.md) | Gives away discounts, or gets tricked into a $1 deal |
+| Negotiation capitulation | Gives away discounts, or gets tricked into a $1 deal |
 
 ## Planned (not yet written)
 - Romantic or parasocial dependence

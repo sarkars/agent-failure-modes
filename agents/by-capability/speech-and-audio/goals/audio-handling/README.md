@@ -34,26 +34,26 @@ Audio-handling patterns describe problems with the acoustic signal itself — no
 Only partially. The patterns show WER increasing proportionally with packet loss, noise level, and device quality regardless of model capability — a noise-robust model trained on augmented data reduces but does not eliminate the gap, and severe degradation (packet loss >5%, SNR <5dB) routes to unusable transcription even with strong models. The reliable mitigation is architectural: pre-processing plus quality-aware confidence gating.
 
 ### What causes the same voice agent to perform differently across devices?
-Because microphone quality, audio codec, and acoustic path differ by device class — the [device-compatibility-issues](failures/device-compatibility-issues.md) pattern documents a 2-3x WER variance across premium phones, budget phones, Bluetooth earbuds, car systems, and smart speakers, driven by hardware differences a single global pipeline configuration doesn't account for.
+Because microphone quality, audio codec, and acoustic path differ by device class — the device-compatibility-issues pattern documents a 2-3x WER variance across premium phones, budget phones, Bluetooth earbuds, car systems, and smart speakers, driven by hardware differences a single global pipeline configuration doesn't account for.
 
 ### How should a voice agent handle a mid-call disconnection?
-[Call-disconnection-handling](failures/call-disconnection-handling.md) recommends classifying the disconnect type (clean end, network drop, accidental, frustrated) within 3 seconds, saving all partial conversation state immediately, and triggering a differentiated callback — a network drop or accidental hang-up merits a prompt callback that resumes from the saved step, while a frustrated hang-up after an objection should not be called back immediately.
+Call-disconnection-handling recommends classifying the disconnect type (clean end, network drop, accidental, frustrated) within 3 seconds, saving all partial conversation state immediately, and triggering a differentiated callback — a network drop or accidental hang-up merits a prompt callback that resumes from the saved step, while a frustrated hang-up after an objection should not be called back immediately.
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [Audio Quality Degradation](failures/audio-quality-degradation.md) | Packet loss, jitter, and codec compression degrade audio before ASR, increasing WER proportionally to signal loss |
-| [Background Noise Failures](failures/background-noise-failures.md) | Ambient noise (traffic, crowds, machinery) drives WER from 5% at high SNR to 50-90% at low SNR |
-| [Call Disconnection Handling](failures/call-disconnection-handling.md) | Mid-call drops go undetected or unclassified, losing partial data and skipping callback recovery |
-| [Device Compatibility Issues](failures/device-compatibility-issues.md) | Microphone quality and audio path vary 2-3x in WER impact across phone, Bluetooth, car, and speaker device classes |
-| [Echo Feedback Issues](failures/echo-feedback-issues.md) | Agent's own TTS output leaks into the mic, causing false triggers, self-interruption, or feedback squeal |
-| [Multi Speaker Confusion](failures/multi-speaker-confusion.md) | Overlapping voices (TV, family, coworkers) blend into one transcript without speaker diarization |
+| Audio Quality Degradation | Packet loss, jitter, and codec compression degrade audio before ASR, increasing WER proportionally to signal loss |
+| Background Noise Failures | Ambient noise (traffic, crowds, machinery) drives WER from 5% at high SNR to 50-90% at low SNR |
+| Call Disconnection Handling | Mid-call drops go undetected or unclassified, losing partial data and skipping callback recovery |
+| Device Compatibility Issues | Microphone quality and audio path vary 2-3x in WER impact across phone, Bluetooth, car, and speaker device classes |
+| Echo Feedback Issues | Agent's own TTS output leaks into the mic, causing false triggers, self-interruption, or feedback squeal |
+| Multi Speaker Confusion | Overlapping voices (TV, family, coworkers) blend into one transcript without speaker diarization |
 
 **Total: 6 patterns**
 
 ## Related Goals
 
-- [Speech Recognition](../speech-recognition/) — recognition-layer errors (accents, homophones, vocabulary gaps) that occur even on a clean signal
+- Speech Recognition — recognition-layer errors (accents, homophones, vocabulary gaps) that occur even on a clean signal
 - [Voice Synthesis](../voice-synthesis/) — TTS output-side quality problems, the mirror concern to audio-handling's input-side focus
 - [Conversation Flow](../conversation-flow/) — dialog-management failures that occur once audio has been successfully captured and transcribed

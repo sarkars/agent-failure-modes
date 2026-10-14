@@ -24,9 +24,9 @@
 
 ## How These Patterns Group
 
-- **Measuring:** [Token Counting Inaccuracy](failures/token-counting-inaccuracy.md), [Billing Reconciliation Gaps](failures/billing-reconciliation-gaps.md), [Cost Attribution Errors](failures/cost-attribution-errors.md)
-- **Detecting and enforcing:** [Cost Anomaly Blindness](failures/cost-anomaly-blindness.md), [Budget Enforcement Bypass](failures/budget-enforcement-bypass.md)
-- **Limits:** [Rate Limit Mishandling](failures/rate-limit-mishandling.md)
+- **Measuring:** Token Counting Inaccuracy, Billing Reconciliation Gaps, Cost Attribution Errors
+- **Detecting and enforcing:** Cost Anomaly Blindness, Budget Enforcement Bypass
+- **Limits:** Rate Limit Mishandling
 
 ## When This Matters
 
@@ -38,15 +38,15 @@
 
 ### How do I stop an AI agent from overspending?
 
-Alerts are not enough. See [budget enforcement bypass](failures/budget-enforcement-bypass.md) for why hard stops matter.
+Alerts are not enough. See budget enforcement bypass for why hard stops matter.
 
 ### Why don't my token counts match the bill?
 
-See [token counting inaccuracy](failures/token-counting-inaccuracy.md) and [billing reconciliation gaps](failures/billing-reconciliation-gaps.md).
+See token counting inaccuracy and billing reconciliation gaps.
 
 ### How do I know which user or feature costs the most?
 
-That needs request-level tagging. See [cost attribution errors](failures/cost-attribution-errors.md).
+That needs request-level tagging. See cost attribution errors.
 
 ## Related
 

@@ -11,7 +11,7 @@
 
 ## Scope
 
-- **Opaque Costs** — [Hidden Tool Costs Not Visible](failures/hidden-tool-costs-not-visible.md), [Paid Feature Cost Not Disclosed](failures/paid-feature-cost-not-disclosed.md), [Per Tool Cost Per Operation Surprise](failures/per-tool-cost-per-operation-surprise.md). Tool costs are not transparent; agents don't know the cost of operations before calling them.
+- **Opaque Costs** — [Hidden Tool Costs Not Visible](failures/hidden-tool-costs-not-visible.md), [Paid Feature Cost Not Disclosed](../tool-capability-limits/failures/paid-feature-cost-not-disclosed.md), [Per Tool Cost Per Operation Surprise](failures/per-tool-cost-per-operation-surprise.md). Tool costs are not transparent; agents don't know the cost of operations before calling them.
 - **Per-Tool Budgets** — [Per Tool Daily Budget Exhaustion](failures/per-tool-daily-budget-exhaustion.md), [Per Tool Monthly Budget Overrun](failures/per-tool-monthly-budget-overrun.md), [Per Tool Minimum Usage Penalty](failures/per-tool-minimum-usage-penalty.md). Per-tool budget limits; when exhausted, tool calls fail or become unavailable.
 - **Complex Pricing** — [Per Tool Burst Pricing Penalty](failures/per-tool-burst-pricing-penalty.md), [Per Tool Tiered Pricing Unknown](failures/per-tool-tiered-pricing-unknown.md). Pricing is tiered or has burst charges; agents don't know which tier they're in or when burst penalties apply.
 - **Total Budget and Allocation** — [Cross Tool Total Budget Exceeded](failures/cross-tool-total-budget-exceeded.md), [Tool Budget Starvation](failures/tool-budget-starvation.md), [Budget Priority Misalignment](failures/budget-priority-misalignment.md), [Tool Cost Override Incident](failures/tool-cost-override-incident.md). Multiple tools share a total budget; allocation strategy is unclear or priorities don't match usage patterns.
@@ -29,32 +29,32 @@ The 11 financial-limit patterns describe systems where cost is treated as an ope
 ## Frequently Asked Questions
 
 ### How do you know if a tool operation is expensive before calling it?
-Per [Hidden Tool Costs Not Visible](failures/hidden-tool-costs-not-visible.md) and [Per Tool Cost Per Operation Surprise](failures/per-tool-cost-per-operation-surprise.md), tools should expose cost information in their API: return cost per operation in responses or provide a cost-estimation endpoint. Agents should query cost information before expensive operations and make cost-aware decisions.
+Per Hidden Tool Costs Not Visible and Per Tool Cost Per Operation Surprise, tools should expose cost information in their API: return cost per operation in responses or provide a cost-estimation endpoint. Agents should query cost information before expensive operations and make cost-aware decisions.
 
 ### What should an agent do if budget is running low?
-Per [Per Tool Daily Budget Exhaustion](failures/per-tool-daily-budget-exhaustion.md), agents should check budget before operating and adjust strategy if budget is low: skip expensive operations, use cheaper alternatives, or fail fast with clear messaging. Don't attempt expensive operations that might be cut off mid-way through, leaving incomplete state.
+Per Per Tool Daily Budget Exhaustion, agents should check budget before operating and adjust strategy if budget is low: skip expensive operations, use cheaper alternatives, or fail fast with clear messaging. Don't attempt expensive operations that might be cut off mid-way through, leaving incomplete state.
 
 ### How do you allocate total budget across multiple tools?
-Per [Cross Tool Total Budget Exceeded](failures/cross-tool-total-budget-exceeded.md) and [Budget Priority Misalignment](failures/budget-priority-misalignment.md), allocate budget based on priority and expected usage: high-priority tools get larger budgets, low-priority tools get smaller budgets. Monitor actual usage and re-allocate if priorities change. Never let per-tool budgets add up to more than total budget.
+Per Cross Tool Total Budget Exceeded and Budget Priority Misalignment, allocate budget based on priority and expected usage: high-priority tools get larger budgets, low-priority tools get smaller budgets. Monitor actual usage and re-allocate if priorities change. Never let per-tool budgets add up to more than total budget.
 
 ### Are burst pricing penalties avoidable?
-Partially — per [Per Tool Burst Pricing Penalty](failures/per-tool-burst-pricing-penalty.md), burst charges apply when usage exceeds a threshold. Avoid burst by keeping usage below the threshold, or negotiate flat-rate pricing if frequent bursts are unavoidable. Understand your service's pricing structure and design agents to stay within tier limits.
+Partially — per Per Tool Burst Pricing Penalty, burst charges apply when usage exceeds a threshold. Avoid burst by keeping usage below the threshold, or negotiate flat-rate pricing if frequent bursts are unavoidable. Understand your service's pricing structure and design agents to stay within tier limits.
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [Budget Priority Misalignment](failures/budget-priority-misalignment.md) | Budget allocation doesn't match actual tool priorities; high-value tool exhausts budget before critical tool can be used |
-| [Cross Tool Total Budget Exceeded](failures/cross-tool-total-budget-exceeded.md) | Per-tool budgets sum to more than total budget; total spending exceeds organizational budget |
-| [Hidden Tool Costs Not Visible](failures/hidden-tool-costs-not-visible.md) | Tool operations have costs; agents don't know about them and call operations without cost awareness |
-| [Per Tool Burst Pricing Penalty](failures/per-tool-burst-pricing-penalty.md) | Tool has tiered or burst pricing; agent's usage spikes into burst tier, incurring penalty charges |
-| [Per Tool Cost Per Operation Surprise](failures/per-tool-cost-per-operation-surprise.md) | Each operation has a cost, but cost structure is only discovered after significant usage |
-| [Per Tool Daily Budget Exhaustion](failures/per-tool-daily-budget-exhaustion.md) | Tool has daily budget cap; when exhausted, calls fail or tool becomes unavailable until next day |
-| [Per Tool Minimum Usage Penalty](failures/per-tool-minimum-usage-penalty.md) | Tool has monthly minimum; agents must pay for minimum even if usage is lower |
-| [Per Tool Monthly Budget Overrun](failures/per-tool-monthly-budget-overrun.md) | Tool has monthly budget cap; overages incur additional charges or service suspension |
-| [Per Tool Tiered Pricing Unknown](failures/per-tool-tiered-pricing-unknown.md) | Tool has tiered pricing (volume discounts or usage tiers); agents don't know which tier they're in |
-| [Tool Budget Starvation](failures/tool-budget-starvation.md) | In shared budget pool, one tool's high usage starves other tools of budget |
-| [Tool Cost Override Incident](failures/tool-cost-override-incident.md) | Cost controls or budget limits are intentionally overridden; override is forgotten and causes budget overrun |
+| Budget Priority Misalignment | Budget allocation doesn't match actual tool priorities; high-value tool exhausts budget before critical tool can be used |
+| Cross Tool Total Budget Exceeded | Per-tool budgets sum to more than total budget; total spending exceeds organizational budget |
+| Hidden Tool Costs Not Visible | Tool operations have costs; agents don't know about them and call operations without cost awareness |
+| Per Tool Burst Pricing Penalty | Tool has tiered or burst pricing; agent's usage spikes into burst tier, incurring penalty charges |
+| Per Tool Cost Per Operation Surprise | Each operation has a cost, but cost structure is only discovered after significant usage |
+| Per Tool Daily Budget Exhaustion | Tool has daily budget cap; when exhausted, calls fail or tool becomes unavailable until next day |
+| Per Tool Minimum Usage Penalty | Tool has monthly minimum; agents must pay for minimum even if usage is lower |
+| Per Tool Monthly Budget Overrun | Tool has monthly budget cap; overages incur additional charges or service suspension |
+| Per Tool Tiered Pricing Unknown | Tool has tiered pricing (volume discounts or usage tiers); agents don't know which tier they're in |
+| Tool Budget Starvation | In shared budget pool, one tool's high usage starves other tools of budget |
+| Tool Cost Override Incident | Cost controls or budget limits are intentionally overridden; override is forgotten and causes budget overrun |
 
 **Total: 11 patterns**
 

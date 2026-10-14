@@ -28,10 +28,10 @@
 
 ## How These Patterns Group
 
-- **Recall:** [Incorrect Memory Recall](failures/incorrect-memory-recall.md), [Missing Memory Recall](failures/missing-memory-recall.md), [Outdated Memory](failures/outdated-memory.md), [Over-Applied Memory](failures/over-applied-memory.md), [Preference Vs Instruction Confusion](failures/preference-vs-instruction-confusion.md)
-- **Integrity:** [Memory Conflict](failures/memory-conflict.md), [Memory Poisoning](failures/memory-poisoning.md)
-- **Privacy and deletion:** [Memory Privilege Leak](failures/memory-privilege-leak.md), [Memory Deletion Failure](failures/memory-deletion-failure.md)
-- **Context limits:** [Context Window Overflow with Silent Truncation](failures/context-window-overflow-silent-truncation.md)
+- **Recall:** Incorrect Memory Recall, Missing Memory Recall, Outdated Memory, Over-Applied Memory, Preference Vs Instruction Confusion
+- **Integrity:** Memory Conflict, Memory Poisoning
+- **Privacy and deletion:** Memory Privilege Leak, Memory Deletion Failure
+- **Context limits:** Context Window Overflow with Silent Truncation
 
 ## When This Matters
 
@@ -43,15 +43,15 @@
 
 ### What happens if an agent's memory is poisoned?
 
-See [memory poisoning](failures/memory-poisoning.md).
+See memory poisoning.
 
 ### Why does my agent still remember something I asked it to forget?
 
-See [memory deletion failure](failures/memory-deletion-failure.md).
+See memory deletion failure.
 
 ### Why does my agent apply an old preference where it does not belong?
 
-See [over-applied memory](failures/over-applied-memory.md) and [preference vs instruction confusion](failures/preference-vs-instruction-confusion.md).
+See over-applied memory and preference vs instruction confusion.
 
 ### What is the difference between memory safety and memory management?
 

@@ -34,4 +34,4 @@ The value-alignment goal currently has no documented failure patterns. Patterns 
 ## Related Goals
 
 - [Safety & Security](../safety-security/) — core safety constraints; value-alignment focuses on longer-term, harder-to-detect misalignment rather than immediate safety violations.
-- [Accuracy](../../accuracy/) — if goals are misaligned with user values, accurate goal optimization makes misalignment worse, not better.
+- [Accuracy](../../../accuracy/) — if goals are misaligned with user values, accurate goal optimization makes misalignment worse, not better.

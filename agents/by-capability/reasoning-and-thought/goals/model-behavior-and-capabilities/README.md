@@ -28,31 +28,31 @@ Every mitigation across all 10 patterns follows the same shape: don't trust the 
 ## Frequently Asked Questions
 
 ### Can the model just say when it's uncertain or when a task is too complex for it?
-Per [Model Uncertainty Unawareness](failures/model-uncertainty-unawareness.md), confident, declarative phrasing is simply a more common surface pattern in training data than hedged phrasing, and RLHF has historically reinforced confident phrasing because human raters tend to prefer complete-sounding answers. The model's internal token-probability distribution does encode a form of uncertainty, but that isn't reliably linked to the surface language it chooses to use.
+Per Model Uncertainty Unawareness, confident, declarative phrasing is simply a more common surface pattern in training data than hedged phrasing, and RLHF has historically reinforced confident phrasing because human raters tend to prefer complete-sounding answers. The model's internal token-probability distribution does encode a form of uncertainty, but that isn't reliably linked to the surface language it chooses to use.
 
 ### Is instruction-following decay the same thing as style drift?
-They share a root cause — a fixed-position system prompt losing influence as the transcript grows — but affect different things. [Model Instruction Following Decay](failures/model-instruction-following-decay.md) is about rule compliance (a forbidden topic, a formatting requirement); [Model Style Drift](failures/model-style-drift.md) is about persona and tone specifically. Both patterns document that periodic re-injection of the original instruction restores compliance temporarily before it decays again.
+They share a root cause — a fixed-position system prompt losing influence as the transcript grows — but affect different things. Model Instruction Following Decay is about rule compliance (a forbidden topic, a formatting requirement); Model Style Drift is about persona and tone specifically. Both patterns document that periodic re-injection of the original instruction restores compliance temporarily before it decays again.
 
 ### Can prompting alone fix reasoning inconsistency or refusal inconsistency?
-No — both patterns show reasoning inconsistency and refusal inconsistency are properties of autoregressive sampling and learned decision boundaries, not something a single better-worded prompt eliminates. [Model Reasoning Inconsistency](failures/model-reasoning-inconsistency.md) recommends self-consistency sampling (multiple runs, majority vote) for high-stakes decisions; [Model Refusal Inconsistency](failures/model-refusal-inconsistency.md) recommends a deterministic policy layer independent of the model's own judgment for well-defined categories, rather than relying on the generative model as the enforcement point.
+No — both patterns show reasoning inconsistency and refusal inconsistency are properties of autoregressive sampling and learned decision boundaries, not something a single better-worded prompt eliminates. Model Reasoning Inconsistency recommends self-consistency sampling (multiple runs, majority vote) for high-stakes decisions; Model Refusal Inconsistency recommends a deterministic policy layer independent of the model's own judgment for well-defined categories, rather than relying on the generative model as the enforcement point.
 
 ### How much does context length actually have to fill before quality drops?
-[Model Context Length Behavior Change](failures/model-context-length-behavior-change.md) reports instruction-following degradation becoming noticeable once transcript length exceeds roughly 60-70% of the model's advertised context window, with recall for mid-context facts running 20-40 percentage points below facts placed at the start or end (the "lost in the middle" effect).
+Model Context Length Behavior Change reports instruction-following degradation becoming noticeable once transcript length exceeds roughly 60-70% of the model's advertised context window, with recall for mid-context facts running 20-40 percentage points below facts placed at the start or end (the "lost in the middle" effect).
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [Model Capacity Limits](failures/model-capacity-limits.md) | Task complexity/constraint count exceeds the model's effective per-call reasoning capacity, so it silently drops or deprioritizes constraints |
-| [Model Context Length Behavior Change](failures/model-context-length-behavior-change.md) | Recall and instruction-following degrade as the context window fills, worst for facts in the middle of a long context |
-| [Model Fairness Bias](failures/model-fairness-bias.md) | Statistical associations from training data leak demographic bias into scores/decisions with no explicit discriminatory instruction |
-| [Model Instruction Following Decay](failures/model-instruction-following-decay.md) | System-prompt rule adherence drops as a conversation lengthens, even though the prompt never changes |
-| [Model Knowledge Cutoff](failures/model-knowledge-cutoff.md) | Facts frozen at training time are stated with the same confidence as current facts, with no built-in staleness signal |
-| [Model Output Format Instability](failures/model-output-format-instability.md) | Strict format compliance (JSON/XML) holds most of the time but deviates intermittently under sampling variance |
-| [Model Reasoning Inconsistency](failures/model-reasoning-inconsistency.md) | Logically identical inputs differing only in superficial ways (order, phrasing) produce different reasoning and conclusions |
-| [Model Refusal Inconsistency](failures/model-refusal-inconsistency.md) | Refusal boundaries are porous to paraphrase, framing, and sampling variance rather than a robust semantic rule |
-| [Model Style Drift](failures/model-style-drift.md) | A configured persona/tone is followed early in a session and gradually fades toward a generic default voice |
-| [Model Uncertainty Unawareness](failures/model-uncertainty-unawareness.md) | Low-confidence or fabricated content is phrased with the same declarative certainty as well-established facts |
+| Model Capacity Limits | Task complexity/constraint count exceeds the model's effective per-call reasoning capacity, so it silently drops or deprioritizes constraints |
+| Model Context Length Behavior Change | Recall and instruction-following degrade as the context window fills, worst for facts in the middle of a long context |
+| Model Fairness Bias | Statistical associations from training data leak demographic bias into scores/decisions with no explicit discriminatory instruction |
+| Model Instruction Following Decay | System-prompt rule adherence drops as a conversation lengthens, even though the prompt never changes |
+| Model Knowledge Cutoff | Facts frozen at training time are stated with the same confidence as current facts, with no built-in staleness signal |
+| Model Output Format Instability | Strict format compliance (JSON/XML) holds most of the time but deviates intermittently under sampling variance |
+| Model Reasoning Inconsistency | Logically identical inputs differing only in superficial ways (order, phrasing) produce different reasoning and conclusions |
+| Model Refusal Inconsistency | Refusal boundaries are porous to paraphrase, framing, and sampling variance rather than a robust semantic rule |
+| Model Style Drift | A configured persona/tone is followed early in a session and gradually fades toward a generic default voice |
+| Model Uncertainty Unawareness | Low-confidence or fabricated content is phrased with the same declarative certainty as well-established facts |
 
 **Total: 10 patterns**
 

@@ -12,8 +12,8 @@
 ## Scope
 
 - **Authenticity and signature verification** — [document-authenticity-markers](failures/document-authenticity-markers.md), [signature-verification-failures](failures/signature-verification-failures.md), [fraudulent-document-detection](failures/fraudulent-document-detection.md). Document-type-specific authenticity checks (W-2 control numbers, bank statement logos, notarization validation), required-signature presence and dating, forged-document detection.
-- **Completeness and dating** — [document-completeness-gaps](failures/document-completeness-gaps.md), [stale-document-detection](failures/stale-document-detection.md), [date-consistency-failures](failures/date-consistency-failures.md). Required-document presence by loan type and borrower scenario, document recency (pay stubs <60 days, employment verification <120 days), document date alignment with loan timeline.
-- **Correlation and alteration** — [multi-document-correlation-failures](failures/multi-document-correlation.md), [altered-document-detection](failures/altered-document-detection.md), [title-document-validation](failures/title-document-validation.md), [notarization-validation](failures/notarization-validation.md), [stacking-order-validation](failures/stacking-order-validation.md). Document sets correlating (set completeness), alteration detection (physical or digital tampering), notarization validity, title-document completeness, closing-document ordering.
+- **Completeness and dating** — document-completeness-gaps, stale-document-detection, date-consistency-failures. Required-document presence by loan type and borrower scenario, document recency (pay stubs <60 days, employment verification <120 days), document date alignment with loan timeline.
+- **Correlation and alteration** — multi-document-correlation-failures, altered-document-detection, [title-document-validation](failures/title-document-validation.md), [notarization-validation](failures/notarization-validation.md), [stacking-order-validation](failures/stacking-order-validation.md). Document sets correlating (set completeness), alteration detection (physical or digital tampering), notarization validity, title-document completeness, closing-document ordering.
 
 ## When Document Verification Matters
 
@@ -51,14 +51,14 @@ Document-set completeness requires a loan-type-specific checklist: conventional 
 
 | Pattern | Mechanism |
 |---|---|
-| [Document Authenticity Markers](failures/document-authenticity-markers.md) | Missing institutional markers (W-2 control numbers, bank logos), non-standard format layouts, outdated form versions |
-| [Signature Verification Failures](failures/signature-verification-failures.md) | Missing required signatures, signature dated after document date, multiple signature inconsistencies, notarization missing |
-| [Fraudulent Document Detection](failures/fraudulent-document-detection.md) | Forged W-2s, fake pay stubs, fabricated bank statements detected via format analysis and authenticity checks |
-| [Date Consistency Failures](failures/date-consistency-failures.md) | Document dates inconsistent with loan timeline, document dated after closing, signature date before document date |
-| [Document Completeness Gaps](failures/document-completeness-gaps.md) | Required documents missing by loan type (FHA vs. conventional), co-borrower documentation absent, state-required documents missing |
-| [Stale Document Detection](failures/stale-document-detection.md) | Pay stubs >60 days old, employment verification >120 days old, appraisals >90 days old, outdated credit reports |
-| [Multi-Document Correlation Failures](failures/multi-document-correlation.md) | Document sets incomplete (references missing documents), co-borrower sets separate when should be combined, prior-loan documentation absent |
-| [Altered Document Detection](failures/altered-document-detection.md) | Physical or digital tampering detected, corrected-field inconsistency, amendment without proper documentation |
+| Document Authenticity Markers | Missing institutional markers (W-2 control numbers, bank logos), non-standard format layouts, outdated form versions |
+| Signature Verification Failures | Missing required signatures, signature dated after document date, multiple signature inconsistencies, notarization missing |
+| Fraudulent Document Detection | Forged W-2s, fake pay stubs, fabricated bank statements detected via format analysis and authenticity checks |
+| Date Consistency Failures | Document dates inconsistent with loan timeline, document dated after closing, signature date before document date |
+| Document Completeness Gaps | Required documents missing by loan type (FHA vs. conventional), co-borrower documentation absent, state-required documents missing |
+| Stale Document Detection | Pay stubs >60 days old, employment verification >120 days old, appraisals >90 days old, outdated credit reports |
+| Multi-Document Correlation Failures | Document sets incomplete (references missing documents), co-borrower sets separate when should be combined, prior-loan documentation absent |
+| Altered Document Detection | Physical or digital tampering detected, corrected-field inconsistency, amendment without proper documentation |
 
 **Total: 8 patterns**
 

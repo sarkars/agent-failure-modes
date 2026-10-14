@@ -47,16 +47,16 @@ The mitigation strategies target sessions above roughly 10-15 turns with periodi
 
 | Pattern | Mechanism |
 |---|---|
-| [Ambiguous Goal Interpretation](failures/ambiguous-goal-interpretation.md) | Agent optimizes for a different meaning of the user's or business goal |
-| [Business-Policy Mismatch](failures/business-policy-mismatch.md) | Agent completes a technical action that violates company policy |
-| [Conflicting Objectives](failures/conflicting-objectives.md) | Agent cannot resolve tradeoffs like speed vs. accuracy or helpfulness vs. compliance |
-| [Goal Drift Across Turns](failures/goal-drift-across-turns.md) | Agent's objective changes over long conversations or workflows |
-| [Goal Expansion / Scope Creep](failures/goal-expansion-scope-creep.md) | Agent performs additional actions that were never requested |
-| [Hidden Requirement Miss](failures/hidden-requirement-miss.md) | Agent misses unstated but critical constraints such as policy, geography, role, or SLA |
-| [Over-Literal Goal Following](failures/over-literal-goal-following.md) | Agent follows the wording but violates user intent or common-sense constraints |
-| [Proxy Metric Optimization](failures/proxy-metric-optimization.md) | Agent improves an easy-to-measure metric while harming the real outcome |
-| [Unclear Stop Condition](failures/unclear-stop-condition.md) | Agent keeps looping, retrying, or asking because "done" was never defined |
-| [Wrong Success Criteria](failures/wrong-success-criteria.md) | Agent reports success when the real-world task outcome is not actually complete |
+| Ambiguous Goal Interpretation | Agent optimizes for a different meaning of the user's or business goal |
+| Business-Policy Mismatch | Agent completes a technical action that violates company policy |
+| Conflicting Objectives | Agent cannot resolve tradeoffs like speed vs. accuracy or helpfulness vs. compliance |
+| Goal Drift Across Turns | Agent's objective changes over long conversations or workflows |
+| Goal Expansion / Scope Creep | Agent performs additional actions that were never requested |
+| Hidden Requirement Miss | Agent misses unstated but critical constraints such as policy, geography, role, or SLA |
+| Over-Literal Goal Following | Agent follows the wording but violates user intent or common-sense constraints |
+| Proxy Metric Optimization | Agent improves an easy-to-measure metric while harming the real outcome |
+| Unclear Stop Condition | Agent keeps looping, retrying, or asking because "done" was never defined |
+| Wrong Success Criteria | Agent reports success when the real-world task outcome is not actually complete |
 
 **Total: 10 patterns**
 

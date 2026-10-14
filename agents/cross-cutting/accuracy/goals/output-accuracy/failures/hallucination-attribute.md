@@ -252,8 +252,8 @@ HAVING (common_accuracy - uncommon_accuracy) > 0.05
 - [Hallucination: Confidence Miscalibration](hallucination-confidence-miscalibration.md) — Why hallucinated attributes come with high confidence
 
 **Domain-Specific Variants**:
-- **[Document Processing: Attribute Hallucination](../../../by-capability/document-processing/goals/multimodal-reliability/failures/attribute-hallucination.md)** — Value correction errors in document extraction
-- **[Vision: Attribute Hallucination](../../../by-capability/vision-and-images/goals/visual-hallucination/failures/attribute-hallucination.md)** — Color/size/material misattribution in object detection
+- **Document Processing: Attribute Hallucination** — Value correction errors in document extraction
+- **Vision: Attribute Hallucination** — Color/size/material misattribution in object detection
 
 ---
 

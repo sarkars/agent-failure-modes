@@ -28,31 +28,31 @@ Every adverse-drug-interaction pattern documented here traces back to a checking
 ## Frequently Asked Questions
 
 ### What causes an agent to miss a drug interaction between a patient's current medications?
-Most misses trace to scope, not model capability: the interaction check queries a pairwise drug-drug database and never sees condition-based contraindications, lab-value-triggered risks, herbal/supplement interactions, or three-way-plus combinations, because the checking pipeline was built to answer a narrower question than "is this regimen safe." See [Contraindication Omission](failures/contraindication-omission.md) and [Polypharmacy Cascade Failures](failures/polypharmacy-cascade-failures.md).
+Most misses trace to scope, not model capability: the interaction check queries a pairwise drug-drug database and never sees condition-based contraindications, lab-value-triggered risks, herbal/supplement interactions, or three-way-plus combinations, because the checking pipeline was built to answer a narrower question than "is this regimen safe." See Contraindication Omission and Polypharmacy Cascade Failures.
 
 ### How do you catch interaction misses caused by polypharmacy?
 Add a mandatory pharmacist gate whenever a recommendation would bring a patient to five or more concurrent drugs, and run a mechanism-based higher-order analyzer (shared metabolic pathway, shared target) alongside pairwise checks, since three-way interactions are too sparse and too varied for a pairwise database to cover.
 
 ### Can herbal supplements really cause dangerous drug interactions that an agent would miss?
-Yes — St. John's Wort, ginkgo, garlic, and ginseng all carry documented clinically significant herb-drug interactions, but supplements are reported as unstructured free text far more often than as a coded medication, so a structured interaction check that queries only the medication list silently excludes supplements from the check entirely. See [Herbal & Supplement Interaction Blindness](failures/herbal-supplement-interaction-blindness.md).
+Yes — St. John's Wort, ginkgo, garlic, and ginseng all carry documented clinically significant herb-drug interactions, but supplements are reported as unstructured free text far more often than as a coded medication, so a structured interaction check that queries only the medication list silently excludes supplements from the check entirely. See Herbal & Supplement Interaction Blindness.
 
 ### Does a better language model fix embedding-retrieval interaction mismatches?
 No. The mismatch happens because look-alike drug names in the same family (different macrolides, different statins) score as highly similar under any text-similarity metric, and a more capable model doing the same similarity-based lookup still retrieves the wrong profile. The fix is architectural: match on the exact RxNorm/NDC identifier first, and treat similarity search as a flagged fallback, not the primary path.
 
 ### What causes a spurious drug attribution during adverse-event review?
-An agent naming "the most recently started drug" as the likely cause without applying a structured causality framework (Naranjo, WHO-UMC) or checking for a plausible pharmacological mechanism — recency alone, not clinical evidence, drives the narrative. See [Spurious Causal Narrative from Temporally Coincident Medication](failures/spurious-causal-narrative-from-temporally-coincident-medication-in-adverse-event-attribution.md).
+An agent naming "the most recently started drug" as the likely cause without applying a structured causality framework (Naranjo, WHO-UMC) or checking for a plausible pharmacological mechanism — recency alone, not clinical evidence, drives the narrative. See Spurious Causal Narrative from Temporally Coincident Medication.
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [Contraindication Omission](failures/contraindication-omission.md) | Interaction check scoped to drug-drug pairs only, missing condition/lab/allergy/demographic contraindications |
-| [Dosage Renal/Hepatic Adjustment Failure](failures/dosage-renal-hepatic-adjustment-failure.md) | Standard adult dosing recommended without adjusting for chart-documented renal or hepatic impairment |
-| [Drug Interaction Misses & Contraindication Blindness](failures/drug-interaction-misses.md) | Recommends a drug combination without flagging a known dangerous interaction due to statistical rather than rule-based reasoning |
-| [Embedding Retrieval Matches Structurally Similar, Different-Class Drug](failures/embedding-retrieval-matches-structurally-similar-different-class-drug-for-interaction-check.md) | Similarity search over drug names retrieves a name-adjacent but pharmacologically distinct drug's interaction profile |
-| [Herbal & Supplement Interaction Blindness](failures/herbal-supplement-interaction-blindness.md) | Free-text supplement/herb mentions excluded from the structured interaction check entirely |
-| [Polypharmacy Cascade Failures](failures/polypharmacy-cascade-failures.md) | Pairwise-only interaction checking misses three-way or four-way synergistic risk in 5+ drug regimens |
-| [Spurious Causal Narrative from Temporally Coincident Medication](failures/spurious-causal-narrative-from-temporally-coincident-medication-in-adverse-event-attribution.md) | Adverse-event attribution driven by recency of prescription rather than pharmacological mechanism |
+| Contraindication Omission | Interaction check scoped to drug-drug pairs only, missing condition/lab/allergy/demographic contraindications |
+| Dosage Renal/Hepatic Adjustment Failure | Standard adult dosing recommended without adjusting for chart-documented renal or hepatic impairment |
+| Drug Interaction Misses & Contraindication Blindness | Recommends a drug combination without flagging a known dangerous interaction due to statistical rather than rule-based reasoning |
+| Embedding Retrieval Matches Structurally Similar, Different-Class Drug | Similarity search over drug names retrieves a name-adjacent but pharmacologically distinct drug's interaction profile |
+| Herbal & Supplement Interaction Blindness | Free-text supplement/herb mentions excluded from the structured interaction check entirely |
+| Polypharmacy Cascade Failures | Pairwise-only interaction checking misses three-way or four-way synergistic risk in 5+ drug regimens |
+| Spurious Causal Narrative from Temporally Coincident Medication | Adverse-event attribution driven by recency of prescription rather than pharmacological mechanism |
 
 **Total: 7 patterns**
 

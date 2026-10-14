@@ -27,13 +27,13 @@ Reliability and resilience failures are the result of testing in the wrong envir
 ## Frequently Asked Questions
 
 ### How do you design graceful degradation before knowing which dependencies will fail?
-Per [Missing Graceful Degradation](failures/missing-graceful-degradation.md), identify all hard dependencies (external APIs, required tools, databases that have no fallback), then design fallback paths for each: local approximations, reduced-accuracy paths, cached results from previous requests, or explicit capability reduction and user messaging. Test each fallback path independently before production, not just in simulation — a cached fallback that hasn't been used in months is just dead code.
+Per Missing Graceful Degradation, identify all hard dependencies (external APIs, required tools, databases that have no fallback), then design fallback paths for each: local approximations, reduced-accuracy paths, cached results from previous requests, or explicit capability reduction and user messaging. Test each fallback path independently before production, not just in simulation — a cached fallback that hasn't been used in months is just dead code.
 
 ### At what corpus size does RAG scale degradation typically occur?
-Per [RAG Scale Degradation](failures/rag-scale-degradation.md), naive flat-index retrieval starts hitting latency cliffs around 100K-500K documents and accuracy cliffs around 1M-10M documents, but exact thresholds depend on embedding model quality, reranking strategy, and inference infrastructure. Don't assume a system that works at 100K will work at 1M — test at 10x intended scale before considering the architecture proven.
+Per RAG Scale Degradation, naive flat-index retrieval starts hitting latency cliffs around 100K-500K documents and accuracy cliffs around 1M-10M documents, but exact thresholds depend on embedding model quality, reranking strategy, and inference infrastructure. Don't assume a system that works at 100K will work at 1M — test at 10x intended scale before considering the architecture proven.
 
 ### How do you catch scale degradation before users notice accuracy dropping?
-Per [RAG Scale Degradation](failures/rag-scale-degradation.md), instrument end-to-end accuracy separately from component accuracy and alert when accuracy drops more than a configured threshold (e.g., alert if accuracy drops > 2% per month or < 90% absolute). If using retrieval + reranking + generation, measure accuracy at each stage independently so you can see whether degradation is in retrieval, reranking, or generation — degradation in retrieval signals you need hierarchical partitioning or vector-index optimization, not better generation.
+Per RAG Scale Degradation, instrument end-to-end accuracy separately from component accuracy and alert when accuracy drops more than a configured threshold (e.g., alert if accuracy drops > 2% per month or < 90% absolute). If using retrieval + reranking + generation, measure accuracy at each stage independently so you can see whether degradation is in retrieval, reranking, or generation — degradation in retrieval signals you need hierarchical partitioning or vector-index optimization, not better generation.
 
 ### Is graceful degradation the same as fallback?
 Graceful degradation includes fallback (trying an alternative when primary fails), but also reduced-mode operation, partial responses, and explicit user messaging. A fallback that returns results users don't know are degraded is hiding the failure, not handling it gracefully — tell users when capability is reduced.
@@ -42,8 +42,8 @@ Graceful degradation includes fallback (trying an alternative when primary fails
 
 | Pattern | Mechanism |
 |---|---|
-| [Missing Graceful Degradation](failures/missing-graceful-degradation.md) | When a dependency (external API, tool, database) fails, the entire agent fails instead of operating in reduced mode with fallback paths |
-| [RAG Scale Degradation](failures/rag-scale-degradation.md) | Retrieval accuracy silently drops and latency increases exponentially when corpus scales 1000x (10K → 10M documents) without hierarchical partitioning |
+| Missing Graceful Degradation | When a dependency (external API, tool, database) fails, the entire agent fails instead of operating in reduced mode with fallback paths |
+| RAG Scale Degradation | Retrieval accuracy silently drops and latency increases exponentially when corpus scales 1000x (10K → 10M documents) without hierarchical partitioning |
 
 **Total: 2 patterns**
 

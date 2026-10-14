@@ -243,11 +243,11 @@ Result:
 ## Related Patterns
 
 For failures caused by insufficient coordination after specification, see:
-- **[Work Duplication Between Agents](./work-duplication-between-agents.md)** — Multiple agents perform same work without awareness
-- **[Inter-Agent Memory Management Failures](./inter-agent-memory-failures.md)** — State not propagated correctly between agents
+- **Work Duplication Between Agents** — Multiple agents perform same work without awareness
+- **Inter-Agent Memory Management Failures** — State not propagated correctly between agents
 
 For single-agent goal alignment issues, see:
-- **[Goal Drift and Task Mutation](../../governance/goals/agent-oversight/failures/goal-drift-and-task-mutation.md)** — Agent learns unintended behaviors
+- **[Goal Drift and Task Mutation](../../../../governance/goals/agent-oversight/failures/goal-drift-and-task-mutation.md)** — Agent learns unintended behaviors
 
 ---
 

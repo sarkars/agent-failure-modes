@@ -41,12 +41,12 @@ Support services (return policies, fee waivers, escalation routing), healthcare 
 
 | Pattern | Mechanism |
 |---------|-----------|
-| [Agent Defaults to Stale Training Knowledge Over Live-Lookup Tool](failures/agent-defaults-to-stale-training-knowledge-over-live-lookup-tool.md) | Agent has access to live reference-data tool but applies outdated training-era policy/rule/threshold instead of querying tool |
+| Agent Defaults to Stale Training Knowledge Over Live-Lookup Tool | Agent has access to live reference-data tool but applies outdated training-era policy/rule/threshold instead of querying tool |
 
 **Total: 1 pattern**
 
 ## Related Goals
 
-- [Context Management](../context-management/) — handling instruction conflicts and context window limits, upstream of knowledge staleness
+- Context Management — handling instruction conflicts and context window limits, upstream of knowledge staleness
 - [Output Accuracy](../output-accuracy/) — hallucination and content fabrication, orthogonal to staleness
 - [Evaluation Reliability](../evaluation-reliability/) — catching staleness issues in test data before production

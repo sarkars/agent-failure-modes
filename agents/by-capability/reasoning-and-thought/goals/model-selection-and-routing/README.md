@@ -28,27 +28,27 @@ Every model-selection-and-routing pattern traces back to the same structural gap
 ## Frequently Asked Questions
 
 ### What's the difference between Model Capability Mismatch and Model Version Incompatibility?
-[Model Capability Mismatch](failures/model-capability-mismatch.md) is the coarse case — a text-only model receiving an image, or a non-tool-calling model receiving a function-calling request. [Model Version Incompatibility](failures/model-version-incompatibility.md) is the fine-grained case within the same capability category — two versions of the same model family both nominally support tool calling, but one supports parallel tool calls and the other doesn't, breaking calling code that assumed uniform behavior across the family.
+Model Capability Mismatch is the coarse case — a text-only model receiving an image, or a non-tool-calling model receiving a function-calling request. Model Version Incompatibility is the fine-grained case within the same capability category — two versions of the same model family both nominally support tool calling, but one supports parallel tool calls and the other doesn't, breaking calling code that assumed uniform behavior across the family.
 
 ### Can a cost-saving routing change ever be treated as a failure pattern?
-Because per [Model Downgrade Silent Failure](failures/model-downgrade-silent-failure.md), the downgrade decision itself is often reasonable — the failure is that no mechanism measures or surfaces the resulting quality impact, so the cost win is visible on a dashboard while the quality loss accumulates for weeks before anyone notices via complaints. The pattern isn't "don't downgrade," it's "downgrades without a paired quality metric are invisible regressions."
+Because per Model Downgrade Silent Failure, the downgrade decision itself is often reasonable — the failure is that no mechanism measures or surfaces the resulting quality impact, so the cost win is visible on a dashboard while the quality loss accumulates for weeks before anyone notices via complaints. The pattern isn't "don't downgrade," it's "downgrades without a paired quality metric are invisible regressions."
 
 ### If a load balancer's health checks are passing, why would routing still be broken?
-Per [Model Load Balancing Failure](failures/model-load-balancing-failure.md), a lightweight liveness health check (a fast ping) measures reachability, not the quality of service under real production traffic — an instance can respond to a health check normally while queueing badly or degrading under load, and the balancer keeps sending it a full share of traffic because its routing signal never saw the real degradation.
+Per Model Load Balancing Failure, a lightweight liveness health check (a fast ping) measures reachability, not the quality of service under real production traffic — an instance can respond to a health check normally while queueing badly or degrading under load, and the balancer keeps sending it a full share of traffic because its routing signal never saw the real degradation.
 
 ### Does session-pinned routing fully solve mid-session model switching?
-[Model Switching Mid-Session](failures/model-switching-mid-session.md) reports that pinning model selection for the duration of a session (rather than re-evaluating per turn) eliminates the large majority of switch-induced continuity complaints, though failover events unrelated to routing logic (an instance going down) can still force an unavoidable switch — the pattern's mitigation for that case is explicit constraint re-anchoring at the switch point rather than relying on silent transcript continuity.
+Model Switching Mid-Session reports that pinning model selection for the duration of a session (rather than re-evaluating per turn) eliminates the large majority of switch-induced continuity complaints, though failover events unrelated to routing logic (an instance going down) can still force an unavoidable switch — the pattern's mitigation for that case is explicit constraint re-anchoring at the switch point rather than relying on silent transcript continuity.
 
 ## Patterns
 
 | Pattern | Mechanism |
 |---|---|
-| [Model Capability Mismatch](failures/model-capability-mismatch.md) | Router selects a model without verifying it supports a capability (vision, tools, context length) the request needs |
-| [Model Downgrade Silent Failure](failures/model-downgrade-silent-failure.md) | Cost-driven router shifts traffic to a cheaper model with no mechanism to measure or surface the quality impact |
-| [Model Load Balancing Failure](failures/model-load-balancing-failure.md) | Balancer keeps routing to a degraded instance because its health check measures liveness, not real task quality |
-| [Model Selection Nondeterminism](failures/model-selection-nondeterminism.md) | Identical requests route to different underlying models across runs due to unrecorded load/cohort/tie-break factors |
-| [Model Switching Mid-Session](failures/model-switching-mid-session.md) | Per-turn re-routing hands a conversation to a different model mid-session, breaking persona/context continuity |
-| [Model Version Incompatibility](failures/model-version-incompatibility.md) | Routing pool treats model versions within a family as interchangeable despite differing feature support |
+| Model Capability Mismatch | Router selects a model without verifying it supports a capability (vision, tools, context length) the request needs |
+| Model Downgrade Silent Failure | Cost-driven router shifts traffic to a cheaper model with no mechanism to measure or surface the quality impact |
+| Model Load Balancing Failure | Balancer keeps routing to a degraded instance because its health check measures liveness, not real task quality |
+| Model Selection Nondeterminism | Identical requests route to different underlying models across runs due to unrecorded load/cohort/tie-break factors |
+| Model Switching Mid-Session | Per-turn re-routing hands a conversation to a different model mid-session, breaking persona/context continuity |
+| Model Version Incompatibility | Routing pool treats model versions within a family as interchangeable despite differing feature support |
 
 **Total: 6 patterns**
 

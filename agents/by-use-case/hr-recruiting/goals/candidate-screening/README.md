@@ -51,11 +51,11 @@ Compare screening scores against actual downstream hire performance or hiring-ma
 
 | Pattern | Mechanism |
 |---|---|
-| [Protected-Class Proxy Discrimination](failures/protected-class-proxy-discrimination.md) | Graduation year, name, job history gaps learned as proxies for age/race/national origin |
-| [Resume Keyword Matching Bias](failures/resume-keyword-matching-bias.md) | Exact keyword match rejects qualified candidates who use industry synonyms or describe skills differently |
-| [Resume Keyword Overfit Bias](failures/resume-keyword-overfit-bias.md) | Over-weighting lexical resume-to-JD similarity penalizes career-changers and non-standard phrasing despite equivalent skills |
-| [Interview Transcript Sentiment Overweighted vs. Content](failures/interview-transcript-sentiment-overweighted-vs-content.md) | Fluency and positive sentiment outweigh technical answer correctness; non-native speakers and deliberate communicators systematically disadvantaged |
-| [Multi-Agent Handoff Drops Disclosed Accommodation Request Before Interview Scheduling](failures/multi-agent-handoff-drops-disclosed-accommodation-request-before-interview-scheduling.md) | Accessibility accommodation disclosed in screening chat is not captured in structured handoff, so interview scheduled without accommodation |
+| Protected-Class Proxy Discrimination | Graduation year, name, job history gaps learned as proxies for age/race/national origin |
+| Resume Keyword Matching Bias | Exact keyword match rejects qualified candidates who use industry synonyms or describe skills differently |
+| Resume Keyword Overfit Bias | Over-weighting lexical resume-to-JD similarity penalizes career-changers and non-standard phrasing despite equivalent skills |
+| Interview Transcript Sentiment Overweighted vs. Content | Fluency and positive sentiment outweigh technical answer correctness; non-native speakers and deliberate communicators systematically disadvantaged |
+| Multi-Agent Handoff Drops Disclosed Accommodation Request Before Interview Scheduling | Accessibility accommodation disclosed in screening chat is not captured in structured handoff, so interview scheduled without accommodation |
 
 **Total: 5 patterns**
 
