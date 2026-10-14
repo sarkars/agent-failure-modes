@@ -404,4 +404,13 @@ Ideas from earlier lists that were never chosen. They stay out of the queue unti
 AI-written help content in knowledge bases · voice in cars and wearables · agents using other agents' tools (user-facing side) · email and calendar agents (now partly PA) · group chats and shared assistants · proactive and ambient agents · document and spreadsheet copilots · workplace monitoring through copilots · shopping honesty (stale prices, affiliate bias) · benefits, government, and insurance chat · outbound AI sales at scale · elder-care assistants · household and family assistants · digital twins and cloned voices of real people · video and avatar service agents · "know your agent" identity · AI-generated reviews · scammers impersonating your support · assistant marketplaces · invisible model routing · memory shared across products · apps inside assistants · accessibility-first agents · jurisdiction-aware behaviour (state-by-state rules) · transcript mining and privacy · smart glasses and AR overlays · robots and embodied assistants · live camera and screen sharing · game characters and creative companions
 
 ## Schedule
-*(Filled in after the scheduled task is created.)*
+| Item | Value |
+|---|---|
+| Scheduled task name | `HMI roadmap: 20 patterns every 5 hours` |
+| Task id | `trig_01J1rwvuKcpXBGmKkkRfihF7` |
+| Created | 2026-10-14 19:05 UTC |
+| Cron (UTC) | `5 */5 * * *`, so runs start at minute 5 of hours 0, 5, 10, 15, and 20 |
+| First run | 2026-10-14 20:05 UTC |
+| Gap at midnight | Hours 20 and 0 are only 4 hours apart, because 24 isn't divisible by 5. All other gaps are 5 hours. |
+| Where it fires | Into the same session that created it, so the run has the repository checkout and tools |
+| To pause or stop | Ask the session to disable the task, or call the scheduled-task update tool with `enabled=false` for the id above. The queue keeps its place, so re-enabling resumes where it stopped. |
