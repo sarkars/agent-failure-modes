@@ -1,4 +1,17 @@
-# Answer-and-Go Conversation
+<!-- SEO
+title: Chatbot Answers Then Stops: Fix Dead-End Conversations
+description: Why a chatbot answers the question and then goes quiet, with before/after examples, a tested fix, guardrails, evals, and alerts.
+search phrases:
+- chatbot only answers the question and doesn't ask follow-up questions
+- chatbot dead end no next step
+- chatbot ends conversation too early
+- chatbot doesn't close the loop / confirm the problem is solved
+- how to make a chatbot proactive instead of reactive
+- why does my AI chatbot feel flat or robotic
+- chatbot not moving the sales conversation forward
+-->
+
+# Chatbot Answers, Then Stops: The Answer-and-Go Conversation
 
 > **One line:** The bot answers exactly what was asked, then stops. It doesn't find out what the user is trying to do, doesn't move them toward it, and doesn't confirm the problem is solved.
 
@@ -9,6 +22,7 @@
 | **Who is affected** | Every user, and most visibly those with a real goal behind a small first question |
 | **Frequency** | Very common. Observed in practice; I found no study that measures how often it occurs. |
 | **Family** | Conversation leadership |
+| **Also searched as** | chatbot dead end · chatbot doesn't ask follow-up questions · chatbot ends conversation too early · chatbot no next step · reactive chatbot · chatbot not closing the loop |
 
 ## 1. In plain words
 A good human salesperson, support agent, or advisor treats the user's first question as a doorway. The bot treats it as the whole job. It answers, waits, and the conversation dies. Nobody is rude and nothing is wrong, but nothing moves forward either.
@@ -105,7 +119,7 @@ State to keep between turns:
   "advances_declined": 0, "closed": false }
 ```
 
-**Don't over-correct.** The opposite failure is a bot that interrogates, upsells, or won't let the user leave (see [over-clarification](../../../../by-use-case/agent-interaction/goals/conversation-quality/failures/over-clarification.md)). Three guardrails: one move per turn; stop advancing after two declined prompts (`advances_declined >= 2`); and in high-stakes or distressed contexts, the forward move is a safe next step or a handoff, never a sales prompt.
+**Don't over-correct.** The opposite failure is a bot that interrogates, upsells, or won't let the user leave (see [over-clarification](../../../../by-use-case/agent-interaction/goals/conversation-quality/failures/over-clarification.md)). Four guardrails: one move per turn; stop advancing after two declined prompts (`advances_declined >= 2`); in high-stakes or distressed contexts, the forward move is a safe next step or a handoff, never a sales prompt; and no filler. A tag-on like "Want me to explain more?" after every reply is a known annoyance. Users and tech writers have complained about it in general-purpose assistants, and one writer reported that a plain "do not ask follow-up questions" instruction wasn't enough to stop it ([PCWorld](https://www.pcworld.com/article/3221302/i-got-chatgpt-stop-its-annoying-follow-up-questions-with-one-prompt.html)). A forward move counts only if it ties to the user's stated goal.
 
 **Hand-off rule.** If the goal can't be advanced (out of scope, repeated non-progress, or the user asks), the forward move is a handoff to a human with the conversation summary attached, so the user doesn't have to repeat themselves. See [poor-escalation](../../../../by-use-case/customer-service/goals/conversation-resolution/failures/poor-escalation.md).
 
@@ -139,6 +153,108 @@ Thresholds below are starting points to tune for your product, not published ben
 - [under-clarification](../../../../by-use-case/agent-interaction/goals/conversation-quality/failures/under-clarification.md): the bot didn't ask what it needed to *answer correctly*. Here, the answer may be right, but the bot never asks what the user needs *next*.
 - [tone-mismatch](../../../../by-use-case/customer-service/goals/conversation-resolution/failures/tone-mismatch.md) and [repeated-question-loop](../../../../by-use-case/customer-service/goals/conversation-resolution/failures/repeated-question-loop.md): neighbouring conversation failures that often co-occur.
 - Planned in this family: no-closure-confirmation, framework-blind sales conversation, stakes-blind register.
+
+## 9. Common questions
+
+### Why does my chatbot only answer the question and then stop?
+Usually because it was told to ("be concise", "don't ask unnecessary questions"), it doesn't track what the user is trying to do, and the success metric counts a finished session as a win. See [why it happens](#3-why-it-happens) and the [fix](#5-the-fix).
+
+### How do I make a chatbot ask good follow-up questions?
+Answer first, then ask one question chosen from the user's goal and stage, such as a Situation or Problem question from the [SPIN questioning guide](../../../solutions-library/spin-questioning.md). Research on human conversations found that follow-up questions raised how much partners liked each other, because they felt heard (Huang et al., 2017). Whether the same holds for bots is not yet shown.
+
+### How many questions should a chatbot ask?
+In this pattern, one per turn. For lead qualification across a whole conversation, vendor guides suggest keeping it to roughly 2-5 questions total (for example [Lindy's guide](https://www.lindy.ai/blog/how-do-chatbots-qualify-leads)). Those are vendor recommendations, not tested limits, so tune with your own data.
+
+### Won't extra questions annoy users?
+They can, if they're filler or pushy. That's why the fix limits the bot to one move per turn, stops after two declined prompts, and drops the sales-style prompts in high-stakes or distressed conversations. See [don't over-correct](#5-the-fix).
+
+### How should a chatbot end a conversation?
+It should summarise what was done, ask the user to confirm it worked, say what happens next, and give a way back. "Anything else?" alone is not a close. See the closing step in the [turn policy](#5-the-fix) and the [closure gate](#t1-solution-architecture).
+
+### How is this different from over-clarification or an unclear next step?
+Over-clarification asks too many questions *before* answering. [Unclear next step](../../../../by-use-case/customer-service/goals/conversation-resolution/failures/unclear-next-step.md) has a next step that's vague. Here the bot gives no forward move at all and never checks the problem is solved.
+
+---
+## Technical section
+
+> For teams building the fix. Thresholds below are **starting points to tune on your own traffic**, not published benchmarks.
+
+### T1. Solution architecture
+Add a thin policy layer around the model so the three jobs (answer, advance, close) don't depend on the prompt alone.
+
+```
+user message
+   │
+   ▼
+[1] State update ──► goal, stage, known facts, advances_declined, stakes
+   │
+   ▼
+[2] Move selector ──► picks ONE move from the allowed menu (table in section 5)
+   │                  (menu is filtered by stakes and by advances_declined)
+   ▼
+[3] Response composer ──► generates: ANSWER + the selected move
+   │
+   ▼
+[4] Post-check ──► one-question rule, no filler, closure gate (see T2)
+   │
+   ▼
+reply (or regenerate / hand off)
+```
+```python
+def select_move(state):
+    if state.user_signalled_done or state.advances_declined >= 2:
+        return None                       # just answer or close
+    menu = MOVES[(state.goal, state.stage)]
+    if state.stakes == "high":
+        menu = [m for m in menu if m.kind in ("safe_next_step", "handoff", "verify")]
+    if state.out_of_scope or state.stalled_turns >= 3:
+        return Move("handoff", with_summary=True)
+    return menu[0] if menu else None
+```
+State object: see the JSON in section 5. Keep it small and rewritten every turn, rather than relying on the model to remember the goal from the transcript.
+
+### T2. Guardrails
+| Rule | Enforced where | How it is checked |
+|---|---|---|
+| At most one question per reply | Post-check [4] | Count question marks and run a quick classifier; regenerate if more than one |
+| Every non-final reply has exactly one forward move, unless suppressed | Post-check [4] | LLM judge or rule check against the allowed menu |
+| No forward move after the user is done, hurried, or upset | Move selector [2] | Sentiment and "done" intent flags in state |
+| Stop advancing after two declined prompts | State [1] | `advances_declined` counter |
+| High-stakes: no sales-style moves | Move selector [2] | Stakes flag filters the menu |
+| No filler tag-ons not tied to the goal | Post-check [4] | Judge rubric item: "move references the user's goal" |
+| **Closure gate:** a conversation can't be marked resolved until a closing message with confirm-and-next-step was sent | Conversation state machine | `closed=true` only after the closing template was emitted |
+| Hand-off carries a summary | Handoff step | Required field in the handoff payload |
+
+### T3. Evals
+- **Dataset:** start with 100 to 200 conversation openers across your top intents: informational questions (sales), fix requests (support), "I'm done" messages, high-stakes cases, and out-of-scope requests. Include 20 to 30 adversarial cases where advancing is wrong (user in a hurry, user upset, user declined twice).
+- **Judge rubric (score each reply 0/1):** (a) answers the question; (b) exactly one forward move, or correctly none; (c) the move ties to the user's goal; (d) no filler; (e) when the goal is met, closes with confirm and next step. Calibrate the judge on 50 human-labelled examples before trusting it.
+- **Metrics and starting thresholds**
+
+| Metric | Starting target | Notes |
+|---|---|---|
+| Answer correctness | Same as your baseline | Don't let the fix hurt accuracy |
+| Forward-move coverage (non-final turns) | > 90% | Excluding suppressed cases |
+| Multi-question replies | < 2% | Interrogation guard |
+| Correct suppression (done/upset/declined cases) | > 95% | Over-correction guard |
+| Closing-confirmation rate (resolved cases) | > 90% | |
+
+- **Release gate:** block a prompt or model change if multi-question replies or incorrect suppression exceed target, or if answer correctness drops below baseline.
+- **Human review:** sample 30 conversations per release, scored by someone who didn't build the fix.
+
+### T4. Alerts
+| Metric | Warn | Page | First response |
+|---|---|---|---|
+| Silent-exit rate (sessions ending on a bot message, no confirmed resolution) | +20% vs 4-week baseline | +40% | Check recent prompt or model changes for a lost forward-move rule |
+| Re-contact within 72h (same user, same topic) | +15% | +30% | Sample sessions that "closed", check the closure gate |
+| Questions per bot turn (mean) | > 1.2 | > 1.5 | Post-check may be failing; look for filler and interrogation |
+| Declined-advance rate | > 30% of advances | > 45% | Moves aren't relevant; review the move menu |
+| Handoff-without-summary rate | > 2% | > 5% | Fix the handoff payload |
+
+### T5. Trade-offs
+- **Latency and cost:** a post-check and a possible regeneration add a model call or a rule pass per turn. Run cheap rule checks first and the judge only on flagged replies.
+- **Over-steering:** a strong move selector can make conversations feel scripted. Keep the menu small and let the model phrase the move naturally.
+- **Goal misclassification:** a wrong `goal` or `stage` yields a poorly aimed move. Treat the state as a guess, refresh it every turn, and prefer a neutral verify-or-ask move when confidence is low.
+- **Metric conflict:** this fix can lower containment while raising resolution. Agree on which metric wins before rollout.
 
 ---
 ### Deep dive
