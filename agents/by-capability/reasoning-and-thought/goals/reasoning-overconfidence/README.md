@@ -1,16 +1,31 @@
-# Reasoning Overconfidence
+# Reasoning Overconfidence in AI Agents: Planned Failure Patterns
 
-Reasoning chains that appear sound but lead to incorrect conclusions; confidence in intermediate steps doesn't correlate with correctness.
+**Status: planned.** No pattern pages are written for this goal yet. Reasoning chains that appear sound but lead to incorrect conclusions; confidence in intermediate steps does not correlate with correctness.
 
-## Failure Patterns
+## Key Takeaways
 
-| Pattern |
-|---------|
-| [Circular Reasoning](failures/circular-reasoning.md) |
-| [False Premise Acceptance](failures/false-premise.md) |
-| [Reasoning Hallucination](failures/reasoning-hallucination.md) |
-| [Confidence-Accuracy Mismatch](failures/confidence-mismatch.md) |
-| [Backtracking Failure](failures/backtracking-failure.md) |
-| [Proof Verification Failure](failures/proof-verification.md) |
+- This goal covers cases where a reasoning chain looks sound but reaches a wrong conclusion.
+- 6 patterns are planned; they are listed below without links until their pages exist.
+- Planned patterns will follow the same format as the written ones: symptoms, example, root cause, and fixes.
+
+## Planned patterns
+
+- Circular Reasoning
+- False Premise Acceptance
+- Reasoning Hallucination
+- Confidence-Accuracy Mismatch
+- Backtracking Failure
+- Proof Verification Failure
 
 **Total: 6 patterns (planned)**
+
+## Frequently Asked Questions
+
+### Where can I find fixes for reasoning overconfidence today?
+
+Not here yet. Check the other goals under [Reasoning and thought](../), and watch this page: the planned patterns above will be linked when written.
+
+## Related
+
+- [All reasoning and thought goals](../)
+- [All agent failure patterns](../../../../)
