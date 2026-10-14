@@ -1,6 +1,6 @@
 # SPIN Questioning (discovery for chat)
 
-> **Use it when:** the user asks a surface question ("Do you ship to Pune?", "What's the price?") and the real goal is still unknown. It tells the bot what to ask next.
+> **Use it when:** the user asks a surface question ("Do you ship to Austin?", "What's the price?") and the real goal is still unknown. It tells the bot what to ask next.
 
 ## The idea in one paragraph
 SPIN is a question sequence from Neil Rackham's *SPIN Selling* (1988), based on research by Rackham's Huthwaite team into large, complex sales. The book argues that in bigger decisions, skilled sellers win by asking questions that surface the buyer's problem and its consequences, not by pushing closing techniques. Its tradeoff matters for bots: SPIN was built for high-consideration decisions. For simple, low-value requests, one question is plenty.
@@ -22,8 +22,8 @@ SPIN is a question sequence from Neil Rackham's *SPIN Selling* (1988), based on 
 
 ## Worked example
 ```
-User: Do you ship to Pune?
-Bot:  Yes, we ship to Pune, usually in 5-7 days. Is this for a home or an office?     <- Situation
+User: Do you ship to Austin?
+Bot:  Yes, we ship to Austin, usually in 3-5 business days. Is this for a home or an office?     <- Situation
 User: Home. Our old sofa has gone saggy.
 Bot:  Sorry to hear that. Is the sagging the main thing you want fixed, or is it also
       the size?                                                                       <- Problem

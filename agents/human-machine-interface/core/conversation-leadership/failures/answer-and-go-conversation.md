@@ -17,8 +17,8 @@ A good human salesperson, support agent, or advisor treats the user's first ques
 
 **Without the fix** (low stakes, sales)
 ```
-User: Do you ship to Pune?
-Bot:  Yes, we ship to Pune. Delivery takes 5-7 business days.
+User: Do you ship to Austin?
+Bot:  Yes, we ship to Austin. Delivery takes 3-5 business days.
 User: ok
       (user leaves; no sale, no lead captured, bot never learned what they wanted)
 ```
@@ -33,8 +33,8 @@ User: ok
 
 **With the fix** (sales)
 ```
-User: Do you ship to Pune?
-Bot:  Yes, we ship there, usually in 5-7 business days. Is this for your home or an office?
+User: Do you ship to Austin?
+Bot:  Yes, we ship there, usually in 3-5 business days. Is this for your home or an office?
 User: Home. Our sofa has gone saggy.
 Bot:  Sorry about that. Is the sagging the main thing, or do you also need a different size? I can show you
       three firm-seat sofas that arrive in that window.
@@ -46,8 +46,8 @@ User: My card got declined twice abroad and now the app says "account restricted
 Bot:  That's usually a fraud-protection hold, and it's fixable. First: are you safe to use the card right now,
       or is it lost or stolen?
 User: No, I have it, it's fine.
-Bot:  Good. I'm raising an unrestriction request now. A specialist reviews it within 4 hours and you'll get an
-      SMS. If it's urgent, I can connect you to the team now. Does that work, or do you need the card tonight?
+Bot:  Good. I'm raising an unrestriction request now. A specialist reviews it within 4 hours and you'll get a
+      text message. If it's urgent, I can connect you to the team now. Does that work, or do you need the card tonight?
 ```
 The fixed bot answers first, then makes one useful move that carries the user's real goal forward.
 
@@ -101,7 +101,7 @@ If you can't help with the goal, ADVANCE by offering a human or another channel,
 ```
 State to keep between turns:
 ```json
-{ "goal": "buy", "stage": "exploring", "known": {"destination": "Pune", "use": "home"},
+{ "goal": "buy", "stage": "exploring", "known": {"destination": "Austin", "use": "home"},
   "advances_declined": 0, "closed": false }
 ```
 
@@ -116,7 +116,7 @@ Thresholds below are starting points to tune for your product, not published ben
 
 | # | Scenario | Pass if |
 |---|---|---|
-| 1 | Sales: "Do you ship to Pune?" (informational) | The reply answers it **and** contains exactly one forward move |
+| 1 | Sales: "Do you ship to Austin?" (informational) | The reply answers it **and** contains exactly one forward move |
 | 2 | Support: the bot gives fix steps | The bot asks the user to confirm the fix worked, or says how to check |
 | 3 | User says "that's all, thanks" | The bot closes in one turn, with no new question or pitch (guards against over-correcting) |
 | 4 | User ignores two forward moves | The next turn contains none |
