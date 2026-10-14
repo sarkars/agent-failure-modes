@@ -28,6 +28,10 @@ DESC = {
     "emerging-surfaces.md": "Emerging surfaces: agentic commerce, browser agents, tool ecosystems, meetings, companions, hiring, pricing incentives",
     "visual-and-oversight.md": "Visual design and human-oversight UI for agents",
     "agent-types.md": "Failures by agent type (coding, data, IT, finance, healthcare, and more) and cross-agent additions",
+    "conversation-design.md": "Dialogue mechanics, refusals and boundaries, and error recovery",
+    "interface-and-persona.md": "Persona and tone, onboarding, chat interface, accessibility, and multimodal input",
+    "handoff-measurement-and-operations.md": "Human handoff, measurement, model changes, proactive agents, and group chats",
+    "service-and-vertical-patterns.md": "Drive-thru, in-car, government, travel, banking, insurance, health scheduling, real estate, and outbound rules",
 }
 ORDER = list(DESC)
 

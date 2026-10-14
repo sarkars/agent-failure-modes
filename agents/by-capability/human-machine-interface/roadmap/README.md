@@ -14,7 +14,7 @@ The first version of this roadmap did not check the library, and several rows tu
 | **New** | No matching pattern found by file-name and keyword search | Search again before writing. This is a name-and-keyword check, not a full read of every file |
 
 <!-- BEGIN:result -->
-**Result: 355 rows, of which 0 are Written, 138 are New, 156 Extend an existing pattern, and 61 are already Covered.**
+**Result: 493 rows, of which 0 are Written, 228 are New, 204 Extend an existing pattern, and 61 are already Covered.**
 <!-- END:result -->
 
 <!-- BEGIN:root-cause -->
@@ -23,18 +23,18 @@ Every row carries two extra labels: its **primary root cause**, and whether **a 
 
 | Primary root cause | Rows | Share |
 |---|---|---|
-| Model: a stronger model plausibly reduces it | 94 | 26% |
-| Reliability: state, verification, enforcement, evals, latency | 87 | 25% |
-| Business context: your data, entitlements, rules, workflows, UX | 123 | 35% |
-| Governance: incentives, law, and decisions | 51 | 14% |
+| Model: a stronger model plausibly reduces it | 119 | 24% |
+| Reliability: state, verification, enforcement, evals, latency | 120 | 24% |
+| Business context: your data, entitlements, rules, workflows, UX | 193 | 39% |
+| Governance: incentives, law, and decisions | 61 | 12% |
 
 | Better model alone? | Rows | Share |
 |---|---|---|
-| Yes, largely | 6 | 2% |
-| Partly: helps, residual remains | 137 | 39% |
-| No: persists with a perfect model | 212 | 60% |
+| Yes, largely | 6 | 1% |
+| Partly: helps, residual remains | 192 | 39% |
+| No: persists with a perfect model | 295 | 60% |
 
-If every "Partly" were solved, models would fix up to 40%. If none were, 2%. A one-page list of all rows is in the [index](index.md).
+If every "Partly" were solved, models would fix up to 40%. If none were, 1%. A one-page list of all rows is in the [index](index.md).
 <!-- END:root-cause -->
 
 ## Before writing any pattern
@@ -65,7 +65,11 @@ If every "Partly" were solved, models would fix up to 40%. If none were, 2%. A o
 | [emerging-surfaces.md](emerging-surfaces.md) | Emerging surfaces: agentic commerce, browser agents, tool ecosystems, meetings, companions, hiring, pricing incentives | 25 | 0 | 7 | 15 | 3 |
 | [visual-and-oversight.md](visual-and-oversight.md) | Visual design and human-oversight UI for agents | 32 | 0 | 17 | 12 | 3 |
 | [agent-types.md](agent-types.md) | Failures by agent type (coding, data, IT, finance, healthcare, and more) and cross-agent additions | 61 | 0 | 26 | 34 | 1 |
-| | **Total** | **355** | **0** | **138** | **156** | **61** |
+| [conversation-design.md](conversation-design.md) | Dialogue mechanics, refusals and boundaries, and error recovery | 33 | 0 | 14 | 19 | 0 |
+| [interface-and-persona.md](interface-and-persona.md) | Persona and tone, onboarding, chat interface, accessibility, and multimodal input | 41 | 0 | 30 | 11 | 0 |
+| [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Human handoff, measurement, model changes, proactive agents, and group chats | 28 | 0 | 16 | 12 | 0 |
+| [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Drive-thru, in-car, government, travel, banking, insurance, health scheduling, real estate, and outbound rules | 36 | 0 | 30 | 6 | 0 |
+| | **Total** | **493** | **0** | **228** | **204** | **61** |
 <!-- END:catalog-table -->
 
 ## Suggested priority

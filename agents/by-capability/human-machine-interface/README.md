@@ -5,8 +5,8 @@
 > Status: **chat is written; voice and visual are planned.** The patterns below are written for chat and note what changes in other modalities.
 
 ## Key takeaways
-- 14 patterns are written for chat today. [355 more are catalogued](roadmap/README.md) across chat, voice, and visual.
-- Most failures here come from conversation design and business context, not model quality. In the roadmap, 59% are judged not fixable by a better model alone. Those splits are our own judgments, not measured.
+- 14 patterns are written for chat today. [493 more are catalogued](roadmap/README.md) across chat, voice, and visual.
+- Most failures here come from conversation design and business context, not model quality. In the roadmap, 60% are judged not fixable by a better model alone. Those splits are our own judgments, not measured.
 - Every pattern states its goal and a primary metric with a starting target to tune.
 
 ## Three questions every pattern answers
@@ -51,10 +51,10 @@
 A one-page [index of every catalogued failure](roadmap/index.md) shows its library status, root cause, and whether a better model alone would fix it.
 
 <!-- BEGIN:roadmap-count -->
-[355 catalogued patterns](roadmap/README.md) with goals and metrics, checked against the existing library (0 written, 138 new, 156 that extend an existing pattern, 61 already covered). The [execution plan](roadmap/execution-plan.md) orders the 294 to write.
+[493 catalogued patterns](roadmap/README.md) with goals and metrics, checked against the existing library (0 written, 228 new, 204 that extend an existing pattern, 61 already covered). The [execution plan](roadmap/execution-plan.md) orders the 432 to write.
 <!-- END:roadmap-count -->
 
-Catalog files: [agent types](roadmap/agent-types.md), [embedded copilots](roadmap/embedded-copilots.md), [emerging surfaces](roadmap/emerging-surfaces.md), chat and core, [response time](roadmap/response-time.md), [response structure and closers](roadmap/response-structure-and-length.md), [language and locale](roadmap/language-and-locale.md), [conversation frameworks](roadmap/conversation-frameworks.md) (sales, support, style matching), voice, voice listening and transcription, [privacy, governance, and access](roadmap/privacy-governance-and-access.md), [effort, completeness, and memory](roadmap/effort-completeness-and-memory.md), and visual and oversight.
+Catalog files: [conversation design, refusals, and errors](roadmap/conversation-design.md), [persona, onboarding, interface, accessibility, and multimodal input](roadmap/interface-and-persona.md), [handoff, measurement, and operations](roadmap/handoff-measurement-and-operations.md), [service verticals](roadmap/service-and-vertical-patterns.md), [agent types](roadmap/agent-types.md), [embedded copilots](roadmap/embedded-copilots.md), [emerging surfaces](roadmap/emerging-surfaces.md), chat and core, [response time](roadmap/response-time.md), [response structure and closers](roadmap/response-structure-and-length.md), [language and locale](roadmap/language-and-locale.md), [conversation frameworks](roadmap/conversation-frameworks.md) (sales, support, style matching), voice, voice listening and transcription, [privacy, governance, and access](roadmap/privacy-governance-and-access.md), [effort, completeness, and memory](roadmap/effort-completeness-and-memory.md), and visual and oversight.
 
 ## Frequently asked questions
 
