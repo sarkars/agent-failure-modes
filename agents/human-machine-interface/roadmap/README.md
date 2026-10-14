@@ -11,7 +11,7 @@ The first version of this roadmap did not check the library, and several rows tu
 | **Extends** | An existing pattern covers the technical failure | Write only the experience or design angle and a fix, and link to the existing pattern |
 | **New** | No matching pattern found by file-name and keyword search | Search again before writing. This is a name-and-keyword check, not a full read of every file |
 
-**Result: 246 rows, of which 130 are New, 68 Extend an existing pattern, and 48 are already Covered.**
+**Result: 294 rows, of which 147 are New, 95 Extend an existing pattern, and 52 are already Covered.**
 
 ## Before writing any pattern
 1. Search the library for the topic (file names and keywords, under `agents/`).
@@ -28,6 +28,7 @@ The first version of this roadmap did not check the library, and several rows tu
 | File | Area | Rows | New | Extends | Covered |
 |---|---|---|---|---|---|
 | [chat-and-core.md](chat-and-core.md) | Remaining chat and core families, plus channel selection | 21 | 18 | 2 | 1 |
+| [embedded-copilots.md](embedded-copilots.md) | Embedded copilots: upselling, context, first response, obvious questions | 23 | 10 | 12 | 1 |
 | [response-time.md](response-time.md) | Speed, waiting, and pacing, all channels | 14 | 10 | 4 | 0 |
 | [response-structure-and-length.md](response-structure-and-length.md) | Reply structure, length, chunking, and closers such as 'ok' and 'bye' | 18 | 9 | 9 | 0 |
 | [language-and-locale.md](language-and-locale.md) | Language, reading level, and locale | 16 | 14 | 1 | 1 |
@@ -36,13 +37,14 @@ The first version of this roadmap did not check the library, and several rows tu
 | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Voice listening and transcription | 22 | 4 | 11 | 7 |
 | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Privacy, governance, ethics, access control, and external services | 42 | 6 | 13 | 23 |
 | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Effort, completeness, and memory | 25 | 5 | 10 | 10 |
+| [emerging-surfaces.md](emerging-surfaces.md) | Emerging surfaces: agentic commerce, browser agents, tool ecosystems, meetings, companions, hiring, pricing incentives | 25 | 7 | 15 | 3 |
 | [visual-and-oversight.md](visual-and-oversight.md) | Visual design and human-oversight UI for agents | 32 | 25 | 6 | 1 |
-| | **Total** | **246** | **130** | **68** | **48** |
+| | **Total** | **294** | **147** | **95** | **52** |
 
 ## Suggested priority
 | Tier | Why | Start with |
 |---|---|---|
-| 1 | High harm, evidence exists, and the library has a gap | Lazy completion and deferring work to the user · no warning of context loss · skipped steps with no receipt · transcription hallucination · non-speech heard as speech · names with no repair path · acknowledgments and closers (RS-14 to RS-16) · answer buried and wall of text · scam victims and romantic or parasocial dependence · slow first response and silent long waits · dark patterns · approval fatigue · pitching before discovery |
+| 1 | High harm, evidence exists, and the library has a gap | Generic first response · re-asking known information · forced re-login · help that turns into a sales pitch · purchases without clear authorisation · browser-agent hijacking · lazy completion and deferring work to the user · no warning of context loss · skipped steps with no receipt · transcription hallucination · non-speech heard as speech · names with no repair path · acknowledgments and closers (RS-14 to RS-16) · answer buried and wall of text · scam victims and romantic or parasocial dependence · slow first response and silent long waits · dark patterns · approval fatigue · pitching before discovery · per-resolution pricing incentives |
 | 2 | Common failures with solid frameworks, or conversation-facing governance gaps | Remaining sales, support, and style-matching patterns · privacy-rights requests · memory the user can't see or control · weak identity verification · denial messages that leak · locale formatting · reading level · accessibility |
 | 3 | Valuable but needs more research or expert input | Emotion inferred from voice · explanation faithfulness · regional styles · pacing and "natural delay" research · sensitive-category inference |
 
@@ -85,6 +87,18 @@ The first version of this roadmap did not check the library, and several rows tu
 | tau-bench (Yao et al., 2024) | Policy following | Verified. Strong models inconsistent across repeated runs. |
 | Coding-agent production-database incident (July 2025) | External services | Press and incident-database reports. Record counts differ by source. |
 | CFPB guidance withdrawal (May 2025) | Regulation | Verified: 67 documents withdrawn, pending review. Status of the 2023 chatbot spotlight **unconfirmed**. |
+| DarkBench (ICLR 2025) and related dark-pattern studies | Manipulation in assistants | Verified existence and scope (sycophancy, anthropomorphism, emotional manipulation). **No study of upselling found.** |
+| Ads in ChatGPT (announced Jan 2026; tests from Feb 2026) | Conflicts of interest | Reported by vendor, marketing, and opinion sources. OpenAI's own principles not read. |
+| Salesforce State of the Connected Customer | Repeating information | Figures read via secondary articles; they vary by edition and region |
+| Gartner: 40% of enterprise apps to include task-specific agents by end-2026 | Market size | Reported through secondary sources; original not checked |
+| Agentic commerce protocols and market size (Juniper, others) | Commerce | Vendor, trade, and preprint sources; dates and details conflict |
+| AI browser prompt injection (OpenAI, Brave statements) | Browser agents | Verified through press and security-blog coverage; no 2026 primary disclosure found |
+| MCP security reporting (2025 to 2026) | Tool ecosystems | Vendor and research-blog sources; counts of vulnerabilities differ |
+| Otter.ai and Fireflies suits (2025) | Meeting recorders | Allegations in filings as reported; current status unchecked |
+| Illinois AI therapy law (Aug 2025) | Wellbeing | Verified through news coverage |
+| Mobley v. Workday (2025) | AI hiring | Verified through law-firm summaries; merits pending |
+| Per-resolution pricing (Intercom Fin, Decagon, Sierra) | Incentives | Third-party analyses; Fin's $0.99 figure best supported, others estimates |
+| FCC ruling on AI voices under the TCPA (Feb 2024) | Voice outreach | Verified for 2024; claims of newer 2026 rules unconfirmed |
 | Grice's maxims, peak-end rule, Hofstede, Culture Map, HEARD, LAST, GDPR Art. 22 | Various | **Not verified in this session** |
 
 ## Next steps
