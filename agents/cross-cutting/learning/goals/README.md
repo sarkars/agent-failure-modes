@@ -1,33 +1,35 @@
 # Learning AI Agent Failures by Goal: 12 Patterns, Causes, and Fixes
 
-**Learning failures in AI agents are grouped here into 3 goals, each with a catalog of named failure patterns, the symptoms you will see, the root cause, and mitigations you can copy.** Start from the symptom you are debugging, pick the matching goal below, and open its failure list.
+**Learning AI agents fail in 3 distinct ways, grouped by the goal each failure breaks.** Find the goal that matches what you are seeing, open its list, and use the fix on each pattern page.
 
 ## Key Takeaways
 
-- This cross-cutting concern covers 3 goals and 12 documented failure patterns.
-- The largest goal is [Safe Learning](safe-learning/) with 12 patterns.
-- Each goal page explains the failure class, how to tell it apart from its neighbors, and which mitigations apply across its patterns.
-- Each failure page covers the symptoms, an example, the root cause, and how to fix it.
+- 12 documented patterns across 3 goals; the most documented is [Safe Learning](safe-learning/) with 12.
+- Each pattern page gives the symptoms, an example, the root cause, and mitigations.
 
 ## Learning Goals
 
-| Goal | What goes wrong | Patterns |
+| Goal | When it fails | Patterns |
 |---|---|---|
-| [Feedback and Adaptation](feedback-and-adaptation/) | Feedback and adaptation fails when an agent receives correction signals but cannot respond to correction, misinterprets feedback context, or applies corrective action inconsistently across similar scenarios (planned, no patterns written yet) | 0 |
-| [In Context Learning](in-context-learning/) | In-context learning fails when an agent receives examples or few-shot instruction within a request but interprets examples incorrectly, forgets examples mid-conversation, or applies learned patterns too rigidly to new scenarios (planned, no patterns written yet) | 0 |
-| [Safe Learning](safe-learning/) | Safe self-improvement fails when an agent ingests feedback or metrics and updates its behavior without adequate validation, catching the degradation only weeks later after shipping degraded behavior to production | 12 |
+| [Feedback and Adaptation](feedback-and-adaptation/) | When an agent receives correction signals but cannot respond to correction, misinterprets feedback context, or applies corrective action inconsistently across similar scenarios. | 0 |
+| [In Context Learning](in-context-learning/) | When an agent receives examples or few-shot instruction within a request but interprets examples incorrectly, forgets examples mid-conversation | 0 |
+| [Safe Learning](safe-learning/) | When an agent ingests feedback or metrics and updates its behavior without adequate validation, catching the degradation only weeks later after shipping degraded behavior to production. | 12 |
 
 **Total: 12 patterns**
 
 ## Frequently Asked Questions
 
-### Where do I start if my learning agent is failing?
+### How do you catch metric-only-learning when a metric is by definition the thing you're optimizing for?
 
-Match the symptom to a goal in the table above, then open that goal's page for how to tell its failures apart and where to look first. Each failure page ends in mitigations you can apply directly.
+Metric-only learning fails when the metric omits constraints (compliance, safety, policy adherence) that matter beyond the metric itself. See [Safe Learning](safe-learning/).
 
-### How are these learning failure patterns organized?
+### How do you distinguish feedback that should apply globally vs. feedback that applies only to the current context?
 
-By goal: the outcome the agent is supposed to achieve. Under each goal, a `failures` folder holds one page per pattern. For the full picture see the [Learning overview](../).
+Structured feedback metadata should tag feedback with its intended scope: "user-specific preference for X" (user-specific), "X violates policy Y" (global), "domain never uses X" (domain-specific), or "X is outdated information" (temporal). See [Feedback and Adaptation](feedback-and-adaptation/).
+
+### How do language models sometimes lose examples and mode-switch back to training-time behavior mid-conversation?
+
+Context-window degradation and example-forgetting are well-documented: as conversation length increases and context window fills, models often de-emphasize or lose access to early examples and learned patterns, reverting to training-time defaults or the most recent input. See [In Context Learning](in-context-learning/).
 
 ## Related
 

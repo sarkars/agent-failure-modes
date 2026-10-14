@@ -1,36 +1,38 @@
-# Sales Crm AI Agent Failures by Goal: 16 Patterns, Causes, and Fixes
+# Sales CRM AI Agent Failures by Goal: 16 Patterns, Causes, and Fixes
 
-**Sales Crm failures in AI agents are grouped here into 4 goals, each with a catalog of named failure patterns, the symptoms you will see, the root cause, and mitigations you can copy.** Start from the symptom you are debugging, pick the matching goal below, and open its failure list.
+**Sales CRM AI agents fail in 4 distinct ways, grouped by the goal each failure breaks.** Find the goal that matches what you are seeing, open its list, and use the fix on each pattern page.
 
 ## Key Takeaways
 
-- This use case covers 4 goals and 16 documented failure patterns.
-- The largest goal is [Quota Achievement](quota-achievement/) with 5 patterns.
-- Each goal page explains the failure class, how to tell it apart from its neighbors, and which mitigations apply across its patterns.
-- Each failure page covers the symptoms, an example, the root cause, and how to fix it.
+- 16 documented patterns across 4 goals; the most documented is [Quota Achievement](quota-achievement/) with 5.
+- Each pattern page gives the symptoms, an example, the root cause, and mitigations.
 
-## Sales Crm Goals
+## Sales CRM Goals
 
-| Goal | What goes wrong | Patterns |
+| Goal | When it fails | Patterns |
 |---|---|---|
-| [Deal Management](deal-management/) | Deal management failures occur when agents assemble contract clauses, track negotiated terms, or approve deals using stale pricing data, wrong contract templates, or missing handoff fields that capture negotiated exceptions | 3 |
-| [Lead Scoring](lead-scoring/) | Lead-scoring failures occur when agents compute a lead's likelihood-to-close using stale scoring rules, fabricated data when tool results are unavailable, superficially-similar deal precedents instead of structurally comparable ones | 4 |
-| [Pipeline Forecasting](pipeline-forecasting/) | Pipeline-forecasting failures occur across multiple independent dimensions | 4 |
-| [Quota Achievement](quota-achievement/) | Quota-achievement failures occur when agents calculate rep quota attainment using stale discount policies, fabricated approval records, mismatched coaching recommendations, or unverified credit adjustments | 5 |
+| [Deal Management](deal-management/) | When agents assemble contract clauses, track negotiated terms, or approve deals using stale pricing data, wrong contract templates, or missing handoff fields that capture negotiated exceptions | 3 |
+| [Lead Scoring](lead-scoring/) | When agents compute a lead's likelihood-to-close using stale scoring rules, fabricated data when tool results are unavailable | 4 |
+| [Pipeline Forecasting](pipeline-forecasting/) | Pipeline-forecasting failures occur across multiple independent dimensions: agents apply outdated stage-probability weights instead of current configuration | 4 |
+| [Quota Achievement](quota-achievement/) | When agents calculate rep quota attainment using stale discount policies, fabricated approval records, mismatched coaching recommendations, or unverified credit adjustments | 5 |
 
 **Total: 16 patterns**
 
 ## Frequently Asked Questions
 
-### Where do I start if my sales crm agent is failing?
+### How do you prevent discount-policy cache lag from causing unauthorized approvals?
 
-Match the symptom to a goal in the table above, then open that goal's page for how to tell its failures apart and where to look first. Each failure page ends in mitigations you can apply directly.
+Implement event-coupled cache invalidation: when RevOps publishes a discount-policy change, immediately trigger cache-invalidation events that clear the discount-tool's cache within the same transaction. See [Quota Achievement](quota-achievement/).
 
-### How are these sales crm failure patterns organized?
+### Can reps be trained to ignore stale-heuristic explanations even if an agent provides them with high confidence?
 
-By goal: the outcome the agent is supposed to achieve. Under each goal, a `failures` folder holds one page per pattern. For the full picture see the [Sales Crm overview](../).
+Partially. See [Lead Scoring](lead-scoring/).
+
+### How much probability calibration discount should be applied to sales-rep estimates?
+
+Typical empirical finding: reps estimate 40-60% higher probability than actual close rates. See [Pipeline Forecasting](pipeline-forecasting/).
 
 ## Related
 
-- [Sales Crm overview](../)
+- [Sales CRM overview](../)
 - [All agent failure patterns](../../../)

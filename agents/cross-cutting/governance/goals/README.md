@@ -1,34 +1,36 @@
 # Governance AI Agent Failures by Goal: 33 Patterns, Causes, and Fixes
 
-**Governance failures in AI agents are grouped here into 4 goals, each with a catalog of named failure patterns, the symptoms you will see, the root cause, and mitigations you can copy.** Start from the symptom you are debugging, pick the matching goal below, and open its failure list.
+**Governance AI agents fail in 4 distinct ways, grouped by the goal each failure breaks.** Find the goal that matches what you are seeing, open its list, and use the fix on each pattern page.
 
 ## Key Takeaways
 
-- This cross-cutting concern covers 4 goals and 33 documented failure patterns.
-- The largest goal is [Approval Workflows](approval-workflows/) with 14 patterns.
-- Each goal page explains the failure class, how to tell it apart from its neighbors, and which mitigations apply across its patterns.
-- Each failure page covers the symptoms, an example, the root cause, and how to fix it.
+- 33 documented patterns across 4 goals; the most documented is [Approval Workflows](approval-workflows/) with 14.
+- Each pattern page gives the symptoms, an example, the root cause, and mitigations.
 
 ## Governance Goals
 
-| Goal | What goes wrong | Patterns |
+| Goal | When it fails | Patterns |
 |---|---|---|
-| [Agent Oversight](agent-oversight/) | Agents using reinforcement learning or feedback-driven fine-tuning gradually drift from original goals toward unintended behaviors or reward-hacked alternatives that technically achieve the stated metric but violate the underlying intent | 1 |
-| [Approval Workflows](approval-workflows/) | Multi-step approval chains break partway through because handoffs between stages fail silently, individual stages timeout without escalation, or decision authorities conflict over who can approve what | 14 |
-| [Governance](governance/) | Agents operate without accountability, transparency, or compliance controls | 12 |
-| [Tool Compliance Limits](tool-compliance-limits/) | Agents execute tool calls without compliance guardrails — audit logging is not enforced at dispatch, so sensitive actions leave no record; PII data is retained past policy expiration; data is deleted without proper audit trail | 6 |
+| [Agent Oversight](agent-oversight/) | Agents using reinforcement learning or feedback-driven fine-tuning gradually drift from original goals toward unintended behaviors or reward-hacked alternatives that technically achieve… | 1 |
+| [Approval Workflows](approval-workflows/) | Multi-step approval chains break partway through because handoffs between stages fail silently, individual stages timeout without escalation | 14 |
+| [Governance](governance/) | When things go wrong, no incident process, and no mechanism to prove to regulators that decisions were made according to policy. | 12 |
+| [Tool Compliance Limits](tool-compliance-limits/) | Agents execute tool calls without compliance guardrails — audit logging is not enforced at dispatch, so sensitive actions leave no record; PII data is retained past policy expiration | 6 |
 
 **Total: 33 patterns**
 
 ## Frequently Asked Questions
 
-### Where do I start if my governance agent is failing?
+### How do approval workflow failures differ from tool-compliance limits?
 
-Match the symptom to a goal in the table above, then open that goal's page for how to tell its failures apart and where to look first. Each failure page ends in mitigations you can apply directly.
+Approval workflows cover *governance gates* for decisions (requiring human approval before action). See [Approval Workflows](approval-workflows/).
 
-### How are these governance failure patterns organized?
+### How does governance differ from approval workflows?
 
-By goal: the outcome the agent is supposed to achieve. Under each goal, a `failures` folder holds one page per pattern. For the full picture see the [Governance overview](../).
+Governance covers the *infrastructure* for accountability (human owner, incident process, audit log, rollback). See [Governance](governance/).
+
+### How does tool compliance differ from approval workflows?
+
+Tool compliance covers enforcement of *policies* at the tool level (audit logging, data retention, data residency). See [Tool Compliance Limits](tool-compliance-limits/).
 
 ## Related
 

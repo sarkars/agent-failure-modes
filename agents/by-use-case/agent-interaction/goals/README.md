@@ -1,31 +1,25 @@
 # Agent Interaction AI Agent Failures by Goal: 23 Patterns, Causes, and Fixes
 
-**Agent Interaction failures in AI agents are grouped here into 1 goal, each with a catalog of named failure patterns, the symptoms you will see, the root cause, and mitigations you can copy.** Start from the symptom you are debugging, pick the matching goal below, and open its failure list.
+**Agent Interaction AI agents fail in 1 distinct ways, grouped by the goal each failure breaks.** Find the goal that matches what you are seeing, open its list, and use the fix on each pattern page.
 
 ## Key Takeaways
 
-- This use case covers 1 goal and 23 documented failure patterns.
-- The largest goal is [Conversation Quality](conversation-quality/) with 23 patterns.
-- Each goal page explains the failure class, how to tell it apart from its neighbors, and which mitigations apply across its patterns.
-- Each failure page covers the symptoms, an example, the root cause, and how to fix it.
+- 23 documented patterns across 1 goal; the most documented is [Conversation Quality](conversation-quality/) with 23.
+- Each pattern page gives the symptoms, an example, the root cause, and mitigations.
 
 ## Agent Interaction Goals
 
-| Goal | What goes wrong | Patterns |
+| Goal | When it fails | Patterns |
 |---|---|---|
-| [Conversation Quality](conversation-quality/) | Conversation quality fails when an agent mismanages the ask-vs-act decision on ambiguous requests, loses track of its own conversational state over many turns, miscalibrates register to context | 23 |
+| [Conversation Quality](conversation-quality/) | When an agent mismanages the ask-vs-act decision on ambiguous requests, loses track of its own conversational state over many turns, miscalibrates register to context | 23 |
 
 **Total: 23 patterns**
 
 ## Frequently Asked Questions
 
-### Where do I start if my agent interaction agent is failing?
+### What causes a conversation to feel "off" even when every individual response seems reasonable?
 
-Match the symptom to a goal in the table above, then open that goal's page for how to tell its failures apart and where to look first. Each failure page ends in mitigations you can apply directly.
-
-### How are these agent interaction failure patterns organized?
-
-By goal: the outcome the agent is supposed to achieve. Under each goal, a `failures` folder holds one page per pattern. For the full picture see the [Agent Interaction overview](../).
+Most conversation-quality failures are only visible in aggregate: a single clarifying question, tone shift, or satisfied rating looks fine on its own, but [conversation coherence loss](conversation-quality/failures/conversation-coherence-loss.md), [user trust degradation](conversation-quality/failures/user-trust-degradation.md), and [user retention decline](conversation-quality/failures/user-retention-decline.md) all describe damage that compounds silently across turns or sessions precisely because no single instance crosses a per-response quality bar. See [Conversation Quality](conversation-quality/).
 
 ## Related
 

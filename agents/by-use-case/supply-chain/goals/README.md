@@ -1,35 +1,37 @@
 # Supply Chain AI Agent Failures by Goal: 25 Patterns, Causes, and Fixes
 
-**Supply Chain failures in AI agents are grouped here into 5 goals, each with a catalog of named failure patterns, the symptoms you will see, the root cause, and mitigations you can copy.** Start from the symptom you are debugging, pick the matching goal below, and open its failure list.
+**Supply Chain AI agents fail in 5 distinct ways, grouped by the goal each failure breaks.** Find the goal that matches what you are seeing, open its list, and use the fix on each pattern page.
 
 ## Key Takeaways
 
-- This use case covers 5 goals and 25 documented failure patterns.
-- The largest goal is [Demand Forecasting](demand-forecasting/) with 7 patterns.
-- Each goal page explains the failure class, how to tell it apart from its neighbors, and which mitigations apply across its patterns.
-- Each failure page covers the symptoms, an example, the root cause, and how to fix it.
+- 25 documented patterns across 5 goals; the most documented is [Demand Forecasting](demand-forecasting/) with 7.
+- Each pattern page gives the symptoms, an example, the root cause, and mitigations.
 
 ## Supply Chain Goals
 
-| Goal | What goes wrong | Patterns |
+| Goal | When it fails | Patterns |
 |---|---|---|
 | [Demand Forecasting](demand-forecasting/) | Demand-forecasting agents treat conversational, qualitative forecast adjustments ("bump it up for the campaign") as replacements for structured baseline computations rather than deltas | 7 |
-| [Inventory Optimization](inventory-optimization/) | Inventory-optimization agents miscalibrate safety stock using demand-variance estimates computed at the wrong aggregation level (monthly when replenishment is weekly) | 4 |
+| [Inventory Optimization](inventory-optimization/) | When replenishment is weekly), treat quality-hold flags recorded in free-text inspection notes as not relevant to available-to-promise calculations | 4 |
 | [Logistics Routing](logistics-routing/) | Logistics-routing agents commit customer ETAs based on cached or stale traffic data without re-checking live disruption feeds | 4 |
 | [Supplier Onboarding](supplier-onboarding/) | Supplier-onboarding agents extract certification fields from uploaded documents and treat extraction success as equivalent to verification against the issuing authority's own records | 4 |
-| [Supplier Risk](supplier-risk/) | Supplier-risk agents anchor risk scores to mismatched historical-supplier analogs selected by name-similarity or description-text similarity rather than by structured-attribute matching (industry code, ownership, geography) | 6 |
+| [Supplier Risk](supplier-risk/) | Supplier-risk agents anchor risk scores to mismatched historical-supplier analogs selected by name-similarity or description-text similarity rather than by structured-attribute matching… | 6 |
 
 **Total: 25 patterns**
 
 ## Frequently Asked Questions
 
-### Where do I start if my supply chain agent is failing?
+### How do you distinguish between a conversational adjustment and a forecast-model update?
 
-Match the symptom to a goal in the table above, then open that goal's page for how to tell its failures apart and where to look first. Each failure page ends in mitigations you can apply directly.
+A conversational adjustment ("bump it up for the campaign") should be routed through the forecasting model's own adjustment/override interface with a structured delta parameter. See [Demand Forecasting](demand-forecasting/).
 
-### How are these supply chain failure patterns organized?
+### How do you catch analog-mismatch risk scores before they're used in a procurement decision?
 
-By goal: the outcome the agent is supposed to achieve. Under each goal, a `failures` folder holds one page per pattern. For the full picture see the [Supply Chain overview](../).
+Require every analog-informed risk score to surface which analog it was based on and whether key structured attributes (industry, country, ownership) matched. See [Supplier Risk](supplier-risk/).
+
+### How do you catch safety-stock miscalibration before it causes stockouts?
+
+Compare realized in-stock rate against the target service level for each SKU on a rolling basis. See [Inventory Optimization](inventory-optimization/).
 
 ## Related
 

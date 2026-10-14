@@ -1,34 +1,36 @@
 # Speech and Audio AI Agent Failures by Goal: 66 Patterns, Causes, and Fixes
 
-**Speech and Audio failures in AI agents are grouped here into 4 goals, each with a catalog of named failure patterns, the symptoms you will see, the root cause, and mitigations you can copy.** Start from the symptom you are debugging, pick the matching goal below, and open its failure list.
+**Speech and Audio AI agents fail in 4 distinct ways, grouped by the goal each failure breaks.** Find the goal that matches what you are seeing, open its list, and use the fix on each pattern page.
 
 ## Key Takeaways
 
-- This capability covers 4 goals and 66 documented failure patterns.
-- The largest goal is [Conversation Flow](conversation-flow/) with 44 patterns.
-- Each goal page explains the failure class, how to tell it apart from its neighbors, and which mitigations apply across its patterns.
-- Each failure page covers the symptoms, an example, the root cause, and how to fix it.
+- 66 documented patterns across 4 goals; the most documented is [Conversation Flow](conversation-flow/) with 44.
+- Each pattern page gives the symptoms, an example, the root cause, and mitigations.
 
 ## Speech and Audio Goals
 
-| Goal | What goes wrong | Patterns |
+| Goal | When it fails | Patterns |
 |---|---|---|
 | [Audio Handling](audio-handling/) | Voice agents fail under degraded audio conditions because the audio pipeline — network transport, device hardware, acoustic environment, and call session state | 6 |
-| [Conversation Flow](conversation-flow/) | Voice agents fail at conversation flow because dialog management in voice has to solve real-time turn-taking, persona consistency, structured data capture, and business-logic compliance simultaneously, and a failure in any one layer | 44 |
-| [Speech Recognition](speech-recognition/) | Speech recognition fails in AI voice agents when the transcription layer either mishears open-vocabulary or ambiguous speech, or correctly produces uncertain output that the application then treats as certain | 8 |
-| [Voice Synthesis](voice-synthesis/) | Text-to-speech output sounds wrong when the synthesis layer applies a default, one-size-fits-all rendering to text that actually needs domain-specific pronunciation, content-appropriate emotion, or a stable persona | 8 |
+| [Conversation Flow](conversation-flow/) | Voice agents fail at conversation flow because dialog management in voice has to solve real-time turn-taking, persona consistency, structured data capture | 44 |
+| [Speech Recognition](speech-recognition/) | When the transcription layer either mishears open-vocabulary or ambiguous speech, or correctly produces uncertain output that the application then treats as certain. | 8 |
+| [Voice Synthesis](voice-synthesis/) | When the synthesis layer applies a default, one-size-fits-all rendering to text that actually needs domain-specific pronunciation, content-appropriate emotion, or a stable persona | 8 |
 
 **Total: 66 patterns**
 
 ## Frequently Asked Questions
 
-### Where do I start if my speech and audio agent is failing?
+### What makes conversation flow have so many more patterns than other speech-and-audio goals?
 
-Match the symptom to a goal in the table above, then open that goal's page for how to tell its failures apart and where to look first. Each failure page ends in mitigations you can apply directly.
+Conversation flow sits at the intersection of real-time audio mechanics (turn-taking, latency, silence handling — problems that don't exist in text chatbots) and business-logic dialog management (step sequencing, data capture, compliance, scope boundaries — problems that exist in any structured conversation, voice or text). See [Conversation Flow](conversation-flow/).
 
-### How are these speech and audio failure patterns organized?
+### What makes voice agents perform worse for some accents or names than others?
 
-By goal: the outcome the agent is supposed to achieve. Under each goal, a `failures` folder holds one page per pattern. For the full picture see the [Speech and Audio overview](../).
+Because ASR acoustic and language models are trained predominantly on standard accents and common Western names — [accent-dialect-bias](speech-recognition/failures/accent-dialect-bias.md) documents a 10-20 point WER gap for non-standard accents, and [name-recognition-failures](speech-recognition/failures/name-recognition-failures.md) documents 20-40% name WER (2-4x higher for ethnic names) versus 5-10% for common words, both traceable to training-data underrepresentation. See [Speech Recognition](speech-recognition/).
+
+### What's the difference between brand-term mispronunciation and general pronunciation errors?
+
+[Brand-term-mispronunciation](voice-synthesis/failures/brand-term-mispronunciation.md) focuses specifically on brand names, acronyms, and version/number formats unique to a product or company. See [Voice Synthesis](voice-synthesis/).
 
 ## Related
 

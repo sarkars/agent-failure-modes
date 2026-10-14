@@ -1,35 +1,37 @@
 # Insurance AI Agent Failures by Goal: 13 Patterns, Causes, and Fixes
 
-**Insurance failures in AI agents are grouped here into 5 goals, each with a catalog of named failure patterns, the symptoms you will see, the root cause, and mitigations you can copy.** Start from the symptom you are debugging, pick the matching goal below, and open its failure list.
+**Insurance AI agents fail in 5 distinct ways, grouped by the goal each failure breaks.** Find the goal that matches what you are seeing, open its list, and use the fix on each pattern page.
 
 ## Key Takeaways
 
-- This use case covers 5 goals and 13 documented failure patterns.
-- The largest goal is [Claim Processing](claim-processing/) with 3 patterns.
-- Each goal page explains the failure class, how to tell it apart from its neighbors, and which mitigations apply across its patterns.
-- Each failure page covers the symptoms, an example, the root cause, and how to fix it.
+- 13 documented patterns across 5 goals; the most documented is [Claim Processing](claim-processing/) with 3.
+- Each pattern page gives the symptoms, an example, the root cause, and mitigations.
 
 ## Insurance Goals
 
-| Goal | What goes wrong | Patterns |
+| Goal | When it fails | Patterns |
 |---|---|---|
-| [Claim Processing](claim-processing/) | Claim-processing agents fail in three distinct, recurring ways | 3 |
-| [Claims Processing](claims-processing/) | Claims-processing reserve models fail when they assume claims arrive as independent, randomly-distributed events and do not account for catastrophe correlation | 1 |
-| [Fraud Detection](fraud-detection/) | Fraud-detection agents fail when they treat embedding-similarity matches to known fraud ring members as sufficient grounds for escalation without requiring a corroborating structured relational signal | 3 |
-| [Policy Management](policy-management/) | Policy-management agents fail when a renewal-pricing RAG step retrieves a similar-looking but territory-mismatched policy precedent, when a multi-agent handoff loses a mid-term endorsement that changed the risk profile | 3 |
-| [Underwriting](underwriting/) | Underwriting agents fail when an occupation-class retrieval step matches applicants by job-title lexical similarity to a prior case without verifying that the retrieved precedent's actual hazard profile matches the current applicant's | 3 |
+| [Claim Processing](claim-processing/) | Claim-processing agents fail in three distinct, recurring ways: a retrieval step pulls a superseded or wrong-jurisdiction policy document that looks textually similar to the correct one | 3 |
+| [Claims Processing](claims-processing/) | When they assume claims arrive as independent, randomly-distributed events and do not account for catastrophe correlation — a single hurricane hits and creates 10,000 simultaneous claims | 1 |
+| [Fraud Detection](fraud-detection/) | When they treat embedding-similarity matches to known fraud ring members as sufficient grounds for escalation without requiring a corroborating structured relational signal | 3 |
+| [Policy Management](policy-management/) | When a renewal-pricing RAG step retrieves a similar-looking but territory-mismatched policy precedent, when a multi-agent handoff loses a mid-term endorsement that changed the risk profile | 3 |
+| [Underwriting](underwriting/) | When an occupation-class retrieval step matches applicants by job-title lexical similarity to a prior case without verifying that the retrieved precedent's actual hazard profile matches… | 3 |
 
 **Total: 13 patterns**
 
 ## Frequently Asked Questions
 
-### Where do I start if my insurance agent is failing?
+### What causes a claims-adjudication agent to apply the wrong coverage terms?
 
-Match the symptom to a goal in the table above, then open that goal's page for how to tell its failures apart and where to look first. Each failure page ends in mitigations you can apply directly.
+Most commonly, a retrieval step selects a policy endorsement or clause by embedding similarity rather than by a deterministic match on form number and effective date, so a superseded or wrong-jurisdiction version with near-identical boilerplate gets applied instead of the version actually attached to the policy. See [Claim Processing](claim-processing/).
 
-### How are these insurance failure patterns organized?
+### Can an agent detect a fraud-ring member purely from name and address similarity?
 
-By goal: the outcome the agent is supposed to achieve. Under each goal, a `failures` folder holds one page per pattern. For the full picture see the [Insurance overview](../).
+No. See [Fraud Detection](fraud-detection/).
+
+### How does a renewal-pricing precedent lookup retrieve the wrong rating territory?
+
+Renewal-pricing retrieval matches the query policy against a corpus of prior renewals by embedding similarity over shared attributes (construction type, coverage limits, property age), which look similar across all territories. See [Policy Management](policy-management/).
 
 ## Related
 

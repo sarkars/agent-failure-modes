@@ -1,36 +1,38 @@
-# Hr Recruiting AI Agent Failures by Goal: 19 Patterns, Causes, and Fixes
+# HR Recruiting AI Agent Failures by Goal: 19 Patterns, Causes, and Fixes
 
-**Hr Recruiting failures in AI agents are grouped here into 4 goals, each with a catalog of named failure patterns, the symptoms you will see, the root cause, and mitigations you can copy.** Start from the symptom you are debugging, pick the matching goal below, and open its failure list.
+**HR Recruiting AI agents fail in 4 distinct ways, grouped by the goal each failure breaks.** Find the goal that matches what you are seeing, open its list, and use the fix on each pattern page.
 
 ## Key Takeaways
 
-- This use case covers 4 goals and 19 documented failure patterns.
-- The largest goal is [Candidate Screening](candidate-screening/) with 5 patterns.
-- Each goal page explains the failure class, how to tell it apart from its neighbors, and which mitigations apply across its patterns.
-- Each failure page covers the symptoms, an example, the root cause, and how to fix it.
+- 19 documented patterns across 4 goals; the most documented is [Candidate Screening](candidate-screening/) with 5.
+- Each pattern page gives the symptoms, an example, the root cause, and mitigations.
 
-## Hr Recruiting Goals
+## HR Recruiting Goals
 
-| Goal | What goes wrong | Patterns |
+| Goal | When it fails | Patterns |
 |---|---|---|
 | [Candidate Screening](candidate-screening/) | Candidate screening agents systematically favor articulate or keyword-optimized candidates over substantively qualified ones, confuse surface-level similarity with actual job relevance | 5 |
-| [Offer Generation](offer-generation/) | Offer-generation agents produce compensation figures from stale training-data benchmarks instead of querying live market data, anchor offers to mismatched leveling precedents selected via embedding similarity | 4 |
+| [Offer Generation](offer-generation/) | Offer-generation agents produce compensation figures from stale training-data benchmarks instead of querying live market data | 4 |
 | [Onboarding](onboarding/) | Onboarding agents lose track of conditional requirements (visa-status-specific tasks, jurisdiction-specific benefits, accommodations) across multi-session workflows | 5 |
-| [Retention Prediction](retention-prediction/) | Retention-prediction agents fabricate conversational details in risk-score narratives that are not grounded in any source record, use stale industry-attrition benchmarks instead of querying live cohort-comparison tools | 5 |
+| [Retention Prediction](retention-prediction/) | Retention-prediction agents fabricate conversational details in risk-score narratives that are not grounded in any source record | 5 |
 
 **Total: 19 patterns**
 
 ## Frequently Asked Questions
 
-### Where do I start if my hr recruiting agent is failing?
+### How do you distinguish between keyword matching and legitimate skill assessment?
 
-Match the symptom to a goal in the table above, then open that goal's page for how to tell its failures apart and where to look first. Each failure page ends in mitigations you can apply directly.
+Legitimate skill assessment evaluates underlying capabilities independent of terminology or phrasing; keyword matching rewards resume language that mirrors the job description text. See [Candidate Screening](candidate-screening/).
 
-### How are these hr recruiting failure patterns organized?
+### How do conditional onboarding tasks get lost across sessions?
 
-By goal: the outcome the agent is supposed to achieve. Under each goal, a `failures` folder holds one page per pattern. For the full picture see the [Hr Recruiting overview](../).
+Each session operates on the hire's persistent structured record. See [Onboarding](onboarding/).
+
+### How do you catch narrative hallucinations in risk-score justifications?
+
+Require every specific factual claim in a risk narrative (quotes, dated events, manager-conversation details) to cite the source document or note ID it came from. See [Retention Prediction](retention-prediction/).
 
 ## Related
 
-- [Hr Recruiting overview](../)
+- [HR Recruiting overview](../)
 - [All agent failure patterns](../../../)
