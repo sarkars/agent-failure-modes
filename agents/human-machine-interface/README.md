@@ -38,9 +38,12 @@
 - [SPIN questioning](solutions-library/spin-questioning.md): discovery questions for chat
 
 ### Modalities
-- **Chat:** the patterns above. Chat-only mechanics (message length, typing indicators, formatting) are planned.
-- **Voice:** [planned](modalities/voice/README.md)
-- **Visual:** [planned](modalities/visual/README.md)
+- **Chat:** the patterns above. Chat-only mechanics (message length, formatting) are in the [roadmap](roadmap/chat-and-core.md).
+- **Voice:** [planned](modalities/voice/README.md), with 24 patterns in the [voice roadmap](roadmap/voice.md)
+- **Visual:** [planned](modalities/visual/README.md), with 32 patterns in the [visual and oversight roadmap](roadmap/visual-and-oversight.md)
+
+### Roadmap
+[141 planned patterns](roadmap/README.md) with goals and metrics: [response time](roadmap/response-time.md), [language and locale](roadmap/language-and-locale.md), [conversation frameworks](roadmap/conversation-frameworks.md) (sales, support, style matching), [voice](roadmap/voice.md), [visual and oversight](roadmap/visual-and-oversight.md), and the [rest of chat and core](roadmap/chat-and-core.md).
 
 ## Goals and metrics
 Each family has a README that states its **goal** and the shared **metrics** its patterns report against. Each pattern repeats its goal and primary metric in its header and lists measurable signals in section 7 (`Metric | Target | How to measure | Alert at`).

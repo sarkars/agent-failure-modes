@@ -8,6 +8,8 @@ Phone agents, smart speakers, in-car and in-app voice assistants. Failures in ho
 ## Core patterns that will get a voice note or variant
 The [core patterns](../../README.md) apply to voice. Each already has a "Modality notes (PLANNED)" line describing what changes. Examples: disclose the AI in the first sentence; ask one question at a time; confirm aloud before consequential actions.
 
+> **Full list:** 24 voice patterns with goals and metrics are in the [voice roadmap](../../roadmap/voice.md). The table below is the original short list.
+
 ## Planned voice-specific patterns
 | Planned pattern | What it will cover |
 |---|---|

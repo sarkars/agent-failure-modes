@@ -8,6 +8,8 @@ Screens, rich cards, dashboards, forms, avatars, and generated interfaces: what 
 ## Core patterns that will get a visual note or variant
 The [core patterns](../../README.md) apply here too. Each already has a "Modality notes (PLANNED)" line. Examples: a dead end is a screen with no clear primary action; confetti and bright colors on a bereavement screen; an avatar that looks human without an AI label.
 
+> **Full list:** 32 visual-design and human-oversight patterns with goals and metrics are in the [visual and oversight roadmap](../../roadmap/visual-and-oversight.md). The table below is the original short list.
+
 ## Planned visual-specific patterns
 | Planned pattern | What it will cover |
 |---|---|
