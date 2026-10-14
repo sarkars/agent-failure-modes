@@ -15,7 +15,7 @@
 | [Cascading Failures](cascading-failures/) | When there is insufficient isolation between agents, missing bulkheads or circuit breakers to prevent failure propagation | 0 |
 | [Context Lifecycle](context-lifecycle/) | Context assembly and truncation | 6 |
 | [Cost Efficiency](cost-efficiency/) | Token and API cost management | 15 |
-| [Cost Optimization](cost-optimization/) | Agentic planning, learning, and architecture-level cost waste — distinct from [Cost Efficiency](../cost-efficiency/)'s execution-level patterns (batching, retries, model routing) | 13 |
+| [Cost Optimization](cost-optimization/) | Agentic planning, learning, and architecture-level cost waste — distinct from [Cost Efficiency](cost-efficiency/)'s execution-level patterns (batching, retries, model routing) | 13 |
 | [Cost Tracking](cost-tracking/) | Budget enforcement and attribution | 6 |
 | [Data Pipeline Integration](data-pipeline-integration/) | When stages are not coordinated, schemas evolve without synchronization, data ordering is not preserved, or end-to-end data consistency is not maintained, resulting in data loss, corruption | 0 |
 | [Dependency Management](dependency-management/) | When versions conflict, APIs change incompatibly, circular dependencies deadlock the system, or transitive dependencies bring in security vulnerabilities, licensing conflicts | 23 |
