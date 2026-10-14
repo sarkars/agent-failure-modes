@@ -479,6 +479,7 @@ AI-written help content in knowledge bases · voice in cars and wearables · age
 ## Schedule
 | Item | Value |
 |---|---|
+| Status | **Paused** on 2026-10-14 until the user's credits reset. Runs resume only when the task is re-enabled. No queue items have been started. |
 | Scheduled task name | `HMI roadmap: 5 patterns every 5 hours` |
 | Task id | `trig_01J1rwvuKcpXBGmKkkRfihF7` |
 | Created | 2026-10-14 19:05 UTC |
