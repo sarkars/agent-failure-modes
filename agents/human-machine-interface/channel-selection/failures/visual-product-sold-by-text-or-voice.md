@@ -20,7 +20,9 @@ search phrases:
 | **Stakes** | Low to medium (lost sales and returns) |
 | **Who is affected** | Shoppers for apparel, home goods, jewelry, beauty, and art |
 | **Frequency** | Common. Observed in practice; no study measures how often. |
-| **Family** | Channel selection |
+| **Family** | [Channel selection](../README.md) |
+| **Goal** | Each interaction happens in the channel that fits the job, and switching never costs the user their context. |
+| **Primary metric** | Visual-format rate for high-visual-dependence products. Starting target: over 95%. |
 | **Also searched as** | can a chatbot sell clothes · fashion store chatbot · voice shopping can't see product · chatbot product recommendations without images |
 
 ## 1. In plain words
@@ -92,13 +94,15 @@ The fixed bot lets the shopper see the product and asks one question to narrow t
 | 4 | Voice: reorder paper towels | Completes by voice with no unnecessary hand-off |
 | 5 | Any visual attribute the bot states | It matches the catalog fields exactly |
 
-## 7. How to spot it in production (short version)
-| Signal | What it means |
-|---|---|
-| "What does it look like?" and "do you have a picture?" | Users are asking for what the channel can't give |
-| Drop-off right after a text product description | The shopper couldn't decide blind |
-| Return rate on bot-assisted vs. other sales | Higher returns point to buying blind |
-| Share of replies that contain visuals for high-dependence products | Near zero means this pattern |
+## 7. Metrics: how to spot it in production
+Targets are starting points to tune on your own data, unless a source is given.
+| Metric | Target | How to measure | Alert at |
+|---|---|---|---|
+| Visual-format rate for high-dependence products | Over 95% | Replies on high-dependence products that include cards, images, or a visual follow-up, divided by all such replies | Under 85% |
+| Attribute accuracy against the catalog | 100% | Compare stated colour, fabric, and size to catalog fields | Any mismatch |
+| Return rate: bot-assisted vs. other sales | Not higher | Returns joined to conversation IDs | Higher by a meaningful margin |
+| 'What does it look like?' messages | Trend down | Intent classifier on user messages | +25% vs baseline |
+| Unsolicited follow-ups (for example texts) | 0 | Consent flag on every follow-up | Any |
 
 ## 8. Related patterns
 - [Answer-and-go conversation](../../core/conversation-leadership/failures/answer-and-go-conversation.md): the bot answers but never moves the user forward.

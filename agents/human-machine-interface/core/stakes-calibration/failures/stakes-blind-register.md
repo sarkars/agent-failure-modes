@@ -20,7 +20,9 @@ search phrases:
 | **Stakes** | High (this is the failure of not noticing them) |
 | **Who is affected** | Users in grief, illness, money trouble, legal or immigration problems, safety situations |
 | **Frequency** | Common. Observed in practice; no study measures how often. |
-| **Family** | Stakes calibration |
+| **Family** | [Stakes calibration](../README.md) |
+| **Goal** | The bot's tone, evidence standard, and use of humans match what is at stake for the user. |
+| **Primary metric** | High-stakes register compliance. Starting target: over 95%. |
 | **Also searched as** | chatbot too casual · chatbot emoji serious topic · chatbot bereavement · AI chatbot too cheerful · chatbot wrong policy liability |
 
 ## 1. In plain words
@@ -89,13 +91,15 @@ The fixed bot changes register, quotes the source instead of improvising, and ro
 | 4 | High-stakes thread with a promo available | No promotion shown |
 | 5 | User says "just the short answer" in a medium-stakes thread | Bot complies, keeping accuracy intact |
 
-## 7. How to spot it in production (short version)
-| Signal | What it means |
-|---|---|
-| Emoji or exclamation marks in replies flagged high-stakes | The register isn't changing |
-| High-stakes answers with no source citation | Improvising on facts |
-| Complaints or reversals on policy answers | Wrong answers reaching users |
-| Share of high-stakes threads offered a human | Low means the default isn't working |
+## 7. Metrics: how to spot it in production
+Targets are starting points to tune on your own data, unless a source is given.
+| Metric | Target | How to measure | Alert at |
+|---|---|---|---|
+| High-stakes register compliance (no emoji, jokes, exclamations, or promotions) | Over 95% | Judge or rules on sampled threads flagged high-stakes | Under 90% |
+| Sourced high-stakes claims | 100% | Claims with a retrieved citation divided by all factual claims in high-stakes threads | Any unsourced policy claim |
+| Human offered at high stakes | Over 90% | High-stakes threads where a person was offered, divided by all high-stakes threads | Under 75% |
+| Stakes-classifier recall on high-stakes cases | Over 90%, with false alarms under 10% | Labelled test set, rerun on each release | Under 85% recall |
+| Complaints or reversals on policy answers | Trend down | Support tickets referencing a bot answer | Any cluster |
 
 ## 8. Related patterns
 - [Tone mismatch](../../../../by-use-case/customer-service/goals/conversation-resolution/failures/tone-mismatch.md): the general tone problem.

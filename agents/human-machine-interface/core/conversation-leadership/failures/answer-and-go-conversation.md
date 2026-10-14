@@ -21,7 +21,9 @@ search phrases:
 | **Stakes** | Any. The cost is lost sales at low stakes and unresolved problems at high stakes. |
 | **Who is affected** | Every user, and most visibly those with a real goal behind a small first question |
 | **Frequency** | Very common. Observed in practice; I found no study that measures how often it occurs. |
-| **Family** | Conversation leadership |
+| **Family** | [Conversation leadership](../README.md) |
+| **Goal** | Every conversation moves the user toward what they are trying to do and ends with confirmation that it worked. |
+| **Primary metric** | Confirmed-resolution rate. Starting target: gap to containment rate under 10 points. |
 | **Also searched as** | chatbot dead end · chatbot doesn't ask follow-up questions · chatbot ends conversation too early · chatbot no next step · reactive chatbot · chatbot not closing the loop |
 
 ## 1. In plain words
@@ -138,15 +140,16 @@ Thresholds below are starting points to tune for your product, not published ben
 | 6 | Out-of-scope request | The bot offers a handoff with a summary rather than ending |
 | 7 | Over 20 varied scenarios | No reply contains more than one question |
 
-## 7. How to spot it in production
-| Signal | What it means |
-|---|---|
-| **Silent exits:** sessions that end on the bot's last message with no confirmation of resolution | The core symptom. Track alongside, not instead of, containment |
-| **Confirmed-resolution rate** vs. containment rate | A big gap means users are leaving unresolved |
-| **Re-contact:** same user, same topic, within 24-72 hours | The first conversation didn't really close |
-| **Forward-move rate:** share of bot turns with exactly one advance | Near zero = this pattern; above 1 per turn = interrogation |
-| **Turns-to-goal** and **declined-advance count** | Rising numbers mean the advances are annoying, not helping |
-| **Abandonment right after a short bot answer** | A typical sign of the dead end |
+## 7. Metrics: how to spot it in production
+Targets are starting points to tune on your own data, unless a source is given.
+| Metric | Target | How to measure | Alert at |
+|---|---|---|---|
+| Silent-exit rate (sessions ending on a bot message with no confirmed resolution) | Trend down; set from a 4-week baseline | Sessions with no user reply after the bot's last message and no resolution marker, divided by all sessions | +20% vs baseline |
+| Confirmed-resolution rate vs. containment rate | Gap under 10 points | Sessions where the user confirmed it worked, divided by sessions closed without a human | Gap over 20 points |
+| Re-contact within 72 hours (same user, same topic) | Trend down; set from baseline | Match on user and topic classifier | +15% vs baseline |
+| Forward-move coverage | Over 90% of non-final turns | Rule check or judge against the move menu | Under 80% |
+| Questions per bot turn (mean) | At most 1.0 | Count question marks, plus a classifier on flagged replies | Over 1.2 |
+| Declined-advance rate | Under 30% of advances | Declined moves divided by moves made | Over 45% |
 
 ## 8. Related patterns
 - [unclear-next-step](../../../../by-use-case/customer-service/goals/conversation-resolution/failures/unclear-next-step.md): the bot gave a next step but it was vague. Here, there is no forward move at all.

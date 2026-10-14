@@ -20,7 +20,9 @@ search phrases:
 | **Stakes** | Low to high |
 | **Who is affected** | Upset, stressed, or time-pressed users |
 | **Frequency** | Very common. Observed in practice; no study measures how often. |
-| **Family** | Emotional intelligence |
+| **Family** | [Emotional intelligence](../README.md) |
+| **Goal** | Users feel heard because the bot reflects their actual situation and then acts on it. |
+| **Primary metric** | Specificity rate of empathy lines. Starting target: over 90% on complaint messages. |
 | **Also searched as** | chatbot empathy sounds fake · "I understand your frustration" chatbot · empathetic chatbot design · scripted empathy · chatbot apology not helping |
 
 ## 1. In plain words
@@ -90,13 +92,15 @@ Banned openers: "I understand your frustration", "I'm sorry for any inconvenienc
 | 4 | User calm and asking for info | No unnecessary empathy language |
 | 5 | Empathy followed by offer | No upsell directly after an apology |
 
-## 7. How to spot it in production (short version)
-| Signal | What it means |
-|---|---|
-| Same empathy phrase appearing repeatedly in a conversation | Template empathy |
-| "You keep saying that", "robot", "scripted" in user messages | Users have noticed |
-| Sentiment drops after an empathy turn | The line is landing badly |
-| CSAT free text mentioning "canned" or "fake" | Aggregate evidence |
+## 7. Metrics: how to spot it in production
+Targets are starting points to tune on your own data, unless a source is given.
+| Metric | Target | How to measure | Alert at |
+|---|---|---|---|
+| Specificity rate (reply cites a concrete detail from the user's message) | Over 90% on complaint messages | Judge rubric on a weekly sample | Under 80% |
+| Repeated empathy phrase rate | Under 2% | N-gram similarity across the last 5 bot turns | Over 5% |
+| Sentiment change after an empathy turn | Not negative on average | User sentiment on the turn before vs. after | Negative on average |
+| 'Scripted', 'robot', 'canned' mentions | Trend down | Text mining of user messages and CSAT comments | +50% vs baseline |
+| Empathy followed directly by an upsell | 0 | Turn-order check | Any |
 
 ## 8. Related patterns
 - [Over-apology loop](../../../../by-use-case/customer-service/goals/conversation-resolution/failures/over-apology-loop.md): apologising repeatedly. This pattern is about *generic* empathy even when it isn't repeated.

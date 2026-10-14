@@ -20,7 +20,9 @@ search phrases:
 | **Stakes** | Medium to high (especially credit, housing, hiring, insurance, benefits) |
 | **Who is affected** | Speakers of non-standard dialects (such as African American English), users with names associated with particular groups, English learners |
 | **Frequency** | Unknown in customer-service bots; documented in language models in research settings |
-| **Family** | Fairness and identity |
+| **Family** | [Fairness and identity](../README.md) |
+| **Goal** | Quality of service does not depend on dialect, name, or other identity cues. |
+| **Primary metric** | Paired-test parity ratio on verification, escalation, and risk flags. Starting target: within about 0.9 to 1.1 (a heuristic, not a legal standard). |
 | **Also searched as** | AI chatbot bias dialect · chatbot treats customers differently by name · how to test a chatbot for bias · LLM dialect prejudice · counterfactual testing |
 
 ## 1. In plain words
@@ -99,13 +101,15 @@ Report differences with confidence intervals, and review a sample of pairs by ha
 | 4 | Model input inspection | No names or inferred demographics sent unless required |
 | 5 | A dialect-written request | Treated as valid; no comment on the writing |
 
-## 7. How to spot it in production (short version)
-| Signal | What it means |
-|---|---|
-| Parity differences in escalation, verification, or flag rates between cohorts | A quality gap |
-| Complaints citing different treatment | Real-world impact |
-| Matched-pair test drift after model or prompt updates | A regression |
-| Share of risk flags using text features that correlate with identity | A route for bias |
+## 7. Metrics: how to spot it in production
+Targets are starting points to tune on your own data, unless a source is given.
+| Metric | Target | How to measure | Alert at |
+|---|---|---|---|
+| Paired-test parity ratio (verification, escalation, risk flags, helpfulness) | Within about 0.9 to 1.1 | Same request under varied names and dialects, compared with confidence intervals | Outside 0.9-1.1 (warn), outside 0.8-1.25 (page) |
+| Parity regressions after model or prompt changes | 0 | Paired suite as a CI release gate | Any |
+| Risk flags driven by text features correlated with identity | 0 | Ablation test on the scoring features | Any |
+| Cohort outcome parity in production | Within tolerance | Consented or self-reported cohorts, or synthetic matched pairs | Gap with statistical support |
+| Complaints citing unequal treatment | 0 unreviewed | Complaint tracking | Any cluster |
 
 ## 8. Related patterns
 - [One-size communication style](../../cultural-adaptation/failures/one-size-communication-style.md): adapting style without sliding into stereotyping.

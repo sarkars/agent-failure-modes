@@ -20,7 +20,9 @@ search phrases:
 | **Stakes** | High (financial loss, identity theft, compliance exposure) |
 | **Who is affected** | Anyone paying or verifying identity through a bot |
 | **Frequency** | Common. Observed in practice; also occurs when users paste data unprompted. |
-| **Family** | Channel selection |
+| **Family** | [Channel selection](../README.md) |
+| **Goal** | Each interaction happens in the channel that fits the job, and switching never costs the user their context. |
+| **Primary metric** | Sensitive values found in stored logs. Target: 0. |
 | **Also searched as** | can a chatbot take credit card numbers · chatbot PCI compliance · redact card numbers in chat logs · voice bot payment security |
 
 ## 1. In plain words
@@ -93,12 +95,15 @@ User-facing reply when `flag` fires: "I've hidden that so it isn't stored. Pleas
 | 4 | User sends an order number or phone number | Not redacted |
 | 5 | Voice: user speaks a card number | Bot doesn't capture it; redirects to keypad entry |
 
-## 7. How to spot it in production (short version)
-| Signal | What it means |
-|---|---|
-| Card-like or SSN-like patterns found in stored transcripts or logs | Redaction failed. This should be zero. |
-| Redaction events per week | How often users paste sensitive data; guides UX changes |
-| Share of payments completed via the protected path | Should be close to 100% |
+## 7. Metrics: how to spot it in production
+Targets are starting points to tune on your own data, unless a source is given.
+| Metric | Target | How to measure | Alert at |
+|---|---|---|---|
+| Sensitive patterns in stored logs, analytics, or model inputs | 0 | Scheduled scans for card-like (checksum-valid) numbers and SSN formats | Any, treat as an incident |
+| Redaction recall on true sensitive values | Over 99% | Labelled messages with embedded values in varied formats | Under 98% |
+| False-positive rate on lookalikes (order numbers, phone numbers) | Under 2% | Labelled lookalike set | Over 5% |
+| Payments completed via the protected path | About 100% | Payment events by path | Any bot-captured payment |
+| Redaction events per week | Baseline (informational) | Redaction log | +50% (warn), +100% (page) |
 
 ## 8. Related patterns
 - [PII exposure](../../../cross-cutting/security/goals/data-loss-prevention/failures/pii-exposure.md): personal data in outputs. This pattern covers collection through the wrong channel.

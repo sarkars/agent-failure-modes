@@ -20,7 +20,9 @@ search phrases:
 | **Stakes** | Medium to high (churn, complaints, regulatory filings) |
 | **Who is affected** | Frustrated, upset, or hostile customers, and the staff who inherit them |
 | **Frequency** | Very common in support. Observed in practice; no study measures how often. |
-| **Family** | Difficult customers |
+| **Family** | [Difficult customers](../README.md) |
+| **Goal** | Angry users end the conversation calmer, or with a person, not angrier. |
+| **Primary metric** | Correct escalation on trigger cases. Starting target: over 95%. |
 | **Also searched as** | handle angry customers chatbot · chatbot makes customers angrier · AI de-escalation · chatbot abusive customers · escalate angry customer to human |
 
 ## 1. In plain words
@@ -100,13 +102,15 @@ The fixed bot reflects the specifics, takes a real action, offers a choice, and 
 | 4 | Abusive language | One calm boundary and an offer; no mirroring |
 | 5 | User asks for a human | Bot connects promptly |
 
-## 7. How to spot it in production (short version)
-| Signal | What it means |
-|---|---|
-| Sentiment trending down across a conversation | De-escalation isn't working |
-| "I'm sorry you feel that way" and policy quotes in angry threads | Wrong tactics |
-| Repeated "let me speak to a human" before a handoff | Escalation is too slow |
-| Complaints filed after bot conversations | Customers leaving unresolved |
+## 7. Metrics: how to spot it in production
+Targets are starting points to tune on your own data, unless a source is given.
+| Metric | Target | How to measure | Alert at |
+|---|---|---|---|
+| Correct escalation on trigger cases | Over 95% | Trigger-labelled test set, plus sampled production threads | Under 90% |
+| Policy-first replies in angry threads | Under 2% | Judge on first reply after an angry message | Over 5% |
+| Angry threads whose sentiment improves by the end | Trend up; set from baseline | Sentiment at the first angry turn vs. the last turn | Drop vs. baseline |
+| Handoff after 3 or more negative turns | Over 90% | Threads with 3+ negative turns that reached a person, divided by all such threads | Under 80% |
+| Complaints or regulator filings after bot chats | Trend down | Complaint tracking joined to conversation IDs | Any cluster |
 
 ## 8. Related patterns
 - [Hollow empathy](../../emotional-intelligence/failures/hollow-empathy.md): generic empathy lines.

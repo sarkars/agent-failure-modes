@@ -25,7 +25,7 @@
 | Fairness and identity | [Dialect and name quality gap](core/fairness-and-identity/failures/dialect-and-name-quality-gap.md) | Unequal service by dialect, name, or identity cues |
 | Relational and boundaries | [Negotiation capitulation](core/relational-and-boundaries/failures/negotiation-capitulation.md) | Gives away discounts, or gets tricked into a $1 deal |
 
-### Channel selection: choosing the wrong channel
+### [Channel selection](channel-selection/README.md): choosing the wrong channel
 | Pattern | One line |
 |---|---|
 | [Visual product sold by text or voice](channel-selection/failures/visual-product-sold-by-text-or-voice.md) | Selling fashion or furniture with words only |
@@ -41,6 +41,9 @@
 - **Chat:** the patterns above. Chat-only mechanics (message length, typing indicators, formatting) are planned.
 - **Voice:** [planned](modalities/voice/README.md)
 - **Visual:** [planned](modalities/visual/README.md)
+
+## Goals and metrics
+Each family has a README that states its **goal** and the shared **metrics** its patterns report against. Each pattern repeats its goal and primary metric in its header and lists measurable signals in section 7 (`Metric | Target | How to measure | Alert at`).
 
 ## How a pattern reads
 Every pattern opens with a one-line summary and a before-and-after transcript, then the cause, the evidence, and **the fix**. Testing and monitoring come next. Patterns whose fix needs engineering end with a technical section (architecture, guardrails, evals, alerts). See the [pattern template](_templates/hmi-pattern.md).

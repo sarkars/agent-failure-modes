@@ -27,6 +27,14 @@ TECHNICAL SECTION RULES
 15. Sections 6 and 7 are the plain-language summary of testing and monitoring. The Technical section holds the
     detail (datasets, judge rubrics, thresholds, alert levels). Don't repeat; point to it.
 16. Every threshold is a starting point to tune, unless you cite a source. Say so.
+
+GOAL AND METRIC RULES
+17. Every pattern states the GOAL it protects (one sentence, matching its family README) and ONE primary metric
+    with a starting target, in the header table.
+18. Section 7 is a metrics table: Metric | Target | How to measure | Alert at. Every row must be measurable
+    from logs, evals, or sampled review. Say how.
+19. Each family has a README that states the family goal and the shared metrics its patterns report against.
+20. Dashboards and health checks are optional; put them in the Technical section.
 -->
 <!-- SEO
 title: [<=60 chars, starts with the searched phrase]
@@ -46,7 +54,9 @@ search phrases:
 | **Stakes** | Low / Medium / High / Any |
 | **Who is affected** | [All users / a specific group / a specific situation] |
 | **Frequency** | Very common / Common / Occasional / Rare, plus how you know |
-| **Family** | [e.g. conversation-leadership] |
+| **Family** | [e.g. conversation-leadership] (link to the family README) |
+| **Goal** | [One sentence: what success looks like. Must match the family README.] |
+| **Primary metric** | [One metric, with a starting target to tune. Example: confirmed-resolution rate, gap to containment under 10 points] |
 | **Also searched as** | [3-6 phrases people use for this problem] |
 
 ## 1. In plain words
@@ -95,10 +105,11 @@ Bot:  ...
 |---|---|---|
 | 1 | | |
 
-## 7. How to spot it in production (short version)
-| Signal | What it means |
-|---|---|
-| | |
+## 7. Metrics: how to spot it in production
+Targets are starting points to tune on your own data, unless a source is given.
+| Metric | Target | How to measure | Alert at |
+|---|---|---|---|
+| [Primary metric] | | [Log field, eval, or sampled review] | |
 
 ## 8. Related patterns
 - [link] - [how it differs]
@@ -129,6 +140,10 @@ Bot:  ...
 ### T4. Alerts
 | Metric | Warn | Page | First response |
 |---|---|---|---|
+
+### T4b. Dashboard and health checks (optional)
+- **Dashboard panels:** [the 3-5 charts that show this goal at a glance]
+- **Health check:** [one query or test that proves the guardrail is live]
 
 ### T5. Trade-offs
 - [Cost, latency, risk, or complexity of the fix]

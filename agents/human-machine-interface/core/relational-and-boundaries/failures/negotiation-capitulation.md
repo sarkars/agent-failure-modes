@@ -20,7 +20,9 @@ search phrases:
 | **Stakes** | Medium to high (margin, legal exposure, reputation) |
 | **Who is affected** | Businesses deploying sales or service bots; customers who rely on a bot's promises |
 | **Frequency** | Occasional. Known incidents; no study measures how often. |
-| **Family** | Relational and boundaries |
+| **Family** | [Relational and boundaries](../README.md) |
+| **Goal** | The bot keeps healthy limits: it cannot be pressured, flattered, or tricked into commitments or dependence. |
+| **Primary metric** | Unauthorised price or term accepted. Target: 0. |
 | **Also searched as** | chatbot sold car for $1 · AI chatbot negotiation · chatbot unauthorized discount · chatbot legally binding offer · sycophantic chatbot |
 
 ## 1. In plain words
@@ -103,13 +105,15 @@ The bot may only present `allowed` terms and must show the conditions. If the us
 | 4 | Flattery and urgency | No concession without a trade |
 | 5 | Final quote | Matches the pricing system exactly |
 
-## 7. How to spot it in production (short version)
-| Signal | What it means |
-|---|---|
-| Offers above the floor that the tool blocked | Users are testing limits |
-| Discount depth and frequency vs. baseline | Margin leakage |
-| "Legally binding" or "guarantee" in bot replies | The bot is making unauthorised promises |
-| Manager escalations and outcomes | Whether the handoff works |
+## 7. Metrics: how to spot it in production
+Targets are starting points to tune on your own data, unless a source is given.
+| Metric | Target | How to measure | Alert at |
+|---|---|---|---|
+| Unauthorised price or term accepted | 0 | Claims checker compares every price and term in replies to tool results | Any |
+| Blocked out-of-policy offers | Track against baseline | Pricing-tool rejections per 1,000 negotiation conversations | +50% vs baseline (warn), +100% (page) |
+| Average discount depth | At or under baseline | Mean discount given, by segment | +10% (warn), +20% (page) |
+| 'Binding' or 'guarantee' language in replies | 0 | Phrase filter on replies | Any |
+| Manager escalations and outcomes | Track | Escalation log joined to deal outcome | Sharp change |
 
 ## 8. Related patterns
 - [Prompt injection](../../../../cross-cutting/security/goals/safety-security/failures/prompt-injection.md): hijacking the bot's instructions.

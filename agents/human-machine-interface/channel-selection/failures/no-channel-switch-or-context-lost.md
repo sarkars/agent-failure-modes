@@ -20,7 +20,9 @@ search phrases:
 | **Stakes** | Medium to high |
 | **Who is affected** | Anyone who needs to move from one channel or agent to another |
 | **Frequency** | Very common, according to vendor surveys (see section 4) |
-| **Family** | Channel selection |
+| **Family** | [Channel selection](../README.md) |
+| **Goal** | Each interaction happens in the channel that fits the job, and switching never costs the user their context. |
+| **Primary metric** | Re-ask rate after handoff. Starting target: under 5%. |
 | **Also searched as** | chatbot to human handoff lost context · customers repeat themselves · chat to phone context lost · bot can't reach live agent |
 
 ## 1. In plain words
@@ -98,13 +100,15 @@ The consistent finding across these sources is that repetition after a handoff i
 | 4 | Packet delivery fails | Bot tells the user and gives a reference number |
 | 5 | User corrects the summary | Packet is updated before the transfer |
 
-## 7. How to spot it in production (short version)
-| Signal | What it means |
-|---|---|
-| "As I said earlier", "I already told the bot" | Users are repeating themselves |
-| Re-ask rate after handoff | Questions asked that the packet already answered |
-| Handle time for escalated cases vs. fresh ones | Context loss inflates it |
-| Packets missing required fields | A broken or skipped handoff |
+## 7. Metrics: how to spot it in production
+Targets are starting points to tune on your own data, unless a source is given.
+| Metric | Target | How to measure | Alert at |
+|---|---|---|---|
+| Re-ask rate after handoff (questions the packet already answered) | Under 5% | Compare the next agent's or bot's questions to packet fields | Over 10% (warn), over 20% (page) |
+| Handoff packet completeness | 100% | Schema validation on every handoff | Over 2% missing required fields (warn), over 5% (page) |
+| Handle time: escalated vs. fresh cases | Gap shrinking | Handle-time logs | Gap widening |
+| 'As I said earlier' and 'I already told the bot' | Trend down | Text mining of user messages after handoff | +25% vs baseline |
+| Packets that failed to deliver | 0 silent failures | Delivery acknowledgements | Any |
 
 ## 8. Related patterns
 - [Poor escalation](../../../by-use-case/customer-service/goals/conversation-resolution/failures/poor-escalation.md): escalation done badly.

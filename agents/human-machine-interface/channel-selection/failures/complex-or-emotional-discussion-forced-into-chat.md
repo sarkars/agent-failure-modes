@@ -20,7 +20,9 @@ search phrases:
 | **Stakes** | Medium to high (claims, finance, health, technical faults) |
 | **Who is affected** | Users with multi-part problems, confusing policies, or strong emotions |
 | **Frequency** | Very common. Most deployed agents are chat-first; no study measures this exact failure. |
-| **Family** | Channel selection |
+| **Family** | [Channel selection](../README.md) |
+| **Goal** | Each interaction happens in the channel that fits the job, and switching never costs the user their context. |
+| **Primary metric** | Detection recall of conversations that have outgrown chat. Starting target: over 85%. |
 | **Also searched as** | chatbot can't handle complex questions · chatbot too long no resolution · when should a chatbot hand off to a human · chatbot vs phone for complicated issues |
 
 ## 1. In plain words
@@ -92,13 +94,15 @@ if complex and not already_offered:
 | 4 | Simple long chat with steady progress | No unnecessary switch |
 | 5 | User states a preference for chat | Bot keeps the chat and supports it |
 
-## 7. How to spot it in production (short version)
-| Signal | What it means |
-|---|---|
-| Sessions over about 20 turns with no resolution | Conversations stuck in the wrong channel |
-| "I don't understand" and repeated rephrasing | Confusion the bot isn't catching |
-| Abandonment after long bot answers | Walls of text driving users away |
-| Switch-offer acceptance rate | Low means poor timing or wording |
+## 7. Metrics: how to spot it in production
+Targets are starting points to tune on your own data, unless a source is given.
+| Metric | Target | How to measure | Alert at |
+|---|---|---|---|
+| Detection recall on stuck conversations | Over 85% | Labelled stuck-conversation set | Under 75% |
+| False-trigger rate on healthy long chats | Under 10% | Labelled healthy-chat negatives | Over 15% |
+| Sessions over about 20 turns with no resolution | Trend down | Turn count and resolution marker | +20% vs baseline |
+| Switch-offer acceptance rate | Track (low means poor timing or wording) | Offers made vs. accepted | Sharp drop |
+| 'I don't understand' and repeated rephrasing | Trend down | Intent classifier and reformulation detector | +25% vs baseline |
 
 ## 8. Related patterns
 - [Conversation length explosion](../../../by-use-case/agent-interaction/goals/conversation-quality/failures/conversation-length-explosion.md): the symptom this pattern's fix addresses.

@@ -20,7 +20,9 @@ search phrases:
 | **Stakes** | Medium to high |
 | **Who is affected** | Every user; most sharply anyone making a purchase or sharing personal details |
 | **Frequency** | Occasional to common. Practices vary; no study measures how often. |
-| **Family** | Trust and rapport |
+| **Family** | [Trust and rapport](../README.md) |
+| **Goal** | Users know what they are dealing with, what it can do, and can rely on what it says it did. |
+| **Primary metric** | Truthful identity answer rate. Starting target: 100%. |
 | **Also searched as** | does a chatbot have to say it's a bot · California bot disclosure law · EU AI Act Article 50 chatbot · chatbot pretending to be human · are you a real person |
 
 ## 1. In plain words
@@ -91,13 +93,15 @@ Handoff:   "I'm passing you to [Name], a person on our team. They can see what w
 | 4 | Asked for something out of scope | States the limit and offers a person |
 | 5 | Handoff | Marks the boundary clearly |
 
-## 7. How to spot it in production (short version)
-| Signal | What it means |
-|---|---|
-| Messages like "am I talking to a real person?" | Users are unsure; check the opening |
-| Complaints about feeling deceived | Disclosure is failing |
-| Tasks claimed done but not done | Follow-through gaps eroding trust |
-| Audit of persona prompts for "never reveal you are an AI" | A policy violation |
+## 7. Metrics: how to spot it in production
+Targets are starting points to tune on your own data, unless a source is given.
+| Metric | Target | How to measure | Alert at |
+|---|---|---|---|
+| Opening disclosure present | 100% | Conversation-start template check on every session | Any miss |
+| Truthful answers to identity questions | 100% | Test set of 30+ phrasings, plus sampled production | Any miss |
+| Limits stated when a request is out of scope | Over 95% | Judge on out-of-scope conversations | Under 90% |
+| Claimed-done vs. actually-done mismatch | About 0 | Compare 'done' claims to system-of-record state | Any confirmed mismatch |
+| 'Am I talking to a real person?' messages | Track (informational) | Intent classifier on user messages | Sharp rise after a change |
 
 ## 8. Related patterns
 - [False completion claim](../../../../by-use-case/customer-service/goals/conversation-resolution/failures/false-completion-claim.md): claiming a task is done when it isn't.

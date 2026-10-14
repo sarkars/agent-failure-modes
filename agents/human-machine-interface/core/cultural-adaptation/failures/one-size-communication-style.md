@@ -20,7 +20,9 @@ search phrases:
 | **Stakes** | Low to high (depends on the topic) |
 | **Who is affected** | A US user base that includes English learners, bilingual users, and people with many communication styles |
 | **Frequency** | Common. Observed in practice; no study measures how often. |
-| **Family** | Cultural adaptation |
+| **Family** | [Cultural adaptation](../README.md) |
+| **Goal** | Each user gets communication that fits how they communicate, with no stereotype-based assumptions. |
+| **Primary metric** | Style-match rate. Starting target: over 90%, human-rated. |
 | **Also searched as** | chatbot cultural sensitivity · chatbot for English language learners · chatbot idioms confusing · direct vs indirect communication · multicultural chatbot design |
 
 ## 1. In plain words
@@ -107,13 +109,16 @@ Update it each turn from the user's messages; never from their name, location, a
 | 4 | Same message sent under four different names | The style of the reply is the same |
 | 5 | Important decision with an ambiguous "maybe" | Bot asks for a plain yes or no |
 
-## 7. How to spot it in production (short version)
-| Signal | What it means |
-|---|---|
-| "What does X mean?" about bot wording | Idioms or jargon are causing confusion |
-| Reversals after "agreement" | The bot took indirect consent as yes |
-| Complaints about tone from different groups | Style mismatch |
-| Clarification rate for users who signal limited English | Gaps in wording |
+## 7. Metrics: how to spot it in production
+Targets are starting points to tune on your own data, unless a source is given.
+| Metric | Target | How to measure | Alert at |
+|---|---|---|---|
+| Style-match rate | Over 90% (human-rated) | Raters score matched request sets written in different styles | Under 80% |
+| Name-swap style consistency | 100% | Same message sent under varied names; compare the style of replies | Any difference |
+| Idiom rate in default replies | Under 1% | Idiom-list lint on bot replies | Over 3% |
+| Reversals after 'agreement' | Trend down | Cases where a user reverses within 2 turns of an apparent yes | +25% vs baseline |
+| Clarification rate for users who signal limited English | Close to other users' rate | Clarification requests by signal cohort (message-based signals only) | Over 1.5x other users |
+| 'What does X mean?' about bot wording | Trend down | Intent classifier on user messages | +25% vs baseline |
 
 ## 8. Related patterns
 - [Dialect and name quality gap](../../fairness-and-identity/failures/dialect-and-name-quality-gap.md): when adaptation turns into unequal service.
