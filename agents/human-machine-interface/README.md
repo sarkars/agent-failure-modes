@@ -1,8 +1,13 @@
-# Human-Machine Interface: How Chat, Voice, and Visual Agents Fail People, and How to Fix It
+# Chatbot and Voice Agent Failures: Why AI Conversations Feel Boring, Tone-Deaf, or Stuck, and How to Fix Them
 
-**Failure patterns, fixes, evals, and production signals for how AI agents talk to, listen to, and show things to people.** Each pattern shows what the failure looks like, why it happens, and a fix you can copy.
+**Why chatbots, voice assistants, and AI copilots feel boring, tone-deaf, or unhelpful, and how to fix each failure.** Each pattern shows what the failure looks like in a real transcript, why it happens, a fix you can copy, and the metric to track. This is the human-machine interface (HMI) section of the agent failure modes library.
 
 > Status: **chat is written; voice and visual are planned.** The patterns below are written for chat and note what changes in other modalities.
+
+## Key takeaways
+- 14 patterns are written for chat today. [355 more are catalogued](roadmap/README.md) across chat, voice, and visual.
+- Most failures here come from conversation design and business context, not model quality. In the roadmap, 59% are judged not fixable by a better model alone. Those splits are our own judgments, not measured.
+- Every pattern states its goal and a primary metric with a starting target to tune.
 
 ## Three questions every pattern answers
 1. **Is this the right channel?** Chat, voice, a visual interface, or a person?
@@ -50,6 +55,20 @@ A one-page [index of every catalogued failure](roadmap/index.md) shows its libra
 <!-- END:roadmap-count -->
 
 Catalog files: [agent types](roadmap/agent-types.md), [embedded copilots](roadmap/embedded-copilots.md), [emerging surfaces](roadmap/emerging-surfaces.md), [chat and core](roadmap/chat-and-core.md), [response time](roadmap/response-time.md), [response structure and closers](roadmap/response-structure-and-length.md), [language and locale](roadmap/language-and-locale.md), [conversation frameworks](roadmap/conversation-frameworks.md) (sales, support, style matching), [voice](roadmap/voice.md), [voice listening and transcription](roadmap/voice-listening-and-transcription.md), [privacy, governance, and access](roadmap/privacy-governance-and-access.md), [effort, completeness, and memory](roadmap/effort-completeness-and-memory.md), and [visual and oversight](roadmap/visual-and-oversight.md).
+
+## Frequently asked questions
+
+### Why does my chatbot feel boring and generic?
+Most bots answer and stop. See [answer-and-go conversation](core/conversation-leadership/failures/answer-and-go-conversation.md).
+
+### How do I stop a chatbot from sounding fake-empathetic?
+See [hollow empathy](core/emotional-intelligence/failures/hollow-empathy.md).
+
+### Should this be chat, voice, a visual page, or a person?
+See [channel selection](channel-selection/) and the [channel-fit matrix](solutions-library/channel-fit-matrix.md).
+
+### Is a better model enough to fix these?
+Usually not. Context, handoffs, and policy decide most outcomes. The [roadmap](roadmap/README.md#root-cause-and-the-model-question) breaks this down.
 
 ## Goals and metrics
 Each family has a README that states its **goal** and the shared **metrics** its patterns report against. Each pattern repeats its goal and primary metric in its header and lists measurable signals in section 7 (`Metric | Target | How to measure | Alert at`).
