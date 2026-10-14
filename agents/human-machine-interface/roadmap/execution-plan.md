@@ -1,41 +1,70 @@
-# Execution Plan: 20 Patterns per Run, Every 5 Hours
+# Execution Plan: 5 Patterns per Run, Every 5 Hours
 
-> **What this is.** A prioritized queue of **294 patterns** to write, split into **15 runs of up to 20**, plus the procedure each scheduled run follows. A scheduled task fires every 5 hours and works through the queue until it is empty. Each run is meant to be unattended: everything it needs is in this file.
+> **What this is.** A prioritized queue of **294 patterns** to write, split into **59 runs of up to 5**, plus the procedure each scheduled run follows and the quality gate every pattern must pass. A scheduled task fires every 5 hours and works through the queue until it is empty. Each run is meant to be unattended: everything it needs is in this file.
 
-## Settings (edit here to change behaviour)
+## Settings (edit here to change behavior)
 | Setting | Value |
 |---|---|
-| Patterns per run | 20 |
+| Patterns per run | 5 (raise or lower this number to change the pace; the schedule stays the same) |
+| Quality gate | A pattern is **Done** only if it passes the Definition of done below. Anything that doesn't is marked **Needs review** and left for a person. |
 | Run mode | **write** (research, write the full pattern, update the catalog). Change to **plan-only** to have each run only research and record briefs in `roadmap/briefs/` without writing patterns. |
 | Cadence | Every 5 hours (set in the scheduled task, not in this file) |
 | Branch | `claude/zealous-ramanujan-u8zwfk` (commit and push; never open a pull request) |
 | Scope | Only files under `agents/human-machine-interface/`. Do not edit the older patterns elsewhere in `agents/`. |
-| Schedule | See the "Schedule" section at the bottom for the task name and id. |
+| Spelling and examples | American English, and US examples (US cities, dollars, US laws and regulators) |
 
 ## How the order was set
-Priority combines five things: **(1)** demand evidence (customers' top frustrations: no human, "doesn't understand me", repeating themselves; builders' top barrier: quality), **(2)** gaps in the library (the Code Agent area is empty; upselling, forced re-login, and generic first responses have no patterns), **(3)** harm if wrong (crisis, scams, minors, unauthorised purchases), **(4)** evidence available now, and **(5)** dependencies (a family's first pattern also creates its README). The earlier "Suggested priority" tiers in the [roadmap README](README.md) are superseded by this order. Items the library already covers are not in the queue.
+Priority combines five things: **(1)** demand evidence (customers' top frustrations: no human, "doesn't understand me", repeating themselves; builders' top barrier: quality), **(2)** gaps in the library (the Code Agent area is empty; upselling, forced re-login, and generic first responses have no patterns), **(3)** harm if wrong (crisis, scams, minors, unauthorized purchases), **(4)** evidence available now, and **(5)** dependencies (a family's first pattern also creates its README). The earlier "Suggested priority" tiers in the [roadmap README](README.md) are superseded by this order. Items the library already covers are not in the queue.
 
 ## Run procedure
 Follow these steps on every run. Don't skip the checks: earlier work in this project had to be corrected for duplicating existing patterns and for a counting bug.
 
-1. **Sync.** `git fetch origin claude/zealous-ramanujan-u8zwfk` and make sure the working tree is on that branch and up to date. Read this file, `_templates/hmi-pattern.md`, and the two existing flagship patterns (`core/conversation-leadership/failures/answer-and-go-conversation.md` and `channel-selection/failures/no-channel-switch-or-context-lost.md`) so style stays consistent.
-2. **Pick the work.** Take any rows marked *In progress* first, then the next **20** rows marked *Queued*, in order. Mark them *In progress*. If the queue has fewer than 20, take what's left. If the queue is empty, write "Queue complete" in the Run log, disable the schedule (see the Schedule section), and stop.
-3. **For each pattern:**
-   1. **Re-check the library.** Search `agents/` (file names and keywords) for existing patterns on the topic and read the closest one to three. If it is already fully covered, mark the row *Skipped* with the link and take the next *Queued* row so the run still writes 20. If the row is **Extends**, write only the new human-interface angle and a fix, and link the existing pattern instead of restating it.
-   2. **Research.** Run at least two web searches for evidence (loading the search tools first if needed). Cite only what you can verify, and say when a source is secondary, vendor-run, from a different setting, or couldn't be opened. **Never invent statistics.** If no good evidence exists, say so in the pattern.
-   3. **Write the pattern** at the row's target file, using `_templates/hmi-pattern.md`: SEO comment block; H1 with the phrase people search plus the pattern name; header table with **Goal** and **Primary metric** matching the catalog row (and the family README); before-and-after transcripts with **US examples**; why it happens; evidence table with caveats; **the fix** (principle, numbered rules, a reference design someone can copy, "don't over-correct", hand-off rule); short tests; a section 7 metrics table (`Metric | Target | How to measure | Alert at`); related patterns with working links; common questions; and a technical section (architecture, guardrails, evals, alerts) when the fix needs engineering. For agent-type patterns, set the examples inside that agent's real workflow.
-   4. **Flags.** Rows flagged **L** (legal) or **E** (expert) get a "Read this first" note near the top: design guidance, not legal, clinical, or other professional advice, and a review is needed before use. State any regulation only as far as you could verify it.
-   5. **Family README.** If the folder has no `README.md`, create one in the style of `core/vulnerable-users/README.md` using the family goal from the table below. Otherwise add the new pattern to its table.
-   6. **Update the catalog.** In the catalog file named in the row, change the last cell to the word `**Written**` followed by a colon and a markdown link to the new pattern (path relative to the roadmap folder). Set the queue row to *Done* with the run number.
-4. **Verify.** Every 5 patterns, and at the end, run `python3 -I agents/human-machine-interface/roadmap/tools/rebuild_summary.py` then `python3 -I agents/human-machine-interface/roadmap/tools/check_links.py`. Fix every problem it reports before committing.
-5. **Commit and push.** Commit every 5 patterns with a message like `HMI run N: <ids>` and the attribution lines from the session. Push with `git push -u origin claude/zealous-ramanujan-u8zwfk`. If the push fails on a network error, retry up to 4 times (waits of 2, 4, 8, 16 seconds). If it still fails, record it in the Run log and stop; the next run continues.
-6. **Log.** Append an entry to the Run log: run number, UTC date and time, items done and skipped, anything you could not verify, and any problem or correction.
+1. **Sync.** `git fetch origin claude/zealous-ramanujan-u8zwfk` and make sure the working tree is on that branch and up to date. Read this file, `_templates/hmi-pattern.md`, and the two flagship patterns (`core/conversation-leadership/failures/answer-and-go-conversation.md` and `channel-selection/failures/no-channel-switch-or-context-lost.md`) so style stays consistent.
+2. **Pick the work.** Take rows marked *In progress* first, then the next **5** rows marked *Queued*, in order. Mark them *In progress*. Don't touch rows marked *Needs review*. If fewer than 5 remain, take what's left. If no *Queued* or *In progress* rows remain, write "Queue complete" in the Run log, disable the schedule (see the Schedule section), and stop.
+3. **Write one pattern at a time, finishing each before starting the next:**
+   1. **Re-check the library.** Search `agents/` (file names and keywords) for existing patterns on the topic and read the closest one to three. If it is already fully covered, mark the row *Skipped* with the link and take the next *Queued* row. If the row is **Extends**, write only the new human-interface angle and a fix, and link the existing pattern instead of restating it.
+   2. **Research properly.** Run at least three web searches (loading the search tools first if needed). **Open the source itself** with the fetch tool whenever it is reachable; don't rely on a search summary alone. For every claim you plan to use, note the source link, what it actually says, and whether you opened it or only read a summary of it. Find every number in the source text; if you can't, don't use the number. Prefer one strong, neutral source over several weak ones. Label vendor, secondary, and single-source evidence. If there is no good evidence, say so in the pattern. **Never invent statistics.**
+   3. **Draft the pattern** at the row's target file, using `_templates/hmi-pattern.md`: SEO comment block with real queries; H1 with the phrase people search plus the pattern name; header table with **Goal** and **Primary metric** matching the catalog row and the family README; before-and-after transcripts with US examples; why it happens; an evidence table with caveats; **the fix**; short tests; a metrics table (`Metric | Target | How to measure | Alert at`); related patterns; common questions; and a technical section when the fix needs engineering. For agent-type patterns, set the examples inside that agent's real workflow.
+   4. **Flags.** Rows flagged **L** (legal) or **E** (expert) get a "Read this first" note near the top: design guidance, not legal, clinical, or other professional advice, and a review is needed before use. State any regulation only as far as you verified it.
+   5. **Review pass.** Check the draft against every item in the **Definition of done** below. Then read the whole file once, top to bottom, as a skeptical reader who has not seen your notes. Fix what you find, and re-read what you changed.
+   6. **Family README.** If the folder has no `README.md`, create one in the style of `core/vulnerable-users/README.md` using the family goal from the table below. Otherwise add the new pattern to its table.
+   7. **Record the result.** If every item in the Definition of done is true, change the catalog row's last cell to the word `**Written**` followed by a colon and a markdown link to the new pattern (path relative to the roadmap folder), and set the queue row to *Done* with the run number. If any item still fails after a reasonable effort, set the queue row to *Needs review* with a one-line reason, leave the catalog row unchanged, and keep the draft file.
+   8. **Verify and commit.** Run `python3 -I agents/human-machine-interface/roadmap/tools/rebuild_summary.py` then `python3 -I agents/human-machine-interface/roadmap/tools/check_links.py`, and fix every problem they report. Commit this one pattern with a message like `HMI run N: <id> <name>` plus the attribution lines from the session, then push with `git push -u origin claude/zealous-ramanujan-u8zwfk`. If the push fails on a network error, retry up to 4 times (waits of 2, 4, 8, 16 seconds). If it still fails, record it in the Run log and stop; the next run continues.
+4. **Log.** Append an entry to the Run log: run number, UTC date and time, and for each pattern the ID, the result (Done, Needs review, or Skipped), how many sources you opened vs. read only through summaries, any claims left unverified, and what the review pass changed. Add anything you could not check or any correction to earlier files.
+
+## Definition of done (quality gate)
+A pattern is *Done* only if **every** item is true.
+
+**Evidence**
+- Every statistic, date, legal statement, and quotation in the file has a source link and appears in the source text, or is marked as read through a summary. No number appears without a source. Single-source numbers say so.
+- The "Why it matters" caveat column is honest about vendor, secondary, or different-setting evidence, and about what you couldn't open.
+- Nothing about law, medicine, or finance goes beyond what a source supports. Rows flagged **L** or **E** carry the "Read this first" note.
+
+**Substance**
+- A reader gets the failure and the fix idea from the first two sentences and the header table.
+- The fix is concrete and copyable: numbered rules, a reference design (a prompt block, state schema, decision table, or improved transcript), a "Don't over-correct" paragraph, and a hand-off rule. Each rule is testable, so it could become an eval.
+- The before-and-after examples are realistic US scenarios, and the "after" example visibly follows the rules. Nothing in the examples contradicts the text.
+- "Why it happens" names real causes (three at most), not generic ones.
+- The pattern states how it differs from the closest existing library pattern and links to it.
+
+**Measurement**
+- The goal and primary metric match the catalog row and the family README.
+- The metrics table has Metric, Target, How to measure, and Alert at, and every metric can be computed from logs, evals, or sampled review. Targets are labeled starting points unless a source supports them.
+- Each test in the short tests table maps to a rule in the fix.
+
+**Form**
+- The SEO comment block holds real search phrases; the H1 includes the phrase people search; questions in the FAQ are written as people ask them.
+- Link text is descriptive, and `check_links.py` passes.
+- The file is 120 to 250 lines. The technical section appears only when the fix needs engineering.
+- American spelling, US examples, and the same layout, voice, and section numbering as the flagship patterns.
+
+If any item can't be met in this run, the pattern is *Needs review*, not *Done*.
 
 ## Quality bar and limits
-- **Quality beats the count.** If a run can't finish 20 well, stop at what's done, log it, and let the next run resume. Don't pad with thin patterns.
+- **Quality beats the count.** A run may write fewer than 5. Never pad with a thin pattern, and never mark something *Done* that hasn't passed the gate.
 - **No duplicates.** Don't rewrite a pattern the library already has. Link to it.
-- **Honesty.** Mark unverified claims as unverified. Keep thresholds labelled as starting points unless sourced.
-- **Don't change** the schedule, other families' patterns, the older library, or this file's Settings. You may correct errors in files you wrote earlier, and say so in the log.
+- **Honesty.** Mark unverified claims as unverified. Keep thresholds labeled as starting points unless sourced.
+- **Don't change** the schedule (except to disable it when the queue is empty), other families' patterns, the older library, or this file's Settings. You may correct errors in files you wrote earlier, and say so in the log.
 - **No pull requests.** Push to the branch only.
 
 ## Family folders and goals
@@ -75,28 +104,72 @@ Create a folder's README on its first pattern. Folders that already have a READM
 | `agent-types/customer-support-agents` | Support agents are measured and paid by what customers confirm was solved. |
 
 ## Run schedule
-Run N covers queue orders as shown. At one run every 5 hours, 15 runs take about 70 hours between the first and last start, in practice about three days.
+Run N covers queue orders as shown. At one run every 5 hours, 59 runs take about 290 hours between the first and last start, roughly 12.1 days. A run that marks a pattern *Needs review* doesn't delay the queue, but those patterns need a person.
 
 | Run | Orders | Themes |
 |---|---|---|
-| 1 | 1-20 (20) | Understood, in context, and a real first reply; Upselling and conflicts of interest |
-| 2 | 21-40 (20) | Upselling and conflicts of interest; Reply shape, length, and closers |
-| 3 | 41-60 (20) | Reply shape, length, and closers; Effort, completeness, and memory; Response time and waiting |
-| 4 | 61-80 (20) | Response time and waiting; Measurement and feedback; High-harm picks |
-| 5 | 81-100 (20) | High-harm picks; Coding agents; Research and data-analysis agents; Workflow-automation agents; IT and security agents |
-| 6 | 101-120 (20) | IT and security agents; Healthcare agents; Transcription and listening |
-| 7 | 121-140 (20) | Transcription and listening; Finance agents; Chat and core, the rest |
-| 8 | 141-160 (20) | Chat and core, the rest; Selling and sales agents; Support and style frameworks |
-| 9 | 161-180 (20) | Support and style frameworks; Privacy, governance, and access |
-| 10 | 181-200 (20) | Privacy, governance, and access; Emerging surfaces, the rest |
-| 11 | 201-220 (20) | Emerging surfaces, the rest; Voice |
-| 12 | 221-240 (20) | Voice; Browser, shopping, and assistant agents |
-| 13 | 241-260 (20) | Browser, shopping, and assistant agents; Language and locale; Education, HR, legal, and multi-agent |
-| 14 | 261-280 (20) | Education, HR, legal, and multi-agent; Visual and oversight, the rest |
-| 15 | 281-294 (14) | Visual and oversight, the rest |
+| 1 | 1-5 (5) | Understood, in context, and a real first reply |
+| 2 | 6-10 (5) | Understood, in context, and a real first reply |
+| 3 | 11-15 (5) | Understood, in context, and a real first reply |
+| 4 | 16-20 (5) | Understood, in context, and a real first reply; Upselling and conflicts of interest |
+| 5 | 21-25 (5) | Upselling and conflicts of interest; Reply shape, length, and closers |
+| 6 | 26-30 (5) | Reply shape, length, and closers |
+| 7 | 31-35 (5) | Reply shape, length, and closers |
+| 8 | 36-40 (5) | Reply shape, length, and closers |
+| 9 | 41-45 (5) | Reply shape, length, and closers; Effort, completeness, and memory |
+| 10 | 46-50 (5) | Effort, completeness, and memory |
+| 11 | 51-55 (5) | Effort, completeness, and memory |
+| 12 | 56-60 (5) | Effort, completeness, and memory; Response time and waiting |
+| 13 | 61-65 (5) | Response time and waiting |
+| 14 | 66-70 (5) | Response time and waiting; Measurement and feedback |
+| 15 | 71-75 (5) | Measurement and feedback; High-harm picks |
+| 16 | 76-80 (5) | High-harm picks |
+| 17 | 81-85 (5) | High-harm picks; Coding agents |
+| 18 | 86-90 (5) | Coding agents; Research and data-analysis agents |
+| 19 | 91-95 (5) | Research and data-analysis agents; Workflow-automation agents |
+| 20 | 96-100 (5) | Workflow-automation agents; IT and security agents |
+| 21 | 101-105 (5) | IT and security agents; Healthcare agents |
+| 22 | 106-110 (5) | Healthcare agents; Transcription and listening |
+| 23 | 111-115 (5) | Transcription and listening |
+| 24 | 116-120 (5) | Transcription and listening |
+| 25 | 121-125 (5) | Transcription and listening; Finance agents |
+| 26 | 126-130 (5) | Finance agents; Chat and core, the rest |
+| 27 | 131-135 (5) | Chat and core, the rest |
+| 28 | 136-140 (5) | Chat and core, the rest |
+| 29 | 141-145 (5) | Chat and core, the rest; Selling and sales agents |
+| 30 | 146-150 (5) | Selling and sales agents |
+| 31 | 151-155 (5) | Selling and sales agents |
+| 32 | 156-160 (5) | Selling and sales agents; Support and style frameworks |
+| 33 | 161-165 (5) | Support and style frameworks |
+| 34 | 166-170 (5) | Support and style frameworks |
+| 35 | 171-175 (5) | Support and style frameworks |
+| 36 | 176-180 (5) | Privacy, governance, and access |
+| 37 | 181-185 (5) | Privacy, governance, and access |
+| 38 | 186-190 (5) | Privacy, governance, and access |
+| 39 | 191-195 (5) | Privacy, governance, and access; Emerging surfaces, the rest |
+| 40 | 196-200 (5) | Emerging surfaces, the rest |
+| 41 | 201-205 (5) | Emerging surfaces, the rest |
+| 42 | 206-210 (5) | Emerging surfaces, the rest |
+| 43 | 211-215 (5) | Emerging surfaces, the rest; Voice |
+| 44 | 216-220 (5) | Voice |
+| 45 | 221-225 (5) | Voice |
+| 46 | 226-230 (5) | Voice |
+| 47 | 231-235 (5) | Voice; Browser, shopping, and assistant agents |
+| 48 | 236-240 (5) | Browser, shopping, and assistant agents |
+| 49 | 241-245 (5) | Browser, shopping, and assistant agents; Language and locale |
+| 50 | 246-250 (5) | Language and locale |
+| 51 | 251-255 (5) | Language and locale |
+| 52 | 256-260 (5) | Language and locale; Education, HR, legal, and multi-agent |
+| 53 | 261-265 (5) | Education, HR, legal, and multi-agent |
+| 54 | 266-270 (5) | Education, HR, legal, and multi-agent; Visual and oversight, the rest |
+| 55 | 271-275 (5) | Visual and oversight, the rest |
+| 56 | 276-280 (5) | Visual and oversight, the rest |
+| 57 | 281-285 (5) | Visual and oversight, the rest |
+| 58 | 286-290 (5) | Visual and oversight, the rest |
+| 59 | 291-294 (4) | Visual and oversight, the rest |
 
 ## Queue
-Status: *Queued*, *In progress*, *Done*, or *Skipped*. The **Library** column is the status in the catalog when the queue was built (**New** or **Extends**).
+Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Library** column is the status in the catalog when the queue was built (**New** or **Extends**).
 
 | # | ID | Pattern | Library | Flags | Target file | Status | Run |
 |---|---|---|---|---|---|---|---|
@@ -406,7 +479,7 @@ AI-written help content in knowledge bases · voice in cars and wearables · age
 ## Schedule
 | Item | Value |
 |---|---|
-| Scheduled task name | `HMI roadmap: 20 patterns every 5 hours` |
+| Scheduled task name | `HMI roadmap: 5 patterns every 5 hours` |
 | Task id | `trig_01J1rwvuKcpXBGmKkkRfihF7` |
 | Created | 2026-10-14 19:05 UTC |
 | Cron (UTC) | `5 */5 * * *`, so runs start at minute 5 of hours 0, 5, 10, 15, and 20 |
