@@ -14,16 +14,16 @@
 ### Core: applies to every channel
 | Family | Pattern | One line |
 |---|---|---|
-| Conversation leadership | [Answer-and-go conversation](core/conversation-leadership/failures/answer-and-go-conversation.md) | The bot answers, then stops: no next step, no closure |
-| Stakes calibration | [Stakes-blind register](core/stakes-calibration/failures/stakes-blind-register.md) | Same breezy tone and improvised facts for a funeral as for store hours |
-| Emotional intelligence | [Hollow empathy](core/emotional-intelligence/failures/hollow-empathy.md) | "I understand your frustration," on repeat, with no action |
-| Trust and rapport | [Undisclosed bot identity](core/trust-and-rapport/failures/undisclosed-bot-identity.md) | Hides that it's an AI, or what it can't do |
-| Difficult customers | [No de-escalation strategy](core/difficult-customers/failures/no-de-escalation-strategy.md) | Quotes policy at angry customers and never changes tactics |
-| Vulnerable users | [Missed crisis signals](core/vulnerable-users/failures/missed-crisis-signals.md) | Carries on with the task while a user signals crisis |
-| Age adaptation | [Child user treated as adult](core/age-adaptation/failures/child-user-treated-as-adult.md) | Collects data and pushes sales on a likely child |
-| Cultural adaptation | [One-size communication style](core/cultural-adaptation/failures/one-size-communication-style.md) | Same directness, idioms, and formality for everyone |
-| Fairness and identity | [Dialect and name quality gap](core/fairness-and-identity/failures/dialect-and-name-quality-gap.md) | Unequal service by dialect, name, or identity cues |
-| Relational and boundaries | [Negotiation capitulation](core/relational-and-boundaries/failures/negotiation-capitulation.md) | Gives away discounts, or gets tricked into a $1 deal |
+| [Conversation leadership](core/conversation-leadership/README.md) | [Answer-and-go conversation](core/conversation-leadership/failures/answer-and-go-conversation.md) | The bot answers, then stops: no next step, no closure |
+| [Stakes calibration](core/stakes-calibration/README.md) | [Stakes-blind register](core/stakes-calibration/failures/stakes-blind-register.md) | Same breezy tone and improvised facts for a funeral as for store hours |
+| [Emotional intelligence](core/emotional-intelligence/README.md) | [Hollow empathy](core/emotional-intelligence/failures/hollow-empathy.md) | "I understand your frustration," on repeat, with no action |
+| [Trust and rapport](core/trust-and-rapport/README.md) | [Undisclosed bot identity](core/trust-and-rapport/failures/undisclosed-bot-identity.md) | Hides that it's an AI, or what it can't do |
+| [Difficult customers](core/difficult-customers/README.md) | [No de-escalation strategy](core/difficult-customers/failures/no-de-escalation-strategy.md) | Quotes policy at angry customers and never changes tactics |
+| [Vulnerable users](core/vulnerable-users/README.md) | [Missed crisis signals](core/vulnerable-users/failures/missed-crisis-signals.md) | Carries on with the task while a user signals crisis |
+| [Age adaptation](core/age-adaptation/README.md) | [Child user treated as adult](core/age-adaptation/failures/child-user-treated-as-adult.md) | Collects data and pushes sales on a likely child |
+| [Cultural adaptation](core/cultural-adaptation/README.md) | [One-size communication style](core/cultural-adaptation/failures/one-size-communication-style.md) | Same directness, idioms, and formality for everyone |
+| [Fairness and identity](core/fairness-and-identity/README.md) | [Dialect and name quality gap](core/fairness-and-identity/failures/dialect-and-name-quality-gap.md) | Unequal service by dialect, name, or identity cues |
+| [Relational and boundaries](core/relational-and-boundaries/README.md) | [Negotiation capitulation](core/relational-and-boundaries/failures/negotiation-capitulation.md) | Gives away discounts, or gets tricked into a $1 deal |
 
 ### [Channel selection](channel-selection/README.md): choosing the wrong channel
 | Pattern | One line |
