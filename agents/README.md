@@ -6,6 +6,8 @@
 - **By Use Case** — Failures driven by *where the system operates* (healthcare, financial services, legal contracts). Use this when the failure is domain-specific or shaped by regulatory/business context.
 - **Cross-Cutting** — Failures that apply to *all AI systems* (security, accuracy, operations). Use this first as a foundation; every other pattern builds on these.
 
+**Start here if you are building a specific agent:** [browse by agent and business goal](by-agent/). Each page maps an agent's goals to the failures that threaten them.
+
 ## Three Taxonomies
 
 | Taxonomy | Answer This Question | Use When | Patterns |
