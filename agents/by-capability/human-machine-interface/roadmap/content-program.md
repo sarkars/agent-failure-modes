@@ -1,4 +1,4 @@
-# Content Program: Twelve Workstreams Run Alongside the Pattern Queue
+# Content Program: Thirteen Workstreams Run Alongside the Pattern Queue
 
 > **What this is.** Besides writing patterns, each scheduled run does **one** task from this file. The tasks turn a catalog into something people cite and use: tiered quality, real incidents, runnable tests, an honest "will a better model fix this?" answer, and entry points by symptom and by role. Everything stays inside `agents/by-capability/human-machine-interface/`. The [execution plan](execution-plan.md) says how a run works.
 
@@ -53,7 +53,7 @@ These come first in the queue, at 3 per run. They were picked for customer deman
 | 29 | CC-08 | Scam victim not interrupted |
 | 30 | CC-16 | Romantic or parasocial dependence |
 
-## The twelve workstreams
+## The thirteen workstreams
 | ID | Workstream | Deliverable | When a run does it |
 |---|---|---|---|
 | WS-01 | Two tiers, labeled | Maturity label and tier on every written pattern; this file's flagship list | Set up now. Each run labels its own patterns |
@@ -66,6 +66,7 @@ These come first in the queue, at 3 per run. They were picked for customer deman
 | WS-08 | Role-based starting points | `start-here/<role>.md` for product leads, engineers, CX leaders, and compliance | When each role has at least five written patterns, then refresh every ten |
 | WS-09 | Definition pages | `glossary/<term>.md`: short, sourced definitions linking to patterns | One term per run when a term is used by three or more written patterns |
 | WS-12 | Base agent and learning loop | The end state in [learning-agent.md](learning-agent.md): L0 base spec, L1 base agent design, and the gated learning loop's policy, all labeled untested until a person runs them. Built on the [gap analysis](gap-analysis.md) | Gap analysis redo first; then one level at a time |
+| WS-13 | Use-case agent specs | One page per specific agent in `agents/by-agent/use-cases/`: scope, business goals with measure, failure definition, severity, hand-over triggers, and linked failures to test. Eight exist as first drafts | Add a spec when a use case has at least three documented failures; revise each with a practitioner's input |
 | WS-10 | Cross-framework mappings | `mappings/proposals.md`: OWASP, NIST, and MITRE entries for flagships, each with a source you opened and a confidence label | Flagships only, after the pattern is Done; always *Needs review* |
 | WS-11 | Build guide | `guide/`: a failure-first guide to building a customer-facing agent that doesn't fail people. A gap analysis first, then one step per task, each linking only written patterns | Gap analysis first; then one step when its condition is met |
 
@@ -94,7 +95,9 @@ Status values: *Queued*, *In progress*, *Done*, *Blocked*, *Needs review*. A run
 | 13f | Learning-loop policy (L2 to L4) with each rule checked against an opened source, and the candidate-registry format | WS-12 | Task 13c Done | Queued |
 | 14 | Guide outline: the steps, what each decides, and the patterns each links; no prose beyond a sentence per step | WS-11 | Task 13 Done and says a guide is worth writing | Queued |
 | 15 | Write one guide step: what to decide, the minimal fix, the patterns it prevents, the tests, and when you can skip it | WS-11 | Outline Done and the step has at least two written patterns it can link; repeat per step | Queued |
-| 16 | Repeat: merge proposals, role pages, mapping proposals as their conditions are met | WS-06, WS-08, WS-10 | As conditions are met | Queued |
+| 16 | Review the eight use-case specs in `agents/by-agent/use-cases/`: open sources for every metric name and definition, remove anything unsupported, and list which definitions need a practitioner's review | WS-13 | None | Queued |
+| 17 | Add the next use-case agent specs (candidates: candidate screening, voice appointment scheduling, e-commerce order support, internal knowledge assistant), each with at least three documented failures behind it | WS-13 | Task 16 Done | Queued |
+| 18 | Repeat: merge proposals, role pages, mapping proposals as their conditions are met | WS-06, WS-08, WS-10 | As conditions are met | Queued |
 
 ## Guide rules (workstream 11)
 - **Failure-first, not architecture-first.** The guide covers what to decide so the failures in this library don't happen. It does not re-teach general agent architecture; it links to the original sources for that.
