@@ -12,7 +12,7 @@
 | Run mode | **write** (research, write the full pattern, update the catalog). Change to **plan-only** to have each run only research and record briefs in `roadmap/briefs/` without writing patterns. |
 | Cadence | Every 5 hours (set in the scheduled task, not in this file) |
 | Branch | `claude/zealous-ramanujan-u8zwfk` (commit and push; never open a pull request) |
-| Scope | Only files under `agents/by-capability/human-machine-interface/`. Do not edit the older patterns elsewhere in `agents/`. Anything that would change files outside this folder goes into `roadmap/merge-proposals.md` as a proposal for a person to approve. |
+| Scope | Only files under `agents/by-capability/human-machine-interface/` and `agents/solutions/`. Do not edit the older patterns elsewhere in `agents/`. Anything that would change files outside this folder goes into `roadmap/merge-proposals.md` as a proposal for a person to approve. |
 | Spelling and examples | American English, and US examples (US cities, dollars, US laws and regulators) |
 
 ## How the order was set
@@ -31,7 +31,7 @@ Follow these steps on every run. Don't skip the checks: earlier work in this pro
    5. **Review pass.** Check the draft against every item in the **Definition of done** below. Then read the whole file once, top to bottom, as a skeptical reader who has not seen your notes. Fix what you find, and re-read what you changed.
    6. **Family README.** If the folder has no `README.md`, create one in the style of `goals/vulnerable-users/README.md` using the family goal from the table below. Otherwise add the new pattern to its table.
    7. **Record the result.** If every item in the Definition of done is true, change the catalog row's last cell to the word `**Written**` followed by a colon and a markdown link to the new pattern (path relative to the roadmap folder), and set the queue row to *Done* with the run number. If any item still fails after a reasonable effort, set the queue row to *Needs review* with a one-line reason, leave the catalog row unchanged, and keep the draft file.
-   8. **Verify and commit.** Run `python3 -I agents/by-capability/human-machine-interface/roadmap/tools/rebuild_summary.py` then `python3 -I agents/by-capability/human-machine-interface/roadmap/tools/check_links.py` and `python3 -I agents/by-capability/human-machine-interface/roadmap/tools/check_site_compat.py`, and `python3 -I agents/by-capability/human-machine-interface/roadmap/tools/check_public_urls.py`, and fix every problem they report. Commit this one pattern with a message like `HMI run N: <id> <name>` plus the attribution lines from the session, then push with `git push -u origin claude/zealous-ramanujan-u8zwfk`. If the push fails on a network error, retry up to 4 times (waits of 2, 4, 8, 16 seconds). If it still fails, record it in the Run log and stop; the next run continues.
+   8. **Verify and commit.** Run `python3 -I agents/by-capability/human-machine-interface/roadmap/tools/rebuild_summary.py` then `python3 -I agents/by-capability/human-machine-interface/roadmap/tools/check_links.py` and `python3 -I agents/by-capability/human-machine-interface/roadmap/tools/check_site_compat.py`, and `python3 -I agents/by-capability/human-machine-interface/roadmap/tools/check_public_urls.py`, and `python3 -I agents/by-capability/human-machine-interface/roadmap/tools/check_solutions.py`, and fix every problem they report. Commit this one pattern with a message like `HMI run N: <id> <name>` plus the attribution lines from the session, then push with `git push -u origin claude/zealous-ramanujan-u8zwfk`. If the push fails on a network error, retry up to 4 times (waits of 2, 4, 8, 16 seconds). If it still fails, record it in the Run log and stop; the next run continues.
 4. **Content-program task.** After the patterns, do the first ready task in the Task queue of [content-program.md](content-program.md), under the rules there, then commit and push it on its own. Skip it if no task is ready.
 5. **Log.** Append an entry to the Run log: run number, UTC date and time, and for each pattern the ID, the result (Done, Needs review, or Skipped), how many sources you opened vs. read only through summaries, any claims left unverified, and what the review pass changed. Add anything you could not check or any correction to earlier files.
 
@@ -57,7 +57,7 @@ A pattern is *Done* only if **every** item is true.
 
 **Form**
 - The SEO comment block holds real search phrases; the H1 includes the phrase people search; questions in the FAQ are written as people ask them.
-- Link text is descriptive, and `check_links.py`, `check_site_compat.py`, and `check_public_urls.py` pass.
+- Link text is descriptive, and `check_links.py`, `check_site_compat.py`, `check_public_urls.py`, and `check_solutions.py` pass.
 - The file is 120 to 250 lines. The technical section appears only when the fix needs engineering.
 - American spelling, US examples, and the same layout, voice, and section numbering as the flagship patterns.
 

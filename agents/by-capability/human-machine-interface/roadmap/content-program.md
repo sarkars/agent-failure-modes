@@ -8,7 +8,7 @@ The published site is Astro, fed by an importer that reads this repo. Keep these
 - Line 1 of a pattern is its H1. It also has a `**Frequency**: Very Common|Common|Occasional|Rare` line and a `## Issue: <one sentence>` line.
 - Run `python3 -I agents/by-capability/human-machine-interface/roadmap/tools/check_site_compat.py` with the other checks. It must pass before every commit.
 - **Existing public URLs must not change** (Google has indexed them). Never move, rename, or delete a pattern file, or a goal or category folder, outside the HMI folder. `check_public_urls.py` compares against `roadmap/tools/public-urls.tsv`, a frozen list of the 1,267 patterns, goals, and categories on the live site, and fails on any change. HMI pages are exempt and may change, but keep their URLs stable too unless there is a reason.
-- Incident pages use the site's incident front matter. The chat builder ships as a static page in the site's `public/` folder.
+- Incident pages use the site's incident front matter.
 
 ## Rules for every task
 - **No invented evidence.** Cite only what you opened. Never write test results, incidents, quotations, or mappings you did not verify. If you can't, write "Not yet run", "No public incident found", or leave the task *Blocked* with the reason.
@@ -75,7 +75,7 @@ These come first in the queue, at 3 per run. They were picked for customer deman
 | WS-09 | Definition pages | `glossary/<term>.md`: short, sourced definitions linking to patterns | One term per run when a term is used by three or more written patterns |
 | WS-12 | Base agent and learning loop | The end state in [learning-agent.md](learning-agent.md): L0 base spec, L1 base agent design, and the gated learning loop's policy, all labeled untested until a person runs them. Built on the [gap analysis](gap-analysis.md) | Gap analysis redo first; then one level at a time |
 | WS-13 | Use-case agent specs | One page per specific agent in `agents/by-agent/use-cases/`: scope, business goals with measure, failure definition, severity, hand-over triggers, and linked failures to test. Eight exist as first drafts | Add a spec when a use case has at least three documented failures; revise each with a practitioner's input |
-| WS-14 | Narrow chat use-case guides | `chat-use-cases/`: one guide per narrow chat use case (32 listed, ranked by market usage evidence), each with instructions, guardrails, and evals tied to a metric ledger. See the [hub](../chat-use-cases/) and the rules below | Exemplar first, then Tier A, then B, then C |
+| WS-14 | Solutions: chat use cases | One independent Markdown page, [agents/solutions/chat-use-cases.md](../../../solutions/chat-use-cases.md), that explains 32 narrow chat use cases end to end: goals, instructions, guardrails, evals, and the existing failure patterns to test against, each with a metric and a counter-metric. Markdown only; no interactive pages | Verify usage evidence first, then deepen one use case per task in priority-wave order |
 | WS-10 | Cross-framework mappings | `mappings/proposals.md`: OWASP, NIST, and MITRE entries for flagships, each with a source you opened and a confidence label | Flagships only, after the pattern is Done; always *Needs review* |
 | WS-11 | Build guide | `guide/`: a failure-first guide to building a customer-facing agent that doesn't fail people. A gap analysis first, then one step per task, each linking only written patterns | Gap analysis first; then one step when its condition is met |
 
@@ -88,16 +88,16 @@ Status values: *Queued*, *In progress*, *Done*, *Blocked*, *Needs review*. A run
 | 2 | Write `incidents/README.md`: the incident-page format and the source rules | WS-02 | None | Done |
 | 3 | Write `data/README.md` and `data/failure-report-template.md`: consent, anonymization, what never to submit | WS-07 | None | Done |
 | 4 | Add Maturity and "Will a better model fix this?" rows to the pattern template | WS-01, WS-04 | None | Done |
-| 14a | **Verify market usage.** Open every source in [market-usage.md](../chat-use-cases/market-usage.md): confirm each figure and its grade, replace grade C claims with better sources where they exist, and record the use cases that have no evidence. Update `content.py` (evidence, grades, waves) and rebuild the [builder](../chat-use-cases/builder/) | WS-14 | None | Queued |
-| 14b | **Exemplar 1, general-purpose:** CU-27 information-seeking assistant, as data in [content.py](../chat-use-cases/builder/content.py): use-case-specific goals, rules, failure mapping, code, and ledger rows beyond the shared variants. Open and read every source; mark everything untested; run `build.py` and `check_links.py` | WS-14 | Task 14a Done | Queued |
-| 14c | **Exemplar 2, business-deployed:** CU-02 e-commerce order support, same method | WS-14 | Task 14b Done | Queued |
-| 14d | **Adversarial review of both exemplars:** is each ledger row measurable from logs, an eval, or sampled review? Does each rule map to a real failure and have a counter-metric? Are the general-purpose and business wordings both right? Fix the data model or page if not | WS-14 | Task 14c Done | Queued |
-| 14e | **Wave 1 guides**, one per task: CU-26, CU-28, CU-32, CU-30 (CU-30 carries legal and expert flags and stays *Needs review*) | WS-14 | Task 14d Done | Queued |
-| 14f | **Wave 2 guides**, one per task: CU-29, CU-31, CU-07, CU-15, CU-16, CU-17, CU-05, CU-04, CU-01 | WS-14 | Three Wave 1 guides Done | Queued |
-| 14g | **Wave 3 guides**, one per task, drafted as *Needs review* with instruction text withheld: CU-21, CU-20, CU-22, CU-23, CU-24, CU-25 | WS-14 | Task 14d Done and two Wave 2 guides Done | Queued |
-| 14h | **Wave 4 and new use cases:** for each Wave 4 use case, first look for usage evidence; keep it only if some is found or a judgment reason is written down. Add use cases the evidence shows are missing | WS-14 | Task 14a Done | Queued |
-| 14i | **Eval sets** in `tests/` for each finished guide, in the tests format; results "Not yet run" | WS-14, WS-03 | A guide Done | Queued |
-| 14j | **Refresh market usage** every 20 runs: search for new usage studies, update `market-usage.md` and the builder data, and record what changed | WS-14 | Task 14a Done | Queued |
+| 14a | **Verify market usage.** Open every source in section 1 of [chat-use-cases.md](../../../solutions/chat-use-cases.md): confirm each figure and its grade, replace grade C claims with better sources where they exist, and record use cases with no evidence. Correct the page | WS-14 | None | Queued |
+| 14b | **Deepen CU-27 (information-seeking assistant)** in place: research it, then write its full end-to-end section (use-case-specific instructions, guardrails, evals, each with a metric and counter-metric). Link only to existing failure patterns. Mark everything untested | WS-14 | Task 14a Done | Queued |
+| 14c | **Deepen CU-02 (e-commerce order support)** the same way | WS-14 | Task 14b Done | Queued |
+| 14d | **Adversarial review of 14b and 14c:** is each metric measurable from logs, an eval, or sampled review? Does each item have a counter-metric? Is anything claimed that is not sourced? Fix the page structure if it fails | WS-14 | Task 14c Done | Queued |
+| 14e | **Deepen wave 1**, one use case per task: CU-26, CU-28, CU-32, CU-30 (CU-30 carries legal and expert flags and stays *Needs review*) | WS-14 | Task 14d Done | Queued |
+| 14f | **Deepen wave 2**, one per task: CU-29, CU-31, CU-07, CU-15, CU-16, CU-17, CU-05, CU-04, CU-01 | WS-14 | Three wave 1 use cases Done | Queued |
+| 14g | **Deepen wave 3**, one per task, as *Needs review*, with instruction text withheld: CU-21, CU-20, CU-22, CU-23, CU-24, CU-25 | WS-14 | Task 14d Done and two wave 2 use cases Done | Queued |
+| 14h | **Wave 4:** for each use case with no usage evidence, look for evidence; keep it only if some is found or a judgment reason is written. Add use cases the evidence shows are missing | WS-14 | Task 14a Done | Queued |
+| 14i | **Link new patterns:** when a failure pattern is written that a use case needs, link it and remove the "none documented yet" note | WS-14 | A pattern is Done | Queued |
+| 14j | **Refresh market usage** every 20 runs: search for new usage studies, update section 1, and record what changed | WS-14 | Task 14a Done | Queued |
 | 5 | Incident page: pick the best-sourced public case for the first flagship that has one | WS-02 | A flagship is Done | Queued |
 | 6 | Seed `glossary/`: "containment rate" and "cold transfer" | WS-09 | HU-01 and HU-03 Done | Queued |
 | 7 | First symptom page: "The bot keeps asking what I already told it" | WS-05 | CP-14 Done and two more related patterns Done | Queued |
@@ -126,17 +126,13 @@ Status values: *Queued*, *In progress*, *Done*, *Blocked*, *Needs review*. A run
 - **Maintained.** Each step has a last-reviewed date. Frameworks change fast, so avoid framework-specific code unless it is tested.
 - **No claim that following the guide guarantees good behavior.** The guide reduces known failures; only testing shows whether a given agent has them.
 
-## Chat use-case guide rules (workstream 14)
-- **Usage first.** A guide may not be started until its use case's entry in [market-usage.md](../chat-use-cases/market-usage.md) has been verified by opening the source, or is labeled as judgment. Waves weigh usage evidence with stakes; usage is not risk.
-- **Format: interactive, data-first.** Content lives as data in `chat-use-cases/builder/content.py`. `build.py` fails if any rule lacks a metric, a how-measured, or a counter-metric, and regenerates the page. Markdown guides are drafts only.
-- **Every instruction, guardrail, and eval has a ledger row** with a metric, how it is measured, a counter-metric, and a threshold basis. `check_ledger.py` must pass.
-- **Counter-metrics are required** for any metric that can be gamed (for example containment and confirmed resolution; speed and accuracy).
-- **No invented thresholds.** Use "set from baseline" unless a law or a published benchmark gives a number, and cite it.
-- **Judge-based metrics** say how the judge is calibrated against human labels. A judge that has not been checked is listed as unverified.
-- **Untested means untested.** Instructions and guardrails are drafts until a recorded run exists. Never write results you did not obtain.
-- **Tier C is gated.** Instruction text for emotional support, companions, children, older adults, grief, and role-play is not published until a qualified reviewer has checked it. Children's guides name the age bands they cover.
-- **Reuse before you write.** Link the [use-case agent specs](../../../by-agent/) and written patterns instead of restating them.
-- **Review notes (2026-10-15).** The main risks are metric theater (metrics without baselines or with unvalidated judges), Goodhart effects (hence counter-metrics), false confidence in untested prompts, and overreach in high-stakes use cases. A scheduled run cannot test prompts or approve Tier B or C material.
+## Chat use-case solution rules (workstream 14)
+- **Markdown only.** No interactive pages, data files, or build scripts. Everything is a Markdown file.
+- **Solution pages are independent and link only to existing failure patterns,** other solution pages, or the solutions README. `check_solutions.py` enforces this.
+- **Every instruction, guardrail, and eval has a metric, how it is measured, and a counter-metric.** No invented thresholds: write "set from your baseline" unless a law or published benchmark gives a number, and cite it.
+- **Usage first.** Do not deepen a use case until its usage evidence in section 1 has been verified by opening the source, or is labeled as judgment. Waves weigh usage evidence with stakes.
+- **Untested means untested.** Instructions, guardrails, and evals are drafts until a recorded run exists. Never write results you did not obtain.
+- **Tier C is gated.** Instruction text for emotional support, companions, children, older adults, grief, and role-play stays withheld until a qualified reviewer has checked it.
 
 ## What these runs cannot do
 - **Run the tests.** The scheduled run has no model-evaluation harness. It writes the tests and leaves "Not yet run". Someone has to run them and record results before any pattern can be *Tested*.

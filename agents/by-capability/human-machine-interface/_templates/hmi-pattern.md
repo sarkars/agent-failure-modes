@@ -42,7 +42,7 @@ SITE COMPATIBILITY RULES (the published Astro site imports this file)
 22. Keep the machine-readable line "**Frequency**: <word>" (Very Common, Common, Occasional, or Rare) and the
     line "## Issue: <one sentence>". The site reads them for badges and cards. The header table is for readers.
 23. Patterns live at goals/<family>/failures/<name>.md so the importer finds the capability, goal, and category.
-    Other folders (tests, incidents, chat-use-cases, roadmap) are not imported as patterns.
+    Other folders (tests, incidents, roadmap) are not imported as patterns.
 -->
 
 # [Searched phrase]: [Pattern name]
