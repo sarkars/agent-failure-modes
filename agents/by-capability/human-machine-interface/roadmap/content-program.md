@@ -1,4 +1,4 @@
-# Content Program: Ten Workstreams Run Alongside the Pattern Queue
+# Content Program: Eleven Workstreams Run Alongside the Pattern Queue
 
 > **What this is.** Besides writing patterns, each scheduled run does **one** task from this file. The tasks turn a catalog into something people cite and use: tiered quality, real incidents, runnable tests, an honest "will a better model fix this?" answer, and entry points by symptom and by role. Everything stays inside `agents/by-capability/human-machine-interface/`. The [execution plan](execution-plan.md) says how a run works.
 
@@ -53,7 +53,7 @@ These come first in the queue, at 3 per run. They were picked for customer deman
 | 29 | CC-08 | Scam victim not interrupted |
 | 30 | CC-16 | Romantic or parasocial dependence |
 
-## The ten workstreams
+## The eleven workstreams
 | ID | Workstream | Deliverable | When a run does it |
 |---|---|---|---|
 | WS-01 | Two tiers, labeled | Maturity label and tier on every written pattern; this file's flagship list | Set up now. Each run labels its own patterns |
@@ -66,6 +66,7 @@ These come first in the queue, at 3 per run. They were picked for customer deman
 | WS-08 | Role-based starting points | `start-here/<role>.md` for product leads, engineers, CX leaders, and compliance | When each role has at least five written patterns, then refresh every ten |
 | WS-09 | Definition pages | `glossary/<term>.md`: short, sourced definitions linking to patterns | One term per run when a term is used by three or more written patterns |
 | WS-10 | Cross-framework mappings | `mappings/proposals.md`: OWASP, NIST, and MITRE entries for flagships, each with a source you opened and a confidence label | Flagships only, after the pattern is Done; always *Needs review* |
+| WS-11 | Build guide | `guide/`: a failure-first guide to building a customer-facing agent that doesn't fail people. A gap analysis first, then one step per task, each linking only written patterns | Gap analysis first; then one step when its condition is met |
 
 ## Task queue
 Status values: *Queued*, *In progress*, *Done*, *Blocked*, *Needs review*. A run takes the first row that is *Queued* or *In progress* and whose condition is met.
@@ -84,7 +85,18 @@ Status values: *Queued*, *In progress*, *Done*, *Blocked*, *Needs review*. A run
 | 10 | First mapping proposal for the first Done flagship | WS-10 | A flagship is Done | Queued |
 | 11 | Seed `symptoms/` with the next 3 pages | WS-05 | 9 patterns written | Queued |
 | 12 | Add terms to `glossary/` until 10 exist | WS-09 | Repeat as terms qualify | Queued |
-| 13 | Repeat: merge proposals, role pages, mapping proposals as their conditions are met | WS-06, WS-08, WS-10 | As conditions are met | Queued |
+| 13 | Gap analysis: read the published agent-building guides from major model and framework vendors (open each one), record what they cover and what they leave out about the human side, and decide whether a guide is still worth writing | WS-11 | None | Queued |
+| 14 | Guide outline: the steps, what each decides, and the patterns each links; no prose beyond a sentence per step | WS-11 | Task 13 Done and says a guide is worth writing | Queued |
+| 15 | Write one guide step: what to decide, the minimal fix, the patterns it prevents, the tests, and when you can skip it | WS-11 | Outline Done and the step has at least two written patterns it can link; repeat per step | Queued |
+| 16 | Repeat: merge proposals, role pages, mapping proposals as their conditions are met | WS-06, WS-08, WS-10 | As conditions are met | Queued |
+
+## Guide rules (workstream 11)
+- **Failure-first, not architecture-first.** The guide covers what to decide so the failures in this library don't happen. It does not re-teach general agent architecture; it links to the original sources for that.
+- **Primary sources for every recommendation that isn't a pattern.** Open them. Where practice is only our judgment, say so.
+- **Every step links to written patterns and test files,** and each step says when it can be skipped.
+- **Short.** A step is a page a team can act on in an afternoon. If a step needs more, it becomes a pattern.
+- **Maintained.** Each step has a last-reviewed date. Frameworks change fast, so avoid framework-specific code unless it is tested.
+- **No claim that following the guide guarantees good behavior.** The guide reduces known failures; only testing shows whether a given agent has them.
 
 ## What these runs cannot do
 - **Run the tests.** The scheduled run has no model-evaluation harness. It writes the tests and leaves "Not yet run". Someone has to run them and record results before any pattern can be *Tested*.
