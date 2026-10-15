@@ -1,4 +1,4 @@
-# Content Program: Eleven Workstreams Run Alongside the Pattern Queue
+# Content Program: Twelve Workstreams Run Alongside the Pattern Queue
 
 > **What this is.** Besides writing patterns, each scheduled run does **one** task from this file. The tasks turn a catalog into something people cite and use: tiered quality, real incidents, runnable tests, an honest "will a better model fix this?" answer, and entry points by symptom and by role. Everything stays inside `agents/by-capability/human-machine-interface/`. The [execution plan](execution-plan.md) says how a run works.
 
@@ -53,7 +53,7 @@ These come first in the queue, at 3 per run. They were picked for customer deman
 | 29 | CC-08 | Scam victim not interrupted |
 | 30 | CC-16 | Romantic or parasocial dependence |
 
-## The eleven workstreams
+## The twelve workstreams
 | ID | Workstream | Deliverable | When a run does it |
 |---|---|---|---|
 | WS-01 | Two tiers, labeled | Maturity label and tier on every written pattern; this file's flagship list | Set up now. Each run labels its own patterns |
@@ -65,6 +65,7 @@ These come first in the queue, at 3 per run. They were picked for customer deman
 | WS-07 | Original data | `data/` process and template; accepted anonymized submissions summarized in the Run log | Set up once; check for submissions each run |
 | WS-08 | Role-based starting points | `start-here/<role>.md` for product leads, engineers, CX leaders, and compliance | When each role has at least five written patterns, then refresh every ten |
 | WS-09 | Definition pages | `glossary/<term>.md`: short, sourced definitions linking to patterns | One term per run when a term is used by three or more written patterns |
+| WS-12 | Base agent and learning loop | The end state in [learning-agent.md](learning-agent.md): L0 base spec, L1 base agent design, and the gated learning loop's policy, all labeled untested until a person runs them. Built on the [gap analysis](gap-analysis.md) | Gap analysis redo first; then one level at a time |
 | WS-10 | Cross-framework mappings | `mappings/proposals.md`: OWASP, NIST, and MITRE entries for flagships, each with a source you opened and a confidence label | Flagships only, after the pattern is Done; always *Needs review* |
 | WS-11 | Build guide | `guide/`: a failure-first guide to building a customer-facing agent that doesn't fail people. A gap analysis first, then one step per task, each linking only written patterns | Gap analysis first; then one step when its condition is met |
 
@@ -85,7 +86,12 @@ Status values: *Queued*, *In progress*, *Done*, *Blocked*, *Needs review*. A run
 | 10 | First mapping proposal for the first Done flagship | WS-10 | A flagship is Done | Queued |
 | 11 | Seed `symptoms/` with the next 3 pages | WS-05 | 9 patterns written | Queued |
 | 12 | Add terms to `glossary/` until 10 exist | WS-09 | Repeat as terms qualify | Queued |
-| 13 | Gap analysis: read the published agent-building guides from major model and framework vendors (open each one), record what they cover and what they leave out about the human side, and decide whether a guide is still worth writing | WS-11 | None | Queued |
+| 13 | Redo `roadmap/gap-analysis.md` properly: open every source it lists, correct any claim the source doesn't support, mark each row opened or summary-only, and add a second search for each "nothing found" claim. Decide whether a guide (WS-11) is still worth writing | WS-11, WS-12 | None | Queued |
+| 13b | Per-agent-type gap analysis for the six most-built agent types: customer service, coding, research and data, workflow automation, IT and security, and copilots. For each, open the main failure and benchmark references and record what they cover, what they leave out, and what the library adds | WS-12 | Task 13 Done | Queued |
+| 13c | Decision record: build the L1 base agent on an existing harness (tau2-bench, the OpenAI cookbook loop) or from scratch, with reasons from opened sources | WS-12 | Task 13b Done | Queued |
+| 13d | L0 base spec from the Done flagships' fixes | WS-12 | 10 flagships Done | Queued |
+| 13e | L1 base agent design: prompt, tool contracts, handoff and refusal rules, test cases; label everything untested | WS-12 | Task 13d Done | Queued |
+| 13f | Learning-loop policy (L2 to L4) with each rule checked against an opened source, and the candidate-registry format | WS-12 | Task 13c Done | Queued |
 | 14 | Guide outline: the steps, what each decides, and the patterns each links; no prose beyond a sentence per step | WS-11 | Task 13 Done and says a guide is worth writing | Queued |
 | 15 | Write one guide step: what to decide, the minimal fix, the patterns it prevents, the tests, and when you can skip it | WS-11 | Outline Done and the step has at least two written patterns it can link; repeat per step | Queued |
 | 16 | Repeat: merge proposals, role pages, mapping proposals as their conditions are met | WS-06, WS-08, WS-10 | As conditions are met | Queued |

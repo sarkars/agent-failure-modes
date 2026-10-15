@@ -4,7 +4,7 @@ Run:  python3 -I agents/by-capability/human-machine-interface/roadmap/tools/chec
 import re, glob, os, sys
 AREA = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 os.chdir(AREA)
-SKIP_TABLE = {"README.md", "index.md", "execution-plan.md", "content-program.md", "merge-proposals.md"}
+SKIP_TABLE = {"README.md", "index.md", "execution-plan.md", "content-program.md", "merge-proposals.md", "gap-analysis.md", "learning-agent.md"}
 def slug(h): return re.sub(r"[^a-z0-9 -]", "", h.lower()).strip().replace(" ", "-")
 bad = tot = 0
 for f in sorted(glob.glob("**/*.md", recursive=True)):
