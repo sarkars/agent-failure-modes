@@ -7,6 +7,7 @@ The published site is Astro, fed by an importer that reads this repo. Keep these
 - Written patterns live at `goals/<family>/failures/<name>.md`, with `goals/<family>/README.md` present.
 - Line 1 of a pattern is its H1. It also has a `**Frequency**: Very Common|Common|Occasional|Rare` line and a `## Issue: <one sentence>` line.
 - Run `python3 -I agents/by-capability/human-machine-interface/roadmap/tools/check_site_compat.py` with the other checks. It must pass before every commit.
+- **Existing public URLs must not change** (Google has indexed them). Never move, rename, or delete a pattern file, or a goal or category folder, outside the HMI folder. `check_public_urls.py` compares against `roadmap/tools/public-urls.tsv`, a frozen list of the 1,267 patterns, goals, and categories on the live site, and fails on any change. HMI pages are exempt and may change, but keep their URLs stable too unless there is a reason.
 - Incident pages use the site's incident front matter. The chat builder ships as a static page in the site's `public/` folder.
 
 ## Rules for every task

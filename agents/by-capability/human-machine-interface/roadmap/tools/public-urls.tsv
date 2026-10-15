@@ -1,0 +1,1450 @@
+# Frozen list of public URLs from the published site as of 2026-10-15. HMI pages are excluded: they may change.
+# kind\tslug\tsource path (patterns only)
+pattern	3d-reasoning-collapse	by-capability/vision-and-images/goals/spatial-reasoning/failures/3d-reasoning-collapse.md
+pattern	accent-dialect-bias	by-capability/speech-and-audio/goals/speech-recognition/failures/accent-dialect-bias.md
+pattern	access-control-inheritance-wrong	cross-cutting/operations/goals/tool-access-scope-limits/failures/access-control-inheritance-wrong.md
+pattern	account-level-data-scope	cross-cutting/operations/goals/tool-access-scope-limits/failures/account-level-data-scope.md
+pattern	accuracy-guarantee-not-met	cross-cutting/operations/goals/tool-sla-quality-limits/failures/accuracy-guarantee-not-met.md
+pattern	accuracy-regression	by-capability/document-processing/goals/production-reliability/failures/accuracy-regression.md
+pattern	action-completion-claimed-without-status-check	cross-cutting/operations/goals/tool-reliability/failures/action-completion-claimed-without-status-check.md
+pattern	adaptive-rate-limiting	cross-cutting/operations/goals/tool-rate-quota-limits/failures/adaptive-rate-limiting.md
+pattern	address-history-gaps	by-use-case/mortgage-documents/goals/cross-document-validation/failures/address-history-gaps.md
+pattern	address-standardization	by-use-case/mortgage-documents/goals/data-extraction/failures/address-standardization.md
+pattern	admin-operation-called-by-non-admin	cross-cutting/security/goals/tool-authorization-limits/failures/admin-operation-called-by-non-admin.md
+pattern	adversarial-perturbation	by-capability/vision-and-images/goals/adversarial-robustness/failures/adversarial-perturbation.md
+pattern	age-bias-in-symptoms	by-use-case/healthcare/goals/diagnosis-safety/failures/age-bias-in-symptoms.md
+pattern	agent-applies-remembered-scoring-heuristic-instead-of-querying-live-scoring-rules-tool	by-use-case/sales-crm/goals/lead-scoring/failures/agent-applies-remembered-scoring-heuristic-instead-of-querying-live-scoring-rules-tool.md
+pattern	agent-applies-remembered-stage-weighting-instead-of-current-forecasting-config	by-use-case/sales-crm/goals/pipeline-forecasting/failures/agent-applies-remembered-stage-weighting-instead-of-current-forecasting-config.md
+pattern	agent-defaults-to-stale-training-knowledge-over-live-lookup-tool	cross-cutting/accuracy/goals/knowledge-staleness/failures/agent-defaults-to-stale-training-knowledge-over-live-lookup-tool.md
+pattern	agent-fabricates-manager-exception-approval-when-approval-tool-returns-no-record	by-use-case/sales-crm/goals/quota-achievement/failures/agent-fabricates-manager-exception-approval-when-approval-tool-returns-no-record.md
+pattern	agent-fabricates-plausible-tool-output-when-risk-engine-tool-call-times-out	by-use-case/financial-services/goals/trading-execution/failures/agent-fabricates-plausible-tool-output-when-risk-engine-tool-call-times-out.md
+pattern	agent-fabricates-stated-objection-when-call-transcript-tool-returns-empty	by-use-case/sales-crm/goals/lead-scoring/failures/agent-fabricates-stated-objection-when-call-transcript-tool-returns-empty.md
+pattern	agent-handoff-race-condition	cross-cutting/operations/goals/multi-agent-orchestration/failures/agent-handoff-race-condition.md
+pattern	agent-impersonation	cross-cutting/security/goals/agent-trust/failures/agent-impersonation.md
+pattern	agent-infers-product-line-from-recently-mentioned-topic-instead-of-entitlement-record	by-use-case/support-services/goals/ticket-routing/failures/agent-infers-product-line-from-recently-mentioned-topic-instead-of-entitlement-record.md
+pattern	agent-injection	cross-cutting/security/goals/safety-security/failures/agent-injection.md
+pattern	agent-misalignment	cross-cutting/operations/goals/multi-agent-coordination/failures/agent-misalignment.md
+pattern	agent-priority-inversion	cross-cutting/operations/goals/multi-agent-orchestration/failures/agent-priority-inversion.md
+pattern	agent-resource-contention	cross-cutting/operations/goals/multi-agent-orchestration/failures/agent-resource-contention.md
+pattern	agent-routes-only-primary-intent-in-multi-issue-ticket-dropping-secondary-urgent-issue	by-use-case/support-services/goals/ticket-routing/failures/agent-routes-only-primary-intent-in-multi-issue-ticket-dropping-secondary-urgent-issue.md
+pattern	agent-self-attribution-errors	by-capability/speech-and-audio/goals/conversation-flow/failures/agent-self-attribution-errors.md
+pattern	agent-state-divergence	cross-cutting/operations/goals/multi-agent-orchestration/failures/agent-state-divergence.md
+pattern	agent-timeout-cascade	cross-cutting/operations/goals/multi-agent-orchestration/failures/agent-timeout-cascade.md
+pattern	ai-disclosure-failures	by-capability/speech-and-audio/goals/conversation-flow/failures/ai-disclosure-failures.md
+pattern	ai-generated-content-disclosure-omission	by-use-case/content-marketing/goals/quality-control/failures/ai-generated-content-disclosure-omission.md
+pattern	ai-generated-forgery	by-use-case/mortgage-documents/goals/fraud-detection/failures/ai-generated-forgery.md
+pattern	alert-fatigue-from-threshold-misconfiguration	by-use-case/devops/goals/anomaly-detection/failures/alert-fatigue-from-threshold-misconfiguration.md
+pattern	algorithmic-discrimination	cross-cutting/accuracy/goals/output-accuracy/failures/algorithmic-discrimination.md
+pattern	ambiguity-mishandling	by-capability/knowledge-retrieval/goals/query-understanding/failures/ambiguity-mishandling.md
+pattern	ambiguous-goal-interpretation	by-capability/task-planning/goals/goal-understanding/failures/ambiguous-goal-interpretation.md
+pattern	amendment-tracking-failure	by-use-case/legal-contracts/goals/compliance/failures/amendment-tracking-failure.md
+pattern	anchoring-bias-first-diagnosis	by-use-case/healthcare/goals/diagnosis-safety/failures/anchoring-bias-first-diagnosis.md
+pattern	answer-query-drift	by-capability/knowledge-retrieval/goals/answer-synthesis/failures/answer-query-drift.md
+pattern	answer-synthesis-failure	by-capability/knowledge-retrieval/goals/retrieval/failures/answer-synthesis-failure.md
+pattern	api-key-quota-per-account	cross-cutting/operations/goals/tool-allocation-limits/failures/api-key-quota-per-account.md
+pattern	api-version-schema-mismatch	cross-cutting/operations/goals/tool-capability-limits/failures/api-version-schema-mismatch.md
+pattern	appraisal-data-discrepancies	by-use-case/mortgage-documents/goals/quality-control/failures/appraisal-data-discrepancies.md
+pattern	approval-authority-escalation-failure	cross-cutting/governance/goals/approval-workflows/failures/approval-authority-escalation-failure.md
+pattern	approval-chain-break	cross-cutting/governance/goals/approval-workflows/failures/approval-chain-break.md
+pattern	approval-conflict	cross-cutting/governance/goals/approval-workflows/failures/approval-conflict.md
+pattern	approval-delegation-loop	cross-cutting/governance/goals/approval-workflows/failures/approval-delegation-loop.md
+pattern	approval-queue-overflow	cross-cutting/operations/goals/human-oversight-reliability/failures/approval-queue-overflow.md
+pattern	approval-scope-mismatch	cross-cutting/governance/goals/approval-workflows/failures/approval-scope-mismatch.md
+pattern	approval-signature-verification	cross-cutting/security/goals/tool-authorization-limits/failures/approval-signature-verification.md
+pattern	approval-timeout-expiration	cross-cutting/governance/goals/approval-workflows/failures/approval-timeout-expiration.md
+pattern	approval-timeout-mishandling	cross-cutting/operations/goals/human-oversight-reliability/failures/approval-timeout-mishandling.md
+pattern	approval-waiver-abuse	cross-cutting/governance/goals/approval-workflows/failures/approval-waiver-abuse.md
+pattern	apr-calculation-errors	by-use-case/mortgage-documents/goals/compliance-validation/failures/apr-calculation-errors.md
+pattern	array-element-limit	cross-cutting/operations/goals/tool-operational-limits/failures/array-element-limit.md
+pattern	artifact-accumulation	by-capability/vision-and-images/goals/generation-artifacts/failures/artifact-accumulation.md
+pattern	asset-source-tracing	by-use-case/mortgage-documents/goals/cross-document-validation/failures/asset-source-tracing.md
+pattern	asset-verification-failures	by-use-case/mortgage-documents/goals/data-extraction/failures/asset-verification-failures.md
+pattern	assumption-validation-failure	by-use-case/agent-interaction/goals/conversation-quality/failures/assumption-validation-failure.md
+pattern	attribute-hallucination-vision-and-images	by-capability/vision-and-images/goals/visual-hallucination/failures/attribute-hallucination.md
+pattern	attribute-hallucination	by-capability/document-processing/goals/multimodal-reliability/failures/attribute-hallucination.md
+pattern	attrition-risk-score-feedback-loop-self-fulfilling	by-use-case/hr-recruiting/goals/retention-prediction/failures/attrition-risk-score-feedback-loop-self-fulfilling.md
+pattern	atypical-presentation-blindness	by-use-case/healthcare/goals/diagnosis-safety/failures/atypical-presentation-blindness.md
+pattern	audio-artifact-generation	by-capability/speech-and-audio/goals/voice-synthesis/failures/audio-artifact-generation.md
+pattern	audio-quality-degradation	by-capability/speech-and-audio/goals/audio-handling/failures/audio-quality-degradation.md
+pattern	audit-evasion	cross-cutting/security/goals/safety-security/failures/audit-evasion.md
+pattern	audit-log-tampering	cross-cutting/governance/goals/tool-compliance-limits/failures/audit-log-tampering.md
+pattern	audit-logging-not-enforced	cross-cutting/governance/goals/tool-compliance-limits/failures/audit-logging-not-enforced.md
+pattern	audit-retention-policy	cross-cutting/governance/goals/tool-compliance-limits/failures/audit-retention-policy.md
+pattern	authority-confusion	by-capability/multi-agent-systems/goals/coordination/failures/authority-confusion.md
+pattern	authority-mismatch	cross-cutting/operations/goals/human-oversight-reliability/failures/authority-mismatch.md
+pattern	autonomous-system-safety	cross-cutting/security/goals/safety-security/failures/autonomous-system-safety.md
+pattern	autoscaling-thrash	by-use-case/devops/goals/capacity-planning/failures/autoscaling-thrash.md
+pattern	backchannel-timing-errors	by-capability/speech-and-audio/goals/conversation-flow/failures/backchannel-timing-errors.md
+pattern	background-interference	by-capability/document-processing/goals/accurate-text-extraction/failures/background-interference.md
+pattern	background-noise-failures	by-capability/speech-and-audio/goals/audio-handling/failures/background-noise-failures.md
+pattern	backoff-envelope-violation	cross-cutting/operations/goals/tool-operational-limits/failures/backoff-envelope-violation.md
+pattern	bad-clarification-behavior	by-use-case/customer-service/goals/conversation-resolution/failures/bad-clarification-behavior.md
+pattern	bad-concessioncommitment	by-capability/domain-expertise/goals/domain-decisions/failures/bad-concessioncommitment.md
+pattern	bad-refusal	by-use-case/customer-service/goals/conversation-resolution/failures/bad-refusal.md
+pattern	bad-task-decomposition	by-capability/task-planning/goals/planning/failures/bad-task-decomposition.md
+pattern	bank-statement-misreads	by-use-case/mortgage-documents/goals/data-extraction/failures/bank-statement-misreads.md
+pattern	barcode-data-mismatch	by-use-case/mortgage-documents/goals/document-integrity/failures/barcode-data-mismatch.md
+pattern	barge-in-failures	by-capability/speech-and-audio/goals/conversation-flow/failures/barge-in-failures.md
+pattern	batch-cost-inefficiency	cross-cutting/operations/goals/inference-cost-management/failures/batch-cost-inefficiency.md
+pattern	batch-optimization-failures	cross-cutting/operations/goals/cost-efficiency/failures/batch-optimization-failures.md
+pattern	batch-size-limit	cross-cutting/operations/goals/tool-operational-limits/failures/batch-size-limit.md
+pattern	batch-timing	by-capability/document-processing/goals/production-reliability/failures/batch-timing.md
+pattern	batch-total-operations-limit	cross-cutting/operations/goals/tool-operational-limits/failures/batch-total-operations-limit.md
+pattern	batching-delays	cross-cutting/operations/goals/real-time-performance/failures/batching-delays.md
+pattern	behavioral-anomaly-blindness	by-use-case/mortgage-documents/goals/fraud-detection/failures/behavioral-anomaly-blindness.md
+pattern	benchmark-misalignment	by-use-case/financial-services/goals/portfolio-recommendation-accuracy/failures/benchmark-misalignment.md
+pattern	best-case-projection-bias	by-use-case/sales-crm/goals/pipeline-forecasting/failures/best-case-projection-bias.md
+pattern	beta-feature-instability	cross-cutting/operations/goals/tool-capability-limits/failures/beta-feature-instability.md
+pattern	bias-amplification	cross-cutting/accuracy/goals/output-accuracy/failures/bias-amplification.md
+pattern	bidirectional-text	by-capability/document-processing/goals/layout-preservation/failures/bidirectional-text.md
+pattern	billing-reconciliation-gaps	cross-cutting/operations/goals/cost-tracking/failures/billing-reconciliation-gaps.md
+pattern	blank-pages	by-capability/document-processing/goals/document-classification/failures/blank-pages.md
+pattern	blind-delegation	cross-cutting/security/goals/agent-trust/failures/blind-delegation.md
+pattern	blind-spots-in-observability	cross-cutting/operations/goals/observability-monitoring/failures/blind-spots-in-observability.md
+pattern	blocking-tool-operations	cross-cutting/operations/goals/tool-reliability/failures/blocking-tool-operations.md
+pattern	blue-green-deployment-traffic-not-switched	cross-cutting/operations/goals/version-management/failures/blue-green-deployment-traffic-not-switched.md
+pattern	boilerplate-clause-misapplication	by-use-case/legal-contracts/goals/contract-drafting/failures/boilerplate-clause-misapplication.md
+pattern	bounding-box-errors	by-capability/vision-and-images/goals/spatial-reasoning/failures/bounding-box-errors.md
+pattern	brand-term-mispronunciation	by-capability/speech-and-audio/goals/voice-synthesis/failures/brand-term-mispronunciation.md
+pattern	broken-references	by-capability/knowledge-retrieval/goals/citation-accuracy/failures/broken-references.md
+pattern	budget-enforcement-bypass	cross-cutting/operations/goals/cost-tracking/failures/budget-enforcement-bypass.md
+pattern	budget-priority-misalignment	cross-cutting/operations/goals/tool-financial-limits/failures/budget-priority-misalignment.md
+pattern	bullwhip-effect	by-use-case/supply-chain/goals/demand-forecasting/failures/bullwhip-effect.md
+pattern	business-context-blindness	by-capability/domain-expertise/goals/domain-decisions/failures/business-context-blindness.md
+pattern	business-policy-mismatch	by-capability/task-planning/goals/goal-understanding/failures/business-policy-mismatch.md
+pattern	byzantine-agent-failure	cross-cutting/operations/goals/multi-agent-orchestration/failures/byzantine-agent-failure.md
+pattern	caching-failures	cross-cutting/operations/goals/cost-efficiency/failures/caching-failures.md
+pattern	call-disconnection-handling	by-capability/speech-and-audio/goals/audio-handling/failures/call-disconnection-handling.md
+pattern	canary-analysis-false-pass	by-use-case/devops/goals/deployment-safety/failures/canary-analysis-false-pass.md
+pattern	canary-deployment-incomplete	cross-cutting/operations/goals/version-management/failures/canary-deployment-incomplete.md
+pattern	canned-response-context-mismatch	by-use-case/support-services/goals/issue-resolution/failures/canned-response-context-mismatch.md
+pattern	capability-misrepresentation	cross-cutting/security/goals/agent-trust/failures/capability-misrepresentation.md
+pattern	care-plan-goal-drift	by-use-case/healthcare/goals/treatment-planning/failures/care-plan-goal-drift.md
+pattern	carrier-capacity-blindness	by-use-case/supply-chain/goals/logistics-routing/failures/carrier-capacity-blindness.md
+pattern	cascade-amplification	cross-cutting/operations/goals/fault-tolerance/failures/cascade-amplification.md
+pattern	cascade-branching	cross-cutting/operations/goals/fault-tolerance/failures/cascade-branching.md
+pattern	cascade-detection-failure	cross-cutting/operations/goals/fault-tolerance/failures/cascade-detection-failure.md
+pattern	cascade-divergent-recovery	cross-cutting/operations/goals/fault-tolerance/failures/cascade-divergent-recovery.md
+pattern	cascade-isolation-failure	cross-cutting/operations/goals/fault-tolerance/failures/cascade-isolation-failure.md
+pattern	cascade-resilience-failure	cross-cutting/operations/goals/fault-tolerance/failures/cascade-resilience-failure.md
+pattern	cascade-timeout-interaction	cross-cutting/operations/goals/fault-tolerance/failures/cascade-timeout-interaction.md
+pattern	cascading-error	by-capability/multi-agent-systems/goals/coordination/failures/cascading-error.md
+pattern	cascading-errors	by-capability/document-processing/goals/production-reliability/failures/cascading-errors.md
+pattern	cascading-external-failures	cross-cutting/operations/goals/tool-special-constraints/failures/cascading-external-failures.md
+pattern	cascading-multi-agent-latency	cross-cutting/operations/goals/real-time-performance/failures/cascading-multi-agent-latency.md
+pattern	catastrophe-correlation-blindness	by-use-case/insurance/goals/claims-processing/failures/catastrophe-correlation-blindness.md
+pattern	certification-extraction-treated-as-verification-in-supplier-onboarding	by-use-case/supply-chain/goals/supplier-onboarding/failures/certification-extraction-treated-as-verification-in-supplier-onboarding.md
+pattern	change-of-control-clause-omission	by-use-case/legal-contracts/goals/due-diligence/failures/change-of-control-clause-omission.md
+pattern	character-confusion	by-capability/document-processing/goals/accurate-text-extraction/failures/character-confusion.md
+pattern	chatbot-loop-without-human-escalation-path	by-use-case/support-services/goals/self-service-deflection/failures/chatbot-loop-without-human-escalation-path.md
+pattern	chatbot-manipulation	cross-cutting/security/goals/safety-security/failures/chatbot-manipulation.md
+pattern	cherry-picking	by-capability/knowledge-retrieval/goals/answer-synthesis/failures/cherry-picking.md
+pattern	choice-of-law-mishandling	by-use-case/legal-contracts/goals/jurisdiction-handling/failures/choice-of-law-mishandling.md
+pattern	chunk-boundary-failure	by-capability/knowledge-retrieval/goals/retrieval/failures/chunk-boundary-failure.md
+pattern	chunk-boundary	by-capability/knowledge-retrieval/goals/retrieval-quality/failures/chunk-boundary.md
+pattern	circuit-breaker-false-positive	cross-cutting/operations/goals/version-management/failures/circuit-breaker-false-positive.md
+pattern	circuit-split-blindness-in-citation-selection	by-use-case/legal-contracts/goals/precedent-currency/failures/circuit-split-blindness-in-citation-selection.md
+pattern	circular-faq-redirect-loop	by-use-case/support-services/goals/self-service-deflection/failures/circular-faq-redirect-loop.md
+pattern	citation-mismatch	by-capability/knowledge-retrieval/goals/retrieval/failures/citation-mismatch.md
+pattern	clarification-failure	cross-cutting/accuracy/goals/reasoning-quality/failures/clarification-failure.md
+pattern	clarification-irrelevant	by-use-case/agent-interaction/goals/conversation-quality/failures/clarification-irrelevant.md
+pattern	clarification-loop-infinite	by-use-case/agent-interaction/goals/conversation-quality/failures/clarification-loop-infinite.md
+pattern	cloud-action-acknowledgment-mistaken-for-completed-resize	by-use-case/devops/goals/cost-optimization/failures/cloud-action-acknowledgment-mistaken-for-completed-resize.md
+pattern	co-borrower-data-mixing	by-use-case/mortgage-documents/goals/cross-document-validation/failures/co-borrower-data-mixing.md
+pattern	cold-start-latency	cross-cutting/operations/goals/real-time-performance/failures/cold-start-latency.md
+pattern	column-ordering	by-capability/document-processing/goals/layout-preservation/failures/column-ordering.md
+pattern	command-injection	cross-cutting/security/goals/security-autonomy/failures/command-injection.md
+pattern	communication-breakdown	cross-cutting/operations/goals/multi-agent-coordination/failures/communication-breakdown.md
+pattern	communication-loss	by-capability/multi-agent-systems/goals/coordination/failures/communication-loss.md
+pattern	comorbidity-neglect	by-use-case/healthcare/goals/treatment-planning/failures/comorbidity-neglect.md
+pattern	compaction-information-loss	cross-cutting/operations/goals/memory-management/failures/compaction-information-loss.md
+pattern	complex-tables	by-capability/document-processing/goals/multimodal-reliability/failures/complex-tables.md
+pattern	compliance-boundary-violation	cross-cutting/security/goals/data-loss-prevention/failures/compliance-boundary-violation.md
+pattern	compression-information-loss	by-capability/knowledge-retrieval/goals/answer-synthesis/failures/compression-information-loss.md
+pattern	compression-sensitivity	by-capability/vision-and-images/goals/adversarial-robustness/failures/compression-sensitivity.md
+pattern	computed-field-cost-not-disclosed	cross-cutting/operations/goals/tool-access-scope-limits/failures/computed-field-cost-not-disclosed.md
+pattern	concurrent-request-resource-explosion	cross-cutting/operations/goals/inference-cost-management/failures/concurrent-request-resource-explosion.md
+pattern	concurrent-session-not-licensed	cross-cutting/operations/goals/tool-special-constraints/failures/concurrent-session-not-licensed.md
+pattern	concurrent-state-conflict	cross-cutting/operations/goals/state-tracking/failures/concurrent-state-conflict.md
+pattern	concurrent-state-modification	cross-cutting/operations/goals/state-consistency/failures/concurrent-state-modification.md
+pattern	concurrent-user-quota	cross-cutting/operations/goals/tool-allocation-limits/failures/concurrent-user-quota.md
+pattern	conditional-permission-logic	cross-cutting/security/goals/tool-authorization-limits/failures/conditional-permission-logic.md
+pattern	confidence-calibration-failure	cross-cutting/accuracy/goals/output-optimization/failures/confidence-calibration-failure.md
+pattern	confidence-miscalibration-knowledge-retrieval	by-capability/knowledge-retrieval/goals/answer-synthesis/failures/confidence-miscalibration.md
+pattern	confidence-miscalibration-vision-and-images	by-capability/vision-and-images/goals/visual-hallucination/failures/confidence-miscalibration.md
+pattern	confidence-miscalibration	by-capability/document-processing/goals/multimodal-reliability/failures/confidence-miscalibration.md
+pattern	confident-fabrication	cross-cutting/accuracy/goals/output-accuracy/failures/confident-fabrication.md
+pattern	confirmation-bias-from-prior-notes	by-use-case/healthcare/goals/diagnosis-safety/failures/confirmation-bias-from-prior-notes.md
+pattern	conflicting-feedback	cross-cutting/learning/goals/safe-learning/failures/conflicting-feedback.md
+pattern	conflicting-information	by-capability/document-processing/goals/agentic-orchestration/failures/conflicting-information.md
+pattern	conflicting-instructions	cross-cutting/accuracy/goals/context-management/failures/conflicting-instructions.md
+pattern	conflicting-objectives	by-capability/task-planning/goals/goal-understanding/failures/conflicting-objectives.md
+pattern	conflicting-source-failure	by-capability/knowledge-retrieval/goals/retrieval/failures/conflicting-source-failure.md
+pattern	connection-draining-incomplete	cross-cutting/operations/goals/version-management/failures/connection-draining-incomplete.md
+pattern	connection-pool-exhaustion	cross-cutting/operations/goals/tool-rate-quota-limits/failures/connection-pool-exhaustion.md
+pattern	connection-timeout-no-retry	cross-cutting/operations/goals/tool-rate-quota-limits/failures/connection-timeout-no-retry.md
+pattern	consensus-deadlock	cross-cutting/operations/goals/multi-agent-coordination/failures/consensus-deadlock.md
+pattern	consensus-illusion	by-capability/multi-agent-systems/goals/coordination/failures/consensus-illusion.md
+pattern	consistency-failure	by-capability/vision-and-images/goals/generation-artifacts/failures/consistency-failure.md
+pattern	content-fabrication	cross-cutting/accuracy/goals/output-accuracy/failures/content-fabrication.md
+pattern	context-aggregation-error	by-capability/vision-and-images/goals/multi-image-understanding/failures/context-aggregation-error.md
+pattern	context-assembly-race	cross-cutting/operations/goals/context-lifecycle/failures/context-assembly-race.md
+pattern	context-coherence-loss	cross-cutting/operations/goals/memory-management/failures/context-coherence-loss.md
+pattern	context-ignored	by-capability/knowledge-retrieval/goals/answer-synthesis/failures/context-ignored.md
+pattern	context-injection-leakage	cross-cutting/security/goals/data-loss-prevention/failures/context-injection-leakage.md
+pattern	context-overflow	cross-cutting/accuracy/goals/context-management/failures/context-overflow.md
+pattern	context-priority-inversion	cross-cutting/operations/goals/context-lifecycle/failures/context-priority-inversion.md
+pattern	context-refresh-stale-state	cross-cutting/operations/goals/memory-management/failures/context-refresh-stale-state.md
+pattern	context-size-latency-impact	cross-cutting/operations/goals/real-time-performance/failures/context-size-latency-impact.md
+pattern	context-stuffing-failure	by-capability/knowledge-retrieval/goals/retrieval/failures/context-stuffing-failure.md
+pattern	context-stuffing	cross-cutting/operations/goals/cost-efficiency/failures/context-stuffing.md
+pattern	context-window-awareness-failure	cross-cutting/operations/goals/memory-management/failures/context-window-awareness-failure.md
+pattern	context-window-limits	by-capability/document-processing/goals/agentic-orchestration/failures/context-window-limits.md
+pattern	context-window-overflow-silent-truncation	cross-cutting/operations/goals/memory-safety/failures/context-window-overflow-silent-truncation.md
+pattern	context-window-poisoning	cross-cutting/security/goals/runtime-security/failures/context-window-poisoning.md
+pattern	context-window-saturation	by-capability/knowledge-retrieval/goals/answer-synthesis/failures/context-window-saturation.md
+pattern	context-window-truncation-drops-early-session-client-constraint	by-use-case/financial-services/goals/portfolio-recommendation-accuracy/failures/context-window-truncation-drops-early-session-client-constraint.md
+pattern	contingency-plan-missing	cross-cutting/operations/goals/planning-and-decomposition/failures/contingency-plan-missing.md
+pattern	contract-ambiguity-misses	by-use-case/legal-contracts/goals/risk-detection/failures/contract-ambiguity-misses.md
+pattern	contradictory-outputs	by-capability/multi-agent-systems/goals/coordination/failures/contradictory-outputs.md
+pattern	contraindication-omission	by-use-case/healthcare/goals/adverse-drug-interaction/failures/contraindication-omission.md
+pattern	conversation-coherence-loss	by-use-case/agent-interaction/goals/conversation-quality/failures/conversation-coherence-loss.md
+pattern	conversation-contradiction	by-use-case/agent-interaction/goals/conversation-quality/failures/conversation-contradiction.md
+pattern	conversation-depth-mismatch	by-use-case/agent-interaction/goals/conversation-quality/failures/conversation-depth-mismatch.md
+pattern	conversation-formality-mismatch	by-use-case/agent-interaction/goals/conversation-quality/failures/conversation-formality-mismatch.md
+pattern	conversation-length-explosion	by-use-case/agent-interaction/goals/conversation-quality/failures/conversation-length-explosion.md
+pattern	conversation-mood-whiplash	by-use-case/agent-interaction/goals/conversation-quality/failures/conversation-mood-whiplash.md
+pattern	conversation-relevance-drift	by-use-case/agent-interaction/goals/conversation-quality/failures/conversation-relevance-drift.md
+pattern	conversation-repetition	by-use-case/agent-interaction/goals/conversation-quality/failures/conversation-repetition.md
+pattern	conversation-tangent-proliferation	by-use-case/agent-interaction/goals/conversation-quality/failures/conversation-tangent-proliferation.md
+pattern	conversational-forecast-adjustment-discards-structured-model-baseline	by-use-case/supply-chain/goals/demand-forecasting/failures/conversational-forecast-adjustment-discards-structured-model-baseline.md
+pattern	coordinator-failure	by-capability/multi-agent-systems/goals/coordination/failures/coordinator-failure.md
+pattern	corporate-action-blindness	by-use-case/financial-services/goals/market-data-freshness/failures/corporate-action-blindness.md
+pattern	corporate-hierarchy-misattribution	by-use-case/financial-services/goals/data-quality/failures/corporate-hierarchy-misattribution.md
+pattern	correlation-breakdown	by-use-case/financial-services/goals/portfolio-recommendation-accuracy/failures/correlation-breakdown.md
+pattern	correlation-induced-false-positives	by-use-case/devops/goals/anomaly-detection/failures/correlation-induced-false-positives.md
+pattern	correlation-narrated-as-causation-in-financial-risk-memo	by-use-case/legal-contracts/goals/due-diligence/failures/correlation-narrated-as-causation-in-financial-risk-memo.md
+pattern	corrupted-agent-state	cross-cutting/security/goals/agent-trust/failures/corrupted-agent-state.md
+pattern	cost-anomaly-blindness	cross-cutting/operations/goals/cost-tracking/failures/cost-anomaly-blindness.md
+pattern	cost-attribution-errors	cross-cutting/operations/goals/cost-tracking/failures/cost-attribution-errors.md
+pattern	cost-quality-tradeoff	cross-cutting/operations/goals/cost-efficiency/failures/cost-quality-tradeoff.md
+pattern	counterfeit-supplier-verification-gap	by-use-case/supply-chain/goals/supplier-onboarding/failures/counterfeit-supplier-verification-gap.md
+pattern	cpu-quota-per-job	cross-cutting/operations/goals/tool-allocation-limits/failures/cpu-quota-per-job.md
+pattern	cpu-saturation-cascade	cross-cutting/operations/goals/inference-cost-management/failures/cpu-saturation-cascade.md
+pattern	credential-exposure	cross-cutting/security/goals/safety-security/failures/credential-exposure.md
+pattern	credential-leakage-in-logs	cross-cutting/security/goals/security-autonomy/failures/credential-leakage-in-logs.md
+pattern	credential-leakage	cross-cutting/security/goals/data-loss-prevention/failures/credential-leakage.md
+pattern	critical-field-error	by-capability/domain-expertise/goals/domain-decisions/failures/critical-field-error.md
+pattern	critical-value-notification-delay	by-use-case/healthcare/goals/lab-result-interpretation/failures/critical-value-notification-delay.md
+pattern	cross-border-data-transfer-clause-miss	by-use-case/legal-contracts/goals/jurisdiction-handling/failures/cross-border-data-transfer-clause-miss.md
+pattern	cross-client-parameter-bleed-in-sequential-advisory-sessions	by-use-case/financial-services/goals/portfolio-recommendation-accuracy/failures/cross-client-parameter-bleed-in-sequential-advisory-sessions.md
+pattern	cross-image-reference-loss	by-capability/vision-and-images/goals/multi-image-understanding/failures/cross-image-reference-loss.md
+pattern	cross-session-bleed	cross-cutting/security/goals/data-loss-prevention/failures/cross-session-bleed.md
+pattern	cross-session-confusion	cross-cutting/accuracy/goals/context-management/failures/cross-session-confusion.md
+pattern	cross-tenant-data-leak	cross-cutting/security/goals/security-autonomy/failures/cross-tenant-data-leak.md
+pattern	cross-tenant-leakage	cross-cutting/security/goals/runtime-security/failures/cross-tenant-leakage.md
+pattern	cross-tool-total-budget-exceeded	cross-cutting/operations/goals/tool-financial-limits/failures/cross-tool-total-budget-exceeded.md
+pattern	cross-turn-contamination	cross-cutting/operations/goals/state-tracking/failures/cross-turn-contamination.md
+pattern	currency-exposure-blindness	by-use-case/financial-services/goals/portfolio-recommendation-accuracy/failures/currency-exposure-blindness.md
+pattern	customer-emotion-misread	by-capability/domain-expertise/goals/domain-decisions/failures/customer-emotion-misread.md
+pattern	data-classification-access-not-enforced	cross-cutting/operations/goals/tool-access-scope-limits/failures/data-classification-access-not-enforced.md
+pattern	data-deletion-compliance	cross-cutting/governance/goals/tool-compliance-limits/failures/data-deletion-compliance.md
+pattern	data-exfiltration	cross-cutting/security/goals/security-autonomy/failures/data-exfiltration.md
+pattern	data-leakage	cross-cutting/security/goals/safety-security/failures/data-leakage.md
+pattern	data-lineage-loss	cross-cutting/operations/goals/dependency-management/failures/data-lineage-loss.md
+pattern	data-pipeline-backpressure-unhandled	cross-cutting/operations/goals/dependency-management/failures/data-pipeline-backpressure-unhandled.md
+pattern	data-pipeline-latency	cross-cutting/operations/goals/dependency-management/failures/data-pipeline-latency.md
+pattern	data-pipeline-lossy-transformation	cross-cutting/operations/goals/dependency-management/failures/data-pipeline-lossy-transformation.md
+pattern	data-pipeline-ordering-change	cross-cutting/operations/goals/dependency-management/failures/data-pipeline-ordering-change.md
+pattern	data-pipeline-replay-idempotency	cross-cutting/operations/goals/dependency-management/failures/data-pipeline-replay-idempotency.md
+pattern	data-pipeline-schema-drift	cross-cutting/operations/goals/dependency-management/failures/data-pipeline-schema-drift.md
+pattern	data-provenance-loss	cross-cutting/security/goals/safety-security/failures/data-provenance-loss.md
+pattern	data-residency-violation	cross-cutting/governance/goals/tool-compliance-limits/failures/data-residency-violation.md
+pattern	data-scope-boundary-violation	cross-cutting/operations/goals/tool-access-scope-limits/failures/data-scope-boundary-violation.md
+pattern	deadlock-in-multi-agent	cross-cutting/operations/goals/multi-agent-orchestration/failures/deadlock-in-multi-agent.md
+pattern	debt-obligation-detection	by-use-case/mortgage-documents/goals/data-extraction/failures/debt-obligation-detection.md
+pattern	debug-information-loss	cross-cutting/operations/goals/traceability/failures/debug-information-loss.md
+pattern	deepfake-impersonation	by-use-case/mortgage-documents/goals/fraud-detection/failures/deepfake-impersonation.md
+pattern	deflection-of-unresolved-issues	by-use-case/support-services/goals/self-service-deflection/failures/deflection-of-unresolved-issues.md
+pattern	degraded-sla-not-communicated	cross-cutting/operations/goals/tool-sla-quality-limits/failures/degraded-sla-not-communicated.md
+pattern	delayed-outcome-attribution	cross-cutting/learning/goals/safe-learning/failures/delayed-outcome-attribution.md
+pattern	delegation-depth-explosion	cross-cutting/operations/goals/multi-agent-coordination/failures/delegation-depth-explosion.md
+pattern	delegation-impersonation-not-limited	cross-cutting/security/goals/tool-authorization-limits/failures/delegation-impersonation-not-limited.md
+pattern	demographic-bias	by-use-case/healthcare/goals/diagnosis-safety/failures/demographic-bias.md
+pattern	dependency-availability-region	cross-cutting/operations/goals/dependency-management/failures/dependency-availability-region.md
+pattern	dependency-breaking-change	cross-cutting/operations/goals/dependency-management/failures/dependency-breaking-change.md
+pattern	dependency-circular-reference	cross-cutting/operations/goals/dependency-management/failures/dependency-circular-reference.md
+pattern	dependency-hell-blindness	by-use-case/devops/goals/deployment-safety/failures/dependency-hell-blindness.md
+pattern	dependency-license-incompatibility	cross-cutting/operations/goals/dependency-management/failures/dependency-license-incompatibility.md
+pattern	dependency-security-vulnerability	cross-cutting/operations/goals/dependency-management/failures/dependency-security-vulnerability.md
+pattern	dependency-version-conflicts	cross-cutting/operations/goals/dependency-management/failures/dependency-version-conflicts.md
+pattern	dependency-version-pinning-conflict	cross-cutting/operations/goals/dependency-management/failures/dependency-version-pinning-conflict.md
+pattern	deploy-correlated-anomaly-misattribution	by-use-case/devops/goals/anomaly-detection/failures/deploy-correlated-anomaly-misattribution.md
+pattern	deployment-dependency-deadlock	cross-cutting/operations/goals/version-management/failures/deployment-dependency-deadlock.md
+pattern	deployment-ordering-violation	cross-cutting/operations/goals/version-management/failures/deployment-ordering-violation.md
+pattern	deployment-validation-skipped	cross-cutting/operations/goals/version-management/failures/deployment-validation-skipped.md
+pattern	deprecated-endpoint-retirement	cross-cutting/operations/goals/tool-capability-limits/failures/deprecated-endpoint-retirement.md
+pattern	depth-estimation-failure	by-capability/vision-and-images/goals/spatial-reasoning/failures/depth-estimation-failure.md
+pattern	depth-estimation-hallucination-monocular-vision	by-capability/vision-and-images/goals/spatial-reasoning/failures/depth-estimation-hallucination-monocular-vision.md
+pattern	deterministic-verification-bypassed	cross-cutting/accuracy/goals/output-optimization/failures/deterministic-verification-bypassed.md
+pattern	device-compatibility-issues	by-capability/speech-and-audio/goals/audio-handling/failures/device-compatibility-issues.md
+pattern	digital-signature-validation	by-use-case/mortgage-documents/goals/document-integrity/failures/digital-signature-validation.md
+pattern	direct-prompt-injection	cross-cutting/security/goals/security-autonomy/failures/direct-prompt-injection.md
+pattern	disambiguation-strategy-ineffective	by-use-case/agent-interaction/goals/conversation-quality/failures/disambiguation-strategy-ineffective.md
+pattern	discharge-medication-reconciliation-gap	by-use-case/healthcare/goals/medication-reconciliation/failures/discharge-medication-reconciliation-gap.md
+pattern	disclosure-document-gaps	by-use-case/mortgage-documents/goals/compliance-validation/failures/disclosure-document-gaps.md
+pattern	discovery-document-relevance-misclassification	by-use-case/legal-contracts/goals/litigation-support/failures/discovery-document-relevance-misclassification.md
+pattern	disfluency-calibration-failures	by-capability/speech-and-audio/goals/voice-synthesis/failures/disfluency-calibration-failures.md
+pattern	disk-space-exhaustion	cross-cutting/operations/goals/inference-cost-management/failures/disk-space-exhaustion.md
+pattern	distribution-shift	cross-cutting/accuracy/goals/evaluation-reliability/failures/distribution-shift.md
+pattern	document-authenticity-markers	by-use-case/mortgage-documents/goals/document-verification/failures/document-authenticity-markers.md
+pattern	document-completeness-checks	by-use-case/mortgage-documents/goals/document-verification/failures/document-completeness-checks.md
+pattern	document-date-correlation	by-use-case/mortgage-documents/goals/cross-document-validation/failures/document-date-correlation.md
+pattern	document-dating-validation	by-use-case/mortgage-documents/goals/document-verification/failures/document-dating-validation.md
+pattern	document-level-retrieval-mismatch-pulls-wrong-billing-dispute-template	by-use-case/customer-service/goals/refund-and-billing-disputes/failures/document-level-retrieval-mismatch-pulls-wrong-billing-dispute-template.md
+pattern	document-template-validation	by-use-case/mortgage-documents/goals/document-integrity/failures/document-template-validation.md
+pattern	document-type-confusion	by-capability/domain-expertise/goals/domain-decisions/failures/document-type-confusion.md
+pattern	domain-best-practice-ignorance	by-capability/knowledge-retrieval/goals/knowledge-freshness/failures/domain-best-practice-ignorance.md
+pattern	domain-constraint-violation	by-capability/knowledge-retrieval/goals/knowledge-freshness/failures/domain-constraint-violation.md
+pattern	domain-context-loss	by-capability/knowledge-retrieval/goals/knowledge-freshness/failures/domain-context-loss.md
+pattern	domain-exception-not-handled	by-capability/knowledge-retrieval/goals/knowledge-freshness/failures/domain-exception-not-handled.md
+pattern	domain-mismatch	cross-cutting/accuracy/goals/output-accuracy/failures/domain-mismatch.md
+pattern	domain-risk-blindness	by-capability/knowledge-retrieval/goals/knowledge-freshness/failures/domain-risk-blindness.md
+pattern	domain-rule-miss	by-capability/domain-expertise/goals/domain-decisions/failures/domain-rule-miss.md
+pattern	domain-rule-misunderstanding	by-capability/knowledge-retrieval/goals/knowledge-freshness/failures/domain-rule-misunderstanding.md
+pattern	domain-rule-violation	cross-cutting/accuracy/goals/reasoning-quality/failures/domain-rule-violation.md
+pattern	domain-terminology-confusion	by-capability/knowledge-retrieval/goals/knowledge-freshness/failures/domain-terminology-confusion.md
+pattern	domain-vocabulary-gaps	by-capability/speech-and-audio/goals/speech-recognition/failures/domain-vocabulary-gaps.md
+pattern	dosage-renal-hepatic-adjustment-failure	by-use-case/healthcare/goals/adverse-drug-interaction/failures/dosage-renal-hepatic-adjustment-failure.md
+pattern	drug-interaction-misses	by-use-case/healthcare/goals/adverse-drug-interaction/failures/drug-interaction-misses.md
+pattern	duplicate-action	by-capability/external-actions/goals/action-execution/failures/duplicate-action.md
+pattern	duplicate-work	by-capability/multi-agent-systems/goals/coordination/failures/duplicate-work.md
+pattern	earlier-established-negative-keyword-constraint-lost-from-context-in-long-keyword-research-session	by-use-case/content-marketing/goals/seo-optimization/failures/earlier-established-negative-keyword-constraint-lost-from-context-in-long-keyword-research-session.md
+pattern	echo-feedback-issues	by-capability/speech-and-audio/goals/audio-handling/failures/echo-feedback-issues.md
+pattern	embedded-documents	by-capability/document-processing/goals/document-classification/failures/embedded-documents.md
+pattern	embedded-object-analysis	by-use-case/mortgage-documents/goals/document-integrity/failures/embedded-object-analysis.md
+pattern	embedding-drift	by-capability/knowledge-retrieval/goals/retrieval-quality/failures/embedding-drift.md
+pattern	embedding-retrieval-applies-wrong-jurisdictions-clause-template-by-name-similarity	by-use-case/legal-contracts/goals/jurisdiction-handling/failures/embedding-retrieval-applies-wrong-jurisdictions-clause-template-by-name-similarity.md
+pattern	embedding-retrieval-applies-wrong-jurisdictions-disclosure-template-by-name-similarity	by-use-case/legal-contracts/goals/compliance/failures/embedding-retrieval-applies-wrong-jurisdictions-disclosure-template-by-name-similarity.md
+pattern	embedding-retrieval-applies-wrong-occupation-class-rate-precedent-by-lexical-similarity	by-use-case/insurance/goals/underwriting/failures/embedding-retrieval-applies-wrong-occupation-class-rate-precedent-by-lexical-similarity.md
+pattern	embedding-retrieval-applies-wrong-services-capacity-profile-by-name-similarity	by-use-case/devops/goals/capacity-planning/failures/embedding-retrieval-applies-wrong-services-capacity-profile-by-name-similarity.md
+pattern	embedding-retrieval-applies-wrong-services-deployment-checklist	by-use-case/devops/goals/deployment-safety/failures/embedding-retrieval-applies-wrong-services-deployment-checklist.md
+pattern	embedding-retrieval-applies-wrong-workloads-cost-playbook-by-tag-similarity	by-use-case/devops/goals/cost-optimization/failures/embedding-retrieval-applies-wrong-workloads-cost-playbook-by-tag-similarity.md
+pattern	embedding-retrieval-flags-unrelated-claimant-as-fraud-ring-match	by-use-case/insurance/goals/fraud-detection/failures/embedding-retrieval-flags-unrelated-claimant-as-fraud-ring-match.md
+pattern	embedding-retrieval-maps-new-product-to-wrong-regulatory-rule-by-lexical-similarity	by-use-case/financial-services/goals/regulatory-compliance/failures/embedding-retrieval-maps-new-product-to-wrong-regulatory-rule-by-lexical-similarity.md
+pattern	embedding-retrieval-matches-legally-distinct-substantiation-source	by-use-case/content-marketing/goals/compliance/failures/embedding-retrieval-matches-legally-distinct-substantiation-source.md
+pattern	embedding-retrieval-matches-look-alike-sound-alike-drug-name	by-use-case/healthcare/goals/medication-reconciliation/failures/embedding-retrieval-matches-look-alike-sound-alike-drug-name.md
+pattern	embedding-retrieval-matches-new-supplier-to-wrong-certification-template	by-use-case/supply-chain/goals/supplier-onboarding/failures/embedding-retrieval-matches-new-supplier-to-wrong-certification-template.md
+pattern	embedding-retrieval-matches-similarly-named-lab-panel-with-different-reference-range	by-use-case/healthcare/goals/lab-result-interpretation/failures/embedding-retrieval-matches-similarly-named-lab-panel-with-different-reference-range.md
+pattern	embedding-retrieval-matches-structurally-similar-different-class-drug-for-interaction-check	by-use-case/healthcare/goals/adverse-drug-interaction/failures/embedding-retrieval-matches-structurally-similar-different-class-drug-for-interaction-check.md
+pattern	embedding-retrieval-matches-wrong-sla-tier-policy-document	by-use-case/support-services/goals/sla-management/failures/embedding-retrieval-matches-wrong-sla-tier-policy-document.md
+pattern	embedding-retrieval-merges-similarly-named-issuer-entities-in-data-cleansing-pipeline	by-use-case/financial-services/goals/data-quality/failures/embedding-retrieval-merges-similarly-named-issuer-entities-in-data-cleansing-pipeline.md
+pattern	embedding-retrieval-misroutes-alert-via-similar-runbook-match	by-use-case/devops/goals/alert-routing/failures/embedding-retrieval-misroutes-alert-via-similar-runbook-match.md
+pattern	embedding-retrieval-misroutes-ticket-via-similarity-to-wrong-product-line-taxonomy-node	by-use-case/support-services/goals/ticket-routing/failures/embedding-retrieval-misroutes-ticket-via-similarity-to-wrong-product-line-taxonomy-node.md
+pattern	embedding-retrieval-pulls-competitor-claim-into-own-content	by-use-case/content-marketing/goals/seo-optimization/failures/embedding-retrieval-pulls-competitor-claim-into-own-content.md
+pattern	embedding-retrieval-pulls-deprecated-style-guide-version-as-current	by-use-case/content-marketing/goals/brand-consistency/failures/embedding-retrieval-pulls-deprecated-style-guide-version-as-current.md
+pattern	embedding-retrieval-pulls-discontinued-sku-as-demand-analog-for-new-product	by-use-case/supply-chain/goals/demand-forecasting/failures/embedding-retrieval-pulls-discontinued-sku-as-demand-analog-for-new-product.md
+pattern	embedding-retrieval-pulls-generic-oss-license-as-ip-assignment-template	by-use-case/legal-contracts/goals/ip-rights/failures/embedding-retrieval-pulls-generic-oss-license-as-ip-assignment-template.md
+pattern	embedding-retrieval-pulls-mismatched-historical-attrition-cohort-as-comparable	by-use-case/hr-recruiting/goals/retention-prediction/failures/embedding-retrieval-pulls-mismatched-historical-attrition-cohort-as-comparable.md
+pattern	embedding-retrieval-pulls-mismatched-historical-deal-cohort-as-stage-conversion-benchmark	by-use-case/sales-crm/goals/pipeline-forecasting/failures/embedding-retrieval-pulls-mismatched-historical-deal-cohort-as-stage-conversion-benchmark.md
+pattern	embedding-retrieval-pulls-mismatched-job-family-leveling-precedent-for-offer-band	by-use-case/hr-recruiting/goals/offer-generation/failures/embedding-retrieval-pulls-mismatched-job-family-leveling-precedent-for-offer-band.md
+pattern	embedding-retrieval-pulls-mismatched-rating-territory-policy-precedent-for-renewal	by-use-case/insurance/goals/policy-management/failures/embedding-retrieval-pulls-mismatched-rating-territory-policy-precedent-for-renewal.md
+pattern	embedding-retrieval-pulls-mismatched-rep-playbook-for-quota-coaching	by-use-case/sales-crm/goals/quota-achievement/failures/embedding-retrieval-pulls-mismatched-rep-playbook-for-quota-coaching.md
+pattern	embedding-retrieval-pulls-similar-but-unrelated-past-incident-as-resolution-precedent	by-use-case/devops/goals/incident-response/failures/embedding-retrieval-pulls-similar-but-unrelated-past-incident-as-resolution-precedent.md
+pattern	embedding-retrieval-pulls-wrong-analog-suppliers-risk-profile-by-name-similarity	by-use-case/supply-chain/goals/supplier-risk/failures/embedding-retrieval-pulls-wrong-analog-suppliers-risk-profile-by-name-similarity.md
+pattern	embedding-retrieval-pulls-wrong-clause-version-from-template-library	by-use-case/legal-contracts/goals/contract-drafting/failures/embedding-retrieval-pulls-wrong-clause-version-from-template-library.md
+pattern	embedding-retrieval-pulls-wrong-contract-clause-by-lexical-similarity-across-boilerplate-agreements	by-use-case/sales-crm/goals/deal-management/failures/embedding-retrieval-pulls-wrong-contract-clause-by-lexical-similarity-across-boilerplate-agreements.md
+pattern	embedding-retrieval-pulls-wrong-jurisdiction-benefits-policy-during-onboarding	by-use-case/hr-recruiting/goals/onboarding/failures/embedding-retrieval-pulls-wrong-jurisdiction-benefits-policy-during-onboarding.md
+pattern	embedding-retrieval-pulls-wrong-substitute-sku-as-safety-stock-variance-proxy	by-use-case/supply-chain/goals/inventory-optimization/failures/embedding-retrieval-pulls-wrong-substitute-sku-as-safety-stock-variance-proxy.md
+pattern	embedding-retrieval-selects-similar-but-wrong-canned-response	by-use-case/customer-service/goals/conversation-resolution/failures/embedding-retrieval-selects-similar-but-wrong-canned-response.md
+pattern	embedding-retrieval-selects-wrong-escalation-playbook-by-keyword-similarity	by-use-case/support-services/goals/sentiment-escalation/failures/embedding-retrieval-selects-wrong-escalation-playbook-by-keyword-similarity.md
+pattern	embedding-retrieval-selects-wrong-historical-benchmark-order-for-tca-comparison	by-use-case/financial-services/goals/trading-execution/failures/embedding-retrieval-selects-wrong-historical-benchmark-order-for-tca-comparison.md
+pattern	embedding-retrieval-selects-wrong-historical-lane-as-transit-time-benchmark	by-use-case/supply-chain/goals/logistics-routing/failures/embedding-retrieval-selects-wrong-historical-lane-as-transit-time-benchmark.md
+pattern	embedding-retrieval-selects-wrong-reference-instrument-for-freshness-benchmark	by-use-case/financial-services/goals/market-data-freshness/failures/embedding-retrieval-selects-wrong-reference-instrument-for-freshness-benchmark.md
+pattern	embedding-retrieval-surfaces-deprecated-help-article-in-deflection-suggestion	by-use-case/support-services/goals/self-service-deflection/failures/embedding-retrieval-surfaces-deprecated-help-article-in-deflection-suggestion.md
+pattern	embedding-retrieval-surfaces-similarly-named-unrelated-subsidiary-in-corporate-structure-chart	by-use-case/legal-contracts/goals/due-diligence/failures/embedding-retrieval-surfaces-similarly-named-unrelated-subsidiary-in-corporate-structure-chart.md
+pattern	embedding-retrieval-treats-mismatched-prior-claim-as-confirming-precedent	by-use-case/content-marketing/goals/quality-control/failures/embedding-retrieval-treats-mismatched-prior-claim-as-confirming-precedent.md
+pattern	embedding-retrieval-wrong-endorsement-version-applied	by-use-case/insurance/goals/claim-processing/failures/embedding-retrieval-wrong-endorsement-version-applied.md
+pattern	embedding-similarity-retrieves-superficially-similar-deal-as-precedent	by-use-case/sales-crm/goals/lead-scoring/failures/embedding-similarity-retrieves-superficially-similar-deal-as-precedent.md
+pattern	emergent-behavior	by-capability/multi-agent-systems/goals/coordination/failures/emergent-behavior.md
+pattern	emotional-expression-overuse	by-capability/speech-and-audio/goals/conversation-flow/failures/emotional-expression-overuse.md
+pattern	emotional-tone-mismatch	by-capability/speech-and-audio/goals/voice-synthesis/failures/emotional-tone-mismatch.md
+pattern	employment-fabrication	by-use-case/mortgage-documents/goals/fraud-detection/failures/employment-fabrication.md
+pattern	employment-history-gaps	by-use-case/mortgage-documents/goals/data-extraction/failures/employment-history-gaps.md
+pattern	employment-timeline-conflicts	by-use-case/mortgage-documents/goals/cross-document-validation/failures/employment-timeline-conflicts.md
+pattern	empty-allergy-query-result-documented-as-confirmed-no-known-allergies	by-use-case/healthcare/goals/clinical-documentation/failures/empty-allergy-query-result-documented-as-confirmed-no-known-allergies.md
+pattern	end-of-turn-detection	by-capability/speech-and-audio/goals/conversation-flow/failures/end-of-turn-detection.md
+pattern	entity-confusion	cross-cutting/accuracy/goals/output-accuracy/failures/entity-confusion.md
+pattern	erp-integration	by-capability/document-processing/goals/production-reliability/failures/erp-integration.md
+pattern	error-code-semantic-drift	cross-cutting/operations/goals/tool-error-handling/failures/error-code-semantic-drift.md
+pattern	error-information-leakage	cross-cutting/operations/goals/tool-reliability/failures/error-information-leakage.md
+pattern	error-recovery-errors	by-capability/document-processing/goals/agentic-orchestration/failures/error-recovery-errors.md
+pattern	error-response-format-inconsistency	cross-cutting/operations/goals/tool-error-handling/failures/error-response-format-inconsistency.md
+pattern	escalation-not-triggered	cross-cutting/operations/goals/human-oversight-reliability/failures/escalation-not-triggered.md
+pattern	escalation-too-early	by-use-case/customer-service/goals/conversation-resolution/failures/escalation-too-early.md
+pattern	esg-data-greenwashing-blindness	by-use-case/financial-services/goals/portfolio-recommendation-accuracy/failures/esg-data-greenwashing-blindness.md
+pattern	eval-data-mismatch	cross-cutting/accuracy/goals/verification/failures/eval-data-mismatch.md
+pattern	evaluation-data-leakage	cross-cutting/accuracy/goals/evaluation-reliability/failures/evaluation-data-leakage.md
+pattern	evaluation-metric-mismatch	cross-cutting/accuracy/goals/evaluation-reliability/failures/evaluation-metric-mismatch.md
+pattern	excessive-agency	cross-cutting/security/goals/safety-security/failures/excessive-agency.md
+pattern	execution-time-quota	cross-cutting/operations/goals/tool-allocation-limits/failures/execution-time-quota.md
+pattern	expensive-model-cascade	cross-cutting/operations/goals/cost-efficiency/failures/expensive-model-cascade.md
+pattern	external-side-effect-surprise	by-capability/external-actions/goals/action-execution/failures/external-side-effect-surprise.md
+pattern	external-system-failures	cross-cutting/operations/goals/tool-reliability/failures/external-system-failures.md
+pattern	extraction-hallucination	by-use-case/mortgage-documents/goals/ai-model-reliability/failures/extraction-hallucination.md
+pattern	extrapolation	cross-cutting/accuracy/goals/output-accuracy/failures/extrapolation.md
+pattern	fabricated-citations	by-capability/knowledge-retrieval/goals/citation-accuracy/failures/fabricated-citations.md
+pattern	fabricated-content	by-capability/document-processing/goals/multimodal-reliability/failures/fabricated-content.md
+pattern	fabricated-disclosure-figure-fills-a-retrieval-gap-in-fund-comparison	by-use-case/financial-services/goals/portfolio-recommendation-accuracy/failures/fabricated-disclosure-figure-fills-a-retrieval-gap-in-fund-comparison.md
+pattern	fabricated-usage-decline-justification-when-analytics-tool-returns-empty	by-use-case/customer-service/goals/proactive-retention-outreach/failures/fabricated-usage-decline-justification-when-analytics-tool-returns-empty.md
+pattern	fact-check-skipped-on-statistical-claims	by-use-case/content-marketing/goals/quality-control/failures/fact-check-skipped-on-statistical-claims.md
+pattern	fact-context-loss	by-capability/knowledge-retrieval/goals/knowledge-freshness/failures/fact-context-loss.md
+pattern	fact-generalization-error	by-capability/knowledge-retrieval/goals/knowledge-freshness/failures/fact-generalization-error.md
+pattern	fact-inversion	by-capability/knowledge-retrieval/goals/knowledge-freshness/failures/fact-inversion.md
+pattern	fact-negation-confusion	by-capability/knowledge-retrieval/goals/knowledge-freshness/failures/fact-negation-confusion.md
+pattern	fact-partial-truth	by-capability/knowledge-retrieval/goals/knowledge-freshness/failures/fact-partial-truth.md
+pattern	fact-probabilistic-mismatch	by-capability/knowledge-retrieval/goals/knowledge-freshness/failures/fact-probabilistic-mismatch.md
+pattern	fact-source-confusion	by-capability/knowledge-retrieval/goals/knowledge-freshness/failures/fact-source-confusion.md
+pattern	fact-timestamp-error	by-capability/knowledge-retrieval/goals/knowledge-freshness/failures/fact-timestamp-error.md
+pattern	factor-crowding-blindness	by-use-case/financial-services/goals/portfolio-recommendation-accuracy/failures/factor-crowding-blindness.md
+pattern	failover-correctness-failure	cross-cutting/operations/goals/fault-tolerance/failures/failover-correctness-failure.md
+pattern	failover-data-loss	cross-cutting/operations/goals/fault-tolerance/failures/failover-data-loss.md
+pattern	failover-delay-too-long	cross-cutting/operations/goals/fault-tolerance/failures/failover-delay-too-long.md
+pattern	failover-state-corruption	cross-cutting/operations/goals/fault-tolerance/failures/failover-state-corruption.md
+pattern	fair-lending-red-flags	by-use-case/mortgage-documents/goals/compliance-validation/failures/fair-lending-red-flags.md
+pattern	false-completion-claim	by-use-case/customer-service/goals/conversation-resolution/failures/false-completion-claim.md
+pattern	false-premise-acceptance	by-capability/knowledge-retrieval/goals/query-understanding/failures/false-premise-acceptance.md
+pattern	faulty-decomposition	cross-cutting/accuracy/goals/reasoning-quality/failures/faulty-decomposition.md
+pattern	feature-entitlement-limit	cross-cutting/operations/goals/tool-special-constraints/failures/feature-entitlement-limit.md
+pattern	feature-flag-disabled	cross-cutting/operations/goals/tool-capability-limits/failures/feature-flag-disabled.md
+pattern	feature-flag-toggle-lag	cross-cutting/operations/goals/version-management/failures/feature-flag-toggle-lag.md
+pattern	feedback-ambiguity	cross-cutting/learning/goals/safe-learning/failures/feedback-ambiguity.md
+pattern	feedback-not-incorporated	cross-cutting/operations/goals/human-oversight-reliability/failures/feedback-not-incorporated.md
+pattern	feedback-sparsity	cross-cutting/learning/goals/safe-learning/failures/feedback-sparsity.md
+pattern	field-length-limit	cross-cutting/operations/goals/tool-operational-limits/failures/field-length-limit.md
+pattern	field-level-access-not-restricted	cross-cutting/operations/goals/tool-access-scope-limits/failures/field-level-access-not-restricted.md
+pattern	fill-confirmation-status-trusted-without-diffing-against-submitted-order-intent	by-use-case/financial-services/goals/trading-execution/failures/fill-confirmation-status-trusted-without-diffing-against-submitted-order-intent.md
+pattern	filler-word-mishandling	by-capability/speech-and-audio/goals/speech-recognition/failures/filler-word-mishandling.md
+pattern	financial-distress-signal-blindness	by-use-case/supply-chain/goals/supplier-risk/failures/financial-distress-signal-blindness.md
+pattern	fine-tuning-data-poisoning	cross-cutting/security/goals/security-autonomy/failures/fine-tuning-data-poisoning.md
+pattern	follow-up-context-loss	by-capability/knowledge-retrieval/goals/query-understanding/failures/follow-up-context-loss.md
+pattern	font-handling	by-capability/document-processing/goals/accurate-text-extraction/failures/font-handling.md
+pattern	font-substitution-detection	by-use-case/mortgage-documents/goals/document-integrity/failures/font-substitution-detection.md
+pattern	footnotes	by-capability/document-processing/goals/layout-preservation/failures/footnotes.md
+pattern	format-diversity	by-capability/document-processing/goals/production-reliability/failures/format-diversity.md
+pattern	fraudulent-document-detection	by-use-case/mortgage-documents/goals/document-verification/failures/fraudulent-document-detection.md
+pattern	full-reprocessing-on-incremental-change	cross-cutting/operations/goals/cost-optimization/failures/full-reprocessing-on-incremental-change.md
+pattern	fuzzy-field-mapping-after-venue-api-schema-change-misroutes-order-size	by-use-case/financial-services/goals/trading-execution/failures/fuzzy-field-mapping-after-venue-api-schema-change-misroutes-order-size.md
+pattern	geographic-data-access-restriction	cross-cutting/operations/goals/tool-access-scope-limits/failures/geographic-data-access-restriction.md
+pattern	geopolitical-risk-blindness	by-use-case/supply-chain/goals/supplier-risk/failures/geopolitical-risk-blindness.md
+pattern	goal-drift-across-turns	by-capability/task-planning/goals/goal-understanding/failures/goal-drift-across-turns.md
+pattern	goal-drift-and-task-mutation	cross-cutting/governance/goals/agent-oversight/failures/goal-drift-and-task-mutation.md
+pattern	goal-drift	cross-cutting/accuracy/goals/reasoning-quality/failures/goal-drift.md
+pattern	goal-expansion-scope-creep	by-capability/task-planning/goals/goal-understanding/failures/goal-expansion-scope-creep.md
+pattern	golden-data-coverage-gaps	cross-cutting/accuracy/goals/evaluation-reliability/failures/golden-data-coverage-gaps.md
+pattern	golden-data-staleness	cross-cutting/accuracy/goals/evaluation-reliability/failures/golden-data-staleness.md
+pattern	graceless-call-ending	by-capability/speech-and-audio/goals/conversation-flow/failures/graceless-call-ending.md
+pattern	granular-crud-permission-not-enforced	cross-cutting/security/goals/tool-authorization-limits/failures/granular-crud-permission-not-enforced.md
+pattern	granularity-mismatch	by-capability/knowledge-retrieval/goals/citation-accuracy/failures/granularity-mismatch.md
+pattern	guideline-conflict-resolution-failure	by-use-case/healthcare/goals/treatment-planning/failures/guideline-conflict-resolution-failure.md
+pattern	hallucinated-completion-when-upstream-dependency-fails	cross-cutting/accuracy/goals/output-accuracy/failures/hallucinated-completion-when-upstream-dependency-fails.md
+pattern	hallucinated-security-identifier-fills-missing-reference-data-gap	by-use-case/financial-services/goals/data-quality/failures/hallucinated-security-identifier-fills-missing-reference-data-gap.md
+pattern	hallucination-attribute	cross-cutting/accuracy/goals/output-accuracy/failures/hallucination-attribute.md
+pattern	hallucination-base-mechanism	cross-cutting/accuracy/goals/output-accuracy/failures/hallucination-base-mechanism.md
+pattern	hallucination-confidence-miscalibration	cross-cutting/accuracy/goals/output-accuracy/failures/hallucination-confidence-miscalibration.md
+pattern	hallucination-despite-context	by-capability/knowledge-retrieval/goals/answer-synthesis/failures/hallucination-despite-context.md
+pattern	hallucination-object	cross-cutting/accuracy/goals/output-accuracy/failures/hallucination-object.md
+pattern	handoff-accountability-loss	cross-cutting/operations/goals/agent-handoffs-delegation/failures/handoff-accountability-loss.md
+pattern	handoff-approval-skipped	cross-cutting/operations/goals/agent-handoffs-delegation/failures/handoff-approval-skipped.md
+pattern	handoff-circular-dependency	cross-cutting/operations/goals/agent-handoffs-delegation/failures/handoff-circular-dependency.md
+pattern	handoff-context-incompleteness	cross-cutting/operations/goals/agent-handoffs-delegation/failures/handoff-context-incompleteness.md
+pattern	handoff-idempotency-violation	cross-cutting/operations/goals/agent-handoffs-delegation/failures/handoff-idempotency-violation.md
+pattern	handoff-permission-downgrade	cross-cutting/operations/goals/agent-handoffs-delegation/failures/handoff-permission-downgrade.md
+pattern	handoff-protocol-version-mismatch	cross-cutting/operations/goals/agent-handoffs-delegation/failures/handoff-protocol-version-mismatch.md
+pattern	handoff-rollback-failure	cross-cutting/operations/goals/agent-handoffs-delegation/failures/handoff-rollback-failure.md
+pattern	handoff-schema-loses-upstream-confidence-signal	by-capability/multi-agent-systems/goals/handoff-reliability/failures/handoff-schema-loses-upstream-confidence-signal.md
+pattern	handoff-state-loss	cross-cutting/operations/goals/agent-handoffs-delegation/failures/handoff-state-loss.md
+pattern	handoff-timing-mismatch	cross-cutting/operations/goals/agent-handoffs-delegation/failures/handoff-timing-mismatch.md
+pattern	handwritten-text	by-capability/document-processing/goals/accurate-text-extraction/failures/handwritten-text.md
+pattern	happy-path-only-evals	cross-cutting/accuracy/goals/verification/failures/happy-path-only-evals.md
+pattern	headers-footers	by-capability/document-processing/goals/layout-preservation/failures/headers-footers.md
+pattern	health-check-flapping	cross-cutting/operations/goals/version-management/failures/health-check-flapping.md
+pattern	herbal-supplement-interaction-blindness	by-use-case/healthcare/goals/adverse-drug-interaction/failures/herbal-supplement-interaction-blindness.md
+pattern	hesitation-mishandling	by-capability/speech-and-audio/goals/conversation-flow/failures/hesitation-mishandling.md
+pattern	hidden-requirement-miss	by-capability/task-planning/goals/goal-understanding/failures/hidden-requirement-miss.md
+pattern	hidden-tool-costs-not-visible	cross-cutting/operations/goals/tool-financial-limits/failures/hidden-tool-costs-not-visible.md
+pattern	high-effort-ticket-misrouting	by-use-case/support-services/goals/ticket-routing/failures/high-effort-ticket-misrouting.md
+pattern	hipaa-deidentification-failure	by-use-case/healthcare/goals/compliance-liability/failures/hipaa-deidentification-failure.md
+pattern	hmda-data-extraction	by-use-case/mortgage-documents/goals/compliance-validation/failures/hmda-data-extraction.md
+pattern	homophones-confusion	by-capability/speech-and-audio/goals/speech-recognition/failures/homophones-confusion.md
+pattern	human-loop-bypass	cross-cutting/security/goals/safety-security/failures/human-loop-bypass.md
+pattern	human-unavailability	cross-cutting/operations/goals/human-oversight-reliability/failures/human-unavailability.md
+pattern	hyperscaler-cold-start-lag	by-use-case/devops/goals/capacity-planning/failures/hyperscaler-cold-start-lag.md
+pattern	idempotency-failure	cross-cutting/operations/goals/tool-invocation/failures/idempotency-failure.md
+pattern	identity-manipulation	by-capability/speech-and-audio/goals/conversation-flow/failures/identity-manipulation.md
+pattern	image-contradiction	by-capability/vision-and-images/goals/multi-image-understanding/failures/image-contradiction.md
+pattern	image-forensics-failures	by-use-case/mortgage-documents/goals/document-integrity/failures/image-forensics-failures.md
+pattern	imaging-report-discrepancy-blindness	by-use-case/healthcare/goals/diagnosis-safety/failures/imaging-report-discrepancy-blindness.md
+pattern	implicit-requirements	by-capability/knowledge-retrieval/goals/query-understanding/failures/implicit-requirements.md
+pattern	income-calculation-errors	by-use-case/mortgage-documents/goals/data-extraction/failures/income-calculation-errors.md
+pattern	income-triangulation-failures	by-use-case/mortgage-documents/goals/cross-document-validation/failures/income-triangulation-failures.md
+pattern	incomplete-action-logging	cross-cutting/operations/goals/traceability/failures/incomplete-action-logging.md
+pattern	inconsistent-answers	by-use-case/customer-service/goals/conversation-resolution/failures/inconsistent-answers.md
+pattern	incorrect-memory-recall	cross-cutting/operations/goals/memory-safety/failures/incorrect-memory-recall.md
+pattern	incremental-capture-failures	by-capability/speech-and-audio/goals/conversation-flow/failures/incremental-capture-failures.md
+pattern	indemnification-cap-blindness	by-use-case/legal-contracts/goals/risk-detection/failures/indemnification-cap-blindness.md
+pattern	index-staleness	by-capability/knowledge-retrieval/goals/retrieval-quality/failures/index-staleness.md
+pattern	indirect-prompt-injection	cross-cutting/security/goals/security-autonomy/failures/indirect-prompt-injection.md
+pattern	inference-caching-miss	cross-cutting/operations/goals/inference-cost-management/failures/inference-caching-miss.md
+pattern	inference-latency-variance	cross-cutting/operations/goals/real-time-performance/failures/inference-latency-variance.md
+pattern	inferred-preference-silently-overrides-explicit-client-constraint	by-use-case/financial-services/goals/portfolio-recommendation-accuracy/failures/inferred-preference-silently-overrides-explicit-client-constraint.md
+pattern	infinite-debate	by-capability/multi-agent-systems/goals/coordination/failures/infinite-debate.md
+pattern	infinite-loops	cross-cutting/operations/goals/cost-efficiency/failures/infinite-loops.md
+pattern	informed-consent-documentation-gap	by-use-case/healthcare/goals/compliance-liability/failures/informed-consent-documentation-gap.md
+pattern	inherited-errors	cross-cutting/accuracy/goals/output-accuracy/failures/inherited-errors.md
+pattern	input-default-value-assumption	cross-cutting/operations/goals/input-output-handling/failures/input-default-value-assumption.md
+pattern	input-encoding-mismatch	cross-cutting/operations/goals/input-output-handling/failures/input-encoding-mismatch.md
+pattern	input-locale-mismatch	cross-cutting/operations/goals/input-output-handling/failures/input-locale-mismatch.md
+pattern	input-null-bytes-injection	cross-cutting/operations/goals/input-output-handling/failures/input-null-bytes-injection.md
+pattern	input-quality-gap	by-capability/document-processing/goals/multimodal-reliability/failures/input-quality-gap.md
+pattern	input-recursion-limit	cross-cutting/operations/goals/input-output-handling/failures/input-recursion-limit.md
+pattern	input-schema-evolution	cross-cutting/operations/goals/input-output-handling/failures/input-schema-evolution.md
+pattern	input-size-not-validated	cross-cutting/operations/goals/input-output-handling/failures/input-size-not-validated.md
+pattern	input-special-character-handling	cross-cutting/operations/goals/input-output-handling/failures/input-special-character-handling.md
+pattern	input-timezone-ambiguity	cross-cutting/operations/goals/input-output-handling/failures/input-timezone-ambiguity.md
+pattern	input-validation-bypass	cross-cutting/operations/goals/input-output-handling/failures/input-validation-bypass.md
+pattern	insecure-output-handling	cross-cutting/security/goals/security-autonomy/failures/insecure-output-handling.md
+pattern	instruction-drift	cross-cutting/accuracy/goals/context-management/failures/instruction-drift.md
+pattern	instruction-following	cross-cutting/accuracy/goals/reasoning-quality/failures/instruction-following.md
+pattern	insufficient-isolation	cross-cutting/security/goals/safety-security/failures/insufficient-isolation.md
+pattern	insufficient-rollback	by-capability/external-actions/goals/action-execution/failures/insufficient-rollback.md
+pattern	integration-api-contract-violation	cross-cutting/operations/goals/dependency-management/failures/integration-api-contract-violation.md
+pattern	integration-cascading-failure	cross-cutting/operations/goals/dependency-management/failures/integration-cascading-failure.md
+pattern	integration-data-consistency	cross-cutting/operations/goals/dependency-management/failures/integration-data-consistency.md
+pattern	integration-error-handling-mismatch	cross-cutting/operations/goals/dependency-management/failures/integration-error-handling-mismatch.md
+pattern	integration-impedance-mismatch	cross-cutting/operations/goals/dependency-management/failures/integration-impedance-mismatch.md
+pattern	integration-order-dependency	cross-cutting/operations/goals/dependency-management/failures/integration-order-dependency.md
+pattern	integration-rate-limit-across-systems	cross-cutting/operations/goals/dependency-management/failures/integration-rate-limit-across-systems.md
+pattern	integration-timeout-mismatch	cross-cutting/operations/goals/dependency-management/failures/integration-timeout-mismatch.md
+pattern	intent-boundary-confusion	by-capability/speech-and-audio/goals/conversation-flow/failures/intent-boundary-confusion.md
+pattern	intent-misclassification	by-capability/knowledge-retrieval/goals/query-understanding/failures/intent-misclassification.md
+pattern	inter-agent-latency-imbalance	cross-cutting/operations/goals/multi-agent-orchestration/failures/inter-agent-latency-imbalance.md
+pattern	intermediate-result-corruption	cross-cutting/operations/goals/state-tracking/failures/intermediate-result-corruption.md
+pattern	internal-process-leakage	by-capability/speech-and-audio/goals/conversation-flow/failures/internal-process-leakage.md
+pattern	interruption-mishandling	by-capability/speech-and-audio/goals/conversation-flow/failures/interruption-mishandling.md
+pattern	interview-transcript-sentiment-overweighted-vs-content	by-use-case/hr-recruiting/goals/candidate-screening/failures/interview-transcript-sentiment-overweighted-vs-content.md
+pattern	ip-assignment-gap-in-contractor-agreements	by-use-case/legal-contracts/goals/ip-rights/failures/ip-assignment-gap-in-contractor-agreements.md
+pattern	irreversible-action-without-confirmation	by-capability/external-actions/goals/action-execution/failures/irreversible-action-without-confirmation.md
+pattern	join-depth-limit	cross-cutting/operations/goals/tool-operational-limits/failures/join-depth-limit.md
+pattern	jurisdictional-mismatch	by-capability/knowledge-retrieval/goals/retrieval-quality/failures/jurisdictional-mismatch.md
+pattern	knowledge-base-poisoning	by-capability/knowledge-retrieval/goals/retrieval-quality/failures/knowledge-base-poisoning.md
+pattern	knowledge-contradiction-unresolved	by-capability/knowledge-retrieval/goals/knowledge-freshness/failures/knowledge-contradiction-unresolved.md
+pattern	knowledge-expiration-not-enforced	by-capability/knowledge-retrieval/goals/knowledge-freshness/failures/knowledge-expiration-not-enforced.md
+pattern	knowledge-scope-assumption-wrong	by-capability/knowledge-retrieval/goals/knowledge-freshness/failures/knowledge-scope-assumption-wrong.md
+pattern	knowledge-source-reliability-unknown	by-capability/knowledge-retrieval/goals/knowledge-freshness/failures/knowledge-source-reliability-unknown.md
+pattern	knowledge-temporal-context-lost	by-capability/knowledge-retrieval/goals/knowledge-freshness/failures/knowledge-temporal-context-lost.md
+pattern	knowledge-update-lag	by-capability/knowledge-retrieval/goals/knowledge-freshness/failures/knowledge-update-lag.md
+pattern	knowledge-version-mismatch	by-capability/knowledge-retrieval/goals/knowledge-freshness/failures/knowledge-version-mismatch.md
+pattern	knowledgebase-staleness	by-use-case/support-services/goals/issue-resolution/failures/knowledgebase-staleness.md
+pattern	kyc-refresh-staleness	by-use-case/financial-services/goals/regulatory-compliance/failures/kyc-refresh-staleness.md
+pattern	lab-value-reference-range-misapplication	by-use-case/healthcare/goals/diagnosis-safety/failures/lab-value-reference-range-misapplication.md
+pattern	label-noise-and-errors	cross-cutting/accuracy/goals/evaluation-reliability/failures/label-noise-and-errors.md
+pattern	language-barrier-failures	by-capability/speech-and-audio/goals/conversation-flow/failures/language-barrier-failures.md
+pattern	language-mismatch-misroute	by-use-case/support-services/goals/ticket-routing/failures/language-mismatch-misroute.md
+pattern	latency-cost-tradeoff	cross-cutting/operations/goals/inference-cost-management/failures/latency-cost-tradeoff.md
+pattern	latency-sla-violation	cross-cutting/operations/goals/tool-sla-quality-limits/failures/latency-sla-violation.md
+pattern	layout-signal-loss	by-capability/document-processing/goals/production-reliability/failures/layout-signal-loss.md
+pattern	leader-election-failure	cross-cutting/operations/goals/multi-agent-orchestration/failures/leader-election-failure.md
+pattern	learning-from-bad-feedback	cross-cutting/learning/goals/safe-learning/failures/learning-from-bad-feedback.md
+pattern	leverage-risk-underestimation	by-use-case/financial-services/goals/portfolio-recommendation-accuracy/failures/leverage-risk-underestimation.md
+pattern	liability-clause-blindness	by-use-case/legal-contracts/goals/risk-detection/failures/liability-clause-blindness.md
+pattern	license-expiration-not-checked	cross-cutting/operations/goals/tool-special-constraints/failures/license-expiration-not-checked.md
+pattern	lighting-color-shift	by-capability/vision-and-images/goals/adversarial-robustness/failures/lighting-color-shift.md
+pattern	liquidity-mispricing	by-use-case/financial-services/goals/portfolio-recommendation-accuracy/failures/liquidity-mispricing.md
+pattern	livelock-in-multi-agent	cross-cutting/operations/goals/multi-agent-orchestration/failures/livelock-in-multi-agent.md
+pattern	llm-paraphrase-normalization-drops-legal-entity-suffix-during-canonicalization	by-use-case/financial-services/goals/data-quality/failures/llm-paraphrase-normalization-drops-legal-entity-suffix-during-canonicalization.md
+pattern	log-sampling-blind-spot	by-use-case/devops/goals/monitoring/failures/log-sampling-blind-spot.md
+pattern	long-session-context-loss-violates-earlier-constraints	cross-cutting/accuracy/goals/context-management/failures/long-session-context-loss-violates-earlier-constraints.md
+pattern	look-ahead-bias	by-use-case/financial-services/goals/portfolio-recommendation-accuracy/failures/look-ahead-bias.md
+pattern	lost-decision-context	cross-cutting/operations/goals/traceability/failures/lost-decision-context.md
+pattern	lost-failure-signal	cross-cutting/operations/goals/state-tracking/failures/lost-failure-signal.md
+pattern	lost-state	cross-cutting/accuracy/goals/context-management/failures/lost-state.md
+pattern	low-confidence-mishandling	by-capability/speech-and-audio/goals/speech-recognition/failures/low-confidence-mishandling.md
+pattern	low-precision-retrieval	by-capability/knowledge-retrieval/goals/retrieval/failures/low-precision-retrieval.md
+pattern	low-recall-retrieval	by-capability/knowledge-retrieval/goals/retrieval/failures/low-recall-retrieval.md
+pattern	low-resolution-failure	by-capability/vision-and-images/goals/adversarial-robustness/failures/low-resolution-failure.md
+pattern	low-resolution	by-capability/document-processing/goals/accurate-text-extraction/failures/low-resolution.md
+pattern	low-retrieval-confidence-presented-as-confident-answer-without-escalation-disclaimer	by-use-case/support-services/goals/self-service-deflection/failures/low-retrieval-confidence-presented-as-confident-answer-without-escalation-disclaimer.md
+pattern	macro-response-misapplication	by-use-case/support-services/goals/issue-resolution/failures/macro-response-misapplication.md
+pattern	malicious-file-handling	cross-cutting/security/goals/security-autonomy/failures/malicious-file-handling.md
+pattern	malicious-tool-injection	cross-cutting/security/goals/runtime-security/failures/malicious-tool-injection.md
+pattern	market-impact-blindness	by-use-case/financial-services/goals/trading-execution/failures/market-impact-blindness.md
+pattern	masked-field-unmasking	cross-cutting/operations/goals/tool-access-scope-limits/failures/masked-field-unmasking.md
+pattern	mcp-protocol-exploitation	cross-cutting/security/goals/runtime-security/failures/mcp-protocol-exploitation.md
+pattern	memory-coherence-breakdown	cross-cutting/operations/goals/memory-management/failures/memory-coherence-breakdown.md
+pattern	memory-conflict	cross-cutting/operations/goals/memory-safety/failures/memory-conflict.md
+pattern	memory-corruption-detection-failure	cross-cutting/operations/goals/memory-management/failures/memory-corruption-detection-failure.md
+pattern	memory-corruption	cross-cutting/accuracy/goals/context-management/failures/memory-corruption.md
+pattern	memory-deletion-failure	cross-cutting/operations/goals/memory-safety/failures/memory-deletion-failure.md
+pattern	memory-fragmentation-allocation-failure	cross-cutting/operations/goals/inference-cost-management/failures/memory-fragmentation-allocation-failure.md
+pattern	memory-fragmentation	cross-cutting/operations/goals/memory-management/failures/memory-fragmentation.md
+pattern	memory-inconsistency-between-agents	cross-cutting/operations/goals/memory-management/failures/memory-inconsistency-between-agents.md
+pattern	memory-interleaving-corruption	cross-cutting/operations/goals/memory-management/failures/memory-interleaving-corruption.md
+pattern	memory-loss-on-reboot	cross-cutting/operations/goals/memory-management/failures/memory-loss-on-reboot.md
+pattern	memory-not-updated-stale-retrieval	cross-cutting/operations/goals/memory-management/failures/memory-not-updated-stale-retrieval.md
+pattern	memory-poison-defense-gap-existing-tools-insufficient	cross-cutting/security/goals/agent-trust/failures/memory-poison-defense-gap-existing-tools-insufficient.md
+pattern	memory-poisoning-attack-95-percent-success-rate	cross-cutting/security/goals/agent-trust/failures/memory-poisoning-attack-95-percent-success-rate.md
+pattern	memory-poisoning	cross-cutting/operations/goals/memory-safety/failures/memory-poisoning.md
+pattern	memory-priority-inversion	cross-cutting/operations/goals/memory-management/failures/memory-priority-inversion.md
+pattern	memory-privacy-boundary-violation	cross-cutting/operations/goals/memory-management/failures/memory-privacy-boundary-violation.md
+pattern	memory-privilege-leak	cross-cutting/operations/goals/memory-safety/failures/memory-privilege-leak.md
+pattern	memory-quota-per-operation	cross-cutting/operations/goals/tool-allocation-limits/failures/memory-quota-per-operation.md
+pattern	memory-retrieval-failures	cross-cutting/operations/goals/memory-management/failures/memory-retrieval-failures.md
+pattern	memory-summarization-lossy	cross-cutting/operations/goals/memory-management/failures/memory-summarization-lossy.md
+pattern	merged-cells	by-capability/document-processing/goals/layout-preservation/failures/merged-cells.md
+pattern	message-misinterpretation	by-capability/multi-agent-systems/goals/coordination/failures/message-misinterpretation.md
+pattern	metadata-filter-error	by-capability/knowledge-retrieval/goals/retrieval/failures/metadata-filter-error.md
+pattern	metadata-filtering	by-capability/knowledge-retrieval/goals/retrieval-quality/failures/metadata-filtering.md
+pattern	metadata-timestamp-anomalies	by-use-case/mortgage-documents/goals/document-integrity/failures/metadata-timestamp-anomalies.md
+pattern	metric-cardinality-explosion	by-use-case/devops/goals/monitoring/failures/metric-cardinality-explosion.md
+pattern	metric-gaming	cross-cutting/accuracy/goals/verification/failures/metric-gaming.md
+pattern	metric-only-learning	cross-cutting/learning/goals/safe-learning/failures/metric-only-learning.md
+pattern	mid-conversation-reclassification-reroutes-actively-owned-ticket	by-use-case/support-services/goals/ticket-routing/failures/mid-conversation-reclassification-reroutes-actively-owned-ticket.md
+pattern	misgrounded-citation	by-capability/knowledge-retrieval/goals/citation-accuracy/failures/misgrounded-citation.md
+pattern	missing-abstention-affordance	cross-cutting/accuracy/goals/output-optimization/failures/missing-abstention-affordance.md
+pattern	missing-agent-eval-framework	cross-cutting/operations/goals/established-framework-adoption/failures/missing-agent-eval-framework.md
+pattern	missing-approval-gates	cross-cutting/operations/goals/human-oversight-reliability/failures/missing-approval-gates.md
+pattern	missing-audit-trail	cross-cutting/operations/goals/traceability/failures/missing-audit-trail.md
+pattern	missing-citations	by-capability/knowledge-retrieval/goals/citation-accuracy/failures/missing-citations.md
+pattern	missing-cost-observability-framework	cross-cutting/operations/goals/established-framework-adoption/failures/missing-cost-observability-framework.md
+pattern	missing-data-handling	by-use-case/financial-services/goals/data-quality/failures/missing-data-handling.md
+pattern	missing-end-to-end-tracing	cross-cutting/operations/goals/observability-monitoring/failures/missing-end-to-end-tracing.md
+pattern	missing-graceful-degradation	cross-cutting/operations/goals/reliability-and-resilience/failures/missing-graceful-degradation.md
+pattern	missing-memory-recall	cross-cutting/operations/goals/memory-safety/failures/missing-memory-recall.md
+pattern	missing-metadata	by-capability/document-processing/goals/production-reliability/failures/missing-metadata.md
+pattern	missing-parameters	cross-cutting/operations/goals/tool-reliability/failures/missing-parameters.md
+pattern	missing-pii-detection-framework	cross-cutting/operations/goals/established-framework-adoption/failures/missing-pii-detection-framework.md
+pattern	missing-prerequisite-step	by-capability/task-planning/goals/planning/failures/missing-prerequisite-step.md
+pattern	missing-prompt-injection-guardrails-framework	cross-cutting/operations/goals/established-framework-adoption/failures/missing-prompt-injection-guardrails-framework.md
+pattern	missing-rag-framework-adoption	cross-cutting/operations/goals/established-framework-adoption/failures/missing-rag-framework-adoption.md
+pattern	missing-required-parameter	cross-cutting/operations/goals/tool-invocation/failures/missing-required-parameter.md
+pattern	missing-secrets-detection-framework	cross-cutting/operations/goals/established-framework-adoption/failures/missing-secrets-detection-framework.md
+pattern	missing-self-reflection-for-high-stakes-output	cross-cutting/accuracy/goals/output-optimization/failures/missing-self-reflection-for-high-stakes-output.md
+pattern	missing-substantiation-for-comparative-claims	by-use-case/content-marketing/goals/compliance/failures/missing-substantiation-for-comparative-claims.md
+pattern	missing-task-specialization	cross-cutting/operations/goals/cost-optimization/failures/missing-task-specialization.md
+pattern	missing-timestamps	cross-cutting/operations/goals/traceability/failures/missing-timestamps.md
+pattern	model-ab-test-interference	by-capability/reasoning-and-thought/goals/model-updates-and-versioning/failures/model-ab-test-interference.md
+pattern	model-behavior-change-detection-failure	by-capability/reasoning-and-thought/goals/model-updates-and-versioning/failures/model-behavior-change-detection-failure.md
+pattern	model-capability-mismatch	by-capability/reasoning-and-thought/goals/model-selection-and-routing/failures/model-capability-mismatch.md
+pattern	model-capacity-limits	by-capability/reasoning-and-thought/goals/model-behavior-and-capabilities/failures/model-capacity-limits.md
+pattern	model-collapse	by-capability/vision-and-images/goals/generation-artifacts/failures/model-collapse.md
+pattern	model-compression-failure	cross-cutting/operations/goals/inference-cost-management/failures/model-compression-failure.md
+pattern	model-context-length-behavior-change	by-capability/reasoning-and-thought/goals/model-behavior-and-capabilities/failures/model-context-length-behavior-change.md
+pattern	model-denial-of-service	cross-cutting/security/goals/security-autonomy/failures/model-denial-of-service.md
+pattern	model-downgrade-silent-failure	by-capability/reasoning-and-thought/goals/model-selection-and-routing/failures/model-downgrade-silent-failure.md
+pattern	model-fairness-bias	by-capability/reasoning-and-thought/goals/model-behavior-and-capabilities/failures/model-fairness-bias.md
+pattern	model-instruction-following-decay	by-capability/reasoning-and-thought/goals/model-behavior-and-capabilities/failures/model-instruction-following-decay.md
+pattern	model-knowledge-cutoff	by-capability/reasoning-and-thought/goals/model-behavior-and-capabilities/failures/model-knowledge-cutoff.md
+pattern	model-load-balancing-failure	by-capability/reasoning-and-thought/goals/model-selection-and-routing/failures/model-load-balancing-failure.md
+pattern	model-output-format-instability	by-capability/reasoning-and-thought/goals/model-behavior-and-capabilities/failures/model-output-format-instability.md
+pattern	model-reasoning-inconsistency	by-capability/reasoning-and-thought/goals/model-behavior-and-capabilities/failures/model-reasoning-inconsistency.md
+pattern	model-refusal-inconsistency	by-capability/reasoning-and-thought/goals/model-behavior-and-capabilities/failures/model-refusal-inconsistency.md
+pattern	model-release-cycle-timing-mismatch	by-capability/reasoning-and-thought/goals/model-updates-and-versioning/failures/model-release-cycle-timing-mismatch.md
+pattern	model-selection-nondeterminism	by-capability/reasoning-and-thought/goals/model-selection-and-routing/failures/model-selection-nondeterminism.md
+pattern	model-selection-waste	cross-cutting/operations/goals/cost-efficiency/failures/model-selection-waste.md
+pattern	model-style-drift	by-capability/reasoning-and-thought/goals/model-behavior-and-capabilities/failures/model-style-drift.md
+pattern	model-switching-mid-session	by-capability/reasoning-and-thought/goals/model-selection-and-routing/failures/model-switching-mid-session.md
+pattern	model-uncertainty-unawareness	by-capability/reasoning-and-thought/goals/model-behavior-and-capabilities/failures/model-uncertainty-unawareness.md
+pattern	model-update-accuracy-regression	by-capability/reasoning-and-thought/goals/model-updates-and-versioning/failures/model-update-accuracy-regression.md
+pattern	model-update-rollback-delay	by-capability/reasoning-and-thought/goals/model-updates-and-versioning/failures/model-update-rollback-delay.md
+pattern	model-version-incompatibility	by-capability/reasoning-and-thought/goals/model-selection-and-routing/failures/model-version-incompatibility.md
+pattern	model-version-pinning-expiration	by-capability/reasoning-and-thought/goals/model-updates-and-versioning/failures/model-version-pinning-expiration.md
+pattern	monologue-without-engagement	by-capability/speech-and-audio/goals/conversation-flow/failures/monologue-without-engagement.md
+pattern	multi-agent-context-broadcast-waste	cross-cutting/operations/goals/cost-optimization/failures/multi-agent-context-broadcast-waste.md
+pattern	multi-agent-error-propagation-cascade	by-capability/multi-agent-systems/goals/error-propagation/failures/multi-agent-error-propagation-cascade.md
+pattern	multi-agent-false-consensus-risk	by-capability/multi-agent-systems/goals/reasoning-quality/failures/multi-agent-false-consensus-risk.md
+pattern	multi-agent-handoff-drops-affected-customer-segment-before-comms-notification	by-use-case/devops/goals/incident-response/failures/multi-agent-handoff-drops-affected-customer-segment-before-comms-notification.md
+pattern	multi-agent-handoff-drops-baseline-adjustment-between-tuning-agent-and-detection-agent	by-use-case/devops/goals/anomaly-detection/failures/multi-agent-handoff-drops-baseline-adjustment-between-tuning-agent-and-detection-agent.md
+pattern	multi-agent-handoff-drops-beneficial-ownership-discrepancy-before-onboarding-approval	by-use-case/supply-chain/goals/supplier-onboarding/failures/multi-agent-handoff-drops-beneficial-ownership-discrepancy-before-onboarding-approval.md
+pattern	multi-agent-handoff-drops-canonical-url-correction-before-publishing	by-use-case/content-marketing/goals/seo-optimization/failures/multi-agent-handoff-drops-canonical-url-correction-before-publishing.md
+pattern	multi-agent-handoff-drops-confirmed-accommodation-before-equipment-provisioning	by-use-case/hr-recruiting/goals/onboarding/failures/multi-agent-handoff-drops-confirmed-accommodation-before-equipment-provisioning.md
+pattern	multi-agent-handoff-drops-confirmed-comp-adjustment-before-retention-risk-rescoring	by-use-case/hr-recruiting/goals/retention-prediction/failures/multi-agent-handoff-drops-confirmed-comp-adjustment-before-retention-risk-rescoring.md
+pattern	multi-agent-handoff-drops-customer-specific-sla-override-between-intake-bot-and-billing-agent	by-use-case/support-services/goals/sla-management/failures/multi-agent-handoff-drops-customer-specific-sla-override-between-intake-bot-and-billing-agent.md
+pattern	multi-agent-handoff-drops-customs-hold-flag-before-customer-eta-commitment	by-use-case/supply-chain/goals/logistics-routing/failures/multi-agent-handoff-drops-customs-hold-flag-before-customer-eta-commitment.md
+pattern	multi-agent-handoff-drops-data-quality-flag-between-cleansing-agent-and-downstream-consuming-agent	by-use-case/financial-services/goals/data-quality/failures/multi-agent-handoff-drops-data-quality-flag-between-cleansing-agent-and-downstream-consuming-agent.md
+pattern	multi-agent-handoff-drops-de-escalation-context-between-triage-and-billing-agent	by-use-case/customer-service/goals/conversation-resolution/failures/multi-agent-handoff-drops-de-escalation-context-between-triage-and-billing-agent.md
+pattern	multi-agent-handoff-drops-disclosed-accommodation-request-before-interview-scheduling	by-use-case/hr-recruiting/goals/candidate-screening/failures/multi-agent-handoff-drops-disclosed-accommodation-request-before-interview-scheduling.md
+pattern	multi-agent-handoff-drops-disclosed-risk-factor-between-intake-and-scheduling-agent	by-use-case/healthcare/goals/mental-health-triage/failures/multi-agent-handoff-drops-disclosed-risk-factor-between-intake-and-scheduling-agent.md
+pattern	multi-agent-handoff-drops-do-not-resize-safety-constraint	by-use-case/devops/goals/cost-optimization/failures/multi-agent-handoff-drops-do-not-resize-safety-constraint.md
+pattern	multi-agent-handoff-drops-elevated-risk-flag-before-purchase-order-finalization	by-use-case/supply-chain/goals/supplier-risk/failures/multi-agent-handoff-drops-elevated-risk-flag-before-purchase-order-finalization.md
+pattern	multi-agent-handoff-drops-escalation-trigger-between-sentiment-classifier-and-routing-agent	by-use-case/support-services/goals/sentiment-escalation/failures/multi-agent-handoff-drops-escalation-trigger-between-sentiment-classifier-and-routing-agent.md
+pattern	multi-agent-handoff-drops-escalation-urgency-flag-between-triage-bot-and-on-call-clinician-queue	by-use-case/healthcare/goals/telehealth-triage/failures/multi-agent-handoff-drops-escalation-urgency-flag-between-triage-bot-and-on-call-clinician-queue.md
+pattern	multi-agent-handoff-drops-fact-checkers-statistical-caveat-before-publishing	by-use-case/content-marketing/goals/quality-control/failures/multi-agent-handoff-drops-fact-checkers-statistical-caveat-before-publishing.md
+pattern	multi-agent-handoff-drops-failed-resolution-attempt-between-intake-bot-and-specialist-deflection-agent	by-use-case/support-services/goals/self-service-deflection/failures/multi-agent-handoff-drops-failed-resolution-attempt-between-intake-bot-and-specialist-deflection-agent.md
+pattern	multi-agent-handoff-drops-feature-flag-precondition-between-deploy-agent-and-config-agent	by-use-case/devops/goals/deployment-safety/failures/multi-agent-handoff-drops-feature-flag-precondition-between-deploy-agent-and-config-agent.md
+pattern	multi-agent-handoff-drops-field-of-use-limitation-between-clearance-and-licensing-agent	by-use-case/legal-contracts/goals/ip-rights/failures/multi-agent-handoff-drops-field-of-use-limitation-between-clearance-and-licensing-agent.md
+pattern	multi-agent-handoff-drops-flagged-interaction-between-reconciliation-and-pharmacy-review-agent	by-use-case/healthcare/goals/medication-reconciliation/failures/multi-agent-handoff-drops-flagged-interaction-between-reconciliation-and-pharmacy-review-agent.md
+pattern	multi-agent-handoff-drops-flagged-risk-between-review-and-summary-agent	by-use-case/legal-contracts/goals/due-diligence/failures/multi-agent-handoff-drops-flagged-risk-between-review-and-summary-agent.md
+pattern	multi-agent-handoff-drops-inspection-flagged-hazard-before-policy-binding	by-use-case/insurance/goals/underwriting/failures/multi-agent-handoff-drops-inspection-flagged-hazard-before-policy-binding.md
+pattern	multi-agent-handoff-drops-jurisdiction-flag-between-account-opening-and-compliance-screening-agents	by-use-case/financial-services/goals/regulatory-compliance/failures/multi-agent-handoff-drops-jurisdiction-flag-between-account-opening-and-compliance-screening-agents.md
+pattern	multi-agent-handoff-drops-jurisdiction-specific-exception-between-compliance-review-and-filing-agent	by-use-case/legal-contracts/goals/compliance/failures/multi-agent-handoff-drops-jurisdiction-specific-exception-between-compliance-review-and-filing-agent.md
+pattern	multi-agent-handoff-drops-maintenance-window-suppression-flag-between-scheduler-and-alert-router	by-use-case/devops/goals/alert-routing/failures/multi-agent-handoff-drops-maintenance-window-suppression-flag-between-scheduler-and-alert-router.md
+pattern	multi-agent-handoff-drops-mid-quarter-territory-realignment-before-quota-credit-calculation	by-use-case/sales-crm/goals/quota-achievement/failures/multi-agent-handoff-drops-mid-quarter-territory-realignment-before-quota-credit-calculation.md
+pattern	multi-agent-handoff-drops-mid-term-endorsement-before-renewal-pricing	by-use-case/insurance/goals/policy-management/failures/multi-agent-handoff-drops-mid-term-endorsement-before-renewal-pricing.md
+pattern	multi-agent-handoff-drops-narrowed-consent-scope-between-intake-and-billing-agent	by-use-case/healthcare/goals/compliance-liability/failures/multi-agent-handoff-drops-narrowed-consent-scope-between-intake-and-billing-agent.md
+pattern	multi-agent-handoff-drops-negotiated-deviation-between-redline-and-assembly-agent	by-use-case/legal-contracts/goals/contract-drafting/failures/multi-agent-handoff-drops-negotiated-deviation-between-redline-and-assembly-agent.md
+pattern	multi-agent-handoff-drops-negotiated-payment-terms-exception-before-deal-desk-approval	by-use-case/sales-crm/goals/deal-management/failures/multi-agent-handoff-drops-negotiated-payment-terms-exception-before-deal-desk-approval.md
+pattern	multi-agent-handoff-drops-negotiated-visa-tied-remote-exception-before-offer-letter-generation	by-use-case/hr-recruiting/goals/offer-generation/failures/multi-agent-handoff-drops-negotiated-visa-tied-remote-exception-before-offer-letter-generation.md
+pattern	multi-agent-handoff-drops-noted-exclusion-before-payment-step	by-use-case/insurance/goals/claim-processing/failures/multi-agent-handoff-drops-noted-exclusion-before-payment-step.md
+pattern	multi-agent-handoff-drops-override-flag-between-deploy-and-rollback-agent	by-use-case/devops/goals/rollback-safety/failures/multi-agent-handoff-drops-override-flag-between-deploy-and-rollback-agent.md
+pattern	multi-agent-handoff-drops-overruled-citation-flag-between-research-and-drafting-agent	by-use-case/legal-contracts/goals/precedent-currency/failures/multi-agent-handoff-drops-overruled-citation-flag-between-research-and-drafting-agent.md
+pattern	multi-agent-handoff-drops-partial-credit-already-issued-between-triage-and-billing-agent	by-use-case/customer-service/goals/refund-and-billing-disputes/failures/multi-agent-handoff-drops-partial-credit-already-issued-between-triage-and-billing-agent.md
+pattern	multi-agent-handoff-drops-pre-inception-loss-date-conflict-before-siu-triage	by-use-case/insurance/goals/fraud-detection/failures/multi-agent-handoff-drops-pre-inception-loss-date-conflict-before-siu-triage.md
+pattern	multi-agent-handoff-drops-prior-attempted-fix-between-bot-and-human-agent	by-use-case/support-services/goals/issue-resolution/failures/multi-agent-handoff-drops-prior-attempted-fix-between-bot-and-human-agent.md
+pattern	multi-agent-handoff-drops-promotion-cancellation-before-demand-forecast-run	by-use-case/supply-chain/goals/demand-forecasting/failures/multi-agent-handoff-drops-promotion-cancellation-before-demand-forecast-run.md
+pattern	multi-agent-handoff-drops-quality-hold-flag-between-receiving-agent-and-replenishment-agent	by-use-case/supply-chain/goals/inventory-optimization/failures/multi-agent-handoff-drops-quality-hold-flag-between-receiving-agent-and-replenishment-agent.md
+pattern	multi-agent-handoff-drops-region-specific-disclaimer-requirement-before-publishing	by-use-case/content-marketing/goals/compliance/failures/multi-agent-handoff-drops-region-specific-disclaimer-requirement-before-publishing.md
+pattern	multi-agent-handoff-drops-risk-limit-breach-flag-between-pre-trade-risk-agent-and-execution-agent	by-use-case/financial-services/goals/trading-execution/failures/multi-agent-handoff-drops-risk-limit-breach-flag-between-pre-trade-risk-agent-and-execution-agent.md
+pattern	multi-agent-handoff-drops-specialist-noted-contraindication-before-care-plan-finalization	by-use-case/healthcare/goals/treatment-planning/failures/multi-agent-handoff-drops-specialist-noted-contraindication-before-care-plan-finalization.md
+pattern	multi-agent-handoff-drops-stale-feed-flag-between-ingestion-agent-and-valuation-agent	by-use-case/financial-services/goals/market-data-freshness/failures/multi-agent-handoff-drops-stale-feed-flag-between-ingestion-agent-and-valuation-agent.md
+pattern	multi-agent-handoff-drops-suppression-scope-between-triage-and-auto-remediation-agent	by-use-case/devops/goals/monitoring/failures/multi-agent-handoff-drops-suppression-scope-between-triage-and-auto-remediation-agent.md
+pattern	multi-agent-handoff-drops-vip-tier-flag-between-triage-bot-and-routing-agent	by-use-case/support-services/goals/ticket-routing/failures/multi-agent-handoff-drops-vip-tier-flag-between-triage-bot-and-routing-agent.md
+pattern	multi-agent-pipeline-drops-prior-editorial-correction	by-use-case/content-marketing/goals/brand-consistency/failures/multi-agent-pipeline-drops-prior-editorial-correction.md
+pattern	multi-field-collection-overload	by-capability/speech-and-audio/goals/conversation-flow/failures/multi-field-collection-overload.md
+pattern	multi-frame-fusion-failure	by-capability/vision-and-images/goals/multi-image-understanding/failures/multi-frame-fusion-failure.md
+pattern	multi-image-spatial-inconsistencies	by-capability/vision-and-images/goals/spatial-reasoning/failures/multi-image-spatial-inconsistencies.md
+pattern	multi-issue-message-sentiment-averaging-masks-severe-complaint	by-use-case/support-services/goals/sentiment-escalation/failures/multi-issue-message-sentiment-averaging-masks-severe-complaint.md
+pattern	multi-jurisdiction-conflict	by-use-case/financial-services/goals/regulatory-compliance/failures/multi-jurisdiction-conflict.md
+pattern	multi-part-fragmentation	by-capability/knowledge-retrieval/goals/query-understanding/failures/multi-part-fragmentation.md
+pattern	multi-party-obligation-tracking	by-use-case/legal-contracts/goals/risk-detection/failures/multi-party-obligation-tracking.md
+pattern	multi-speaker-confusion	by-capability/speech-and-audio/goals/audio-handling/failures/multi-speaker-confusion.md
+pattern	multi-step-onboarding-agent-loses-context-on-conditional-task-across-sessions	by-use-case/hr-recruiting/goals/onboarding/failures/multi-step-onboarding-agent-loses-context-on-conditional-task-across-sessions.md
+pattern	multi-tenant-data-leakage	cross-cutting/security/goals/safety-security/failures/multi-tenant-data-leakage.md
+pattern	multi-turn-context-loss	by-capability/speech-and-audio/goals/conversation-flow/failures/multi-turn-context-loss.md
+pattern	multilingual-code-switching	by-capability/speech-and-audio/goals/conversation-flow/failures/multilingual-code-switching.md
+pattern	multimodal-hallucination-cascade-across-reasoning-chain	by-capability/vision-and-images/goals/visual-hallucination/failures/multimodal-hallucination-cascade-across-reasoning-chain.md
+pattern	name-change-documentation	by-use-case/mortgage-documents/goals/cross-document-validation/failures/name-change-documentation.md
+pattern	name-recognition-failures	by-capability/speech-and-audio/goals/speech-recognition/failures/name-recognition-failures.md
+pattern	name-ssn-mismatches	by-use-case/mortgage-documents/goals/data-extraction/failures/name-ssn-mismatches.md
+pattern	name-variation-mishandling	by-use-case/mortgage-documents/goals/cross-document-validation/failures/name-variation-mishandling.md
+pattern	negative-banlist-priming	by-capability/speech-and-audio/goals/conversation-flow/failures/negative-banlist-priming.md
+pattern	nesting-depth-limit	cross-cutting/operations/goals/tool-operational-limits/failures/nesting-depth-limit.md
+pattern	network-bandwidth-saturation	cross-cutting/operations/goals/inference-cost-management/failures/network-bandwidth-saturation.md
+pattern	network-latency-blindness	cross-cutting/operations/goals/real-time-performance/failures/network-latency-blindness.md
+pattern	new-product-cold-start-misforecast	by-use-case/supply-chain/goals/demand-forecasting/failures/new-product-cold-start-misforecast.md
+pattern	no-access-review	cross-cutting/governance/goals/governance/failures/no-access-review.md
+pattern	no-adversarial-testing	cross-cutting/accuracy/goals/verification/failures/no-adversarial-testing.md
+pattern	no-approval-boundary	cross-cutting/governance/goals/governance/failures/no-approval-boundary.md
+pattern	no-audit-log	cross-cutting/governance/goals/governance/failures/no-audit-log.md
+pattern	no-business-kpi-validation	cross-cutting/accuracy/goals/verification/failures/no-business-kpi-validation.md
+pattern	no-change-management	cross-cutting/governance/goals/governance/failures/no-change-management.md
+pattern	no-data-retention-control	cross-cutting/governance/goals/governance/failures/no-data-retention-control.md
+pattern	no-ground-truth-comparison	cross-cutting/accuracy/goals/verification/failures/no-ground-truth-comparison.md
+pattern	no-human-owner	cross-cutting/governance/goals/governance/failures/no-human-owner.md
+pattern	no-human-review-trigger	cross-cutting/accuracy/goals/verification/failures/no-human-review-trigger.md
+pattern	no-improvement-audit	cross-cutting/learning/goals/safe-learning/failures/no-improvement-audit.md
+pattern	no-incident-process	cross-cutting/governance/goals/governance/failures/no-incident-process.md
+pattern	no-long-horizon-evaluation	cross-cutting/accuracy/goals/verification/failures/no-long-horizon-evaluation.md
+pattern	no-plan-before-action	by-capability/task-planning/goals/planning/failures/no-plan-before-action.md
+pattern	no-policy-mapping	cross-cutting/governance/goals/governance/failures/no-policy-mapping.md
+pattern	no-preplanned-workflow-for-frequent-operations	cross-cutting/operations/goals/cost-optimization/failures/no-preplanned-workflow-for-frequent-operations.md
+pattern	no-regression-testing	cross-cutting/accuracy/goals/verification/failures/no-regression-testing.md
+pattern	no-risk-tiering	cross-cutting/governance/goals/governance/failures/no-risk-tiering.md
+pattern	no-rollback-plan	by-capability/task-planning/goals/planning/failures/no-rollback-plan.md
+pattern	no-rollback-process	cross-cutting/governance/goals/governance/failures/no-rollback-process.md
+pattern	no-root-cause-separation	cross-cutting/learning/goals/safe-learning/failures/no-root-cause-separation.md
+pattern	no-should-not-decide-detection	by-capability/domain-expertise/goals/domain-decisions/failures/no-should-not-decide-detection.md
+pattern	no-user-notification-rule	cross-cutting/governance/goals/governance/failures/no-user-notification-rule.md
+pattern	no-vendor-risk-control	cross-cutting/governance/goals/governance/failures/no-vendor-risk-control.md
+pattern	no-verification	cross-cutting/accuracy/goals/verification/failures/no-verification.md
+pattern	noise-corruption	by-capability/knowledge-retrieval/goals/answer-synthesis/failures/noise-corruption.md
+pattern	non-generalized-plan-template	cross-cutting/operations/goals/cost-optimization/failures/non-generalized-plan-template.md
+pattern	non-reproducible-execution	cross-cutting/operations/goals/traceability/failures/non-reproducible-execution.md
+pattern	notarization-validation	by-use-case/mortgage-documents/goals/document-verification/failures/notarization-validation.md
+pattern	number-date-errors	by-capability/speech-and-audio/goals/speech-recognition/failures/number-date-errors.md
+pattern	numeric-precision-drift-across-chained-nav-calculation-tool-calls	by-use-case/financial-services/goals/data-quality/failures/numeric-precision-drift-across-chained-nav-calculation-tool-calls.md
+pattern	oauth-token-theft	cross-cutting/security/goals/runtime-security/failures/oauth-token-theft.md
+pattern	object-hallucination-vision-and-images	by-capability/vision-and-images/goals/visual-hallucination/failures/object-hallucination.md
+pattern	object-hallucination	by-capability/document-processing/goals/multimodal-reliability/failures/object-hallucination.md
+pattern	object-tracking-failure	by-capability/vision-and-images/goals/multi-image-understanding/failures/object-tracking-failure.md
+pattern	occlusion-mishandling	by-capability/vision-and-images/goals/spatial-reasoning/failures/occlusion-mishandling.md
+pattern	occlusion-reasoning-failures	by-capability/vision-and-images/goals/spatial-reasoning/failures/occlusion-reasoning-failures.md
+pattern	occupancy-fraud-signals	by-use-case/mortgage-documents/goals/fraud-detection/failures/occupancy-fraud-signals.md
+pattern	ocr-extraction-error	by-capability/knowledge-retrieval/goals/retrieval/failures/ocr-extraction-error.md
+pattern	offer-letter-auto-sent-without-rechecking-live-background-check-gate-status	by-use-case/hr-recruiting/goals/offer-generation/failures/offer-letter-auto-sent-without-rechecking-live-background-check-gate-status.md
+pattern	on-call-escalation-misroute	by-use-case/devops/goals/alert-routing/failures/on-call-escalation-misroute.md
+pattern	onboarding-agent-notifies-manager-of-background-check-clearance-without-verifying-source-status	by-use-case/hr-recruiting/goals/onboarding/failures/onboarding-agent-notifies-manager-of-background-check-clearance-without-verifying-source-status.md
+pattern	ood-blindness	by-capability/vision-and-images/goals/adversarial-robustness/failures/ood-blindness.md
+pattern	opening-timing-mismatch	by-capability/speech-and-audio/goals/conversation-flow/failures/opening-timing-mismatch.md
+pattern	orchestrator-bottleneck	cross-cutting/operations/goals/multi-agent-coordination/failures/orchestrator-bottleneck.md
+pattern	orchestrator-status-mistaken-for-application-health-after-rollback	by-use-case/devops/goals/rollback-safety/failures/orchestrator-status-mistaken-for-application-health-after-rollback.md
+pattern	organizational-knowledge-loss	cross-cutting/accuracy/goals/reasoning-quality/failures/organizational-knowledge-loss.md
+pattern	orphaned-operations	cross-cutting/operations/goals/traceability/failures/orphaned-operations.md
+pattern	outcome-classification-errors	by-capability/speech-and-audio/goals/conversation-flow/failures/outcome-classification-errors.md
+pattern	outdated-guidance-reliance	by-use-case/financial-services/goals/regulatory-compliance/failures/outdated-guidance-reliance.md
+pattern	outdated-medical-guidelines	by-use-case/healthcare/goals/treatment-planning/failures/outdated-medical-guidelines.md
+pattern	outdated-memory	cross-cutting/operations/goals/memory-safety/failures/outdated-memory.md
+pattern	output-encoding-issues	cross-cutting/operations/goals/input-output-handling/failures/output-encoding-issues.md
+pattern	output-format-not-validated	cross-cutting/operations/goals/input-output-handling/failures/output-format-not-validated.md
+pattern	output-hallucination-in-structured-format	cross-cutting/operations/goals/input-output-handling/failures/output-hallucination-in-structured-format.md
+pattern	output-inconsistency	cross-cutting/operations/goals/input-output-handling/failures/output-inconsistency.md
+pattern	output-injection-vulnerability	cross-cutting/operations/goals/input-output-handling/failures/output-injection-vulnerability.md
+pattern	output-length-not-enforced	cross-cutting/operations/goals/input-output-handling/failures/output-length-not-enforced.md
+pattern	output-manipulation	cross-cutting/security/goals/safety-security/failures/output-manipulation.md
+pattern	output-misinterpretation	cross-cutting/operations/goals/tool-reliability/failures/output-misinterpretation.md
+pattern	output-ordering-nondeterminism	cross-cutting/operations/goals/input-output-handling/failures/output-ordering-nondeterminism.md
+pattern	output-precision-loss	cross-cutting/operations/goals/input-output-handling/failures/output-precision-loss.md
+pattern	output-processing-errors	cross-cutting/operations/goals/tool-reliability/failures/output-processing-errors.md
+pattern	output-provenance-loss	cross-cutting/security/goals/agent-trust/failures/output-provenance-loss.md
+pattern	output-quote-escaping-failure	cross-cutting/operations/goals/input-output-handling/failures/output-quote-escaping-failure.md
+pattern	output-sanitization-bypass	cross-cutting/operations/goals/input-output-handling/failures/output-sanitization-bypass.md
+pattern	output-truncation-silent	cross-cutting/operations/goals/input-output-handling/failures/output-truncation-silent.md
+pattern	output-type-coercion-failure	cross-cutting/operations/goals/input-output-handling/failures/output-type-coercion-failure.md
+pattern	over-apology-loop	by-use-case/customer-service/goals/conversation-resolution/failures/over-apology-loop.md
+pattern	over-applied-memory	cross-cutting/operations/goals/memory-safety/failures/over-applied-memory.md
+pattern	over-broad-query	cross-cutting/operations/goals/tool-invocation/failures/over-broad-query.md
+pattern	over-clarification	by-use-case/agent-interaction/goals/conversation-quality/failures/over-clarification.md
+pattern	over-literal-goal-following	by-capability/task-planning/goals/goal-understanding/failures/over-literal-goal-following.md
+pattern	over-narrow-query	cross-cutting/operations/goals/tool-invocation/failures/over-narrow-query.md
+pattern	over-planning	by-capability/task-planning/goals/planning/failures/over-planning.md
+pattern	over-retrieval	by-capability/knowledge-retrieval/goals/retrieval-quality/failures/over-retrieval.md
+pattern	over-scoped-credentials	cross-cutting/security/goals/security-autonomy/failures/over-scoped-credentials.md
+pattern	over-scoped-permissions	cross-cutting/security/goals/safety-security/failures/over-scoped-permissions.md
+pattern	over-trusting-confidence-score	cross-cutting/accuracy/goals/verification/failures/over-trusting-confidence-score.md
+pattern	overconfident-planning	cross-cutting/accuracy/goals/reasoning-quality/failures/overconfident-planning.md
+pattern	overfitting-to-evaluation	cross-cutting/accuracy/goals/evaluation-reliability/failures/overfitting-to-evaluation.md
+pattern	overfitting-to-incidents	cross-cutting/learning/goals/safe-learning/failures/overfitting-to-incidents.md
+pattern	overfitting-to-market-regime	by-use-case/financial-services/goals/portfolio-recommendation-accuracy/failures/overfitting-to-market-regime.md
+pattern	override-signal-failures	by-capability/speech-and-audio/goals/conversation-flow/failures/override-signal-failures.md
+pattern	owner-verification-not-enforced	cross-cutting/security/goals/tool-authorization-limits/failures/owner-verification-not-enforced.md
+pattern	page-grouping	by-capability/document-processing/goals/document-classification/failures/page-grouping.md
+pattern	pagination-failure	cross-cutting/operations/goals/tool-invocation/failures/pagination-failure.md
+pattern	paid-feature-cost-not-disclosed	cross-cutting/operations/goals/tool-capability-limits/failures/paid-feature-cost-not-disclosed.md
+pattern	parallel-execution-failures	cross-cutting/operations/goals/multi-agent-coordination/failures/parallel-execution-failures.md
+pattern	parameter-mismatches	cross-cutting/operations/goals/tool-reliability/failures/parameter-mismatches.md
+pattern	parametric-override	by-capability/knowledge-retrieval/goals/answer-synthesis/failures/parametric-override.md
+pattern	partial-execution	by-capability/external-actions/goals/action-execution/failures/partial-execution.md
+pattern	partial-rank-tracking-api-response-treated-as-confirmed-no-cannibalization	by-use-case/content-marketing/goals/seo-optimization/failures/partial-rank-tracking-api-response-treated-as-confirmed-no-cannibalization.md
+pattern	partial-result-misuse	cross-cutting/operations/goals/tool-invocation/failures/partial-result-misuse.md
+pattern	partial-rollback-state-corruption	by-use-case/devops/goals/rollback-safety/failures/partial-rollback-state-corruption.md
+pattern	patient-history-truncation	by-use-case/healthcare/goals/diagnosis-safety/failures/patient-history-truncation.md
+pattern	patient-identity-mismatch-in-tool-retrieved-lab-payload-accepted-without-verification	by-use-case/healthcare/goals/lab-result-interpretation/failures/patient-identity-mismatch-in-tool-retrieved-lab-payload-accepted-without-verification.md
+pattern	pdf-modification-detection	by-use-case/mortgage-documents/goals/document-integrity/failures/pdf-modification-detection.md
+pattern	pediatric-dosing-extrapolation-error	by-use-case/healthcare/goals/treatment-planning/failures/pediatric-dosing-extrapolation-error.md
+pattern	per-tool-burst-pricing-penalty	cross-cutting/operations/goals/tool-financial-limits/failures/per-tool-burst-pricing-penalty.md
+pattern	per-tool-burst-rate-exceeded	cross-cutting/operations/goals/tool-rate-quota-limits/failures/per-tool-burst-rate-exceeded.md
+pattern	per-tool-concurrent-connections-exceeded	cross-cutting/operations/goals/tool-rate-quota-limits/failures/per-tool-concurrent-connections-exceeded.md
+pattern	per-tool-cost-per-operation-surprise	cross-cutting/operations/goals/tool-financial-limits/failures/per-tool-cost-per-operation-surprise.md
+pattern	per-tool-daily-budget-exhaustion	cross-cutting/operations/goals/tool-financial-limits/failures/per-tool-daily-budget-exhaustion.md
+pattern	per-tool-max-parallel-requests	cross-cutting/operations/goals/tool-rate-quota-limits/failures/per-tool-max-parallel-requests.md
+pattern	per-tool-minimum-usage-penalty	cross-cutting/operations/goals/tool-financial-limits/failures/per-tool-minimum-usage-penalty.md
+pattern	per-tool-monthly-budget-overrun	cross-cutting/operations/goals/tool-financial-limits/failures/per-tool-monthly-budget-overrun.md
+pattern	per-tool-requests-per-day-quota	cross-cutting/operations/goals/tool-rate-quota-limits/failures/per-tool-requests-per-day-quota.md
+pattern	per-tool-requests-per-hour-exceeded	cross-cutting/operations/goals/tool-rate-quota-limits/failures/per-tool-requests-per-hour-exceeded.md
+pattern	per-tool-requests-per-minute-exceeded	cross-cutting/operations/goals/tool-rate-quota-limits/failures/per-tool-requests-per-minute-exceeded.md
+pattern	per-tool-tiered-pricing-unknown	cross-cutting/operations/goals/tool-financial-limits/failures/per-tool-tiered-pricing-unknown.md
+pattern	permission-cascade-incorrect	cross-cutting/security/goals/tool-authorization-limits/failures/permission-cascade-incorrect.md
+pattern	perspective-blindness	by-capability/vision-and-images/goals/spatial-reasoning/failures/perspective-blindness.md
+pattern	perspective-distortion-misunderstanding	by-capability/vision-and-images/goals/spatial-reasoning/failures/perspective-distortion-misunderstanding.md
+pattern	pii-exposure	cross-cutting/security/goals/data-loss-prevention/failures/pii-exposure.md
+pattern	pii-field-exposure	cross-cutting/operations/goals/tool-access-scope-limits/failures/pii-field-exposure.md
+pattern	pii-field-leakage-in-responses	cross-cutting/operations/goals/tool-access-scope-limits/failures/pii-field-leakage-in-responses.md
+pattern	pii-retention-policy-violation	cross-cutting/governance/goals/tool-compliance-limits/failures/pii-retention-policy-violation.md
+pattern	plan-adaptability-failure	cross-cutting/operations/goals/planning-and-decomposition/failures/plan-adaptability-failure.md
+pattern	plan-backtracking-failure	cross-cutting/operations/goals/planning-and-decomposition/failures/plan-backtracking-failure.md
+pattern	plan-cost-estimation-failure	cross-cutting/operations/goals/planning-and-decomposition/failures/plan-cost-estimation-failure.md
+pattern	plan-dependency-cycle	cross-cutting/operations/goals/planning-and-decomposition/failures/plan-dependency-cycle.md
+pattern	plan-hallucination-detection-failure	cross-cutting/operations/goals/planning-and-decomposition/failures/plan-hallucination-detection-failure.md
+pattern	plan-hallucination	by-capability/task-planning/goals/planning/failures/plan-hallucination.md
+pattern	plan-invalidation-not-detected	cross-cutting/operations/goals/planning-and-decomposition/failures/plan-invalidation-not-detected.md
+pattern	plan-optimization-pathological	cross-cutting/operations/goals/planning-and-decomposition/failures/plan-optimization-pathological.md
+pattern	plan-parallelization-error	cross-cutting/operations/goals/planning-and-decomposition/failures/plan-parallelization-error.md
+pattern	plan-state-mismatch	by-capability/task-planning/goals/planning/failures/plan-state-mismatch.md
+pattern	plausible-wrong-outputs	by-capability/document-processing/goals/multimodal-reliability/failures/plausible-wrong-outputs.md
+pattern	plugin-compatibility-matrix	cross-cutting/operations/goals/tool-integration-limits/failures/plugin-compatibility-matrix.md
+pattern	point-in-time-data-violations	by-use-case/financial-services/goals/data-quality/failures/point-in-time-data-violations.md
+pattern	policy-ambiguity-exploitation	cross-cutting/governance/goals/approval-workflows/failures/policy-ambiguity-exploitation.md
+pattern	policy-consistency-violation	cross-cutting/governance/goals/approval-workflows/failures/policy-consistency-violation.md
+pattern	policy-exception-not-authorized	cross-cutting/governance/goals/approval-workflows/failures/policy-exception-not-authorized.md
+pattern	policy-retroactive-application	cross-cutting/governance/goals/approval-workflows/failures/policy-retroactive-application.md
+pattern	policy-scope-misunderstanding	cross-cutting/governance/goals/approval-workflows/failures/policy-scope-misunderstanding.md
+pattern	policy-temporal-violation	cross-cutting/governance/goals/approval-workflows/failures/policy-temporal-violation.md
+pattern	policy-version-mismatch	cross-cutting/governance/goals/approval-workflows/failures/policy-version-mismatch.md
+pattern	policy-violating-action	by-capability/external-actions/goals/action-execution/failures/policy-violating-action.md
+pattern	polypharmacy-cascade-failures	by-use-case/healthcare/goals/adverse-drug-interaction/failures/polypharmacy-cascade-failures.md
+pattern	poor-escalation	by-use-case/customer-service/goals/conversation-resolution/failures/poor-escalation.md
+pattern	positional-bias-omits-mid-document-admission-in-deposition-summary	by-use-case/legal-contracts/goals/litigation-support/failures/positional-bias-omits-mid-document-admission-in-deposition-summary.md
+pattern	post-liquidation-state-blindness-in-margin-call-resolution	by-use-case/financial-services/goals/trading-execution/failures/post-liquidation-state-blindness-in-margin-call-resolution.md
+pattern	prediction-model-accuracy-regression	cross-cutting/operations/goals/tool-sla-quality-limits/failures/prediction-model-accuracy-regression.md
+pattern	preference-vs-instruction-confusion	cross-cutting/operations/goals/memory-safety/failures/preference-vs-instruction-confusion.md
+pattern	premature-action	by-capability/external-actions/goals/action-execution/failures/premature-action.md
+pattern	premature-call-ending	by-capability/speech-and-audio/goals/conversation-flow/failures/premature-call-ending.md
+pattern	premature-conclusion	cross-cutting/accuracy/goals/reasoning-quality/failures/premature-conclusion.md
+pattern	premature-consensus	by-capability/multi-agent-systems/goals/coordination/failures/premature-consensus.md
+pattern	premature-finalization	by-capability/task-planning/goals/planning/failures/premature-finalization.md
+pattern	premature-ticket-closure-from-politeness-cue-misread-as-resolution-confirmation	by-use-case/support-services/goals/issue-resolution/failures/premature-ticket-closure-from-politeness-cue-misread-as-resolution-confirmation.md
+pattern	prior-loan-reference-mismatches	by-use-case/mortgage-documents/goals/cross-document-validation/failures/prior-loan-reference-mismatches.md
+pattern	priority-inflation-gaming	by-use-case/support-services/goals/ticket-routing/failures/priority-inflation-gaming.md
+pattern	privilege-escalation-security	cross-cutting/security/goals/security-autonomy/failures/privilege-escalation.md
+pattern	privilege-escalation	cross-cutting/security/goals/safety-security/failures/privilege-escalation.md
+pattern	privilege-waiver-risk	by-use-case/legal-contracts/goals/litigation-support/failures/privilege-waiver-risk.md
+pattern	promotion-lift-overestimation	by-use-case/supply-chain/goals/demand-forecasting/failures/promotion-lift-overestimation.md
+pattern	prompt-bloat-latency	by-capability/speech-and-audio/goals/conversation-flow/failures/prompt-bloat-latency.md
+pattern	prompt-caching-underutilization	cross-cutting/operations/goals/cost-optimization/failures/prompt-caching-underutilization.md
+pattern	prompt-compression-not-applied	cross-cutting/operations/goals/cost-optimization/failures/prompt-compression-not-applied.md
+pattern	prompt-injection-via-user-context	cross-cutting/security/goals/security-autonomy/failures/prompt-injection-via-user-context.md
+pattern	prompt-injection	cross-cutting/security/goals/safety-security/failures/prompt-injection.md
+pattern	pronunciation-errors	by-capability/speech-and-audio/goals/voice-synthesis/failures/pronunciation-errors.md
+pattern	property-value-extraction	by-use-case/mortgage-documents/goals/data-extraction/failures/property-value-extraction.md
+pattern	prosody-mismatch	by-capability/speech-and-audio/goals/voice-synthesis/failures/prosody-mismatch.md
+pattern	protected-class-proxy-discrimination	by-use-case/hr-recruiting/goals/candidate-screening/failures/protected-class-proxy-discrimination.md
+pattern	proxy-metric-optimization	by-capability/task-planning/goals/goal-understanding/failures/proxy-metric-optimization.md
+pattern	punctuation-errors	by-capability/document-processing/goals/accurate-text-extraction/failures/punctuation-errors.md
+pattern	qm-atr-validation	by-use-case/mortgage-documents/goals/compliance-validation/failures/qm-atr-validation.md
+pattern	qualification-flow-violations	by-capability/speech-and-audio/goals/conversation-flow/failures/qualification-flow-violations.md
+pattern	quality-drift	by-capability/vision-and-images/goals/generation-artifacts/failures/quality-drift.md
+pattern	quality-rejection	by-capability/document-processing/goals/document-classification/failures/quality-rejection.md
+pattern	quantization-accuracy-degradation-undetected	cross-cutting/operations/goals/inference-cost-management/failures/quantization-accuracy-degradation-undetected.md
+pattern	query-complexity-limit	cross-cutting/operations/goals/tool-operational-limits/failures/query-complexity-limit.md
+pattern	query-decomposition-failure	by-capability/knowledge-retrieval/goals/query-understanding/failures/query-decomposition-failure.md
+pattern	query-expansion-noise	by-capability/knowledge-retrieval/goals/retrieval-quality/failures/query-expansion-noise.md
+pattern	query-planning-timeout	cross-cutting/operations/goals/tool-operational-limits/failures/query-planning-timeout.md
+pattern	queue-backpressure	cross-cutting/operations/goals/real-time-performance/failures/queue-backpressure.md
+pattern	quota-agent-auto-applies-credit-adjustment-without-verifying-crediting-tool-output	by-use-case/sales-crm/goals/quota-achievement/failures/quota-agent-auto-applies-credit-adjustment-without-verifying-crediting-tool-output.md
+pattern	quota-reset-boundary-race	cross-cutting/operations/goals/tool-rate-quota-limits/failures/quota-reset-boundary-race.md
+pattern	quota-reset-during-operation	cross-cutting/operations/goals/tool-rate-quota-limits/failures/quota-reset-during-operation.md
+pattern	quota-reset-timing-unknown	cross-cutting/operations/goals/tool-rate-quota-limits/failures/quota-reset-timing-unknown.md
+pattern	rag-scale-degradation	cross-cutting/operations/goals/reliability-and-resilience/failures/rag-scale-degradation.md
+pattern	rapport-absence	by-capability/speech-and-audio/goals/conversation-flow/failures/rapport-absence.md
+pattern	rare-disease-misses	by-use-case/healthcare/goals/diagnosis-safety/failures/rare-disease-misses.md
+pattern	rare-object-false-positive	by-capability/vision-and-images/goals/visual-hallucination/failures/rare-object-false-positive.md
+pattern	rate-limit-grace-period-missing	cross-cutting/operations/goals/tool-rate-quota-limits/failures/rate-limit-grace-period-missing.md
+pattern	rate-limit-header-not-honored	cross-cutting/operations/goals/tool-rate-quota-limits/failures/rate-limit-header-not-honored.md
+pattern	rate-limit-mishandling	cross-cutting/operations/goals/cost-tracking/failures/rate-limit-mishandling.md
+pattern	rate-limittimeout-mishandling	cross-cutting/operations/goals/tool-invocation/failures/rate-limittimeout-mishandling.md
+pattern	read-only-agent-write-access	cross-cutting/security/goals/tool-authorization-limits/failures/read-only-agent-write-access.md
+pattern	reading-bottleneck	by-capability/document-processing/goals/agentic-orchestration/failures/reading-bottleneck.md
+pattern	reasoning-action-mismatch	cross-cutting/accuracy/goals/reasoning-quality/failures/reasoning-action-mismatch.md
+pattern	rebalancing-lag	by-use-case/financial-services/goals/portfolio-recommendation-accuracy/failures/rebalancing-lag.md
+pattern	recency-bias	by-use-case/financial-services/goals/portfolio-recommendation-accuracy/failures/recency-bias.md
+pattern	record-level-access-not-enforced	cross-cutting/operations/goals/tool-access-scope-limits/failures/record-level-access-not-enforced.md
+pattern	record-ownership-not-validated	cross-cutting/operations/goals/tool-access-scope-limits/failures/record-ownership-not-validated.md
+pattern	recovery-data-corruption	cross-cutting/operations/goals/fault-tolerance/failures/recovery-data-corruption.md
+pattern	recovery-divergence	cross-cutting/operations/goals/fault-tolerance/failures/recovery-divergence.md
+pattern	recovery-ordering-violation	cross-cutting/operations/goals/fault-tolerance/failures/recovery-ordering-violation.md
+pattern	recovery-partial-failure	cross-cutting/operations/goals/fault-tolerance/failures/recovery-partial-failure.md
+pattern	recovery-point-objective-miss	cross-cutting/operations/goals/fault-tolerance/failures/recovery-point-objective-miss.md
+pattern	recovery-procedure-untested	cross-cutting/operations/goals/fault-tolerance/failures/recovery-procedure-untested.md
+pattern	recovery-time-objective-miss	cross-cutting/operations/goals/fault-tolerance/failures/recovery-time-objective-miss.md
+pattern	redundancy-coordination-failure	cross-cutting/operations/goals/fault-tolerance/failures/redundancy-coordination-failure.md
+pattern	redundant-self-reflection-passes	cross-cutting/operations/goals/cost-optimization/failures/redundant-self-reflection-passes.md
+pattern	regional-feature-not-available	cross-cutting/operations/goals/tool-capability-limits/failures/regional-feature-not-available.md
+pattern	regulatory-threshold-miss	by-capability/domain-expertise/goals/domain-decisions/failures/regulatory-threshold-miss.md
+pattern	regulatory-update-lag	by-use-case/legal-contracts/goals/compliance/failures/regulatory-update-lag.md
+pattern	relational-hallucination	by-capability/document-processing/goals/multimodal-reliability/failures/relational-hallucination.md
+pattern	relative-position-confusion	by-capability/vision-and-images/goals/spatial-reasoning/failures/relative-position-confusion.md
+pattern	remote-vital-sign-absence-blindness	by-use-case/healthcare/goals/telehealth-triage/failures/remote-vital-sign-absence-blindness.md
+pattern	renamed-metric-empty-result-read-as-healthy-zero	by-use-case/devops/goals/monitoring/failures/renamed-metric-empty-result-read-as-healthy-zero.md
+pattern	rendered-export-not-verified-against-edited-clause-text	by-use-case/legal-contracts/goals/contract-drafting/failures/rendered-export-not-verified-against-edited-clause-text.md
+pattern	repeat-contact-loop	by-use-case/support-services/goals/issue-resolution/failures/repeat-contact-loop.md
+pattern	repeated-question-loop	by-use-case/customer-service/goals/conversation-resolution/failures/repeated-question-loop.md
+pattern	repeated-regeneration-of-known-incorrect-answer	cross-cutting/operations/goals/cost-optimization/failures/repeated-regeneration-of-known-incorrect-answer.md
+pattern	repetitive-degenerate-generation	cross-cutting/accuracy/goals/output-optimization/failures/repetitive-degenerate-generation.md
+pattern	request-payload-size-limit	cross-cutting/operations/goals/tool-operational-limits/failures/request-payload-size-limit.md
+pattern	request-timeout-no-graceful-handling	cross-cutting/operations/goals/tool-operational-limits/failures/request-timeout-no-graceful-handling.md
+pattern	required-field-added-to-api	cross-cutting/operations/goals/tool-special-constraints/failures/required-field-added-to-api.md
+pattern	reranking-degradation	by-capability/knowledge-retrieval/goals/retrieval-quality/failures/reranking-degradation.md
+pattern	resource-exhaustion	cross-cutting/operations/goals/cost-efficiency/failures/resource-exhaustion.md
+pattern	resource-leak	cross-cutting/operations/goals/inference-cost-management/failures/resource-leak.md
+pattern	resource-quota-overcommit	cross-cutting/operations/goals/inference-cost-management/failures/resource-quota-overcommit.md
+pattern	resource-reservation-insufficient	cross-cutting/operations/goals/inference-cost-management/failures/resource-reservation-insufficient.md
+pattern	response-adaptation-failure	by-capability/speech-and-audio/goals/conversation-flow/failures/response-adaptation-failure.md
+pattern	response-latency-issues	by-capability/speech-and-audio/goals/conversation-flow/failures/response-latency-issues.md
+pattern	response-payload-size-limit	cross-cutting/operations/goals/tool-operational-limits/failures/response-payload-size-limit.md
+pattern	response-time-sla-breach	cross-cutting/operations/goals/real-time-performance/failures/response-time-sla-breach.md
+pattern	resume-keyword-matching-bias	by-use-case/hr-recruiting/goals/candidate-screening/failures/resume-keyword-matching-bias.md
+pattern	resume-keyword-overfit-bias	by-use-case/hr-recruiting/goals/candidate-screening/failures/resume-keyword-overfit-bias.md
+pattern	retention-agent-fabricates-manager-conversation-detail-not-present-in-any-source-note	by-use-case/hr-recruiting/goals/retention-prediction/failures/retention-agent-fabricates-manager-conversation-detail-not-present-in-any-source-note.md
+pattern	retrieval-confidence-miscalibration	cross-cutting/operations/goals/memory-management/failures/retrieval-confidence-miscalibration.md
+pattern	retrieval-deduplication-failure	cross-cutting/operations/goals/memory-management/failures/retrieval-deduplication-failure.md
+pattern	retrieval-index-corruption	cross-cutting/operations/goals/memory-management/failures/retrieval-index-corruption.md
+pattern	retrieval-ranking-errors	by-capability/knowledge-retrieval/goals/retrieval-quality/failures/retrieval-ranking-errors.md
+pattern	retrieval-temporal-ordering-failure	cross-cutting/operations/goals/memory-management/failures/retrieval-temporal-ordering-failure.md
+pattern	retry-amplification-of-costs	cross-cutting/operations/goals/cost-efficiency/failures/retry-amplification-of-costs.md
+pattern	retry-latency-amplification	cross-cutting/operations/goals/real-time-performance/failures/retry-latency-amplification.md
+pattern	retry-storms	cross-cutting/operations/goals/cost-efficiency/failures/retry-storms.md
+pattern	review-queue-overflow	by-capability/document-processing/goals/production-reliability/failures/review-queue-overflow.md
+pattern	rightsizing-recommendation-overcorrection	by-use-case/devops/goals/cost-optimization/failures/rightsizing-recommendation-overcorrection.md
+pattern	risk-severity-misclassification	by-capability/domain-expertise/goals/domain-decisions/failures/risk-severity-misclassification.md
+pattern	role-ambiguity	by-capability/multi-agent-systems/goals/coordination/failures/role-ambiguity.md
+pattern	role-permission-mismatch	cross-cutting/security/goals/tool-authorization-limits/failures/role-permission-mismatch.md
+pattern	role-specification-violation	cross-cutting/accuracy/goals/reasoning-quality/failures/role-specification-violation.md
+pattern	rollback-data-consistency	cross-cutting/operations/goals/version-management/failures/rollback-data-consistency.md
+pattern	rollback-partial-failure	cross-cutting/operations/goals/version-management/failures/rollback-partial-failure.md
+pattern	rolling-window-quota-misunderstanding	cross-cutting/operations/goals/tool-rate-quota-limits/failures/rolling-window-quota-misunderstanding.md
+pattern	root-cause-misattribution-in-postmortems	by-use-case/devops/goals/incident-response/failures/root-cause-misattribution-in-postmortems.md
+pattern	rotation-perspective-variance	by-capability/vision-and-images/goals/adversarial-robustness/failures/rotation-perspective-variance.md
+pattern	routing-failures	cross-cutting/operations/goals/multi-agent-coordination/failures/routing-failures.md
+pattern	runtime-credential-exposure	cross-cutting/security/goals/runtime-security/failures/runtime-credential-exposure.md
+pattern	safety-filter-bypass	by-capability/vision-and-images/goals/generation-artifacts/failures/safety-filter-bypass.md
+pattern	safety-stock-miscalibration	by-use-case/supply-chain/goals/inventory-optimization/failures/safety-stock-miscalibration.md
+pattern	salience-bias	by-capability/vision-and-images/goals/visual-hallucination/failures/salience-bias.md
+pattern	sanctions-list-staleness	by-use-case/financial-services/goals/regulatory-compliance/failures/sanctions-list-staleness.md
+pattern	sarcasm-misread-as-satisfaction	by-use-case/support-services/goals/sentiment-escalation/failures/sarcasm-misread-as-satisfaction.md
+pattern	satisfaction-metric-gaming	by-use-case/agent-interaction/goals/conversation-quality/failures/satisfaction-metric-gaming.md
+pattern	scale-confusion	by-capability/vision-and-images/goals/spatial-reasoning/failures/scale-confusion.md
+pattern	scene-hallucination	by-capability/vision-and-images/goals/visual-hallucination/failures/scene-hallucination.md
+pattern	schema-drift	cross-cutting/operations/goals/tool-reliability/failures/schema-drift.md
+pattern	scope-boundary-violations	by-capability/speech-and-audio/goals/conversation-flow/failures/scope-boundary-violations.md
+pattern	scope-downgrade-not-enforced	cross-cutting/operations/goals/tool-access-scope-limits/failures/scope-downgrade-not-enforced.md
+pattern	scope-misunderstanding	by-capability/knowledge-retrieval/goals/query-understanding/failures/scope-misunderstanding.md
+pattern	script-compliance-drift	by-capability/speech-and-audio/goals/conversation-flow/failures/script-compliance-drift.md
+pattern	sdk-version-incompatibility	cross-cutting/operations/goals/tool-integration-limits/failures/sdk-version-incompatibility.md
+pattern	sdr-qualification-handoff-drops-disclosed-budget-ceiling-before-scoring	by-use-case/sales-crm/goals/lead-scoring/failures/sdr-qualification-handoff-drops-disclosed-budget-ceiling-before-scoring.md
+pattern	sdr-to-ae-handoff-drops-unstructured-disqualifying-signal	by-use-case/sales-crm/goals/pipeline-forecasting/failures/sdr-to-ae-handoff-drops-unstructured-disqualifying-signal.md
+pattern	seasonal-blindness	by-use-case/devops/goals/anomaly-detection/failures/seasonal-blindness.md
+pattern	seasonal-demand-misses	by-use-case/supply-chain/goals/demand-forecasting/failures/seasonal-demand-misses.md
+pattern	secret-exposure	cross-cutting/security/goals/security-autonomy/failures/secret-exposure.md
+pattern	self-correction-failure	cross-cutting/accuracy/goals/reasoning-quality/failures/self-correction-failure.md
+pattern	self-justifying-rationale-generation-for-autonomous-trade-execution	by-use-case/financial-services/goals/regulatory-compliance/failures/self-justifying-rationale-generation-for-autonomous-trade-execution.md
+pattern	self-referential-validation-entrenches-recurring-filing-error-across-quarters	by-use-case/financial-services/goals/regulatory-compliance/failures/self-referential-validation-entrenches-recurring-filing-error-across-quarters.md
+pattern	self-verification-bias	cross-cutting/accuracy/goals/verification/failures/self-verification-bias.md
+pattern	self-verification-cannot-catch-upstream-errors	cross-cutting/accuracy/goals/output-verification/failures/self-verification-cannot-catch-upstream-errors.md
+pattern	semantic-drift-in-embeddings	cross-cutting/operations/goals/memory-management/failures/semantic-drift-in-embeddings.md
+pattern	semantic-equivalence-failures	cross-cutting/accuracy/goals/evaluation-reliability/failures/semantic-equivalence-failures.md
+pattern	semantic-mismatch	by-capability/knowledge-retrieval/goals/retrieval-quality/failures/semantic-mismatch.md
+pattern	semantic-shift	by-capability/vision-and-images/goals/generation-artifacts/failures/semantic-shift.md
+pattern	semantic-similarity-retrieval-misses-structural-attributes	by-capability/knowledge-retrieval/goals/retrieval-relevance/failures/semantic-similarity-retrieval-misses-structural-attributes.md
+pattern	sensitive-data-in-logs	cross-cutting/security/goals/data-loss-prevention/failures/sensitive-data-in-logs.md
+pattern	sensitive-field-access-not-restricted	cross-cutting/operations/goals/tool-access-scope-limits/failures/sensitive-field-access-not-restricted.md
+pattern	sensitive-operation-no-approval-requirement	cross-cutting/security/goals/tool-authorization-limits/failures/sensitive-operation-no-approval-requirement.md
+pattern	sentiment-misclassification-delays-escalation	by-use-case/support-services/goals/sentiment-escalation/failures/sentiment-misclassification-delays-escalation.md
+pattern	sequencing-errors	cross-cutting/operations/goals/tool-reliability/failures/sequencing-errors.md
+pattern	session-hijacking	cross-cutting/security/goals/runtime-security/failures/session-hijacking.md
+pattern	shadow-ai-exposure	cross-cutting/security/goals/safety-security/failures/shadow-ai-exposure.md
+pattern	shutdown-resistance	cross-cutting/security/goals/safety-security/failures/shutdown-resistance.md
+pattern	side-effect-misunderstanding	cross-cutting/operations/goals/tool-invocation/failures/side-effect-misunderstanding.md
+pattern	signature-verification-failures	by-use-case/mortgage-documents/goals/document-verification/failures/signature-verification-failures.md
+pattern	silence-misinterpretation	by-capability/speech-and-audio/goals/conversation-flow/failures/silence-misinterpretation.md
+pattern	silent-data-errors	by-capability/document-processing/goals/production-reliability/failures/silent-data-errors.md
+pattern	silent-failures-in-multi-stage-pipelines	cross-cutting/operations/goals/observability-monitoring/failures/silent-failures-in-multi-stage-pipelines.md
+pattern	silent-failures	cross-cutting/operations/goals/tool-reliability/failures/silent-failures.md
+pattern	silent-model-update	by-capability/reasoning-and-thought/goals/model-updates-and-versioning/failures/silent-model-update.md
+pattern	silent-type-coercion	cross-cutting/operations/goals/tool-reliability/failures/silent-type-coercion.md
+pattern	similar-templates	by-capability/document-processing/goals/document-classification/failures/similar-templates.md
+pattern	single-path-planning	by-capability/task-planning/goals/planning/failures/single-path-planning.md
+pattern	single-point-of-failure	cross-cutting/operations/goals/fault-tolerance/failures/single-point-of-failure.md
+pattern	single-supplier-bottleneck	by-use-case/supply-chain/goals/supplier-risk/failures/single-supplier-bottleneck.md
+pattern	size-scale-miscalibration	by-capability/vision-and-images/goals/spatial-reasoning/failures/size-scale-miscalibration.md
+pattern	skew-rotation	by-capability/document-processing/goals/accurate-text-extraction/failures/skew-rotation.md
+pattern	sla-agent-fabricates-breach-root-cause-in-customer-communication	by-use-case/support-services/goals/sla-management/failures/sla-agent-fabricates-breach-root-cause-in-customer-communication.md
+pattern	sla-availability-not-met	cross-cutting/operations/goals/tool-sla-quality-limits/failures/sla-availability-not-met.md
+pattern	sla-breach-blindness-from-clock-pause-errors	by-use-case/support-services/goals/sla-management/failures/sla-breach-blindness-from-clock-pause-errors.md
+pattern	slippage-underestimation	by-use-case/financial-services/goals/trading-execution/failures/slippage-underestimation.md
+pattern	slot-extraction-errors	by-capability/speech-and-audio/goals/conversation-flow/failures/slot-extraction-errors.md
+pattern	slow-tool-silence	by-capability/speech-and-audio/goals/conversation-flow/failures/slow-tool-silence.md
+pattern	source-contradiction	by-capability/knowledge-retrieval/goals/answer-synthesis/failures/source-contradiction.md
+pattern	source-misattribution	cross-cutting/accuracy/goals/output-accuracy/failures/source-misattribution.md
+pattern	source-of-truth-confusion	by-capability/domain-expertise/goals/domain-decisions/failures/source-of-truth-confusion.md
+pattern	spatial-attention-bias	by-capability/vision-and-images/goals/spatial-reasoning/failures/spatial-attention-bias.md
+pattern	spatial-reasoning-failures-in-3d-environments	by-capability/vision-and-images/goals/spatial-reasoning/failures/spatial-reasoning-failures-in-3d-environments.md
+pattern	specification-ambiguity-causing-misalignment	cross-cutting/operations/goals/multi-agent-coordination/failures/specification-ambiguity-causing-misalignment.md
+pattern	speculative-execution-cost-waste	cross-cutting/operations/goals/inference-cost-management/failures/speculative-execution-cost-waste.md
+pattern	spoken-form-failures	by-capability/speech-and-audio/goals/conversation-flow/failures/spoken-form-failures.md
+pattern	spurious-causal-narrative-from-coincident-news-event-in-slippage-explanation	by-use-case/financial-services/goals/trading-execution/failures/spurious-causal-narrative-from-coincident-news-event-in-slippage-explanation.md
+pattern	spurious-causal-narrative-from-correlated-crm-fields-treated-as-rule	by-use-case/sales-crm/goals/quota-achievement/failures/spurious-causal-narrative-from-correlated-crm-fields-treated-as-rule.md
+pattern	spurious-causal-narrative-from-keyword-co-occurrence	by-use-case/support-services/goals/sentiment-escalation/failures/spurious-causal-narrative-from-keyword-co-occurrence.md
+pattern	spurious-causal-narrative-from-temporally-coincident-medication-in-adverse-event-attribution	by-use-case/healthcare/goals/adverse-drug-interaction/failures/spurious-causal-narrative-from-temporally-coincident-medication-in-adverse-event-attribution.md
+pattern	spurious-causal-narrative-from-unrelated-news-event-in-risk-score-justification	by-use-case/supply-chain/goals/supplier-risk/failures/spurious-causal-narrative-from-unrelated-news-event-in-risk-score-justification.md
+pattern	ssml-markup-failures	by-capability/speech-and-audio/goals/voice-synthesis/failures/ssml-markup-failures.md
+pattern	ssn-cross-reference-errors	by-use-case/mortgage-documents/goals/cross-document-validation/failures/ssn-cross-reference-errors.md
+pattern	stacking-order-validation	by-use-case/mortgage-documents/goals/document-verification/failures/stacking-order-validation.md
+pattern	stale-approval-reuse	cross-cutting/operations/goals/human-oversight-reliability/failures/stale-approval-reuse.md
+pattern	stale-billing-export-treated-as-current-spend	by-use-case/devops/goals/cost-optimization/failures/stale-billing-export-treated-as-current-spend.md
+pattern	stale-cached-discount-tier-tool-result-trusted-in-quote-approval	by-use-case/sales-crm/goals/deal-management/failures/stale-cached-discount-tier-tool-result-trusted-in-quote-approval.md
+pattern	stale-cached-traffic-feed-treated-as-live-in-eta-commitment	by-use-case/supply-chain/goals/logistics-routing/failures/stale-cached-traffic-feed-treated-as-live-in-eta-commitment.md
+pattern	stale-context-retention	cross-cutting/operations/goals/context-lifecycle/failures/stale-context-retention.md
+pattern	stale-document-use	by-capability/knowledge-retrieval/goals/retrieval/failures/stale-document-use.md
+pattern	stale-price-feed-reliance	by-use-case/financial-services/goals/market-data-freshness/failures/stale-price-feed-reliance.md
+pattern	stale-state-use	cross-cutting/operations/goals/state-tracking/failures/stale-state-use.md
+pattern	stale-tool-confirmation-after-revision	cross-cutting/operations/goals/tool-reliability/failures/stale-tool-confirmation-after-revision.md
+pattern	stale-training-corpus-cancellation-notice-rule-overrides-live-state-lookup	by-use-case/insurance/goals/policy-management/failures/stale-training-corpus-cancellation-notice-rule-overrides-live-state-lookup.md
+pattern	stale-training-corpus-catastrophe-zone-data-overrides-live-feed	by-use-case/insurance/goals/underwriting/failures/stale-training-corpus-catastrophe-zone-data-overrides-live-feed.md
+pattern	stale-training-corpus-comp-benchmarks-override-live-market-data	by-use-case/hr-recruiting/goals/offer-generation/failures/stale-training-corpus-comp-benchmarks-override-live-market-data.md
+pattern	stale-training-corpus-disclosure-placement-rule-overrides-updated-regulatory-guidance	by-use-case/content-marketing/goals/compliance/failures/stale-training-corpus-disclosure-placement-rule-overrides-updated-regulatory-guidance.md
+pattern	stale-training-corpus-fraud-typology-overrides-current-siu-red-flag-list	by-use-case/insurance/goals/fraud-detection/failures/stale-training-corpus-fraud-typology-overrides-current-siu-red-flag-list.md
+pattern	stale-training-corpus-industry-attrition-benchmark-overrides-live-cohort-tool	by-use-case/hr-recruiting/goals/retention-prediction/failures/stale-training-corpus-industry-attrition-benchmark-overrides-live-cohort-tool.md
+pattern	stale-training-corpus-meta-tag-rule-overrides-live-seo-guidelines-tool	by-use-case/content-marketing/goals/seo-optimization/failures/stale-training-corpus-meta-tag-rule-overrides-live-seo-guidelines-tool.md
+pattern	stale-training-corpus-prompt-payment-deadline-overrides-current-state-statute	by-use-case/insurance/goals/claim-processing/failures/stale-training-corpus-prompt-payment-deadline-overrides-current-state-statute.md
+pattern	stale-training-corpus-quality-threshold-overrides-live-qc-policy-tool	by-use-case/content-marketing/goals/quality-control/failures/stale-training-corpus-quality-threshold-overrides-live-qc-policy-tool.md
+pattern	stale-training-corpus-tone-rule-overrides-live-brand-voice-guideline-update	by-use-case/content-marketing/goals/brand-consistency/failures/stale-training-corpus-tone-rule-overrides-live-brand-voice-guideline-update.md
+pattern	stale-training-corpus-visa-sponsorship-rule-overrides-live-immigration-policy-tool	by-use-case/hr-recruiting/goals/onboarding/failures/stale-training-corpus-visa-sponsorship-rule-overrides-live-immigration-policy-tool.md
+pattern	stamps-overlays	by-capability/document-processing/goals/accurate-text-extraction/failures/stamps-overlays.md
+pattern	state-awareness	cross-cutting/accuracy/goals/context-management/failures/state-awareness.md
+pattern	state-consistency-timeout	cross-cutting/operations/goals/state-consistency/failures/state-consistency-timeout.md
+pattern	state-encoding-mismatch	cross-cutting/operations/goals/state-consistency/failures/state-encoding-mismatch.md
+pattern	state-garbage-collection-failure	cross-cutting/operations/goals/state-consistency/failures/state-garbage-collection-failure.md
+pattern	state-hallucination	cross-cutting/operations/goals/state-tracking/failures/state-hallucination.md
+pattern	state-loss	cross-cutting/operations/goals/state-tracking/failures/state-loss.md
+pattern	state-machine-violation	cross-cutting/operations/goals/state-consistency/failures/state-machine-violation.md
+pattern	state-replication-lag	cross-cutting/operations/goals/state-consistency/failures/state-replication-lag.md
+pattern	state-serialization-failure	cross-cutting/operations/goals/state-consistency/failures/state-serialization-failure.md
+pattern	state-space-navigation	cross-cutting/operations/goals/tool-reliability/failures/state-space-navigation.md
+pattern	state-version-incompatibility	cross-cutting/operations/goals/state-consistency/failures/state-version-incompatibility.md
+pattern	step-repetition	cross-cutting/operations/goals/cost-efficiency/failures/step-repetition.md
+pattern	sticky-session-loss	cross-cutting/operations/goals/version-management/failures/sticky-session-loss.md
+pattern	storage-quota-exceeded	cross-cutting/operations/goals/tool-allocation-limits/failures/storage-quota-exceeded.md
+pattern	storage-quota-shared-across-agents	cross-cutting/operations/goals/tool-allocation-limits/failures/storage-quota-shared-across-agents.md
+pattern	storage-quota-soft-limit	cross-cutting/operations/goals/tool-allocation-limits/failures/storage-quota-soft-limit.md
+pattern	straw-buyer-detection	by-use-case/mortgage-documents/goals/fraud-detection/failures/straw-buyer-detection.md
+pattern	streaming-asr-instability	by-capability/speech-and-audio/goals/speech-recognition/failures/streaming-asr-instability.md
+pattern	streaming-stalls	cross-cutting/operations/goals/real-time-performance/failures/streaming-stalls.md
+pattern	subgoal-ordering-error	cross-cutting/operations/goals/planning-and-decomposition/failures/subgoal-ordering-error.md
+pattern	suicide-risk-underestimation	by-use-case/healthcare/goals/mental-health-triage/failures/suicide-risk-underestimation.md
+pattern	summarization-step-launders-away-positive-sanctions-hit	by-use-case/financial-services/goals/regulatory-compliance/failures/summarization-step-launders-away-positive-sanctions-hit.md
+pattern	summary-drift	cross-cutting/operations/goals/memory-management/failures/summary-drift.md
+pattern	superseded-case-law-citation	by-use-case/legal-contracts/goals/precedent-currency/failures/superseded-case-law-citation.md
+pattern	supply-chain-vulnerability	cross-cutting/security/goals/security-autonomy/failures/supply-chain-vulnerability.md
+pattern	supply-chain	cross-cutting/security/goals/safety-security/failures/supply-chain.md
+pattern	surface-level-validation	cross-cutting/accuracy/goals/verification/failures/surface-level-validation.md
+pattern	survivorship-bias	by-use-case/financial-services/goals/portfolio-recommendation-accuracy/failures/survivorship-bias.md
+pattern	sybil-agent-attack	cross-cutting/security/goals/agent-trust/failures/sybil-agent-attack.md
+pattern	sycophancy	cross-cutting/accuracy/goals/reasoning-quality/failures/sycophancy.md
+pattern	symptom-attribution-bias	by-use-case/healthcare/goals/diagnosis-safety/failures/symptom-attribution-bias.md
+pattern	synthesis-errors	by-capability/knowledge-retrieval/goals/answer-synthesis/failures/synthesis-errors.md
+pattern	synthetic-identity-detection	by-use-case/mortgage-documents/goals/fraud-detection/failures/synthetic-identity-detection.md
+pattern	system-prompt-displacement	cross-cutting/operations/goals/context-lifecycle/failures/system-prompt-displacement.md
+pattern	table-boundaries	by-capability/document-processing/goals/layout-preservation/failures/table-boundaries.md
+pattern	table-cell-omission	by-capability/document-processing/goals/multimodal-reliability/failures/table-cell-omission.md
+pattern	tablefigure-blindness	by-capability/knowledge-retrieval/goals/retrieval/failures/tablefigure-blindness.md
+pattern	tail-risk-underestimation	by-use-case/financial-services/goals/portfolio-recommendation-accuracy/failures/tail-risk-underestimation.md
+pattern	task-handoff-errors	cross-cutting/operations/goals/multi-agent-coordination/failures/task-handoff-errors.md
+pattern	task-handoff-failure	by-capability/multi-agent-systems/goals/coordination/failures/task-handoff-failure.md
+pattern	tax-efficiency-blindness	by-use-case/financial-services/goals/portfolio-recommendation-accuracy/failures/tax-efficiency-blindness.md
+pattern	tax-return-parsing-errors	by-use-case/mortgage-documents/goals/data-extraction/failures/tax-return-parsing-errors.md
+pattern	template-drift	by-capability/document-processing/goals/production-reliability/failures/template-drift.md
+pattern	temporal-confusion	cross-cutting/accuracy/goals/output-accuracy/failures/temporal-confusion.md
+pattern	temporal-inconsistency	by-capability/vision-and-images/goals/multi-image-understanding/failures/temporal-inconsistency.md
+pattern	temporal-relevance	by-capability/knowledge-retrieval/goals/retrieval-quality/failures/temporal-relevance.md
+pattern	temporally-decoupled-poison-execution	cross-cutting/security/goals/agent-trust/failures/temporally-decoupled-poison-execution.md
+pattern	termination-clause-misinterpretation	by-use-case/legal-contracts/goals/risk-detection/failures/termination-clause-misinterpretation.md
+pattern	termination-unawareness	cross-cutting/operations/goals/multi-agent-coordination/failures/termination-unawareness.md
+pattern	text-prompt-voice-failure	by-capability/speech-and-audio/goals/conversation-flow/failures/text-prompt-voice-failure.md
+pattern	throughput-per-dollar-optimization-failure	cross-cutting/operations/goals/inference-cost-management/failures/throughput-per-dollar-optimization-failure.md
+pattern	time-based-data-access-not-enforced	cross-cutting/operations/goals/tool-access-scope-limits/failures/time-based-data-access-not-enforced.md
+pattern	timeout-misconfiguration	cross-cutting/operations/goals/real-time-performance/failures/timeout-misconfiguration.md
+pattern	title-document-validation	by-use-case/mortgage-documents/goals/document-verification/failures/title-document-validation.md
+pattern	token-based-rate-limiting	cross-cutting/operations/goals/tool-rate-quota-limits/failures/token-based-rate-limiting.md
+pattern	token-budget-overflow-attack	cross-cutting/operations/goals/cost-efficiency/failures/token-budget-overflow-attack.md
+pattern	token-counting-inaccuracy	cross-cutting/operations/goals/cost-tracking/failures/token-counting-inaccuracy.md
+pattern	token-explosion	cross-cutting/operations/goals/cost-efficiency/failures/token-explosion.md
+pattern	token-limit-artifacts	by-capability/vision-and-images/goals/generation-artifacts/failures/token-limit-artifacts.md
+pattern	tone-mismatch	by-use-case/customer-service/goals/conversation-resolution/failures/tone-mismatch.md
+pattern	tool-availability-assumptions	cross-cutting/operations/goals/tool-reliability/failures/tool-availability-assumptions.md
+pattern	tool-avoidance	cross-cutting/operations/goals/tool-selection/failures/tool-avoidance.md
+pattern	tool-based-exfiltration	cross-cutting/security/goals/data-loss-prevention/failures/tool-based-exfiltration.md
+pattern	tool-budget-starvation	cross-cutting/operations/goals/tool-financial-limits/failures/tool-budget-starvation.md
+pattern	tool-call-latency-accumulation	cross-cutting/operations/goals/real-time-performance/failures/tool-call-latency-accumulation.md
+pattern	tool-capability-misunderstanding	cross-cutting/operations/goals/tool-selection/failures/tool-capability-misunderstanding.md
+pattern	tool-capability-overestimation	cross-cutting/operations/goals/tool-reliability/failures/tool-capability-overestimation.md
+pattern	tool-composition-complexity-explosion	cross-cutting/operations/goals/tool-selection-sequencing/failures/tool-composition-complexity-explosion.md
+pattern	tool-conflict-unresolved	cross-cutting/operations/goals/tool-selection/failures/tool-conflict-unresolved.md
+pattern	tool-cost-override-incident	cross-cutting/operations/goals/tool-financial-limits/failures/tool-cost-override-incident.md
+pattern	tool-description-failures	by-capability/speech-and-audio/goals/conversation-flow/failures/tool-description-failures.md
+pattern	tool-execution-rce	cross-cutting/security/goals/runtime-security/failures/tool-execution-rce.md
+pattern	tool-idempotency-assumption-failure	cross-cutting/operations/goals/tool-selection-sequencing/failures/tool-idempotency-assumption-failure.md
+pattern	tool-invocation-ordering-dependency	cross-cutting/operations/goals/tool-selection-sequencing/failures/tool-invocation-ordering-dependency.md
+pattern	tool-max-retry-limit-enforced	cross-cutting/operations/goals/tool-operational-limits/failures/tool-max-retry-limit-enforced.md
+pattern	tool-mutation-state-leak	cross-cutting/operations/goals/tool-selection-sequencing/failures/tool-mutation-state-leak.md
+pattern	tool-output-format-mismatch	cross-cutting/operations/goals/tool-selection-sequencing/failures/tool-output-format-mismatch.md
+pattern	tool-output-injection	cross-cutting/security/goals/security-autonomy/failures/tool-output-injection.md
+pattern	tool-overuse	cross-cutting/operations/goals/tool-selection/failures/tool-overuse.md
+pattern	tool-parameter-errors	by-capability/document-processing/goals/agentic-orchestration/failures/tool-parameter-errors.md
+pattern	tool-selection-greedy-suboptimal	cross-cutting/operations/goals/tool-selection-sequencing/failures/tool-selection-greedy-suboptimal.md
+pattern	tool-selection-non-determinism	cross-cutting/operations/goals/tool-selection-sequencing/failures/tool-selection-non-determinism.md
+pattern	tool-sequencing-error	cross-cutting/operations/goals/tool-selection/failures/tool-sequencing-error.md
+pattern	tool-state-dependency-violation	cross-cutting/operations/goals/tool-selection-sequencing/failures/tool-state-dependency-violation.md
+pattern	tool-version-incompatibility	cross-cutting/operations/goals/tool-reliability/failures/tool-version-incompatibility.md
+pattern	total-job-timeout	cross-cutting/operations/goals/tool-operational-limits/failures/total-job-timeout.md
+pattern	traffic-overflow-cascade	cross-cutting/operations/goals/version-management/failures/traffic-overflow-cascade.md
+pattern	traffic-routing-asymmetry	cross-cutting/operations/goals/version-management/failures/traffic-routing-asymmetry.md
+pattern	training-data-extraction	cross-cutting/security/goals/data-loss-prevention/failures/training-data-extraction.md
+pattern	training-data-leakage	by-capability/vision-and-images/goals/visual-hallucination/failures/training-data-leakage.md
+pattern	transitive-dependency-explosion	cross-cutting/operations/goals/dependency-management/failures/transitive-dependency-explosion.md
+pattern	transitive-tool-dependency-failure	cross-cutting/operations/goals/tool-special-constraints/failures/transitive-tool-dependency-failure.md
+pattern	trid-timing-violations	by-use-case/mortgage-documents/goals/compliance-validation/failures/trid-timing-violations.md
+pattern	truncation-information-loss	cross-cutting/operations/goals/context-lifecycle/failures/truncation-information-loss.md
+pattern	trust-transitivity-abuse	cross-cutting/security/goals/agent-trust/failures/trust-transitivity-abuse.md
+pattern	turn-taking-errors	by-capability/speech-and-audio/goals/conversation-flow/failures/turn-taking-errors.md
+pattern	unauthorized-action	by-capability/external-actions/goals/action-execution/failures/unauthorized-action.md
+pattern	unauthorized-actions	cross-cutting/security/goals/safety-security/failures/unauthorized-actions.md
+pattern	unauthorized-commitments	by-capability/speech-and-audio/goals/conversation-flow/failures/unauthorized-commitments.md
+pattern	unbounded-action-loop	by-capability/external-actions/goals/action-execution/failures/unbounded-action-loop.md
+pattern	unbounded-context-growth-across-turns	cross-cutting/operations/goals/cost-optimization/failures/unbounded-context-growth-across-turns.md
+pattern	unclear-next-step	by-use-case/customer-service/goals/conversation-resolution/failures/unclear-next-step.md
+pattern	unclear-stop-condition	by-capability/task-planning/goals/goal-understanding/failures/unclear-stop-condition.md
+pattern	uncontrolled-destructive-actions	cross-cutting/security/goals/security-autonomy/failures/uncontrolled-destructive-actions.md
+pattern	uncontrolled-tool-chaining-attack	cross-cutting/security/goals/security-autonomy/failures/uncontrolled-tool-chaining-attack.md
+pattern	under-clarification	by-use-case/agent-interaction/goals/conversation-quality/failures/under-clarification.md
+pattern	under-planning-costly-rework	cross-cutting/operations/goals/cost-optimization/failures/under-planning-costly-rework.md
+pattern	under-retrieval	by-capability/knowledge-retrieval/goals/retrieval-quality/failures/under-retrieval.md
+pattern	undocumented-api-behavior	cross-cutting/operations/goals/tool-integration-limits/failures/undocumented-api-behavior.md
+pattern	unit-conversion-arithmetic-drift-in-llm-generated-reorder-quantity	by-use-case/supply-chain/goals/inventory-optimization/failures/unit-conversion-arithmetic-drift-in-llm-generated-reorder-quantity.md
+pattern	unnatural-conversational-style	by-capability/speech-and-audio/goals/conversation-flow/failures/unnatural-conversational-style.md
+pattern	unnecessary-data-collection	by-capability/speech-and-audio/goals/conversation-flow/failures/unnecessary-data-collection.md
+pattern	unnecessary-ensemble-voting-overhead	cross-cutting/operations/goals/cost-optimization/failures/unnecessary-ensemble-voting-overhead.md
+pattern	unnecessary-planning-step	cross-cutting/operations/goals/cost-optimization/failures/unnecessary-planning-step.md
+pattern	unnecessary-tool-calls	cross-cutting/operations/goals/cost-efficiency/failures/unnecessary-tool-calls.md
+pattern	unsafe-auto-update	cross-cutting/learning/goals/safe-learning/failures/unsafe-auto-update.md
+pattern	unsafe-code-execution	cross-cutting/security/goals/security-autonomy/failures/unsafe-code-execution.md
+pattern	unsafe-tool-selection	cross-cutting/operations/goals/tool-selection/failures/unsafe-tool-selection.md
+pattern	unstructured-documents	by-capability/document-processing/goals/agentic-orchestration/failures/unstructured-documents.md
+pattern	unsupported-claim	by-capability/knowledge-retrieval/goals/citation-accuracy/failures/unsupported-claim.md
+pattern	untraceable-data-flow	cross-cutting/operations/goals/traceability/failures/untraceable-data-flow.md
+pattern	untracked-assumptions	cross-cutting/operations/goals/state-tracking/failures/untracked-assumptions.md
+pattern	untrusted-tool-result-acceptance	cross-cutting/operations/goals/tool-selection/failures/untrusted-tool-result-acceptance.md
+pattern	unvalidated-improvement	cross-cutting/learning/goals/safe-learning/failures/unvalidated-improvement.md
+pattern	unverified-agent-output	cross-cutting/security/goals/agent-trust/failures/unverified-agent-output.md
+pattern	unverified-clearance-opinion-filed-without-checking-cited-clause-against-source-agreement	by-use-case/legal-contracts/goals/ip-rights/failures/unverified-clearance-opinion-filed-without-checking-cited-clause-against-source-agreement.md
+pattern	unverified-customer-claim-triggers-autonomous-refund	by-use-case/support-services/goals/issue-resolution/failures/unverified-customer-claim-triggers-autonomous-refund.md
+pattern	unverified-data-usage	by-capability/speech-and-audio/goals/conversation-flow/failures/unverified-data-usage.md
+pattern	upcoding-downcoding-risk	by-use-case/healthcare/goals/clinical-documentation/failures/upcoding-downcoding-risk.md
+pattern	user-adoption-failure	by-use-case/agent-interaction/goals/conversation-quality/failures/user-adoption-failure.md
+pattern	user-expectation-mismatch	by-use-case/agent-interaction/goals/conversation-quality/failures/user-expectation-mismatch.md
+pattern	user-feedback-bias	by-use-case/agent-interaction/goals/conversation-quality/failures/user-feedback-bias.md
+pattern	user-frustration-escalation	by-use-case/agent-interaction/goals/conversation-quality/failures/user-frustration-escalation.md
+pattern	user-retention-decline	by-use-case/agent-interaction/goals/conversation-quality/failures/user-retention-decline.md
+pattern	user-support-bottleneck	by-use-case/agent-interaction/goals/conversation-quality/failures/user-support-bottleneck.md
+pattern	user-trust-degradation	by-use-case/agent-interaction/goals/conversation-quality/failures/user-trust-degradation.md
+pattern	vague-consent-exploitation	by-capability/speech-and-audio/goals/conversation-flow/failures/vague-consent-exploitation.md
+pattern	vague-tool-descriptions	cross-cutting/operations/goals/tool-reliability/failures/vague-tool-descriptions.md
+pattern	variable-binding-error	cross-cutting/operations/goals/state-tracking/failures/variable-binding-error.md
+pattern	vendor-promise-gap	by-use-case/mortgage-documents/goals/ai-model-reliability/failures/vendor-promise-gap.md
+pattern	venue-selection-blindness	by-use-case/financial-services/goals/trading-execution/failures/venue-selection-blindness.md
+pattern	verbose-reasoning	cross-cutting/operations/goals/cost-efficiency/failures/verbose-reasoning.md
+pattern	verbosity-despite-brevity-instructions	by-capability/speech-and-audio/goals/conversation-flow/failures/verbosity-despite-brevity-instructions.md
+pattern	verification-collapse	by-use-case/mortgage-documents/goals/ai-model-reliability/failures/verification-collapse.md
+pattern	verification-failure	cross-cutting/accuracy/goals/output-accuracy/failures/verification-failure.md
+pattern	verifier-agent-weakness	by-capability/multi-agent-systems/goals/coordination/failures/verifier-agent-weakness.md
+pattern	verifier-hallucination	cross-cutting/accuracy/goals/verification/failures/verifier-hallucination.md
+pattern	version-compatibility-matrix-explosion	cross-cutting/operations/goals/version-management/failures/version-compatibility-matrix-explosion.md
+pattern	version-confusion	by-capability/document-processing/goals/document-classification/failures/version-confusion.md
+pattern	version-downgrade-failure	cross-cutting/operations/goals/version-management/failures/version-downgrade-failure.md
+pattern	version-lock-file-staleness	cross-cutting/operations/goals/version-management/failures/version-lock-file-staleness.md
+pattern	version-pinning-expiration	cross-cutting/operations/goals/version-management/failures/version-pinning-expiration.md
+pattern	version-prerelease-in-production	cross-cutting/operations/goals/version-management/failures/version-prerelease-in-production.md
+pattern	version-rollout-coordination	cross-cutting/operations/goals/version-management/failures/version-rollout-coordination.md
+pattern	version-skipping-unsupported	cross-cutting/operations/goals/version-management/failures/version-skipping-unsupported.md
+pattern	vision-model-grid-cell-counting-failure	by-capability/vision-and-images/goals/visual-hallucination/failures/vision-model-grid-cell-counting-failure.md
+pattern	vision-model-patch-tokenization-boundary-failure	by-capability/vision-and-images/goals/visual-hallucination/failures/vision-model-patch-tokenization-boundary-failure.md
+pattern	visual-degradation	by-capability/document-processing/goals/multimodal-reliability/failures/visual-degradation.md
+pattern	voice-consistency-issues	by-capability/speech-and-audio/goals/voice-synthesis/failures/voice-consistency-issues.md
+pattern	voice-drift-after-model-version-upgrade	by-use-case/content-marketing/goals/brand-consistency/failures/voice-drift-after-model-version-upgrade.md
+pattern	w2-form-extraction	by-use-case/mortgage-documents/goals/data-extraction/failures/w2-form-extraction.md
+pattern	wash-trade-detection-gap	by-use-case/financial-services/goals/trading-execution/failures/wash-trade-detection-gap.md
+pattern	webhook-delivery-guarantee-not-enforced	cross-cutting/operations/goals/tool-integration-limits/failures/webhook-delivery-guarantee-not-enforced.md
+pattern	webhook-order-not-guaranteed	cross-cutting/operations/goals/tool-integration-limits/failures/webhook-order-not-guaranteed.md
+pattern	webhook-retry-exhaustion	cross-cutting/operations/goals/tool-integration-limits/failures/webhook-retry-exhaustion.md
+pattern	weighted-routing-algorithm-error	cross-cutting/operations/goals/version-management/failures/weighted-routing-algorithm-error.md
+pattern	window-boundary-artifacts	cross-cutting/operations/goals/context-lifecycle/failures/window-boundary-artifacts.md
+pattern	worker-tunnel-vision	by-capability/multi-agent-systems/goals/coordination/failures/worker-tunnel-vision.md
+pattern	working-memory-overflow	cross-cutting/operations/goals/memory-management/failures/working-memory-overflow.md
+pattern	workspace-isolation-bypass	cross-cutting/operations/goals/tool-access-scope-limits/failures/workspace-isolation-bypass.md
+pattern	wrong-argument-format	cross-cutting/operations/goals/tool-invocation/failures/wrong-argument-format.md
+pattern	wrong-corpus-retrieval	by-capability/knowledge-retrieval/goals/retrieval/failures/wrong-corpus-retrieval.md
+pattern	wrong-date-rangetimezone	cross-cutting/operations/goals/tool-invocation/failures/wrong-date-rangetimezone.md
+pattern	wrong-environment	cross-cutting/operations/goals/tool-selection/failures/wrong-environment.md
+pattern	wrong-fix-target	cross-cutting/learning/goals/safe-learning/failures/wrong-fix-target.md
+pattern	wrong-idkey-usage	cross-cutting/operations/goals/tool-invocation/failures/wrong-idkey-usage.md
+pattern	wrong-number-wrong-person	by-capability/speech-and-audio/goals/conversation-flow/failures/wrong-number-wrong-person.md
+pattern	wrong-order-of-operations	by-capability/task-planning/goals/planning/failures/wrong-order-of-operations.md
+pattern	wrong-retrieval-channel	cross-cutting/operations/goals/tool-selection/failures/wrong-retrieval-channel.md
+pattern	wrong-source	by-capability/knowledge-retrieval/goals/citation-accuracy/failures/wrong-source.md
+pattern	wrong-success-criteria	by-capability/task-planning/goals/goal-understanding/failures/wrong-success-criteria.md
+pattern	wrong-target-action	by-capability/external-actions/goals/action-execution/failures/wrong-target-action.md
+pattern	wrong-tool-selected	cross-cutting/operations/goals/tool-selection/failures/wrong-tool-selected.md
+pattern	wrong-tool-selection	cross-cutting/operations/goals/tool-reliability/failures/wrong-tool-selection.md
+pattern	wrong-unitscurrency	cross-cutting/operations/goals/tool-invocation/failures/wrong-unitscurrency.md
+pattern	wrong-verifier	cross-cutting/accuracy/goals/verification/failures/wrong-verifier.md
+pattern	wrong-workflow-branch	by-capability/external-actions/goals/action-execution/failures/wrong-workflow-branch.md
+goal	accurate-text-extraction	
+goal	action-execution	
+goal	adversarial-robustness	
+goal	adverse-drug-interaction	
+goal	agent-handoffs-delegation	
+goal	agent-oversight	
+goal	agent-trust	
+goal	agentic-orchestration	
+goal	ai-model-reliability	
+goal	alert-routing	
+goal	anomaly-detection	
+goal	answer-synthesis	
+goal	approval-workflows	
+goal	audio-handling	
+goal	brand-consistency	
+goal	candidate-screening	
+goal	capacity-planning	
+goal	cascading-failures	
+goal	citation-accuracy	
+goal	claim-processing	
+goal	claims-processing	
+goal	clinical-documentation	
+goal	compliance	
+goal	compliance-liability	
+goal	compliance-validation	
+goal	context-lifecycle	
+goal	context-management	
+goal	contract-drafting	
+goal	conversation-flow	
+goal	conversation-quality	
+goal	conversation-resolution	
+goal	coordination	
+goal	cost-efficiency	
+goal	cost-optimization	
+goal	cost-tracking	
+goal	cross-document-validation	
+goal	data-extraction	
+goal	data-loss-prevention	
+goal	data-quality	
+goal	deal-management	
+goal	demand-forecasting	
+goal	dependency-management	
+goal	deployment-safety	
+goal	diagnosis-safety	
+goal	document-classification	
+goal	document-integrity	
+goal	document-verification	
+goal	domain-decisions	
+goal	due-diligence	
+goal	error-propagation	
+goal	established-framework-adoption	
+goal	evaluation-reliability	
+goal	fault-tolerance	
+goal	fraud-detection	
+goal	generation-artifacts	
+goal	goal-understanding	
+goal	governance	
+goal	handoff-reliability	
+goal	human-oversight-reliability	
+goal	incident-response	
+goal	inference-cost-management	
+goal	input-output-handling	
+goal	inventory-optimization	
+goal	ip-rights	
+goal	issue-resolution	
+goal	jurisdiction-handling	
+goal	knowledge-freshness	
+goal	knowledge-staleness	
+goal	lab-result-interpretation	
+goal	layout-preservation	
+goal	lead-scoring	
+goal	litigation-support	
+goal	logistics-routing	
+goal	market-data-freshness	
+goal	medication-reconciliation	
+goal	memory-management	
+goal	memory-safety	
+goal	mental-health-triage	
+goal	model-behavior-and-capabilities	
+goal	model-selection-and-routing	
+goal	model-updates-and-versioning	
+goal	monitoring	
+goal	multi-agent-coordination	
+goal	multi-agent-orchestration	
+goal	multi-image-understanding	
+goal	multimodal-reliability	
+goal	observability-monitoring	
+goal	offer-generation	
+goal	onboarding	
+goal	output-accuracy	
+goal	output-optimization	
+goal	output-verification	
+goal	pipeline-forecasting	
+goal	planning	
+goal	planning-and-decomposition	
+goal	policy-management	
+goal	portfolio-recommendation-accuracy	
+goal	precedent-currency	
+goal	proactive-retention-outreach	
+goal	production-reliability	
+goal	quality-control	
+goal	query-understanding	
+goal	quota-achievement	
+goal	real-time-performance	
+goal	reasoning-quality	
+goal	refund-and-billing-disputes	
+goal	regulatory-compliance	
+goal	reliability-and-resilience	
+goal	retention-prediction	
+goal	retrieval	
+goal	retrieval-quality	
+goal	retrieval-relevance	
+goal	risk-detection	
+goal	rollback-safety	
+goal	runtime-security	
+goal	safe-learning	
+goal	safety-security	
+goal	security-autonomy	
+goal	self-service-deflection	
+goal	sentiment-escalation	
+goal	seo-optimization	
+goal	sla-management	
+goal	spatial-reasoning	
+goal	speech-recognition	
+goal	state-consistency	
+goal	state-tracking	
+goal	supplier-onboarding	
+goal	supplier-risk	
+goal	telehealth-triage	
+goal	ticket-routing	
+goal	tool-access-scope-limits	
+goal	tool-allocation-limits	
+goal	tool-authorization-limits	
+goal	tool-capability-limits	
+goal	tool-compliance-limits	
+goal	tool-error-handling	
+goal	tool-financial-limits	
+goal	tool-integration-limits	
+goal	tool-invocation	
+goal	tool-operational-limits	
+goal	tool-rate-quota-limits	
+goal	tool-reliability	
+goal	tool-selection	
+goal	tool-selection-sequencing	
+goal	tool-sla-quality-limits	
+goal	tool-special-constraints	
+goal	traceability	
+goal	trading-execution	
+goal	treatment-planning	
+goal	underwriting	
+goal	verification	
+goal	version-management	
+goal	visual-hallucination	
+goal	voice-synthesis	
+category	accuracy	
+category	agent-interaction	
+category	content-marketing	
+category	customer-service	
+category	devops	
+category	document-processing	
+category	domain-expertise	
+category	external-actions	
+category	financial-services	
+category	governance	
+category	healthcare	
+category	hr-recruiting	
+category	insurance	
+category	knowledge-retrieval	
+category	learning	
+category	legal-contracts	
+category	mortgage-documents	
+category	multi-agent-systems	
+category	operations	
+category	reasoning-and-thought	
+category	sales-crm	
+category	security	
+category	speech-and-audio	
+category	supply-chain	
+category	support-services	
+category	task-planning	
+category	vision-and-images	
