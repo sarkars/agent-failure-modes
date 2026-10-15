@@ -13,7 +13,7 @@ import re, glob, os, collections
 
 ROADMAP = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 AREA = os.path.dirname(ROADMAP)
-SKIP = {"README.md", "index.md", "execution-plan.md"}
+SKIP = {"README.md", "index.md", "execution-plan.md", "content-program.md", "merge-proposals.md"}
 DESC = {
     "chat-and-core.md": "Remaining chat and core families, plus channel selection",
     "embedded-copilots.md": "Embedded copilots: upselling, context, first response, obvious questions",

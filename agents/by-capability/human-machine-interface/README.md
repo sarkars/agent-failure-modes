@@ -76,6 +76,9 @@ Each family has a README that states its **goal** and the shared **metrics** its
 ## How a pattern reads
 Every pattern opens with a one-line summary and a before-and-after transcript, then the cause, the evidence, and **the fix**. Testing and monitoring come next. Patterns whose fix needs engineering end with a technical section (architecture, guardrails, evals, alerts). See the [pattern template](_templates/hmi-pattern.md).
 
+## Tests, incidents, and failure reports
+[Test files](tests/) let you check whether your assistant has a pattern. [Incidents](incidents/) hold dated public cases behind the patterns. You can [share a failure report](data/) in anonymized form. The [content program](roadmap/content-program.md) says how these are built.
+
 ## Evidence standard
 - **Cite only what you can verify,** and say when a source is secondary, vendor-run, from a different setting (for example, human-to-human research), or when you couldn't open the original.
 - **Every threshold is a starting point to tune,** unless it has a source.

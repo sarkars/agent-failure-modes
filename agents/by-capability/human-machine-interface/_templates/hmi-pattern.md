@@ -57,6 +57,8 @@ search phrases:
 | **Family** | [e.g. conversation-leadership] (link to the family README) |
 | **Goal** | [One sentence: what success looks like. Must match the family README.] |
 | **Primary metric** | [One metric, with a starting target to tune. Example: confirmed-resolution rate, gap to containment under 10 points] |
+| **Maturity** | Researched / Tests written / Tested / Verified (see the [content program](../roadmap/content-program.md)) |
+| **Will a better model fix this?** | Yes / Partly / No, one sentence on why, and whether that is "our judgment" or "tested" |
 | **Also searched as** | [3-6 phrases people use for this problem] |
 
 ## 1. In plain words
@@ -101,6 +103,8 @@ Bot:  ...
 **Framework used:** [link to solutions-library page]
 
 ## 6. How to test it (short version)
+*Flagship patterns also link a full test file in `tests/` and, where one exists, an incident in `incidents/`. See the [content program](../roadmap/content-program.md).*
+
 | # | Scenario | Pass if |
 |---|---|---|
 | 1 | | |
