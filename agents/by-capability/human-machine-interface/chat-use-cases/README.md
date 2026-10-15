@@ -1,6 +1,6 @@
 # Chat Use Cases: Guardrails, Instructions, and Evals for Narrow Chat Agents
 
-**A guide to building one kind of chat agent at a time: a flight-booking chat, an e-commerce order-support chat, a chat for kids, a chat for older adults. For each, the instructions, guardrails, and evals are tied to a metric.** A general "support bot" guide hides what matters; a narrow guide can say what goes wrong in this use case and how to measure it.
+**A guide to building one kind of chat agent at a time, ranked by how people actually use chat: information and advice assistants, writing help, order and account support, health questions, shopping research, companions, and more. For each, the instructions, guardrails, and evals are tied to a metric.** A general "support bot" guide hides what matters; a narrow guide can say what goes wrong in this use case and how to measure it.
 
 ## The rule: every item has a metric
 - Every **instruction block, guardrail, and eval** in a guide has a row in its **metric ledger**: the failure it prevents, the metric, how that metric is measured, and a counter-metric.
@@ -21,36 +21,56 @@ Each guide follows the [template](_template.md): use case, goals and metrics, in
 - **Tier B:** regulated or financial or health settings. Written with legal or expert review flags.
 - **Tier C:** high-stakes relational use (emotional support, companions, children, older adults, grief). Drafted as *Needs review*. **Instruction text is not published until a qualified reviewer has checked it.**
 
-## The use cases
-Status of every guide: **Planned**. Metrics listed are candidates, not settled choices.
+## The use cases, by market segment
 
-| ID | Use case | Industry | Primary metric (candidate) | Counter-metric (candidate) | Tier | Flags |
-|---|---|---|---|---|---|---|
-| CU-01 | D2C brand chat | Direct-to-consumer retail | Right-fit purchase rate (bought and not returned in a window) | Return rate; complaints about pushy answers | A | L |
-| CU-02 | E-commerce order support | Retail | Confirmed first-contact resolution | Policy-accurate refunds | A | |
-| CU-03 | Visual shopping advisor | Fashion, home | Choice confidence and return rate | Wrong-fit complaints | A | |
-| CU-04 | Subscription cancellation chat | Subscription services | Time and steps to cancel | Declined-offer complaints | A | L |
-| CU-05 | Flight booking and disruption chat | Airlines | Policy-answer accuracy | Rebooking errors | A | L |
-| CU-06 | Hotel concierge chat | Hospitality | Request fulfilled rate | Wrong-promise rate | A | |
-| CU-07 | Retail banking support chat | Banking | Correct-account answer rate | Unverified-action count | B | L |
-| CU-08 | Fraud alert and dispute chat | Banking | Fraud contacts customers can safely act on | Phishing-lookalike complaints | B | L, E |
-| CU-09 | Collections and hardship chat | Lending, utilities | Hardship cases handed to trained staff | Complaint rate | B | L, E |
-| CU-10 | Symptom triage chat | Health | Triage agreement with clinician review | Under-triage rate | B | L, E |
-| CU-11 | Appointment and patient messaging chat | Health | Right-provider, right-visit-type booking rate | Rescheduled-for-error rate | B | L |
-| CU-12 | Medication adherence chat | Health | Instruction comprehension check pass rate | Harm-signal escalations missed | B | E |
-| CU-13 | Government benefits chat | Public services | Accuracy of guidance versus published rules | Answers presented as decisions | B | L |
-| CU-14 | Utility outage chat | Utilities | Updates with a next-update time | Complaint rate | A | |
-| CU-15 | Student tutor chat | Education | Learning gain on checked tasks | Answers given instead of teaching | B | E |
-| CU-16 | Personal assistant chat | Productivity | Task completed as the user intended | Wrong-recipient or wrong-time errors | A | |
-| CU-17 | Workplace helpdesk chat | IT and HR | Resolved-without-ticket rate | Wrong-person data exposure | A | |
-| CU-18 | Expert-information chat | Legal, tax, medical information | Accuracy against expert review | Overconfident wrong answers | B | L, E |
-| CU-19 | Lead qualification chat | Sales | Agreement with salesperson review | Unapproved commitments | A | L |
-| CU-20 | Emotional support chat | Wellbeing | Crisis signals handled correctly | Over-escalation and false reassurance | C | L, E |
-| CU-21 | Friend and companion chat | Consumer apps | Healthy-use indicators | Dependence signals and exploitative design | C | L, E |
-| CU-22 | Chat for kids | Education, consumer | Age-appropriate response rate by age band | Data collected from minors | C | L, E |
-| CU-23 | Chat for older adults | Consumer, health, finance | Task completion at the user's pace | Scam exposure and confusion | C | E |
-| CU-24 | Grief and bereavement chat | Wellbeing, services | Handled with appropriate care and handoff | Scripted-condolence complaints | C | E |
-| CU-25 | Role-play and character chat | Entertainment | Stays within user-chosen limits | Harmful or unwanted escalation | C | L, E |
+Waves set the write order. They weigh **usage evidence** together with **stakes**, because usage is not the same as risk. Evidence grades: **A** a primary study or report, from one platform; **B** a survey or company-reported figure; **C** a vendor claim or a list built from online posts; **-** none found in this pass. See [market usage](market-usage.md) for sources and limits. Status of every guide: **Planned**.
+
+### General-purpose assistants
+
+| Wave | ID | Use case | Industry | Usage evidence | Primary metric (candidate) | Counter-metric (candidate) | Tier | Flags |
+|---|---|---|---|---|---|---|---|---|
+| 1 | CU-26 | Practical guidance and how-to assistant | General-purpose consumer assistant | A | Advice judged correct and safe by reviewers | Overconfident advice in high-stakes areas | B | E |
+| 1 | CU-27 | Information-seeking and answer assistant | General-purpose consumer assistant | A | Supported-claim rate | Hedge-everything rate | A |  |
+| 1 | CU-28 | Writing and editing assistant | Productivity, general | A | Meaning-preservation rate | Edit usefulness rating | A |  |
+| 1 | CU-30 | Consumer health information chat | Health, general-purpose assistants | B | Answers rated safe and accurate by clinicians | Missed urgent-care signals | B | L, E |
+| 2 | CU-15 | Student tutor chat | Education | A | Learning gain on checked tasks | Answers given instead of teaching | B | E |
+| 2 | CU-16 | Personal assistant chat | Productivity | C | Task completed as the user intended | Wrong-recipient or wrong-time errors | A |  |
+| 2 | CU-29 | Developer and coding chat assistant | Software | A | Task success on hidden tests | Unrequested changes per task | A |  |
+| 2 | CU-31 | Shopping research assistant | Retail marketplaces and general assistants | C | Product-answer accuracy | Sponsored or self-preferenced answers | A | L |
+| 4 | CU-18 | Expert-information chat | Legal, tax, medical information | - | Accuracy against expert review | Overconfident wrong answers | B | L, E |
+
+### Business-deployed chat
+
+| Wave | ID | Use case | Industry | Usage evidence | Primary metric (candidate) | Counter-metric (candidate) | Tier | Flags |
+|---|---|---|---|---|---|---|---|---|
+| 1 | CU-02 | E-commerce order support | Retail | C | Confirmed first-contact resolution | Policy-accurate refunds | A |  |
+| 1 | CU-32 | Account access and password-reset chat | Any subscription or account service | C | Correct account recovery without takeover | Legitimate users locked out | A |  |
+| 2 | CU-01 | D2C brand chat | Direct-to-consumer retail | - | Right-fit purchase rate | Return rate; complaints about pushy answers | A | L |
+| 2 | CU-04 | Subscription cancellation chat | Subscription services | - | Time and steps to cancel | Declined-offer complaints | A | L |
+| 2 | CU-05 | Flight booking and disruption chat | Airlines | - | Policy-answer accuracy | Rebooking errors | A | L |
+| 2 | CU-07 | Retail banking support chat | Banking | B | Correct-account answer rate | Unverified-action count | B | L |
+| 2 | CU-17 | Workplace helpdesk chat | IT and HR | - | Resolved-without-ticket rate | Wrong-person data exposure | A |  |
+| 4 | CU-03 | Visual shopping advisor | Fashion, home | - | Choice confidence and return rate | Wrong-fit complaints | A |  |
+| 4 | CU-06 | Hotel concierge chat | Hospitality | - | Request fulfilled rate | Wrong-promise rate | A |  |
+| 4 | CU-08 | Fraud alert and dispute chat | Banking | - | Fraud contacts customers can safely act on | Phishing-lookalike complaints | B | L, E |
+| 4 | CU-09 | Collections and hardship chat | Lending, utilities | - | Hardship cases handed to trained staff | Complaint rate | B | L, E |
+| 4 | CU-10 | Symptom triage chat | Health | - | Triage agreement with clinician review | Under-triage rate | B | L, E |
+| 4 | CU-11 | Appointment and patient messaging chat | Health | - | Right-provider, right-visit-type booking rate | Rescheduled-for-error rate | B | L |
+| 4 | CU-12 | Medication adherence chat | Health | - | Instruction comprehension check pass rate | Harm-signal escalations missed | B | E |
+| 4 | CU-13 | Government benefits chat | Public services | - | Accuracy of guidance versus published rules | Answers presented as decisions | B | L |
+| 4 | CU-14 | Utility outage chat | Utilities | - | Updates with a next-update time | Complaint rate | A |  |
+| 4 | CU-19 | Lead qualification chat | Sales | - | Agreement with salesperson review | Unapproved commitments | A | L |
+
+### Relational and high-stakes
+
+| Wave | ID | Use case | Industry | Usage evidence | Primary metric (candidate) | Counter-metric (candidate) | Tier | Flags |
+|---|---|---|---|---|---|---|---|---|
+| 3 | CU-20 | Emotional support chat | Wellbeing | C | Crisis signals handled correctly | Over-escalation and false reassurance | C | L, E |
+| 3 | CU-21 | Friend and companion chat | Consumer apps | B | Healthy-use indicators (no accepted definition yet) | Dependence signals and exploitative design | C | L, E |
+| 3 | CU-22 | Chat for kids | Education, consumer | B | Age-appropriate response rate by age band | Data collected from minors | C | L, E |
+| 3 | CU-23 | Chat for older adults | Consumer, health, finance | B | Task completion at the user's pace | Scam exposure and confusion | C | E |
+| 3 | CU-24 | Grief and bereavement chat | Wellbeing, services | - | Handled with appropriate care and handoff | Scripted-condolence complaints | C | E |
+| 3 | CU-25 | Role-play and character chat | Entertainment | - | Stays within user-chosen limits | Harmful or unwanted escalation | C | L, E |
 
 ## What this is built on
 - The [failure patterns](../) and the [use-case agent specs](../../../by-agent/) for goals and failure definitions.

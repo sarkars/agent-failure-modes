@@ -12,9 +12,16 @@ for gid, g in C.GOALS.items():
     assert all(f in F for f in g["failures"]) and all(r in C.RULES for r in g["rules"]), gid
 for rid, r in C.RULES.items():
     assert all(f in F for f in r["prevents"]) and r["metric"] and r["counter"] and r["how"], rid
+for kind in ("goals", "rules"):
+    for vid, segs in C.VARIANTS[kind].items():
+        base = (C.GOALS if kind == "goals" else C.RULES)[vid]
+        for seg, f in segs.items():
+            merged = {**base, **f}
+            for k in ("metric", "counter") + (("how",) if kind == "rules" else ("measure",)):
+                assert merged.get(k), (kind, vid, seg, k)
 for u in C.USECASES:
     assert all(g in C.GOALS for g in u["goals"]), u["id"]
-data = dict(goals=C.GOALS, rules=C.RULES, usecases=C.USECASES, failures=F,
+data = dict(goals=C.GOALS, rules=C.RULES, usecases=C.USECASES, failures=F, variants=C.VARIANTS,
             linkBase="https://github.com/sarkars/agent-failure-modes/blob/main/agents/")
 (HERE / "data.json").write_text(json.dumps(data))
 page = (HERE / "page.tpl").read_text().replace("__DATA__", json.dumps(data).replace("</", "<\\/"))

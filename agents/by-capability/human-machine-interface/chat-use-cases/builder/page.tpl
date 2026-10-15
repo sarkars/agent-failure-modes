@@ -144,6 +144,7 @@ td.id{font-family:var(--font-mono);white-space:nowrap}
 
 <div class="foot">
   <p><b>How to read this.</b> Failures come from the failure library and catalog, linked where a page exists. "Candidate" means catalogued but not yet written. Goals, rule text, and snippets are illustrative drafts written for this page: none has been run against a model, and the code is shaped to show the idea, not to ship.</p>
+  <p><b>Usage evidence grades.</b> A: a primary study or report, but from one platform. B: a survey or company-reported figure. C: a vendor claim, or a list built from online posts rather than usage logs. "-": none found in this pass. Write order (waves) weighs usage evidence together with stakes. Usage is not the same as risk.</p>
   <p><b>Thresholds.</b> The page names the metric and how to measure it. The number comes from your baseline, or from a law or published benchmark you cite.</p>
   <p><b>High-stakes use cases.</b> For emotional, companion, kids, older-adult, grief, and role-play chat (tier C), instruction text is withheld until qualified reviewers have checked it. Flags L and E mean legal or expert review is needed.</p>
 </div>
@@ -155,42 +156,48 @@ const $ = s => document.querySelector(s);
 const esc = s => String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const TYPES=[['instruction','Instructions'],['guardrail','Guardrails'],['eval','Evals']];
 const TIERNAME={A:'Tier A: public evidence, lower stakes',B:'Tier B: regulated or sensitive',C:'Tier C: high-stakes relational'};
+let V={goals:DATA.goals,rules:DATA.rules};
+function buildView(){const seg=ucById(state.uc).segment;const m=(base,vs)=>{const o={};for(const k in base){o[k]=Object.assign({},base[k],((vs||{})[k]||{})[seg]||{})}return o};V={goals:m(DATA.goals,DATA.variants.goals),rules:m(DATA.rules,DATA.variants.rules)}}
 const state={uc:'CU-05',goals:new Set(),over:{},tab:'failures'};
 const ucById=id=>DATA.usecases.find(u=>u.id===id);
+const GRADE_CLS={A:'good',B:'warn',C:'bad','-':''};
 
 function load(){try{const s=JSON.parse(localStorage.getItem('chatbuilder')||'null');if(s&&ucById(s.uc)){state.uc=s.uc;state.goals=new Set(s.goals);state.over=s.over||{};state.tab=s.tab||'failures';return true}}catch(e){}return false}
 function save(){try{localStorage.setItem('chatbuilder',JSON.stringify({uc:state.uc,goals:[...state.goals],over:state.over,tab:state.tab}))}catch(e){}}
 function defaults(){state.goals=new Set(ucById(state.uc).goals);state.over={}}
-function derived(){const s=new Set();state.goals.forEach(g=>DATA.goals[g].rules.forEach(r=>s.add(r)));return s}
-function selectedRules(){const d=derived();return Object.keys(DATA.rules).filter(r=>(r in state.over)?state.over[r]:d.has(r))}
-function ordered(ids){const o={instruction:0,guardrail:1,eval:2};return ids.slice().sort((a,b)=>o[DATA.rules[a].type]-o[DATA.rules[b].type])}
-function withheld(r){return ucById(state.uc).tier==='C'&&DATA.rules[r].type==='instruction'}
-function failuresFor(){const out=[];state.goals.forEach(g=>{out.push([g,DATA.goals[g].failures])});return out}
-function uniqFailures(){const s=new Set();state.goals.forEach(g=>DATA.goals[g].failures.forEach(f=>s.add(f)));return s}
+function derived(){const s=new Set();state.goals.forEach(g=>V.goals[g].rules.forEach(r=>s.add(r)));return s}
+function selectedRules(){const d=derived();return Object.keys(V.rules).filter(r=>(r in state.over)?state.over[r]:d.has(r))}
+function ordered(ids){const o={instruction:0,guardrail:1,eval:2};return ids.slice().sort((a,b)=>o[V.rules[a].type]-o[V.rules[b].type])}
+function withheld(r){return ucById(state.uc).tier==='C'&&V.rules[r].type==='instruction'}
+function failuresFor(){const out=[];state.goals.forEach(g=>{out.push([g,V.goals[g].failures])});return out}
+function uniqFailures(){const s=new Set();state.goals.forEach(g=>V.goals[g].failures.forEach(f=>s.add(f)));return s}
 
 function renderUC(){
   const sel=$('#uc');
   if(!sel.options.length){
-    ['A','B','C'].forEach(t=>{const og=document.createElement('optgroup');og.label=TIERNAME[t];
-      DATA.usecases.filter(u=>u.tier===t).forEach(u=>{const o=document.createElement('option');o.value=u.id;o.textContent=u.name+' ('+u.industry+')';og.appendChild(o)});sel.appendChild(og)});
+    [['general','General-purpose assistants'],['business','Business-deployed chat'],['relational','Relational and high-stakes']].forEach(([seg,label])=>{
+      const og=document.createElement('optgroup');og.label=label;
+      DATA.usecases.filter(u=>u.segment===seg).sort((a,b)=>a.wave-b.wave||a.id.localeCompare(b.id)).forEach(u=>{const o=document.createElement('option');o.value=u.id;o.textContent='Wave '+u.wave+' · '+u.name;og.appendChild(o)});sel.appendChild(og)});
   }
   sel.value=state.uc;
   const u=ucById(state.uc);
   const tierCls=u.tier==='A'?'good':u.tier==='B'?'warn':'bad';
-  $('#ucCard').innerHTML=`<div style="display:flex;flex-wrap:wrap;gap:6px"><span class="chip ${tierCls}">${esc(TIERNAME[u.tier])}</span>${u.flags?`<span class="chip bad">Review needed: ${esc(u.flags)}</span>`:''}<span class="chip">${esc(u.id)}</span></div>
+  $('#ucCard').innerHTML=`<div style="display:flex;flex-wrap:wrap;gap:6px"><span class="chip ${tierCls}">${esc(TIERNAME[u.tier])}</span>${u.flags?`<span class="chip bad">Review needed: ${esc(u.flags)}</span>`:''}<span class="chip">${esc(u.id)}</span><span class="chip acc">Write order: wave ${u.wave}</span></div>
   <dl class="kv" style="margin:0"><dt>Primary metric</dt><dd>${esc(u.primary)}</dd><dt>Counter-metric</dt><dd>${esc(u.counter)}</dd></dl>
   ${u.note?`<p class="note">${esc(u.note)}</p>`:''}
+  <div><div class="group-title">Market usage evidence <span class="chip ${GRADE_CLS[u.evidence.grade]||''}">Grade ${esc(u.evidence.grade)}</span></div>
+  <p class="note">${esc(u.evidence.text)}</p>${u.evidence.sources.length?`<p class="note">${u.evidence.sources.map(x=>`<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.name)}</a>`).join(' · ')}</p>`:''}</div>
   ${u.tier==='C'?'<div class="gate">Instruction text is withheld for this use case until qualified reviewers have checked it. Goals, metrics, guardrail rules, and evals are shown.</div>':''}`;
 }
 function renderGoals(){
-  $('#goals').innerHTML=Object.entries(DATA.goals).map(([id,g])=>{const on=state.goals.has(id);
+  $('#goals').innerHTML=Object.entries(V.goals).map(([id,g])=>{const on=state.goals.has(id);
     return `<li><label class="opt ${on?'on':''}"><input type="checkbox" data-goal="${id}" ${on?'checked':''}><span><span class="t">${esc(g.name)}</span><span class="m" style="display:block">Metric: ${esc(g.metric)}</span></span></label></li>`}).join('');
 }
 function renderRules(){
   const d=derived();
   $('#rules').innerHTML=TYPES.map(([t,label])=>{
-    const ids=Object.keys(DATA.rules).filter(r=>DATA.rules[r].type===t);
-    return `<div class="group-title">${label}</div><ul class="list">`+ids.map(r=>{const R=DATA.rules[r];const on=selectedRules().includes(r);const rec=d.has(r);
+    const ids=Object.keys(V.rules).filter(r=>V.rules[r].type===t);
+    return `<div class="group-title">${label}</div><ul class="list">`+ids.map(r=>{const R=V.rules[r];const on=selectedRules().includes(r);const rec=d.has(r);
       return `<li><label class="opt ${on?'on':''}"><input type="checkbox" data-rule="${r}" ${on?'checked':''}><span><span class="t">${esc(R.title)}</span><span class="m" style="display:block">${esc(R.metric)}</span><span class="tags">${rec?'<span class="chip acc">From your goals</span>':''}${R.flag?`<span class="chip bad">${esc(R.flag)}</span>`:''}</span></span></label></li>`}).join('')+'</ul>';
   }).join('');
 }
@@ -200,24 +207,24 @@ function failItem(k){const f=DATA.failures[k];
   return `<div class="fail"><div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center"><span class="ft">${title}</span><span class="chip ${kind[1]}">${kind[0]}</span></div><div class="fi">${esc(f.issue)}</div></div>`}
 function tabFailures(){
   if(!state.goals.size)return '<div class="empty">Pick at least one goal to see its failures.</div>';
-  return failuresFor().map(([g,fs])=>{const G=DATA.goals[g];const real=fs.filter(k=>DATA.failures[k].kind!=='candidate').length;
+  return failuresFor().map(([g,fs])=>{const G=V.goals[g];const real=fs.filter(k=>DATA.failures[k].kind!=='candidate').length;
     return `<div class="card"><div class="goalhead"><h3>${esc(G.name)}</h3><span class="sub">Metric: ${esc(G.metric)}. Counter-metric: ${esc(G.counter)}.</span></div>
     ${real===0?'<div class="gate">No written pattern covers this goal yet. The items below are catalogued candidates.</div>':''}
     <div>${fs.map(failItem).join('')}</div></div>`}).join('');
 }
-function ruleCard(r){const R=DATA.rules[r];const w=withheld(r);
+function ruleCard(r){const R=V.rules[r];const w=withheld(r);
   const prev=R.prevents.map(k=>esc(DATA.failures[k].title)).join('; ');
   return `<div class="card"><div class="row"><h3>${esc(R.title)}</h3><span style="display:flex;gap:6px;flex-wrap:wrap"><span class="chip acc">${esc(R.type)}</span>${R.flag?`<span class="chip bad">Review: ${esc(R.flag)}</span>`:''}</span></div>
   ${w?'<div class="gate">Instruction text withheld for this use case pending expert review.</div>':`<p>${esc(R.text)}</p>`}
   <div class="metricgrid"><div><b>Metric</b>${esc(R.metric)}</div><div><b>How measured</b>${esc(R.how)}</div><div><b>Counter-metric</b>${esc(R.counter)}</div><div><b>Threshold</b>${esc(R.basis)}</div></div>
   <p class="note"><b>Prevents:</b> ${prev}</p></div>`}
 function tabRules(){const ids=ordered(selectedRules());if(!ids.length)return '<div class="empty">No rules selected. Pick goals or add rules on the left.</div>';
-  return TYPES.map(([t,label])=>{const x=ids.filter(r=>DATA.rules[r].type===t);return x.length?`<h2>${label} (${x.length})</h2>`+x.map(ruleCard).join(''):''}).join('')}
+  return TYPES.map(([t,label])=>{const x=ids.filter(r=>V.rules[r].type===t);return x.length?`<h2>${label} (${x.length})</h2>`+x.map(ruleCard).join(''):''}).join('')}
 function tabCode(){const ids=ordered(selectedRules());if(!ids.length)return '<div class="empty">No rules selected.</div>';
   const note='<div class="gate">Illustrative drafts. None of this has been run against a model, and none is production code. Placeholders and example values are marked in comments.</div>';
-  return note+ids.map(r=>{const R=DATA.rules[r];const w=withheld(r);
+  return note+ids.map(r=>{const R=V.rules[r];const w=withheld(r);
     return `<div class="card"><div class="codehead"><h3>${esc(R.title)}</h3><span style="display:flex;gap:8px;align-items:center"><span class="lang">${esc(R.lang)}</span>${w?'':`<button class="btn" type="button" data-copy="${r}">Copy</button>`}</span></div>${w?'<div class="gate">Instruction text withheld for this use case pending expert review.</div>':`<pre id="code-${r}"><code>${esc(R.code)}</code></pre>`}</div>`}).join('')}
-function ledgerRows(){return ordered(selectedRules()).map((r,i)=>{const R=DATA.rules[r];return {id:'L-'+String(i+1).padStart(2,'0'),item:R.title,type:R.type,metric:R.metric,how:R.how,counter:R.counter,basis:R.basis}})}
+function ledgerRows(){return ordered(selectedRules()).map((r,i)=>{const R=V.rules[r];return {id:'L-'+String(i+1).padStart(2,'0'),item:R.title,type:R.type,metric:R.metric,how:R.how,counter:R.counter,basis:R.basis}})}
 function tabLedger(){const rows=ledgerRows();if(!rows.length)return '<div class="empty">No rules selected.</div>';
   return `<div class="row" style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn pri" type="button" data-copy-ledger="md">Copy as Markdown</button><button class="btn" type="button" data-copy-ledger="json">Copy as JSON</button></div>
   <div class="tablewrap"><table><thead><tr><th>ID</th><th>Item</th><th>Type</th><th>Metric</th><th>How measured</th><th>Counter-metric</th><th>Threshold basis</th></tr></thead><tbody>`+
@@ -231,7 +238,7 @@ function renderOut(){
   const fn={failures:tabFailures,rules:tabRules,code:tabCode,ledger:tabLedger}[state.tab];
   $('#panel').innerHTML=fn();
 }
-function renderAll(){renderUC();renderGoals();renderRules();renderOut();save()}
+function renderAll(){buildView();renderUC();renderGoals();renderRules();renderOut();save()}
 async function copyText(text,btn){
   let ok=false;
   try{await navigator.clipboard.writeText(text);ok=true}catch(e){
@@ -248,7 +255,7 @@ document.addEventListener('click',e=>{
   const b=e.target.closest('button');if(!b)return;
   if(b.id==='reset'){defaults();renderAll();return}
   if(b.dataset.tab){state.tab=b.dataset.tab;renderAll();return}
-  if(b.dataset.copy){copyText(DATA.rules[b.dataset.copy].code,b);return}
+  if(b.dataset.copy){copyText(V.rules[b.dataset.copy].code,b);return}
   if(b.dataset.copyLedger){const rows=ledgerRows();
     const text=b.dataset.copyLedger==='json'?JSON.stringify(rows,null,2):'| ID | Item | Type | Metric | How measured | Counter-metric | Threshold basis |\n|---|---|---|---|---|---|---|\n'+rows.map(r=>`| ${r.id} | ${r.item} | ${r.type} | ${r.metric} | ${r.how} | ${r.counter} | ${r.basis} |`).join('\n');
     copyText(text,b)}
