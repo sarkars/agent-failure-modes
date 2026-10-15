@@ -1,0 +1,63 @@
+# Chat Use Cases: Guardrails, Instructions, and Evals for Narrow Chat Agents
+
+**A guide to building one kind of chat agent at a time: a flight-booking chat, an e-commerce order-support chat, a chat for kids, a chat for older adults. For each, the instructions, guardrails, and evals are tied to a metric.** A general "support bot" guide hides what matters; a narrow guide can say what goes wrong in this use case and how to measure it.
+
+## The rule: every item has a metric
+- Every **instruction block, guardrail, and eval** in a guide has a row in its **metric ledger**: the failure it prevents, the metric, how that metric is measured, and a counter-metric.
+- A **counter-metric** is paired with any metric that could be gamed. For example, containment is paired with confirmed resolution.
+- **Thresholds are set from your own baseline** unless a law or a published benchmark gives one, and then it is cited.
+- A guide's instructions and guardrails are **untested drafts** until a recorded test run says otherwise.
+- Judge-based metrics state how the judge is checked against human labels.
+- `roadmap/tools/check_ledger.py` checks this structure automatically.
+
+## How a guide is built
+Each guide follows the [template](_template.md): use case, goals and metrics, instructions, guardrails, evals, the metric ledger, a production dashboard, the failure patterns used, legal and expert flags, and open decisions.
+
+## Tiers
+- **Tier A:** public evidence and lower stakes. Written first.
+- **Tier B:** regulated or financial or health settings. Written with legal or expert review flags.
+- **Tier C:** high-stakes relational use (emotional support, companions, children, older adults, grief). Drafted as *Needs review*. **Instruction text is not published until a qualified reviewer has checked it.**
+
+## The use cases
+Status of every guide: **Planned**. Metrics listed are candidates, not settled choices.
+
+| ID | Use case | Industry | Primary metric (candidate) | Counter-metric (candidate) | Tier | Flags |
+|---|---|---|---|---|---|---|
+| CU-01 | D2C brand chat | Direct-to-consumer retail | Right-fit purchase rate (bought and not returned in a window) | Return rate; complaints about pushy answers | A | L |
+| CU-02 | E-commerce order support | Retail | Confirmed first-contact resolution | Policy-accurate refunds | A | |
+| CU-03 | Visual shopping advisor | Fashion, home | Choice confidence and return rate | Wrong-fit complaints | A | |
+| CU-04 | Subscription cancellation chat | Subscription services | Time and steps to cancel | Declined-offer complaints | A | L |
+| CU-05 | Flight booking and disruption chat | Airlines | Policy-answer accuracy | Rebooking errors | A | L |
+| CU-06 | Hotel concierge chat | Hospitality | Request fulfilled rate | Wrong-promise rate | A | |
+| CU-07 | Retail banking support chat | Banking | Correct-account answer rate | Unverified-action count | B | L |
+| CU-08 | Fraud alert and dispute chat | Banking | Fraud contacts customers can safely act on | Phishing-lookalike complaints | B | L, E |
+| CU-09 | Collections and hardship chat | Lending, utilities | Hardship cases handed to trained staff | Complaint rate | B | L, E |
+| CU-10 | Symptom triage chat | Health | Triage agreement with clinician review | Under-triage rate | B | L, E |
+| CU-11 | Appointment and patient messaging chat | Health | Right-provider, right-visit-type booking rate | Rescheduled-for-error rate | B | L |
+| CU-12 | Medication adherence chat | Health | Instruction comprehension check pass rate | Harm-signal escalations missed | B | E |
+| CU-13 | Government benefits chat | Public services | Accuracy of guidance versus published rules | Answers presented as decisions | B | L |
+| CU-14 | Utility outage chat | Utilities | Updates with a next-update time | Complaint rate | A | |
+| CU-15 | Student tutor chat | Education | Learning gain on checked tasks | Answers given instead of teaching | B | E |
+| CU-16 | Personal assistant chat | Productivity | Task completed as the user intended | Wrong-recipient or wrong-time errors | A | |
+| CU-17 | Workplace helpdesk chat | IT and HR | Resolved-without-ticket rate | Wrong-person data exposure | A | |
+| CU-18 | Expert-information chat | Legal, tax, medical information | Accuracy against expert review | Overconfident wrong answers | B | L, E |
+| CU-19 | Lead qualification chat | Sales | Agreement with salesperson review | Unapproved commitments | A | L |
+| CU-20 | Emotional support chat | Wellbeing | Crisis signals handled correctly | Over-escalation and false reassurance | C | L, E |
+| CU-21 | Friend and companion chat | Consumer apps | Healthy-use indicators | Dependence signals and exploitative design | C | L, E |
+| CU-22 | Chat for kids | Education, consumer | Age-appropriate response rate by age band | Data collected from minors | C | L, E |
+| CU-23 | Chat for older adults | Consumer, health, finance | Task completion at the user's pace | Scam exposure and confusion | C | E |
+| CU-24 | Grief and bereavement chat | Wellbeing, services | Handled with appropriate care and handoff | Scripted-condolence complaints | C | E |
+| CU-25 | Role-play and character chat | Entertainment | Stays within user-chosen limits | Harmful or unwanted escalation | C | L, E |
+
+## What this is built on
+- The [failure patterns](../) and the [use-case agent specs](../../../by-agent/) for goals and failure definitions.
+- The [content program](../roadmap/content-program.md) for how guides are written and reviewed.
+
+## Known limits
+- **Instructions and guardrails are drafts.** Nobody here runs them against a model, so no guide claims they work.
+- **Metrics need your baseline.** The guides name the measures and how to compute them; the numbers have to come from your data.
+- **Tier C needs real experts.** A scheduled run can draft and flag; it cannot approve.
+
+## Related
+- [Human-machine interface overview](../)
+- [Tests and evals](../tests/)

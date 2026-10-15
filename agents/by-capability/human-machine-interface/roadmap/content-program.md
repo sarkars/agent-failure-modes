@@ -1,4 +1,4 @@
-# Content Program: Thirteen Workstreams Run Alongside the Pattern Queue
+# Content Program: Fourteen Workstreams Run Alongside the Pattern Queue
 
 > **What this is.** Besides writing patterns, each scheduled run does **one** task from this file. The tasks turn a catalog into something people cite and use: tiered quality, real incidents, runnable tests, an honest "will a better model fix this?" answer, and entry points by symptom and by role. Everything stays inside `agents/by-capability/human-machine-interface/`. The [execution plan](execution-plan.md) says how a run works.
 
@@ -53,7 +53,7 @@ These come first in the queue, at 3 per run. They were picked for customer deman
 | 29 | CC-08 | Scam victim not interrupted |
 | 30 | CC-16 | Romantic or parasocial dependence |
 
-## The thirteen workstreams
+## The fourteen workstreams
 | ID | Workstream | Deliverable | When a run does it |
 |---|---|---|---|
 | WS-01 | Two tiers, labeled | Maturity label and tier on every written pattern; this file's flagship list | Set up now. Each run labels its own patterns |
@@ -67,6 +67,7 @@ These come first in the queue, at 3 per run. They were picked for customer deman
 | WS-09 | Definition pages | `glossary/<term>.md`: short, sourced definitions linking to patterns | One term per run when a term is used by three or more written patterns |
 | WS-12 | Base agent and learning loop | The end state in [learning-agent.md](learning-agent.md): L0 base spec, L1 base agent design, and the gated learning loop's policy, all labeled untested until a person runs them. Built on the [gap analysis](gap-analysis.md) | Gap analysis redo first; then one level at a time |
 | WS-13 | Use-case agent specs | One page per specific agent in `agents/by-agent/use-cases/`: scope, business goals with measure, failure definition, severity, hand-over triggers, and linked failures to test. Eight exist as first drafts | Add a spec when a use case has at least three documented failures; revise each with a practitioner's input |
+| WS-14 | Narrow chat use-case guides | `chat-use-cases/`: one guide per narrow chat use case (25 listed), each with instructions, guardrails, and evals tied to a metric ledger. See the [hub](../chat-use-cases/) and the rules below | Exemplar first, then Tier A, then B, then C |
 | WS-10 | Cross-framework mappings | `mappings/proposals.md`: OWASP, NIST, and MITRE entries for flagships, each with a source you opened and a confidence label | Flagships only, after the pattern is Done; always *Needs review* |
 | WS-11 | Build guide | `guide/`: a failure-first guide to building a customer-facing agent that doesn't fail people. A gap analysis first, then one step per task, each linking only written patterns | Gap analysis first; then one step when its condition is met |
 
@@ -79,6 +80,8 @@ Status values: *Queued*, *In progress*, *Done*, *Blocked*, *Needs review*. A run
 | 2 | Write `incidents/README.md`: the incident-page format and the source rules | WS-02 | None | Done |
 | 3 | Write `data/README.md` and `data/failure-report-template.md`: consent, anonymization, what never to submit | WS-07 | None | Done |
 | 4 | Add Maturity and "Will a better model fix this?" rows to the pattern template | WS-01, WS-04 | None | Done |
+| 18 | Exemplar guide: **CU-05 Flight booking and disruption chat** from the [template](../chat-use-cases/_template.md). Open and read every source (including the Moffatt v. Air Canada decision and the airline-domain material in tau-bench); find and cite any U.S. rules on refunds and automated assistance from primary sources; fill the metric ledger completely; run `check_ledger.py`; mark everything untested | WS-14 | None | Queued |
+| 19 | Review the exemplar adversarially: for each ledger row, is the metric measurable from logs, an eval, or sampled review? Is there a counter-metric? Does each instruction map to a real failure pattern? Revise the template if it fails | WS-14 | Task 18 Done | Queued |
 | 5 | Incident page: pick the best-sourced public case for the first flagship that has one | WS-02 | A flagship is Done | Queued |
 | 6 | Seed `glossary/`: "containment rate" and "cold transfer" | WS-09 | HU-01 and HU-03 Done | Queued |
 | 7 | First symptom page: "The bot keeps asking what I already told it" | WS-05 | CP-14 Done and two more related patterns Done | Queued |
@@ -97,7 +100,11 @@ Status values: *Queued*, *In progress*, *Done*, *Blocked*, *Needs review*. A run
 | 15 | Write one guide step: what to decide, the minimal fix, the patterns it prevents, the tests, and when you can skip it | WS-11 | Outline Done and the step has at least two written patterns it can link; repeat per step | Queued |
 | 16 | Review the eight use-case specs in `agents/by-agent/use-cases/`: open sources for every metric name and definition, remove anything unsupported, and list which definitions need a practitioner's review | WS-13 | None | Queued |
 | 17 | Add the next use-case agent specs (candidates: candidate screening, voice appointment scheduling, e-commerce order support, internal knowledge assistant), each with at least three documented failures behind it | WS-13 | Task 16 Done | Queued |
-| 18 | Repeat: merge proposals, role pages, mapping proposals as their conditions are met | WS-06, WS-08, WS-10 | As conditions are met | Queued |
+| 20 | Tier A guides, one per task: CU-02, CU-01, CU-16, CU-17, CU-04, CU-14, CU-19, CU-03, CU-06 | WS-14 | Task 19 Done | Queued |
+| 21 | Eval sets for each finished guide in `tests/`, in the tests format; results "Not yet run" | WS-14, WS-03 | A guide Done | Queued |
+| 22 | Tier B guides, one per task, each with legal or expert flags and *Needs review*: CU-07, CU-08, CU-09, CU-10, CU-11, CU-12, CU-13, CU-15, CU-18 | WS-14 | Five Tier A guides Done | Queued |
+| 23 | Tier C guides, one per task, drafted as *Needs review*. Publish goals, metrics, guardrail rules, and evals; **withhold instruction text** until a qualified reviewer has checked it: CU-20, CU-21, CU-22, CU-23, CU-24, CU-25 | WS-14 | Task 19 Done and two Tier B guides Done | Queued |
+| 24 | Repeat: merge proposals, role pages, mapping proposals as their conditions are met | WS-06, WS-08, WS-10 | As conditions are met | Queued |
 
 ## Guide rules (workstream 11)
 - **Failure-first, not architecture-first.** The guide covers what to decide so the failures in this library don't happen. It does not re-teach general agent architecture; it links to the original sources for that.
@@ -106,6 +113,16 @@ Status values: *Queued*, *In progress*, *Done*, *Blocked*, *Needs review*. A run
 - **Short.** A step is a page a team can act on in an afternoon. If a step needs more, it becomes a pattern.
 - **Maintained.** Each step has a last-reviewed date. Frameworks change fast, so avoid framework-specific code unless it is tested.
 - **No claim that following the guide guarantees good behavior.** The guide reduces known failures; only testing shows whether a given agent has them.
+
+## Chat use-case guide rules (workstream 14)
+- **Every instruction, guardrail, and eval has a ledger row** with a metric, how it is measured, a counter-metric, and a threshold basis. `check_ledger.py` must pass.
+- **Counter-metrics are required** for any metric that can be gamed (for example containment and confirmed resolution; speed and accuracy).
+- **No invented thresholds.** Use "set from baseline" unless a law or a published benchmark gives a number, and cite it.
+- **Judge-based metrics** say how the judge is calibrated against human labels. A judge that has not been checked is listed as unverified.
+- **Untested means untested.** Instructions and guardrails are drafts until a recorded run exists. Never write results you did not obtain.
+- **Tier C is gated.** Instruction text for emotional support, companions, children, older adults, grief, and role-play is not published until a qualified reviewer has checked it. Children's guides name the age bands they cover.
+- **Reuse before you write.** Link the [use-case agent specs](../../../by-agent/) and written patterns instead of restating them.
+- **Review notes (2026-10-15).** The main risks are metric theater (metrics without baselines or with unvalidated judges), Goodhart effects (hence counter-metrics), false confidence in untested prompts, and overreach in high-stakes use cases. A scheduled run cannot test prompts or approve Tier B or C material.
 
 ## What these runs cannot do
 - **Run the tests.** The scheduled run has no model-evaluation harness. It writes the tests and leaves "Not yet run". Someone has to run them and record results before any pattern can be *Tested*.
