@@ -58,6 +58,6 @@ Delegation is frequently implemented as a single broad credential (an OAuth toke
 | Credential passed to unscoped sub-agent | Parent credential detected in a sub-agent's tool-call context without a narrower derived scope | High | Fail the sub-agent call, alert engineering |
 
 ## Related Patterns
-- [Owner Verification Not Enforced](./owner-verification-not-enforced.md) - both concern whether the acting party's authority actually covers the specific action taken
-- [Approval Signature Verification](./approval-signature-verification.md) - forged or over-broad approvals are a related mechanism for exceeding intended authority
-- [Permission Cascade Incorrect](./permission-cascade-incorrect.md) - both involve authority that should narrow as it passes down a chain (org->team->user, or user->agent->sub-agent) but doesn't
+- [Owner Verification Not Enforced](owner-verification-not-enforced.md) - both concern whether the acting party's authority actually covers the specific action taken
+- [Approval Signature Verification](approval-signature-verification.md) - forged or over-broad approvals are a related mechanism for exceeding intended authority
+- [Permission Cascade Incorrect](permission-cascade-incorrect.md) - both involve authority that should narrow as it passes down a chain (org->team->user, or user->agent->sub-agent) but doesn't

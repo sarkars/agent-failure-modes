@@ -70,6 +70,6 @@ link and no indication a link was ever supposed to be included.
 | Length overflow rate trending upward | output_length_overflow_rate for a given content type rises above historical baseline | Medium | Review recent prompt or model changes affecting verbosity |
 
 ## Related Patterns
-- [Output Truncation Silent](./output-truncation-silent.md) - the frequent downstream consequence when unenforced length overflow meets a consumer that truncates without signaling
-- [Input Size Not Validated](./input-size-not-validated.md) - the mirror-image failure on the input side, where an oversized payload isn't rejected before processing
-- [Output Format Not Validated](./output-format-not-validated.md) - length is one specific dimension of the broader problem of not validating output against a downstream contract
+- [Output Truncation Silent](output-truncation-silent.md) - the frequent downstream consequence when unenforced length overflow meets a consumer that truncates without signaling
+- [Input Size Not Validated](input-size-not-validated.md) - the mirror-image failure on the input side, where an oversized payload isn't rejected before processing
+- [Output Format Not Validated](output-format-not-validated.md) - length is one specific dimension of the broader problem of not validating output against a downstream contract

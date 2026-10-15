@@ -65,6 +65,6 @@ authorization the technical system never actually checked for.
 | Classification-Enforcement Gap Detected | Reconciliation job finds a governance-classified sensitive field with no runtime check | P2 | Prioritize adding enforcement before the field remains reachable by general-purpose tools |
 
 ## Related Patterns
-- [Data Classification Access Not Enforced](./data-classification-access-not-enforced.md) - the general case of this pattern applied at the record/document level rather than specifically to known-sensitive fields
-- [Field-Level Access Not Restricted](./field-level-access-not-restricted.md) - the underlying architectural gap (record-level-only enforcement) that allows sensitive fields to leak through
-- [PII Field Exposure](./pii-field-exposure.md) - overlaps when the unrestricted sensitive field is also personally identifiable information
+- [Data Classification Access Not Enforced](data-classification-access-not-enforced.md) - the general case of this pattern applied at the record/document level rather than specifically to known-sensitive fields
+- [Field-Level Access Not Restricted](field-level-access-not-restricted.md) - the underlying architectural gap (record-level-only enforcement) that allows sensitive fields to leak through
+- [PII Field Exposure](pii-field-exposure.md) - overlaps when the unrestricted sensitive field is also personally identifiable information

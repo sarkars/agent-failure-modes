@@ -35,7 +35,18 @@ GOAL AND METRIC RULES
     from logs, evals, or sampled review. Say how.
 19. Each family has a README that states the family goal and the shared metrics its patterns report against.
 20. Dashboards and health checks are optional; put them in the Technical section.
+
+SITE COMPATIBILITY RULES (the published Astro site imports this file)
+21. Line 1 of a pattern is the H1. The importer drops the first line of the file, so anything else there leaks
+    into the page.
+22. Keep the machine-readable line "**Frequency**: <word>" (Very Common, Common, Occasional, or Rare) and the
+    line "## Issue: <one sentence>". The site reads them for badges and cards. The header table is for readers.
+23. Patterns live at goals/<family>/failures/<name>.md so the importer finds the capability, goal, and category.
+    Other folders (tests, incidents, chat-use-cases, roadmap) are not imported as patterns.
 -->
+
+# [Searched phrase]: [Pattern name]
+
 <!-- SEO
 title: [<=60 chars, starts with the searched phrase]
 description: [<=155 chars, answers the question]
@@ -44,7 +55,9 @@ search phrases:
 - [real query 2]
 -->
 
-# [Searched phrase]: [Pattern name]
+**Frequency**: [Very Common / Common / Occasional / Rare]
+
+## Issue: [One sentence, the same as the SEO description; the published site uses it on cards]
 
 > **One line:** [What goes wrong, in one sentence a non-engineer would understand.]
 

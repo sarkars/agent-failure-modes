@@ -69,6 +69,6 @@ support agent.
 | Shared resource near exhaustion | Shared connection pool/gateway utilization approaches capacity limit | High | Trigger bulkhead isolation, shed load from lowest-priority integration |
 
 ## Related Patterns
-- [Integration Rate Limit Across Systems](./integration-rate-limit-across-systems.md) - shared rate limits are one specific type of shared infrastructure whose exhaustion by one integration can cascade to others
-- [Dependency Circular Reference](./dependency-circular-reference.md) - both describe failure propagating through a coupling that isn't visible in any single component's own design
-- [Integration Timeout Mismatch](./integration-timeout-mismatch.md) - inconsistent timeouts across integrations sharing infrastructure affect how quickly a cascading failure spreads versus gets contained
+- [Integration Rate Limit Across Systems](integration-rate-limit-across-systems.md) - shared rate limits are one specific type of shared infrastructure whose exhaustion by one integration can cascade to others
+- [Dependency Circular Reference](dependency-circular-reference.md) - both describe failure propagating through a coupling that isn't visible in any single component's own design
+- [Integration Timeout Mismatch](integration-timeout-mismatch.md) - inconsistent timeouts across integrations sharing infrastructure affect how quickly a cascading failure spreads versus gets contained

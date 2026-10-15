@@ -72,6 +72,6 @@ reconciles unauthorized spend at month-end.
 | New integration lacks normalized error handling | A newly added integration bypasses the unified error-representation layer | Medium | Require refactor before the integration is used in a multi-step workflow |
 
 ## Related Patterns
-- [Integration API Contract Violation](./integration-api-contract-violation.md) - a mismatch between documented and actual error signaling is a specific case of a broader contract violation
-- [Integration Data Consistency](./integration-data-consistency.md) - silently missed failures are a common root cause of two systems ending up in disagreeing states
-- [Data Pipeline Replay Idempotency](./data-pipeline-replay-idempotency.md) - retries triggered by a misread error state can produce the same duplicate-action risk idempotency failures cause
+- [Integration API Contract Violation](integration-api-contract-violation.md) - a mismatch between documented and actual error signaling is a specific case of a broader contract violation
+- [Integration Data Consistency](integration-data-consistency.md) - silently missed failures are a common root cause of two systems ending up in disagreeing states
+- [Data Pipeline Replay Idempotency](data-pipeline-replay-idempotency.md) - retries triggered by a misread error state can produce the same duplicate-action risk idempotency failures cause

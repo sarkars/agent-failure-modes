@@ -64,6 +64,6 @@ a controlled swap of only the name/school field.
 | Post-update bias shift | Counterfactual audit after a model version change shows a significant shift in bias magnitude or direction | High | Hold rollout, re-run full fairness audit before resuming production traffic |
 
 ## Related Patterns
-- [Model Reasoning Inconsistency](./model-reasoning-inconsistency.md) - fairness bias is a specific, demographically-correlated instance of inconsistent reasoning across logically equivalent inputs
-- [Model Uncertainty Unawareness](./model-uncertainty-unawareness.md) - biased scores are delivered with the same false confidence and post-hoc justification as other uncertain outputs
-- [Model Style Drift](./model-style-drift.md) - both are subtle, cumulative behavioral shifts that are invisible in single-instance review and only detectable in aggregate
+- [Model Reasoning Inconsistency](model-reasoning-inconsistency.md) - fairness bias is a specific, demographically-correlated instance of inconsistent reasoning across logically equivalent inputs
+- [Model Uncertainty Unawareness](model-uncertainty-unawareness.md) - biased scores are delivered with the same false confidence and post-hoc justification as other uncertain outputs
+- [Model Style Drift](model-style-drift.md) - both are subtle, cumulative behavioral shifts that are invisible in single-instance review and only detectable in aggregate

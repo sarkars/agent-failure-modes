@@ -54,7 +54,7 @@ Impact: A $0.0003 per-share NAV discrepancy is below typical materiality thresho
 
 ## Related Patterns
 - [Tool Output Format Mismatch](../../../../../cross-cutting/operations/goals/tool-selection-sequencing/failures/tool-output-format-mismatch.md) — related tool-chaining failure from format/unit disagreement between tools, distinct from precision loss introduced by text-mediated restatement of an otherwise-compatible numeric value
-- [Point-in-Time Data Violations](./point-in-time-data-violations.md) — related NAV/data-integrity failure in financial-services data pipelines, driven by temporal misalignment rather than numeric transcription loss
+- [Point-in-Time Data Violations](point-in-time-data-violations.md) — related NAV/data-integrity failure in financial-services data pipelines, driven by temporal misalignment rather than numeric transcription loss
 - [Fill-Confirmation Status Trusted Without Diffing Against Submitted Order Intent](../../trading-execution/failures/fill-confirmation-status-trusted-without-diffing-against-submitted-order-intent.md) — related failure to reconcile a chained tool-call output against ground truth before relying on it
 
 ## References

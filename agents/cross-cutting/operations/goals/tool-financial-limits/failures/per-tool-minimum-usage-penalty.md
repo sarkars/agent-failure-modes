@@ -65,6 +65,6 @@ usage no longer justifies the volume tier the pricing was based on.
 | Optimization shipped without contract check | A caching/routing change reduces call volume to a committed-minimum tool without a documented contract review | High | Roll back or reroute, add contract-check gate to the deploy process |
 
 ## Related Patterns
-- [Per-Tool Tiered Pricing Unknown](./per-tool-tiered-pricing-unknown.md) - both involve pricing structures that reward or penalize specific usage volumes in ways the agent doesn't model
-- [Hidden Tool Costs Not Visible](./hidden-tool-costs-not-visible.md) - both are cases where the true cost mechanics live outside the API response the agent's cost tracker reads
-- [Cross-Tool Total Budget Exceeded](./cross-tool-total-budget-exceeded.md) - contract-blind routing decisions compound with aggregate budget visibility gaps
+- [Per-Tool Tiered Pricing Unknown](per-tool-tiered-pricing-unknown.md) - both involve pricing structures that reward or penalize specific usage volumes in ways the agent doesn't model
+- [Hidden Tool Costs Not Visible](hidden-tool-costs-not-visible.md) - both are cases where the true cost mechanics live outside the API response the agent's cost tracker reads
+- [Cross-Tool Total Budget Exceeded](cross-tool-total-budget-exceeded.md) - contract-blind routing decisions compound with aggregate budget visibility gaps

@@ -62,6 +62,6 @@ Turn 12: User leaves the conversation and opens a complaint ticket
 | Repeated failed-pattern responses under rising frustration | Same clarification/resolution approach repeated 2+ times while frustration is rising | Medium | Force approach change or escalation |
 
 ## Related Patterns
-- [Clarification Loop Infinite](./clarification-loop-infinite.md) - a common concrete trigger of escalating frustration when repeated unresolved questioning continues unchanged
-- [User Trust Degradation](./user-trust-degradation.md) - unaddressed frustration escalation within sessions accumulates into longer-term trust erosion across sessions
-- [User Support Bottleneck](./user-support-bottleneck.md) - unresolved escalating-frustration sessions are a major source of the human escalation volume that overwhelms support teams
+- [Clarification Loop Infinite](clarification-loop-infinite.md) - a common concrete trigger of escalating frustration when repeated unresolved questioning continues unchanged
+- [User Trust Degradation](user-trust-degradation.md) - unaddressed frustration escalation within sessions accumulates into longer-term trust erosion across sessions
+- [User Support Bottleneck](user-support-bottleneck.md) - unresolved escalating-frustration sessions are a major source of the human escalation volume that overwhelms support teams

@@ -57,6 +57,6 @@ Teams often implement "requires signed approval" as a checkbox feature — add a
 | Expired token accepted | Token with expiry timestamp in the past passes verification | Critical | Halt approval service, audit verification code path immediately |
 
 ## Related Patterns
-- [Sensitive Operation No Approval Requirement](./sensitive-operation-no-approval-requirement.md) - this pattern covers the case where the approval gate exists but is verified incorrectly, versus missing entirely
-- [Conditional Permission Logic](./conditional-permission-logic.md) - both involve runtime evaluation logic that must correctly bind a decision to current, specific facts
-- [Delegation Impersonation Not Limited](./delegation-impersonation-not-limited.md) - forged/replayed approvals are one mechanism by which delegated authority is exceeded
+- [Sensitive Operation No Approval Requirement](sensitive-operation-no-approval-requirement.md) - this pattern covers the case where the approval gate exists but is verified incorrectly, versus missing entirely
+- [Conditional Permission Logic](conditional-permission-logic.md) - both involve runtime evaluation logic that must correctly bind a decision to current, specific facts
+- [Delegation Impersonation Not Limited](delegation-impersonation-not-limited.md) - forged/replayed approvals are one mechanism by which delegated authority is exceeded

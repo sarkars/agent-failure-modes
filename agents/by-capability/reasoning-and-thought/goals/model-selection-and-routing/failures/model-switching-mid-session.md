@@ -64,6 +64,6 @@ conversation without any signal to the user that a switch occurred.
 | Continuity failure following switch | post_switch_continuity_failure_rate spikes after a detected switch | Medium | Re-anchor constraints for affected session, review switch cause |
 
 ## Related Patterns
-- [Model Selection Nondeterminism](./model-selection-nondeterminism.md) - unscoped cohort/routing reassignment is the general mechanism that produces mid-session switching as a specific symptom
-- [Model Load Balancing Failure](./model-load-balancing-failure.md) - load-triggered failover is one legitimate cause of mid-session switching when session affinity isn't preserved through the failover path
-- [Model Version Incompatibility](./model-version-incompatibility.md) - a switch to a different model version mid-session can also break feature assumptions the calling code made about the original version
+- [Model Selection Nondeterminism](model-selection-nondeterminism.md) - unscoped cohort/routing reassignment is the general mechanism that produces mid-session switching as a specific symptom
+- [Model Load Balancing Failure](model-load-balancing-failure.md) - load-triggered failover is one legitimate cause of mid-session switching when session affinity isn't preserved through the failover path
+- [Model Version Incompatibility](model-version-incompatibility.md) - a switch to a different model version mid-session can also break feature assumptions the calling code made about the original version

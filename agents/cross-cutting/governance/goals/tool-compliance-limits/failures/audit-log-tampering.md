@@ -57,5 +57,5 @@ Audit logging is frequently implemented as "just another table" written to by th
 | Write credential used against log store | The agent's operational credential (not the isolated log-writer identity) attempts to write to the log store | Critical | Revoke the credential immediately, treat as a suspected compromise |
 
 ## Related Patterns
-- [Audit Logging Not Enforced](./audit-logging-not-enforced.md) - both undermine the reliability of the audit trail, one by preventing entries from being written, the other by allowing them to be altered after the fact
-- [Audit Retention Policy](./audit-retention-policy.md) - both result in audit evidence being unavailable when needed, through deletion rather than tampering
+- [Audit Logging Not Enforced](audit-logging-not-enforced.md) - both undermine the reliability of the audit trail, one by preventing entries from being written, the other by allowing them to be altered after the fact
+- [Audit Retention Policy](audit-retention-policy.md) - both result in audit evidence being unavailable when needed, through deletion rather than tampering

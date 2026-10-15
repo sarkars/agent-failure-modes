@@ -72,6 +72,6 @@ outpaced the original forecast.
 | Recurring predictable burst pattern | on_demand_burst_spend_recurring_ratio > 60% over a rolling month | Medium | Model cost of resizing reservation versus continued bursting; propose adjustment |
 
 ## Related Patterns
-- [Resource Quota Overcommit](./resource-quota-overcommit.md) - the cluster-level version of undersized capacity, where overlapping tenant demand rather than a single workload's growth causes the shortfall
-- [Concurrent Request Resource Explosion](./concurrent-request-resource-explosion.md) - an acute version of this pattern's chronic shortfall, where a sudden spike rather than gradual growth exceeds reserved capacity
-- [Latency Cost Tradeoff](./latency-cost-tradeoff.md) - insufficient reservation forces the same latency-versus-cost tension this pattern describes, but driven by under-provisioning rather than a deliberate tuning choice
+- [Resource Quota Overcommit](resource-quota-overcommit.md) - the cluster-level version of undersized capacity, where overlapping tenant demand rather than a single workload's growth causes the shortfall
+- [Concurrent Request Resource Explosion](concurrent-request-resource-explosion.md) - an acute version of this pattern's chronic shortfall, where a sudden spike rather than gradual growth exceeds reserved capacity
+- [Latency Cost Tradeoff](latency-cost-tradeoff.md) - insufficient reservation forces the same latency-versus-cost tension this pattern describes, but driven by under-provisioning rather than a deliberate tuning choice

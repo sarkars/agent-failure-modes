@@ -67,6 +67,6 @@ response, while the agent is fully down for contract-review requests.
 | Deprecated model error spike in production | deprecated_model_error_rate becomes nonzero | Critical | Treat as a production outage; expedite emergency migration to the tracked replacement candidate |
 
 ## Related Patterns
-- [Silent Model Update](./silent-model-update.md) - the inverse failure: not pinning (or using a floating alias) leads to unannounced behavior drift, whereas this pattern is the deferred cost of pinning itself
-- [Model Update Rollback Delay](./model-update-rollback-delay.md) - a rollback plan is only viable if the target version hasn't already expired, tying the two patterns together operationally
+- [Silent Model Update](silent-model-update.md) - the inverse failure: not pinning (or using a floating alias) leads to unannounced behavior drift, whereas this pattern is the deferred cost of pinning itself
+- [Model Update Rollback Delay](model-update-rollback-delay.md) - a rollback plan is only viable if the target version hasn't already expired, tying the two patterns together operationally
 - [Version Pinning Expiration](../../../../../cross-cutting/operations/goals/version-management/failures/version-pinning-expiration.md) - the general software-dependency form of this pattern (npm/pip lockfiles, base image tags, CVEs going stale); this pattern is the ML model/provider-API-specific variant with model-specific mitigations (eval regression testing, canarying) instead of package-patching ones

@@ -65,6 +65,6 @@ Policy scope is often defined in prose ("this policy applies to customer-facing 
 | High over-enforcement complaint rate | Sustained volume of requester complaints about a policy blocking out-of-scope actions | Warning | Review scope classification logic against policy author's actual intent |
 
 ## Related Patterns
-- [Policy Ambiguity Exploitation](./policy-ambiguity-exploitation.md) - both involve a gap between a policy's written scope and how it's actually enforced, though one is adversarial and one is a genuine misread
-- [Approval Scope Mismatch](./approval-scope-mismatch.md) - both involve a mismatch between intended and actual coverage of a control
-- [Policy Consistency Violation](./policy-consistency-violation.md) - both can produce inconsistent enforcement outcomes for functionally similar actions
+- [Policy Ambiguity Exploitation](policy-ambiguity-exploitation.md) - both involve a gap between a policy's written scope and how it's actually enforced, though one is adversarial and one is a genuine misread
+- [Approval Scope Mismatch](approval-scope-mismatch.md) - both involve a mismatch between intended and actual coverage of a control
+- [Policy Consistency Violation](policy-consistency-violation.md) - both can produce inconsistent enforcement outcomes for functionally similar actions

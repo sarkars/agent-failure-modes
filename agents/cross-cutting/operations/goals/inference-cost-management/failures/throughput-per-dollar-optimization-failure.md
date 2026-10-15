@@ -74,6 +74,6 @@ requests, not on more successful summaries delivered per dollar.
 | Throughput and success rate diverging | throughput_success_divergence shows sustained opposite trends for 2+ weeks | Medium | Cross-team review between infrastructure and product owners to identify the causal lever |
 
 ## Related Patterns
-- [Latency Cost Tradeoff](./latency-cost-tradeoff.md) - a specific case where a throughput-motivated latency change can trigger the retry/regeneration dynamics this pattern describes
-- [Model Compression Failure](./model-compression-failure.md) - quantization done to raise throughput is a common concrete lever that can directly cause the success-rate regression this pattern measures
-- [Speculative Execution Cost Waste](./speculative-execution-cost-waste.md) - another throughput-oriented optimization whose real economic value depends on a downstream success metric (acceptance rate) that's easy to stop monitoring
+- [Latency Cost Tradeoff](latency-cost-tradeoff.md) - a specific case where a throughput-motivated latency change can trigger the retry/regeneration dynamics this pattern describes
+- [Model Compression Failure](model-compression-failure.md) - quantization done to raise throughput is a common concrete lever that can directly cause the success-rate regression this pattern measures
+- [Speculative Execution Cost Waste](speculative-execution-cost-waste.md) - another throughput-oriented optimization whose real economic value depends on a downstream success metric (acceptance rate) that's easy to stop monitoring

@@ -2,7 +2,7 @@
 
 ## Issue: Agent Narrates a Tool-Initiated Action as Complete Based on Having Issued the Call, Not on the Call's Actual Returned Status
 
-An agent calls a tool that performs a real-world side effect — disbursing funds, applying a credit, sending a notification — and generates its confirmation to the user or downstream system immediately after issuing the call, without gating that confirmation on the tool's actual response. When the call times out, returns a `pending`/queued status, or fails outright, the agent has already claimed success. This differs from the tool itself lying about its outcome (see [Silent Tool Failures](./silent-failures.md)): here the tool may be behaving correctly and honestly reporting `pending` or `failed`, but nothing in the agent's control flow requires that status to be read before the completion claim is generated.
+An agent calls a tool that performs a real-world side effect — disbursing funds, applying a credit, sending a notification — and generates its confirmation to the user or downstream system immediately after issuing the call, without gating that confirmation on the tool's actual response. When the call times out, returns a `pending`/queued status, or fails outright, the agent has already claimed success. This differs from the tool itself lying about its outcome (see [Silent Tool Failures](silent-failures.md)): here the tool may be behaving correctly and honestly reporting `pending` or `failed`, but nothing in the agent's control flow requires that status to be read before the completion claim is generated.
 
 **Frequency**: Occasional
 
@@ -68,6 +68,6 @@ completed -- only the transcript claiming it was.
 | Audit sampling mismatch | Periodic sampling finds a claimed-complete action absent from the system of record | P1 | Escalate for manual remediation |
 
 ## Related Patterns
-- [Silent Tool Failures](./silent-failures.md) - the tool itself misreports its outcome (returns success when the action didn't complete); this pattern is the case where the tool honestly reports pending/failed but the agent never reads that field before claiming success
-- [Stale Tool Confirmation After Revision](./stale-tool-confirmation-after-revision.md) - a related but distinct failure where a confirmation was genuinely read once, but a subsequent change invalidates it without triggering a fresh re-check
-- [Tool Output Misinterpretation](./output-misinterpretation.md) - a related but distinct failure where the agent does read the tool's response but extracts the wrong value from it, as opposed to this pattern's case of never reading the response at all
+- [Silent Tool Failures](silent-failures.md) - the tool itself misreports its outcome (returns success when the action didn't complete); this pattern is the case where the tool honestly reports pending/failed but the agent never reads that field before claiming success
+- [Stale Tool Confirmation After Revision](stale-tool-confirmation-after-revision.md) - a related but distinct failure where a confirmation was genuinely read once, but a subsequent change invalidates it without triggering a fresh re-check
+- [Tool Output Misinterpretation](output-misinterpretation.md) - a related but distinct failure where the agent does read the tool's response but extracts the wrong value from it, as opposed to this pattern's case of never reading the response at all

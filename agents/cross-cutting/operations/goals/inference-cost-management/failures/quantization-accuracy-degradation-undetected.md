@@ -71,6 +71,6 @@ seemingly negligible aggregate number.
 | Gradual downstream metric drift post-quantization | user_correction_rate or downstream_task_success_rate drifts unfavorably within 8 weeks of a quantization rollout | Medium | Cross-reference deployment changelog; run a targeted stratified re-evaluation |
 
 ## Related Patterns
-- [Model Compression Failure](./model-compression-failure.md) - the broader pattern of compression breaking a specific capability; this pattern is the detection-gap variant where the regression is real but statistically invisible pre-deployment
-- [Throughput Per Dollar Optimization Failure](./throughput-per-dollar-optimization-failure.md) - undetected accuracy loss silently worsens cost-per-successful-output even while raw serving cost metrics look like a clean win
-- [Batch Cost Inefficiency](./batch-cost-inefficiency.md) - both are cost-optimization efforts whose success is measured on an incomplete metric, hiding a real efficiency loss elsewhere
+- [Model Compression Failure](model-compression-failure.md) - the broader pattern of compression breaking a specific capability; this pattern is the detection-gap variant where the regression is real but statistically invisible pre-deployment
+- [Throughput Per Dollar Optimization Failure](throughput-per-dollar-optimization-failure.md) - undetected accuracy loss silently worsens cost-per-successful-output even while raw serving cost metrics look like a clean win
+- [Batch Cost Inefficiency](batch-cost-inefficiency.md) - both are cost-optimization efforts whose success is measured on an incomplete metric, hiding a real efficiency loss elsewhere

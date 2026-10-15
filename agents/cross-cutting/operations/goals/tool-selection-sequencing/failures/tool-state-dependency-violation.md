@@ -70,6 +70,6 @@ behavior.
 | Elevated missing-dependency error rate | missing_dependency_error_rate exceeds threshold for a specific tool | Medium | Review the planner's handling of that tool's prerequisites, add explicit precondition declarations |
 
 ## Related Patterns
-- [Tool Invocation Ordering Dependency](./tool-invocation-ordering-dependency.md) - the closely related failure where the prerequisite call is made but in the wrong order, rather than omitted entirely
-- [Tool Mutation State Leak](./tool-mutation-state-leak.md) - the inverse failure, where leftover state from an unrelated call is incorrectly used instead of being correctly absent
-- [Tool Idempotency Assumption Failure](./tool-idempotency-assumption-failure.md) - both involve incorrect assumptions about what state a prior call did or didn't establish
+- [Tool Invocation Ordering Dependency](tool-invocation-ordering-dependency.md) - the closely related failure where the prerequisite call is made but in the wrong order, rather than omitted entirely
+- [Tool Mutation State Leak](tool-mutation-state-leak.md) - the inverse failure, where leftover state from an unrelated call is incorrectly used instead of being correctly absent
+- [Tool Idempotency Assumption Failure](tool-idempotency-assumption-failure.md) - both involve incorrect assumptions about what state a prior call did or didn't establish

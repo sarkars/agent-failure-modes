@@ -86,7 +86,7 @@ The same mechanism recurs with different nouns across at least these domains, ea
 | Safety cap hit rate rising | The cursor exhaustion guardrail triggers on more than 2% of calls in a week | P3 | Review whether the cap is too low for current data volumes or whether upstream filters should narrow the query |
 
 ## Related Patterns
-- [Partial Result Misuse](./partial-result-misuse.md) - the broader category of treating any incomplete tool output (truncation, omitted fields, warnings) as complete; this pattern is the specific case where the incompleteness signal is a pagination cursor/count
+- [Partial Result Misuse](partial-result-misuse.md) - the broader category of treating any incomplete tool output (truncation, omitted fields, warnings) as complete; this pattern is the specific case where the incompleteness signal is a pagination cursor/count
 - [Tool Capability Overestimation](../../tool-reliability/failures/tool-capability-overestimation.md) - a related but distinct failure where the agent assumes a tool supports functionality it doesn't, sometimes co-occurring with pagination failures when a capped result is also mistaken for a complete one
 - [Silent Tool Failures](../../tool-reliability/failures/silent-failures.md) - a related but distinct failure where the tool call itself fails or errors and is misread as success, as opposed to this pattern's case of a successful call whose completeness signal is ignored
 

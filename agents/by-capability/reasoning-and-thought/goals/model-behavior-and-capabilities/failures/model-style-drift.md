@@ -65,6 +65,6 @@ unchanged, in the system prompt sent with every call.
 | No recovery after register shift | register_transition_recovery_rate drops for a specific transition type (e.g. after error messages) | Medium | Add explicit handling instructions for that transition type in the persona prompt |
 
 ## Related Patterns
-- [Model Instruction Following Decay](./model-instruction-following-decay.md) - style drift is the stylistic manifestation of the same conversational-position dilution that degrades rule adherence generally
-- [Model Context Length Behavior Change](./model-context-length-behavior-change.md) - both stem from the fixed-position system prompt losing relative influence as context grows
-- [Model Fairness Bias](./model-fairness-bias.md) - both are gradual, cumulative behavioral shifts that are invisible turn-by-turn and only clear in aggregate or before/after comparison
+- [Model Instruction Following Decay](model-instruction-following-decay.md) - style drift is the stylistic manifestation of the same conversational-position dilution that degrades rule adherence generally
+- [Model Context Length Behavior Change](model-context-length-behavior-change.md) - both stem from the fixed-position system prompt losing relative influence as context grows
+- [Model Fairness Bias](model-fairness-bias.md) - both are gradual, cumulative behavioral shifts that are invisible turn-by-turn and only clear in aggregate or before/after comparison

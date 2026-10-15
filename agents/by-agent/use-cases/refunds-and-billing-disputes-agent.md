@@ -79,9 +79,9 @@ For every goal: how to measure it, how to find your baseline, what counts as a f
 ## Conversation-level failures to check
 
 This agent talks to people. Also test these:
-- [hollow empathy](../../by-capability/human-machine-interface/core/emotional-intelligence/failures/hollow-empathy.md)
-- [missed crisis signals](../../by-capability/human-machine-interface/core/vulnerable-users/failures/missed-crisis-signals.md)
-- [no de-escalation strategy](../../by-capability/human-machine-interface/core/difficult-customers/failures/no-de-escalation-strategy.md)
+- [hollow empathy](../../by-capability/human-machine-interface/goals/emotional-intelligence/failures/hollow-empathy.md)
+- [missed crisis signals](../../by-capability/human-machine-interface/goals/vulnerable-users/failures/missed-crisis-signals.md)
+- [no de-escalation strategy](../../by-capability/human-machine-interface/goals/difficult-customers/failures/no-de-escalation-strategy.md)
 
 ## Operations concerns for this agent
 

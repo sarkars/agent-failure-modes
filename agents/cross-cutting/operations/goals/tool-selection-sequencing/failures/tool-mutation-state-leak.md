@@ -69,6 +69,6 @@ cross-checks the reported number against the billing system's total.
 | Residual state detected pre-call | State audit finds non-default shared state present before a tool call that didn't set it | Medium | Investigate the prior call that left the residue, add a reset point |
 
 ## Related Patterns
-- [Tool State Dependency Violation](./tool-state-dependency-violation.md) - the inverse failure, where a call depends on state that was never actually set, rather than being affected by state it didn't expect
-- [Tool Invocation Ordering Dependency](./tool-invocation-ordering-dependency.md) - ordering issues and mutation leaks often compound, since the leaked state's effect depends on call order
-- [Tool Idempotency Assumption Failure](./tool-idempotency-assumption-failure.md) - both involve incorrect assumptions about a tool call's side effects beyond its declared return value
+- [Tool State Dependency Violation](tool-state-dependency-violation.md) - the inverse failure, where a call depends on state that was never actually set, rather than being affected by state it didn't expect
+- [Tool Invocation Ordering Dependency](tool-invocation-ordering-dependency.md) - ordering issues and mutation leaks often compound, since the leaked state's effect depends on call order
+- [Tool Idempotency Assumption Failure](tool-idempotency-assumption-failure.md) - both involve incorrect assumptions about a tool call's side effects beyond its declared return value

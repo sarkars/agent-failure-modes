@@ -62,6 +62,6 @@ the booking.
 | Handoff schema incomplete | A handoff payload is missing required schema fields for its task type | Medium | Block the handoff, return to sending agent for completion |
 
 ## Related Patterns
-- [Handoff State Loss](./handoff-state-loss.md) - a more severe variant where task state is dropped entirely rather than selectively summarized
-- [Handoff Accountability Loss](./handoff-accountability-loss.md) - incomplete context can compound accountability loss when the receiving agent doesn't realize it's missing something critical
-- [Handoff Protocol Version Mismatch](./handoff-protocol-version-mismatch.md) - a structural cause of context incompleteness when schema versions between sender and receiver diverge
+- [Handoff State Loss](handoff-state-loss.md) - a more severe variant where task state is dropped entirely rather than selectively summarized
+- [Handoff Accountability Loss](handoff-accountability-loss.md) - incomplete context can compound accountability loss when the receiving agent doesn't realize it's missing something critical
+- [Handoff Protocol Version Mismatch](handoff-protocol-version-mismatch.md) - a structural cause of context incompleteness when schema versions between sender and receiver diverge

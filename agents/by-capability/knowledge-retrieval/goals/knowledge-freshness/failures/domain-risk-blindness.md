@@ -63,6 +63,6 @@ substantially reduces their available retirement funds.
 | Risk-scan step returns empty on high-base-rate domain | Risk-scan step yields zero flags in a domain where the historical flag rate is well above zero | Medium | Trigger human review, audit risk-scan step for regression |
 
 ## Related Patterns
-- [Domain Constraint Violation](./domain-constraint-violation.md) - a hard-constraint version of the same "domain-specific significance not captured by generic retrieval" mechanism
-- [Domain Exception Not Handled](./domain-exception-not-handled.md) - both involve domain judgment not encoded in retrieval ranking, one for exceptions and one for risk salience
-- [Domain Rule Misunderstanding](./domain-rule-misunderstanding.md) - shares the underlying gap between literal fact retrieval and domain-expert-level judgment
+- [Domain Constraint Violation](domain-constraint-violation.md) - a hard-constraint version of the same "domain-specific significance not captured by generic retrieval" mechanism
+- [Domain Exception Not Handled](domain-exception-not-handled.md) - both involve domain judgment not encoded in retrieval ranking, one for exceptions and one for risk salience
+- [Domain Rule Misunderstanding](domain-rule-misunderstanding.md) - shares the underlying gap between literal fact retrieval and domain-expert-level judgment

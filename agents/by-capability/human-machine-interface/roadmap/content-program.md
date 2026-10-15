@@ -2,6 +2,13 @@
 
 > **What this is.** Besides writing patterns, each scheduled run does **one** task from this file. The tasks turn a catalog into something people cite and use: tiered quality, real incidents, runnable tests, an honest "will a better model fix this?" answer, and entry points by symptom and by role. Everything stays inside `agents/by-capability/human-machine-interface/`. The [execution plan](execution-plan.md) says how a run works.
 
+## Site compatibility
+The published site is Astro, fed by an importer that reads this repo. Keep these true or pages vanish or lose their goal and category:
+- Written patterns live at `goals/<family>/failures/<name>.md`, with `goals/<family>/README.md` present.
+- Line 1 of a pattern is its H1. It also has a `**Frequency**: Very Common|Common|Occasional|Rare` line and a `## Issue: <one sentence>` line.
+- Run `python3 -I agents/by-capability/human-machine-interface/roadmap/tools/check_site_compat.py` with the other checks. It must pass before every commit.
+- Incident pages use the site's incident front matter. The chat builder ships as a static page in the site's `public/` folder.
+
 ## Rules for every task
 - **No invented evidence.** Cite only what you opened. Never write test results, incidents, quotations, or mappings you did not verify. If you can't, write "Not yet run", "No public incident found", or leave the task *Blocked* with the reason.
 - **Link only to what exists.** Entry pages (symptoms, roles, glossary) link only to patterns marked **Written**. A page with fewer than three links to written patterns waits.
@@ -57,7 +64,7 @@ These come first in the queue, at 3 per run. They were picked for customer deman
 | ID | Workstream | Deliverable | When a run does it |
 |---|---|---|---|
 | WS-01 | Two tiers, labeled | Maturity label and tier on every written pattern; this file's flagship list | Set up now. Each run labels its own patterns |
-| WS-02 | Incident anchoring | `incidents/<slug>.md`: dated, sourced public cases, linked from patterns | Alongside each flagship, plus one standalone task per week when ready |
+| WS-02 | Incident anchoring | `incidents/<slug>.md` in the site's incident format ([README](../incidents/)); check the site's existing incidents first and link to them | Alongside each flagship, plus one standalone task per week when ready |
 | WS-03 | Tested fixes | `tests/<pattern>.md` per flagship in the `tests/README.md` format | Alongside each flagship |
 | WS-04 | "Will a better model fix this?" | A header row on every pattern, from the catalog column, marked "our judgment" or "tested" | Every pattern |
 | WS-05 | Symptom-first entry pages | `symptoms/<slug>.md`: a three-question diagnosis ending at written patterns | When three or more written patterns share a symptom |

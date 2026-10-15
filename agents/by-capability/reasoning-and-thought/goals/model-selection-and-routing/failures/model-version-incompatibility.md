@@ -66,6 +66,6 @@ missing the additional tool calls the code assumed would be present.
 | Version-specific error spike | version_specific_error_rate breaches threshold for one version in the pool | Medium | Isolate traffic from that version, investigate feature gap |
 
 ## Related Patterns
-- [Model Capability Mismatch](./model-capability-mismatch.md) - a broader category of the same problem; version incompatibility is the fine-grained, within-family instance of a capability gap
-- [Model Switching Mid-Session](./model-switching-mid-session.md) - a version incompatibility discovered mid-session compounds into a continuity break if the switch happens between versions with different feature support
-- [Model Selection Nondeterminism](./model-selection-nondeterminism.md) - inconsistent version selection makes version-incompatibility bugs intermittent and hard to reproduce
+- [Model Capability Mismatch](model-capability-mismatch.md) - a broader category of the same problem; version incompatibility is the fine-grained, within-family instance of a capability gap
+- [Model Switching Mid-Session](model-switching-mid-session.md) - a version incompatibility discovered mid-session compounds into a continuity break if the switch happens between versions with different feature support
+- [Model Selection Nondeterminism](model-selection-nondeterminism.md) - inconsistent version selection makes version-incompatibility bugs intermittent and hard to reproduce

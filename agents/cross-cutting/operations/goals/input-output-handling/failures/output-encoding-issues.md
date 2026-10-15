@@ -66,6 +66,6 @@ customers have been trained to distrust.
 | Encoding metadata mismatch | Declared charset in output metadata doesn't match the encoding actually used to write the bytes | High | Halt affected pipeline, audit templating/serialization separation |
 
 ## Related Patterns
-- [Input Encoding Mismatch](./input-encoding-mismatch.md) - the mirror-image failure occurring at ingestion rather than at output generation
-- [Output Quote Escaping Failure](./output-quote-escaping-failure.md) - a related output-serialization failure, focused on structural characters rather than character-set encoding
-- [Output Truncation Silent](./output-truncation-silent.md) - multi-byte encoding mismatches can compound with truncation when byte-length limits are applied without encoding awareness
+- [Input Encoding Mismatch](input-encoding-mismatch.md) - the mirror-image failure occurring at ingestion rather than at output generation
+- [Output Quote Escaping Failure](output-quote-escaping-failure.md) - a related output-serialization failure, focused on structural characters rather than character-set encoding
+- [Output Truncation Silent](output-truncation-silent.md) - multi-byte encoding mismatches can compound with truncation when byte-length limits are applied without encoding awareness

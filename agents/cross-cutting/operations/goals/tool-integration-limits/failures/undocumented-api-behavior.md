@@ -66,5 +66,5 @@ API documentation is written and maintained separately from the actual server im
 
 ## Related Patterns
 - [Api Version Schema Mismatch](../../tool-capability-limits/failures/api-version-schema-mismatch.md) - a specific case of documented-versus-actual divergence, focused on schema rather than behavior generally
-- [Webhook Order Not Guaranteed](./webhook-order-not-guaranteed.md) - a common specific instance of undocumented (or under-emphasized) behavior around delivery ordering
-- [Plugin Compatibility Matrix](./plugin-compatibility-matrix.md) - undocumented behavior often emerges specifically at unsupported version combinations
+- [Webhook Order Not Guaranteed](webhook-order-not-guaranteed.md) - a common specific instance of undocumented (or under-emphasized) behavior around delivery ordering
+- [Plugin Compatibility Matrix](plugin-compatibility-matrix.md) - undocumented behavior often emerges specifically at unsupported version combinations

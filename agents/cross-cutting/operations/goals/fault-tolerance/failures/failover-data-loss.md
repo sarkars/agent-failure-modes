@@ -74,6 +74,6 @@ as the primary's local WAL fsync completes, before shipping to standby.
 | Missing acknowledged write confirmed | A specific acknowledged write is confirmed absent from new primary | High | Escalate to data-integrity incident, attempt reconciliation from client-side receipts or logs |
 
 ## Related Patterns
-- [Failover State Corruption](./failover-state-corruption.md) - both involve state loss/damage during transfer to standby, one is loss of specific in-flight writes, the other is corruption of transferred state
-- [Recovery Point Objective Miss](./recovery-point-objective-miss.md) - measures the general data-loss window an organization tolerates; failover data loss is the concrete incident-level instance of exceeding it
-- [Failover Delay Too Long](./failover-delay-too-long.md) - a longer failover delay generally widens the exposure window in which in-flight data loss can occur
+- [Failover State Corruption](failover-state-corruption.md) - both involve state loss/damage during transfer to standby, one is loss of specific in-flight writes, the other is corruption of transferred state
+- [Recovery Point Objective Miss](recovery-point-objective-miss.md) - measures the general data-loss window an organization tolerates; failover data loss is the concrete incident-level instance of exceeding it
+- [Failover Delay Too Long](failover-delay-too-long.md) - a longer failover delay generally widens the exposure window in which in-flight data loss can occur

@@ -95,9 +95,9 @@ For every goal: how to measure it, how to find your baseline, what counts as a f
 ## Conversation-level failures to check
 
 This agent talks to people. Also test these:
-- [stakes-blind register](../../by-capability/human-machine-interface/core/stakes-calibration/failures/stakes-blind-register.md)
-- [missed crisis signals](../../by-capability/human-machine-interface/core/vulnerable-users/failures/missed-crisis-signals.md)
-- [no channel switch or context lost](../../by-capability/human-machine-interface/channel-selection/failures/no-channel-switch-or-context-lost.md)
+- [stakes-blind register](../../by-capability/human-machine-interface/goals/stakes-calibration/failures/stakes-blind-register.md)
+- [missed crisis signals](../../by-capability/human-machine-interface/goals/vulnerable-users/failures/missed-crisis-signals.md)
+- [no channel switch or context lost](../../by-capability/human-machine-interface/goals/channel-selection/failures/no-channel-switch-or-context-lost.md)
 
 ## Operations concerns for this agent
 

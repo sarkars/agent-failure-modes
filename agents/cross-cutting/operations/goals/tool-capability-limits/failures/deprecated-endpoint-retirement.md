@@ -62,6 +62,6 @@ Vendors typically announce deprecations through channels (email to account owner
 | Sudden 404/410 spike on production dependency | `404_410_rate` exceeds 1% for a previously stable endpoint | Critical | Halt retries, check vendor status page/changelog for retirement, execute fallback plan |
 
 ## Related Patterns
-- [Beta Feature Instability](./beta-feature-instability.md) - deprecation and retirement is often the final stage of the same lifecycle beta instability represents early on
-- [Api Version Schema Mismatch](./api-version-schema-mismatch.md) - schema drift frequently precedes and signals an eventual retirement
-- [Feature Flag Disabled](./feature-flag-disabled.md) - both leave the agent with no advance detection of a capability disappearing
+- [Beta Feature Instability](beta-feature-instability.md) - deprecation and retirement is often the final stage of the same lifecycle beta instability represents early on
+- [Api Version Schema Mismatch](api-version-schema-mismatch.md) - schema drift frequently precedes and signals an eventual retirement
+- [Feature Flag Disabled](feature-flag-disabled.md) - both leave the agent with no advance detection of a capability disappearing

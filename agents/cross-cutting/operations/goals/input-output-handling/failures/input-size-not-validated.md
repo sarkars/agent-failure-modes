@@ -68,6 +68,6 @@ triggering the same crash again.
 | Oversized input rejection spike | oversized_input_rejection_rate exceeds baseline within a rolling window | Medium | Investigate whether a specific client/integration is misconfigured or retry-looping |
 
 ## Related Patterns
-- [Input Recursion Limit](./input-recursion-limit.md) - a related failure to bound input cost, but along the nesting-depth dimension rather than raw size
-- [Output Length Not Enforced](./output-length-not-enforced.md) - the mirror-image failure on the output side, where generated content isn't bounded before being handed to a consumer
-- [Output Truncation Silent](./output-truncation-silent.md) - a frequent downstream consequence when an oversized input's output is force-truncated without signaling the caller
+- [Input Recursion Limit](input-recursion-limit.md) - a related failure to bound input cost, but along the nesting-depth dimension rather than raw size
+- [Output Length Not Enforced](output-length-not-enforced.md) - the mirror-image failure on the output side, where generated content isn't bounded before being handed to a consumer
+- [Output Truncation Silent](output-truncation-silent.md) - a frequent downstream consequence when an oversized input's output is force-truncated without signaling the caller

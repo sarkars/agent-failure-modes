@@ -55,6 +55,6 @@ The orchestrator's retry logic waits a fixed 60 seconds before retrying (tuned f
 | Repeated burst rejection despite low sustained usage | Burst 429s recur across multiple fan-outs while daily/monthly quota utilization stays under 20% | Warning | Confirm burst limit value with vendor and update local pacing config |
 
 ## Related Patterns
-- [Per-Tool Requests Per Minute Exceeded](./per-tool-requests-per-minute-exceeded.md) - the sustained-window sibling of this short-window constraint; agents often tune for one and miss the other
-- [Per-Tool Concurrent Connections Exceeded](./per-tool-concurrent-connections-exceeded.md) - fan-out patterns that trigger burst limits often simultaneously trip concurrent-connection limits
-- [Rate Limit Grace Period Missing](./rate-limit-grace-period-missing.md) - burst windows are especially likely to have little to no grace period, making backoff timing critical
+- [Per-Tool Requests Per Minute Exceeded](per-tool-requests-per-minute-exceeded.md) - the sustained-window sibling of this short-window constraint; agents often tune for one and miss the other
+- [Per-Tool Concurrent Connections Exceeded](per-tool-concurrent-connections-exceeded.md) - fan-out patterns that trigger burst limits often simultaneously trip concurrent-connection limits
+- [Rate Limit Grace Period Missing](rate-limit-grace-period-missing.md) - burst windows are especially likely to have little to no grace period, making backoff timing critical

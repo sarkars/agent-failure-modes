@@ -68,6 +68,6 @@ cancellation and apology email.
 | Timeout rate spike | consistency_check_timeout_rate exceeds threshold for 5+ minutes | Medium | Investigate downstream service load, consider temporarily switching affected action types to fail-closed |
 
 ## Related Patterns
-- [State Replication Lag](./state-replication-lag.md) - a related cause of the staleness a consistency check is designed to detect
-- [Concurrent State Modification](./concurrent-state-modification.md) - the underlying race that a timed-out consistency check often fails to catch
-- [State Machine Violation](./state-machine-violation.md) - acting on stale state from a timed-out check can itself produce an invalid state transition
+- [State Replication Lag](state-replication-lag.md) - a related cause of the staleness a consistency check is designed to detect
+- [Concurrent State Modification](concurrent-state-modification.md) - the underlying race that a timed-out consistency check often fails to catch
+- [State Machine Violation](state-machine-violation.md) - acting on stale state from a timed-out check can itself produce an invalid state transition

@@ -64,6 +64,6 @@ consensus, and it had no way of knowing its source predated the shift.
 | Repeated outdated-advice corrections | Same content ID flagged outdated by 3+ distinct users | High | Immediately suppress from confident recommendations, escalate for manual review |
 
 ## Related Patterns
-- [Knowledge Update Lag](./knowledge-update-lag.md) - the underlying mechanism (indexed copy lags the source) that produces stale best-practice advice as one manifestation
-- [Domain Rule Misunderstanding](./domain-rule-misunderstanding.md) - both involve misapplying domain knowledge, but this one is about currency rather than scope
-- [Fact Timestamp Error](./fact-timestamp-error.md) - shares the temporal-validity mechanism, applied to individual facts rather than aggregate practice
+- [Knowledge Update Lag](knowledge-update-lag.md) - the underlying mechanism (indexed copy lags the source) that produces stale best-practice advice as one manifestation
+- [Domain Rule Misunderstanding](domain-rule-misunderstanding.md) - both involve misapplying domain knowledge, but this one is about currency rather than scope
+- [Fact Timestamp Error](fact-timestamp-error.md) - shares the temporal-validity mechanism, applied to individual facts rather than aggregate practice

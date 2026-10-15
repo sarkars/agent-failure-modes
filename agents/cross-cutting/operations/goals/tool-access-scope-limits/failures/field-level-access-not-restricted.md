@@ -64,6 +64,6 @@ question.
 | New Field Missing Classification | A newly added schema field reaches an agent tool without a field-level classification | P2 | Block exposure pending classification review |
 
 ## Related Patterns
-- [Sensitive Field Access Not Restricted](./sensitive-field-access-not-restricted.md) - a specific case where the unrestricted field is a known-sensitive one like salary or health status
-- [Masked Field Unmasking](./masked-field-unmasking.md) - a related failure where a field-level control exists but is bypassed rather than absent
-- [Data Classification Access Not Enforced](./data-classification-access-not-enforced.md) - the same enforcement gap at record/document granularity instead of field granularity
+- [Sensitive Field Access Not Restricted](sensitive-field-access-not-restricted.md) - a specific case where the unrestricted field is a known-sensitive one like salary or health status
+- [Masked Field Unmasking](masked-field-unmasking.md) - a related failure where a field-level control exists but is bypassed rather than absent
+- [Data Classification Access Not Enforced](data-classification-access-not-enforced.md) - the same enforcement gap at record/document granularity instead of field granularity

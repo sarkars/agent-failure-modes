@@ -74,6 +74,6 @@ Week 0, 03:14:00 - us-east-1 primary experiences a hardware fault.
 | Correctness regression post-failover | post_failover_correctness_delta exceeds threshold within monitoring window | High | Treat as a live incident even though availability metrics are green; investigate standby parity |
 
 ## Related Patterns
-- [Failover Delay Too Long](./failover-delay-too-long.md) - both are failover-quality failures, one about timing, this one about correctness of the result
-- [Failover State Corruption](./failover-state-corruption.md) - a related but distinct mechanism where the standby's state itself is corrupted during transfer rather than merely stale
-- [Recovery Divergence](./recovery-divergence.md) - shares the theme of a recovered/promoted instance ending up in a state inconsistent with what preceded it
+- [Failover Delay Too Long](failover-delay-too-long.md) - both are failover-quality failures, one about timing, this one about correctness of the result
+- [Failover State Corruption](failover-state-corruption.md) - a related but distinct mechanism where the standby's state itself is corrupted during transfer rather than merely stale
+- [Recovery Divergence](recovery-divergence.md) - shares the theme of a recovered/promoted instance ending up in a state inconsistent with what preceded it

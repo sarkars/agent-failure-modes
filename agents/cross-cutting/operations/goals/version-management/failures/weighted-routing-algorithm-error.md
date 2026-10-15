@@ -70,6 +70,6 @@ deployment itself.
 | Zero traffic to a nonzero-weighted version | A version configured with a nonzero weight measures 0% observed traffic share | High | Treat as a routing algorithm bug candidate before assuming a deployment or health-check issue |
 
 ## Related Patterns
-- [Traffic Routing Asymmetry](./traffic-routing-asymmetry.md) - a related but distinct failure where correctly-computed weights are applied unevenly across different entry points or protocols due to infrastructure quirks, rather than the weight computation itself being wrong
-- [Canary Deployment Incomplete](./canary-deployment-incomplete.md) - a related but distinct failure where a rollout stalls at an intermediate weight and never progresses, as opposed to this pattern's consistently miscalculated weight at any given point in the rollout
-- [Sticky Session Loss](./sticky-session-loss.md) - a related infrastructure-level routing failure that can produce similar-looking distribution anomalies but stems from session-affinity handling rather than weight-computation bugs
+- [Traffic Routing Asymmetry](traffic-routing-asymmetry.md) - a related but distinct failure where correctly-computed weights are applied unevenly across different entry points or protocols due to infrastructure quirks, rather than the weight computation itself being wrong
+- [Canary Deployment Incomplete](canary-deployment-incomplete.md) - a related but distinct failure where a rollout stalls at an intermediate weight and never progresses, as opposed to this pattern's consistently miscalculated weight at any given point in the rollout
+- [Sticky Session Loss](sticky-session-loss.md) - a related infrastructure-level routing failure that can produce similar-looking distribution anomalies but stems from session-affinity handling rather than weight-computation bugs

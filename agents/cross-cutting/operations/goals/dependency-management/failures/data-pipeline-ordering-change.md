@@ -67,6 +67,6 @@ sold out.
 | Out-of-order event spike | out_of_order_event_rate exceeds threshold | Medium | Investigate consumer lag imbalance, check for recent scaling/repartitioning changes |
 
 ## Related Patterns
-- [Data Pipeline Replay Idempotency](./data-pipeline-replay-idempotency.md) - both concern event delivery guarantees consumers implicitly rely on; ordering and idempotency are frequently violated together
-- [Data Pipeline Backpressure Unhandled](./data-pipeline-backpressure-unhandled.md) - scaling changes made to relieve backpressure are a common trigger for the repartitioning that breaks ordering
-- [Data Pipeline Latency](./data-pipeline-latency.md) - uneven consumer lag across partitions, a latency phenomenon, is the direct mechanism by which repartitioning produces out-of-order application
+- [Data Pipeline Replay Idempotency](data-pipeline-replay-idempotency.md) - both concern event delivery guarantees consumers implicitly rely on; ordering and idempotency are frequently violated together
+- [Data Pipeline Backpressure Unhandled](data-pipeline-backpressure-unhandled.md) - scaling changes made to relieve backpressure are a common trigger for the repartitioning that breaks ordering
+- [Data Pipeline Latency](data-pipeline-latency.md) - uneven consumer lag across partitions, a latency phenomenon, is the direct mechanism by which repartitioning produces out-of-order application

@@ -66,6 +66,6 @@ to happen than to happen.
 | Hedge preservation rate drop | hedge_preservation_rate falls below threshold after a generation pipeline change | Medium | Review recent prompt/pipeline changes for hedge-stripping regressions |
 
 ## Related Patterns
-- [Fact Partial Truth](./fact-partial-truth.md) - a probabilistic mismatch is a specific form of partial truth where the dropped qualifier is specifically the fact's uncertainty framing
-- [Fact Generalization Error](./fact-generalization-error.md) - both involve stripping a scoping condition, one for applicable population and one for certainty level
-- [Domain Risk Blindness](./domain-risk-blindness.md) - related in that both concern under-communicating risk, one through omission and one through false certainty
+- [Fact Partial Truth](fact-partial-truth.md) - a probabilistic mismatch is a specific form of partial truth where the dropped qualifier is specifically the fact's uncertainty framing
+- [Fact Generalization Error](fact-generalization-error.md) - both involve stripping a scoping condition, one for applicable population and one for certainty level
+- [Domain Risk Blindness](domain-risk-blindness.md) - related in that both concern under-communicating risk, one through omission and one through false certainty

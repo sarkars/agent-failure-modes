@@ -66,6 +66,6 @@ recognize as "needs both."
 | Hop budget near exhaustion | task_hop_count reaches 80% of the configured maximum | Medium | Flag task for review before the hard cutoff discards routing context |
 
 ## Related Patterns
-- [Handoff Timing Mismatch](./handoff-timing-mismatch.md) - both involve handoff logic that is locally correct but globally dysfunctional across agent boundaries
-- [Handoff Accountability Loss](./handoff-accountability-loss.md) - a circularly-routed task also has no single owner, compounding the difficulty of noticing the loop
-- [Handoff Context Incompleteness](./handoff-context-incompleteness.md) - incomplete context about prior routing decisions is often what allows a cycle to go undetected
+- [Handoff Timing Mismatch](handoff-timing-mismatch.md) - both involve handoff logic that is locally correct but globally dysfunctional across agent boundaries
+- [Handoff Accountability Loss](handoff-accountability-loss.md) - a circularly-routed task also has no single owner, compounding the difficulty of noticing the loop
+- [Handoff Context Incompleteness](handoff-context-incompleteness.md) - incomplete context about prior routing decisions is often what allows a cycle to go undetected

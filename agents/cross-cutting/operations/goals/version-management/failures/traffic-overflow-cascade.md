@@ -70,6 +70,6 @@ capacity without checking.
 | Receiving pool overloaded post-redirect | receiving_pool_capacity_utilization exceeds threshold immediately after a shift | High | Throttle or pause the redirect, evaluate emergency capacity scale-out |
 
 ## Related Patterns
-- [Circuit Breaker False Positive](./circuit-breaker-false-positive.md) - a related instability mechanism where a threshold-based reaction (breaker tripping or health check failing) removes capacity that then compounds load elsewhere
-- [Health Check Flapping](./health-check-flapping.md) - overloaded instances failing and recovering under fluctuating load can flap in ways that repeatedly re-trigger overflow redirection
-- [Traffic Routing Asymmetry](./traffic-routing-asymmetry.md) - both concern traffic distribution going wrong during a shift, one via uneven capacity absorption and one via inconsistent rule application
+- [Circuit Breaker False Positive](circuit-breaker-false-positive.md) - a related instability mechanism where a threshold-based reaction (breaker tripping or health check failing) removes capacity that then compounds load elsewhere
+- [Health Check Flapping](health-check-flapping.md) - overloaded instances failing and recovering under fluctuating load can flap in ways that repeatedly re-trigger overflow redirection
+- [Traffic Routing Asymmetry](traffic-routing-asymmetry.md) - both concern traffic distribution going wrong during a shift, one via uneven capacity absorption and one via inconsistent rule application

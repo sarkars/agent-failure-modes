@@ -65,6 +65,6 @@ account was deleted before her first day.
 | Irreversible action taken pre-failure | An irreversible action (send, charge, external notify) occurred in a task that subsequently failed and required rollback | Medium | Flag for manual review, assess customer/user-facing impact |
 
 ## Related Patterns
-- [Handoff Idempotency Violation](./handoff-idempotency-violation.md) - both involve side effects that are hard to cleanly reverse, one from duplication and one from partial failure
-- [Handoff Accountability Loss](./handoff-accountability-loss.md) - a failed rollback that leaves residual state often has no clear owner responsible for the cleanup
-- [Handoff State Loss](./handoff-state-loss.md) - without a preserved side-effect ledger, the state needed to perform a correct rollback is often the first thing lost
+- [Handoff Idempotency Violation](handoff-idempotency-violation.md) - both involve side effects that are hard to cleanly reverse, one from duplication and one from partial failure
+- [Handoff Accountability Loss](handoff-accountability-loss.md) - a failed rollback that leaves residual state often has no clear owner responsible for the cleanup
+- [Handoff State Loss](handoff-state-loss.md) - without a preserved side-effect ledger, the state needed to perform a correct rollback is often the first thing lost

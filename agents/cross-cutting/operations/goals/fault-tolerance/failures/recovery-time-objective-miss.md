@@ -83,6 +83,6 @@ cover.
 | RTO validation stale after architecture change | A new critical-path dependency is added without a corresponding RTO re-validation | Medium | Require re-validation drill before the change is considered fully rolled out |
 
 ## Related Patterns
-- [Failover Delay Too Long](./failover-delay-too-long.md) - describes the stage-by-stage mechanics that most commonly cause an aggregate RTO miss
-- [Recovery Point Objective Miss](./recovery-point-objective-miss.md) - the data-loss-axis counterpart; both are commitment-vs-reality gaps in disaster-recovery objectives
-- [Recovery Procedure Untested](./recovery-procedure-untested.md) - an untested procedure is one of the most common root causes of an RTO miss, since its time estimate was never empirically validated
+- [Failover Delay Too Long](failover-delay-too-long.md) - describes the stage-by-stage mechanics that most commonly cause an aggregate RTO miss
+- [Recovery Point Objective Miss](recovery-point-objective-miss.md) - the data-loss-axis counterpart; both are commitment-vs-reality gaps in disaster-recovery objectives
+- [Recovery Procedure Untested](recovery-procedure-untested.md) - an untested procedure is one of the most common root causes of an RTO miss, since its time estimate was never empirically validated

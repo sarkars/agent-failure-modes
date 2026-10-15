@@ -61,6 +61,6 @@ phrasing gives no indication the fact was ever time-anchored at all.
 | Anchor retention rate drop | temporal_anchor_retention_rate falls below threshold after a summarization pipeline change | Medium | Review recent generation prompt/pipeline changes for anchor-stripping regressions |
 
 ## Related Patterns
-- [Fact Timestamp Error](./fact-timestamp-error.md) - closely related; this pattern is the generation-time stripping of temporal framing, that one is the retrieval-time misapplication of a fact outside its valid window
-- [Fact Context Loss](./fact-context-loss.md) - the general "qualifier dropped" mechanism, of which temporal-anchor loss is a specific, common instance
-- [Knowledge Update Lag](./knowledge-update-lag.md) - related in that both concern currency, one about the index lagging the source and one about currency framing being stripped even when the source itself is current
+- [Fact Timestamp Error](fact-timestamp-error.md) - closely related; this pattern is the generation-time stripping of temporal framing, that one is the retrieval-time misapplication of a fact outside its valid window
+- [Fact Context Loss](fact-context-loss.md) - the general "qualifier dropped" mechanism, of which temporal-anchor loss is a specific, common instance
+- [Knowledge Update Lag](knowledge-update-lag.md) - related in that both concern currency, one about the index lagging the source and one about currency framing being stripped even when the source itself is current

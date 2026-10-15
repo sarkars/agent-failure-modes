@@ -58,6 +58,6 @@ Retention policies are typically authored by a legal or privacy team as a docume
 | PII-writing tool deployed without TTL | A new tool begins writing a PII category with no corresponding expiry configuration | High | Block further writes until a retention mechanism is configured |
 
 ## Related Patterns
-- [Data Deletion Compliance](./data-deletion-compliance.md) - both concern personal data persisting beyond when it should be gone, via missed scheduled expiry versus incomplete request-driven deletion
-- [Audit Retention Policy](./audit-retention-policy.md) - the inverse failure mode: records deleted too early rather than personal data retained too long
-- [Data Residency Violation](./data-residency-violation.md) - both are data-governance requirements that must be enforced consistently across every tool that touches the data, not just the primary store
+- [Data Deletion Compliance](data-deletion-compliance.md) - both concern personal data persisting beyond when it should be gone, via missed scheduled expiry versus incomplete request-driven deletion
+- [Audit Retention Policy](audit-retention-policy.md) - the inverse failure mode: records deleted too early rather than personal data retained too long
+- [Data Residency Violation](data-residency-violation.md) - both are data-governance requirements that must be enforced consistently across every tool that touches the data, not just the primary store

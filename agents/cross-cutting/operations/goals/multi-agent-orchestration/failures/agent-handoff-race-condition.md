@@ -65,6 +65,6 @@ T+0.40s: Both instances independently call the refund API. The customer
 | Orphaned task backlog growing | orphaned_handoff_count exceeds threshold for 3 consecutive intervals | Medium | Trigger reconciliation sweep, check queue redelivery settings |
 
 ## Related Patterns
-- [Agent State Divergence](./agent-state-divergence.md) - handoff races are a specific, transaction-boundary case of the broader state-sync problem
-- [Deadlock in Multi-Agent](./deadlock-in-multi-agent.md) - both stem from missing or incorrect coordination primitives around shared task ownership
-- [Byzantine Agent Failure](./byzantine-agent-failure.md) - both involve one agent needing to tolerate or resolve conflicting claims from another
+- [Agent State Divergence](agent-state-divergence.md) - handoff races are a specific, transaction-boundary case of the broader state-sync problem
+- [Deadlock in Multi-Agent](deadlock-in-multi-agent.md) - both stem from missing or incorrect coordination primitives around shared task ownership
+- [Byzantine Agent Failure](byzantine-agent-failure.md) - both involve one agent needing to tolerate or resolve conflicting claims from another

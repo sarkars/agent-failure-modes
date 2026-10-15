@@ -63,6 +63,6 @@ context.
 | Chunk boundary split rate increase | chunk_boundary_split_rate rises after a re-indexing or chunking-strategy change | Medium | Roll back or refine chunking strategy, re-audit affected documents |
 
 ## Related Patterns
-- [Fact Partial Truth](./fact-partial-truth.md) - the resulting failure mode when a critical qualifier is dropped, presenting a partial truth as complete
-- [Domain Context Loss](./domain-context-loss.md) - the same "qualifying context silently dropped" mechanism at the level of a whole session rather than a single fact
-- [Knowledge Temporal Context Lost](./knowledge-temporal-context-lost.md) - a specific case of this pattern where the dropped qualifier is temporal ("as of" scoping)
+- [Fact Partial Truth](fact-partial-truth.md) - the resulting failure mode when a critical qualifier is dropped, presenting a partial truth as complete
+- [Domain Context Loss](domain-context-loss.md) - the same "qualifying context silently dropped" mechanism at the level of a whole session rather than a single fact
+- [Knowledge Temporal Context Lost](knowledge-temporal-context-lost.md) - a specific case of this pattern where the dropped qualifier is temporal ("as of" scoping)

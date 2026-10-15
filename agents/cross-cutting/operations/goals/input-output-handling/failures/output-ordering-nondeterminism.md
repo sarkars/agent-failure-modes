@@ -72,6 +72,6 @@ future result ordering.
 | Pagination integrity failure | Sequential paginated requests show duplicate or skipped items | High | Halt pagination-dependent workflows, investigate underlying sort stability |
 
 ## Related Patterns
-- [Output Inconsistency](./output-inconsistency.md) - ordering nondeterminism is a specific, narrower instance of the broader output-inconsistency problem
-- [Output Format Not Validated](./output-format-not-validated.md) - both stem from insufficient guarantees on the shape/structure of generated output being verified before use
-- [Output Precision Loss](./output-precision-loss.md) - both are subtle data-fidelity failures where the returned content looks correct in isolation and only proves wrong under comparison
+- [Output Inconsistency](output-inconsistency.md) - ordering nondeterminism is a specific, narrower instance of the broader output-inconsistency problem
+- [Output Format Not Validated](output-format-not-validated.md) - both stem from insufficient guarantees on the shape/structure of generated output being verified before use
+- [Output Precision Loss](output-precision-loss.md) - both are subtle data-fidelity failures where the returned content looks correct in isolation and only proves wrong under comparison

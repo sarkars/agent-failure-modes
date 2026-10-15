@@ -74,6 +74,6 @@ a 60-second SLA — a 680% overrun, with no single stage being obviously
 | Manual approval bottleneck | manual_approval_wait_time exceeds threshold | Medium | Evaluate automating the decision for this failure signature |
 
 ## Related Patterns
-- [Recovery Time Objective Miss](./recovery-time-objective-miss.md) - failover delay is frequently the dominant contributor to an overall RTO miss
-- [Cascade Timeout Interaction](./cascade-timeout-interaction.md) - misconfigured timeouts at intermediate layers can independently add to total failover delay
-- [Failover Data Loss](./failover-data-loss.md) - a longer failover delay generally widens the window in which in-flight data loss can occur
+- [Recovery Time Objective Miss](recovery-time-objective-miss.md) - failover delay is frequently the dominant contributor to an overall RTO miss
+- [Cascade Timeout Interaction](cascade-timeout-interaction.md) - misconfigured timeouts at intermediate layers can independently add to total failover delay
+- [Failover Data Loss](failover-data-loss.md) - a longer failover delay generally widens the window in which in-flight data loss can occur

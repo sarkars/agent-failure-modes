@@ -55,6 +55,6 @@ The team has no way to detect this shift proactively since the vendor never docu
 | Reset anchor drift detected | `observed_reset_time_variance` exceeds threshold across multiple cycles | Warning | Investigate whether the vendor's reset is account-anchored and has shifted; adjust scheduling buffer |
 
 ## Related Patterns
-- [Quota Reset During Operation](./quota-reset-during-operation.md) - not knowing the exact reset time makes it harder to detect when a long operation is about to straddle one
-- [Quota Reset Boundary Race](./quota-reset-boundary-race.md) - imprecise reset timing knowledge compounds the inconsistency multiple agent instances see when racing a boundary
-- [Rolling Window Quota Misunderstanding](./rolling-window-quota-misunderstanding.md) - one specific and common form of "unknown reset timing" is mistaking a rolling window for a fixed one
+- [Quota Reset During Operation](quota-reset-during-operation.md) - not knowing the exact reset time makes it harder to detect when a long operation is about to straddle one
+- [Quota Reset Boundary Race](quota-reset-boundary-race.md) - imprecise reset timing knowledge compounds the inconsistency multiple agent instances see when racing a boundary
+- [Rolling Window Quota Misunderstanding](rolling-window-quota-misunderstanding.md) - one specific and common form of "unknown reset timing" is mistaking a rolling window for a fixed one

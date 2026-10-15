@@ -66,6 +66,6 @@ matched the query.
 | Reliability tier coverage drop | reliability_tier_coverage falls below threshold after a new content-ingestion pipeline is added | Medium | Audit new ingestion source for missing reliability tagging |
 
 ## Related Patterns
-- [Knowledge Contradiction Unresolved](./knowledge-contradiction-unresolved.md) - unknown source reliability is a primary reason contradictions can't be authoritatively resolved
-- [Fact Source Confusion](./fact-source-confusion.md) - both stem from insufficient source-provenance handling, one for entity identity and one for trust weighting
-- [Domain Best Practice Ignorance](./domain-best-practice-ignorance.md) - stale but formerly-authoritative content can itself become a lower-reliability source over time if currency isn't tracked
+- [Knowledge Contradiction Unresolved](knowledge-contradiction-unresolved.md) - unknown source reliability is a primary reason contradictions can't be authoritatively resolved
+- [Fact Source Confusion](fact-source-confusion.md) - both stem from insufficient source-provenance handling, one for entity identity and one for trust weighting
+- [Domain Best Practice Ignorance](domain-best-practice-ignorance.md) - stale but formerly-authoritative content can itself become a lower-reliability source over time if currency isn't tracked

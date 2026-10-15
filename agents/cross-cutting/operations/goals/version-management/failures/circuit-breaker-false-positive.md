@@ -74,6 +74,6 @@ seconds corresponded to an actual upstream issue.
 | Sustained false-positive fallback | fallback_traffic_share_during_healthy_upstream stays elevated while upstream is reporting healthy | High | Manually reset/tune breaker, notify dependency owner, audit user impact during the window |
 
 ## Related Patterns
-- [Health Check Flapping](./health-check-flapping.md) - a closely related instability pattern where the underlying health signal itself oscillates, often co-occurring with breaker false positives
-- [Traffic Overflow Cascade](./traffic-overflow-cascade.md) - describes what happens downstream when a breaker's fallback path itself gets overwhelmed by the traffic it absorbs
-- [Deployment Validation Skipped](./deployment-validation-skipped.md) - untested breaker threshold changes are a common way overly sensitive configurations reach production
+- [Health Check Flapping](health-check-flapping.md) - a closely related instability pattern where the underlying health signal itself oscillates, often co-occurring with breaker false positives
+- [Traffic Overflow Cascade](traffic-overflow-cascade.md) - describes what happens downstream when a breaker's fallback path itself gets overwhelmed by the traffic it absorbs
+- [Deployment Validation Skipped](deployment-validation-skipped.md) - untested breaker threshold changes are a common way overly sensitive configurations reach production

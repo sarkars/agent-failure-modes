@@ -59,6 +59,6 @@ Sensitive-operation classification is often decided and documented at a policy o
 | New sensitive tool deployed without gate | CI detects a tool tagged sensitive lacking an approval-check code path | High | Block deployment until the gate is implemented |
 
 ## Related Patterns
-- [Approval Signature Verification](./approval-signature-verification.md) - covers the case where the approval gate exists but its verification is weak, versus missing entirely here
-- [Admin Operation Called By Non-Admin](./admin-operation-called-by-non-admin.md) - both involve a documented restriction that isn't backed by a runtime enforcement mechanism
-- [Owner Verification Not Enforced](./owner-verification-not-enforced.md) - both are missing pre-execution checks on a mutating, consequential action
+- [Approval Signature Verification](approval-signature-verification.md) - covers the case where the approval gate exists but its verification is weak, versus missing entirely here
+- [Admin Operation Called By Non-Admin](admin-operation-called-by-non-admin.md) - both involve a documented restriction that isn't backed by a runtime enforcement mechanism
+- [Owner Verification Not Enforced](owner-verification-not-enforced.md) - both are missing pre-execution checks on a mutating, consequential action

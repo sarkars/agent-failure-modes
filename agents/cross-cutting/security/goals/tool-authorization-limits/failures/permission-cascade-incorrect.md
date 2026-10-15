@@ -58,6 +58,6 @@ Correctly resolving cascading permissions requires walking the full ancestor cha
 | Cascade logic divergence between tools | Two tools disagree on effective permission for the same user/resource | High | Freeze the diverging tool, route all checks through the shared resolver |
 
 ## Related Patterns
-- [Role Permission Mismatch](./role-permission-mismatch.md) - both concern the mapping from an intended permission model to the model actually enforced by the tool layer
-- [Delegation Impersonation Not Limited](./delegation-impersonation-not-limited.md) - both involve authority that is supposed to narrow as it passes down a chain
-- [Conditional Permission Logic](./conditional-permission-logic.md) - both are cases of incorrect evaluation logic producing an over- or under-grant
+- [Role Permission Mismatch](role-permission-mismatch.md) - both concern the mapping from an intended permission model to the model actually enforced by the tool layer
+- [Delegation Impersonation Not Limited](delegation-impersonation-not-limited.md) - both involve authority that is supposed to narrow as it passes down a chain
+- [Conditional Permission Logic](conditional-permission-logic.md) - both are cases of incorrect evaluation logic producing an over- or under-grant

@@ -70,6 +70,6 @@ against the v2 query embedding now being used to search for it.
 | Unplanned mixed-version index | mixed_version_index_fraction remains nonzero well past the intended migration window | Medium | Schedule and complete full corpus re-embedding |
 
 ## Related Patterns
-- [Retrieval Index Corruption](./retrieval-index-corruption.md) - both degrade retrieval broadly across the index, though drift is a semantic/geometric mismatch rather than structural damage
-- [Retrieval Confidence Miscalibration](./retrieval-confidence-miscalibration.md) - a mixed-version index makes similarity scores even less reliable as a usefulness signal, compounding existing miscalibration
-- [Memory Fragmentation](./memory-fragmentation.md) - a deferred full re-embedding, like deferred consolidation, leaves the store in a degraded intermediate state that compounds the longer it's postponed
+- [Retrieval Index Corruption](retrieval-index-corruption.md) - both degrade retrieval broadly across the index, though drift is a semantic/geometric mismatch rather than structural damage
+- [Retrieval Confidence Miscalibration](retrieval-confidence-miscalibration.md) - a mixed-version index makes similarity scores even less reliable as a usefulness signal, compounding existing miscalibration
+- [Memory Fragmentation](memory-fragmentation.md) - a deferred full re-embedding, like deferred consolidation, leaves the store in a degraded intermediate state that compounds the longer it's postponed

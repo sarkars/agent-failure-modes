@@ -62,6 +62,6 @@ Delegation is usually implemented as a simple "if I'm unavailable, forward to X"
 | Delegation chain exceeds hop limit | Request traverses more than the configured maximum delegation hops | Warning | Route to fallback approver, flag chain for manual review of stale rules |
 
 ## Related Patterns
-- [Approval Chain Break](./approval-chain-break.md) - both are structural failures in how a request moves between approvers, one by stalling and one by looping
-- [Approval Authority Escalation Failure](./approval-authority-escalation-failure.md) - misconfigured routing tables cause both escalation dead-ends and delegation loops
-- [Approval Timeout Expiration](./approval-timeout-expiration.md) - loops that are never detected eventually manifest as timeouts once someone notices the request never resolved
+- [Approval Chain Break](approval-chain-break.md) - both are structural failures in how a request moves between approvers, one by stalling and one by looping
+- [Approval Authority Escalation Failure](approval-authority-escalation-failure.md) - misconfigured routing tables cause both escalation dead-ends and delegation loops
+- [Approval Timeout Expiration](approval-timeout-expiration.md) - loops that are never detected eventually manifest as timeouts once someone notices the request never resolved

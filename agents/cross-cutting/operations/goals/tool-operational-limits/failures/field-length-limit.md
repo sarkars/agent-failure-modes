@@ -59,6 +59,6 @@ changelog I've ever read."
 | Oversized generation before submission | LLM output exceeds target field's max length prior to write attempt | Medium | Re-summarize or truncate at boundary before retrying submission |
 
 ## Related Patterns
-- [Array Element Limit](./array-element-limit.md) - the same silent-truncation risk pattern applied to array cardinality instead of string length
-- [Request Payload Size Limit](./request-payload-size-limit.md) - a whole-request analogue of a single field's length limit
-- [Response Payload Size Limit](./response-payload-size-limit.md) - truncation can also happen on the read side, compounding detection difficulty when both request and response are silently shortened
+- [Array Element Limit](array-element-limit.md) - the same silent-truncation risk pattern applied to array cardinality instead of string length
+- [Request Payload Size Limit](request-payload-size-limit.md) - a whole-request analogue of a single field's length limit
+- [Response Payload Size Limit](response-payload-size-limit.md) - truncation can also happen on the read side, compounding detection difficulty when both request and response are silently shortened

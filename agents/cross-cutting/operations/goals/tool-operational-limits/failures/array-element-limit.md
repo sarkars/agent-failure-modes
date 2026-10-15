@@ -58,6 +58,6 @@ wrong.
 | Approaching array limit | submitted array length >= 90% of known maxItems for 3 consecutive calls | Medium | Trigger automatic chunking rollout for that tool/field |
 
 ## Related Patterns
-- [Batch Size Limit](./batch-size-limit.md) - same class of cap but applied to the whole batch/request rather than a single array field
-- [Batch Total Operations Limit](./batch-total-operations-limit.md) - aggregate cap across multiple calls that per-call array chunking alone won't satisfy
-- [Response Payload Size Limit](./response-payload-size-limit.md) - another silent-truncation failure mode, on the response side instead of the request side
+- [Batch Size Limit](batch-size-limit.md) - same class of cap but applied to the whole batch/request rather than a single array field
+- [Batch Total Operations Limit](batch-total-operations-limit.md) - aggregate cap across multiple calls that per-call array chunking alone won't satisfy
+- [Response Payload Size Limit](response-payload-size-limit.md) - another silent-truncation failure mode, on the response side instead of the request side

@@ -74,6 +74,6 @@ system does.
 | Unscoped query detected | A retrieval query executes without an applied scope filter | High | Block the query path, page on-call, audit for prior unnoticed occurrences |
 
 ## Related Patterns
-- [Memory Inconsistency Between Agents](./memory-inconsistency-between-agents.md) - both involve a shared memory store serving unintended or incorrect views, though this pattern is a security boundary failure rather than a consistency lag
-- [Retrieval Confidence Miscalibration](./retrieval-confidence-miscalibration.md) - an unfiltered query can return high-similarity-scored results from the wrong tenant, compounding a scoping bug with an over-trusted relevance signal
-- [Memory Corruption Detection Failure](./memory-corruption-detection-failure.md) - both are failures where a retrieval succeeds and returns plausible-looking content that should have been rejected before reaching the agent
+- [Memory Inconsistency Between Agents](memory-inconsistency-between-agents.md) - both involve a shared memory store serving unintended or incorrect views, though this pattern is a security boundary failure rather than a consistency lag
+- [Retrieval Confidence Miscalibration](retrieval-confidence-miscalibration.md) - an unfiltered query can return high-similarity-scored results from the wrong tenant, compounding a scoping bug with an over-trusted relevance signal
+- [Memory Corruption Detection Failure](memory-corruption-detection-failure.md) - both are failures where a retrieval succeeds and returns plausible-looking content that should have been rejected before reaching the agent

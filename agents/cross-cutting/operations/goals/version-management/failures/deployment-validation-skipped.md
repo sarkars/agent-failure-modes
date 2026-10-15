@@ -75,6 +75,6 @@ finally runs the skipped eval suite against it retroactively.
 | Retroactive validation failure | A skipped gate, run after the fact, would have failed | High | Treat as an active incident, assess whether the shipped build needs immediate rollback or a follow-up fix |
 
 ## Related Patterns
-- [Rollback Partial Failure](./rollback-partial-failure.md) - a skipped validation gate often leads directly to needing a rollback, which can itself fail partway
-- [Deployment Ordering Violation](./deployment-ordering-violation.md) - a missing precondition check is a specific instance of a skipped validation
-- [Canary Deployment Incomplete](./canary-deployment-incomplete.md) - a canary soak period is itself a form of validation gate that can be skipped or cut short under the same pressure
+- [Rollback Partial Failure](rollback-partial-failure.md) - a skipped validation gate often leads directly to needing a rollback, which can itself fail partway
+- [Deployment Ordering Violation](deployment-ordering-violation.md) - a missing precondition check is a specific instance of a skipped validation
+- [Canary Deployment Incomplete](canary-deployment-incomplete.md) - a canary soak period is itself a form of validation gate that can be skipped or cut short under the same pressure

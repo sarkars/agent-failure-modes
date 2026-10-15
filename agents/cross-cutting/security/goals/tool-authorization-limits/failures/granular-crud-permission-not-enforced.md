@@ -58,6 +58,6 @@ Tool wrappers are often built by directly exposing a convenient underlying SDK o
 | New tool registered spanning multiple CRUD verbs | CI detects a tool function capable of more than one CRUD verb without per-verb role checks | Warning | Block merge until split or gated |
 
 ## Related Patterns
-- [Read Only Agent Write Access](./read-only-agent-write-access.md) - the specific, most common instance of this pattern where read-only access silently includes write capability
-- [Role Permission Mismatch](./role-permission-mismatch.md) - both describe a gap between the intended permission model and what the tool layer actually enforces
-- [Admin Operation Called By Non-Admin](./admin-operation-called-by-non-admin.md) - same root cause (missing server-side enforcement) applied at the role tier instead of the operation-verb level
+- [Read Only Agent Write Access](read-only-agent-write-access.md) - the specific, most common instance of this pattern where read-only access silently includes write capability
+- [Role Permission Mismatch](role-permission-mismatch.md) - both describe a gap between the intended permission model and what the tool layer actually enforces
+- [Admin Operation Called By Non-Admin](admin-operation-called-by-non-admin.md) - same root cause (missing server-side enforcement) applied at the role tier instead of the operation-verb level

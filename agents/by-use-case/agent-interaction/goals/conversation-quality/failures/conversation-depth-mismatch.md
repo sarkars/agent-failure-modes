@@ -68,6 +68,6 @@ needed: `ALTER TABLE t RENAME COLUMN old_name TO new_name;`
 | Sustained overlength on simple queries | low_complexity_overlength_rate exceeds threshold over a rolling window | Low | Review depth-calibration prompt/thresholds |
 
 ## Related Patterns
-- [Conversation Formality Mismatch](./conversation-formality-mismatch.md) - both are calibration failures, one on register/tone and one on depth/length
-- [Under-Clarification](./under-clarification.md) - a shallow answer to a genuinely ambiguous high-stakes question can also reflect insufficient clarification, not just insufficient depth
-- [User Expectation Mismatch](./user-expectation-mismatch.md) - persistent depth miscalibration is one concrete driver of a broader gap between expected and delivered agent behavior
+- [Conversation Formality Mismatch](conversation-formality-mismatch.md) - both are calibration failures, one on register/tone and one on depth/length
+- [Under-Clarification](under-clarification.md) - a shallow answer to a genuinely ambiguous high-stakes question can also reflect insufficient clarification, not just insufficient depth
+- [User Expectation Mismatch](user-expectation-mismatch.md) - persistent depth miscalibration is one concrete driver of a broader gap between expected and delivered agent behavior

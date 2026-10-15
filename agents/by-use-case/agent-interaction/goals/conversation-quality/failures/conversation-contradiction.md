@@ -59,6 +59,6 @@ Turn 25: Agent: "You're right, sorry for the confusion — it's 15 seats."
 | Repeated unacknowledged contradictions | Session contains 2+ unflagged contradictions | Medium | Flag session for review, check claim-ledger implementation |
 
 ## Related Patterns
-- [Conversation Coherence Loss](./conversation-coherence-loss.md) - a common upstream cause, since forgotten state often produces a contradicting restatement
-- [User Trust Degradation](./user-trust-degradation.md) - contradictions are one of the fastest-acting contributors to eroding user trust
-- [Assumption Validation Failure](./assumption-validation-failure.md) - an unflagged assumption revised later without acknowledgment can surface as a contradiction
+- [Conversation Coherence Loss](conversation-coherence-loss.md) - a common upstream cause, since forgotten state often produces a contradicting restatement
+- [User Trust Degradation](user-trust-degradation.md) - contradictions are one of the fastest-acting contributors to eroding user trust
+- [Assumption Validation Failure](assumption-validation-failure.md) - an unflagged assumption revised later without acknowledgment can surface as a contradiction

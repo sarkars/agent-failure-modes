@@ -70,6 +70,6 @@ target path.
 | Suspicious filename/path pattern | Filename or path contains control characters combined with a trusted-looking extension | High | Block the file operation, quarantine the upload, alert security team |
 
 ## Related Patterns
-- [Input Special Character Handling](./input-special-character-handling.md) - null bytes are a specific, especially dangerous instance of the broader special-character handling problem
-- [Input Validation Bypass](./input-validation-bypass.md) - null-byte truncation is one concrete technique for bypassing a validation rule via an encoding edge case
-- [Output Injection Vulnerability](./output-injection-vulnerability.md) - both stem from mismatched string-handling assumptions between the validating and executing layers
+- [Input Special Character Handling](input-special-character-handling.md) - null bytes are a specific, especially dangerous instance of the broader special-character handling problem
+- [Input Validation Bypass](input-validation-bypass.md) - null-byte truncation is one concrete technique for bypassing a validation rule via an encoding edge case
+- [Output Injection Vulnerability](output-injection-vulnerability.md) - both stem from mismatched string-handling assumptions between the validating and executing layers

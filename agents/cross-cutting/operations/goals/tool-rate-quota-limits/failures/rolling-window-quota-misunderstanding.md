@@ -57,6 +57,6 @@ On a different occasion, the same agent hits the limit at 14:31 (just after what
 | Recurring false-start rejections | 429s recur immediately after each assumed reset across multiple cycles | Warning | Treat as high-confidence rolling-window mismatch; prioritize fixing pacing logic |
 
 ## Related Patterns
-- [Per-Tool Requests Per Hour Exceeded](./per-tool-requests-per-hour-exceeded.md) - the underlying limit this pattern's misdiagnosis often applies to, since hourly limits are a common place for the fixed-vs-rolling ambiguity to appear
-- [Quota Reset Timing Unknown](./quota-reset-timing-unknown.md) - a broader pattern of not knowing the reset mechanism at all; this pattern is the specific case of confidently assuming the wrong mechanism
-- [Token-Based Rate Limiting](./token-based-rate-limiting.md) - another case where the agent's mental model of "what's being counted and how" diverges from the vendor's actual accounting method
+- [Per-Tool Requests Per Hour Exceeded](per-tool-requests-per-hour-exceeded.md) - the underlying limit this pattern's misdiagnosis often applies to, since hourly limits are a common place for the fixed-vs-rolling ambiguity to appear
+- [Quota Reset Timing Unknown](quota-reset-timing-unknown.md) - a broader pattern of not knowing the reset mechanism at all; this pattern is the specific case of confidently assuming the wrong mechanism
+- [Token-Based Rate Limiting](token-based-rate-limiting.md) - another case where the agent's mental model of "what's being counted and how" diverges from the vendor's actual accounting method

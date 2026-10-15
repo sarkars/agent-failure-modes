@@ -65,7 +65,7 @@ truncated output as successfully generated and successfully parsed.
 | Truncated content persisted | A record is detected in storage with a finish_reason of length/timeout that was never retried or flagged | Medium | Backfill/regenerate affected records, add a completeness gate before the persistence step |
 
 ## Related Patterns
-- [Output Length Not Enforced](./output-length-not-enforced.md) - related but distinct: that pattern is about the agent never being bounded to a downstream limit at all, while this one is about detecting when a bounded generation was cut off mid-stream
+- [Output Length Not Enforced](output-length-not-enforced.md) - related but distinct: that pattern is about the agent never being bounded to a downstream limit at all, while this one is about detecting when a bounded generation was cut off mid-stream
 - [Context Window Overflow with Silent Truncation](../../memory-safety/failures/context-window-overflow-silent-truncation.md) - the input-side counterpart, where incoming context (not generated output) is silently dropped
 - [Truncation Information Loss](../../context-lifecycle/failures/truncation-information-loss.md) - similar silent-loss mechanism applied to conversation history truncation rather than a single generation being cut off
-- [Output Format Not Validated](./output-format-not-validated.md) - broader pattern of unchecked output structure, of which unvalidated truncation is one specific cause
+- [Output Format Not Validated](output-format-not-validated.md) - broader pattern of unchecked output structure, of which unvalidated truncation is one specific cause

@@ -68,4 +68,4 @@ agent's traffic pattern needs adjustment) is never surfaced to anyone.
 | Silent skip path triggered | Any call falls into a generic catch-and-skip error handler | Medium | Log full raw response, route to review queue instead of silent skip |
 
 ## Related Patterns
-- [Error Code Semantic Drift](./error-code-semantic-drift.md) - both involve the agent's error-handling assumptions about vendor error shape/meaning silently breaking without any explicit versioned change
+- [Error Code Semantic Drift](error-code-semantic-drift.md) - both involve the agent's error-handling assumptions about vendor error shape/meaning silently breaking without any explicit versioned change

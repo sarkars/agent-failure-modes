@@ -57,6 +57,6 @@ This is a classic insecure direct object reference (IDOR) pattern transplanted i
 | Tool handler missing ownership filter | Static analysis detects a mutating handler querying by resource ID alone | High | Block deploy until an ownership filter is added |
 
 ## Related Patterns
-- [Conditional Permission Logic](./conditional-permission-logic.md) - both require the agent to correctly evaluate specific runtime facts about a resource before acting
-- [Delegation Impersonation Not Limited](./delegation-impersonation-not-limited.md) - both concern the agent acting on behalf of the wrong party
-- [Granular CRUD Permission Not Enforced](./granular-crud-permission-not-enforced.md) - complementary check: even for the correct owner, the allowed verb set must still be enforced
+- [Conditional Permission Logic](conditional-permission-logic.md) - both require the agent to correctly evaluate specific runtime facts about a resource before acting
+- [Delegation Impersonation Not Limited](delegation-impersonation-not-limited.md) - both concern the agent acting on behalf of the wrong party
+- [Granular CRUD Permission Not Enforced](granular-crud-permission-not-enforced.md) - complementary check: even for the correct owner, the allowed verb set must still be enforced

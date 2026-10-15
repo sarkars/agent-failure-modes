@@ -68,6 +68,6 @@ performance reasons, refreshed via an event bus.
 | Event propagation backlog growing | Event bus consumer lag for state-sync events exceeds threshold | Medium | Investigate bus health, alert dependent agent owners |
 
 ## Related Patterns
-- [Agent Handoff Race Condition](./agent-handoff-race-condition.md) - a transaction-boundary special case of state divergence occurring specifically during task ownership transfer
-- [Byzantine Agent Failure](./byzantine-agent-failure.md) - both require other agents to detect and not blindly trust an inconsistent view, though divergence is unintentional and Byzantine failure may not be
-- [Inter-Agent Latency Imbalance](./inter-agent-latency-imbalance.md) - latency differences between agents are a common contributor to how long divergence windows stay open
+- [Agent Handoff Race Condition](agent-handoff-race-condition.md) - a transaction-boundary special case of state divergence occurring specifically during task ownership transfer
+- [Byzantine Agent Failure](byzantine-agent-failure.md) - both require other agents to detect and not blindly trust an inconsistent view, though divergence is unintentional and Byzantine failure may not be
+- [Inter-Agent Latency Imbalance](inter-agent-latency-imbalance.md) - latency differences between agents are a common contributor to how long divergence windows stay open

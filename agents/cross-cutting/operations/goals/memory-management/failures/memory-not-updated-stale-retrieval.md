@@ -66,6 +66,6 @@ caught up to its own write.
 | Indexing pipeline backlog | write_to_index_lag_seconds exceeds SLA sustained over several minutes | Medium | Scale indexing workers, alert infra team |
 
 ## Related Patterns
-- [Context Refresh Stale State](./context-refresh-stale-state.md) - the same read-after-write consistency gap, surfacing through a context-refresh mechanism rather than a direct memory retrieval call
-- [Memory Inconsistency Between Agents](./memory-inconsistency-between-agents.md) - a multi-agent variant where the stale read is served to a different agent than the one that wrote the update
-- [Retrieval Temporal Ordering Failure](./retrieval-temporal-ordering-failure.md) - both can surface an outdated fact ahead of a current one, though this pattern is caused by indexing lag rather than ranking logic
+- [Context Refresh Stale State](context-refresh-stale-state.md) - the same read-after-write consistency gap, surfacing through a context-refresh mechanism rather than a direct memory retrieval call
+- [Memory Inconsistency Between Agents](memory-inconsistency-between-agents.md) - a multi-agent variant where the stale read is served to a different agent than the one that wrote the update
+- [Retrieval Temporal Ordering Failure](retrieval-temporal-ordering-failure.md) - both can surface an outdated fact ahead of a current one, though this pattern is caused by indexing lag rather than ranking logic

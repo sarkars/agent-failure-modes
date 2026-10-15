@@ -151,8 +151,8 @@ Root cause: Cell size smaller than patch granularity
 
 ## Related Patterns
 - [Confident Fabrication](../../../../../cross-cutting/accuracy/goals/output-accuracy/failures/confident-fabrication.md) — High confidence despite incorrect counting
-- [Vision Model Hallucination - Patch Tokenization Boundaries](./vision-model-patch-tokenization-boundary-failure.md) — Root cause: patch misalignment
-- [Semantic Similarity Retrieval Misses Structural Attributes](../../../../../by-capability/knowledge-retrieval/goals/retrieval-relevance/failures/semantic-similarity-retrieval-misses-structural-attributes.md) — Structural attribute detection failures
+- [Vision Model Hallucination - Patch Tokenization Boundaries](vision-model-patch-tokenization-boundary-failure.md) — Root cause: patch misalignment
+- [Semantic Similarity Retrieval Misses Structural Attributes](../../../../knowledge-retrieval/goals/retrieval-relevance/failures/semantic-similarity-retrieval-misses-structural-attributes.md) — Structural attribute detection failures
 
 ---
 

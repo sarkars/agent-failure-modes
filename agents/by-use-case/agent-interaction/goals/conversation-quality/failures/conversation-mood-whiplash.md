@@ -66,6 +66,6 @@ erratic rather than responsive.
 | User flags erratic tone | Explicit user comment about inconsistent tone | Low | Log for persona/prompt tuning review |
 
 ## Related Patterns
-- [Conversation Formality Mismatch](./conversation-formality-mismatch.md) - a single miscalibrated response; repeated or extreme mismatches across turns produce whiplash
-- [Conversation Coherence Loss](./conversation-coherence-loss.md) - both stem from insufficient cross-turn state tracking, one for facts and one for tone
-- [User Trust Degradation](./user-trust-degradation.md) - erratic tone contributes to a sense of unreliability that compounds trust erosion over time
+- [Conversation Formality Mismatch](conversation-formality-mismatch.md) - a single miscalibrated response; repeated or extreme mismatches across turns produce whiplash
+- [Conversation Coherence Loss](conversation-coherence-loss.md) - both stem from insufficient cross-turn state tracking, one for facts and one for tone
+- [User Trust Degradation](user-trust-degradation.md) - erratic tone contributes to a sense of unreliability that compounds trust erosion over time

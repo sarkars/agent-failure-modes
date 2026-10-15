@@ -62,6 +62,6 @@ the current documentation actually states.
 | Ingestion backlog growing | ingestion_backlog_depth increases over a sustained window without processing catching up | Medium | Scale ingestion pipeline capacity, investigate root cause of backlog |
 
 ## Related Patterns
-- [Knowledge Expiration Not Enforced](./knowledge-expiration-not-enforced.md) - a related but distinct systemic gap: this pattern is the index lagging an actively-changing source, that one is the absence of any decay mechanism at all
-- [Fact Timestamp Error](./fact-timestamp-error.md) - the per-fact symptom that update lag produces when a stale indexed fact is applied as though current
-- [Knowledge Version Mismatch](./knowledge-version-mismatch.md) - update lag is a common direct cause of version mismatch, when the agent's cached version falls behind the source's current version
+- [Knowledge Expiration Not Enforced](knowledge-expiration-not-enforced.md) - a related but distinct systemic gap: this pattern is the index lagging an actively-changing source, that one is the absence of any decay mechanism at all
+- [Fact Timestamp Error](fact-timestamp-error.md) - the per-fact symptom that update lag produces when a stale indexed fact is applied as though current
+- [Knowledge Version Mismatch](knowledge-version-mismatch.md) - update lag is a common direct cause of version mismatch, when the agent's cached version falls behind the source's current version

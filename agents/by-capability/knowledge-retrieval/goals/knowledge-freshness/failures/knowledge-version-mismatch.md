@@ -64,6 +64,6 @@ major version of the library.
 | New version retrieval share stalled | new_version_retrieval_share for a topic remains low long after the new version's release | Medium | Boost retrieval weighting for new-version content, prioritize new-version documentation ingestion |
 
 ## Related Patterns
-- [Knowledge Scope Assumption Wrong](./knowledge-scope-assumption-wrong.md) - version mismatch is a specific instance of the broader scope-assumption failure, applied to product/policy version rather than jurisdiction or unit
-- [Knowledge Update Lag](./knowledge-update-lag.md) - update lag is a common direct cause of version mismatch, when the agent's indexed content hasn't caught up to a newly released version
-- [Domain Best Practice Ignorance](./domain-best-practice-ignorance.md) - shares the mechanism of older, more-documented content dominating retrieval over newer, currently-preferred content
+- [Knowledge Scope Assumption Wrong](knowledge-scope-assumption-wrong.md) - version mismatch is a specific instance of the broader scope-assumption failure, applied to product/policy version rather than jurisdiction or unit
+- [Knowledge Update Lag](knowledge-update-lag.md) - update lag is a common direct cause of version mismatch, when the agent's indexed content hasn't caught up to a newly released version
+- [Domain Best Practice Ignorance](domain-best-practice-ignorance.md) - shares the mechanism of older, more-documented content dominating retrieval over newer, currently-preferred content

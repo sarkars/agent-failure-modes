@@ -66,6 +66,6 @@ Many webhook systems are implemented as a simple HTTP POST fired at the moment a
 | Receiver errors spike during deploy | `receiver_non_2xx_rate` exceeds threshold during a known deployment window | Medium | Review deployment process for zero-downtime gaps; treat as a leading indicator of dropped webhooks |
 
 ## Related Patterns
-- [Webhook Retry Exhaustion](./webhook-retry-exhaustion.md) - the specific mechanism (retries running out) by which delivery guarantees fail to be enforced
-- [Webhook Order Not Guaranteed](./webhook-order-not-guaranteed.md) - a related but distinct assumption gap about webhooks, ordering instead of delivery
+- [Webhook Retry Exhaustion](webhook-retry-exhaustion.md) - the specific mechanism (retries running out) by which delivery guarantees fail to be enforced
+- [Webhook Order Not Guaranteed](webhook-order-not-guaranteed.md) - a related but distinct assumption gap about webhooks, ordering instead of delivery
 - [Sla Availability Not Met](../../tool-sla-quality-limits/failures/sla-availability-not-met.md) - receiver-side or vendor-side availability gaps are frequently the proximate cause of dropped webhook deliveries

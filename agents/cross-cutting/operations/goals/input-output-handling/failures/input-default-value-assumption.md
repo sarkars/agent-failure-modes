@@ -65,6 +65,6 @@ spend audit.
 | Default rate spike | defaulted_field_rate for any field exceeds its alert threshold within a rolling window | Medium | Investigate upstream integration for a mapping regression |
 
 ## Related Patterns
-- [Input Schema Evolution](./input-schema-evolution.md) - an upstream schema change is one common cause of fields silently going missing and triggering default assumptions
-- [Input Validation Bypass](./input-validation-bypass.md) - both involve the agent accepting input that should have been rejected rather than silently accepted
-- [Output Type Coercion Failure](./output-type-coercion-failure.md) - a related failure where an assumed value, once produced, is misinterpreted downstream
+- [Input Schema Evolution](input-schema-evolution.md) - an upstream schema change is one common cause of fields silently going missing and triggering default assumptions
+- [Input Validation Bypass](input-validation-bypass.md) - both involve the agent accepting input that should have been rejected rather than silently accepted
+- [Output Type Coercion Failure](output-type-coercion-failure.md) - a related failure where an assumed value, once produced, is misinterpreted downstream

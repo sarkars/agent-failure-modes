@@ -59,6 +59,6 @@ Vendor billing and access-control models are usually scoped to an account or API
 | Unattributed spike detected | Aggregate usage jumps >3x baseline with no matching increase in known consumers' logs | Medium | Audit for new/rogue integrations using the same key |
 
 ## Related Patterns
-- [Concurrent User Quota](./concurrent-user-quota.md) - both stem from a tool-side allocation shared across unrelated consumers
-- [Storage Quota Shared Across Agents](./storage-quota-shared-across-agents.md) - same root pattern applied to storage instead of request rate
-- [Storage Quota Soft Limit](./storage-quota-soft-limit.md) - degraded-mode behavior that can compound with shared quota exhaustion
+- [Concurrent User Quota](concurrent-user-quota.md) - both stem from a tool-side allocation shared across unrelated consumers
+- [Storage Quota Shared Across Agents](storage-quota-shared-across-agents.md) - same root pattern applied to storage instead of request rate
+- [Storage Quota Soft Limit](storage-quota-soft-limit.md) - degraded-mode behavior that can compound with shared quota exhaustion

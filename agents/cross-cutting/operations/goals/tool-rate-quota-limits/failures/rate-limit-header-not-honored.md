@@ -55,6 +55,6 @@ The agent retries after 5 seconds, well before the actual 42-second reset, and i
 | Retry-After ignored | Agent's retry delay deviates significantly from the vendor's Retry-After value on a 429 | Warning | Fix retry logic to read and honor the header directly |
 
 ## Related Patterns
-- [Adaptive Rate Limiting](./adaptive-rate-limiting.md) - headers are especially valuable (and especially likely to be ignored) when the underlying limit moves dynamically, since they're often the only real-time signal available
-- [Rate Limit Grace Period Missing](./rate-limit-grace-period-missing.md) - when headers are honored, they often compensate for a missing grace period by providing an exact wait time instead
-- [Token-Based Rate Limiting](./token-based-rate-limiting.md) - some vendors expose token-consumption headers analogous to request-count headers, and the same "not honored" failure applies equally to those
+- [Adaptive Rate Limiting](adaptive-rate-limiting.md) - headers are especially valuable (and especially likely to be ignored) when the underlying limit moves dynamically, since they're often the only real-time signal available
+- [Rate Limit Grace Period Missing](rate-limit-grace-period-missing.md) - when headers are honored, they often compensate for a missing grace period by providing an exact wait time instead
+- [Token-Based Rate Limiting](token-based-rate-limiting.md) - some vendors expose token-consumption headers analogous to request-count headers, and the same "not honored" failure applies equally to those

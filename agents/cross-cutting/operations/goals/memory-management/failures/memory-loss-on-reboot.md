@@ -65,6 +65,6 @@ resubmit or wait — from their perspective the job simply vanished.
 | Deploy-correlated job loss spike | Job-not-found error rate spikes within a short window of a deploy | High | Treat as a deploy regression, review whether new code path lost durability coverage |
 
 ## Related Patterns
-- [Memory Not Updated Stale Retrieval](./memory-not-updated-stale-retrieval.md) - both are consistency gaps between what the system believes is durable and what actually is, though this pattern loses data entirely rather than serving an old version
-- [Context Window Awareness Failure](./context-window-awareness-failure.md) - both are silent, undetected loss-of-state failures the agent has no visibility into when they occur
-- [Memory Priority Inversion](./memory-priority-inversion.md) - checkpointing added to fix reboot loss can itself introduce write contention that delays higher-priority memory operations
+- [Memory Not Updated Stale Retrieval](memory-not-updated-stale-retrieval.md) - both are consistency gaps between what the system believes is durable and what actually is, though this pattern loses data entirely rather than serving an old version
+- [Context Window Awareness Failure](context-window-awareness-failure.md) - both are silent, undetected loss-of-state failures the agent has no visibility into when they occur
+- [Memory Priority Inversion](memory-priority-inversion.md) - checkpointing added to fix reboot loss can itself introduce write contention that delays higher-priority memory operations

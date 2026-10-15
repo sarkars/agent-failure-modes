@@ -63,5 +63,5 @@ Many tool providers version their API but don't hard-require callers to pin a ve
 
 ## Related Patterns
 - [Undocumented Api Behavior](../../tool-integration-limits/failures/undocumented-api-behavior.md) - both involve reality diverging from what the agent's integration code assumes
-- [Deprecated Endpoint Retirement](./deprecated-endpoint-retirement.md) - schema mismatches often precede outright endpoint retirement in a vendor's deprecation cycle
+- [Deprecated Endpoint Retirement](deprecated-endpoint-retirement.md) - schema mismatches often precede outright endpoint retirement in a vendor's deprecation cycle
 - [Sdk Version Incompatibility](../../tool-integration-limits/failures/sdk-version-incompatibility.md) - related failure where the client library itself, not just the wire schema, falls out of sync with the server

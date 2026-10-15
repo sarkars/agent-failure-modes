@@ -72,6 +72,6 @@ what to do next.
 | Long execution window with no re-validation checkpoint | A plan's execution spans longer than a defined threshold with zero re-validation events logged | Medium | Flag workflow for adding assumption-expiry checks |
 
 ## Related Patterns
-- [Plan Adaptability Failure](./plan-adaptability-failure.md) - invalidation-not-detected is the specific failure to notice a changed premise, while adaptability failure is the broader inability to act on it even once noticed
-- [Contingency Plan Missing](./contingency-plan-missing.md) - a well-designed contingency for "assumption no longer holds" would catch what an invalidated plan otherwise executes blindly through
-- [Plan Hallucination Detection Failure](./plan-hallucination-detection-failure.md) - both involve the plan being disconnected from ground truth, one from the start and one developing over the execution window
+- [Plan Adaptability Failure](plan-adaptability-failure.md) - invalidation-not-detected is the specific failure to notice a changed premise, while adaptability failure is the broader inability to act on it even once noticed
+- [Contingency Plan Missing](contingency-plan-missing.md) - a well-designed contingency for "assumption no longer holds" would catch what an invalidated plan otherwise executes blindly through
+- [Plan Hallucination Detection Failure](plan-hallucination-detection-failure.md) - both involve the plan being disconnected from ground truth, one from the start and one developing over the execution window

@@ -68,6 +68,6 @@ Cycle 2 result: The combiner issues a "buy" signal based on fresh
 | Persistent latency imbalance | inter_agent_latency_ratio exceeds threshold for a sustained period | Medium | Investigate slow agent's dependencies, consider caching or re-pairing |
 
 ## Related Patterns
-- [Agent Timeout Cascade](./agent-timeout-cascade.md) - sustained latency imbalance is a common precursor to timeout cascades once one agent's slowness exceeds a caller's patience
-- [Agent Resource Contention](./agent-resource-contention.md) - contention on a shared resource is a frequent cause of the latency imbalance between agents in the first place
-- [Agent State Divergence](./agent-state-divergence.md) - acting on a slower peer's stale output is a specific mechanism by which state divergence occurs
+- [Agent Timeout Cascade](agent-timeout-cascade.md) - sustained latency imbalance is a common precursor to timeout cascades once one agent's slowness exceeds a caller's patience
+- [Agent Resource Contention](agent-resource-contention.md) - contention on a shared resource is a frequent cause of the latency imbalance between agents in the first place
+- [Agent State Divergence](agent-state-divergence.md) - acting on a slower peer's stale output is a specific mechanism by which state divergence occurs

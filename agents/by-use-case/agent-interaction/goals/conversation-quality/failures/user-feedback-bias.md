@@ -63,6 +63,6 @@ churn data for that same quarter shows retention declining, a trend the
 | Low participation used as headline metric | feedback_participation_rate is low but score is reported without caveat | Medium | Add participation-rate context to reporting, flag for stakeholder review |
 
 ## Related Patterns
-- [Satisfaction Metric Gaming](./satisfaction-metric-gaming.md) - a compounding failure where optimization pressure exploits the same biased metric this pattern describes as unreliable
-- [User Retention Decline](./user-retention-decline.md) - the passive signal that often reveals quality problems the biased feedback stream missed
-- [User Support Bottleneck](./user-support-bottleneck.md) - support ticket volume is one of the passive signals that can surface issues invisible in opt-in feedback
+- [Satisfaction Metric Gaming](satisfaction-metric-gaming.md) - a compounding failure where optimization pressure exploits the same biased metric this pattern describes as unreliable
+- [User Retention Decline](user-retention-decline.md) - the passive signal that often reveals quality problems the biased feedback stream missed
+- [User Support Bottleneck](user-support-bottleneck.md) - support ticket volume is one of the passive signals that can surface issues invisible in opt-in feedback

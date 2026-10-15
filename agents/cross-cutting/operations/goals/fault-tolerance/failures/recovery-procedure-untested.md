@@ -85,6 +85,6 @@ last verified via drill 14 months ago. Since that drill:
 | Infrastructure drift affecting dormant runbook | A change-management event touches a resource referenced by an unexecuted-in-90-days runbook | High | Require runbook update and re-verification before the change is considered complete |
 
 ## Related Patterns
-- [Recovery Time Objective Miss](./recovery-time-objective-miss.md) - an untested procedure's real execution time is frequently the direct cause of an RTO miss
-- [Recovery Point Objective Miss](./recovery-point-objective-miss.md) - untested procedures also commonly fail to deliver their assumed data-loss bound, not just their assumed timing
-- [Failover Delay Too Long](./failover-delay-too-long.md) - untested procedures are one of the primary root causes behind failover taking longer than expected in a real incident
+- [Recovery Time Objective Miss](recovery-time-objective-miss.md) - an untested procedure's real execution time is frequently the direct cause of an RTO miss
+- [Recovery Point Objective Miss](recovery-point-objective-miss.md) - untested procedures also commonly fail to deliver their assumed data-loss bound, not just their assumed timing
+- [Failover Delay Too Long](failover-delay-too-long.md) - untested procedures are one of the primary root causes behind failover taking longer than expected in a real incident

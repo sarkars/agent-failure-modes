@@ -68,6 +68,6 @@ while the enterprise deal is on hold pending resolution.
 | Incompatible license found in production dependency tree | Periodic SBOM audit finds an existing production dependency with an incompatible license | High | Prioritize replacement, involve legal to assess exposure, notify affected stakeholders if customer-facing |
 
 ## Related Patterns
-- [Dependency Security Vulnerability](./dependency-security-vulnerability.md) - both are non-functional dependency risks (legal and security) that standard build/test checks don't catch without dedicated tooling
-- [Transitive Dependency Explosion](./transitive-dependency-explosion.md) - an uncontrolled transitive dependency tree makes license auditing dramatically harder, since license conflicts hide several levels deep
-- [Dependency Breaking Change](./dependency-breaking-change.md) - both describe risks introduced by a dependency that go unnoticed because they fall outside the standard functional test suite
+- [Dependency Security Vulnerability](dependency-security-vulnerability.md) - both are non-functional dependency risks (legal and security) that standard build/test checks don't catch without dedicated tooling
+- [Transitive Dependency Explosion](transitive-dependency-explosion.md) - an uncontrolled transitive dependency tree makes license auditing dramatically harder, since license conflicts hide several levels deep
+- [Dependency Breaking Change](dependency-breaking-change.md) - both describe risks introduced by a dependency that go unnoticed because they fall outside the standard functional test suite

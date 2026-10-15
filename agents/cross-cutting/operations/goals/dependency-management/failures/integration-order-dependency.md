@@ -74,6 +74,6 @@ ticket.
 | Orphaned record detected | orphaned_record_count increases for a critical cross-system workflow | High | Reconcile the orphaned record, audit the workflow's call ordering for the affected step pair |
 
 ## Related Patterns
-- [Integration Data Consistency](./integration-data-consistency.md) - order violations are one specific mechanism that produces the cross-system state disagreement this sibling pattern describes
-- [Integration Timeout Mismatch](./integration-timeout-mismatch.md) - both involve one integration's call proceeding before another's true completion state is known, one from timing/timeout assumptions and one from missing sequencing constraints
+- [Integration Data Consistency](integration-data-consistency.md) - order violations are one specific mechanism that produces the cross-system state disagreement this sibling pattern describes
+- [Integration Timeout Mismatch](integration-timeout-mismatch.md) - both involve one integration's call proceeding before another's true completion state is known, one from timing/timeout assumptions and one from missing sequencing constraints
 - [Recovery Ordering Violation](../../fault-tolerance/failures/recovery-ordering-violation.md) - the same out-of-order-execution mechanism applied specifically to recovery/replay after a failure, rather than to normal-path multi-system orchestration

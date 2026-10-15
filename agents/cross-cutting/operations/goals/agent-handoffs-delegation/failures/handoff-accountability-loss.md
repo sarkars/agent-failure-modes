@@ -65,6 +65,6 @@ agent's logs show no error, because it never touched the ticket at all.
 | Handoff/completion metric divergence | handoff_count for a task ID has no corresponding completion_count within the expected window | Medium | Audit the receiving agent's queue configuration and filters |
 
 ## Related Patterns
-- [Handoff Context Incompleteness](./handoff-context-incompleteness.md) - a related failure where the receiving agent does take ownership but lacks the information to act on it correctly
-- [Handoff Timing Mismatch](./handoff-timing-mismatch.md) - one specific mechanism by which a receiving agent never picks up ownership, contributing to accountability loss
-- [Handoff Rollback Failure](./handoff-rollback-failure.md) - accountability loss often surfaces only when a rollback is attempted and no owner can be found to authorize or perform it
+- [Handoff Context Incompleteness](handoff-context-incompleteness.md) - a related failure where the receiving agent does take ownership but lacks the information to act on it correctly
+- [Handoff Timing Mismatch](handoff-timing-mismatch.md) - one specific mechanism by which a receiving agent never picks up ownership, contributing to accountability loss
+- [Handoff Rollback Failure](handoff-rollback-failure.md) - accountability loss often surfaces only when a rollback is attempted and no owner can be found to authorize or perform it

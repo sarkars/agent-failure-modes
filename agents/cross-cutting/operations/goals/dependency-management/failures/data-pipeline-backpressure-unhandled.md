@@ -64,6 +64,6 @@ existed because the source queue had already acknowledged and removed them.
 | Consumer lag exceeds SLA | End-to-end processing lag exceeds the pipeline's freshness SLA | Medium | Scale consumer capacity, evaluate load shedding policy |
 
 ## Related Patterns
-- [Data Pipeline Latency](./data-pipeline-latency.md) - unhandled backpressure is the acute failure that chronic latency accumulation can trigger
-- [Data Pipeline Lossy Transformation](./data-pipeline-lossy-transformation.md) - load-shedding under backpressure is a deliberate form of the same data loss this pattern causes accidentally
-- [Data Pipeline Replay Idempotency](./data-pipeline-replay-idempotency.md) - recovering from a backpressure-induced crash often requires replaying the backlog, which needs idempotent processing to avoid duplicates
+- [Data Pipeline Latency](data-pipeline-latency.md) - unhandled backpressure is the acute failure that chronic latency accumulation can trigger
+- [Data Pipeline Lossy Transformation](data-pipeline-lossy-transformation.md) - load-shedding under backpressure is a deliberate form of the same data loss this pattern causes accidentally
+- [Data Pipeline Replay Idempotency](data-pipeline-replay-idempotency.md) - recovering from a backpressure-induced crash often requires replaying the backlog, which needs idempotent processing to avoid duplicates

@@ -64,6 +64,6 @@ event despite carrying a current-looking timestamp.
 | Duplicate action from stale refresh | Agent re-performs an action the source of record shows as already completed | Medium | Log and suppress duplicate, alert workflow owner to review refresh routing |
 
 ## Related Patterns
-- [Memory Not Updated Stale Retrieval](./memory-not-updated-stale-retrieval.md) - the same read-after-write consistency gap, in the memory store's read path rather than a context-refresh mechanism
-- [Context Coherence Loss](./context-coherence-loss.md) - stale refreshed state is one common trigger for the agent's context becoming internally inconsistent
-- [Retrieval Temporal Ordering Failure](./retrieval-temporal-ordering-failure.md) - both involve the agent trusting a data-freshness signal that doesn't reflect true recency
+- [Memory Not Updated Stale Retrieval](memory-not-updated-stale-retrieval.md) - the same read-after-write consistency gap, in the memory store's read path rather than a context-refresh mechanism
+- [Context Coherence Loss](context-coherence-loss.md) - stale refreshed state is one common trigger for the agent's context becoming internally inconsistent
+- [Retrieval Temporal Ordering Failure](retrieval-temporal-ordering-failure.md) - both involve the agent trusting a data-freshness signal that doesn't reflect true recency

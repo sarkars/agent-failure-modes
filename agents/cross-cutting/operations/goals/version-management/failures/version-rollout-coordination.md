@@ -71,6 +71,6 @@ reproduce.
 | Silent contract mismatch detected | A component logs an unrecognized message/request format consistent with a version-skew window | High | Investigate immediately; treat any silent-default fallback found as a data-integrity risk requiring backfill assessment |
 
 ## Related Patterns
-- [Deployment Ordering Violation](./deployment-ordering-violation.md) - closely related: that pattern covers ordering violations within a single deployment pipeline's steps, while this pattern covers coordination gaps across separately-piped components
-- [Deployment Dependency Deadlock](./deployment-dependency-deadlock.md) - a related coordination failure where components waiting on each other block progress entirely, as opposed to this pattern's silent, ungated cross-version window
+- [Deployment Ordering Violation](deployment-ordering-violation.md) - closely related: that pattern covers ordering violations within a single deployment pipeline's steps, while this pattern covers coordination gaps across separately-piped components
+- [Deployment Dependency Deadlock](deployment-dependency-deadlock.md) - a related coordination failure where components waiting on each other block progress entirely, as opposed to this pattern's silent, ungated cross-version window
 - [Handoff Protocol Version Mismatch](../../agent-handoffs-delegation/failures/handoff-protocol-version-mismatch.md) - a related but narrower pattern focused on version mismatch specifically during an agent-to-agent handoff, rather than general component rollout coordination

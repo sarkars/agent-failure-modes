@@ -71,6 +71,6 @@ testimonial in the batch, not just the one with the problematic quote.
 | Batch-wide failure from one malformed record | A single record's escaping error causes full-batch parse failure | Medium | Add per-record isolation/validation so one bad record doesn't block the whole batch |
 
 ## Related Patterns
-- [Output Injection Vulnerability](./output-injection-vulnerability.md) - injection is the security-framed version of unescaped interpolation with adversarial intent; this pattern is the reliability-framed version where ordinary, non-malicious content breaks the model's own attempted escaping
-- [Output Encoding Issues](./output-encoding-issues.md) - both are about the model's own serialization step corrupting output, one from character-encoding mismatch and one from escaping-grammar mismatch
-- [Output Format Not Validated](./output-format-not-validated.md) - a missing validation gate is what allows a quote-escaping failure to reach a downstream consumer undetected rather than being caught at the source
+- [Output Injection Vulnerability](output-injection-vulnerability.md) - injection is the security-framed version of unescaped interpolation with adversarial intent; this pattern is the reliability-framed version where ordinary, non-malicious content breaks the model's own attempted escaping
+- [Output Encoding Issues](output-encoding-issues.md) - both are about the model's own serialization step corrupting output, one from character-encoding mismatch and one from escaping-grammar mismatch
+- [Output Format Not Validated](output-format-not-validated.md) - a missing validation gate is what allows a quote-escaping failure to reach a downstream consumer undetected rather than being caught at the source

@@ -57,6 +57,6 @@ Conditional permission logic requires the check to run against current, authorit
 | Post-hoc condition violation | Reconciliation job finds an executed action whose gating condition was false at execution time | Critical | Reverse if possible, audit the specific check path |
 
 ## Related Patterns
-- [Owner Verification Not Enforced](./owner-verification-not-enforced.md) - both are runtime checks that must be evaluated against live, specific state rather than assumptions
-- [Approval Signature Verification](./approval-signature-verification.md) - both are examples of authorization logic that looks correct on paper but has a gap in when/how the check is evaluated
-- [Permission Cascade Incorrect](./permission-cascade-incorrect.md) - both involve incorrect evaluation of a permission rule against the wrong data or scope
+- [Owner Verification Not Enforced](owner-verification-not-enforced.md) - both are runtime checks that must be evaluated against live, specific state rather than assumptions
+- [Approval Signature Verification](approval-signature-verification.md) - both are examples of authorization logic that looks correct on paper but has a gap in when/how the check is evaluated
+- [Permission Cascade Incorrect](permission-cascade-incorrect.md) - both involve incorrect evaluation of a permission rule against the wrong data or scope

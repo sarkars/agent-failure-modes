@@ -96,7 +96,7 @@ Result: 300 API calls instead of 3
 **This pattern focuses on COORDINATION failures where multiple agents retry simultaneously.**
 
 For cost explosion caused by cascading retries across multiple layers within a single request, see:
-- **[Retry Amplification of Costs](./retry-amplification-of-costs.md)** — When exponential backoff and layered retries multiply costs 10-100x through LLM re-invocation
+- **[Retry Amplification of Costs](retry-amplification-of-costs.md)** — When exponential backoff and layered retries multiply costs 10-100x through LLM re-invocation
 
 **Key distinction:**
 - `retry-storms` = Multiple agents coordinating poorly (no backoff, simultaneous retries) → overwhelm downstream

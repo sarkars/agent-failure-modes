@@ -66,4 +66,4 @@ transaction the agent had silently marked done.
 | Unrecognized error subtype observed | An error response contains a subtype/reason value not in the agent's known mapping | Medium | Log full payload for review, do not silently default to prior behavior |
 
 ## Related Patterns
-- [Error Response Format Inconsistency](./error-response-format-inconsistency.md) - both involve the agent's error parser making assumptions about vendor error shape that silently stop holding
+- [Error Response Format Inconsistency](error-response-format-inconsistency.md) - both involve the agent's error parser making assumptions about vendor error shape that silently stop holding

@@ -4,7 +4,7 @@ Run:  python3 -I agents/by-capability/human-machine-interface/roadmap/tools/chec
 import re, glob, os, sys
 AREA = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 GUIDES = [f for f in sorted(glob.glob(os.path.join(AREA, "chat-use-cases", "*.md")))
-          if os.path.basename(f) not in ("README.md", "_template.md")]
+          if os.path.basename(f) not in ("README.md", "_template.md", "market-usage.md")]
 def section(text, name):
     m = re.search(r"^## \d+\. " + re.escape(name) + r".*?\n(.*?)(?=^## |\Z)", text, re.S | re.M)
     return m.group(1) if m else ""

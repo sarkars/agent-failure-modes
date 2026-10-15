@@ -75,6 +75,6 @@ locally-reasonable tool choice.
 | Rate limit hit during a high-call-count trace | A task trace shows both elevated call count and a rate-limit error | Low | Flag for retrospective review, no immediate user-facing action needed if task still completed |
 
 ## Related Patterns
-- [Tool Composition Complexity Explosion](./tool-composition-complexity-explosion.md) - a large tool space makes greedy, myopic selection more likely since full evaluation becomes infeasible
-- [Tool Selection Non-Determinism](./tool-selection-non-determinism.md) - greedy selection based on surface-level phrasing match is also more sensitive to run-to-run prompt variance
-- [Tool Invocation Ordering Dependency](./tool-invocation-ordering-dependency.md) - a greedy first choice can also violate an ordering dependency that a lookahead-aware plan would have respected
+- [Tool Composition Complexity Explosion](tool-composition-complexity-explosion.md) - a large tool space makes greedy, myopic selection more likely since full evaluation becomes infeasible
+- [Tool Selection Non-Determinism](tool-selection-non-determinism.md) - greedy selection based on surface-level phrasing match is also more sensitive to run-to-run prompt variance
+- [Tool Invocation Ordering Dependency](tool-invocation-ordering-dependency.md) - a greedy first choice can also violate an ordering dependency that a lookahead-aware plan would have respected

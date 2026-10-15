@@ -62,6 +62,6 @@ which was never established for someone in their situation.
 | Scope qualifier retention drop | scope_qualifier_retention_rate falls below threshold after a summarization pipeline change | Medium | Review recent summarization prompt/pipeline changes for scope-stripping regressions |
 
 ## Related Patterns
-- [Fact Partial Truth](./fact-partial-truth.md) - closely related; generalization error is the specific case where the dropped qualifier is the fact's applicable scope
-- [Knowledge Scope Assumption Wrong](./knowledge-scope-assumption-wrong.md) - shares the scope-mismatch mechanism, framed at the level of jurisdiction/version rather than population/condition
-- [Fact Probabilistic Mismatch](./fact-probabilistic-mismatch.md) - a related over-confidence failure where a conditional/probabilistic finding is stated as a flat certainty
+- [Fact Partial Truth](fact-partial-truth.md) - closely related; generalization error is the specific case where the dropped qualifier is the fact's applicable scope
+- [Knowledge Scope Assumption Wrong](knowledge-scope-assumption-wrong.md) - shares the scope-mismatch mechanism, framed at the level of jurisdiction/version rather than population/condition
+- [Fact Probabilistic Mismatch](fact-probabilistic-mismatch.md) - a related over-confidence failure where a conditional/probabilistic finding is stated as a flat certainty

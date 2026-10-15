@@ -66,6 +66,6 @@ of records only partially reformatted.
 | Unbounded step proceeding without cardinality check | A step whose cost scales with data volume begins execution with no preliminary size check logged | Medium | Flag for planning-process review |
 
 ## Related Patterns
-- [Plan Optimization Pathological](./plan-optimization-pathological.md) - both stem from the planner's cost model not matching real-world cost, one producing bad estimates and the other producing bad optimization targets
-- [Plan Hallucination Detection Failure](./plan-hallucination-detection-failure.md) - an estimate built on a hallucinated step inherits that step's fabricated (and therefore meaningless) cost figure
-- [Plan Parallelization Error](./plan-parallelization-error.md) - inaccurate per-step cost estimates commonly feed into incorrect parallelization decisions, since parallelizability judgments often rely on assumed step cost
+- [Plan Optimization Pathological](plan-optimization-pathological.md) - both stem from the planner's cost model not matching real-world cost, one producing bad estimates and the other producing bad optimization targets
+- [Plan Hallucination Detection Failure](plan-hallucination-detection-failure.md) - an estimate built on a hallucinated step inherits that step's fabricated (and therefore meaningless) cost figure
+- [Plan Parallelization Error](plan-parallelization-error.md) - inaccurate per-step cost estimates commonly feed into incorrect parallelization decisions, since parallelizability judgments often rely on assumed step cost

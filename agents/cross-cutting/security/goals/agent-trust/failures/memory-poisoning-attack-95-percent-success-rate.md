@@ -204,10 +204,10 @@ Impact: Data breach; system compromise; regulatory penalties
 ---
 
 ## Related Patterns
-- [Temporally Decoupled Poison Execution](./temporally-decoupled-poison-execution.md) — Attack persists over time
+- [Temporally Decoupled Poison Execution](temporally-decoupled-poison-execution.md) — Attack persists over time
 - Memory Poison Defense Gap — Existing defenses insufficient
-- [Confident Fabrication](../../../../../cross-cutting/accuracy/goals/output-accuracy/failures/confident-fabrication.md) — Poisoned instructions treated with confidence
-- [Unverified Agent Output](./unverified-agent-output.md) — Trust in agent output from poisoned knowledge
+- [Confident Fabrication](../../../../accuracy/goals/output-accuracy/failures/confident-fabrication.md) — Poisoned instructions treated with confidence
+- [Unverified Agent Output](unverified-agent-output.md) — Trust in agent output from poisoned knowledge
 
 ---
 

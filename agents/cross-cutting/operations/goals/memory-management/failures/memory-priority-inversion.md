@@ -72,6 +72,6 @@ in a priority-blind queue.
 | Background write burst detected | A batch/bulk writer submits volume likely to cause queue contention | Medium | Throttle the bulk writer, verify priority lane isolation is in place |
 
 ## Related Patterns
-- [Memory Interleaving Corruption](./memory-interleaving-corruption.md) - both are consequences of a write pipeline not being designed for the concurrency/priority realities of production load
-- [Memory Loss on Reboot](./memory-loss-on-reboot.md) - checkpointing added to prevent reboot loss can itself add to write-path contention that triggers priority inversion
-- [Retrieval Confidence Miscalibration](./retrieval-confidence-miscalibration.md) - unrelated failure surface, but both illustrate a subsystem (queue priority, relevance scoring) missing a signal the agent implicitly assumes exists
+- [Memory Interleaving Corruption](memory-interleaving-corruption.md) - both are consequences of a write pipeline not being designed for the concurrency/priority realities of production load
+- [Memory Loss on Reboot](memory-loss-on-reboot.md) - checkpointing added to prevent reboot loss can itself add to write-path contention that triggers priority inversion
+- [Retrieval Confidence Miscalibration](retrieval-confidence-miscalibration.md) - unrelated failure surface, but both illustrate a subsystem (queue priority, relevance scoring) missing a signal the agent implicitly assumes exists

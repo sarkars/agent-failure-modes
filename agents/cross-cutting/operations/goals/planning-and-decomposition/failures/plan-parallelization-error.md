@@ -66,7 +66,7 @@ decision assumed independence that didn't actually hold.
 | Non-deterministic plan outcome | Identical plan and input produce differing final state across repeated executions | High | Quarantine the plan template pending manual dependency audit |
 
 ## Related Patterns
-- [Plan Dependency Cycle](./plan-dependency-cycle.md) - a related planning-time dependency error, but one that produces a structurally unexecutable cycle rather than a false independence classification
-- [Subgoal Ordering Error](./subgoal-ordering-error.md) - a related failure where sequential (not parallel) subgoals are ordered incorrectly due to an unrecognized implicit precedence constraint
+- [Plan Dependency Cycle](plan-dependency-cycle.md) - a related planning-time dependency error, but one that produces a structurally unexecutable cycle rather than a false independence classification
+- [Subgoal Ordering Error](subgoal-ordering-error.md) - a related failure where sequential (not parallel) subgoals are ordered incorrectly due to an unrecognized implicit precedence constraint
 - [Parallel Execution Failures](../../multi-agent-coordination/failures/parallel-execution-failures.md) - the runtime-coordination counterpart, where parallel work is correctly identified but poorly coordinated during execution, as opposed to being incorrectly identified as parallel in the first place
 - [Tool Invocation Ordering Dependency](../../tool-selection-sequencing/failures/tool-invocation-ordering-dependency.md) - a related but narrower failure at the individual tool-call level rather than the subtask-decomposition level

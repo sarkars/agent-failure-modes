@@ -67,6 +67,6 @@ the two candidates were scored against each other.
 | Recency signal absent from ranking | Periodic audit finds recency has no measurable effect on ranking for a time-sensitive namespace | Medium | Add recency weighting to the ranking function for that namespace |
 
 ## Related Patterns
-- [Retrieval Confidence Miscalibration](./retrieval-confidence-miscalibration.md) - temporal ordering failure is a specific, common instance of the broader problem that similarity score doesn't track actual usefulness
-- [Memory Not Updated Stale Retrieval](./memory-not-updated-stale-retrieval.md) - both surface an outdated fact, though this pattern is a ranking-logic gap rather than an indexing-lag gap
-- [Context Refresh Stale State](./context-refresh-stale-state.md) - both involve the agent trusting an apparently-current result that is actually outdated relative to a more recent truth
+- [Retrieval Confidence Miscalibration](retrieval-confidence-miscalibration.md) - temporal ordering failure is a specific, common instance of the broader problem that similarity score doesn't track actual usefulness
+- [Memory Not Updated Stale Retrieval](memory-not-updated-stale-retrieval.md) - both surface an outdated fact, though this pattern is a ranking-logic gap rather than an indexing-lag gap
+- [Context Refresh Stale State](context-refresh-stale-state.md) - both involve the agent trusting an apparently-current result that is actually outdated relative to a more recent truth

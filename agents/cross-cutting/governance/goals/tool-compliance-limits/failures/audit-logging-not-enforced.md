@@ -58,6 +58,6 @@ Audit logging is usually treated as an application-level concern bolted onto ind
 | New tool deployed without logging metadata | CI detects a tool lacking an audit-logging category declaration | Warning | Block merge until logging metadata and coverage are added |
 
 ## Related Patterns
-- [Audit Log Tampering](./audit-log-tampering.md) - both undermine audit trail reliability, one by preventing entries, the other by altering them after creation
-- [Audit Retention Policy](./audit-retention-policy.md) - even fully-logged actions are useless for compliance if the resulting log is deleted before the required retention period
-- [PII Retention Policy Violation](./pii-retention-policy-violation.md) - unlogged PII access compounds the risk of undetected data-handling violations going unnoticed
+- [Audit Log Tampering](audit-log-tampering.md) - both undermine audit trail reliability, one by preventing entries, the other by altering them after creation
+- [Audit Retention Policy](audit-retention-policy.md) - even fully-logged actions are useless for compliance if the resulting log is deleted before the required retention period
+- [PII Retention Policy Violation](pii-retention-policy-violation.md) - unlogged PII access compounds the risk of undetected data-handling violations going unnoticed

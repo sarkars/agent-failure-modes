@@ -64,6 +64,6 @@ mistake is only caught when a confused invitee replies asking whether the
 | DST-transition discrepancy spike | Scheduled-action complaints cluster around a daylight-saving transition date | Medium | Audit timezone-conversion logic for DST handling correctness |
 
 ## Related Patterns
-- [Input Locale Mismatch](./input-locale-mismatch.md) - a related temporal/numeric misinterpretation failure, often co-occurring with timezone ambiguity in the same input
-- [Input Default Value Assumption](./input-default-value-assumption.md) - defaulting to a server-local or hardcoded timezone is a specific instance of the broader unsafe-default pattern
-- [Output Inconsistency](./output-inconsistency.md) - inconsistent timezone handling across calls can produce differently-formatted timestamps for logically identical inputs
+- [Input Locale Mismatch](input-locale-mismatch.md) - a related temporal/numeric misinterpretation failure, often co-occurring with timezone ambiguity in the same input
+- [Input Default Value Assumption](input-default-value-assumption.md) - defaulting to a server-local or hardcoded timezone is a specific instance of the broader unsafe-default pattern
+- [Output Inconsistency](output-inconsistency.md) - inconsistent timezone handling across calls can produce differently-formatted timestamps for logically identical inputs

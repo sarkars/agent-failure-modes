@@ -66,6 +66,6 @@ the user to do the reconciliation the agent should have done.
 | Rising contradiction trend | self_contradiction_rate increases session-over-session for a given agent/workflow | Medium | Investigate recent changes to tool retry or compaction logic |
 
 ## Related Patterns
-- [Context Window Awareness Failure](./context-window-awareness-failure.md) - context loss from silent eviction compounds coherence problems when the reconciling context is what gets dropped
-- [Memory Inconsistency Between Agents](./memory-inconsistency-between-agents.md) - the cross-agent analogue of the same underlying problem: no single authoritative view of current state
-- [Memory Summarization Lossy](./memory-summarization-lossy.md) - lossy compaction is one of the mechanisms that produces the stale, unreconciled mentions behind coherence loss
+- [Context Window Awareness Failure](context-window-awareness-failure.md) - context loss from silent eviction compounds coherence problems when the reconciling context is what gets dropped
+- [Memory Inconsistency Between Agents](memory-inconsistency-between-agents.md) - the cross-agent analogue of the same underlying problem: no single authoritative view of current state
+- [Memory Summarization Lossy](memory-summarization-lossy.md) - lossy compaction is one of the mechanisms that produces the stale, unreconciled mentions behind coherence loss

@@ -60,6 +60,6 @@ burning through its retry budget and eventually aborting the job with
 | Retry loop against exhausted aggregate quota | Same-window retries continue after an aggregate-limit rejection | Critical | Disable short-backoff retry for aggregate errors, switch to window-reset-aware scheduling |
 
 ## Related Patterns
-- [Batch Size Limit](./batch-size-limit.md) - the per-call limit that correct chunking satisfies but that does nothing to prevent this aggregate limit
-- [Backoff Envelope Violation](./backoff-envelope-violation.md) - applying the wrong retry timing to an aggregate-quota rejection compounds the failure
-- [Tool Max Retry Limit Enforced](./tool-max-retry-limit-enforced.md) - another server-tracked rolling counter that client-side logic commonly fails to mirror
+- [Batch Size Limit](batch-size-limit.md) - the per-call limit that correct chunking satisfies but that does nothing to prevent this aggregate limit
+- [Backoff Envelope Violation](backoff-envelope-violation.md) - applying the wrong retry timing to an aggregate-quota rejection compounds the failure
+- [Tool Max Retry Limit Enforced](tool-max-retry-limit-enforced.md) - another server-tracked rolling counter that client-side logic commonly fails to mirror

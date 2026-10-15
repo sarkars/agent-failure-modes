@@ -72,6 +72,6 @@ during an active incident.
 | Persistent flag skew | flag_value_skew_fleet_share stays elevated well past expected TTL | Medium | Check flag service health, verify instances are polling successfully, investigate stuck instances |
 
 ## Related Patterns
-- [Traffic Routing Asymmetry](./traffic-routing-asymmetry.md) - both produce inconsistent behavior across concurrent requests due to state that hasn't uniformly propagated
-- [Sticky Session Loss](./sticky-session-loss.md) - flag skew combined with session routing can compound into a single user seeing wildly different behavior turn to turn
-- [Canary Deployment Incomplete](./canary-deployment-incomplete.md) - flags are sometimes used as a lighter-weight substitute for canary rollout, and share the same "believed complete but actually partial" failure shape
+- [Traffic Routing Asymmetry](traffic-routing-asymmetry.md) - both produce inconsistent behavior across concurrent requests due to state that hasn't uniformly propagated
+- [Sticky Session Loss](sticky-session-loss.md) - flag skew combined with session routing can compound into a single user seeing wildly different behavior turn to turn
+- [Canary Deployment Incomplete](canary-deployment-incomplete.md) - flags are sometimes used as a lighter-weight substitute for canary rollout, and share the same "believed complete but actually partial" failure shape

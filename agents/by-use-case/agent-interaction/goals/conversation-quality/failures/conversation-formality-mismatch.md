@@ -67,6 +67,6 @@ proceed accordingly. Please advise if further assistance is required."
 | User tone correction ignored | User flags tone and next turn doesn't reflect the correction | Medium | Flag for register-persistence logic review |
 
 ## Related Patterns
-- [Conversation Depth Mismatch](./conversation-depth-mismatch.md) - both are context-calibration failures, one on register and one on length/detail
-- [Conversation Mood Whiplash](./conversation-mood-whiplash.md) - formality mismatch on a single response can compound into mood whiplash when register swings across turns
-- [User Trust Degradation](./user-trust-degradation.md) - a tone-deaf response on a sensitive topic can disproportionately damage trust relative to its apparent severity
+- [Conversation Depth Mismatch](conversation-depth-mismatch.md) - both are context-calibration failures, one on register and one on length/detail
+- [Conversation Mood Whiplash](conversation-mood-whiplash.md) - formality mismatch on a single response can compound into mood whiplash when register swings across turns
+- [User Trust Degradation](user-trust-degradation.md) - a tone-deaf response on a sensitive topic can disproportionately damage trust relative to its apparent severity

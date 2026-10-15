@@ -67,6 +67,6 @@ selection non-determinism rather than a data or pricing issue.
 | Duplicate action from ambiguous selection | The agent calls two overlapping tools for what should be a single action | High | Notify workflow owner, add explicit mutual-exclusivity guidance or a selection gate |
 
 ## Related Patterns
-- [Tool Selection Greedy Suboptimal](./tool-selection-greedy-suboptimal.md) - near-tied, ambiguous tool choices are also where greedy selection is most likely to pick a locally-plausible but globally-worse option
-- [Tool Composition Complexity Explosion](./tool-composition-complexity-explosion.md) - a larger, more overlapping toolkit increases both the complexity cost and the rate of near-tied, non-deterministic selections
-- [Tool Output Format Mismatch](./tool-output-format-mismatch.md) - non-deterministic tool choice means downstream steps must handle a wider, less predictable range of output formats
+- [Tool Selection Greedy Suboptimal](tool-selection-greedy-suboptimal.md) - near-tied, ambiguous tool choices are also where greedy selection is most likely to pick a locally-plausible but globally-worse option
+- [Tool Composition Complexity Explosion](tool-composition-complexity-explosion.md) - a larger, more overlapping toolkit increases both the complexity cost and the rate of near-tied, non-deterministic selections
+- [Tool Output Format Mismatch](tool-output-format-mismatch.md) - non-deterministic tool choice means downstream steps must handle a wider, less predictable range of output formats

@@ -62,6 +62,6 @@ or is shared with the requesting user.
 | Enumeration Test Failure | Automated ID-enumeration test successfully retrieves an unauthorized record | P1 | Block release, add the missing ownership predicate before deploy |
 
 ## Related Patterns
-- [Record Ownership Not Validated](./record-ownership-not-validated.md) - the write-path counterpart: this pattern covers reads, that one covers updates/writes without an ownership check
-- [Field-Level Access Not Restricted](./field-level-access-not-restricted.md) - a related gap one level down in granularity, restricting fields rather than whole records
-- [Access Control Inheritance Wrong](./access-control-inheritance-wrong.md) - over-broad inherited scope often compounds with missing record-level checks to produce this failure
+- [Record Ownership Not Validated](record-ownership-not-validated.md) - the write-path counterpart: this pattern covers reads, that one covers updates/writes without an ownership check
+- [Field-Level Access Not Restricted](field-level-access-not-restricted.md) - a related gap one level down in granularity, restricting fields rather than whole records
+- [Access Control Inheritance Wrong](access-control-inheritance-wrong.md) - over-broad inherited scope often compounds with missing record-level checks to produce this failure

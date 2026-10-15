@@ -33,10 +33,10 @@ This is a **design heuristic**, not a validated model. It draws on media richnes
 - Ask permission before moving to a new channel such as text messages.
 
 ## Patterns that apply this guide
-- [Visual products sold by chat or voice](../channel-selection/failures/visual-product-sold-by-text-or-voice.md)
-- [Complex or emotional discussion forced into chat](../channel-selection/failures/complex-or-emotional-discussion-forced-into-chat.md)
-- [No channel switch, or context lost on switch](../channel-selection/failures/no-channel-switch-or-context-lost.md)
-- [Sensitive data collected in chat](../channel-selection/failures/sensitive-data-collected-in-chat.md)
+- [Visual products sold by chat or voice](../goals/channel-selection/failures/visual-product-sold-by-text-or-voice.md)
+- [Complex or emotional discussion forced into chat](../goals/channel-selection/failures/complex-or-emotional-discussion-forced-into-chat.md)
+- [No channel switch, or context lost on switch](../goals/channel-selection/failures/no-channel-switch-or-context-lost.md)
+- [Sensitive data collected in chat](../goals/channel-selection/failures/sensitive-data-collected-in-chat.md)
 
 ## Sources
 - Daft, R. L., & Lengel, R. H. (1986). Organizational information requirements, media richness and structural design. *Management Science*. Summary via [Wikipedia](https://en.wikipedia.org/wiki/Media_richness_theory); I could not read the full text.

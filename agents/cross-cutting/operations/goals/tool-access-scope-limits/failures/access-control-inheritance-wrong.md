@@ -61,6 +61,6 @@ single-customer task at hand.
 | Cross-Principal Scope Drift | Same automation invoked by two different principals resolves to permission sets differing by more than the expected per-user delta | P2 | Audit both invocation paths, confirm intended vs. accidental elevation |
 
 ## Related Patterns
-- [Scope Downgrade Not Enforced](./scope-downgrade-not-enforced.md) - both involve a permission-narrowing step that silently fails to apply
-- [Record-Level Access Not Enforced](./record-level-access-not-enforced.md) - inherited over-broad scope often manifests as missing record-level checks downstream
-- [Workspace Isolation Bypass](./workspace-isolation-bypass.md) - inheritance from a system/service account is a common root cause of cross-workspace leakage
+- [Scope Downgrade Not Enforced](scope-downgrade-not-enforced.md) - both involve a permission-narrowing step that silently fails to apply
+- [Record-Level Access Not Enforced](record-level-access-not-enforced.md) - inherited over-broad scope often manifests as missing record-level checks downstream
+- [Workspace Isolation Bypass](workspace-isolation-bypass.md) - inheritance from a system/service account is a common root cause of cross-workspace leakage

@@ -67,6 +67,6 @@ SLA breach alert fires on a ticket that should have been fast-tracked.
 | Conflict rate spike | write_conflict_rate exceeds threshold for 3+ consecutive windows | Medium | Check for scaling events producing duplicate workers, verify queue visibility-timeout configuration |
 
 ## Related Patterns
-- [State Machine Violation](./state-machine-violation.md) - concurrent writers can also drive a record through an invalid transition sequence, not just lose field values
-- [State Replication Lag](./state-replication-lag.md) - a related timing failure where the read side, not the write side, sees stale state
-- [State Consistency Timeout](./state-consistency-timeout.md) - describes what happens when the safeguards meant to catch this race (a consistency check) themselves fail to complete
+- [State Machine Violation](state-machine-violation.md) - concurrent writers can also drive a record through an invalid transition sequence, not just lose field values
+- [State Replication Lag](state-replication-lag.md) - a related timing failure where the read side, not the write side, sees stale state
+- [State Consistency Timeout](state-consistency-timeout.md) - describes what happens when the safeguards meant to catch this race (a consistency check) themselves fail to complete

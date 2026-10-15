@@ -59,6 +59,6 @@ Log retention is an infrastructure configuration setting (a bucket lifecycle rul
 | Legal hold conflicts with default deletion | A record under active legal hold is scheduled for deletion by the standard retention job | Critical | Block the deletion, escalate to legal/compliance immediately |
 
 ## Related Patterns
-- [Audit Logging Not Enforced](./audit-logging-not-enforced.md) - complementary failure: even correctly-retained logs are useless for compliance if the entries were never written in the first place
-- [Audit Log Tampering](./audit-log-tampering.md) - both result in audit evidence being unavailable when needed, through deletion versus alteration
-- [PII Retention Policy Violation](./pii-retention-policy-violation.md) - the same retention-drift root cause applies to PII data stores, not just audit logs
+- [Audit Logging Not Enforced](audit-logging-not-enforced.md) - complementary failure: even correctly-retained logs are useless for compliance if the entries were never written in the first place
+- [Audit Log Tampering](audit-log-tampering.md) - both result in audit evidence being unavailable when needed, through deletion versus alteration
+- [PII Retention Policy Violation](pii-retention-policy-violation.md) - the same retention-drift root cause applies to PII data stores, not just audit logs

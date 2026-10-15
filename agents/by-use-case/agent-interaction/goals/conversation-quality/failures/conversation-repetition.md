@@ -65,6 +65,6 @@ Turn 20: User: "You've told me that twice now, can we move on?"
 | User flags repetition | Explicit "already told you" style user statement detected | Low | Log session, review said-before check coverage |
 
 ## Related Patterns
-- [Conversation Coherence Loss](./conversation-coherence-loss.md) - a frequent root cause of repetition, since forgotten state leads directly to re-asking or re-stating
-- [Conversation Length Explosion](./conversation-length-explosion.md) - repeated content inflates turn count without adding information, contributing directly to unbounded conversation growth
-- [Over-Clarification](./over-clarification.md) - repeated questions are a specific case of over-clarification when the repeated content is itself a clarifying question
+- [Conversation Coherence Loss](conversation-coherence-loss.md) - a frequent root cause of repetition, since forgotten state leads directly to re-asking or re-stating
+- [Conversation Length Explosion](conversation-length-explosion.md) - repeated content inflates turn count without adding information, contributing directly to unbounded conversation growth
+- [Over-Clarification](over-clarification.md) - repeated questions are a specific case of over-clarification when the repeated content is itself a clarifying question

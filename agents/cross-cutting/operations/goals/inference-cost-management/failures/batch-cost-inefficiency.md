@@ -67,6 +67,6 @@ time-of-day.
 | Off-peak cost-per-token spike | cost_per_1k_tokens_hourly exceeds 2x the peak-hour baseline | High | Review batch window and size settings for the affected time window; check for a stale static config |
 
 ## Related Patterns
-- [Latency Cost Tradeoff](./latency-cost-tradeoff.md) - batch sizing decisions sit directly on the latency/cost curve this pattern describes
-- [Throughput Per Dollar Optimization Failure](./throughput-per-dollar-optimization-failure.md) - batching tuned for raw throughput without accounting for occupancy waste is a specific instance of this broader failure
-- [Resource Reservation Insufficient](./resource-reservation-insufficient.md) - the inverse failure, where batch/replica sizing under-provisions rather than wastes capacity
+- [Latency Cost Tradeoff](latency-cost-tradeoff.md) - batch sizing decisions sit directly on the latency/cost curve this pattern describes
+- [Throughput Per Dollar Optimization Failure](throughput-per-dollar-optimization-failure.md) - batching tuned for raw throughput without accounting for occupancy waste is a specific instance of this broader failure
+- [Resource Reservation Insufficient](resource-reservation-insufficient.md) - the inverse failure, where batch/replica sizing under-provisions rather than wastes capacity

@@ -71,6 +71,6 @@ someone manually inspects the dead-letter payloads.
 | Contract test failure against upstream | A consumer-driven contract test fails against the upstream service's current staging build | High | Block upstream deployment or coordinate a synchronized release with the agent's parser update |
 
 ## Related Patterns
-- [Input Default Value Assumption](./input-default-value-assumption.md) - a renamed or restructured field is a common trigger for the agent falling back to an incorrect default
-- [Input Validation Bypass](./input-validation-bypass.md) - a schema change can inadvertently open a gap that a previously-enforced validation rule no longer covers
-- [Output Format Not Validated](./output-format-not-validated.md) - the mirror-image failure, where the agent's own output schema drifts without downstream consumers being updated
+- [Input Default Value Assumption](input-default-value-assumption.md) - a renamed or restructured field is a common trigger for the agent falling back to an incorrect default
+- [Input Validation Bypass](input-validation-bypass.md) - a schema change can inadvertently open a gap that a previously-enforced validation rule no longer covers
+- [Output Format Not Validated](output-format-not-validated.md) - the mirror-image failure, where the agent's own output schema drifts without downstream consumers being updated

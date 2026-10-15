@@ -75,6 +75,6 @@ rest of the traffic mix.
 | Speculative decoding costing more than standard decoding | speculative_decoding_cost_delta turns positive for 24+ hours | High | Audit recent target-model or traffic-mix changes; consider disabling speculative decoding pending investigation |
 
 ## Related Patterns
-- [Model Compression Failure](./model-compression-failure.md) - both are cost-motivated inference optimizations that can silently underperform their design intent on a subset of traffic
-- [Batch Cost Inefficiency](./batch-cost-inefficiency.md) - both describe throughput-oriented optimizations whose benefit depends on a matching assumption (batch fill rate, acceptance rate) that can quietly break
-- [Throughput Per Dollar Optimization Failure](./throughput-per-dollar-optimization-failure.md) - wasted speculative compute is a direct mechanism by which raw throughput metrics can look fine while cost-per-successful-output worsens
+- [Model Compression Failure](model-compression-failure.md) - both are cost-motivated inference optimizations that can silently underperform their design intent on a subset of traffic
+- [Batch Cost Inefficiency](batch-cost-inefficiency.md) - both describe throughput-oriented optimizations whose benefit depends on a matching assumption (batch fill rate, acceptance rate) that can quietly break
+- [Throughput Per Dollar Optimization Failure](throughput-per-dollar-optimization-failure.md) - wasted speculative compute is a direct mechanism by which raw throughput metrics can look fine while cost-per-successful-output worsens

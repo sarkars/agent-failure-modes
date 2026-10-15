@@ -106,7 +106,7 @@ by months simply because no recurring process existed to trigger the evaluation 
 ## Related Patterns
 
 - [Model Selection Waste](../../cost-efficiency/failures/model-selection-waste.md) - the tier-routing failure (choosing among existing off-the-shelf models); this pattern is the distinct case of never specializing a model to the task at all
-- [Non-Generalized Plan Template](./non-generalized-plan-template.md) - a related but distinct specialization gap at the plan level rather than the model level
+- [Non-Generalized Plan Template](non-generalized-plan-template.md) - a related but distinct specialization gap at the plan level rather than the model level
 
 ## References
 

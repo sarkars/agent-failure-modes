@@ -6,7 +6,7 @@
 
 | Modality | Status | Where to look now |
 |---|---|---|
-| Chat | Written | [Core patterns](../core/), [channel selection](../channel-selection/) |
+| Chat | Written | [Core patterns](../goals/), [channel selection](../goals/channel-selection/) |
 | [Voice](voice/) | Planned | [Voice catalog](../roadmap/voice.md), [listening and transcription catalog](../roadmap/voice-listening-and-transcription.md) |
 | [Visual](visual/) | Planned | [Visual and oversight catalog](../roadmap/visual-and-oversight.md) |
 

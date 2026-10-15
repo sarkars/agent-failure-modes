@@ -73,6 +73,6 @@ cost on top of the capacity already lost.
 | Disk growth trending toward exhaustion | disk_usage_growth_rate_daily projects a threshold breach within 72 hours | Medium | Investigate growth source (logs, checkpoints, cache spill), schedule proactive cleanup |
 
 ## Related Patterns
-- [Resource Leak](./resource-leak.md) - shares the slow-accumulation-until-crisis mechanism, but for memory/connections rather than disk
-- [Concurrent Request Resource Explosion](./concurrent-request-resource-explosion.md) - a burst-driven capacity loss that can compound with disk exhaustion if log volume spikes alongside request volume
-- [Resource Quota Overcommit](./resource-quota-overcommit.md) - both describe infrastructure limits reached through unmanaged growth rather than deliberate provisioning decisions
+- [Resource Leak](resource-leak.md) - shares the slow-accumulation-until-crisis mechanism, but for memory/connections rather than disk
+- [Concurrent Request Resource Explosion](concurrent-request-resource-explosion.md) - a burst-driven capacity loss that can compound with disk exhaustion if log volume spikes alongside request volume
+- [Resource Quota Overcommit](resource-quota-overcommit.md) - both describe infrastructure limits reached through unmanaged growth rather than deliberate provisioning decisions

@@ -64,6 +64,6 @@ point the firm must explain the fabrication to the court.
 | Calibration regression | confidence_accuracy_correlation drops after a model or prompt change | Medium | Re-run calibration evaluation, review structured confidence prompting |
 
 ## Related Patterns
-- [Model Knowledge Cutoff](./model-knowledge-cutoff.md) - stale knowledge is one specific source of uncertainty presented with the same false confidence this pattern describes broadly
-- [Model Reasoning Inconsistency](./model-reasoning-inconsistency.md) - borderline, inconsistent conclusions are delivered with no signal that the underlying reasoning was near a decision boundary
-- [Model Refusal Inconsistency](./model-refusal-inconsistency.md) - borderline refusal decisions are resolved without surfacing the underlying uncertainty at the decision threshold
+- [Model Knowledge Cutoff](model-knowledge-cutoff.md) - stale knowledge is one specific source of uncertainty presented with the same false confidence this pattern describes broadly
+- [Model Reasoning Inconsistency](model-reasoning-inconsistency.md) - borderline, inconsistent conclusions are delivered with no signal that the underlying reasoning was near a decision boundary
+- [Model Refusal Inconsistency](model-refusal-inconsistency.md) - borderline refusal decisions are resolved without surfacing the underlying uncertainty at the decision threshold

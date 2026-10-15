@@ -65,6 +65,6 @@ Vendors facing internal capacity problems or partial outages sometimes choose (o
 | Sustained response-characteristic anomalies | `response_characteristic_anomaly_rate` elevated for over 30 minutes | Medium | Investigate for silent vendor-side degradation before assuming an internal bug |
 
 ## Related Patterns
-- [Accuracy Guarantee Not Met](./accuracy-guarantee-not-met.md) - both involve a gap between assumed and actual output quality, but this pattern is specifically about a transient, incident-driven degradation
-- [Prediction Model Accuracy Regression](./prediction-model-accuracy-regression.md) - a related but permanent version of undetected quality loss, following a model update rather than a transient incident
-- [Latency Sla Violation](./latency-sla-violation.md) - latency-focused degradation often accompanies or precedes quality degradation during the same underlying vendor incident
+- [Accuracy Guarantee Not Met](accuracy-guarantee-not-met.md) - both involve a gap between assumed and actual output quality, but this pattern is specifically about a transient, incident-driven degradation
+- [Prediction Model Accuracy Regression](prediction-model-accuracy-regression.md) - a related but permanent version of undetected quality loss, following a model update rather than a transient incident
+- [Latency Sla Violation](latency-sla-violation.md) - latency-focused degradation often accompanies or precedes quality degradation during the same underlying vendor incident

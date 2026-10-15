@@ -71,6 +71,6 @@ Branching occurs at fan-out points in the dependency graph — components with m
 | High-fan-out component degraded | A component with more than N known downstream consumers reports degraded health | Medium | Proactively notify all known downstream teams before they self-diagnose |
 
 ## Related Patterns
-- [Cascade Amplification](./cascade-amplification.md) - amplification deepens one cascade chain, branching spreads the trigger across independent chains
-- [Cascade Detection Failure](./cascade-detection-failure.md) - branching frequently causes detection failure because each branch looks like an unrelated incident
-- [Single Point of Failure](./single-point-of-failure.md) - the high-fan-out shared dependency that enables branching is often an undocumented single point of failure
+- [Cascade Amplification](cascade-amplification.md) - amplification deepens one cascade chain, branching spreads the trigger across independent chains
+- [Cascade Detection Failure](cascade-detection-failure.md) - branching frequently causes detection failure because each branch looks like an unrelated incident
+- [Single Point of Failure](single-point-of-failure.md) - the high-fan-out shared dependency that enables branching is often an undocumented single point of failure

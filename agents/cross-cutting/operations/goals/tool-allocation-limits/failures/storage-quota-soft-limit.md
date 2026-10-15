@@ -62,6 +62,6 @@ Storage vendors often implement a two-tier enforcement model: a soft threshold t
 | Generic filesystem errors correlated with high utilization | `generic_fs_error_rate` rises while `utilization_pct` > 85% | High | Treat as soft-limit degraded mode, not a tool bug; free space immediately |
 
 ## Related Patterns
-- [Storage Quota Exceeded](./storage-quota-exceeded.md) - the hard-limit counterpart this soft limit is designed to protect against
-- [Storage Quota Shared Across Agents](./storage-quota-shared-across-agents.md) - soft-limit degraded mode can be triggered by a different agent's usage in a shared pool
+- [Storage Quota Exceeded](storage-quota-exceeded.md) - the hard-limit counterpart this soft limit is designed to protect against
+- [Storage Quota Shared Across Agents](storage-quota-shared-across-agents.md) - soft-limit degraded mode can be triggered by a different agent's usage in a shared pool
 - [Degraded Sla Not Communicated](../../tool-sla-quality-limits/failures/degraded-sla-not-communicated.md) - same "silent degraded state misread as a bug" pattern applied to SLA quality rather than storage capacity

@@ -62,6 +62,6 @@ Turn 31: Agent: "You're right, let me reconsider." (proceeds to
 | Repeated user restatement | User restates the same fact 2+ times in one session | Medium | Flag session for coherence review |
 
 ## Related Patterns
-- [Conversation Relevance Drift](./conversation-relevance-drift.md) - drift changes what's being discussed; coherence loss loses track of the same discussion's own state
-- [Conversation Contradiction](./conversation-contradiction.md) - a frequent symptom of coherence loss, since forgotten state often leads directly to contradicting earlier statements
-- [Conversation Repetition](./conversation-repetition.md) - re-explaining already-established information is a common surface symptom of underlying coherence loss
+- [Conversation Relevance Drift](conversation-relevance-drift.md) - drift changes what's being discussed; coherence loss loses track of the same discussion's own state
+- [Conversation Contradiction](conversation-contradiction.md) - a frequent symptom of coherence loss, since forgotten state often leads directly to contradicting earlier statements
+- [Conversation Repetition](conversation-repetition.md) - re-explaining already-established information is a common surface symptom of underlying coherence loss

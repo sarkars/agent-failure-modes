@@ -66,6 +66,6 @@ User: "This is the wrong quarter and wrong format entirely."
 | Repeated multi-round ambiguity resolution | A session requires 3+ clarification rounds for one request | Low | Flag for manual review of question quality |
 
 ## Related Patterns
-- [Under-Clarification](./under-clarification.md) - the opposite failure to ask at all; both leave the real ambiguity unresolved, just via different paths
-- [Over-Clarification](./over-clarification.md) - both involve poorly targeted clarification behavior, one asking when unneeded, the other asking the wrong thing
-- [Disambiguation Strategy Ineffective](./disambiguation-strategy-ineffective.md) - the broader pattern of a resolution approach that doesn't narrow ambiguity, of which irrelevant questioning is one specific cause
+- [Under-Clarification](under-clarification.md) - the opposite failure to ask at all; both leave the real ambiguity unresolved, just via different paths
+- [Over-Clarification](over-clarification.md) - both involve poorly targeted clarification behavior, one asking when unneeded, the other asking the wrong thing
+- [Disambiguation Strategy Ineffective](disambiguation-strategy-ineffective.md) - the broader pattern of a resolution approach that doesn't narrow ambiguity, of which irrelevant questioning is one specific cause

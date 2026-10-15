@@ -61,6 +61,6 @@ this would have reached a caregiver directly.
 | Constraint retrieval miss detected | Audit finds a relevant hard constraint absent from context for a matching query | Medium | Add forced-inclusion rule for the constraint, backfill audit of recent similar queries |
 
 ## Related Patterns
-- [Domain Exception Not Handled](./domain-exception-not-handled.md) - both involve missing a documented rule, but this one is a hard block rather than an exception to a general rule
-- [Domain Rule Misunderstanding](./domain-rule-misunderstanding.md) - shares the mechanism of misapplied domain rules, differing in severity (hard constraint vs. general rule)
-- [Domain Risk Blindness](./domain-risk-blindness.md) - related in that both stem from knowledge lacking domain-relevance weighting, one for risk factors and one for hard limits
+- [Domain Exception Not Handled](domain-exception-not-handled.md) - both involve missing a documented rule, but this one is a hard block rather than an exception to a general rule
+- [Domain Rule Misunderstanding](domain-rule-misunderstanding.md) - shares the mechanism of misapplied domain rules, differing in severity (hard constraint vs. general rule)
+- [Domain Risk Blindness](domain-risk-blindness.md) - related in that both stem from knowledge lacking domain-relevance weighting, one for risk factors and one for hard limits

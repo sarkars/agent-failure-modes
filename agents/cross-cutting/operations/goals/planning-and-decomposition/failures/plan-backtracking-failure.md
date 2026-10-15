@@ -71,6 +71,6 @@ only when the client asks support why they got two invitation emails.
 | Irreversible action stranded by abandoned branch | An irreversible action (message sent, payment made) is part of a branch the agent abandoned | High | Immediate human review, may require external correction (refund, follow-up message) |
 
 ## Related Patterns
-- [Contingency Plan Missing](./contingency-plan-missing.md) - a plan without a defined fallback is also unlikely to have a defined rollback for the path it's abandoning
-- [Plan Adaptability Failure](./plan-adaptability-failure.md) - adapting a plan to new information often requires exactly the backtracking capability this pattern describes
-- [Plan Dependency Cycle](./plan-dependency-cycle.md) - both concern the structural integrity of a plan's step relationships, one during execution failure and one before execution even begins
+- [Contingency Plan Missing](contingency-plan-missing.md) - a plan without a defined fallback is also unlikely to have a defined rollback for the path it's abandoning
+- [Plan Adaptability Failure](plan-adaptability-failure.md) - adapting a plan to new information often requires exactly the backtracking capability this pattern describes
+- [Plan Dependency Cycle](plan-dependency-cycle.md) - both concern the structural integrity of a plan's step relationships, one during execution failure and one before execution even begins

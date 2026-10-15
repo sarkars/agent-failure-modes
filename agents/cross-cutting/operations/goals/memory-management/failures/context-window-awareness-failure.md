@@ -66,6 +66,6 @@ dropped.
 | Pinned constraint evicted | A marked non-evictable instruction is no longer present in the active context | High | Halt session, re-inject constraint, alert engineering |
 
 ## Related Patterns
-- [Context Coherence Loss](./context-coherence-loss.md) - silent eviction is one of the primary mechanisms that produces internally inconsistent context
-- [Memory Summarization Lossy](./memory-summarization-lossy.md) - the compaction step that should catch evicted content before it's lost is itself prone to dropping needed detail
-- [Context Refresh Stale State](./context-refresh-stale-state.md) - both involve the agent trusting context content without visibility into how that content was produced or maintained
+- [Context Coherence Loss](context-coherence-loss.md) - silent eviction is one of the primary mechanisms that produces internally inconsistent context
+- [Memory Summarization Lossy](memory-summarization-lossy.md) - the compaction step that should catch evicted content before it's lost is itself prone to dropping needed detail
+- [Context Refresh Stale State](context-refresh-stale-state.md) - both involve the agent trusting context content without visibility into how that content was produced or maintained

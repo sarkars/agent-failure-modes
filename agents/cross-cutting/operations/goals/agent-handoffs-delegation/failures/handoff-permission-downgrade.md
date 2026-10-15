@@ -64,6 +64,6 @@ to the customer, happens to already know about the open tickets.
 | Permission scope gap detected | Pre-handoff capability check finds the receiving agent lacks a required scope | Medium | Block handoff, route to an agent with sufficient permissions or escalate to a human |
 
 ## Related Patterns
-- [Handoff Context Incompleteness](./handoff-context-incompleteness.md) - both result in a receiving agent producing output on incomplete information, though from different root mechanisms
-- [Handoff Protocol Version Mismatch](./handoff-protocol-version-mismatch.md) - schema mismatches can similarly cause silent partial failures that resemble a permission downgrade
-- [Handoff Accountability Loss](./handoff-accountability-loss.md) - a silently degraded output from a permission downgrade is more likely to go unnoticed when no one is tracking the task to a verified completion
+- [Handoff Context Incompleteness](handoff-context-incompleteness.md) - both result in a receiving agent producing output on incomplete information, though from different root mechanisms
+- [Handoff Protocol Version Mismatch](handoff-protocol-version-mismatch.md) - schema mismatches can similarly cause silent partial failures that resemble a permission downgrade
+- [Handoff Accountability Loss](handoff-accountability-loss.md) - a silently degraded output from a permission downgrade is more likely to go unnoticed when no one is tracking the task to a verified completion

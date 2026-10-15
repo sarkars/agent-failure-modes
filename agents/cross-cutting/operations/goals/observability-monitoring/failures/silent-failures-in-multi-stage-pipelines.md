@@ -180,8 +180,8 @@ For failures at the INDIVIDUAL TOOL level (a tool returns false success), see:
 - **[Silent Tool Failures](../../tool-reliability/failures/silent-failures.md)** — When individual tools fail but report success without downstream effects
 
 For failures caused by incomplete observability infrastructure, see:
-- **[Blind Spots in Observability](./blind-spots-in-observability.md)** — When critical monitoring is missing at certain pipeline stages
-- **[Missing End-to-End Tracing](./missing-end-to-end-tracing.md)** — When requests can't be traced across pipeline stages, preventing correlation of failures
+- **[Blind Spots in Observability](blind-spots-in-observability.md)** — When critical monitoring is missing at certain pipeline stages
+- **[Missing End-to-End Tracing](missing-end-to-end-tracing.md)** — When requests can't be traced across pipeline stages, preventing correlation of failures
 
 ---
 

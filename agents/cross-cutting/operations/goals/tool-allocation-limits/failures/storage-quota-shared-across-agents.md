@@ -61,6 +61,6 @@ Shared storage pools are provisioned at the account, bucket, or namespace level 
 | Anomalous single-consumer growth | One agent's 24h usage delta exceeds 2x its own baseline | Medium | Investigate for leaked cleanup logic or retry storm in that specific agent |
 
 ## Related Patterns
-- [Storage Quota Exceeded](./storage-quota-exceeded.md) - the single-consumer version of this same hard-limit failure
-- [Storage Quota Soft Limit](./storage-quota-soft-limit.md) - degraded-mode variant that can precede a shared-pool hard exhaustion
-- [Api Key Quota Per Account](./api-key-quota-per-account.md) - same "unknown competing consumer" root cause applied to API rate quota instead of storage
+- [Storage Quota Exceeded](storage-quota-exceeded.md) - the single-consumer version of this same hard-limit failure
+- [Storage Quota Soft Limit](storage-quota-soft-limit.md) - degraded-mode variant that can precede a shared-pool hard exhaustion
+- [Api Key Quota Per Account](api-key-quota-per-account.md) - same "unknown competing consumer" root cause applied to API rate quota instead of storage

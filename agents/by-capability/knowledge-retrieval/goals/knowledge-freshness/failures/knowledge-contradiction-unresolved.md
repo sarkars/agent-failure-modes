@@ -65,6 +65,6 @@ agent silently resolved in favor of one source.
 | Contradiction detection rate drop to near-zero | contradiction_detection_rate falls to near zero after a pipeline change, in a knowledge base with known overlapping sources | Medium | Audit the contradiction-detection step for a regression or disabled check |
 
 ## Related Patterns
-- [Knowledge Source Reliability Unknown](./knowledge-source-reliability-unknown.md) - a missing authority hierarchy is a common root cause of contradictions going unresolved rather than adjudicated
-- [Domain Exception Not Handled](./domain-exception-not-handled.md) - a general rule and its exception can be mistaken for a contradiction, or a true contradiction mistaken for an exception, without structural linking
-- [Fact Timestamp Error](./fact-timestamp-error.md) - a common source of apparent contradiction is actually two time-bound facts from different valid periods, misread as conflicting rather than sequential
+- [Knowledge Source Reliability Unknown](knowledge-source-reliability-unknown.md) - a missing authority hierarchy is a common root cause of contradictions going unresolved rather than adjudicated
+- [Domain Exception Not Handled](domain-exception-not-handled.md) - a general rule and its exception can be mistaken for a contradiction, or a true contradiction mistaken for an exception, without structural linking
+- [Fact Timestamp Error](fact-timestamp-error.md) - a common source of apparent contradiction is actually two time-bound facts from different valid periods, misread as conflicting rather than sequential

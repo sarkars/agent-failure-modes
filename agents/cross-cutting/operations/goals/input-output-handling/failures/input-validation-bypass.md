@@ -65,6 +65,6 @@ validation instead of before, an encoded variant bypassed it entirely.
 | Validation/normalization order drift | A code change reorders validation relative to decoding/normalization steps | High | Require security review on any change to input-handling pipeline ordering |
 
 ## Related Patterns
-- [Input Null Bytes Injection](./input-null-bytes-injection.md) - a specific technique for bypassing validation via a byte-level representation mismatch
-- [Input Encoding Mismatch](./input-encoding-mismatch.md) - encoding confusion is one concrete mechanism that enables validation bypass
-- [Output Sanitization Bypass](./output-sanitization-bypass.md) - the mirror-image failure on the output side, where a sanitizer is defeated by a representation variant rather than a validator
+- [Input Null Bytes Injection](input-null-bytes-injection.md) - a specific technique for bypassing validation via a byte-level representation mismatch
+- [Input Encoding Mismatch](input-encoding-mismatch.md) - encoding confusion is one concrete mechanism that enables validation bypass
+- [Output Sanitization Bypass](output-sanitization-bypass.md) - the mirror-image failure on the output side, where a sanitizer is defeated by a representation variant rather than a validator

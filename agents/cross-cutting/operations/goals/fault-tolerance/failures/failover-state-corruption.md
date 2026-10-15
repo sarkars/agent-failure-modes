@@ -81,6 +81,6 @@ serializer for warm-standby failover.
 | Deserialization error spike after promotion | post_failover_deserialization_error_rate rises above 0 following a failover | High | Treat as active incident distinct from the original outage; investigate transfer mechanism atomicity |
 
 ## Related Patterns
-- [Failover Data Loss](./failover-data-loss.md) - both involve state damage during failover, one is loss of specific writes, this is corruption of transferred state structure
-- [Recovery Data Corruption](./recovery-data-corruption.md) - the equivalent mechanism during recovery/replay rather than during live failover transfer
-- [Failover Correctness Failure](./failover-correctness-failure.md) - both produce a standby that serves wrong results, one via stale-but-consistent state, this via internally torn state
+- [Failover Data Loss](failover-data-loss.md) - both involve state damage during failover, one is loss of specific writes, this is corruption of transferred state structure
+- [Recovery Data Corruption](recovery-data-corruption.md) - the equivalent mechanism during recovery/replay rather than during live failover transfer
+- [Failover Correctness Failure](failover-correctness-failure.md) - both produce a standby that serves wrong results, one via stale-but-consistent state, this via internally torn state

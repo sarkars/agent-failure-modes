@@ -74,6 +74,6 @@ appears to resolve itself before on-call finishes investigating.
 | Out-of-order pipeline completion detected | Dependent app deploy pipeline completes before its declared upstream dependency | High | Block further traffic shift, alert deploying team, verify data integrity for the affected window |
 
 ## Related Patterns
-- [Deployment Dependency Deadlock](./deployment-dependency-deadlock.md) - the inverse problem: an ordering requirement is respected so conservatively that neither side deploys
-- [Deployment Validation Skipped](./deployment-validation-skipped.md) - a missing precondition check is a specific form of a skipped validation gate
-- [Version Rollout Coordination](./version-rollout-coordination.md) - broader failures in sequencing dependent services' version updates, of which strict ordering violations are one case
+- [Deployment Dependency Deadlock](deployment-dependency-deadlock.md) - the inverse problem: an ordering requirement is respected so conservatively that neither side deploys
+- [Deployment Validation Skipped](deployment-validation-skipped.md) - a missing precondition check is a specific form of a skipped validation gate
+- [Version Rollout Coordination](version-rollout-coordination.md) - broader failures in sequencing dependent services' version updates, of which strict ordering violations are one case

@@ -59,6 +59,6 @@ before the key is manually unblocked by an engineer.
 | Retry storm penalty escalation | 3+ consecutive retries each receiving a harsher throttle response | Critical | Kill switch on the tool's retry path, require manual re-enable |
 
 ## Related Patterns
-- [Tool Max Retry Limit Enforced](./tool-max-retry-limit-enforced.md) - server-side retry ceiling that a wrong local backoff schedule will hit even sooner
-- [Batch Total Operations Limit](./batch-total-operations-limit.md) - both involve rolling-window server limits that naive client-side logic doesn't track
-- [Request Timeout No Graceful Handling](./request-timeout-no-graceful-handling.md) - retries triggered by timeouts are especially prone to envelope violations if the timeout itself isn't factored into backoff timing
+- [Tool Max Retry Limit Enforced](tool-max-retry-limit-enforced.md) - server-side retry ceiling that a wrong local backoff schedule will hit even sooner
+- [Batch Total Operations Limit](batch-total-operations-limit.md) - both involve rolling-window server limits that naive client-side logic doesn't track
+- [Request Timeout No Graceful Handling](request-timeout-no-graceful-handling.md) - retries triggered by timeouts are especially prone to envelope violations if the timeout itself isn't factored into backoff timing

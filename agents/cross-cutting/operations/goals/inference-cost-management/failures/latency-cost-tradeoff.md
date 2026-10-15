@@ -71,6 +71,6 @@ once the fire was out.
 | Cost spike after latency fix | cost_per_token_vs_baseline exceeds 1.5x within 48 hours of a batch/replica config change | High | Review the change against the documented latency-cost frontier; confirm it's still necessary |
 
 ## Related Patterns
-- [Batch Cost Inefficiency](./batch-cost-inefficiency.md) - batch size is the primary shared lever in both this pattern's tradeoff and batching's occupancy waste
-- [Throughput Per Dollar Optimization Failure](./throughput-per-dollar-optimization-failure.md) - optimizing latency without a cost frontier is a common specific cause of this broader metric failure
-- [Resource Reservation Insufficient](./resource-reservation-insufficient.md) - the opposite failure mode, where cost-minimization pressure leaves too little headroom for latency
+- [Batch Cost Inefficiency](batch-cost-inefficiency.md) - batch size is the primary shared lever in both this pattern's tradeoff and batching's occupancy waste
+- [Throughput Per Dollar Optimization Failure](throughput-per-dollar-optimization-failure.md) - optimizing latency without a cost frontier is a common specific cause of this broader metric failure
+- [Resource Reservation Insufficient](resource-reservation-insufficient.md) - the opposite failure mode, where cost-minimization pressure leaves too little headroom for latency

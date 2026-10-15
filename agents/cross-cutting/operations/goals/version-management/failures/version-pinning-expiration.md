@@ -73,5 +73,5 @@ libssl issue was fixed upstream.
 
 ## Related Patterns
 - [Model Version Pinning Expiration](../../../../../by-capability/reasoning-and-thought/goals/model-updates-and-versioning/failures/model-version-pinning-expiration.md) - the ML-model/LLM-provider counterpart of this same mechanism, where a pinned model or API version goes stale relative to newer, better-supported releases, requiring different (model-evaluation-driven rather than CVE-driven) mitigations
-- [Version Lock File Staleness](./version-lock-file-staleness.md) - a closely related pattern where the staleness comes from an auto-generated lock file never being regenerated, rather than from a deliberate exact pin never being revisited
+- [Version Lock File Staleness](version-lock-file-staleness.md) - a closely related pattern where the staleness comes from an auto-generated lock file never being regenerated, rather than from a deliberate exact pin never being revisited
 - [Version Deprecation Timeline Miss](../../tool-capability-limits/failures/deprecated-endpoint-retirement.md) - a related failure where a vendor-driven sunset date is missed entirely, as opposed to this pattern's slower, review-driven accumulation of risk on a pin nobody revisits

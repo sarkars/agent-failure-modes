@@ -75,7 +75,7 @@ Flags: **V** verified source · **R** needs research · **L** legal review · **
 | ID | Pattern | What goes wrong | Goal | Primary metric (starting target) | Flags | Root cause | Better model alone? | In the library today |
 |---|---|---|---|---|---|---|---|---|
 | VA-01 | Bookings without confirming details | Name spelling, callback number, or time isn't read back | Read back every critical detail | Booking calls with a read-back. Target: 100% |  | Business context | No | New (see TR-10 for spelled-out strings) |
-| VA-02 | Emergency phrases missed in routine calls | A caller mentions an emergency during an ordinary call and it isn't caught | Detect and route emergencies immediately | Emergency recall on labelled calls | E | Model | Partly | **Extends**: [missed crisis signals](../core/vulnerable-users/failures/missed-crisis-signals.md) |
+| VA-02 | Emergency phrases missed in routine calls | A caller mentions an emergency during an ordinary call and it isn't caught | Detect and route emergencies immediately | Emergency recall on labelled calls | E | Model | Partly | **Extends**: [missed crisis signals](../goals/vulnerable-users/failures/missed-crisis-signals.md) |
 | VA-03 | Collections calls without required disclosures | AI collections calls omit notices the law requires | Include required disclosures and consent | Calls with required disclosures. Target: 100% | L, R | Governance | No | New (requirements not verified here) |
 
 ## Browser and computer-use agents
@@ -84,7 +84,7 @@ Flags: **V** verified source · **R** needs research · **L** legal review · **
 | BA-01 | Bypasses CAPTCHAs or site terms | Works around anti-bot measures or a site's terms | Stop and ask the user | Bypass attempts. Target: 0 | L | Governance | No | New |
 | BA-02 | Accepts consent pop-ups for the user | Clicks 'accept all' without telling the user | Ask, or choose the most private option | Consents accepted without a user choice. Target: 0 | L | Governance | No | New |
 | BA-03 | Navigation loops and cost blow-ups | Repeats steps, burning time and money | Detect loops and cap steps and cost | Tasks that hit step or cost caps |  | Reliability | Partly | **Extends**: [unbounded action loop](../../external-actions/goals/action-execution/failures/unbounded-action-loop.md) |
-| BA-04 | Asks for credentials at login walls | Requests passwords in chat | Hand control to the user to sign in | Credential requests in chat. Target: 0 |  | Reliability | No | **Extends**: [sensitive data collected in chat](../channel-selection/failures/sensitive-data-collected-in-chat.md) |
+| BA-04 | Asks for credentials at login walls | Requests passwords in chat | Hand control to the user to sign in | Credential requests in chat. Target: 0 |  | Reliability | No | **Extends**: [sensitive data collected in chat](../goals/channel-selection/failures/sensitive-data-collected-in-chat.md) |
 
 ## Shopping and commerce agents
 | ID | Pattern | What goes wrong | Goal | Primary metric (starting target) | Flags | Root cause | Better model alone? | In the library today |
@@ -100,7 +100,7 @@ Flags: **V** verified source · **R** needs research · **L** legal review · **
 | ED-01 | Gives answers instead of teaching | Does the homework instead of building understanding | Offer hints before answers in learning mode | Hint-before-answer rate in learning mode |  | Business context | Partly | New |
 | ED-02 | Wrong explanations taught as fact | Confident errors in a lesson | Verify content and show uncertainty | Explanation error rate on a curriculum test set | R | Model | Partly | New |
 | ED-03 | Unfair or inconsistent grading | Similar work gets different scores | Use rubrics and calibration | Score consistency; parity across groups | R | Model | Partly | **Extends**: [model fairness bias](../../reasoning-and-thought/goals/model-behavior-and-capabilities/failures/model-fairness-bias.md) |
-| ED-04 | Student data and surveillance | Collects more student data than needed | Minimise data, with consent | Student data fields beyond need. Target: 0 | L | Governance | No | **Extends**: [child user treated as adult](../core/age-adaptation/failures/child-user-treated-as-adult.md) |
+| ED-04 | Student data and surveillance | Collects more student data than needed | Minimise data, with consent | Student data fields beyond need. Target: 0 | L | Governance | No | **Extends**: [child user treated as adult](../goals/age-adaptation/failures/child-user-treated-as-adult.md) |
 
 ## Personal assistants
 | ID | Pattern | What goes wrong | Goal | Primary metric (starting target) | Flags | Root cause | Better model alone? | In the library today |

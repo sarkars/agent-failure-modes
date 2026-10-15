@@ -72,5 +72,5 @@ go through.
 
 ## Related Patterns
 - [Cascade Timeout Interaction](../../fault-tolerance/failures/cascade-timeout-interaction.md) - covers timeout values interacting across a call chain to amplify system-wide load via retries; this pattern is the narrower, single-integration correctness failure (duplicate/incorrect side effects) that a timeout-then-retry produces even without a broader cascade
-- [Integration Order Dependency](./integration-order-dependency.md) - both involve an agent acting on an incomplete or incorrect picture of a downstream call's true completion state
+- [Integration Order Dependency](integration-order-dependency.md) - both involve an agent acting on an incomplete or incorrect picture of a downstream call's true completion state
 - [Recovery Data Corruption](../../fault-tolerance/failures/recovery-data-corruption.md) - shares the underlying "acted before the true outcome was known" mechanism, applied to failure-recovery replay rather than to normal-path timeout handling

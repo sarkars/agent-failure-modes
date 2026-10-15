@@ -70,6 +70,6 @@ and no fencing token.
 | Election storm | Leadership changes exceed threshold within a short window with no stable leader | High | Investigate heartbeat/network health, apply election backoff |
 
 ## Related Patterns
-- [Byzantine Agent Failure](./byzantine-agent-failure.md) - Byzantine fault tolerance in consensus protocols directly addresses election correctness under arbitrary or adversarial agent behavior
-- [Agent State Divergence](./agent-state-divergence.md) - split-brain leadership is a specific and severe form of state divergence about who is authoritative
-- [Deadlock in Multi-Agent](./deadlock-in-multi-agent.md) - a failed election that leaves no leader can leave follower agents waiting indefinitely, structurally similar to a deadlocked wait
+- [Byzantine Agent Failure](byzantine-agent-failure.md) - Byzantine fault tolerance in consensus protocols directly addresses election correctness under arbitrary or adversarial agent behavior
+- [Agent State Divergence](agent-state-divergence.md) - split-brain leadership is a specific and severe form of state divergence about who is authoritative
+- [Deadlock in Multi-Agent](deadlock-in-multi-agent.md) - a failed election that leaves no leader can leave follower agents waiting indefinitely, structurally similar to a deadlocked wait

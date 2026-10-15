@@ -58,6 +58,6 @@ Read-only is a property that must be enforced at the lowest layer capable of per
 | Grant drift detected | Scheduled audit finds a read-only credential with write grants | High | Rotate credential with corrected grants, investigate how the drift occurred |
 
 ## Related Patterns
-- [Granular CRUD Permission Not Enforced](./granular-crud-permission-not-enforced.md) - this pattern is the specific, most severe case of granular CRUD enforcement failing (full write access instead of intended zero-write)
-- [Role Permission Mismatch](./role-permission-mismatch.md) - both describe the agent's actual access diverging from the access its assigned role or label implies
-- [Admin Operation Called By Non-Admin](./admin-operation-called-by-non-admin.md) - same underlying failure of enforcing a boundary only at the label/description layer instead of the execution layer
+- [Granular CRUD Permission Not Enforced](granular-crud-permission-not-enforced.md) - this pattern is the specific, most severe case of granular CRUD enforcement failing (full write access instead of intended zero-write)
+- [Role Permission Mismatch](role-permission-mismatch.md) - both describe the agent's actual access diverging from the access its assigned role or label implies
+- [Admin Operation Called By Non-Admin](admin-operation-called-by-non-admin.md) - same underlying failure of enforcing a boundary only at the label/description layer instead of the execution layer

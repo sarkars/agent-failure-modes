@@ -66,6 +66,6 @@ users - is never identified without a manual cross-team investigation.
 | Intersection anomaly found | intersection_cohort_metric_anomaly crosses threshold | Medium | Segment analysis by intersection cohort, investigate interaction before drawing conclusions from either experiment |
 
 ## Related Patterns
-- [Model Behavior Change Detection Failure](./model-behavior-change-detection-failure.md) - both involve behavior changes that existing monitoring isn't structured to detect, one from interaction effects and one from lack of eval coverage
-- [Model Release Cycle Timing Mismatch](./model-release-cycle-timing-mismatch.md) - concurrent experiments and provider release cadence both introduce version changes that can arrive faster than validation processes can isolate their effects
-- [Model Update Rollback Delay](./model-update-rollback-delay.md) - an undetected interaction effect from this pattern often takes longer to diagnose and roll back precisely because its cause isn't a single experiment's own metrics
+- [Model Behavior Change Detection Failure](model-behavior-change-detection-failure.md) - both involve behavior changes that existing monitoring isn't structured to detect, one from interaction effects and one from lack of eval coverage
+- [Model Release Cycle Timing Mismatch](model-release-cycle-timing-mismatch.md) - concurrent experiments and provider release cadence both introduce version changes that can arrive faster than validation processes can isolate their effects
+- [Model Update Rollback Delay](model-update-rollback-delay.md) - an undetected interaction effect from this pattern often takes longer to diagnose and roll back precisely because its cause isn't a single experiment's own metrics

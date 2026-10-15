@@ -65,6 +65,6 @@ accumulate to correlate the pattern manually.
 | Mid-session cohort split detected | A session is found to have been served by multiple model versions across turns | High | Fix cohort-assignment key scoping, audit affected sessions for continuity issues |
 
 ## Related Patterns
-- [Model Switching Mid-Session](./model-switching-mid-session.md) - the specific, session-continuity-breaking consequence of unscoped cohort assignment described here
-- [Model Load Balancing Failure](./model-load-balancing-failure.md) - load-based routing is one legitimate source of the nondeterminism this pattern describes, when not paired with adequate logging
-- [Model Capability Mismatch](./model-capability-mismatch.md) - nondeterministic selection increases the chance that some fraction of requests land on a capability-incompatible model inconsistently
+- [Model Switching Mid-Session](model-switching-mid-session.md) - the specific, session-continuity-breaking consequence of unscoped cohort assignment described here
+- [Model Load Balancing Failure](model-load-balancing-failure.md) - load-based routing is one legitimate source of the nondeterminism this pattern describes, when not paired with adequate logging
+- [Model Capability Mismatch](model-capability-mismatch.md) - nondeterministic selection increases the chance that some fraction of requests land on a capability-incompatible model inconsistently

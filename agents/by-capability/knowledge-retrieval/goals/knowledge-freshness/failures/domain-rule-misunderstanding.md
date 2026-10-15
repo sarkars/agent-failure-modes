@@ -63,6 +63,6 @@ agreement carve-back applied to their exact situation.
 | Compound-rule accuracy regression | compound_rule_accuracy drops below simple-rule accuracy by more than threshold | Medium | Audit recently modified or added compound rules for decomposition gaps |
 
 ## Related Patterns
-- [Domain Exception Not Handled](./domain-exception-not-handled.md) - a specific case of rule misunderstanding where the missed element is a documented exception rather than a general scope-boundary misread
-- [Domain Constraint Violation](./domain-constraint-violation.md) - misunderstanding a rule's scope can directly cause a hard-constraint violation when the rule is safety- or compliance-critical
-- [Fact Negation Confusion](./fact-negation-confusion.md) - shares the mechanism of mishandled negation/conditional language, at the level of a single fact rather than a compound rule
+- [Domain Exception Not Handled](domain-exception-not-handled.md) - a specific case of rule misunderstanding where the missed element is a documented exception rather than a general scope-boundary misread
+- [Domain Constraint Violation](domain-constraint-violation.md) - misunderstanding a rule's scope can directly cause a hard-constraint violation when the rule is safety- or compliance-critical
+- [Fact Negation Confusion](fact-negation-confusion.md) - shares the mechanism of mishandled negation/conditional language, at the level of a single fact rather than a compound rule

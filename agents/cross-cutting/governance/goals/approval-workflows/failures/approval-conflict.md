@@ -61,6 +61,6 @@ Multi-approver workflows are often built assuming approvers will agree, so the d
 | Action executed on partial quorum | Action proceeds with fewer than the required number of recorded decisions | Critical | Halt and reverse if possible, audit the quorum-check logic |
 
 ## Related Patterns
-- [Approval Chain Break](./approval-chain-break.md) - both involve multi-party approval state that isn't tracked as a coherent whole
-- [Approval Authority Escalation Failure](./approval-authority-escalation-failure.md) - unresolved conflicts should escalate the same way authority mismatches should
-- [Approval Delegation Loop](./approval-delegation-loop.md) - both arise from approval logic that wasn't designed for the non-happy-path case
+- [Approval Chain Break](approval-chain-break.md) - both involve multi-party approval state that isn't tracked as a coherent whole
+- [Approval Authority Escalation Failure](approval-authority-escalation-failure.md) - unresolved conflicts should escalate the same way authority mismatches should
+- [Approval Delegation Loop](approval-delegation-loop.md) - both arise from approval logic that wasn't designed for the non-happy-path case

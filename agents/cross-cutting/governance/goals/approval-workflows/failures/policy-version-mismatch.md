@@ -64,6 +64,6 @@ For performance reasons, agents and policy-evaluation services commonly cache po
 | Decision made on stale policy version | A logged decision's policy version stamp is older than the authoritative version at the time of the decision | Warning | Audit the specific decision for correctness under the current policy, investigate cache invalidation gap |
 
 ## Related Patterns
-- [Policy Consistency Violation](./policy-consistency-violation.md) - both can result in different effective policies being applied to functionally identical actions
-- [Policy Retroactive Application](./policy-retroactive-application.md) - both involve confusion about which policy version governs a decision at a given point in time
-- [Policy Temporal Violation](./policy-temporal-violation.md) - both are timing-related failures in how policy state is evaluated relative to the current moment
+- [Policy Consistency Violation](policy-consistency-violation.md) - both can result in different effective policies being applied to functionally identical actions
+- [Policy Retroactive Application](policy-retroactive-application.md) - both involve confusion about which policy version governs a decision at a given point in time
+- [Policy Temporal Violation](policy-temporal-violation.md) - both are timing-related failures in how policy state is evaluated relative to the current moment

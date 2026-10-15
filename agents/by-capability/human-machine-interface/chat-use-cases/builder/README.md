@@ -14,6 +14,9 @@ Rebuild after changing content: `python3 -I agents/by-capability/human-machine-i
 
 **Status.** Prompts, code, and eval snippets are illustrative drafts that have not been run against a model. Thresholds are never given, only the metric and how to measure it. For tier C use cases, instruction text is withheld in the page.
 
+## Shipping it to the site
+The site is Astro and serves `public/` as-is. Copy `index.html` to `website-astro/public/chat-builder/index.html` in the site repo and link to `/chat-builder/`. The page is standalone: it needs no framework and carries its own styles and data. It fetches only Google Fonts, which the site already allows. Rebuild the copy whenever `content.py` changes.
+
 ## Related
 - [Chat use cases](../)
 - [Content program](../../roadmap/content-program.md)

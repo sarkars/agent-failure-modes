@@ -63,6 +63,6 @@ approved on text alone.
 | Silent content drop spike | silent_content_drop_rate rises above zero for a monitored request type | High | Audit recent routing config changes, add explicit capability gate for affected content type |
 
 ## Related Patterns
-- [Model Version Incompatibility](./model-version-incompatibility.md) - a narrower case of the same problem, where the mismatch is a specific feature gap between model versions rather than a coarse capability category
-- [Model Downgrade Silent Failure](./model-downgrade-silent-failure.md) - both involve routing decisions that silently degrade quality without surfacing the tradeoff being made
-- [Model Selection Nondeterminism](./model-selection-nondeterminism.md) - unstable routing config is one path by which a request that should be capability-gated ends up on an incompatible model inconsistently
+- [Model Version Incompatibility](model-version-incompatibility.md) - a narrower case of the same problem, where the mismatch is a specific feature gap between model versions rather than a coarse capability category
+- [Model Downgrade Silent Failure](model-downgrade-silent-failure.md) - both involve routing decisions that silently degrade quality without surfacing the tradeoff being made
+- [Model Selection Nondeterminism](model-selection-nondeterminism.md) - unstable routing config is one path by which a request that should be capability-gated ends up on an incompatible model inconsistently

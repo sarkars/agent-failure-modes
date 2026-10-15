@@ -64,6 +64,6 @@ downstream action (auto-approve vs. route to legal) flipped.
 | Consistency regression after change | self_consistency_agreement_rate drops after a prompt or model version change | Medium | Roll back or investigate change, re-run consistency evaluation suite |
 
 ## Related Patterns
-- [Model Output Format Instability](./model-output-format-instability.md) - both are forms of run-to-run nondeterminism, one in structure and one in substantive conclusions
-- [Model Capacity Limits](./model-capacity-limits.md) - reasoning inconsistency is more pronounced on complex, near-boundary decisions where capacity is already strained
-- [Model Fairness Bias](./model-fairness-bias.md) - a systematic, demographically-correlated subtype of the same underlying sensitivity to surface-level input variation
+- [Model Output Format Instability](model-output-format-instability.md) - both are forms of run-to-run nondeterminism, one in structure and one in substantive conclusions
+- [Model Capacity Limits](model-capacity-limits.md) - reasoning inconsistency is more pronounced on complex, near-boundary decisions where capacity is already strained
+- [Model Fairness Bias](model-fairness-bias.md) - a systematic, demographically-correlated subtype of the same underlying sensitivity to surface-level input variation

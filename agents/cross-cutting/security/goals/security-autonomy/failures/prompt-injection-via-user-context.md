@@ -237,8 +237,8 @@ HAVING injections_detected > 0
 **This pattern focuses on prompt injection via UNVALIDATED USER INPUT — emphasis on input validation gaps.**
 
 **Other prompt injection patterns:**
-- **[Direct Prompt Injection](./direct-prompt-injection.md)** — Direct attacks in user messages (broader attack/response patterns, attack techniques)
-- **[Indirect Prompt Injection](./indirect-prompt-injection.md)** — Attacker embeds instructions in documents/emails agent retrieves (external content sources)
+- **[Direct Prompt Injection](direct-prompt-injection.md)** — Direct attacks in user messages (broader attack/response patterns, attack techniques)
+- **[Indirect Prompt Injection](indirect-prompt-injection.md)** — Attacker embeds instructions in documents/emails agent retrieves (external content sources)
 - **[Prompt Injection](../../safety-security/failures/prompt-injection.md)** — General prompt injection defenses (canonical pattern)
 
 **Key distinctions:**

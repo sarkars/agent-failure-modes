@@ -72,6 +72,6 @@ installer itself reported success.
 | Post-upgrade state inconsistency detected | Validation finds records/configs not matching the target version's expected schema after a completed upgrade | High | Roll back if possible, run the skipped intermediate migration logic explicitly, re-validate |
 
 ## Related Patterns
-- [Version Compatibility Matrix Explosion](./version-compatibility-matrix-explosion.md) - a related pattern about the combinatorial difficulty of tracking compatibility across many versioned components, which compounds the risk of an unsupported version skip going unnoticed
+- [Version Compatibility Matrix Explosion](version-compatibility-matrix-explosion.md) - a related pattern about the combinatorial difficulty of tracking compatibility across many versioned components, which compounds the risk of an unsupported version skip going unnoticed
 - [Version Deprecation Timeline Miss](../../tool-capability-limits/failures/deprecated-endpoint-retirement.md) - deferred upgrades that lead to a large version-skip situation often originate from the same missed-timeline pattern applied repeatedly across several release cycles
-- [Rollback Data Consistency](./rollback-data-consistency.md) - shares the same underlying mechanism (state left in a form no single version's logic was designed to handle), applied to a rollback rather than a forward version skip
+- [Rollback Data Consistency](rollback-data-consistency.md) - shares the same underlying mechanism (state left in a form no single version's logic was designed to handle), applied to a rollback rather than a forward version skip

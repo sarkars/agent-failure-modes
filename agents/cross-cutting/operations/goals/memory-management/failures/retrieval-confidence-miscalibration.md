@@ -70,6 +70,6 @@ sounding top result.
 | Score calibration drift | score_utility_correlation drops below threshold on periodic evaluation | Medium | Re-evaluate reranking model/weights, review recent shifts in query or content patterns |
 
 ## Related Patterns
-- [Retrieval Temporal Ordering Failure](./retrieval-temporal-ordering-failure.md) - a specific, common cause of miscalibration: the score doesn't account for recency, letting stale results outrank current ones
-- [Retrieval Deduplication Failure](./retrieval-deduplication-failure.md) - near-duplicate high-scoring results compound miscalibration by crowding out genuinely distinct, useful candidates
-- [Semantic Drift in Embeddings](./semantic-drift-in-embeddings.md) - an embedding model change can itself introduce or worsen miscalibration by shifting what "similar" means without recalibrating downstream thresholds
+- [Retrieval Temporal Ordering Failure](retrieval-temporal-ordering-failure.md) - a specific, common cause of miscalibration: the score doesn't account for recency, letting stale results outrank current ones
+- [Retrieval Deduplication Failure](retrieval-deduplication-failure.md) - near-duplicate high-scoring results compound miscalibration by crowding out genuinely distinct, useful candidates
+- [Semantic Drift in Embeddings](semantic-drift-in-embeddings.md) - an embedding model change can itself introduce or worsen miscalibration by shifting what "similar" means without recalibrating downstream thresholds

@@ -59,6 +59,6 @@ Agent frameworks and the third-party tools/APIs they call often use different pe
 | Vendor scope semantics changed | Third-party API changelog indicates a scope used in an existing mapping now covers new actions | Medium | Re-review and re-approve the mapping before the change takes effect for the agent |
 
 ## Related Patterns
-- [Admin Operation Called By Non-Admin](./admin-operation-called-by-non-admin.md) - both result in a role having more effective access than intended, via different mechanisms
-- [Permission Cascade Incorrect](./permission-cascade-incorrect.md) - both are cases of the enforced permission model diverging from the intended one
-- [Granular CRUD Permission Not Enforced](./granular-crud-permission-not-enforced.md) - a common specific symptom of role-permission mismatch at the operation-verb level
+- [Admin Operation Called By Non-Admin](admin-operation-called-by-non-admin.md) - both result in a role having more effective access than intended, via different mechanisms
+- [Permission Cascade Incorrect](permission-cascade-incorrect.md) - both are cases of the enforced permission model diverging from the intended one
+- [Granular CRUD Permission Not Enforced](granular-crud-permission-not-enforced.md) - a common specific symptom of role-permission mismatch at the operation-verb level

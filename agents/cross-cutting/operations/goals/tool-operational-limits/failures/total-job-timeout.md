@@ -64,6 +64,6 @@ own completion-reporting logic never checks.
 | Cumulative elapsed time approaching job ceiling | Running total elapsed time exceeds 80% of known total-job timeout before job completion | Medium | Trigger proactive job split or checkpoint-and-defer remaining steps |
 
 ## Related Patterns
-- [Request Timeout No Graceful Handling](./request-timeout-no-graceful-handling.md) - the single-request analogue of this pattern, without the multi-step aggregation dimension
-- [Query Planning Timeout](./query-planning-timeout.md) - another timeout variant occurring at a different layer (query planning) than the overall job clock
-- [Backoff Envelope Violation](./backoff-envelope-violation.md) - retry delays added between steps can themselves consume enough of the total-job budget to trigger this pattern
+- [Request Timeout No Graceful Handling](request-timeout-no-graceful-handling.md) - the single-request analogue of this pattern, without the multi-step aggregation dimension
+- [Query Planning Timeout](query-planning-timeout.md) - another timeout variant occurring at a different layer (query planning) than the overall job clock
+- [Backoff Envelope Violation](backoff-envelope-violation.md) - retry delays added between steps can themselves consume enough of the total-job budget to trigger this pattern

@@ -68,6 +68,6 @@ root cause was a malformed field the agent itself produced.
 | Downstream schema rejection despite upstream validation | A downstream consumer rejects output that passed the agent's own schema validation | High | Audit for a schema drift between the agent's validator and the consumer's actual contract |
 
 ## Related Patterns
-- [Output Hallucination in Structured Format](./output-hallucination-in-structured-format.md) - a specific cause of format-validation failures, where the agent fabricates a plausible-looking but incorrect value to fill a required field
-- [Output Inconsistency](./output-inconsistency.md) - unvalidated format drift across calls is one way inconsistency manifests
-- [Input Schema Evolution](./input-schema-evolution.md) - the mirror-image failure on the input side, where an upstream schema changes without the agent's parser being updated
+- [Output Hallucination in Structured Format](output-hallucination-in-structured-format.md) - a specific cause of format-validation failures, where the agent fabricates a plausible-looking but incorrect value to fill a required field
+- [Output Inconsistency](output-inconsistency.md) - unvalidated format drift across calls is one way inconsistency manifests
+- [Input Schema Evolution](input-schema-evolution.md) - the mirror-image failure on the input side, where an upstream schema changes without the agent's parser being updated

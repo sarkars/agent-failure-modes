@@ -63,5 +63,5 @@ that were no longer honored.
 | Full fallback chain exhausted | An agent exhausts every configured fallback option for a task without a successful result | High | Halt task execution rather than serving degraded output silently, escalate to on-call |
 
 ## Related Patterns
-- [Transitive Tool Dependency Failure](./transitive-tool-dependency-failure.md) - the underlying structural cause: tools depending on other tools/services in ways the agent doesn't model, of which cascading failure across "redundant" tools is one visible consequence
-- [Required Field Added To API](./required-field-added-to-api.md) - both involve an agent's tool-integration assumptions silently breaking due to changes in infrastructure it doesn't directly control
+- [Transitive Tool Dependency Failure](transitive-tool-dependency-failure.md) - the underlying structural cause: tools depending on other tools/services in ways the agent doesn't model, of which cascading failure across "redundant" tools is one visible consequence
+- [Required Field Added To API](required-field-added-to-api.md) - both involve an agent's tool-integration assumptions silently breaking due to changes in infrastructure it doesn't directly control

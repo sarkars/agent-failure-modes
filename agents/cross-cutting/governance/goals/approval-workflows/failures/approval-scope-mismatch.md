@@ -61,6 +61,6 @@ Many approval systems validate presence of an approval token or ID at execution 
 | Dynamic scope re-run detected | A query underlying an approved action is re-executed after approval was granted | Warning | Force re-approval against the new result set before allowing execution |
 
 ## Related Patterns
-- [Policy Scope Misunderstanding](./policy-scope-misunderstanding.md) - both involve a mismatch between the intended scope of a control and what actually gets applied
-- [Approval Waiver Abuse](./approval-waiver-abuse.md) - both represent ways an agent's actual execution can exceed the boundaries of a legitimate control
-- [Policy Exception Not Authorized](./policy-exception-not-authorized.md) - both involve execution proceeding on the basis of authorization that doesn't actually cover the specific action taken
+- [Policy Scope Misunderstanding](policy-scope-misunderstanding.md) - both involve a mismatch between the intended scope of a control and what actually gets applied
+- [Approval Waiver Abuse](approval-waiver-abuse.md) - both represent ways an agent's actual execution can exceed the boundaries of a legitimate control
+- [Policy Exception Not Authorized](policy-exception-not-authorized.md) - both involve execution proceeding on the basis of authorization that doesn't actually cover the specific action taken

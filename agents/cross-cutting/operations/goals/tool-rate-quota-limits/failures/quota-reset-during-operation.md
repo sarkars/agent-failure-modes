@@ -55,6 +55,6 @@ A data-sync agent runs a "FullCatalogSync" job against the InventorySystem API (
 | Recurring boundary stalls on scheduled job | Same scheduled operation stalls at reset boundary across multiple runs | Critical | Reschedule the job's start time or add live quota re-checking |
 
 ## Related Patterns
-- [Quota Reset Boundary Race](./quota-reset-boundary-race.md) - a related boundary-timing issue, but caused by multiple concurrent instances racing the boundary rather than one operation spanning it
-- [Quota Reset Timing Unknown](./quota-reset-timing-unknown.md) - not knowing the exact reset time makes it harder to even detect that an operation is about to straddle one
-- [Per-Tool Requests Per Day Quota](./per-tool-requests-per-day-quota.md) - the daily-quota context in which this cross-boundary operation failure most commonly occurs
+- [Quota Reset Boundary Race](quota-reset-boundary-race.md) - a related boundary-timing issue, but caused by multiple concurrent instances racing the boundary rather than one operation spanning it
+- [Quota Reset Timing Unknown](quota-reset-timing-unknown.md) - not knowing the exact reset time makes it harder to even detect that an operation is about to straddle one
+- [Per-Tool Requests Per Day Quota](per-tool-requests-per-day-quota.md) - the daily-quota context in which this cross-boundary operation failure most commonly occurs

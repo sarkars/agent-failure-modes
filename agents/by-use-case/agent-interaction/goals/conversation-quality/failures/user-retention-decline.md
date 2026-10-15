@@ -64,6 +64,6 @@ than it should have."
 | Cohort-wide retention decline | Aggregate retention metrics decline despite stable per-session quality scores | High | Investigate longitudinal/cumulative quality issues, review conversation-quality metrics across sessions |
 
 ## Related Patterns
-- [User Adoption Failure](./user-adoption-failure.md) - the analogous pattern for new users, driven by early friction rather than long-horizon accumulation
-- [User Feedback Bias](./user-feedback-bias.md) - biased feedback collection often fails to surface the users quietly disengaging, masking retention decline until usage data reveals it
-- [Conversation Repetition](./conversation-repetition.md) - one of several individually-minor recurring issues whose accumulation across sessions is a common driver of this pattern
+- [User Adoption Failure](user-adoption-failure.md) - the analogous pattern for new users, driven by early friction rather than long-horizon accumulation
+- [User Feedback Bias](user-feedback-bias.md) - biased feedback collection often fails to surface the users quietly disengaging, masking retention decline until usage data reveals it
+- [Conversation Repetition](conversation-repetition.md) - one of several individually-minor recurring issues whose accumulation across sessions is a common driver of this pattern

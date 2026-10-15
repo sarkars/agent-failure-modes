@@ -67,6 +67,6 @@ than fully reasoning through which of the 5 email tools was correct.
 | Success rate regression after tool addition | task_success_rate_by_toolset_size drops after a new tool is added to the shared toolkit | High | Roll back or scope the new tool, audit for overlapping tool descriptions |
 
 ## Related Patterns
-- [Tool Selection Greedy Suboptimal](./tool-selection-greedy-suboptimal.md) - the shallow-heuristic fallback that complexity explosion tends to push planners toward
-- [Tool Selection Non-Determinism](./tool-selection-non-determinism.md) - a large, ambiguous tool space also increases run-to-run variance in which tool gets picked
-- [Tool Invocation Ordering Dependency](./tool-invocation-ordering-dependency.md) - ordering constraints compound the combinatorial cost that complexity explosion describes
+- [Tool Selection Greedy Suboptimal](tool-selection-greedy-suboptimal.md) - the shallow-heuristic fallback that complexity explosion tends to push planners toward
+- [Tool Selection Non-Determinism](tool-selection-non-determinism.md) - a large, ambiguous tool space also increases run-to-run variance in which tool gets picked
+- [Tool Invocation Ordering Dependency](tool-invocation-ordering-dependency.md) - ordering constraints compound the combinatorial cost that complexity explosion describes

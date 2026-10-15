@@ -70,6 +70,6 @@ staging database, corrupting data continuity across two environments.
 | Repeated ordering-violation failures for the same tool pair | ordering_violation_error_rate for a specific tool pair exceeds threshold | Medium | Add an explicit dependency declaration or composite wrapper tool for that pair |
 
 ## Related Patterns
-- [Tool State Dependency Violation](./tool-state-dependency-violation.md) - the closely related failure where the prerequisite call was believed to have happened but actually didn't
-- [Tool Composition Complexity Explosion](./tool-composition-complexity-explosion.md) - ordering constraints are one of the factors that compound the combinatorial planning cost described there
-- [Tool Mutation State Leak](./tool-mutation-state-leak.md) - out-of-order calls can also leave mutation side effects that leak into later, unrelated calls
+- [Tool State Dependency Violation](tool-state-dependency-violation.md) - the closely related failure where the prerequisite call was believed to have happened but actually didn't
+- [Tool Composition Complexity Explosion](tool-composition-complexity-explosion.md) - ordering constraints are one of the factors that compound the combinatorial planning cost described there
+- [Tool Mutation State Leak](tool-mutation-state-leak.md) - out-of-order calls can also leave mutation side effects that leak into later, unrelated calls

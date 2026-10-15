@@ -64,6 +64,6 @@ revealed it.
 | Agent Surfaced Leaked PII | Agent-side leak detection confirms unredacted PII reached a user-facing response | P1 | Notify security/privacy immediately, assess notification obligations, patch the leak source |
 
 ## Related Patterns
-- [PII Field Exposure](./pii-field-exposure.md) - a related but distinct failure where PII is present in the primary response by design rather than leaking through a secondary channel
-- [Masked Field Unmasking](./masked-field-unmasking.md) - both involve a control that works on the primary path but fails on an alternate access pattern
-- [Sensitive Field Access Not Restricted](./sensitive-field-access-not-restricted.md) - overlaps when the leaked secondary-channel data is also a flagged sensitive field
+- [PII Field Exposure](pii-field-exposure.md) - a related but distinct failure where PII is present in the primary response by design rather than leaking through a secondary channel
+- [Masked Field Unmasking](masked-field-unmasking.md) - both involve a control that works on the primary path but fails on an alternate access pattern
+- [Sensitive Field Access Not Restricted](sensitive-field-access-not-restricted.md) - overlaps when the leaked secondary-channel data is also a flagged sensitive field

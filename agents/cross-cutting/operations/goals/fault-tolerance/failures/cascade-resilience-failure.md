@@ -74,6 +74,6 @@ Resilience mechanisms are typically designed and tuned in isolation against an a
 | Retry amplification spike | retry_amplification_factor exceeds 1.5x during a degraded dependency incident | High | Disable non-critical retries, notify dependency owner of aggregate retry load |
 
 ## Related Patterns
-- [Cascade Amplification](./cascade-amplification.md) - resilience-caused amplification is one specific, common mechanism behind the general amplification pattern
-- [Cascade Timeout Interaction](./cascade-timeout-interaction.md) - mismatched timeout settings are a frequent root cause of the retry/breaker misbehavior described here
-- [Cascade Isolation Failure](./cascade-isolation-failure.md) - both involve a resilience mechanism failing at its one job, isolation vs. containment/backoff
+- [Cascade Amplification](cascade-amplification.md) - resilience-caused amplification is one specific, common mechanism behind the general amplification pattern
+- [Cascade Timeout Interaction](cascade-timeout-interaction.md) - mismatched timeout settings are a frequent root cause of the retry/breaker misbehavior described here
+- [Cascade Isolation Failure](cascade-isolation-failure.md) - both involve a resilience mechanism failing at its one job, isolation vs. containment/backoff

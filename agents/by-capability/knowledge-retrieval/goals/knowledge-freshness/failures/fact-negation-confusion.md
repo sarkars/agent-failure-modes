@@ -61,6 +61,6 @@ transaction is later reviewed against the original compliance text.
 | Negation preservation rate drop | negation_preservation_rate falls below threshold after a summarization pipeline change | Medium | Review recent prompt/pipeline changes for negation-handling regressions |
 
 ## Related Patterns
-- [Fact Inversion](./fact-inversion.md) - the broader pattern of flipped meaning; negation confusion is the specific linguistic mechanism that produces one common form of it
-- [Domain Rule Misunderstanding](./domain-rule-misunderstanding.md) - negated conditional clauses ("unless," "except when") are a frequent source of rule scope misreads
-- [Domain Terminology Confusion](./domain-terminology-confusion.md) - both are single-token-level linguistic failures with outsized effect on overall meaning
+- [Fact Inversion](fact-inversion.md) - the broader pattern of flipped meaning; negation confusion is the specific linguistic mechanism that produces one common form of it
+- [Domain Rule Misunderstanding](domain-rule-misunderstanding.md) - negated conditional clauses ("unless," "except when") are a frequent source of rule scope misreads
+- [Domain Terminology Confusion](domain-terminology-confusion.md) - both are single-token-level linguistic failures with outsized effect on overall meaning

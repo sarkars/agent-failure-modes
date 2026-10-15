@@ -54,9 +54,9 @@ their bank three days later.
 5. **Lag-aware alerting separate from correctness alerting**: Monitor replication lag directly and alert when it exceeds levels known to cause read-after-write violations, rather than only discovering lag through downstream correctness incidents.
 
 ## Related Patterns
-- [State Consistency Timeout](./state-consistency-timeout.md) - a related staleness problem where the check meant to catch lag itself fails to complete in time
-- [Concurrent State Modification](./concurrent-state-modification.md) - both involve an agent acting on a view of state that a concurrent process has already changed
-- [State Machine Violation](./state-machine-violation.md) - acting on a lagging replica's stale status field can trigger a transition that violates the state machine given the true, current state
+- [State Consistency Timeout](state-consistency-timeout.md) - a related staleness problem where the check meant to catch lag itself fails to complete in time
+- [Concurrent State Modification](concurrent-state-modification.md) - both involve an agent acting on a view of state that a concurrent process has already changed
+- [State Machine Violation](state-machine-violation.md) - acting on a lagging replica's stale status field can trigger a transition that violates the state machine given the true, current state
 
 ## Production Signals
 ### Key Metrics

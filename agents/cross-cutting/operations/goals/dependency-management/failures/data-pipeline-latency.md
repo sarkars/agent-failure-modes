@@ -65,6 +65,6 @@ compounded latency made the data wrong for the new use case.
 | Gradual latency creep | Per-stage latency trending upward over a rolling multi-week window | Medium | Schedule latency budget review before it breaches SLA |
 
 ## Related Patterns
-- [Data Pipeline Backpressure Unhandled](./data-pipeline-backpressure-unhandled.md) - unhandled backpressure is an acute cause of the same staleness this pattern describes as a chronic condition
-- [Data Lineage Loss](./data-lineage-loss.md) - without lineage and timestamps, staleness cannot even be diagnosed after the fact
-- [Integration Timeout Mismatch](./integration-timeout-mismatch.md) - mismatched timeouts across integrated systems are one common contributor to compounding pipeline latency
+- [Data Pipeline Backpressure Unhandled](data-pipeline-backpressure-unhandled.md) - unhandled backpressure is an acute cause of the same staleness this pattern describes as a chronic condition
+- [Data Lineage Loss](data-lineage-loss.md) - without lineage and timestamps, staleness cannot even be diagnosed after the fact
+- [Integration Timeout Mismatch](integration-timeout-mismatch.md) - mismatched timeouts across integrated systems are one common contributor to compounding pipeline latency

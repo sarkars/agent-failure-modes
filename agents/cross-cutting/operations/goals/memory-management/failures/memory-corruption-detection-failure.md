@@ -68,6 +68,6 @@ but wrong routing decision with no error anywhere in the pipeline.
 | Partial write detected | A multi-step write pipeline reports one step succeeded and a dependent step failed/timed out | High | Roll back or complete the write, log for corruption audit |
 
 ## Related Patterns
-- [Memory Interleaving Corruption](./memory-interleaving-corruption.md) - a different corruption mechanism (concurrent writes racing) producing similarly undetected bad records
-- [Retrieval Index Corruption](./retrieval-index-corruption.md) - corruption at the index/structural level rather than within individual records, degrading all lookups rather than one
-- [Memory Not Updated Stale Retrieval](./memory-not-updated-stale-retrieval.md) - both stem from multi-step or multi-store writes that aren't atomic, though this produces corruption rather than staleness
+- [Memory Interleaving Corruption](memory-interleaving-corruption.md) - a different corruption mechanism (concurrent writes racing) producing similarly undetected bad records
+- [Retrieval Index Corruption](retrieval-index-corruption.md) - corruption at the index/structural level rather than within individual records, degrading all lookups rather than one
+- [Memory Not Updated Stale Retrieval](memory-not-updated-stale-retrieval.md) - both stem from multi-step or multi-store writes that aren't atomic, though this produces corruption rather than staleness

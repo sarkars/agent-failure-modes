@@ -63,6 +63,6 @@ Plugins and connectors are typically built and QA-tested against a finite, expli
 | Data quality degradation on plugin pipeline | `data_quality_check_failure_rate` rises after a platform/plugin version change | High | Suspect compatibility-matrix issue first; check recent version changes before assuming a data bug |
 
 ## Related Patterns
-- [Sdk Version Incompatibility](./sdk-version-incompatibility.md) - closely related: client-library version mismatch versus platform/plugin version mismatch
-- [Undocumented Api Behavior](./undocumented-api-behavior.md) - unsupported version combinations often produce behavior that diverges from documentation in the same subtle way
+- [Sdk Version Incompatibility](sdk-version-incompatibility.md) - closely related: client-library version mismatch versus platform/plugin version mismatch
+- [Undocumented Api Behavior](undocumented-api-behavior.md) - unsupported version combinations often produce behavior that diverges from documentation in the same subtle way
 - [Api Version Schema Mismatch](../../tool-capability-limits/failures/api-version-schema-mismatch.md) - a related version-mismatch failure at the wire-schema level rather than the plugin-compatibility level

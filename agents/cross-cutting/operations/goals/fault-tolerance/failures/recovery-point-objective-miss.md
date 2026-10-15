@@ -82,6 +82,6 @@ hours when the RPO was last spot-checked.
 | RPO breach confirmed | actual_data_loss_window_per_incident exceeds committed RPO on a real incident | High | Formal SLA/compliance incident, root-cause the replication gap, revise RPO commitment or architecture |
 
 ## Related Patterns
-- [Failover Data Loss](./failover-data-loss.md) - the concrete per-incident mechanism; RPO miss is the aggregate/statistical pattern of that mechanism exceeding its committed bound
-- [Recovery Time Objective Miss](./recovery-time-objective-miss.md) - the time-axis counterpart; both are commitment-vs-reality gaps in disaster-recovery objectives
-- [Recovery Procedure Untested](./recovery-procedure-untested.md) - an untested recovery procedure is one of the ways an RPO commitment goes unvalidated until a real incident exposes it
+- [Failover Data Loss](failover-data-loss.md) - the concrete per-incident mechanism; RPO miss is the aggregate/statistical pattern of that mechanism exceeding its committed bound
+- [Recovery Time Objective Miss](recovery-time-objective-miss.md) - the time-axis counterpart; both are commitment-vs-reality gaps in disaster-recovery objectives
+- [Recovery Procedure Untested](recovery-procedure-untested.md) - an untested recovery procedure is one of the ways an RPO commitment goes unvalidated until a real incident exposes it

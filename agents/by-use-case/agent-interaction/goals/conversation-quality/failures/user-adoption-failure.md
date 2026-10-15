@@ -63,6 +63,6 @@ the cohort average for users who went on to become regular users.
 | Elevated first-session friction | first_session_friction_score trending up | Medium | Review clarification/assumption thresholds for new-user sessions |
 
 ## Related Patterns
-- [User Retention Decline](./user-retention-decline.md) - the analogous erosion pattern among already-engaged users, driven by accumulated friction over a longer horizon
-- [User Expectation Mismatch](./user-expectation-mismatch.md) - a mismatch between marketed and actual capability is a common contributor to early-session disappointment and abandonment
-- [Over-Clarification](./over-clarification.md) - a frequent concrete driver of first-session friction that disproportionately affects new-user adoption
+- [User Retention Decline](user-retention-decline.md) - the analogous erosion pattern among already-engaged users, driven by accumulated friction over a longer horizon
+- [User Expectation Mismatch](user-expectation-mismatch.md) - a mismatch between marketed and actual capability is a common contributor to early-session disappointment and abandonment
+- [Over-Clarification](over-clarification.md) - a frequent concrete driver of first-session friction that disproportionately affects new-user adoption

@@ -63,6 +63,6 @@ when a contract term is misread three weeks later.
 | Exploratory spend spike | exploratory_call_spend_share exceeds 40% mid-session | Medium | Throttle exploratory calls, notify workflow owner |
 
 ## Related Patterns
-- [Cross-Tool Total Budget Exceeded](./cross-tool-total-budget-exceeded.md) - both stem from budget enforcement that ignores call context, one across tools and one across priority
-- [Tool Budget Starvation](./tool-budget-starvation.md) - a shared-pool variant of the same underlying problem, but across tasks/agents rather than within one session
-- [Per-Tool Daily Budget Exhaustion](./per-tool-daily-budget-exhaustion.md) - describes the exhaustion mechanics that priority misalignment makes worse
+- [Cross-Tool Total Budget Exceeded](cross-tool-total-budget-exceeded.md) - both stem from budget enforcement that ignores call context, one across tools and one across priority
+- [Tool Budget Starvation](tool-budget-starvation.md) - a shared-pool variant of the same underlying problem, but across tasks/agents rather than within one session
+- [Per-Tool Daily Budget Exhaustion](per-tool-daily-budget-exhaustion.md) - describes the exhaustion mechanics that priority misalignment makes worse

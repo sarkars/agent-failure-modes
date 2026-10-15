@@ -73,6 +73,6 @@ Warehouse DB (read replica).
 | Full-plan retry storm | plan_level_retry_count exceeds threshold within a 1-minute window | Medium | Disable plan-level retry fallback, force step-level retry only |
 
 ## Related Patterns
-- [Cascade Branching](./cascade-branching.md) - amplification grows a single cascade's magnitude, branching spreads it across independent subsystems
-- [Cascade Resilience Failure](./cascade-resilience-failure.md) - describes how the retry/circuit-breaker mechanisms meant to help are frequently the amplification mechanism itself
-- [Cascade Timeout Interaction](./cascade-timeout-interaction.md) - mismatched timeouts across layers are one of the primary triggers for amplification
+- [Cascade Branching](cascade-branching.md) - amplification grows a single cascade's magnitude, branching spreads it across independent subsystems
+- [Cascade Resilience Failure](cascade-resilience-failure.md) - describes how the retry/circuit-breaker mechanisms meant to help are frequently the amplification mechanism itself
+- [Cascade Timeout Interaction](cascade-timeout-interaction.md) - mismatched timeouts across layers are one of the primary triggers for amplification

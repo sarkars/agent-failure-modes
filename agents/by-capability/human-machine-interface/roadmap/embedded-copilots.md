@@ -57,4 +57,4 @@ Flags: **V** verified source · **R** needs research · **L** legal review · **
 - [VI-03 dark patterns](visual-and-oversight.md): cancellation and consent interface tricks.
 - [CC-22 creepy personalisation](chat-and-core.md): the opposite risk, using context too freely.
 - [GV-09 weak or excessive identity verification](privacy-governance-and-access.md): the security side of CP-15.
-- [Answer-and-go conversation](../core/conversation-leadership/failures/answer-and-go-conversation.md) (written): the assistant that answers and stops.
+- [Answer-and-go conversation](../goals/conversation-leadership/failures/answer-and-go-conversation.md) (written): the assistant that answers and stops.

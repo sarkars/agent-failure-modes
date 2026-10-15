@@ -55,6 +55,6 @@ The agent's monitoring shows "6/30 requests used this minute" — apparently eno
 | Sustained token budget pressure | `tokens_consumed_per_minute` stays above 85% of limit for 10+ minutes | Warning | Throttle large-payload requests or spread them across a longer window |
 
 ## Related Patterns
-- [Rate Limit Header Not Honored](./rate-limit-header-not-honored.md) - token-metered APIs often expose token-usage headers that are just as easy to overlook as request-count headers
-- [Rolling Window Quota Misunderstanding](./rolling-window-quota-misunderstanding.md) - token-based limits are frequently also rolling-window based, compounding both misunderstandings at once
-- [Per-Tool Requests Per Minute Exceeded](./per-tool-requests-per-minute-exceeded.md) - the request-count analog of this pattern; agents need both forms of pacing for tools that meter by token but also cap raw request count
+- [Rate Limit Header Not Honored](rate-limit-header-not-honored.md) - token-metered APIs often expose token-usage headers that are just as easy to overlook as request-count headers
+- [Rolling Window Quota Misunderstanding](rolling-window-quota-misunderstanding.md) - token-based limits are frequently also rolling-window based, compounding both misunderstandings at once
+- [Per-Tool Requests Per Minute Exceeded](per-tool-requests-per-minute-exceeded.md) - the request-count analog of this pattern; agents need both forms of pacing for tools that meter by token but also cap raw request count

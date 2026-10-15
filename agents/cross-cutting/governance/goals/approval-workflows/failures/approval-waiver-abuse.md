@@ -64,6 +64,6 @@ Waiver mechanisms are deliberately built with low friction — that's what makes
 | Waiver usage trending upward | Rolling waiver share of total approvals increases for 3+ consecutive review periods | Warning | Governance review of waiver policy and top requesters, consider tightening linkage requirements |
 
 ## Related Patterns
-- [Approval Timeout Expiration](./approval-timeout-expiration.md) - both involve a path where an action proceeds without a genuine, scrutinized approval decision
-- [Policy Exception Not Authorized](./policy-exception-not-authorized.md) - both involve a bypass mechanism used outside its intended, properly authorized scope
-- [Approval Scope Mismatch](./approval-scope-mismatch.md) - both represent ways the real-world use of a control drifts from its documented intent
+- [Approval Timeout Expiration](approval-timeout-expiration.md) - both involve a path where an action proceeds without a genuine, scrutinized approval decision
+- [Policy Exception Not Authorized](policy-exception-not-authorized.md) - both involve a bypass mechanism used outside its intended, properly authorized scope
+- [Approval Scope Mismatch](approval-scope-mismatch.md) - both represent ways the real-world use of a control drifts from its documented intent

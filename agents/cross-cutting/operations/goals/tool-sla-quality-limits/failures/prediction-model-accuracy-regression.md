@@ -64,6 +64,6 @@ ML vendors frequently treat model weights as an internal implementation detail d
 | Sustained rise in downstream overrides | `override_or_correction_rate` trends upward significantly over 14 days | Medium | Investigate for silent model update; run golden-set comparison to confirm |
 
 ## Related Patterns
-- [Accuracy Guarantee Not Met](./accuracy-guarantee-not-met.md) - a related but distinct failure: never having met the advertised accuracy at all, versus previously adequate accuracy regressing after a change
-- [Degraded Sla Not Communicated](./degraded-sla-not-communicated.md) - shares the "silent, undetected quality change" structure, though driven by a permanent model update rather than a transient incident
+- [Accuracy Guarantee Not Met](accuracy-guarantee-not-met.md) - a related but distinct failure: never having met the advertised accuracy at all, versus previously adequate accuracy regressing after a change
+- [Degraded Sla Not Communicated](degraded-sla-not-communicated.md) - shares the "silent, undetected quality change" structure, though driven by a permanent model update rather than a transient incident
 - [Beta Feature Instability](../../tool-capability-limits/failures/beta-feature-instability.md) - beta/preview ML features are especially prone to frequent, uncommunicated model changes

@@ -71,6 +71,6 @@ when the goal was simply "extract tables from PDFs."
 | Deep-chain CVE with no clear owner | A CVE is found several levels deep in the transitive graph with no direct dependency owner identified | High | Trace the chain to its responsible direct dependency, escalate for an upstream fix or dependency replacement |
 
 ## Related Patterns
-- [Dependency Version Conflicts](./dependency-version-conflicts.md) - version conflicts are one specific downstream consequence of a large transitive graph; this pattern is the broader growth-of-the-graph problem that makes such conflicts more likely
-- [Dependency Security Vulnerability](./dependency-security-vulnerability.md) - a larger transitive graph mechanically increases the number of packages that can carry an unpatched CVE, making this pattern a root-cause amplifier of that one
-- [Dependency Circular Reference](./dependency-circular-reference.md) - both describe dependency-graph structural problems, one from cyclic references and one from unbounded combinatorial growth
+- [Dependency Version Conflicts](dependency-version-conflicts.md) - version conflicts are one specific downstream consequence of a large transitive graph; this pattern is the broader growth-of-the-graph problem that makes such conflicts more likely
+- [Dependency Security Vulnerability](dependency-security-vulnerability.md) - a larger transitive graph mechanically increases the number of packages that can carry an unpatched CVE, making this pattern a root-cause amplifier of that one
+- [Dependency Circular Reference](dependency-circular-reference.md) - both describe dependency-graph structural problems, one from cyclic references and one from unbounded combinatorial growth

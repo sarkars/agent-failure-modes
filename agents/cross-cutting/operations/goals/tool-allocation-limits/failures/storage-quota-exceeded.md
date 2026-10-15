@@ -62,6 +62,6 @@ Storage quotas are typically enforced as a hard account-level or bucket-level ce
 | Mid-batch write failure due to quota | Write batch fails with quota-exceeded error and partial success | High | Halt remaining batches, reconcile which records persisted before resuming |
 
 ## Related Patterns
-- [Storage Quota Shared Across Agents](./storage-quota-shared-across-agents.md) - same failure mode compounded by multiple consumers drawing from one pool
-- [Storage Quota Soft Limit](./storage-quota-soft-limit.md) - the degraded-mode-before-hard-failure variant of this same quota category
-- [Memory Quota Per Operation](./memory-quota-per-operation.md) - related resource-ceiling failure at the per-operation rather than persistent-storage level
+- [Storage Quota Shared Across Agents](storage-quota-shared-across-agents.md) - same failure mode compounded by multiple consumers drawing from one pool
+- [Storage Quota Soft Limit](storage-quota-soft-limit.md) - the degraded-mode-before-hard-failure variant of this same quota category
+- [Memory Quota Per Operation](memory-quota-per-operation.md) - related resource-ceiling failure at the per-operation rather than persistent-storage level

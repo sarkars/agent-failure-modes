@@ -64,6 +64,6 @@ batch before a support ticket flags the garbled greeting.
 | Decode failure spike | UnicodeDecodeError rate exceeds baseline for a given source system | Medium | Notify source-system owner, verify declared encoding hasn't changed |
 
 ## Related Patterns
-- [Input Special Character Handling](./input-special-character-handling.md) - encoding mismatches often manifest specifically around accented and special characters
-- [Output Encoding Issues](./output-encoding-issues.md) - the same class of problem occurring on the output side rather than at ingestion
-- [Input Null Bytes Injection](./input-null-bytes-injection.md) - another byte-level input handling failure that surfaces during decoding/parsing
+- [Input Special Character Handling](input-special-character-handling.md) - encoding mismatches often manifest specifically around accented and special characters
+- [Output Encoding Issues](output-encoding-issues.md) - the same class of problem occurring on the output side rather than at ingestion
+- [Input Null Bytes Injection](input-null-bytes-injection.md) - another byte-level input handling failure that surfaces during decoding/parsing

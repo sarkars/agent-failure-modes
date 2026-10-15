@@ -65,5 +65,5 @@ Vendor-published latency SLAs are often aspirational or measured under condition
 
 ## Related Patterns
 - [Execution Time Quota](../../tool-allocation-limits/failures/execution-time-quota.md) - related but distinct: a hard-enforced cutoff versus a latency SLA that's merely exceeded in practice
-- [Degraded Sla Not Communicated](./degraded-sla-not-communicated.md) - latency violations are often one symptom of a broader, uncommunicated vendor-side degradation
-- [Sla Availability Not Met](./sla-availability-not-met.md) - severe, sustained latency violations frequently shade into an effective availability failure even if the vendor doesn't classify it as downtime
+- [Degraded Sla Not Communicated](degraded-sla-not-communicated.md) - latency violations are often one symptom of a broader, uncommunicated vendor-side degradation
+- [Sla Availability Not Met](sla-availability-not-met.md) - severe, sustained latency violations frequently shade into an effective availability failure even if the vendor doesn't classify it as downtime

@@ -64,6 +64,6 @@ complaints before the platform team notices the regional imbalance.
 | Health check divergence from real traffic | Health check reports healthy while task-outcome metrics show degradation on the same instance | Medium | Investigate health check adequacy, add task-representative synthetic probes |
 
 ## Related Patterns
-- [Model Downgrade Silent Failure](./model-downgrade-silent-failure.md) - both involve routing decisions that silently degrade user experience because the routing signal doesn't reflect real quality/performance impact
-- [Model Selection Nondeterminism](./model-selection-nondeterminism.md) - inconsistent instance selection compounds the difficulty of isolating and diagnosing a specific degraded instance
-- [Model Version Incompatibility](./model-version-incompatibility.md) - regional/instance deployments can silently diverge in version, turning a load-balancing issue into a compatibility issue as well
+- [Model Downgrade Silent Failure](model-downgrade-silent-failure.md) - both involve routing decisions that silently degrade user experience because the routing signal doesn't reflect real quality/performance impact
+- [Model Selection Nondeterminism](model-selection-nondeterminism.md) - inconsistent instance selection compounds the difficulty of isolating and diagnosing a specific degraded instance
+- [Model Version Incompatibility](model-version-incompatibility.md) - regional/instance deployments can silently diverge in version, turning a load-balancing issue into a compatibility issue as well

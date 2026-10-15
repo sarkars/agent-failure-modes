@@ -71,6 +71,6 @@ count grew from roughly 5 to 47 for what is, in substance, one fact.
 | Latency degradation from index bloat | retrieval_latency_p95 trend correlates with unconsolidated index growth | Medium | Trigger consolidation, review merge-on-write coverage |
 
 ## Related Patterns
-- [Retrieval Deduplication Failure](./retrieval-deduplication-failure.md) - a closely related symptom where near-duplicate entries clutter individual query results, often the visible surface of underlying fragmentation
-- [Retrieval Index Corruption](./retrieval-index-corruption.md) - both degrade retrieval quality/performance at the index level, though corruption is structural damage rather than accumulated bloat
-- [Memory Summarization Lossy](./memory-summarization-lossy.md) - consolidation to fix fragmentation risks the same information-loss failure mode if merge logic is too aggressive
+- [Retrieval Deduplication Failure](retrieval-deduplication-failure.md) - a closely related symptom where near-duplicate entries clutter individual query results, often the visible surface of underlying fragmentation
+- [Retrieval Index Corruption](retrieval-index-corruption.md) - both degrade retrieval quality/performance at the index level, though corruption is structural damage rather than accumulated bloat
+- [Memory Summarization Lossy](memory-summarization-lossy.md) - consolidation to fix fragmentation risks the same information-loss failure mode if merge logic is too aggressive

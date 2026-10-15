@@ -72,6 +72,6 @@ doubling effective cost-per-token for the duration.
 | Cascading saturation detected | fleet_saturated_node_count grows across 3+ nodes within 15 minutes | High | Page on-call, cap per-node concurrency fleet-wide, review recent traffic mix changes |
 
 ## Related Patterns
-- [Concurrent Request Resource Explosion](./concurrent-request-resource-explosion.md) - a burst in concurrency can be the trigger event that pushes the first node into CPU saturation
-- [Network Bandwidth Saturation](./network-bandwidth-saturation.md) - a parallel infrastructure-exhaustion mechanism where a different resource cascades into inference degradation
-- [Throughput Per Dollar Optimization Failure](./throughput-per-dollar-optimization-failure.md) - the fleet-wide cost-per-token increase during a CPU cascade is a direct instance of this broader economic failure
+- [Concurrent Request Resource Explosion](concurrent-request-resource-explosion.md) - a burst in concurrency can be the trigger event that pushes the first node into CPU saturation
+- [Network Bandwidth Saturation](network-bandwidth-saturation.md) - a parallel infrastructure-exhaustion mechanism where a different resource cascades into inference degradation
+- [Throughput Per Dollar Optimization Failure](throughput-per-dollar-optimization-failure.md) - the fleet-wide cost-per-token increase during a CPU cascade is a direct instance of this broader economic failure

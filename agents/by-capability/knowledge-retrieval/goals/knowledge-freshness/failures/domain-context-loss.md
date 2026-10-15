@@ -64,6 +64,6 @@ this were a first, unscoped question.
 | Repeated context re-ask | Agent requests already-provided domain info twice in one session | Low | Surface bug ticket for context-pinning gap, no immediate user-facing action needed |
 
 ## Related Patterns
-- [Knowledge Temporal Context Lost](./knowledge-temporal-context-lost.md) - shares the "qualifying context silently dropped" mechanism, applied to time-scoping rather than domain-scoping
-- [Knowledge Scope Assumption Wrong](./knowledge-scope-assumption-wrong.md) - both involve losing track of applicable scope, one through decay and one through incorrect initial assumption
-- [Fact Context Loss](./fact-context-loss.md) - the same underlying "qualifier dropped from context" mechanism at the level of a single fact rather than a whole session
+- [Knowledge Temporal Context Lost](knowledge-temporal-context-lost.md) - shares the "qualifying context silently dropped" mechanism, applied to time-scoping rather than domain-scoping
+- [Knowledge Scope Assumption Wrong](knowledge-scope-assumption-wrong.md) - both involve losing track of applicable scope, one through decay and one through incorrect initial assumption
+- [Fact Context Loss](fact-context-loss.md) - the same underlying "qualifier dropped from context" mechanism at the level of a single fact rather than a whole session

@@ -61,6 +61,6 @@ follow-up with the treating physician.
 | Terminology confusion in high-stakes domain | Expert review confirms wrong-sense interpretation of a domain term in medical/legal/financial output | High | Escalate for incident review, add term and case to watchlist test set |
 
 ## Related Patterns
-- [Fact Negation Confusion](./fact-negation-confusion.md) - a related linguistic-mishandling failure, negation rather than sense-disambiguation
-- [Domain Rule Misunderstanding](./domain-rule-misunderstanding.md) - terminology confusion is often the specific trigger for a broader rule-scope misread
-- [Fact Inversion](./fact-inversion.md) - shares the "meaning flips to its near-opposite" shape, at the level of a retrieved fact's polarity rather than a term's sense
+- [Fact Negation Confusion](fact-negation-confusion.md) - a related linguistic-mishandling failure, negation rather than sense-disambiguation
+- [Domain Rule Misunderstanding](domain-rule-misunderstanding.md) - terminology confusion is often the specific trigger for a broader rule-scope misread
+- [Fact Inversion](fact-inversion.md) - shares the "meaning flips to its near-opposite" shape, at the level of a retrieved fact's polarity rather than a term's sense

@@ -72,6 +72,6 @@ well within safe bounds.
 | Fleet-wide flap-driven capacity loss | flapping_instance_count and effective_capacity_loss_from_flapping both elevated simultaneously | High | Widen hysteresis or consecutive-check requirement fleet-wide, check for a systemic load pattern driving the noise |
 
 ## Related Patterns
-- [Circuit Breaker False Positive](./circuit-breaker-false-positive.md) - closely related instability where a threshold-based gate trips on noise rather than genuine sustained failure
-- [Canary Deployment Incomplete](./canary-deployment-incomplete.md) - a flapping health signal can be one reason canary promotion metrics never resolve cleanly to a promote or rollback decision
-- [Sticky Session Loss](./sticky-session-loss.md) - each flap that pulls an instance from rotation is a concrete mechanism by which in-flight session affinity gets broken
+- [Circuit Breaker False Positive](circuit-breaker-false-positive.md) - closely related instability where a threshold-based gate trips on noise rather than genuine sustained failure
+- [Canary Deployment Incomplete](canary-deployment-incomplete.md) - a flapping health signal can be one reason canary promotion metrics never resolve cleanly to a promote or rollback decision
+- [Sticky Session Loss](sticky-session-loss.md) - each flap that pulls an instance from rotation is a concrete mechanism by which in-flight session affinity gets broken

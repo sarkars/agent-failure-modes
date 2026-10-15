@@ -72,6 +72,6 @@ migrating forward) the data it had already written.
 | Silent data loss suspected | unexpected_field_default_rate spikes for sessions touched during the rolled-back-from version's active window | High | Audit a sample of affected records, determine scope, communicate to affected users if data loss is confirmed |
 
 ## Related Patterns
-- [Rollback Partial Failure](./rollback-partial-failure.md) - both concern rollback leaving the system in a worse or inconsistent state than either the old or new version alone
-- [Deployment Ordering Violation](./deployment-ordering-violation.md) - shares the root theme of code and data changes being coupled but managed by disconnected processes
-- [Version Downgrade Failure](./version-downgrade-failure.md) - the forward-only-migration variant of this same underlying problem, where the downgrade path itself is technically blocked rather than just producing bad behavior
+- [Rollback Partial Failure](rollback-partial-failure.md) - both concern rollback leaving the system in a worse or inconsistent state than either the old or new version alone
+- [Deployment Ordering Violation](deployment-ordering-violation.md) - shares the root theme of code and data changes being coupled but managed by disconnected processes
+- [Version Downgrade Failure](version-downgrade-failure.md) - the forward-only-migration variant of this same underlying problem, where the downgrade path itself is technically blocked rather than just producing bad behavior

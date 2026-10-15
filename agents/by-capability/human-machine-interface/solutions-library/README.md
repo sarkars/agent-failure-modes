@@ -6,8 +6,8 @@
 
 | Framework | Use it to | Fixes patterns like |
 |---|---|---|
-| [SPIN questioning](spin-questioning.md) | Ask discovery questions in chat (situation, problem, implication, need-payoff) instead of answering and stopping | [Answer-and-go conversation](../core/conversation-leadership/failures/answer-and-go-conversation.md) |
-| [Channel-fit matrix](channel-fit-matrix.md) | Choose chat, voice, visual, or a person for each job | [Visual product sold by text or voice](../channel-selection/failures/visual-product-sold-by-text-or-voice.md), [complex or emotional discussion forced into chat](../channel-selection/failures/complex-or-emotional-discussion-forced-into-chat.md) |
+| [SPIN questioning](spin-questioning.md) | Ask discovery questions in chat (situation, problem, implication, need-payoff) instead of answering and stopping | [Answer-and-go conversation](../goals/conversation-leadership/failures/answer-and-go-conversation.md) |
+| [Channel-fit matrix](channel-fit-matrix.md) | Choose chat, voice, visual, or a person for each job | [Visual product sold by text or voice](../goals/channel-selection/failures/visual-product-sold-by-text-or-voice.md), [complex or emotional discussion forced into chat](../goals/channel-selection/failures/complex-or-emotional-discussion-forced-into-chat.md) |
 
 ## Frequently asked questions
 
@@ -20,5 +20,5 @@ Use the channel-fit matrix.
 ## Related
 
 - [Human-machine interface overview](../)
-- [Core conversation patterns](../core/)
-- [Channel selection](../channel-selection/)
+- [Core conversation patterns](../goals/)
+- [Channel selection](../goals/channel-selection/)

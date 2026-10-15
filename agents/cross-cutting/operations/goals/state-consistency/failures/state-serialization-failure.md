@@ -69,6 +69,6 @@ end of JSON input", and the entire planning session's progress -
 | Serialization stack overflow | A serialization call fails due to excessive recursion depth | Medium | Investigate the object graph for circular references, add cycle-detection guard at the identified construction point |
 
 ## Related Patterns
-- [State Encoding Mismatch](./state-encoding-mismatch.md) - a related but distinct boundary failure where the serialized data is well-formed but decoded with the wrong assumptions
-- [State Version Incompatibility](./state-version-incompatibility.md) - describes a serialization boundary failure driven by schema evolution rather than mechanism limits
-- [State Garbage Collection Failure](./state-garbage-collection-failure.md) - a schema/serialization change can be the exact trigger that silently breaks a downstream collector's deserializer
+- [State Encoding Mismatch](state-encoding-mismatch.md) - a related but distinct boundary failure where the serialized data is well-formed but decoded with the wrong assumptions
+- [State Version Incompatibility](state-version-incompatibility.md) - describes a serialization boundary failure driven by schema evolution rather than mechanism limits
+- [State Garbage Collection Failure](state-garbage-collection-failure.md) - a schema/serialization change can be the exact trigger that silently breaks a downstream collector's deserializer

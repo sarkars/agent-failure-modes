@@ -59,6 +59,6 @@ generic "transaction sync failed" message that omits the actual cause.
 | Repeated unchanged retry after size rejection | Same batch payload resubmitted 2+ times after a size error | Critical | Disable naive retry path, page on-call to fix chunking logic |
 
 ## Related Patterns
-- [Array Element Limit](./array-element-limit.md) - a narrower cap on one array field rather than the whole batch/request
-- [Batch Total Operations Limit](./batch-total-operations-limit.md) - a rolling aggregate cap across many correctly-sized batches
-- [Request Payload Size Limit](./request-payload-size-limit.md) - byte-size ceiling that a large batch can hit even when item count is within limits
+- [Array Element Limit](array-element-limit.md) - a narrower cap on one array field rather than the whole batch/request
+- [Batch Total Operations Limit](batch-total-operations-limit.md) - a rolling aggregate cap across many correctly-sized batches
+- [Request Payload Size Limit](request-payload-size-limit.md) - byte-size ceiling that a large batch can hit even when item count is within limits

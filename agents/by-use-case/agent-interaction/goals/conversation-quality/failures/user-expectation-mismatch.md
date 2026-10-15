@@ -66,6 +66,6 @@ the marketing-level mismatch.
 | Spike in expectation-gap complaints | expectation_gap_complaint_rate rises for a specific capability area | Medium | Review and update marketing/onboarding copy for that area |
 
 ## Related Patterns
-- [User Adoption Failure](./user-adoption-failure.md) - expectation mismatches discovered early are a common concrete driver of new users abandoning the product
-- [User Trust Degradation](./user-trust-degradation.md) - repeated capability overclaims erode trust in a way that compounds beyond the individual mismatch incident
-- [Conversation Contradiction](./conversation-contradiction.md) - an agent asserting a capability it then fails to deliver on is a specific form of self-contradiction over time
+- [User Adoption Failure](user-adoption-failure.md) - expectation mismatches discovered early are a common concrete driver of new users abandoning the product
+- [User Trust Degradation](user-trust-degradation.md) - repeated capability overclaims erode trust in a way that compounds beyond the individual mismatch incident
+- [Conversation Contradiction](conversation-contradiction.md) - an agent asserting a capability it then fails to deliver on is a specific form of self-contradiction over time

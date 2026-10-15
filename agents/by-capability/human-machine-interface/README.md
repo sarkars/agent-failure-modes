@@ -19,24 +19,24 @@
 ### Core: applies to every channel
 | Family | Pattern | One line |
 |---|---|---|
-| [Conversation leadership](core/conversation-leadership/README.md) | [Answer-and-go conversation](core/conversation-leadership/failures/answer-and-go-conversation.md) | The bot answers, then stops: no next step, no closure |
-| [Stakes calibration](core/stakes-calibration/README.md) | [Stakes-blind register](core/stakes-calibration/failures/stakes-blind-register.md) | Same breezy tone and improvised facts for a funeral as for store hours |
-| [Emotional intelligence](core/emotional-intelligence/README.md) | [Hollow empathy](core/emotional-intelligence/failures/hollow-empathy.md) | "I understand your frustration," on repeat, with no action |
-| [Trust and rapport](core/trust-and-rapport/README.md) | [Undisclosed bot identity](core/trust-and-rapport/failures/undisclosed-bot-identity.md) | Hides that it's an AI, or what it can't do |
-| [Difficult customers](core/difficult-customers/README.md) | [No de-escalation strategy](core/difficult-customers/failures/no-de-escalation-strategy.md) | Quotes policy at angry customers and never changes tactics |
-| [Vulnerable users](core/vulnerable-users/README.md) | [Missed crisis signals](core/vulnerable-users/failures/missed-crisis-signals.md) | Carries on with the task while a user signals crisis |
-| [Age adaptation](core/age-adaptation/README.md) | [Child user treated as adult](core/age-adaptation/failures/child-user-treated-as-adult.md) | Collects data and pushes sales on a likely child |
-| [Cultural adaptation](core/cultural-adaptation/README.md) | [One-size communication style](core/cultural-adaptation/failures/one-size-communication-style.md) | Same directness, idioms, and formality for everyone |
-| [Fairness and identity](core/fairness-and-identity/README.md) | [Dialect and name quality gap](core/fairness-and-identity/failures/dialect-and-name-quality-gap.md) | Unequal service by dialect, name, or identity cues |
-| [Relational and boundaries](core/relational-and-boundaries/README.md) | [Negotiation capitulation](core/relational-and-boundaries/failures/negotiation-capitulation.md) | Gives away discounts, or gets tricked into a $1 deal |
+| [Conversation leadership](goals/conversation-leadership/README.md) | [Answer-and-go conversation](goals/conversation-leadership/failures/answer-and-go-conversation.md) | The bot answers, then stops: no next step, no closure |
+| [Stakes calibration](goals/stakes-calibration/README.md) | [Stakes-blind register](goals/stakes-calibration/failures/stakes-blind-register.md) | Same breezy tone and improvised facts for a funeral as for store hours |
+| [Emotional intelligence](goals/emotional-intelligence/README.md) | [Hollow empathy](goals/emotional-intelligence/failures/hollow-empathy.md) | "I understand your frustration," on repeat, with no action |
+| [Trust and rapport](goals/trust-and-rapport/README.md) | [Undisclosed bot identity](goals/trust-and-rapport/failures/undisclosed-bot-identity.md) | Hides that it's an AI, or what it can't do |
+| [Difficult customers](goals/difficult-customers/README.md) | [No de-escalation strategy](goals/difficult-customers/failures/no-de-escalation-strategy.md) | Quotes policy at angry customers and never changes tactics |
+| [Vulnerable users](goals/vulnerable-users/README.md) | [Missed crisis signals](goals/vulnerable-users/failures/missed-crisis-signals.md) | Carries on with the task while a user signals crisis |
+| [Age adaptation](goals/age-adaptation/README.md) | [Child user treated as adult](goals/age-adaptation/failures/child-user-treated-as-adult.md) | Collects data and pushes sales on a likely child |
+| [Cultural adaptation](goals/cultural-adaptation/README.md) | [One-size communication style](goals/cultural-adaptation/failures/one-size-communication-style.md) | Same directness, idioms, and formality for everyone |
+| [Fairness and identity](goals/fairness-and-identity/README.md) | [Dialect and name quality gap](goals/fairness-and-identity/failures/dialect-and-name-quality-gap.md) | Unequal service by dialect, name, or identity cues |
+| [Relational and boundaries](goals/relational-and-boundaries/README.md) | [Negotiation capitulation](goals/relational-and-boundaries/failures/negotiation-capitulation.md) | Gives away discounts, or gets tricked into a $1 deal |
 
-### [Channel selection](channel-selection/README.md): choosing the wrong channel
+### [Channel selection](goals/channel-selection/README.md): choosing the wrong channel
 | Pattern | One line |
 |---|---|
-| [Visual product sold by text or voice](channel-selection/failures/visual-product-sold-by-text-or-voice.md) | Selling fashion or furniture with words only |
-| [Complex or emotional discussion forced into chat](channel-selection/failures/complex-or-emotional-discussion-forced-into-chat.md) | A hard conversation stuck in a chat window |
-| [No channel switch, or context lost on switch](channel-selection/failures/no-channel-switch-or-context-lost.md) | Customers repeat themselves after a handoff |
-| [Sensitive data collected in chat](channel-selection/failures/sensitive-data-collected-in-chat.md) | Card numbers and SSNs typed into a chat or spoken to a bot |
+| [Visual product sold by text or voice](goals/channel-selection/failures/visual-product-sold-by-text-or-voice.md) | Selling fashion or furniture with words only |
+| [Complex or emotional discussion forced into chat](goals/channel-selection/failures/complex-or-emotional-discussion-forced-into-chat.md) | A hard conversation stuck in a chat window |
+| [No channel switch, or context lost on switch](goals/channel-selection/failures/no-channel-switch-or-context-lost.md) | Customers repeat themselves after a handoff |
+| [Sensitive data collected in chat](goals/channel-selection/failures/sensitive-data-collected-in-chat.md) | Card numbers and SSNs typed into a chat or spoken to a bot |
 
 ### Solutions library: reusable frameworks
 - [Channel-fit matrix](solutions-library/channel-fit-matrix.md): which channel for which job
@@ -65,7 +65,7 @@ Most bots answer and stop. See answer-and-go conversation.
 See hollow empathy.
 
 ### Should this be chat, voice, a visual page, or a person?
-See [channel selection](channel-selection/) and the channel-fit matrix.
+See [channel selection](goals/channel-selection/) and the channel-fit matrix.
 
 ### Is a better model enough to fix these?
 Usually not. Context, handoffs, and policy decide most outcomes. The roadmap breaks this down.

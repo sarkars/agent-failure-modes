@@ -60,6 +60,6 @@ Escalation logic is typically implemented as a side lookup (org chart, role tabl
 | Stale delegation-of-authority mapping | Role-to-approver table entry unchanged for > 90 days while org roster has changed | Warning | Trigger manual review of the mapping before next escalation event |
 
 ## Related Patterns
-- [Approval Chain Break](./approval-chain-break.md) - both involve a routing step in a multi-party approval flow silently failing to forward the request
-- [Approval Timeout Expiration](./approval-timeout-expiration.md) - escalation failures often manifest as timeouts once the request has no valid recipient
-- [Approval Delegation Loop](./approval-delegation-loop.md) - misconfigured delegation mappings can cause loops instead of, or in addition to, escalation dead-ends
+- [Approval Chain Break](approval-chain-break.md) - both involve a routing step in a multi-party approval flow silently failing to forward the request
+- [Approval Timeout Expiration](approval-timeout-expiration.md) - escalation failures often manifest as timeouts once the request has no valid recipient
+- [Approval Delegation Loop](approval-delegation-loop.md) - misconfigured delegation mappings can cause loops instead of, or in addition to, escalation dead-ends

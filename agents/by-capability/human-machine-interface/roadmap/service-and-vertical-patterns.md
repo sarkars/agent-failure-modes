@@ -51,9 +51,9 @@ Flags: **V** verified source · **R** needs research · **L** legal review · **
 ## Insurance claims intake (CI)
 | ID | Pattern | What goes wrong | Goal | Primary metric (starting target) | Flags | Root cause | Better model alone? | In the library today |
 |---|---|---|---|---|---|---|---|---|
-| CI-01 | Cold handling of a loss | A claim after a fire or a death gets a form-filling tone | Acknowledge the loss once, then make the next step easy | Claimant sentiment after intake; escalations on tone |  | Business context | Partly | **Extends**: [stakes-blind register](../core/stakes-calibration/failures/stakes-blind-register.md) |
+| CI-01 | Cold handling of a loss | A claim after a fire or a death gets a form-filling tone | Acknowledge the loss once, then make the next step easy | Claimant sentiment after intake; escalations on tone |  | Business context | Partly | **Extends**: [stakes-blind register](../goals/stakes-calibration/failures/stakes-blind-register.md) |
 | CI-02 | Coverage answers sound like guarantees | 'You're covered' before the claim is reviewed | Say what is generally covered and what the claim decision depends on | Coverage statements with a stated condition. Target: 100% | L | Business context | No | New |
-| CI-03 | Photo-evidence guidance fails | Asks for photos that can't show the damage, or rejects usable ones | Tell people exactly what to capture, with examples | Claims needing a second photo request |  | Business context | Partly | **Extends**: [low resolution](../../../by-capability/document-processing/goals/accurate-text-extraction/failures/low-resolution.md) |
+| CI-03 | Photo-evidence guidance fails | Asks for photos that can't show the damage, or rejects usable ones | Tell people exactly what to capture, with examples | Claims needing a second photo request |  | Business context | Partly | **Extends**: [low resolution](../../document-processing/goals/accurate-text-extraction/failures/low-resolution.md) |
 
 ## Health scheduling and patient messages (HS)
 | ID | Pattern | What goes wrong | Goal | Primary metric (starting target) | Flags | Root cause | Better model alone? | In the library today |
@@ -80,4 +80,4 @@ Flags: **V** verified source · **R** needs research · **L** legal review · **
 | ID | Pattern | What goes wrong | Goal | Primary metric (starting target) | Flags | Root cause | Better model alone? | In the library today |
 |---|---|---|---|---|---|---|---|---|
 | RP-01 | Role-play drifts into harmful or unwanted territory | A story or persona escalates beyond what the user chose | Set limits for role-play and check in at turning points | Role-play turns flagged by safety review | L, E | Model | Partly | New (CC-16 covers romantic or parasocial dependence) |
-| RP-02 | Bereavement handled with scripts | Account closures after a death use form language and ask the family for proof repeatedly | Give a dedicated, gentle path and ask for documents once | Contacts needed to complete a bereavement closure | E | Business context | No | **Extends**: [stakes-blind register](../core/stakes-calibration/failures/stakes-blind-register.md) |
+| RP-02 | Bereavement handled with scripts | Account closures after a death use form language and ask the family for proof repeatedly | Give a dedicated, gentle path and ask for documents once | Contacts needed to complete a bereavement closure | E | Business context | No | **Extends**: [stakes-blind register](../goals/stakes-calibration/failures/stakes-blind-register.md) |

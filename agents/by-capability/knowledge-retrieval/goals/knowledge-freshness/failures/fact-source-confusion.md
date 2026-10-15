@@ -64,6 +64,6 @@ matches the merged description.
 | Disambiguation gate bypassed | A query matching a registered name collision produced a direct answer without a clarification prompt | Medium | Audit disambiguation-gating logic for the affected entity pair |
 
 ## Related Patterns
-- [Fact Inversion](./fact-inversion.md) - can produce a similarly-shaped symptom (attributes swapped) via a different mechanism, flipped polarity rather than conflated entities
-- [Knowledge Scope Assumption Wrong](./knowledge-scope-assumption-wrong.md) - both involve applying a fact to the wrong scope, one for entity identity and one for jurisdiction/version
-- [Knowledge Source Reliability Unknown](./knowledge-source-reliability-unknown.md) - related in that both stem from insufficient provenance tracking on retrieved facts
+- [Fact Inversion](fact-inversion.md) - can produce a similarly-shaped symptom (attributes swapped) via a different mechanism, flipped polarity rather than conflated entities
+- [Knowledge Scope Assumption Wrong](knowledge-scope-assumption-wrong.md) - both involve applying a fact to the wrong scope, one for entity identity and one for jurisdiction/version
+- [Knowledge Source Reliability Unknown](knowledge-source-reliability-unknown.md) - related in that both stem from insufficient provenance tracking on retrieved facts

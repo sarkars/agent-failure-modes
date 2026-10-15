@@ -80,8 +80,8 @@ For every goal: how to measure it, how to find your baseline, what counts as a f
 ## Conversation-level failures to check
 
 This agent talks to people. Also test these:
-- [negotiation capitulation](../../by-capability/human-machine-interface/core/relational-and-boundaries/failures/negotiation-capitulation.md)
-- [undisclosed bot identity](../../by-capability/human-machine-interface/core/trust-and-rapport/failures/undisclosed-bot-identity.md)
+- [negotiation capitulation](../../by-capability/human-machine-interface/goals/relational-and-boundaries/failures/negotiation-capitulation.md)
+- [undisclosed bot identity](../../by-capability/human-machine-interface/goals/trust-and-rapport/failures/undisclosed-bot-identity.md)
 
 ## Operations concerns for this agent
 

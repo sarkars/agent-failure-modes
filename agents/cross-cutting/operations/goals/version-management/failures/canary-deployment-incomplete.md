@@ -73,7 +73,7 @@ users the whole time.
 | Long-running dual-version traffic | Two agent versions both receiving >1% of traffic for over 72 hours | Medium | Escalate to release owner, review whether rollout should be aborted |
 
 ## Related Patterns
-- [Blue-Green Deployment Traffic Not Switched](./blue-green-deployment-traffic-not-switched.md) - a related failure where the traffic-shift mechanism itself, rather than the promotion decision, fails to progress
-- [Version Rollout Coordination](./version-rollout-coordination.md) - stalled canaries compound coordination problems when downstream services expect a rollout to have finished
-- [Weighted Routing Algorithm Error](./weighted-routing-algorithm-error.md) - describes a different way the traffic split itself can be wrong, independent of whether the promotion decision stalls
-- [Health Check Flapping](./health-check-flapping.md) - a noisy or flapping health signal can be one root cause of an inconclusive canary metric that never triggers promotion
+- [Blue-Green Deployment Traffic Not Switched](blue-green-deployment-traffic-not-switched.md) - a related failure where the traffic-shift mechanism itself, rather than the promotion decision, fails to progress
+- [Version Rollout Coordination](version-rollout-coordination.md) - stalled canaries compound coordination problems when downstream services expect a rollout to have finished
+- [Weighted Routing Algorithm Error](weighted-routing-algorithm-error.md) - describes a different way the traffic split itself can be wrong, independent of whether the promotion decision stalls
+- [Health Check Flapping](health-check-flapping.md) - a noisy or flapping health signal can be one root cause of an inconclusive canary metric that never triggers promotion

@@ -63,6 +63,6 @@ individual logs show "success" for their respective attempts.
 | Missing idempotency key on retryable handoff | A handoff to a side-effecting agent is sent without an idempotency key | Medium | Block the handoff, require key before dispatch |
 
 ## Related Patterns
-- [Handoff Timing Mismatch](./handoff-timing-mismatch.md) - the timeout-driven retries that trigger idempotency violations are a direct consequence of timing mismatches between sender and receiver
-- [Handoff Rollback Failure](./handoff-rollback-failure.md) - duplicate executions are especially damaging when the resulting side effects cannot be cleanly rolled back
-- [Handoff State Loss](./handoff-state-loss.md) - loss of "already processed" state is one specific mechanism by which idempotency checks fail to catch a retry
+- [Handoff Timing Mismatch](handoff-timing-mismatch.md) - the timeout-driven retries that trigger idempotency violations are a direct consequence of timing mismatches between sender and receiver
+- [Handoff Rollback Failure](handoff-rollback-failure.md) - duplicate executions are especially damaging when the resulting side effects cannot be cleanly rolled back
+- [Handoff State Loss](handoff-state-loss.md) - loss of "already processed" state is one specific mechanism by which idempotency checks fail to catch a retry

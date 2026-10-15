@@ -66,6 +66,6 @@ that. Can we just draft it with what I gave you?"
 | Excessive open tangent accumulation | open_tangent_count exceeds threshold without closure | Low | Surface open-thread ledger to user for triage |
 
 ## Related Patterns
-- [Conversation Relevance Drift](./conversation-relevance-drift.md) - drift is a single gradual departure from the original topic; tangent proliferation is multiple simultaneous branches
-- [Conversation Length Explosion](./conversation-length-explosion.md) - accumulating unresolved tangents is one direct mechanism by which conversations grow unboundedly long
-- [Over-Clarification](./over-clarification.md) - agent-initiated tangential questions can themselves be a form of unnecessary clarification that fuels proliferation
+- [Conversation Relevance Drift](conversation-relevance-drift.md) - drift is a single gradual departure from the original topic; tangent proliferation is multiple simultaneous branches
+- [Conversation Length Explosion](conversation-length-explosion.md) - accumulating unresolved tangents is one direct mechanism by which conversations grow unboundedly long
+- [Over-Clarification](over-clarification.md) - agent-initiated tangential questions can themselves be a form of unnecessary clarification that fuels proliferation

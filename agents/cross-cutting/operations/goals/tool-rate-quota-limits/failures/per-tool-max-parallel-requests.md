@@ -55,6 +55,6 @@ The batch takes several retry cycles and multiple minutes to fully complete work
 | Repeated retry-storm on same tool | Same batch retried 3+ times against the parallelism cap without converging | Critical | Halt naive retries; switch to queue-based dispatch or the tool's batch API |
 
 ## Related Patterns
-- [Per-Tool Concurrent Connections Exceeded](./per-tool-concurrent-connections-exceeded.md) - a network-layer sibling of this request-layer concurrency cap; both need an orchestrator-side throttle
-- [Connection Pool Exhaustion](./connection-pool-exhaustion.md) - client-side concurrency limits can mask or compound this vendor-side cap
-- [Per-Tool Burst Rate Exceeded](./per-tool-burst-rate-exceeded.md) - both are triggered by uncoordinated parallel dispatch, but this is an in-flight cap rather than a time-window cap
+- [Per-Tool Concurrent Connections Exceeded](per-tool-concurrent-connections-exceeded.md) - a network-layer sibling of this request-layer concurrency cap; both need an orchestrator-side throttle
+- [Connection Pool Exhaustion](connection-pool-exhaustion.md) - client-side concurrency limits can mask or compound this vendor-side cap
+- [Per-Tool Burst Rate Exceeded](per-tool-burst-rate-exceeded.md) - both are triggered by uncoordinated parallel dispatch, but this is an in-flight cap rather than a time-window cap

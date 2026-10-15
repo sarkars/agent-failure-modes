@@ -63,6 +63,6 @@ Webhook delivery infrastructure is typically built for throughput and reliabilit
 | Elevated out-of-order delivery rate | `out_of_order_delivery_rate` exceeds 2% sustained over an hour | Medium | Correlate with vendor-side retry activity or load; confirm ordering-safe handling is in place |
 
 ## Related Patterns
-- [Webhook Delivery Guarantee Not Enforced](./webhook-delivery-guarantee-not-enforced.md) - a related webhook-reliability assumption gap, delivery guarantee instead of ordering
-- [Webhook Retry Exhaustion](./webhook-retry-exhaustion.md) - retries are a primary mechanism that produces the out-of-order delivery described here
-- [Undocumented Api Behavior](./undocumented-api-behavior.md) - ordering guarantees (or their absence) are frequently under-documented relative to their operational importance
+- [Webhook Delivery Guarantee Not Enforced](webhook-delivery-guarantee-not-enforced.md) - a related webhook-reliability assumption gap, delivery guarantee instead of ordering
+- [Webhook Retry Exhaustion](webhook-retry-exhaustion.md) - retries are a primary mechanism that produces the out-of-order delivery described here
+- [Undocumented Api Behavior](undocumented-api-behavior.md) - ordering guarantees (or their absence) are frequently under-documented relative to their operational importance

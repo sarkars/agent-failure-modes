@@ -65,7 +65,7 @@ step, and simply executed in the wrong order.
 | Order sensitive to non-semantic factor | Analysis shows subgoal order correlating with generation order or a shallow heuristic rather than a declared precedence model | Medium | Add explicit precondition elicitation to the decomposition step |
 
 ## Related Patterns
-- [Plan Dependency Cycle](./plan-dependency-cycle.md) - a related but distinct failure where the dependency graph is genuinely unexecutable (a true cycle), rather than acyclic-but-wrongly-ordered
-- [Plan Parallelization Error](./plan-parallelization-error.md) - a related planning-time misclassification, where subgoals are wrongly deemed independent enough to run in parallel rather than wrongly ordered when run sequentially
+- [Plan Dependency Cycle](plan-dependency-cycle.md) - a related but distinct failure where the dependency graph is genuinely unexecutable (a true cycle), rather than acyclic-but-wrongly-ordered
+- [Plan Parallelization Error](plan-parallelization-error.md) - a related planning-time misclassification, where subgoals are wrongly deemed independent enough to run in parallel rather than wrongly ordered when run sequentially
 - [Sequencing Errors](../../tool-reliability/failures/sequencing-errors.md) - a related but narrower failure at the individual tool-call level rather than the higher-level subgoal-decomposition level
 - [Tool Invocation Ordering Dependency](../../tool-selection-sequencing/failures/tool-invocation-ordering-dependency.md) - a related failure where the missing precedence signal lives in undocumented tool relationships rather than in unencoded subgoal preconditions

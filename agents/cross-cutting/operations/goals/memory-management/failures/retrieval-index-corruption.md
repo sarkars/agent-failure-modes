@@ -70,6 +70,6 @@ rebuild happens to catch and correct the issue as a side effect.
 | Interrupted index update | An incremental index update job is killed or times out mid-operation | High | Flag the affected region for integrity check, avoid serving queries against it until verified |
 
 ## Related Patterns
-- [Memory Corruption Detection Failure](./memory-corruption-detection-failure.md) - corruption at the individual-record level rather than the index's own structure, though both stem from non-atomic multi-step writes
-- [Memory Fragmentation](./memory-fragmentation.md) - both degrade retrieval performance over time, though fragmentation is accumulated bloat rather than structural damage
-- [Retrieval Confidence Miscalibration](./retrieval-confidence-miscalibration.md) - a corrupted index can produce results whose similarity scores are especially unreliable, compounding an existing miscalibration risk
+- [Memory Corruption Detection Failure](memory-corruption-detection-failure.md) - corruption at the individual-record level rather than the index's own structure, though both stem from non-atomic multi-step writes
+- [Memory Fragmentation](memory-fragmentation.md) - both degrade retrieval performance over time, though fragmentation is accumulated bloat rather than structural damage
+- [Retrieval Confidence Miscalibration](retrieval-confidence-miscalibration.md) - a corrupted index can produce results whose similarity scores are especially unreliable, compounding an existing miscalibration risk

@@ -55,6 +55,6 @@ The quota doesn't reset until 00:00 UTC, so the enrichment tool is unusable for 
 | High-priority call denied by quota | Any user-facing or critical-path call rejected with a daily-quota error | Critical | Page on-call; verify quota reservation partitioning is active and correctly sized |
 
 ## Related Patterns
-- [Per-Tool Requests Per Hour Exceeded](./per-tool-requests-per-hour-exceeded.md) - a shorter-window version of the same visibility gap, often hit before the daily quota even becomes relevant
-- [Quota Reset Timing Unknown](./quota-reset-timing-unknown.md) - not knowing precisely when the daily quota resets compounds the pacing problem described here
-- [Rolling Window Quota Misunderstanding](./rolling-window-quota-misunderstanding.md) - agents that assume a fixed daily reset when the vendor actually uses a rolling 24-hour window will mispace their usage in a related but distinct way
+- [Per-Tool Requests Per Hour Exceeded](per-tool-requests-per-hour-exceeded.md) - a shorter-window version of the same visibility gap, often hit before the daily quota even becomes relevant
+- [Quota Reset Timing Unknown](quota-reset-timing-unknown.md) - not knowing precisely when the daily quota resets compounds the pacing problem described here
+- [Rolling Window Quota Misunderstanding](rolling-window-quota-misunderstanding.md) - agents that assume a fixed daily reset when the vendor actually uses a rolling 24-hour window will mispace their usage in a related but distinct way

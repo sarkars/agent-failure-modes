@@ -66,6 +66,6 @@ crash-recovery into a billing incident.
 | Non-idempotent consumer restarted with offset reset | A consumer without a processed-event ledger has its offset reset | High | Block automatic replay, require manual dedup review before reprocessing |
 
 ## Related Patterns
-- [Data Pipeline Ordering Change](./data-pipeline-ordering-change.md) - both are consumer-side assumptions about delivery guarantees (order and exactly-once) that the transport layer does not actually promise
-- [Data Pipeline Backpressure Unhandled](./data-pipeline-backpressure-unhandled.md) - crash-and-replay recovery from a backpressure-induced crash is a common trigger for idempotency failures
-- [Integration Error Handling Mismatch](./integration-error-handling-mismatch.md) - retries triggered by mismatched error handling across integrated systems can cause the same non-idempotent duplicate-action problem
+- [Data Pipeline Ordering Change](data-pipeline-ordering-change.md) - both are consumer-side assumptions about delivery guarantees (order and exactly-once) that the transport layer does not actually promise
+- [Data Pipeline Backpressure Unhandled](data-pipeline-backpressure-unhandled.md) - crash-and-replay recovery from a backpressure-induced crash is a common trigger for idempotency failures
+- [Integration Error Handling Mismatch](integration-error-handling-mismatch.md) - retries triggered by mismatched error handling across integrated systems can cause the same non-idempotent duplicate-action problem

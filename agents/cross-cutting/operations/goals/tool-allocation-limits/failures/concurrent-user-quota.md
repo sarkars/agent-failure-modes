@@ -58,6 +58,6 @@ Concurrent-user licensing models (common in legacy enterprise tools like CRMs, E
 | Concurrent pool near saturation | `pool_utilization_pct` > 90% for 10 minutes | Medium | Throttle non-critical agent jobs, review seat count with vendor |
 
 ## Related Patterns
-- [Api Key Quota Per Account](./api-key-quota-per-account.md) - both involve an agent unknowingly competing with other consumers for a shared allocation
-- [Storage Quota Shared Across Agents](./storage-quota-shared-across-agents.md) - shared-pool exhaustion pattern applied to storage rather than sessions
-- [Execution Time Quota](./execution-time-quota.md) - another case where the agent's usage pattern diverges from the assumptions baked into the tool's limit
+- [Api Key Quota Per Account](api-key-quota-per-account.md) - both involve an agent unknowingly competing with other consumers for a shared allocation
+- [Storage Quota Shared Across Agents](storage-quota-shared-across-agents.md) - shared-pool exhaustion pattern applied to storage rather than sessions
+- [Execution Time Quota](execution-time-quota.md) - another case where the agent's usage pattern diverges from the assumptions baked into the tool's limit
