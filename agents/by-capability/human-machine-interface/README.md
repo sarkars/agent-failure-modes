@@ -80,7 +80,7 @@ Every pattern opens with a one-line summary and a before-and-after transcript, t
 [Test files](tests/) let you check whether your assistant has a pattern. [Incidents](incidents/) hold dated public cases behind the patterns. You can [share a failure report](data/) in anonymized form. The [content program](roadmap/content-program.md) says how these are built.
 
 ## Chat use-case guides
-[Narrow guides](chat-use-cases/) for 25 chat use cases, from a flight chat to a chat for kids. Each ties its instructions, guardrails, and evals to a metric.
+[Narrow guides](chat-use-cases/) for 25 chat use cases, from a flight chat to a chat for kids. Each ties its instructions, guardrails, and evals to a metric. Try the [interactive builder](chat-use-cases/builder/index.html).
 
 ## Evidence standard
 - **Cite only what you can verify,** and say when a source is secondary, vendor-run, from a different setting (for example, human-to-human research), or when you couldn't open the original.

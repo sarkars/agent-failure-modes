@@ -80,7 +80,7 @@ Status values: *Queued*, *In progress*, *Done*, *Blocked*, *Needs review*. A run
 | 2 | Write `incidents/README.md`: the incident-page format and the source rules | WS-02 | None | Done |
 | 3 | Write `data/README.md` and `data/failure-report-template.md`: consent, anonymization, what never to submit | WS-07 | None | Done |
 | 4 | Add Maturity and "Will a better model fix this?" rows to the pattern template | WS-01, WS-04 | None | Done |
-| 18 | Exemplar guide: **CU-05 Flight booking and disruption chat** from the [template](../chat-use-cases/_template.md). Open and read every source (including the Moffatt v. Air Canada decision and the airline-domain material in tau-bench); find and cite any U.S. rules on refunds and automated assistance from primary sources; fill the metric ledger completely; run `check_ledger.py`; mark everything untested | WS-14 | None | Queued |
+| 18 | Exemplar guide: **CU-05 Flight booking and disruption chat**, written as **data for the [interactive builder](../chat-use-cases/builder/)** (use-case-specific goals, rules, failures, snippets, and ledger rows in `content.py`), using the [template](../chat-use-cases/_template.md) as its shape. Open and read every source (including the Moffatt v. Air Canada decision and the airline-domain material in tau-bench); find and cite any U.S. rules on refunds and automated assistance from primary sources; fill the metric ledger completely; run `check_ledger.py`; mark everything untested | WS-14 | None | Queued |
 | 19 | Review the exemplar adversarially: for each ledger row, is the metric measurable from logs, an eval, or sampled review? Is there a counter-metric? Does each instruction map to a real failure pattern? Revise the template if it fails | WS-14 | Task 18 Done | Queued |
 | 5 | Incident page: pick the best-sourced public case for the first flagship that has one | WS-02 | A flagship is Done | Queued |
 | 6 | Seed `glossary/`: "containment rate" and "cold transfer" | WS-09 | HU-01 and HU-03 Done | Queued |
@@ -115,6 +115,7 @@ Status values: *Queued*, *In progress*, *Done*, *Blocked*, *Needs review*. A run
 - **No claim that following the guide guarantees good behavior.** The guide reduces known failures; only testing shows whether a given agent has them.
 
 ## Chat use-case guide rules (workstream 14)
+- **Format: interactive, data-first.** Content lives as data in `chat-use-cases/builder/content.py`. `build.py` fails if any rule lacks a metric, a how-measured, or a counter-metric, and regenerates the page. Markdown guides are drafts only.
 - **Every instruction, guardrail, and eval has a ledger row** with a metric, how it is measured, a counter-metric, and a threshold basis. `check_ledger.py` must pass.
 - **Counter-metrics are required** for any metric that can be gamed (for example containment and confirmed resolution; speed and accuracy).
 - **No invented thresholds.** Use "set from baseline" unless a law or a published benchmark gives a number, and cite it.
