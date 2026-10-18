@@ -63,6 +63,6 @@ also exceeds the cost limit, since the underlying list sizes didn't change.
 | Repeated retry without complexity reduction | Same high-cost query resubmitted unchanged after a complexity rejection | High | Disable naive retry, route through complexity-aware query decomposition |
 
 ## Related Patterns
-- [Join Depth Limit](./join-depth-limit.md) - a structural depth cap that complements but is independent of cost-based complexity scoring
-- [Query Planning Timeout](./query-planning-timeout.md) - a query that passes complexity scoring can still time out during planning if the cost model underestimates true execution cost
-- [Nesting Depth Limit](./nesting-depth-limit.md) - a payload-structure limit distinct from query-cost limits, though both stem from bounding server-side processing cost
+- [Join Depth Limit](join-depth-limit.md) - a structural depth cap that complements but is independent of cost-based complexity scoring
+- [Query Planning Timeout](query-planning-timeout.md) - a query that passes complexity scoring can still time out during planning if the cost model underestimates true execution cost
+- [Nesting Depth Limit](nesting-depth-limit.md) - a payload-structure limit distinct from query-cost limits, though both stem from bounding server-side processing cost

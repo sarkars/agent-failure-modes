@@ -65,6 +65,6 @@ conversational framing differences the safety boundary wasn't robust to.
 | Consistency test failure post-update | refusal_consistency_rate drops after a model or prompt update | High | Hold rollout, re-run framing-invariance red-team suite |
 
 ## Related Patterns
-- [Model Instruction Following Decay](./model-instruction-following-decay.md) - conversational position effects that erode general instruction-following also erode refusal boundaries specifically
-- [Model Reasoning Inconsistency](./model-reasoning-inconsistency.md) - refusal decisions are a safety-critical special case of the same surface-sensitivity affecting general model reasoning
-- [Model Uncertainty Unawareness](./model-uncertainty-unawareness.md) - borderline refusal decisions near the model's decision threshold are resolved without any signal of that borderline uncertainty being surfaced
+- [Model Instruction Following Decay](model-instruction-following-decay.md) - conversational position effects that erode general instruction-following also erode refusal boundaries specifically
+- [Model Reasoning Inconsistency](model-reasoning-inconsistency.md) - refusal decisions are a safety-critical special case of the same surface-sensitivity affecting general model reasoning
+- [Model Uncertainty Unawareness](model-uncertainty-unawareness.md) - borderline refusal decisions near the model's decision threshold are resolved without any signal of that borderline uncertainty being surfaced

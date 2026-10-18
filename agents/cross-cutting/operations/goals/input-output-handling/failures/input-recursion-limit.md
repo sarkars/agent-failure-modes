@@ -66,6 +66,6 @@ loop until the payload is manually purged from the retry queue.
 | Nesting depth spike from a known source | A specific upstream source's payload nesting depth deviates sharply from its historical baseline | Medium | Contact source owner, inspect for a serialization bug |
 
 ## Related Patterns
-- [Input Size Not Validated](./input-size-not-validated.md) - both are failures to bound an input's cost (depth vs. raw size) before the parser fully commits to processing it
-- [Input Schema Evolution](./input-schema-evolution.md) - an upstream serialization bug causing runaway nesting is a specific case of unexpected structural drift
-- [Output Truncation Silent](./output-truncation-silent.md) - a related failure where an oversized structure causes silent data loss rather than a crash
+- [Input Size Not Validated](input-size-not-validated.md) - both are failures to bound an input's cost (depth vs. raw size) before the parser fully commits to processing it
+- [Input Schema Evolution](input-schema-evolution.md) - an upstream serialization bug causing runaway nesting is a specific case of unexpected structural drift
+- [Output Truncation Silent](output-truncation-silent.md) - a related failure where an oversized structure causes silent data loss rather than a crash

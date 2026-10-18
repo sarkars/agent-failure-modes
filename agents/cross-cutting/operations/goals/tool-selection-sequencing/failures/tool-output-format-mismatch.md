@@ -70,6 +70,6 @@ doesn't match the filed declaration.
 | Elevated chaining error rate for a tool pair | chained_call_error_rate_by_pair exceeds threshold for a specific pair of tools | Medium | Review the two tools' documented schemas for divergence, add an explicit adapter |
 
 ## Related Patterns
-- [Tool State Dependency Violation](./tool-state-dependency-violation.md) - both are hand-off failures between chained tool calls, one on data format and one on state existence
-- [Tool Composition Complexity Explosion](./tool-composition-complexity-explosion.md) - format-mismatch risk compounds as more tool pairs are chained across a larger toolkit
-- [Tool Selection Non-Determinism](./tool-selection-non-determinism.md) - inconsistent tool selection across runs can also mean inconsistent output formats feeding the next step
+- [Tool State Dependency Violation](tool-state-dependency-violation.md) - both are hand-off failures between chained tool calls, one on data format and one on state existence
+- [Tool Composition Complexity Explosion](tool-composition-complexity-explosion.md) - format-mismatch risk compounds as more tool pairs are chained across a larger toolkit
+- [Tool Selection Non-Determinism](tool-selection-non-determinism.md) - inconsistent tool selection across runs can also mean inconsistent output formats feeding the next step

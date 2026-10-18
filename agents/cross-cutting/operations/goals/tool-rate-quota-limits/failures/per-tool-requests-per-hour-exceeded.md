@@ -55,6 +55,6 @@ The scheduling logic runs the full 300-topic refresh once every hour, at the top
 | Recurring boundary-time rejections | `hourly_429_count` > 0 for the same clock-hour slot across multiple days | Critical | Offset the responsible scheduled job's start time away from the reset boundary |
 
 ## Related Patterns
-- [Per-Tool Requests Per Day Quota](./per-tool-requests-per-day-quota.md) - the longer-window sibling; agents need to track both independently since being fine on one says nothing about the other
-- [Quota Reset Boundary Race](./quota-reset-boundary-race.md) - describes the clock-skew boundary miscounting mechanism referenced in this pattern's example in more detail
-- [Per-Tool Requests Per Minute Exceeded](./per-tool-requests-per-minute-exceeded.md) - the shorter-window sibling, typically hit first when a batch job front-loads its calls
+- [Per-Tool Requests Per Day Quota](per-tool-requests-per-day-quota.md) - the longer-window sibling; agents need to track both independently since being fine on one says nothing about the other
+- [Quota Reset Boundary Race](quota-reset-boundary-race.md) - describes the clock-skew boundary miscounting mechanism referenced in this pattern's example in more detail
+- [Per-Tool Requests Per Minute Exceeded](per-tool-requests-per-minute-exceeded.md) - the shorter-window sibling, typically hit first when a batch job front-loads its calls

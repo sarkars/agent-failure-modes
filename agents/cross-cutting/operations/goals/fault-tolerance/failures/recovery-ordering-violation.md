@@ -80,6 +80,6 @@ region's shard in parallel to reduce total recovery time.
 | Excessive cross-shard clock skew | cross_shard_clock_skew exceeds tolerance | Medium | Investigate NTP sync on affected hosts, consider moving affected event types to logical-clock ordering |
 
 ## Related Patterns
-- [Recovery Data Corruption](./recovery-data-corruption.md) - a related replay-correctness failure, this pattern preserves individual entry integrity but breaks their sequence
-- [Recovery Divergence](./recovery-divergence.md) - misordered replay is one specific mechanism that can produce a recovered state divergent from true pre-failure state
-- [Cascade Divergent Recovery](./cascade-divergent-recovery.md) - ordering violations across components compound into the broader cross-component divergence problem
+- [Recovery Data Corruption](recovery-data-corruption.md) - a related replay-correctness failure, this pattern preserves individual entry integrity but breaks their sequence
+- [Recovery Divergence](recovery-divergence.md) - misordered replay is one specific mechanism that can produce a recovered state divergent from true pre-failure state
+- [Cascade Divergent Recovery](cascade-divergent-recovery.md) - ordering violations across components compound into the broader cross-component divergence problem

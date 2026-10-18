@@ -65,6 +65,6 @@ Exception-handling logic is often bolted onto a policy engine as a simple flag (
 | Exception cited after expiration | An action relies on an exception past its stated validity window | Critical | Block the action, require re-authorization before proceeding |
 
 ## Related Patterns
-- [Approval Waiver Abuse](./approval-waiver-abuse.md) - both involve a bypass mechanism used beyond its properly authorized scope or intent
-- [Approval Scope Mismatch](./approval-scope-mismatch.md) - both involve an agent citing an authorization that doesn't actually cover the specific action taken
-- [Policy Consistency Violation](./policy-consistency-violation.md) - both involve applying the wrong governing rule to an action due to unclear authority boundaries
+- [Approval Waiver Abuse](approval-waiver-abuse.md) - both involve a bypass mechanism used beyond its properly authorized scope or intent
+- [Approval Scope Mismatch](approval-scope-mismatch.md) - both involve an agent citing an authorization that doesn't actually cover the specific action taken
+- [Policy Consistency Violation](policy-consistency-violation.md) - both involve applying the wrong governing rule to an action due to unclear authority boundaries

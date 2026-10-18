@@ -66,6 +66,6 @@ was in the source but never surfaced.
 | Completeness score regression | completeness_score drops below baseline after a summarization pipeline or prompt change | Medium | Review recent changes for over-aggressive compression |
 
 ## Related Patterns
-- [Fact Context Loss](./fact-context-loss.md) - the retrieval-stage mechanism (qualifier dropped during chunking) that frequently produces this generation-stage symptom
-- [Fact Generalization Error](./fact-generalization-error.md) - a specific form of partial truth where the dropped qualifier is specifically the fact's population/condition scope
-- [Domain Exception Not Handled](./domain-exception-not-handled.md) - the rule-level analog, where the omitted element is a documented exception rather than a qualifying clause on a fact
+- [Fact Context Loss](fact-context-loss.md) - the retrieval-stage mechanism (qualifier dropped during chunking) that frequently produces this generation-stage symptom
+- [Fact Generalization Error](fact-generalization-error.md) - a specific form of partial truth where the dropped qualifier is specifically the fact's population/condition scope
+- [Domain Exception Not Handled](domain-exception-not-handled.md) - the rule-level analog, where the omitted element is a documented exception rather than a qualifying clause on a fact

@@ -64,6 +64,6 @@ users started complaining in volume.
 | Post-launch complaint spike by task type | post_update_complaint_rate_by_task_type spikes for a specific task type after a version update | High | Roll back or restrict the update for the affected task type, add the failure case to the eval suite |
 
 ## Related Patterns
-- [Model Update Accuracy Regression](./model-update-accuracy-regression.md) - describes the regression itself; this pattern describes why the detection mechanism failed to catch it before launch
-- [Model AB Test Interference](./model-ab-test-interference.md) - both describe behavior changes that existing monitoring isn't structured to surface, one from interaction effects and one from eval coverage gaps
-- [Model Update Rollback Delay](./model-update-rollback-delay.md) - a detection failure at launch directly extends the time before a rollback decision can even be triggered
+- [Model Update Accuracy Regression](model-update-accuracy-regression.md) - describes the regression itself; this pattern describes why the detection mechanism failed to catch it before launch
+- [Model AB Test Interference](model-ab-test-interference.md) - both describe behavior changes that existing monitoring isn't structured to surface, one from interaction effects and one from eval coverage gaps
+- [Model Update Rollback Delay](model-update-rollback-delay.md) - a detection failure at launch directly extends the time before a rollback decision can even be triggered

@@ -67,6 +67,6 @@ either as an open question.
 | Assumption surfacing rate drop | assumption_surfacing_rate falls below threshold over a rolling window | Medium | Review prompt/template for missing surfacing instruction |
 
 ## Related Patterns
-- [Under-Clarification](./under-clarification.md) - assumption validation failure is under-clarification narrowed to a single unstated slot inside an otherwise clear request
-- [User Expectation Mismatch](./user-expectation-mismatch.md) - repeated wrong assumptions compound into a broader mismatch between what users expect the agent to infer correctly
-- [Conversation Contradiction](./conversation-contradiction.md) - correcting a bad assumption mid-conversation can itself trigger a contradiction if the agent doesn't reconcile its prior output
+- [Under-Clarification](under-clarification.md) - assumption validation failure is under-clarification narrowed to a single unstated slot inside an otherwise clear request
+- [User Expectation Mismatch](user-expectation-mismatch.md) - repeated wrong assumptions compound into a broader mismatch between what users expect the agent to infer correctly
+- [Conversation Contradiction](conversation-contradiction.md) - correcting a bad assumption mid-conversation can itself trigger a contradiction if the agent doesn't reconcile its prior output

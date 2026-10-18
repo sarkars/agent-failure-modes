@@ -66,6 +66,6 @@ minor ones.
 | Trust incident threshold exceeded for a user | cumulative_trust_incident_count crosses defined threshold | Medium | Flag for proactive outreach or quality review before churn occurs |
 
 ## Related Patterns
-- [Conversation Contradiction](./conversation-contradiction.md) - one of the fastest-acting individual contributors to cumulative trust erosion
-- [User Expectation Mismatch](./user-expectation-mismatch.md) - overclaimed capabilities are a specific trust-damaging pattern that compounds into general skepticism
-- [User Retention Decline](./user-retention-decline.md) - degraded trust is one of the primary underlying mechanisms driving the gradual usage decline described in that pattern
+- [Conversation Contradiction](conversation-contradiction.md) - one of the fastest-acting individual contributors to cumulative trust erosion
+- [User Expectation Mismatch](user-expectation-mismatch.md) - overclaimed capabilities are a specific trust-damaging pattern that compounds into general skepticism
+- [User Retention Decline](user-retention-decline.md) - degraded trust is one of the primary underlying mechanisms driving the gradual usage decline described in that pattern

@@ -62,6 +62,6 @@ model simply not knowing about a change made after its cutoff.
 | Downstream failure traced to stale fact | Production error (e.g. deprecated endpoint call) attributed to model knowledge cutoff | High | Patch retrieval coverage for the affected fact category, notify affected users |
 
 ## Related Patterns
-- [Model Uncertainty Unawareness](./model-uncertainty-unawareness.md) - stale knowledge is delivered with the same unwarranted confidence this pattern describes more broadly
-- [Model Reasoning Inconsistency](./model-reasoning-inconsistency.md) - conflicts between stale parametric knowledge and fresh retrieved context can surface as inconsistent answers to logically similar queries
-- [Model Capacity Limits](./model-capacity-limits.md) - both describe silent quality gaps between what the model appears to know and what it actually reliably knows
+- [Model Uncertainty Unawareness](model-uncertainty-unawareness.md) - stale knowledge is delivered with the same unwarranted confidence this pattern describes more broadly
+- [Model Reasoning Inconsistency](model-reasoning-inconsistency.md) - conflicts between stale parametric knowledge and fresh retrieved context can surface as inconsistent answers to logically similar queries
+- [Model Capacity Limits](model-capacity-limits.md) - both describe silent quality gaps between what the model appears to know and what it actually reliably knows

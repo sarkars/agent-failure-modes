@@ -67,6 +67,6 @@ Time-windowed policies require correctly comparing the current evaluation time a
 | Policy failed to activate at start timestamp | Actions that should be restricted proceed normally past a time-windowed policy's start timestamp | Critical | Immediately activate enforcement, audit actions taken during the gap for retroactive review |
 
 ## Related Patterns
-- [Policy Retroactive Application](./policy-retroactive-application.md) - both involve mismatches between the time a policy is intended to apply and the time it's actually evaluated
-- [Policy Version Mismatch](./policy-version-mismatch.md) - both can result in enforcement against the wrong effective policy state for a given moment in time
-- [Approval Timeout Expiration](./approval-timeout-expiration.md) - both involve time-boundary handling errors in approval-adjacent logic
+- [Policy Retroactive Application](policy-retroactive-application.md) - both involve mismatches between the time a policy is intended to apply and the time it's actually evaluated
+- [Policy Version Mismatch](policy-version-mismatch.md) - both can result in enforcement against the wrong effective policy state for a given moment in time
+- [Approval Timeout Expiration](approval-timeout-expiration.md) - both involve time-boundary handling errors in approval-adjacent logic

@@ -65,6 +65,6 @@ the schema change.
 | Behavioral drift correlated with deployment | A downstream metric (e.g., routing distribution) shifts sharply following a deployment on either the sending or receiving agent | Medium | Compare schema versions across the deployment boundary, roll back if mismatch confirmed |
 
 ## Related Patterns
-- [Handoff Context Incompleteness](./handoff-context-incompleteness.md) - a version mismatch is one specific mechanism that can produce incomplete or misinterpreted context at the receiver
-- [Handoff Permission Downgrade](./handoff-permission-downgrade.md) - both are silent degradations that pass a superficial validation check while breaking the task's actual intent
-- [Handoff State Loss](./handoff-state-loss.md) - schema mismatches can manifest as apparent state loss when fields are silently dropped during parsing
+- [Handoff Context Incompleteness](handoff-context-incompleteness.md) - a version mismatch is one specific mechanism that can produce incomplete or misinterpreted context at the receiver
+- [Handoff Permission Downgrade](handoff-permission-downgrade.md) - both are silent degradations that pass a superficial validation check while breaking the task's actual intent
+- [Handoff State Loss](handoff-state-loss.md) - schema mismatches can manifest as apparent state loss when fields are silently dropped during parsing

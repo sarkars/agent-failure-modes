@@ -70,6 +70,6 @@ that support has to manually untangle by comparing both systems by hand.
 | Agent decision made on disagreeing state | An agent action proceeds despite the two source systems disagreeing on the relevant entity's state | High | Halt automated decision, route to human review, log both systems' conflicting values |
 
 ## Related Patterns
-- [Integration Error Handling Mismatch](./integration-error-handling-mismatch.md) - silent webhook/event delivery failures, a common cause of consistency drift, are a specific instance of mismatched error signaling between systems
-- [Data Lineage Loss](./data-lineage-loss.md) - without lineage, it's hard to determine which system's value is more recent or authoritative when reconciling a divergence
-- [Integration Order Dependency](./integration-order-dependency.md) - consistency issues can also arise when sync operations that must happen in a specific order are triggered out of sequence
+- [Integration Error Handling Mismatch](integration-error-handling-mismatch.md) - silent webhook/event delivery failures, a common cause of consistency drift, are a specific instance of mismatched error signaling between systems
+- [Data Lineage Loss](data-lineage-loss.md) - without lineage, it's hard to determine which system's value is more recent or authoritative when reconciling a divergence
+- [Integration Order Dependency](integration-order-dependency.md) - consistency issues can also arise when sync operations that must happen in a specific order are triggered out of sequence

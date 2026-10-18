@@ -55,6 +55,6 @@ The fleet's shared assumption ("it's past :00, we're all clear") turns out to be
 | Recurring boundary rejections | `boundary_race_rejection_count` > 0 for 3+ consecutive reset cycles | Warning | Increase resume-delay buffer; consider centralized quota coordination |
 
 ## Related Patterns
-- [Quota Reset Timing Unknown](./quota-reset-timing-unknown.md) - not knowing the precise reset time in the first place makes this race harder to avoid, since the agent can't even queue accurately near the boundary
-- [Quota Reset During Operation](./quota-reset-during-operation.md) - both involve inconsistent state at a reset boundary, but this pattern is about concurrent instances racing the boundary rather than one long operation spanning it
-- [Per-Tool Requests Per Hour Exceeded](./per-tool-requests-per-hour-exceeded.md) - describes a related boundary-adjacent miscounting scenario at the hourly-window granularity
+- [Quota Reset Timing Unknown](quota-reset-timing-unknown.md) - not knowing the precise reset time in the first place makes this race harder to avoid, since the agent can't even queue accurately near the boundary
+- [Quota Reset During Operation](quota-reset-during-operation.md) - both involve inconsistent state at a reset boundary, but this pattern is about concurrent instances racing the boundary rather than one long operation spanning it
+- [Per-Tool Requests Per Hour Exceeded](per-tool-requests-per-hour-exceeded.md) - describes a related boundary-adjacent miscounting scenario at the hourly-window granularity

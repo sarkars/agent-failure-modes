@@ -63,6 +63,6 @@ no quality metric having flagged the downgrade at the time it happened.
 | Unreviewed downgrade shipped | A routing change reducing model tier for a category ships without a paired quality evaluation | Medium | Block further rollout, require shadow evaluation before proceeding |
 
 ## Related Patterns
-- [Model Capability Mismatch](./model-capability-mismatch.md) - both involve routing decisions optimized on one axis (cost or capability metadata) while silently ignoring quality/compatibility impact
-- [Model Load Balancing Failure](./model-load-balancing-failure.md) - a related failure where routing optimizes for availability instead of cost, with a similar lack of quality feedback in the loop
-- [Model Selection Nondeterminism](./model-selection-nondeterminism.md) - unstable or inconsistently-applied routing rules make it harder to attribute quality changes to any single downgrade decision
+- [Model Capability Mismatch](model-capability-mismatch.md) - both involve routing decisions optimized on one axis (cost or capability metadata) while silently ignoring quality/compatibility impact
+- [Model Load Balancing Failure](model-load-balancing-failure.md) - a related failure where routing optimizes for availability instead of cost, with a similar lack of quality feedback in the loop
+- [Model Selection Nondeterminism](model-selection-nondeterminism.md) - unstable or inconsistently-applied routing rules make it harder to attribute quality changes to any single downgrade decision

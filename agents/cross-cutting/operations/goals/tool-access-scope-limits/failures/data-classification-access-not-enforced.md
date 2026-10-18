@@ -63,6 +63,6 @@ that was sitting right next to the content the whole time.
 | New Tool Missing Enforcement | A newly deployed tool reads from a classified dataset without a registered enforcement check | P2 | Block production rollout until the classification filter is verified |
 
 ## Related Patterns
-- [Sensitive Field Access Not Restricted](./sensitive-field-access-not-restricted.md) - a narrower case where the classification is field-level rather than record/document-level
-- [Field-Level Access Not Restricted](./field-level-access-not-restricted.md) - both describe access controls that exist in policy but aren't wired into the serving path
-- [Geographic Data Access Restriction](./geographic-data-access-restriction.md) - a specific instance of classification-style restriction (residency) not being enforced
+- [Sensitive Field Access Not Restricted](sensitive-field-access-not-restricted.md) - a narrower case where the classification is field-level rather than record/document-level
+- [Field-Level Access Not Restricted](field-level-access-not-restricted.md) - both describe access controls that exist in policy but aren't wired into the serving path
+- [Geographic Data Access Restriction](geographic-data-access-restriction.md) - a specific instance of classification-style restriction (residency) not being enforced

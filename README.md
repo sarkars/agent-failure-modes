@@ -92,6 +92,10 @@ agents/
 
 > **New (2026-07)**: Added 4 canonical hallucination patterns (Base Mechanism, Confidence Miscalibration, Attributes, Objects) with 50+ domain-variant cross-references. See Categorization Updates for details.
 
+### By Agent and Business Goal
+
+Building a specific agent? Start with [agents by business goal](agents/by-agent/): customer support, healthcare, financial services, insurance, sales, legal, HR, DevOps, supply chain, document processing, and content agents, each mapped from goals to failures.
+
 ### By Capability (Design-Driven Failure Modes)
 
 | Capability | Description | Goals | Patterns |
@@ -103,6 +107,7 @@ agents/
 | [Document Processing](agents/by-capability/document-processing/) | OCR and document text extraction | 6 | 48 |
 | [Knowledge Retrieval](agents/by-capability/knowledge-retrieval/) | RAG, retrieval relevance, semantic matching | 6 | 60 |
 | [Multi-Agent Systems](agents/by-capability/multi-agent-systems/) | Coordination, orchestration, handoff reliability | 2 | 25 |
+| [Human-Machine Interface](agents/by-capability/human-machine-interface/) | How chat, voice, and visual agents talk to people: tone, empathy, channel choice | 11 | 14 |
 
 ### By Use Case (Domain-Specific)
 

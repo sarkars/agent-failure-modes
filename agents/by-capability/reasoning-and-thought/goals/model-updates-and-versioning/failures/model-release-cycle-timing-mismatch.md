@@ -63,6 +63,6 @@ reaches production, traced back directly to the compressed timeline.
 | Compressed validation issue detected | An issue is traced to an update that underwent compressed validation | Medium | Review fast-track process adequacy, consider negotiating longer notice windows with provider |
 
 ## Related Patterns
-- [Model Update Rollback Delay](./model-update-rollback-delay.md) - a mismatch that forces rushed adoption also tends to slow the team's ability to cleanly roll back if the rushed update turns out to be bad
-- [Model Version Pinning Expiration](./model-version-pinning-expiration.md) - deprecation-driven timing pressure is the direct trigger event that this pattern's forced-migration scenario describes
-- [Model Behavior Change Detection Failure](./model-behavior-change-detection-failure.md) - compressed validation cycles directly reduce the eval coverage available to catch a regression before launch
+- [Model Update Rollback Delay](model-update-rollback-delay.md) - a mismatch that forces rushed adoption also tends to slow the team's ability to cleanly roll back if the rushed update turns out to be bad
+- [Model Version Pinning Expiration](model-version-pinning-expiration.md) - deprecation-driven timing pressure is the direct trigger event that this pattern's forced-migration scenario describes
+- [Model Behavior Change Detection Failure](model-behavior-change-detection-failure.md) - compressed validation cycles directly reduce the eval coverage available to catch a regression before launch

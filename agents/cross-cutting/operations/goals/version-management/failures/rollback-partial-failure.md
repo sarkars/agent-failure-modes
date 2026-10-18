@@ -70,6 +70,6 @@ another 25 minutes, during which the leak continues degrading the
 | Rollback capacity contention | Rollback batch failures correlate with cluster resource pressure from the still-running bad version | High | Free capacity (scale cluster or forcibly terminate excess bad-version instances), retry rollback |
 
 ## Related Patterns
-- [Rollback Data Consistency](./rollback-data-consistency.md) - both concern rollback leaving the system in a worse state, one via data shape mismatch and one via incomplete execution
-- [Connection Draining Incomplete](./connection-draining-incomplete.md) - a stalled rollback often compounds with forced termination of in-flight sessions on the instances stuck mid-transition
-- [Deployment Validation Skipped](./deployment-validation-skipped.md) - skipped validation is a common trigger for the bad release that then requires a rollback in the first place
+- [Rollback Data Consistency](rollback-data-consistency.md) - both concern rollback leaving the system in a worse state, one via data shape mismatch and one via incomplete execution
+- [Connection Draining Incomplete](connection-draining-incomplete.md) - a stalled rollback often compounds with forced termination of in-flight sessions on the instances stuck mid-transition
+- [Deployment Validation Skipped](deployment-validation-skipped.md) - skipped validation is a common trigger for the bad release that then requires a rollback in the first place

@@ -66,6 +66,6 @@ that the key needs to be regenerated to make any further progress.
 | Retry-counter divergence detected | Local retry count differs from server-reported attempt count for the same operation | Medium | Migrate retry-count storage to a durable, server-key-aligned store |
 
 ## Related Patterns
-- [Backoff Envelope Violation](./backoff-envelope-violation.md) - incorrect retry timing that can accelerate reaching a server-side max-retry wall
-- [Batch Total Operations Limit](./batch-total-operations-limit.md) - another server-tracked rolling counter independent of client-side state that agents commonly fail to mirror
-- [Request Timeout No Graceful Handling](./request-timeout-no-graceful-handling.md) - timeouts are a common trigger for the retry sequences that then run into a server-side max-retry block
+- [Backoff Envelope Violation](backoff-envelope-violation.md) - incorrect retry timing that can accelerate reaching a server-side max-retry wall
+- [Batch Total Operations Limit](batch-total-operations-limit.md) - another server-tracked rolling counter independent of client-side state that agents commonly fail to mirror
+- [Request Timeout No Graceful Handling](request-timeout-no-graceful-handling.md) - timeouts are a common trigger for the retry sequences that then run into a server-side max-retry block

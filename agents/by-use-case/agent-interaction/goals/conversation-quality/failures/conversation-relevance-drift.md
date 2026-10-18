@@ -66,6 +66,6 @@ code field, unrelated to anything discussed in turns 3-15.
 | Original goal abandoned | Session ends with original stated goal never marked resolved or explicitly deferred | Medium | Flag for review, consider follow-up prompt to user |
 
 ## Related Patterns
-- [Conversation Tangent Proliferation](./conversation-tangent-proliferation.md) - drift is the gradual, single-direction version; tangent proliferation is multiple simultaneous branching side-threads
-- [Conversation Coherence Loss](./conversation-coherence-loss.md) - drift changes what's discussed, coherence loss loses track of state within the same discussion; the two can compound
-- [User Adoption Failure](./user-adoption-failure.md) - a pattern of unresolved original goals due to drift is one contributor to users abandoning the agent after initial trials
+- [Conversation Tangent Proliferation](conversation-tangent-proliferation.md) - drift is the gradual, single-direction version; tangent proliferation is multiple simultaneous branching side-threads
+- [Conversation Coherence Loss](conversation-coherence-loss.md) - drift changes what's discussed, coherence loss loses track of state within the same discussion; the two can compound
+- [User Adoption Failure](user-adoption-failure.md) - a pattern of unresolved original goals due to drift is one contributor to users abandoning the agent after initial trials

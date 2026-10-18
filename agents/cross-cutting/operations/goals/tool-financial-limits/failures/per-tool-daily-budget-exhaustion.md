@@ -63,6 +63,6 @@ consistently resetting usage at midnight and being consumed by 1pm.
 | Silent degraded mode active | Tool calls are failing due to budget exhaustion and no explicit fallback signal is being emitted | High | Add explicit degraded-mode flagging, page integration owner |
 
 ## Related Patterns
-- [Per-Tool Monthly Budget Overrun](./per-tool-monthly-budget-overrun.md) - the monthly-scale analog of the same fixed-cap-without-pacing problem
-- [Tool Budget Starvation](./tool-budget-starvation.md) - describes what happens when the exhausted budget is shared across multiple consumers rather than one
-- [Budget Priority Misalignment](./budget-priority-misalignment.md) - a priority scheme is one of the core fixes for exhaustion-window degradation
+- [Per-Tool Monthly Budget Overrun](per-tool-monthly-budget-overrun.md) - the monthly-scale analog of the same fixed-cap-without-pacing problem
+- [Tool Budget Starvation](tool-budget-starvation.md) - describes what happens when the exhausted budget is shared across multiple consumers rather than one
+- [Budget Priority Misalignment](budget-priority-misalignment.md) - a priority scheme is one of the core fixes for exhaustion-window degradation

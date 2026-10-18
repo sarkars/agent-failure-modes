@@ -64,6 +64,6 @@ identified validation errors that a downstream cleanup step needed.
 | Payload near transport size limit | A handoff payload approaches the transport mechanism's known size limit | Medium | Switch to reference-based checkpoint handoff before the limit is reached |
 
 ## Related Patterns
-- [Handoff Context Incompleteness](./handoff-context-incompleteness.md) - a milder, often deliberate version of the same underlying problem: information failing to make it across the handoff boundary
-- [Handoff Idempotency Violation](./handoff-idempotency-violation.md) - loss of "already processed" state specifically can cause a retried handoff to be treated as brand new
-- [Handoff Rollback Failure](./handoff-rollback-failure.md) - state loss removes the very record a rollback routine would need to cleanly compensate for prior actions
+- [Handoff Context Incompleteness](handoff-context-incompleteness.md) - a milder, often deliberate version of the same underlying problem: information failing to make it across the handoff boundary
+- [Handoff Idempotency Violation](handoff-idempotency-violation.md) - loss of "already processed" state specifically can cause a retried handoff to be treated as brand new
+- [Handoff Rollback Failure](handoff-rollback-failure.md) - state loss removes the very record a rollback routine would need to cleanly compensate for prior actions

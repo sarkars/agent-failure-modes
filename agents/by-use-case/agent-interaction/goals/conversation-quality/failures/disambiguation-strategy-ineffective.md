@@ -66,6 +66,6 @@ resolving anything.
 | Oversized option menu presented for narrow ambiguity | Option count presented exceeds plausible interpretation count by a wide margin | Low | Flag for menu-generation logic review |
 
 ## Related Patterns
-- [Clarification Irrelevant](./clarification-irrelevant.md) - a specific case of ineffective strategy where the chosen approach is asking, but the question targets the wrong axis
-- [Under-Clarification](./under-clarification.md) - occurs when the chosen strategy is to guess without flagging, and the ambiguity's stakes warranted asking instead
-- [Over-Clarification](./over-clarification.md) - occurs when the chosen strategy is to ask when a confident default would have been the better-fitting approach
+- [Clarification Irrelevant](clarification-irrelevant.md) - a specific case of ineffective strategy where the chosen approach is asking, but the question targets the wrong axis
+- [Under-Clarification](under-clarification.md) - occurs when the chosen strategy is to guess without flagging, and the ambiguity's stakes warranted asking instead
+- [Over-Clarification](over-clarification.md) - occurs when the chosen strategy is to ask when a confident default would have been the better-fitting approach

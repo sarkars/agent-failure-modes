@@ -80,6 +80,6 @@ well within all four timeout budgets.
 | Uncancelled work spike | uncancelled_work_ratio crosses threshold during a live incident | High | Trigger downstream load shedding, alert dependency owner to enable cancellation propagation |
 
 ## Related Patterns
-- [Cascade Amplification](./cascade-amplification.md) - timeout misconfiguration is one of the most common specific triggers for the general amplification pattern
-- [Cascade Resilience Failure](./cascade-resilience-failure.md) - describes the broader family of resilience mechanisms (including retries driven by bad timeouts) contributing to cascades
-- [Failover Delay Too Long](./failover-delay-too-long.md) - timeout misconfiguration can also directly cause failover to be triggered later than intended, or not at all
+- [Cascade Amplification](cascade-amplification.md) - timeout misconfiguration is one of the most common specific triggers for the general amplification pattern
+- [Cascade Resilience Failure](cascade-resilience-failure.md) - describes the broader family of resilience mechanisms (including retries driven by bad timeouts) contributing to cascades
+- [Failover Delay Too Long](failover-delay-too-long.md) - timeout misconfiguration can also directly cause failover to be triggered later than intended, or not at all

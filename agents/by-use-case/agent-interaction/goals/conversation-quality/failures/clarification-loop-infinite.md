@@ -66,6 +66,6 @@ User: "I already told you to use your best judgment. Forget it."
 | User override ignored | Agent asks another question immediately after an explicit "just decide" statement | Medium | Flag for override-detection logic review |
 
 ## Related Patterns
-- [Clarification Irrelevant](./clarification-irrelevant.md) - a wrong-question failure that can compound into a loop when each wrong question triggers another
-- [Over-Clarification](./over-clarification.md) - shares the root cause of excessive question-asking, but over-clarification can occur as a single unneeded question rather than a non-terminating loop
-- [User Frustration Escalation](./user-frustration-escalation.md) - infinite clarification loops are a common concrete trigger of escalating user frustration
+- [Clarification Irrelevant](clarification-irrelevant.md) - a wrong-question failure that can compound into a loop when each wrong question triggers another
+- [Over-Clarification](over-clarification.md) - shares the root cause of excessive question-asking, but over-clarification can occur as a single unneeded question rather than a non-terminating loop
+- [User Frustration Escalation](user-frustration-escalation.md) - infinite clarification loops are a common concrete trigger of escalating user frustration

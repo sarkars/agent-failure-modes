@@ -66,6 +66,6 @@ manually cross-checks a sample of records against source documents.
 
 ## Related Patterns
 - [Silent Type Coercion](../../tool-reliability/failures/silent-type-coercion.md) - the input-side counterpart, where a tool silently coerces mistyped arguments the agent passes in, rather than a downstream consumer coercing the agent's output
-- [Output Precision Loss](./output-precision-loss.md) - a related but narrower failure specifically about numeric precision being lost during serialization, as opposed to broader type reinterpretation
-- [Input Default Value Assumption](./input-default-value-assumption.md) - a related input-side pattern where missing/ambiguous values are silently defaulted rather than coerced
-- [Output Format Not Validated](./output-format-not-validated.md) - broader unvalidated-output pattern that this is one specific, type-focused instance of
+- [Output Precision Loss](output-precision-loss.md) - a related but narrower failure specifically about numeric precision being lost during serialization, as opposed to broader type reinterpretation
+- [Input Default Value Assumption](input-default-value-assumption.md) - a related input-side pattern where missing/ambiguous values are silently defaulted rather than coerced
+- [Output Format Not Validated](output-format-not-validated.md) - broader unvalidated-output pattern that this is one specific, type-focused instance of

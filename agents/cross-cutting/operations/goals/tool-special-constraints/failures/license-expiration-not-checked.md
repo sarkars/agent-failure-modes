@@ -66,5 +66,5 @@ expected story about a competitor's product launch.
 | Tool failing on licensing error | A previously healthy tool begins failing all calls with an expiration/subscription-lapsed error | High | Escalate immediately, halt retries, initiate emergency renewal or switch to fallback tool |
 
 ## Related Patterns
-- [Feature Entitlement Limit](./feature-entitlement-limit.md) - a related failure where the account is still valid but lacks entitlement to a specific feature, versus the whole credential being invalid here
-- [Concurrent Session Not Licensed](./concurrent-session-not-licensed.md) - both involve licensing constraints the agent has no proactive visibility into until a call fails
+- [Feature Entitlement Limit](feature-entitlement-limit.md) - a related failure where the account is still valid but lacks entitlement to a specific feature, versus the whole credential being invalid here
+- [Concurrent Session Not Licensed](concurrent-session-not-licensed.md) - both involve licensing constraints the agent has no proactive visibility into until a call fails

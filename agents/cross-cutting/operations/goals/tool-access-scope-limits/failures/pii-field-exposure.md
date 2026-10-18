@@ -65,6 +65,6 @@ applied.
 | Unreferenced PII in Transcript | Sampled transcript audit finds PII present but unused across a significant share of a tool's invocations | P3 | Prioritize schema minimization for the tool in the next review cycle |
 
 ## Related Patterns
-- [PII Field Leakage In Responses](./pii-field-leakage-in-responses.md) - a related but distinct failure where PII is correctly scrubbed from the primary response but leaks through a secondary channel
-- [Field-Level Access Not Restricted](./field-level-access-not-restricted.md) - PII over-exposure is often a downstream symptom of record-level-only access control
-- [Sensitive Field Access Not Restricted](./sensitive-field-access-not-restricted.md) - overlaps for PII fields that are also flagged as sensitive, though this pattern covers unnecessary exposure even of unflagged PII
+- [PII Field Leakage In Responses](pii-field-leakage-in-responses.md) - a related but distinct failure where PII is correctly scrubbed from the primary response but leaks through a secondary channel
+- [Field-Level Access Not Restricted](field-level-access-not-restricted.md) - PII over-exposure is often a downstream symptom of record-level-only access control
+- [Sensitive Field Access Not Restricted](sensitive-field-access-not-restricted.md) - overlaps for PII fields that are also flagged as sensitive, though this pattern covers unnecessary exposure even of unflagged PII

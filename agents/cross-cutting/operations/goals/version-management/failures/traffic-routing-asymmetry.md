@@ -71,6 +71,6 @@ release having covered that traffic at all.
 | Uncovered traffic path found | unmanaged_traffic_path_share is nonzero during an active canary | Medium | Extend routing rule coverage to the missed path before continuing the rollout |
 
 ## Related Patterns
-- [Weighted Routing Algorithm Error](./weighted-routing-algorithm-error.md) - a related but distinct failure where the routing math itself is wrong, rather than the rule being inconsistently applied across paths
-- [Canary Deployment Incomplete](./canary-deployment-incomplete.md) - routing asymmetry can produce a canary that looks complete and successful while actually only having validated a subset of real traffic
-- [Sticky Session Loss](./sticky-session-loss.md) - stale sticky-session pins are one specific mechanism by which a subset of traffic ends up permanently exempt from an updated routing rule
+- [Weighted Routing Algorithm Error](weighted-routing-algorithm-error.md) - a related but distinct failure where the routing math itself is wrong, rather than the rule being inconsistently applied across paths
+- [Canary Deployment Incomplete](canary-deployment-incomplete.md) - routing asymmetry can produce a canary that looks complete and successful while actually only having validated a subset of real traffic
+- [Sticky Session Loss](sticky-session-loss.md) - stale sticky-session pins are one specific mechanism by which a subset of traffic ends up permanently exempt from an updated routing rule

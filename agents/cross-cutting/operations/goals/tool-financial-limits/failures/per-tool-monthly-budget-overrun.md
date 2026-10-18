@@ -65,6 +65,6 @@ on the corrected number either.
 | Confirmed overrun on reconciliation | Vendor-authoritative figure, once updated, shows the cap was exceeded | High | Halt further calls, notify budget owner, review lag-window scheduled jobs |
 
 ## Related Patterns
-- [Per-Tool Daily Budget Exhaustion](./per-tool-daily-budget-exhaustion.md) - the daily-scale analog, though driven by front-loaded usage rather than reporting lag
-- [Cross-Tool Total Budget Exceeded](./cross-tool-total-budget-exceeded.md) - both are cases of budget enforcement acting on incomplete or stale information
-- [Tool Cost Override Incident](./tool-cost-override-incident.md) - reporting lag can mask both routine overruns and forgotten manual overrides
+- [Per-Tool Daily Budget Exhaustion](per-tool-daily-budget-exhaustion.md) - the daily-scale analog, though driven by front-loaded usage rather than reporting lag
+- [Cross-Tool Total Budget Exceeded](cross-tool-total-budget-exceeded.md) - both are cases of budget enforcement acting on incomplete or stale information
+- [Tool Cost Override Incident](tool-cost-override-incident.md) - reporting lag can mask both routine overruns and forgotten manual overrides

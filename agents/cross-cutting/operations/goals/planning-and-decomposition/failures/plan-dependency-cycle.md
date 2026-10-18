@@ -68,6 +68,6 @@ engineer has to manually trace the dependency graph to find it.
 | Executor unable to schedule any subtask | A plan reaches execution with zero subtasks having satisfied dependencies | High | Halt execution immediately, this indicates cycle validation was bypassed or failed |
 
 ## Related Patterns
-- [Subgoal Ordering Error](./subgoal-ordering-error.md) - a related but distinct failure where the dependency graph is acyclic but the chosen execution order still violates logical prerequisites
-- [Plan Parallelization Error](./plan-parallelization-error.md) - both concern incorrect reasoning about the dependency graph, one missing a hidden dependency and the other introducing a nonexistent circular one
-- [Plan Backtracking Failure](./plan-backtracking-failure.md) - a plan discovered to be cyclic partway through partial execution requires clean backtracking of whatever subtasks did execute before the cycle was found
+- [Subgoal Ordering Error](subgoal-ordering-error.md) - a related but distinct failure where the dependency graph is acyclic but the chosen execution order still violates logical prerequisites
+- [Plan Parallelization Error](plan-parallelization-error.md) - both concern incorrect reasoning about the dependency graph, one missing a hidden dependency and the other introducing a nonexistent circular one
+- [Plan Backtracking Failure](plan-backtracking-failure.md) - a plan discovered to be cyclic partway through partial execution requires clean backtracking of whatever subtasks did execute before the cycle was found

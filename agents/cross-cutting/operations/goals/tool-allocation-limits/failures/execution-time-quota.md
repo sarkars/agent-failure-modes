@@ -60,6 +60,6 @@ Execution-time quotas exist to bound resource consumption and preserve responsiv
 | Rising p95 approaching timeout ceiling | `sync_call_p95_duration_s` trending toward 80%+ of quota over 7 days | Medium | Proactively migrate endpoint usage to async pattern before failures spike |
 
 ## Related Patterns
-- [Cpu Quota Per Job](./cpu-quota-per-job.md) - CPU throttling is a frequent underlying cause of hitting the execution-time wall
-- [Memory Quota Per Operation](./memory-quota-per-operation.md) - another fixed per-call resource ceiling that fails without partial results
+- [Cpu Quota Per Job](cpu-quota-per-job.md) - CPU throttling is a frequent underlying cause of hitting the execution-time wall
+- [Memory Quota Per Operation](memory-quota-per-operation.md) - another fixed per-call resource ceiling that fails without partial results
 - [Latency Sla Violation](../../tool-sla-quality-limits/failures/latency-sla-violation.md) - related but distinct: SLA latency overruns versus a hard-enforced execution cutoff

@@ -73,6 +73,6 @@ independently configured timeout:
 | Retry storm on degraded downstream | Multiple layers retrying the same downstream agent within a short window | Medium | Trigger circuit breaker, throttle retries at all but one layer |
 
 ## Related Patterns
-- [Agent Resource Contention](./agent-resource-contention.md) - contention-driven slowdowns at a shared resource are a common root trigger for a timeout cascade
-- [Agent Priority Inversion](./agent-priority-inversion.md) - a stalled low-priority holder's unbounded wait can be the initiating slow layer in a cascade
-- [Inter-Agent Latency Imbalance](./inter-agent-latency-imbalance.md) - persistent latency imbalance between agents increases the likelihood that one layer will trigger cascading timeouts in others
+- [Agent Resource Contention](agent-resource-contention.md) - contention-driven slowdowns at a shared resource are a common root trigger for a timeout cascade
+- [Agent Priority Inversion](agent-priority-inversion.md) - a stalled low-priority holder's unbounded wait can be the initiating slow layer in a cascade
+- [Inter-Agent Latency Imbalance](inter-agent-latency-imbalance.md) - persistent latency imbalance between agents increases the likelihood that one layer will trigger cascading timeouts in others

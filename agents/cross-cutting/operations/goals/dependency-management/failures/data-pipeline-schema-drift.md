@@ -67,6 +67,6 @@ other work and forgotten the release.
 | Post-deploy field anomaly | Downstream null/default rate or validation failure rate spikes within a window after an upstream deploy | High | Roll back or hotfix upstream change, notify consumer teams |
 
 ## Related Patterns
-- [Data Pipeline Lossy Transformation](./data-pipeline-lossy-transformation.md) - schema drift is the unplanned, upstream-driven counterpart to a transform intentionally narrowing its output schema
-- [Integration API Contract Violation](./integration-api-contract-violation.md) - schema drift is the pipeline-internal version of an integrated service breaking its documented contract
-- [Dependency Breaking Change](./dependency-breaking-change.md) - both describe an upstream change shipping without downstream coordination, one in code dependencies and one in data schemas
+- [Data Pipeline Lossy Transformation](data-pipeline-lossy-transformation.md) - schema drift is the unplanned, upstream-driven counterpart to a transform intentionally narrowing its output schema
+- [Integration API Contract Violation](integration-api-contract-violation.md) - schema drift is the pipeline-internal version of an integrated service breaking its documented contract
+- [Dependency Breaking Change](dependency-breaking-change.md) - both describe an upstream change shipping without downstream coordination, one in code dependencies and one in data schemas

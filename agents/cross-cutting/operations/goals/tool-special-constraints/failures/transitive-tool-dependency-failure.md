@@ -70,5 +70,5 @@ directly integrate with.
 | Generic unattributed error spike | A tool's unresolved_generic_error_rate spikes with no corresponding incident on the tool's own status page | Medium | Escalate to vendor support to investigate potential upstream dependency issues |
 
 ## Related Patterns
-- [Cascading External Failures](./cascading-external-failures.md) - a related mechanism where multiple directly-integrated tools share a transitive dependency, so one upstream outage cascades across several tools at once
-- [Required Field Added To API](./required-field-added-to-api.md) - both involve failures originating outside the agent's direct control and outside its visibility until a call fails or degrades
+- [Cascading External Failures](cascading-external-failures.md) - a related mechanism where multiple directly-integrated tools share a transitive dependency, so one upstream outage cascades across several tools at once
+- [Required Field Added To API](required-field-added-to-api.md) - both involve failures originating outside the agent's direct control and outside its visibility until a call fails or degrades

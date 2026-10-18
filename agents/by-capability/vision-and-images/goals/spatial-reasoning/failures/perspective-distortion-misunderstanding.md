@@ -161,8 +161,8 @@ Root cause: Model built 3D from distorted 2D without perspective correction
 ---
 
 ## Related Patterns
-- [Spatial Reasoning Failures in 3D](./spatial-reasoning-failures-in-3d-environments.md) — Related: 3D geometric reasoning
-- [Depth Estimation Hallucination](./depth-estimation-hallucination-monocular-vision.md) — Related: inferring 3D properties
+- [Spatial Reasoning Failures in 3D](spatial-reasoning-failures-in-3d-environments.md) — Related: 3D geometric reasoning
+- [Depth Estimation Hallucination](depth-estimation-hallucination-monocular-vision.md) — Related: inferring 3D properties
 - [Vision Model Patch Tokenization Boundary](../../visual-hallucination/failures/vision-model-patch-tokenization-boundary-failure.md) — Related: geometric feature detection
 
 ---

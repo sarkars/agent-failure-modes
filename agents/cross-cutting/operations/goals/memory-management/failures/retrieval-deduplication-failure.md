@@ -71,6 +71,6 @@ fact occupied 4 of the 5 available result slots.
 | Relevant fact crowded out | A known-relevant fact for a benchmark query falls below cutoff due to duplicate entries ranking above it | Medium | Add diversity-aware reranking, consolidate the crowding duplicates |
 
 ## Related Patterns
-- [Memory Fragmentation](./memory-fragmentation.md) - the broader storage-level pattern (many small overlapping records) that produces the duplicate candidates this pattern fails to filter out at retrieval time
-- [Retrieval Confidence Miscalibration](./retrieval-confidence-miscalibration.md) - duplicate high-scoring results compound miscalibration by making the score distribution even less informative about true usefulness
-- [Memory Summarization Lossy](./memory-summarization-lossy.md) - consolidating duplicates via summarization risks trading one failure (redundancy) for another (dropped detail) if not done carefully
+- [Memory Fragmentation](memory-fragmentation.md) - the broader storage-level pattern (many small overlapping records) that produces the duplicate candidates this pattern fails to filter out at retrieval time
+- [Retrieval Confidence Miscalibration](retrieval-confidence-miscalibration.md) - duplicate high-scoring results compound miscalibration by making the score distribution even less informative about true usefulness
+- [Memory Summarization Lossy](memory-summarization-lossy.md) - consolidating duplicates via summarization risks trading one failure (redundancy) for another (dropped detail) if not done carefully

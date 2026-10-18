@@ -63,6 +63,6 @@ Timeout handling is often added late in workflow design, as a way to prevent req
 | Timeout with no prior reminder | Approval window closes without any reminder having been sent | Warning | Review reminder configuration for that workflow, treat outcome as lower-confidence for audit purposes |
 
 ## Related Patterns
-- [Approval Chain Break](./approval-chain-break.md) - a broken chain often surfaces first as an unexplained timeout
-- [Approval Authority Escalation Failure](./approval-authority-escalation-failure.md) - both involve a request stalling with no effective human decision reached in time
-- [Approval Waiver Abuse](./approval-waiver-abuse.md) - fail-open timeout behavior and waiver abuse both let actions proceed without a genuine approval decision
+- [Approval Chain Break](approval-chain-break.md) - a broken chain often surfaces first as an unexplained timeout
+- [Approval Authority Escalation Failure](approval-authority-escalation-failure.md) - both involve a request stalling with no effective human decision reached in time
+- [Approval Waiver Abuse](approval-waiver-abuse.md) - fail-open timeout behavior and waiver abuse both let actions proceed without a genuine approval decision

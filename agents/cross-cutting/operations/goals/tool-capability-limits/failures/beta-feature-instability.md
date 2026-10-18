@@ -62,6 +62,6 @@ Beta and preview labels exist precisely so vendors can iterate quickly without t
 | Beta feature availability drop | `availability_pct` < 90% for 15 minutes | High | Assume feature may be pulled or degraded; activate fallback path |
 
 ## Related Patterns
-- [Feature Flag Disabled](./feature-flag-disabled.md) - both involve capability availability the agent cannot verify ahead of the call
-- [Deprecated Endpoint Retirement](./deprecated-endpoint-retirement.md) - beta instability is often the precursor stage to eventual GA deprecation and retirement
-- [Api Version Schema Mismatch](./api-version-schema-mismatch.md) - the schema-drift symptom is shared, but beta features carry no notice-period guarantee at all
+- [Feature Flag Disabled](feature-flag-disabled.md) - both involve capability availability the agent cannot verify ahead of the call
+- [Deprecated Endpoint Retirement](deprecated-endpoint-retirement.md) - beta instability is often the precursor stage to eventual GA deprecation and retirement
+- [Api Version Schema Mismatch](api-version-schema-mismatch.md) - the schema-drift symptom is shared, but beta features carry no notice-period guarantee at all

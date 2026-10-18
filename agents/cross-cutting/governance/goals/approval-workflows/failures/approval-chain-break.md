@@ -63,6 +63,6 @@ Approval chains are frequently implemented as a sequence of independent point-to
 | Chain stalled past SLA | No stage-status change for longer than that stage's defined SLA | Warning | Notify chain owner and current-stage approver to confirm receipt |
 
 ## Related Patterns
-- [Approval Authority Escalation Failure](./approval-authority-escalation-failure.md) - both are routing failures within a multi-party approval process
-- [Approval Timeout Expiration](./approval-timeout-expiration.md) - a broken chain often presents as a timeout at whichever stage the handoff failed to reach
-- [Approval Conflict](./approval-conflict.md) - both stem from the absence of a single authoritative status for a multi-approver decision
+- [Approval Authority Escalation Failure](approval-authority-escalation-failure.md) - both are routing failures within a multi-party approval process
+- [Approval Timeout Expiration](approval-timeout-expiration.md) - a broken chain often presents as a timeout at whichever stage the handoff failed to reach
+- [Approval Conflict](approval-conflict.md) - both stem from the absence of a single authoritative status for a multi-approver decision

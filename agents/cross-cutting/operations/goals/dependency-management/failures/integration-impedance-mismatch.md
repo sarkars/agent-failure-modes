@@ -72,6 +72,6 @@ log and confuses support staff investigating "who edited this address."
 | Round-trip fidelity regression | round_trip_fidelity_mismatch_rate spikes after a schema change on either system | Medium | Review the mapping layer against the new schema, update the canonical model |
 
 ## Related Patterns
-- [Integration Data Consistency](./integration-data-consistency.md) - impedance mismatch is a structural translation problem at each call; this sibling pattern is a temporal drift problem in shared state over time — a mismatched translation layer often causes the drift this pattern describes
-- [Integration API Contract Violation](./integration-api-contract-violation.md) - contract violation is about a provider not honoring its own documented shape; impedance mismatch exists even when both systems perfectly honor their own contracts
-- [Dependency Breaking Change](./dependency-breaking-change.md) - a schema change on either side of an impedance-mismatched integration is especially likely to break the adapter layer, since the mapping is already fragile
+- [Integration Data Consistency](integration-data-consistency.md) - impedance mismatch is a structural translation problem at each call; this sibling pattern is a temporal drift problem in shared state over time — a mismatched translation layer often causes the drift this pattern describes
+- [Integration API Contract Violation](integration-api-contract-violation.md) - contract violation is about a provider not honoring its own documented shape; impedance mismatch exists even when both systems perfectly honor their own contracts
+- [Dependency Breaking Change](dependency-breaking-change.md) - a schema change on either side of an impedance-mismatched integration is especially likely to break the adapter layer, since the mapping is already fragile

@@ -62,6 +62,6 @@ before the invoice does.
 | Silent per-tool pass / aggregate fail | All individual tool caps report healthy while the aggregate ledger shows > 90% of envelope consumed | Medium | Trigger manual review of tool-combination usage patterns |
 
 ## Related Patterns
-- [Budget Priority Misalignment](./budget-priority-misalignment.md) - both involve budget enforcement blind spots, one across priority and one across tools
-- [Per-Tool Monthly Budget Overrun](./per-tool-monthly-budget-overrun.md) - a single-tool version of the same detection-lag problem
-- [Tool Cost Override Incident](./tool-cost-override-incident.md) - aggregate visibility gaps make overrides even harder to notice once granted
+- [Budget Priority Misalignment](budget-priority-misalignment.md) - both involve budget enforcement blind spots, one across priority and one across tools
+- [Per-Tool Monthly Budget Overrun](per-tool-monthly-budget-overrun.md) - a single-tool version of the same detection-lag problem
+- [Tool Cost Override Incident](tool-cost-override-incident.md) - aggregate visibility gaps make overrides even harder to notice once granted

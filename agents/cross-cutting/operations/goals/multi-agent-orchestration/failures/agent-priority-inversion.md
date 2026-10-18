@@ -66,6 +66,6 @@ triggering an SLA-breach alert and a customer complaint.
 | Sustained low-priority lock hold | A low-priority agent holds a shared resource longer than its expected task duration | Medium | Investigate holder for stalls, consider auto-timeout policy |
 
 ## Related Patterns
-- [Agent Resource Contention](./agent-resource-contention.md) - priority inversion is a specific failure mode within the broader class of resource contention
-- [Deadlock in Multi-Agent](./deadlock-in-multi-agent.md) - both involve resource holds blocking other agents, though deadlock is circular and inversion is priority-order-only
-- [Agent Timeout Cascade](./agent-timeout-cascade.md) - a stalled low-priority holder's unbounded hold time is often the root trigger for cascading timeouts elsewhere
+- [Agent Resource Contention](agent-resource-contention.md) - priority inversion is a specific failure mode within the broader class of resource contention
+- [Deadlock in Multi-Agent](deadlock-in-multi-agent.md) - both involve resource holds blocking other agents, though deadlock is circular and inversion is priority-order-only
+- [Agent Timeout Cascade](agent-timeout-cascade.md) - a stalled low-priority holder's unbounded hold time is often the root trigger for cascading timeouts elsewhere

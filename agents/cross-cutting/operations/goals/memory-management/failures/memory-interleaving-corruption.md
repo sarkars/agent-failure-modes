@@ -72,6 +72,6 @@ clobbering the first.
 | High write contention | compare_and_set_conflict_rate spikes for a specific record/entity type | Medium | Consider record-level locking or splitting the hot entity into finer-grained records |
 
 ## Related Patterns
-- [Memory Corruption Detection Failure](./memory-corruption-detection-failure.md) - both leave a record in a state neither writer intended, though this pattern is caused specifically by concurrent write races rather than partial/failed writes
-- [Memory Inconsistency Between Agents](./memory-inconsistency-between-agents.md) - a read-side version of the same underlying concurrency problem, where divergent reads rather than colliding writes cause the inconsistency
-- [Memory Priority Inversion](./memory-priority-inversion.md) - concurrency control mechanisms (locks) intended to prevent interleaving can themselves introduce priority inversion under contention
+- [Memory Corruption Detection Failure](memory-corruption-detection-failure.md) - both leave a record in a state neither writer intended, though this pattern is caused specifically by concurrent write races rather than partial/failed writes
+- [Memory Inconsistency Between Agents](memory-inconsistency-between-agents.md) - a read-side version of the same underlying concurrency problem, where divergent reads rather than colliding writes cause the inconsistency
+- [Memory Priority Inversion](memory-priority-inversion.md) - concurrency control mechanisms (locks) intended to prevent interleaving can themselves introduce priority inversion under contention

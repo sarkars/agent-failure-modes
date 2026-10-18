@@ -113,7 +113,7 @@ prevented by redacting the credential before it was ever persisted.
 ## Related Patterns
 
 - [Credential Leakage](../../../../security/goals/data-loss-prevention/failures/credential-leakage.md) - the downstream symptom (a credential actually leaked); this pattern is the upstream root cause of never having an automated scanner in place to catch it
-- [Missing PII Detection Framework](./missing-pii-detection-framework.md) - the same "ad-hoc versus established framework" mechanism applied to secrets/credentials rather than PII
+- [Missing PII Detection Framework](missing-pii-detection-framework.md) - the same "ad-hoc versus established framework" mechanism applied to secrets/credentials rather than PII
 
 ## References
 

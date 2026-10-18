@@ -68,6 +68,6 @@ result contradicted the plan's premise.
 | Task completed with low goal-alignment score | Final outcome scored as misaligned with the original user goal despite all plan steps completing | High | Route to human review before delivering result to user |
 
 ## Related Patterns
-- [Plan Invalidation Not Detected](./plan-invalidation-not-detected.md) - a closely related failure focused specifically on external changes invalidating the plan, versus adaptability's broader inability to revise given any new information
-- [Contingency Plan Missing](./contingency-plan-missing.md) - both leave the agent unable to deviate from an original plan, one for failures and one for new information
-- [Plan Backtracking Failure](./plan-backtracking-failure.md) - adapting the plan often requires backtracking to undo or bypass steps built on the now-invalid premise
+- [Plan Invalidation Not Detected](plan-invalidation-not-detected.md) - a closely related failure focused specifically on external changes invalidating the plan, versus adaptability's broader inability to revise given any new information
+- [Contingency Plan Missing](contingency-plan-missing.md) - both leave the agent unable to deviate from an original plan, one for failures and one for new information
+- [Plan Backtracking Failure](plan-backtracking-failure.md) - adapting the plan often requires backtracking to undo or bypass steps built on the now-invalid premise

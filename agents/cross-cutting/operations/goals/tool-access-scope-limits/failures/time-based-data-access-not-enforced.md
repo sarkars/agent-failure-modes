@@ -63,6 +63,6 @@ time had elapsed since termination or gated the response accordingly.
 | Tiering Migration Overdue | A record's policy window has expired but it hasn't yet been migrated to the restricted tier | P3 | Investigate the tiering job, expedite migration |
 
 ## Related Patterns
-- [Geographic Data Access Restriction](./geographic-data-access-restriction.md) - both involve a compliance-driven access dimension treated as policy metadata rather than a runtime gate
-- [Data Classification Access Not Enforced](./data-classification-access-not-enforced.md) - shares the pattern of a policy label existing without a corresponding enforcement mechanism
-- [Record Ownership Not Validated](./record-ownership-not-validated.md) - both illustrate access checks that exist in intent but aren't wired into the actual query/write path
+- [Geographic Data Access Restriction](geographic-data-access-restriction.md) - both involve a compliance-driven access dimension treated as policy metadata rather than a runtime gate
+- [Data Classification Access Not Enforced](data-classification-access-not-enforced.md) - shares the pattern of a policy label existing without a corresponding enforcement mechanism
+- [Record Ownership Not Validated](record-ownership-not-validated.md) - both illustrate access checks that exist in intent but aren't wired into the actual query/write path

@@ -60,6 +60,6 @@ a full round trip, turning a task that should take one call into eight.
 | Repeated identical deep-query retries | Same over-depth query resubmitted unchanged 2+ times | High | Disable naive retry, route to depth-aware query decomposition |
 
 ## Related Patterns
-- [Query Complexity Limit](./query-complexity-limit.md) - a cost-based sibling limit that can reject a query even when depth alone is within bounds
-- [Nesting Depth Limit](./nesting-depth-limit.md) - the same depth-limiting concept applied to payload structure rather than query relation traversal
-- [Query Planning Timeout](./query-planning-timeout.md) - deep or complex queries that pass depth/complexity checks can still time out during planning before execution
+- [Query Complexity Limit](query-complexity-limit.md) - a cost-based sibling limit that can reject a query even when depth alone is within bounds
+- [Nesting Depth Limit](nesting-depth-limit.md) - the same depth-limiting concept applied to payload structure rather than query relation traversal
+- [Query Planning Timeout](query-planning-timeout.md) - deep or complex queries that pass depth/complexity checks can still time out during planning before execution

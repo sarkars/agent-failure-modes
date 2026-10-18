@@ -68,6 +68,6 @@ release the locks before edits can resume.
 | Stalled agents with zero throughput | Multiple agents show "active" status but no resource or task progress for N minutes | High | Investigate for deadlock, manually inspect lock state |
 
 ## Related Patterns
-- [Agent Priority Inversion](./agent-priority-inversion.md) - both involve resource holds blocking other agents, though inversion is priority-order-only and deadlock is a circular, unresolvable wait
-- [Livelock in Multi-Agent](./livelock-in-multi-agent.md) - the "unstuck but never progressing" counterpart to deadlock's "fully stuck" state, often caused by naive deadlock-avoidance logic
-- [Agent Resource Contention](./agent-resource-contention.md) - deadlock is the pathological extreme of unmanaged resource contention between agents
+- [Agent Priority Inversion](agent-priority-inversion.md) - both involve resource holds blocking other agents, though inversion is priority-order-only and deadlock is a circular, unresolvable wait
+- [Livelock in Multi-Agent](livelock-in-multi-agent.md) - the "unstuck but never progressing" counterpart to deadlock's "fully stuck" state, often caused by naive deadlock-avoidance logic
+- [Agent Resource Contention](agent-resource-contention.md) - deadlock is the pathological extreme of unmanaged resource contention between agents

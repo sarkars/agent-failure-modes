@@ -68,6 +68,6 @@ question.
 | Structured field never uses null option | A required-but-often-ungrounded field is populated 100% of the time across a large sample, despite an available null option | Medium | Audit sample of populated values for fabrication, consider prompt or schema adjustment |
 
 ## Related Patterns
-- [Output Format Not Validated](./output-format-not-validated.md) - format validation alone will not catch this failure, since fabricated values are typically well-formed
-- [Output Inconsistency](./output-inconsistency.md) - fabricated values are often a source of inconsistency, since a hallucinated field may vary between repeated calls on identical input
-- [Input Default Value Assumption](./input-default-value-assumption.md) - a related failure where a plausible-but-unfounded value is substituted for a genuinely missing one, on the input side rather than the output side
+- [Output Format Not Validated](output-format-not-validated.md) - format validation alone will not catch this failure, since fabricated values are typically well-formed
+- [Output Inconsistency](output-inconsistency.md) - fabricated values are often a source of inconsistency, since a hallucinated field may vary between repeated calls on identical input
+- [Input Default Value Assumption](input-default-value-assumption.md) - a related failure where a plausible-but-unfounded value is substituted for a genuinely missing one, on the input side rather than the output side

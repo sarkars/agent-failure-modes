@@ -55,6 +55,6 @@ Only the fourth retry, at roughly 8 seconds after the first rejection (putting i
 | Retry storm on grace-period-less tool | 3+ consecutive 429s observed for a single logical call | Warning | Escalate backoff aggressively; verify a hard minimum delay is enforced before retry |
 
 ## Related Patterns
-- [Per-Tool Requests Per Minute Exceeded](./per-tool-requests-per-minute-exceeded.md) - tight retry loops against a per-minute limit are especially damaging when combined with a missing grace period
-- [Rate Limit Header Not Honored](./rate-limit-header-not-honored.md) - when Retry-After is present but ignored, the effect closely resembles a missing grace period even though the vendor did provide guidance
-- [Connection Timeout No Retry](./connection-timeout-no-retry.md) - both patterns hinge on whether the agent's retry/backoff strategy matches the actual recovery characteristics of the failure
+- [Per-Tool Requests Per Minute Exceeded](per-tool-requests-per-minute-exceeded.md) - tight retry loops against a per-minute limit are especially damaging when combined with a missing grace period
+- [Rate Limit Header Not Honored](rate-limit-header-not-honored.md) - when Retry-After is present but ignored, the effect closely resembles a missing grace period even though the vendor did provide guidance
+- [Connection Timeout No Retry](connection-timeout-no-retry.md) - both patterns hinge on whether the agent's retry/backoff strategy matches the actual recovery characteristics of the failure

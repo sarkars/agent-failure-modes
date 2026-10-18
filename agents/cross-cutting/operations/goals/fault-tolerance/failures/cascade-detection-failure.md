@@ -73,6 +73,6 @@ Detection systems are typically built per-service: each service emits its own me
 | Repeated re-alert after mitigation | An alert that was marked resolved re-fires on a dependent service within 30 minutes | Medium | Reopen as part of the original incident rather than a new ticket |
 
 ## Related Patterns
-- [Cascade Branching](./cascade-branching.md) - branching cascades are especially prone to detection failure because each branch presents as an unrelated incident
-- [Cascade Amplification](./cascade-amplification.md) - undetected cascades have more time to amplify before anyone applies the correct fix
-- [Recovery Procedure Untested](./recovery-procedure-untested.md) - detection failure often means the correct recovery procedure is never invoked at all
+- [Cascade Branching](cascade-branching.md) - branching cascades are especially prone to detection failure because each branch presents as an unrelated incident
+- [Cascade Amplification](cascade-amplification.md) - undetected cascades have more time to amplify before anyone applies the correct fix
+- [Recovery Procedure Untested](recovery-procedure-untested.md) - detection failure often means the correct recovery procedure is never invoked at all

@@ -63,6 +63,6 @@ customer record directly.
 | New Tool Bypassing Masked View | A newly deployed tool queries the base table directly instead of the masked interface | P2 | Block deploy or require immediate remediation before it reaches production traffic |
 
 ## Related Patterns
-- [Sensitive Field Access Not Restricted](./sensitive-field-access-not-restricted.md) - masking is one specific control that sensitive fields rely on, and this pattern is what happens when that control is bypassed rather than absent
-- [Field-Level Access Not Restricted](./field-level-access-not-restricted.md) - both involve controls that exist for a field but aren't consistently enforced across every access path
-- [PII Field Leakage In Responses](./pii-field-leakage-in-responses.md) - a closely related failure where redaction works in the primary channel but not in a secondary one
+- [Sensitive Field Access Not Restricted](sensitive-field-access-not-restricted.md) - masking is one specific control that sensitive fields rely on, and this pattern is what happens when that control is bypassed rather than absent
+- [Field-Level Access Not Restricted](field-level-access-not-restricted.md) - both involve controls that exist for a field but aren't consistently enforced across every access path
+- [PII Field Leakage In Responses](pii-field-leakage-in-responses.md) - a closely related failure where redaction works in the primary channel but not in a secondary one

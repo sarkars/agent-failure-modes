@@ -63,6 +63,6 @@ Policies are frequently authored by different teams (central compliance, individ
 | Team policy published without global review | A team-level policy touching a globally-governed domain goes live without cross-team sign-off | Warning | Flag for retroactive review, hold enforcement pending confirmation of consistency |
 
 ## Related Patterns
-- [Policy Ambiguity Exploitation](./policy-ambiguity-exploitation.md) - both involve gaps in policy design that produce unintended enforcement outcomes
-- [Policy Version Mismatch](./policy-version-mismatch.md) - both result in an agent applying the wrong policy content due to a gap between authoritative and evaluated policy state
-- [Policy Scope Misunderstanding](./policy-scope-misunderstanding.md) - both involve incorrect determination of which policy actually governs a given action
+- [Policy Ambiguity Exploitation](policy-ambiguity-exploitation.md) - both involve gaps in policy design that produce unintended enforcement outcomes
+- [Policy Version Mismatch](policy-version-mismatch.md) - both result in an agent applying the wrong policy content due to a gap between authoritative and evaluated policy state
+- [Policy Scope Misunderstanding](policy-scope-misunderstanding.md) - both involve incorrect determination of which policy actually governs a given action

@@ -77,6 +77,6 @@ Recovery mechanisms restore an instance to its last durable checkpoint, not to i
 | Redundant costly action re-executed | A recovered instance repeats a side-effecting or costly action already completed pre-failure | High | Add idempotency guard, investigate checkpoint granularity |
 
 ## Related Patterns
-- [Cascade Divergent Recovery](./cascade-divergent-recovery.md) - the multi-component version of this same underlying gap-between-checkpoint-and-failure mechanism
-- [Recovery Ordering Violation](./recovery-ordering-violation.md) - both concern the recovered state not matching pre-failure reality, one via lost work, the other via misordered replay
-- [Recovery Point Objective Miss](./recovery-point-objective-miss.md) - the checkpoint-to-failure gap that causes divergence is exactly the quantity RPO is meant to bound
+- [Cascade Divergent Recovery](cascade-divergent-recovery.md) - the multi-component version of this same underlying gap-between-checkpoint-and-failure mechanism
+- [Recovery Ordering Violation](recovery-ordering-violation.md) - both concern the recovered state not matching pre-failure reality, one via lost work, the other via misordered replay
+- [Recovery Point Objective Miss](recovery-point-objective-miss.md) - the checkpoint-to-failure gap that causes divergence is exactly the quantity RPO is meant to bound

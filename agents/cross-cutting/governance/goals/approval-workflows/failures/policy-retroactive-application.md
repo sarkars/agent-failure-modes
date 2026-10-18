@@ -63,6 +63,6 @@ Compliance and audit tooling frequently evaluates historical records against wha
 | Policy change published without retroactivity designation | A new or updated policy goes live with no explicit statement of retroactive applicability | Warning | Block publication until governance confirms retroactivity stance |
 
 ## Related Patterns
-- [Policy Version Mismatch](./policy-version-mismatch.md) - both stem from an agent or system evaluating against the wrong policy version relative to a point in time
-- [Policy Temporal Violation](./policy-temporal-violation.md) - both involve policies being applied outside their intended, time-bounded scope of effect
-- [Policy Consistency Violation](./policy-consistency-violation.md) - both involve ambiguity about which policy content actually governs a given decision
+- [Policy Version Mismatch](policy-version-mismatch.md) - both stem from an agent or system evaluating against the wrong policy version relative to a point in time
+- [Policy Temporal Violation](policy-temporal-violation.md) - both involve policies being applied outside their intended, time-bounded scope of effect
+- [Policy Consistency Violation](policy-consistency-violation.md) - both involve ambiguity about which policy content actually governs a given decision

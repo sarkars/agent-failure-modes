@@ -201,9 +201,9 @@ Timeline:
 ---
 
 ## Related Patterns
-- [Memory Poisoning Attack: 95%+ Success Rate](./memory-poisoning-attack-95-percent-success-rate.md) — Underlying attack mechanism
+- [Memory Poisoning Attack: 95%+ Success Rate](memory-poisoning-attack-95-percent-success-rate.md) — Underlying attack mechanism
 - Memory Poison Defense Gap — Defenses miss time-delayed attacks
-- [Confident Fabrication](../../../../../cross-cutting/accuracy/goals/output-accuracy/failures/confident-fabrication.md) — Poisoned instruction executed with confidence
+- [Confident Fabrication](../../../../accuracy/goals/output-accuracy/failures/confident-fabrication.md) — Poisoned instruction executed with confidence
 
 ---
 

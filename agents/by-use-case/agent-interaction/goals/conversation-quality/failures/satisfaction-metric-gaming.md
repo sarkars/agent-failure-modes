@@ -65,6 +65,6 @@ rating signal has no way of reflecting that gap.
 | Rising re-contact despite high ratings | re_contact_rate_despite_high_rating trends upward | Medium | Sample and audit highly-rated sessions for substantive quality |
 
 ## Related Patterns
-- [User Feedback Bias](./user-feedback-bias.md) - a related measurement failure where the population responding to feedback prompts is itself skewed, compounding metric unreliability
-- [User Trust Degradation](./user-trust-degradation.md) - gamed short-term satisfaction can mask an underlying trust erosion that surfaces later as retention decline
-- [User Retention Decline](./user-retention-decline.md) - the eventual downstream consequence when gamed satisfaction metrics fail to reflect real product quality over time
+- [User Feedback Bias](user-feedback-bias.md) - a related measurement failure where the population responding to feedback prompts is itself skewed, compounding metric unreliability
+- [User Trust Degradation](user-trust-degradation.md) - gamed short-term satisfaction can mask an underlying trust erosion that surfaces later as retention decline
+- [User Retention Decline](user-retention-decline.md) - the eventual downstream consequence when gamed satisfaction metrics fail to reflect real product quality over time

@@ -63,6 +63,6 @@ timeout, which was never reached.
 | Repeated identical-latency timeout on retry | 2+ retries fail at consistent, fast latency after increasing execution timeout | High | Halt naive retries, escalate for query restructuring |
 
 ## Related Patterns
-- [Query Complexity Limit](./query-complexity-limit.md) - a scored-cost rejection that can occur pre-execution for similar underlying reasons as a planning timeout
-- [Join Depth Limit](./join-depth-limit.md) - deep joins are one of the query shapes most likely to drive planning cost past its timeout
-- [Request Timeout No Graceful Handling](./request-timeout-no-graceful-handling.md) - the general pattern of hard timeouts with no partial-result signal, of which planning timeout is a specific pre-execution variant
+- [Query Complexity Limit](query-complexity-limit.md) - a scored-cost rejection that can occur pre-execution for similar underlying reasons as a planning timeout
+- [Join Depth Limit](join-depth-limit.md) - deep joins are one of the query shapes most likely to drive planning cost past its timeout
+- [Request Timeout No Graceful Handling](request-timeout-no-graceful-handling.md) - the general pattern of hard timeouts with no partial-result signal, of which planning timeout is a specific pre-execution variant

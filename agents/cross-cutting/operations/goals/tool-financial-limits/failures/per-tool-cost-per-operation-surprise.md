@@ -62,6 +62,6 @@ partway through the batch and the remaining calls fail.
 | Outlier payload detected pre-flight | An individual item's projected cost exceeds 5x the batch median | Medium | Flag for manual review or confirmation before dispatch |
 
 ## Related Patterns
-- [Per-Tool Burst Pricing Penalty](./per-tool-burst-pricing-penalty.md) - both are cases of pricing mechanics the flat-rate cost model fails to represent
-- [Hidden Tool Costs Not Visible](./hidden-tool-costs-not-visible.md) - a related failure where the cost driver isn't in the visible response at all, versus here where it's visible but unmodeled
-- [Per-Tool Tiered Pricing Unknown](./per-tool-tiered-pricing-unknown.md) - another dimension of pricing complexity the agent's cost model needs to account for
+- [Per-Tool Burst Pricing Penalty](per-tool-burst-pricing-penalty.md) - both are cases of pricing mechanics the flat-rate cost model fails to represent
+- [Hidden Tool Costs Not Visible](hidden-tool-costs-not-visible.md) - a related failure where the cost driver isn't in the visible response at all, versus here where it's visible but unmodeled
+- [Per-Tool Tiered Pricing Unknown](per-tool-tiered-pricing-unknown.md) - another dimension of pricing complexity the agent's cost model needs to account for

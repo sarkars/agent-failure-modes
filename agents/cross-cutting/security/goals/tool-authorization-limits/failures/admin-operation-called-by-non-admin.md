@@ -57,6 +57,6 @@ Tool schemas are typically written to describe capability, not to enforce access
 | New tool registered without role metadata | A tool is deployed without an explicit min-role field | Warning | Block deploy in CI until role metadata is added |
 
 ## Related Patterns
-- [Role Permission Mismatch](./role-permission-mismatch.md) - both involve the tool's actual permission model diverging from the intended role mapping
-- [Granular CRUD Permission Not Enforced](./granular-crud-permission-not-enforced.md) - same class of missing server-side enforcement, at the operation-type level instead of the role level
-- [Sensitive Operation No Approval Requirement](./sensitive-operation-no-approval-requirement.md) - admin operations are a common subset of operations that should require an approval gate
+- [Role Permission Mismatch](role-permission-mismatch.md) - both involve the tool's actual permission model diverging from the intended role mapping
+- [Granular CRUD Permission Not Enforced](granular-crud-permission-not-enforced.md) - same class of missing server-side enforcement, at the operation-type level instead of the role level
+- [Sensitive Operation No Approval Requirement](sensitive-operation-no-approval-requirement.md) - admin operations are a common subset of operations that should require an approval gate

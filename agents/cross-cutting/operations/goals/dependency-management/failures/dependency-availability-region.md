@@ -68,6 +68,6 @@ customer escalates a delayed response.
 | New region launch without dependency review | A deployment expands to a new region without a completed dependency availability audit | Medium | Block launch or require expedited review before enabling full traffic |
 
 ## Related Patterns
-- [Dependency Breaking Change](./dependency-breaking-change.md) - both involve a dependency's provider making a decision (a breaking change or a regional restriction) the consuming team doesn't control or get advance notice of
-- [Integration Timeout Mismatch](./integration-timeout-mismatch.md) - regional routing to a farther-away available endpoint can introduce latency that trips timeout assumptions tuned for the primary region
-- [Dependency Version Conflicts](./dependency-version-conflicts.md) - both are dependency properties invisible in single-environment testing that only surface under a specific deployment configuration
+- [Dependency Breaking Change](dependency-breaking-change.md) - both involve a dependency's provider making a decision (a breaking change or a regional restriction) the consuming team doesn't control or get advance notice of
+- [Integration Timeout Mismatch](integration-timeout-mismatch.md) - regional routing to a farther-away available endpoint can introduce latency that trips timeout assumptions tuned for the primary region
+- [Dependency Version Conflicts](dependency-version-conflicts.md) - both are dependency properties invisible in single-environment testing that only surface under a specific deployment configuration

@@ -69,6 +69,6 @@ failures instead of automatic retries.
 | Silent transitive version change with test failure | A PR's transitive dependency changes trigger a shared-boundary behavior test failure | High | Investigate the specific incompatibility before merge, do not treat as flaky |
 
 ## Related Patterns
-- [Dependency Version Pinning Conflict](./dependency-version-pinning-conflict.md) - a closely related failure where an explicit pin, rather than an unconstrained transitive resolution, is the source of the incompatibility
-- [Transitive Dependency Explosion](./transitive-dependency-explosion.md) - a larger, harder-to-audit transitive tree increases the likelihood and difficulty of diagnosing version conflicts
-- [Dependency Breaking Change](./dependency-breaking-change.md) - a version conflict is one concrete mechanism by which an upstream breaking change becomes forced onto a consumer that didn't opt into it
+- [Dependency Version Pinning Conflict](dependency-version-pinning-conflict.md) - a closely related failure where an explicit pin, rather than an unconstrained transitive resolution, is the source of the incompatibility
+- [Transitive Dependency Explosion](transitive-dependency-explosion.md) - a larger, harder-to-audit transitive tree increases the likelihood and difficulty of diagnosing version conflicts
+- [Dependency Breaking Change](dependency-breaking-change.md) - a version conflict is one concrete mechanism by which an upstream breaking change becomes forced onto a consumer that didn't opt into it

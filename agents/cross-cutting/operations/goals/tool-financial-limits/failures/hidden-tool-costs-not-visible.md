@@ -63,6 +63,6 @@ still shows 60% of budget remaining.
 | Undocumented line item detected | A new billing line item appears with no mapped internal cost category | Medium | Route to integration owner to update the cost model and confirm with vendor |
 
 ## Related Patterns
-- [Per-Tool Cost-Per-Operation Surprise](./per-tool-cost-per-operation-surprise.md) - both involve the agent's cost model failing to predict true call cost, one from payload variation and one from hidden fan-out
-- [Per-Tool Tiered Pricing Unknown](./per-tool-tiered-pricing-unknown.md) - another case of the agent lacking visibility into the vendor's true pricing mechanics
-- [Per-Tool Monthly Budget Overrun](./per-tool-monthly-budget-overrun.md) - hidden costs are a common root cause of the reporting-lag overrun described there
+- [Per-Tool Cost-Per-Operation Surprise](per-tool-cost-per-operation-surprise.md) - both involve the agent's cost model failing to predict true call cost, one from payload variation and one from hidden fan-out
+- [Per-Tool Tiered Pricing Unknown](per-tool-tiered-pricing-unknown.md) - another case of the agent lacking visibility into the vendor's true pricing mechanics
+- [Per-Tool Monthly Budget Overrun](per-tool-monthly-budget-overrun.md) - hidden costs are a common root cause of the reporting-lag overrun described there

@@ -75,6 +75,6 @@ agent's session cookie.
 | New downstream transform added without re-sanitization review | A new post-sanitization processing step is deployed without evaluation against reintroduction risk | Medium | Require security review of the new step before it processes previously-sanitized content in production |
 
 ## Related Patterns
-- [Input Validation Bypass](./input-validation-bypass.md) - the input-side mirror of this pattern: an encoding or representation variant slips past a check because the check matches only the canonical form, applied at input time rather than output time
-- [Output Injection Vulnerability](./output-injection-vulnerability.md) - injection describes unescaped interpolation with no sanitization attempted at all; this pattern describes sanitization that is attempted but has an incomplete coverage boundary
+- [Input Validation Bypass](input-validation-bypass.md) - the input-side mirror of this pattern: an encoding or representation variant slips past a check because the check matches only the canonical form, applied at input time rather than output time
+- [Output Injection Vulnerability](output-injection-vulnerability.md) - injection describes unescaped interpolation with no sanitization attempted at all; this pattern describes sanitization that is attempted but has an incomplete coverage boundary
 - [Insecure Output Handling](../../../../security/goals/security-autonomy/failures/insecure-output-handling.md) - covers the broader case of a downstream system executing unsanitized LLM output; this pattern is the narrower case where sanitization exists but is bypassable

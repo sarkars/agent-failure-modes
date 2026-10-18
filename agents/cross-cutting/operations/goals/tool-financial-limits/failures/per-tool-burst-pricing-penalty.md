@@ -63,6 +63,6 @@ of approximately $61 — more than 12x the estimate.
 | Retry storm detected | retry_cluster_density exceeds the vendor's baseline throughput for a metered tool | Medium | Add or widen jitter, route through paced queue |
 
 ## Related Patterns
-- [Per-Tool Cost-Per-Operation Surprise](./per-tool-cost-per-operation-surprise.md) - both involve pricing mechanics the agent's cost estimator fails to model
-- [Hidden Tool Costs Not Visible](./hidden-tool-costs-not-visible.md) - burst pricing is a form of hidden cost that only appears under specific traffic conditions
-- [Per-Tool Tiered Pricing Unknown](./per-tool-tiered-pricing-unknown.md) - a related but inverse case where higher volume should reduce, not increase, per-call cost
+- [Per-Tool Cost-Per-Operation Surprise](per-tool-cost-per-operation-surprise.md) - both involve pricing mechanics the agent's cost estimator fails to model
+- [Hidden Tool Costs Not Visible](hidden-tool-costs-not-visible.md) - burst pricing is a form of hidden cost that only appears under specific traffic conditions
+- [Per-Tool Tiered Pricing Unknown](per-tool-tiered-pricing-unknown.md) - a related but inverse case where higher volume should reduce, not increase, per-call cost

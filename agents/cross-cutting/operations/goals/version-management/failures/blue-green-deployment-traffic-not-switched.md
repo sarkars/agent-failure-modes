@@ -71,7 +71,7 @@ argument-serialization bug that was causing malformed API calls in v13.
 | Version mismatch after incident fix | An incident-remediation deploy completes but live traffic still reports the pre-fix version | High | Escalate immediately; treat the incident as still open until traffic confirms the fix version |
 
 ## Related Patterns
-- [Canary Deployment Incomplete](./canary-deployment-incomplete.md) - a related traffic-shift failure where the cutover starts but never finishes ramping past a partial percentage
-- [Traffic Routing Asymmetry](./traffic-routing-asymmetry.md) - both involve routing rules that don't match the deployment system's belief about what's live
-- [Deployment Validation Skipped](./deployment-validation-skipped.md) - the missing post-cutover verification step is a specific instance of a skipped validation gate
-- [Connection Draining Incomplete](./connection-draining-incomplete.md) - the counterpart failure that occurs once a cutover does happen, around how the old environment is retired
+- [Canary Deployment Incomplete](canary-deployment-incomplete.md) - a related traffic-shift failure where the cutover starts but never finishes ramping past a partial percentage
+- [Traffic Routing Asymmetry](traffic-routing-asymmetry.md) - both involve routing rules that don't match the deployment system's belief about what's live
+- [Deployment Validation Skipped](deployment-validation-skipped.md) - the missing post-cutover verification step is a specific instance of a skipped validation gate
+- [Connection Draining Incomplete](connection-draining-incomplete.md) - the counterpart failure that occurs once a cutover does happen, around how the old environment is retired

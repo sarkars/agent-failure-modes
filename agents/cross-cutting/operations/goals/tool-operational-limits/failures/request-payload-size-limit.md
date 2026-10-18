@@ -62,6 +62,6 @@ evidence of the bug.
 | Repeated identical oversized retry | Same payload resubmitted unchanged 2+ times after a 413 | Critical | Disable naive retry, route through size-aware trimming logic |
 
 ## Related Patterns
-- [Response Payload Size Limit](./response-payload-size-limit.md) - the same size-ceiling concern on the response side rather than the request side
-- [Field Length Limit](./field-length-limit.md) - a per-field size constraint that compounds with the overall request-size ceiling
-- [Batch Size Limit](./batch-size-limit.md) - a count-based batch cap that often correlates with, but is distinct from, a byte-based payload-size cap
+- [Response Payload Size Limit](response-payload-size-limit.md) - the same size-ceiling concern on the response side rather than the request side
+- [Field Length Limit](field-length-limit.md) - a per-field size constraint that compounds with the overall request-size ceiling
+- [Batch Size Limit](batch-size-limit.md) - a count-based batch cap that often correlates with, but is distinct from, a byte-based payload-size cap

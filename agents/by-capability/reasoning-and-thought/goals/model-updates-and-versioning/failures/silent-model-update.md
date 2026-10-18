@@ -70,6 +70,6 @@ alias itself and confirming the provider silently rolled it over.
 | Canary output drift detected | reference_prompt_output_drift_score exceeds threshold with no corresponding internal deploy | Medium | Check provider status/changelog feed for a model update coinciding with the drift window |
 
 ## Related Patterns
-- [Model Version Pinning Expiration](./model-version-pinning-expiration.md) - the inverse failure: pinning avoids this pattern but introduces a deferred expiration risk of its own
-- [Model Behavior Change Detection Failure](./model-behavior-change-detection-failure.md) - once a version change (silent or deliberate) has occurred, this sibling pattern covers why evaluation may still fail to catch the resulting regression
-- [Model AB Test Interference](./model-ab-test-interference.md) - both describe behavior changes that existing monitoring isn't structured to attribute correctly, one from concurrent experiments and one from an invisible provider-side swap
+- [Model Version Pinning Expiration](model-version-pinning-expiration.md) - the inverse failure: pinning avoids this pattern but introduces a deferred expiration risk of its own
+- [Model Behavior Change Detection Failure](model-behavior-change-detection-failure.md) - once a version change (silent or deliberate) has occurred, this sibling pattern covers why evaluation may still fail to catch the resulting regression
+- [Model AB Test Interference](model-ab-test-interference.md) - both describe behavior changes that existing monitoring isn't structured to attribute correctly, one from concurrent experiments and one from an invisible provider-side swap

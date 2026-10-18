@@ -82,6 +82,6 @@ back to this partial-write-then-reapply sequence during recovery.
 | Recovery process interrupted mid-replay | recovery_process_interruption_count > 0 | High | Do not resume automatically without verifying atomicity of the last applied entry |
 
 ## Related Patterns
-- [Recovery Ordering Violation](./recovery-ordering-violation.md) - a related replay-correctness failure, one is about corrupting individual entries, the other about applying correct entries in the wrong sequence
-- [Recovery Partial Failure](./recovery-partial-failure.md) - both involve incomplete recovery, but this pattern is about corruption within a component, that pattern is about some components recovering and others not
-- [Failover State Corruption](./failover-state-corruption.md) - the equivalent corruption mechanism occurring during live state transfer rather than log replay
+- [Recovery Ordering Violation](recovery-ordering-violation.md) - a related replay-correctness failure, one is about corrupting individual entries, the other about applying correct entries in the wrong sequence
+- [Recovery Partial Failure](recovery-partial-failure.md) - both involve incomplete recovery, but this pattern is about corruption within a component, that pattern is about some components recovering and others not
+- [Failover State Corruption](failover-state-corruption.md) - the equivalent corruption mechanism occurring during live state transfer rather than log replay

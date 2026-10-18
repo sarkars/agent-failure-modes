@@ -69,6 +69,6 @@ Tick 41: A maintenance engineer notices the conveyor hasn't moved in
 | Repeated symmetric yield cycle | The same conflict-and-yield state recurs beyond threshold count | Medium | Review conflict-avoidance logic for missing randomization/tie-breaking |
 
 ## Related Patterns
-- [Deadlock in Multi-Agent](./deadlock-in-multi-agent.md) - the counterpart failure where agents are fully blocked rather than actively but unproductively cycling
-- [Agent Resource Contention](./agent-resource-contention.md) - livelock frequently emerges from conflict-avoidance logic built to manage resource contention
-- [Agent Priority Inversion](./agent-priority-inversion.md) - both can be resolved by introducing an explicit priority or tie-breaking mechanism where none previously existed
+- [Deadlock in Multi-Agent](deadlock-in-multi-agent.md) - the counterpart failure where agents are fully blocked rather than actively but unproductively cycling
+- [Agent Resource Contention](agent-resource-contention.md) - livelock frequently emerges from conflict-avoidance logic built to manage resource contention
+- [Agent Priority Inversion](agent-priority-inversion.md) - both can be resolved by introducing an explicit priority or tie-breaking mechanism where none previously existed

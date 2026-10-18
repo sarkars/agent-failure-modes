@@ -62,6 +62,6 @@ a stranger's order based on an ID that surfaced in casual conversation.
 | Cross-Owner Write Detected | A completed write's target record ownership doesn't match the requester | P1 | Immediate incident response, notify security and the affected user |
 
 ## Related Patterns
-- [Record-Level Access Not Enforced](./record-level-access-not-enforced.md) - the read-path counterpart to this write-path failure
-- [Account-Level Data Scope](./account-level-data-scope.md) - a related failure where the wrong tenant, rather than the wrong record owner, is targeted
-- [Access Control Inheritance Wrong](./access-control-inheritance-wrong.md) - writes executed on inherited-but-unvalidated scope can produce this same unauthorized-modification outcome
+- [Record-Level Access Not Enforced](record-level-access-not-enforced.md) - the read-path counterpart to this write-path failure
+- [Account-Level Data Scope](account-level-data-scope.md) - a related failure where the wrong tenant, rather than the wrong record owner, is targeted
+- [Access Control Inheritance Wrong](access-control-inheritance-wrong.md) - writes executed on inherited-but-unvalidated scope can produce this same unauthorized-modification outcome

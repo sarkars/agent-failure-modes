@@ -71,6 +71,6 @@ specifically to prevent this.
 | Prefix cache not engaging | prefix_cache_token_ratio near zero despite a large designed-to-be-stable prompt prefix | High | Review prompt assembly order for volatile content placed before the stable prefix |
 
 ## Related Patterns
-- [Batch Cost Inefficiency](./batch-cost-inefficiency.md) - both describe infrastructure meant to reduce per-request cost that silently underperforms its design intent
-- [Latency Cost Tradeoff](./latency-cost-tradeoff.md) - a low cache hit rate forces more requests onto the full-latency, full-cost inference path, worsening both dimensions simultaneously
-- [Throughput Per Dollar Optimization Failure](./throughput-per-dollar-optimization-failure.md) - a poorly performing cache directly depresses cost-per-successful-output even when raw throughput looks unaffected
+- [Batch Cost Inefficiency](batch-cost-inefficiency.md) - both describe infrastructure meant to reduce per-request cost that silently underperforms its design intent
+- [Latency Cost Tradeoff](latency-cost-tradeoff.md) - a low cache hit rate forces more requests onto the full-latency, full-cost inference path, worsening both dimensions simultaneously
+- [Throughput Per Dollar Optimization Failure](throughput-per-dollar-optimization-failure.md) - a poorly performing cache directly depresses cost-per-successful-output even when raw throughput looks unaffected

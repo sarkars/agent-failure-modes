@@ -69,6 +69,6 @@ reconciliation batch for all 40,000 tickets in the run.
 | Downstream crash on state assumption | A consumer process throws an error traceable to a violated state-machine invariant | High | Halt the affected batch job, patch the illegal record, add a guard at the write path identified |
 
 ## Related Patterns
-- [Concurrent State Modification](./concurrent-state-modification.md) - concurrent writers racing on the same entity is one common mechanism that produces an illegal transition
-- [State Consistency Timeout](./state-consistency-timeout.md) - acting on stale state from a timed-out check can itself drive a transition the current true state wouldn't have allowed
-- [State Version Incompatibility](./state-version-incompatibility.md) - a version mismatch in the transition logic itself (old code enforcing an outdated state machine) can also produce illegal transitions
+- [Concurrent State Modification](concurrent-state-modification.md) - concurrent writers racing on the same entity is one common mechanism that produces an illegal transition
+- [State Consistency Timeout](state-consistency-timeout.md) - acting on stale state from a timed-out check can itself drive a transition the current true state wouldn't have allowed
+- [State Version Incompatibility](state-version-incompatibility.md) - a version mismatch in the transition logic itself (old code enforcing an outdated state machine) can also produce illegal transitions

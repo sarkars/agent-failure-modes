@@ -67,6 +67,6 @@ to check manually two days later.
 | Injection pattern detected in source content | Input sanitization flags embedded instruction-like text in a document or tool result | High | Block ingestion, alert security/data-quality owner |
 
 ## Related Patterns
-- [Agent State Divergence](./agent-state-divergence.md) - both involve agents holding inconsistent views, though divergence is unintentional drift and Byzantine failure may be adversarial or arbitrary
-- [Agent Handoff Race Condition](./agent-handoff-race-condition.md) - both require downstream agents to not blindly trust the state or output handed to them
-- [Leader Election Failure](./leader-election-failure.md) - Byzantine fault tolerance in leader election is a classic special case of tolerating arbitrary agent behavior during coordination
+- [Agent State Divergence](agent-state-divergence.md) - both involve agents holding inconsistent views, though divergence is unintentional drift and Byzantine failure may be adversarial or arbitrary
+- [Agent Handoff Race Condition](agent-handoff-race-condition.md) - both require downstream agents to not blindly trust the state or output handed to them
+- [Leader Election Failure](leader-election-failure.md) - Byzantine fault tolerance in leader election is a classic special case of tolerating arbitrary agent behavior during coordination

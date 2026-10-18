@@ -64,6 +64,6 @@ system prompt's effective influence.
 | Adherence curve degradation | rule_adherence_by_turn_depth trend worsens release-over-release | Medium | Review re-injection strategy, consider session length cap changes |
 
 ## Related Patterns
-- [Model Context Length Behavior Change](./model-context-length-behavior-change.md) - context growth is the underlying mechanism that drives instruction decay as sessions lengthen
-- [Model Style Drift](./model-style-drift.md) - persona/tone drift is the stylistic counterpart to rule-adherence decay, both accumulating gradually over a session
-- [Model Refusal Inconsistency](./model-refusal-inconsistency.md) - decayed instruction-following is one path by which refusal behavior becomes inconsistent within the same conversation
+- [Model Context Length Behavior Change](model-context-length-behavior-change.md) - context growth is the underlying mechanism that drives instruction decay as sessions lengthen
+- [Model Style Drift](model-style-drift.md) - persona/tone drift is the stylistic counterpart to rule-adherence decay, both accumulating gradually over a session
+- [Model Refusal Inconsistency](model-refusal-inconsistency.md) - decayed instruction-following is one path by which refusal behavior becomes inconsistent within the same conversation

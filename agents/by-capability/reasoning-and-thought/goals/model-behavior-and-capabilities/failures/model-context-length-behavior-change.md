@@ -62,6 +62,6 @@ disputes the refund amount.
 | Recall regression detected | Sampled QA on early-turn facts falls below accuracy floor | High | Flag session for review, investigate context management strategy |
 
 ## Related Patterns
-- [Model Capacity Limits](./model-capacity-limits.md) - both are soft ceilings on effective model performance that produce no explicit error signal
-- [Model Instruction Following Decay](./model-instruction-following-decay.md) - context length growth is one of the primary mechanisms driving instruction decay over a session
-- [Model Uncertainty Unawareness](./model-uncertainty-unawareness.md) - degraded recall from context fill is presented with the same false confidence as any other uncertain answer
+- [Model Capacity Limits](model-capacity-limits.md) - both are soft ceilings on effective model performance that produce no explicit error signal
+- [Model Instruction Following Decay](model-instruction-following-decay.md) - context length growth is one of the primary mechanisms driving instruction decay over a session
+- [Model Uncertainty Unawareness](model-uncertainty-unawareness.md) - degraded recall from context fill is presented with the same false confidence as any other uncertain answer

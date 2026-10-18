@@ -79,6 +79,6 @@ a bad config push. The recovery runbook triggers a parallel
 | Long-stale component detected | A component's stale_component_state_age exceeds threshold post-incident | Medium | Trigger independent investigation regardless of aggregate health status |
 
 ## Related Patterns
-- [Cascade Divergent Recovery](./cascade-divergent-recovery.md) - both are multi-component recovery failures, one is components recovering to inconsistent states, this is some components never recovering at all
-- [Recovery Time Objective Miss](./recovery-time-objective-miss.md) - a component stuck in partial recovery is a severe, often silent, form of RTO miss for that component
-- [Single Point of Failure](./single-point-of-failure.md) - a component that never recovers can become a de facto single point of failure for functionality that depended on it
+- [Cascade Divergent Recovery](cascade-divergent-recovery.md) - both are multi-component recovery failures, one is components recovering to inconsistent states, this is some components never recovering at all
+- [Recovery Time Objective Miss](recovery-time-objective-miss.md) - a component stuck in partial recovery is a severe, often silent, form of RTO miss for that component
+- [Single Point of Failure](single-point-of-failure.md) - a component that never recovers can become a de facto single point of failure for functionality that depended on it

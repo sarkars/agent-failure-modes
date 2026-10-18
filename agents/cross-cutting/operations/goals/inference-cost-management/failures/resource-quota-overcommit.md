@@ -73,6 +73,6 @@ generating.
 | Overcommit ratio exceeds reviewed ceiling | cluster_overcommit_ratio exceeds the last-approved value after a new tenant onboarding | Medium | Trigger a capacity-planning review before the ratio is allowed to persist |
 
 ## Related Patterns
-- [Resource Reservation Insufficient](./resource-reservation-insufficient.md) - overcommit at the cluster level is one common cause of an individual workload's reservation proving insufficient under real peak load
-- [Concurrent Request Resource Explosion](./concurrent-request-resource-explosion.md) - correlated demand spikes across tenants can trigger this pattern's contention dynamics simultaneously across a shared cluster
-- [CPU Saturation Cascade](./cpu-saturation-cascade.md) - shares the mechanism of one workload's resource pressure degrading others sharing the same infrastructure
+- [Resource Reservation Insufficient](resource-reservation-insufficient.md) - overcommit at the cluster level is one common cause of an individual workload's reservation proving insufficient under real peak load
+- [Concurrent Request Resource Explosion](concurrent-request-resource-explosion.md) - correlated demand spikes across tenants can trigger this pattern's contention dynamics simultaneously across a shared cluster
+- [CPU Saturation Cascade](cpu-saturation-cascade.md) - shares the mechanism of one workload's resource pressure degrading others sharing the same infrastructure

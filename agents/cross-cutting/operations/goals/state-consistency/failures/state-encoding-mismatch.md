@@ -66,6 +66,6 @@ compares the raw stored bytes to what was displayed.
 | Replacement character spike | Text fields show a spike in Unicode replacement characters (U+FFFD) or mojibake patterns | Medium | Review recent client-library or encoding-config changes on the write path |
 
 ## Related Patterns
-- [State Serialization Failure](./state-serialization-failure.md) - a broader category of read/write boundary failure where encoding mismatch is one specific mechanism
-- [State Version Incompatibility](./state-version-incompatibility.md) - a related boundary mismatch, but driven by schema evolution rather than encoding assumptions
-- [State Replication Lag](./state-replication-lag.md) - both are silent data-quality issues that pass functional checks while returning wrong values
+- [State Serialization Failure](state-serialization-failure.md) - a broader category of read/write boundary failure where encoding mismatch is one specific mechanism
+- [State Version Incompatibility](state-version-incompatibility.md) - a related boundary mismatch, but driven by schema evolution rather than encoding assumptions
+- [State Replication Lag](state-replication-lag.md) - both are silent data-quality issues that pass functional checks while returning wrong values

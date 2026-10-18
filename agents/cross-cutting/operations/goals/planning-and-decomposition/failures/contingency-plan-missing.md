@@ -68,6 +68,6 @@ user with a hotel reservation and no way to get there.
 | Improvised action taken post-failure | Agent takes an action not present in the original plan or fallback library after a step failure | High | Flag for human review before downstream effects proceed |
 
 ## Related Patterns
-- [Plan Adaptability Failure](./plan-adaptability-failure.md) - missing contingencies are the static-planning-time counterpart to the dynamic inability to adapt mid-execution
-- [Plan Backtracking Failure](./plan-backtracking-failure.md) - even when a contingency exists, the agent still needs the ability to cleanly unwind and retry the failed branch
-- [Plan Invalidation Not Detected](./plan-invalidation-not-detected.md) - both leave the agent executing blindly forward when the world no longer matches the plan's assumptions
+- [Plan Adaptability Failure](plan-adaptability-failure.md) - missing contingencies are the static-planning-time counterpart to the dynamic inability to adapt mid-execution
+- [Plan Backtracking Failure](plan-backtracking-failure.md) - even when a contingency exists, the agent still needs the ability to cleanly unwind and retry the failed branch
+- [Plan Invalidation Not Detected](plan-invalidation-not-detected.md) - both leave the agent executing blindly forward when the world no longer matches the plan's assumptions

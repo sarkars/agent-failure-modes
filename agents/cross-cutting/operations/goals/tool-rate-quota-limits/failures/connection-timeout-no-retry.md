@@ -54,6 +54,6 @@ The orchestrator, seeing a hard tool failure, aborts the entire "process custome
 | Sustained connection failures post-retry | `connection_timeout_rate` stays above 5% even after 3 retries per call | Critical | Escalate to vendor; this is no longer transient |
 
 ## Related Patterns
-- [Connection Pool Exhaustion](./connection-pool-exhaustion.md) - a different cause of connection-layer failure that is also frequently missing retry handling
-- [Rate Limit Grace Period Missing](./rate-limit-grace-period-missing.md) - both involve an agent giving up too early instead of backing off and retrying
-- [Adaptive Rate Limiting](./adaptive-rate-limiting.md) - retry strategy design overlaps: both need backoff tuned to the failure's actual transience rather than a fixed assumption
+- [Connection Pool Exhaustion](connection-pool-exhaustion.md) - a different cause of connection-layer failure that is also frequently missing retry handling
+- [Rate Limit Grace Period Missing](rate-limit-grace-period-missing.md) - both involve an agent giving up too early instead of backing off and retrying
+- [Adaptive Rate Limiting](adaptive-rate-limiting.md) - retry strategy design overlaps: both need backoff tuned to the failure's actual transience rather than a fixed assumption

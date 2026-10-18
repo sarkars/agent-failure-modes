@@ -67,6 +67,6 @@ reports incorrect figures in a generated report.
 | High-risk dependency auto-merged without review | A dependency tagged as high-risk is auto-merged bypassing the changelog review gate | Medium | Audit the merge, retroactively review changelog, tighten auto-merge policy for that dependency |
 
 ## Related Patterns
-- [Dependency Version Pinning Conflict](./dependency-version-pinning-conflict.md) - pinning strategy is the primary lever for controlling exposure to this pattern, and conflicts often arise from attempts to guard against it
-- [Data Pipeline Schema Drift](./data-pipeline-schema-drift.md) - both describe an upstream party changing behavior/shape without adequate downstream coordination, one in a code dependency and one in a data schema
-- [Dependency Security Vulnerability](./dependency-security-vulnerability.md) - the same weak dependency-review process that lets breaking changes slip through often also delays vulnerability patching
+- [Dependency Version Pinning Conflict](dependency-version-pinning-conflict.md) - pinning strategy is the primary lever for controlling exposure to this pattern, and conflicts often arise from attempts to guard against it
+- [Data Pipeline Schema Drift](data-pipeline-schema-drift.md) - both describe an upstream party changing behavior/shape without adequate downstream coordination, one in a code dependency and one in a data schema
+- [Dependency Security Vulnerability](dependency-security-vulnerability.md) - the same weak dependency-review process that lets breaking changes slip through often also delays vulnerability patching

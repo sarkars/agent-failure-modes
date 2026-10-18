@@ -73,6 +73,6 @@ inference workload as the shared root cause.
 | GPU idling on network wait | gpu_network_idle_ratio > 25% sustained | Medium | Check interconnect fabric type and tensor-parallel configuration; consider provisioning higher-bandwidth links |
 
 ## Related Patterns
-- [CPU Saturation Cascade](./cpu-saturation-cascade.md) - a parallel infrastructure-bottleneck mechanism where a different shared resource saturates and cascades into inference degradation
-- [Concurrent Request Resource Explosion](./concurrent-request-resource-explosion.md) - a concurrency spike can be the trigger event that drives network bandwidth into saturation, particularly for streaming or large-payload workloads
-- [Latency Cost Tradeoff](./latency-cost-tradeoff.md) - network-bound latency degradation forces the same cost-vs-latency tension as compute-bound causes, but from an often-unmonitored source
+- [CPU Saturation Cascade](cpu-saturation-cascade.md) - a parallel infrastructure-bottleneck mechanism where a different shared resource saturates and cascades into inference degradation
+- [Concurrent Request Resource Explosion](concurrent-request-resource-explosion.md) - a concurrency spike can be the trigger event that drives network bandwidth into saturation, particularly for streaming or large-payload workloads
+- [Latency Cost Tradeoff](latency-cost-tradeoff.md) - network-bound latency degradation forces the same cost-vs-latency tension as compute-bound causes, but from an often-unmonitored source

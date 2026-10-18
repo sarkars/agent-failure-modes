@@ -76,7 +76,7 @@ growing from 1 caller to 12 without any corresponding review.
 | Single point of failure outage | A component with no redundant instance and a nonzero dependent count becomes unavailable | Critical | Failover to any available degraded path, prioritize post-incident redundancy remediation |
 
 ## Related Patterns
-- [Cascade Branching](./cascade-branching.md) - a high-fan-out shared dependency is frequently the same component this pattern describes; branching covers what happens once that component fails and its failure fans out, this pattern covers the architectural gap that made the fan-out possible in the first place
-- [Cascade Isolation Failure](./cascade-isolation-failure.md) - isolation failure is a bulkhead that was supposed to contain a failure turning out to be leaky; this pattern is the more basic case where no bulkhead or redundancy was ever designed in at all
+- [Cascade Branching](cascade-branching.md) - a high-fan-out shared dependency is frequently the same component this pattern describes; branching covers what happens once that component fails and its failure fans out, this pattern covers the architectural gap that made the fan-out possible in the first place
+- [Cascade Isolation Failure](cascade-isolation-failure.md) - isolation failure is a bulkhead that was supposed to contain a failure turning out to be leaky; this pattern is the more basic case where no bulkhead or redundancy was ever designed in at all
 - [Retry Storms](../../cost-efficiency/failures/retry-storms.md) - retry storms describe how retry behavior overwhelms a system under load; a single point of failure is often the component that a retry storm ultimately saturates, but the two are independent root causes
-- [Redundancy Coordination Failure](./redundancy-coordination-failure.md) - the opposite failure mode: this pattern is too little redundancy, that pattern is redundancy present but uncoordinated
+- [Redundancy Coordination Failure](redundancy-coordination-failure.md) - the opposite failure mode: this pattern is too little redundancy, that pattern is redundancy present but uncoordinated

@@ -68,6 +68,6 @@ worked around by the retrieval algorithm's own fallback behavior.
 | Isolation Canary Failure | Scheduled cross-workspace canary test detects a leak | P1 | Page on-call, disable the affected retrieval feature until fixed |
 
 ## Related Patterns
-- [Account-Level Data Scope](./account-level-data-scope.md) - the same class of failure at customer/tenant granularity rather than workspace granularity
-- [Data Scope Boundary Violation](./data-scope-boundary-violation.md) - a related soft-boundary failure, typically within a single shared database rather than shared retrieval infrastructure
-- [Scope Downgrade Not Enforced](./scope-downgrade-not-enforced.md) - a sub-agent with an unenforced scope downgrade can trigger this same cross-workspace exposure
+- [Account-Level Data Scope](account-level-data-scope.md) - the same class of failure at customer/tenant granularity rather than workspace granularity
+- [Data Scope Boundary Violation](data-scope-boundary-violation.md) - a related soft-boundary failure, typically within a single shared database rather than shared retrieval infrastructure
+- [Scope Downgrade Not Enforced](scope-downgrade-not-enforced.md) - a sub-agent with an unenforced scope downgrade can trigger this same cross-workspace exposure

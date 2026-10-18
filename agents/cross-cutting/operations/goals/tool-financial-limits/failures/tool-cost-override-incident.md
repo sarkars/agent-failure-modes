@@ -69,6 +69,6 @@ the $5,000 cap traces back to an incident resolved four months prior.
 | Override past expiry | An override's TTL has lapsed without renewal | Medium | Automatically revert to baseline cap, notify the original requester and team |
 
 ## Related Patterns
-- [Per-Tool Monthly Budget Overrun](./per-tool-monthly-budget-overrun.md) - un-reverted overrides are a common root cause of overruns that persist across multiple billing cycles
-- [Cross-Tool Total Budget Exceeded](./cross-tool-total-budget-exceeded.md) - a forgotten override on one tool compounds aggregate visibility gaps across the whole budget picture
-- [Budget Priority Misalignment](./budget-priority-misalignment.md) - overrides applied under incident pressure often bypass whatever priority scheme normally governs spend
+- [Per-Tool Monthly Budget Overrun](per-tool-monthly-budget-overrun.md) - un-reverted overrides are a common root cause of overruns that persist across multiple billing cycles
+- [Cross-Tool Total Budget Exceeded](cross-tool-total-budget-exceeded.md) - a forgotten override on one tool compounds aggregate visibility gaps across the whole budget picture
+- [Budget Priority Misalignment](budget-priority-misalignment.md) - overrides applied under incident pressure often bypass whatever priority scheme normally governs spend

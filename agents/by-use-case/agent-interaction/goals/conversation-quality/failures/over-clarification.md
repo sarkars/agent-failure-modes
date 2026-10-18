@@ -64,6 +64,6 @@ User: "...just do the normal thing, whatever that is."
 | User friction signal on clarification | User response pattern ("just do it," "obviously") detected following a clarifying question | Low | Log for threshold tuning |
 
 ## Related Patterns
-- [Under-Clarification](./under-clarification.md) - the opposite miscalibration: proceeding without asking when ambiguity genuinely warranted a question
-- [Clarification Loop Infinite](./clarification-loop-infinite.md) - repeated over-clarification without a terminating condition escalates into this more severe non-terminating pattern
-- [Disambiguation Strategy Ineffective](./disambiguation-strategy-ineffective.md) - over-clarification is one specific mismatch case within the broader set of poorly-fitted disambiguation strategies
+- [Under-Clarification](under-clarification.md) - the opposite miscalibration: proceeding without asking when ambiguity genuinely warranted a question
+- [Clarification Loop Infinite](clarification-loop-infinite.md) - repeated over-clarification without a terminating condition escalates into this more severe non-terminating pattern
+- [Disambiguation Strategy Ineffective](disambiguation-strategy-ineffective.md) - over-clarification is one specific mismatch case within the broader set of poorly-fitted disambiguation strategies

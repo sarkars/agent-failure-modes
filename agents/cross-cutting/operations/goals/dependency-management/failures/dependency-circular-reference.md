@@ -68,6 +68,6 @@ break the cycle, dropping in-flight requests.
 | Mutual deadlock in production | Two services show simultaneous mutual-wait beyond timeout threshold | High | Trigger circuit breaker/forced abort, page on-call, restart affected services in safe order |
 
 ## Related Patterns
-- [Integration Order Dependency](./integration-order-dependency.md) - both concern implicit ordering/dependency assumptions between systems that aren't enforced by the architecture itself
-- [Integration Cascading Failure](./integration-cascading-failure.md) - a circular dependency deadlock is one specific mechanism by which failure in one system cascades into another
-- [Integration Timeout Mismatch](./integration-timeout-mismatch.md) - inconsistent timeout configuration across the two sides of a cycle affects how quickly (or whether) a deadlock resolves on its own
+- [Integration Order Dependency](integration-order-dependency.md) - both concern implicit ordering/dependency assumptions between systems that aren't enforced by the architecture itself
+- [Integration Cascading Failure](integration-cascading-failure.md) - a circular dependency deadlock is one specific mechanism by which failure in one system cascades into another
+- [Integration Timeout Mismatch](integration-timeout-mismatch.md) - inconsistent timeout configuration across the two sides of a cycle affects how quickly (or whether) a deadlock resolves on its own

@@ -67,6 +67,6 @@ customer-specific rather than a systemic serialization bug.
 | Downstream parse rejection spike | A downstream consumer's rejection rate for agent-generated exports rises sharply | Medium | Correlate against recent input containing special characters, review serialization path |
 
 ## Related Patterns
-- [Output Quote Escaping Failure](./output-quote-escaping-failure.md) - the same underlying issue, specifically scoped to quote characters breaking output parsing
-- [Output Injection Vulnerability](./output-injection-vulnerability.md) - unescaped special characters are the mechanism that enables injection into SQL, shell, or HTML
-- [Input Null Bytes Injection](./input-null-bytes-injection.md) - a more severe, security-relevant instance of a structurally-significant character breaking input handling
+- [Output Quote Escaping Failure](output-quote-escaping-failure.md) - the same underlying issue, specifically scoped to quote characters breaking output parsing
+- [Output Injection Vulnerability](output-injection-vulnerability.md) - unescaped special characters are the mechanism that enables injection into SQL, shell, or HTML
+- [Input Null Bytes Injection](input-null-bytes-injection.md) - a more severe, security-relevant instance of a structurally-significant character breaking input handling

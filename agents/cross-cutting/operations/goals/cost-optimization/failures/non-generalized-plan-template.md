@@ -101,4 +101,4 @@ even though all 1,000 share the exact same 4-step operation shape.
 
 - [Agentic Plan Caching: Test-Time Memory for Fast and Cost-Efficient LLM Agents](https://arxiv.org/abs/2506.14852) - extraction and adaptation of structured, parameterized plan templates versus literal plan-text caching
 - [What Should a Skill Remember? Quality-Cost Trade-offs in Cost-Aware Skill Rewriting for Language Model Agents](https://arxiv.org/html/2606.09421) - what should be generalized into a reusable skill versus left instance-specific
-- [Related Pattern: No Preplanned Workflow for Frequent Operations](./no-preplanned-workflow-for-frequent-operations.md) - the case where no reuse mechanism exists at all, as opposed to this pattern's case where reuse exists but isn't genuinely parameterized
+- [Related Pattern: No Preplanned Workflow for Frequent Operations](no-preplanned-workflow-for-frequent-operations.md) - the case where no reuse mechanism exists at all, as opposed to this pattern's case where reuse exists but isn't genuinely parameterized

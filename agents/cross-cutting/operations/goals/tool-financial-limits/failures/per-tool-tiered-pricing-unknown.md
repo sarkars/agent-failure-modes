@@ -66,6 +66,6 @@ and nobody had updated the estimator since the original integration.
 | Cost model stale | cost_model_staleness exceeds 90 days for a tiered-pricing tool | Medium | Recalibrate cost estimator against latest invoices |
 
 ## Related Patterns
-- [Per-Tool Minimum Usage Penalty](./per-tool-minimum-usage-penalty.md) - both involve volume-dependent pricing structures the agent's optimization logic doesn't model
-- [Per-Tool Cost-Per-Operation Surprise](./per-tool-cost-per-operation-surprise.md) - both stem from an oversimplified flat-rate cost model missing real pricing structure
-- [Hidden Tool Costs Not Visible](./hidden-tool-costs-not-visible.md) - a related visibility gap where the true price driver isn't reflected in the agent's cost tracking
+- [Per-Tool Minimum Usage Penalty](per-tool-minimum-usage-penalty.md) - both involve volume-dependent pricing structures the agent's optimization logic doesn't model
+- [Per-Tool Cost-Per-Operation Surprise](per-tool-cost-per-operation-surprise.md) - both stem from an oversimplified flat-rate cost model missing real pricing structure
+- [Hidden Tool Costs Not Visible](hidden-tool-costs-not-visible.md) - a related visibility gap where the true price driver isn't reflected in the agent's cost tracking

@@ -64,6 +64,6 @@ information that turned out to be obsolete.
 | TTL coverage drop | ttl_coverage falls below threshold after a content-ingestion pipeline change | Medium | Audit ingestion pipeline for missing TTL assignment on newly added content |
 
 ## Related Patterns
-- [Knowledge Update Lag](./knowledge-update-lag.md) - a related but distinct mechanism: this pattern is the absence of any expiration system, that one is a delay in an existing update pipeline
-- [Fact Timestamp Error](./fact-timestamp-error.md) - the per-fact symptom that unenforced expiration at the system level makes systematically likely
-- [Knowledge Version Mismatch](./knowledge-version-mismatch.md) - unexpired old-version content is a common direct cause of version-mismatch errors
+- [Knowledge Update Lag](knowledge-update-lag.md) - a related but distinct mechanism: this pattern is the absence of any expiration system, that one is a delay in an existing update pipeline
+- [Fact Timestamp Error](fact-timestamp-error.md) - the per-fact symptom that unenforced expiration at the system level makes systematically likely
+- [Knowledge Version Mismatch](knowledge-version-mismatch.md) - unexpired old-version content is a common direct cause of version-mismatch errors

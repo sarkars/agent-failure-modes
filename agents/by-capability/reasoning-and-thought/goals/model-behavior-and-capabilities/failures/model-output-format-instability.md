@@ -64,6 +64,6 @@ failure rate that only surfaces as a spike in a dead-letter queue.
 | Persistent unrecoverable failures | retry_success_rate_after_format_failure drops significantly | High | Escalate to pipeline owner, review prompt template and schema complexity |
 
 ## Related Patterns
-- [Model Reasoning Inconsistency](./model-reasoning-inconsistency.md) - both describe nondeterministic output variation across logically identical calls, one in structure and one in content
-- [Model Instruction Following Decay](./model-instruction-following-decay.md) - format instructions are a specific case of instructions whose adherence can degrade under competing contextual pressure
-- [Model Capacity Limits](./model-capacity-limits.md) - deeper/longer target schemas raise the same per-call complexity that drives capacity-related quality drops
+- [Model Reasoning Inconsistency](model-reasoning-inconsistency.md) - both describe nondeterministic output variation across logically identical calls, one in structure and one in content
+- [Model Instruction Following Decay](model-instruction-following-decay.md) - format instructions are a specific case of instructions whose adherence can degrade under competing contextual pressure
+- [Model Capacity Limits](model-capacity-limits.md) - deeper/longer target schemas raise the same per-call complexity that drives capacity-related quality drops

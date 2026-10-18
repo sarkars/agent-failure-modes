@@ -64,6 +64,6 @@ or contractual basis recorded for it.
 | Regional Canary Failure | Synthetic residency-compliance test fails in any deployed region | P1 | Page on-call, block the affected tool until enforcement is restored |
 
 ## Related Patterns
-- [Data Classification Access Not Enforced](./data-classification-access-not-enforced.md) - geographic restriction is a specific instance of a classification/policy tag not being checked at serve time
-- [Time-Based Data Access Not Enforced](./time-based-data-access-not-enforced.md) - both involve a compliance-driven access dimension (region, time) that the tool layer treats as metadata rather than a hard gate
-- [Workspace Isolation Bypass](./workspace-isolation-bypass.md) - shares the pattern of a globally-routed endpoint undermining an intended partition
+- [Data Classification Access Not Enforced](data-classification-access-not-enforced.md) - geographic restriction is a specific instance of a classification/policy tag not being checked at serve time
+- [Time-Based Data Access Not Enforced](time-based-data-access-not-enforced.md) - both involve a compliance-driven access dimension (region, time) that the tool layer treats as metadata rather than a hard gate
+- [Workspace Isolation Bypass](workspace-isolation-bypass.md) - shares the pattern of a globally-routed endpoint undermining an intended partition

@@ -61,6 +61,6 @@ understanding of the trial's actual finding.
 | Direction verification pass rate drop | direction_verification_pass_rate falls below threshold after a generation pipeline change | Medium | Roll back or review recent changes to summarization/generation prompts |
 
 ## Related Patterns
-- [Fact Negation Confusion](./fact-negation-confusion.md) - a closely related mechanism where negation handling, rather than directional polarity, is mishandled
-- [Fact Source Confusion](./fact-source-confusion.md) - can produce a similar-looking symptom (swapped attribution) via a different mechanism (conflated entities rather than flipped polarity)
-- [Domain Terminology Confusion](./domain-terminology-confusion.md) - shares the "single word carries the entire meaning" fragility that makes small errors have outsized effect
+- [Fact Negation Confusion](fact-negation-confusion.md) - a closely related mechanism where negation handling, rather than directional polarity, is mishandled
+- [Fact Source Confusion](fact-source-confusion.md) - can produce a similar-looking symptom (swapped attribution) via a different mechanism (conflated entities rather than flipped polarity)
+- [Domain Terminology Confusion](domain-terminology-confusion.md) - shares the "single word carries the entire meaning" fragility that makes small errors have outsized effect

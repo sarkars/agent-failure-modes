@@ -65,6 +65,6 @@ review.
 | Approval gate timeout-proceed | An approval wait times out and the workflow's default-proceed path fires | Medium | Alert the approver channel, flag the task for post-hoc review |
 
 ## Related Patterns
-- [Handoff Timing Mismatch](./handoff-timing-mismatch.md) - the same async-timing gap that lets an approval be skipped can also cause a handoff to fire before the receiver is ready
-- [Handoff Accountability Loss](./handoff-accountability-loss.md) - once an approval is skipped, there is often no clear owner responsible for catching the gap
-- [Handoff Rollback Failure](./handoff-rollback-failure.md) - actions taken without approval are frequently the hardest to cleanly roll back once discovered
+- [Handoff Timing Mismatch](handoff-timing-mismatch.md) - the same async-timing gap that lets an approval be skipped can also cause a handoff to fire before the receiver is ready
+- [Handoff Accountability Loss](handoff-accountability-loss.md) - once an approval is skipped, there is often no clear owner responsible for catching the gap
+- [Handoff Rollback Failure](handoff-rollback-failure.md) - actions taken without approval are frequently the hardest to cleanly roll back once discovered

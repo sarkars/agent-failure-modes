@@ -61,6 +61,6 @@ Memory quotas are enforced at the infrastructure layer (container cgroup memory 
 | Sustained OOM kills after retries | Same logical request retried 2+ times, each failing at similar payload-processing stage | Medium | Stop blind retries, pre-split payload before resubmission |
 
 ## Related Patterns
-- [Cpu Quota Per Job](./cpu-quota-per-job.md) - sibling per-operation resource ceiling, CPU instead of memory
-- [Execution Time Quota](./execution-time-quota.md) - large payloads often hit both memory and time ceilings together
-- [Storage Quota Exceeded](./storage-quota-exceeded.md) - related but distinct: persistent storage limits versus transient in-operation memory limits
+- [Cpu Quota Per Job](cpu-quota-per-job.md) - sibling per-operation resource ceiling, CPU instead of memory
+- [Execution Time Quota](execution-time-quota.md) - large payloads often hit both memory and time ceilings together
+- [Storage Quota Exceeded](storage-quota-exceeded.md) - related but distinct: persistent storage limits versus transient in-operation memory limits

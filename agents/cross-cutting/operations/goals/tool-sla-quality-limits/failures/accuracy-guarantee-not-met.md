@@ -64,6 +64,6 @@ Vendors typically measure and publish accuracy figures against a benchmark datas
 | Manual correction rate trending upward | `manual_correction_rate` rises significantly over a rolling 30-day window | Medium | Investigate for input distribution shift or vendor-side model regression |
 
 ## Related Patterns
-- [Prediction Model Accuracy Regression](./prediction-model-accuracy-regression.md) - a related but distinct failure: accuracy that was previously adequate silently degrading after a vendor-side model update
-- [Degraded Sla Not Communicated](./degraded-sla-not-communicated.md) - both involve a quality gap the agent has no direct signal to detect
-- [Latency Sla Violation](./latency-sla-violation.md) - a parallel case of an advertised SLA figure (latency instead of accuracy) not holding up in practice
+- [Prediction Model Accuracy Regression](prediction-model-accuracy-regression.md) - a related but distinct failure: accuracy that was previously adequate silently degrading after a vendor-side model update
+- [Degraded Sla Not Communicated](degraded-sla-not-communicated.md) - both involve a quality gap the agent has no direct signal to detect
+- [Latency Sla Violation](latency-sla-violation.md) - a parallel case of an advertised SLA figure (latency instead of accuracy) not holding up in practice

@@ -61,6 +61,6 @@ Multi-tenant execution platforms enforce per-job CPU quotas to guarantee fair sc
 | Sustained throttling on retries | Same job ID retried >2 times with `cpu_throttled_pct` > 50% each time | Medium | Route job to higher-CPU tier or split input before further retries |
 
 ## Related Patterns
-- [Memory Quota Per Operation](./memory-quota-per-operation.md) - same class of resource-limit failure, memory instead of CPU
-- [Execution Time Quota](./execution-time-quota.md) - CPU throttling often manifests as hitting the execution-time limit
-- [Storage Quota Soft Limit](./storage-quota-soft-limit.md) - degraded-performance-before-hard-failure pattern shared across resource types
+- [Memory Quota Per Operation](memory-quota-per-operation.md) - same class of resource-limit failure, memory instead of CPU
+- [Execution Time Quota](execution-time-quota.md) - CPU throttling often manifests as hitting the execution-time limit
+- [Storage Quota Soft Limit](storage-quota-soft-limit.md) - degraded-performance-before-hard-failure pattern shared across resource types

@@ -64,6 +64,6 @@ one which prior constraints still apply, catches all nine correctly.
 | Constraint miss on verified output | Post-hoc verification finds a stated constraint unmet | High | Block delivery, trigger decomposition retry or escalation to stronger model |
 
 ## Related Patterns
-- [Model Context Length Behavior Change](./model-context-length-behavior-change.md) - both describe capacity ceilings, one from task complexity and one from context fullness
-- [Model Reasoning Inconsistency](./model-reasoning-inconsistency.md) - capacity overload is one cause of the inconsistent reasoning this pattern describes
-- [Model Instruction Following Decay](./model-instruction-following-decay.md) - shares the mechanism of later-stated requirements losing attention priority, but over a session rather than within one call
+- [Model Context Length Behavior Change](model-context-length-behavior-change.md) - both describe capacity ceilings, one from task complexity and one from context fullness
+- [Model Reasoning Inconsistency](model-reasoning-inconsistency.md) - capacity overload is one cause of the inconsistent reasoning this pattern describes
+- [Model Instruction Following Decay](model-instruction-following-decay.md) - shares the mechanism of later-stated requirements losing attention priority, but over a session rather than within one call

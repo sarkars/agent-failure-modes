@@ -67,6 +67,6 @@ the order is already placed.
 | Handoff latency spike | handoff_to_processing_latency exceeds the alert threshold for a sustained period | Medium | Investigate queue backlog or receiver capacity, scale up if needed |
 
 ## Related Patterns
-- [Handoff Approval Skipped](./handoff-approval-skipped.md) - the same async timing gap that causes stale-task delivery can also cause an approval wait to be bypassed via timeout
-- [Handoff Idempotency Violation](./handoff-idempotency-violation.md) - timing-driven retries are a primary source of the duplicate handoffs that trigger idempotency violations
-- [Handoff Circular Dependency](./handoff-circular-dependency.md) - timing mismatches and circular routing are both cases where locally reasonable handoff logic produces a globally broken outcome
+- [Handoff Approval Skipped](handoff-approval-skipped.md) - the same async timing gap that causes stale-task delivery can also cause an approval wait to be bypassed via timeout
+- [Handoff Idempotency Violation](handoff-idempotency-violation.md) - timing-driven retries are a primary source of the duplicate handoffs that trigger idempotency violations
+- [Handoff Circular Dependency](handoff-circular-dependency.md) - timing mismatches and circular routing are both cases where locally reasonable handoff logic produces a globally broken outcome

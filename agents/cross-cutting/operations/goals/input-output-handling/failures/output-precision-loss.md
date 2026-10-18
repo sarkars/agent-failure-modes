@@ -67,6 +67,6 @@ the agent's aggregation step using floats instead of a decimal type.
 | Large ID round-trip mismatch | A large integer ID differs after passing through JSON serialization/deserialization | High | Patch serialization to use string representation, audit for corrupted references |
 
 ## Related Patterns
-- [Output Type Coercion Failure](./output-type-coercion-failure.md) - a related numeric/type-fidelity failure where a value's type, not just its precision, is altered incorrectly downstream
-- [Input Locale Mismatch](./input-locale-mismatch.md) - a related numeric-fidelity failure on the input side, where decimal-separator confusion produces a wrong value that also parses cleanly
-- [Output Ordering Nondeterminism](./output-ordering-nondeterminism.md) - both are subtle data-fidelity failures that produce plausible-looking output that only proves wrong under close comparison
+- [Output Type Coercion Failure](output-type-coercion-failure.md) - a related numeric/type-fidelity failure where a value's type, not just its precision, is altered incorrectly downstream
+- [Input Locale Mismatch](input-locale-mismatch.md) - a related numeric-fidelity failure on the input side, where decimal-separator confusion produces a wrong value that also parses cleanly
+- [Output Ordering Nondeterminism](output-ordering-nondeterminism.md) - both are subtle data-fidelity failures that produce plausible-looking output that only proves wrong under close comparison

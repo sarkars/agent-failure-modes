@@ -70,6 +70,6 @@ Week 6: store has grown to 1.7M records. Checkpoint lookup queries,
 | Unbounded store growth | state_store_growth_rate exceeds baseline for 3+ days with no matching workload increase | Medium | Audit collector configuration and reference-count logic, check for abandoned branches |
 
 ## Related Patterns
-- [State Version Incompatibility](./state-version-incompatibility.md) - a schema change can be exactly what silently breaks the collector's deserializer, as in the worked example above
-- [State Replication Lag](./state-replication-lag.md) - both describe background maintenance processes whose failure is invisible from the live request path
-- [State Consistency Timeout](./state-consistency-timeout.md) - shares the pattern of a background safeguard failing quietly and only surfacing as a downstream symptom later
+- [State Version Incompatibility](state-version-incompatibility.md) - a schema change can be exactly what silently breaks the collector's deserializer, as in the worked example above
+- [State Replication Lag](state-replication-lag.md) - both describe background maintenance processes whose failure is invisible from the live request path
+- [State Consistency Timeout](state-consistency-timeout.md) - shares the pattern of a background safeguard failing quietly and only surfacing as a downstream symptom later

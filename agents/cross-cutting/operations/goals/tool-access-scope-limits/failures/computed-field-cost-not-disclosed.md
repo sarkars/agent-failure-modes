@@ -65,6 +65,6 @@ customers' deal data through the win-probability value.
 | Computed Field Cost Spike | A single agent session's calls to a computed field exceed the defined cost budget | P2 | Throttle the session, review whether the field needs a dedicated batch/cache path |
 
 ## Related Patterns
-- [Data Classification Access Not Enforced](./data-classification-access-not-enforced.md) - both stem from the scoping layer relying on metadata that isn't consistently applied
-- [Sensitive Field Access Not Restricted](./sensitive-field-access-not-restricted.md) - a computed field can encode sensitive information without being individually flagged as sensitive
-- [Field-Level Access Not Restricted](./field-level-access-not-restricted.md) - both involve gaps below the record-level granularity that access control typically operates at
+- [Data Classification Access Not Enforced](data-classification-access-not-enforced.md) - both stem from the scoping layer relying on metadata that isn't consistently applied
+- [Sensitive Field Access Not Restricted](sensitive-field-access-not-restricted.md) - a computed field can encode sensitive information without being individually flagged as sensitive
+- [Field-Level Access Not Restricted](field-level-access-not-restricted.md) - both involve gaps below the record-level granularity that access control typically operates at

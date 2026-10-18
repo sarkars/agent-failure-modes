@@ -60,6 +60,6 @@ line-item pricing — into a conversation with Account B's support rep.
 | Canary Tenant Query Failure | Synthetic cross-tenant canary query returns data for the wrong tenant | P1 | Page on-call, disable the affected tool pending root-cause fix |
 
 ## Related Patterns
-- [Workspace Isolation Bypass](./workspace-isolation-bypass.md) - same class of failure at workspace rather than account/tenant granularity
-- [Data Scope Boundary Violation](./data-scope-boundary-violation.md) - shares the pattern of an unenforced boundary at the query layer
-- [Record-Level Access Not Enforced](./record-level-access-not-enforced.md) - account-level scoping failures often compound with missing per-record checks
+- [Workspace Isolation Bypass](workspace-isolation-bypass.md) - same class of failure at workspace rather than account/tenant granularity
+- [Data Scope Boundary Violation](data-scope-boundary-violation.md) - shares the pattern of an unenforced boundary at the query layer
+- [Record-Level Access Not Enforced](record-level-access-not-enforced.md) - account-level scoping failures often compound with missing per-record checks

@@ -72,6 +72,6 @@ the leak was found and fixed.
 | Throughput decline correlated with uptime | throughput_per_gpu_hour_vs_uptime declines > 10% within 24 hours of restart | Medium | Schedule investigation into leak source; consider temporary restart cadence adjustment |
 
 ## Related Patterns
-- [Memory Fragmentation Allocation Failure](./memory-fragmentation-allocation-failure.md) - both degrade effective node capacity over uptime and resolve with a restart, though fragmentation and leaks are distinct mechanisms
-- [Disk Space Exhaustion](./disk-space-exhaustion.md) - the same slow-accumulation-to-crisis pattern applied to disk rather than memory/connections
-- [Resource Quota Overcommit](./resource-quota-overcommit.md) - a leak can push a node toward the kind of contention that overcommitted quotas are designed (and fail) to absorb
+- [Memory Fragmentation Allocation Failure](memory-fragmentation-allocation-failure.md) - both degrade effective node capacity over uptime and resolve with a restart, though fragmentation and leaks are distinct mechanisms
+- [Disk Space Exhaustion](disk-space-exhaustion.md) - the same slow-accumulation-to-crisis pattern applied to disk rather than memory/connections
+- [Resource Quota Overcommit](resource-quota-overcommit.md) - a leak can push a node toward the kind of contention that overcommitted quotas are designed (and fail) to absorb

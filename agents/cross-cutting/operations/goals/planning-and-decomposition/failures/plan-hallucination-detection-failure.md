@@ -67,6 +67,6 @@ never delivered, and no clear next action suggested.
 | Runtime tool-not-found error | A step fails during execution because its tool doesn't exist, indicating validation was bypassed | High | Halt remaining plan execution, investigate why pre-execution validation didn't catch it |
 
 ## Related Patterns
-- [Plan Cost Estimation Failure](./plan-cost-estimation-failure.md) - a cost estimate built on a hallucinated step is meaningless, since the fabricated tool has no real cost profile to draw from
-- [Contingency Plan Missing](./contingency-plan-missing.md) - even a well-validated plan needs a fallback for the case where a needed capability turns out not to exist
-- [Plan Invalidation Not Detected](./plan-invalidation-not-detected.md) - both concern the plan being disconnected from ground truth, one from the start (hallucination) and one developing during execution (invalidation)
+- [Plan Cost Estimation Failure](plan-cost-estimation-failure.md) - a cost estimate built on a hallucinated step is meaningless, since the fabricated tool has no real cost profile to draw from
+- [Contingency Plan Missing](contingency-plan-missing.md) - even a well-validated plan needs a fallback for the case where a needed capability turns out not to exist
+- [Plan Invalidation Not Detected](plan-invalidation-not-detected.md) - both concern the plan being disconnected from ground truth, one from the start (hallucination) and one developing during execution (invalidation)

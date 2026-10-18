@@ -55,6 +55,6 @@ The orchestrator reports 20 of 40 ticket summaries failed, and retries them one-
 | Sustained pool saturation | `pool_wait_time_ms` p95 > 1s for 10+ minutes | Critical | Page on-call; likely an unbounded fan-out bug spawning more concurrent calls than intended |
 
 ## Related Patterns
-- [Per-Tool Concurrent Connections Exceeded](./per-tool-concurrent-connections-exceeded.md) - the remote-side counterpart of this client-side pool limit; both cap effective concurrency below the agent's fan-out
-- [Per-Tool Max Parallel Requests](./per-tool-max-parallel-requests.md) - similar concurrency mismatch but enforced by the vendor at the request level instead of the client's connection layer
-- [Connection Timeout No Retry](./connection-timeout-no-retry.md) - pool-wait timeouts are often misdiagnosed as this pattern if the agent doesn't distinguish timeout types
+- [Per-Tool Concurrent Connections Exceeded](per-tool-concurrent-connections-exceeded.md) - the remote-side counterpart of this client-side pool limit; both cap effective concurrency below the agent's fan-out
+- [Per-Tool Max Parallel Requests](per-tool-max-parallel-requests.md) - similar concurrency mismatch but enforced by the vendor at the request level instead of the client's connection layer
+- [Connection Timeout No Retry](connection-timeout-no-retry.md) - pool-wait timeouts are often misdiagnosed as this pattern if the agent doesn't distinguish timeout types

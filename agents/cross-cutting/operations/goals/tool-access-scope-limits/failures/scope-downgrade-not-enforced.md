@@ -66,6 +66,6 @@ could deviate from.
 | Missing Scoped Credential at Spawn | A sub-agent is spawned without a successfully minted restricted credential | P2 | Block the sub-agent from tool use until a properly scoped credential is issued |
 
 ## Related Patterns
-- [Access Control Inheritance Wrong](./access-control-inheritance-wrong.md) - both involve a permission-narrowing or resolution step that silently fails to apply correctly
-- [Workspace Isolation Bypass](./workspace-isolation-bypass.md) - a scope downgrade failure can directly cause a sub-agent to cross workspace boundaries its parent could access
-- [Record-Level Access Not Enforced](./record-level-access-not-enforced.md) - an under-scoped sub-agent frequently manifests this failure downstream when it reads records outside its intended scope
+- [Access Control Inheritance Wrong](access-control-inheritance-wrong.md) - both involve a permission-narrowing or resolution step that silently fails to apply correctly
+- [Workspace Isolation Bypass](workspace-isolation-bypass.md) - a scope downgrade failure can directly cause a sub-agent to cross workspace boundaries its parent could access
+- [Record-Level Access Not Enforced](record-level-access-not-enforced.md) - an under-scoped sub-agent frequently manifests this failure downstream when it reads records outside its intended scope

@@ -62,6 +62,6 @@ Tool vendors evolve their server-side API and expect client SDKs to track it —
 | Unexplained auth/signature failures after vendor deploy | `auth_error_rate_post_deploy` spikes with no credential change on the agent's side | High | Check SDK version against vendor's current supported list before investigating credentials |
 
 ## Related Patterns
-- [Plugin Compatibility Matrix](./plugin-compatibility-matrix.md) - closely related: SDK-to-server mismatch versus plugin-to-platform mismatch
+- [Plugin Compatibility Matrix](plugin-compatibility-matrix.md) - closely related: SDK-to-server mismatch versus plugin-to-platform mismatch
 - [Api Version Schema Mismatch](../../tool-capability-limits/failures/api-version-schema-mismatch.md) - overlapping cause: an outdated SDK often means an outdated understanding of the wire schema too
 - [Deprecated Endpoint Retirement](../../tool-capability-limits/failures/deprecated-endpoint-retirement.md) - SDK incompatibility is frequently the mechanism by which an endpoint's retirement actually manifests as a client failure

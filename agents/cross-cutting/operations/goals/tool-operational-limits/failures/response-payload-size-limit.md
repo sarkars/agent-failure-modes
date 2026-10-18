@@ -62,6 +62,6 @@ larger contributor, but never appears in the agent's summary.
 | Response near known size cap with no pagination used | Unpaginated call returns a body within 10% of the known size limit | Medium | Switch call to paginated retrieval going forward |
 
 ## Related Patterns
-- [Request Payload Size Limit](./request-payload-size-limit.md) - the same size-ceiling risk on the outbound side of a call rather than the inbound response
-- [Field Length Limit](./field-length-limit.md) - a narrower, single-field version of silent truncation that shares the same detection challenge
-- [Array Element Limit](./array-element-limit.md) - a request-side array cap that produces an analogous silent-partial-success failure mode
+- [Request Payload Size Limit](request-payload-size-limit.md) - the same size-ceiling risk on the outbound side of a call rather than the inbound response
+- [Field Length Limit](field-length-limit.md) - a narrower, single-field version of silent truncation that shares the same detection challenge
+- [Array Element Limit](array-element-limit.md) - a request-side array cap that produces an analogous silent-partial-success failure mode

@@ -65,6 +65,6 @@ two actions taken 1 second apart contradict each other.
 | Replication lag spike | replication_lag_seconds exceeds SLA for a shared memory store | Medium | Route high-conflict entity reads to primary, notify infra team |
 
 ## Related Patterns
-- [Memory Not Updated Stale Retrieval](./memory-not-updated-stale-retrieval.md) - the single-agent version of the same read-after-write consistency gap
-- [Memory Interleaving Corruption](./memory-interleaving-corruption.md) - a more severe outcome of concurrent multi-agent access where writes actually corrupt a record rather than just diverge in reads
-- [Context Coherence Loss](./context-coherence-loss.md) - the within-agent analogue: no single authoritative current-state view, here across agents rather than across turns
+- [Memory Not Updated Stale Retrieval](memory-not-updated-stale-retrieval.md) - the single-agent version of the same read-after-write consistency gap
+- [Memory Interleaving Corruption](memory-interleaving-corruption.md) - a more severe outcome of concurrent multi-agent access where writes actually corrupt a record rather than just diverge in reads
+- [Context Coherence Loss](context-coherence-loss.md) - the within-agent analogue: no single authoritative current-state view, here across agents rather than across turns

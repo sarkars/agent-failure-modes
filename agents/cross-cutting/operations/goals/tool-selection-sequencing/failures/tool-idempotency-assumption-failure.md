@@ -69,6 +69,6 @@ flags the account balance discrepancy.
 | Retry issued against unclassified tool | A retry fires against a tool with no idempotency classification on record | Medium | Block the retry pending classification, notify the tool's owning team |
 
 ## Related Patterns
-- [Tool State Dependency Violation](./tool-state-dependency-violation.md) - both involve incorrect assumptions about what state a prior call actually established
-- [Tool Invocation Ordering Dependency](./tool-invocation-ordering-dependency.md) - a retried call can also violate an ordering constraint if other calls happened in between the original attempt and the retry
-- [Tool Mutation State Leak](./tool-mutation-state-leak.md) - a non-idempotent retry is one specific mechanism by which a tool's mutation can unexpectedly affect later processing
+- [Tool State Dependency Violation](tool-state-dependency-violation.md) - both involve incorrect assumptions about what state a prior call actually established
+- [Tool Invocation Ordering Dependency](tool-invocation-ordering-dependency.md) - a retried call can also violate an ordering constraint if other calls happened in between the original attempt and the retry
+- [Tool Mutation State Leak](tool-mutation-state-leak.md) - a non-idempotent retry is one specific mechanism by which a tool's mutation can unexpectedly affect later processing

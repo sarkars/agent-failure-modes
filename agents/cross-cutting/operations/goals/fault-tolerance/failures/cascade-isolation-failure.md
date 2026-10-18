@@ -72,6 +72,6 @@ single shared pool of 200 connections rather than per-tenant pools.
 | Unverified bulkhead flagged | An isolation boundary's verification age exceeds threshold | Low | Schedule a fault-injection test for that boundary |
 
 ## Related Patterns
-- [Single Point of Failure](./single-point-of-failure.md) - the shared resource that breaks isolation is frequently an undocumented single point of failure
-- [Cascade Branching](./cascade-branching.md) - isolation failure is one of the mechanisms that turns what should be a contained fault into a branching cascade
-- [Cascade Resilience Failure](./cascade-resilience-failure.md) - both involve a resilience mechanism (bulkhead vs. retry/breaker) that fails to perform its intended containment function
+- [Single Point of Failure](single-point-of-failure.md) - the shared resource that breaks isolation is frequently an undocumented single point of failure
+- [Cascade Branching](cascade-branching.md) - isolation failure is one of the mechanisms that turns what should be a contained fault into a branching cascade
+- [Cascade Resilience Failure](cascade-resilience-failure.md) - both involve a resilience mechanism (bulkhead vs. retry/breaker) that fails to perform its intended containment function

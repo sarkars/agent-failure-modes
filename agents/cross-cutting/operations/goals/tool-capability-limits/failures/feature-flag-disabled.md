@@ -61,6 +61,6 @@ Vendors commonly use feature flags to control staged rollouts, plan-tier gating,
 | New tenant onboarded with capability gap | `capability_parity_gap_count` increases at tenant onboarding | Medium | Validate required flags before go-live, request enablement proactively |
 
 ## Related Patterns
-- [Regional Feature Not Available](./regional-feature-not-available.md) - same "capability the agent assumes exists is actually gated" pattern, gated by region instead of account flag
-- [Paid Feature Cost Not Disclosed](./paid-feature-cost-not-disclosed.md) - flag-gating is often tied to plan tier, overlapping with undisclosed paid-feature costs
-- [Beta Feature Instability](./beta-feature-instability.md) - beta features are frequently the same features gated behind an early-access flag
+- [Regional Feature Not Available](regional-feature-not-available.md) - same "capability the agent assumes exists is actually gated" pattern, gated by region instead of account flag
+- [Paid Feature Cost Not Disclosed](paid-feature-cost-not-disclosed.md) - flag-gating is often tied to plan tier, overlapping with undisclosed paid-feature costs
+- [Beta Feature Instability](beta-feature-instability.md) - beta features are frequently the same features gated behind an early-access flag

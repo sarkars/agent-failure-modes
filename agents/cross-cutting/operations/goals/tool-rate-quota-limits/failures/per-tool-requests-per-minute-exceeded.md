@@ -56,6 +56,6 @@ By the time the per-minute window rolls over, the agent has sent well over 130 r
 | Sustained per-minute exhaustion | `per_minute_429_count` > 5 for 3+ consecutive minutes | Critical | Switch affected tool traffic to serialized/paced dispatch; page on-call if task-critical |
 
 ## Related Patterns
-- [Rate Limit Grace Period Missing](./rate-limit-grace-period-missing.md) - the immediate-next-call-also-rejected scenario this pattern's retry loop is especially vulnerable to
-- [Per-Tool Burst Rate Exceeded](./per-tool-burst-rate-exceeded.md) - a shorter-window variant of the same "dispatch too much too fast" root problem
-- [Connection Timeout No Retry](./connection-timeout-no-retry.md) - the opposite failure (no retry at all); both stem from retry logic that isn't tuned to the specific failure type
+- [Rate Limit Grace Period Missing](rate-limit-grace-period-missing.md) - the immediate-next-call-also-rejected scenario this pattern's retry loop is especially vulnerable to
+- [Per-Tool Burst Rate Exceeded](per-tool-burst-rate-exceeded.md) - a shorter-window variant of the same "dispatch too much too fast" root problem
+- [Connection Timeout No Retry](connection-timeout-no-retry.md) - the opposite failure (no retry at all); both stem from retry logic that isn't tuned to the specific failure type

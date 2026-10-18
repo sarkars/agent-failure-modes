@@ -156,7 +156,7 @@ Root cause: Model assumed standard product size; no visual scale to correct esti
 ---
 
 ## Related Patterns
-- [Depth Estimation Hallucination](./depth-estimation-hallucination-monocular-vision.md) — Related: size requires depth knowledge
+- [Depth Estimation Hallucination](depth-estimation-hallucination-monocular-vision.md) — Related: size requires depth knowledge
 - [Confident Fabrication](../../../../../cross-cutting/accuracy/goals/output-accuracy/failures/confident-fabrication.md) — High confidence + size error
 - Attribute Recognition Under Lighting Variation — Related: attribute estimation under conditions
 

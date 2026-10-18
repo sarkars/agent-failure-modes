@@ -66,6 +66,6 @@ indication in the schema that anything was ever removed.
 | Precision loss detected | Numeric/temporal field shows rounding or truncation beyond declared tolerance | Medium | Review type mapping, backfill affected records if feasible |
 
 ## Related Patterns
-- [Data Lineage Loss](./data-lineage-loss.md) - lossy transformations often destroy the same fields that would otherwise carry lineage information
-- [Data Pipeline Schema Drift](./data-pipeline-schema-drift.md) - schema drift is an unplanned version of the same field-loss risk, driven by upstream change rather than an intentional narrow mapping
-- [Integration Impedance Mismatch](./integration-impedance-mismatch.md) - lossy transformation is the pipeline-internal analog of impedance mismatch between two integrated systems' data models
+- [Data Lineage Loss](data-lineage-loss.md) - lossy transformations often destroy the same fields that would otherwise carry lineage information
+- [Data Pipeline Schema Drift](data-pipeline-schema-drift.md) - schema drift is an unplanned version of the same field-loss risk, driven by upstream change rather than an intentional narrow mapping
+- [Integration Impedance Mismatch](integration-impedance-mismatch.md) - lossy transformation is the pipeline-internal analog of impedance mismatch between two integrated systems' data models

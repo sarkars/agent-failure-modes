@@ -152,9 +152,9 @@ Root cause: Lesion fragments across patches; insufficient local context to recog
 ---
 
 ## Related Patterns
-- [Vision Model Grid Cell Counting Failure](./vision-model-grid-cell-counting-failure.md) — Specific instance: counting fails due to patch misalignment
+- [Vision Model Grid Cell Counting Failure](vision-model-grid-cell-counting-failure.md) — Specific instance: counting fails due to patch misalignment
 - [Confident Fabrication](../../../../../cross-cutting/accuracy/goals/output-accuracy/failures/confident-fabrication.md) — Model may hallucinate entire objects to fill patch gaps
-- [Semantic Similarity Retrieval Misses Structural Attributes](../../../../../by-capability/knowledge-retrieval/goals/retrieval-relevance/failures/semantic-similarity-retrieval-misses-structural-attributes.md) — Related: structural attributes lost in embeddings
+- [Semantic Similarity Retrieval Misses Structural Attributes](../../../../knowledge-retrieval/goals/retrieval-relevance/failures/semantic-similarity-retrieval-misses-structural-attributes.md) — Related: structural attributes lost in embeddings
 
 ---
 

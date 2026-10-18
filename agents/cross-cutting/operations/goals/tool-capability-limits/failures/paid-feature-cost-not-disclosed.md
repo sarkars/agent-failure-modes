@@ -62,6 +62,6 @@ Vendors often price granular capabilities (e.g., a "premium" OCR mode, an "enhan
 | Unexpected paid-feature call volume spike | `paid_feature_call_count` doubles day-over-day with no corresponding workload change | Medium | Audit recent code changes for unintended routing to the paid variant |
 
 ## Related Patterns
-- [Feature Flag Disabled](./feature-flag-disabled.md) - both involve capability-tier gaps between what the agent assumes and what the account actually has enabled/billed
-- [Regional Feature Not Available](./regional-feature-not-available.md) - a related capability-assumption gap, availability instead of cost
+- [Feature Flag Disabled](feature-flag-disabled.md) - both involve capability-tier gaps between what the agent assumes and what the account actually has enabled/billed
+- [Regional Feature Not Available](regional-feature-not-available.md) - a related capability-assumption gap, availability instead of cost
 - [Api Key Quota Per Account](../../tool-allocation-limits/failures/api-key-quota-per-account.md) - both are cases where the agent lacks visibility into a resource constraint tied to its account

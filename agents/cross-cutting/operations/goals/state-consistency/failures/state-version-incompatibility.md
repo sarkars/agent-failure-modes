@@ -70,6 +70,6 @@ never attempted.
 | Sustained unknown-field rate | unknown_field_encounter_rate stays elevated after a deploy window should have closed | Medium | Check for stuck instances still running old code, verify rollout actually completed |
 
 ## Related Patterns
-- [State Serialization Failure](./state-serialization-failure.md) - a related but distinct failure where the serialization mechanism itself breaks, rather than two valid but incompatible schema versions colliding
-- [State Encoding Mismatch](./state-encoding-mismatch.md) - both are boundary failures where writer and reader assumptions diverge, one on encoding and one on schema
-- [State Garbage Collection Failure](./state-garbage-collection-failure.md) - a schema change can be exactly what causes a collector on an older or newer version to silently stop processing records it can't deserialize
+- [State Serialization Failure](state-serialization-failure.md) - a related but distinct failure where the serialization mechanism itself breaks, rather than two valid but incompatible schema versions colliding
+- [State Encoding Mismatch](state-encoding-mismatch.md) - both are boundary failures where writer and reader assumptions diverge, one on encoding and one on schema
+- [State Garbage Collection Failure](state-garbage-collection-failure.md) - a schema change can be exactly what causes a collector on an older or newer version to silently stop processing records it can't deserialize

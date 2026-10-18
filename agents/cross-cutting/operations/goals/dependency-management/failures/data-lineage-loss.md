@@ -66,6 +66,6 @@ corrupted values.
 | Unresolved source correction | A source correction/retraction has no matching downstream records after propagation window | Medium | Manually audit affected batch, notify data owner |
 
 ## Related Patterns
-- [Data Pipeline Lossy Transformation](./data-pipeline-lossy-transformation.md) - lineage loss is often a side effect of the same transforms that silently drop fields
-- [Data Pipeline Schema Drift](./data-pipeline-schema-drift.md) - schema changes can silently remove the lineage fields a downstream consumer depended on
-- [Data Pipeline Replay Idempotency](./data-pipeline-replay-idempotency.md) - without lineage IDs, replays cannot be scoped to only the affected records
+- [Data Pipeline Lossy Transformation](data-pipeline-lossy-transformation.md) - lineage loss is often a side effect of the same transforms that silently drop fields
+- [Data Pipeline Schema Drift](data-pipeline-schema-drift.md) - schema changes can silently remove the lineage fields a downstream consumer depended on
+- [Data Pipeline Replay Idempotency](data-pipeline-replay-idempotency.md) - without lineage IDs, replays cannot be scoped to only the affected records

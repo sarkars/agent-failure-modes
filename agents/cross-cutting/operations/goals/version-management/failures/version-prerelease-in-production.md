@@ -69,6 +69,6 @@ that had superseded both.
 | Corresponding stable release available | The stable release superseding a tracked prerelease pin has shipped | Medium | Schedule migration to the stable pin in the next release cycle |
 
 ## Related Patterns
-- [Version Pinning Expiration](./version-pinning-expiration.md) - a related pattern about any pin (stable or prerelease) going stale without review; this pattern is the specific case where the pin was never on a supported channel to begin with
+- [Version Pinning Expiration](version-pinning-expiration.md) - a related pattern about any pin (stable or prerelease) going stale without review; this pattern is the specific case where the pin was never on a supported channel to begin with
 - [Beta Feature Instability](../../tool-capability-limits/failures/beta-feature-instability.md) - a related pattern about using a vendor's beta-labeled feature/API, sharing the same "no stability guarantee" root cause applied to a feature flag rather than a pinned dependency version
-- [Version Compatibility Matrix Explosion](./version-compatibility-matrix-explosion.md) - prerelease pins compound this pattern by adding untested, unstable version combinations to an already-unmanageable compatibility matrix
+- [Version Compatibility Matrix Explosion](version-compatibility-matrix-explosion.md) - prerelease pins compound this pattern by adding untested, unstable version combinations to an already-unmanageable compatibility matrix

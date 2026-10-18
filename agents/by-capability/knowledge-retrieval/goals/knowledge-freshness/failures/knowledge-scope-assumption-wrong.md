@@ -63,6 +63,6 @@ compliance audit months later.
 | Non-default scope error rate elevated | non_default_scope_error_rate significantly exceeds default-scope error rate | Medium | Audit retrieval defaulting behavior for the affected topic/scope combination |
 
 ## Related Patterns
-- [Fact Source Confusion](./fact-source-confusion.md) - both stem from insufficient disambiguation before answering, one for entity identity and one for applicable scope
-- [Knowledge Version Mismatch](./knowledge-version-mismatch.md) - the specific case of this pattern where the mismatched scope is product/policy version
-- [Fact Generalization Error](./fact-generalization-error.md) - shares the mechanism of a narrowly-scoped fact being applied outside its true scope, framed at the population/condition level rather than jurisdiction/version
+- [Fact Source Confusion](fact-source-confusion.md) - both stem from insufficient disambiguation before answering, one for entity identity and one for applicable scope
+- [Knowledge Version Mismatch](knowledge-version-mismatch.md) - the specific case of this pattern where the mismatched scope is product/policy version
+- [Fact Generalization Error](fact-generalization-error.md) - shares the mechanism of a narrowly-scoped fact being applied outside its true scope, framed at the population/condition level rather than jurisdiction/version

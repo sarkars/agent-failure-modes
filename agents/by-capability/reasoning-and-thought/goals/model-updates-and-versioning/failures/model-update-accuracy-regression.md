@@ -71,6 +71,6 @@ volumes and finds the default queue's ticket count has nearly tripled.
 | Post-update parse/fallback spike | downstream_parse_failure_rate or fallback volume rises shortly after a version change | High | Correlate with the most recent model version change, roll back if confirmed, add the failure case to the regression suite |
 
 ## Related Patterns
-- [Model Behavior Change Detection Failure](./model-behavior-change-detection-failure.md) - describes why the evaluation/monitoring process fails to catch this regression before launch; this pattern describes the regression mechanism itself
-- [Model Update Rollback Delay](./model-update-rollback-delay.md) - once this regression is detected, this sibling pattern covers why reverting to the prior version is often slower than expected
-- [Model AB Test Interference](./model-ab-test-interference.md) - both describe behavior shifts introduced by a model change, one from interaction effects across concurrent experiments and one from the training trade-off itself
+- [Model Behavior Change Detection Failure](model-behavior-change-detection-failure.md) - describes why the evaluation/monitoring process fails to catch this regression before launch; this pattern describes the regression mechanism itself
+- [Model Update Rollback Delay](model-update-rollback-delay.md) - once this regression is detected, this sibling pattern covers why reverting to the prior version is often slower than expected
+- [Model AB Test Interference](model-ab-test-interference.md) - both describe behavior shifts introduced by a model change, one from interaction effects across concurrent experiments and one from the training trade-off itself

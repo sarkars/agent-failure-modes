@@ -68,6 +68,6 @@ releases from scratch.
 | Stale undocumented pin detected | A pin exceeds the review interval with no linked rationale | Medium | Assign an engineer to investigate and either document, narrow, or remove the pin |
 
 ## Related Patterns
-- [Dependency Version Conflicts](./dependency-version-conflicts.md) - a pinning conflict is a special case where one side of the incompatible-version collision is a deliberate historical pin rather than an unconstrained transitive requirement
-- [Dependency Breaking Change](./dependency-breaking-change.md) - pins are frequently created specifically in reaction to a breaking change, making the two patterns causally linked
-- [Dependency Security Vulnerability](./dependency-security-vulnerability.md) - a stale pin is one of the most common concrete reasons a known-fixed vulnerability remains unpatched
+- [Dependency Version Conflicts](dependency-version-conflicts.md) - a pinning conflict is a special case where one side of the incompatible-version collision is a deliberate historical pin rather than an unconstrained transitive requirement
+- [Dependency Breaking Change](dependency-breaking-change.md) - pins are frequently created specifically in reaction to a breaking change, making the two patterns causally linked
+- [Dependency Security Vulnerability](dependency-security-vulnerability.md) - a stale pin is one of the most common concrete reasons a known-fixed vulnerability remains unpatched

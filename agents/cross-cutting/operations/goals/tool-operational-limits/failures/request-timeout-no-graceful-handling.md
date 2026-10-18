@@ -62,6 +62,6 @@ requests, each comfortably under the 30-second timeout.
 | Repeated full-scope retry after timeout | Same unchunked request retried 2+ times after timing out | Critical | Disable naive retry path for this tool, require scope-reduction logic before further attempts |
 
 ## Related Patterns
-- [Total Job Timeout](./total-job-timeout.md) - a related but distinct limit on overall multi-step job duration rather than a single request's hard cutoff
-- [Query Planning Timeout](./query-planning-timeout.md) - another timeout variant where the failure mode (no result, no partial progress) looks similar but occurs before execution even begins
-- [Backoff Envelope Violation](./backoff-envelope-violation.md) - retrying too aggressively after a timeout compounds wasted work when the tool offers no partial-progress recovery
+- [Total Job Timeout](total-job-timeout.md) - a related but distinct limit on overall multi-step job duration rather than a single request's hard cutoff
+- [Query Planning Timeout](query-planning-timeout.md) - another timeout variant where the failure mode (no result, no partial progress) looks similar but occurs before execution even begins
+- [Backoff Envelope Violation](backoff-envelope-violation.md) - retrying too aggressively after a timeout compounds wasted work when the tool offers no partial-progress recovery

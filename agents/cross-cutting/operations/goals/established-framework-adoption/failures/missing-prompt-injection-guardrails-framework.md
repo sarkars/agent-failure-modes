@@ -112,7 +112,7 @@ been another one-off sentence added to the system prompt.
 
 ## Related Patterns
 
-- [Missing PII Detection Framework](./missing-pii-detection-framework.md) - the same "ad-hoc versus established framework" mechanism applied to a different security-adjacent domain
+- [Missing PII Detection Framework](missing-pii-detection-framework.md) - the same "ad-hoc versus established framework" mechanism applied to a different security-adjacent domain
 
 ## References
 

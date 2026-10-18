@@ -64,6 +64,6 @@ is a tiny fraction of the total pool.
 | Critical-path call denied | A call tagged critical/gating is rejected due to shared pool exhaustion | High | Immediately allocate from reserved capacity, page on-call |
 
 ## Related Patterns
-- [Budget Priority Misalignment](./budget-priority-misalignment.md) - starvation is the multi-consumer version of the same lack-of-priority problem within a single agent
-- [Per-Tool Daily Budget Exhaustion](./per-tool-daily-budget-exhaustion.md) - starvation is one specific cause of exhaustion, driven by uneven consumption rather than aggregate demand
-- [Cross-Tool Total Budget Exceeded](./cross-tool-total-budget-exceeded.md) - both involve pooled-resource accounting gaps, one across tools and one across consumers of one tool
+- [Budget Priority Misalignment](budget-priority-misalignment.md) - starvation is the multi-consumer version of the same lack-of-priority problem within a single agent
+- [Per-Tool Daily Budget Exhaustion](per-tool-daily-budget-exhaustion.md) - starvation is one specific cause of exhaustion, driven by uneven consumption rather than aggregate demand
+- [Cross-Tool Total Budget Exceeded](cross-tool-total-budget-exceeded.md) - both involve pooled-resource accounting gaps, one across tools and one across consumers of one tool

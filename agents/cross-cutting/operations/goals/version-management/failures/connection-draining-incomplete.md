@@ -72,6 +72,6 @@ logged because the process was killed before it could write one.
 | Orphaned tool call detected | A tool call side effect logged with no matching completion within its expected window, near a deployment timestamp | High | Manually reconcile the affected external state, notify affected user session owner if applicable |
 
 ## Related Patterns
-- [Blue-Green Deployment Traffic Not Switched](./blue-green-deployment-traffic-not-switched.md) - both concern the mechanics of retiring an old version safely once traffic has (or hasn't) moved
-- [Rollback Partial Failure](./rollback-partial-failure.md) - shares the theme of side effects left in an indeterminate state when an operation is interrupted mid-flight
-- [Sticky Session Loss](./sticky-session-loss.md) - a related failure where session continuity breaks during deployment, though via routing rather than forced termination
+- [Blue-Green Deployment Traffic Not Switched](blue-green-deployment-traffic-not-switched.md) - both concern the mechanics of retiring an old version safely once traffic has (or hasn't) moved
+- [Rollback Partial Failure](rollback-partial-failure.md) - shares the theme of side effects left in an indeterminate state when an operation is interrupted mid-flight
+- [Sticky Session Loss](sticky-session-loss.md) - a related failure where session continuity breaks during deployment, though via routing rather than forced termination

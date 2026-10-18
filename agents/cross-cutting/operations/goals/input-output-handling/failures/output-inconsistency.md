@@ -70,6 +70,6 @@ support system's own count.
 | Downstream aggregation record drop spike | Reporting/aggregation pipeline drop rate for agent-sourced records rises sharply | High | Reconcile against source-of-truth counts, audit recent output-shape changes |
 
 ## Related Patterns
-- [Output Format Not Validated](./output-format-not-validated.md) - the underlying enforcement gap that allows shape inconsistency to reach consumers unfiltered
-- [Output Ordering Nondeterminism](./output-ordering-nondeterminism.md) - a specific instance of output inconsistency scoped to list/array element ordering
-- [Output Hallucination in Structured Format](./output-hallucination-in-structured-format.md) - a related failure where the model fills schema gaps with fabricated content rather than varying the shape itself
+- [Output Format Not Validated](output-format-not-validated.md) - the underlying enforcement gap that allows shape inconsistency to reach consumers unfiltered
+- [Output Ordering Nondeterminism](output-ordering-nondeterminism.md) - a specific instance of output inconsistency scoped to list/array element ordering
+- [Output Hallucination in Structured Format](output-hallucination-in-structured-format.md) - a related failure where the model fills schema gaps with fabricated content rather than varying the shape itself

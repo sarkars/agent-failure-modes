@@ -75,6 +75,6 @@ this one customer's environment.
 | Compatibility matrix out of date | compatibility_matrix_staleness exceeds threshold after a new component version ships | Low | Assign matrix update as part of the release checklist for the newly shipped component |
 
 ## Related Patterns
-- [Version Skipping Unsupported](./version-skipping-unsupported.md) - an upgrade path issue that becomes far more likely to go unnoticed when the compatibility matrix is already too large to reason about
+- [Version Skipping Unsupported](version-skipping-unsupported.md) - an upgrade path issue that becomes far more likely to go unnoticed when the compatibility matrix is already too large to reason about
 - [Deprecated Endpoint Retirement](../../tool-capability-limits/failures/deprecated-endpoint-retirement.md) - failing to actually retire old supported versions/endpoints on their announced timeline is a direct driver of matrix growth over time
-- [Deployment Dependency Deadlock](./deployment-dependency-deadlock.md) - both stem from independently-versioned components lacking a shared, explicit compatibility contract
+- [Deployment Dependency Deadlock](deployment-dependency-deadlock.md) - both stem from independently-versioned components lacking a shared, explicit compatibility contract

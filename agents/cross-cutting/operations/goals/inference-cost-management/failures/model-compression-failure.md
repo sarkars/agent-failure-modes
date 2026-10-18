@@ -74,6 +74,6 @@ specifically while keeping INT4 for less numerically-sensitive agents.
 | Segment-specific production error spike | segment_error_rate_delta exceeds 10% relative increase for any request-type segment post-compression | High | Investigate correlation with compression rollout; consider workload-specific precision exemption |
 
 ## Related Patterns
-- [Quantization Accuracy Degradation Undetected](./quantization-accuracy-degradation-undetected.md) - the specific case of this pattern where the undetected regression is a general accuracy drop rather than a capability-specific one; the two often co-occur
-- [Throughput Per Dollar Optimization Failure](./throughput-per-dollar-optimization-failure.md) - a compression change that increases rework/escalation cost is a direct instance of raw throughput improving while cost-per-successful-output worsens
-- [Speculative Execution Cost Waste](./speculative-execution-cost-waste.md) - another cost-motivated inference optimization technique that can carry hidden quality or efficiency costs not visible in aggregate metrics
+- [Quantization Accuracy Degradation Undetected](quantization-accuracy-degradation-undetected.md) - the specific case of this pattern where the undetected regression is a general accuracy drop rather than a capability-specific one; the two often co-occur
+- [Throughput Per Dollar Optimization Failure](throughput-per-dollar-optimization-failure.md) - a compression change that increases rework/escalation cost is a direct instance of raw throughput improving while cost-per-successful-output worsens
+- [Speculative Execution Cost Waste](speculative-execution-cost-waste.md) - another cost-motivated inference optimization technique that can carry hidden quality or efficiency costs not visible in aggregate metrics

@@ -63,6 +63,6 @@ Vendors bound webhook retry attempts (both in count and total elapsed time) to p
 | Vendor reports exhausted deliveries | `exhausted_delivery_count` > 0 | High | Manually process the specific event IDs reported as failed, backfill from source system |
 
 ## Related Patterns
-- [Webhook Delivery Guarantee Not Enforced](./webhook-delivery-guarantee-not-enforced.md) - retry exhaustion is the specific terminal mechanism by which a best-effort delivery guarantee ultimately fails
-- [Webhook Order Not Guaranteed](./webhook-order-not-guaranteed.md) - retries are also a primary cause of out-of-order delivery when they arrive after a subsequent event
+- [Webhook Delivery Guarantee Not Enforced](webhook-delivery-guarantee-not-enforced.md) - retry exhaustion is the specific terminal mechanism by which a best-effort delivery guarantee ultimately fails
+- [Webhook Order Not Guaranteed](webhook-order-not-guaranteed.md) - retries are also a primary cause of out-of-order delivery when they arrive after a subsequent event
 - [Sla Availability Not Met](../../tool-sla-quality-limits/failures/sla-availability-not-met.md) - receiver-side or vendor-side downtime exceeding assumptions is often the trigger event for retry exhaustion

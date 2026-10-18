@@ -55,6 +55,6 @@ Total requests sent (15) was nowhere near any documented rate limit, but the con
 | Sustained concurrency starvation | Rejection rate stays above 0 for 10+ minutes despite queuing | Critical | Reduce sub-task concurrency or request a higher connection limit from the vendor |
 
 ## Related Patterns
-- [Connection Pool Exhaustion](./connection-pool-exhaustion.md) - a client-side version of the same concurrency-vs-capacity mismatch, caused by the agent's own HTTP client rather than a vendor-enforced cap
-- [Per-Tool Max Parallel Requests](./per-tool-max-parallel-requests.md) - the request-level analog of this connection-level limit; both require an orchestrator-side concurrency cap
-- [Per-Tool Burst Rate Exceeded](./per-tool-burst-rate-exceeded.md) - parallel fan-out often trips both a burst-rate limit and a concurrent-connection limit simultaneously
+- [Connection Pool Exhaustion](connection-pool-exhaustion.md) - a client-side version of the same concurrency-vs-capacity mismatch, caused by the agent's own HTTP client rather than a vendor-enforced cap
+- [Per-Tool Max Parallel Requests](per-tool-max-parallel-requests.md) - the request-level analog of this connection-level limit; both require an orchestrator-side concurrency cap
+- [Per-Tool Burst Rate Exceeded](per-tool-burst-rate-exceeded.md) - parallel fan-out often trips both a burst-rate limit and a concurrent-connection limit simultaneously

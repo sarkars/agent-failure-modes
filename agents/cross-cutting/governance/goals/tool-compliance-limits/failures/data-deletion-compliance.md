@@ -59,6 +59,6 @@ Data written by an agent frequently fans out across multiple systems as a side e
 | New PII-writing tool unregistered | A tool writes personal data without a corresponding entry in the deletion-scope inventory | High | Block further writes from that tool until it's registered with a deletion hook |
 
 ## Related Patterns
-- [PII Retention Policy Violation](./pii-retention-policy-violation.md) - both concern personal data persisting beyond the point it should have been removed, via retention expiry versus incomplete deletion propagation
-- [Data Residency Violation](./data-residency-violation.md) - both stem from an incomplete inventory of where the agent's data actually ends up across downstream systems
-- [Audit Retention Policy](./audit-retention-policy.md) - the inverse compliance risk: retaining audit records too briefly versus retaining personal data too long
+- [PII Retention Policy Violation](pii-retention-policy-violation.md) - both concern personal data persisting beyond the point it should have been removed, via retention expiry versus incomplete deletion propagation
+- [Data Residency Violation](data-residency-violation.md) - both stem from an incomplete inventory of where the agent's data actually ends up across downstream systems
+- [Audit Retention Policy](audit-retention-policy.md) - the inverse compliance risk: retaining audit records too briefly versus retaining personal data too long

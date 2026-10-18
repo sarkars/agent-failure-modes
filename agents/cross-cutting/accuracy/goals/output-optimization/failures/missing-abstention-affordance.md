@@ -104,7 +104,7 @@ review reimbursements after the discrepancy surfaces in an audit.
 ## Related Patterns
 
 - [Bad Refusal](../../../../../by-use-case/customer-service/goals/conversation-resolution/failures/bad-refusal.md) - the inverse failure of refusing when the agent actually had enough information to help; this pattern is the failure to refuse/abstain when it genuinely lacked grounding
-- [Confidence Calibration Failure](./confidence-calibration-failure.md) - a related failure where even a well-calibrated low-confidence signal goes unused because there's no abstention path to route it to
+- [Confidence Calibration Failure](confidence-calibration-failure.md) - a related failure where even a well-calibrated low-confidence signal goes unused because there's no abstention path to route it to
 
 ## References
 

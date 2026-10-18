@@ -67,6 +67,6 @@ execution on an interpretation it never surfaced as a choice.
 | Rising wrong-interpretation corrections | wrong_interpretation_rate trends upward for a request category | Medium | Review ambiguity-detection coverage for that category |
 
 ## Related Patterns
-- [Assumption Validation Failure](./assumption-validation-failure.md) - narrower version limited to a single unstated parameter rather than the core intent of the request
-- [Over-Clarification](./over-clarification.md) - the opposite miscalibration, asking when the request was actually clear
-- [Disambiguation Strategy Ineffective](./disambiguation-strategy-ineffective.md) - under-clarification is the specific failure mode where the chosen strategy is "guess silently" and that choice was wrong for the ambiguity's stakes
+- [Assumption Validation Failure](assumption-validation-failure.md) - narrower version limited to a single unstated parameter rather than the core intent of the request
+- [Over-Clarification](over-clarification.md) - the opposite miscalibration, asking when the request was actually clear
+- [Disambiguation Strategy Ineffective](disambiguation-strategy-ineffective.md) - under-clarification is the specific failure mode where the chosen strategy is "guess silently" and that choice was wrong for the ambiguity's stakes

@@ -65,6 +65,6 @@ hasn't left the port yet.
 | New source with undeclared locale | An ingestion source begins sending data without a locale/format declaration | Medium | Block ingestion until format is confirmed with source owner |
 
 ## Related Patterns
-- [Input Timezone Ambiguity](./input-timezone-ambiguity.md) - a related temporal-interpretation failure, often co-occurring with date locale mismatches in the same payload
-- [Input Encoding Mismatch](./input-encoding-mismatch.md) - both are silent misinterpretation failures where a value "successfully" parses under the wrong assumption
-- [Output Precision Loss](./output-precision-loss.md) - a related numeric-fidelity failure that can compound with decimal-separator misparsing
+- [Input Timezone Ambiguity](input-timezone-ambiguity.md) - a related temporal-interpretation failure, often co-occurring with date locale mismatches in the same payload
+- [Input Encoding Mismatch](input-encoding-mismatch.md) - both are silent misinterpretation failures where a value "successfully" parses under the wrong assumption
+- [Output Precision Loss](output-precision-loss.md) - a related numeric-fidelity failure that can compound with decimal-separator misparsing

@@ -72,6 +72,6 @@ minor detail relative to the 34 more "typical" records.
 | Recall regression after compaction | post_compaction_recall_rate for an account drops below threshold after a compaction run | Medium | Review compaction budget/prompt, consider raising budget for the affected account |
 
 ## Related Patterns
-- [Summary Drift](./summary-drift.md) - the cascading, multi-cycle version of information loss, versus this pattern's single budget-driven compaction pass
-- [Compaction Information Loss](./compaction-information-loss.md) - a closely related pattern focused on age/frequency-based deletion policies rather than summarization-driven compression choices
-- [Memory Fragmentation](./memory-fragmentation.md) - the opposite failure mode in the same lifecycle stage: too little consolidation causing bloat, versus too much consolidation causing information loss
+- [Summary Drift](summary-drift.md) - the cascading, multi-cycle version of information loss, versus this pattern's single budget-driven compaction pass
+- [Compaction Information Loss](compaction-information-loss.md) - a closely related pattern focused on age/frequency-based deletion policies rather than summarization-driven compression choices
+- [Memory Fragmentation](memory-fragmentation.md) - the opposite failure mode in the same lifecycle stage: too little consolidation causing bloat, versus too much consolidation causing information loss

@@ -76,6 +76,6 @@ baseline.
 | High fragmentation approaching threshold | largest_contiguous_free_block_ratio < 0.6 on any node | Medium | Schedule proactive restart before failures occur; avoid autoscaling in response |
 
 ## Related Patterns
-- [Resource Leak](./resource-leak.md) - both degrade a node's effective capacity gradually over uptime until a restart resolves them, though the underlying mechanism differs
-- [Concurrent Request Resource Explosion](./concurrent-request-resource-explosion.md) - fragmentation reduces the effective ceiling that a concurrency spike can push past, making the explosion more likely at a given nominal capacity
-- [Resource Reservation Insufficient](./resource-reservation-insufficient.md) - fragmentation-driven failures are often misdiagnosed as this pattern, leading to unnecessary over-provisioning instead of the correct fix
+- [Resource Leak](resource-leak.md) - both degrade a node's effective capacity gradually over uptime until a restart resolves them, though the underlying mechanism differs
+- [Concurrent Request Resource Explosion](concurrent-request-resource-explosion.md) - fragmentation reduces the effective ceiling that a concurrency spike can push past, making the explosion more likely at a given nominal capacity
+- [Resource Reservation Insufficient](resource-reservation-insufficient.md) - fragmentation-driven failures are often misdiagnosed as this pattern, leading to unnecessary over-provisioning instead of the correct fix

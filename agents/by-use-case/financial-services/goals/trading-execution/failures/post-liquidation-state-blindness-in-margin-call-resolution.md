@@ -51,8 +51,8 @@ Impact: Client's position in B is liquidated unnecessarily, realizing taxable ga
 ---
 
 ## Related Patterns
-- [Fill-Confirmation Status Trusted Without Diffing Against Submitted Order Intent](./fill-confirmation-status-trusted-without-diffing-against-submitted-order-intent.md) — related failure to reconcile a tool's confirmation payload against ground truth, but there the mismatch originates upstream rather than from the agent's own uncaptured side effect
-- [Market-Impact Blindness in Trading Execution](./market-impact-blindness.md) — related execution-sizing failure where the agent's own prior actions are the un-modeled variable
+- [Fill-Confirmation Status Trusted Without Diffing Against Submitted Order Intent](fill-confirmation-status-trusted-without-diffing-against-submitted-order-intent.md) — related failure to reconcile a tool's confirmation payload against ground truth, but there the mismatch originates upstream rather than from the agent's own uncaptured side effect
+- [Market-Impact Blindness in Trading Execution](market-impact-blindness.md) — related execution-sizing failure where the agent's own prior actions are the un-modeled variable
 - [Context Refresh Stale State](../../../../../cross-cutting/operations/goals/memory-management/failures/context-refresh-stale-state.md) — related stale-state mechanism, but driven by a lagging external read path rather than the agent's own unpropagated action
 
 ## References

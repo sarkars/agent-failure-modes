@@ -63,6 +63,6 @@ that closed three years earlier.
 | Validity window match rate drop | validity_window_match_rate falls below threshold after a re-indexing or retrieval-ranking change | Medium | Review recent ranking changes for loss of temporal-validity filtering |
 
 ## Related Patterns
-- [Knowledge Update Lag](./knowledge-update-lag.md) - a systemic version of this failure, where the whole knowledge base lags rather than a single fact being time-misapplied
-- [Knowledge Temporal Context Lost](./knowledge-temporal-context-lost.md) - closely related; this pattern is the retrieval-time mismatch, that one is the generation-time stripping of "as of" framing
-- [Knowledge Version Mismatch](./knowledge-version-mismatch.md) - the product/policy-version analog of the same time-scoping mechanism
+- [Knowledge Update Lag](knowledge-update-lag.md) - a systemic version of this failure, where the whole knowledge base lags rather than a single fact being time-misapplied
+- [Knowledge Temporal Context Lost](knowledge-temporal-context-lost.md) - closely related; this pattern is the retrieval-time mismatch, that one is the generation-time stripping of "as of" framing
+- [Knowledge Version Mismatch](knowledge-version-mismatch.md) - the product/policy-version analog of the same time-scoping mechanism

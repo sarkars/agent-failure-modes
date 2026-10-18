@@ -65,5 +65,5 @@ for the next 20 minutes.
 | Active session evicted | A running task's session is terminated due to another session exceeding the concurrency cap | High | Fail the affected task gracefully with a clear retry-later message, investigate load spike |
 
 ## Related Patterns
-- [License Expiration Not Checked](./license-expiration-not-checked.md) - both stem from the agent treating a licensed tool's usage terms as unconstrained rather than actively tracking them
-- [Feature Entitlement Limit](./feature-entitlement-limit.md) - a related licensing-boundary failure where the constraint is on account tier/feature access rather than session count
+- [License Expiration Not Checked](license-expiration-not-checked.md) - both stem from the agent treating a licensed tool's usage terms as unconstrained rather than actively tracking them
+- [Feature Entitlement Limit](feature-entitlement-limit.md) - a related licensing-boundary failure where the constraint is on account tier/feature access rather than session count

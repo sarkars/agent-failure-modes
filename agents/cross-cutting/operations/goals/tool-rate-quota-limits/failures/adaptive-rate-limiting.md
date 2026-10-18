@@ -54,6 +54,6 @@ The vendor's gateway implements load-shedding or adaptive throttling (often via 
 | Rate estimate collapse | Effective rate estimate falls below 20% of baseline for over 10 minutes | Critical | Open circuit breaker, page on-call, check vendor status page |
 
 ## Related Patterns
-- [Rate Limit Header Not Honored](./rate-limit-header-not-honored.md) - adaptive limits are especially painful when the agent also ignores the headers that could reveal the current ceiling
-- [Rate Limit Grace Period Missing](./rate-limit-grace-period-missing.md) - both patterns involve a tight failure loop when the agent doesn't back off correctly after a 429
-- [Per-Tool Requests Per Minute Exceeded](./per-tool-requests-per-minute-exceeded.md) - a fixed-limit variant of the same underlying symptom, without the added complication of a moving target
+- [Rate Limit Header Not Honored](rate-limit-header-not-honored.md) - adaptive limits are especially painful when the agent also ignores the headers that could reveal the current ceiling
+- [Rate Limit Grace Period Missing](rate-limit-grace-period-missing.md) - both patterns involve a tight failure loop when the agent doesn't back off correctly after a 429
+- [Per-Tool Requests Per Minute Exceeded](per-tool-requests-per-minute-exceeded.md) - a fixed-limit variant of the same underlying symptom, without the added complication of a moving target

@@ -66,6 +66,6 @@ would have cost.
 | Runaway cost session | Cumulative session cost exceeds a multiple of category median with no resolution | High | Alert on-call, review session for loop/non-convergence |
 
 ## Related Patterns
-- [Clarification Loop Infinite](./clarification-loop-infinite.md) - a specific mechanism (endless questioning) that is one common driver of overall length explosion
-- [Conversation Repetition](./conversation-repetition.md) - re-explaining settled facts inflates turn count without adding information, a direct contributor to length explosion
-- [User Frustration Escalation](./user-frustration-escalation.md) - unresolved long-running sessions are a strong predictor of rising user frustration
+- [Clarification Loop Infinite](clarification-loop-infinite.md) - a specific mechanism (endless questioning) that is one common driver of overall length explosion
+- [Conversation Repetition](conversation-repetition.md) - re-explaining settled facts inflates turn count without adding information, a direct contributor to length explosion
+- [User Frustration Escalation](user-frustration-escalation.md) - unresolved long-running sessions are a strong predictor of rising user frustration

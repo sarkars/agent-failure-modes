@@ -69,6 +69,6 @@ intending to pin it that long.
 | CVE present in pinned version already patched within manifest range | Vulnerability scan finds a CVE in a pinned version where a patched version is already permitted by the manifest's own range | High | Regenerate lock file immediately, fast-track the resulting PR |
 
 ## Related Patterns
-- [Version Pinning Expiration](./version-pinning-expiration.md) - closely related: pinning expiration covers the broader pattern of any pinned version (including explicit exact pins, not just lock-file-resolved ones) going stale without review; lock-file staleness is the specific case where the pinning mechanism is an auto-generated lock file rather than an explicit manifest pin
+- [Version Pinning Expiration](version-pinning-expiration.md) - closely related: pinning expiration covers the broader pattern of any pinned version (including explicit exact pins, not just lock-file-resolved ones) going stale without review; lock-file staleness is the specific case where the pinning mechanism is an auto-generated lock file rather than an explicit manifest pin
 - [Dependency Version Conflicts](../../dependency-management/failures/dependency-version-conflicts.md) - a related but distinct dependency-management failure about incompatible version constraints between packages, rather than a single resolution silently aging past its patched alternatives
-- [Version Downgrade Failure](./version-downgrade-failure.md) - a stale lock file can obscure which version was actually last known-good, complicating an attempted downgrade during an incident
+- [Version Downgrade Failure](version-downgrade-failure.md) - a stale lock file can obscure which version was actually last known-good, complicating an attempted downgrade during an incident

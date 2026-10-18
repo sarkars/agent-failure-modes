@@ -52,7 +52,7 @@ Impact: Advisor implements the recommendation without independently re-checking 
 ---
 
 ## Related Patterns
-- [Cross-Client Parameter Bleed in Sequential Advisory Sessions](./cross-client-parameter-bleed-in-sequential-advisory-sessions.md) — related suitability-parameter integrity failure in recommendation generation, driven by cross-session carryover rather than in-session inference overriding an explicit rule
+- [Cross-Client Parameter Bleed in Sequential Advisory Sessions](cross-client-parameter-bleed-in-sequential-advisory-sessions.md) — related suitability-parameter integrity failure in recommendation generation, driven by cross-session carryover rather than in-session inference overriding an explicit rule
 - [Long-Session Context Loss Violates Earlier Constraints](../../../../../cross-cutting/accuracy/goals/context-management/failures/long-session-context-loss-violates-earlier-constraints.md) — related constraint-violation symptom, but caused by the constraint falling out of attention over a long session rather than being correctly retained and then outweighed by an inferred signal
 - [Preference Vs Instruction Confusion](../../../../../cross-cutting/operations/goals/memory-safety/failures/preference-vs-instruction-confusion.md) — related but inverse mechanism: a soft preference mistakenly enforced as a hard rule, versus a hard rule mistakenly softened by an inferred preference
 

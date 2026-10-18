@@ -65,6 +65,6 @@ a tax preparer months later.
 | Low exception co-retrieval | Audit finds exception co-retrieval rate below threshold for a rule with known exceptions | Medium | Prioritize structural linking for the affected rule set |
 
 ## Related Patterns
-- [Domain Rule Misunderstanding](./domain-rule-misunderstanding.md) - both involve misapplying a domain rule's scope, one via ignoring an exception and one via misreading the rule itself
-- [Domain Constraint Violation](./domain-constraint-violation.md) - exceptions can themselves function as hard constraints when missed, producing this more severe failure mode
-- [Knowledge Contradiction Unresolved](./knowledge-contradiction-unresolved.md) - a general rule and its exception can look like a contradiction if the linking metadata connecting them is absent
+- [Domain Rule Misunderstanding](domain-rule-misunderstanding.md) - both involve misapplying a domain rule's scope, one via ignoring an exception and one via misreading the rule itself
+- [Domain Constraint Violation](domain-constraint-violation.md) - exceptions can themselves function as hard constraints when missed, producing this more severe failure mode
+- [Knowledge Contradiction Unresolved](knowledge-contradiction-unresolved.md) - a general rule and its exception can look like a contradiction if the linking metadata connecting them is absent

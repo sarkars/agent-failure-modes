@@ -67,6 +67,6 @@ Advertised SLA percentages describe an aggregate historical or contractual commi
 | Trailing availability below contracted SLA | `observed_availability_pct` (30-day) falls below the vendor's contracted commitment | High | Document for SLA credit claim, reassess fallback investment given actual observed reliability |
 
 ## Related Patterns
-- [Latency Sla Violation](./latency-sla-violation.md) - a related SLA-gap failure focused on response time rather than availability
-- [Degraded Sla Not Communicated](./degraded-sla-not-communicated.md) - covers the case where the tool stays technically "available" but silently degrades quality instead of going down outright
+- [Latency Sla Violation](latency-sla-violation.md) - a related SLA-gap failure focused on response time rather than availability
+- [Degraded Sla Not Communicated](degraded-sla-not-communicated.md) - covers the case where the tool stays technically "available" but silently degrades quality instead of going down outright
 - [Webhook Delivery Guarantee Not Enforced](../../tool-integration-limits/failures/webhook-delivery-guarantee-not-enforced.md) - availability gaps on the receiving or sending side are a common proximate cause of dropped webhook deliveries

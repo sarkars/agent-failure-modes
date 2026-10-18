@@ -197,9 +197,9 @@ Cost: ~2-3x latency per decision, but detects 95%+ of attacks
 ---
 
 ## Related Patterns
-- [Memory Poisoning Attack: 95%+ Success Rate](./memory-poisoning-attack-95-percent-success-rate.md) — Underlying attack
-- [Temporally Decoupled Poison Execution](./temporally-decoupled-poison-execution.md) — Time-delayed variant
-- [Unverified Agent Output](./unverified-agent-output.md) — Trust in unverified outputs
+- [Memory Poisoning Attack: 95%+ Success Rate](memory-poisoning-attack-95-percent-success-rate.md) — Underlying attack
+- [Temporally Decoupled Poison Execution](temporally-decoupled-poison-execution.md) — Time-delayed variant
+- [Unverified Agent Output](unverified-agent-output.md) — Trust in unverified outputs
 
 ---
 

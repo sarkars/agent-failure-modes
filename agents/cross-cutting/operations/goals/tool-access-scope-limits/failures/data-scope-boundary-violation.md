@@ -64,6 +64,6 @@ Product user was never meant to see.
 | Missing Filter in Generated Query | Query-generation guardrail detects a generated query lacking the boundary clause | P2 | Block the query, log the generation for prompt/guardrail tuning |
 
 ## Related Patterns
-- [Account-Level Data Scope](./account-level-data-scope.md) - the same failure mode at tenant/account granularity instead of department/project
-- [Workspace Isolation Bypass](./workspace-isolation-bypass.md) - a related boundary-crossing failure in multi-workspace systems
-- [Record-Level Access Not Enforced](./record-level-access-not-enforced.md) - boundary violations often co-occur with missing per-record ownership checks
+- [Account-Level Data Scope](account-level-data-scope.md) - the same failure mode at tenant/account granularity instead of department/project
+- [Workspace Isolation Bypass](workspace-isolation-bypass.md) - a related boundary-crossing failure in multi-workspace systems
+- [Record-Level Access Not Enforced](record-level-access-not-enforced.md) - boundary violations often co-occur with missing per-record ownership checks

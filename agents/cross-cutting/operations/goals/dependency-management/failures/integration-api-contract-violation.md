@@ -68,6 +68,6 @@ a finance audit catches a pattern of malformed line items.
 | Contract violation concentrated in one endpoint/path | Schema validation failures cluster around a specific endpoint or input type | Medium | Investigate whether the endpoint is less well-maintained by the provider, consider avoiding it |
 
 ## Related Patterns
-- [Integration Error Handling Mismatch](./integration-error-handling-mismatch.md) - a status/body mismatch is one specific form of the broader inconsistency in how integrated systems signal errors
-- [Data Pipeline Schema Drift](./data-pipeline-schema-drift.md) - both involve a producer's actual output diverging from what the consumer was built to expect, one through unannounced change and one through undocumented inconsistency
-- [Integration Impedance Mismatch](./integration-impedance-mismatch.md) - a contract violation is a special case of impedance mismatch where the divergence is a provider bug rather than an inherent modeling difference
+- [Integration Error Handling Mismatch](integration-error-handling-mismatch.md) - a status/body mismatch is one specific form of the broader inconsistency in how integrated systems signal errors
+- [Data Pipeline Schema Drift](data-pipeline-schema-drift.md) - both involve a producer's actual output diverging from what the consumer was built to expect, one through unannounced change and one through undocumented inconsistency
+- [Integration Impedance Mismatch](integration-impedance-mismatch.md) - a contract violation is a special case of impedance mismatch where the divergence is a provider bug rather than an inherent modeling difference

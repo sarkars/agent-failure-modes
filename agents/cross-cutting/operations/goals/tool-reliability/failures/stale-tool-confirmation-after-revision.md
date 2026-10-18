@@ -2,7 +2,7 @@
 
 ## Issue: Agent Treats an Earlier Tool Confirmation as Still Valid After Making a Change the Tool Never Re-Evaluated
 
-An agent calls a verification/compliance tool, receives a "not yet passing" result, makes a corrective change based on its own judgment about what the flagged issue requires, and then proceeds to an autonomous, hard-to-reverse action (publish, submit, execute) without issuing a fresh call to the same tool against the revised content. The agent's own belief that the revision addressed the flagged condition is substituted for the tool's actual, re-verified confirmation. This is distinct from [Action-Completion Claimed Without Status Check](./action-completion-claimed-without-status-check.md): there, the agent never reads a confirmation at all; here, a real confirmation was read once, but a subsequent change silently invalidates it and nothing forces a re-check against the new state.
+An agent calls a verification/compliance tool, receives a "not yet passing" result, makes a corrective change based on its own judgment about what the flagged issue requires, and then proceeds to an autonomous, hard-to-reverse action (publish, submit, execute) without issuing a fresh call to the same tool against the revised content. The agent's own belief that the revision addressed the flagged condition is substituted for the tool's actual, re-verified confirmation. This is distinct from [Action-Completion Claimed Without Status Check](action-completion-claimed-without-status-check.md): there, the agent never reads a confirmation at all; here, a real confirmation was read once, but a subsequent change silently invalidates it and nothing forces a re-check against the new state.
 
 **Frequency**: Common
 
@@ -65,5 +65,5 @@ touched -- the original flagged condition was never actually cleared.
 | Recheck-skip rate rising | Percentage of actions with exactly one tool call (versus one per revision cycle) exceeds a defined threshold | P2 | Review the workflow for hard-gate enforcement |
 
 ## Related Patterns
-- [Action-Completion Claimed Without Status Check](./action-completion-claimed-without-status-check.md) - a related but distinct failure where no confirmation is ever read at all, as opposed to this pattern's case of a real confirmation being read once and then reused past its validity
-- [Silent Tool Failures](./silent-failures.md) - a related but distinct failure where the tool itself misreports its outcome, rather than the agent reusing a stale-but-accurate prior result
+- [Action-Completion Claimed Without Status Check](action-completion-claimed-without-status-check.md) - a related but distinct failure where no confirmation is ever read at all, as opposed to this pattern's case of a real confirmation being read once and then reused past its validity
+- [Silent Tool Failures](silent-failures.md) - a related but distinct failure where the tool itself misreports its outcome, rather than the agent reusing a stale-but-accurate prior result

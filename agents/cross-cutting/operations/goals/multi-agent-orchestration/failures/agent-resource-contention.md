@@ -64,6 +64,6 @@ with a 500 requests/minute limit.
 | Retry storm detected | retry_storm_ratio exceeds threshold for 3 consecutive minutes | High | Enable coordinated backoff, throttle new agent spawns |
 
 ## Related Patterns
-- [Agent Priority Inversion](./agent-priority-inversion.md) - a specific case of contention where priority ordering, not just volume, causes the degradation
-- [Agent Timeout Cascade](./agent-timeout-cascade.md) - contention-driven latency is a common trigger for downstream timeout cascades
-- [Inter-Agent Latency Imbalance](./inter-agent-latency-imbalance.md) - contention can produce or worsen the latency imbalance between agents sharing the same resource
+- [Agent Priority Inversion](agent-priority-inversion.md) - a specific case of contention where priority ordering, not just volume, causes the degradation
+- [Agent Timeout Cascade](agent-timeout-cascade.md) - contention-driven latency is a common trigger for downstream timeout cascades
+- [Inter-Agent Latency Imbalance](inter-agent-latency-imbalance.md) - contention can produce or worsen the latency imbalance between agents sharing the same resource

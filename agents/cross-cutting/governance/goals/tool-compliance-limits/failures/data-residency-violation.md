@@ -59,6 +59,6 @@ Modern agent toolchains are typically composed of multiple third-party and inter
 | New tool added without residency review | A new tool begins receiving traffic without an entry in the data-flow map | High | Suspend the integration pending a residency review |
 
 ## Related Patterns
-- [Data Deletion Compliance](./data-deletion-compliance.md) - both stem from an incomplete inventory of every downstream system the agent's data actually flows through
-- [PII Retention Policy Violation](./pii-retention-policy-violation.md) - both are data-governance requirements that must be enforced consistently across every tool in the chain, not just the primary store
-- [Audit Logging Not Enforced](./audit-logging-not-enforced.md) - logging pipelines are themselves a common, overlooked vector for residency violations when log destinations aren't region-aware
+- [Data Deletion Compliance](data-deletion-compliance.md) - both stem from an incomplete inventory of every downstream system the agent's data actually flows through
+- [PII Retention Policy Violation](pii-retention-policy-violation.md) - both are data-governance requirements that must be enforced consistently across every tool in the chain, not just the primary store
+- [Audit Logging Not Enforced](audit-logging-not-enforced.md) - logging pipelines are themselves a common, overlooked vector for residency violations when log destinations aren't region-aware

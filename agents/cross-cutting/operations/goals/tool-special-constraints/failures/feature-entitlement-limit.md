@@ -66,5 +66,5 @@ needed data, just without table structure preserved.
 | Retry attempted on entitlement error | The agent's retry logic engages on an error classified as entitlement-related | Medium | Fix error classification to mark entitlement errors as non-retryable |
 
 ## Related Patterns
-- [License Expiration Not Checked](./license-expiration-not-checked.md) - both involve the agent discovering an account-level access restriction only when a call fails, rather than tracking it proactively
-- [Concurrent Session Not Licensed](./concurrent-session-not-licensed.md) - a related licensing-boundary failure, capping simultaneous usage rather than gating specific features
+- [License Expiration Not Checked](license-expiration-not-checked.md) - both involve the agent discovering an account-level access restriction only when a call fails, rather than tracking it proactively
+- [Concurrent Session Not Licensed](concurrent-session-not-licensed.md) - a related licensing-boundary failure, capping simultaneous usage rather than gating specific features

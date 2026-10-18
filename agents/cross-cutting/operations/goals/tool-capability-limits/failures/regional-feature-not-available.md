@@ -64,6 +64,6 @@ Vendors often restrict feature availability by region for legal reasons (data re
 | Fallback capacity exceeded for a region | `fallback.volume_by_region` exceeds provisioned manual-review or backup capacity | Critical | Scale fallback capacity immediately, escalate to vendor for regional support timeline |
 
 ## Related Patterns
-- [Feature Flag Disabled](./feature-flag-disabled.md) - same "capability gap invisible until exercised in the affected context" pattern, account-level instead of region-level
-- [Paid Feature Cost Not Disclosed](./paid-feature-cost-not-disclosed.md) - another undisclosed constraint tied to account/region configuration rather than the API contract itself
+- [Feature Flag Disabled](feature-flag-disabled.md) - same "capability gap invisible until exercised in the affected context" pattern, account-level instead of region-level
+- [Paid Feature Cost Not Disclosed](paid-feature-cost-not-disclosed.md) - another undisclosed constraint tied to account/region configuration rather than the API contract itself
 - [Sla Availability Not Met](../../tool-sla-quality-limits/failures/sla-availability-not-met.md) - related but distinct: regional unavailability is a permanent gap, not a transient outage

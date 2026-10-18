@@ -64,6 +64,6 @@ no process cross-references the two.
 | Support SLA breach from sustained escalation volume | support_sla_degradation exceeds target for a sustained period | High | Allocate additional support capacity, prioritize root-cause agent fix |
 
 ## Related Patterns
-- [User Frustration Escalation](./user-frustration-escalation.md) - unaddressed within-session frustration is a primary feeder into the human escalation volume this pattern describes
-- [Clarification Loop Infinite](./clarification-loop-infinite.md) - a specific agent failure pattern that reliably converts into human escalations when left unresolved
-- [User Feedback Bias](./user-feedback-bias.md) - support ticket volume is one of the passive signals that can reveal quality problems invisible in biased opt-in feedback
+- [User Frustration Escalation](user-frustration-escalation.md) - unaddressed within-session frustration is a primary feeder into the human escalation volume this pattern describes
+- [Clarification Loop Infinite](clarification-loop-infinite.md) - a specific agent failure pattern that reliably converts into human escalations when left unresolved
+- [User Feedback Bias](user-feedback-bias.md) - support ticket volume is one of the passive signals that can reveal quality problems invisible in biased opt-in feedback

@@ -74,6 +74,6 @@ When multiple components fail together during a cascade, each one typically has 
 | Recovery checkpoint skew detected | Two or more components in the same cascade recover from checkpoints more than 30s apart | Medium | Delay traffic resumption until checkpoints are aligned or reconciled |
 
 ## Related Patterns
-- [Recovery Divergence](./recovery-divergence.md) - the single-instance version of this problem; this pattern is the multi-component, cross-service form of the same divergence mechanism
-- [Recovery Ordering Violation](./recovery-ordering-violation.md) - out-of-order replay within one component is one of the mechanisms that produces cross-component divergence
-- [Redundancy Coordination Failure](./redundancy-coordination-failure.md) - both stem from a missing coordination protocol between independently-acting components during recovery
+- [Recovery Divergence](recovery-divergence.md) - the single-instance version of this problem; this pattern is the multi-component, cross-service form of the same divergence mechanism
+- [Recovery Ordering Violation](recovery-ordering-violation.md) - out-of-order replay within one component is one of the mechanisms that produces cross-component divergence
+- [Redundancy Coordination Failure](redundancy-coordination-failure.md) - both stem from a missing coordination protocol between independently-acting components during recovery

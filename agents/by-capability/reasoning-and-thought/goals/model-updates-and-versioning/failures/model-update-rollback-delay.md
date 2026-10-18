@@ -74,7 +74,7 @@ Reverting application code is a well-practiced, low-risk, and usually automated 
 | Rollback target nearing deprecation | rollback_target_version_ttl below safety buffer while it is the only fallback for the currently-live version | Medium | Pin or archive an accessible copy of the fallback version, or identify an alternative before it disappears |
 
 ## Related Patterns
-- [Model Update Accuracy Regression](./model-update-accuracy-regression.md) - the regression this pattern's delay applies to; the two together span detection-to-resolution
-- [Model Behavior Change Detection Failure](./model-behavior-change-detection-failure.md) - a slow detection process compounds directly with a slow rollback process to extend total incident duration
-- [Model Version Pinning Expiration](./model-version-pinning-expiration.md) - the same provider-deprecation dynamic that blocks rollback also forces unwanted forward migrations when a pinned version expires
+- [Model Update Accuracy Regression](model-update-accuracy-regression.md) - the regression this pattern's delay applies to; the two together span detection-to-resolution
+- [Model Behavior Change Detection Failure](model-behavior-change-detection-failure.md) - a slow detection process compounds directly with a slow rollback process to extend total incident duration
+- [Model Version Pinning Expiration](model-version-pinning-expiration.md) - the same provider-deprecation dynamic that blocks rollback also forces unwanted forward migrations when a pinned version expires
 - [Failover Delay Too Long](../../../../../cross-cutting/operations/goals/fault-tolerance/failures/failover-delay-too-long.md) - the general infrastructure pattern of a correct recovery mechanism taking too long to execute, here specialized to model version reverts

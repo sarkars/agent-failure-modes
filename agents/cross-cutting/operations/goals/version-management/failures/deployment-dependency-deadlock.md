@@ -73,6 +73,6 @@ orchestrator ships the validator against the now-live field.
 | Stale staged release | A release has sat ready-to-deploy beyond the staleness threshold | Low | Review blocking reason, confirm still valid, unblock or reprioritize |
 
 ## Related Patterns
-- [Deployment Ordering Violation](./deployment-ordering-violation.md) - the inverse failure mode: an ordering constraint exists but gets violated rather than over-conservatively enforced
-- [Version Rollout Coordination](./version-rollout-coordination.md) - broader coordination failures across dependent services' rollouts, of which mutual deadlock is one specific shape
-- [Version Compatibility Matrix Explosion](./version-compatibility-matrix-explosion.md) - both stem from under-specified cross-service version compatibility contracts
+- [Deployment Ordering Violation](deployment-ordering-violation.md) - the inverse failure mode: an ordering constraint exists but gets violated rather than over-conservatively enforced
+- [Version Rollout Coordination](version-rollout-coordination.md) - broader coordination failures across dependent services' rollouts, of which mutual deadlock is one specific shape
+- [Version Compatibility Matrix Explosion](version-compatibility-matrix-explosion.md) - both stem from under-specified cross-service version compatibility contracts

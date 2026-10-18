@@ -61,6 +61,6 @@ levels are what pushed a valid 14-level org chart over the limit.
 | Opaque depth failure with no field attribution | Rejection with no field-level detail, following construction of a recursively nested payload | Low | Route to manual inspection, add client-side depth validation to prevent recurrence |
 
 ## Related Patterns
-- [Join Depth Limit](./join-depth-limit.md) - the same depth-limiting principle applied to query relation traversal rather than payload structure
-- [Request Payload Size Limit](./request-payload-size-limit.md) - a size-based sibling limit that a deeply nested but small payload can pass while still failing on depth
-- [Query Complexity Limit](./query-complexity-limit.md) - another structural-cost limit, scored rather than depth-counted, that can reject a payload for similar underlying reasons
+- [Join Depth Limit](join-depth-limit.md) - the same depth-limiting principle applied to query relation traversal rather than payload structure
+- [Request Payload Size Limit](request-payload-size-limit.md) - a size-based sibling limit that a deeply nested but small payload can pass while still failing on depth
+- [Query Complexity Limit](query-complexity-limit.md) - another structural-cost limit, scored rather than depth-counted, that can reject a payload for similar underlying reasons

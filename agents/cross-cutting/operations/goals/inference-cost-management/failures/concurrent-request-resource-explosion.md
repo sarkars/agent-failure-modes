@@ -68,6 +68,6 @@ original 200 legitimate sessions would have cost on their own.
 | Retry storm detected | retry_request_ratio exceeds 20% while queue_depth_growth_rate is positive | High | Enable aggressive rate limiting on retries, notify client teams, investigate root capacity event |
 
 ## Related Patterns
-- [Resource Reservation Insufficient](./resource-reservation-insufficient.md) - describes the under-provisioning that leaves headroom too thin to absorb a concurrency spike in the first place
-- [Latency Cost Tradeoff](./latency-cost-tradeoff.md) - the retry storm this pattern causes is a direct, unplanned worsening of both latency and cost simultaneously
-- [Memory Fragmentation Allocation Failure](./memory-fragmentation-allocation-failure.md) - a related mechanism by which concurrent load causes allocation failures even when raw capacity looks sufficient
+- [Resource Reservation Insufficient](resource-reservation-insufficient.md) - describes the under-provisioning that leaves headroom too thin to absorb a concurrency spike in the first place
+- [Latency Cost Tradeoff](latency-cost-tradeoff.md) - the retry storm this pattern causes is a direct, unplanned worsening of both latency and cost simultaneously
+- [Memory Fragmentation Allocation Failure](memory-fragmentation-allocation-failure.md) - a related mechanism by which concurrent load causes allocation failures even when raw capacity looks sufficient

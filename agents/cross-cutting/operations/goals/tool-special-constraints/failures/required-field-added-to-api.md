@@ -66,5 +66,5 @@ spots the actual cause.
 | Schema drift detected | A scheduled schema comparison finds a new required field not present in the agent's request payload | Medium | Update request-building logic proactively before the field becomes required in production traffic |
 
 ## Related Patterns
-- [Transitive Tool Dependency Failure](./transitive-tool-dependency-failure.md) - both involve an agent's tool integration breaking due to a change in something outside its direct control that it has no visibility into ahead of time
-- [Cascading External Failures](./cascading-external-failures.md) - a schema change on one shared upstream API can simultaneously break multiple tools built on top of it
+- [Transitive Tool Dependency Failure](transitive-tool-dependency-failure.md) - both involve an agent's tool integration breaking due to a change in something outside its direct control that it has no visibility into ahead of time
+- [Cascading External Failures](cascading-external-failures.md) - a schema change on one shared upstream API can simultaneously break multiple tools built on top of it

@@ -72,6 +72,6 @@ instead been closer to completion.
 | Duplicate side-effecting tool action detected | duplicate_tool_action_rate registers a nonzero event for a side-effecting tool | High | Manually reconcile the duplicated action, review idempotency guards for the affected tool flow |
 
 ## Related Patterns
-- [Connection Draining Incomplete](./connection-draining-incomplete.md) - both concern in-flight session continuity breaking during infrastructure changes, one via forced termination and one via routing change
-- [Feature Flag Toggle Lag](./feature-flag-toggle-lag.md) - can compound with affinity loss so a single conversation sees both a routing change and a behavior change mid-session
-- [Traffic Routing Asymmetry](./traffic-routing-asymmetry.md) - a broader category of routing inconsistency that sticky-session loss is one specific instance of
+- [Connection Draining Incomplete](connection-draining-incomplete.md) - both concern in-flight session continuity breaking during infrastructure changes, one via forced termination and one via routing change
+- [Feature Flag Toggle Lag](feature-flag-toggle-lag.md) - can compound with affinity loss so a single conversation sees both a routing change and a behavior change mid-session
+- [Traffic Routing Asymmetry](traffic-routing-asymmetry.md) - a broader category of routing inconsistency that sticky-session loss is one specific instance of
