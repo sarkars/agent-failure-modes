@@ -1,4 +1,4 @@
-# Execution Plan: 3 to 5 Patterns plus One Content-Program Task per Run, Every 5 Hours
+# Execution Plan: 3 to 5 Patterns plus One Content-Program Task per Run, Every Hour
 
 > **What this is.** A prioritized queue of **432 patterns** to write, split into **91 runs** (the first 30 flagship patterns at 3 per run, the rest at up to 5), each with one task from the [content program](content-program.md), plus the procedure each scheduled run follows and the quality gate every pattern must pass. A scheduled task fires every 5 hours and works through the queue until it is empty. Each run is meant to be unattended: everything it needs is in this file.
 
@@ -10,7 +10,7 @@
 | Tiers | **Flagship**: the 30 patterns listed in content-program.md, held to the extra flagship items in the Definition of done. **Catalog**: all others. |
 | Quality gate | A pattern is **Done** only if it passes the Definition of done below. Anything that doesn't is marked **Needs review** and left for a person. |
 | Run mode | **write** (research, write the full pattern, update the catalog). Change to **plan-only** to have each run only research and record briefs in `roadmap/briefs/` without writing patterns. |
-| Cadence | Every 5 hours (set in the scheduled task, not in this file) |
+| Cadence | Every hour (set in the scheduled task, not in this file) |
 | Branch | `claude/zealous-ramanujan-u8zwfk` (commit and push; never open a pull request) |
 | Scope | Only files under `agents/by-capability/human-machine-interface/` and `agents/solutions/`. Do not edit the older patterns elsewhere in `agents/`. Anything that would change files outside this folder goes into `roadmap/merge-proposals.md` as a proposal for a person to approve. |
 | Spelling and examples | American English, and US examples (US cities, dollars, US laws and regulators) |
@@ -135,7 +135,7 @@ Create a folder's README on its first pattern. Folders that already have a READM
 | `goals/outbound-messaging-agents` | Outbound texts and calls respect consent, quiet hours, and suppression lists. |
 
 ## Run schedule
-Run N covers queue orders as shown. At one run every 5 hours, 91 runs take about 450 hours between the first and last start, roughly 18.8 days. A run that marks a pattern *Needs review* doesn't delay the queue, but those patterns need a person.
+Run N covers queue orders as shown. At one run every hour, 91 runs take about 91 hours between the first and last start, roughly 3.8 days. A run that marks a pattern *Needs review* doesn't delay the queue, but those patterns need a person.
 
 | Run | Orders | Themes |
 |---|---|---|
@@ -681,11 +681,10 @@ AI-written help content in knowledge bases · agents using other agents' tools (
 | Item | Value |
 |---|---|
 | Status | **Active** from 2026-10-18 (credits reset). Merged to main in PR #4. Runs append to the Run log below. |
-| Scheduled task name | `HMI roadmap: patterns and content program every 5 hours` |
+| Scheduled task name | `HMI roadmap: patterns and content program every hour` |
 | Task id | `trig_01J1rwvuKcpXBGmKkkRfihF7` |
 | Created | 2026-10-14 19:05 UTC |
-| Cron (UTC) | `5 */5 * * *`, so runs start at minute 5 of hours 0, 5, 10, 15, and 20 |
-| First run | 2026-10-14 20:05 UTC |
-| Gap at midnight | Hours 20 and 0 are only 4 hours apart, because 24 isn't divisible by 5. All other gaps are 5 hours. |
+| Cron (UTC) | `16 * * * *`, so runs start at minute 16 of every hour (changed from every 5 hours on 2026-10-18) |
+| First run | 2026-10-18 19:16 UTC (hourly schedule) |
 | Where it fires | Into the same session that created it, so the run has the repository checkout and tools |
 | To pause or stop | Ask the session to disable the task, or call the scheduled-task update tool with `enabled=false` for the id above. The queue keeps its place, so re-enabling resumes where it stopped. |

@@ -2,7 +2,7 @@
 
 > **Status: an exhaustive catalog, not written patterns.** Each row names a failure, the goal it protects, and a primary metric with a starting target. The library today has **14 written HMI patterns** (see the [area README](../README.md)) plus about 1,280 older patterns elsewhere in `agents/`. This catalog is checked against that library.
 
-> **Execution plan.** The order in which these get written, and the procedure a scheduled run follows (5 patterns every 5 hours, each held to a quality gate), is in [execution-plan.md](execution-plan.md). The catalog tables stay the source of goals and metrics.
+> **Execution plan.** The order in which these get written, and the procedure a scheduled run follows (patterns every hour, each held to a quality gate), is in [execution-plan.md](execution-plan.md). The catalog tables stay the source of goals and metrics.
 
 ## Audit: what already exists
 The first version of this roadmap did not check the library, and several rows turned out to duplicate existing patterns (voice turn-taking, ASR names and noise, sycophancy, and more). This version checks **every row** against the library, by file name and keyword search across all failure files, and by reading the closest matches. The last column of each table says what I found:
