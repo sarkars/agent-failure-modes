@@ -680,7 +680,7 @@ AI-written help content in knowledge bases · agents using other agents' tools (
 ## Schedule
 | Item | Value |
 |---|---|
-| Status | **Paused** on 2026-10-14 until the user's credits reset. Runs resume only when the task is re-enabled. No queue items have been started. |
+| Status | **Active** from 2026-10-18 (credits reset). Merged to main in PR #4. Runs append to the Run log below. |
 | Scheduled task name | `HMI roadmap: patterns and content program every 5 hours` |
 | Task id | `trig_01J1rwvuKcpXBGmKkkRfihF7` |
 | Created | 2026-10-14 19:05 UTC |
