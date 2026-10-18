@@ -21,6 +21,7 @@ Priority combines five things: **(1)** demand evidence (customers' top frustrati
 ## Run procedure
 Follow these steps on every run. Don't skip the checks: earlier work in this project had to be corrected for duplicating existing patterns and for a counting bug.
 
+0. **Check network access first (takes one minute).** Try to open one source site (for example `curl -sS -m 15 -o /dev/null -w "%{http_code}" https://www.consumerfinance.gov`; 000 or a proxy refusal means blocked). If sources cannot be opened, **write nothing from summaries**. Append a "Blocked: sources unreachable" entry to the Run log and `seo/log.md`, commit and push those two files, and stop. A run that cannot open sources may not mark any pattern Done. Search-result summaries do not count as opened sources.
 1. **Sync.** `git fetch origin claude/zealous-ramanujan-u8zwfk` and make sure the working tree is on that branch and up to date. Read this file, `_templates/hmi-pattern.md`, and the two flagship patterns (`goals/conversation-leadership/failures/answer-and-go-conversation.md` and `goals/channel-selection/failures/no-channel-switch-or-context-lost.md`) so style stays consistent.
 2. **Pick the work.** Take rows marked *In progress* first, then the next **3** rows marked *Queued* while any flagship row remains, otherwise the next **5**, in order. Mark them *In progress*. Don't touch rows marked *Needs review*. If fewer remain, take what's left. Never take a catalog row while a flagship row is still *Queued*. If no *Queued* or *In progress* rows remain, write "Queue complete" in the Run log, disable the schedule (see the Schedule section), and stop.
 3. **Write one pattern at a time, finishing each before starting the next:**
@@ -672,6 +673,13 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 
 ## Run log
 *(Each run appends an entry here.)*
+
+### Run 1: 2026-10-18 19:16 UTC (first scheduled run): Blocked
+- **Patterns:** none written. HU-01, HU-02 and HU-03 stay *Queued*.
+- **Why:** the session's network policy refuses every source host tried: `files.consumerfinance.gov`, `www.consumerfinance.gov`, `www.gartner.com`, `www.ftc.gov`, `www.lawcommentary.com`, `en.wikipedia.org` and `www.techradar.com` (proxy returned 403, `connect_rejected`). Web search works but returns only summaries, which the Definition of done does not accept as opened sources.
+- **Read through summaries only, not used in any file:** the CFPB 2023 chatbot issue spotlight (doom loops); a Gartner July 2024 survey (64% prefer no AI in customer service; 53% would consider switching); reports of a proposed California bill on human customer service. None was opened, so none was written down as a fact.
+- **Needs from a person:** allow outbound access to source sites in the environment's Network access settings (a broader level, or add the hosts under Allowed domains). Until then each run stops at step 0.
+- **Content-program task and SEO review:** not done. The SEO review needs Search Console, which needs Chrome or an export; neither is available.
 
 ## Backlog (not scheduled)
 Ideas from earlier lists that were never chosen. They stay out of the queue until someone adds them.
