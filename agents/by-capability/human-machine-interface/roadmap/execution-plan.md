@@ -682,6 +682,9 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 - **Needs from a person:** allow outbound access to source sites in the environment's Network access settings (a broader level, or add the hosts under Allowed domains). Until then each run stops at step 0.
 - **Content-program task and SEO review:** not done. The SEO review needs Search Console, which needs Chrome or an export; neither is available.
 
+### Run 2: 2026-10-18 20:16 UTC: Blocked
+- Step 0 failed again: `www.consumerfinance.gov` is still unreachable (no HTTP response through the proxy). Nothing written; queue unchanged. Same fix needed as run 1: allow source sites in the environment's Network access settings.
+
 ## Backlog (not scheduled)
 Ideas from earlier lists that were never chosen. They stay out of the queue until someone adds them.
 
