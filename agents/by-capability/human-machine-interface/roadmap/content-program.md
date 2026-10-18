@@ -3,6 +3,8 @@
 > **What this is.** Besides writing patterns, each scheduled run does **one** task from this file. The tasks turn a catalog into something people cite and use: tiered quality, real incidents, runnable tests, an honest "will a better model fix this?" answer, and entry points by symptom and by role. Everything stays inside `agents/by-capability/human-machine-interface/`. The [execution plan](execution-plan.md) says how a run works.
 
 ## Site compatibility
+**Two repositories.** This repo holds content only; the Astro site and its importers live in `sarkars/agent-kb-autopublish`. Anything that needs a change there goes to `roadmap/merge-proposals.md`. See [REPOSITORIES.md](../../../../REPOSITORIES.md).
+
 The published site is Astro, fed by an importer that reads this repo. Keep these true or pages vanish or lose their goal and category:
 - Written patterns live at `goals/<family>/failures/<name>.md`, with `goals/<family>/README.md` present.
 - Line 1 of a pattern is its H1. It also has a `**Frequency**: Very Common|Common|Occasional|Rare` line and a `## Issue: <one sentence>` line.

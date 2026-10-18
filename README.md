@@ -25,6 +25,7 @@
 | [How to Use](#how-to-use-this-repo) | Practical use cases and pattern structure |
 | [Quick Reference](#quick-reference-cross-cutting-failure-patterns) | Most common failure patterns at a glance |
 | [References](REFERENCES.md) | Research sources, incident databases, statistics |
+| [Which repository holds what](REPOSITORIES.md) | This repo holds the content; the website lives in its own repo |
 | [Contributing](#contributing) | How to add failure patterns |
 | [Published Knowledge Base](https://agent-kb-autopublish.vercel.app/) | Browse all patterns online |
 

@@ -13,6 +13,7 @@
 | Cadence | Every hour (set in the scheduled task, not in this file) |
 | Branch | `claude/zealous-ramanujan-u8zwfk` (commit and push; never open a pull request) |
 | Scope | Only files under `agents/by-capability/human-machine-interface/` and `agents/solutions/`. Do not edit the older patterns elsewhere in `agents/`. Anything that would change files outside this folder goes into `roadmap/merge-proposals.md` as a proposal for a person to approve. |
+| Repositories | Content lives here; the website lives in `sarkars/agent-kb-autopublish`. The run reads that repo and never edits it. Site changes become proposals. See [REPOSITORIES.md](../../../../REPOSITORIES.md) |
 | Spelling and examples | American English, and US examples (US cities, dollars, US laws and regulators) |
 
 ## How the order was set
