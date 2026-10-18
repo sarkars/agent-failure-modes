@@ -682,7 +682,7 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 - **Needs from a person:** allow outbound access to source sites in the environment's Network access settings (a broader level, or add the hosts under Allowed domains). Until then each run stops at step 0.
 - **Content-program task and SEO review:** not done. The SEO review needs Search Console, which needs Chrome or an export; neither is available.
 
-### Runs 2 and 3: 2026-10-18 20:16 and 21:16 UTC: Blocked
+### Runs 2 to 4: 2026-10-18 20:16, 21:16 and 22:16 UTC: Blocked
 - *(Repeat blocked runs update this one entry instead of adding a new one each hour.)*
 - Step 0 failed again: `www.consumerfinance.gov` is still unreachable (no HTTP response through the proxy). Nothing written; queue unchanged (checked `consumerfinance.gov`, `gartner.com`, `ftc.gov`; all unreachable at 21:17 UTC). Same fix needed as run 1: allow source sites in the environment's Network access settings.
 
