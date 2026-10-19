@@ -37,10 +37,10 @@
 
 ## Rules for the scheduled run
 1. It writes only under `agents/by-capability/human-machine-interface/` and `agents/solutions/` in the content repo.
-2. It never edits the site repo. It reads that repo to check which incidents exist and how the importer works.
+2. It edits the site repo in one way only: the publish step in [deploy.md](agents/by-capability/human-machine-interface/roadmap/deploy.md), which copies the human-machine-interface pages into `website-astro/src/content/` after a clean build. Everything else in the site repo is read-only to it.
 3. A change that needs the site repo goes into `roadmap/merge-proposals.md` in this repo, as a proposal with the file and the reason. A person makes the change there.
 4. Existing public URLs never change (`check_public_urls.py` enforces this).
-5. It opens no pull requests.
+5. At the end of each run it opens one pull request into `main` and merges it (deploy.md step 2). It opens no other pull requests.
 
 ## Order for a change that touches both
 1. Write the pages here and make the checks pass.
