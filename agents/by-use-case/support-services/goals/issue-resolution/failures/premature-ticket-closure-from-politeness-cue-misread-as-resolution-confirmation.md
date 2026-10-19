@@ -111,6 +111,23 @@ def check_closure_trigger(message: str) -> dict:
 
 ---
 
+## Chat assistant examples
+
+### Misreading ok and minimal replies
+```
+User: My Xfinity internet has dropped every evening this week.
+Bot:  I reset your modem remotely. Does that fix it?
+User: ok
+Bot:  Great, glad that's sorted! Closing this chat.      (ticket marked Resolved)
+User: (next evening, same drop) ...
+User: ok so I guess it just doesn't work
+Bot:  Closed chats can't be reopened. Please start a new one.
+```
+**What the user experiences:** an "ok" that meant "fine, whatever" was heard as "fixed," so the user must start over and repeat the whole problem.
+**Fix:** treat a bare "ok" as unresolved unless the bot just asked a yes/no question and the reply answers it. Otherwise ask once ("Has it stayed up since the reset, or is it still dropping?"), and offer a technician visit if the tone reads as resignation. See [no reply to acknowledgments and closers](../../../../../by-capability/human-machine-interface/goals/response-structure/failures/no-reply-to-acknowledgments-and-closers.md).
+
+---
+
 ## References
 - [TRACER: Early Failure Detection for Task-Oriented Dialogue](https://arxiv.org/pdf/2607.03974)
 - [ChatChecker: A Framework for Dialogue System Testing and Evaluation Through Non-cooperative User Simulation](https://arxiv.org/pdf/2507.16792)

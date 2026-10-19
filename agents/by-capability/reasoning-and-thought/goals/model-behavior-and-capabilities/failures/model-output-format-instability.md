@@ -67,3 +67,20 @@ failure rate that only surfaces as a spike in a dead-letter queue.
 - [Model Reasoning Inconsistency](model-reasoning-inconsistency.md) - both describe nondeterministic output variation across logically identical calls, one in structure and one in content
 - [Model Instruction Following Decay](model-instruction-following-decay.md) - format instructions are a specific case of instructions whose adherence can degrade under competing contextual pressure
 - [Model Capacity Limits](model-capacity-limits.md) - deeper/longer target schemas raise the same per-call complexity that drives capacity-related quality drops
+
+## Chat assistant examples
+
+### Structure flips between turns
+```
+User (ChatGPT, trip planning): Compare Hertz and Avis for a week in Denver.
+Bot:  | | Hertz | Avis |  ... a 5-row table of price, pickup, mileage
+User: Add Enterprise.
+Bot:  Sure! Enterprise is a good option. It usually costs a bit less, and
+      its pickup is off-airport, so you may need a shuttle...   (prose)
+User: Which one is cheapest?
+Bot:  - Enterprise: lowest base rate                            (bullets)
+      - Avis: mid
+      - Hertz: highest
+```
+**What the user experiences:** three turns about one comparison arrive in three shapes, so the user can't line up the new answer with the old one and has to ask for the table again.
+**Fix:** once a turn sets a structure for a task, keep it for follow-ups on that task (add the row to the table) and change it only when the user asks or the content type changes. Treat the first structure as part of the conversation state. See the [unstructured procedures pattern](../../../../human-machine-interface/goals/response-structure/failures/unstructured-procedures.md) for the matching chat-side rule on picking structure that fits the content.

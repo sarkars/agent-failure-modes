@@ -95,6 +95,13 @@ Refuse only requests that carry real risk under the written policy. When you ref
 Never refuse because a message contains the company name, a product term, or a common account term.
 ```
 
+**Moves** (see [conversation moves](../../../solutions-library/conversation-moves.md); list only the moves that apply, most preferred first)
+| Move | When, in this pattern |
+|---|---|
+| Lead with the answer | The request is an ordinary task that only resembles a risky one (a brand name, "kill a process", "chargeback"): answer it. Do not use it when the request carries real risk under the written policy. |
+| Offer choices: 2-4 options plus "Something else", free text open | A refusal still fires on a borderline request and there is more than one real way to help: "Do the allowed part", "Another way to do it", "Talk to a person", "Something else". Offer only options you can deliver. Do not offer them when the request is clearly ordinary (answer it) or clearly unsafe (no safe option exists). |
+| Hand off to a person | The request is borderline and the user needs an answer: hand off with a summary and tell the user. Do not hand off if the user asked to stay with the bot. |
+
 **Don't over-correct.** Do not weaken the refusal of truly harmful requests to lower the over-refusal rate; track both. Do not let the system prompt say "always help", which can remove real limits. Keep legal, medical, and safety-critical limits in place.
 
 **Hand-off rule.** If a request is borderline and the user needs an answer, route to a person rather than refuse flatly ([escalates too early or too late](../../human-handoff/failures/escalates-too-early-or-too-late.md)).
@@ -132,6 +139,20 @@ Signals in a conversation event log that suggest this failure. Treat them as pro
 | Refusal rate on the benign-looking test set rises after a model, prompt, or filter change | Test-set run compared with the last baseline | A deliberate policy change that was written down and approved |
 
 **Starter rule:** a refusal must never fire on a message that holds only brand, product, or common account terms, and every refusal states what the bot cannot do and what it can do instead.
+
+**Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
+```yaml
+pattern_id: over-refusal-of-ordinary-requests
+runs: pre_send
+reads: [refusal_event.message_text, refusal_event.reason, refusal_event.alternative_offered, brand_and_product_terms]
+trigger: a refusal reply is about to be sent
+moves: [lead_with_answer, offer_choices, hand_off]
+choices: ["Do the allowed part", "Another way to do it", "Talk to a person", "Something else"]
+on_miss: rewrite
+metric: over-refusal rate on a benign-but-risky-looking test set
+counter_metric: refusal rate on truly unsafe requests
+status: proposed
+```
 
 ## 8. Related patterns
 - [Bad refusal](../../../../../by-use-case/customer-service/goals/conversation-resolution/failures/bad-refusal.md): the older pattern, from the customer-service side. This page adds the two-sided test and the path-forward rule.

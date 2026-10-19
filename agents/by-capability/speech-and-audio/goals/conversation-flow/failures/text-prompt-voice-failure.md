@@ -479,6 +479,26 @@ instructions: |
 
 ---
 
+## Chat assistant examples
+
+### Wrong format for the medium
+Setting: a bank's text-message (SMS) assistant. The model's markdown reaches a channel that shows it as literal characters.
+```
+Before
+User: What are my checking account options?
+Bot:  **Checking options**
+      | Account | Fee |
+      |---|---|
+      | Basic | $0 |
+      | Plus | $12 |
+
+After
+Bot:  Two options: Basic has no monthly fee. Plus is $12 a month, waived
+      at a $1,500 balance. Reply 1 or 2 and I'll text the sign-up link.
+```
+**What the user experiences:** a message full of asterisks, pipes and dashes that is hard to read on a phone and makes the bank look broken.
+**Fix:** before generating, tell the model the channel is plain-text SMS: no markdown, tables or link syntax, short sentences, and a bare URL only when needed. Also strip markdown from the reply before sending, as a backstop. A small widget gets the same rule, adjusted to what it can render. See [bullet and heading overuse](../../../../human-machine-interface/goals/response-structure/failures/bullet-and-heading-overuse.md) for the closest HMI pattern.
+
 ## References
 
 - [VAPI Prompting Guide](https://docs.vapi.ai/prompting-guide) - Voice vs text

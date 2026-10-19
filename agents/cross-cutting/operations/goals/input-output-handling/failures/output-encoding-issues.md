@@ -69,3 +69,23 @@ customers have been trained to distrust.
 - [Input Encoding Mismatch](input-encoding-mismatch.md) - the mirror-image failure occurring at ingestion rather than at output generation
 - [Output Quote Escaping Failure](output-quote-escaping-failure.md) - a related output-serialization failure, focused on structural characters rather than character-set encoding
 - [Output Truncation Silent](output-truncation-silent.md) - multi-byte encoding mismatches can compound with truncation when byte-length limits are applied without encoding awareness
+
+## Chat assistant examples
+
+### Formatting artifacts
+```
+User (text message to a Verizon Wireless support number): What's the difference between the two plans?
+Bot:  Here are the options:
+      **Unlimited Plus** | $80/mo | 5G
+      **Welcome Unlimited** | $65/mo | 4G
+      ### Recommendation
+      Choose **Unlimited Plus** for hotspot data.
+
+User: Why is it full of stars and # symbols?
+Bot:  I'm sorry about that. Here are the options again:
+      | Plan | Price |
+      |---|---|
+      | Unlimited Plus | $80/mo |
+```
+**What the user experiences:** a reply full of literal `**`, `###` and `|` symbols that is hard to read and looks broken, and a "fix" that repeats the same symbols.
+**Fix:** declare each surface's formatting ability (SMS and plain-text widgets: none) and, for those surfaces, tell the model to use plain labels and line breaks and strip markdown syntax before sending. Test every reply type against a surface matrix. See [Key details buried](../../../../../by-capability/human-machine-interface/goals/response-structure/failures/key-details-buried.md) for the plain-label layout.
