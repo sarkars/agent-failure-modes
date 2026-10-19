@@ -1,5 +1,7 @@
 # Aligning Search Queries to Our Content
 
+> **Superseded (2026-10-19): the audience is now developers. See [developer-search-plan.md](developer-search-plan.md). This consumer-oriented mapping is kept as a record.**
+
 > **What this is.** A mapping from real search suggestions (see [queries.md](queries.md)) to the content this library already has, with an honest rating of how well our content answers each query. It shows where a search asset can be written now, where research is missing, and where our content does not fit and should not be forced. The queries are Google autocomplete suggestions pulled on 2026-10-19; they are not volumes. Written 2026-10-19.
 
 ## How to read the fit

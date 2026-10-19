@@ -1,5 +1,7 @@
 # Search Queries: Real Suggestions That Search Assets Start From
 
+> **Audience note (2026-10-19): the audience is now developers. The suggestions below are mostly consumer-oriented and are kept as a record; use [developer-search-plan.md](developer-search-plan.md).**
+
 > **What this is.** A record of real Google autocomplete suggestions, pulled on 2026-10-19 from the public suggestion endpoint, for 52 seed phrases across the problem areas of this library. They show what people begin typing. **They are not search volumes, and not Search Console data.** A suggestion means the phrase is common enough to be suggested; it says nothing about how many people search it or whether this site can rank. Use them to choose the words for titles and headings, then confirm with Search Console when access exists.
 
 ## How it was collected
