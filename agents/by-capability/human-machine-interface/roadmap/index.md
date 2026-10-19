@@ -44,7 +44,7 @@
 | CP-17 | Ignores recent activity and history | [embedded-copilots.md](embedded-copilots.md) | Extends | Business context | No |
 | CP-18 | Stale or wrong-user context used with confidence | [embedded-copilots.md](embedded-copilots.md) | Covered | Business context | No |
 | CP-19 | Context lost across a multi-session task | [embedded-copilots.md](embedded-copilots.md) | Extends | Business context | No |
-| CP-20 | Generic first response | [embedded-copilots.md](embedded-copilots.md) | New | Business context | No |
+| CP-20 | Generic first response | [embedded-copilots.md](embedded-copilots.md) | Written | Business context | No |
 | CP-21 | Greeting-only first turn | [embedded-copilots.md](embedded-copilots.md) | New | Business context | No |
 | CP-22 | No likely-next-action suggestions | [embedded-copilots.md](embedded-copilots.md) | New | Business context | No |
 | CP-23 | Boilerplate steps that don't match the user's setup | [embedded-copilots.md](embedded-copilots.md) | Extends | Business context | Partly |

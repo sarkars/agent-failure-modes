@@ -244,7 +244,7 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 3 | HU-03 | Cold transfer | Extends | - | `goals/human-handoff/failures/cold-transfer.md` | Done | 10 (manual) |
 | 4 | CP-14 | Re-asks for known information | Extends | V | `goals/embedded-copilots/failures/re-asks-for-known-information.md` | Done | 11 |
 | 5 | CP-15 | Forces a fresh login | New | E | `goals/embedded-copilots/failures/forces-a-fresh-login.md` | Done | 11 |
-| 6 | CP-20 | Generic first response | New | R | `goals/embedded-copilots/failures/generic-first-response.md` | In progress | 11 |
+| 6 | CP-20 | Generic first response | New | R | `goals/embedded-copilots/failures/generic-first-response.md` | Done | 11 |
 | 7 | CP-08 | Missing the obvious intent | Extends | - | `goals/embedded-copilots/failures/missing-the-obvious-intent.md` | Queued |  |
 | 8 | CP-12 | Doesn't say what it can do | New | R | `goals/embedded-copilots/failures/doesn-t-say-what-it-can-do.md` | Queued |  |
 | 9 | XA-01 | Dead-end 'I don't understand' replies | Extends | V, R | `goals/conversation-leadership/failures/dead-end-i-don-t-understand-replies.md` | Queued |  |
@@ -711,6 +711,11 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 - **Sources opened (2):** NIST SP 800-63B-4 AAL page (the reauthentication timeout values were checked against the text) and the Open.cx widget documentation. **Not used:** secondary pages with older NIST values (12 hours / 30 minutes), forum threads.
 - **Claims left unverified:** how often the failure occurs (no study found). The risk table and policy are design guidance for a security team to set.
 - **Review pass changed:** removed the pre-existing planned-link text from CP-14 now that this page exists; added the NIST caveat that the values are a federal benchmark, not a rule for every product.
+- **CP-20 Generic first response: Done.** File: `goals/embedded-copilots/failures/generic-first-response.md`, plus `tests/generic-first-response.md` (12 scenarios, "Not yet run"). Incident: "No public incident found" with the searches run.
+- **Sources opened (1):** the IceBreaker preprint (arXiv 2604.18375; the ~20% and the per-mille lifts were checked against the text). **Not opened or not usable:** Google's welcome-message guidance (the page redirected to a landing page; only a search summary), vendor blogs with engagement claims (one 40% figure not traceable to a study).
+- **Claims left unverified:** none stated as fact beyond the opened paper; the paper is about suggested starters, which the page says.
+- **Review pass changed:** replaced a placeholder link with the roadmap link; added the caveat that the preprint is not about support greetings.
+- **Part C (content-program task):** not done in this run. The first ready task is 13 (redo the gap analysis); it stays Queued for the next run.
 
 ## Backlog (not scheduled)
 Ideas from earlier lists that were never chosen. They stay out of the queue until someone adds them.

@@ -11,15 +11,16 @@ Shared metrics the patterns below report against. Targets are starting points to
 |---|---|---|
 | Re-ask rate on known fields | Under 2% | [re-asks for known information](failures/re-asks-for-known-information.md) |
 | Re-authentication prompts on low-risk actions for signed-in users | Near 0 | [forces a fresh login](failures/forces-a-fresh-login.md) |
+| Openers that reference user-specific context or a likely need | Over 70% (tune) | [generic first response](failures/generic-first-response.md) |
 
 ## Patterns
 | Pattern | One line |
 |---|---|
 | Re-asks for known information | The assistant asks for details the product already holds |
 | Forces a fresh login | The signed-in user is asked to sign in or verify again, even for low-risk help |
+| Generic first response | The first message is a stock greeting that ignores what the product knows |
 
 ## Planned (not yet written)
-- Generic first response
 - Missing the obvious intent
 - Doesn't say what it can do
 - Help that becomes a sales pitch
