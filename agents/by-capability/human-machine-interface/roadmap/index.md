@@ -25,7 +25,7 @@
 | CC-19 | User-context channel mismatch | [chat-and-core.md](chat-and-core.md) | New | Business context | No |
 | CC-22 | Creepy personalisation and memory | [chat-and-core.md](chat-and-core.md) | Extends | Business context | No |
 | CC-23 | Proactive outreach overreach | [chat-and-core.md](chat-and-core.md) | New | Governance | No |
-| CP-01 | Help that becomes a sales pitch | [embedded-copilots.md](embedded-copilots.md) | New | Governance | No |
+| CP-01 | Help that becomes a sales pitch | [embedded-copilots.md](embedded-copilots.md) | Written | Governance | No |
 | CP-02 | Recommending features the user can't use | [embedded-copilots.md](embedded-copilots.md) | Extends | Business context | No |
 | CP-03 | Answers withheld behind an upgrade, unsaid | [embedded-copilots.md](embedded-copilots.md) | New | Governance | No |
 | CP-04 | Self-preferencing | [embedded-copilots.md](embedded-copilots.md) | New | Governance | No |
