@@ -254,7 +254,7 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 12 | CP-03 | Answers withheld behind an upgrade, unsaid | New | L | `goals/embedded-copilots/failures/answers-withheld-behind-an-upgrade-unsaid.md` | Done | 13 |
 | 13 | RS-14 | No reply to acknowledgments and closers | Extends | - | `goals/response-structure/failures/no-reply-to-acknowledgments-and-closers.md` | Done | 14 |
 | 14 | RS-01 | Answer buried | New | - | `goals/response-structure/failures/answer-buried.md` | Done | 14 |
-| 15 | EM-02 | Deferring work to the user | New | - | `goals/effort-and-memory/failures/deferring-work-to-the-user.md` | Queued |  |
+| 15 | EM-02 | Deferring work to the user | New | - | `goals/effort-and-memory/failures/deferring-work-to-the-user.md` | Done | 14 |
 | 16 | EM-11 | No warning of context loss | Extends | - | `goals/effort-and-memory/failures/no-warning-of-context-loss.md` | Queued |  |
 | 17 | EM-01 | Lazy completion | New | V | `goals/effort-and-memory/failures/lazy-completion.md` | Queued |  |
 | 18 | DM-03 | Corrections not applied | New | - | `goals/dialogue-management/failures/corrections-not-applied.md` | Queued |  |
