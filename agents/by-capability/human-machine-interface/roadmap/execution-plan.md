@@ -309,16 +309,16 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 65 | RS-05 | Message bursts | New | - | `goals/response-structure/failures/message-bursts.md` | Done |  |
 | 66 | RS-06 | Unstructured procedures | New | - | `goals/response-structure/failures/unstructured-procedures.md` | Done |  |
 | 67 | RS-07 | Key details buried | New | - | `goals/response-structure/failures/key-details-buried.md` | Done |  |
-| 68 | RS-08 | Bullet and heading overuse | New | R | `goals/response-structure/failures/bullet-and-heading-overuse.md` | Queued |  |
-| 69 | RS-09 | Filler and padding | New | R | `goals/response-structure/failures/filler-and-padding.md` | Queued |  |
-| 70 | RS-10 | Structure flips between turns | Extends | - | `goals/response-structure/failures/structure-flips-between-turns.md` | Queued |  |
-| 71 | RS-11 | Formatting artifacts | Extends | - | `goals/response-structure/failures/formatting-artifacts.md` | Queued |  |
-| 72 | RS-12 | Wrong format for the medium | Extends | - | `goals/response-structure/failures/wrong-format-for-the-medium.md` | Queued |  |
-| 73 | RS-13 | Cut-off replies | Extends | - | `goals/response-structure/failures/cut-off-replies.md` | Queued |  |
-| 74 | RS-15 | Over-reply to acknowledgments | New | - | `goals/response-structure/failures/over-reply-to-acknowledgments.md` | Queued |  |
-| 75 | RS-16 | Misreading 'ok' and minimal replies | Extends | V, R | `goals/response-structure/failures/misreading-ok-and-minimal-replies.md` | Queued |  |
-| 76 | RS-17 | Length mismatch with the user's effort | New | - | `goals/response-structure/failures/length-mismatch-with-the-user-s-effort.md` | Queued |  |
-| 77 | RS-18 | Link and resource dumps | New | R | `goals/response-structure/failures/link-and-resource-dumps.md` | Queued |  |
+| 68 | RS-08 | Bullet and heading overuse | New | R | `goals/response-structure/failures/bullet-and-heading-overuse.md` | Done | Run 26: new page |
+| 69 | RS-09 | Filler and padding | New | R | `goals/response-structure/failures/filler-and-padding.md` | Done | Run 26: new page |
+| 70 | RS-10 | Structure flips between turns | Extends | - | `goals/response-structure/failures/structure-flips-between-turns.md` | Done | Run 26: chat example |
+| 71 | RS-11 | Formatting artifacts | Extends | - | `goals/response-structure/failures/formatting-artifacts.md` | Done | Run 26: chat example |
+| 72 | RS-12 | Wrong format for the medium | Extends | - | `goals/response-structure/failures/wrong-format-for-the-medium.md` | Done | Run 26: chat example |
+| 73 | RS-13 | Cut-off replies | Extends | - | `goals/response-structure/failures/cut-off-replies.md` | Done | Run 26: chat example |
+| 74 | RS-15 | Over-reply to acknowledgments | New | - | `goals/response-structure/failures/over-reply-to-acknowledgments.md` | Done | Run 26: new page |
+| 75 | RS-16 | Misreading 'ok' and minimal replies | Extends | V, R | `goals/response-structure/failures/misreading-ok-and-minimal-replies.md` | Done | Run 26: chat example |
+| 76 | RS-17 | Length mismatch with the user's effort | New | - | `goals/response-structure/failures/length-mismatch-with-the-user-s-effort.md` | Done | Run 26: new page |
+| 77 | RS-18 | Link and resource dumps | New | R | `goals/response-structure/failures/link-and-resource-dumps.md` | Done | Run 26: new page |
 | 78 | TE-02 | Apology without repair | Extends | - | `goals/errors-and-recovery/failures/apology-without-repair.md` | Queued |  |
 | 79 | TE-03 | Blames the user | New | - | `goals/errors-and-recovery/failures/blames-the-user.md` | Queued |  |
 | 80 | TE-04 | Contradicts an earlier answer without saying so | Extends | - | `goals/errors-and-recovery/failures/contradicts-an-earlier-answer-without-saying-so.md` | Queued |  |
@@ -929,6 +929,20 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 - **Taxonomy:** 61 entries; signals 61 of 61; Moves 59 of 61.
 - **Deploy:** content PR #20 merged (merge commit d155436); the site repo had no foreign commits. Scratch build clean, 1622 pages; the live sitemap had 1592 URLs, none missing from the build (removed: 0; 29 added). The new page has exactly one `<h1>`; the `search phrases:` text matches existing pages (importer behavior). Pushed to site repo main as 78478ce42 (20 files, none deleted), not verified live (no Vercel access, no deploy hook). The Chevrolet teardown and the explainer are not published by this runbook.
 - **Waiting for the owner:** CP-21 redo or drop, the role-boundary pattern gap, Search Console access for the site, Vercel build-on-push confirmation.
+
+### Run 26 (scheduled): 2026-10-20 onward
+- **Coordinator run:** 15 subagents wrote pages in parallel; I read each result and updated all shared files. Deviation: subagents got the quality guide and rules through scratchpad files, not pasted word for word.
+- **Part A new patterns (rows 68, 69, 74, 76, 77):** RS-08 bullet-and-heading-overuse, RS-09 filler-and-padding, RS-15 over-reply-to-acknowledgments, RS-17 length-mismatch-with-the-user-s-effort, RS-18 link-and-resource-dumps: **Done**, checked against guide section 2 (Detection signals, Starter rule, Moves, Guide spec present; 223 to 236 lines). Review changed: bullet-and-heading-overuse had a relative link one level short (check_links found 2 broken links; fixed); filler-and-padding used the move name `ask_one_clarifying_question`, changed to `ask_clarifying_question` like the other 26 pages. Searches were counted by each subagent and reported at 3 or more per page; their source lists are on the pages. Claims the subagents could not open are kept out of public text.
+- **Extends (rows 70, 71, 72, 73, 75, guide section 3):** RS-10 into model-output-format-instability, RS-11 into output-encoding-issues, RS-12 into text-prompt-voice-failure, RS-13 into output-truncation-silent, RS-16 into premature-ticket-closure-from-politeness-cue-misread-as-resolution-confirmation: **Done**, chat examples only, appended as `## Chat assistant examples`. Searches: 1 each (the rule asks for at least one for Extends; the run prompt's three-search bar applies to new pages).
+- **Part E (2, section 5):** Moves table and Guide spec added to confident-wrong-answer-with-no-way-to-check and over-refusal-of-ordinary-requests. All 66 written pages now have a Moves table and Guide spec.
+- **Part C asset 4 (teardown), NYC MyCity business chatbot: Done** (`incidents/nyc-mycity-chatbot-gives-businesses-illegal-advice-2024.md`, 88 lines, guide section 6). Statements about law are reported as the press reported them and stay Needs review.
+- **Part E5 guardrail tools comparison: Done as a draft, Needs review** (`reference/guardrail-tools-compared.md`, 81 lines). Searches: 0 (vendor docs opened directly). Where a page did not say something, the comparison says "not listed".
+- **Part E6 design note: Done** (`roadmap/code-module-design.md`, 114 lines, no code). **Waiting for the owner to create the code repo.**
+- **Part B:** Skipped. The 2026-10-20 entry already exists.
+- **Taxonomy:** 66 entries; signals 66 of 66; Moves 66 of 66.
+- **Unverified claims:** anything the subagents read only in search summaries is not in public text; mappings to outside frameworks remain Needs review.
+- **Deploy:** DEPLOY_PLACEHOLDER
+- **Waiting for the owner:** the code repo for E6, CP-21 redo or drop, the role-boundary pattern gap, Search Console access for the site, Vercel build-on-push confirmation.
 
 ## Backlog (not scheduled)
 Ideas from earlier lists that were never chosen. They stay out of the queue until someone adds them.

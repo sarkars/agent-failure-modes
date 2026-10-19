@@ -23,6 +23,11 @@ Shared metrics the patterns below report against. Targets are starting points to
 | Message bursts | One reply is split into many rapid messages that flood the chat |
 | Unstructured procedures | Step-by-step tasks come as prose, with steps merged or out of order |
 | Key details buried | Dates, amounts, deadlines, and required actions are hidden in paragraphs |
+| [Bullet and heading overuse](failures/bullet-and-heading-overuse.md) | Reasoning is shattered into fragments and headers, so the connecting "because" and "but" are lost |
+| [Filler and padding](failures/filler-and-padding.md) | "Great question!" openers, restated questions, and closing recaps add words and no information |
+| [Over-reply to acknowledgments](failures/over-reply-to-acknowledgments.md) | "Ok" or "thanks" triggers a recap, a new question, or an offer, so a closed topic reopens |
+| [Length mismatch with the user's effort](failures/length-mismatch-with-the-user-s-effort.md) | A three-word message gets several paragraphs back |
+| [Link and resource dumps](failures/link-and-resource-dumps.md) | A pile of links stands in for an answer |
 
 ## Planned (not yet written)
 The remaining patterns in the family are listed in the [roadmap](../../roadmap/response-structure-and-length.md).

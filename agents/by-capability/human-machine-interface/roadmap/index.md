@@ -69,17 +69,17 @@
 | RS-05 | Message bursts | [response-structure-and-length.md](response-structure-and-length.md) | Written | Business context | No |
 | RS-06 | Unstructured procedures | [response-structure-and-length.md](response-structure-and-length.md) | Written | Model | Partly |
 | RS-07 | Key details buried | [response-structure-and-length.md](response-structure-and-length.md) | Written | Model | Partly |
-| RS-08 | Bullet and heading overuse | [response-structure-and-length.md](response-structure-and-length.md) | New | Model | Partly |
-| RS-09 | Filler and padding | [response-structure-and-length.md](response-structure-and-length.md) | New | Model | Partly |
-| RS-10 | Structure flips between turns | [response-structure-and-length.md](response-structure-and-length.md) | Extends | Model | Partly |
-| RS-11 | Formatting artifacts | [response-structure-and-length.md](response-structure-and-length.md) | Extends | Business context | No |
-| RS-12 | Wrong format for the medium | [response-structure-and-length.md](response-structure-and-length.md) | Extends | Business context | No |
-| RS-13 | Cut-off replies | [response-structure-and-length.md](response-structure-and-length.md) | Extends | Reliability | No |
+| RS-08 | Bullet and heading overuse | [response-structure-and-length.md](response-structure-and-length.md) | Written | Model | Partly |
+| RS-09 | Filler and padding | [response-structure-and-length.md](response-structure-and-length.md) | Written | Model | Partly |
+| RS-10 | Structure flips between turns | [response-structure-and-length.md](response-structure-and-length.md) | Covered | Model | Partly |
+| RS-11 | Formatting artifacts | [response-structure-and-length.md](response-structure-and-length.md) | Covered | Business context | No |
+| RS-12 | Wrong format for the medium | [response-structure-and-length.md](response-structure-and-length.md) | Covered | Business context | No |
+| RS-13 | Cut-off replies | [response-structure-and-length.md](response-structure-and-length.md) | Covered | Reliability | No |
 | RS-14 | No reply to acknowledgments and closers | [response-structure-and-length.md](response-structure-and-length.md) | Written | Business context | Partly |
-| RS-15 | Over-reply to acknowledgments | [response-structure-and-length.md](response-structure-and-length.md) | New | Model | Partly |
-| RS-16 | Misreading 'ok' and minimal replies | [response-structure-and-length.md](response-structure-and-length.md) | Extends | Model | Partly |
-| RS-17 | Length mismatch with the user's effort | [response-structure-and-length.md](response-structure-and-length.md) | New | Model | Partly |
-| RS-18 | Link and resource dumps | [response-structure-and-length.md](response-structure-and-length.md) | New | Model | Partly |
+| RS-15 | Over-reply to acknowledgments | [response-structure-and-length.md](response-structure-and-length.md) | Written | Model | Partly |
+| RS-16 | Misreading 'ok' and minimal replies | [response-structure-and-length.md](response-structure-and-length.md) | Covered | Model | Partly |
+| RS-17 | Length mismatch with the user's effort | [response-structure-and-length.md](response-structure-and-length.md) | Written | Model | Partly |
+| RS-18 | Link and resource dumps | [response-structure-and-length.md](response-structure-and-length.md) | Written | Model | Partly |
 | LG-01 | Wrong-language reply | [language-and-locale.md](language-and-locale.md) | Extends | Model | Yes |
 | LG-02 | Code-switching breakage | [language-and-locale.md](language-and-locale.md) | Covered | Model | Yes |
 | LG-03 | Language switch ignored | [language-and-locale.md](language-and-locale.md) | Extends | Reliability | Partly |
