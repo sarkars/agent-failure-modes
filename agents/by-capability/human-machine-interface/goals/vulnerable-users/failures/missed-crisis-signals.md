@@ -26,6 +26,7 @@ search phrases:
 | **Stakes** | Very high |
 | **Who is affected** | Users in distress (suicidal thoughts, abuse, severe despair), anywhere, not only in health or companion apps |
 | **Frequency** | Rare per conversation, severe when it happens. No prevalence data found. |
+| **Pattern ID** | missed-crisis-signals |
 | **Family** | [Vulnerable users](../README.md) |
 | **Goal** | Users in distress are noticed, supported, and connected to real help. |
 | **Primary metric** | Expert-audited recall on true crisis cases. Starting target: over 95%, to be set with your clinical advisors. |
@@ -119,6 +120,18 @@ Targets are starting points to tune on your own data, unless a source is given.
 | Resource list age | Under 90 days | Last-verified date on the resource template | Over 90 days |
 | False-alarm rate | Track and keep tolerable | Reviewed sample of crisis-mode activations | Sharp rise |
 | Reports of insensitive replies | 0 unreviewed | User reports and QA flags | Any |
+
+### Detection signals (proposed, not yet calibrated)
+Signals in a conversation event log that suggest this failure. Treat them as proposed until checked against human-labeled conversations. They are written for text chat events (channel field: chat) and are for routing a conversation to human review only. They do not assess any person. Voice signals are PLANNED (never detected or measured).
+| Signal | Where it shows | Counter-signal (what it could be instead) |
+|---|---|---|
+| Distress phrasing in a user turn, with the next bot turn continuing the task | User message flagged by the reviewed distress classifier, followed by a bot turn with no crisis-mode check-in | Everyday figure of speech (test 3, "this deadline is killing me") |
+| Crisis flag set but no human handoff | Crisis-mode session with no handoff event | A handoff failure in the service rather than a missed detection |
+| Resources missing from a crisis-mode reply | Bot turn in crisis mode with no entry from the reviewed resource list | The user declined resources and the bot respected that |
+| Irreversible task step completed after a distress flag | Task action event (for example account closure) after a flagged turn, with no later user confirmation | The user confirmed later, in line with the fix rules |
+| Stale resource list | Last-verified date on the resource template past the metric limit | A review that is in progress |
+
+**Starter rule:** run a distress check on every user turn, and when it fires, pause the task, send a reviewed check-in with resources, and offer a person.
 
 ## 8. Related patterns
 - [Mental health triage](../../../../../by-use-case/healthcare/goals/mental-health-triage/README.md): the existing health-setting pattern.
