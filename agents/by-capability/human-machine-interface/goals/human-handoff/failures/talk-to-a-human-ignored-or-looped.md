@@ -25,6 +25,7 @@ search phrases:
 | **Stakes** | Any. At low stakes it costs time; with a bill due, a frozen account, or a fraud claim it costs money. |
 | **Who is affected** | Anyone whose problem falls outside what the bot can do, which is usually the customers who most need help |
 | **Frequency** | Common. I found no study that measures how often it happens; the evidence below is regulator and survey material. |
+| **Pattern ID** | talk-to-a-human-ignored-or-looped |
 | **Family** | [Human handoff](../README.md) |
 | **Goal** | A person is reachable when needed, and arrives informed, without the customer repeating themselves. |
 | **Primary metric** | Human-request fulfillment rate: requests for a person that end in a transfer, a scheduled callback, or a stated route within 2 bot turns. Starting target: 100% (this is a rule, not a statistic). |
@@ -137,6 +138,18 @@ Targets are starting points to tune on your own data, unless a source is given.
 | Repeated bot replies | Under 2% of turns | Identical or near-identical bot reply twice in a row after a request | Over 5% |
 | Abandonment after a request | Track; set from baseline | Conversations that end within 3 turns of the request with no handoff | Rising two weeks in a row |
 | Wait time stated | 100% of transfers | Transfers where the bot stated a wait or response window | Below 95% |
+
+### Detection signals (proposed, not yet calibrated)
+Signals in a conversation event log that suggest this failure. Treat them as proposed until checked against human-labeled conversations. Written for text chat; voice signals are planned.
+| Signal | Where it shows | Counter-signal (what it could be instead) |
+|---|---|---|
+| User message asks for a person and the next bot turn is not a handoff, route, or stated wait | Request label on a user turn, bot turn type after it | A single offer to help alongside the handoff offer, which the fix allows once |
+| A second request for a person after a bot reply | Two request-labeled user turns in one conversation | A user rephrasing because the first route was unclear |
+| Identical or near-identical bot reply twice in a row after a request | Consecutive bot turns with high similarity | An intentional repeated confirmation |
+| Conversation ends within 3 turns of a request with no transfer, callback, or stated route | Session end event after a request-labeled turn | The user found the answer elsewhere |
+| Transfer with no wait time or response window stated | Handoff event with no stated window in the bot message | A channel with no queue |
+
+**Starter rule:** a clear request for a person is a routing event, answered within two bot turns with a transfer, a callback, or a stated route and time.
 
 ## 8. Related patterns
 - [Chatbot loop without human escalation path](../../../../../by-use-case/support-services/goals/self-service-deflection/failures/chatbot-loop-without-human-escalation-path.md): the same loop seen from the deflection side, in service workflows. This page is about honoring an explicit request.

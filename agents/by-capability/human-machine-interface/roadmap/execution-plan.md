@@ -267,7 +267,7 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 25 | DT-01 | Order mix-ups at the speaker | New | V | `goals/drive-thru-agents/failures/order-mix-ups-at-the-speaker.md` | Done | 18 |
 | 26 | VO-05 | Repair failure | Extends | - | `goals/voice/failures/repair-failure.md` | Done | 18 |
 | 27 | RT-02 | Silent long-running work | Extends | V | `goals/response-time/failures/silent-long-running-work.md` | Done | 18 |
-| 28 | RT-06 | Silent failure and timeout | Extends | - | `goals/response-time/failures/silent-failure-and-timeout.md` | Queued |  |
+| 28 | RT-06 | Silent failure and timeout | Extends | - | `goals/response-time/failures/silent-failure-and-timeout.md` | Done | 19 |
 | 29 | CC-08 | Scam victim not interrupted | New | E, L | `goals/vulnerable-users/failures/scam-victim-not-interrupted.md` | Queued |  |
 | 30 | CC-16 | Romantic or parasocial dependence | New | L, E | `goals/relational-and-boundaries/failures/romantic-or-parasocial-dependence.md` | Queued |  |
 | 31 | CP-10 | Irrelevant or already-answered clarifying questions | Extends | - | `goals/embedded-copilots/failures/irrelevant-or-already-answered-clarifying-questions.md` | Queued |  |
@@ -841,6 +841,15 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 - **Part B (SEO review):** an entry for today exists in `seo/log.md`; Search Console not available.
 - **Deploy (run 18):** content repo merged to `main` as `2b92164` (PR 12). Site repo `main` pushed after a clean build: 1,591 sitemap URLs, 0 URLs lost against the live sitemap (1,553), 38 added (the three new patterns, earlier unpublished ones, and goal pages including drive-thru-agents, voice, and response-time). One H1 per page checked; no visible SEO comment. **Live check: not deployed** (pages return 404; the live sitemap still has 1,553 URLs; no deploy hook variable is set). Same known gap as runs 13 to 17. Needs the owner to check Vercel.
 - **Flagship patterns written so far: 27 of 30** (the 24 from run 17, plus DT-01, VO-05, RT-02).
+
+### Run 19 (scheduled): 2026-10-19 17:16 UTC onward
+- **RT-06 Silent failure and timeout: Done.** File: `goals/response-time/failures/silent-failure-and-timeout.md` (retitled for developer search: "Chatbot Stops Mid-Answer or Never Replies"), `tests/silent-failure-and-timeout.md` (12 scenarios, "Not yet run"), response-time README updated. Includes the Pattern ID row and a Detection signals block (proposed; voice signals marked planned). Incident: "No public incident found".
+- **Searches run: 3** (chatbot timeout with no response; LLM stream cut off mid-sentence; error message guidance for timeouts). **Sources opened (3):** Atlassian Forge, *Handling LLM API streaming errors* (page dated Jul 23, 2026); the OpenAI Developer Community thread on stream cut-offs (Jan 22, 2024); Canva Developers, *Errors & messaging*. WebFetch could not resolve hosts, so pages were fetched with curl and read as text. **Not opened or unusable:** a vendor-forum thread on a flow timeout (the page returned a 404), a Cursor forum report, a Zapier community post, the NN/g video page (navigation only); none is used in any claim.
+- **Claims left unverified:** how often silent failures occur in production chat; whether the OpenAI-forum cut-off was fixed or what caused it.
+- **Review pass changed:** limited the Atlassian claims to what the page says (one vendor, one model observation); labeled the forum thread a single report; kept the library's existing silent-wait and error-message pages as the neighbors rather than restating them.
+- **Part A2 (retrofit): 3 patterns.** Added the Pattern ID row and a proposed Detection signals block (with counter-signals and a starter rule) to `cold-transfer`, `escalates-too-early-or-too-late` and `talk-to-a-human-ignored-or-looped`, derived from each pattern's own metrics and fix. No file moved.
+- **Part C asset 1: evidence review draft v0.1.** `roadmap/evidence/why-people-leave-chatbots.md`. Searches run: 3 (Luo et al. 2019; Salvi et al.; the truck-driver field experiment). **Opened (5):** Luo et al. abstract (IDEAS/RePEc), Salvi et al. (Nature Human Behaviour page, arXiv abstract), the SUFE/GLOBE listing and UNC article for Xu, Dai and Yan. **Not opened:** the INFORMS journal pages (access refused) and the Gartner 2024 release (listed unverified, not used). **Claims left unverified:** the Xu et al. paper itself (abstract only); whether the Luo result has been replicated. **Review pass changed:** used the journal's figures for Salvi (81.2%, N = 900) over the preprint's; marked the two field experiments as outbound calls (Xu is voice); stated that the studies do not support "hide the disclosure".
+- **Flagship patterns written so far: 28 of 30** (CC-08 and CC-16 remain; both legal or expert flagged).
 
 ## Backlog (not scheduled)
 Ideas from earlier lists that were never chosen. They stay out of the queue until someone adds them.

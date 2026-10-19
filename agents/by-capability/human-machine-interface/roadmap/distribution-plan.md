@@ -41,6 +41,14 @@ Ordered by how much distribution each asset earns relative to effort. Every asse
 | 8 | **The free failure audit offer and one worked example** | Direct outreach | The L1 base agent as the worked example; a public sample audit of a synthetic transcript | 4 |
 | 9 | **Glossary** of conversation analytics terms (drop-off, containment, confirmed resolution, handoff recall) | Definitions pages | Pattern metric definitions | 1 |
 
+### Status
+| # | Asset | Status |
+|---|---|---|
+| 1 | Evidence review | **Draft v0.1** written 2026-10-19: [why people leave chatbots](evidence/why-people-leave-chatbots.md). Studies opened; re-check Xu et al. paper before publishing |
+| 2-9 | Schema and taxonomy, scenario pack, teardowns, metrics hub, preregistrations, rules library, audit offer, glossary | Not started |
+
+**Retrofit progress (Pattern ID and detection signals):** done on generic-error-messages, silent-failure-and-timeout, cold-transfer, escalates-too-early-or-too-late and talk-to-a-human-ignored-or-looped (5 of 28 written patterns); the other 23 are pending. Retrofit order: patterns whose pages get impressions first.
+
 ### How the assets connect to the existing patterns
 The 27 written patterns are the backbone. Each pattern's file name is its **Pattern ID** and never changes, so every public URL stays as it is. Everything else keys off that ID:
 

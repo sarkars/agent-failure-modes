@@ -53,7 +53,7 @@
 | RT-03 | Unpredictable latency | [response-time.md](response-time.md) | Extends | Reliability | Partly |
 | RT-04 | Pacing mismatch | [response-time.md](response-time.md) | New | Business context | No |
 | RT-05 | Deceptive typing indicators | [response-time.md](response-time.md) | New | Governance | No |
-| RT-06 | Silent failure and timeout | [response-time.md](response-time.md) | Extends | Reliability | No |
+| RT-06 | Silent failure and timeout | [response-time.md](response-time.md) | Written | Reliability | No |
 | RT-07 | Queue wait with no ETA | [response-time.md](response-time.md) | Extends | Business context | No |
 | RT-08 | Missed async promises | [response-time.md](response-time.md) | Extends | Business context | No |
 | RT-09 | Session timeout and lost context | [response-time.md](response-time.md) | New | Business context | No |

@@ -10,11 +10,13 @@ Shared metrics the patterns below report against. Targets are starting points to
 | Metric | Target | Defined in |
 |---|---|---|
 | Share of waits over 10 seconds with a progress or ETA message | Over 95% (tune) | [silent long-running work](failures/silent-long-running-work.md) |
+| Silent-failure rate (requests ending with no reply, error, or incomplete marker) | 0 (tune) | [silent failure and timeout](failures/silent-failure-and-timeout.md) |
 
 ## Patterns
 | Pattern | One line |
 |---|---|
 | Silent long-running work | The assistant works for about 10 seconds or more with no status, progress, or estimate |
+| Silent failure and timeout | A request times out or an answer is cut off with no error, or partial text looks finished |
 
 ## Planned (not yet written)
 The rest of the family is listed in the [roadmap](../../roadmap/response-time.md).
