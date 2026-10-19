@@ -63,12 +63,12 @@
 | RT-13 | Guardrail and hop latency | [response-time.md](response-time.md) | Covered | Reliability | No |
 | RT-14 | Fast replies, slow resolution | [response-time.md](response-time.md) | Extends | Business context | No |
 | RS-01 | Answer buried | [response-structure-and-length.md](response-structure-and-length.md) | Written | Model | Partly |
-| RS-02 | Wall of text | [response-structure-and-length.md](response-structure-and-length.md) | Extends | Model | Partly |
-| RS-03 | Over-long replies | [response-structure-and-length.md](response-structure-and-length.md) | Extends | Model | Partly |
-| RS-04 | Over-short replies | [response-structure-and-length.md](response-structure-and-length.md) | Extends | Model | Partly |
-| RS-05 | Message bursts | [response-structure-and-length.md](response-structure-and-length.md) | New | Business context | No |
-| RS-06 | Unstructured procedures | [response-structure-and-length.md](response-structure-and-length.md) | New | Model | Partly |
-| RS-07 | Key details buried | [response-structure-and-length.md](response-structure-and-length.md) | New | Model | Partly |
+| RS-02 | Wall of text | [response-structure-and-length.md](response-structure-and-length.md) | Covered | Model | Partly |
+| RS-03 | Over-long replies | [response-structure-and-length.md](response-structure-and-length.md) | Covered | Model | Partly |
+| RS-04 | Over-short replies | [response-structure-and-length.md](response-structure-and-length.md) | Covered | Model | Partly |
+| RS-05 | Message bursts | [response-structure-and-length.md](response-structure-and-length.md) | Written | Business context | No |
+| RS-06 | Unstructured procedures | [response-structure-and-length.md](response-structure-and-length.md) | Written | Model | Partly |
+| RS-07 | Key details buried | [response-structure-and-length.md](response-structure-and-length.md) | Written | Model | Partly |
 | RS-08 | Bullet and heading overuse | [response-structure-and-length.md](response-structure-and-length.md) | New | Model | Partly |
 | RS-09 | Filler and padding | [response-structure-and-length.md](response-structure-and-length.md) | New | Model | Partly |
 | RS-10 | Structure flips between turns | [response-structure-and-length.md](response-structure-and-length.md) | Extends | Model | Partly |
@@ -370,10 +370,10 @@
 | DM-09 | Guessing instead of asking | [conversation-design.md](conversation-design.md) | Written | Model | Partly |
 | DM-10 | Clarifying questions the user can't answer | [conversation-design.md](conversation-design.md) | Extends | Business context | Partly |
 | DM-11 | No way back in a flow | [conversation-design.md](conversation-design.md) | Written | Business context | No |
-| DM-12 | Rigid flows break on off-script answers | [conversation-design.md](conversation-design.md) | Extends | Business context | Partly |
-| DM-13 | Small talk and off-topic messages handled badly | [conversation-design.md](conversation-design.md) | New | Business context | Partly |
-| DM-14 | Same answer to a rephrased question | [conversation-design.md](conversation-design.md) | Extends | Reliability | Partly |
-| DM-15 | False premises accepted | [conversation-design.md](conversation-design.md) | New | Model | Partly |
+| DM-12 | Rigid flows break on off-script answers | [conversation-design.md](conversation-design.md) | Covered | Business context | Partly |
+| DM-13 | Small talk and off-topic messages handled badly | [conversation-design.md](conversation-design.md) | Written | Business context | Partly |
+| DM-14 | Same answer to a rephrased question | [conversation-design.md](conversation-design.md) | Covered | Reliability | Partly |
+| DM-15 | False premises accepted | [conversation-design.md](conversation-design.md) | Written | Model | Partly |
 | RF-01 | Over-refusal of ordinary requests | [conversation-design.md](conversation-design.md) | Written | Model | Partly |
 | RF-02 | Refusal with no reason or next step | [conversation-design.md](conversation-design.md) | Written | Business context | Partly |
 | RF-03 | Preachy, moralizing replies | [conversation-design.md](conversation-design.md) | New | Model | Partly |

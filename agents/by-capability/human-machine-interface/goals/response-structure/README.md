@@ -11,15 +11,21 @@ Shared metrics the patterns below report against. Targets are starting points to
 |---|---|---|
 | Answer-first rate (first sentence holds the answer or next step) | Over 90% | [answer buried](failures/answer-buried.md) |
 | Handling correctness on labelled acknowledgment and closer turns | Over 95% | [no reply to acknowledgments and closers](failures/no-reply-to-acknowledgments-and-closers.md) |
+| Messages per turn, against a team-set cap | Set from baseline | [message bursts](failures/message-bursts.md) |
+| Procedure replies that use numbered steps | Set from baseline | [unstructured procedures](failures/unstructured-procedures.md) |
+| Critical-facts-surfaced rate | Set from baseline | [key details buried](failures/key-details-buried.md) |
 
 ## Patterns
 | Pattern | One line |
 |---|---|
 | Answer buried | A long preamble sits before the answer, so the user must read everything to find it |
 | No reply to acknowledgments and closers | The user says "ok", "thanks", or "bye" and the bot stays silent, restarts, or repeats its last question |
+| Message bursts | One reply is split into many rapid messages that flood the chat |
+| Unstructured procedures | Step-by-step tasks come as prose, with steps merged or out of order |
+| Key details buried | Dates, amounts, deadlines, and required actions are hidden in paragraphs |
 
 ## Planned (not yet written)
-Wall of text, over-long replies, and the rest of the family are listed in the [roadmap](../../roadmap/response-structure-and-length.md).
+The remaining patterns in the family are listed in the [roadmap](../../roadmap/response-structure-and-length.md).
 
 ## Related
 - [Conversation leadership](../conversation-leadership/README.md): the bot's own turn endings and fallbacks

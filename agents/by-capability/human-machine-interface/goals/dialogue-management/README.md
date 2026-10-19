@@ -12,6 +12,8 @@ Shared metrics the patterns below report against. Targets are starting points to
 | Corrections still wrong two turns later | 0 | [corrections not applied](failures/corrections-not-applied.md) |
 | Wrong-guess rate on ambiguous test requests | Set from baseline | [guessing instead of asking](failures/guessing-instead-of-asking.md) |
 | Wrong-referent rate on follow-ups with pronouns and ordinals | Set from baseline | [reference resolution failures](failures/reference-resolution-failures.md) |
+| Off-topic turns that return to the task within two turns | Set from baseline | [small talk and off-topic messages handled badly](failures/small-talk-and-off-topic-messages-handled-badly.md) |
+| Answers that accept a false premise in a test set | Set from baseline | [false premises accepted](failures/false-premises-accepted.md) |
 
 ## Patterns
 | Pattern | One line |
@@ -22,6 +24,8 @@ Shared metrics the patterns below report against. Targets are starting points to
 | Negation and exceptions ignored | "Not the red one" gets the red one |
 | Over-confirmation | "Are you sure?" on every routine step, so the one that matters gets lost |
 | No way back in a flow | The user cannot go back, change an earlier answer, or start over without losing everything |
+| Small talk and off-topic messages handled badly | The assistant ignores a friendly remark, or follows a tangent into a long chat |
+| False premises accepted | "Why did you cancel my order?" is answered as if it were cancelled |
 
 ## Planned (not yet written)
 The rest of the family are listed in the [roadmap](../../roadmap/conversation-design.md).
