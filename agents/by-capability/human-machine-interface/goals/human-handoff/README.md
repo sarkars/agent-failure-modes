@@ -10,14 +10,15 @@ Shared metrics the patterns below report against. Targets are starting points to
 | Metric | Target | Defined in |
 |---|---|---|
 | Human-request fulfillment rate (requests that end in a transfer, callback, or stated route within 2 bot turns) | 100% | [talk to a human ignored or looped](failures/talk-to-a-human-ignored-or-looped.md) |
+| Escalation recall and precision against labeled conversations | Recall over 95%, precision over 80% | [escalates too early or too late](failures/escalates-too-early-or-too-late.md) |
 
 ## Patterns
 | Pattern | One line |
 |---|---|
 | Talk to a human ignored or looped | The customer asks for a person and the bot loops or deflects |
+| Escalates too early, or too late | The bot hands off questions it could answer, or holds on to ones it cannot |
 
 ## Planned (not yet written)
-- Escalates too early, or too late
 - Cold transfer
 - Handoff summary is wrong or misleading
 - Humans can't see what the bot said or promised
