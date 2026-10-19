@@ -26,6 +26,7 @@ search phrases:
 | **Stakes** | High |
 | **Who is affected** | Children under 13 and teens, plus the parents and companies responsible for them |
 | **Frequency** | Occasional to common on general-audience products. No prevalence data found. |
+| **Pattern ID** | child-user-treated-as-adult |
 | **Family** | [Age adaptation](../README.md) |
 | **Goal** | Likely minors get safe, age-appropriate behaviour, with no data collection or pressure. |
 | **Primary metric** | Personal-data requests in minor mode. Target: 0. |
@@ -85,6 +86,13 @@ The fixed bot keeps it friendly and simple, asks for nothing personal, drops the
 | 13 to 15 | Minimal; explain why | Very limited | Plain, respectful, not babyish | Trusted-adult and crisis paths; no romantic role-play |
 | 16 to 17 | Minimal | Limited, transparent | Near-adult, with care on sensitive topics | Same safeguards; clear AI disclosure |
 
+**Moves** (see [conversation moves](../../../solutions-library/conversation-moves.md); list only the moves that apply, most preferred first)
+| Move | When, in this pattern |
+|---|---|
+| Lead with the answer | A strong age signal is present and the request is clear: answer in short, concrete words first, with no personal-data request and no promotion. |
+| Offer choices: 2-4 options plus "Something else", free text open | The child's interest is open-ended, as in the game example: "Racing", "Building", "Puzzles", "Something else". Do not offer them when the request is already specific, or when the choices would stand in for pointing to a trusted adult on money or safety. |
+| Hand off to a person | A safeguarding concern (abuse, self-harm) comes up: pass a summary to a trained human. Do not use it for ordinary questions from a young user. |
+
 **Don't over-correct.** Don't treat every short, slangy, or simple message as a child (many adults write that way, including people with disabilities or those learning English). Don't demand ID in chat. Don't store inferred age more than needed.
 
 **Hand-off rule.** Safeguarding concerns go to a trained human, with a summary.
@@ -109,6 +117,32 @@ Targets are starting points to tune on your own data, unless a source is given.
 | Strong-signal detection recall | Over 90% | Labelled child-signal test set | Under 85% |
 | False minor-mode rate on adult look-alikes | Under 5% | Labelled adult look-alike set (simple language, slang, learners) | Over 10% |
 | Parent or regulator complaints | 0 unreviewed | Complaint tracking | Any |
+
+### Detection signals (proposed, not yet calibrated)
+Signals in a conversation event log that suggest this failure. Treat them as proposed until checked against human-labeled conversations. A user saying their age is not verification; every signal is a probability.
+| Signal | Where it shows | Counter-signal (what it could be instead) |
+|---|---|---|
+| Bot asks for personal data after a strong age signal | Bot turn with a personal-data request, in a conversation where `age_signal.strength` is strong or `mode` is "minor" | The user is an adult who mentioned a child, or the signal was a joke or role-play |
+| Promotion or pressure shown after a strong age signal | Bot turn with promo or scarcity phrases after the signal | The promo was shown before the signal and not repeated |
+| Stated age or "my mom said" with no change in mode | User turn with an age phrase, then no `mode = "minor"` event | The phrase was about someone else, such as "my son is 11" |
+| Minor mode fires on simple or slangy writing with no stated age | `mode = "minor"` event whose reasons list only style | Strong stated-age signal present, so the mode is correct |
+| Safeguarding disclosure with no crisis-path event | User turn about abuse or self-harm, no crisis-path event follows | The user was quoting a story or asking about the topic in general |
+
+**Starter rule:** when age signals suggest a child, change what the bot collects, says, and asks for, not just its vocabulary.
+
+**Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
+```yaml
+pattern_id: child-user-treated-as-adult
+runs: pre_send
+reads: [age_signal.strength, age_signal.reasons, session.mode, bot_turn.text]
+trigger: a reply is about to be sent in a conversation with a strong age signal
+moves: [lead_with_answer, offer_choices, hand_off]
+choices: ["Racing", "Building", "Puzzles", "Something else"]
+on_miss: rewrite
+metric: personal-data requests in minor mode
+counter_metric: false minor-mode rate on adult look-alikes
+status: proposed
+```
 
 ## 8. Related patterns
 - [Missed crisis signals](../../vulnerable-users/failures/missed-crisis-signals.md)

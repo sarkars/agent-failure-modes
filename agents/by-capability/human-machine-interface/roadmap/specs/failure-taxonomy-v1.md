@@ -2,15 +2,15 @@
 
 > **Status:** v1 draft, proposed, not yet calibrated against human-labeled conversations. Written 2026-10-20 from the pattern pages as they exist today. Nothing here is a measured result.
 
-This is a plain index of the 46 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
+This is a plain index of the 50 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
 
 The taxonomy pairs with the [conversation event schema v0.1](conversation-event-schema-v0.1.md). The schema describes what a turn looks like in a log; this page names the failures. A pattern's own page holds the fix, the metrics, and (for some) a "Detection signals (proposed, not yet calibrated)" block that says which schema fields it reads.
 
 ## What this page is and is not
 
-- It lists every file found in `goals/*/failures/*.md`: **46 entries in 22 families**. If a pattern is added or removed, this count changes.
+- It lists every file found in `goals/*/failures/*.md`: **50 entries in 22 families**. If a pattern is added or removed, this count changes.
 - It copies each pattern's one-sentence Issue line, its Stakes row, and whether a Detection signals block exists. It does not add facts the page does not state.
-- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **29 of 46** pages have such a block; 17 have metrics only. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **15 of 46** pages have one.
+- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **37 of 50** pages have such a block; 13 have metrics only. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **15 of 46** pages have one.
 - It does not rank patterns by frequency or harm. No counts of real-world occurrences are given because none have been measured here.
 - It does not map patterns to outside frameworks (such as OWASP or NIST). That mapping is **Needs review** by a person and is not part of v1.
 
@@ -26,7 +26,7 @@ Family folder: `age-adaptation` ([family README](../../goals/age-adaptation/READ
 
 | Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
 |---|---|---|---|---|---|---|
-| `child-user-treated-as-adult` | Child user treated as adult | What a chatbot should do when a user may be under 13 or a teen, covering COPPA, age signals, data collection, persuasion limits, and age-band design. | High **Read this first: needs expert or legal review.** | no | none yet | [page](../../goals/age-adaptation/failures/child-user-treated-as-adult.md)  |
+| `child-user-treated-as-adult` | Child user treated as adult | What a chatbot should do when a user may be under 13 or a teen, covering COPPA, age signals, data collection, persuasion limits, and age-band design. | High **Read this first: needs expert or legal review.** | yes | lead_with_answer, offer_choices, hand_off | [page](../../goals/age-adaptation/failures/child-user-treated-as-adult.md)  |
 
 ### Channel selection
 
@@ -34,9 +34,9 @@ Family folder: `channel-selection` ([family README](../../goals/channel-selectio
 
 | Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
 |---|---|---|---|---|---|---|
-| `complex-or-emotional-discussion-forced-into-chat` | Complex or emotional discussion forced into chat | Why long, confusing, or emotional conversations go wrong in chatbots, and how to detect it and move users to a call, a screen, or a person. | Medium to high (claims, finance, health, technical faults) | no | none yet | [page](../../goals/channel-selection/failures/complex-or-emotional-discussion-forced-into-chat.md)  |
+| `complex-or-emotional-discussion-forced-into-chat` | Complex or emotional discussion forced into chat | Why long, confusing, or emotional conversations go wrong in chatbots, and how to detect it and move users to a call, a screen, or a person. | Medium to high (claims, finance, health, technical faults) | yes | ask_clarifying_question, offer_choices, hand_off, lead_with_answer | [page](../../goals/channel-selection/failures/complex-or-emotional-discussion-forced-into-chat.md)  |
 | `no-channel-switch-or-context-lost` | No channel switch, or context lost in it | Why customers have to repeat themselves after a chatbot hands off to an agent or switches channels, with a handoff packet design and tests. | Medium to high | no | none yet | [page](../../goals/channel-selection/failures/no-channel-switch-or-context-lost.md)  |
-| `sensitive-data-collected-in-chat` | Sensitive data collected in chat | Why collecting card numbers, SSNs, or passwords in a chatbot or voice bot is risky, what PCI DSS says, and how to design a safe alternative. | High (financial loss, identity theft, compliance exposure) | no | none yet | [page](../../goals/channel-selection/failures/sensitive-data-collected-in-chat.md)  |
+| `sensitive-data-collected-in-chat` | Sensitive data collected in chat | Why collecting card numbers, SSNs, or passwords in a chatbot or voice bot is risky, what PCI DSS says, and how to design a safe alternative. | High (financial loss, identity theft, compliance exposure) | yes | lead_with_answer, offer_choices, hand_off | [page](../../goals/channel-selection/failures/sensitive-data-collected-in-chat.md)  |
 | `visual-product-sold-by-text-or-voice` | Visual product sold by text or voice | Why text-only chatbots and voice assistants fail at selling visual products like fashion, furniture, and art, and how to fix it. | Low to medium (lost sales and returns) | no | none yet | [page](../../goals/channel-selection/failures/visual-product-sold-by-text-or-voice.md)  |
 
 ### Conversation leadership
@@ -114,7 +114,7 @@ Family folder: `emotional-intelligence` ([family README](../../goals/emotional-i
 
 | Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
 |---|---|---|---|---|---|---|
-| `hollow-empathy` | Hollow empathy | Why "I understand your frustration" repeated by a chatbot backfires, what research says about empathic chatbots, and how to write specific, useful empathy. | Low to high | yes | none yet | [page](../../goals/emotional-intelligence/failures/hollow-empathy.md)  |
+| `hollow-empathy` | Hollow empathy | Why "I understand your frustration" repeated by a chatbot backfires, what research says about empathic chatbots, and how to write specific, useful empathy. | Low to high | yes | lead_with_answer, offer_choices, hand_off | [page](../../goals/emotional-intelligence/failures/hollow-empathy.md)  |
 
 ### Errors and recovery
 
@@ -150,6 +150,10 @@ Family folder: `human-handoff` ([family README](../../goals/human-handoff/README
 | `cold-transfer` | Cold transfer | A chatbot transfers the customer, and the person who picks up knows nothing, so the customer explains the problem, the order number, and what they already tried all over again. | Any. Costly when the customer is already upset or the issue involves money or a deadline. | yes | hand_off, admit_uncertainty | [page](../../goals/human-handoff/failures/cold-transfer.md)  |
 | `escalates-too-early-or-too-late` | Escalates too early or too late | A chatbot hands off questions it could answer, or holds on to ones it cannot, because nobody defined when a person should take over. | Any. Too late is worst when money, safety, or a deadline is involved. Too early wastes scarce staff. | yes | none yet | [page](../../goals/human-handoff/failures/escalates-too-early-or-too-late.md)  |
 | `talk-to-a-human-ignored-or-looped` | "Talk to a human" ignored or looped | A customer asks for a person, and the chatbot answers with the same menu, asks the same question again, or sends them in circles instead of connecting them or saying how. | Any. At low stakes it costs time; with a bill due, a frozen account, or a fraud claim it costs money. | yes | hand_off, lead_with_answer, offer_choices, ask_clarifying_question | [page](../../goals/human-handoff/failures/talk-to-a-human-ignored-or-looped.md)  |
+| `handoff-summary-is-wrong-or-misleading` | Handoff summary is wrong or misleading | The chatbot hands a person a summary that drops a key fact or states one the customer never gave, so the person starts from a wrong story. | Medium to high. A wrong amount, date, or account detail can lead to a wrong refund, a wrong cancellation, or a customer who is told something false. | yes | admit_uncertainty, ask_clarifying_question, hand_off | [page](../../goals/human-handoff/failures/handoff-summary-is-wrong-or-misleading.md) |
+| `humans-can-t-see-what-the-bot-said-or` | Humans can't see what the bot said or promised | A customer says "your chatbot told me," and the person who picks up has no record of what the bot said or promised, so they cannot confirm, honor, or correct it. | Medium to high. The bot's words often concern money, deadlines, refunds, or eligibility. Read this first: needs expert or legal review. | yes | hand_off, admit_uncertainty | [page](../../goals/human-handoff/failures/humans-can-t-see-what-the-bot-said-or.md) |
+| `bot-keeps-replying-after-a-person-joins` | Bot keeps replying after a person joins | A support chatbot keeps answering after a human agent joins the chat, so the customer gets two replies, often contradicting each other, and the agent loses control of the conversation. | Low to high. Two conflicting answers about a refund, a deadline, or a policy are worse than one wrong answer. | yes | hand_off, admit_uncertainty | [page](../../goals/human-handoff/failures/bot-keeps-replying-after-a-person-joins.md) |
+| `handoff-outside-staffed-hours-with-no-alternative` | Handoff outside staffed hours with no alternative | A chatbot says a person will join the chat, but no one is staffed until tomorrow, and it offers no callback, ticket, or email to bridge the gap. | Any. Low for a shipping question; high for a locked account, a fraud charge, or a deadline that falls before the next shift. | yes | lead_with_answer, offer_choices, hand_off | [page](../../goals/human-handoff/failures/handoff-outside-staffed-hours-with-no-alternative.md) |
 
 ### Refusals and boundaries
 
@@ -193,7 +197,7 @@ Family folder: `stakes-calibration` ([family README](../../goals/stakes-calibrat
 
 | Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
 |---|---|---|---|---|---|---|
-| `stakes-blind-register` | Stakes-blind register | Why chatbots use the same upbeat tone for bereavement, money, and health as for store hours, and how to calibrate tone and accuracy to the stakes. | High (this is the failure of not noticing them) | no | none yet | [page](../../goals/stakes-calibration/failures/stakes-blind-register.md)  |
+| `stakes-blind-register` | Stakes-blind register | Why chatbots use the same upbeat tone for bereavement, money, and health as for store hours, and how to calibrate tone and accuracy to the stakes. | High (this is the failure of not noticing them) | yes | admit_uncertainty, offer_choices, hand_off, lead_with_answer | [page](../../goals/stakes-calibration/failures/stakes-blind-register.md)  |
 
 ### Trust and rapport
 
@@ -201,7 +205,7 @@ Family folder: `trust-and-rapport` ([family README](../../goals/trust-and-rappor
 
 | Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
 |---|---|---|---|---|---|---|
-| `undisclosed-bot-identity` | Undisclosed bot identity | Why chatbots that pretend to be human or hide their limits lose trust, what California's bot law and the EU AI Act require, and how to disclose well. | Medium to high | yes | none yet | [page](../../goals/trust-and-rapport/failures/undisclosed-bot-identity.md)  |
+| `undisclosed-bot-identity` | Undisclosed bot identity | Why chatbots that pretend to be human or hide their limits lose trust, what California's bot law and the EU AI Act require, and how to disclose well. | Medium to high | yes | lead_with_answer, admit_uncertainty, hand_off | [page](../../goals/trust-and-rapport/failures/undisclosed-bot-identity.md)  |
 
 ### Voice
 
@@ -217,7 +221,7 @@ Family folder: `vulnerable-users` ([family README](../../goals/vulnerable-users/
 
 | Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
 |---|---|---|---|---|---|---|
-| `missed-crisis-signals` | Missed crisis signals | What a chatbot should do when a user mentions suicidal thoughts, abuse, or despair mid-task, including 988 referral, human handoff, and testing with expert review. | Very high **Read this first: needs expert or legal review.** | yes | none yet | [page](../../goals/vulnerable-users/failures/missed-crisis-signals.md)  |
+| `missed-crisis-signals` | Missed crisis signals | What a chatbot should do when a user mentions suicidal thoughts, abuse, or despair mid-task, including 988 referral, human handoff, and testing with expert review. | Very high **Read this first: needs expert or legal review.** | yes | ask_clarifying_question, hand_off | [page](../../goals/vulnerable-users/failures/missed-crisis-signals.md)  |
 | `scam-victim-not-interrupted` | Scam victim not interrupted | A user is mid-scam (gift cards, wire transfers, crypto) and the chatbot completes the payment; the fix is to notice scam signals, slow or stop the action, and reach a person fast. | High. The money is often unrecoverable once sent. **Read this first: needs expert or legal review.** | yes | none yet | [page](../../goals/vulnerable-users/failures/scam-victim-not-interrupted.md)  |
 
 ## Versioning and changes

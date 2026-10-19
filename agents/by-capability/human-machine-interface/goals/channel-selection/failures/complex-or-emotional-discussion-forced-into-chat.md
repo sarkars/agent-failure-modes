@@ -24,6 +24,7 @@ search phrases:
 | **Stakes** | Medium to high (claims, finance, health, technical faults) |
 | **Who is affected** | Users with multi-part problems, confusing policies, or strong emotions |
 | **Frequency** | Very common. Most deployed agents are chat-first; no study measures this exact failure. |
+| **Pattern ID** | complex-or-emotional-discussion-forced-into-chat |
 | **Family** | [Channel selection](../README.md) |
 | **Goal** | Each interaction happens in the channel that fits the job, and switching never costs the user their context. |
 | **Primary metric** | Detection recall of conversations that have outgrown chat. Starting target: over 85%. |
@@ -83,6 +84,14 @@ if complex and not already_offered:
     reply = summary(3 bullets) + one_switch_offer(reason, specific_times)
 ```
 
+**Moves** (see [conversation moves](../../../solutions-library/conversation-moves.md); list only the moves that apply, most preferred first)
+| Move | When, in this pattern |
+|---|---|
+| Ask one clarifying question | Two issues may be the same one (for example, which claim the user means) and the answer changes what the bot summarises. Do not ask when the three-bullet summary already makes it clear. |
+| Offer choices: 2-4 options plus "Something else", free text open | When a complexity trigger fires: the specific switch times plus "Keep going in chat" and "Something else". Do not offer them twice after a decline, or when the user has said they prefer chat. |
+| Hand off to a person | After the user accepts the switch, or when stakes and emotion are both high. Pass the summary, the goal and what was tried. Do not hand off if the user asked to stay with the bot. |
+| Lead with the answer | After a declined switch, or while the trigger is active and the request is clear: a short answer and one next step, not a policy dump. |
+
 **Don't over-correct.** Don't escalate every long chat; many long chats are fine. Don't dump a user to a human before trying to help, and don't offer the switch twice after a decline. If the user declines, keep going in chat with shorter answers.
 
 **Hand-off rule.** Hand off with the three-bullet summary, the user's goal, and what has been tried, so nobody asks again.
@@ -107,6 +116,32 @@ Targets are starting points to tune on your own data, unless a source is given.
 | Sessions over about 20 turns with no resolution | Trend down | Turn count and resolution marker | +20% vs baseline |
 | Switch-offer acceptance rate | Track (low means poor timing or wording) | Offers made vs. accepted | Sharp drop |
 | 'I don't understand' and repeated rephrasing | Trend down | Intent classifier and reformulation detector | +25% vs baseline |
+
+### Detection signals (proposed, not yet calibrated)
+Signals in a conversation event log that suggest this failure. Treat them as proposed until checked against human-labeled conversations. Chat is the written channel; voice and web signals are PLANNED, not detected.
+| Signal | Where it shows | Counter-signal (what it could be instead) |
+|---|---|---|
+| Three or more distinct issues in the thread (reference design: `issues >= 3`) | Issue count per session from the complexity monitor | One issue described in several messages |
+| User repeats or rephrases the same question, or says "I don't get it" | Reformulation detector and "don't understand" intent events (confusion metric) | A deliberate follow-up that adds new detail |
+| Turns with no progress pass the page's start value (6 to 8, tune) | Turn count and resolution marker (the over-20-turns metric) | A long chat that is still closing open questions |
+| High stakes and strong emotion in the same thread | `stakes` and `emotion` flags in the reference design | Strong emotion about a low-stakes topic that the bot can resolve |
+| Switch offer made, then no acceptance or a decline | `offer_made` and `offer_declined` events (acceptance-rate metric) | The user prefers chat; do not re-offer |
+
+**Starter rule:** detect when a conversation has outgrown chat, then offer one specific switch and carry the context over.
+
+**Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
+```yaml
+pattern_id: complex-or-emotional-discussion-forced-into-chat
+runs: conversation
+reads: [session.issue_count, session.turns_without_progress, session.confusion_signals, session.stakes, session.emotion, session.offer_declined]
+trigger: the complexity check is true and no switch has been offered yet
+moves: [ask_clarifying_question, offer_choices, hand_off, lead_with_answer]
+choices: ["Call at 2:30", "Call at 4:00", "Keep going in chat", "Something else"]
+on_miss: rewrite
+metric: detection recall of conversations that have outgrown chat
+counter_metric: false-trigger rate on healthy long chats
+status: proposed
+```
 
 ## 8. Related patterns
 - [Conversation length explosion](../../../../../by-use-case/agent-interaction/goals/conversation-quality/failures/conversation-length-explosion.md): the symptom this pattern's fix addresses.
