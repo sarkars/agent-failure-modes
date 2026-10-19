@@ -19,11 +19,11 @@ Shared metrics the patterns below report against. Targets are starting points to
 | Talk to a human ignored or looped | The customer asks for a person and the bot loops or deflects |
 | Escalates too early, or too late | The bot hands off questions it could answer, or holds on to ones it cannot |
 | Cold transfer | The person who picks up knows nothing and asks everything again |
+| [Handoff summary is wrong or misleading](failures/handoff-summary-is-wrong-or-misleading.md) | The summary drops a key fact or invents one |
+| [Humans can't see what the bot said or promised](failures/humans-can-t-see-what-the-bot-said-or.md) | The customer says "your chatbot told me" and the agent has no record |
+| [Bot keeps replying after a person joins](failures/bot-keeps-replying-after-a-person-joins.md) | Two replies, often contradicting each other |
+| [Handoff outside staffed hours with no alternative](failures/handoff-outside-staffed-hours-with-no-alternative.md) | The bot promises a person who is not there until tomorrow |
 
-## Planned (not yet written)
-- Handoff summary is wrong or misleading
-- Humans can't see what the bot said or promised
-- Handoff outside staffed hours with no alternative
 
 ## Related
 - [Channel selection](../channel-selection/README.md): switching channels without losing context
