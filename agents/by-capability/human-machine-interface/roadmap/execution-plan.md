@@ -242,8 +242,8 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 1 | HU-01 | 'Talk to a human' ignored or looped | Extends | - | `goals/human-handoff/failures/talk-to-a-human-ignored-or-looped.md` | Done | 10 (manual) |
 | 2 | HU-02 | Escalates too early, or too late | Extends | - | `goals/human-handoff/failures/escalates-too-early-or-too-late.md` | Done | 10 (manual) |
 | 3 | HU-03 | Cold transfer | Extends | - | `goals/human-handoff/failures/cold-transfer.md` | Done | 10 (manual) |
-| 4 | CP-14 | Re-asks for known information | Extends | V | `goals/embedded-copilots/failures/re-asks-for-known-information.md` | In progress | 11 |
-| 5 | CP-15 | Forces a fresh login | New | E | `goals/embedded-copilots/failures/forces-a-fresh-login.md` | Queued |  |
+| 4 | CP-14 | Re-asks for known information | Extends | V | `goals/embedded-copilots/failures/re-asks-for-known-information.md` | Done | 11 |
+| 5 | CP-15 | Forces a fresh login | New | E | `goals/embedded-copilots/failures/forces-a-fresh-login.md` | In progress | 11 |
 | 6 | CP-20 | Generic first response | New | R | `goals/embedded-copilots/failures/generic-first-response.md` | Queued |  |
 | 7 | CP-08 | Missing the obvious intent | Extends | - | `goals/embedded-copilots/failures/missing-the-obvious-intent.md` | Queued |  |
 | 8 | CP-12 | Doesn't say what it can do | New | R | `goals/embedded-copilots/failures/doesn-t-say-what-it-can-do.md` | Queued |  |
@@ -701,6 +701,12 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 - **Claims left unverified:** the original Five9 and Liveops question wording.
 - **Review pass changed:** added the "vendor survey of perceptions" caveat to each row, marked causes as our reading, and kept the primary metric aligned with the channel-selection family (re-ask under 5%).
 - **Part B (daily SEO review):** Blocked: no Chrome tools and no export in `seo/inbox/`; logged in `seo/log.md`.
+
+### Run 11 (scheduled): 2026-10-19 04:17 UTC onward
+- **CP-14 Re-asks for known information: Done.** File: `goals/embedded-copilots/failures/re-asks-for-known-information.md`, a new family README, and `tests/re-asks-for-known-information.md` (12 scenarios, "Not yet run"). Incident: "No public incident found" with the searches run.
+- **Sources opened (3):** the B&T article on Salesforce's connected-customer report (ANZ edition), the Salesforce 2019 news story, and the Digital Applied agent-clarification guide. **Not opened:** the Salesforce reports themselves, ServiceNow's conversation-design page (403).
+- **Claims left unverified:** the catalog row's 56% global figure could not be verified and was not used; only the 66% ANZ figure from the B&T article is shown, with its caveats. The edition year of that article is unknown.
+- **Review pass changed:** removed a link to a pattern that did not exist yet and replaced it with plain text; added a note that the global repeat figure was not verified.
 
 ## Backlog (not scheduled)
 Ideas from earlier lists that were never chosen. They stay out of the queue until someone adds them.

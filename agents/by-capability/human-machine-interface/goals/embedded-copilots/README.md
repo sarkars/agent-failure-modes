@@ -1,0 +1,30 @@
+# Embedded Copilots: Goal, Metrics, and Patterns
+
+> **Goal:** An assistant built into a product helps the person do what they came to do, using what the product already knows, and never puts the vendor's interest ahead of theirs.
+
+## Why this family exists
+Assistants inside products (support widgets, in-app help, copilots) differ from general chatbots. They sit next to a sales motive, they can reach account and screen context, and users expect them to know it. This family covers the failures that follow.
+
+## How we measure it
+Shared metrics the patterns below report against. Targets are starting points to tune on your own data, unless a source is given.
+| Metric | Target | Defined in |
+|---|---|---|
+| Re-ask rate on known fields | Under 2% | [re-asks for known information](failures/re-asks-for-known-information.md) |
+
+## Patterns
+| Pattern | One line |
+|---|---|
+| Re-asks for known information | The assistant asks for details the product already holds |
+
+## Planned (not yet written)
+- Forces a fresh login
+- Generic first response
+- Missing the obvious intent
+- Doesn't say what it can do
+- Help that becomes a sales pitch
+- Obstructing cancellation, downgrade, or refund
+- Answers withheld behind an upgrade, unsaid
+
+## Related
+- [Human handoff](../human-handoff/README.md): what happens when the assistant passes the customer to a person
+- [Area overview](../../README.md) · [Pattern template](../../_templates/hmi-pattern.md)
