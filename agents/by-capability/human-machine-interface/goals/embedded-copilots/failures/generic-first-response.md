@@ -25,6 +25,7 @@ search phrases:
 | **Stakes** | Low to medium. The cost is conversations that never start, and a slower start to the ones that do. |
 | **Who is affected** | Every user who opens the assistant, especially those with a vague goal or an urgent one |
 | **Frequency** | Very common as a design default. I found no study of how often products ship it. |
+| **Pattern ID** | generic-first-response |
 | **Family** | [Embedded copilots](../README.md) |
 | **Goal** | An assistant built into a product helps the person do what they came to do, using what the product already knows, and never puts the vendor's interest ahead of theirs. |
 | **Primary metric** | Share of first replies or opening messages that reference user-specific context or a likely need, rated by a calibrated judge. Starting target: over 70% (tune). Pair it with first-reply resolution rate. |
@@ -127,6 +128,17 @@ Targets are starting points to tune on your own data, unless a source is given.
 | Conversation start rate | Track; set from baseline | Share of users who open the assistant and send or tap something. (The source paper tracks the same idea.) | Falling |
 | Wrong-guess rate (counter-metric) | Under 20% | Options shown but ignored, followed by "something else" or a typed correction | Over 35% |
 | Complaints or opt-outs about personalization | Track | Feedback tagged "creepy" or "too personal" | Rising |
+
+### Detection signals (proposed, not yet calibrated)
+Signals in a conversation event log that suggest this failure. Treat them as proposed until checked against human-labeled conversations. All four are written for text chat; matching signals for voice are planned, not built.
+| Signal | Where it shows | Counter-signal (what it could be instead) |
+|---|---|---|
+| Opener text is the same fixed string across different pages or account states | Opener event with page, entry point, and account state fields | No usable context for that user, where the short capability line is the intended fallback |
+| Opener names no page, error, or account state even though the context fields were filled | Opener text compared with the context fields passed in | The data is something this user may not see, so leaving it out is correct |
+| User opens the assistant and sends or taps nothing | Open event with no later message or tap | The opener answered the need, or the user opened it by accident |
+| User's first message restates something the product already knew (for example "my payment didn't go through") | First user turn compared with the account events | The user adds new detail the product did not have |
+
+**Starter rule:** every opener references the user's page, error, or account state when that data is available and allowed, and offers up to three likely next steps plus "Something else".
 
 ## 8. Related patterns
 - [Re-asks for known information](re-asks-for-known-information.md): the assistant asks for details it holds. This page is about not using context to open.
