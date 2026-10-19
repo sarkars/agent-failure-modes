@@ -870,7 +870,7 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 - **Part B:** an entry for 2026-10-19 already exists in `seo/log.md`; skipped.
 - **Part C asset 2: Done (draft).** `specs/conversation-event-schema-v0.1.md` and `specs/failure-taxonomy-v1.md` (44 entries, 22 families; 9 carry the Read-this-first flag). Built from the pages; no outside data, no framework mapping (Needs review). Voice and web fields listed as PLANNED. License left for the owner. Searches: none needed (no new external claims).
 - **Claims left unverified:** none new.
-- **Deploy (run 21):** see Deploy line below.
+- **Deploy (run 21):** content repo merged to `main` as `59411a4` (PR 16). **Part D stopped, site repo not touched:** the site checkout's `main` still has the local commit `f8455aac7` that this run did not create, and `git fetch origin` there fails on credentials. Not pushed, not verified live. Waiting on the owner: push or discard that commit and fix the site repo's git credentials (its remote URL has a token embedded; rotate it and use a credential helper).
 
 ## Backlog (not scheduled)
 Ideas from earlier lists that were never chosen. They stay out of the queue until someone adds them.
