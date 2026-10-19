@@ -32,7 +32,7 @@
 | Explainer: output guardrails vs. conversation guidance | Cross-pattern | `reference/` | Not started |
 | Comparison with existing guardrail tools | Cross-pattern | `reference/` | Not started, Needs review |
 | Failure-audit offer (asset 8) | Cross-pattern | `reference/` | Not started |
-| Reference code module | Code | Its own repo, later | Backlog, owner decision |
+| Reference code module | Code | Its own repo, after a design note | Approved, last |
 
 `reference/` is one new folder for every new cross-pattern page that a reader should see. Pages already in `roadmap/specs/` and `roadmap/evidence/` stay where they are.
 
@@ -42,10 +42,11 @@
 - **Independent assets left:** teardowns, metrics hub, studies, glossary, the explainer, the tool comparison and the audit offer. They all go in `reference/` or `incidents/`.
 - **Front page:** a "Start here" section with three doors: patterns (what goes wrong and what to do), the taxonomy (every pattern at a glance) and reference (specs, metrics and studies).
 
-## What is still the owner's call
-- Approve this model.
-- Whether cross-pattern pages should be published on the website. That needs an importer change in the site repo.
-- Whether to start the reference code module.
+## Owner decisions (2026-10-19)
+- This model: approved.
+- Cross-pattern pages on the website: approved. The site importer change is in [sarkars/agent-kb-autopublish#1](https://github.com/sarkars/agent-kb-autopublish/pull/1); pages in `solutions-library/`, `roadmap/specs/` and `reference/` are published once it merges.
+- Reference code module: approved, last. A design note comes first, then code in its own repository.
+- The queued catalog rows: approved. The hourly run writes them after the flagships, up to 5 per run.
 
 ## Related
 - [Distribution plan](distribution-plan.md)

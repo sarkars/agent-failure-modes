@@ -69,7 +69,7 @@ The reader's path is: pattern, then detection signals, then starter rule, then s
 This phase is chat-first: text chatbots. The event schema describes a conversation turn in a channel-neutral way, with a `channel` field (chat, voice, web). Voice-specific signals (silence, interruptions, speech-recognition errors) and web-analytics signals are listed as **planned**, never as detected or measured. Patterns already written for voice keep their pages and Pattern IDs; their detection signals say which are written for text and which are planned for voice. Voice and web get their own phase after chat has traction.
 
 ### Conversation guidance (Part E, folded into the patterns)
-Added 2026-10-19 at the owner's request; reshaped the same day by the approved [document model](document-model.md). Guidance for chat in the spirit of output guardrails, but aimed at how the conversation goes: what the bot should do at a known failure moment, then the check that spots a miss. It is not a separate document type. Each pattern carries its own "Moves" table (section 5) and "Guide spec" block (end of section 7); the moves are explained once in [conversation moves](../solutions-library/conversation-moves.md). Checks stay proposed until calibrated. Code comes last: a reference module is backlog only and needs the owner's go-ahead.
+Added 2026-10-19 at the owner's request; reshaped the same day by the approved [document model](document-model.md). Guidance for chat in the spirit of output guardrails, but aimed at how the conversation goes: what the bot should do at a known failure moment, then the check that spots a miss. It is not a separate document type. Each pattern carries its own "Moves" table (section 5) and "Guide spec" block (end of section 7); the moves are explained once in [conversation moves](../solutions-library/conversation-moves.md). Checks stay proposed until calibrated. Code comes last: the owner approved a reference module on 2026-10-19; it starts with a design note and lives in its own repository.
 
 | # | Item | Status |
 |---|---|---|
@@ -78,7 +78,7 @@ Added 2026-10-19 at the owner's request; reshaped the same day by the approved [
 | E3 | Explainer: output guardrails vs. conversation guidance, in `reference/` | Not started |
 | E4 | Test conversations per pattern, in `tests/<pattern-id>.md` | Folded into asset 3 |
 | E5 | How this sits next to existing guardrail tools, in `reference/`, from their docs actually opened (Needs review) | Not started |
-| E6 | Reference code module | Backlog, owner decision |
+| E6 | Reference code module: design note first (roadmap/code-module-design.md, once 19 patterns have a Guide spec), then code in its own repository, which the owner creates | Approved 2026-10-19, not started |
 
 Folded assets: the scenario pack (asset 3) becomes scenarios in the test files plus a taxonomy column, and the starter rules library (asset 7) becomes a taxonomy column. The [failure taxonomy](specs/failure-taxonomy-v1.md) gains columns for starter rule, moves, test file and incident. New cross-pattern pages (metrics hub, studies, glossary, explainer, tool comparison, audit offer) go in `reference/`.
 
