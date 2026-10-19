@@ -22,3 +22,15 @@ Still blocked: no Search Console access (no Chrome tools, empty `inbox/`) and no
 **Cause (read in the site repo, not changed):** the site repo's committed copy of the HMI pattern pages is an older import (`frequency: "Occasional"`, `source:` path from before the move). It predates the current files, so the comment block leaks and the H1 repeats.
 
 **Action:** none inside this folder can fix it. Written up as [proposal 1](../merge-proposals.md) for the site repo (re-run the importers and redeploy). Impact: the 14 live HMI pages show raw SEO text and a duplicate H1 until that is done, which affects how Google reads them.
+
+## 2026-10-20 (UTC), scheduled run 22
+**Search Console: Blocked for our site.** Chrome tools worked, and the signed-in Search Console showed one property, `https://campfyrr.vercel.app/` (Overview: 0 clicks, "Processing data, please check again in a day or so"). That is not `agent-kb-autopublish.vercel.app`, so nothing from it was recorded as our data. `inbox/` is empty. No search data recorded, no changes made.
+
+**Public checks, 2026-10-20 (curl):**
+| Check | Result |
+|---|---|
+| `/`, `/goals/conversation-leadership/`, `/answer-and-go-conversation/` | All return 200 |
+| H1 count | Home: 2. Goal page: 1. `/answer-and-go-conversation/`: 1 (it was 2 on 2026-10-19) |
+| `sitemap-0.xml` | 1,592 `<loc>` entries (1,553 on 2026-10-19) |
+
+**Action:** none. Not checked: titles, meta descriptions, and whether the home page's second H1 is intended.
