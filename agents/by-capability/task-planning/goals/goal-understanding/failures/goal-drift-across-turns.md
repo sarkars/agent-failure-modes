@@ -100,6 +100,22 @@ doesn't solve the stated problem.
 | Re-Anchor Checkpoint Missed | A session exceeds the checkpoint interval without a logged re-anchoring event | Medium |
 | Untraceable Action Spike | More than 10% of actions in a session have no link to the goal contract | Low |
 
+## Chat assistant examples
+
+### Tangents never closed
+Illustrative transcript, not a real log. Setting: a cardholder disputing a charge in a bank app's chat. [Doctor of Credit](https://doctorofcredit.com/chase-now-lets-you-dispute-a-charge-in-app) reported that Chase added disputing a charge inside its app, so a dispute is a realistic main task.
+```
+User (bank app chat): I need to dispute a $89 charge I don't recognize.
+Bot: Happy to help. Which charge is it?
+User: Wait, how long until a new card arrives if I replace it?
+Bot (before): The delivery time depends on the shipping option you pick. Anything else I can help with?
+User: The dispute, still.   (the bot has lost the open dispute)
+
+Bot (after): The delivery time depends on the shipping option you pick. Back to your $89 dispute: which charge is it?
+```
+**What the user experiences:** a side question gets answered but the main task is dropped, so they must restart it themselves.
+**Fix:** answer the tangent briefly, then offer to resume the open task by name, and keep the unfinished task in the session state until the user finishes or cancels it. Related pattern: [answer-and-go conversation](../../../../human-machine-interface/goals/conversation-leadership/failures/answer-and-go-conversation.md).
+
 ---
 
 ## References

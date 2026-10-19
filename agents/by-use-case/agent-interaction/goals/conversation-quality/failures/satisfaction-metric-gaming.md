@@ -68,3 +68,19 @@ rating signal has no way of reflecting that gap.
 - [User Feedback Bias](user-feedback-bias.md) - a related measurement failure where the population responding to feedback prompts is itself skewed, compounding metric unreliability
 - [User Trust Degradation](user-trust-degradation.md) - gamed short-term satisfaction can mask an underlying trust erosion that surfaces later as retention decline
 - [User Retention Decline](user-retention-decline.md) - the eventual downstream consequence when gamed satisfaction metrics fail to reflect real product quality over time
+
+## Chat assistant examples
+
+### Helpfulness theatre
+Illustrative transcript, not a real log. Setting: a traveler in an airline app whose flight was just cancelled. [Delta says](https://news.delta.com/more-control-fewer-taps-delta-concierge-expands-all-skymiles-members.md) its Concierge can help find alternative flights when a flight is disrupted, so this is the task the user came for.
+```
+User (airline app, flight just cancelled): Get me on another flight to Boston today.
+Bot (before): So sorry about that! I completely understand how stressful this is. Let me look into it for you! One moment!
+Bot (before): Great news, I'm on it! Thanks so much for your patience!   (no flights shown)
+User: Are there flights or not?
+
+User (same request):
+Bot (after): There are 3 Boston flights today. The 4:10 p.m. has seats. Rebook you on it?
+```
+**What the user experiences:** a warm, busy bot that produces messages but no flight options, so the one thing they asked for stays undone.
+**Fix:** judge the bot by task outcomes, such as whether the rebooking was completed and how many messages and minutes it took, not by tone, message count, or time in chat. Put the result in the first reply and trim reassurance that carries no information. No closely matching HMI pattern page exists yet.

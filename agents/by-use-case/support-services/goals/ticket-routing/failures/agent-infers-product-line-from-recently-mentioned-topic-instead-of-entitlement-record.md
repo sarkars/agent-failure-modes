@@ -147,6 +147,20 @@ Bot (after, role = member): That setting is limited to workspace owners and admi
 **What the user experiences:** steps for a menu they cannot open, so the bot seems to be answering for someone else.
 **Fix:** read the signed-in user's role, plan, and device from the session before giving steps, and offer only options that user can use. If the setting is out of reach, say so and offer the path that is open to them (a request to an admin). Related pattern: [answers withheld behind an unsaid upgrade](../../../../../by-capability/human-machine-interface/goals/embedded-copilots/failures/answers-withheld-behind-an-upgrade-unsaid.md).
 
+### Recommending features the user can't use
+Illustrative transcript, not a real log. Setting: a Zendesk admin on a plan without generative AI answers asks the support bot how to set up their AI agent. Per [Zendesk's help article](https://support.zendesk.com/hc/en-us/articles/9856206766618-Generative-answers-don-t-appear-in-my-AI-agent), generative AI isn't included with AI Agents - Essential.
+```
+User (Zendesk Suite admin, AI Agents - Essential): How do I make our AI agent answer from our help center articles?
+Bot (before): Turn on generative answers in your AI agent settings.
+User: I can't find that setting anywhere.
+
+User (same admin): How do I make our AI agent answer from our help center articles?
+Bot (after, plan = Essential): Generative answers aren't part of your plan, so that setting won't appear. Today you can add articles as answers in a bot flow.
+      Generative answers need an upgrade. Want the steps for the flow, or a request to your account owner about upgrading?
+```
+**What the user experiences:** a recommendation for a setting that isn't there, so they search, doubt their own setup, and may open a ticket.
+**Fix:** check the account's plan and role before recommending a feature. Lead with what the user can do now, and label anything that needs an upgrade as such, with the reason. Related pattern: [answers withheld behind an unsaid upgrade](../../../../../by-capability/human-machine-interface/goals/embedded-copilots/failures/answers-withheld-behind-an-upgrade-unsaid.md).
+
 ---
 
 ## References
