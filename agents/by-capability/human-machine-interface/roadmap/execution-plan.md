@@ -42,6 +42,8 @@ Follow these steps on every run. Don't skip the checks: earlier work in this pro
 ## Definition of done (quality gate)
 A pattern is *Done* only if **every** item is true.
 
+The [quality guide](quality-guide.md) shows a passing and a failing example for each kind of piece; review every piece against it.
+
 **Evidence**
 - Every statistic, date, legal statement, and quotation in the file has a source link and appears in the source text, or is marked as read through a summary. No number appears without a source. Single-source numbers say so.
 - The "Why it matters" caveat column is honest about vendor, secondary, or different-setting evidence, and about what you couldn't open.
