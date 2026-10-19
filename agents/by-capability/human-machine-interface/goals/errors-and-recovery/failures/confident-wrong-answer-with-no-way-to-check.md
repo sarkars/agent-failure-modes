@@ -99,6 +99,14 @@ If you have no source, say so. Do not state a policy from memory.
 For money, legal, medical, or safety answers, offer a path to a person.
 ```
 
+**Moves** (see [conversation moves](../../../solutions-library/conversation-moves.md); list only the moves that apply, most preferred first)
+| Move | When, in this pattern |
+|---|---|
+| Lead with the answer | A retrieved source clearly supports a policy, price, deadline, or eligibility answer: state it plainly, show the passage and link, and add no hedge. Do not use it when the source is weak, partial, or missing. |
+| Admit uncertainty and show how to check | The source is weak or partial, or there is none: say "I'm not certain" in the first person, show the passage if there is one, and give one way to check. |
+| Offer choices: 2-4 options plus "Something else", free text open | After a hedge or "not in my sources" where more than one next step is reasonable: "Open the source passage", "Confirm with a person", "Something else". Do not offer them when a source clearly supports the answer, or when the options would push the answer below the evidence. |
+| Hand off to a person | Money, legal, medical, or safety answers, or the source is missing or conflicts and the stakes are high. Do not hand off if the user asked to stay with the bot and the stakes are low. |
+
 **Don't over-correct.** Do not add "I might be wrong" to every reply; the study I opened tested hedges on specific uncertain answers, not blanket disclaimers. Do not show a citation that has not been checked against the claim: the experiment found a citation can raise trust even when it is random. Do not bury the answer under the evidence.
 
 **Hand-off rule.** If the source is missing or conflicts and the stakes are high, hand off with the question and what was found ([escalates too early or too late](../../human-handoff/failures/escalates-too-early-or-too-late.md)).
@@ -137,6 +145,20 @@ Signals in a conversation event log that suggest this failure. Treat them as pro
 | The user says the answer was wrong after a policy answer | User turn disputing the previous policy answer | The user misread a correct answer |
 
 **Starter rule:** every policy, price, deadline, or eligibility answer shows the supporting passage and link, hedges in the first person when the source is weak, and says "not in my sources" when there is none.
+
+**Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
+```yaml
+pattern_id: confident-wrong-answer-with-no-way-to-check
+runs: pre_send
+reads: [reply.draft, retrieval.passages, support_check.result, intent.stakes]
+trigger: a policy, price, deadline, or eligibility answer is about to be sent
+moves: [lead_with_answer, admit_uncertainty, offer_choices, hand_off]
+choices: ["Open the source passage", "Confirm with a person", "Something else"]
+on_miss: rewrite
+metric: wrong answers stated without any uncertainty or source
+counter_metric: blanket hedging
+status: proposed
+```
 
 ## 8. Related patterns
 - [Confidence calibration failure](../../../../../cross-cutting/accuracy/goals/output-optimization/failures/confidence-calibration-failure.md): stated confidence that does not track accuracy. This page covers what the user sees and can check.
