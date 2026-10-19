@@ -32,7 +32,7 @@
 | CP-05 | Paid content blended into answers | [embedded-copilots.md](embedded-copilots.md) | New | Governance | No |
 | CP-06 | Obstructing cancellation, downgrade, or refund | [embedded-copilots.md](embedded-copilots.md) | Extends | Governance | No |
 | CP-07 | Helpfulness theatre | [embedded-copilots.md](embedded-copilots.md) | Extends | Governance | No |
-| CP-08 | Missing the obvious intent | [embedded-copilots.md](embedded-copilots.md) | Extends | Model | Partly |
+| CP-08 | Missing the obvious intent | [embedded-copilots.md](embedded-copilots.md) | Written | Model | Partly |
 | CP-09 | Over-complicating simple tasks | [embedded-copilots.md](embedded-copilots.md) | Extends | Model | Partly |
 | CP-10 | Irrelevant or already-answered clarifying questions | [embedded-copilots.md](embedded-copilots.md) | Extends | Model | Partly |
 | CP-11 | Keyword-matched documentation instead of an answer | [embedded-copilots.md](embedded-copilots.md) | Extends | Business context | Partly |

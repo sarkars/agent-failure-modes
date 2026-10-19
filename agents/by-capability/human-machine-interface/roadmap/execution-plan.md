@@ -245,8 +245,8 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 4 | CP-14 | Re-asks for known information | Extends | V | `goals/embedded-copilots/failures/re-asks-for-known-information.md` | Done | 11 |
 | 5 | CP-15 | Forces a fresh login | New | E | `goals/embedded-copilots/failures/forces-a-fresh-login.md` | Done | 11 |
 | 6 | CP-20 | Generic first response | New | R | `goals/embedded-copilots/failures/generic-first-response.md` | Done | 11 |
-| 7 | CP-08 | Missing the obvious intent | Extends | - | `goals/embedded-copilots/failures/missing-the-obvious-intent.md` | In progress | 12 |
-| 8 | CP-12 | Doesn't say what it can do | New | R | `goals/embedded-copilots/failures/doesn-t-say-what-it-can-do.md` | Queued |  |
+| 7 | CP-08 | Missing the obvious intent | Extends | - | `goals/embedded-copilots/failures/missing-the-obvious-intent.md` | Done | 12 |
+| 8 | CP-12 | Doesn't say what it can do | New | R | `goals/embedded-copilots/failures/doesn-t-say-what-it-can-do.md` | In progress | 12 |
 | 9 | XA-01 | Dead-end 'I don't understand' replies | Extends | V, R | `goals/conversation-leadership/failures/dead-end-i-don-t-understand-replies.md` | Queued |  |
 | 10 | CP-01 | Help that becomes a sales pitch | New | V, R, L | `goals/embedded-copilots/failures/help-that-becomes-a-sales-pitch.md` | Queued |  |
 | 11 | CP-06 | Obstructing cancellation, downgrade, or refund | Extends | V, L | `goals/embedded-copilots/failures/obstructing-cancellation-downgrade-or-refund.md` | Queued |  |
@@ -716,6 +716,12 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 - **Claims left unverified:** none stated as fact beyond the opened paper; the paper is about suggested starters, which the page says.
 - **Review pass changed:** replaced a placeholder link with the roadmap link; added the caveat that the preprint is not about support greetings.
 - **Part C (content-program task):** not done in this run. The first ready task is 13 (redo the gap analysis); it stays Queued for the next run.
+
+### Run 12 (scheduled): 2026-10-19 05:16 UTC onward
+- **CP-08 Missing the obvious intent: Done.** File: `goals/embedded-copilots/failures/missing-the-obvious-intent.md`, plus `tests/missing-the-obvious-intent.md` (12 scenarios, "Not yet run"). Incident: "No public incident found" with the searches run.
+- **Searches run: 3** (intent-detection benchmarks; clarify-versus-answer research; chatbot misunderstanding surveys). **Sources opened (3):** the Verint 2022 press release, and the abstracts of Zhang et al. (arXiv 2410.13788) and Su and Cardie (arXiv 2605.25284). **Search summaries only, not used as facts:** BANKING77 benchmark figures; a Five9 "46% abandon because the bot misunderstood" figure (the article I opened did not contain it); Cyara and Tidio survey figures.
+- **Claims left unverified:** how often plain requests are misread (no study found).
+- **Review pass changed:** added the note that the two research rows concern truly ambiguous requests, and a "don't over-correct" line on keeping clarification for those.
 
 ## Backlog (not scheduled)
 Ideas from earlier lists that were never chosen. They stay out of the queue until someone adds them.
