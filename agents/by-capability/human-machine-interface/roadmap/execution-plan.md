@@ -255,9 +255,9 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 13 | RS-14 | No reply to acknowledgments and closers | Extends | - | `goals/response-structure/failures/no-reply-to-acknowledgments-and-closers.md` | Done | 14 |
 | 14 | RS-01 | Answer buried | New | - | `goals/response-structure/failures/answer-buried.md` | Done | 14 |
 | 15 | EM-02 | Deferring work to the user | New | - | `goals/effort-and-memory/failures/deferring-work-to-the-user.md` | Done | 14 |
-| 16 | EM-11 | No warning of context loss | Extends | - | `goals/effort-and-memory/failures/no-warning-of-context-loss.md` | Queued |  |
-| 17 | EM-01 | Lazy completion | New | V | `goals/effort-and-memory/failures/lazy-completion.md` | Queued |  |
-| 18 | DM-03 | Corrections not applied | New | - | `goals/dialogue-management/failures/corrections-not-applied.md` | Queued |  |
+| 16 | EM-11 | No warning of context loss | Extends | - | `goals/effort-and-memory/failures/no-warning-of-context-loss.md` | Done | 15 |
+| 17 | EM-01 | Lazy completion | New | V | `goals/effort-and-memory/failures/lazy-completion.md` | Done | 15 |
+| 18 | DM-03 | Corrections not applied | New | - | `goals/dialogue-management/failures/corrections-not-applied.md` | Done | 15 |
 | 19 | DM-09 | Guessing instead of asking | Extends | - | `goals/dialogue-management/failures/guessing-instead-of-asking.md` | Queued |  |
 | 20 | RF-01 | Over-refusal of ordinary requests | Extends | V | `goals/refusals-and-boundaries/failures/over-refusal-of-ordinary-requests.md` | Queued |  |
 | 21 | RF-02 | Refusal with no reason or next step | Extends | - | `goals/refusals-and-boundaries/failures/refusal-with-no-reason-or-next-step.md` | Queued |  |
@@ -767,7 +767,25 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 - **Review pass changed:** replaced an unsupported statement about OpenAI having "no single explanation" with what the source says; kept the incident labeled adjacent, not a direct match.
 - **Part C: Task 13 Done.** `gap-analysis.md` redone: 14 listed sources fetched; 12 read at least at abstract level, 1 not opened (vectara list: no repository access), and 2 added from a second search (GRASP, abstract opened; QiscusCS, summary only). Six first-pass claims corrected or dropped (MAST counts, AdaMAST "fixed catalogs", DGM misalignment warning, governance-paper claim, Hyper-τ-bench figures, vectara star count). Two "nothing found" claims got a second search and both narrowed. The guide (WS-11) is recommended against in generic form, for a person to confirm.
 - **Part B (SEO review):** an entry for today exists in `seo/log.md`; Search Console not available.
+- **Deploy (run 14):** content repo merged to `main` as `b0c25e9` (PR 8). Site repo `main` at `e85c258`, pushed after a clean build: 1,572 sitemap URLs, 0 URLs lost against the live sitemap (1,553), 19 added (the three new patterns, the 11 earlier unpublished patterns, and the goal pages for effort-and-memory, response-structure, embedded-copilots, and human-handoff, among others). One H1 per page checked; no visible SEO comment. **Live check: not deployed** (the new pages return 404 a few minutes after the push; the live sitemap still has 1,553 URLs; no deploy hook variable is set). Same known gap as run 13; not pushed again. Needs the owner to check Vercel.
 - **Flagship patterns written so far: 15 of 30** (HU-01 to HU-03, CP-14, CP-15, CP-20, CP-08, CP-12, XA-01, CP-01, CP-06, CP-03, RS-14, RS-01, EM-02).
+
+### Run 15 (scheduled): 2026-10-19 08:16 UTC onward
+- **EM-11 No warning of context loss: Done.** File: `goals/effort-and-memory/failures/no-warning-of-context-loss.md`, `tests/no-warning-of-context-loss.md` (12 scenarios, "Not yet run"), and the incident page `incidents/chatgpt-memory-missing-memories-november-2025.md` (adjacent case, labeled so).
+- **Searches run: 3** (ChatGPT memory loss reports; "conversation too long" notices; lost-in-the-middle and multi-turn research). **Sources opened (6):** the OpenAI status page incident (Nov. 6 to 7, 2025), an OpenAI Developer Community thread (Feb. 3, 2025), a Microsoft Community Hub thread (May 2024, first post), and the abstracts of Liu et al. (arXiv 2307.03172) and Laban et al. (arXiv 2505.06120); also TechRadar (says there is no official OpenAI confirmation of a memory-wipe problem; not cited). **Not opened:** the Tom's Guide and Logicc pages; search-summary claims of a February 2025 wipe acknowledged by OpenAI were not supported and are not used.
+- **Claims left unverified:** how often products fail to warn; what users were told inside the product during the November 2025 incident.
+- **Review pass changed:** dropped a February 2025 "memory wipe" framing that no source supported; labeled the status-page incident adjacent; used only the first post of the Microsoft thread.
+- **EM-01 Lazy completion: Done.** File: `goals/effort-and-memory/failures/lazy-completion.md`, `tests/lazy-completion.md` (12 scenarios, "Not yet run"). Incident: the existing page `incidents/openai-gpt-4-turbo-laziness-reports.md`, now also matched to this pattern, with OpenAI's Dec. 8, 2023 post added through Semafor and Gigazine.
+- **Searches run: 4** (placeholder code; the winter break hypothesis; partial lists, which returned nothing relevant; LongWriter). **Sources opened (4):** Semafor, Gigazine, CIO Dive (opened in run 14), and the LongWriter abstract (arXiv 2408.07055). **Not opened:** OpenAI's post itself and the Ars Technica article (relayed by the two I opened); a practitioner "full output enforcement" page (connection failed).
+- **Claims left unverified:** how often it happens; any cause for the 2023 reports. The winter break effect is stated as contested, and cost as a motive is attributed to Semafor commentary only.
+- **Review pass changed:** merged a duplicated related-pattern bullet; reworded the cost explanation to what the source says.
+- **DM-03 Corrections not applied: Done.** File: `goals/dialogue-management/failures/corrections-not-applied.md`, `tests/corrections-not-applied.md` (12 scenarios, "Not yet run"), and the new family README `goals/dialogue-management/README.md`. Incident: "No public incident found" with the searches run.
+- **Searches run: 3** (dialogue state tracking and corrections; sycophancy under challenge; voice or booking bots using a wrong date). **Sources opened (4):** abstracts of Sun et al. (IJCAI 2022), Kim et al. (ACL 2020, SOM-DST), Laban et al. (FlipFlop, arXiv 2311.08596), and TRUTH DECAY (arXiv 2503.11656; no figures used). **Not opened:** two Vapi forum threads (script-rendered page; security checkpoint).
+- **Claims left unverified:** how often live products fail corrections.
+- **Review pass changed:** checked every author attribution against the arXiv pages; bounded the fix with the FlipFlop result so it does not teach the bot to accept every challenge.
+- **Part C: Task 13b Done.** New file `agent-type-gap-analysis.md` for six agent types: 6 searches and the abstract pages (or PDF text for τ-bench) of 16 papers plus the OWASP press release opened. Summary-only items are marked, and the Hyper-τ-bench and GPT-4o figures from blog write-ups are not used.
+- **Part B (SEO review):** an entry for today exists in `seo/log.md`; Search Console not available.
+- **Flagship patterns written so far: 18 of 30** (HU-01 to HU-03, CP-14, CP-15, CP-20, CP-08, CP-12, XA-01, CP-01, CP-06, CP-03, RS-14, RS-01, EM-02, EM-11, EM-01, DM-03).
 
 ## Backlog (not scheduled)
 Ideas from earlier lists that were never chosen. They stay out of the queue until someone adds them.

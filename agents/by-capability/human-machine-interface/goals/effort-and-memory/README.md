@@ -10,14 +10,18 @@ Shared metrics the patterns below report against. Targets are starting points to
 | Metric | Target | Defined in |
 |---|---|---|
 | Deferral rate: replies handing a task to the user that the agent has a tool for | Near 0 | [deferring work to the user](failures/deferring-work-to-the-user.md) |
+| Completeness rate: required items delivered divided by items requested | 100%, or an explicit gap list | [lazy completion](failures/lazy-completion.md) |
+| Context-loss events with a user-visible notice | 100% (tune) | [no warning of context loss](failures/no-warning-of-context-loss.md) |
 
 ## Patterns
 | Pattern | One line |
 |---|---|
 | Deferring work to the user | The assistant has the tool or data and says "you can check…" instead of doing it |
+| Lazy completion | The assistant does a sample or part of the job and leaves the rest, without saying what is left |
+| No warning of context loss | Early messages or saved memories are dropped and the user is not told |
 
 ## Planned (not yet written)
-No warning of context loss, partial work, skipped steps with no receipt, and the rest of the family are listed in the [roadmap](../../roadmap/effort-completeness-and-memory.md).
+Partial work, skipped steps with no receipt, and the rest of the family are listed in the [roadmap](../../roadmap/effort-completeness-and-memory.md).
 
 ## Related
 - [Response structure](../response-structure/README.md): where the result should sit in the reply

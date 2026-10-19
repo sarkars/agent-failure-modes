@@ -1,6 +1,6 @@
 # Gap Analysis: What Already Exists, Per Agent Type, and Whether This Library Stands Out
 
-> **Status: second pass, 2026-10-19 (task 13).** Each source in section 1 was fetched and read on 2026-10-19. The **Read** column says what I actually read: the **abstract** (or the whole page for blog posts), or **summary only** when I could not open it. Claims the source did not support were removed or reworded; the first pass is in the git history. "Nothing found" now means two searches found nothing, which is still not proof that nothing exists. Section 2 (coverage by agent type) is **not redone here**: task 13b does it.
+> **Status: second pass, 2026-10-19 (task 13).** Each source in section 1 was fetched and read on 2026-10-19. The **Read** column says what I actually read: the **abstract** (or the whole page for blog posts), or **summary only** when I could not open it. Claims the source did not support were removed or reworded; the first pass is in the git history. "Nothing found" now means two searches found nothing, which is still not proof that nothing exists. Section 2 (coverage by agent type) is **not redone here**: task 13b did a first pass in [agent-type-gap-analysis.md](agent-type-gap-analysis.md).
 
 ## 1. What already exists
 | Area | What the source says | Read | Type | What it means for us |
@@ -20,7 +20,7 @@
 | Self-improvement governance | [TrueFoundry playbook](https://www.truefoundry.com/blog/self-evolving-agents-enterprise-governance-playbook): self-changes land as separate candidate versions, pass an evaluation gate and, above a threshold, human approval, with versioned artifacts and rollback; the loop itself needs a budget and a watchdog. [Runtime governance paper](https://arxiv.org/abs/2603.16586): treats the execution path as the unit of governance and compliance policies as functions of identity, partial path, and proposed action | Whole page; abstract | Vendor; preprint | The "propose, evaluate, gate" design is published. The first pass said the governance paper argues that in-agent guardrails cannot be audited independently; the abstract does not say that, so I reworded it |
 
 ## 2. This library's coverage by agent type
-**Not redone in this pass.** The table from the first pass is kept below. Counts are catalog rows, not verified patterns; "not searched" cells are filled in by task 13b.
+**Not redone in this file.** The table from the first pass is kept below; see [agent-type-gap-analysis.md](agent-type-gap-analysis.md) for the six most-built types. Counts are catalog rows, not verified patterns; "not searched" cells are filled in, for six types, in the agent-type file.
 
 | Agent type | Catalog rows | External coverage found | Gap suggested |
 |---|---|---|---|

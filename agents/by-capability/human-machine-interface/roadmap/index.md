@@ -216,7 +216,7 @@
 | GV-40 | Engagement-maximising design that harms | [privacy-governance-and-access.md](privacy-governance-and-access.md) | New | Governance | No |
 | GV-41 | Exploiting vulnerable circumstances | [privacy-governance-and-access.md](privacy-governance-and-access.md) | New | Governance | No |
 | GV-42 | Calibration between helping with wrongdoing and over-blocking | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Extends | Model | Partly |
-| EM-01 | Lazy completion | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | New | Model | Partly |
+| EM-01 | Lazy completion | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Written | Model | Partly |
 | EM-02 | Deferring work to the user | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Written | Model | Partly |
 | EM-03 | Underthinking | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Extends | Model | Partly |
 | EM-04 | Overthinking easy tasks | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Covered | Reliability | Partly |
@@ -226,7 +226,7 @@
 | EM-08 | Partial answers to multi-part questions | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | New | Model | Partly |
 | EM-09 | Early-assumption lock-in | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Extends | Reliability | Partly |
 | EM-10 | Forgetting key information | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Covered | Reliability | Partly |
-| EM-11 | No warning of context loss | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Extends | Business context | No |
+| EM-11 | No warning of context loss | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Written | Business context | No |
 | EM-12 | Critical facts not pinned | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Extends | Reliability | No |
 | EM-13 | Fresh-session amnesia | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | New | Business context | No |
 | EM-14 | Silent capability downgrade | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Extends | Business context | No |
@@ -361,7 +361,7 @@
 | XA-03 | No way to report bad behaviour | [agent-types.md](agent-types.md) | New | Business context | No |
 | DM-01 | Reference resolution failures | [conversation-design.md](conversation-design.md) | New | Model | Partly |
 | DM-02 | Tangents never closed | [conversation-design.md](conversation-design.md) | Extends | Reliability | Partly |
-| DM-03 | Corrections not applied | [conversation-design.md](conversation-design.md) | New | Reliability | Partly |
+| DM-03 | Corrections not applied | [conversation-design.md](conversation-design.md) | Written | Reliability | Partly |
 | DM-04 | Multi-intent messages answered in part | [conversation-design.md](conversation-design.md) | Extends | Model | Partly |
 | DM-05 | Negation and exceptions ignored | [conversation-design.md](conversation-design.md) | New | Model | Partly |
 | DM-06 | Questions asked one at a time when the user already gave everything | [conversation-design.md](conversation-design.md) | Extends | Business context | Partly |
