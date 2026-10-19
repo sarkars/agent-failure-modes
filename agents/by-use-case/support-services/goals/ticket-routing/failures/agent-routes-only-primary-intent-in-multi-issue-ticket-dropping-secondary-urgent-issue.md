@@ -113,6 +113,23 @@ def check_dropped_secondary_intent(routed_intents: list[str], full_text_intents:
 
 ---
 
+## Chat assistant examples
+
+### Multi-intent messages answered in part
+Illustrative transcript, not a real product log. Moment: a Pelican Home Internet customer in the support chat.
+```
+Before:
+User: Can you move my install to Friday? Also my modem has been blinking red since last night and I work from home.
+Bot:  Sure! Your install is now set for Friday, 9 a.m. to 1 p.m. Anything else I can help with?
+User: The red light. Did you see that part?
+
+After:
+User: Can you move my install to Friday? Also my modem has been blinking red since last night and I work from home.
+Bot:  Two things: (1) moving your install to Friday, and (2) the blinking red modem. Friday works, 9 a.m. to 1 p.m. Want me to book it? For the red light, I'm opening an outage check now. Shall I start with that, since you work from home?
+```
+**What the user experiences:** the urgent problem was ignored, so they have to repeat it and wonder whether anyone read the whole message.
+**Fix:** before replying, list every request in the message and answer each one, or say which are still open and ask which to take first. Put the urgent one first when the user signals urgency. See [Chatbot Guesses Instead of Asking](../../../../../by-capability/human-machine-interface/goals/dialogue-management/failures/guessing-instead-of-asking.md) for when to ask versus act.
+
 ## References
 - [Multi-Intent Recognition in Dialogue Understanding: A Comparison Between Smaller Open-Source LLMs](https://arxiv.org/abs/2509.10010)
 - [RECAP: REwriting Conversations for Intent Understanding in Agentic Planning](https://arxiv.org/html/2509.04472v2)

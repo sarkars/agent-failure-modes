@@ -274,6 +274,24 @@ Previous context:
 | Permission Confusion High | ambiguous > 25% | P2 |
 | Phone Number Errors | error > 12% | P1 |
 
+## Chat assistant examples
+
+### Questions asked one at a time when the user already gave everything
+
+Illustrative transcript (invented; "Harbor Air" is a made-up airline):
+
+```
+User: Rebook me on Harbor Air flight HA 214 from Denver to Boston on Friday, Nov 7, same seat type, window.
+Bot:  Sure. What is your departure city?
+User: Denver. I just said that.
+Bot:  Thanks. What date would you like to fly?
+User: Friday, Nov 7.
+Bot:  And which seat type do you prefer?
+```
+
+**What the user experiences:** a form read aloud one field at a time, so they repeat what they already typed and stop trusting the bot to read.
+**Fix:** after each user message, fill every slot you can (city, date, flight, seat) and confirm them in one line, then ask only for what is still missing. Re-ask a filled slot only when it is ambiguous or stale. See the [re-asks for known information pattern](../../../../human-machine-interface/goals/embedded-copilots/failures/re-asks-for-known-information.md).
+
 ---
 
 ## References
