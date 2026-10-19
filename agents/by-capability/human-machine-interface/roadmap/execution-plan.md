@@ -941,7 +941,7 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 - **Part B:** Skipped. The 2026-10-20 entry already exists.
 - **Taxonomy:** 66 entries; signals 66 of 66; Moves 66 of 66.
 - **Unverified claims:** anything the subagents read only in search summaries is not in public text; mappings to outside frameworks remain Needs review.
-- **Deploy:** DEPLOY_PLACEHOLDER
+- **Deploy:** content PR #21 merged (merge commit 8b2024e); the site repo had no foreign commits. Scratch build clean, 1628 pages built; the live sitemap had 1592 URLs, none missing from the build (removed: 0). The new page has exactly one `<h1>`; the `search phrases:` text also appears on existing pages (importer behavior). Pushed to site repo main as b542619c2 (11 files, none deleted: 5 new patterns, the guardrail comparison, 3 updated pages, 1 goal page, 1 category page), not verified live (no Vercel token and no deploy hook set).
 - **Waiting for the owner:** the code repo for E6, CP-21 redo or drop, the role-boundary pattern gap, Search Console access for the site, Vercel build-on-push confirmation.
 
 ## Backlog (not scheduled)
