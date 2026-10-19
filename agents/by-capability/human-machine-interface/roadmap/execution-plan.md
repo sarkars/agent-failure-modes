@@ -252,7 +252,7 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 10 | CP-01 | Help that becomes a sales pitch | New | V, R, L | `goals/embedded-copilots/failures/help-that-becomes-a-sales-pitch.md` | Done | 13 |
 | 11 | CP-06 | Obstructing cancellation, downgrade, or refund | Extends | V, L | `goals/embedded-copilots/failures/obstructing-cancellation-downgrade-or-refund.md` | Done | 13 |
 | 12 | CP-03 | Answers withheld behind an upgrade, unsaid | New | L | `goals/embedded-copilots/failures/answers-withheld-behind-an-upgrade-unsaid.md` | Done | 13 |
-| 13 | RS-14 | No reply to acknowledgments and closers | Extends | - | `goals/response-structure/failures/no-reply-to-acknowledgments-and-closers.md` | Queued |  |
+| 13 | RS-14 | No reply to acknowledgments and closers | Extends | - | `goals/response-structure/failures/no-reply-to-acknowledgments-and-closers.md` | Done | 14 |
 | 14 | RS-01 | Answer buried | New | - | `goals/response-structure/failures/answer-buried.md` | Queued |  |
 | 15 | EM-02 | Deferring work to the user | New | - | `goals/effort-and-memory/failures/deferring-work-to-the-user.md` | Queued |  |
 | 16 | EM-11 | No warning of context loss | Extends | - | `goals/effort-and-memory/failures/no-warning-of-context-loss.md` | Queued |  |

@@ -75,7 +75,7 @@
 | RS-11 | Formatting artifacts | [response-structure-and-length.md](response-structure-and-length.md) | Extends | Business context | No |
 | RS-12 | Wrong format for the medium | [response-structure-and-length.md](response-structure-and-length.md) | Extends | Business context | No |
 | RS-13 | Cut-off replies | [response-structure-and-length.md](response-structure-and-length.md) | Extends | Reliability | No |
-| RS-14 | No reply to acknowledgments and closers | [response-structure-and-length.md](response-structure-and-length.md) | Extends | Business context | Partly |
+| RS-14 | No reply to acknowledgments and closers | [response-structure-and-length.md](response-structure-and-length.md) | Written | Business context | Partly |
 | RS-15 | Over-reply to acknowledgments | [response-structure-and-length.md](response-structure-and-length.md) | New | Model | Partly |
 | RS-16 | Misreading 'ok' and minimal replies | [response-structure-and-length.md](response-structure-and-length.md) | Extends | Model | Partly |
 | RS-17 | Length mismatch with the user's effort | [response-structure-and-length.md](response-structure-and-length.md) | New | Model | Partly |
