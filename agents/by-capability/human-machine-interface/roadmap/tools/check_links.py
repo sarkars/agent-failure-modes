@@ -8,6 +8,7 @@ SKIP_TABLE = {"README.md", "index.md", "execution-plan.md", "content-program.md"
 def slug(h): return re.sub(r"[^a-z0-9 -]", "", h.lower()).strip().replace(" ", "-")
 bad = tot = 0
 for f in sorted(glob.glob("**/*.md", recursive=True)):
+    f = f.replace(os.sep, "/")  # Windows: glob returns backslashes
     if f.startswith("_templates"):
         continue
     t = open(f).read()
