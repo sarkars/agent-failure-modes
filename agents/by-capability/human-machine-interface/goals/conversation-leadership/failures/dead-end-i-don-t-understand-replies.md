@@ -104,6 +104,14 @@ Miss 3, or if the user asks for a person: hand off with a summary of the convers
 Never use the same wording twice in a row.
 ```
 
+**Moves** (see [conversation moves](../../../solutions-library/conversation-moves.md); list only the moves that apply, most preferred first)
+| Move | When, in this pattern |
+|---|---|
+| Admit uncertainty and show how to check | First miss: say "I'm not sure I got that", say what you did catch (if anything), and keep the task so far |
+| Offer choices: 2-4 options plus "Something else", free text open | First miss, when confidence is not too low: the closest options plus "Something else". Do NOT offer them when confidence is very low (show topics instead of a wrong guess), and do not show them on every turn |
+| Ask one clarifying question | Second miss: one narrower question in place of the same options again |
+| Hand off to a person | Third consecutive miss, or at once when the user asks for a person: hand off with a summary |
+
 **Don't over-correct.** Do not show a "Help" prompt or a menu on every turn, and do not offer wrong "closest" options when confidence is very low. Do not hand off on the first miss for simple matters; one more try is cheap. Keep the person option visible without nagging.
 
 **Hand-off rule.** Hand off by the third consecutive miss, and immediately on request. When to hand off in general is covered in [escalates too early or too late](../../human-handoff/failures/escalates-too-early-or-too-late.md).
@@ -141,6 +149,20 @@ Signals in a conversation event log that suggest this failure. Treat them as pro
 | Conversation ends within 2 turns of a fallback | Session end event right after a fallback turn | The user got the answer elsewhere or finished the task |
 
 **Starter rule:** never send the same fallback twice in a row, and hand off with a summary by the third consecutive miss or at once on request.
+
+**Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
+```yaml
+pattern_id: dead-end-i-don-t-understand-replies
+runs: conversation
+reads: [turn.fallback_template, turn.fallback_text, session.consecutive_fallback_count, user_event.request_for_person, session.handoff_event]
+trigger: the bot cannot understand the user's message and is about to send a fallback reply
+moves: [admit_uncertainty, offer_choices, ask_clarifying_question, hand_off]   # short names for the moves in the table
+choices: ["The closest option", "Another close option", "Talk to a person", "Something else"]
+on_miss: rewrite
+metric: share of conversations with 3 or more consecutive no-progress turns
+counter_metric: fallback-to-new-intent conversion
+status: proposed
+```
 
 ## 8. Related patterns
 - [Chatbot loop without human escalation path](../../../../../by-use-case/support-services/goals/self-service-deflection/failures/chatbot-loop-without-human-escalation-path.md): the loop from the deflection side. This page covers the fallback reply itself.

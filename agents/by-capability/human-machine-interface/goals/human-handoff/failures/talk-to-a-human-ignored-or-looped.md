@@ -112,6 +112,14 @@ Decision table the policy layer should follow:
 | 2 or more | No | Confirm the callback or ticket is created and give the time |
 | Any | Handoff fails | Say so, give another route, never go back to the menu |
 
+**Moves** (see [conversation moves](../../../solutions-library/conversation-moves.md); only the moves that apply, most preferred first)
+| Move | When, in this pattern |
+|---|---|
+| Hand off to a person | The user clearly asks for a person (first clear ask, or second ask in any case) and a person is available: transfer with wait time and summary. Do not use it when the user says they want to stay with the bot |
+| Lead with the answer | Right after the request: the first sentence says how they will reach a person and when (or when a person is available), before anything else |
+| Offer choices | Only when no person is available now: "Callback", "Ticket", "Email", "Something else", free text open. Do NOT offer choices when a person is available (transfer instead) or when the handoff fails and one route is already confirmed, because a menu there is the loop this page describes |
+| Ask one clarifying question | Only when "agent" or similar appears inside what may be a different request (for example "travel agent"): ask whether they want a person. Never ask a diagnostic question in place of the answer to a clear request |
+
 **Don't over-correct.** Not every mention of "agent" is a request (for example "insurance agent" or "travel agent" inside a question). Use intent detection, not keyword matching alone. Do not transfer people who clearly want the bot's quick answer, and do not route trivial questions to scarce humans. The only thing the bot may not do is block a clear request.
 
 **Hand-off rule.** When the handoff happens, pass a summary, the customer's goal, and what was tried, so the person does not start from zero. The mechanics belong to the planned [cold transfer](../../../roadmap/handoff-measurement-and-operations.md) pattern; the closest written one is [no channel switch or context lost](../../channel-selection/failures/no-channel-switch-or-context-lost.md).
@@ -150,6 +158,20 @@ Signals in a conversation event log that suggest this failure. Treat them as pro
 | Transfer with no wait time or response window stated | Handoff event with no stated window in the bot message | A channel with no queue |
 
 **Starter rule:** a clear request for a person is a routing event, answered within two bot turns with a transfer, a callback, or a stated route and time.
+
+**Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
+```yaml
+pattern_id: talk-to-a-human-ignored-or-looped
+runs: conversation
+reads: [user_turn.human_request_label, user_turn.request_count, bot_turn.type, handoff.person_available, handoff.stated_window]
+trigger: a user turn is labeled as a clear request for a person
+moves: [hand_off, lead_with_answer, offer_choices, ask_clarifying_question]
+choices: ["Callback", "Ticket", "Email", "Something else"]
+on_miss: handoff
+metric: Human-request fulfillment rate
+counter_metric: false human-request detections (for example "travel agent")
+status: proposed
+```
 
 ## 8. Related patterns
 - [Chatbot loop without human escalation path](../../../../../by-use-case/support-services/goals/self-service-deflection/failures/chatbot-loop-without-human-escalation-path.md): the same loop seen from the deflection side, in service workflows. This page is about honoring an explicit request.

@@ -99,6 +99,13 @@ Use a different message for outage, too-long input, rate limit, permission, and 
 Never show only "Something went wrong". After a repeated failure, offer a person and a reference code.
 ```
 
+**Moves** (see [conversation moves](../../../solutions-library/conversation-moves.md); list only the moves that apply, most preferred first)
+| Move | When, in this pattern |
+|---|---|
+| Admit uncertainty and show how to check | The cause is unknown or unclassified: say so, say what is saved only if the product has confirmed it, and give one next step. |
+| Offer choices: 2-4 options plus "Something else", free text open | After an error with more than one reasonable next step: "Retry", "Copy my message", "Talk to a person", "Something else". Do not offer them when only one next step fits the cause (for example, a message over the length limit: say to shorten it), or when the options would replace the plain-words cause. |
+| Hand off to a person | After two failures of the same kind. Do not hand off if the user asked to stay with the bot. |
+
 **Don't over-correct.** Do not show stack traces or raw error codes as the message. Do not claim "your work is saved" unless the product has confirmed it. Do not write a paragraph; a short, specific message beats a long one.
 
 **Hand-off rule.** After two failures of the same kind, offer a person and pass the reference code and the user's message ([talk to a human ignored or looped](../../human-handoff/failures/talk-to-a-human-ignored-or-looped.md)).
@@ -137,6 +144,20 @@ Signals in a conversation event log that suggest this failure. Treat them as pro
 | Earlier messages missing after an error | Message count drops between turns | A planned session reset the user was told about |
 
 **Starter rule:** every error shown to a user names what failed, whether their work was saved, and one next step.
+
+**Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
+```yaml
+pattern_id: generic-error-messages
+runs: pre_send
+reads: [error_event.cause_code, error_event.template, session.saved_state]
+trigger: an error message is about to be shown
+moves: [admit_uncertainty, offer_choices, hand_off]
+choices: ["Retry", "Copy my message", "Talk to a person", "Something else"]
+on_miss: rewrite
+metric: errors shown with a cause and action
+counter_metric: false "saved" claims
+status: proposed
+```
 
 ## 8. Related patterns
 - [No warning of context loss](../../effort-and-memory/failures/no-warning-of-context-loss.md): telling the user what was lost.
