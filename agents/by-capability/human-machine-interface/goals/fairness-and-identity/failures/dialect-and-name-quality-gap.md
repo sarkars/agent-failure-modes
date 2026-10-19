@@ -24,6 +24,7 @@ search phrases:
 | **Stakes** | Medium to high (especially credit, housing, hiring, insurance, benefits) |
 | **Who is affected** | Speakers of non-standard dialects (such as African American English), users with names associated with particular groups, English learners |
 | **Frequency** | Unknown in customer-service bots; documented in language models in research settings |
+| **Pattern ID** | dialect-and-name-quality-gap |
 | **Family** | [Fairness and identity](../README.md) |
 | **Goal** | Quality of service does not depend on dialect, name, or other identity cues. |
 | **Primary metric** | Paired-test parity ratio on verification, escalation, and risk flags. Starting target: within about 0.9 to 1.1 (a heuristic, not a legal standard). |
@@ -90,6 +91,12 @@ for request in REQUESTS:                       # e.g. 200 requests across intent
 ```
 Report differences with confidence intervals, and review a sample of pairs by hand.
 
+**Moves** (see [conversation moves](../../../solutions-library/conversation-moves.md); list only the moves that apply, most preferred first)
+| Move | When, in this pattern |
+|---|---|
+| Lead with the answer | The request is clear: give every variant the same answer and the same verification steps. Do not add steps because of the user's name or dialect. |
+| Hand off to a person | A risk flag or a denial could affect someone's money, housing, or job: send it to a human reviewer with the reasoning. Do not hand off a routine request that the bot can answer for every variant alike. |
+
 **Don't over-correct.** Don't adapt tone to a guessed race (that is the bias). Don't mimic dialect or slang. Don't add identity references to the conversation. Don't throw away useful personalisation (a user's preferred name) that the user asked for.
 
 **Hand-off rule.** Where a risk flag or a denial could affect someone's money, housing, or job, send it to a human reviewer with the reasoning, and keep a record.
@@ -114,6 +121,32 @@ Targets are starting points to tune on your own data, unless a source is given.
 | Risk flags driven by text features correlated with identity | 0 | Ablation test on the scoring features | Any |
 | Cohort outcome parity in production | Within tolerance | Consented or self-reported cohorts, or synthetic matched pairs | Gap with statistical support |
 | Complaints citing unequal treatment | 0 unreviewed | Complaint tracking | Any cluster |
+
+### Detection signals (proposed, not yet calibrated)
+Signals in a paired-test or conversation event log that suggest this failure. Treat them as proposed until checked against human-labeled conversations. All of them are written for text chat; a voice-only signal (speech-recognition error rates by accent) is planned and not included.
+| Signal | Where it shows | Counter-signal (what it could be instead) |
+|---|---|---|
+| Extra verification requested for one variant of a paired request but not the other | `extra_verification` in the paired-test output | Run-to-run variation; compare with confidence intervals before acting |
+| Risk flag raised for one variant but not the other | `risk_flagged` in the paired-test output | A real difference in the request, not only in name or style |
+| Escalation to a person differs between variants | `escalated` in the paired-test output | Random variation in escalation wording |
+| A name or inferred demographic appears in decision-relevant model input | Prompt builder input log | A preferred name the user asked the bot to use |
+| The reply comments on or corrects how the user writes | Text check on the bot reply | The user asked for writing help |
+
+**Starter rule:** quality of service must not depend on dialect, name, or other identity cues, checked with paired tests before and after release.
+
+**Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
+```yaml
+pattern_id: dialect-and-name-quality-gap
+runs: pre_send
+reads: [model_input.name, model_input.inferred_traits, draft_reply.extra_verification, draft_reply.risk_flagged, draft_reply.escalated]
+trigger: a risk flag, denial, or extra verification step is about to be applied to a request
+moves: [lead_with_answer, hand_off]
+choices: none
+on_miss: handoff
+metric: paired-test parity ratio on verification, escalation, and risk flags
+counter_metric: replies that mimic dialect or refer to the user's identity
+status: proposed
+```
 
 ## 8. Related patterns
 - [One-size communication style](../../cultural-adaptation/failures/one-size-communication-style.md): adapting style without sliding into stereotyping.

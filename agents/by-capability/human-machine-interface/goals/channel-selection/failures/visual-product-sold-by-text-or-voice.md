@@ -24,6 +24,7 @@ search phrases:
 | **Stakes** | Low to medium (lost sales and returns) |
 | **Who is affected** | Shoppers for apparel, home goods, jewelry, beauty, and art |
 | **Frequency** | Common. Observed in practice; no study measures how often. |
+| **Pattern ID** | visual-product-sold-by-text-or-voice |
 | **Family** | [Channel selection](../README.md) |
 | **Goal** | Each interaction happens in the channel that fits the job, and switching never costs the user their context. |
 | **Primary metric** | Visual-format rate for high-visual-dependence products. Starting target: over 95%. |
@@ -83,6 +84,14 @@ The fixed bot lets the shopper see the product and asks one question to narrow t
 | Medium | Image plus spec table | Offer specs by voice, send details by text |
 | Low | Short text answer | Complete by voice |
 
+**Moves** (see [conversation moves](../../../solutions-library/conversation-moves.md); list only the moves that apply, most preferred first)
+| Move | When, in this pattern |
+|---|---|
+| Lead with the answer | The shopper names a high-dependence product need ("dress for a summer wedding"): show the photo cards first, with one line of prose. |
+| Ask one clarifying question | After showing the products: one question that narrows the choice (occasion, size, budget). Do not ask when the answer would not change which products to show. |
+| Admit uncertainty and show how to check | The shopper asks about a look or fit the catalog fields do not cover: say so and show the images or size tool, never an invented description. |
+| Hand off to a person | High-touch categories (wedding, custom furniture): offer a video call or a stylist with the conversation summary attached. Do not hand off for low-dependence reorders or if the user asked to stay with the bot. |
+
 **Don't over-correct.** Don't push images for commodity reorders, don't send unrequested texts, and don't hide the text answer. Some users can't see images, so keep alt text and a text description from catalog fields.
 
 **Hand-off rule.** For high-touch categories (wedding, custom furniture), offer a video call or a stylist, with the conversation summary attached.
@@ -107,6 +116,32 @@ Targets are starting points to tune on your own data, unless a source is given.
 | Return rate: bot-assisted vs. other sales | Not higher | Returns joined to conversation IDs | Higher by a meaningful margin |
 | 'What does it look like?' messages | Trend down | Intent classifier on user messages | +25% vs baseline |
 | Unsolicited follow-ups (for example texts) | 0 | Consent flag on every follow-up | Any |
+
+### Detection signals (proposed, not yet calibrated)
+Signals in a conversation event log that suggest this failure. Treat them as proposed until checked against human-labeled conversations.
+| Signal | Where it shows | Counter-signal (what it could be instead) |
+|---|---|---|
+| Reply on a high-dependence product has no card, image, or visual follow-up | Reply format field compared with the product's visual-dependence tag | The user asked a non-visual question, such as price or shipping |
+| User asks what the product looks like | "What does it look like?" intent in a user turn after a product reply | The user already saw the images and wants another angle |
+| A stated color, fabric, or size differs from the catalog | Stated attribute compared with the product record | The catalog changed during the conversation |
+| A follow-up (for example a text) sent without consent | Follow-up event with the consent flag missing | The user explicitly asked to be sent the details |
+| Planned (voice): a voice session on a high-dependence product ends with no offer to send visuals | Voice session end event with no hand-off offer logged | The user said they would look it up themselves |
+
+**Starter rule:** for high-dependence products, show photo cards or images instead of prose, and state only visual attributes that come from catalog fields.
+
+**Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
+```yaml
+pattern_id: visual-product-sold-by-text-or-voice
+runs: pre_send
+reads: [product.visual_dependence, reply.format, product.catalog_fields, user.consent_flag]
+trigger: a reply about a high-dependence product is about to be sent
+moves: [lead_with_answer, ask_one_question, admit_uncertainty, hand_off]
+choices: none
+on_miss: rewrite
+metric: visual-format rate for high-dependence products
+counter_metric: unsolicited follow-ups
+status: proposed
+```
 
 ## 8. Related patterns
 - [Answer-and-go conversation](../../conversation-leadership/failures/answer-and-go-conversation.md): the bot answers but never moves the user forward.
