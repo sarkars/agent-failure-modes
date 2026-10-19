@@ -1,0 +1,12 @@
+# Proposals for Changes Outside This Folder
+
+**Changes that need a person, or that touch the site repository, are listed here.** The scheduled run never edits the site repo or the older patterns. See [REPOSITORIES.md](../../../../REPOSITORIES.md) for which repo holds what.
+
+Status values: *Proposed*, *Accepted*, *Done*, *Rejected*.
+
+| # | Date (UTC) | Repo | Proposal | Evidence | Status |
+|---|---|---|---|---|---|
+| 1 | 2026-10-19 | Site repo (`agent-kb-autopublish`) | **Re-run the pattern importers and redeploy.** The committed content in `website-astro/src/content/patterns/` for the human-machine-interface pages is an older import. On the live site the 14 HMI pages show the SEO comment text (`description:`, `search phrases:` and the list) as visible body text, a second H1 identical to the title, `frequency: "Occasional"` instead of the value in each file, and `source:` paths from before the folder move. Run `scripts/import_patterns.py` and `scripts/import_taxonomy_readmes.py` against the current `main` of this repo, commit the result, and deploy. | Live page `/answer-and-go-conversation/` (checked 2026-10-19): two `<h1>` elements and the SEO text in the body. Site repo file `website-astro/src/content/patterns/answer-and-go-conversation.md`: `frequency: "Occasional"`, `source: "human-machine-interface/core/conversation-leadership/..."`. The page in this repo has `**Frequency**: Very Common`. | Proposed |
+| 2 | 2026-10-19 | Site repo | **After the re-import, confirm the new human-handoff pages appear.** Three new patterns (`talk-to-a-human-ignored-or-looped`, `escalates-too-early-or-too-late`, `cold-transfer`) and the `human-handoff` goal are on the branch and not yet on `main`. They are not in the live sitemap. | Live `sitemap-0.xml` (1,553 URLs) has none of them. | Proposed |
+| 3 | 2026-10-19 | Site repo | **Publish `agents/solutions/` and `agents/by-agent/`.** The importers read only files under a `failures/` path, so `chat-use-cases.md` and the agent pages are not on the site. | Live `sitemap-0.xml` has no `chat-use-cases` URL. | Proposed |
+| 4 | 2026-10-19 | Site repo | **Add `cfpb-bank-chatbot-doom-loops` as an incident page.** The draft is in this repo at `agents/by-capability/human-machine-interface/incidents/cfpb-bank-chatbot-doom-loops.md`, in the site's format. Copy it to `website-astro/src/content/incidents/` after the patterns it links exist on the site. | Source opened: the CFPB report PDF. | Proposed |
