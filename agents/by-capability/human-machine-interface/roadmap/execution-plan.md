@@ -899,6 +899,8 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 - **Part C asset 4 (teardown), Klarna: Done** (section 6, `incidents/klarna-ai-assistant-customer-service-reversal-2025.md`, 75 lines). 5 searches, 5 sources opened (Klarna press release, CX Dive, Fortune, Entrepreneur, one more). Bloomberg not opened. The sources report a strategy change, not a specific failure; the page says so and forces no pattern link. Review changed: removed four short quotes to paraphrase, keeping only "lower quality".
 - **Part B:** Skipped this run (coordinator time spent on review).
 - **Taxonomy:** 50 entries; signals 37 of 50; Moves 26 of 50.
+- **Deploy:** content PR #18 merged (merge commit 0745bff); the site repo had no foreign commits. Scratch build clean, 1609 pages; the live sitemap had 1592 URLs, none missing from the build (removed: 0; 17 more pages in the build, 4 of them new patterns). One new page has exactly one `<h1>`; the `search phrases:` text appears in the meta description of new and existing pages alike (importer behavior, not new). Pushed to site repo main as 75d330f26, not verified live (no Vercel access). The Klarna incident page is not published by this runbook.
+- **Waiting for the owner:** nothing new; earlier items stand (CP-21 redo or drop, Search Console access for the site, Vercel build-on-push confirmation).
 
 ## Backlog (not scheduled)
 Ideas from earlier lists that were never chosen. They stay out of the queue until someone adds them.
