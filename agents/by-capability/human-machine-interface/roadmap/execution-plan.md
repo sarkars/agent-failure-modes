@@ -806,6 +806,23 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 - **Deploy (run 16):** content repo merged to `main` as `f5c7780` (PR 10). Site repo `main` pushed after a clean build: 1,580 sitemap URLs, 0 URLs lost against the live sitemap (1,553), 27 added (the three new patterns, earlier unpublished ones, and goal pages including refusals-and-boundaries). One H1 per page checked; no visible SEO comment. **Live check: not deployed** (pages return 404; the live sitemap still has 1,553 URLs; no deploy hook variable is set). Same known gap as runs 13 to 15. Needs the owner to check Vercel.
 - **Flagship patterns written so far: 21 of 30** (the 18 from run 15, plus DM-09, RF-01, RF-02).
 
+### Run 17 (scheduled): 2026-10-19 10:16 UTC onward
+- **TE-01 Generic error messages: Done.** File: `goals/errors-and-recovery/failures/generic-error-messages.md`, `tests/generic-error-messages.md` (12 scenarios, "Not yet run"), new family README `goals/errors-and-recovery/README.md`. Incident: "No public incident found" with the searches run.
+- **Searches run: 3** (NN/g error-message guidelines; generic versus specific error studies; chatbot "something went wrong" incidents). **Sources opened (4):** NN/g *Error-Message Guidelines* (2023), Baymard (Dec. 2023, first part), the German UPA guideline (contents and foreword), and an OpenAI Developer Community thread (Aug. 2024). **Not opened:** the 2000 Rimmer and Ozchi web-error-page paper (bot check) and outage news pieces (read through a search summary only; not used).
+- **Claims left unverified:** how often chat products show generic errors; any controlled comparison in chat.
+- **Review pass changed:** stated the Baymard 98% finding as it appears (messages not targeted at the exact problem); dropped the claim that any outage was a sourced incident about message text.
+- **TE-06 Confident wrong answer with no way to check: Done.** File: `goals/errors-and-recovery/failures/confident-wrong-answer-with-no-way-to-check.md`, `tests/confident-wrong-answer-with-no-way-to-check.md`. Incident: the site's existing Air Canada page, linked by URL.
+- **Searches run: 3** (uncertainty expression and reliance; the Air Canada ruling; citations and trust). **Sources opened (4):** abstracts of Kim et al. (FAccT 2024), Ding et al. (AAAI 2025), and Liu et al. (EMNLP Findings 2023), and the site's Air Canada incident page (plus the CTV headline and date). **Not opened:** the CanLII ruling (403); a blog claim about hedging and internal confidence, not used.
+- **Claims left unverified:** how often live support bots are confidently wrong; whether any confidence display reduces wrong actions in production.
+- **Review pass changed:** noted that a citation raised trust even when random, so the fix requires checking support; labeled the tribunal case as a small-claims decision and added no legal statement.
+- **GS-01 Eligibility answers sound like decisions: Done, flagged L and E (legal and expert review needed).** File: `goals/government-service-agents/failures/eligibility-answers-sound-like-decisions.md` with a "Read this first" note, `tests/eligibility-answers-sound-like-decisions.md` (12 scenarios, "Not yet run"), and the new family README `goals/government-service-agents/README.md`. Incident: the site's NYC MyCity page, labeled adjacent.
+- **Searches run: 3** (benefits chatbot accuracy and disclaimers; the NYC MyCity coverage; GOV.UK Chat findings). **Sources opened (4):** the GDS blog on the first GOV.UK Chat experiment, the abstract of Gosciak et al. (arXiv 2603.11213), the Beeck Center Policy2Code summary, and The Markup article (partly). **Not opened:** later GOV.UK Chat pilot reports (press only), Services Australia and Canadian guidance (not found), and any statute or agency rule.
+- **Claims left unverified:** how applicants act after a chatbot "no"; any program rule, deadline, or appeal right (none is stated; the page links agency pages instead).
+- **Review pass changed:** removed a statement that income limits update each year; reworded the NYC bot description to what the article text I read supports; kept all legal rights out of the fix.
+- **Part C: Task 13d Done.** `roadmap/l0-base-spec.md`: a draft table of 24 behaviors with their patterns, tests, and metrics, built from the pattern pages' principle lines, with five tensions for a person to decide. Untested, for review.
+- **Part B (SEO review):** an entry for today exists in `seo/log.md`; Search Console not available.
+- **Flagship patterns written so far: 24 of 30** (the 21 from run 16, plus TE-01, TE-06, GS-01).
+
 ## Backlog (not scheduled)
 Ideas from earlier lists that were never chosen. They stay out of the queue until someone adds them.
 
