@@ -132,7 +132,7 @@
 | VO-02 | Barge-in failure | [voice.md](voice.md) | Covered | Reliability | Partly |
 | VO-03 | Premature endpointing | [voice.md](voice.md) | Covered | Model | Partly |
 | VO-04 | Late endpointing | [voice.md](voice.md) | Covered | Model | Partly |
-| VO-05 | Repair failure | [voice.md](voice.md) | Extends | Model | Partly |
+| VO-05 | Repair failure | [voice.md](voice.md) | Written | Model | Partly |
 | VO-06 | No repeat or recap controls | [voice.md](voice.md) | New | Business context | No |
 | VO-07 | Accent and dialect recognition gaps | [voice.md](voice.md) | Covered | Model | Partly |
 | VO-08 | Atypical speech mishandled | [voice.md](voice.md) | New | Model | Partly |
@@ -461,7 +461,7 @@
 | GC-02 | One member's private information shown to the group | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Extends | Governance | No |
 | GC-03 | Conflicting instructions from different members | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Extends | Business context | No |
 | GC-04 | The bot talks over people | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | New | Business context | No |
-| DT-01 | Order mix-ups at the speaker | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Reliability | Partly |
+| DT-01 | Order mix-ups at the speaker | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Written | Reliability | Partly |
 | DT-02 | Modifiers and customizations misparsed | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Model | Partly |
 | DT-03 | Upsell pressure at the speaker | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Business context | No |
 | DT-04 | Screen and spoken order disagree | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Reliability | No |

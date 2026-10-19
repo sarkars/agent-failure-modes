@@ -264,8 +264,8 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 22 | TE-01 | Generic error messages | New | - | `goals/errors-and-recovery/failures/generic-error-messages.md` | Done | 17 |
 | 23 | TE-06 | Confident wrong answer with no way to check | Extends | - | `goals/errors-and-recovery/failures/confident-wrong-answer-with-no-way-to-check.md` | Done | 17 |
 | 24 | GS-01 | Eligibility answers sound like decisions | New | L, E | `goals/government-service-agents/failures/eligibility-answers-sound-like-decisions.md` | Done | 17 |
-| 25 | DT-01 | Order mix-ups at the speaker | New | V | `goals/drive-thru-agents/failures/order-mix-ups-at-the-speaker.md` | Queued |  |
-| 26 | VO-05 | Repair failure | Extends | - | `goals/voice/failures/repair-failure.md` | Queued |  |
+| 25 | DT-01 | Order mix-ups at the speaker | New | V | `goals/drive-thru-agents/failures/order-mix-ups-at-the-speaker.md` | Done | 18 |
+| 26 | VO-05 | Repair failure | Extends | - | `goals/voice/failures/repair-failure.md` | Done | 18 |
 | 27 | RT-02 | Silent long-running work | Extends | V | `goals/response-time/failures/silent-long-running-work.md` | Queued |  |
 | 28 | RT-06 | Silent failure and timeout | Extends | - | `goals/response-time/failures/silent-failure-and-timeout.md` | Queued |  |
 | 29 | CC-08 | Scam victim not interrupted | New | E, L | `goals/vulnerable-users/failures/scam-victim-not-interrupted.md` | Queued |  |
