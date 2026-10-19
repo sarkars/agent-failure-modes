@@ -226,7 +226,7 @@
 | EM-08 | Partial answers to multi-part questions | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | New | Model | Partly |
 | EM-09 | Early-assumption lock-in | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Extends | Reliability | Partly |
 | EM-10 | Forgetting key information | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Covered | Reliability | Partly |
-| EM-11 | No warning of context loss | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Extends | Business context | No |
+| EM-11 | No warning of context loss | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Written | Business context | No |
 | EM-12 | Critical facts not pinned | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Extends | Reliability | No |
 | EM-13 | Fresh-session amnesia | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | New | Business context | No |
 | EM-14 | Silent capability downgrade | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Extends | Business context | No |
