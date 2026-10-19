@@ -913,7 +913,7 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 - **Part B:** Skipped. The 2026-10-20 entry already exists.
 - **Not started:** E3 explainer, E5 guardrail comparison, E6 design note. Queue rows 58 and 59 stay Queued. Retrofits still pending: dialect-and-name-quality-gap, one-size-communication-style, no-de-escalation-strategy, negotiation-capitulation, visual-product-sold-by-text-or-voice.
 - **Taxonomy:** 56 entries; signals 51 of 56; Moves 44 of 56.
-- **Deploy:** content PR merged, branch reset, scratch build and URL-loss check, then push to the site repo main. Result: pushed to site repo main, not verified live (no Vercel access). The Cursor incident page and glossary are not published by this runbook.
+- **Deploy:** content PR #19 merged (merge commit cba9a20); the site repo had no foreign commits. Scratch build clean, 1616 pages; the live sitemap had 1592 URLs, none missing from the build (removed: 0; 23 added, 6 of them new patterns plus the glossary). New pages have exactly one `<h1>`; the `search phrases:` text matches existing pages (importer behavior). Pushed to site repo main as 07714261c, not verified live (no Vercel access). The Cursor incident page and glossary are not published by this runbook.
 - **Waiting for the owner:** CP-21 redo or drop, the role-boundary pattern gap, Search Console access for the site, Vercel build-on-push confirmation.
 
 ## Backlog (not scheduled)
