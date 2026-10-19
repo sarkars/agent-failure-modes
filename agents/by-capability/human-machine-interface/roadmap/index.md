@@ -384,12 +384,12 @@
 | RF-08 | Silent sandbagging | [conversation-design.md](conversation-design.md) | New | Model | Partly |
 | RF-09 | Refusal depends on wording | [conversation-design.md](conversation-design.md) | Extends | Model | Partly |
 | RF-10 | Accusatory or harsh refusals | [conversation-design.md](conversation-design.md) | New | Model | Partly |
-| TE-01 | Generic error messages | [conversation-design.md](conversation-design.md) | New | Business context | No |
+| TE-01 | Generic error messages | [conversation-design.md](conversation-design.md) | Written | Business context | No |
 | TE-02 | Apology without repair | [conversation-design.md](conversation-design.md) | Extends | Business context | Partly |
 | TE-03 | Blames the user | [conversation-design.md](conversation-design.md) | New | Business context | Partly |
 | TE-04 | Contradicts an earlier answer without saying so | [conversation-design.md](conversation-design.md) | Extends | Reliability | Partly |
 | TE-05 | Different answers by session or regeneration | [conversation-design.md](conversation-design.md) | Extends | Model | Partly |
-| TE-06 | Confident wrong answer with no way to check | [conversation-design.md](conversation-design.md) | Extends | Model | Partly |
+| TE-06 | Confident wrong answer with no way to check | [conversation-design.md](conversation-design.md) | Written | Model | Partly |
 | TE-07 | Doesn't acknowledge its own mistake when it is pointed out | [conversation-design.md](conversation-design.md) | Extends | Model | Partly |
 | TE-08 | Repeats a corrected mistake | [conversation-design.md](conversation-design.md) | Extends | Reliability | Partly |
 | PV-01 | Persona drift within a conversation | [interface-and-persona.md](interface-and-persona.md) | Extends | Model | Partly |
@@ -471,7 +471,7 @@
 | IC-03 | Anyone can issue a sensitive voice command | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Governance | No |
 | IC-04 | Always-listening surprises | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Governance | No |
 | IC-05 | Purchases by children or the TV | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Reliability | No |
-| GS-01 | Eligibility answers sound like decisions | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Business context | No |
+| GS-01 | Eligibility answers sound like decisions | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Written | Business context | No |
 | GS-02 | Plain-language and language access gaps | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Business context | Partly |
 | GS-03 | Deadlines and document lists wrong or stale | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Extends | Business context | No |
 | GS-04 | Identity checks exclude people without standard IDs | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Business context | No |
