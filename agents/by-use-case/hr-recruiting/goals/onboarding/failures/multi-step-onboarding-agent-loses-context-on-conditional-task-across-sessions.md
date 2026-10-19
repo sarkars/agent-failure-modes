@@ -55,6 +55,24 @@ Hire's first paycheck is processed without the required state withholding electi
 
 ---
 
+## Chat assistant examples
+
+### Context lost across a multi-session task
+
+```
+Before (Tuesday, after the user quit mid-setup on Monday):
+User: Hi, I'm back to finish my W-4 and direct deposit.
+Bot:  Welcome to Acme HR! I can help with onboarding. What's your start date?
+After:
+User: Hi, I'm back to finish my W-4 and direct deposit.
+Bot:  Welcome back, Maria. Yesterday you finished your W-4 and the Oregon withholding form. Direct deposit is still open.
+Bot:  Want to continue with direct deposit, or start the whole checklist over?
+```
+
+**What the user experiences:** they have to repeat steps they already completed, and the Oregon form they were told about is never mentioned again.
+
+**Fix:** save each completed step and each condition (such as "remote in Oregon") to the hire's record, not only to the chat. On return, read that record, say where the user left off, and offer to continue or restart. See the [re-asks for known information pattern](../../../../../by-capability/human-machine-interface/goals/embedded-copilots/failures/re-asks-for-known-information.md).
+
 ## References
 
 - [Why Do Multi-Agent LLM Systems Fail? (MAST)](https://arxiv.org/abs/2503.13657)

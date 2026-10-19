@@ -132,6 +132,21 @@ def check_ungrounded_product_routing(trace: list[dict], routed_product: str,
 | Ungrounded Product Routing | Ticket routed with no entitlement lookup in trace | P2 | Re-route based on entitlement record; audit routing pipeline for the affected window |
 | Entitlement Mismatch Spike | Entitlement-mismatch rate exceeds threshold for a rolling day | P1 | Investigate routing logic regression; consider temporary human review gate |
 
+## Chat assistant examples
+
+### Ignores role, plan, locale, and device
+```
+User (Slack member role, not an admin): Can you stop people from inviting guests?
+Bot (before): Go to Admin > Workspace settings > Permissions > Invitations and turn on admin approval.
+User: I don't see an Admin menu.
+
+User (Slack member role, not an admin): Can you stop people from inviting guests?
+Bot (after, role = member): That setting is limited to workspace owners and admins, so you can't change it.
+      I can send your admins a request to turn on invitation approval. Want me to?
+```
+**What the user experiences:** steps for a menu they cannot open, so the bot seems to be answering for someone else.
+**Fix:** read the signed-in user's role, plan, and device from the session before giving steps, and offer only options that user can use. If the setting is out of reach, say so and offer the path that is open to them (a request to an admin). Related pattern: [answers withheld behind an unsaid upgrade](../../../../../by-capability/human-machine-interface/goals/embedded-copilots/failures/answers-withheld-behind-an-upgrade-unsaid.md).
+
 ---
 
 ## References
