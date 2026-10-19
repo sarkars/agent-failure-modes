@@ -111,6 +111,14 @@ If a row in "After one more try" matches and this is the second match, offer a p
 If neither matches, answer the question. Do not hand off just because you are unsure; try once, then offer.
 ```
 
+**Moves** (see [conversation moves](../../../solutions-library/conversation-moves.md); list only the moves that apply, most preferred first)
+| Move | When, in this pattern |
+|---|---|
+| Hand off to a person | A row in the "Always" group matches, or the customer asks for a person: hand off now and say why. Do not hand off if the customer asked to stay with the bot, unless the topic is on the "Always" list. |
+| Offer choices: 2-4 options plus "Something else", free text open | A row in "After one more try" matches for the second time: "Try another way", "Talk to a person", "Something else". Do not offer them in the "Always" group (hand off instead) or in the "Never" group (answer). |
+| Admit uncertainty and show how to check | The question is outside the bot's known topics: say what it can do and offer a person. |
+| Lead with the answer | The question is in the "Never" group and the bot can answer it fully from records it can read: answer, no handoff. |
+
 **Don't over-correct.** Raising recall alone floods staff; raising precision alone strands customers. Report both every week, and never lower recall on the "Always" group to save staff time.
 
 **Hand-off rule.** When the bot hands off, it passes the summary, the customer's goal, and what was tried (the planned cold-transfer pattern covers the mechanics; see the [roadmap row](../../../roadmap/handoff-measurement-and-operations.md)).
@@ -149,6 +157,20 @@ Signals in a conversation event log that suggest this failure. Treat them as pro
 | Topic in the "always a person" group handled by the bot | Intent label in the always-list with no immediate transfer | A mislabeled intent |
 
 **Starter rule:** each trigger is written down in one of three groups and checked every turn in the policy layer, not only in the prompt.
+
+**Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
+```yaml
+pattern_id: escalates-too-early-or-too-late
+runs: conversation
+reads: [trigger_table.group, turn.user_request_for_person, turn.bot_reply_similarity, turn.topic_label, handoff_event]
+trigger: a row in the escalation trigger table matches the current turn
+moves: [hand_off, offer_choices, admit_uncertainty, lead_with_answer]
+choices: ["Try another way", "Talk to a person", "Something else"]
+on_miss: handoff
+metric: escalation recall
+counter_metric: escalation precision
+status: proposed
+```
 
 ## 8. Related patterns
 - [Escalation too early](../../../../../by-use-case/customer-service/goals/conversation-resolution/failures/escalation-too-early.md): the too-early half in service workflows. This page covers both directions and the decision rules.

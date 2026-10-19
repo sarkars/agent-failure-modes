@@ -105,6 +105,13 @@ If a request fails or times out, say what happened, whether the user's message i
 Never present partial text as a finished answer.
 ```
 
+**Moves** (see [conversation moves](../../../solutions-library/conversation-moves.md); list only the moves that apply, most preferred first)
+| Move | When, in this pattern |
+|---|---|
+| Admit uncertainty and show how to check | A request timed out, a stream closed without a finish signal, or a tool call failed. Say it was cut off or failed, say the question is saved only if the product has confirmed it, and give one next step. |
+| Offer choices: 2-4 options plus "Something else", free text open | After a cut-off answer: "Continue the answer", "Start over", "Talk to a person", "Something else". After a timeout: "Try again", "Notify me", "Something else". Do not offer them when the request completed normally or when only one next step fits the cause. |
+| Hand off to a person | After two failures of the same kind in a row. Do not hand off if the user asked to stay with the bot. |
+
 **Don't over-correct.** Do not show an error for every slow reply that finishes, do not retry automatically without limit (it can duplicate actions and hide a real outage), and do not mark an intentionally short answer as incomplete. A false "cut off" label costs trust as much as a missing one.
 
 **Hand-off rule.** If a request fails twice in a row, offer a person and pass the saved question with it ([cold transfer](../../human-handoff/failures/cold-transfer.md)).
@@ -145,6 +152,20 @@ Signals in a conversation event log that suggest this failure. Treat them as pro
 Voice signals (silence on the line, the caller hanging up during a tool wait) are **planned**, not yet written.
 
 **Starter rule:** every request ends in a labeled state (complete, incomplete, timed out, or failed), and a cut-off answer is never shown as finished.
+
+**Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
+```yaml
+pattern_id: silent-failure-and-timeout
+runs: post_turn
+reads: [request.start_event, request.end_reason, stream.finish_reason, stream.last_event, session.saved_state]
+trigger: a request passes its deadline, or a stream closes without a finish signal or a complete marker
+moves: [admit_uncertainty, offer_choices, hand_off]
+choices: ["Continue the answer", "Start over", "Try again", "Talk to a person", "Something else"]
+on_miss: log
+metric: silent-failure rate
+counter_metric: false incomplete labels
+status: proposed
+```
 
 ## 8. Related patterns
 - [Silent long-running work](silent-long-running-work.md): the wait is still going; this page is about waits that end without a message.

@@ -103,6 +103,14 @@ The fixed bot names the signal, holds the money, asks one plain question, and of
 | No signals | Proceed normally; no warning text |
 | Payment already sent | Recovery steps; hand off with priority |
 
+**Moves** (see [conversation moves](../../../solutions-library/conversation-moves.md); list only the moves that apply, most preferred first)
+| Move | When, in this pattern |
+|---|---|
+| Ask one clarifying question | One or two soft signals only (new payee, large amount, urgency): "Is anyone guiding you through this?" Do not ask when a hard signal is already present, or when no signal is present. |
+| Offer choices: 2-4 options plus "Something else", free text open | Right after a hold: "Connect me to the fraud team", "Show me how to check this", "Something else". Do not offer a choice that lets the user release the hold themselves, and do not offer choices when there is no signal. |
+| Admit uncertainty and show how to check | The bot cannot verify who is directing the payment: say nothing was sent, say why in one plain sentence, and give a safe check (hang up, call the number on the card or the official site). Do not accuse the user. |
+| Hand off to a person | Any hard signal, and any payment already sent. Pass the signals seen, amount, payee, method, and whether a caller is live. Do not hand off when there is no signal. |
+
 **Don't over-correct.** Most payments are legitimate, and the experiment above found that extra friction can also stop legitimate payments. Do not warn on every transfer: repeated warnings wear off and teach people to click past them. Gift cards bought as a present, a user's own crypto account, and a regular landlord are normal. Hold only on signals, keep the tone respectful, and give the user a quick way to a person if the hold is wrong.
 
 **Hand-off rule.** A hard signal or a completed scam payment goes to a trained person with priority and a summary (signals seen, amount, payee, method, whether a caller is live). See [talk to a human ignored or looped](../../human-handoff/failures/talk-to-a-human-ignored-or-looped.md) and [cold transfer](../../human-handoff/failures/cold-transfer.md).
@@ -141,6 +149,20 @@ Signals in a conversation event log that suggest this failure. Proposed until ch
 | New payee, large amount, same-session urgency | Payment event fields | A planned purchase with a known seller |
 
 **Starter rule:** On any hard scam signal, do not execute the payment; say nothing was sent, name the signal in plain words, and offer a person with a summary in the same message. *(Pattern ID: scam-victim-not-interrupted)*
+
+**Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
+```yaml
+pattern_id: scam-victim-not-interrupted
+runs: pre_send
+reads: [user_turn.text, payment.method, payment.payee_type, payment.reason, payment.is_new_payee, payment.amount]
+trigger: a money-moving request (gift card, wire, crypto, payment app, or new payee) is about to be executed
+moves: [ask_clarifying_question, offer_choices, admit_uncertainty, hand_off]
+choices: ["Connect me to the fraud team", "Show me how to check this", "Something else"]
+on_miss: handoff
+metric: scam-signal intervention rate
+counter_metric: legitimate payments held by mistake
+status: proposed
+```
 
 ## 8. Related patterns
 - [Chatbot misses signs of crisis](missed-crisis-signals.md): the closest pattern. It pauses a task for a user in personal distress; this one pauses a payment for a user being manipulated, where the harm is financial and the user may not feel distress at all.
