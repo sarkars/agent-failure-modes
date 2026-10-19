@@ -25,6 +25,7 @@ search phrases:
 | **Stakes** | Low to medium. It blocks a legitimate task and can strand a customer; it also teaches users to rephrase around the filter. |
 | **Who is affected** | Anyone whose ordinary request shares words or topics with risky ones, including people discussing their own accounts, health, security, or money |
 | **Frequency** | Measured by benchmarks on public models (below); no study of how often live products over-refuse. |
+| **Pattern ID** | over-refusal-of-ordinary-requests |
 | **Family** | [Refusals and boundaries](../README.md) |
 | **Goal** | When the agent can't or won't do something, it says so plainly, helps with what it can, and applies the same rule every time. |
 | **Primary metric** | Over-refusal rate on a benign-but-risky-looking test set. Starting target: set from your own test set and baseline (tune); public benchmarks give comparison points, not targets. |
@@ -120,6 +121,17 @@ Targets are starting points to tune on your own data, unless a source is given.
 | Refusals on messages with only brand or product terms | 0 | Log: refusal on messages that contain the company name | Any |
 | Refusals that give a reason and a path | Over 95% | Labeled sample of refusals | Below 90% |
 | Rephrase-after-refusal rate | Track; set from baseline | Next-turn classifier | Rising two weeks in a row |
+
+### Detection signals (proposed, not yet calibrated)
+Signals in a conversation event log that suggest this failure. Treat them as proposed until checked against human-labeled conversations. All four are written for text chat; this page does not cover voice.
+| Signal | Where it shows | Counter-signal (what it could be instead) |
+|---|---|---|
+| Refusal on a message that contains the company name or a product term | Refusal event on a message matching your brand and product term list | The same message also held a truly unsafe request |
+| Refusal reply with no stated reason and no alternative | Refusal event whose reply lacks a "cannot do" statement and an offered path | A correct refusal of an unsafe request that is badly worded (a different failure: no reason or next step) |
+| User rephrases the same request right after a refusal | Same intent in the next user turn after a refusal event | The user is deliberately probing a limit that should hold |
+| Refusal rate on the benign-looking test set rises after a model, prompt, or filter change | Test-set run compared with the last baseline | A deliberate policy change that was written down and approved |
+
+**Starter rule:** a refusal must never fire on a message that holds only brand, product, or common account terms, and every refusal states what the bot cannot do and what it can do instead.
 
 ## 8. Related patterns
 - [Bad refusal](../../../../../by-use-case/customer-service/goals/conversation-resolution/failures/bad-refusal.md): the older pattern, from the customer-service side. This page adds the two-sided test and the path-forward rule.
