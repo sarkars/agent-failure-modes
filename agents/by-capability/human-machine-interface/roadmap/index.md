@@ -49,7 +49,7 @@
 | CP-22 | No likely-next-action suggestions | [embedded-copilots.md](embedded-copilots.md) | New | Business context | No |
 | CP-23 | Boilerplate steps that don't match the user's setup | [embedded-copilots.md](embedded-copilots.md) | Extends | Business context | Partly |
 | RT-01 | Slow first response | [response-time.md](response-time.md) | Extends | Reliability | Partly |
-| RT-02 | Silent long-running work | [response-time.md](response-time.md) | Extends | Business context | No |
+| RT-02 | Silent long-running work | [response-time.md](response-time.md) | Written | Business context | No |
 | RT-03 | Unpredictable latency | [response-time.md](response-time.md) | Extends | Reliability | Partly |
 | RT-04 | Pacing mismatch | [response-time.md](response-time.md) | New | Business context | No |
 | RT-05 | Deceptive typing indicators | [response-time.md](response-time.md) | New | Governance | No |
