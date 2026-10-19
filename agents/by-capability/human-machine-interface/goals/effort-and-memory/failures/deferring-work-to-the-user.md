@@ -25,6 +25,7 @@ search phrases:
 | **Stakes** | Low to medium. It wastes time and sends people to other channels; on urgent matters it can cost money. |
 | **Who is affected** | Everyone, most of all people who came to the bot because they could not find the answer themselves |
 | **Frequency** | Common in practice. I found no study that counts it for assistants with tools. The nearest evidence is a vendor-acknowledged "laziness" episode in 2023 to 2024. |
+| **Pattern ID** | deferring-work-to-the-user |
 | **Family** | [Effort and memory](../README.md) |
 | **Goal** | The agent does the whole job, spends effort in proportion to difficulty, keeps what the user told it, and says so when it can't. |
 | **Primary metric** | Deferral rate: replies handing a task to the user that the agent has a tool for. Target: near 0 (tune). |
@@ -96,6 +97,14 @@ If you cannot do something, say so and say why. Do not cite limits you have not 
 Offer a how-to only in addition to the result.
 ```
 
+**Moves** (see [conversation moves](../../../solutions-library/conversation-moves.md); list only the moves that apply, most preferred first)
+| Move | When, in this pattern |
+|---|---|
+| Lead with the answer | The request maps to a tool the assistant has and the user is permitted: call it and put the result in the first sentence. Do not use it when the tool would be irreversible and the user has not confirmed. |
+| Ask one clarifying question | Only the user can supply one thing (a code sent to their email, a missing number): name that one thing. Do not ask for anything the assistant can look up. |
+| Admit uncertainty and show how to check | The assistant cannot do it (no tool, or verification needed): say so, say why in one clause, and give the next step. |
+| Hand off to a person | No tool route works and a person has the tool. Do not hand off if the user asked to stay with the bot. |
+
 **Don't over-correct.** Do not take actions the user did not ask for, and do not run costly or irreversible tools without confirmation. When a user clearly wants to learn how, teach them; do not do it silently. Do not call tools on unverified users just to avoid deferring.
 
 **Hand-off rule.** If a task needs a tool the assistant lacks and a person has it, hand off with a summary of what the user asked and what was tried ([talk to a human ignored or looped](../../human-handoff/failures/talk-to-a-human-ignored-or-looped.md)).
@@ -122,6 +131,31 @@ Targets are starting points to tune on your own data, unless a source is given.
 | Same-request repeat ("I asked you to") within 2 turns | Track; set from baseline | Next-turn classifier | Rising two weeks in a row |
 | Unrequested tool calls (counter-metric) | 0 | Log of tool calls without a matching request | Any |
 | Irreversible actions without confirmation (counter-metric) | 0 | Log check | Any |
+
+### Detection signals (proposed, not yet calibrated)
+Signals in a conversation event log that suggest this failure. Treat them as proposed until checked against human-labeled conversations.
+| Signal | Where it shows | Counter-signal (what it could be instead) |
+|---|---|---|
+| Reply points the user to a page, account, or how-to, and the turn has no tool call, although the request maps to a tool the assistant has | Intent-to-tool map joined to the turn's tool-call log and reply text | The user asked "how do I" and wanted a how-to |
+| "Do it yourself" reply with no stated reason | Pattern match on the reply text, plus no reason clause | The reply says what is blocking it (for example, verification needed) |
+| User repeats the request ("I asked you to") within 2 turns | Same intent in the next user turn | A rephrase that adds new detail |
+| Reply cites a platform or length limit with no limit check logged | Reply text plus the limit-check event | The limit actually applies |
+
+**Starter rule:** if a tool can do what the user asked, call it and report the result in the first sentence, and do not tell the user how to do it themselves instead.
+
+**Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
+```yaml
+pattern_id: deferring-work-to-the-user
+runs: pre_send
+reads: [request.intent, tool_map, permission.status, turn.tool_calls, reply.text]
+trigger: a reply is about to be sent that hands a task to the user while a permitted tool maps to the request
+moves: [lead_with_answer, ask_clarifying_question, admit_uncertainty, hand_off]
+choices: none
+on_miss: rewrite
+metric: deferral rate, replies handing a task to the user that the agent has a tool for
+counter_metric: unrequested tool calls
+status: proposed
+```
 
 ## 8. Related patterns
 - [Re-asks for known information](../../embedded-copilots/failures/re-asks-for-known-information.md): the reverse favor, asking for what the product already has.

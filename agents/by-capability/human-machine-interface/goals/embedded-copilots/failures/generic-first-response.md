@@ -102,6 +102,13 @@ If there is no useful context, say in one line what you can help with. Never ope
 | Order shipped, on orders page | Gives the status; offers track, change address, issue |
 | No context | One line on what the assistant can do, with two or three starting points |
 
+**Moves** (see [conversation moves](../../../solutions-library/conversation-moves.md); most preferred first)
+| Move | When, in this pattern |
+|---|---|
+| Offer choices | First open with usable context: up to three likely needs, plus "Something else", free text open. Do not offer them when the user's first message is already a clear request, or when there is no usable context; answer it, or say what you can help with. |
+| Lead with the answer | The user's first message is a clear request, or the context makes the need plain: name the situation in one sentence and act on it, no menu |
+| Hand off to a person | The context suggests a problem (failed payment, error screen): include a way to reach a person from the opener or first turn |
+
 **Don't over-correct.** An opener that recites everything it knows is creepy and slow. A wrong guess stated as fact wastes a turn. Keep to one sentence of context and three options, phrase guesses as offers ("I see... want to...?"), and avoid sensitive inferences.
 
 **Hand-off rule.** Always include a way to reach a person from the opener or the first turn when the context suggests a problem ([HU-01](../../human-handoff/failures/talk-to-a-human-ignored-or-looped.md)).
@@ -139,6 +146,20 @@ Signals in a conversation event log that suggest this failure. Treat them as pro
 | User's first message restates something the product already knew (for example "my payment didn't go through") | First user turn compared with the account events | The user adds new detail the product did not have |
 
 **Starter rule:** every opener references the user's page, error, or account state when that data is available and allowed, and offers up to three likely next steps plus "Something else".
+
+**Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
+```yaml
+pattern_id: generic-first-response
+runs: pre_send
+reads: [session.is_new_chat, screen.page, session.entry_point, account.events, user_turn.text]
+trigger: a chat opens and the assistant is about to send its first message
+moves: [offer_choices, lead_with_answer, hand_off]
+choices: ["Update card", "Retry", "Something else"]
+on_miss: rewrite
+metric: share of first replies or opening messages that reference user-specific context or a likely need
+counter_metric: wrong-guess rate (options shown but ignored, followed by "something else" or a typed correction)
+status: proposed
+```
 
 ## 8. Related patterns
 - [Re-asks for known information](re-asks-for-known-information.md): the assistant asks for details it holds. This page is about not using context to open.

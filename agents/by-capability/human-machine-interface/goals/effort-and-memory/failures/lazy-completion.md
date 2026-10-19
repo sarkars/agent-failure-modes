@@ -25,6 +25,7 @@ search phrases:
 | **Stakes** | Low to medium. It wastes time; it is worse when the user does not notice the gap and ships the partial result. |
 | **Who is affected** | Anyone who asks for a long list, a full file, a multi-part document, or a batch of similar items |
 | **Frequency** | Common in reports. I found no study that measures how often it happens. The sources below are an acknowledged vendor episode, a contested test, and research on output length limits. |
+| **Pattern ID** | lazy-completion |
 | **Family** | [Effort and memory](../README.md) |
 | **Goal** | The agent does the whole job, spends effort in proportion to difficulty, keeps what the user told it, and says so when it can't. |
 | **Primary metric** | Completeness rate: required items delivered divided by items requested. Target: 100%, or an explicit gap list. |
@@ -102,6 +103,13 @@ If you cannot fit everything, deliver the first part, say exactly which items re
 End with a completeness line: "N of N done" or "X of N done; remaining: ...".
 ```
 
+**Moves** (see [conversation moves](../../../solutions-library/conversation-moves.md); list only the moves that apply, most preferred first)
+| Move | When, in this pattern |
+|---|---|
+| Lead with the answer | The job fits: deliver all of it and end with the completeness line. A partial result says "partial" in the first line. |
+| Offer choices: 2-4 options plus "Something else", free text open | The job will not fit in one reply: "Continue", "Split it into parts", "Something else". Do not offer them when the job fits, or when the user asked for a sample. |
+| Hand off to a person | The job is too large for the assistant at all. Do not hand off a job that chunking can finish. |
+
 **Don't over-correct.** Do not pad answers to look thorough, and do not refuse a long job because it is long. When the user asked for a sample or an outline, give a sample or an outline. Do not repeat the whole work in each continuation.
 
 **Hand-off rule.** If a job is too large for the assistant at all, say so and propose a split or a person ([escalates too early or too late](../../human-handoff/failures/escalates-too-early-or-too-late.md)).
@@ -128,6 +136,31 @@ Targets are starting points to tune on your own data, unless a source is given.
 | Partial results without a gap line | 0 | Delivered below requested with no gap statement | Any |
 | "Please continue" after a partial reply | Track; set from baseline | Next-turn classifier | Rising two weeks in a row |
 | Padded answers (counter-metric) | Under 5% | Samples where length exceeds the minimal complete answer | Over 10% |
+
+### Detection signals (proposed, not yet calibrated)
+Signals in a conversation event log that suggest this failure. Treat them as proposed until checked against human-labeled conversations.
+| Signal | Where it shows | Counter-signal (what it could be instead) |
+|---|---|---|
+| Delivered items fewer than requested, with no gap statement | Reply event: delivered count below requested count, no gap line | The user asked for a sample or an outline |
+| Placeholder string in a deliverable ("rest of", "and so on", "// ...", "similar to above") | Reply text matched by the placeholder scan | The user's own pasted code contains that string |
+| Countable request answered with no completeness line | Reply text lacks "N of N done" or "X of N done" | The request had no countable target |
+| User asks to continue after a reply | Next user turn classified as "please continue" | The reply said it was partial and offered to continue |
+
+**Starter rule:** if the user asks for a set number of items, a full file, or every row, deliver all of them or end with a gap line naming what remains and why.
+
+**Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
+```yaml
+pattern_id: lazy-completion
+runs: pre_send
+reads: [request.requested_count, reply.delivered_count, reply.text]
+trigger: a reply to a countable request (items, file, rows) is about to be sent
+moves: [lead_with_answer, offer_choices, hand_off]
+choices: ["Continue", "Split it into parts", "Something else"]
+on_miss: rewrite
+metric: completeness rate
+counter_metric: padded answers
+status: proposed
+```
 
 ## 8. Related patterns
 - [Deferring work to the user](deferring-work-to-the-user.md): the assistant hands a task back without starting it. Lazy completion starts the job and leaves part of it undone.

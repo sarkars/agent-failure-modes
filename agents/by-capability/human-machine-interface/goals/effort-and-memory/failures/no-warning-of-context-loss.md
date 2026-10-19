@@ -25,6 +25,7 @@ search phrases:
 | **Stakes** | Low to high. Forgotten preferences are an annoyance; a dropped allergy, deadline, or constraint can lead to a wrong answer. |
 | **Who is affected** | People in long sessions, and people who rely on saved memory to carry details between chats |
 | **Frequency** | Common in long sessions. I found no study that counts how often products fail to warn. The evidence below is research on long-context weakness, user reports, and one status-page incident. |
+| **Pattern ID** | no-warning-of-context-loss |
 | **Family** | [Effort and memory](../README.md) |
 | **Goal** | The agent does the whole job, spends effort in proportion to difficulty, keeps what the user told it, and says so when it can't. |
 | **Primary metric** | Context-loss events with a user-visible notice. Target: 100% (tune after you can detect the events). |
@@ -97,6 +98,13 @@ Never say you saved or remembered something unless the save succeeded. If memory
 Keep pinned facts (allergies, deadlines, consent) out of compaction.
 ```
 
+**Moves** (see [conversation moves](../../../solutions-library/conversation-moves.md); list only the moves that apply, most preferred first)
+| Move | When, in this pattern |
+|---|---|
+| Admit uncertainty and show how to check | After a drop, compaction, or failed memory write: say what was lost or not saved, list what is still held, and ask the user to restate what matters. Never say "saved" unless the write succeeded. |
+| Offer choices: 2-4 options plus "Something else", free text open | At the near-limit notice or a memory-full notice: "Save a summary and continue in a new chat", "Delete a memory entry", "Keep it in this chat", "Something else". Do not offer them in short chats, or on every turn. |
+| Hand off to a person | A dropped detail could cause harm (safety, legal, money) and the user cannot restate it. Do not hand off if the user restated it. |
+
 **Don't over-correct.** Do not show a warning on every turn or in short chats. Do not alarm users with a long list of what "might" be missing. Do not compact pinned facts to save space.
 
 **Hand-off rule.** If a dropped detail could cause harm (a safety, legal, or money detail) and the user cannot restate it, say so and route to a person ([escalates too early or too late](../../human-handoff/failures/escalates-too-early-or-too-late.md)).
@@ -123,6 +131,32 @@ Targets are starting points to tune on your own data, unless a source is given.
 | Pinned-fact loss after compaction | 0 | Replay tests with pinned facts | Any |
 | Restate rate after a drop notice | Track; set from baseline | Next-turn classifier | Unexplained rise |
 | Notices in short chats (counter-metric) | Under 1% | Notices in sessions under the threshold | Over 3% |
+
+### Detection signals (proposed, not yet calibrated)
+Signals in a conversation event log that suggest this failure. Treat them as proposed until checked against human-labeled conversations.
+| Signal | Where it shows | Counter-signal (what it could be instead) |
+|---|---|---|
+| A drop or compaction event has no notice event | Context-manager event with no matching notice shown to the user | A notice already shown once when the threshold was crossed |
+| A "saved" message has no successful memory write | Confirmation message joined to the write log | A write that succeeded slightly later and was logged out of order |
+| A pinned fact is missing from context after compaction | Pinned-fact list compared to the post-compaction context | The user withdrew or changed the fact |
+| The user restates a fact right after a drop | Same fact in the next user turn after a drop event | The user is deliberately updating the fact |
+| A notice appears in a session under the threshold (counter-metric) | Notice event in a short session | A failed memory write, which warrants a notice at any length |
+
+**Starter rule:** if the conversation is near its limit or content was dropped, tell the user once, list the key facts still held, and never say something was saved unless the save succeeded.
+
+**Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
+```yaml
+pattern_id: no-warning-of-context-loss
+runs: pre_send
+reads: [context_event.type, context_event.dropped_areas, session.pinned_facts, memory_write.status]
+trigger: a context drop, compaction, near-limit state, or memory write result is about to go unannounced
+moves: [admit_uncertainty, offer_choices, hand_off]
+choices: ["Save a summary and continue in a new chat", "Delete a memory entry", "Keep it in this chat", "Something else"]
+on_miss: rewrite
+metric: context-loss events with a user-visible notice
+counter_metric: notices in short chats
+status: proposed
+```
 
 ## 8. Related patterns
 - [Context window overflow with silent truncation](../../../../../cross-cutting/operations/goals/memory-safety/failures/context-window-overflow-silent-truncation.md): the loss itself. This page covers telling the user.

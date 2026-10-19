@@ -287,18 +287,18 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 43 | HU-06 | Bot keeps replying after a person joins | New | - | `goals/human-handoff/failures/bot-keeps-replying-after-a-person-joins.md` | Done |  |
 | 44 | HU-07 | Handoff outside staffed hours with no alternative | New | - | `goals/human-handoff/failures/handoff-outside-staffed-hours-with-no-alternative.md` | Done |  |
 | 45 | CP-02 | Recommending features the user can't use | Extends | - | `goals/embedded-copilots/failures/recommending-features-the-user-can-t-use.md` | Done |  |
-| 46 | CP-04 | Self-preferencing | New | R, L | `goals/embedded-copilots/failures/self-preferencing.md` | Queued |  |
-| 47 | CP-05 | Paid content blended into answers | New | V, R, L | `goals/embedded-copilots/failures/paid-content-blended-into-answers.md` | Queued |  |
+| 46 | CP-04 | Self-preferencing | New | R, L | `goals/embedded-copilots/failures/self-preferencing.md` | Done |  |
+| 47 | CP-05 | Paid content blended into answers | New | V, R, L | `goals/embedded-copilots/failures/paid-content-blended-into-answers.md` | Done |  |
 | 48 | CP-07 | Helpfulness theatre | Extends | - | `goals/embedded-copilots/failures/helpfulness-theatre.md` | Done |  |
-| 49 | DM-01 | Reference resolution failures | New | R | `goals/dialogue-management/failures/reference-resolution-failures.md` | Queued |  |
+| 49 | DM-01 | Reference resolution failures | New | R | `goals/dialogue-management/failures/reference-resolution-failures.md` | Done |  |
 | 50 | DM-02 | Tangents never closed | Extends | - | `goals/dialogue-management/failures/tangents-never-closed.md` | Done |  |
-| 51 | DM-04 | Multi-intent messages answered in part | Extends | - | `goals/dialogue-management/failures/multi-intent-messages-answered-in-part.md` | Queued |  |
-| 52 | DM-05 | Negation and exceptions ignored | New | - | `goals/dialogue-management/failures/negation-and-exceptions-ignored.md` | Queued |  |
-| 53 | DM-06 | Questions asked one at a time when the user already gave everything | Extends | - | `goals/dialogue-management/failures/questions-asked-one-at-a-time-when-the-user.md` | Queued |  |
-| 54 | DM-07 | Over-confirmation | New | - | `goals/dialogue-management/failures/over-confirmation.md` | Queued |  |
-| 55 | DM-08 | Under-confirmation of consequential details | Extends | - | `goals/dialogue-management/failures/under-confirmation-of-consequential-details.md` | Queued |  |
-| 56 | DM-10 | Clarifying questions the user can't answer | Extends | - | `goals/dialogue-management/failures/clarifying-questions-the-user-can-t-answer.md` | Queued |  |
-| 57 | DM-11 | No way back in a flow | New | - | `goals/dialogue-management/failures/no-way-back-in-a-flow.md` | Queued |  |
+| 51 | DM-04 | Multi-intent messages answered in part | Extends | - | `goals/dialogue-management/failures/multi-intent-messages-answered-in-part.md` | Done |  |
+| 52 | DM-05 | Negation and exceptions ignored | New | - | `goals/dialogue-management/failures/negation-and-exceptions-ignored.md` | Done |  |
+| 53 | DM-06 | Questions asked one at a time when the user already gave everything | Extends | - | `goals/dialogue-management/failures/questions-asked-one-at-a-time-when-the-user.md` | Done |  |
+| 54 | DM-07 | Over-confirmation | New | - | `goals/dialogue-management/failures/over-confirmation.md` | Done |  |
+| 55 | DM-08 | Under-confirmation of consequential details | Extends | - | `goals/dialogue-management/failures/under-confirmation-of-consequential-details.md` | Done |  |
+| 56 | DM-10 | Clarifying questions the user can't answer | Extends | - | `goals/dialogue-management/failures/clarifying-questions-the-user-can-t-answer.md` | Done |  |
+| 57 | DM-11 | No way back in a flow | New | - | `goals/dialogue-management/failures/no-way-back-in-a-flow.md` | Done |  |
 | 58 | DM-12 | Rigid flows break on off-script answers | Extends | - | `goals/dialogue-management/failures/rigid-flows-break-on-off-script-answers.md` | Queued |  |
 | 59 | DM-13 | Small talk and off-topic messages handled badly | New | - | `goals/dialogue-management/failures/small-talk-and-off-topic-messages-handled-badly.md` | Queued |  |
 | 60 | DM-14 | Same answer to a rephrased question | Extends | - | `goals/dialogue-management/failures/same-answer-to-a-rephrased-question.md` | Queued |  |
@@ -899,6 +899,22 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 - **Part C asset 4 (teardown), Klarna: Done** (section 6, `incidents/klarna-ai-assistant-customer-service-reversal-2025.md`, 75 lines). 5 searches, 5 sources opened (Klarna press release, CX Dive, Fortune, Entrepreneur, one more). Bloomberg not opened. The sources report a strategy change, not a specific failure; the page says so and forces no pattern link. Review changed: removed four short quotes to paraphrase, keeping only "lower quality".
 - **Part B:** Skipped this run (coordinator time spent on review).
 - **Taxonomy:** 50 entries; signals 37 of 50; Moves 26 of 50.
+- **Deploy:** content PR #18 merged (merge commit 0745bff); the site repo had no foreign commits. Scratch build clean, 1609 pages; the live sitemap had 1592 URLs, none missing from the build (removed: 0; 17 more pages in the build, 4 of them new patterns). One new page has exactly one `<h1>`; the `search phrases:` text appears in the meta description of new and existing pages alike (importer behavior, not new). Pushed to site repo main as 75d330f26, not verified live (no Vercel access). The Klarna incident page is not published by this runbook.
+- **Waiting for the owner:** nothing new; earlier items stand (CP-21 redo or drop, Search Console access for the site, Vercel build-on-push confirmation).
+
+### Run 24 (scheduled): 2026-10-20 onward
+- **Coordinator run:** subagents wrote and retrofitted pages in parallel; I reviewed each result and updated all shared files. Deviation: subagents were given the quality guide through scratchpad files, not pasted word for word. The five checks pass (0 problems).
+- **Part A new patterns (rows 46, 47, 49, 51, 52, 53):** CP-04 self-preferencing, CP-05 paid-content-blended-into-answers, DM-01 reference-resolution-failures, DM-05 negation-and-exceptions-ignored, DM-07 over-confirmation, DM-11 no-way-back-in-a-flow: **Done**, checked against guide section 2. Review changed: Frequency lines on CP-04 and CP-05 fixed to `Occasional` (check_site_compat required one of the four allowed values); sections 8 and 9 added to self-preferencing; CP-05's "planned" self-preferencing text now links the written page. OpenAI pages returned HTTP 403 and CP-05 makes no OpenAI claim. Two Guide specs keep `<...>` placeholders by design (template slots, not unfinished text).
+- **Extends (rows 54-57, guide section 3):** DM-04, DM-06, DM-08, DM-10: **Done**, chat examples under `## Chat assistant examples` in the existing pattern each row links. Transcripts are illustrative. Only those sections changed.
+- **Part A2 retrofits (8, sections 4 and 5):** deferring-work-to-the-user, lazy-completion, no-warning-of-context-loss, order-mix-ups-at-the-speaker, silent-long-running-work, repair-failure, no-channel-switch-or-context-lost, eligibility-answers-sound-like-decisions. Review note: `runs: pre_send` on no-channel-switch could also be `conversation` or `post_turn`; left as proposed.
+- **Part E (4, section 5):** Moves table and Guide spec added to generic-first-response, re-asks-for-known-information, answer-buried, guessing-instead-of-asking. Still without Moves: escalates-too-early-or-too-late, refusal-with-no-reason-or-next-step, romantic-or-parasocial-dependence, silent-failure-and-timeout, scam-victim-not-interrupted, confident-wrong-answer-with-no-way-to-check.
+- **Part C asset 4 (teardown), Cursor support bot: Done** (`incidents/cursor-support-bot-invents-a-policy-april-2025.md`, 86 lines, guide section 6). Sources opened: The Register, Fortune, a Hacker News thread via the Algolia API, AI Incident Database 1039. Not opened: the original Reddit post, Truell's full comments, an eWeek article (HTTP 403). The policy wording is second-hand and marked so; the undisclosed-bot-identity link is stated as a partial, unresolved fit.
+- **Part C asset 9 (glossary): Done as a draft** (`reference/glossary.md`, 81 lines). Built from library pages only; "our usage" terms are marked; no outside sources.
+- **Part B:** Skipped. The 2026-10-20 entry already exists.
+- **Not started:** E3 explainer, E5 guardrail comparison, E6 design note. Queue rows 58 and 59 stay Queued. Retrofits still pending: dialect-and-name-quality-gap, one-size-communication-style, no-de-escalation-strategy, negotiation-capitulation, visual-product-sold-by-text-or-voice.
+- **Taxonomy:** 56 entries; signals 51 of 56; Moves 44 of 56.
+- **Deploy:** content PR merged, branch reset, scratch build and URL-loss check, then push to the site repo main. Result: pushed to site repo main, not verified live (no Vercel access). The Cursor incident page and glossary are not published by this runbook.
+- **Waiting for the owner:** CP-21 redo or drop, the role-boundary pattern gap, Search Console access for the site, Vercel build-on-push confirmation.
 
 ## Backlog (not scheduled)
 Ideas from earlier lists that were never chosen. They stay out of the queue until someone adds them.

@@ -25,6 +25,7 @@ search phrases:
 | **Stakes** | Low to medium for a wrong item; higher with allergies, large totals, or a customer who can't easily correct it. |
 | **Who is affected** | Drive-thru customers, especially people with accents, speech differences, noisy cars, or children in the back seat, and the crew who fix orders |
 | **Frequency** | Press reports and company statements describe repeated mix-ups; I found no independent measurement of order accuracy across vendors. |
+| **Pattern ID** | order-mix-ups-at-the-speaker |
 | **Family** | [Drive-thru agents](../README.md) |
 | **Goal** | Voice ordering gets the order right, shows it, and never pressures or risks someone's health. |
 | **Primary metric** | Order accuracy at pickup, and orders corrected by a person. Starting target: set from a baseline on your own orders (tune). |
@@ -105,6 +106,15 @@ Read the full order back and wait for a clear yes before payment.
 After two failed corrections, or on request, hand the order to a staff member.
 ```
 
+**Moves** (see [conversation moves](../../../solutions-library/conversation-moves.md); list only the moves that apply, most preferred first)
+| Move | When, in this pattern |
+|---|---|
+| Ask one clarifying question | The customer says stop, no, or that's wrong, or the total jumps: halt, then ask what to fix or confirm ("That's 40 nuggets, $211. Is that right?"). Don't ask when the correction already names the item |
+| Admit uncertainty and show how to check | The transcript may be wrong: show what was heard on the screen and read the order back before payment. Don't use it to re-read every item on a short order |
+| Hand off to a person | After two failed fixes, on request, or for allergy and dietary words: pass the order state to a staff member |
+
+Offer choices is not used here: at a speaker, a menu of options would slow the line, and the screen already shows the order.
+
 **Don't over-correct.** Do not read back every item every time on a short order, and do not pause on ordinary large family orders. Keep the readback short, and let regular customers confirm quickly. Do not use upsell prompts to fill the readback ([help that becomes a sales pitch](../../embedded-copilots/failures/help-that-becomes-a-sales-pitch.md)).
 
 **Hand-off rule.** Give a staff member the order state and what the customer was trying to fix, and keep the order on the screen for both.
@@ -132,6 +142,32 @@ Targets are starting points to tune on your own data, unless a source is given.
 | Orders with a readback and a yes | Over 98% | Log | Below 95% |
 | Runaway totals paid without a pause (counter-metric) | 0 | Orders over a total cap with no confirmation | Any |
 | Order time (counter-metric) | Track | Median time per order | Rising by more than a set margin |
+
+### Detection signals (proposed, not yet calibrated)
+Signals in an order log or transcript that suggest this failure. Treat them as proposed until checked against human-labeled orders. The first four are written for text/transcript and order log; the last is PLANNED for voice (needs audio-side data).
+| Signal | Where it shows | Counter-signal (what it could be instead) |
+|---|---|---|
+| An add event after a stop or "no" from the customer | Order log: add events after a stop signal in the transcript | The "no" answered "Anything else?" and the add is a later, new request |
+| Payment with no readback and no yes | Order log: payment event with no confirmed readback | A short order where the customer confirmed quickly in their own words |
+| Total or item count far above the usual, paid with no confirm | Order log: total and item count at payment, confirm event | An ordinary large family order the customer confirmed |
+| Staff change items after the agent took the order | Order log: item edits by crew after the agent's entry | The customer changed their mind at the window |
+| PLANNED for voice: items added from low-confidence recognition with nothing flagged on the screen | Recognition confidence per item (audio-side; not in a transcript) | Clear speech that the recognizer simply scored low |
+
+**Starter rule:** read the full order back and wait for a clear yes before payment.
+
+**Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
+```yaml
+pattern_id: order-mix-ups-at-the-speaker
+runs: conversation
+reads: [order.items, order.total, order.item_count, stop_event, readback.confirmed, fix_attempts]
+trigger: the customer says stop, no, or that's wrong; the total or item count jumps; or payment is about to start
+moves: [ask_clarifying_question, admit_uncertainty, hand_off]   # short names for the moves in the table
+choices: none
+on_miss: handoff
+metric: order accuracy at pickup
+counter_metric: order time
+status: proposed
+```
 
 ## 8. Related patterns
 - [Corrections not applied](../../dialogue-management/failures/corrections-not-applied.md): the old value returning after a correction.

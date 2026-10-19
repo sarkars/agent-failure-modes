@@ -92,6 +92,31 @@ Fixing this means classifying actions by reversibility and putting the confirmat
 
 ---
 
+## Chat assistant examples
+
+### Under-confirmation of consequential details
+
+*Illustrative transcript, not a real product log. "PayBot" is an invented banking chat assistant.*
+
+```
+Before:
+User: Send Dana 250 bucks for the deposit, she needs it by Friday.
+PayBot: Done! Sent $250.00 to Dana Whitfield.
+        (two saved contacts named Dana; the user meant Dana Lopez)
+
+After:
+User: Send Dana 250 bucks for the deposit, she needs it by Friday.
+PayBot: You have two Danas. Send $250.00 to Dana Lopez (ending 4417), arriving by Friday, Oct 24? Reply "yes" to send.
+User: Yes.
+PayBot: Sent $250.00 to Dana Lopez.
+```
+
+**What the user experiences:** money leaves their account on a name and an amount heard once, and they learn which Dana got it only after it is too late to stop it.
+
+**Fix:** before any send, charge, or booking, read back the amount, recipient, and date in one message and wait for a yes. Skip the read-back for undoable actions. See the [guessing instead of asking](../../../../human-machine-interface/goals/dialogue-management/failures/guessing-instead-of-asking.md) pattern.
+
+---
+
 ## References
 
 - [OWASP-LLM-Top10](https://owasp.org/www-project-top-10-for-large-language-model-applications/)

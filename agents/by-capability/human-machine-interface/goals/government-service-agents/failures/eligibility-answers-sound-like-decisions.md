@@ -27,6 +27,7 @@ search phrases:
 | **Stakes** | High. A wrong "no" can stop someone from applying; a wrong "yes" can lead to missed deadlines or wasted effort. |
 | **Who is affected** | People applying for benefits, often under stress, with limited time, with less common situations, or in a second language |
 | **Frequency** | I found no count of how often public-service bots do this. The evidence below is on accuracy, over-trust, and one named case. |
+| **Pattern ID** | eligibility-answers-sound-like-decisions |
 | **Family** | [Government service agents](../README.md) |
 | **Goal** | Public-service agents give accurate, accessible, plain-language guidance and always leave a path to a person and an appeal. |
 | **Primary metric** | Eligibility answers that state what is a guess. Target: 100% (tune). |
@@ -103,6 +104,13 @@ Always include the application link and a way to reach a person. Do not tell any
 For disputes, urgent cases, or unusual situations, hand off to a person.
 ```
 
+**Moves** (see [conversation moves](../../../solutions-library/conversation-moves.md); list only the moves that apply, most preferred first)
+| Move | When, in this pattern |
+|---|---|
+| Admit uncertainty and show how to check | Any eligibility question: say the agency decides, say the answer rests only on what the person told you, name the facts that could change it, and show the rule with its date. |
+| Offer choices: 2-4 options plus "Something else", free text open | At the end of the reply: "Apply now", "Talk to a person", "How to ask for a review", "Something else". Do not offer them in place of the guidance itself, or when the person has already said which one they want. |
+| Hand off to a person | Edge cases, disputes about a decision, and urgent situations. Do not hand off if the person asked to stay with the bot and the case is not urgent. |
+
 **Don't over-correct.** Do not refuse to discuss the rules at all, or bury the guidance under disclaimers; people need the information. Do not hedge so much that the answer says nothing. Do not state legal rights or deadlines unless the agency's own page does, and then link it.
 
 **Hand-off rule.** Hand off to a caseworker or navigator for edge cases, disputes, and urgency, with a summary of what the person said ([cold transfer](../../human-handoff/failures/cold-transfer.md)).
@@ -130,6 +138,32 @@ Targets are starting points to tune on your own data, unless a source is given.
 | Rule figures with a shown date | 100% | Replies that cite a figure with its source date | Below 98% |
 | Accuracy of stated rules (counter-metric) | Track; set from expert review | Expert-checked sample against the current rules | Falling |
 | Over-hedged answers (counter-metric) | Under 10% | Replies judged to say nothing useful | Over 20% |
+
+### Detection signals (proposed, not yet calibrated)
+Signals in a conversation event log that suggest this failure. Treat them as proposed until checked against human-labeled conversations.
+| Signal | Where it shows | Counter-signal (what it could be instead) |
+|---|---|---|
+| Verdict phrasing ("you qualify", "you're not eligible") in a reply to an eligibility question | Pattern match on the reply text, per the verdict-phrasing metric | The reply quotes the agency's own rule wording, or repeats the user's words |
+| Eligibility reply never says the agency decides or what the answer rests on | Labeled sample of eligibility replies, per the primary metric | A short follow-up turn in a thread whose first reply already said it |
+| Eligibility reply has no application link or person route | Link fields on the reply | The question was not about eligibility, or the links appear in the same turn's next message |
+| Rule figure shown without its source date | Reply cites a figure; the retrieval event has no source date | The figure is a number the user gave, echoed back |
+| Reply judged to say nothing useful (over-hedged) | Labeled sample, per the over-hedged counter-metric | No current rule data was available, so declining to give a number is the intended answer (test 4) |
+
+**Starter rule:** never say "you qualify" or "you don't qualify"; say the agency decides, quote the current rule with its date, and give the application link and a way to reach a person.
+
+**Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
+```yaml
+pattern_id: eligibility-answers-sound-like-decisions
+runs: pre_send
+reads: [draft_reply, intent, retrieved_rule.source_date, reply.links]
+trigger: a reply to an eligibility question is about to be sent
+moves: [admit_uncertainty, offer_choices, hand_off]
+choices: ["Apply now", "Talk to a person", "How to ask for a review", "Something else"]
+on_miss: rewrite
+metric: eligibility answers that state what is a guess
+counter_metric: accuracy of stated rules
+status: proposed
+```
 
 ## 8. Related patterns
 - [Confident wrong answer with no way to check](../../errors-and-recovery/failures/confident-wrong-answer-with-no-way-to-check.md): show the source and the uncertainty.

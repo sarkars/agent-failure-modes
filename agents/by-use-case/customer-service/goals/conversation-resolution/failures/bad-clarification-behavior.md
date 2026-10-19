@@ -96,6 +96,30 @@ Agent: "Understood. What is the reason for cancellation?"
 | Clarification Overload Spike | clarification_questions_per_resolved_conversation exceeds 2.5 on a rolling 24h window | Medium |
 | Rising Correction Rate | user_correction_rate exceeds 8% weekly | Medium |
 
+## Chat assistant examples
+
+### Clarifying questions the user can't answer
+
+Illustrative transcript. The retailer and product are invented.
+
+```
+Before:
+User: My Harborline dishwasher stopped draining. Can you send a part?
+Bot:  What is the model number?
+User: No idea. It's a few years old.
+Bot:  I need the model number to continue. What is the model number?
+
+After:
+User: My Harborline dishwasher stopped draining. Can you send a part?
+Bot:  Sure. I need the model number. It's usually on a sticker on the side of the door or the door frame. Can you open the door and read it to me?
+User: I see "HL-D4120". Is that it?
+Bot:  Yes. That is the one.
+```
+
+**What the user experiences:** a demand for information they do not have, repeated with no way forward, so they leave or ask for a person.
+
+**Fix:** when you ask for an identifier, say where to find it, and offer another route if they cannot (a photo of the label, an order number, or the email address on the purchase). Treat "I don't know" as a normal answer, not a repeat of the question. Where to look varies by appliance; a [published guide](https://www.mrappliance.com/fort-worth/about/blog/where-to-find-appliance-model-number/) lists the door frame or side of the door for dishwashers. Related HMI patterns: [guessing instead of asking](../../../../../by-capability/human-machine-interface/goals/dialogue-management/failures/guessing-instead-of-asking.md) (the opposite failure) and [re-asks for known information](../../../../../by-capability/human-machine-interface/goals/embedded-copilots/failures/re-asks-for-known-information.md).
+
 ---
 
 ## References
