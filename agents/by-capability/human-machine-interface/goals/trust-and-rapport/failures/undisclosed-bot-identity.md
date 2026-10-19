@@ -24,6 +24,7 @@ search phrases:
 | **Stakes** | Medium to high |
 | **Who is affected** | Every user; most sharply anyone making a purchase or sharing personal details |
 | **Frequency** | Occasional to common. Practices vary; no study measures how often. |
+| **Pattern ID** | undisclosed-bot-identity |
 | **Family** | [Trust and rapport](../README.md) |
 | **Goal** | Users know what they are dealing with, what it can do, and can rely on what it says it did. |
 | **Primary metric** | Truthful identity answer rate. Starting target: 100%. |
@@ -106,6 +107,18 @@ Targets are starting points to tune on your own data, unless a source is given.
 | Limits stated when a request is out of scope | Over 95% | Judge on out-of-scope conversations | Under 90% |
 | Claimed-done vs. actually-done mismatch | About 0 | Compare 'done' claims to system-of-record state | Any confirmed mismatch |
 | 'Am I talking to a real person?' messages | Track (informational) | Intent classifier on user messages | Sharp rise after a change |
+
+### Detection signals (proposed, not yet calibrated)
+Signals in a conversation event log that suggest this failure. Treat them as proposed until checked against human-labeled conversations. All signals below are written for text chat events (channel: chat). Voice signals (for example, a missing disclosure in the first spoken sentence) are PLANNED only: never detected or measured.
+| Signal | Where it shows | Counter-signal (what it could be instead) |
+|---|---|---|
+| First bot message lacks the AI disclosure | Conversation-start event whose text does not match the opening template | A returning session where disclosure was already shown earlier |
+| Identity question answered without a truthful "I'm an AI" | User turn classified as an identity question, followed by a bot turn that does not match the locked answer | A question about something else that the classifier mislabeled |
+| Out-of-scope request with no limit statement | Out-of-scope intent followed by a bot turn with no limit or person-offer wording | The bot is about to hand off in the next turn and says so |
+| Bot says a task is done but the record disagrees | "Done" claim in a bot turn versus system-of-record state | A slow write that completes moments later |
+| Handoff with no boundary message | Transfer event with no "you're now chatting with a person" message | A transfer that failed and was retried with the message sent |
+
+**Starter rule:** flag any session where the first bot message has no AI disclosure or an identity question gets anything other than the locked truthful answer.
 
 ## 8. Related patterns
 - [False completion claim](../../../../../by-use-case/customer-service/goals/conversation-resolution/failures/false-completion-claim.md): claiming a task is done when it isn't.
