@@ -1,8 +1,10 @@
-# Content Program: Fourteen Workstreams Run Alongside the Pattern Queue
+# Content Program: Fifteen Workstreams Run Alongside the Pattern Queue
 
 > **What this is.** Besides writing patterns, each scheduled run does **one** task from this file. The tasks turn a catalog into something people cite and use: tiered quality, real incidents, runnable tests, an honest "will a better model fix this?" answer, and entry points by symptom and by role. Everything stays inside `agents/by-capability/human-machine-interface/`. The [execution plan](execution-plan.md) says how a run works.
 
 ## Site compatibility
+**Two repositories.** This repo holds content only; the Astro site and its importers live in `sarkars/agent-kb-autopublish`. Anything that needs a change there goes to `roadmap/merge-proposals.md`. See [REPOSITORIES.md](../../../../REPOSITORIES.md).
+
 The published site is Astro, fed by an importer that reads this repo. Keep these true or pages vanish or lose their goal and category:
 - Written patterns live at `goals/<family>/failures/<name>.md`, with `goals/<family>/README.md` present.
 - Line 1 of a pattern is its H1. It also has a `**Frequency**: Very Common|Common|Occasional|Rare` line and a `## Issue: <one sentence>` line.
@@ -61,7 +63,7 @@ These come first in the queue, at 3 per run. They were picked for customer deman
 | 29 | CC-08 | Scam victim not interrupted |
 | 30 | CC-16 | Romantic or parasocial dependence |
 
-## The fourteen workstreams
+## The fifteen workstreams
 | ID | Workstream | Deliverable | When a run does it |
 |---|---|---|---|
 | WS-01 | Two tiers, labeled | Maturity label and tier on every written pattern; this file's flagship list | Set up now. Each run labels its own patterns |
@@ -77,9 +79,12 @@ These come first in the queue, at 3 per run. They were picked for customer deman
 | WS-13 | Use-case agent specs | One page per specific agent in `agents/by-agent/use-cases/`: scope, business goals with measure, failure definition, severity, hand-over triggers, and linked failures to test. Eight exist as first drafts | Add a spec when a use case has at least three documented failures; revise each with a practitioner's input |
 | WS-14 | Solutions: chat use cases | One independent Markdown page, [agents/solutions/chat-use-cases.md](../../../solutions/chat-use-cases.md), that explains 32 narrow chat use cases end to end: goals, instructions, guardrails, evals, and the existing failure patterns to test against, each with a metric and a counter-metric. Markdown only; no interactive pages | Verify usage evidence first, then deepen one use case per task in priority-wave order |
 | WS-10 | Cross-framework mappings | `mappings/proposals.md`: OWASP, NIST, and MITRE entries for flagships, each with a source you opened and a confidence label | Flagships only, after the pattern is Done; always *Needs review* |
+| WS-15 | SEO from search data | Daily review of Search Console queries and pages (Chrome, or an export in `seo/inbox/`), logged in [seo/log.md](seo/log.md); title, summary, and internal-link fixes; queries with no page become queue rows. Rules in [seo/README.md](seo/README.md) | Once per UTC day, before the other content task |
 | WS-11 | Build guide | `guide/`: a failure-first guide to building a customer-facing agent that doesn't fail people. A gap analysis first, then one step per task, each linking only written patterns | Gap analysis first; then one step when its condition is met |
 
 ## Task queue
+**Order:** flagship patterns come first (Part A of every run). Among tasks, roadmap tasks (13 to 17) come first, then tasks tied to written flagships (5 to 12 and 24), then the chat use-case tasks (14a to 14j). **Daily SEO review (WS-15):** the first run of each UTC day does it before the queue task, if `seo/log.md` has no entry for today. It is not a queue row.
+
 Status values: *Queued*, *In progress*, *Done*, *Blocked*, *Needs review*. A run takes the first row that is *Queued* or *In progress* and whose condition is met.
 
 | # | Task | Workstream | Condition | Status |
@@ -88,24 +93,6 @@ Status values: *Queued*, *In progress*, *Done*, *Blocked*, *Needs review*. A run
 | 2 | Write `incidents/README.md`: the incident-page format and the source rules | WS-02 | None | Done |
 | 3 | Write `data/README.md` and `data/failure-report-template.md`: consent, anonymization, what never to submit | WS-07 | None | Done |
 | 4 | Add Maturity and "Will a better model fix this?" rows to the pattern template | WS-01, WS-04 | None | Done |
-| 14a | **Verify market usage.** Open every source in section 1 of [chat-use-cases.md](../../../solutions/chat-use-cases.md): confirm each figure and its grade, replace grade C claims with better sources where they exist, and record use cases with no evidence. Correct the page | WS-14 | None | Queued |
-| 14b | **Deepen CU-27 (information-seeking assistant)** in place: research it, then write its full end-to-end section (use-case-specific instructions, guardrails, evals, each with a metric and counter-metric). Link only to existing failure patterns. Mark everything untested | WS-14 | Task 14a Done | Queued |
-| 14c | **Deepen CU-02 (e-commerce order support)** the same way | WS-14 | Task 14b Done | Queued |
-| 14d | **Adversarial review of 14b and 14c:** is each metric measurable from logs, an eval, or sampled review? Does each item have a counter-metric? Is anything claimed that is not sourced? Fix the page structure if it fails | WS-14 | Task 14c Done | Queued |
-| 14e | **Deepen wave 1**, one use case per task: CU-26, CU-28, CU-32, CU-30 (CU-30 carries legal and expert flags and stays *Needs review*) | WS-14 | Task 14d Done | Queued |
-| 14f | **Deepen wave 2**, one per task: CU-29, CU-31, CU-07, CU-15, CU-16, CU-17, CU-05, CU-04, CU-01 | WS-14 | Three wave 1 use cases Done | Queued |
-| 14g | **Deepen wave 3**, one per task, as *Needs review*, with instruction text withheld: CU-21, CU-20, CU-22, CU-23, CU-24, CU-25 | WS-14 | Task 14d Done and two wave 2 use cases Done | Queued |
-| 14h | **Wave 4:** for each use case with no usage evidence, look for evidence; keep it only if some is found or a judgment reason is written. Add use cases the evidence shows are missing | WS-14 | Task 14a Done | Queued |
-| 14i | **Link new patterns:** when a failure pattern is written that a use case needs, link it and remove the "none documented yet" note | WS-14 | A pattern is Done | Queued |
-| 14j | **Refresh market usage** every 20 runs: search for new usage studies, update section 1, and record what changed | WS-14 | Task 14a Done | Queued |
-| 5 | Incident page: pick the best-sourced public case for the first flagship that has one | WS-02 | A flagship is Done | Queued |
-| 6 | Seed `glossary/`: "containment rate" and "cold transfer" | WS-09 | HU-01 and HU-03 Done | Queued |
-| 7 | First symptom page: "The bot keeps asking what I already told it" | WS-05 | CP-14 Done and two more related patterns Done | Queued |
-| 8 | First merge proposal covering the written HMI patterns and their older-library neighbors | WS-06 | 10 patterns written | Queued |
-| 9 | First role page: `start-here/cx-leaders.md` | WS-08 | 5 written patterns relevant to CX leaders | Queued |
-| 10 | First mapping proposal for the first Done flagship | WS-10 | A flagship is Done | Queued |
-| 11 | Seed `symptoms/` with the next 3 pages | WS-05 | 9 patterns written | Queued |
-| 12 | Add terms to `glossary/` until 10 exist | WS-09 | Repeat as terms qualify | Queued |
 | 13 | Redo `roadmap/gap-analysis.md` properly: open every source it lists, correct any claim the source doesn't support, mark each row opened or summary-only, and add a second search for each "nothing found" claim. Decide whether a guide (WS-11) is still worth writing | WS-11, WS-12 | None | Queued |
 | 13b | Per-agent-type gap analysis for the six most-built agent types: customer service, coding, research and data, workflow automation, IT and security, and copilots. For each, open the main failure and benchmark references and record what they cover, what they leave out, and what the library adds | WS-12 | Task 13 Done | Queued |
 | 13c | Decision record: build the L1 base agent on an existing harness (tau2-bench, the OpenAI cookbook loop) or from scratch, with reasons from opened sources | WS-12 | Task 13b Done | Queued |
@@ -116,7 +103,25 @@ Status values: *Queued*, *In progress*, *Done*, *Blocked*, *Needs review*. A run
 | 15 | Write one guide step: what to decide, the minimal fix, the patterns it prevents, the tests, and when you can skip it | WS-11 | Outline Done and the step has at least two written patterns it can link; repeat per step | Queued |
 | 16 | Review the eight use-case specs in `agents/by-agent/use-cases/`: open sources for every metric name and definition, remove anything unsupported, and list which definitions need a practitioner's review | WS-13 | None | Queued |
 | 17 | Add the next use-case agent specs (candidates: candidate screening, voice appointment scheduling, e-commerce order support, internal knowledge assistant), each with at least three documented failures behind it | WS-13 | Task 16 Done | Queued |
+| 5 | Incident page: pick the best-sourced public case for the first flagship that has one | WS-02 | A flagship is Done | Queued |
+| 6 | Seed `glossary/`: "containment rate" and "cold transfer" | WS-09 | HU-01 and HU-03 Done | Queued |
+| 7 | First symptom page: "The bot keeps asking what I already told it" | WS-05 | CP-14 Done and two more related patterns Done | Queued |
+| 8 | First merge proposal covering the written HMI patterns and their older-library neighbors | WS-06 | 10 patterns written | Queued |
+| 9 | First role page: `start-here/cx-leaders.md` | WS-08 | 5 written patterns relevant to CX leaders | Queued |
+| 10 | First mapping proposal for the first Done flagship | WS-10 | A flagship is Done | Queued |
+| 11 | Seed `symptoms/` with the next 3 pages | WS-05 | 9 patterns written | Queued |
+| 12 | Add terms to `glossary/` until 10 exist | WS-09 | Repeat as terms qualify | Queued |
 | 24 | Repeat: merge proposals, role pages, mapping proposals as their conditions are met | WS-06, WS-08, WS-10 | As conditions are met | Queued |
+| 14a | **Verify market usage.** Open every source in section 1 of [chat-use-cases.md](../../../solutions/chat-use-cases.md): confirm each figure and its grade, replace grade C claims with better sources where they exist, and record use cases with no evidence. Correct the page | WS-14 | None | Queued |
+| 14b | **Deepen CU-27 (information-seeking assistant)** in place: research it, then write its full end-to-end section (use-case-specific instructions, guardrails, evals, each with a metric and counter-metric). Link only to existing failure patterns. Mark everything untested | WS-14 | Task 14a Done | Queued |
+| 14c | **Deepen CU-02 (e-commerce order support)** the same way | WS-14 | Task 14b Done | Queued |
+| 14d | **Adversarial review of 14b and 14c:** is each metric measurable from logs, an eval, or sampled review? Does each item have a counter-metric? Is anything claimed that is not sourced? Fix the page structure if it fails | WS-14 | Task 14c Done | Queued |
+| 14e | **Deepen wave 1**, one use case per task: CU-26, CU-28, CU-32, CU-30 (CU-30 carries legal and expert flags and stays *Needs review*) | WS-14 | Task 14d Done | Queued |
+| 14f | **Deepen wave 2**, one per task: CU-29, CU-31, CU-07, CU-15, CU-16, CU-17, CU-05, CU-04, CU-01 | WS-14 | Three wave 1 use cases Done | Queued |
+| 14g | **Deepen wave 3**, one per task, as *Needs review*, with instruction text withheld: CU-21, CU-20, CU-22, CU-23, CU-24, CU-25 | WS-14 | Task 14d Done and two wave 2 use cases Done | Queued |
+| 14h | **Wave 4:** for each use case with no usage evidence, look for evidence; keep it only if some is found or a judgment reason is written. Add use cases the evidence shows are missing | WS-14 | Task 14a Done | Queued |
+| 14i | **Link new patterns:** when a failure pattern is written that a use case needs, link it and remove the "none documented yet" note | WS-14 | A pattern is Done | Queued |
+| 14j | **Refresh market usage** every 20 runs: search for new usage studies, update section 1, and record what changed | WS-14 | Task 14a Done | Queued |
 
 ## Guide rules (workstream 11)
 - **Failure-first, not architecture-first.** The guide covers what to decide so the failures in this library don't happen. It does not re-teach general agent architecture; it links to the original sources for that.

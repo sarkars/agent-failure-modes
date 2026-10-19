@@ -1,4 +1,4 @@
-# Execution Plan: 3 to 5 Patterns plus One Content-Program Task per Run, Every 5 Hours
+# Execution Plan: 3 to 5 Patterns plus One Content-Program Task per Run, Every Hour
 
 > **What this is.** A prioritized queue of **432 patterns** to write, split into **91 runs** (the first 30 flagship patterns at 3 per run, the rest at up to 5), each with one task from the [content program](content-program.md), plus the procedure each scheduled run follows and the quality gate every pattern must pass. A scheduled task fires every 5 hours and works through the queue until it is empty. Each run is meant to be unattended: everything it needs is in this file.
 
@@ -10,9 +10,10 @@
 | Tiers | **Flagship**: the 30 patterns listed in content-program.md, held to the extra flagship items in the Definition of done. **Catalog**: all others. |
 | Quality gate | A pattern is **Done** only if it passes the Definition of done below. Anything that doesn't is marked **Needs review** and left for a person. |
 | Run mode | **write** (research, write the full pattern, update the catalog). Change to **plan-only** to have each run only research and record briefs in `roadmap/briefs/` without writing patterns. |
-| Cadence | Every 5 hours (set in the scheduled task, not in this file) |
+| Cadence | Every hour (set in the scheduled task, not in this file) |
 | Branch | `claude/zealous-ramanujan-u8zwfk` (commit and push; never open a pull request) |
 | Scope | Only files under `agents/by-capability/human-machine-interface/` and `agents/solutions/`. Do not edit the older patterns elsewhere in `agents/`. Anything that would change files outside this folder goes into `roadmap/merge-proposals.md` as a proposal for a person to approve. |
+| Repositories | Content lives here; the website lives in `sarkars/agent-kb-autopublish`. The run reads that repo and never edits it. Site changes become proposals. See [REPOSITORIES.md](../../../../REPOSITORIES.md) |
 | Spelling and examples | American English, and US examples (US cities, dollars, US laws and regulators) |
 
 ## How the order was set
@@ -21,19 +22,21 @@ Priority combines five things: **(1)** demand evidence (customers' top frustrati
 ## Run procedure
 Follow these steps on every run. Don't skip the checks: earlier work in this project had to be corrected for duplicating existing patterns and for a counting bug.
 
+0. **Check network access first (takes one minute).** Try to open one source site (for example `curl -sS -m 15 -o /dev/null -w "%{http_code}" https://www.consumerfinance.gov`; 000 or a proxy refusal means blocked). If sources cannot be opened, **write nothing from summaries**. Append a "Blocked: sources unreachable" entry to the Run log and `seo/log.md`, commit and push those two files, and stop. A run that cannot open sources may not mark any pattern Done. Search-result summaries do not count as opened sources.
 1. **Sync.** `git fetch origin claude/zealous-ramanujan-u8zwfk` and make sure the working tree is on that branch and up to date. Read this file, `_templates/hmi-pattern.md`, and the two flagship patterns (`goals/conversation-leadership/failures/answer-and-go-conversation.md` and `goals/channel-selection/failures/no-channel-switch-or-context-lost.md`) so style stays consistent.
 2. **Pick the work.** Take rows marked *In progress* first, then the next **3** rows marked *Queued* while any flagship row remains, otherwise the next **5**, in order. Mark them *In progress*. Don't touch rows marked *Needs review*. If fewer remain, take what's left. Never take a catalog row while a flagship row is still *Queued*. If no *Queued* or *In progress* rows remain, write "Queue complete" in the Run log, disable the schedule (see the Schedule section), and stop.
 3. **Write one pattern at a time, finishing each before starting the next:**
    1. **Re-check the library.** Search `agents/` (file names and keywords) for existing patterns on the topic and read the closest one to three. If it is already fully covered, mark the row *Skipped* with the link and take the next *Queued* row. If the row is **Extends**, write only the new human-interface angle and a fix, and link the existing pattern instead of restating it.
-   2. **Research properly.** Run at least three web searches (loading the search tools first if needed). **Open the source itself** with the fetch tool whenever it is reachable; don't rely on a search summary alone. For every claim you plan to use, note the source link, what it actually says, and whether you opened it or only read a summary of it. Find every number in the source text; if you can't, don't use the number. Prefer one strong, neutral source over several weak ones. Label vendor, secondary, and single-source evidence. If there is no good evidence, say so in the pattern. **Never invent statistics.**
+   2. **Research properly.** Run at least three web searches and count them: a pattern cannot be marked Done with fewer than three, and its Run log entry states the count. Run at least three web searches (loading the search tools first if needed). **Open the source itself** with the fetch tool whenever it is reachable; don't rely on a search summary alone. For every claim you plan to use, note the source link, what it actually says, and whether you opened it or only read a summary of it. Find every number in the source text; if you can't, don't use the number. Prefer one strong, neutral source over several weak ones. Label vendor, secondary, and single-source evidence. If there is no good evidence, say so in the pattern. **Never invent statistics.**
    3. **Draft the pattern** at the row's target file, using `_templates/hmi-pattern.md`: SEO comment block with real queries; H1 with the phrase people search plus the pattern name; header table with **Goal** and **Primary metric** matching the catalog row and the family README; before-and-after transcripts with US examples; why it happens; an evidence table with caveats; **the fix**; short tests; a metrics table (`Metric | Target | How to measure | Alert at`); related patterns; common questions; and a technical section when the fix needs engineering. For agent-type patterns, set the examples inside that agent's real workflow.
    4. **Flags.** Rows flagged **L** (legal) or **E** (expert) get a "Read this first" note near the top: design guidance, not legal, clinical, or other professional advice, and a review is needed before use. State any regulation only as far as you verified it.
    5. **Review pass.** Check the draft against every item in the **Definition of done** below. Then read the whole file once, top to bottom, as a skeptical reader who has not seen your notes. Fix what you find, and re-read what you changed.
    6. **Family README.** If the folder has no `README.md`, create one in the style of `goals/vulnerable-users/README.md` using the family goal from the table below. Otherwise add the new pattern to its table.
    7. **Record the result.** If every item in the Definition of done is true, change the catalog row's last cell to the word `**Written**` followed by a colon and a markdown link to the new pattern (path relative to the roadmap folder), and set the queue row to *Done* with the run number. If any item still fails after a reasonable effort, set the queue row to *Needs review* with a one-line reason, leave the catalog row unchanged, and keep the draft file.
    8. **Verify and commit.** Run `python3 -I agents/by-capability/human-machine-interface/roadmap/tools/rebuild_summary.py` then `python3 -I agents/by-capability/human-machine-interface/roadmap/tools/check_links.py` and `python3 -I agents/by-capability/human-machine-interface/roadmap/tools/check_site_compat.py`, and `python3 -I agents/by-capability/human-machine-interface/roadmap/tools/check_public_urls.py`, and `python3 -I agents/by-capability/human-machine-interface/roadmap/tools/check_solutions.py`, and fix every problem they report. Commit this one pattern with a message like `HMI run N: <id> <name>` plus the attribution lines from the session, then push with `git push -u origin claude/zealous-ramanujan-u8zwfk`. If the push fails on a network error, retry up to 4 times (waits of 2, 4, 8, 16 seconds). If it still fails, record it in the Run log and stop; the next run continues.
-4. **Content-program task.** After the patterns, do the first ready task in the Task queue of [content-program.md](content-program.md), under the rules there, then commit and push it on its own. Skip it if no task is ready.
-5. **Log.** Append an entry to the Run log: run number, UTC date and time, and for each pattern the ID, the result (Done, Needs review, or Skipped), how many sources you opened vs. read only through summaries, any claims left unverified, and what the review pass changed. Add anything you could not check or any correction to earlier files.
+4. **Daily SEO review.** If `seo/log.md` has no entry for today's UTC date, do the review in [seo/README.md](seo/README.md) first: read the Search Console search terms (Chrome if its tools are available, otherwise an export in `seo/inbox/`, otherwise log "Blocked" and run the public checks), act on the opportunities inside the allowed scope, log it, and commit and push it on its own. Never invent search data.
+5. **Content-program task.** After the patterns, do the first ready task in the Task queue of [content-program.md](content-program.md), under the rules there, then commit and push it on its own. Skip it if no task is ready.
+6. **Log.** Append an entry to the Run log: run number, UTC date and time, and for each pattern the ID, the result (Done, Needs review, or Skipped), how many sources you opened vs. read only through summaries, any claims left unverified, and what the review pass changed. Add anything you could not check or any correction to earlier files.
 
 ## Definition of done (quality gate)
 A pattern is *Done* only if **every** item is true.
@@ -135,7 +138,7 @@ Create a folder's README on its first pattern. Folders that already have a READM
 | `goals/outbound-messaging-agents` | Outbound texts and calls respect consent, quiet hours, and suppression lists. |
 
 ## Run schedule
-Run N covers queue orders as shown. At one run every 5 hours, 91 runs take about 450 hours between the first and last start, roughly 18.8 days. A run that marks a pattern *Needs review* doesn't delay the queue, but those patterns need a person.
+Run N covers queue orders as shown. At one run every hour, 91 runs take about 91 hours between the first and last start, roughly 3.8 days. A run that marks a pattern *Needs review* doesn't delay the queue, but those patterns need a person.
 
 | Run | Orders | Themes |
 |---|---|---|
@@ -236,15 +239,15 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 
 | # | ID | Pattern | Library | Flags | Target file | Status | Run |
 |---|---|---|---|---|---|---|---|
-| 1 | HU-01 | 'Talk to a human' ignored or looped | Extends | - | `goals/human-handoff/failures/talk-to-a-human-ignored-or-looped.md` | Queued |  |
-| 2 | HU-02 | Escalates too early, or too late | Extends | - | `goals/human-handoff/failures/escalates-too-early-or-too-late.md` | Queued |  |
-| 3 | HU-03 | Cold transfer | Extends | - | `goals/human-handoff/failures/cold-transfer.md` | Queued |  |
-| 4 | CP-14 | Re-asks for known information | Extends | V | `goals/embedded-copilots/failures/re-asks-for-known-information.md` | Queued |  |
-| 5 | CP-15 | Forces a fresh login | New | E | `goals/embedded-copilots/failures/forces-a-fresh-login.md` | Queued |  |
-| 6 | CP-20 | Generic first response | New | R | `goals/embedded-copilots/failures/generic-first-response.md` | Queued |  |
-| 7 | CP-08 | Missing the obvious intent | Extends | - | `goals/embedded-copilots/failures/missing-the-obvious-intent.md` | Queued |  |
-| 8 | CP-12 | Doesn't say what it can do | New | R | `goals/embedded-copilots/failures/doesn-t-say-what-it-can-do.md` | Queued |  |
-| 9 | XA-01 | Dead-end 'I don't understand' replies | Extends | V, R | `goals/conversation-leadership/failures/dead-end-i-don-t-understand-replies.md` | Queued |  |
+| 1 | HU-01 | 'Talk to a human' ignored or looped | Extends | - | `goals/human-handoff/failures/talk-to-a-human-ignored-or-looped.md` | Done | 10 (manual) |
+| 2 | HU-02 | Escalates too early, or too late | Extends | - | `goals/human-handoff/failures/escalates-too-early-or-too-late.md` | Done | 10 (manual) |
+| 3 | HU-03 | Cold transfer | Extends | - | `goals/human-handoff/failures/cold-transfer.md` | Done | 10 (manual) |
+| 4 | CP-14 | Re-asks for known information | Extends | V | `goals/embedded-copilots/failures/re-asks-for-known-information.md` | Done | 11 |
+| 5 | CP-15 | Forces a fresh login | New | E | `goals/embedded-copilots/failures/forces-a-fresh-login.md` | Done | 11 |
+| 6 | CP-20 | Generic first response | New | R | `goals/embedded-copilots/failures/generic-first-response.md` | Done | 11 |
+| 7 | CP-08 | Missing the obvious intent | Extends | - | `goals/embedded-copilots/failures/missing-the-obvious-intent.md` | Done | 12 |
+| 8 | CP-12 | Doesn't say what it can do | New | R | `goals/embedded-copilots/failures/doesn-t-say-what-it-can-do.md` | Done | 12 |
+| 9 | XA-01 | Dead-end 'I don't understand' replies | Extends | V, R | `goals/conversation-leadership/failures/dead-end-i-don-t-understand-replies.md` | Done | 12 |
 | 10 | CP-01 | Help that becomes a sales pitch | New | V, R, L | `goals/embedded-copilots/failures/help-that-becomes-a-sales-pitch.md` | Queued |  |
 | 11 | CP-06 | Obstructing cancellation, downgrade, or refund | Extends | V, L | `goals/embedded-copilots/failures/obstructing-cancellation-downgrade-or-refund.md` | Queued |  |
 | 12 | CP-03 | Answers withheld behind an upgrade, unsaid | New | L | `goals/embedded-copilots/failures/answers-withheld-behind-an-upgrade-unsaid.md` | Queued |  |
@@ -672,6 +675,64 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 ## Run log
 *(Each run appends an entry here.)*
 
+### Run 1: 2026-10-18 19:16 UTC (first scheduled run): Blocked
+- **Patterns:** none written. HU-01, HU-02 and HU-03 stay *Queued*.
+- **Why:** the session's network policy refuses every source host tried: `files.consumerfinance.gov`, `www.consumerfinance.gov`, `www.gartner.com`, `www.ftc.gov`, `www.lawcommentary.com`, `en.wikipedia.org` and `www.techradar.com` (proxy returned 403, `connect_rejected`). Web search works but returns only summaries, which the Definition of done does not accept as opened sources.
+- **Read through summaries only, not used in any file:** the CFPB 2023 chatbot issue spotlight (doom loops); a Gartner July 2024 survey (64% prefer no AI in customer service; 53% would consider switching); reports of a proposed California bill on human customer service. None was opened, so none was written down as a fact.
+- **Needs from a person:** allow outbound access to source sites in the environment's Network access settings (a broader level, or add the hosts under Allowed domains). Until then each run stops at step 0.
+- **Content-program task and SEO review:** not done. The SEO review needs Search Console, which needs Chrome or an export; neither is available.
+
+### Runs 2 to 5: 2026-10-18 20:16 to 23:16 UTC (hourly): Blocked
+- *(Repeat blocked runs update this one entry instead of adding a new one each hour.)*
+- Step 0 failed again: `www.consumerfinance.gov` is still unreachable (no HTTP response through the proxy). Nothing written; queue unchanged (checked `consumerfinance.gov`, `gartner.com`, `ftc.gov`; all unreachable at 21:17 UTC). Same fix needed as run 1: allow source sites in the environment's Network access settings.
+
+### Run 10 (manual, run now): 2026-10-19 03:55 UTC onward
+- **HU-01 'Talk to a human' ignored or looped: Done.** File: `goals/human-handoff/failures/talk-to-a-human-ignored-or-looped.md`, plus a new family README, `tests/talk-to-a-human-ignored-or-looped.md` (12 conversations, results "Not yet run") and `incidents/cfpb-bank-chatbot-doom-loops.md`.
+- **Sources opened (3 of 5 cited):** the CFPB report PDF (full text read: sections 1, 3.1.3, and 5) and the CFPB landing page. **Read through a search summary only:** the Gartner July 2024 press release (page returned 403) and the 64% / 53% figures, shown in the pattern as unverified. **Not used:** a "68% abandon" claim (traces to a blog), the HBS anxiety paper (403, cited by the CFPB), a California bill on human customer service (403 on the statute site; status unverified), a Klarna reversal (only summaries; Bloomberg original not opened).
+- **Claims left unverified:** the 37% of US population figure (CFPB's own estimate from a source not opened); the Gartner figures.
+- **Review pass changed:** softened the family README's claim about customers' top complaint; marked the "why it happens" causes as our reading; added the incident link to the Maturity row.
+- **Incident:** the site's incidents folder has no similar page; new page written in the site's format as a draft for a person to copy.
+- **HU-02 Escalates too early, or too late: Done.** File: `goals/human-handoff/failures/escalates-too-early-or-too-late.md`, plus `tests/escalates-too-early-or-too-late.md` (12 conversations, "Not yet run"). Incident: links the CFPB page for the too-late side; states "No public incident found" for the too-early side with the searches run.
+- **Sources opened (2):** Liu et al., *Time to Transfer*, AAAI-21 (full text; the early/late trade-off quote, the labeling rules, and dataset sizes were checked against the text) and the CFPB report. **Read through search summaries only, not used as facts:** vendor blogs on containment rate (a deployment example of 72.6% containment vs 35.2% AI-resolved was not opened), the EMNLP 2022 handoff paper (downloaded but not read), a practitioner write-up on lateness.
+- **Claims left unverified:** none stated as fact beyond the opened sources.
+- **Review pass changed:** marked causes as our reading; replaced a vendor figure with the opened paper's own statement of the trade-off.
+- **HU-03 Cold transfer: Done.** File: `goals/human-handoff/failures/cold-transfer.md`, plus `tests/cold-transfer.md` (12 scenarios, "Not yet run"). Incident: "No public incident found" with the searches run.
+- **Sources opened (2 articles):** CMSWire's report on Five9's 2026 CX report and the Liveops blog post on its 2026 Resolution Gap Report. **Original reports not opened.** Both are vendor surveys; the pattern says so and uses them only as evidence the complaint is common. **Not used:** a Zendesk figure and a UJET agent survey (seen only in search summaries); cold/warm transfer definitions from vendor glossaries (summaries).
+- **Claims left unverified:** the original Five9 and Liveops question wording.
+- **Review pass changed:** added the "vendor survey of perceptions" caveat to each row, marked causes as our reading, and kept the primary metric aligned with the channel-selection family (re-ask under 5%).
+- **Part B (daily SEO review):** Blocked: no Chrome tools and no export in `seo/inbox/`; logged in `seo/log.md`.
+
+### Run 11 (scheduled): 2026-10-19 04:17 UTC onward
+- **CP-14 Re-asks for known information: Done.** File: `goals/embedded-copilots/failures/re-asks-for-known-information.md`, a new family README, and `tests/re-asks-for-known-information.md` (12 scenarios, "Not yet run"). Incident: "No public incident found" with the searches run.
+- **Sources opened (3):** the B&T article on Salesforce's connected-customer report (ANZ edition), the Salesforce 2019 news story, and the Digital Applied agent-clarification guide. **Not opened:** the Salesforce reports themselves, ServiceNow's conversation-design page (403).
+- **Claims left unverified:** the catalog row's 56% global figure could not be verified and was not used; only the 66% ANZ figure from the B&T article is shown, with its caveats. The edition year of that article is unknown.
+- **Review pass changed:** removed a link to a pattern that did not exist yet and replaced it with plain text; added a note that the global repeat figure was not verified.
+- **CP-15 Forces a fresh login: Done, flagged E (expert review needed).** File: `goals/embedded-copilots/failures/forces-a-fresh-login.md` with a "Read this first" security note, plus `tests/forces-a-fresh-login.md` (12 scenarios, "Not yet run"). Incident: "No public incident found" with the searches run.
+- **Sources opened (2):** NIST SP 800-63B-4 AAL page (the reauthentication timeout values were checked against the text) and the Open.cx widget documentation. **Not used:** secondary pages with older NIST values (12 hours / 30 minutes), forum threads.
+- **Claims left unverified:** how often the failure occurs (no study found). The risk table and policy are design guidance for a security team to set.
+- **Review pass changed:** removed the pre-existing planned-link text from CP-14 now that this page exists; added the NIST caveat that the values are a federal benchmark, not a rule for every product.
+- **CP-20 Generic first response: Done.** File: `goals/embedded-copilots/failures/generic-first-response.md`, plus `tests/generic-first-response.md` (12 scenarios, "Not yet run"). Incident: "No public incident found" with the searches run.
+- **Sources opened (1):** the IceBreaker preprint (arXiv 2604.18375; the ~20% and the per-mille lifts were checked against the text). **Not opened or not usable:** Google's welcome-message guidance (the page redirected to a landing page; only a search summary), vendor blogs with engagement claims (one 40% figure not traceable to a study).
+- **Claims left unverified:** none stated as fact beyond the opened paper; the paper is about suggested starters, which the page says.
+- **Review pass changed:** replaced a placeholder link with the roadmap link; added the caveat that the preprint is not about support greetings.
+- **Part C (content-program task):** not done in this run. The first ready task is 13 (redo the gap analysis); it stays Queued for the next run.
+
+### Run 12 (scheduled): 2026-10-19 05:16 UTC onward
+- **CP-08 Missing the obvious intent: Done.** File: `goals/embedded-copilots/failures/missing-the-obvious-intent.md`, plus `tests/missing-the-obvious-intent.md` (12 scenarios, "Not yet run"). Incident: "No public incident found" with the searches run.
+- **Searches run: 3** (intent-detection benchmarks; clarify-versus-answer research; chatbot misunderstanding surveys). **Sources opened (3):** the Verint 2022 press release, and the abstracts of Zhang et al. (arXiv 2410.13788) and Su and Cardie (arXiv 2605.25284). **Search summaries only, not used as facts:** BANKING77 benchmark figures; a Five9 "46% abandon because the bot misunderstood" figure (the article I opened did not contain it); Cyara and Tidio survey figures.
+- **Claims left unverified:** how often plain requests are misread (no study found).
+- **Review pass changed:** added the note that the two research rows concern truly ambiguous requests, and a "don't over-correct" line on keeping clarification for those.
+- **CP-12 Doesn't say what it can do: Done.** File: `goals/embedded-copilots/failures/doesn-t-say-what-it-can-do.md`, plus `tests/doesn-t-say-what-it-can-do.md` (12 scenarios, "Not yet run"). Incident: "No public incident found" with the searches run.
+- **Searches run: 3** (discoverability and suggested prompts; the Microsoft human-AI guidelines; capability mental models and blank-box research). **Sources opened (3):** NN/g's March 2024 study of new AI users, Amplitude's blog on its chat-box tests, and the abstract of arXiv 2402.08030. **Search summaries only, not used as facts:** the Microsoft human-AI guideline wording (the page I opened did not contain it), the VU capability-communication study, practitioner blogs on onboarding levels.
+- **Claims left unverified:** the Amplitude test design and statistics (company's own claims, stated as such).
+- **Review pass changed:** added a caveat that one academic study found prompt hints alone made little difference; kept the 2x and retention figures labelled as the company's account.
+- **XA-01 Dead-end 'I don't understand' replies: Done.** File: `goals/conversation-leadership/failures/dead-end-i-don-t-understand-replies.md`, plus `tests/dead-end-i-don-t-understand-replies.md` (12 scenarios, "Not yet run"). Incident: "No public incident found" with the searches run.
+- **Searches run: 3** (fallback design guidance; repair strategies; banking-chatbot abandonment). **Sources opened (4):** Li et al. CHI 2020 (full text; the 1,685 users, 12 NP types, and three-consecutive-NP sign were checked against the text), Yang et al. CUI 2021 (abstract), Ashktorab et al. CHI 2019 (abstract), and the Mensch und Computer 2024 short paper (abstract). **Not opened, not used:** the 2024 IJHCI abandonment study (1,373 users) and the roadmap row's vendor poll (25.9%); practitioner fallback blogs (summaries).
+- **Claims left unverified:** effect sizes of the MuC 2024 study.
+- **Review pass changed:** removed the 1,373-user figure and the vendor poll figure, which I had not opened; added the caveat that "three" comes from an observational study.
+- **Part B (daily SEO review):** an entry for today already exists in `seo/log.md`; no Search Console data available.
+- **Part C (content-program task):** not done in this run; task 13 (redo the gap analysis) stays Queued.
+
 ## Backlog (not scheduled)
 Ideas from earlier lists that were never chosen. They stay out of the queue until someone adds them.
 
@@ -680,12 +741,11 @@ AI-written help content in knowledge bases · agents using other agents' tools (
 ## Schedule
 | Item | Value |
 |---|---|
-| Status | **Paused** on 2026-10-14 until the user's credits reset. Runs resume only when the task is re-enabled. No queue items have been started. |
-| Scheduled task name | `HMI roadmap: patterns and content program every 5 hours` |
+| Status | **Active** from 2026-10-18 (credits reset). Merged to main in PR #4. Runs append to the Run log below. |
+| Scheduled task name | `HMI roadmap: patterns and content program every hour` |
 | Task id | `trig_01J1rwvuKcpXBGmKkkRfihF7` |
 | Created | 2026-10-14 19:05 UTC |
-| Cron (UTC) | `5 */5 * * *`, so runs start at minute 5 of hours 0, 5, 10, 15, and 20 |
-| First run | 2026-10-14 20:05 UTC |
-| Gap at midnight | Hours 20 and 0 are only 4 hours apart, because 24 isn't divisible by 5. All other gaps are 5 hours. |
+| Cron (UTC) | `16 * * * *`, so runs start at minute 16 of every hour (changed from every 5 hours on 2026-10-18) |
+| First run | 2026-10-18 19:16 UTC (hourly schedule) |
 | Where it fires | Into the same session that created it, so the run has the repository checkout and tools |
 | To pause or stop | Ask the session to disable the task, or call the scheduled-task update tool with `enabled=false` for the id above. The queue keeps its place, so re-enabling resumes where it stopped. |

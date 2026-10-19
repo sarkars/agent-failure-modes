@@ -12,11 +12,13 @@ Shared metrics the patterns below report against. Targets are starting points to
 | Confirmed-resolution rate vs. containment | Gap under 10 points | [answer and go conversation](failures/answer-and-go-conversation.md) |
 | Silent-exit rate | Trend down from baseline | answer and go conversation |
 | Forward-move coverage | Over 90% of non-final turns | answer and go conversation |
+| Conversations with 3+ consecutive no-progress turns | Under 2% | [dead-end replies](failures/dead-end-i-don-t-understand-replies.md) |
 
 ## Patterns
 | Pattern | One line |
 |---|---|
 | Answer-and-go conversation | The bot answers, then stops: no next step, no closure |
+| Dead-end "I don't understand" replies | The bot says it didn't understand and gives no way forward |
 
 ## Planned (not yet written)
 - No closure confirmation

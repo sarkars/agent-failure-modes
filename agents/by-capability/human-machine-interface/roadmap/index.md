@@ -32,19 +32,19 @@
 | CP-05 | Paid content blended into answers | [embedded-copilots.md](embedded-copilots.md) | New | Governance | No |
 | CP-06 | Obstructing cancellation, downgrade, or refund | [embedded-copilots.md](embedded-copilots.md) | Extends | Governance | No |
 | CP-07 | Helpfulness theatre | [embedded-copilots.md](embedded-copilots.md) | Extends | Governance | No |
-| CP-08 | Missing the obvious intent | [embedded-copilots.md](embedded-copilots.md) | Extends | Model | Partly |
+| CP-08 | Missing the obvious intent | [embedded-copilots.md](embedded-copilots.md) | Written | Model | Partly |
 | CP-09 | Over-complicating simple tasks | [embedded-copilots.md](embedded-copilots.md) | Extends | Model | Partly |
 | CP-10 | Irrelevant or already-answered clarifying questions | [embedded-copilots.md](embedded-copilots.md) | Extends | Model | Partly |
 | CP-11 | Keyword-matched documentation instead of an answer | [embedded-copilots.md](embedded-copilots.md) | Extends | Business context | Partly |
-| CP-12 | Doesn't say what it can do | [embedded-copilots.md](embedded-copilots.md) | New | Business context | No |
+| CP-12 | Doesn't say what it can do | [embedded-copilots.md](embedded-copilots.md) | Written | Business context | No |
 | CP-13 | Ignores the page, selection, and form state | [embedded-copilots.md](embedded-copilots.md) | New | Business context | No |
-| CP-14 | Re-asks for known information | [embedded-copilots.md](embedded-copilots.md) | Extends | Business context | No |
-| CP-15 | Forces a fresh login | [embedded-copilots.md](embedded-copilots.md) | New | Business context | No |
+| CP-14 | Re-asks for known information | [embedded-copilots.md](embedded-copilots.md) | Written | Business context | No |
+| CP-15 | Forces a fresh login | [embedded-copilots.md](embedded-copilots.md) | Written | Business context | No |
 | CP-16 | Ignores role, plan, locale, and device | [embedded-copilots.md](embedded-copilots.md) | Extends | Business context | No |
 | CP-17 | Ignores recent activity and history | [embedded-copilots.md](embedded-copilots.md) | Extends | Business context | No |
 | CP-18 | Stale or wrong-user context used with confidence | [embedded-copilots.md](embedded-copilots.md) | Covered | Business context | No |
 | CP-19 | Context lost across a multi-session task | [embedded-copilots.md](embedded-copilots.md) | Extends | Business context | No |
-| CP-20 | Generic first response | [embedded-copilots.md](embedded-copilots.md) | New | Business context | No |
+| CP-20 | Generic first response | [embedded-copilots.md](embedded-copilots.md) | Written | Business context | No |
 | CP-21 | Greeting-only first turn | [embedded-copilots.md](embedded-copilots.md) | New | Business context | No |
 | CP-22 | No likely-next-action suggestions | [embedded-copilots.md](embedded-copilots.md) | New | Business context | No |
 | CP-23 | Boilerplate steps that don't match the user's setup | [embedded-copilots.md](embedded-copilots.md) | Extends | Business context | Partly |
@@ -356,7 +356,7 @@
 | LA-02 | Privileged material sent to third-party models | [agent-types.md](agent-types.md) | Covered | Governance | No |
 | MA-01 | Agents contradict each other | [agent-types.md](agent-types.md) | Extends | Reliability | No |
 | MA-02 | Internal coordination leaks into replies | [agent-types.md](agent-types.md) | Extends | Reliability | No |
-| XA-01 | Dead-end 'I don't understand' replies | [agent-types.md](agent-types.md) | Extends | Business context | No |
+| XA-01 | Dead-end 'I don't understand' replies | [agent-types.md](agent-types.md) | Written | Business context | No |
 | XA-02 | Conversation-quality measurement gaps | [agent-types.md](agent-types.md) | Extends | Reliability | No |
 | XA-03 | No way to report bad behaviour | [agent-types.md](agent-types.md) | New | Business context | No |
 | DM-01 | Reference resolution failures | [conversation-design.md](conversation-design.md) | New | Model | Partly |
@@ -433,9 +433,9 @@
 | MI-06 | Conflicting inputs resolved silently | [interface-and-persona.md](interface-and-persona.md) | New | Model | Partly |
 | MI-07 | Images of IDs and documents kept without need | [interface-and-persona.md](interface-and-persona.md) | Extends | Governance | No |
 | MI-08 | No warning about input limits | [interface-and-persona.md](interface-and-persona.md) | New | Business context | No |
-| HU-01 | 'Talk to a human' ignored or looped | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Extends | Business context | No |
-| HU-02 | Escalates too early, or too late | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Extends | Business context | Partly |
-| HU-03 | Cold transfer | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Extends | Business context | No |
+| HU-01 | 'Talk to a human' ignored or looped | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Written | Business context | No |
+| HU-02 | Escalates too early, or too late | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Written | Business context | Partly |
+| HU-03 | Cold transfer | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Written | Business context | No |
 | HU-04 | Handoff summary is wrong or misleading | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | New | Model | Partly |
 | HU-05 | Humans can't see what the bot said or promised | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | New | Business context | No |
 | HU-06 | Bot keeps replying after a person joins | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | New | Reliability | No |
