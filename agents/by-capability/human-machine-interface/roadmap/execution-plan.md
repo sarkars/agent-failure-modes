@@ -11,7 +11,7 @@
 | Quality gate | A pattern is **Done** only if it passes the Definition of done below. Anything that doesn't is marked **Needs review** and left for a person. |
 | Run mode | **write** (research, write the full pattern, update the catalog). Change to **plan-only** to have each run only research and record briefs in `roadmap/briefs/` without writing patterns. |
 | Cadence | Every hour (set in the scheduled task, not in this file) |
-| Branch | `claude/zealous-ramanujan-u8zwfk` (commit and push; never open a pull request) |
+| Branch | `claude/zealous-ramanujan-u8zwfk` (commit and push). At the end of each run a pull request into `main` is opened and merged, as set out in [deploy.md](deploy.md) |
 | Scope | Only files under `agents/by-capability/human-machine-interface/` and `agents/solutions/`. Do not edit the older patterns elsewhere in `agents/`. Anything that would change files outside this folder goes into `roadmap/merge-proposals.md` as a proposal for a person to approve. |
 | Repositories | Content lives here; the website lives in `sarkars/agent-kb-autopublish`. The run reads that repo and never edits it. Site changes become proposals. See [REPOSITORIES.md](../../../../REPOSITORIES.md) |
 | Spelling and examples | American English, and US examples (US cities, dollars, US laws and regulators) |
@@ -37,6 +37,7 @@ Follow these steps on every run. Don't skip the checks: earlier work in this pro
 4. **Daily SEO review.** If `seo/log.md` has no entry for today's UTC date, do the review in [seo/README.md](seo/README.md) first: read the Search Console search terms (Chrome if its tools are available, otherwise an export in `seo/inbox/`, otherwise log "Blocked" and run the public checks), act on the opportunities inside the allowed scope, log it, and commit and push it on its own. Never invent search data.
 5. **Content-program task.** After the patterns, do the first ready task in the Task queue of [content-program.md](content-program.md), under the rules there, then commit and push it on its own. Skip it if no task is ready.
 6. **Log.** Append an entry to the Run log: run number, UTC date and time, and for each pattern the ID, the result (Done, Needs review, or Skipped), how many sources you opened vs. read only through summaries, any claims left unverified, and what the review pass changed. Add anything you could not check or any correction to earlier files.
+7. **Deploy.** Follow [deploy.md](deploy.md): merge the branch into `main`, reset the branch to `main`, publish the new and changed pages to the website repo, verify the build and the live URLs, and add a Deploy line to the Run log entry. If a run wrote nothing new, skip this step. If any check in deploy.md fails, stop and record why.
 
 ## Definition of done (quality gate)
 A pattern is *Done* only if **every** item is true.
