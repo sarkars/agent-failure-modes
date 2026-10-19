@@ -240,7 +240,7 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | # | ID | Pattern | Library | Flags | Target file | Status | Run |
 |---|---|---|---|---|---|---|---|
 | 1 | HU-01 | 'Talk to a human' ignored or looped | Extends | - | `goals/human-handoff/failures/talk-to-a-human-ignored-or-looped.md` | Done | 10 (manual) |
-| 2 | HU-02 | Escalates too early, or too late | Extends | - | `goals/human-handoff/failures/escalates-too-early-or-too-late.md` | Queued |  |
+| 2 | HU-02 | Escalates too early, or too late | Extends | - | `goals/human-handoff/failures/escalates-too-early-or-too-late.md` | In progress | 10 (manual) |
 | 3 | HU-03 | Cold transfer | Extends | - | `goals/human-handoff/failures/cold-transfer.md` | Queued |  |
 | 4 | CP-14 | Re-asks for known information | Extends | V | `goals/embedded-copilots/failures/re-asks-for-known-information.md` | Queued |  |
 | 5 | CP-15 | Forces a fresh login | New | E | `goals/embedded-copilots/failures/forces-a-fresh-login.md` | Queued |  |
@@ -686,7 +686,7 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 - *(Repeat blocked runs update this one entry instead of adding a new one each hour.)*
 - Step 0 failed again: `www.consumerfinance.gov` is still unreachable (no HTTP response through the proxy). Nothing written; queue unchanged (checked `consumerfinance.gov`, `gartner.com`, `ftc.gov`; all unreachable at 21:17 UTC). Same fix needed as run 1: allow source sites in the environment's Network access settings.
 
-### Run 10 (manual, run now): 2026-10-19 03:55 to about 04:30 UTC
+### Run 10 (manual, run now): 2026-10-19 03:55 UTC onward
 - **HU-01 'Talk to a human' ignored or looped: Done.** File: `goals/human-handoff/failures/talk-to-a-human-ignored-or-looped.md`, plus a new family README, `tests/talk-to-a-human-ignored-or-looped.md` (12 conversations, results "Not yet run") and `incidents/cfpb-bank-chatbot-doom-loops.md`.
 - **Sources opened (3 of 5 cited):** the CFPB report PDF (full text read: sections 1, 3.1.3, and 5) and the CFPB landing page. **Read through a search summary only:** the Gartner July 2024 press release (page returned 403) and the 64% / 53% figures, shown in the pattern as unverified. **Not used:** a "68% abandon" claim (traces to a blog), the HBS anxiety paper (403, cited by the CFPB), a California bill on human customer service (403 on the statute site; status unverified), a Klarna reversal (only summaries; Bloomberg original not opened).
 - **Claims left unverified:** the 37% of US population figure (CFPB's own estimate from a source not opened); the Gartner figures.
