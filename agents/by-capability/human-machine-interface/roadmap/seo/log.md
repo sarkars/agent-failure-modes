@@ -7,3 +7,6 @@ No Search Console access today: no Chrome tools in the session and no export in 
 
 ## 2026-10-18 (UTC), run 2
 Still blocked: no Search Console access (no Chrome tools, empty `inbox/`) and no external network. Nothing recorded.
+
+## 2026-10-19 (UTC), manual run 10
+Blocked for Search Console: no Chrome tools in the session and `inbox/` is empty. Network access to public sites now works, so the public checks can run; they were not run in this pass. No search data recorded.

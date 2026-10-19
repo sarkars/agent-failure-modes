@@ -435,7 +435,7 @@
 | MI-08 | No warning about input limits | [interface-and-persona.md](interface-and-persona.md) | New | Business context | No |
 | HU-01 | 'Talk to a human' ignored or looped | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Written | Business context | No |
 | HU-02 | Escalates too early, or too late | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Written | Business context | Partly |
-| HU-03 | Cold transfer | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Extends | Business context | No |
+| HU-03 | Cold transfer | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Written | Business context | No |
 | HU-04 | Handoff summary is wrong or misleading | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | New | Model | Partly |
 | HU-05 | Humans can't see what the bot said or promised | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | New | Business context | No |
 | HU-06 | Bot keeps replying after a person joins | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | New | Reliability | No |

@@ -241,7 +241,7 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 |---|---|---|---|---|---|---|---|
 | 1 | HU-01 | 'Talk to a human' ignored or looped | Extends | - | `goals/human-handoff/failures/talk-to-a-human-ignored-or-looped.md` | Done | 10 (manual) |
 | 2 | HU-02 | Escalates too early, or too late | Extends | - | `goals/human-handoff/failures/escalates-too-early-or-too-late.md` | Done | 10 (manual) |
-| 3 | HU-03 | Cold transfer | Extends | - | `goals/human-handoff/failures/cold-transfer.md` | In progress | 10 (manual) |
+| 3 | HU-03 | Cold transfer | Extends | - | `goals/human-handoff/failures/cold-transfer.md` | Done | 10 (manual) |
 | 4 | CP-14 | Re-asks for known information | Extends | V | `goals/embedded-copilots/failures/re-asks-for-known-information.md` | Queued |  |
 | 5 | CP-15 | Forces a fresh login | New | E | `goals/embedded-copilots/failures/forces-a-fresh-login.md` | Queued |  |
 | 6 | CP-20 | Generic first response | New | R | `goals/embedded-copilots/failures/generic-first-response.md` | Queued |  |
@@ -696,6 +696,11 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 - **Sources opened (2):** Liu et al., *Time to Transfer*, AAAI-21 (full text; the early/late trade-off quote, the labeling rules, and dataset sizes were checked against the text) and the CFPB report. **Read through search summaries only, not used as facts:** vendor blogs on containment rate (a deployment example of 72.6% containment vs 35.2% AI-resolved was not opened), the EMNLP 2022 handoff paper (downloaded but not read), a practitioner write-up on lateness.
 - **Claims left unverified:** none stated as fact beyond the opened sources.
 - **Review pass changed:** marked causes as our reading; replaced a vendor figure with the opened paper's own statement of the trade-off.
+- **HU-03 Cold transfer: Done.** File: `goals/human-handoff/failures/cold-transfer.md`, plus `tests/cold-transfer.md` (12 scenarios, "Not yet run"). Incident: "No public incident found" with the searches run.
+- **Sources opened (2 articles):** CMSWire's report on Five9's 2026 CX report and the Liveops blog post on its 2026 Resolution Gap Report. **Original reports not opened.** Both are vendor surveys; the pattern says so and uses them only as evidence the complaint is common. **Not used:** a Zendesk figure and a UJET agent survey (seen only in search summaries); cold/warm transfer definitions from vendor glossaries (summaries).
+- **Claims left unverified:** the original Five9 and Liveops question wording.
+- **Review pass changed:** added the "vendor survey of perceptions" caveat to each row, marked causes as our reading, and kept the primary metric aligned with the channel-selection family (re-ask under 5%).
+- **Part B (daily SEO review):** Blocked: no Chrome tools and no export in `seo/inbox/`; logged in `seo/log.md`.
 
 ## Backlog (not scheduled)
 Ideas from earlier lists that were never chosen. They stay out of the queue until someone adds them.
