@@ -93,7 +93,7 @@ Status values: *Queued*, *In progress*, *Done*, *Blocked*, *Needs review*. A run
 | 2 | Write `incidents/README.md`: the incident-page format and the source rules | WS-02 | None | Done |
 | 3 | Write `data/README.md` and `data/failure-report-template.md`: consent, anonymization, what never to submit | WS-07 | None | Done |
 | 4 | Add Maturity and "Will a better model fix this?" rows to the pattern template | WS-01, WS-04 | None | Done |
-| 13 | Redo `roadmap/gap-analysis.md` properly: open every source it lists, correct any claim the source doesn't support, mark each row opened or summary-only, and add a second search for each "nothing found" claim. Decide whether a guide (WS-11) is still worth writing | WS-11, WS-12 | None | Queued |
+| 13 | Redo `roadmap/gap-analysis.md` properly: open every source it lists, correct any claim the source doesn't support, mark each row opened or summary-only, and add a second search for each "nothing found" claim. Decide whether a guide (WS-11) is still worth writing | WS-11, WS-12 | None | Done (run 14); see the second-pass status line in the file |
 | 13b | Per-agent-type gap analysis for the six most-built agent types: customer service, coding, research and data, workflow automation, IT and security, and copilots. For each, open the main failure and benchmark references and record what they cover, what they leave out, and what the library adds | WS-12 | Task 13 Done | Queued |
 | 13c | Decision record: build the L1 base agent on an existing harness (tau2-bench, the OpenAI cookbook loop) or from scratch, with reasons from opened sources | WS-12 | Task 13b Done | Queued |
 | 13d | L0 base spec from the Done flagships' fixes | WS-12 | 10 flagships Done | Queued |

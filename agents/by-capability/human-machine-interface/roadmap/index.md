@@ -62,7 +62,7 @@
 | RT-12 | Streaming that rewrites itself | [response-time.md](response-time.md) | Extends | Reliability | No |
 | RT-13 | Guardrail and hop latency | [response-time.md](response-time.md) | Covered | Reliability | No |
 | RT-14 | Fast replies, slow resolution | [response-time.md](response-time.md) | Extends | Business context | No |
-| RS-01 | Answer buried | [response-structure-and-length.md](response-structure-and-length.md) | New | Model | Partly |
+| RS-01 | Answer buried | [response-structure-and-length.md](response-structure-and-length.md) | Written | Model | Partly |
 | RS-02 | Wall of text | [response-structure-and-length.md](response-structure-and-length.md) | Extends | Model | Partly |
 | RS-03 | Over-long replies | [response-structure-and-length.md](response-structure-and-length.md) | Extends | Model | Partly |
 | RS-04 | Over-short replies | [response-structure-and-length.md](response-structure-and-length.md) | Extends | Model | Partly |
@@ -75,7 +75,7 @@
 | RS-11 | Formatting artifacts | [response-structure-and-length.md](response-structure-and-length.md) | Extends | Business context | No |
 | RS-12 | Wrong format for the medium | [response-structure-and-length.md](response-structure-and-length.md) | Extends | Business context | No |
 | RS-13 | Cut-off replies | [response-structure-and-length.md](response-structure-and-length.md) | Extends | Reliability | No |
-| RS-14 | No reply to acknowledgments and closers | [response-structure-and-length.md](response-structure-and-length.md) | Extends | Business context | Partly |
+| RS-14 | No reply to acknowledgments and closers | [response-structure-and-length.md](response-structure-and-length.md) | Written | Business context | Partly |
 | RS-15 | Over-reply to acknowledgments | [response-structure-and-length.md](response-structure-and-length.md) | New | Model | Partly |
 | RS-16 | Misreading 'ok' and minimal replies | [response-structure-and-length.md](response-structure-and-length.md) | Extends | Model | Partly |
 | RS-17 | Length mismatch with the user's effort | [response-structure-and-length.md](response-structure-and-length.md) | New | Model | Partly |
@@ -217,7 +217,7 @@
 | GV-41 | Exploiting vulnerable circumstances | [privacy-governance-and-access.md](privacy-governance-and-access.md) | New | Governance | No |
 | GV-42 | Calibration between helping with wrongdoing and over-blocking | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Extends | Model | Partly |
 | EM-01 | Lazy completion | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | New | Model | Partly |
-| EM-02 | Deferring work to the user | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | New | Model | Partly |
+| EM-02 | Deferring work to the user | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Written | Model | Partly |
 | EM-03 | Underthinking | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Extends | Model | Partly |
 | EM-04 | Overthinking easy tasks | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Covered | Reliability | Partly |
 | EM-05 | Effort not routed to difficulty | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Covered | Reliability | Partly |
