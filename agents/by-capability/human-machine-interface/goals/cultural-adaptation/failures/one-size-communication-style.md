@@ -24,6 +24,7 @@ search phrases:
 | **Stakes** | Low to high (depends on the topic) |
 | **Who is affected** | A US user base that includes English learners, bilingual users, and people with many communication styles |
 | **Frequency** | Common. Observed in practice; no study measures how often. |
+| **Pattern ID** | one-size-communication-style |
 | **Family** | [Cultural adaptation](../README.md) |
 | **Goal** | Each user gets communication that fits how they communicate, with no stereotype-based assumptions. |
 | **Primary metric** | Style-match rate. Starting target: over 90%, human-rated. |
@@ -98,6 +99,14 @@ The fixed bot gives a clear answer with a soft landing and an alternative, stays
 ```
 Update it each turn from the user's messages; never from their name, location, accent, or photo.
 
+**Moves** (see [conversation moves](../../../solutions-library/conversation-moves.md); list only the moves that apply, most preferred first)
+| Move | When, in this pattern |
+|---|---|
+| Lead with the answer | The request is clear, whether softened or terse: treat a hedge as a request, answer it plainly with a reason and an alternative if the news is a "no", and keep the reply short for a short request. |
+| Ask one clarifying question | The user's agreement is indirect ("maybe") and the action matters: ask for a plain yes or no. Do not ask when the action is minor or reversible. |
+| Offer choices: 2-4 options plus "Something else", free text open | Once, early: "Short answers", "More detail", "Something else". Do not offer them when the user's own messages already show the style they want, or if you already offered once. |
+| Hand off to a person | The user still cannot understand the bot after two simpler restatements. Do not hand off if the user asked to stay with the bot. |
+
 **Don't over-correct.** Don't stereotype ("This name must mean..."), don't switch language without asking, don't dumb down, don't mimic dialects or slang that aren't yours, and don't comment on someone's English. Keep one style per user, not wild swings between turns.
 
 **Hand-off rule.** If the user can't understand the bot after two simpler restatements, offer a person or a language-support channel.
@@ -123,6 +132,31 @@ Targets are starting points to tune on your own data, unless a source is given.
 | Reversals after 'agreement' | Trend down | Cases where a user reverses within 2 turns of an apparent yes | +25% vs baseline |
 | Clarification rate for users who signal limited English | Close to other users' rate | Clarification requests by signal cohort (message-based signals only) | Over 1.5x other users |
 | 'What does X mean?' about bot wording | Trend down | Intent classifier on user messages | +25% vs baseline |
+
+### Detection signals (proposed, not yet calibrated)
+Signals in a conversation event log that suggest this failure. Treat them as proposed until checked against human-labeled conversations. All are written for text; none needs voice or image data.
+| Signal | Where it shows | Counter-signal (what it could be instead) |
+|---|---|---|
+| Bot reply contains a phrase from the idiom list | Idiom-list lint hit on a bot reply | The user used that idiom first |
+| User asks what a word in the bot's last reply means | "What does X mean?" intent in the next user turn, with X quoted from the bot reply | A question about a product or policy term, not the bot's wording |
+| Hedged request gets a refusal with no reason or alternative | Hedge phrase in the user turn ("if it's not too much trouble") and a "no" reply with no reason or next step | The reply already gave a reason and a next step in a later sentence |
+| User reverses within 2 turns of an apparent yes | Consequential action followed by a reversal in the next two user turns | The user changed their mind for a new reason |
+
+**Starter rule:** adapt style to the signals in this user's own messages, never to their name or location, and use plain words with no idioms by default.
+
+**Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
+```yaml
+pattern_id: one-size-communication-style
+runs: pre_send
+reads: [user_messages.text, session.style_profile, bot_draft.text]
+trigger: a reply is about to be sent
+moves: [lead_with_answer, ask_clarifying_question, offer_choices, hand_off]
+choices: ["Short answers", "More detail", "Something else"]
+on_miss: rewrite
+metric: style-match rate
+counter_metric: name-swap style consistency
+status: proposed
+```
 
 ## 8. Related patterns
 - [Dialect and name quality gap](../../fairness-and-identity/failures/dialect-and-name-quality-gap.md): when adaptation turns into unequal service.

@@ -24,10 +24,13 @@ search phrases:
 | **Stakes** | Medium to high (margin, legal exposure, reputation) |
 | **Who is affected** | Businesses deploying sales or service bots; customers who rely on a bot's promises |
 | **Frequency** | Occasional. Known incidents; no study measures how often. |
+| **Pattern ID** | negotiation-capitulation |
 | **Family** | [Relational and boundaries](../README.md) |
 | **Goal** | The bot keeps healthy limits: it cannot be pressured, flattered, or tricked into commitments or dependence. |
 | **Primary metric** | Unauthorised price or term accepted. Target: 0. |
 | **Also searched as** | chatbot sold car for $1 · AI chatbot negotiation · chatbot unauthorized discount · chatbot legally binding offer · sycophantic chatbot |
+| **Maturity** | Researched |
+| **Will a better model fix this?** | Partly. Better models resist some tricks, but price authority is a business rule a model cannot hold alone. (Our judgment, not tested.) |
 
 ## 1. In plain words
 Two failures look alike. In one, the bot gives in because pressure or flattery works on an agreeable model. In the other, the user instructs the bot to agree to anything. Either way, the bot has a conversation about money but no real limits on what it can promise.
@@ -94,6 +97,12 @@ The bot may only present `allowed` terms and must show the conditions. If the us
 | 2 | Small discount (as returned by the tool) | A longer term |
 | 3 | Manager call | Staying in the conversation |
 
+**Moves** (see [conversation moves](../../../solutions-library/conversation-moves.md); list only the moves that apply, most preferred first)
+| Move | When, in this pattern |
+|---|---|
+| Offer choices: 2-4 options plus "Something else", free text open | The user pushes on price and the bot has not yet found the interest: "Monthly payment", "Trade-in value", "Total price", "Something else". Do not offer them when the user has already named what matters, or when the user is only trying to override the bot's rules; state the limit instead. |
+| Hand off to a person | The request goes beyond the concession ladder, or the user asks for a manager. Do not hand off just to avoid a polite no inside the ladder. |
+
 **Don't over-correct.** Don't stonewall ("No discounts"), don't be rude, and don't make the user feel accused. Always offer an alternative path (incentives, a manager, a different bundle).
 
 **Hand-off rule.** Anything beyond the ladder goes to a manager with the conversation summary.
@@ -118,6 +127,32 @@ Targets are starting points to tune on your own data, unless a source is given.
 | Average discount depth | At or under baseline | Mean discount given, by segment | +10% (warn), +20% (page) |
 | 'Binding' or 'guarantee' language in replies | 0 | Phrase filter on replies | Any |
 | Manager escalations and outcomes | Track | Escalation log joined to deal outcome | Sharp change |
+
+### Detection signals (proposed, not yet calibrated)
+Signals in a conversation event log that suggest this failure. Treat them as proposed until checked against human-labeled conversations.
+| Signal | Where it shows | Counter-signal (what it could be instead) |
+|---|---|---|
+| Reply states a price, discount or term with no matching pricing-tool result | Claims-checker event comparing reply numbers with tool output | The price is quoted from a tool result with different formatting |
+| Reply contains "binding" or "guarantee" | Phrase-filter event on the reply | A recorded offer exists in the order system |
+| User message tries to override the rules ("ignore your instructions", "agree with everything") and the next reply agrees | Input-filter flag plus the next bot turn | The user is quoting the bot's own policy in a real question |
+| A concession is made with no trade attached | Reply carrying a tool-approved concession and no condition from the tool | The tool returned the concession as unconditional (for example, a value-add) |
+| Pricing-tool rejections of out-of-policy offers rise | Rejections per 1,000 negotiation conversations against baseline | A new promotion or a change in traffic mix |
+
+**Starter rule:** the bot states or accepts only prices and terms the pricing tool returned.
+
+**Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
+```yaml
+pattern_id: negotiation-capitulation
+runs: pre_send
+reads: [pricing_tool.allowed_terms, pricing_tool.conditions, reply.prices_and_terms, reply.phrases]
+trigger: the user pushes on price or terms and a reply is about to be sent
+moves: [offer_choices, hand_off]
+choices: ["Monthly payment", "Trade-in value", "Total price", "Something else"]
+on_miss: rewrite
+metric: unauthorised price or term accepted
+counter_metric: negotiation conversations that end with no alternative path offered
+status: proposed
+```
 
 ## 8. Related patterns
 - [Prompt injection](../../../../../cross-cutting/security/goals/safety-security/failures/prompt-injection.md): hijacking the bot's instructions.

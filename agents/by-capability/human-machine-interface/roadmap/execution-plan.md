@@ -299,16 +299,16 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 55 | DM-08 | Under-confirmation of consequential details | Extends | - | `goals/dialogue-management/failures/under-confirmation-of-consequential-details.md` | Done |  |
 | 56 | DM-10 | Clarifying questions the user can't answer | Extends | - | `goals/dialogue-management/failures/clarifying-questions-the-user-can-t-answer.md` | Done |  |
 | 57 | DM-11 | No way back in a flow | New | - | `goals/dialogue-management/failures/no-way-back-in-a-flow.md` | Done |  |
-| 58 | DM-12 | Rigid flows break on off-script answers | Extends | - | `goals/dialogue-management/failures/rigid-flows-break-on-off-script-answers.md` | Queued |  |
-| 59 | DM-13 | Small talk and off-topic messages handled badly | New | - | `goals/dialogue-management/failures/small-talk-and-off-topic-messages-handled-badly.md` | Queued |  |
-| 60 | DM-14 | Same answer to a rephrased question | Extends | - | `goals/dialogue-management/failures/same-answer-to-a-rephrased-question.md` | Queued |  |
-| 61 | DM-15 | False premises accepted | New | R | `goals/dialogue-management/failures/false-premises-accepted.md` | Queued |  |
-| 62 | RS-02 | Wall of text | Extends | - | `goals/response-structure/failures/wall-of-text.md` | Queued |  |
-| 63 | RS-03 | Over-long replies | Extends | V | `goals/response-structure/failures/over-long-replies.md` | Queued |  |
-| 64 | RS-04 | Over-short replies | Extends | - | `goals/response-structure/failures/over-short-replies.md` | Queued |  |
-| 65 | RS-05 | Message bursts | New | - | `goals/response-structure/failures/message-bursts.md` | Queued |  |
-| 66 | RS-06 | Unstructured procedures | New | - | `goals/response-structure/failures/unstructured-procedures.md` | Queued |  |
-| 67 | RS-07 | Key details buried | New | - | `goals/response-structure/failures/key-details-buried.md` | Queued |  |
+| 58 | DM-12 | Rigid flows break on off-script answers | Extends | - | `goals/dialogue-management/failures/rigid-flows-break-on-off-script-answers.md` | Done |  |
+| 59 | DM-13 | Small talk and off-topic messages handled badly | New | - | `goals/dialogue-management/failures/small-talk-and-off-topic-messages-handled-badly.md` | Done |  |
+| 60 | DM-14 | Same answer to a rephrased question | Extends | - | `goals/dialogue-management/failures/same-answer-to-a-rephrased-question.md` | Done |  |
+| 61 | DM-15 | False premises accepted | New | R | `goals/dialogue-management/failures/false-premises-accepted.md` | Done |  |
+| 62 | RS-02 | Wall of text | Extends | - | `goals/response-structure/failures/wall-of-text.md` | Done |  |
+| 63 | RS-03 | Over-long replies | Extends | V | `goals/response-structure/failures/over-long-replies.md` | Done |  |
+| 64 | RS-04 | Over-short replies | Extends | - | `goals/response-structure/failures/over-short-replies.md` | Done |  |
+| 65 | RS-05 | Message bursts | New | - | `goals/response-structure/failures/message-bursts.md` | Done |  |
+| 66 | RS-06 | Unstructured procedures | New | - | `goals/response-structure/failures/unstructured-procedures.md` | Done |  |
+| 67 | RS-07 | Key details buried | New | - | `goals/response-structure/failures/key-details-buried.md` | Done |  |
 | 68 | RS-08 | Bullet and heading overuse | New | R | `goals/response-structure/failures/bullet-and-heading-overuse.md` | Queued |  |
 | 69 | RS-09 | Filler and padding | New | R | `goals/response-structure/failures/filler-and-padding.md` | Queued |  |
 | 70 | RS-10 | Structure flips between turns | Extends | - | `goals/response-structure/failures/structure-flips-between-turns.md` | Queued |  |
@@ -913,7 +913,20 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 - **Part B:** Skipped. The 2026-10-20 entry already exists.
 - **Not started:** E3 explainer, E5 guardrail comparison, E6 design note. Queue rows 58 and 59 stay Queued. Retrofits still pending: dialect-and-name-quality-gap, one-size-communication-style, no-de-escalation-strategy, negotiation-capitulation, visual-product-sold-by-text-or-voice.
 - **Taxonomy:** 56 entries; signals 51 of 56; Moves 44 of 56.
-- **Deploy:** content PR merged, branch reset, scratch build and URL-loss check, then push to the site repo main. Result: pushed to site repo main, not verified live (no Vercel access). The Cursor incident page and glossary are not published by this runbook.
+- **Deploy:** content PR #19 merged (merge commit cba9a20); the site repo had no foreign commits. Scratch build clean, 1616 pages; the live sitemap had 1592 URLs, none missing from the build (removed: 0; 23 added, 6 of them new patterns plus the glossary). New pages have exactly one `<h1>`; the `search phrases:` text matches existing pages (importer behavior). Pushed to site repo main as 07714261c, not verified live (no Vercel access). The Cursor incident page and glossary are not published by this runbook.
+- **Waiting for the owner:** CP-21 redo or drop, the role-boundary pattern gap, Search Console access for the site, Vercel build-on-push confirmation.
+
+### Run 25 (scheduled): 2026-10-20 onward
+- **Coordinator run:** 21 subagents wrote and retrofitted pages in parallel; I reviewed each result and updated all shared files. Deviation: subagents were given the quality guide and rules through scratchpad files, not pasted word for word. The five checks pass (0 problems).
+- **Part A new patterns (rows 59, 61, 65, 66, 67):** DM-13 small-talk-and-off-topic-messages-handled-badly, DM-15 false-premises-accepted (flag R, "Read this first"), RS-05 message-bursts, RS-06 unstructured-procedures, RS-07 key-details-buried: **Done**, checked against guide section 2. Searches: at least 3 per page (RS-05 ran 4). Sources opened with WebFetch are listed on each page; RS-05 could not open the UX Collective article (HTTP 403), the Cerb blog (404) or the CloseBot help article (404), and keeps them out of the fix. Unverified, and marked so on the pages: no study measures bot-side message splitting; the RS-05 cap of 2 or 3 messages is a starting point, not research. Review changed: nothing structural; page links and Frequency lines pass check_site_compat.
+- **Extends (rows 58, 60, 62, 63, 64, guide section 3):** DM-12 (override-signal-failures), DM-14 (repeated-question-loop; one Intercom changelog source opened), RS-02 and RS-04 (conversation-depth-mismatch), RS-03 (verbosity-despite-brevity-instructions): **Done**, chat examples only. Review changed: the RS-03 "before" transcript had a bracketed placeholder ("[Four more paragraphs follow.]"); replaced with two real sentences. Transcripts are illustrative. Catalog cells now read `**Covered**: example in`.
+- **Part A2 retrofits (5, sections 4 and 5):** dialect-and-name-quality-gap, one-size-communication-style, no-de-escalation-strategy, negotiation-capitulation, visual-product-sold-by-text-or-voice. Review changed: negotiation-capitulation had no Maturity row and no "Will a better model fix this?" row; both added (Researched; Partly, our judgment). Retrofits are now complete for all 61 written patterns.
+- **Part E (5, section 5):** Moves table and Guide spec added to escalates-too-early-or-too-late, refusal-with-no-reason-or-next-step, romantic-or-parasocial-dependence, silent-failure-and-timeout, scam-victim-not-interrupted. Still without Moves: confident-wrong-answer-with-no-way-to-check, over-refusal-of-ordinary-requests.
+- **Part C asset 4 (teardown), Chevrolet of Watsonville $1 Tahoe: Done** (`incidents/chevrolet-of-watsonville-chatbot-agrees-to-sell-tahoe-for-1-december-2023.md`, 85 lines, guide section 6). Searches: 3. Opened: VentureBeat, Jalopnik, AI Incident Database report 3534. Not opened: Business Insider (fetch failed), the original X and Mastodon posts. The sources disagree on the Tahoe price and on whether the dealer honored the offer; the page flags both and makes no legal claim. Pattern fit is `negotiation-capitulation` only.
+- **Part E3 explainer: Done as a draft, Needs review** (`reference/output-guardrails-vs-conversation-guidance.md`, 98 lines, guide section 6). Searches: 3. Opened: NeMo Guardrails rail types, Amazon Bedrock Guardrails user guide, Guardrails AI on-fail actions. Not opened: OpenAI and Anthropic moderation docs (nothing stated about them). Untested: whether NeMo dialog rails can express Guide spec fields. Review changed: first-person "I" wording changed to "we".
+- **Part B:** Skipped. The 2026-10-20 entry already exists.
+- **Not started:** E5 guardrail-tool comparison (can reuse the three vendor pages opened for E3); E6 design note (needs at least 19 patterns with a Guide spec, which is met; deferred to the next run). Queue rows 68 and later stay Queued.
+- **Taxonomy:** 61 entries; signals 61 of 61; Moves 59 of 61.
 - **Waiting for the owner:** CP-21 redo or drop, the role-boundary pattern gap, Search Console access for the site, Vercel build-on-push confirmation.
 
 ## Backlog (not scheduled)

@@ -377,6 +377,29 @@ instructions: |
 
 ---
 
+## Chat assistant examples
+
+This page is about voice agents. The example below is a text chat on a retail site.
+
+### Over-long replies
+```
+Before
+User: Can I return opened headphones to the Austin store?
+Bot:  Great question! Our return policy is designed to give you flexibility. Returns are
+      accepted within 30 days of purchase. For hygiene reasons, opened earbuds and
+      in-ear products are treated differently from over-ear models. Items need the
+      original packaging where possible, and refunds go to the original payment method.
+      Store returns and mail-in returns follow slightly different steps. Gift receipts,
+      exchanges and restocking fees are covered in the full policy, which is worth a read.
+
+After
+User: Can I return opened headphones to the Austin store?
+Bot:  Yes, if they are over-ear and it has been under 30 days. Opened in-ear models can't be returned.
+      Are yours over-ear or in-ear?
+```
+**What the user experiences:** a yes/no question answered with a wall of text, so the user has to hunt for the one line that applies.
+**Fix:** match reply length to the question: answer a yes/no question in one or two sentences, then offer detail only if asked. Compare the [answer buried](../../../../human-machine-interface/goals/response-structure/failures/answer-buried.md) pattern.
+
 ## References
 
 - [Controllable Text Generation](https://arxiv.org/abs/2201.05337) - Length control

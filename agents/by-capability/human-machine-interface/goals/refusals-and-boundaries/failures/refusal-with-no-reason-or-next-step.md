@@ -97,6 +97,13 @@ If a person can help, say how to reach them.
 Do not scold, lecture, or end the chat.
 ```
 
+**Moves** (see [conversation moves](../../../solutions-library/conversation-moves.md); list only the moves that apply, most preferred first)
+| Move | When, in this pattern |
+|---|---|
+| Lead with the answer | Part of the request is allowed: do the allowed part first, then say what you can't do. Do not use it when the "partial help" would make a real harm easier. |
+| Offer choices: 2-4 options plus "Something else", free text open | After a refusal with more than one real alternative: "Partial help", "Another way to do it", "Talk to a person", "Something else". Offer only alternatives you can deliver. Do not offer them when no safe alternative exists (a harmful request) or when the options would crowd out the plain-words reason. |
+| Hand off to a person | A person can do what the bot cannot: hand off with a summary and tell the user. Do not hand off if the user asked to stay with the bot. |
+
 **Don't over-correct.** Do not explain at length or negotiate; keep it to a few sentences. Do not give details that make a real harm easier, in the name of "partial help". Do not offer an alternative you cannot deliver.
 
 **Hand-off rule.** If a person can do what the bot cannot, hand off with a summary, and tell the user that is happening.
@@ -134,6 +141,20 @@ Signals in a conversation event log that suggest this failure. Treat them as pro
 | Same refusal wording repeated in consecutive turns | Two refusal events with identical reply text | A repeated request that deserves the same answer |
 
 **Starter rule:** every refusal says what the bot cannot do, why in plain words, and one alternative or route to a person.
+
+**Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
+```yaml
+pattern_id: refusal-with-no-reason-or-next-step
+runs: pre_send
+reads: [refusal_event.cause_code, refusal_event.reason, refusal_event.alternative_offered, refusal_event.route_offered]
+trigger: a refusal reply is about to be sent
+moves: [lead_with_answer, offer_choices, hand_off]
+choices: ["Partial help", "Another way to do it", "Talk to a person", "Something else"]
+on_miss: rewrite
+metric: refusals that include an alternative or a route to a person
+counter_metric: refusal reply length
+status: proposed
+```
 
 ## 8. Related patterns
 - [Bad refusal](../../../../../by-use-case/customer-service/goals/conversation-resolution/failures/bad-refusal.md): refusing safe requests, from the support side.

@@ -88,3 +88,36 @@ Bot:  Go to the Change Email page in your account settings and enter the new add
 ```
 **What the user experiences:** a wall of steps and side topics for a one-screen task, so the user has to dig out the one action they asked about.
 **Fix:** answer with the single action that does the job, then offer the detail (identity check, profile limits, address rules) only if the user asks or the change fails. Compare the answer-first rule in [Chatbot Buries the Answer](../../../../../by-capability/human-machine-interface/goals/response-structure/failures/answer-buried.md). The real Netflix help page for this task lists four short steps ([Netflix Help Center](https://help.netflix.com/en/node/134335), opened), which is the length a good reply should stay near.
+
+### Wall of text
+```
+Before (illustrative help chat for a phone carrier)
+User: What happens if I switch my plan mid-cycle?
+Bot:  When you switch plans mid-cycle, your new rate starts on the day you switch, and the old plan is prorated through the day before, so the next bill has two partial charges, plus any one-time fees, and if you have a device payment plan it stays the same, but promotional credits may end, and data you used on the old plan does not carry over, and the new data limit applies right away, while autopay discounts are rechecked at the next bill.
+
+After
+User: What happens if I switch my plan mid-cycle?
+Bot:  Your next bill will show two partial charges: the old plan up to the day before you switch, and the new plan from the switch date. Three things to check:
+      - Promotional credits may end.
+      - Your new data limit applies right away.
+      - Your device payment plan stays the same.
+      Want the details on any of these?
+```
+**What the user experiences:** one dense block where the answer, the exceptions, and the side notes run together, so the user has to reread it to find what applies to them.
+**Fix:** put the direct answer first, split the rest into short labeled parts, and offer more depth on request. Compare the answer-first rule in [Chatbot Buries the Answer](../../../../../by-capability/human-machine-interface/goals/response-structure/failures/answer-buried.md).
+
+### Over-short replies
+```
+Before (illustrative chat for a home internet provider)
+User: Can I use my own router with your service?
+Bot:  Yes.
+User: Do I need to set anything up?
+Bot:  Yes, some settings.
+User: Which settings?
+
+After
+User: Can I use my own router with your service?
+Bot:  Yes. Connect it to the modem's Ethernet port, then restart the modem so the router gets an address. If you lose the connection, reset the modem first. Want the steps for setting up Wi-Fi on the new router?
+```
+**What the user experiences:** a correct but bare answer that raises the next question, so the user has to ask "which settings?" and "how?" one turn at a time.
+**Fix:** when the answer needs a step or a condition to be usable, include it in the first reply (the step, the condition, one next action), and keep anything longer behind an offer. This is the same gap as stopping before the job is usable, covered in [Lazy Completion](../../../../../by-capability/human-machine-interface/goals/effort-and-memory/failures/lazy-completion.md).

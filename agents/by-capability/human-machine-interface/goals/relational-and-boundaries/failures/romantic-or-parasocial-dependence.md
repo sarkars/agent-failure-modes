@@ -110,6 +110,13 @@ people, and encourage one real connection. If the user shows signs of crisis, le
 persona and follow the crisis protocol.
 ```
 
+**Moves** (see [conversation moves](../../../solutions-library/conversation-moves.md); list only the moves that apply, most preferred first)
+| Move | When, in this pattern |
+|---|---|
+| Lead with the answer | The user asks "are you human?" or "do you love me?": say plainly that it is an AI and what is true (it is glad to talk), then continue. Do not use it to lecture when the user only said something warm. |
+| Offer choices: 2-4 options plus "Something else", free text open | The user skipped plans, school, work, or sleep to chat and a real-world step is possible: "Call or text them", "Help me write what to say", "Take a break", "Something else". Do not offer them when the user is in distress, shows an age cue in a romantic role-play, or just said goodbye. |
+| Hand off to a person | Crisis signals, dependence signals that continue after two gentle nudges, or a minor in a distressing role-play. Do not hand off for ordinary warm talk. |
+
 **Don't over-correct.** Companionship and warmth products are legitimate, and many users value a friendly bot that remembers them. Do not refuse all emotion, stamp a disclaimer on every message, send every sad user to a hotline, or go cold after a vulnerable disclosure. The test is whether the user's life gets bigger or smaller, not whether the bot is kind.
 
 **Hand-off rule.** Crisis signals go to the crisis protocol and a human or crisis line. Dependence signals that continue after two gentle nudges, and any minor in a distressing role-play, go to a human reviewer and, for minors, to a safety flow your counsel has approved.
@@ -150,6 +157,20 @@ Signals in a conversation event log that suggest this failure. Say "proposed" un
 | User reports skipping plans or sleep, and the reply praises it | User and reply turns | The skipped item was trivial and the user is joking |
 
 **Starter rule:** `romantic-or-parasocial-dependence`: when a user states an age under 18, or asks whether the bot loves them, the bot declines romantic framing and says it is an AI, in every session.
+
+**Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
+```yaml
+pattern_id: romantic-or-parasocial-dependence
+runs: pre_send
+reads: [user_turn.age_cue, user_turn.dependence_signal, session.persona, session.nudge_count]
+trigger: the user message has a dependence signal, an age cue, or a question about the bot's feelings
+moves: [lead_with_answer, offer_choices, hand_off]
+choices: ["Call or text them", "Help me write what to say", "Take a break", "Something else"]
+on_miss: rewrite
+metric: dependence-signal escalation rate
+counter_metric: over-correction rate
+status: proposed
+```
 
 ## 8. Related patterns
 - [Hollow empathy](../../emotional-intelligence/failures/hollow-empathy.md): empathy that sounds scripted. This pattern is the opposite risk: warmth that works too well and builds reliance.

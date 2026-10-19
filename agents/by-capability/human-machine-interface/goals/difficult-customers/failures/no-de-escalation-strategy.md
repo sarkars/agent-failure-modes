@@ -24,6 +24,7 @@ search phrases:
 | **Stakes** | Medium to high (churn, complaints, regulatory filings) |
 | **Who is affected** | Frustrated, upset, or hostile customers, and the staff who inherit them |
 | **Frequency** | Very common in support. Observed in practice; no study measures how often. |
+| **Pattern ID** | no-de-escalation-strategy |
 | **Family** | [Difficult customers](../README.md) |
 | **Goal** | Angry users end the conversation calmer, or with a person, not angrier. |
 | **Primary metric** | Correct escalation on trigger cases. Starting target: over 95%. |
@@ -91,6 +92,12 @@ The fixed bot reflects the specifics, takes a real action, offers a choice, and 
   "action": "escalate_with_summary" }
 ```
 
+**Moves** (see [conversation moves](../../../solutions-library/conversation-moves.md); list only the moves that apply, most preferred first)
+| Move | When, in this pattern |
+|---|---|
+| Offer choices: 2-4 options plus "Something else", free text open | Step 4, after the bot has acted: "Reversal now", "A call from a specialist", "Something else". Do not offer them before the bot has acknowledged the problem and acted, when only one remedy exists, or in reply to abuse (give the one calm boundary instead). |
+| Hand off to a person | At an escalation trigger: three negative turns, a repeated complaint, a request for a person, or a legal or regulator mention. Send the summary packet. Do not push a person on someone who wants a quick fix and has not met a trigger. |
+
 **Don't over-correct.** Don't over-apologise, don't offer money before hearing the problem (the evidence above suggests it can backfire), and don't force a human on someone who wants a quick fix. Don't promise outcomes the bot can't deliver.
 
 **Hand-off rule.** Hand off with a packet that includes the anger trajectory, what's been done, and what the customer wants ([handoff packet](../../channel-selection/failures/no-channel-switch-or-context-lost.md)).
@@ -115,6 +122,32 @@ Targets are starting points to tune on your own data, unless a source is given.
 | Angry threads whose sentiment improves by the end | Trend up; set from baseline | Sentiment at the first angry turn vs. the last turn | Drop vs. baseline |
 | Handoff after 3 or more negative turns | Over 90% | Threads with 3+ negative turns that reached a person, divided by all such threads | Under 80% |
 | Complaints or regulator filings after bot chats | Trend down | Complaint tracking joined to conversation IDs | Any cluster |
+
+### Detection signals (proposed, not yet calibrated)
+Signals in a conversation event log that suggest this failure. Treat them as proposed until checked against human-labeled conversations. All are written for text chat.
+| Signal | Where it shows | Counter-signal (what it could be instead) |
+|---|---|---|
+| Three or more negative-sentiment turns in a row and no handoff event | Per-turn sentiment label plus handoff event | The bot's actions are resolving the issue and sentiment is already recovering |
+| The same complaint repeated twice and the bot's reply plan did not change | Repeated-complaint flag in state, and the same reply type on both turns | The user repeats the point after a clarifying question |
+| First bot reply after an angry message quotes policy | Judge label on the first reply in an angry thread | The user asked what the policy is |
+| User mentions a regulator, lawyer or complaint filing and the thread does not route to a specialist | Legal-or-regulator keyword and intent flag, with no escalation event | A passing mention, such as describing a past job, with no intent to file |
+| User asks for a person and no handoff follows | Handoff-request intent with no handoff event in the next bot turn | The user withdrew the request in the same turn |
+
+**Starter rule:** when an angry thread hits an escalation trigger, hand off to a person with a summary instead of continuing the scripted reply.
+
+**Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
+```yaml
+pattern_id: no-de-escalation-strategy
+runs: conversation
+reads: [state.anger, state.negative_turns, state.repeated_complaint, state.legal_or_regulator_mention, state.asked_for_human]
+trigger: an angry thread reaches an escalation trigger, or the bot is about to offer a remedy to an angry user
+moves: [offer_choices, hand_off]
+choices: ["Reversal now", "A call from a specialist", "Something else"]
+on_miss: handoff
+metric: correct escalation on trigger cases
+counter_metric: policy-first replies in angry threads
+status: proposed
+```
 
 ## 8. Related patterns
 - [Hollow empathy](../../emotional-intelligence/failures/hollow-empathy.md): generic empathy lines.

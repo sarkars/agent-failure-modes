@@ -347,6 +347,26 @@ instructions: |
 
 ---
 
+## Chat assistant examples
+
+### Rigid flows break on off-script answers
+```
+Bot:  Let's book your table. What name is it under?
+User: Friday at 7pm for 4, name is Dana Ortiz
+Bot:  Sorry, I didn't get that. What name is it under?          (before)
+User: Dana Ortiz. I just said Friday at 7.
+Bot:  Thanks, Dana! What date would you like?
+
+Bot:  Let's book your table. What name is it under?
+User: Friday at 7pm for 4, name is Dana Ortiz
+Bot:  Got it: Dana Ortiz, Friday at 7:00 PM, party of 4.        (after)
+      Do you want the patio or the dining room?
+```
+**What the user experiences:** the bot throws away an answer it already got and asks again, so the user has to repeat themselves and starts to doubt the bot is reading their messages.
+**Fix:** accept answers in any order and in any form, and store every value found in each message, not just the one just asked for. Before each question, skip any field already filled, and if the bot misses something, ask only for that field without restarting the flow. See the [no way back in a flow](../../../../human-machine-interface/goals/dialogue-management/failures/no-way-back-in-a-flow.md) pattern.
+
+---
+
 ## References
 
 - [Conversational AI Interrupts](https://arxiv.org/abs/2106.07837) - Priority handling
