@@ -13,6 +13,7 @@ Shared metrics the patterns below report against. Targets are starting points to
 | Re-authentication prompts on low-risk actions for signed-in users | Near 0 | [forces a fresh login](failures/forces-a-fresh-login.md) |
 | Openers that reference user-specific context or a likely need | Over 70% (tune) | [generic first response](failures/generic-first-response.md) |
 | Top-intent accuracy on simple requests | Over 95% | [missing the obvious intent](failures/missing-the-obvious-intent.md) |
+| New users who complete a successful first task | Set from baseline | [doesn't say what it can do](failures/doesn-t-say-what-it-can-do.md) |
 
 ## Patterns
 | Pattern | One line |
@@ -21,9 +22,9 @@ Shared metrics the patterns below report against. Targets are starting points to
 | Forces a fresh login | The signed-in user is asked to sign in or verify again, even for low-risk help |
 | Generic first response | The first message is a stock greeting that ignores what the product knows |
 | Missing the obvious intent | A plain request gets a neighboring answer or an over-reading |
+| Doesn't say what it can do | An empty box that never says what the assistant can and cannot do |
 
 ## Planned (not yet written)
-- Doesn't say what it can do
 - Help that becomes a sales pitch
 - Obstructing cancellation, downgrade, or refund
 - Answers withheld behind an upgrade, unsaid

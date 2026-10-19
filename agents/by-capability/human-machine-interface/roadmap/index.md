@@ -36,7 +36,7 @@
 | CP-09 | Over-complicating simple tasks | [embedded-copilots.md](embedded-copilots.md) | Extends | Model | Partly |
 | CP-10 | Irrelevant or already-answered clarifying questions | [embedded-copilots.md](embedded-copilots.md) | Extends | Model | Partly |
 | CP-11 | Keyword-matched documentation instead of an answer | [embedded-copilots.md](embedded-copilots.md) | Extends | Business context | Partly |
-| CP-12 | Doesn't say what it can do | [embedded-copilots.md](embedded-copilots.md) | New | Business context | No |
+| CP-12 | Doesn't say what it can do | [embedded-copilots.md](embedded-copilots.md) | Written | Business context | No |
 | CP-13 | Ignores the page, selection, and form state | [embedded-copilots.md](embedded-copilots.md) | New | Business context | No |
 | CP-14 | Re-asks for known information | [embedded-copilots.md](embedded-copilots.md) | Written | Business context | No |
 | CP-15 | Forces a fresh login | [embedded-copilots.md](embedded-copilots.md) | Written | Business context | No |

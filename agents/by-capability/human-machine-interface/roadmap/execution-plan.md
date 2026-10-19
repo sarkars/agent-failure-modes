@@ -246,8 +246,8 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 5 | CP-15 | Forces a fresh login | New | E | `goals/embedded-copilots/failures/forces-a-fresh-login.md` | Done | 11 |
 | 6 | CP-20 | Generic first response | New | R | `goals/embedded-copilots/failures/generic-first-response.md` | Done | 11 |
 | 7 | CP-08 | Missing the obvious intent | Extends | - | `goals/embedded-copilots/failures/missing-the-obvious-intent.md` | Done | 12 |
-| 8 | CP-12 | Doesn't say what it can do | New | R | `goals/embedded-copilots/failures/doesn-t-say-what-it-can-do.md` | In progress | 12 |
-| 9 | XA-01 | Dead-end 'I don't understand' replies | Extends | V, R | `goals/conversation-leadership/failures/dead-end-i-don-t-understand-replies.md` | Queued |  |
+| 8 | CP-12 | Doesn't say what it can do | New | R | `goals/embedded-copilots/failures/doesn-t-say-what-it-can-do.md` | Done | 12 |
+| 9 | XA-01 | Dead-end 'I don't understand' replies | Extends | V, R | `goals/conversation-leadership/failures/dead-end-i-don-t-understand-replies.md` | In progress | 12 |
 | 10 | CP-01 | Help that becomes a sales pitch | New | V, R, L | `goals/embedded-copilots/failures/help-that-becomes-a-sales-pitch.md` | Queued |  |
 | 11 | CP-06 | Obstructing cancellation, downgrade, or refund | Extends | V, L | `goals/embedded-copilots/failures/obstructing-cancellation-downgrade-or-refund.md` | Queued |  |
 | 12 | CP-03 | Answers withheld behind an upgrade, unsaid | New | L | `goals/embedded-copilots/failures/answers-withheld-behind-an-upgrade-unsaid.md` | Queued |  |
@@ -722,6 +722,10 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 - **Searches run: 3** (intent-detection benchmarks; clarify-versus-answer research; chatbot misunderstanding surveys). **Sources opened (3):** the Verint 2022 press release, and the abstracts of Zhang et al. (arXiv 2410.13788) and Su and Cardie (arXiv 2605.25284). **Search summaries only, not used as facts:** BANKING77 benchmark figures; a Five9 "46% abandon because the bot misunderstood" figure (the article I opened did not contain it); Cyara and Tidio survey figures.
 - **Claims left unverified:** how often plain requests are misread (no study found).
 - **Review pass changed:** added the note that the two research rows concern truly ambiguous requests, and a "don't over-correct" line on keeping clarification for those.
+- **CP-12 Doesn't say what it can do: Done.** File: `goals/embedded-copilots/failures/doesn-t-say-what-it-can-do.md`, plus `tests/doesn-t-say-what-it-can-do.md` (12 scenarios, "Not yet run"). Incident: "No public incident found" with the searches run.
+- **Searches run: 3** (discoverability and suggested prompts; the Microsoft human-AI guidelines; capability mental models and blank-box research). **Sources opened (3):** NN/g's March 2024 study of new AI users, Amplitude's blog on its chat-box tests, and the abstract of arXiv 2402.08030. **Search summaries only, not used as facts:** the Microsoft human-AI guideline wording (the page I opened did not contain it), the VU capability-communication study, practitioner blogs on onboarding levels.
+- **Claims left unverified:** the Amplitude test design and statistics (company's own claims, stated as such).
+- **Review pass changed:** added a caveat that one academic study found prompt hints alone made little difference; kept the 2x and retention figures labelled as the company's account.
 
 ## Backlog (not scheduled)
 Ideas from earlier lists that were never chosen. They stay out of the queue until someone adds them.
