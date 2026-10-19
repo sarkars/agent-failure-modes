@@ -25,6 +25,7 @@ search phrases:
 | **Stakes** | Any. A dead end on a billing or access problem can cost money; on a simple question it costs the customer. |
 | **Who is affected** | Anyone whose wording the bot does not recognize, including second-language speakers and people with unusual requests |
 | **Frequency** | Very common as a design default. I found no study that counts how often products ship it; the studies below observe it in logs. |
+| **Pattern ID** | dead-end-i-don-t-understand-replies |
 | **Family** | [Conversation leadership](../README.md) |
 | **Goal** | Every conversation moves the user toward what they are trying to do and ends with confirmation that it worked. |
 | **Primary metric** | Share of conversations with 3 or more consecutive no-progress turns. Starting target: under 2% (tune). Report next to the escape-to-human rate. |
@@ -129,6 +130,17 @@ Targets are starting points to tune on your own data, unless a source is given.
 | Escape-to-human success | Over 95% | Handoffs after a miss that reached a person | Below 90% |
 | Abandonment within 2 turns of a fallback | Track; set from baseline | Conversations ending right after a fallback | Rising two weeks in a row |
 | Fallback-to-new-intent conversion (counter-metric) | Track | Top fallbacks that become supported intents each month | Stalled |
+
+### Detection signals (proposed, not yet calibrated)
+Signals in a conversation event log that suggest this failure. Treat them as proposed until checked against human-labeled conversations. All are written for text chat events (channel field: chat). Voice versions of these signals are PLANNED, never detected or measured.
+| Signal | Where it shows | Counter-signal (what it could be instead) |
+|---|---|---|
+| Identical fallback reply twice in a row | Two consecutive bot turns with the same fallback template or text | A deliberate repeat after the user sent a new, unrelated message |
+| 3 or more consecutive fallback or no-progress turns | Run of fallback turns in the turn-level log | A user who is typing test input or probing the bot |
+| User asks for a person and no handoff follows | A request-for-person event with no handoff event after it | A handoff that failed for staffing reasons and was explained to the user |
+| Conversation ends within 2 turns of a fallback | Session end event right after a fallback turn | The user got the answer elsewhere or finished the task |
+
+**Starter rule:** never send the same fallback twice in a row, and hand off with a summary by the third consecutive miss or at once on request.
 
 ## 8. Related patterns
 - [Chatbot loop without human escalation path](../../../../../by-use-case/support-services/goals/self-service-deflection/failures/chatbot-loop-without-human-escalation-path.md): the loop from the deflection side. This page covers the fallback reply itself.
