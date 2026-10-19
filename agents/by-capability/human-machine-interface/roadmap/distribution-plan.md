@@ -68,6 +68,20 @@ The reader's path is: pattern, then detection signals, then starter rule, then s
 ### Channel scope
 This phase is chat-first: text chatbots. The event schema describes a conversation turn in a channel-neutral way, with a `channel` field (chat, voice, web). Voice-specific signals (silence, interruptions, speech-recognition errors) and web-analytics signals are listed as **planned**, never as detected or measured. Patterns already written for voice keep their pages and Pattern IDs; their detection signals say which are written for text and which are planned for voice. Voice and web get their own phase after chat has traction.
 
+### Conversation guides (Part E)
+Added 2026-10-19 at the owner's request: guidance for chat, in the spirit of output guardrails but aimed at how the conversation goes. A guide leads with what the bot should do at a known failure moment (lead with the answer, ask one question, offer 2-4 choices plus "Something else", admit uncertainty, hand off), then gives the check that spots a miss. One guide per Pattern ID, written from the pattern's own fix and detection signals; checks stay proposed until calibrated. Index and spec: [conversation guides](../conversation-guides/README.md). Template: [conversation-guide.md](../_templates/conversation-guide.md). Code comes last: a reference module is backlog only and needs the owner's go-ahead.
+
+| # | Item | Status |
+|---|---|---|
+| E1 | Spec, moves, where guides run (the index page) | **Done (draft)** 2026-10-19 |
+| E2 | Guides, one per Pattern ID, starting with the 19 patterns that have detection signals | Not started (0 of 44) |
+| E3 | Explainer: output guardrails vs. conversation guides, for developer searches | Not started |
+| E4 | Test conversations per guide, added to the scenario pack (needs asset 3) | Not started |
+| E5 | How guides sit next to existing guardrail tools, from their docs actually opened (Needs review) | Not started |
+| E6 | Reference code module | Backlog, owner decision |
+
+The starter rules library (asset 7) becomes the one-line index of the guides' "Do this" rules, so it is not written twice.
+
 ## 5. The first 90 days (content and distribution only)
 | Weeks | Do | Done when |
 |---|---|---|
