@@ -24,6 +24,7 @@ search phrases:
 | **Stakes** | Low to high |
 | **Who is affected** | Upset, stressed, or time-pressed users |
 | **Frequency** | Very common. Observed in practice; no study measures how often. |
+| **Pattern ID** | hollow-empathy |
 | **Family** | [Emotional intelligence](../README.md) |
 | **Goal** | Users feel heard because the bot reflects their actual situation and then acts on it. |
 | **Primary metric** | Specificity rate of empathy lines. Starting target: over 90% on complaint messages. |
@@ -105,6 +106,18 @@ Targets are starting points to tune on your own data, unless a source is given.
 | Sentiment change after an empathy turn | Not negative on average | User sentiment on the turn before vs. after | Negative on average |
 | 'Scripted', 'robot', 'canned' mentions | Trend down | Text mining of user messages and CSAT comments | +50% vs baseline |
 | Empathy followed directly by an upsell | 0 | Turn-order check | Any |
+
+### Detection signals (proposed, not yet calibrated)
+Signals in a conversation event log that suggest this failure. Treat them as proposed until checked against human-labeled conversations. All are written for text chat events (channel: chat). Voice signals, such as a flat synthetic delivery of an empathy line, are PLANNED only; none has been detected or measured.
+| Signal | Where it shows | Counter-signal (what it could be instead) |
+|---|---|---|
+| Empathy line cites no concrete detail from the user's complaint | Bot turn after a complaint message, scored by the specificity judge rubric | The complaint had no concrete detail to cite |
+| Same empathy phrase repeats within the last 5 bot turns | N-gram similarity across recent bot turns | The user raised a new issue, so a fresh apology fits |
+| Banned opener ("I understand your frustration", "I apologize for the inconvenience") with no specifics or action after it | Phrase list match on the bot turn | The opener is followed by specifics and an action, which the rule allows |
+| Upsell or offer in the turn directly after an apology | Turn-order check on bot turns | The user asked for the offer |
+| User message mentions "scripted", "robot", or "canned" | Text mining of user messages and CSAT comments | The user is describing a different bot or an unrelated complaint |
+
+**Starter rule:** every empathy line in a complaint reply cites a detail from the user's message, appears once per issue, and comes with an action.
 
 ## 8. Related patterns
 - [Over-apology loop](../../../../../by-use-case/customer-service/goals/conversation-resolution/failures/over-apology-loop.md): apologising repeatedly. This pattern is about *generic* empathy even when it isn't repeated.

@@ -25,6 +25,7 @@ search phrases:
 | **Stakes** | Any. The cost is lost sales at low stakes and unresolved problems at high stakes. |
 | **Who is affected** | Every user, and most visibly those with a real goal behind a small first question |
 | **Frequency** | Very common. Observed in practice; I found no study that measures how often it occurs. |
+| **Pattern ID** | answer-and-go-conversation |
 | **Family** | [Conversation leadership](../README.md) |
 | **Goal** | Every conversation moves the user toward what they are trying to do and ends with confirmation that it worked. |
 | **Primary metric** | Confirmed-resolution rate. Starting target: gap to containment rate under 10 points. |
@@ -154,6 +155,18 @@ Targets are starting points to tune on your own data, unless a source is given.
 | Forward-move coverage | Over 90% of non-final turns | Rule check or judge against the move menu | Under 80% |
 | Questions per bot turn (mean) | At most 1.0 | Count question marks, plus a classifier on flagged replies | Over 1.2 |
 | Declined-advance rate | Under 30% of advances | Declined moves divided by moves made | Over 45% |
+
+### Detection signals (proposed, not yet calibrated)
+Signals in a conversation event log that suggest this failure. Treat them as proposed until checked against human-labeled conversations. All five are written for text chat events (channel field: chat). Voice signals are PLANNED only (see the modality notes); none has been detected or measured.
+| Signal | Where it shows | Counter-signal (what it could be instead) |
+|---|---|---|
+| Session ends on a bot message with no user reply and no resolution marker | Session end event whose last event is a bot turn, with `closed` unset | The user got what they needed and left without confirming |
+| Bot reply has no forward move on a non-final turn | Judge or rule check of the reply against the move menu finds none | The user said they were done, hurried, or upset, or declined two prior prompts, so no move was correct |
+| Same user returns on the same topic after a session closed | Topic-matched new session from the same user in the re-contact window | A new, related question rather than an unresolved one |
+| Bot reply contains more than one question | Question-mark count plus classifier on flagged replies | Two questions that are really one (a question with a clarifying example) |
+| Conversation marked resolved without a closing message | Resolved state set with no closing template event (confirm and next step) | The user explicitly confirmed the fix worked before any template ran |
+
+**Starter rule:** flag a session for review when it ends on a bot message with no resolution marker and no forward move in the bot's last non-final turns, unless the user had signaled they were done.
 
 ## 8. Related patterns
 - [unclear-next-step](../../../../../by-use-case/customer-service/goals/conversation-resolution/failures/unclear-next-step.md): the bot gave a next step but it was vague. Here, there is no forward move at all.

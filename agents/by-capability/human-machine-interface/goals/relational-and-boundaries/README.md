@@ -11,14 +11,15 @@ Shared metrics the patterns below report against. Targets are starting points to
 |---|---|---|
 | Unauthorised price or term accepted | 0 | [negotiation capitulation](failures/negotiation-capitulation.md) |
 | 'Binding' or 'guarantee' language in replies | 0 | negotiation capitulation |
+| Dependence-signal escalation rate (starting target under 2%); romantic role-play with likely minors (target 0) | See pattern | [romantic or parasocial dependence](failures/romantic-or-parasocial-dependence.md) |
 
 ## Patterns
 | Pattern | One line |
 |---|---|
 | Negotiation capitulation | Gives away discounts, or gets tricked into a $1 deal |
+| [Romantic or parasocial dependence](failures/romantic-or-parasocial-dependence.md) | Encourages emotional reliance or romantic role-play instead of keeping warmth with healthy limits |
 
 ## Planned (not yet written)
-- Romantic or parasocial dependence
 - Sycophantic agreement
 
 ## Related

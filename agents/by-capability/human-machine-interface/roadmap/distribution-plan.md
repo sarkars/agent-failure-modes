@@ -44,10 +44,10 @@ Ordered by how much distribution each asset earns relative to effort. Every asse
 ### Status
 | # | Asset | Status |
 |---|---|---|
-| 1 | Evidence review | **Draft v0.1** written 2026-10-19: [why people leave chatbots](evidence/why-people-leave-chatbots.md). Studies opened; re-check Xu et al. paper before publishing |
+| 1 | Evidence review | **Done (v0.2, ready for review)** 2026-10-19: [why people leave chatbots](evidence/why-people-leave-chatbots.md). Every cited study opened; Luo et al. and Xu et al. at abstract level only (paper bodies unread), labeled in the file |
 | 2-9 | Schema and taxonomy, scenario pack, teardowns, metrics hub, preregistrations, rules library, audit offer, glossary | Not started |
 
-**Retrofit progress (Pattern ID and detection signals):** done on generic-error-messages, silent-failure-and-timeout, cold-transfer, escalates-too-early-or-too-late and talk-to-a-human-ignored-or-looped (5 of 28 written patterns); the other 23 are pending. Retrofit order: patterns whose pages get impressions first.
+**Retrofit progress (Pattern ID and detection signals):** done on 13 of the 30 written flagship patterns: generic-error-messages, silent-failure-and-timeout, cold-transfer, escalates-too-early-or-too-late, talk-to-a-human-ignored-or-looped, dead-end-i-don-t-understand-replies, answer-and-go-conversation, hollow-empathy, undisclosed-bot-identity, missed-crisis-signals, refusal-with-no-reason-or-next-step, and the new scam-victim-not-interrupted and romantic-or-parasocial-dependence. The other 17 are pending. Retrofit order: patterns whose pages get impressions first (no Search Console data yet, so by search interest).
 
 ### How the assets connect to the existing patterns
 The 27 written patterns are the backbone. Each pattern's file name is its **Pattern ID** and never changes, so every public URL stays as it is. Everything else keys off that ID:
