@@ -258,9 +258,9 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 16 | EM-11 | No warning of context loss | Extends | - | `goals/effort-and-memory/failures/no-warning-of-context-loss.md` | Done | 15 |
 | 17 | EM-01 | Lazy completion | New | V | `goals/effort-and-memory/failures/lazy-completion.md` | Done | 15 |
 | 18 | DM-03 | Corrections not applied | New | - | `goals/dialogue-management/failures/corrections-not-applied.md` | Done | 15 |
-| 19 | DM-09 | Guessing instead of asking | Extends | - | `goals/dialogue-management/failures/guessing-instead-of-asking.md` | Queued |  |
-| 20 | RF-01 | Over-refusal of ordinary requests | Extends | V | `goals/refusals-and-boundaries/failures/over-refusal-of-ordinary-requests.md` | Queued |  |
-| 21 | RF-02 | Refusal with no reason or next step | Extends | - | `goals/refusals-and-boundaries/failures/refusal-with-no-reason-or-next-step.md` | Queued |  |
+| 19 | DM-09 | Guessing instead of asking | Extends | - | `goals/dialogue-management/failures/guessing-instead-of-asking.md` | Done | 16 |
+| 20 | RF-01 | Over-refusal of ordinary requests | Extends | V | `goals/refusals-and-boundaries/failures/over-refusal-of-ordinary-requests.md` | Done | 16 |
+| 21 | RF-02 | Refusal with no reason or next step | Extends | - | `goals/refusals-and-boundaries/failures/refusal-with-no-reason-or-next-step.md` | Done | 16 |
 | 22 | TE-01 | Generic error messages | New | - | `goals/errors-and-recovery/failures/generic-error-messages.md` | Queued |  |
 | 23 | TE-06 | Confident wrong answer with no way to check | Extends | - | `goals/errors-and-recovery/failures/confident-wrong-answer-with-no-way-to-check.md` | Queued |  |
 | 24 | GS-01 | Eligibility answers sound like decisions | New | L, E | `goals/government-service-agents/failures/eligibility-answers-sound-like-decisions.md` | Queued |  |
@@ -785,7 +785,25 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 - **Review pass changed:** checked every author attribution against the arXiv pages; bounded the fix with the FlipFlop result so it does not teach the bot to accept every challenge.
 - **Part C: Task 13b Done.** New file `agent-type-gap-analysis.md` for six agent types: 6 searches and the abstract pages (or PDF text for τ-bench) of 16 papers plus the OWASP press release opened. Summary-only items are marked, and the Hyper-τ-bench and GPT-4o figures from blog write-ups are not used.
 - **Part B (SEO review):** an entry for today exists in `seo/log.md`; Search Console not available.
+- **Deploy (run 15):** content repo merged to `main` as `26e345d` (PR 9). Site repo `main` at `ebcb2b2`, pushed after a clean build: 1,576 sitemap URLs, 0 URLs lost against the live sitemap (1,553), 23 added (the three new patterns, the pages from runs 13 and 14 still unpublished live, and goal pages including dialogue-management). One H1 per page checked; no visible SEO comment. **Live check: not deployed** (`/answer-buried/` and `/lazy-completion/` return 404; the live sitemap still has 1,553 URLs; no deploy hook variable is set). Same known gap as runs 13 and 14. Needs the owner to check Vercel.
 - **Flagship patterns written so far: 18 of 30** (HU-01 to HU-03, CP-14, CP-15, CP-20, CP-08, CP-12, XA-01, CP-01, CP-06, CP-03, RS-14, RS-01, EM-02, EM-11, EM-01, DM-03).
+
+### Run 16 (scheduled): 2026-10-19 09:16 UTC onward
+- **DM-09 Guessing instead of asking: Done.** File: `goals/dialogue-management/failures/guessing-instead-of-asking.md`, `tests/guessing-instead-of-asking.md` (12 scenarios, "Not yet run"). Incident: "No public incident found" with the searches run.
+- **Searches run: 3** (LLMs and clarifying questions; user studies on how many questions are too many; wrong-intent guesses in customer service). **Sources opened (5):** abstracts of CLAMBER (ACL 2024), Zou et al. (CIKM 2020), Zou et al. (ACM TOIS 2023), the *Ask or Recommend* study (CIKM '24), and Lautraite et al. (arXiv 2110.15235; opened, not cited). **Not opened:** vendor and practitioner pages on intent thresholds (not used).
+- **Claims left unverified:** no study of ask versus guess in live support; the studies are search and shopping tasks and are labeled that way.
+- **Review pass changed:** kept the 11 to 21 question figure as a different-task outer limit, not a target; named only authors and venues I had read.
+- **RF-01 Over-refusal of ordinary requests: Done.** File: `goals/refusals-and-boundaries/failures/over-refusal-of-ordinary-requests.md`, `tests/over-refusal-of-ordinary-requests.md`, new family README `goals/refusals-and-boundaries/README.md`, and the incident page `incidents/virgin-money-chatbot-flags-own-brand-name.md`.
+- **Searches run: 4** (XSTest; OR-Bench; bank chatbot refusals; the Virgin Money case). **Sources opened (5):** the XSTest and OR-Bench abstracts, Fortune (Jan. 30, 2025), CX Today, and a Vibe Graveyard summary (not cited). **Not opened:** the benchmark papers' result tables; a safety-over-refusal correlation figure seen only in a search summary is not used.
+- **Claims left unverified:** how often live products over-refuse; the cause of the Virgin Money reply (the bank says it was more than a single-word block).
+- **Review pass changed:** relabeled the incident as an older basic filter, not an LLM; replaced a health-dosage test scenario with a neutral security one so no expert review is needed.
+- **RF-02 Refusal with no reason or next step: Done.** File: `goals/refusals-and-boundaries/failures/refusal-with-no-reason-or-next-step.md`, `tests/refusal-with-no-reason-or-next-step.md`. Incident: the Virgin Money page, now also matched to this pattern.
+- **Searches run: 3** (user perceptions of refusal styles; OpenAI Model Spec refusal wording; Anthropic guidance on declining), the last two returning only secondary material. **Sources opened (3):** abstracts of *Let Them Down Easy!* (EMNLP 2025), Nahar et al. (arXiv 2609.16191), and *The Art of Saying No* (NeurIPS 2024). **Not opened:** the Model Spec and Anthropic's published guidance (not reached; none used).
+- **Claims left unverified:** no live-product test of refusal templates. Per-strategy figures from a search summary (including satisfaction scores) are not used.
+- **Review pass changed:** limited the explanation finding to the abstract's wording (helps infrequent refusals, not frequent ones); added a cause-specific rule.
+- **Part C: Task 13c Done.** `roadmap/l1-harness-decision.md`: a proposed decision (framework-neutral spec, borrowing the τ-bench evaluation shape and the cookbook and GRASP designs), from abstracts and pages I opened; marked for a person to confirm.
+- **Part B (SEO review):** an entry for today exists in `seo/log.md`; Search Console not available.
+- **Flagship patterns written so far: 21 of 30** (the 18 from run 15, plus DM-09, RF-01, RF-02).
 
 ## Backlog (not scheduled)
 Ideas from earlier lists that were never chosen. They stay out of the queue until someone adds them.
