@@ -25,6 +25,7 @@ search phrases:
 | **Stakes** | Low to high. A wrong date or address on a booking or order can cost money; a wrong name is an insult. |
 | **Who is affected** | Anyone who fixes a detail mid-conversation, and anyone who does not re-read the final summary |
 | **Frequency** | Common in the research on state tracking, which says many models "cannot update slot values appropriately". I found no study of how often live products fail. |
+| **Pattern ID** | corrections-not-applied |
 | **Family** | [Dialogue management](../README.md) |
 | **Goal** | The conversation follows what the person means: references, corrections, exceptions, and several requests at once, and asks and confirms only what matters. |
 | **Primary metric** | Corrections still wrong two turns later. Target: 0 (tune). |
@@ -102,6 +103,16 @@ Before any booking, order, or send, read back the current values and ask for con
 Apply the user's corrections to their own details. If they challenge a fact you are sure of, check it before agreeing.
 ```
 
+**Moves** (see [conversation moves](../../../solutions-library/conversation-moves.md); list only the moves that apply, most preferred first)
+| Move | When, in this pattern |
+|---|---|
+| Lead with the answer | The user corrects a detail: the first sentence gives the corrected value ("Updated: Tuesday at 7 pm"), plus anything it changes |
+| Ask one clarifying question | The "no" may not be a correction of a recorded detail ("no, I don't want a window seat"): ask which detail they mean. Don't ask when the slot is clear |
+| Admit uncertainty and show how to check | The user challenges a fact the assistant is sure of: check it and say what the check shows before agreeing. Don't use it on the user's own details, which are simply applied |
+| Hand off to a person | The corrected value cannot be applied (the slot is gone or the system will not accept it): say so and offer a person |
+
+Offer choices is not used here: a correction names its own value, and a menu would make the user pick what they already said.
+
 **Don't over-correct.** Do not ask the user to re-confirm every detail every turn, and do not flip correct facts because the user pushed back. Do not treat every "no" as a correction; "no, I don't want a window seat" may mean a different thing than "no, that's the wrong date".
 
 **Hand-off rule.** If the corrected value cannot be applied (the slot is gone, or the system will not accept it), say so and offer a person ([cold transfer](../../human-handoff/failures/cold-transfer.md) for how to pass it on).
@@ -128,6 +139,31 @@ Targets are starting points to tune on your own data, unless a source is given.
 | Corrections without a read-back | Under 2% | Replies after a correction that do not state the new value | Over 5% |
 | Re-confirmation of untouched details (counter-metric) | Under 5% | Confirmation prompts about details the user did not change | Over 10% |
 | Flip rate on correct facts under challenge (counter-metric) | Track; set from baseline | Eval set of correct assistant facts challenged by the user | Rising |
+
+### Detection signals (proposed)
+Chat signals in a conversation event log that suggest this failure. All are proposed and not yet checked against human-labeled conversations.
+| Signal | Where it shows | Counter-signal (what it could be instead) |
+|---|---|---|
+| The action's parameters hold the old value after a correction (metric: old value in final action) | Action event params compared with the last correction event's `new_value` for that slot | The user later said "change it back" and the undo log restored the old value |
+| The pre-action summary shows the old value two turns after a correction (primary metric) | Summary event values compared with the correction event's `new_value` | The user made a second correction to that slot in between |
+| The reply right after a correction does not state the new value (metric: corrections without a read-back) | Reply text after a correction event, checked for `new_value` | The reply asked one clarifying question because the "no" was not clearly a correction |
+| The user corrects the same slot again with the same value within the next two turns | Two correction events on one slot with equal `new_value` | The user is changing the value a third time on purpose |
+
+**Starter rule:** When the user corrects a detail, replace the old value everywhere: in what you have recorded, in the summary, and in any pending action.
+
+**Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
+```yaml
+pattern_id: corrections-not-applied
+runs: conversation
+reads: [correction_event.slot, correction_event.new_value, state.slot_values, reply.text, summary.values, action.params]
+trigger: the user corrects a detail, and again before any booking, order, or send
+moves: [lead_with_answer, ask_clarifying_question, admit_uncertainty, hand_off]   # short names for the moves in the table
+choices: none
+on_miss: rewrite
+metric: corrections still wrong two turns later
+counter_metric: re-confirmation of untouched details
+status: proposed
+```
 
 ## 8. Related patterns
 - [Self-correction failure](../../../../../cross-cutting/accuracy/goals/reasoning-quality/failures/self-correction-failure.md): the agent's own errors. This page covers the user's corrections.

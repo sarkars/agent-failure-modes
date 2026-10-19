@@ -45,10 +45,13 @@ Ordered by how much distribution each asset earns relative to effort. Every asse
 | # | Asset | Status |
 |---|---|---|
 | 1 | Evidence review | **Done (v0.2, ready for review)** 2026-10-19: [why people leave chatbots](evidence/why-people-leave-chatbots.md). Every cited study opened; Luo et al. and Xu et al. at abstract level only (paper bodies unread), labeled in the file |
-| 2 | Event schema and failure taxonomy | **Done (v0.1 / v1 draft, ready for review)** 2026-10-19: [event schema](specs/conversation-event-schema-v0.1.md), [taxonomy](specs/failure-taxonomy-v1.md) (44 entries, 22 families). Outside-framework mapping stays Needs review |
-| 3-9 | Scenario pack, teardowns, metrics hub, preregistrations, rules library, audit offer, glossary | Not started |
+| 2 | Event schema and failure taxonomy | **Done (v0.1 / v1 draft, ready for review)** 2026-10-19: [event schema](specs/conversation-event-schema-v0.1.md), [taxonomy](specs/failure-taxonomy-v1.md) (46 entries, 22 families). Outside-framework mapping stays Needs review |
+| 3 | Scenario pack | Not started |
+| 4 | Incident teardowns | In progress: DPD done 2026-10-20 ([teardown](../incidents/dpd-chatbot-swears-and-criticizes-the-company-january-2024.md)); Klarna next |
+| 5 | Metrics hub | **Done (draft, ready for review)** 2026-10-20: [metrics](../reference/metrics.md). Four vendor definitions opened, no benchmarks |
+| 6-9 | Preregistrations, rules library, audit offer, glossary | Not started |
 
-**Retrofit progress (Pattern ID and detection signals):** done on 19 of the 44 written HMI patterns (the 13 earlier ones plus re-asks-for-known-information, generic-first-response, answer-buried, guessing-instead-of-asking, over-refusal-of-ordinary-requests, confident-wrong-answer-with-no-way-to-check). 25 pending. Retrofit order: patterns whose pages get impressions first (no Search Console data yet, so by search interest).
+**Retrofit progress (Pattern ID and detection signals):** done on 27 of the 46 written HMI patterns (19 earlier, plus the 8 of run 22: doesn-t-say-what-it-can-do, forces-a-fresh-login, missing-the-obvious-intent, help-that-becomes-a-sales-pitch, obstructing-cancellation-downgrade-or-refund, answers-withheld-behind-an-upgrade-unsaid, corrections-not-applied, no-reply-to-acknowledgments-and-closers; the 19 were the 13 earlier ones plus re-asks-for-known-information, generic-first-response, answer-buried, guessing-instead-of-asking, over-refusal-of-ordinary-requests, confident-wrong-answer-with-no-way-to-check). 19 pending (the two new run-22 pages were written with signals). Retrofit order: patterns whose pages get impressions first (no Search Console data yet, so by search interest).
 
 ### How the assets connect to the existing patterns
 The 27 written patterns are the backbone. Each pattern's file name is its **Pattern ID** and never changes, so every public URL stays as it is. Everything else keys off that ID:
@@ -67,6 +70,20 @@ The reader's path is: pattern, then detection signals, then starter rule, then s
 
 ### Channel scope
 This phase is chat-first: text chatbots. The event schema describes a conversation turn in a channel-neutral way, with a `channel` field (chat, voice, web). Voice-specific signals (silence, interruptions, speech-recognition errors) and web-analytics signals are listed as **planned**, never as detected or measured. Patterns already written for voice keep their pages and Pattern IDs; their detection signals say which are written for text and which are planned for voice. Voice and web get their own phase after chat has traction.
+
+### Conversation guidance (Part E, folded into the patterns)
+Added 2026-10-19 at the owner's request; reshaped the same day by the approved [document model](document-model.md). Guidance for chat in the spirit of output guardrails, but aimed at how the conversation goes: what the bot should do at a known failure moment, then the check that spots a miss. It is not a separate document type. Each pattern carries its own "Moves" table (section 5) and "Guide spec" block (end of section 7); the moves are explained once in [conversation moves](../solutions-library/conversation-moves.md). Checks stay proposed until calibrated. Code comes last: the owner approved a reference module on 2026-10-19; it starts with a design note and lives in its own repository.
+
+| # | Item | Status |
+|---|---|---|
+| E1 | Conversation moves page and template sections | **Done** 2026-10-19 |
+| E2 | Moves table and Guide spec on every written pattern (added with each retrofit; the patterns already retrofitted get them on their own) | In progress: 15 of 46 pages have a Moves table and Guide spec (8 retrofits and 5 Part E edits in run 22, plus the 2 new pages) |
+| E3 | Explainer: output guardrails vs. conversation guidance, in `reference/` | Not started |
+| E4 | Test conversations per pattern, in `tests/<pattern-id>.md` | Folded into asset 3 |
+| E5 | How this sits next to existing guardrail tools, in `reference/`, from their docs actually opened (Needs review) | Not started |
+| E6 | Reference code module: design note first (roadmap/code-module-design.md, once 19 patterns have a Guide spec), then code in its own repository, which the owner creates | Approved 2026-10-19, not started |
+
+Folded assets: the scenario pack (asset 3) becomes scenarios in the test files plus a taxonomy column, and the starter rules library (asset 7) becomes a taxonomy column. The [failure taxonomy](specs/failure-taxonomy-v1.md) gains columns for starter rule, moves, test file and incident. New cross-pattern pages (metrics hub, studies, glossary, explainer, tool comparison, audit offer) go in `reference/`.
 
 ## 5. The first 90 days (content and distribution only)
 | Weeks | Do | Done when |

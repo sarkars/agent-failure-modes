@@ -67,3 +67,18 @@ User: "...just do the normal thing, whatever that is."
 - [Under-Clarification](under-clarification.md) - the opposite miscalibration: proceeding without asking when ambiguity genuinely warranted a question
 - [Clarification Loop Infinite](clarification-loop-infinite.md) - repeated over-clarification without a terminating condition escalates into this more severe non-terminating pattern
 - [Disambiguation Strategy Ineffective](disambiguation-strategy-ineffective.md) - over-clarification is one specific mismatch case within the broader set of poorly-fitted disambiguation strategies
+
+## Chat assistant examples
+
+### Irrelevant or already-answered clarifying questions
+```
+(Signed in as Dana R.; one Internet account, Visa ending 4417 on file)
+Before:
+User: Move my bill due date to the 20th.
+Bot:  Which account is this for, and what is your email address?
+After:
+User: Move my bill due date to the 20th.
+Bot:  Done. Your Internet account's due date is now the 20th, starting next cycle.
+```
+**What the user experiences:** questions the product could answer itself, or that change nothing, so the bot feels like it is not paying attention and the user types details they already gave when they signed in.
+**Fix:** before asking, check the session (signed-in account, plan, payment method, language setting) and use it. Ask only when the answer would change what the bot does, such as which of two accounts to bill. See [Re-Asks for Known Information](../../../../../by-capability/human-machine-interface/goals/embedded-copilots/failures/re-asks-for-known-information.md).

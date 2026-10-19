@@ -126,6 +126,15 @@ State to keep between turns:
   "advances_declined": 0, "closed": false }
 ```
 
+**Moves** (see [conversation moves](../../../solutions-library/conversation-moves.md); only the moves that apply, most preferred first)
+| Move | When, in this pattern |
+|---|---|
+| Lead with the answer | Every reply: answer what was asked first, then add the one forward move. Never hold the answer back to ask a question |
+| Ask one clarifying question | The forward move for a goal that is still unclear (for example buy, exploring: "Is this for home or an office?"). One question per turn, never two |
+| Offer choices | The forward move when the next step has 2-4 likely paths (for example learn: "2-minute version or step-by-step"). Add "Something else" and keep free text open. Do NOT offer them when the user said they are done, hurried or upset, has declined two prior prompts, or the next step is single and clear |
+| Admit uncertainty and show how to check | After fix steps, when the bot cannot verify the fix worked: say so, and say how to check ("Try it now: does the app load?") |
+| Hand off to a person | The goal is out of scope, there are 3 turns with no progress, stakes are high, or the user asks. Attach the conversation summary |
+
 **Don't over-correct.** The opposite failure is a bot that interrogates, upsells, or won't let the user leave (see [over-clarification](../../../../../by-use-case/agent-interaction/goals/conversation-quality/failures/over-clarification.md)). Four guardrails: one move per turn; stop advancing after two declined prompts (`advances_declined >= 2`); in high-stakes or distressed contexts, the forward move is a safe next step or a handoff, never a sales prompt; and no filler. A tag-on like "Want me to explain more?" after every reply is a known annoyance. Users and tech writers have complained about it in general-purpose assistants, and one writer reported that a plain "do not ask follow-up questions" instruction wasn't enough to stop it ([PCWorld](https://www.pcworld.com/article/3221302/i-got-chatgpt-stop-its-annoying-follow-up-questions-with-one-prompt.html)). A forward move counts only if it ties to the user's stated goal.
 
 **Hand-off rule.** If the goal can't be advanced (out of scope, repeated non-progress, or the user asks), the forward move is a handoff to a human with the conversation summary attached, so the user doesn't have to repeat themselves. See [poor-escalation](../../../../../by-use-case/customer-service/goals/conversation-resolution/failures/poor-escalation.md).
@@ -167,6 +176,20 @@ Signals in a conversation event log that suggest this failure. Treat them as pro
 | Conversation marked resolved without a closing message | Resolved state set with no closing template event (confirm and next step) | The user explicitly confirmed the fix worked before any template ran |
 
 **Starter rule:** flag a session for review when it ends on a bot message with no resolution marker and no forward move in the bot's last non-final turns, unless the user had signaled they were done.
+
+**Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
+```yaml
+pattern_id: answer-and-go-conversation
+runs: pre_send
+reads: [session.goal, session.stage, session.advances_declined, session.stakes, session.stalled_turns, session.user_signalled_done, session.closed, draft_reply.forward_move]
+trigger: a non-final bot reply is about to be sent with an answer but no forward move
+moves: [lead_with_answer, ask_clarifying_question, offer_choices, admit_uncertainty, hand_off]
+choices: ["2-minute version", "Step-by-step", "Something else"]
+on_miss: rewrite
+metric: Confirmed-resolution rate
+counter_metric: Questions per bot turn (mean)
+status: proposed
+```
 
 ## 8. Related patterns
 - [unclear-next-step](../../../../../by-use-case/customer-service/goals/conversation-resolution/failures/unclear-next-step.md): the bot gave a next step but it was vague. Here, there is no forward move at all.

@@ -47,6 +47,34 @@ Impact: One extra round-trip, customer frustration, original payment-form bug re
 - A specific macro's re-contact rate exceeds the queue baseline by a defined margin → P2
 - Macro sent with below-threshold match confidence and no confirmation step → P3
 
+## Chat assistant examples
+
+### Boilerplate steps that don't match the user's setup
+```
+Before:
+User: How do I export my Dropbox files to my external drive? (signed in on a MacBook, Basic plan)
+Bot:  Right-click the Dropbox icon in the Windows taskbar, open Preferences, then choose Sync > Advanced.
+
+After:
+User: How do I export my Dropbox files to my external drive? (signed in on a MacBook, Basic plan)
+Bot:  I see you're on a Mac. Click the Dropbox icon in the menu bar at the top of the screen, then your profile picture, then Preferences. I'll skip Windows-only options like the taskbar.
+```
+**What the user experiences:** a Windows menu that does not exist on their Mac, so they conclude the bot did not look at their setup.
+**Fix:** before sending steps, read the operating system, app version, and plan from the session and pick the matching instructions; if a step depends on something the session does not show, ask once. See the [re-asks for known information](../../../../../by-capability/human-machine-interface/goals/embedded-copilots/failures/re-asks-for-known-information.md) pattern.
+
+### Keyword-matched documentation instead of an answer
+```
+Before:
+User: My Verizon bill jumped $30 this month. I added a line on the 3rd but the rep said it was free.
+Bot:  Here's an article that may help: "Understanding your Verizon bill" (link)
+
+After:
+User: My Verizon bill jumped $30 this month. I added a line on the 3rd but the rep said it was free.
+Bot:  A $30 increase after adding a line on the 3rd is often a device or activation charge. I can check your invoice for that line now. The article has the full list of charges: (link)
+```
+**What the user experiences:** a link to a general article that does not mention their line or the $30, so they must read it and still ask the question again.
+**Fix:** answer the user's stated situation first, using account data where the bot has access, and attach the article as support for the answer rather than as the answer. See the [generic first response](../../../../../by-capability/human-machine-interface/goals/embedded-copilots/failures/generic-first-response.md) pattern.
+
 ---
 
 ## References

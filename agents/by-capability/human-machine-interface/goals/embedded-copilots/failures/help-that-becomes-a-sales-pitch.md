@@ -27,6 +27,7 @@ search phrases:
 | **Stakes** | Medium. It costs trust, and it can cross into misleading marketing. |
 | **Who is affected** | Anyone asking for help, especially people already frustrated |
 | **Frequency** | Common as a design temptation. I found no study that measures how often assistants do this; the evidence below is about hidden ads and revenue-driven behavior in chatbots. |
+| **Pattern ID** | help-that-becomes-a-sales-pitch |
 | **Family** | [Embedded copilots](../README.md) |
 | **Goal** | An assistant built into a product helps the person do what they came to do, using what the product already knows, and never puts the vendor's interest ahead of theirs. |
 | **Primary metric** | Upsell-in-help rate: share of help replies on support intents that include a sales prompt when the user did not ask about plans or pricing. Starting target: under 5% (tune). |
@@ -102,6 +103,12 @@ If the user declines or ignores an offer, do not make another in this conversati
 If you mention a sponsored or paid product, say it is sponsored.
 ```
 
+**Moves** (see [conversation moves](../../../solutions-library/conversation-moves.md); most preferred first)
+| Move | When, in this pattern |
+|---|---|
+| Lead with the answer | Every help request on a support intent: answer fully before any mention of plans, and never hold the answer back for an offer |
+| Hand off to a person | The user pushes back on an offer or asks whether the assistant is selling |
+
 **Don't over-correct.** Banning all commercial mentions fails users who really need to know a feature is on another plan, and it hides legitimate options. The aim is honest, relevant, optional, and labeled, not silent. Measure conversions from relevant offers so the rules are not blamed for lost revenue by accident.
 
 **Hand-off rule.** If a user pushes back on an offer or asks whether the assistant is selling, offer a person ([escalation rules](../../human-handoff/failures/escalates-too-early-or-too-late.md)).
@@ -128,6 +135,32 @@ Targets are starting points to tune on your own data, unless a source is given.
 | Offers during complaints or disputes | 0 | Offers in conversations tagged complaint, error, billing dispute, or cancellation | Any |
 | Help resolution rate (counter-metric) | Track; do not let it fall | Confirmed resolution on support intents | Falling two weeks in a row |
 | Relevant-offer conversion (counter-metric) | Track | Conversions from offers allowed by the table above | Falling sharply |
+
+### Detection signals (proposed, not yet calibrated)
+Signals in a conversation event log that suggest this failure. Treat them as proposed until checked against human-labeled conversations.
+| Signal | Where it shows | Counter-signal (what it could be instead) |
+|---|---|---|
+| Help reply on a support intent contains a sales prompt | Reply event with intent tag and the offer-detector flag, where the user's turns have no plan or pricing question | The user asked about plans, pricing, or limits, or the answer needed a paid feature and the reply said so plainly |
+| An offer follows a decline | Offer event after a user turn marked as a decline (or after an offer with no reply), same conversation | The user later asked about pricing themselves |
+| An offer appears in a complaint, error, billing dispute, or cancellation conversation | Offer event in a conversation carrying one of those tags | The user asked about plans in that conversation |
+| A second offer in one conversation | Count of offer events per conversation is 2 or more | The user asked for more options |
+| A sponsored or paid recommendation with no label | Reply event with the sponsored flag set and no sponsored label in the reply text | The detector flagged a plain feature mention that is not paid placement |
+
+**Starter rule:** answer the question completely before anything else.
+
+**Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
+```yaml
+pattern_id: help-that-becomes-a-sales-pitch
+runs: pre_send
+reads: [reply.offer_flag, reply.sponsored_flag, reply.sponsored_label, conversation.intent_tag, conversation.offer_count, user_turn.declined_offer, user_turn.asked_about_plans]
+trigger: a help reply on a support intent is about to be sent
+moves: [lead_with_answer, hand_off]   # short names for the moves in the table
+choices: none
+on_miss: rewrite
+metric: Upsell-in-help rate
+counter_metric: Help resolution rate
+status: proposed
+```
 
 ## 8. Related patterns
 - [Answers withheld behind an upgrade, unsaid](answers-withheld-behind-an-upgrade-unsaid.md): the answer is held back with no explanation.

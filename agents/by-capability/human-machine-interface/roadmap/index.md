@@ -33,21 +33,21 @@
 | CP-06 | Obstructing cancellation, downgrade, or refund | [embedded-copilots.md](embedded-copilots.md) | Written | Governance | No |
 | CP-07 | Helpfulness theatre | [embedded-copilots.md](embedded-copilots.md) | Extends | Governance | No |
 | CP-08 | Missing the obvious intent | [embedded-copilots.md](embedded-copilots.md) | Written | Model | Partly |
-| CP-09 | Over-complicating simple tasks | [embedded-copilots.md](embedded-copilots.md) | Extends | Model | Partly |
-| CP-10 | Irrelevant or already-answered clarifying questions | [embedded-copilots.md](embedded-copilots.md) | Extends | Model | Partly |
-| CP-11 | Keyword-matched documentation instead of an answer | [embedded-copilots.md](embedded-copilots.md) | Extends | Business context | Partly |
+| CP-09 | Over-complicating simple tasks | [embedded-copilots.md](embedded-copilots.md) | Covered | Model | Partly |
+| CP-10 | Irrelevant or already-answered clarifying questions | [embedded-copilots.md](embedded-copilots.md) | Covered | Model | Partly |
+| CP-11 | Keyword-matched documentation instead of an answer | [embedded-copilots.md](embedded-copilots.md) | Covered | Business context | Partly |
 | CP-12 | Doesn't say what it can do | [embedded-copilots.md](embedded-copilots.md) | Written | Business context | No |
-| CP-13 | Ignores the page, selection, and form state | [embedded-copilots.md](embedded-copilots.md) | New | Business context | No |
+| CP-13 | Ignores the page, selection, and form state | [embedded-copilots.md](embedded-copilots.md) | Written | Business context | No |
 | CP-14 | Re-asks for known information | [embedded-copilots.md](embedded-copilots.md) | Written | Business context | No |
 | CP-15 | Forces a fresh login | [embedded-copilots.md](embedded-copilots.md) | Written | Business context | No |
-| CP-16 | Ignores role, plan, locale, and device | [embedded-copilots.md](embedded-copilots.md) | Extends | Business context | No |
-| CP-17 | Ignores recent activity and history | [embedded-copilots.md](embedded-copilots.md) | Extends | Business context | No |
+| CP-16 | Ignores role, plan, locale, and device | [embedded-copilots.md](embedded-copilots.md) | Covered | Business context | No |
+| CP-17 | Ignores recent activity and history | [embedded-copilots.md](embedded-copilots.md) | Covered | Business context | No |
 | CP-18 | Stale or wrong-user context used with confidence | [embedded-copilots.md](embedded-copilots.md) | Covered | Business context | No |
-| CP-19 | Context lost across a multi-session task | [embedded-copilots.md](embedded-copilots.md) | Extends | Business context | No |
+| CP-19 | Context lost across a multi-session task | [embedded-copilots.md](embedded-copilots.md) | Covered | Business context | No |
 | CP-20 | Generic first response | [embedded-copilots.md](embedded-copilots.md) | Written | Business context | No |
 | CP-21 | Greeting-only first turn | [embedded-copilots.md](embedded-copilots.md) | New | Business context | No |
-| CP-22 | No likely-next-action suggestions | [embedded-copilots.md](embedded-copilots.md) | New | Business context | No |
-| CP-23 | Boilerplate steps that don't match the user's setup | [embedded-copilots.md](embedded-copilots.md) | Extends | Business context | Partly |
+| CP-22 | No likely-next-action suggestions | [embedded-copilots.md](embedded-copilots.md) | Written | Business context | No |
+| CP-23 | Boilerplate steps that don't match the user's setup | [embedded-copilots.md](embedded-copilots.md) | Covered | Business context | Partly |
 | RT-01 | Slow first response | [response-time.md](response-time.md) | Extends | Reliability | Partly |
 | RT-02 | Silent long-running work | [response-time.md](response-time.md) | Written | Business context | No |
 | RT-03 | Unpredictable latency | [response-time.md](response-time.md) | Extends | Reliability | Partly |

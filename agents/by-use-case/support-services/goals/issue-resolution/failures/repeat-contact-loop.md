@@ -47,6 +47,22 @@ Impact: Customer experiences repeated friction; root cause continues affecting o
 
 ---
 
+## Chat assistant examples
+
+### Ignores recent activity and history
+```
+Before:
+User: My Netflix payment failed this morning and now I can't watch anything.
+Bot:  I can help with billing. What is your account email?
+User: This is the second time I'm writing in about this this week.
+Bot:  Thanks for reaching out! Can you describe the issue you're having?
+After:
+User: My Netflix payment failed this morning and now I can't watch anything.
+Bot:  I see the charge on your Visa ending 4417 was declined at 8:12 AM, and you opened a ticket on Monday about the same card. Updating the card should fix it. Want me to open that page?
+```
+**What the user experiences:** a bot that starts from zero after the user has already written in about the same problem, so the user repeats themselves and the earlier ticket seems to count for nothing.
+**Fix:** before replying, read the signed-in account's recent events (failed charges, errors) and open or recent tickets, and lead with what they show. If the same symptom appears in an earlier ticket, say so and escalate for a root-cause check instead of closing it again. See the [re-asks for known information](../../../../../by-capability/human-machine-interface/goals/embedded-copilots/failures/re-asks-for-known-information.md) pattern.
+
 ## References
 
 - [Demystifying the Lifecycle of Failures in Platform-Orchestrated Agentic Workflows](https://arxiv.org/pdf/2509.23735)

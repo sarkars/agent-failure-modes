@@ -71,3 +71,20 @@ needed: `ALTER TABLE t RENAME COLUMN old_name TO new_name;`
 - [Conversation Formality Mismatch](conversation-formality-mismatch.md) - both are calibration failures, one on register/tone and one on depth/length
 - [Under-Clarification](under-clarification.md) - a shallow answer to a genuinely ambiguous high-stakes question can also reflect insufficient clarification, not just insufficient depth
 - [User Expectation Mismatch](user-expectation-mismatch.md) - persistent depth miscalibration is one concrete driver of a broader gap between expected and delivered agent behavior
+
+## Chat assistant examples
+
+### Over-complicating simple tasks
+```
+Before (illustrative help chat for a streaming service)
+User: How do I change my email address?
+Bot:  Changing your email involves several steps. 1. Sign in. 2. Open the profile menu. 3. Choose Account. 4. Find Membership & Billing.
+      5. Check whether a Kids profile is active. 6. Review the email rules. 7. Confirm your identity. 8. Enter the new address. 9. Save.
+      Email addresses also matter for billing notices, device sign-ins, and password resets, so here is how each one works...
+
+After
+User: How do I change my email address?
+Bot:  Go to the Change Email page in your account settings and enter the new address. Want the steps in detail, or help if it won't save?
+```
+**What the user experiences:** a wall of steps and side topics for a one-screen task, so the user has to dig out the one action they asked about.
+**Fix:** answer with the single action that does the job, then offer the detail (identity check, profile limits, address rules) only if the user asks or the change fails. Compare the answer-first rule in [Chatbot Buries the Answer](../../../../../by-capability/human-machine-interface/goals/response-structure/failures/answer-buried.md). The real Netflix help page for this task lists four short steps ([Netflix Help Center](https://help.netflix.com/en/node/134335), opened), which is the length a good reply should stay near.

@@ -103,6 +103,14 @@ I'm connecting you to a specialist. I'm passing along: your order 48213, that th
 and that you want a replacement. Anything to add or fix?
 ```
 
+**Moves** (see [conversation moves](../../../solutions-library/conversation-moves.md); list only the moves that apply, most preferred first)
+| Move | When, in this pattern |
+|---|---|
+| Hand off to a person | The handoff happens: the packet and transcript go to the person before their first message. Do not hand off if the user asked to stay with the bot |
+| Admit uncertainty and show how to check | The bot is about to pass a summary the customer has not seen, or a fact the bot could not verify: show the summary, mark what is unconfirmed, and ask "Anything to add or fix?" so the customer can correct it |
+
+Offer choices does not apply here: the customer is correcting a summary, so a free-text reply fits better than a menu.
+
 **Don't over-correct.** A long summary nobody reads is another failure. Keep the packet to what the next person needs in ten seconds, with the transcript one click away. Do not pass facts the customer did not give you, and do not pass sensitive data beyond what the person is authorized to see.
 
 **Hand-off rule.** This pattern starts where [talk to a human ignored or looped](talk-to-a-human-ignored-or-looped.md) ends: the handoff has happened. A wrong summary is a separate planned pattern (HU-04 in the [roadmap](../../../roadmap/handoff-measurement-and-operations.md)).
@@ -141,6 +149,20 @@ Signals in a conversation event log that suggest this failure. Treat them as pro
 | Customer corrects the summary | Edit or reply to the handoff summary | A small wording fix |
 
 **Starter rule:** every handoff passes a packet the person sees before the first message, and the customer can correct it.
+
+**Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
+```yaml
+pattern_id: cold-transfer
+runs: pre_send
+reads: [handoff_event.packet, handoff_event.transcript_url, session.verified, session.user_facts]
+trigger: the bot is about to hand the customer to a person
+moves: [hand_off, admit_uncertainty]   # short names for the moves in the table
+choices: []
+on_miss: rewrite
+metric: re-ask rate after handoff
+counter_metric: customer corrected the summary (a sharp drop can mean customers stopped reading it)
+status: proposed
+```
 
 ## 8. Related patterns
 - [No channel switch, or context lost on switch](../../channel-selection/failures/no-channel-switch-or-context-lost.md): the same loss when a customer moves between channels. This page is about the handoff from bot to a person.

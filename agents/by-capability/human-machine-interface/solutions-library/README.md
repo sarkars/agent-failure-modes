@@ -7,6 +7,7 @@
 | Framework | Use it to | Fixes patterns like |
 |---|---|---|
 | [SPIN questioning](spin-questioning.md) | Ask discovery questions in chat (situation, problem, implication, need-payoff) instead of answering and stopping | [Answer-and-go conversation](../goals/conversation-leadership/failures/answer-and-go-conversation.md) |
+| [Conversation moves](conversation-moves.md) | Pick what the bot does at a risky moment: lead with the answer, ask one question, offer choices, admit uncertainty, or hand off | [Answer-and-go conversation](../goals/conversation-leadership/failures/answer-and-go-conversation.md) |
 | [Channel-fit matrix](channel-fit-matrix.md) | Choose chat, voice, visual, or a person for each job | [Visual product sold by text or voice](../goals/channel-selection/failures/visual-product-sold-by-text-or-voice.md), [complex or emotional discussion forced into chat](../goals/channel-selection/failures/complex-or-emotional-discussion-forced-into-chat.md) |
 
 ## Frequently asked questions
