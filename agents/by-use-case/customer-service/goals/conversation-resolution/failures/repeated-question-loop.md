@@ -94,6 +94,30 @@ Agent: "Thanks! And can you confirm your order number one more time so I can pul
 
 ---
 
+## Chat assistant examples
+
+### Same answer to a rephrased question
+Before:
+```
+User: Where's my refund for order #48213?
+Bot:  Refunds take 5-7 business days after we receive your return.
+User: I returned it 3 weeks ago. When do I get my money?
+Bot:  Refunds take 5-7 business days after we receive your return.
+User: That's not what I asked. Has the refund been sent?
+Bot:  Refunds take 5-7 business days after we receive your return.
+```
+After:
+```
+User: Where's my refund for order #48213?
+Bot:  Refunds take 5-7 business days after we receive your return.
+User: I returned it 3 weeks ago. When do I get my money?
+Bot:  That didn't answer you, sorry. I checked order #48213: the return was scanned on Oct 2, but no refund is on file. I can send this to a person on our billing team now, or show you the return tracking. Which would you like?
+```
+**What the user experiences:** the bot is not listening; rewording gets the identical text back, so they stop trusting it and go looking for a phone number.
+**Fix:** treat a rephrase of a question the bot just answered as a signal that the last answer failed. Never send the same reply twice: look up the specific order, try a different answer, or offer a person. See [dead-end "I don't understand" replies](../../../../../by-capability/human-machine-interface/goals/conversation-leadership/failures/dead-end-i-don-t-understand-replies.md).
+
+---
+
 ## References
 
 - [NIST-GenAI-Profile](https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence)
