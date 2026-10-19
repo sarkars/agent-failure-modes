@@ -374,8 +374,8 @@
 | DM-13 | Small talk and off-topic messages handled badly | [conversation-design.md](conversation-design.md) | New | Business context | Partly |
 | DM-14 | Same answer to a rephrased question | [conversation-design.md](conversation-design.md) | Extends | Reliability | Partly |
 | DM-15 | False premises accepted | [conversation-design.md](conversation-design.md) | New | Model | Partly |
-| RF-01 | Over-refusal of ordinary requests | [conversation-design.md](conversation-design.md) | Extends | Model | Partly |
-| RF-02 | Refusal with no reason or next step | [conversation-design.md](conversation-design.md) | Extends | Business context | Partly |
+| RF-01 | Over-refusal of ordinary requests | [conversation-design.md](conversation-design.md) | Written | Model | Partly |
+| RF-02 | Refusal with no reason or next step | [conversation-design.md](conversation-design.md) | Written | Business context | Partly |
 | RF-03 | Preachy, moralizing replies | [conversation-design.md](conversation-design.md) | New | Model | Partly |
 | RF-04 | Excess disclaimers and warnings | [conversation-design.md](conversation-design.md) | New | Model | Partly |
 | RF-05 | Boundaries that change between turns or sessions | [conversation-design.md](conversation-design.md) | Extends | Reliability | Partly |
