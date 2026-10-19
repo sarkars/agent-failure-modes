@@ -32,14 +32,29 @@ Ordered by how much distribution each asset earns relative to effort. Every asse
 | # | Asset | Hook or query | Evidence we already hold | Loop |
 |---|---|---|---|---|
 | 1 | **Why people leave chatbots: an evidence review.** What opened studies say causes drop-off: dead ends, no human route, re-asking, buried answers, silence, errors, wrong answers, disclosure | "boring bot" thesis; no searched phrase yet, so it is the category-defining piece | The sources behind 27 patterns, plus the conversion and disclosure studies (to be opened and verified first) | 3, 5 |
-| 2 | **Chatbot test cases and scenarios (pack of 100+)**, organized by behavior, with pass and fail rubrics | "chatbot test cases", "chatbot test scenarios" | 27 test files | 1, 3 |
-| 3 | **Chatbot failure teardowns:** Air Canada, McDonald's drive-thru, Virgin Money, CFPB doom loops, MyCity, GPT-4 laziness, ChatGPT memory; then DPD and Klarna after research | "air canada chatbot failure", "dpd chatbot failure", "klarna chatbot failure", "ai chatbot failures" | Six incident pages and their sources; DPD and Klarna need research | 2 |
-| 4 | **Chatbot metrics hub:** containment versus confirmed resolution, drop-off, KPIs with counter-metrics | "chatbot containment rate", "chatbot kpi metrics", "chatbot evaluation metrics" | Metric tables on every pattern; industry metrics notes | 1 |
-| 5 | **Conversation event schema v0.1** and **failure taxonomy v1** as open specs | Reference value, not a search term | The taxonomy of 27 failures; the analytics plan | 3 |
+| 2 | **Conversation event schema v0.1** and **failure taxonomy v1** as open specs | Reference value, not a search term | The taxonomy of 27 failures; the analytics plan | 3 |
+| 3 | **Chatbot test cases and scenarios (pack of 100+)**, organized by behavior, with pass and fail rubrics | "chatbot test cases", "chatbot test scenarios" | 27 test files | 1, 3 |
+| 4 | **Chatbot failure teardowns:** Air Canada, McDonald's drive-thru, Virgin Money, CFPB doom loops, MyCity, GPT-4 laziness, ChatGPT memory; then DPD and Klarna after research | "air canada chatbot failure", "dpd chatbot failure", "klarna chatbot failure", "ai chatbot failures" | Six incident pages and their sources; DPD and Klarna need research | 2 |
+| 5 | **Chatbot metrics hub:** containment versus confirmed resolution, drop-off, KPIs with counter-metrics | "chatbot containment rate", "chatbot kpi metrics", "chatbot evaluation metrics" | Metric tables on every pattern; industry metrics notes | 1 |
 | 6 | **The preregistrations:** protocols for the first studies, published before running | Subscribe for results | The study table in the analytics plan | 5 |
 | 7 | **Rules and frameworks library (starter)**: selectable rule packs, each with its metric and test scenarios | "chatbot fallback message", "chatbot human handoff" | The L0 spec and the pattern fixes | 1, 3 |
 | 8 | **The free failure audit offer and one worked example** | Direct outreach | The L1 base agent as the worked example; a public sample audit of a synthetic transcript | 4 |
 | 9 | **Glossary** of conversation analytics terms (drop-off, containment, confirmed resolution, handoff recall) | Definitions pages | Pattern metric definitions | 1 |
+
+### How the assets connect to the existing patterns
+The 27 written patterns are the backbone. Each pattern's file name is its **Pattern ID** and never changes, so every public URL stays as it is. Everything else keys off that ID:
+
+| Piece | How it uses the pattern |
+|---|---|
+| Failure taxonomy | One entry per pattern, with the family as its group |
+| Detection signals | A proposed-signals table inside each pattern (see the template); uncalibrated until checked against labeled conversations |
+| Starter rules | The pattern's fix, packaged as one switchable rule with the same ID |
+| Scenario pack | The pattern's test file, rewritten as scenarios with pass and fail rubrics |
+| Teardowns | Each incident links to the pattern it illustrates and says where in the flow it broke |
+| Studies | Each preregistration names the pattern hypotheses it tests |
+| Audit findings | Reported as pattern IDs, each linking to its page |
+
+The reader's path is: pattern, then detection signals, then starter rule, then study. The schema and taxonomy come right after the evidence review (assets 1 and 2) so every later asset uses the same IDs from the start. In parallel, hourly runs add the detection block to existing patterns, three per run, starting with those that already get search impressions. Adding the block edits files in place; no file is renamed or moved, and `check_public_urls.py` must pass on every commit.
 
 ## 5. The first 90 days (content and distribution only)
 | Weeks | Do | Done when |

@@ -41,7 +41,8 @@ SITE COMPATIBILITY RULES (the published Astro site imports this file)
     into the page.
 22. Keep the machine-readable line "**Frequency**: <word>" (Very Common, Common, Occasional, or Rare) and the
     line "## Issue: <one sentence>". The site reads them for badges and cards. The header table is for readers.
-23. Patterns live at goals/<family>/failures/<name>.md so the importer finds the capability, goal, and category.
+23. Never rename or move a pattern file: the file name is the public URL and the Pattern ID. Add detection fields in place.
+24. Patterns live at goals/<family>/failures/<name>.md so the importer finds the capability, goal, and category.
     Other folders (tests, incidents, roadmap) are not imported as patterns.
 -->
 
@@ -67,6 +68,7 @@ search phrases:
 | **Stakes** | Low / Medium / High / Any |
 | **Who is affected** | [All users / a specific group / a specific situation] |
 | **Frequency** | Very common / Common / Occasional / Rare, plus how you know |
+| **Pattern ID** | [the file name without .md; it never changes and is the key that detectors, rules, scenarios, studies and audit findings use] |
 | **Family** | [e.g. conversation-leadership] (link to the family README) |
 | **Goal** | [One sentence: what success looks like. Must match the family README.] |
 | **Primary metric** | [One metric, with a starting target to tune. Example: confirmed-resolution rate, gap to containment under 10 points] |
@@ -127,6 +129,14 @@ Targets are starting points to tune on your own data, unless a source is given.
 | Metric | Target | How to measure | Alert at |
 |---|---|---|---|
 | [Primary metric] | | [Log field, eval, or sampled review] | |
+
+### Detection signals (proposed, not yet calibrated)
+Signals in a conversation event log that suggest this failure. Say "proposed" until they are checked against human-labeled conversations. Event names follow the [event schema](../roadmap/distribution-plan.md) once it is published.
+| Signal | Where it shows | Counter-signal (what it could be instead) |
+|---|---|---|
+| [e.g. same intent asked twice within 3 turns] | [turn-level event field] | [e.g. user rephrasing for clarity] |
+
+**Starter rule:** [the one rule from section 5 that other teams can switch on, one sentence; shares this pattern's ID]
 
 ## 8. Related patterns
 - [link] - [how it differs]
