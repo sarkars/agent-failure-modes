@@ -25,6 +25,7 @@ search phrases:
 | **Stakes** | Any. Too late is worst when money, safety, or a deadline is involved. Too early wastes scarce staff. |
 | **Who is affected** | Customers (late) and the support team (early) |
 | **Frequency** | Common. I found no study of how often it happens; the evidence below shows the trade-off and how it is measured. |
+| **Pattern ID** | escalates-too-early-or-too-late |
 | **Family** | [Human handoff](../README.md) |
 | **Goal** | A person is reachable when needed, and arrives informed, without the customer repeating themselves. |
 | **Primary metric** | Escalation precision and recall against labeled conversations. Starting targets: recall over 95% on cases that need a person, precision over 80% (tune to your staffing). |
@@ -136,6 +137,18 @@ Targets are starting points to tune on your own data, unless a source is given.
 | Handoff lateness | 90th percentile 2 turns or fewer | Turns between the first labeled signal and the transfer | Over 4 turns |
 | "Always" group handled immediately | 100% | Log check on listed topics | Any miss |
 | Unnecessary-handoff flag by agents | Track; set from baseline | Agents mark "bot could have answered" | Rising two weeks in a row |
+
+### Detection signals (proposed, not yet calibrated)
+Signals in a conversation event log that suggest this failure. Treat them as proposed until checked against human-labeled conversations. Written for text chat; voice signals are planned.
+| Signal | Where it shows | Counter-signal (what it could be instead) |
+|---|---|---|
+| Explicit request, anger, or repeated similar messages, and no handoff within a few turns | Labeled trigger turn with no transfer event after it | The user dropped the request on their own |
+| Same or near-identical bot reply twice in a row | Consecutive bot turns with high similarity | An intentional repeated confirmation |
+| Handoff on a topic in the "never a person" group | Transfer event where the topic is one the bot can fully answer | A user who asked for a person explicitly |
+| Agent marks the handoff "bot could have answered" | Agent-side flag after pickup | A reviewer judgment call |
+| Topic in the "always a person" group handled by the bot | Intent label in the always-list with no immediate transfer | A mislabeled intent |
+
+**Starter rule:** each trigger is written down in one of three groups and checked every turn in the policy layer, not only in the prompt.
 
 ## 8. Related patterns
 - [Escalation too early](../../../../../by-use-case/customer-service/goals/conversation-resolution/failures/escalation-too-early.md): the too-early half in service workflows. This page covers both directions and the decision rules.

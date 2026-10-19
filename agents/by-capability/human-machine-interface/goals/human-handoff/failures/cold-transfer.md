@@ -25,6 +25,7 @@ search phrases:
 | **Stakes** | Any. Costly when the customer is already upset or the issue involves money or a deadline. |
 | **Who is affected** | Every customer who is transferred, and the agent who starts cold |
 | **Frequency** | Common. The surveys below suggest it is widespread; they are vendor-run and report perceptions, not measured rates. |
+| **Pattern ID** | cold-transfer |
 | **Family** | [Human handoff](../README.md) |
 | **Goal** | A person is reachable when needed, and arrives informed, without the customer repeating themselves. |
 | **Primary metric** | Re-ask rate after handoff: the share of handoffs where the person asks for something the customer already gave, from a labeled sample. Starting target: under 5% (matches the [channel selection family](../../channel-selection/README.md)). |
@@ -128,6 +129,18 @@ Targets are starting points to tune on your own data, unless a source is given.
 | Customer corrected the summary | Track; set from baseline | Corrections per handoff | A sharp drop can mean customers stopped reading it |
 | Verification repeated | Under 3% | Handoffs where the person re-ran verification already done | Over 8% |
 | Time to first useful action after pickup | Track; set from baseline | Time from pickup to the first action that moves the issue | Rising two weeks in a row |
+
+### Detection signals (proposed, not yet calibrated)
+Signals in a conversation event log that suggest this failure. Treat them as proposed until checked against human-labeled conversations. Written for text chat; voice signals are planned.
+| Signal | Where it shows | Counter-signal (what it could be instead) |
+|---|---|---|
+| Agent's first message asks for facts already in the transcript | Agent turn after pickup repeats an earlier user-provided field (order number, dates, amounts) | The agent is confirming a detail on purpose |
+| Handoff event with no packet attached | Handoff event missing the summary or transcript link | A handoff outside the system that holds the packet |
+| Customer re-explains the problem after pickup | User turn after pickup restates the original goal | The customer has a new, related problem |
+| Verification step repeated after a bot-side verification | Verification event on both sides in one conversation | A required second check for a higher-risk action |
+| Customer corrects the summary | Edit or reply to the handoff summary | A small wording fix |
+
+**Starter rule:** every handoff passes a packet the person sees before the first message, and the customer can correct it.
 
 ## 8. Related patterns
 - [No channel switch, or context lost on switch](../../channel-selection/failures/no-channel-switch-or-context-lost.md): the same loss when a customer moves between channels. This page is about the handoff from bot to a person.
