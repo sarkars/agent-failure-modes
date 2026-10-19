@@ -247,7 +247,7 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 6 | CP-20 | Generic first response | New | R | `goals/embedded-copilots/failures/generic-first-response.md` | Done | 11 |
 | 7 | CP-08 | Missing the obvious intent | Extends | - | `goals/embedded-copilots/failures/missing-the-obvious-intent.md` | Done | 12 |
 | 8 | CP-12 | Doesn't say what it can do | New | R | `goals/embedded-copilots/failures/doesn-t-say-what-it-can-do.md` | Done | 12 |
-| 9 | XA-01 | Dead-end 'I don't understand' replies | Extends | V, R | `goals/conversation-leadership/failures/dead-end-i-don-t-understand-replies.md` | In progress | 12 |
+| 9 | XA-01 | Dead-end 'I don't understand' replies | Extends | V, R | `goals/conversation-leadership/failures/dead-end-i-don-t-understand-replies.md` | Done | 12 |
 | 10 | CP-01 | Help that becomes a sales pitch | New | V, R, L | `goals/embedded-copilots/failures/help-that-becomes-a-sales-pitch.md` | Queued |  |
 | 11 | CP-06 | Obstructing cancellation, downgrade, or refund | Extends | V, L | `goals/embedded-copilots/failures/obstructing-cancellation-downgrade-or-refund.md` | Queued |  |
 | 12 | CP-03 | Answers withheld behind an upgrade, unsaid | New | L | `goals/embedded-copilots/failures/answers-withheld-behind-an-upgrade-unsaid.md` | Queued |  |
@@ -726,6 +726,12 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 - **Searches run: 3** (discoverability and suggested prompts; the Microsoft human-AI guidelines; capability mental models and blank-box research). **Sources opened (3):** NN/g's March 2024 study of new AI users, Amplitude's blog on its chat-box tests, and the abstract of arXiv 2402.08030. **Search summaries only, not used as facts:** the Microsoft human-AI guideline wording (the page I opened did not contain it), the VU capability-communication study, practitioner blogs on onboarding levels.
 - **Claims left unverified:** the Amplitude test design and statistics (company's own claims, stated as such).
 - **Review pass changed:** added a caveat that one academic study found prompt hints alone made little difference; kept the 2x and retention figures labelled as the company's account.
+- **XA-01 Dead-end 'I don't understand' replies: Done.** File: `goals/conversation-leadership/failures/dead-end-i-don-t-understand-replies.md`, plus `tests/dead-end-i-don-t-understand-replies.md` (12 scenarios, "Not yet run"). Incident: "No public incident found" with the searches run.
+- **Searches run: 3** (fallback design guidance; repair strategies; banking-chatbot abandonment). **Sources opened (4):** Li et al. CHI 2020 (full text; the 1,685 users, 12 NP types, and three-consecutive-NP sign were checked against the text), Yang et al. CUI 2021 (abstract), Ashktorab et al. CHI 2019 (abstract), and the Mensch und Computer 2024 short paper (abstract). **Not opened, not used:** the 2024 IJHCI abandonment study (1,373 users) and the roadmap row's vendor poll (25.9%); practitioner fallback blogs (summaries).
+- **Claims left unverified:** effect sizes of the MuC 2024 study.
+- **Review pass changed:** removed the 1,373-user figure and the vendor poll figure, which I had not opened; added the caveat that "three" comes from an observational study.
+- **Part B (daily SEO review):** an entry for today already exists in `seo/log.md`; no Search Console data available.
+- **Part C (content-program task):** not done in this run; task 13 (redo the gap analysis) stays Queued.
 
 ## Backlog (not scheduled)
 Ideas from earlier lists that were never chosen. They stay out of the queue until someone adds them.

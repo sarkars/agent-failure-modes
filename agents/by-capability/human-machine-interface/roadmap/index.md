@@ -356,7 +356,7 @@
 | LA-02 | Privileged material sent to third-party models | [agent-types.md](agent-types.md) | Covered | Governance | No |
 | MA-01 | Agents contradict each other | [agent-types.md](agent-types.md) | Extends | Reliability | No |
 | MA-02 | Internal coordination leaks into replies | [agent-types.md](agent-types.md) | Extends | Reliability | No |
-| XA-01 | Dead-end 'I don't understand' replies | [agent-types.md](agent-types.md) | Extends | Business context | No |
+| XA-01 | Dead-end 'I don't understand' replies | [agent-types.md](agent-types.md) | Written | Business context | No |
 | XA-02 | Conversation-quality measurement gaps | [agent-types.md](agent-types.md) | Extends | Reliability | No |
 | XA-03 | No way to report bad behaviour | [agent-types.md](agent-types.md) | New | Business context | No |
 | DM-01 | Reference resolution failures | [conversation-design.md](conversation-design.md) | New | Model | Partly |
