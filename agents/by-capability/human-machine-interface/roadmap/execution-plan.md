@@ -862,6 +862,7 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 - **Tool fix:** `tools/check_links.py` now normalizes Windows path separators; on Windows it wrongly flagged 8 links in `incidents/` drafts that the checker is meant to skip. No content changed.
 - **Part C asset 2 (schema and taxonomy):** not started this run.
 - **Flagship patterns written so far: 30 of 30.** Retrofits done: 13 of 30.
+- **Deploy (run 20):** content repo merged to `main` as `286758e` (PR 15). **Part D stopped, site repo not touched:** the site checkout's `main` has a local commit not on `origin/main` that this run did not create (`f8455aac7`, "Trigger deploy under repo owner"), and `git fetch origin` there failed (credential prompt: no terminal). Per the local run notes it was not pushed. Waiting on the owner: push or discard that commit and fix the site repo's git credentials, then the next run publishes this run's pages as well. Not verified live.
 
 ## Backlog (not scheduled)
 Ideas from earlier lists that were never chosen. They stay out of the queue until someone adds them.
