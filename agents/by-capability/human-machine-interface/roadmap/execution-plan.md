@@ -785,6 +785,7 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 - **Review pass changed:** checked every author attribution against the arXiv pages; bounded the fix with the FlipFlop result so it does not teach the bot to accept every challenge.
 - **Part C: Task 13b Done.** New file `agent-type-gap-analysis.md` for six agent types: 6 searches and the abstract pages (or PDF text for τ-bench) of 16 papers plus the OWASP press release opened. Summary-only items are marked, and the Hyper-τ-bench and GPT-4o figures from blog write-ups are not used.
 - **Part B (SEO review):** an entry for today exists in `seo/log.md`; Search Console not available.
+- **Deploy (run 15):** content repo merged to `main` as `26e345d` (PR 9). Site repo `main` at `ebcb2b2`, pushed after a clean build: 1,576 sitemap URLs, 0 URLs lost against the live sitemap (1,553), 23 added (the three new patterns, the pages from runs 13 and 14 still unpublished live, and goal pages including dialogue-management). One H1 per page checked; no visible SEO comment. **Live check: not deployed** (`/answer-buried/` and `/lazy-completion/` return 404; the live sitemap still has 1,553 URLs; no deploy hook variable is set). Same known gap as runs 13 and 14. Needs the owner to check Vercel.
 - **Flagship patterns written so far: 18 of 30** (HU-01 to HU-03, CP-14, CP-15, CP-20, CP-08, CP-12, XA-01, CP-01, CP-06, CP-03, RS-14, RS-01, EM-02, EM-11, EM-01, DM-03).
 
 ## Backlog (not scheduled)
