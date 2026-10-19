@@ -47,6 +47,7 @@
 - Cross-pattern pages on the website: approved. The site importer change is in [sarkars/agent-kb-autopublish#1](https://github.com/sarkars/agent-kb-autopublish/pull/1); pages in `solutions-library/`, `roadmap/specs/` and `reference/` are published once it merges.
 - Reference code module: approved, last. A design note comes first, then code in its own repository.
 - The queued catalog rows: approved. The hourly run writes them after the flagships, up to 5 per run.
+- Catalog rows marked **Extends** (188): no new page. Each becomes a short chat example inside the existing pattern it extends, under `## Chat assistant examples`. The 16 Extends pages already written stay, so their URLs keep working.
 
 ## Related
 - [Distribution plan](distribution-plan.md)
