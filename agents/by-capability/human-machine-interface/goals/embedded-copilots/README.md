@@ -10,14 +10,15 @@ Shared metrics the patterns below report against. Targets are starting points to
 | Metric | Target | Defined in |
 |---|---|---|
 | Re-ask rate on known fields | Under 2% | [re-asks for known information](failures/re-asks-for-known-information.md) |
+| Re-authentication prompts on low-risk actions for signed-in users | Near 0 | [forces a fresh login](failures/forces-a-fresh-login.md) |
 
 ## Patterns
 | Pattern | One line |
 |---|---|
 | Re-asks for known information | The assistant asks for details the product already holds |
+| Forces a fresh login | The signed-in user is asked to sign in or verify again, even for low-risk help |
 
 ## Planned (not yet written)
-- Forces a fresh login
 - Generic first response
 - Missing the obvious intent
 - Doesn't say what it can do

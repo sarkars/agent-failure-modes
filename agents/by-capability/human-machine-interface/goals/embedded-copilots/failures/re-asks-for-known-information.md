@@ -82,7 +82,7 @@ These are our reading of the pattern; the sources below report symptoms, not cau
 3. **Ask only for what is missing,** one item at a time, and say why you need it.
 4. **Let the user correct the record.** If the user says it is wrong, accept the correction for this chat and offer to update it.
 5. **Stay inside the user's access.** Use only data this user is allowed to see in this product. Do not look up other accounts to avoid a question.
-6. **Step up only when risk calls for it.** Asking the user to prove who they are again before a sensitive action is not a re-ask. See forces a fresh login (planned, roadmap row CP-15) for when and how.
+6. **Step up only when risk calls for it.** Asking the user to prove who they are again before a sensitive action is not a re-ask. See [forces a fresh login](forces-a-fresh-login.md) for when and how.
 
 **Reference design: a context step before every question**
 ```
@@ -136,7 +136,7 @@ Targets are starting points to tune on your own data, unless a source is given.
 - [Missing memory recall](../../../../../cross-cutting/operations/goals/memory-safety/failures/missing-memory-recall.md): forgetting what was said before. Here the data comes from the product.
 - [Handoff context incompleteness](../../../../../cross-cutting/operations/goals/agent-handoffs-delegation/failures/handoff-context-incompleteness.md): context lost between agents.
 - [Cold transfer](../../human-handoff/failures/cold-transfer.md): the same complaint when a person picks up.
-- Forces a fresh login (planned, roadmap row CP-15): the security side of when to ask again.
+- [Forces a fresh login](forces-a-fresh-login.md): the security side of when to ask again.
 
 ## 9. Common questions
 ### Why does the chatbot ask for my account number when I'm logged in?
@@ -146,7 +146,7 @@ Usually the assistant is not connected to the session or account data, or it was
 It should use only data you are allowed to see, for the task you asked about, and say what it used. Check your privacy rules; this page is design guidance, not legal advice.
 
 ### Should the bot ever ask me to confirm who I am?
-Yes, before sensitive actions such as changing payment details. That is a security step, not a re-ask. See the planned forces a fresh login pattern (roadmap row CP-15).
+Yes, before sensitive actions such as changing payment details. That is a security step, not a re-ask. See [forces a fresh login](forces-a-fresh-login.md).
 
 ### How do I measure whether it is happening?
 Join the assistant's questions to the account record and count the questions that asked for a value already held. See section 7.

@@ -243,8 +243,8 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 2 | HU-02 | Escalates too early, or too late | Extends | - | `goals/human-handoff/failures/escalates-too-early-or-too-late.md` | Done | 10 (manual) |
 | 3 | HU-03 | Cold transfer | Extends | - | `goals/human-handoff/failures/cold-transfer.md` | Done | 10 (manual) |
 | 4 | CP-14 | Re-asks for known information | Extends | V | `goals/embedded-copilots/failures/re-asks-for-known-information.md` | Done | 11 |
-| 5 | CP-15 | Forces a fresh login | New | E | `goals/embedded-copilots/failures/forces-a-fresh-login.md` | In progress | 11 |
-| 6 | CP-20 | Generic first response | New | R | `goals/embedded-copilots/failures/generic-first-response.md` | Queued |  |
+| 5 | CP-15 | Forces a fresh login | New | E | `goals/embedded-copilots/failures/forces-a-fresh-login.md` | Done | 11 |
+| 6 | CP-20 | Generic first response | New | R | `goals/embedded-copilots/failures/generic-first-response.md` | In progress | 11 |
 | 7 | CP-08 | Missing the obvious intent | Extends | - | `goals/embedded-copilots/failures/missing-the-obvious-intent.md` | Queued |  |
 | 8 | CP-12 | Doesn't say what it can do | New | R | `goals/embedded-copilots/failures/doesn-t-say-what-it-can-do.md` | Queued |  |
 | 9 | XA-01 | Dead-end 'I don't understand' replies | Extends | V, R | `goals/conversation-leadership/failures/dead-end-i-don-t-understand-replies.md` | Queued |  |
@@ -707,6 +707,10 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 - **Sources opened (3):** the B&T article on Salesforce's connected-customer report (ANZ edition), the Salesforce 2019 news story, and the Digital Applied agent-clarification guide. **Not opened:** the Salesforce reports themselves, ServiceNow's conversation-design page (403).
 - **Claims left unverified:** the catalog row's 56% global figure could not be verified and was not used; only the 66% ANZ figure from the B&T article is shown, with its caveats. The edition year of that article is unknown.
 - **Review pass changed:** removed a link to a pattern that did not exist yet and replaced it with plain text; added a note that the global repeat figure was not verified.
+- **CP-15 Forces a fresh login: Done, flagged E (expert review needed).** File: `goals/embedded-copilots/failures/forces-a-fresh-login.md` with a "Read this first" security note, plus `tests/forces-a-fresh-login.md` (12 scenarios, "Not yet run"). Incident: "No public incident found" with the searches run.
+- **Sources opened (2):** NIST SP 800-63B-4 AAL page (the reauthentication timeout values were checked against the text) and the Open.cx widget documentation. **Not used:** secondary pages with older NIST values (12 hours / 30 minutes), forum threads.
+- **Claims left unverified:** how often the failure occurs (no study found). The risk table and policy are design guidance for a security team to set.
+- **Review pass changed:** removed the pre-existing planned-link text from CP-14 now that this page exists; added the NIST caveat that the values are a federal benchmark, not a rule for every product.
 
 ## Backlog (not scheduled)
 Ideas from earlier lists that were never chosen. They stay out of the queue until someone adds them.
