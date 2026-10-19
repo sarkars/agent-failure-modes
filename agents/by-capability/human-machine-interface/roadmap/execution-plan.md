@@ -839,6 +839,7 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 - **Review pass changed:** replaced a link to a nonexistent page with the roadmap; added the visible-thinking paper only as a caution.
 - **Part C: Task 13e Done.** `roadmap/l1-base-agent-design.md`: an untested draft of the base support agent (tool contracts, the instruction blocks copied from 24 patterns' reference designs, handoff and refusal rules, ten cross-pattern test cases). Group D is flagged for legal review; the government behavior is excluded.
 - **Part B (SEO review):** an entry for today exists in `seo/log.md`; Search Console not available.
+- **Deploy (run 18):** content repo merged to `main` as `2b92164` (PR 12). Site repo `main` pushed after a clean build: 1,591 sitemap URLs, 0 URLs lost against the live sitemap (1,553), 38 added (the three new patterns, earlier unpublished ones, and goal pages including drive-thru-agents, voice, and response-time). One H1 per page checked; no visible SEO comment. **Live check: not deployed** (pages return 404; the live sitemap still has 1,553 URLs; no deploy hook variable is set). Same known gap as runs 13 to 17. Needs the owner to check Vercel.
 - **Flagship patterns written so far: 27 of 30** (the 24 from run 17, plus DT-01, VO-05, RT-02).
 
 ## Backlog (not scheduled)
