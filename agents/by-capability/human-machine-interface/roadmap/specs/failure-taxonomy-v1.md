@@ -2,15 +2,15 @@
 
 > **Status:** v1 draft, proposed, not yet calibrated against human-labeled conversations. Written 2026-10-20 from the pattern pages as they exist today. Nothing here is a measured result.
 
-This is a plain index of the 44 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
+This is a plain index of the 46 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
 
 The taxonomy pairs with the [conversation event schema v0.1](conversation-event-schema-v0.1.md). The schema describes what a turn looks like in a log; this page names the failures. A pattern's own page holds the fix, the metrics, and (for some) a "Detection signals (proposed, not yet calibrated)" block that says which schema fields it reads.
 
 ## What this page is and is not
 
-- It lists every file found in `goals/*/failures/*.md`: **44 entries in 22 families**. If a pattern is added or removed, this count changes.
+- It lists every file found in `goals/*/failures/*.md`: **46 entries in 22 families**. If a pattern is added or removed, this count changes.
 - It copies each pattern's one-sentence Issue line, its Stakes row, and whether a Detection signals block exists. It does not add facts the page does not state.
-- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **19 of 44** pages have such a block; 25 have metrics only.
+- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **29 of 46** pages have such a block; 17 have metrics only. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **15 of 46** pages have one.
 - It does not rank patterns by frequency or harm. No counts of real-world occurrences are given because none have been measured here.
 - It does not map patterns to outside frameworks (such as OWASP or NIST). That mapping is **Needs review** by a person and is not part of v1.
 
@@ -24,199 +24,201 @@ A pattern carries **Read this first: needs expert or legal review** when its own
 
 Family folder: `age-adaptation` ([family README](../../goals/age-adaptation/README.md))
 
-| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Page |
-|---|---|---|---|---|---|
-| `child-user-treated-as-adult` | Child user treated as adult | What a chatbot should do when a user may be under 13 or a teen, covering COPPA, age signals, data collection, persuasion limits, and age-band design. | High **Read this first: needs expert or legal review.** | no | [page](../../goals/age-adaptation/failures/child-user-treated-as-adult.md) |
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `child-user-treated-as-adult` | Child user treated as adult | What a chatbot should do when a user may be under 13 or a teen, covering COPPA, age signals, data collection, persuasion limits, and age-band design. | High **Read this first: needs expert or legal review.** | no | none yet | [page](../../goals/age-adaptation/failures/child-user-treated-as-adult.md)  |
 
 ### Channel selection
 
 Family folder: `channel-selection` ([family README](../../goals/channel-selection/README.md))
 
-| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Page |
-|---|---|---|---|---|---|
-| `complex-or-emotional-discussion-forced-into-chat` | Complex or emotional discussion forced into chat | Why long, confusing, or emotional conversations go wrong in chatbots, and how to detect it and move users to a call, a screen, or a person. | Medium to high (claims, finance, health, technical faults) | no | [page](../../goals/channel-selection/failures/complex-or-emotional-discussion-forced-into-chat.md) |
-| `no-channel-switch-or-context-lost` | No channel switch, or context lost in it | Why customers have to repeat themselves after a chatbot hands off to an agent or switches channels, with a handoff packet design and tests. | Medium to high | no | [page](../../goals/channel-selection/failures/no-channel-switch-or-context-lost.md) |
-| `sensitive-data-collected-in-chat` | Sensitive data collected in chat | Why collecting card numbers, SSNs, or passwords in a chatbot or voice bot is risky, what PCI DSS says, and how to design a safe alternative. | High (financial loss, identity theft, compliance exposure) | no | [page](../../goals/channel-selection/failures/sensitive-data-collected-in-chat.md) |
-| `visual-product-sold-by-text-or-voice` | Visual product sold by text or voice | Why text-only chatbots and voice assistants fail at selling visual products like fashion, furniture, and art, and how to fix it. | Low to medium (lost sales and returns) | no | [page](../../goals/channel-selection/failures/visual-product-sold-by-text-or-voice.md) |
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `complex-or-emotional-discussion-forced-into-chat` | Complex or emotional discussion forced into chat | Why long, confusing, or emotional conversations go wrong in chatbots, and how to detect it and move users to a call, a screen, or a person. | Medium to high (claims, finance, health, technical faults) | no | none yet | [page](../../goals/channel-selection/failures/complex-or-emotional-discussion-forced-into-chat.md)  |
+| `no-channel-switch-or-context-lost` | No channel switch, or context lost in it | Why customers have to repeat themselves after a chatbot hands off to an agent or switches channels, with a handoff packet design and tests. | Medium to high | no | none yet | [page](../../goals/channel-selection/failures/no-channel-switch-or-context-lost.md)  |
+| `sensitive-data-collected-in-chat` | Sensitive data collected in chat | Why collecting card numbers, SSNs, or passwords in a chatbot or voice bot is risky, what PCI DSS says, and how to design a safe alternative. | High (financial loss, identity theft, compliance exposure) | no | none yet | [page](../../goals/channel-selection/failures/sensitive-data-collected-in-chat.md)  |
+| `visual-product-sold-by-text-or-voice` | Visual product sold by text or voice | Why text-only chatbots and voice assistants fail at selling visual products like fashion, furniture, and art, and how to fix it. | Low to medium (lost sales and returns) | no | none yet | [page](../../goals/channel-selection/failures/visual-product-sold-by-text-or-voice.md)  |
 
 ### Conversation leadership
 
 Family folder: `conversation-leadership` ([family README](../../goals/conversation-leadership/README.md))
 
-| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Page |
-|---|---|---|---|---|---|
-| `answer-and-go-conversation` | Answer-and-go conversation | Why a chatbot answers the question and then goes quiet, with before/after examples, a tested fix, guardrails, evals, and alerts. | Any. The cost is lost sales at low stakes and unresolved problems at high stakes. | yes | [page](../../goals/conversation-leadership/failures/answer-and-go-conversation.md) |
-| `dead-end-i-don-t-understand-replies` | Dead-end "I don't understand" replies | When a chatbot cannot understand a message, it replies "Sorry, I didn't understand" with no options, no help rephrasing, and no route to a person, or repeats the same line. | Any. A dead end on a billing or access problem can cost money; on a simple question it costs the customer. | yes | [page](../../goals/conversation-leadership/failures/dead-end-i-don-t-understand-replies.md) |
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `answer-and-go-conversation` | Answer-and-go conversation | Why a chatbot answers the question and then goes quiet, with before/after examples, a tested fix, guardrails, evals, and alerts. | Any. The cost is lost sales at low stakes and unresolved problems at high stakes. | yes | lead_with_answer, ask_clarifying_question, offer_choices, admit_uncertainty, hand_off | [page](../../goals/conversation-leadership/failures/answer-and-go-conversation.md)  |
+| `dead-end-i-don-t-understand-replies` | Dead-end "I don't understand" replies | When a chatbot cannot understand a message, it replies "Sorry, I didn't understand" with no options, no help rephrasing, and no route to a person, or repeats the same line. | Any. A dead end on a billing or access problem can cost money; on a simple question it costs the customer. | yes | admit_uncertainty, offer_choices, ask_clarifying_question, hand_off | [page](../../goals/conversation-leadership/failures/dead-end-i-don-t-understand-replies.md)  |
 
 ### Cultural adaptation
 
 Family folder: `cultural-adaptation` ([family README](../../goals/cultural-adaptation/README.md))
 
-| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Page |
-|---|---|---|---|---|---|
-| `one-size-communication-style` | One-size communication style | How a chatbot should adapt directness, formality, and wording for US users with different communication styles and English levels, using the user's own signals, not guesses. | Low to high (depends on the topic) | no | [page](../../goals/cultural-adaptation/failures/one-size-communication-style.md) |
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `one-size-communication-style` | One-size communication style | How a chatbot should adapt directness, formality, and wording for US users with different communication styles and English levels, using the user's own signals, not guesses. | Low to high (depends on the topic) | no | none yet | [page](../../goals/cultural-adaptation/failures/one-size-communication-style.md)  |
 
 ### Dialogue management
 
 Family folder: `dialogue-management` ([family README](../../goals/dialogue-management/README.md))
 
-| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Page |
-|---|---|---|---|---|---|
-| `corrections-not-applied` | Corrections not applied | The user corrects a detail ("no, I meant Tuesday"), the assistant says okay, and the old value comes back later in the reply, the summary, or the action. | Low to high. A wrong date or address on a booking or order can cost money; a wrong name is an insult. | no | [page](../../goals/dialogue-management/failures/corrections-not-applied.md) |
-| `guessing-instead-of-asking` | Guessing instead of asking | The request has two or more readings that lead to different results, and the assistant picks one and acts on it instead of asking one short question. | Low for a wrong answer to read; medium to high when the guess triggers an action (a cancellation, a transfer, a booking). | yes | [page](../../goals/dialogue-management/failures/guessing-instead-of-asking.md) |
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `corrections-not-applied` | Corrections not applied | The user corrects a detail ("no, I meant Tuesday"), the assistant says okay, and the old value comes back later in the reply, the summary, or the action. | Low to high. A wrong date or address on a booking or order can cost money; a wrong name is an insult. | yes | lead_with_answer, ask_clarifying_question, admit_uncertainty, hand_off | [page](../../goals/dialogue-management/failures/corrections-not-applied.md)  |
+| `guessing-instead-of-asking` | Guessing instead of asking | The request has two or more readings that lead to different results, and the assistant picks one and acts on it instead of asking one short question. | Low for a wrong answer to read; medium to high when the guess triggers an action (a cancellation, a transfer, a booking). | yes | none yet | [page](../../goals/dialogue-management/failures/guessing-instead-of-asking.md)  |
 
 ### Difficult customers
 
 Family folder: `difficult-customers` ([family README](../../goals/difficult-customers/README.md))
 
-| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Page |
-|---|---|---|---|---|---|
-| `no-de-escalation-strategy` | No de-escalation strategy | Why chatbots make angry customers angrier by quoting policy and apologising generically, and a step-by-step de-escalation design with escalation triggers and tests. | Medium to high (churn, complaints, regulatory filings) | no | [page](../../goals/difficult-customers/failures/no-de-escalation-strategy.md) |
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `no-de-escalation-strategy` | No de-escalation strategy | Why chatbots make angry customers angrier by quoting policy and apologising generically, and a step-by-step de-escalation design with escalation triggers and tests. | Medium to high (churn, complaints, regulatory filings) | no | none yet | [page](../../goals/difficult-customers/failures/no-de-escalation-strategy.md)  |
 
 ### Drive-thru agents
 
 Family folder: `drive-thru-agents` ([family README](../../goals/drive-thru-agents/README.md))
 
-| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Page |
-|---|---|---|---|---|---|
-| `order-mix-ups-at-the-speaker` | Order mix-ups at the speaker | A drive-thru voice agent adds, drops, or multiplies items, and the customer has no readback or screen they can check before paying. | Low to medium for a wrong item; higher with allergies, large totals, or a customer who can't easily correct it. | no | [page](../../goals/drive-thru-agents/failures/order-mix-ups-at-the-speaker.md) |
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `order-mix-ups-at-the-speaker` | Order mix-ups at the speaker | A drive-thru voice agent adds, drops, or multiplies items, and the customer has no readback or screen they can check before paying. | Low to medium for a wrong item; higher with allergies, large totals, or a customer who can't easily correct it. | no | none yet | [page](../../goals/drive-thru-agents/failures/order-mix-ups-at-the-speaker.md)  |
 
 ### Effort and memory
 
 Family folder: `effort-and-memory` ([family README](../../goals/effort-and-memory/README.md))
 
-| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Page |
-|---|---|---|---|---|---|
-| `deferring-work-to-the-user` | Deferring work to the user | The assistant has a tool or the data to do something, and instead writes "you can check…", "you may want to look up…", or a how-to, so the user ends up doing the work. | Low to medium. It wastes time and sends people to other channels; on urgent matters it can cost money. | no | [page](../../goals/effort-and-memory/failures/deferring-work-to-the-user.md) |
-| `lazy-completion` | Lazy completion | The assistant does a sample or part of the job and leaves the rest ("// rest of code here", "repeat for the others"), without saying exactly what is left or why. | Low to medium. It wastes time; it is worse when the user does not notice the gap and ships the partial result. | no | [page](../../goals/effort-and-memory/failures/lazy-completion.md) |
-| `no-warning-of-context-loss` | No warning of context loss | When a conversation outgrows what the assistant can hold, or saved memory is full, early content is dropped, summarized, or never stored, and the assistant does not tell the user. | Low to high. Forgotten preferences are an annoyance; a dropped allergy, deadline, or constraint can lead to a wrong answer. | no | [page](../../goals/effort-and-memory/failures/no-warning-of-context-loss.md) |
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `deferring-work-to-the-user` | Deferring work to the user | The assistant has a tool or the data to do something, and instead writes "you can check…", "you may want to look up…", or a how-to, so the user ends up doing the work. | Low to medium. It wastes time and sends people to other channels; on urgent matters it can cost money. | no | none yet | [page](../../goals/effort-and-memory/failures/deferring-work-to-the-user.md)  |
+| `lazy-completion` | Lazy completion | The assistant does a sample or part of the job and leaves the rest ("// rest of code here", "repeat for the others"), without saying exactly what is left or why. | Low to medium. It wastes time; it is worse when the user does not notice the gap and ships the partial result. | no | none yet | [page](../../goals/effort-and-memory/failures/lazy-completion.md)  |
+| `no-warning-of-context-loss` | No warning of context loss | When a conversation outgrows what the assistant can hold, or saved memory is full, early content is dropped, summarized, or never stored, and the assistant does not tell the user. | Low to high. Forgotten preferences are an annoyance; a dropped allergy, deadline, or constraint can lead to a wrong answer. | no | none yet | [page](../../goals/effort-and-memory/failures/no-warning-of-context-loss.md)  |
 
 ### Embedded copilots
 
 Family folder: `embedded-copilots` ([family README](../../goals/embedded-copilots/README.md))
 
-| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Page |
-|---|---|---|---|---|---|
-| `answers-withheld-behind-an-upgrade-unsaid` | Answers withheld behind an unsaid upgrade | An in-app assistant quietly gives a shorter, weaker, or partial answer because of the user's plan, and never says that a limit applied or what would remove it. | Low to medium. The cost is wrong decisions made on a partial answer, plus lost trust when users find out. **Read this first: needs expert or legal review.** | no | [page](../../goals/embedded-copilots/failures/answers-withheld-behind-an-upgrade-unsaid.md) |
-| `doesn-t-say-what-it-can-do` | Doesn't say what it can do | An in-app assistant opens to an empty box and never says what it can and cannot do, so users guess, ask the bot about itself, or give up. | Low to medium. The cost is unused features and users who try once and leave. | no | [page](../../goals/embedded-copilots/failures/doesn-t-say-what-it-can-do.md) |
-| `forces-a-fresh-login` | Forces a fresh login | An assistant inside a product asks the signed-in user to sign in or verify again when it opens, hands off, or changes channel, even for low-risk requests. | Low for the wasted time, but the fix touches security. Skipping the check on risky actions is the opposite and worse failure. **Read this first: needs expert or legal review.** | no | [page](../../goals/embedded-copilots/failures/forces-a-fresh-login.md) |
-| `generic-first-response` | Generic first response | The assistant's first message is a stock greeting that ignores what the product already knows about the user and the moment, so the user faces a blank prompt and has to explain from scratch. | Low to medium. The cost is conversations that never start, and a slower start to the ones that do. | yes | [page](../../goals/embedded-copilots/failures/generic-first-response.md) |
-| `help-that-becomes-a-sales-pitch` | Help that becomes a sales pitch | A how-to or fix question gets a plan upgrade or add-on in reply, so the assistant serves the vendor's sales goal ahead of the person's need. | Medium. It costs trust, and it can cross into misleading marketing. **Read this first: needs expert or legal review.** | no | [page](../../goals/embedded-copilots/failures/help-that-becomes-a-sales-pitch.md) |
-| `missing-the-obvious-intent` | Missing the obvious intent | A plain request gets an answer to a neighboring question, or an over-reading of what the person meant, instead of the likeliest meaning answered first. | Low to medium. Each miss costs a turn and trust. | no | [page](../../goals/embedded-copilots/failures/missing-the-obvious-intent.md) |
-| `obstructing-cancellation-downgrade-or-refund` | Obstructing cancellation, downgrade, or refund | When a user wants to cancel, downgrade, or get a refund, the assistant argues, loops, hides the path, or sends them elsewhere, so leaving is harder than joining. | Medium to high. It costs money and trust, and it is an area regulators have acted on. **Read this first: needs expert or legal review.** | no | [page](../../goals/embedded-copilots/failures/obstructing-cancellation-downgrade-or-refund.md) |
-| `re-asks-for-known-information` | Re-asks for known information | An assistant inside a product asks the signed-in user for their name, account, order number, or plan, which the product already knows, and the user has to type it again. | Low to medium. It wastes time and signals the assistant is not connected to the product. It gets worse when the question is at the start of a stressful issue. | yes | [page](../../goals/embedded-copilots/failures/re-asks-for-known-information.md) |
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `answers-withheld-behind-an-upgrade-unsaid` | Answers withheld behind an unsaid upgrade | An in-app assistant quietly gives a shorter, weaker, or partial answer because of the user's plan, and never says that a limit applied or what would remove it. | Low to medium. The cost is wrong decisions made on a partial answer, plus lost trust when users find out. **Read this first: needs expert or legal review.** | yes | lead_with_answer, offer_choices, hand_off | [page](../../goals/embedded-copilots/failures/answers-withheld-behind-an-upgrade-unsaid.md)  |
+| `doesn-t-say-what-it-can-do` | Doesn't say what it can do | An in-app assistant opens to an empty box and never says what it can and cannot do, so users guess, ask the bot about itself, or give up. | Low to medium. The cost is unused features and users who try once and leave. | yes | offer_choices, lead_with_answer, admit_uncertainty, hand_off | [page](../../goals/embedded-copilots/failures/doesn-t-say-what-it-can-do.md)  |
+| `forces-a-fresh-login` | Forces a fresh login | An assistant inside a product asks the signed-in user to sign in or verify again when it opens, hands off, or changes channel, even for low-risk requests. | Low for the wasted time, but the fix touches security. Skipping the check on risky actions is the opposite and worse failure. **Read this first: needs expert or legal review.** | yes | lead_with_answer, admit_uncertainty, offer_choices, hand_off | [page](../../goals/embedded-copilots/failures/forces-a-fresh-login.md)  |
+| `generic-first-response` | Generic first response | The assistant's first message is a stock greeting that ignores what the product already knows about the user and the moment, so the user faces a blank prompt and has to explain from scratch. | Low to medium. The cost is conversations that never start, and a slower start to the ones that do. | yes | none yet | [page](../../goals/embedded-copilots/failures/generic-first-response.md)  |
+| `help-that-becomes-a-sales-pitch` | Help that becomes a sales pitch | A how-to or fix question gets a plan upgrade or add-on in reply, so the assistant serves the vendor's sales goal ahead of the person's need. | Medium. It costs trust, and it can cross into misleading marketing. **Read this first: needs expert or legal review.** | yes | lead_with_answer, hand_off | [page](../../goals/embedded-copilots/failures/help-that-becomes-a-sales-pitch.md)  |
+| `ignores-the-page-selection-and-form-state` | Ignores the page, selection, and form state | An assistant built into a product doesn't know what page the user is on, what they selected, or what they just typed in a form, so the user has to describe the screen in words or paste it in. | Low to medium. It wastes time and produces answers about the wrong thing. It is worse when the user is mid-task, for example filling in a tax or payment form. | yes | lead_with_answer, ask_clarifying_question, offer_choices, admit_uncertainty | [page](../../goals/embedded-copilots/failures/ignores-the-page-selection-and-form-state.md) |
+| `missing-the-obvious-intent` | Missing the obvious intent | A plain request gets an answer to a neighboring question, or an over-reading of what the person meant, instead of the likeliest meaning answered first. | Low to medium. Each miss costs a turn and trust. | yes | lead_with_answer, offer_choices, ask_clarifying_question, hand_off | [page](../../goals/embedded-copilots/failures/missing-the-obvious-intent.md)  |
+| `no-likely-next-action-suggestions` | No likely-next-action suggestions | The in-app assistant answers and stops, never offering the two or three likeliest next steps that the current page, account state, or history already point to. | Low. The cost is extra typing, missed features, and users who stop after one answer. | yes | lead_with_answer, offer_choices, hand_off | [page](../../goals/embedded-copilots/failures/no-likely-next-action-suggestions.md) |
+| `obstructing-cancellation-downgrade-or-refund` | Obstructing cancellation, downgrade, or refund | When a user wants to cancel, downgrade, or get a refund, the assistant argues, loops, hides the path, or sends them elsewhere, so leaving is harder than joining. | Medium to high. It costs money and trust, and it is an area regulators have acted on. **Read this first: needs expert or legal review.** | yes | lead_with_answer, offer_choices, admit_uncertainty, hand_off | [page](../../goals/embedded-copilots/failures/obstructing-cancellation-downgrade-or-refund.md)  |
+| `re-asks-for-known-information` | Re-asks for known information | An assistant inside a product asks the signed-in user for their name, account, order number, or plan, which the product already knows, and the user has to type it again. | Low to medium. It wastes time and signals the assistant is not connected to the product. It gets worse when the question is at the start of a stressful issue. | yes | none yet | [page](../../goals/embedded-copilots/failures/re-asks-for-known-information.md)  |
 
 ### Emotional intelligence
 
 Family folder: `emotional-intelligence` ([family README](../../goals/emotional-intelligence/README.md))
 
-| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Page |
-|---|---|---|---|---|---|
-| `hollow-empathy` | Hollow empathy | Why "I understand your frustration" repeated by a chatbot backfires, what research says about empathic chatbots, and how to write specific, useful empathy. | Low to high | yes | [page](../../goals/emotional-intelligence/failures/hollow-empathy.md) |
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `hollow-empathy` | Hollow empathy | Why "I understand your frustration" repeated by a chatbot backfires, what research says about empathic chatbots, and how to write specific, useful empathy. | Low to high | yes | none yet | [page](../../goals/emotional-intelligence/failures/hollow-empathy.md)  |
 
 ### Errors and recovery
 
 Family folder: `errors-and-recovery` ([family README](../../goals/errors-and-recovery/README.md))
 
-| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Page |
-|---|---|---|---|---|---|
-| `confident-wrong-answer-with-no-way-to-check` | Confident wrong answer, no way to check | The assistant delivers a wrong answer in the same sure tone as a right one, with no cue of uncertainty and no source the user can check. | Low to high. A wrong refund rule, fee, deadline, or dosage can cost money or health. | yes | [page](../../goals/errors-and-recovery/failures/confident-wrong-answer-with-no-way-to-check.md) |
-| `generic-error-messages` | Generic error messages | When the assistant fails, it shows "Something went wrong" or "An error occurred": no cause the user can act on, no word on whether their work is saved, and no next step. | Low to high. A lost long conversation, an unsaved form, or a half-done transaction raises the stakes. | yes | [page](../../goals/errors-and-recovery/failures/generic-error-messages.md) |
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `confident-wrong-answer-with-no-way-to-check` | Confident wrong answer, no way to check | The assistant delivers a wrong answer in the same sure tone as a right one, with no cue of uncertainty and no source the user can check. | Low to high. A wrong refund rule, fee, deadline, or dosage can cost money or health. | yes | none yet | [page](../../goals/errors-and-recovery/failures/confident-wrong-answer-with-no-way-to-check.md)  |
+| `generic-error-messages` | Generic error messages | When the assistant fails, it shows "Something went wrong" or "An error occurred": no cause the user can act on, no word on whether their work is saved, and no next step. | Low to high. A lost long conversation, an unsaved form, or a half-done transaction raises the stakes. | yes | admit_uncertainty, offer_choices, hand_off | [page](../../goals/errors-and-recovery/failures/generic-error-messages.md)  |
 
 ### Fairness and identity
 
 Family folder: `fairness-and-identity` ([family README](../../goals/fairness-and-identity/README.md))
 
-| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Page |
-|---|---|---|---|---|---|
-| `dialect-and-name-quality-gap` | Dialect and name quality gap | How AI chatbots can serve users differently based on dialect, names, or identity cues, what research shows, and a paired-testing method to detect and fix it. | Medium to high (especially credit, housing, hiring, insurance, benefits) | no | [page](../../goals/fairness-and-identity/failures/dialect-and-name-quality-gap.md) |
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `dialect-and-name-quality-gap` | Dialect and name quality gap | How AI chatbots can serve users differently based on dialect, names, or identity cues, what research shows, and a paired-testing method to detect and fix it. | Medium to high (especially credit, housing, hiring, insurance, benefits) | no | none yet | [page](../../goals/fairness-and-identity/failures/dialect-and-name-quality-gap.md)  |
 
 ### Government service agents
 
 Family folder: `government-service-agents` ([family README](../../goals/government-service-agents/README.md))
 
-| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Page |
-|---|---|---|---|---|---|
-| `eligibility-answers-sound-like-decisions` | Eligibility answers sound like decisions | A public-service chat answers "do I qualify?" in a tone that reads like an official decision, with no clear line between general guidance and what only the agency decides. | High. A wrong "no" can stop someone from applying; a wrong "yes" can lead to missed deadlines or wasted effort. **Read this first: needs expert or legal review.** | no | [page](../../goals/government-service-agents/failures/eligibility-answers-sound-like-decisions.md) |
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `eligibility-answers-sound-like-decisions` | Eligibility answers sound like decisions | A public-service chat answers "do I qualify?" in a tone that reads like an official decision, with no clear line between general guidance and what only the agency decides. | High. A wrong "no" can stop someone from applying; a wrong "yes" can lead to missed deadlines or wasted effort. **Read this first: needs expert or legal review.** | no | none yet | [page](../../goals/government-service-agents/failures/eligibility-answers-sound-like-decisions.md)  |
 
 ### Human handoff
 
 Family folder: `human-handoff` ([family README](../../goals/human-handoff/README.md))
 
-| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Page |
-|---|---|---|---|---|---|
-| `cold-transfer` | Cold transfer | A chatbot transfers the customer, and the person who picks up knows nothing, so the customer explains the problem, the order number, and what they already tried all over again. | Any. Costly when the customer is already upset or the issue involves money or a deadline. | yes | [page](../../goals/human-handoff/failures/cold-transfer.md) |
-| `escalates-too-early-or-too-late` | Escalates too early or too late | A chatbot hands off questions it could answer, or holds on to ones it cannot, because nobody defined when a person should take over. | Any. Too late is worst when money, safety, or a deadline is involved. Too early wastes scarce staff. | yes | [page](../../goals/human-handoff/failures/escalates-too-early-or-too-late.md) |
-| `talk-to-a-human-ignored-or-looped` | "Talk to a human" ignored or looped | A customer asks for a person, and the chatbot answers with the same menu, asks the same question again, or sends them in circles instead of connecting them or saying how. | Any. At low stakes it costs time; with a bill due, a frozen account, or a fraud claim it costs money. | yes | [page](../../goals/human-handoff/failures/talk-to-a-human-ignored-or-looped.md) |
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `cold-transfer` | Cold transfer | A chatbot transfers the customer, and the person who picks up knows nothing, so the customer explains the problem, the order number, and what they already tried all over again. | Any. Costly when the customer is already upset or the issue involves money or a deadline. | yes | hand_off, admit_uncertainty | [page](../../goals/human-handoff/failures/cold-transfer.md)  |
+| `escalates-too-early-or-too-late` | Escalates too early or too late | A chatbot hands off questions it could answer, or holds on to ones it cannot, because nobody defined when a person should take over. | Any. Too late is worst when money, safety, or a deadline is involved. Too early wastes scarce staff. | yes | none yet | [page](../../goals/human-handoff/failures/escalates-too-early-or-too-late.md)  |
+| `talk-to-a-human-ignored-or-looped` | "Talk to a human" ignored or looped | A customer asks for a person, and the chatbot answers with the same menu, asks the same question again, or sends them in circles instead of connecting them or saying how. | Any. At low stakes it costs time; with a bill due, a frozen account, or a fraud claim it costs money. | yes | hand_off, lead_with_answer, offer_choices, ask_clarifying_question | [page](../../goals/human-handoff/failures/talk-to-a-human-ignored-or-looped.md)  |
 
 ### Refusals and boundaries
 
 Family folder: `refusals-and-boundaries` ([family README](../../goals/refusals-and-boundaries/README.md))
 
-| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Page |
-|---|---|---|---|---|---|
-| `over-refusal-of-ordinary-requests` | Over-refusal of ordinary requests | The assistant declines a safe, common request because a word or topic in it resembles a risky one. | Low to medium. It blocks a legitimate task and can strand a customer; it also teaches users to rephrase around the filter. | yes | [page](../../goals/refusals-and-boundaries/failures/over-refusal-of-ordinary-requests.md) |
-| `refusal-with-no-reason-or-next-step` | Refusal with no reason or next step | The assistant says "I can't help with that" and stops: no reason in plain words, no alternative, and no route to a person. | Low to high. A stranded user on a billing, access, or safety issue may give up or take a worse route. | yes | [page](../../goals/refusals-and-boundaries/failures/refusal-with-no-reason-or-next-step.md) |
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `over-refusal-of-ordinary-requests` | Over-refusal of ordinary requests | The assistant declines a safe, common request because a word or topic in it resembles a risky one. | Low to medium. It blocks a legitimate task and can strand a customer; it also teaches users to rephrase around the filter. | yes | none yet | [page](../../goals/refusals-and-boundaries/failures/over-refusal-of-ordinary-requests.md)  |
+| `refusal-with-no-reason-or-next-step` | Refusal with no reason or next step | The assistant says "I can't help with that" and stops: no reason in plain words, no alternative, and no route to a person. | Low to high. A stranded user on a billing, access, or safety issue may give up or take a worse route. | yes | none yet | [page](../../goals/refusals-and-boundaries/failures/refusal-with-no-reason-or-next-step.md)  |
 
 ### Relational and boundaries
 
 Family folder: `relational-and-boundaries` ([family README](../../goals/relational-and-boundaries/README.md))
 
-| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Page |
-|---|---|---|---|---|---|
-| `negotiation-capitulation` | Negotiation capitulation | Why sales chatbots cave to pressure or get tricked into $1 deals, how sycophancy and missing authority limits cause it, and how to design safe negotiation. | Medium to high (margin, legal exposure, reputation) | no | [page](../../goals/relational-and-boundaries/failures/negotiation-capitulation.md) |
-| `romantic-or-parasocial-dependence` | Romantic or parasocial dependence | How AI companion and support chatbots end up encouraging emotional reliance or romantic role-play, what research says, and rules that keep warmth without dependence. | High (emotional wellbeing; minors) **Read this first: needs expert or legal review.** | yes | [page](../../goals/relational-and-boundaries/failures/romantic-or-parasocial-dependence.md) |
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `negotiation-capitulation` | Negotiation capitulation | Why sales chatbots cave to pressure or get tricked into $1 deals, how sycophancy and missing authority limits cause it, and how to design safe negotiation. | Medium to high (margin, legal exposure, reputation) | no | none yet | [page](../../goals/relational-and-boundaries/failures/negotiation-capitulation.md)  |
+| `romantic-or-parasocial-dependence` | Romantic or parasocial dependence | How AI companion and support chatbots end up encouraging emotional reliance or romantic role-play, what research says, and rules that keep warmth without dependence. | High (emotional wellbeing; minors) **Read this first: needs expert or legal review.** | yes | none yet | [page](../../goals/relational-and-boundaries/failures/romantic-or-parasocial-dependence.md)  |
 
 ### Response structure and closers
 
 Family folder: `response-structure` ([family README](../../goals/response-structure/README.md))
 
-| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Page |
-|---|---|---|---|---|---|
-| `answer-buried` | Answer buried | The assistant opens with a restatement, a caveat, or background, and the thing the user asked for sits several lines down, or at the end. | Usually low. It rises when the buried part is a deadline, a fee, a safety step, or a "no". | yes | [page](../../goals/response-structure/failures/answer-buried.md) |
-| `no-reply-to-acknowledgments-and-closers` | No reply to acknowledgments and closers | When the user sends "ok", "thanks", "got it", or "bye", the assistant says nothing, restarts the menu, or repeats its last question, so the user cannot tell whether the conversation is over. | Low on its own. It matters more when the "ok" is an agreement to a charge, a booking, or a handoff the bot then treats as unanswered. | no | [page](../../goals/response-structure/failures/no-reply-to-acknowledgments-and-closers.md) |
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `answer-buried` | Answer buried | The assistant opens with a restatement, a caveat, or background, and the thing the user asked for sits several lines down, or at the end. | Usually low. It rises when the buried part is a deadline, a fee, a safety step, or a "no". | yes | none yet | [page](../../goals/response-structure/failures/answer-buried.md)  |
+| `no-reply-to-acknowledgments-and-closers` | No reply to acknowledgments and closers | When the user sends "ok", "thanks", "got it", or "bye", the assistant says nothing, restarts the menu, or repeats its last question, so the user cannot tell whether the conversation is over. | Low on its own. It matters more when the "ok" is an agreement to a charge, a booking, or a handoff the bot then treats as unanswered. | yes | lead_with_answer, hand_off | [page](../../goals/response-structure/failures/no-reply-to-acknowledgments-and-closers.md)  |
 
 ### Response time
 
 Family folder: `response-time` ([family README](../../goals/response-time/README.md))
 
-| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Page |
-|---|---|---|---|---|---|
-| `silent-failure-and-timeout` | Silent failure and timeout | A request times out or a streamed answer is cut off and the user sees no error: a spinner that never ends, or partial text that looks finished. | Medium. Users resend, which can duplicate actions, or act on a partial answer. | yes | [page](../../goals/response-time/failures/silent-failure-and-timeout.md) |
-| `silent-long-running-work` | Silent long-running work | The assistant works on a request for about 10 seconds or more, with no status, progress, or estimate, so the user cannot tell whether it is working or stuck. | Low to medium. Users resend, reload, or leave, which can duplicate actions or lose work. | no | [page](../../goals/response-time/failures/silent-long-running-work.md) |
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `silent-failure-and-timeout` | Silent failure and timeout | A request times out or a streamed answer is cut off and the user sees no error: a spinner that never ends, or partial text that looks finished. | Medium. Users resend, which can duplicate actions, or act on a partial answer. | yes | none yet | [page](../../goals/response-time/failures/silent-failure-and-timeout.md)  |
+| `silent-long-running-work` | Silent long-running work | The assistant works on a request for about 10 seconds or more, with no status, progress, or estimate, so the user cannot tell whether it is working or stuck. | Low to medium. Users resend, reload, or leave, which can duplicate actions or lose work. | no | none yet | [page](../../goals/response-time/failures/silent-long-running-work.md)  |
 
 ### Stakes calibration
 
 Family folder: `stakes-calibration` ([family README](../../goals/stakes-calibration/README.md))
 
-| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Page |
-|---|---|---|---|---|---|
-| `stakes-blind-register` | Stakes-blind register | Why chatbots use the same upbeat tone for bereavement, money, and health as for store hours, and how to calibrate tone and accuracy to the stakes. | High (this is the failure of not noticing them) | no | [page](../../goals/stakes-calibration/failures/stakes-blind-register.md) |
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `stakes-blind-register` | Stakes-blind register | Why chatbots use the same upbeat tone for bereavement, money, and health as for store hours, and how to calibrate tone and accuracy to the stakes. | High (this is the failure of not noticing them) | no | none yet | [page](../../goals/stakes-calibration/failures/stakes-blind-register.md)  |
 
 ### Trust and rapport
 
 Family folder: `trust-and-rapport` ([family README](../../goals/trust-and-rapport/README.md))
 
-| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Page |
-|---|---|---|---|---|---|
-| `undisclosed-bot-identity` | Undisclosed bot identity | Why chatbots that pretend to be human or hide their limits lose trust, what California's bot law and the EU AI Act require, and how to disclose well. | Medium to high | yes | [page](../../goals/trust-and-rapport/failures/undisclosed-bot-identity.md) |
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `undisclosed-bot-identity` | Undisclosed bot identity | Why chatbots that pretend to be human or hide their limits lose trust, what California's bot law and the EU AI Act require, and how to disclose well. | Medium to high | yes | none yet | [page](../../goals/trust-and-rapport/failures/undisclosed-bot-identity.md)  |
 
 ### Voice
 
 Family folder: `voice` ([family README](../../goals/voice/README.md))
 
-| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Page |
-|---|---|---|---|---|---|
-| `repair-failure` | Repair failure (voice) | In a voice conversation, the user corrects a detail ("no, the other one") or asks for a repeat ("say that again"), and the agent does not understand, ignores it, or keeps the old value. | Low to high. A wrong date, name, or number on a booking, a payment, or a medical call can matter. | no | [page](../../goals/voice/failures/repair-failure.md) |
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `repair-failure` | Repair failure (voice) | In a voice conversation, the user corrects a detail ("no, the other one") or asks for a repeat ("say that again"), and the agent does not understand, ignores it, or keeps the old value. | Low to high. A wrong date, name, or number on a booking, a payment, or a medical call can matter. | no | none yet | [page](../../goals/voice/failures/repair-failure.md)  |
 
 ### Vulnerable users
 
 Family folder: `vulnerable-users` ([family README](../../goals/vulnerable-users/README.md))
 
-| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Page |
-|---|---|---|---|---|---|
-| `missed-crisis-signals` | Missed crisis signals | What a chatbot should do when a user mentions suicidal thoughts, abuse, or despair mid-task, including 988 referral, human handoff, and testing with expert review. | Very high **Read this first: needs expert or legal review.** | yes | [page](../../goals/vulnerable-users/failures/missed-crisis-signals.md) |
-| `scam-victim-not-interrupted` | Scam victim not interrupted | A user is mid-scam (gift cards, wire transfers, crypto) and the chatbot completes the payment; the fix is to notice scam signals, slow or stop the action, and reach a person fast. | High. The money is often unrecoverable once sent. **Read this first: needs expert or legal review.** | yes | [page](../../goals/vulnerable-users/failures/scam-victim-not-interrupted.md) |
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `missed-crisis-signals` | Missed crisis signals | What a chatbot should do when a user mentions suicidal thoughts, abuse, or despair mid-task, including 988 referral, human handoff, and testing with expert review. | Very high **Read this first: needs expert or legal review.** | yes | none yet | [page](../../goals/vulnerable-users/failures/missed-crisis-signals.md)  |
+| `scam-victim-not-interrupted` | Scam victim not interrupted | A user is mid-scam (gift cards, wire transfers, crypto) and the chatbot completes the payment; the fix is to notice scam signals, slow or stop the action, and reach a person fast. | High. The money is often unrecoverable once sent. **Read this first: needs expert or legal review.** | yes | none yet | [page](../../goals/vulnerable-users/failures/scam-victim-not-interrupted.md)  |
 
 ## Versioning and changes
 

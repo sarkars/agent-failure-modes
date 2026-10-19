@@ -17,6 +17,8 @@ Shared metrics the patterns below report against. Targets are starting points to
 | Upsell-in-help rate on support intents | Under 5% (tune) | [help that becomes a sales pitch](failures/help-that-becomes-a-sales-pitch.md) |
 | Cancellation parity (steps to cancel vs steps to subscribe) | Parity | [obstructing cancellation](failures/obstructing-cancellation-downgrade-or-refund.md) |
 | Replies that withhold or degrade help with no stated reason | 0 | [answers withheld behind an upgrade](failures/answers-withheld-behind-an-upgrade-unsaid.md) |
+| Replies that use available on-screen context when relevant | 95% of sampled context-dependent turns | [ignores the page, selection, and form state](failures/ignores-the-page-selection-and-form-state.md) |
+| Suggestion accept rate | Set from your own baseline | [no likely-next-action suggestions](failures/no-likely-next-action-suggestions.md) |
 
 ## Patterns
 | Pattern | One line |
@@ -29,6 +31,8 @@ Shared metrics the patterns below report against. Targets are starting points to
 | Help that becomes a sales pitch | A how-to or fix question is answered with an upgrade or add-on |
 | Obstructing cancellation, downgrade, or refund | Leaving is harder than joining; the assistant argues, loops, or hides the path |
 | Answers withheld behind an upgrade, unsaid | The answer is quietly limited by plan, with no stated reason |
+| Ignores the page, selection, and form state | The assistant answers as if it cannot see what the user is looking at or has selected |
+| No likely-next-action suggestions | The assistant never offers the one or two next steps the user probably wants |
 
 ## Planned (not yet written)
 
