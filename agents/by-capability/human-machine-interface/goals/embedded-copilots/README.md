@@ -19,6 +19,8 @@ Shared metrics the patterns below report against. Targets are starting points to
 | Replies that withhold or degrade help with no stated reason | 0 | [answers withheld behind an upgrade](failures/answers-withheld-behind-an-upgrade-unsaid.md) |
 | Replies that use available on-screen context when relevant | 95% of sampled context-dependent turns | [ignores the page, selection, and form state](failures/ignores-the-page-selection-and-form-state.md) |
 | Suggestion accept rate | Set from your own baseline | [no likely-next-action suggestions](failures/no-likely-next-action-suggestions.md) |
+| Share of recommendations favoring the vendor where a better fit exists | Set from baseline | [self-preferencing](failures/self-preferencing.md) |
+| Paid items with a clear label | 100% | [paid content blended into answers](failures/paid-content-blended-into-answers.md) |
 
 ## Patterns
 | Pattern | One line |
@@ -28,6 +30,8 @@ Shared metrics the patterns below report against. Targets are starting points to
 | Generic first response | The first message is a stock greeting that ignores what the product knows |
 | Missing the obvious intent | A plain request gets a neighboring answer or an over-reading |
 | Doesn't say what it can do | An empty box that never says what the assistant can and cannot do |
+| Self-preferencing | The assistant recommends the vendor's own product over a better fit and does not say it has a stake |
+| Paid content blended into answers | Sponsored items or affiliate links sit inside the reply with no clear label |
 | Help that becomes a sales pitch | A how-to or fix question is answered with an upgrade or add-on |
 | Obstructing cancellation, downgrade, or refund | Leaving is harder than joining; the assistant argues, loops, or hides the path |
 | Answers withheld behind an upgrade, unsaid | The answer is quietly limited by plan, with no stated reason |

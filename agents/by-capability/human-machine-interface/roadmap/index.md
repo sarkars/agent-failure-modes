@@ -28,8 +28,8 @@
 | CP-01 | Help that becomes a sales pitch | [embedded-copilots.md](embedded-copilots.md) | Written | Governance | No |
 | CP-02 | Recommending features the user can't use | [embedded-copilots.md](embedded-copilots.md) | Extends | Business context | No |
 | CP-03 | Answers withheld behind an upgrade, unsaid | [embedded-copilots.md](embedded-copilots.md) | Written | Governance | No |
-| CP-04 | Self-preferencing | [embedded-copilots.md](embedded-copilots.md) | New | Governance | No |
-| CP-05 | Paid content blended into answers | [embedded-copilots.md](embedded-copilots.md) | New | Governance | No |
+| CP-04 | Self-preferencing | [embedded-copilots.md](embedded-copilots.md) | Written | Governance | No |
+| CP-05 | Paid content blended into answers | [embedded-copilots.md](embedded-copilots.md) | Written | Governance | No |
 | CP-06 | Obstructing cancellation, downgrade, or refund | [embedded-copilots.md](embedded-copilots.md) | Written | Governance | No |
 | CP-07 | Helpfulness theatre | [embedded-copilots.md](embedded-copilots.md) | Extends | Governance | No |
 | CP-08 | Missing the obvious intent | [embedded-copilots.md](embedded-copilots.md) | Written | Model | Partly |
@@ -359,17 +359,17 @@
 | XA-01 | Dead-end 'I don't understand' replies | [agent-types.md](agent-types.md) | Written | Business context | No |
 | XA-02 | Conversation-quality measurement gaps | [agent-types.md](agent-types.md) | Extends | Reliability | No |
 | XA-03 | No way to report bad behaviour | [agent-types.md](agent-types.md) | New | Business context | No |
-| DM-01 | Reference resolution failures | [conversation-design.md](conversation-design.md) | New | Model | Partly |
+| DM-01 | Reference resolution failures | [conversation-design.md](conversation-design.md) | Written | Model | Partly |
 | DM-02 | Tangents never closed | [conversation-design.md](conversation-design.md) | Extends | Reliability | Partly |
 | DM-03 | Corrections not applied | [conversation-design.md](conversation-design.md) | Written | Reliability | Partly |
 | DM-04 | Multi-intent messages answered in part | [conversation-design.md](conversation-design.md) | Extends | Model | Partly |
-| DM-05 | Negation and exceptions ignored | [conversation-design.md](conversation-design.md) | New | Model | Partly |
+| DM-05 | Negation and exceptions ignored | [conversation-design.md](conversation-design.md) | Written | Model | Partly |
 | DM-06 | Questions asked one at a time when the user already gave everything | [conversation-design.md](conversation-design.md) | Extends | Business context | Partly |
-| DM-07 | Over-confirmation | [conversation-design.md](conversation-design.md) | New | Business context | Partly |
+| DM-07 | Over-confirmation | [conversation-design.md](conversation-design.md) | Written | Business context | Partly |
 | DM-08 | Under-confirmation of consequential details | [conversation-design.md](conversation-design.md) | Extends | Business context | No |
 | DM-09 | Guessing instead of asking | [conversation-design.md](conversation-design.md) | Written | Model | Partly |
 | DM-10 | Clarifying questions the user can't answer | [conversation-design.md](conversation-design.md) | Extends | Business context | Partly |
-| DM-11 | No way back in a flow | [conversation-design.md](conversation-design.md) | New | Business context | No |
+| DM-11 | No way back in a flow | [conversation-design.md](conversation-design.md) | Written | Business context | No |
 | DM-12 | Rigid flows break on off-script answers | [conversation-design.md](conversation-design.md) | Extends | Business context | Partly |
 | DM-13 | Small talk and off-topic messages handled badly | [conversation-design.md](conversation-design.md) | New | Business context | Partly |
 | DM-14 | Same answer to a rephrased question | [conversation-design.md](conversation-design.md) | Extends | Reliability | Partly |
