@@ -471,7 +471,7 @@
 | IC-03 | Anyone can issue a sensitive voice command | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Governance | No |
 | IC-04 | Always-listening surprises | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Governance | No |
 | IC-05 | Purchases by children or the TV | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Reliability | No |
-| GS-01 | Eligibility answers sound like decisions | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Business context | No |
+| GS-01 | Eligibility answers sound like decisions | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Written | Business context | No |
 | GS-02 | Plain-language and language access gaps | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Business context | Partly |
 | GS-03 | Deadlines and document lists wrong or stale | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Extends | Business context | No |
 | GS-04 | Identity checks exclude people without standard IDs | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Business context | No |

@@ -14,7 +14,7 @@ The first version of this roadmap did not check the library, and several rows tu
 | **New** | No matching pattern found by file-name and keyword search | Search again before writing. This is a name-and-keyword check, not a full read of every file |
 
 <!-- BEGIN:result -->
-**Result: 493 rows, of which 23 are Written, 218 are New, 191 Extend an existing pattern, and 61 are already Covered.**
+**Result: 493 rows, of which 24 are Written, 217 are New, 191 Extend an existing pattern, and 61 are already Covered.**
 <!-- END:result -->
 
 <!-- BEGIN:root-cause -->
@@ -68,8 +68,8 @@ If every "Partly" were solved, models would fix up to 40%. If none were, 1%. A o
 | [conversation-design.md](conversation-design.md) | Dialogue mechanics, refusals and boundaries, and error recovery | 33 | 6 | 12 | 15 | 0 |
 | [interface-and-persona.md](interface-and-persona.md) | Persona and tone, onboarding, chat interface, accessibility, and multimodal input | 41 | 0 | 30 | 11 | 0 |
 | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Human handoff, measurement, model changes, proactive agents, and group chats | 28 | 3 | 16 | 9 | 0 |
-| [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Drive-thru, in-car, government, travel, banking, insurance, health scheduling, real estate, and outbound rules | 36 | 0 | 30 | 6 | 0 |
-| | **Total** | **493** | **23** | **218** | **191** | **61** |
+| [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Drive-thru, in-car, government, travel, banking, insurance, health scheduling, real estate, and outbound rules | 36 | 1 | 29 | 6 | 0 |
+| | **Total** | **493** | **24** | **217** | **191** | **61** |
 <!-- END:catalog-table -->
 
 ## Suggested priority

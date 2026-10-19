@@ -263,7 +263,7 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 21 | RF-02 | Refusal with no reason or next step | Extends | - | `goals/refusals-and-boundaries/failures/refusal-with-no-reason-or-next-step.md` | Done | 16 |
 | 22 | TE-01 | Generic error messages | New | - | `goals/errors-and-recovery/failures/generic-error-messages.md` | Done | 17 |
 | 23 | TE-06 | Confident wrong answer with no way to check | Extends | - | `goals/errors-and-recovery/failures/confident-wrong-answer-with-no-way-to-check.md` | Done | 17 |
-| 24 | GS-01 | Eligibility answers sound like decisions | New | L, E | `goals/government-service-agents/failures/eligibility-answers-sound-like-decisions.md` | Queued |  |
+| 24 | GS-01 | Eligibility answers sound like decisions | New | L, E | `goals/government-service-agents/failures/eligibility-answers-sound-like-decisions.md` | Done | 17 |
 | 25 | DT-01 | Order mix-ups at the speaker | New | V | `goals/drive-thru-agents/failures/order-mix-ups-at-the-speaker.md` | Queued |  |
 | 26 | VO-05 | Repair failure | Extends | - | `goals/voice/failures/repair-failure.md` | Queued |  |
 | 27 | RT-02 | Silent long-running work | Extends | V | `goals/response-time/failures/silent-long-running-work.md` | Queued |  |
