@@ -256,7 +256,7 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 14 | RS-01 | Answer buried | New | - | `goals/response-structure/failures/answer-buried.md` | Done | 14 |
 | 15 | EM-02 | Deferring work to the user | New | - | `goals/effort-and-memory/failures/deferring-work-to-the-user.md` | Done | 14 |
 | 16 | EM-11 | No warning of context loss | Extends | - | `goals/effort-and-memory/failures/no-warning-of-context-loss.md` | Done | 15 |
-| 17 | EM-01 | Lazy completion | New | V | `goals/effort-and-memory/failures/lazy-completion.md` | Queued |  |
+| 17 | EM-01 | Lazy completion | New | V | `goals/effort-and-memory/failures/lazy-completion.md` | Done | 15 |
 | 18 | DM-03 | Corrections not applied | New | - | `goals/dialogue-management/failures/corrections-not-applied.md` | Queued |  |
 | 19 | DM-09 | Guessing instead of asking | Extends | - | `goals/dialogue-management/failures/guessing-instead-of-asking.md` | Queued |  |
 | 20 | RF-01 | Over-refusal of ordinary requests | Extends | V | `goals/refusals-and-boundaries/failures/over-refusal-of-ordinary-requests.md` | Queued |  |

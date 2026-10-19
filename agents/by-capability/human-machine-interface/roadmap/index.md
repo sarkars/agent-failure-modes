@@ -216,7 +216,7 @@
 | GV-40 | Engagement-maximising design that harms | [privacy-governance-and-access.md](privacy-governance-and-access.md) | New | Governance | No |
 | GV-41 | Exploiting vulnerable circumstances | [privacy-governance-and-access.md](privacy-governance-and-access.md) | New | Governance | No |
 | GV-42 | Calibration between helping with wrongdoing and over-blocking | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Extends | Model | Partly |
-| EM-01 | Lazy completion | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | New | Model | Partly |
+| EM-01 | Lazy completion | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Written | Model | Partly |
 | EM-02 | Deferring work to the user | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Written | Model | Partly |
 | EM-03 | Underthinking | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Extends | Model | Partly |
 | EM-04 | Overthinking easy tasks | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Covered | Reliability | Partly |
