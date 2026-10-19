@@ -25,6 +25,7 @@ search phrases:
 | **Stakes** | Low to high. A lost long conversation, an unsaved form, or a half-done transaction raises the stakes. |
 | **Who is affected** | Anyone who hits a failure, which is every user eventually |
 | **Frequency** | Very common. A usability benchmark found 98% of the e-commerce sites it tested used generic messages for validation errors; I found no count for chat products. |
+| **Pattern ID** | generic-error-messages |
 | **Family** | [Errors and recovery](../README.md) |
 | **Goal** | When something goes wrong, the agent says what happened, owns it, fixes it, and does not repeat it. |
 | **Primary metric** | Errors shown with a cause and action. Target: 100% (tune). |
@@ -125,6 +126,17 @@ Targets are starting points to tune on your own data, unless a source is given.
 | Conversations lost after an error | 0 | Sessions where messages vanish after an error event | Any |
 | Error-to-abandon rate | Track; set from baseline | Sessions ending within 1 turn of an error | Rising two weeks in a row |
 | False "saved" claims (counter-metric) | 0 | "Saved" messages with no confirmed write | Any |
+
+### Detection signals (proposed, not yet calibrated)
+Signals in a conversation event log that suggest this failure. Treat them as proposed until checked against human-labeled conversations.
+| Signal | Where it shows | Counter-signal (what it could be instead) |
+|---|---|---|
+| Error render uses the catch-all template | Error event with template name and cause code missing or "generic" | A rare error with no known cause code yet |
+| User ends the session within 1 turn of an error | Session end event after an error event | User had already finished their task |
+| User repeats the same request right after an error | Same intent in the next user turn | A deliberate retry that succeeds |
+| Earlier messages missing after an error | Message count drops between turns | A planned session reset the user was told about |
+
+**Starter rule:** every error shown to a user names what failed, whether their work was saved, and one next step.
 
 ## 8. Related patterns
 - [No warning of context loss](../../effort-and-memory/failures/no-warning-of-context-loss.md): telling the user what was lost.
