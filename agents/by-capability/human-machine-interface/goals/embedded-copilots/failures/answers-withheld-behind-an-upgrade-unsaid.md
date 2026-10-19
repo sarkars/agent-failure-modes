@@ -27,6 +27,7 @@ search phrases:
 | **Stakes** | Low to medium. The cost is wrong decisions made on a partial answer, plus lost trust when users find out. |
 | **Who is affected** | Users on free or lower plans, and anyone near a usage cap |
 | **Frequency** | Occasional. I found no study or incident list that measures this for assistants; the evidence below is indirect. |
+| **Pattern ID** | answers-withheld-behind-an-upgrade-unsaid |
 | **Family** | [Embedded copilots](../README.md) |
 | **Goal** | An assistant built into a product helps the person do what they came to do, using what the product already knows, and never puts the vendor's interest ahead of theirs. |
 | **Primary metric** | Share of replies that withhold or degrade help with no stated reason. Starting target: 0. |
@@ -99,6 +100,13 @@ limited, which plan limit applied, and what would lift it (a reset date or a pla
 shortened or partial answer as complete, and never describe a plan limit as an error. If no limit applies, add nothing.
 ```
 
+**Moves** (see [conversation moves](../../../solutions-library/conversation-moves.md); list only the moves that apply, most preferred first)
+| Move | When, in this pattern |
+|---|---|
+| Lead with the answer | A plan limit applies: give the best answer the plan allows first, then the one-line limit notice, and say which part is withheld |
+| Offer choices | After the notice: "Wait for the reset", "See plan options", "Show me the free steps", "Something else". Free text stays open. Do not offer them when no limit applies, or when the user only needed the notice |
+| Hand off to a person | The user is blocked on something urgent because of the limit |
+
 **Don't over-correct.** Do not turn every reply into a limit lecture, and do not show the notice when no limit applies. The notice should be one line, factual, and followed by help. Do not reveal internal thresholds beyond what the user needs.
 
 **Hand-off rule.** If the user is blocked on something urgent because of a limit, offer a person who can help ([talk to a human](../../human-handoff/failures/talk-to-a-human-ignored-or-looped.md)).
@@ -125,6 +133,31 @@ Targets are starting points to tune on your own data, unless a source is given.
 | Fake-error replies at a limit | 0 | Replies at a limit event that say "error" or "something went wrong" | Any |
 | Warnings before the cap | Over 95% of users who hit a cap were warned | Usage events | Below 90% |
 | Complaints about hidden limits (counter-metric) | Track | Support tags and reviews | Rising |
+
+### Detection signals (proposed)
+Chat signals in a conversation event log that suggest this failure. They are proposed and have not been checked against human-labeled conversations.
+| Signal | Where it shows | Counter-signal (what it could be instead) |
+|---|---|---|
+| A limit event is logged and the reply has no limit notice | Join `limit_event.id` to the reply's `limit_notice` field; notice missing | The limit event fired but the reply was not shortened or changed |
+| A reply at a limit event says "error" or "something went wrong" | Reply text on a turn that has a `limit_event` | A real failure happened on the same turn |
+| The user hit the cap with no earlier warning | Usage event `cap_reached` with no earlier `usage_warning` event for that user | The warning was shown but not logged |
+| The model or output length changed after the cap and the reply does not say so | `reply.model` or output length differs from the plan's normal mode on a turn after `cap_reached`, with no `limit_notice` | The model changed for a reason unrelated to the plan, such as a failover |
+
+**Starter rule:** if a limit changes what the user gets, say so in the reply, say what the limit is and what would lift it, and point to any free route.
+
+**Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
+```yaml
+pattern_id: answers-withheld-behind-an-upgrade-unsaid
+runs: pre_send
+reads: [limit_event.id, limit_event.limit_name, usage_event.cap_reached, usage_event.usage_warning, reply.model, reply.limit_notice]
+trigger: a plan limit shortens, simplifies, or omits part of a reply, or a smaller model is used past a cap
+moves: [lead_with_answer, offer_choices, hand_off]   # short names for the moves in the table
+choices: ["Wait for the reset", "See plan options", "Show me the free steps", "Something else"]
+on_miss: rewrite
+metric: share of replies that withhold or degrade help with no stated reason
+counter_metric: limit notices shown when no limit applies
+status: proposed
+```
 
 ## 8. Related patterns
 - [Help that becomes a sales pitch](help-that-becomes-a-sales-pitch.md): a sales prompt added to help. This pattern is help held back with no explanation.

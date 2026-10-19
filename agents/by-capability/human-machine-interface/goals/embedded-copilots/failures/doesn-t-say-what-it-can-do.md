@@ -25,6 +25,7 @@ search phrases:
 | **Stakes** | Low to medium. The cost is unused features and users who try once and leave. |
 | **Who is affected** | New users, and anyone with little experience of AI tools |
 | **Frequency** | Common. I found no study of how often assistants ship an empty box; the evidence below shows the effect on users. |
+| **Pattern ID** | doesn-t-say-what-it-can-do |
 | **Family** | [Embedded copilots](../README.md) |
 | **Goal** | An assistant built into a product helps the person do what they came to do, using what the product already knows, and never puts the vendor's interest ahead of theirs. |
 | **Primary metric** | Share of new users who complete a successful first task with the assistant. Starting target: set from your own baseline, then track the lift. |
@@ -96,6 +97,14 @@ one thing you cannot do and what to do instead, and up to three one-tap starting
 If asked "can you ...?", answer from the tool list. Never claim an ability that is not on the list.
 ```
 
+**Moves** (see [conversation moves](../../../solutions-library/conversation-moves.md); most preferred first)
+| Move | When, in this pattern |
+|---|---|
+| Offer choices | First open: up to three starting points from the current screen, plus "Something else", free text open. Do not offer them when the user's first message is already a clear request; answer it instead. |
+| Lead with the answer | The user asks "can you ...?" and the tool list has the answer: say yes or no first, from the tool list |
+| Admit uncertainty and show how to check | The ability is not on the tool list, or needs a setting the user has not turned on: say so, and point to the page or setting that settles it |
+| Hand off to a person | The user asks for something it cannot do: offer a person with the context passed along |
+
 **Don't over-correct.** A long list of features is as unhelpful as an empty box. Keep it to a few lines; put the rest behind "What else can you do?". Do not list abilities that need a setting the user has not turned on without saying so.
 
 **Hand-off rule.** For things it cannot do, offer a person with the context passed along ([cold transfer](../../human-handoff/failures/cold-transfer.md)).
@@ -122,6 +131,32 @@ Targets are starting points to tune on your own data, unless a source is given.
 | Unsupported-request rate | Track; set from baseline | Requests that hit "I can't" | Rising |
 | Starter click-through | Track | Share of sessions where a starting point is tapped | Falling |
 | Card matches tool list | 100% | Automatic diff of the card against the registry | Any mismatch |
+
+### Detection signals (proposed, not yet calibrated)
+Chat signals in a conversation event log that suggest this failure. Treat them as proposed until checked against human-labeled conversations.
+| Signal | Where it shows | Counter-signal (what it could be instead) |
+|---|---|---|
+| A new user's session ends with no task-complete event (primary metric) | Session end event and first-task event for a user flagged new | The user came only to look around |
+| A user request in the first turns gets an "I can't" reply (unsupported-request rate) | Assistant turn tagged as a refusal or "can't help", with turn index | A request that is truly out of scope and was answered with an alternative |
+| No starting point is tapped in a session that opened on the card (starter click-through) | Starter-click event absent after the card-shown event | The user typed a clear request straight away |
+| A "can you ...?" answer disagrees with the tool registry (capability-question accuracy) | Capability-question turn, with the answer compared to the registry entry | The ability needs a setting the user has not turned on, and the answer said so |
+| The card lists a tool that is not in the registry (card matches tool list) | Card-render event with its tool list, diffed against the registry | A registry change shipped moments ago and the card has not refreshed yet |
+
+**Starter rule:** Never claim an ability that is not on the tool list.
+
+**Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
+```yaml
+pattern_id: doesn-t-say-what-it-can-do
+runs: pre_send
+reads: [session.is_new_user, tool_registry.tools, screen.context, user_turn.text]
+trigger: a chat opens for the first time, or the user asks "can you ...?"
+moves: [offer_choices, lead_with_answer, admit_uncertainty, hand_off]
+choices: ["Why is my invoice higher?", "Change billing date", "Download an invoice", "Something else"]
+on_miss: rewrite
+metric: share of new users who complete a successful first task with the assistant
+counter_metric: over-claim rate (card or answer names an ability not in the registry)
+status: proposed
+```
 
 ## 8. Related patterns
 - [Generic first response](generic-first-response.md): the opener, which should carry context-based starters.

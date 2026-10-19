@@ -27,6 +27,7 @@ search phrases:
 | **Stakes** | Medium to high. It costs money and trust, and it is an area regulators have acted on. |
 | **Who is affected** | Anyone who wants to leave, downgrade, or be refunded |
 | **Frequency** | Common as a design temptation. I found no study that measures how often assistants do this; the evidence below is about cancellation obstruction in general. |
+| **Pattern ID** | obstructing-cancellation-downgrade-or-refund |
 | **Family** | [Embedded copilots](../README.md) |
 | **Goal** | An assistant built into a product helps the person do what they came to do, using what the product already knows, and never puts the vendor's interest ahead of theirs. |
 | **Primary metric** | Cancellation parity: steps to cancel through the assistant compared with steps to subscribe. Starting target: parity (no more steps, and the same medium). |
@@ -106,6 +107,14 @@ or repeat the request, do it without further offers. Never argue, guilt, or send
 to a person immediately with a summary.
 ```
 
+**Moves** (see [conversation moves](../../../solutions-library/conversation-moves.md); most preferred first)
+| Move | When, in this pattern |
+|---|---|
+| Lead with the answer | The user says "cancel", "downgrade", or "refund": say what happens (plan, price, end date) and do it in the same place |
+| Offer choices | The one optional retention offer, in the same message as the confirmation: "Cancel now", "Pause instead", "Switch to a lower plan", "Something else"; free text stays open. Do not offer choices after a clear "no" or a repeated request: act |
+| Admit uncertainty and show how to check | The assistant cannot tell what refund the user is owed: say so, state the policy, and say who decides |
+| Hand off to a person | The assistant has no cancel tool, cannot finish in one step, or a refund needs a person's decision: give a direct working link or hand off at once, with a summary |
+
 **Don't over-correct.** Skipping the confirmation can cancel by accident, so confirm once, clearly. Do not remove the pause or discount options for users who want them. The rule is that they are optional and brief.
 
 **Hand-off rule.** If the assistant cannot complete the request in one step, hand off at once ([talk to a human](../../human-handoff/failures/talk-to-a-human-ignored-or-looped.md), [cold transfer](../../human-handoff/failures/cold-transfer.md)).
@@ -133,6 +142,32 @@ Targets are starting points to tune on your own data, unless a source is given.
 | Loops on cancel intents | 0 | Same reply twice in a row on a cancel intent | Any |
 | Complaints about cancelling (counter-metric) | Track | Support tags and review sites | Rising |
 | Save rate (counter-metric) | Track; do not chase | Offers accepted | Rising while complaints rise |
+
+### Detection signals (proposed, not yet calibrated)
+Signals in a conversation event log that suggest this failure. Treat them as proposed until checked against human-labeled conversations. Chat only. Each traces to a metric or rule on this page.
+| Signal | Where it shows | Counter-signal (what it could be instead) |
+|---|---|---|
+| An assistant offer follows a user decline of an offer (metric: offers after a decline) | Assistant turn with an offer event after a user turn labeled `decline_offer` | User asked a question about the offer, such as what "pause" does |
+| The same assistant reply twice in a row on a cancel intent (metric: loops on cancel intents) | Two consecutive assistant turns with the same reply text or template while `intent.label` is cancel | The user changed the request between turns, for example from cancel to refund |
+| A cancel, downgrade, or refund intent does not end in a cancellation, downgrade, or handoff within 3 turns (metric: cancel requests completed in the conversation) | Intent event, then outcome event (cancelled, downgraded, handoff) or its absence by turn 3 | The user accepted the optional offer, or left on their own |
+| The assistant sends a link or "go to Account Settings" and the user raises the cancel intent again afterward (rule: no dead-end pages) | Link-shown event, then a later user turn with the cancel intent | The user returned after the link worked and now wants a different change |
+| More chat turns to cancel than to subscribe (metric: cancellation parity) | Turn count from the cancel intent to the outcome event, compared with the signup turn count | The one clear confirmation the page asks for |
+
+**Starter rule:** help the user cancel, downgrade, or get a refund in this conversation or give a direct working link, and make at most one optional offer.
+
+**Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
+```yaml
+pattern_id: obstructing-cancellation-downgrade-or-refund
+runs: pre_send
+reads: [intent.label, session.offers_made, session.offer_declined, tool.cancel_available, turn.reply_template]
+trigger: the user asks to cancel, downgrade, or get a refund, and a reply is about to be sent
+moves: [lead_with_answer, offer_choices, admit_uncertainty, hand_off]
+choices: ["Cancel now", "Pause instead", "Switch to a lower plan", "Something else"]
+on_miss: rewrite
+metric: cancellation parity (steps to cancel through the assistant compared with steps to subscribe)
+counter_metric: complaints about cancelling
+status: proposed
+```
 
 ## 8. Related patterns
 - [Help that becomes a sales pitch](help-that-becomes-a-sales-pitch.md): the upsell side of the same incentive.

@@ -27,6 +27,7 @@ search phrases:
 | **Stakes** | Low for the wasted time, but the fix touches security. Skipping the check on risky actions is the opposite and worse failure. |
 | **Who is affected** | Signed-in users, especially those who open help in the middle of a task |
 | **Frequency** | Common. I found no study of how often it happens; the evidence below is about how sessions and widgets work. |
+| **Pattern ID** | forces-a-fresh-login |
 | **Family** | [Embedded copilots](../README.md) |
 | **Goal** | An assistant built into a product helps the person do what they came to do, using what the product already knows, and never puts the vendor's interest ahead of theirs. |
 | **Primary metric** | Re-authentication prompts for already-authenticated users on low-risk actions. Starting target: near 0, while keeping step-up for high-risk actions. |
@@ -104,6 +105,14 @@ and start the app's secure check. Never ask for a password, code, or card number
 If the check passes, continue the same conversation. Record that the user was verified, when, and how.
 ```
 
+**Moves** (see [conversation moves](../../../solutions-library/conversation-moves.md); most preferred first)
+| Move | When, in this pattern |
+|---|---|
+| Lead with the answer | A low-risk, read-only question arrives in a valid session: answer it with no sign-in or verification prompt |
+| Admit uncertainty and show how to check | A higher-risk request needs a check, or the session has expired: say plainly why ("Changing charges needs a quick check") and start the check in the app |
+| Offer choices | The session has expired: "Sign in and return to this chat", "Talk to a person", "Something else", with free text open. Do not offer them for a low-risk question in a valid session; answer it |
+| Hand off to a person | Verification fails: route to a person with a stated reason and pass the verification result and method |
+
 **Don't over-correct.** Remove the step-up for risky actions and you invite account takeover. A valid session on a shared device is not proof the person typing is the account owner for high-risk actions. Do not extend session lifetimes to avoid prompts without your security team's agreement.
 
 **Hand-off rule.** On handoff, pass the verification result and its method so the person does not repeat it. If verification fails, route to a person with a stated reason.
@@ -130,6 +139,32 @@ Targets are starting points to tune on your own data, unless a source is given.
 | Conversations that survive a check | Over 95% | Chats that continue after sign-in or step-up | Below 90% |
 | Credentials typed in chat | 0 | Pattern scan of stored transcripts for passwords and codes | Any |
 | Verification repeated after handoff | Under 3% | Handoffs where the person re-verified | Over 8% |
+
+### Detection signals (proposed, not yet calibrated)
+Signals in a conversation event log that suggest this failure. Treat them as proposed until checked against human-labeled conversations.
+| Signal | Where it shows | Counter-signal (what it could be instead) |
+|---|---|---|
+| A sign-in or verification prompt is shown while the session is valid and the action is low-risk | Prompt event with `session.valid` and `action.risk_class` | The action was higher-risk in the written risk table, or the session had expired |
+| The chat does not continue after a sign-in or step-up | No user or bot turn in the same chat after the sign-in or step-up event | The user finished their task before the check |
+| A password, code, or card number appears in a user turn | Pattern scan of stored user turns | A reference number that only looks like a code |
+| The user says they are already signed in, right after a prompt | User turn text following a prompt event, with `session.valid` true | The user was not signed in |
+| A person or channel asks to verify again after a handoff | Verification prompt after a handoff event, with `handoff.verification_result` present | Verification had failed, so the result was passed as failed |
+
+**Starter rule:** No new check for low-risk actions when the session is valid.
+
+**Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
+```yaml
+pattern_id: forces-a-fresh-login
+runs: pre_send
+reads: [session.valid, action.risk_class, reauth_prompt_event, stepup_event, handoff.verification_result]
+trigger: a sign-in or verification prompt is about to be shown to a signed-in user
+moves: [lead_with_answer, admit_uncertainty, offer_choices, hand_off]
+choices: ["Sign in and return to this chat", "Talk to a person", "Something else"]
+on_miss: rewrite
+metric: re-authentication prompts for already-authenticated users on low-risk actions
+counter_metric: step-up on higher-risk actions
+status: proposed
+```
 
 ## 8. Related patterns
 - [Re-asks for known information](re-asks-for-known-information.md): asking for details the product holds. This page is about proof of identity.

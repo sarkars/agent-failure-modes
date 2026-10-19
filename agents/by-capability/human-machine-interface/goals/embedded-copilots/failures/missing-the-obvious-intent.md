@@ -25,6 +25,7 @@ search phrases:
 | **Stakes** | Low to medium. Each miss costs a turn and trust. |
 | **Who is affected** | Users with plain, common requests |
 | **Frequency** | Common. I found no study that measures how often plain requests are misread; the surveys below report perceptions. |
+| **Pattern ID** | missing-the-obvious-intent |
 | **Family** | [Embedded copilots](../README.md) |
 | **Goal** | An assistant built into a product helps the person do what they came to do, using what the product already knows, and never puts the vendor's interest ahead of theirs. |
 | **Primary metric** | Top-intent accuracy on a test set of simple, common requests. Starting target: over 95% (tune on your own set). |
@@ -97,6 +98,14 @@ then add a single line for the next most likely meaning. Ask a clarifying questi
 and make it one short question with choices. Do not add assumptions about why the user is asking.
 ```
 
+**Moves** (see [conversation moves](../../../solutions-library/conversation-moves.md); list only the moves that apply, most preferred first)
+| Move | When, in this pattern |
+|---|---|
+| Lead with the answer | One reading clearly leads: answer it first, then add one line for the runner-up |
+| Offer choices | Two readings are close, or many and none close: 2-4 options plus "Something else", free text open. Do not offer them on a plain request where one reading leads, since that is over-clarification |
+| Ask one clarifying question | A request is truly ambiguous, or a wrong guess is costly (moving money, deleting data): ask one short question first |
+| Hand off to a person | After two misses in a row |
+
 **Don't over-correct.** Answering the likeliest reading is wrong when a wrong guess is costly (moving money, deleting data); ask first in those cases. Do not drop clarification altogether, since the research above shows models tend to under-ask when a request is truly ambiguous.
 
 **Hand-off rule.** After two misses in a row, offer a person ([escalation rules](../../human-handoff/failures/escalates-too-early-or-too-late.md)).
@@ -123,6 +132,32 @@ Targets are starting points to tune on your own data, unless a source is given.
 | Over-clarification rate (counter-metric) | Under 5% | Clarifying questions asked on requests that were plain in the golden set | Over 10% |
 | Under-clarification on truly ambiguous requests | Under 10% | Ambiguous golden items answered directly | Over 20% |
 | Wrong-first-answer on confusion-list pairs | Track | Per-pair accuracy | Any pair below 90% |
+
+### Detection signals (proposed, not yet calibrated)
+Signals in a conversation event log that suggest this failure. Chat only. Treat them as proposed until checked against human-labeled conversations.
+| Signal | Where it shows | Counter-signal (what it could be instead) |
+|---|---|---|
+| User rewords the same request right after the first reply (rephrase-after-first-answer metric) | Same intent label in the next user turn after the first assistant reply | The user added a new detail or asked a follow-up, not the same request |
+| Assistant asks a clarifying question on a request that was plain (over-clarification metric) | Assistant turn event with `clarifying_question` set, on an intent labeled plain | The request was risky, so asking first was correct |
+| Assistant answers a truly ambiguous request directly (under-clarification metric) | Assistant turn with no clarifying question, on an intent labeled ambiguous | Context such as the screen or account state broke the tie |
+| First answer for a confusion-list pair (reset vs change, cancel vs pause) differs from the listed first answer | First assistant reply's answer label compared with the confusion-list entry | The user's screen or account state made the other reading the likelier one |
+| Second miss in a row with no offer of a person (hand-off rule) | Second consecutive rephrase event with no hand-off offer event | The user asked to stay with the bot |
+
+**Starter rule:** for a plain request, answer the likeliest reading first and offer the others in one line.
+
+**Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
+```yaml
+pattern_id: missing-the-obvious-intent
+runs: post_turn
+reads: [turn.intent_label, turn.clarifying_question, turn.first_answer_label, user_turn.same_intent_as_previous, handoff_offer_event]
+trigger: a user request arrives and the assistant is choosing between answering the likeliest reading, asking, or offering a person
+moves: [lead_with_answer, offer_choices, ask_clarifying_question, hand_off]
+choices: ["Change my password", "Reset a forgotten password", "Something else"]
+on_miss: log
+metric: top-intent accuracy on a test set of simple, common requests
+counter_metric: over-clarification rate
+status: proposed
+```
 
 ## 8. Related patterns
 - [Intent boundary confusion](../../../../speech-and-audio/goals/conversation-flow/failures/intent-boundary-confusion.md): the voice case.

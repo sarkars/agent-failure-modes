@@ -25,6 +25,7 @@ search phrases:
 | **Stakes** | Low on its own. It matters more when the "ok" is an agreement to a charge, a booking, or a handoff the bot then treats as unanswered. |
 | **Who is affected** | Everyone who ends a conversation politely, which is most users |
 | **Frequency** | Common in practice, but I found no study that counts it. The evidence below is design guidance and small experiments. |
+| **Pattern ID** | no-reply-to-acknowledgments-and-closers |
 | **Family** | [Response structure and closers](../README.md) |
 | **Goal** | Replies are shaped so people can read, act on, and answer them, and short messages like "ok" and "bye" get the response the moment calls for. |
 | **Primary metric** | Handling correctness on labelled acknowledgment and closer turns. Starting target: over 95% (tune). |
@@ -106,6 +107,14 @@ Ask "anything else?" at most once. If the user says no or that's all, say goodby
 Do not end the conversation on "thanks" or "ok" if the task is unfinished.
 ```
 
+**Moves** (see [conversation moves](../../../solutions-library/conversation-moves.md); list only the moves that apply, most preferred first)
+| Move | When, in this pattern |
+|---|---|
+| Lead with the answer | The short turn is clear: reply to "thanks" once, confirm the action after an "ok" to an explicit proposal, or say goodbye with a way back after a closer (and what is saved if a task is pending) |
+| Hand off to a person | "ok" or "bye" comes right after the user asked for a person and none has arrived: keep the handoff alive and do not close |
+
+Offering choices is not used here: the user is closing the conversation, and a menu after "bye" is the restart this page warns against.
+
 **Don't over-correct.** Do not answer every "ok" with a paragraph, and do not add "Is there anything else?" to every reply. Do not close a session on a word that was only a pause.
 
 **Hand-off rule.** If "ok" or "bye" comes right after the user asked for a person and none has arrived, do not close: keep the handoff alive (see [talk to a human ignored or looped](../../human-handoff/failures/talk-to-a-human-ignored-or-looped.md)).
@@ -132,6 +141,32 @@ Targets are starting points to tune on your own data, unless a source is given.
 | "Anything else?" asked twice in one conversation | 0 | Log check | Any |
 | Sessions closed on an unfinished task (counter-metric) | Under 1% | Closed sessions with a pending step | Over 3% |
 | Conversations reopened within 5 minutes of a close (counter-metric) | Track; set from baseline | Same user, new session | Rising two weeks in a row |
+
+### Detection signals (proposed, not yet calibrated)
+Signals in a conversation event log that suggest this failure. Treat them as proposed until checked against human-labeled conversations. Chat only.
+| Signal | Where it shows | Counter-signal (what it could be instead) |
+|---|---|---|
+| A greeting or menu is sent right after a user turn labeled thanks or closer (restart after a closer) | Bot turn template or intent field ("greeting", "menu") on the turn after a turn labeled closer | The user sent a new request in that turn |
+| "Anything else?" is sent a second time in one conversation | Count of bot turns using the "anything else" template per conversation id | A different question that only resembles the template |
+| The session ends while a step is still pending | Session end event with an open pending-state flag | The user said "bye" and the bot stated what is saved |
+| A user turn labeled closer gets no bot reply and the session stays open | Closer-labeled user turn with no following bot turn and no session end event | A bare "ok" with nothing pending, where no reply is fine |
+| The same user starts a new session within 5 minutes of a close | Session start event, same user id, within 5 minutes of the last session end event | An unrelated new request |
+
+**Starter rule:** ask "anything else?" at most once per conversation, and let an explicit "no" or "that's all" end it.
+
+**Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
+```yaml
+pattern_id: no-reply-to-acknowledgments-and-closers
+runs: pre_send
+reads: [user_turn.short_turn_label, session.pending_state, session.anything_else_count, session.handoff_requested]
+trigger: a short user turn labeled thanks, acknowledgment, agreement or closer is about to get a reply
+moves: [lead_with_answer, hand_off]   # short names for the moves in the table
+choices: none
+on_miss: rewrite
+metric: handling correctness on labelled acknowledgment and closer turns
+counter_metric: sessions closed on an unfinished task
+status: proposed
+```
 
 ## 8. Related patterns
 - [Graceless call ending](../../../../speech-and-audio/goals/conversation-flow/failures/graceless-call-ending.md): the voice version of this failure. This page covers chat.
