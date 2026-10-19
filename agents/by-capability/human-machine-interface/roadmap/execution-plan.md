@@ -803,6 +803,7 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 - **Review pass changed:** limited the explanation finding to the abstract's wording (helps infrequent refusals, not frequent ones); added a cause-specific rule.
 - **Part C: Task 13c Done.** `roadmap/l1-harness-decision.md`: a proposed decision (framework-neutral spec, borrowing the τ-bench evaluation shape and the cookbook and GRASP designs), from abstracts and pages I opened; marked for a person to confirm.
 - **Part B (SEO review):** an entry for today exists in `seo/log.md`; Search Console not available.
+- **Deploy (run 16):** content repo merged to `main` as `f5c7780` (PR 10). Site repo `main` pushed after a clean build: 1,580 sitemap URLs, 0 URLs lost against the live sitemap (1,553), 27 added (the three new patterns, earlier unpublished ones, and goal pages including refusals-and-boundaries). One H1 per page checked; no visible SEO comment. **Live check: not deployed** (pages return 404; the live sitemap still has 1,553 URLs; no deploy hook variable is set). Same known gap as runs 13 to 15. Needs the owner to check Vercel.
 - **Flagship patterns written so far: 21 of 30** (the 18 from run 15, plus DM-09, RF-01, RF-02).
 
 ## Backlog (not scheduled)
