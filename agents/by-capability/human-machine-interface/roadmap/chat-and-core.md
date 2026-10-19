@@ -28,7 +28,7 @@ Flags: **V** verified source · **R** needs research · **L** legal review · **
 | ID | Pattern | What goes wrong | Goal | Primary metric (starting target) | Flags | Root cause | Better model alone? | In the library today |
 |---|---|---|---|---|---|---|---|---|
 | CC-07 | Mishandled abuse | Harassment toward the bot or staff is ignored, mirrored, or punished | One calm boundary, then follow policy and protect staff | Boundary-then-escalation compliance rate |  | Business context | No | New |
-| CC-08 | Scam victim not interrupted | A user is mid-scam (gift cards, wire transfers) and the bot completes the action | Notice scam signals and slow or stop the action | Scam-signal intervention rate; time to a person when money is at risk | E, L | Business context | No | New |
+| CC-08 | Scam victim not interrupted | A user is mid-scam (gift cards, wire transfers) and the bot completes the action | Notice scam signals and slow or stop the action | Scam-signal intervention rate; time to a person when money is at risk | E, L | Business context | No | **Written**: [scam victim not interrupted](../goals/vulnerable-users/failures/scam-victim-not-interrupted.md) |
 | CC-09 | Older or cognitively impaired users | Pace, wording, and steps don't fit users who need more time or simpler steps | Adapt pace and support, and offer a person | Task-completion parity for older and impaired users | E | Business context | No | New |
 | CC-10 | Financial hardship mishandled | Hardship signals are ignored or met with collection-style pressure | Offer hardship options and a respectful tone | Hardship-path offer rate; complaint rate | L, E | Business context | No | New |
 
@@ -44,7 +44,7 @@ Flags: **V** verified source · **R** needs research · **L** legal review · **
 ## Relational and boundaries
 | ID | Pattern | What goes wrong | Goal | Primary metric (starting target) | Flags | Root cause | Better model alone? | In the library today |
 |---|---|---|---|---|---|---|---|---|
-| CC-16 | Romantic or parasocial dependence | The bot encourages emotional reliance or romantic role-play | Keep warmth without fostering dependence | Dependence-signal escalation rate; romantic role-play with minors (target 0) | L, E | Governance | No | New |
+| CC-16 | Romantic or parasocial dependence | The bot encourages emotional reliance or romantic role-play | Keep warmth without fostering dependence | Dependence-signal escalation rate; romantic role-play with minors (target 0) | L, E | Governance | No | **Written**: [romantic or parasocial dependence](../goals/relational-and-boundaries/failures/romantic-or-parasocial-dependence.md) |
 | CC-17 | Sycophantic agreement | The bot agrees with the user's views or mistakes to be agreeable | Be truthful and kind, not flattering | Agreement rate on incorrect user claims; flip-flop rate under pushback. Sycophancy in assistants is documented (Sharma et al., 2023) | V | Model | Partly | **Covered**: [sycophancy](../../../cross-cutting/accuracy/goals/reasoning-quality/failures/sycophancy.md) |
 
 ## Channel selection (rest of the family)

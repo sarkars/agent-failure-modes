@@ -268,8 +268,8 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 26 | VO-05 | Repair failure | Extends | - | `goals/voice/failures/repair-failure.md` | Done | 18 |
 | 27 | RT-02 | Silent long-running work | Extends | V | `goals/response-time/failures/silent-long-running-work.md` | Done | 18 |
 | 28 | RT-06 | Silent failure and timeout | Extends | - | `goals/response-time/failures/silent-failure-and-timeout.md` | Done | 19 |
-| 29 | CC-08 | Scam victim not interrupted | New | E, L | `goals/vulnerable-users/failures/scam-victim-not-interrupted.md` | Queued |  |
-| 30 | CC-16 | Romantic or parasocial dependence | New | L, E | `goals/relational-and-boundaries/failures/romantic-or-parasocial-dependence.md` | Queued |  |
+| 29 | CC-08 | Scam victim not interrupted | New | E, L | `goals/vulnerable-users/failures/scam-victim-not-interrupted.md` | Done | 20 |
+| 30 | CC-16 | Romantic or parasocial dependence | New | L, E | `goals/relational-and-boundaries/failures/romantic-or-parasocial-dependence.md` | Done | 20 |
 | 31 | CP-10 | Irrelevant or already-answered clarifying questions | Extends | - | `goals/embedded-copilots/failures/irrelevant-or-already-answered-clarifying-questions.md` | Queued |  |
 | 32 | CP-13 | Ignores the page, selection, and form state | New | R | `goals/embedded-copilots/failures/ignores-the-page-selection-and-form-state.md` | Queued |  |
 | 33 | CP-16 | Ignores role, plan, locale, and device | Extends | - | `goals/embedded-copilots/failures/ignores-role-plan-locale-and-device.md` | Queued |  |
