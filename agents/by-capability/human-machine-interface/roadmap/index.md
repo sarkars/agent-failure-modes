@@ -384,7 +384,7 @@
 | RF-08 | Silent sandbagging | [conversation-design.md](conversation-design.md) | New | Model | Partly |
 | RF-09 | Refusal depends on wording | [conversation-design.md](conversation-design.md) | Extends | Model | Partly |
 | RF-10 | Accusatory or harsh refusals | [conversation-design.md](conversation-design.md) | New | Model | Partly |
-| TE-01 | Generic error messages | [conversation-design.md](conversation-design.md) | New | Business context | No |
+| TE-01 | Generic error messages | [conversation-design.md](conversation-design.md) | Written | Business context | No |
 | TE-02 | Apology without repair | [conversation-design.md](conversation-design.md) | Extends | Business context | Partly |
 | TE-03 | Blames the user | [conversation-design.md](conversation-design.md) | New | Business context | Partly |
 | TE-04 | Contradicts an earlier answer without saying so | [conversation-design.md](conversation-design.md) | Extends | Reliability | Partly |
