@@ -30,7 +30,7 @@
 | CP-03 | Answers withheld behind an upgrade, unsaid | [embedded-copilots.md](embedded-copilots.md) | New | Governance | No |
 | CP-04 | Self-preferencing | [embedded-copilots.md](embedded-copilots.md) | New | Governance | No |
 | CP-05 | Paid content blended into answers | [embedded-copilots.md](embedded-copilots.md) | New | Governance | No |
-| CP-06 | Obstructing cancellation, downgrade, or refund | [embedded-copilots.md](embedded-copilots.md) | Extends | Governance | No |
+| CP-06 | Obstructing cancellation, downgrade, or refund | [embedded-copilots.md](embedded-copilots.md) | Written | Governance | No |
 | CP-07 | Helpfulness theatre | [embedded-copilots.md](embedded-copilots.md) | Extends | Governance | No |
 | CP-08 | Missing the obvious intent | [embedded-copilots.md](embedded-copilots.md) | Written | Model | Partly |
 | CP-09 | Over-complicating simple tasks | [embedded-copilots.md](embedded-copilots.md) | Extends | Model | Partly |

@@ -131,7 +131,7 @@ Targets are starting points to tune on your own data, unless a source is given.
 
 ## 8. Related patterns
 - [Answers withheld behind an upgrade, unsaid](../../../roadmap/embedded-copilots.md) (planned, CP-03): the answer is held back with no explanation.
-- Obstructing cancellation, downgrade, or refund (planned, CP-06): an upsell used against a user who is leaving.
+- [Obstructing cancellation, downgrade, or refund](obstructing-cancellation-downgrade-or-refund.md): an upsell used against a user who is leaving.
 - [Generic first response](generic-first-response.md): the opener, a place sales prompts creep in.
 - [Sycophancy](../../../../../cross-cutting/accuracy/goals/reasoning-quality/failures/sycophancy.md): another way models bend toward what a stakeholder wants.
 

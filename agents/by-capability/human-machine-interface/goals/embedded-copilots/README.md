@@ -15,6 +15,7 @@ Shared metrics the patterns below report against. Targets are starting points to
 | Top-intent accuracy on simple requests | Over 95% | [missing the obvious intent](failures/missing-the-obvious-intent.md) |
 | New users who complete a successful first task | Set from baseline | [doesn't say what it can do](failures/doesn-t-say-what-it-can-do.md) |
 | Upsell-in-help rate on support intents | Under 5% (tune) | [help that becomes a sales pitch](failures/help-that-becomes-a-sales-pitch.md) |
+| Cancellation parity (steps to cancel vs steps to subscribe) | Parity | [obstructing cancellation](failures/obstructing-cancellation-downgrade-or-refund.md) |
 
 ## Patterns
 | Pattern | One line |
@@ -25,9 +26,9 @@ Shared metrics the patterns below report against. Targets are starting points to
 | Missing the obvious intent | A plain request gets a neighboring answer or an over-reading |
 | Doesn't say what it can do | An empty box that never says what the assistant can and cannot do |
 | Help that becomes a sales pitch | A how-to or fix question is answered with an upgrade or add-on |
+| Obstructing cancellation, downgrade, or refund | Leaving is harder than joining; the assistant argues, loops, or hides the path |
 
 ## Planned (not yet written)
-- Obstructing cancellation, downgrade, or refund
 - Answers withheld behind an upgrade, unsaid
 
 ## Related
