@@ -821,6 +821,7 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 - **Review pass changed:** removed a statement that income limits update each year; reworded the NYC bot description to what the article text I read supports; kept all legal rights out of the fix.
 - **Part C: Task 13d Done.** `roadmap/l0-base-spec.md`: a draft table of 24 behaviors with their patterns, tests, and metrics, built from the pattern pages' principle lines, with five tensions for a person to decide. Untested, for review.
 - **Part B (SEO review):** an entry for today exists in `seo/log.md`; Search Console not available.
+- **Deploy (run 17):** content repo merged to `main` as `1682d61` (PR 11). Site repo `main` pushed after a clean build: 1,585 sitemap URLs, 0 URLs lost against the live sitemap (1,553), 32 added (the three new patterns, earlier unpublished ones, and goal pages including errors-and-recovery and government-service-agents). One H1 per page checked; no visible SEO comment. **Live check: not deployed** (pages return 404; the live sitemap still has 1,553 URLs; no deploy hook variable is set). Same known gap as runs 13 to 16. Needs the owner to check Vercel.
 - **Flagship patterns written so far: 24 of 30** (the 21 from run 16, plus TE-01, TE-06, GS-01).
 
 ## Backlog (not scheduled)
