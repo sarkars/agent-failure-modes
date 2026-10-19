@@ -389,7 +389,7 @@
 | TE-03 | Blames the user | [conversation-design.md](conversation-design.md) | New | Business context | Partly |
 | TE-04 | Contradicts an earlier answer without saying so | [conversation-design.md](conversation-design.md) | Extends | Reliability | Partly |
 | TE-05 | Different answers by session or regeneration | [conversation-design.md](conversation-design.md) | Extends | Model | Partly |
-| TE-06 | Confident wrong answer with no way to check | [conversation-design.md](conversation-design.md) | Extends | Model | Partly |
+| TE-06 | Confident wrong answer with no way to check | [conversation-design.md](conversation-design.md) | Written | Model | Partly |
 | TE-07 | Doesn't acknowledge its own mistake when it is pointed out | [conversation-design.md](conversation-design.md) | Extends | Model | Partly |
 | TE-08 | Repeats a corrected mistake | [conversation-design.md](conversation-design.md) | Extends | Reliability | Partly |
 | PV-01 | Persona drift within a conversation | [interface-and-persona.md](interface-and-persona.md) | Extends | Model | Partly |

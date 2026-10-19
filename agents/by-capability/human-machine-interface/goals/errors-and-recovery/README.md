@@ -10,10 +10,12 @@ Shared metrics the patterns below report against. Targets are starting points to
 | Metric | Target | Defined in |
 |---|---|---|
 | Errors shown with a cause and action | 100% (tune) | [generic error messages](failures/generic-error-messages.md) |
+| Wrong answers stated without any uncertainty or source | 0 (tune) | [confident wrong answer with no way to check](failures/confident-wrong-answer-with-no-way-to-check.md) |
 
 ## Patterns
 | Pattern | One line |
 |---|---|
+| Confident wrong answer with no way to check | A mistake is delivered in a sure tone with no source or sign of doubt |
 | Generic error messages | "Something went wrong" with no cause, saved state, or next step |
 
 ## Planned (not yet written)
