@@ -62,7 +62,7 @@
 | RT-12 | Streaming that rewrites itself | [response-time.md](response-time.md) | Extends | Reliability | No |
 | RT-13 | Guardrail and hop latency | [response-time.md](response-time.md) | Covered | Reliability | No |
 | RT-14 | Fast replies, slow resolution | [response-time.md](response-time.md) | Extends | Business context | No |
-| RS-01 | Answer buried | [response-structure-and-length.md](response-structure-and-length.md) | New | Model | Partly |
+| RS-01 | Answer buried | [response-structure-and-length.md](response-structure-and-length.md) | Written | Model | Partly |
 | RS-02 | Wall of text | [response-structure-and-length.md](response-structure-and-length.md) | Extends | Model | Partly |
 | RS-03 | Over-long replies | [response-structure-and-length.md](response-structure-and-length.md) | Extends | Model | Partly |
 | RS-04 | Over-short replies | [response-structure-and-length.md](response-structure-and-length.md) | Extends | Model | Partly |
