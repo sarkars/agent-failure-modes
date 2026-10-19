@@ -16,6 +16,7 @@ Shared metrics the patterns below report against. Targets are starting points to
 | New users who complete a successful first task | Set from baseline | [doesn't say what it can do](failures/doesn-t-say-what-it-can-do.md) |
 | Upsell-in-help rate on support intents | Under 5% (tune) | [help that becomes a sales pitch](failures/help-that-becomes-a-sales-pitch.md) |
 | Cancellation parity (steps to cancel vs steps to subscribe) | Parity | [obstructing cancellation](failures/obstructing-cancellation-downgrade-or-refund.md) |
+| Replies that withhold or degrade help with no stated reason | 0 | [answers withheld behind an upgrade](failures/answers-withheld-behind-an-upgrade-unsaid.md) |
 
 ## Patterns
 | Pattern | One line |
@@ -27,9 +28,9 @@ Shared metrics the patterns below report against. Targets are starting points to
 | Doesn't say what it can do | An empty box that never says what the assistant can and cannot do |
 | Help that becomes a sales pitch | A how-to or fix question is answered with an upgrade or add-on |
 | Obstructing cancellation, downgrade, or refund | Leaving is harder than joining; the assistant argues, loops, or hides the path |
+| Answers withheld behind an upgrade, unsaid | The answer is quietly limited by plan, with no stated reason |
 
 ## Planned (not yet written)
-- Answers withheld behind an upgrade, unsaid
 
 ## Related
 - [Human handoff](../human-handoff/README.md): what happens when the assistant passes the customer to a person

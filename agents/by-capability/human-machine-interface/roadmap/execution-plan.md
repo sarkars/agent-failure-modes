@@ -251,7 +251,7 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 9 | XA-01 | Dead-end 'I don't understand' replies | Extends | V, R | `goals/conversation-leadership/failures/dead-end-i-don-t-understand-replies.md` | Done | 12 |
 | 10 | CP-01 | Help that becomes a sales pitch | New | V, R, L | `goals/embedded-copilots/failures/help-that-becomes-a-sales-pitch.md` | Done | 13 |
 | 11 | CP-06 | Obstructing cancellation, downgrade, or refund | Extends | V, L | `goals/embedded-copilots/failures/obstructing-cancellation-downgrade-or-refund.md` | Done | 13 |
-| 12 | CP-03 | Answers withheld behind an upgrade, unsaid | New | L | `goals/embedded-copilots/failures/answers-withheld-behind-an-upgrade-unsaid.md` | In progress | 13 |
+| 12 | CP-03 | Answers withheld behind an upgrade, unsaid | New | L | `goals/embedded-copilots/failures/answers-withheld-behind-an-upgrade-unsaid.md` | Done | 13 |
 | 13 | RS-14 | No reply to acknowledgments and closers | Extends | - | `goals/response-structure/failures/no-reply-to-acknowledgments-and-closers.md` | Queued |  |
 | 14 | RS-01 | Answer buried | New | - | `goals/response-structure/failures/answer-buried.md` | Queued |  |
 | 15 | EM-02 | Deferring work to the user | New | - | `goals/effort-and-memory/failures/deferring-work-to-the-user.md` | Queued |  |
@@ -743,6 +743,11 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 - **Searches run: 3** (the Eighth Circuit and the FTC rule; the Amazon settlement; California's renewal law). **Sources opened (4):** the Claims Journal / Bloomberg report on the settlement, the legislative digest of California AB 2863, the Latham & Watkins client alert on the Eighth Circuit ruling, and the ZwillGen summary of the FTC dark-patterns report. **Not opened:** the FTC report, FTC press releases, statute text, Fenwick (403), McGuireWoods (404), eMarketer (403).
 - **Claims left unverified:** the AB 2863 effective date (only in a search summary); any development after July 2025 on the click-to-cancel rule. The page states no legal requirement as fact beyond what those sources say, and labels them as summaries.
 - **Review pass changed:** removed the "Iliad" nickname and the page counts, which I had seen only in summaries; kept the Amazon figures to what the opened report states; fixed a link to the sales-pitch pattern.
+- **CP-03 Answers withheld behind an upgrade, unsaid: Done, flagged L (legal review needed); evidence is thin and says so.** File: `goals/embedded-copilots/failures/answers-withheld-behind-an-upgrade-unsaid.md` with a "Read this first" note, plus `tests/answers-withheld-behind-an-upgrade-unsaid.md` (12 scenarios, "Not yet run"). Incident: "No public incident found" with the searches run.
+- **Searches run: 3** (paywalled or degraded AI answers; FTC deception and disclosure for AI products; Microsoft human-AI guidelines). **Sources opened (3):** the McDonald Hopkins update and the Paubox summary of the FTC's July 2026 proposed policy statement, and the NN/g study (already opened in run 11). **Not opened:** the FTC proposal itself, the Federal Register notice, Mondaq (403), the Microsoft guideline pages (rendered by script, no text).
+- **Claims left unverified:** nothing is stated about what the law requires; the FTC material is about a different kind of steering and is cited only for its disclosure principle. No measurement of how common the failure is.
+- **Review pass changed:** reworded the comment-period statement to what the source says; replaced a link to an unwritten pattern with a roadmap reference.
+- **Flagship patterns written so far: 12 of 30** (HU-01 to HU-03, CP-14, CP-15, CP-20, CP-08, CP-12, XA-01, CP-01, CP-06, CP-03).
 
 ## Backlog (not scheduled)
 Ideas from earlier lists that were never chosen. They stay out of the queue until someone adds them.

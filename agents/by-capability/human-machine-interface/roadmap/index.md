@@ -27,7 +27,7 @@
 | CC-23 | Proactive outreach overreach | [chat-and-core.md](chat-and-core.md) | New | Governance | No |
 | CP-01 | Help that becomes a sales pitch | [embedded-copilots.md](embedded-copilots.md) | Written | Governance | No |
 | CP-02 | Recommending features the user can't use | [embedded-copilots.md](embedded-copilots.md) | Extends | Business context | No |
-| CP-03 | Answers withheld behind an upgrade, unsaid | [embedded-copilots.md](embedded-copilots.md) | New | Governance | No |
+| CP-03 | Answers withheld behind an upgrade, unsaid | [embedded-copilots.md](embedded-copilots.md) | Written | Governance | No |
 | CP-04 | Self-preferencing | [embedded-copilots.md](embedded-copilots.md) | New | Governance | No |
 | CP-05 | Paid content blended into answers | [embedded-copilots.md](embedded-copilots.md) | New | Governance | No |
 | CP-06 | Obstructing cancellation, downgrade, or refund | [embedded-copilots.md](embedded-copilots.md) | Written | Governance | No |

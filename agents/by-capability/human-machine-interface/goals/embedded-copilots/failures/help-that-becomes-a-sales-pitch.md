@@ -130,7 +130,7 @@ Targets are starting points to tune on your own data, unless a source is given.
 | Relevant-offer conversion (counter-metric) | Track | Conversions from offers allowed by the table above | Falling sharply |
 
 ## 8. Related patterns
-- [Answers withheld behind an upgrade, unsaid](../../../roadmap/embedded-copilots.md) (planned, CP-03): the answer is held back with no explanation.
+- [Answers withheld behind an upgrade, unsaid](answers-withheld-behind-an-upgrade-unsaid.md): the answer is held back with no explanation.
 - [Obstructing cancellation, downgrade, or refund](obstructing-cancellation-downgrade-or-refund.md): an upsell used against a user who is leaving.
 - [Generic first response](generic-first-response.md): the opener, a place sales prompts creep in.
 - [Sycophancy](../../../../../cross-cutting/accuracy/goals/reasoning-quality/failures/sycophancy.md): another way models bend toward what a stakeholder wants.

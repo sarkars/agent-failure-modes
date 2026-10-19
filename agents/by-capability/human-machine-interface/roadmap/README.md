@@ -14,7 +14,7 @@ The first version of this roadmap did not check the library, and several rows tu
 | **New** | No matching pattern found by file-name and keyword search | Search again before writing. This is a name-and-keyword check, not a full read of every file |
 
 <!-- BEGIN:result -->
-**Result: 493 rows, of which 11 are Written, 224 are New, 197 Extend an existing pattern, and 61 are already Covered.**
+**Result: 493 rows, of which 12 are Written, 223 are New, 197 Extend an existing pattern, and 61 are already Covered.**
 <!-- END:result -->
 
 <!-- BEGIN:root-cause -->
@@ -53,7 +53,7 @@ If every "Partly" were solved, models would fix up to 40%. If none were, 1%. A o
 | File | Area | Rows | Written | New | Extends | Covered |
 |---|---|---|---|---|---|---|
 | [chat-and-core.md](chat-and-core.md) | Remaining chat and core families, plus channel selection | 21 | 0 | 15 | 5 | 1 |
-| [embedded-copilots.md](embedded-copilots.md) | Embedded copilots: upselling, context, first response, obvious questions | 23 | 7 | 6 | 9 | 1 |
+| [embedded-copilots.md](embedded-copilots.md) | Embedded copilots: upselling, context, first response, obvious questions | 23 | 8 | 5 | 9 | 1 |
 | [response-time.md](response-time.md) | Speed, waiting, and pacing, all channels | 14 | 0 | 5 | 8 | 1 |
 | [response-structure-and-length.md](response-structure-and-length.md) | Reply structure, length, chunking, and closers such as 'ok' and 'bye' | 18 | 0 | 9 | 9 | 0 |
 | [language-and-locale.md](language-and-locale.md) | Language, reading level, and locale | 16 | 0 | 8 | 7 | 1 |
@@ -69,7 +69,7 @@ If every "Partly" were solved, models would fix up to 40%. If none were, 1%. A o
 | [interface-and-persona.md](interface-and-persona.md) | Persona and tone, onboarding, chat interface, accessibility, and multimodal input | 41 | 0 | 30 | 11 | 0 |
 | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Human handoff, measurement, model changes, proactive agents, and group chats | 28 | 3 | 16 | 9 | 0 |
 | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Drive-thru, in-car, government, travel, banking, insurance, health scheduling, real estate, and outbound rules | 36 | 0 | 30 | 6 | 0 |
-| | **Total** | **493** | **11** | **224** | **197** | **61** |
+| | **Total** | **493** | **12** | **223** | **197** | **61** |
 <!-- END:catalog-table -->
 
 ## Suggested priority
