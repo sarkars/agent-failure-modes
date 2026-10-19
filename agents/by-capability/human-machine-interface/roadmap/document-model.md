@@ -1,6 +1,6 @@
 # Document Model: One Pattern, Many Views
 
-**Proposed 2026-10-19, waiting for the owner's approval.** Most of the new document types in the plan are not independent. They are facets of one failure pattern, keyed by its Pattern ID. This page sets one rule for where each kind of content lives, so the folder stops growing a new document type for every idea.
+**Approved 2026-10-19 by the owner.** Most of the new document types in the plan are not independent. They are facets of one failure pattern, keyed by its Pattern ID. This page sets one rule for where each kind of content lives, so the folder stops growing a new document type for every idea.
 
 ## The rule
 1. **A fact about one pattern lives on that pattern's page.** That includes the fix, the guide moves, the detection signals, the starter rule and the short tests. Pattern pages are the only HMI pages the website publishes today (the site importer reads `goals/<family>/failures/`), so content placed there is published without any site change.
@@ -13,8 +13,8 @@
 | Type | Kind | Lives in | Status |
 |---|---|---|---|
 | Fix, principle, don't over-correct, hand-off rule | Pattern facet | Pattern page, section 5 | Exists |
-| Guide moves (lead with answer, ask one question, offer choices, admit uncertainty, hand off) | Pattern facet | Pattern page, section 5, new "Moves" table | Proposed: replaces separate guide files |
-| Guide spec block (fixed format, for later code) | Pattern facet | Pattern page, end of section 7 | Proposed |
+| Guide moves (lead with answer, ask one question, offer choices, admit uncertainty, hand off) | Pattern facet | Pattern page, section 5, "Moves" table | In the template 2026-10-19 |
+| Guide spec block (fixed format, for later code) | Pattern facet | Pattern page, end of section 7 | In the template 2026-10-19 |
 | Detection signals and starter rule | Pattern facet | Pattern page, section 7 | Exists on 19 of 44 |
 | Short tests | Pattern facet | Pattern page, section 6 | Exists |
 | Full test file | Pattern companion | `tests/<pattern-id>.md` | Exists for flagships |
@@ -22,7 +22,7 @@
 | Starter rules library (asset 7) | Index | A column in the taxonomy | Was a separate asset; folded in |
 | Scenario pack (asset 3) | Index plus content | Scenarios in `tests/<pattern-id>.md`; the taxonomy links them | Was a separate asset; becomes test files plus a column |
 | Guides index | Index | A column in the taxonomy | Was a separate page; folded in |
-| Conversation moves, explained once | Cross-pattern | `solutions-library/conversation-moves.md` (a framework, like SPIN) | Proposed: replaces `conversation-guides/README.md` |
+| Conversation moves, explained once | Cross-pattern | `solutions-library/conversation-moves.md` (a framework, like SPIN) | Done 2026-10-19 |
 | Event schema | Cross-pattern | `roadmap/specs/` | Exists |
 | Evidence review | Cross-pattern | `roadmap/evidence/` | Exists |
 | Incident teardowns (asset 4) | Cross-pattern | `incidents/` | Some exist |

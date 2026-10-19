@@ -111,6 +111,11 @@ Bot:  ...
 
 **Reference design** [prompt block, state schema, flow, decision table, or improved transcript]
 
+**Moves** (see [conversation moves](../solutions-library/conversation-moves.md); list only the moves that apply, most preferred first)
+| Move | When, in this pattern |
+|---|---|
+| [e.g. Offer choices: 2-4 options plus "Something else", free text open] | [the moment in this pattern where the move applies] |
+
 **Don't over-correct** [the opposite failure this fix can cause, and the guardrail]
 
 **Hand-off rule** [when to move to a human or another channel]
@@ -137,6 +142,20 @@ Signals in a conversation event log that suggest this failure. Say "proposed" un
 | [e.g. same intent asked twice within 3 turns] | [turn-level event field] | [e.g. user rephrasing for clarity] |
 
 **Starter rule:** [the one rule from section 5 that other teams can switch on, one sentence; shares this pattern's ID]
+
+**Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
+```yaml
+pattern_id: [same as the Pattern ID row]
+runs: [pre_send | post_turn | conversation]
+reads: [the event fields the check needs]
+trigger: [the moment from the Moves table]
+moves: [move names from the Moves table, in order]
+choices: [2-4 example options plus "Something else", or none]
+on_miss: [log | rewrite | ask | handoff]
+metric: [the primary metric above]
+counter_metric: [the metric that shows over-correction]
+status: proposed
+```
 
 ## 8. Related patterns
 - [link] - [how it differs]

@@ -5,9 +5,14 @@
 > Status: **chat is written; voice and visual are planned.** The patterns below are written for chat and note what changes in other modalities.
 
 ## Key takeaways
-- 14 patterns are written for chat today. [493 more are catalogued](roadmap/README.md) across chat, voice, and visual.
+- 44 patterns are written for chat today. [493 more are catalogued](roadmap/README.md) across chat, voice, and visual.
 - Most failures here come from conversation design and business context, not model quality. In the roadmap, 60% are judged not fixable by a better model alone. Those splits are our own judgments, not measured.
 - Every pattern states its goal and a primary metric with a starting target to tune.
+
+## Start here
+- **Patterns:** what goes wrong in a chat and what to do about it. Pick a family in [What's here](#whats-here).
+- **Taxonomy:** every pattern at a glance, with its ID and metric, in the [failure taxonomy](roadmap/specs/failure-taxonomy-v1.md).
+- **Reference:** reusable [conversation frameworks](solutions-library/), including the [conversation moves](solutions-library/conversation-moves.md), and the [event schema](roadmap/specs/conversation-event-schema-v0.1.md).
 
 ## Three questions every pattern answers
 1. **Is this the right channel?** Chat, voice, a visual interface, or a person?
