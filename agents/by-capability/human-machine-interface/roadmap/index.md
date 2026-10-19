@@ -433,7 +433,7 @@
 | MI-06 | Conflicting inputs resolved silently | [interface-and-persona.md](interface-and-persona.md) | New | Model | Partly |
 | MI-07 | Images of IDs and documents kept without need | [interface-and-persona.md](interface-and-persona.md) | Extends | Governance | No |
 | MI-08 | No warning about input limits | [interface-and-persona.md](interface-and-persona.md) | New | Business context | No |
-| HU-01 | 'Talk to a human' ignored or looped | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Extends | Business context | No |
+| HU-01 | 'Talk to a human' ignored or looped | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Written | Business context | No |
 | HU-02 | Escalates too early, or too late | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Extends | Business context | Partly |
 | HU-03 | Cold transfer | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Extends | Business context | No |
 | HU-04 | Handoff summary is wrong or misleading | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | New | Model | Partly |

@@ -12,7 +12,10 @@ for f in sorted(glob.glob("**/*.md", recursive=True)):
         continue
     t = open(f).read()
     for m in re.finditer(r"\]\((?!http)([^)\s]+)\)", t):
-        l = m.group(1); tot += 1
+        l = m.group(1)
+        if f.startswith("incidents/") and l.startswith("/"):
+            continue  # incident drafts use the site's own routes (/pattern-slug/)
+        tot += 1
         p, _, a = l.partition("#")
         tp = os.path.normpath(os.path.join(os.path.dirname(f), p)) if p else f
         ok = os.path.exists(tp)
