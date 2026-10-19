@@ -25,6 +25,7 @@ search phrases:
 | **Stakes** | Low to medium. Users resend, reload, or leave, which can duplicate actions or lose work. |
 | **Who is affected** | Anyone waiting on a multi-step or tool-using reply |
 | **Frequency** | Very common in agent products that run several steps. I found no count. |
+| **Pattern ID** | silent-long-running-work |
 | **Family** | [Response time](../README.md) |
 | **Goal** | Replies arrive at a pace that fits the channel and the user's urgency, and waits are never silent. |
 | **Primary metric** | Share of waits over 10 seconds with a progress or ETA message. Starting target: over 95% (tune). |
@@ -100,6 +101,13 @@ Only describe steps you are really doing. Do not start the same job twice if the
 If it runs past your estimate, say so and let the user wait, stop, or come back later.
 ```
 
+**Moves** (see [conversation moves](../../../solutions-library/conversation-moves.md); list only the moves that apply, most preferred first)
+| Move | When, in this pattern |
+|---|---|
+| Admit uncertainty and show how to check | The task length is unknown: say so ("this can take up to a minute") and say what the assistant is really doing. Do not give a precise ETA you cannot stand behind. |
+| Offer choices: 2-4 options plus "Something else", free text open | The wait passes the estimate: "Keep waiting", "Stop", "Notify me when done", "Something else". Do not offer them on a short task or while the job is within its estimate. |
+| Hand off to a person | The job fails or runs past the estimate twice. Do not hand off if the user asked to stay with the bot. |
+
 **Don't over-correct.** Do not narrate every micro-step on short tasks. Do not show a fake progress bar that moves with no real progress, and do not use a typing indicator that suggests a person is typing (deceptive typing indicators are a planned pattern in the [response-time roadmap](../../../roadmap/response-time.md)). Keep messages short.
 
 **Hand-off rule.** If a job fails or the estimate is exceeded twice, offer a person and keep the request details ([cold transfer](../../human-handoff/failures/cold-transfer.md)).
@@ -126,6 +134,32 @@ Targets are starting points to tune on your own data, unless a source is given.
 | Duplicate jobs from resends | 0 | Jobs started twice within a minute by the same request text | Any |
 | False progress (counter-metric) | 0 | Progress events with no matching backend step | Any |
 | Narration on short tasks (counter-metric) | Under 5% | Status messages on tasks under 3 s | Over 10% |
+
+### Detection signals (proposed, not yet calibrated)
+Signals in a conversation event log that suggest this failure. Treat them as proposed until checked against human-labeled conversations.
+| Signal | Where it shows | Counter-signal (what it could be instead) |
+|---|---|---|
+| Wait over about 10 s with no progress or ETA event | Wait duration and status events in the job log | The final reply arrived just after the 10 s mark |
+| Same request text sent again while a job is running | Two jobs from the same request text within a minute | A deliberate new request with a different intent |
+| Wait passes the estimate with no "taking longer" message | Elapsed time versus estimate, and status events | The estimate was an "up to" range that was not exceeded |
+| Progress event with no matching backend step | UI status events versus job-runner steps | A real step that was not logged |
+| Status messages on a task under 3 s | Status events on short tasks | A new or high-stakes task where more narration is intended (fix rule 8) |
+
+**Starter rule:** if a request will take more than ten seconds, say what you are doing and about how long, and offer to notify the user when done.
+
+**Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
+```yaml
+pattern_id: silent-long-running-work
+runs: conversation
+reads: [job.elapsed, job.estimate, job.status_events, job.backend_steps]
+trigger: a wait passes about 10 seconds, or passes its estimate
+moves: [admit_uncertainty, offer_choices, hand_off]
+choices: ["Keep waiting", "Stop", "Notify me when done", "Something else"]
+on_miss: log
+metric: waits over 10 s with a progress or ETA message
+counter_metric: false progress
+status: proposed
+```
 
 ## 8. Related patterns
 - [Slow tool silence](../../../../speech-and-audio/goals/conversation-flow/failures/slow-tool-silence.md): the voice version.

@@ -24,6 +24,7 @@ search phrases:
 | **Stakes** | Medium to high |
 | **Who is affected** | Anyone who needs to move from one channel or agent to another |
 | **Frequency** | Very common, according to vendor surveys (see section 4) |
+| **Pattern ID** | no-channel-switch-or-context-lost |
 | **Family** | [Channel selection](../README.md) |
 | **Goal** | Each interaction happens in the channel that fits the job, and switching never costs the user their context. |
 | **Primary metric** | Re-ask rate after handoff. Starting target: under 5%. |
@@ -89,6 +90,13 @@ The consistent finding across these sources is that repetition after a handoff i
 }
 ```
 
+**Moves** (see [conversation moves](../../../solutions-library/conversation-moves.md); list only the moves that apply, most preferred first)
+| Move | When, in this pattern |
+|---|---|
+| Offer choices: 2-4 options plus "Something else", free text open | The bot needs to move the user to another channel: "Message me here", "Call me", "Keep going in chat", "Something else". Do not offer them when the bot can safely solve the request, or when the user has said they want to stay in chat. |
+| Hand off to a person | The user accepts the switch: send the handoff packet and say who is next and when. Do not hand off if the user asked to stay with the bot. |
+| Admit uncertainty and show how to check | The packet could not be delivered: say so, and give the user a reference to quote. |
+
 **Don't over-correct.** Don't dump the whole transcript on the next agent as the summary; write a short one and link the transcript. Don't switch channels without consent. Don't hand off for things the bot can safely solve.
 
 **Hand-off rule.** The handoff is the fix here. If the packet can't be delivered, say so honestly and give the user a reference to quote.
@@ -113,6 +121,32 @@ Targets are starting points to tune on your own data, unless a source is given.
 | Handle time: escalated vs. fresh cases | Gap shrinking | Handle-time logs | Gap widening |
 | 'As I said earlier' and 'I already told the bot' | Trend down | Text mining of user messages after handoff | +25% vs baseline |
 | Packets that failed to deliver | 0 silent failures | Delivery acknowledgements | Any |
+
+### Detection signals (proposed, not yet calibrated)
+Signals in a conversation event log that suggest this failure. Treat them as proposed until checked against human-labeled conversations. Signals 1 and 2 are written for text chat (user and agent messages after the handoff). Signals 3 to 5 read handoff records, so they apply to any channel once the packet exists. Voice and web versions are PLANNED only: for voice, a check that the next agent's spoken summary matches the packet; for web, a check on packets that drive a shared-screen or co-browse session.
+| Signal | Where it shows | Counter-signal (what it could be instead) |
+|---|---|---|
+| Next agent or bot asks for something a packet field already answers | Message after the handoff event compared with the packet fields | The user corrected the summary, or the agent is confirming it ("Is this right?") |
+| User says "as I said earlier" or "I already told the bot" | Text of user messages after the handoff event | The user is adding new detail, not repeating |
+| Handoff sent with a required packet field missing | Handoff event, schema validation result | A packet-builder change that made the schema out of date |
+| Packet delivery has no acknowledgement and the user was not told | Handoff event, delivery acknowledgement, next bot message | An acknowledgement that arrives late |
+| Channel switched with no consent flag in the packet | Handoff event, consent flag | The user asked for the switch themselves |
+
+**Starter rule:** every channel switch carries a handoff packet, and the next agent or bot asks only for what the packet is missing.
+
+**Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
+```yaml
+pattern_id: no-channel-switch-or-context-lost
+runs: pre_send
+reads: [handoff.packet, handoff.consent, handoff.delivery_ack]
+trigger: a handoff or channel switch is about to be sent
+moves: [offer_choices, hand_off, admit_uncertainty]
+choices: ["Message me here", "Call me", "Keep going in chat", "Something else"]
+on_miss: rewrite
+metric: re-ask rate after handoff
+counter_metric: channel switches without consent
+status: proposed
+```
 
 ## 8. Related patterns
 - [Poor escalation](../../../../../by-use-case/customer-service/goals/conversation-resolution/failures/poor-escalation.md): escalation done badly.

@@ -25,6 +25,7 @@ search phrases:
 | **Stakes** | Low to high. A wrong date, name, or number on a booking, a payment, or a medical call can matter. |
 | **Who is affected** | Everyone, most of all people with accents, speech differences, or noisy settings, who correct most often |
 | **Frequency** | Common. Studies below observe corrections being misrecognized and abandoned requests in field use; I found no rate for production agents. |
+| **Pattern ID** | repair-failure |
 | **Family** | [Voice](../README.md) |
 | **Goal** | A voice agent listens, speaks, and takes turns the way a competent person would, hears every speaker accurately, never turns noise or silence into words, and never asks for what can't safely be said aloud. |
 | **Primary metric** | Correction-success rate: user corrections that end with the right value in the final state. Starting target: set from a baseline (tune). |
@@ -101,6 +102,13 @@ After one failed repair, change method (spelling, digits, a text link). After tw
 If the caller says stop, stop what you are doing at once.
 ```
 
+**Moves** (see [conversation moves](../../../solutions-library/conversation-moves.md); list only the moves that apply, most preferred first)
+| Move | When, in this pattern |
+|---|---|
+| Ask one clarifying question | The agent is unsure which value the caller means: a short either-or question ("Tuesday or Thursday?"), not "I didn't catch that". Do not ask when the corrected value is already confident. |
+| Offer choices: 2-4 options plus "Something else", free text open | After one failed repair, to change method: "Spell it", "Say the digits", "Text me a link", "Something else". Do not offer them on the first repair, or when the caller has just said a clear value. |
+| Hand off to a person | After two failed repairs, to a person or a screen with the details so far. Do not hand off if the caller asked to stay on the call. |
+
 **Don't over-correct.** Do not read back every detail of every turn, which slows calls. Do not ask the caller to repeat when you already have a confident, corrected value. Do not treat every "no" as a correction ("No, that's all" ends the call).
 
 **Hand-off rule.** Pass the person the corrected and uncorrected values and what was tried ([talk to a human ignored or looped](../../human-handoff/failures/talk-to-a-human-ignored-or-looped.md)).
@@ -127,6 +135,32 @@ Targets are starting points to tune on your own data, unless a source is given.
 | Generic "didn't catch that" replies | Under 5% of repair turns | Log | Over 10% |
 | Repair method changes after one failure | Over 95% | Log: second repair uses a different method | Below 85% |
 | Added call time from readbacks (counter-metric) | Track | Median call time | Rising by more than a set margin |
+
+### Detection signals (proposed, not yet calibrated)
+Signals in a conversation event log that suggest this failure. Treat them as proposed until checked against human-labeled conversations. Signals computable from transcript text are written for text; anything that needs audio is PLANNED for voice.
+| Signal | Where it shows | Counter-signal (what it could be instead) |
+|---|---|---|
+| Written for text: a user turn with a correction cue ("no", "not that", "the other one", "I said") is followed by a final state where the slot still holds the old value | Transcript turn plus slot value in the final state (the primary metric) | "No, that's all" or another "no" that is not a correction |
+| Written for text: the agent's reply to a correction turn is a generic "didn't catch that" | Agent reply text on a repair turn | The caller's turn was empty or unrelated, so a generic reply fits |
+| Written for text: the second repair attempt uses the same method as the first | Repair-method field on consecutive repair turns | The caller chose to try the same method again |
+| Written for text: two failed repairs and no hand-off or method change follows | Repair counter and the next agent turn | The third attempt succeeded with the right value |
+| PLANNED for voice: the caller repeats the same value after a correction with changed speech (slower, louder, longer pauses) | Needs the audio; not computable from the transcript | Background noise, or a caller who always speaks that way |
+
+**Starter rule:** treat a correction as a pointer to the last thing said, change only that detail, and read the new value back.
+
+**Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
+```yaml
+pattern_id: repair-failure
+runs: conversation
+reads: [turn.text, repair.count, repair.method, state.slot_values, reply.text]
+trigger: the caller corrects a detail or asks for a repeat, and again after each failed repair
+moves: [ask_clarifying_question, offer_choices, hand_off]
+choices: ["Spell it", "Say the digits", "Text me a link", "Something else"]
+on_miss: rewrite
+metric: correction-success rate
+counter_metric: added call time from readbacks
+status: proposed
+```
 
 ## 8. Related patterns
 - [Corrections not applied](../../dialogue-management/failures/corrections-not-applied.md): the same failure in chat.
