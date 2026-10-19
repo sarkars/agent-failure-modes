@@ -56,6 +56,9 @@ The 27 written patterns are the backbone. Each pattern's file name is its **Patt
 
 The reader's path is: pattern, then detection signals, then starter rule, then study. The schema and taxonomy come right after the evidence review (assets 1 and 2) so every later asset uses the same IDs from the start. In parallel, hourly runs add the detection block to existing patterns, three per run, starting with those that already get search impressions. Adding the block edits files in place; no file is renamed or moved, and `check_public_urls.py` must pass on every commit.
 
+### Channel scope
+This phase is chat-first: text chatbots. The event schema describes a conversation turn in a channel-neutral way, with a `channel` field (chat, voice, web). Voice-specific signals (silence, interruptions, speech-recognition errors) and web-analytics signals are listed as **planned**, never as detected or measured. Patterns already written for voice keep their pages and Pattern IDs; their detection signals say which are written for text and which are planned for voice. Voice and web get their own phase after chat has traction.
+
 ## 5. The first 90 days (content and distribution only)
 | Weeks | Do | Done when |
 |---|---|---|
