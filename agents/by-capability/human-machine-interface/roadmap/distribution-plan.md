@@ -1,0 +1,92 @@
+# Distribution Plan: Content Around the Chat Failure and Analytics Layer
+
+> **Status: proposed plan, 2026-10-19.** Direction set by the owner: **code is the last step; write the content around the product first, and solve distribution first.** This plan covers who we reach, through which loops, with which assets, in what order, and how we measure it. It builds on the [chat analytics plan](chat-analytics-plan.md) and the [developer search plan](seo/developer-search-plan.md). It is a plan: nothing here has been published, and no result is claimed. Facts about demand are Google autocomplete suggestions pulled 2026-10-19 (not volumes) and the site's own Search Console export.
+
+## 1. The problem distribution has to solve
+- **No audience yet.** The site earned 8,838 impressions and 21 clicks over three months, on older pages. The new chat content has none, because the site has not deployed it.
+- **The category has no name people search.** Autocomplete returned nothing for "chatbot drop off", "chatbot failure analysis", "chatbot a/b testing", "chatbot funnel", "chatbot conversion", or "chatbot quality". So we must create the language, not capture it.
+- **Adjacent terms are searched, and owned by vendors:** "conversation analytics platform", "chatbot analytics tools", "llm observability tools", "conversation intelligence platform".
+- **Incident-by-name queries are searched:** "air canada chatbot failure", "dpd chatbot failure", "klarna chatbot failure", "chatbot failures", "ai chatbot failures". These are reachable with evidence we can build.
+- **An established practice community exists:** "conversation design institute" and "conversation design jobs" show a profession, which is a place to be heard.
+
+## 2. Who we are talking to
+1. **Developers shipping a chatbot or voice agent** who suspect it loses people but cannot see where. (Primary.)
+2. **Conversation designers and product managers** responsible for the flow and the outcome.
+3. **Support and CX engineering leads** who own containment and resolution numbers.
+4. **Later:** the teams buying or building conversation analytics.
+
+## 3. The five distribution loops
+| # | Loop | How it works | First asset | Measured by |
+|---|---|---|---|---|
+| 1 | **Search** | Pages titled as developers search ("chatbot test cases", "chatbot fallback message", "chatbot human handoff"), each with original evidence | Retitled pattern pages and the test-scenario pack | Search Console impressions, position, clicks per page |
+| 2 | **Incident teardown** | When a chatbot fails in public, publish an evidence-based teardown within days: what happened, the failure type, what to measure, what to change | A series from incidents we already hold, then new ones | Clicks for "[company] chatbot failure" queries; links to the teardown |
+| 3 | **Open reference** | Publish the failure taxonomy, the conversation event schema, and the scenario packs as open, citable specs others can adopt or correct | Failure taxonomy v1 and event schema v0.1 | Citations, adoption, pull requests on the spec |
+| 4 | **Free failure audit** | Offer ten or twenty teams a no-code review of a sample of their chatbot conversations, written up anonymously | Audit write-ups and a case-study page | Audits requested; partner conversations; usable case studies |
+| 5 | **Studies** | Preregistered studies announced before results, then published with data | The study pages from the [analytics plan](chat-analytics-plan.md) | Subscribers to results; coverage; links |
+
+Loops 1 to 3 need only content. Loop 4 needs people, not code. Loop 5 needs the simulator, so it comes last.
+
+## 4. Content to write before any code
+Ordered by how much distribution each asset earns relative to effort. Every asset states its query or hook and its evidence.
+
+| # | Asset | Hook or query | Evidence we already hold | Loop |
+|---|---|---|---|---|
+| 1 | **Why people leave chatbots: an evidence review.** What opened studies say causes drop-off: dead ends, no human route, re-asking, buried answers, silence, errors, wrong answers, disclosure | "boring bot" thesis; no searched phrase yet, so it is the category-defining piece | The sources behind 27 patterns, plus the conversion and disclosure studies (to be opened and verified first) | 3, 5 |
+| 2 | **Chatbot test cases and scenarios (pack of 100+)**, organized by behavior, with pass and fail rubrics | "chatbot test cases", "chatbot test scenarios" | 27 test files | 1, 3 |
+| 3 | **Chatbot failure teardowns:** Air Canada, McDonald's drive-thru, Virgin Money, CFPB doom loops, MyCity, GPT-4 laziness, ChatGPT memory; then DPD and Klarna after research | "air canada chatbot failure", "dpd chatbot failure", "klarna chatbot failure", "ai chatbot failures" | Six incident pages and their sources; DPD and Klarna need research | 2 |
+| 4 | **Chatbot metrics hub:** containment versus confirmed resolution, drop-off, KPIs with counter-metrics | "chatbot containment rate", "chatbot kpi metrics", "chatbot evaluation metrics" | Metric tables on every pattern; industry metrics notes | 1 |
+| 5 | **Conversation event schema v0.1** and **failure taxonomy v1** as open specs | Reference value, not a search term | The taxonomy of 27 failures; the analytics plan | 3 |
+| 6 | **The preregistrations:** protocols for the first studies, published before running | Subscribe for results | The study table in the analytics plan | 5 |
+| 7 | **Rules and frameworks library (starter)**: selectable rule packs, each with its metric and test scenarios | "chatbot fallback message", "chatbot human handoff" | The L0 spec and the pattern fixes | 1, 3 |
+| 8 | **The free failure audit offer and one worked example** | Direct outreach | The L1 base agent as the worked example; a public sample audit of a synthetic transcript | 4 |
+| 9 | **Glossary** of conversation analytics terms (drop-off, containment, confirmed resolution, handoff recall) | Definitions pages | Pattern metric definitions | 1 |
+
+## 5. The first 90 days (content and distribution only)
+| Weeks | Do | Done when |
+|---|---|---|
+| 1 to 2 | Get the site deploying (the owner publishes from elsewhere); retitle the written pattern pages to developer phrases; fix titles and descriptions on pages that already rank, with the owner's approval | New titles live; Search Console shows them |
+| 1 to 3 | Verify the studies behind asset 1 by opening them; write the evidence review | Review published, every claim sourced |
+| 2 to 4 | Publish the scenario pack (asset 2) and the metrics hub (asset 4) | Both live and linked from the pattern pages |
+| 3 to 6 | Publish three teardowns (Air Canada, McDonald's, Virgin Money); research DPD and Klarna | Three live; two researched |
+| 4 to 8 | Publish the taxonomy and schema as open specs in a public repository with a license and a way to propose changes | Spec repo public |
+| 5 to 8 | Publish preregistrations for the first studies | Protocols live |
+| 6 to 12 | Run the free failure audit offer: draft the outreach, send it from the owner's accounts, complete the first audits | At least three audits written up |
+| 8 to 12 | Review Search Console and links; double down on what moved; decide what code to build first from what partners ask for | A written decision |
+
+## 6. What distribution needs that I cannot do
+- **Publish the site and give Search Console access.** Everything in loop 1 depends on this.
+- **Send outreach and post.** I can draft posts, outreach, and pitches; a person sends them from a real account.
+- **A custom domain and a place for people to respond** (email or a simple form). A Vercel subdomain with no contact route limits trust and replies.
+- **Real conversations.** Audits need a team willing to share a sample of transcripts.
+- **Community presence.** Conversation-design and developer communities respond to people, not sites.
+
+## 7. How we measure distribution
+| Measure | Source | Why |
+|---|---|---|
+| Impressions, clicks, and position per new asset | Search Console | Loop 1 |
+| Clicks on "[company] chatbot failure" queries | Search Console | Loop 2 |
+| Links to the specs and teardowns | Search Console links report | Loops 2 and 3 |
+| Audit requests and completed audits | Owner's inbox | Loop 4 |
+| Subscribers or watchers for study results | Owner's list | Loop 5 |
+| Design-partner conversations started | Owner's notes | Whether code is worth building |
+
+Do not count raw page views as success; count the actions above.
+
+## 8. Risks
+| Risk | Handling |
+|---|---|
+| Teardowns misstate a company's failure | Cite only opened sources; say what is reported and what is not known; invite corrections |
+| Naming vendors invites disputes | Stick to public, sourced incidents; no rankings of products |
+| The category language never catches on | Use searched terms in titles (chatbot test cases, fallback message), and the new language only in body text |
+| No traffic because the site never deploys | The first action is fixing publishing; nothing else matters until it works |
+| Over-building content with no feedback | Review after week 4 and after week 8 using the measures above; cut what does not move |
+
+## 9. Decisions needed
+1. **Who sends outreach and posts?** I draft; a person sends.
+2. **A custom domain and a contact route.**
+3. **Category name:** I propose using plain searched terms in titles and "conversation failure discovery" as the descriptive line, with the final name to be set by the owner.
+4. **Which incidents next:** DPD and Klarna, or others the owner prefers.
+5. **Whether to offer free failure audits** to outside teams, and who handles the transcripts.
+
+## Related
+- [Chat analytics plan](chat-analytics-plan.md) · [Developer search plan](seo/developer-search-plan.md) · [Industry metrics](industry-metrics.md) · [Content program](content-program.md)
