@@ -25,6 +25,7 @@ search phrases:
 | **Stakes** | Low to high. A wrong refund rule, fee, deadline, or dosage can cost money or health. |
 | **Who is affected** | Anyone who relies on an answer they cannot easily verify |
 | **Frequency** | Very common. An audit of generative search engines found large shares of unsupported statements (below); I found no count for support chatbots. |
+| **Pattern ID** | confident-wrong-answer-with-no-way-to-check |
 | **Family** | [Errors and recovery](../README.md) |
 | **Goal** | When something goes wrong, the agent says what happened, owns it, fixes it, and does not repeat it. |
 | **Primary metric** | Wrong answers stated without any uncertainty or source. Target: 0 (tune). |
@@ -124,6 +125,18 @@ Targets are starting points to tune on your own data, unless a source is given.
 | Policy answers with a source shown | Over 95% | Log: policy intents answered with a retrieved passage | Below 90% |
 | Hedge precision | Track; set from baseline | Share of hedged answers that were actually wrong or weakly supported | Falling |
 | Blanket hedging (counter-metric) | Under 10% of answers | Share of answers with an uncertainty cue where a source clearly supported the claim | Over 20% |
+
+### Detection signals (proposed, not yet calibrated)
+Signals in a conversation event log that suggest this failure. Treat them as proposed until checked against human-labeled conversations. All are written for text chat; none are planned for voice yet, and this page does not cover voice.
+| Signal | Where it shows | Counter-signal (what it could be instead) |
+|---|---|---|
+| A policy, price, deadline, or eligibility answer with no source passage or link | Policy-intent reply with no retrieved passage logged | The intent was misread and the question did not need a policy source |
+| A shown source that does not support the claim next to it | Support-check or judge result of "not supported" on a cited passage | A paraphrase the checker missed; a human label settles it |
+| A firm answer with no uncertainty cue and no source, instead of "I don't have this in my sources" | Reply to a policy question with no hedge, no passage, and no "not in my sources" | A well-supported fact stated plainly, where the source was shown elsewhere in the chat |
+| A high-stakes reply (money, legal, medical, safety) with no path to a person | High-stakes intent with no confirm-with-a-person text in the reply | The user is already talking to a person, or the path was offered earlier in the same chat |
+| The user says the answer was wrong after a policy answer | User turn disputing the previous policy answer | The user misread a correct answer |
+
+**Starter rule:** every policy, price, deadline, or eligibility answer shows the supporting passage and link, hedges in the first person when the source is weak, and says "not in my sources" when there is none.
 
 ## 8. Related patterns
 - [Confidence calibration failure](../../../../../cross-cutting/accuracy/goals/output-optimization/failures/confidence-calibration-failure.md): stated confidence that does not track accuracy. This page covers what the user sees and can check.
