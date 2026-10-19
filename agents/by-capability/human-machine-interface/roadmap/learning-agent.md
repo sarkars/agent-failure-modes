@@ -26,5 +26,6 @@ It cannot run an agent against a model, collect real traces, or measure improvem
 ## Related
 - [Gap analysis](gap-analysis.md)
 - [L1 harness decision record](l1-harness-decision.md)
+- [L0 base spec (draft)](l0-base-spec.md)
 - [Content program](content-program.md)
 - [Execution plan](execution-plan.md)
