@@ -282,16 +282,16 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 38 | CP-23 | Boilerplate steps that don't match the user's setup | Extends | - | `goals/embedded-copilots/failures/boilerplate-steps-that-don-t-match-the-user-s.md` | Done | 22 |
 | 39 | CP-09 | Over-complicating simple tasks | Extends | - | `goals/embedded-copilots/failures/over-complicating-simple-tasks.md` | Done | 22 |
 | 40 | CP-11 | Keyword-matched documentation instead of an answer | Extends | - | `goals/embedded-copilots/failures/keyword-matched-documentation-instead-of-an-answer.md` | Done | 22 |
-| 41 | HU-04 | Handoff summary is wrong or misleading | New | - | `goals/human-handoff/failures/handoff-summary-is-wrong-or-misleading.md` | Queued |  |
-| 42 | HU-05 | Humans can't see what the bot said or promised | New | - | `goals/human-handoff/failures/humans-can-t-see-what-the-bot-said-or.md` | Queued |  |
-| 43 | HU-06 | Bot keeps replying after a person joins | New | - | `goals/human-handoff/failures/bot-keeps-replying-after-a-person-joins.md` | Queued |  |
-| 44 | HU-07 | Handoff outside staffed hours with no alternative | New | - | `goals/human-handoff/failures/handoff-outside-staffed-hours-with-no-alternative.md` | Queued |  |
-| 45 | CP-02 | Recommending features the user can't use | Extends | - | `goals/embedded-copilots/failures/recommending-features-the-user-can-t-use.md` | Queued |  |
+| 41 | HU-04 | Handoff summary is wrong or misleading | New | - | `goals/human-handoff/failures/handoff-summary-is-wrong-or-misleading.md` | Done |  |
+| 42 | HU-05 | Humans can't see what the bot said or promised | New | - | `goals/human-handoff/failures/humans-can-t-see-what-the-bot-said-or.md` | Done |  |
+| 43 | HU-06 | Bot keeps replying after a person joins | New | - | `goals/human-handoff/failures/bot-keeps-replying-after-a-person-joins.md` | Done |  |
+| 44 | HU-07 | Handoff outside staffed hours with no alternative | New | - | `goals/human-handoff/failures/handoff-outside-staffed-hours-with-no-alternative.md` | Done |  |
+| 45 | CP-02 | Recommending features the user can't use | Extends | - | `goals/embedded-copilots/failures/recommending-features-the-user-can-t-use.md` | Done |  |
 | 46 | CP-04 | Self-preferencing | New | R, L | `goals/embedded-copilots/failures/self-preferencing.md` | Queued |  |
 | 47 | CP-05 | Paid content blended into answers | New | V, R, L | `goals/embedded-copilots/failures/paid-content-blended-into-answers.md` | Queued |  |
-| 48 | CP-07 | Helpfulness theatre | Extends | - | `goals/embedded-copilots/failures/helpfulness-theatre.md` | Queued |  |
+| 48 | CP-07 | Helpfulness theatre | Extends | - | `goals/embedded-copilots/failures/helpfulness-theatre.md` | Done |  |
 | 49 | DM-01 | Reference resolution failures | New | R | `goals/dialogue-management/failures/reference-resolution-failures.md` | Queued |  |
-| 50 | DM-02 | Tangents never closed | Extends | - | `goals/dialogue-management/failures/tangents-never-closed.md` | Queued |  |
+| 50 | DM-02 | Tangents never closed | Extends | - | `goals/dialogue-management/failures/tangents-never-closed.md` | Done |  |
 | 51 | DM-04 | Multi-intent messages answered in part | Extends | - | `goals/dialogue-management/failures/multi-intent-messages-answered-in-part.md` | Queued |  |
 | 52 | DM-05 | Negation and exceptions ignored | New | - | `goals/dialogue-management/failures/negation-and-exceptions-ignored.md` | Queued |  |
 | 53 | DM-06 | Questions asked one at a time when the user already gave everything | Extends | - | `goals/dialogue-management/failures/questions-asked-one-at-a-time-when-the-user.md` | Queued |  |
@@ -887,7 +887,18 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 - **Part C asset 5 (metrics hub), Done:** `reference/metrics.md` (190 lines; new folder `reference/` per the document model). 4 searches; opened Lex V2 definitions, Dialogflow CX analytics (page updated 2026-10-13), Decagon glossary, Macha glossary (all four undated vendor pages except Dialogflow). Seen in summaries only: benchmark figures (none used), repeat-contact definitions. Review changed: the agent's repeat-contact definition rested on unopened pages; rewritten to say no opened source defines it. The "exit view" in section 5 is our own proposal, labeled.
 - **Part B:** Blocked for our site: Search Console in Chrome shows only `campfyrr.vercel.app`. Public checks logged in `seo/log.md`.
 - **Taxonomy:** 46 entries (adds CP-13 and CP-22); signals 29 of 46; Moves 15 of 46.
-- **Waiting for the owner:** CP-21 redo or drop; DPD-style "role boundary under user pressure" pattern; Search Console access for `agent-kb-autopublish.vercel.app`; site repo commit `f8455aac7` (see Deploy line).
+- **Deploy:** content PR #17 merged (merge commit 93963e9); the site repo had no foreign commits (local main equal to origin/main, `git fetch` worked, so the earlier f8455aac7 concern is gone). Scratch build clean, 1605 pages; the live sitemap had 1592 URLs and none were missing from the build (removed: 0; the build has 13 more pages than the live sitemap, 11 of them new content files). Sample page has one H1; the `search phrases` text sits inside an HTML comment, not visible. Pushed to site repo main as c006fb228 (38 files: 11 added, 27 changed). No Vercel token or hook: pushed to site repo main, not verified live (the new page returned 404 about 3 minutes after the push; not pushed again).
+- **Waiting for the owner:** CP-21 redo or drop; DPD-style "role boundary under user pressure" pattern; Search Console access for `agent-kb-autopublish.vercel.app`; whether Vercel builds on push for this session's commits (see Deploy line).
+
+### Run 23 (scheduled): 2026-10-20 onward
+- **Coordinator run:** 11 subagents in parallel (4 new patterns, 3 Extends examples, 4 retrofits plus 3 Part E edits, 1 teardown). Deviation: subagents were told to read `roadmap/quality-guide.md` sections 1 and their piece's section instead of having them pasted word for word. Each result was reviewed against those sections; the five checks pass (0 problems).
+- **Part A new patterns (rows 41-44, guide section 2):** HU-04 handoff-summary-is-wrong-or-misleading (225 lines), HU-06 bot-keeps-replying-after-a-person-joins (226), HU-07 handoff-outside-staffed-hours-with-no-alternative (219), HU-05 humans-can-t-see-what-the-bot-said-or (227): **Done**. HU-05: 3 searches; opened Daily Hive, Norton Rose Fulbright summary (via FAnews), Ada docs, Voiceflow docs and the site's Air Canada page; the tribunal decision and CBC returned HTTP 403 and were not opened; carries a "Read this first" note; no frequency count exists, so Frequency is a judgment. Search and source counts for HU-04, HU-06 and HU-07 are in the agents' reports, not re-verified here. Review changed: HU-07 SEO description aligned with the Issue line.
+- **Extends (rows 45, 48, 50, guide section 3):** CP-02, CP-07, DM-02: **Done**, chat examples under `## Chat assistant examples` in the existing pattern each row links. Transcripts are illustrative. Only those sections changed.
+- **Part A2 retrofits (4, sections 4 and 5):** child-user-treated-as-adult, stakes-blind-register, sensitive-data-collected-in-chat, complex-or-emotional-discussion-forced-into-chat. Searches 0 (derived from each page's own fix and metrics). Review changed: `runs: across_conversation` corrected to `conversation`. Pre-existing link in child-user page passed check_links.
+- **Part E (3, section 5):** Moves table and Guide spec added to hollow-empathy, undisclosed-bot-identity, missed-crisis-signals.
+- **Part C asset 4 (teardown), Klarna: Done** (section 6, `incidents/klarna-ai-assistant-customer-service-reversal-2025.md`, 75 lines). 5 searches, 5 sources opened (Klarna press release, CX Dive, Fortune, Entrepreneur, one more). Bloomberg not opened. The sources report a strategy change, not a specific failure; the page says so and forces no pattern link. Review changed: removed four short quotes to paraphrase, keeping only "lower quality".
+- **Part B:** Skipped this run (coordinator time spent on review).
+- **Taxonomy:** 50 entries; signals 37 of 50; Moves 26 of 50.
 
 ## Backlog (not scheduled)
 Ideas from earlier lists that were never chosen. They stay out of the queue until someone adds them.

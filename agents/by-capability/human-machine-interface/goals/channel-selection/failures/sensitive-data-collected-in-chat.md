@@ -24,6 +24,7 @@ search phrases:
 | **Stakes** | High (financial loss, identity theft, compliance exposure) |
 | **Who is affected** | Anyone paying or verifying identity through a bot |
 | **Frequency** | Common. Observed in practice; also occurs when users paste data unprompted. |
+| **Pattern ID** | sensitive-data-collected-in-chat |
 | **Family** | [Channel selection](../README.md) |
 | **Goal** | Each interaction happens in the channel that fits the job, and switching never costs the user their context. |
 | **Primary metric** | Sensitive values found in stored logs. Target: 0. |
@@ -84,6 +85,13 @@ def sanitize(msg):
 ```
 User-facing reply when `flag` fires: "I've hidden that so it isn't stored. Please use the secure page for payment details."
 
+**Moves** (see [conversation moves](../../../solutions-library/conversation-moves.md); list only the moves that apply, most preferred first)
+| Move | When, in this pattern |
+|---|---|
+| Lead with the answer | A payment or identity step is reached, or the user pastes a sensitive value: say at once that it is hidden (if it was) and where to go instead (the secure page). Do not ask for the value in chat first. |
+| Offer choices: 2-4 options plus "Something else", free text open | When the secure path has more than one route (secure link, keypad entry on a call, a person): "Secure payment link", "Talk to a person", "Something else". Do not offer them when only one protected path exists; just give it. |
+| Hand off to a person | Account verification that needs an SSN or a password, which belongs in a verified secure flow or a human on a secured call. Do not hand off a plain payment that the secure page can finish, or when the user asked to stay with the bot. |
+
 **Don't over-correct.** Don't block legitimate, harmless numbers (order numbers, phone numbers). Don't lecture. Redact quietly and point to the safe path.
 
 **Hand-off rule.** For account verification that needs an SSN or a password, use a verified secure flow or a human on a secured call, not the chat bot.
@@ -108,6 +116,32 @@ Targets are starting points to tune on your own data, unless a source is given.
 | False-positive rate on lookalikes (order numbers, phone numbers) | Under 2% | Labelled lookalike set | Over 5% |
 | Payments completed via the protected path | About 100% | Payment events by path | Any bot-captured payment |
 | Redaction events per week | Baseline (informational) | Redaction log | +50% (warn), +100% (page) |
+
+### Detection signals (proposed, not yet calibrated)
+Signals in a conversation event log that suggest this failure. Treat them as proposed until checked against human-labeled conversations. Signals use masked flags only; the sensitive value itself is never stored or logged.
+| Signal | Where it shows | Counter-signal (what it could be instead) |
+|---|---|---|
+| User message carries a card-like number | Input-filter flag `contains_card_like_number: true` (the `card_pasted` flag) | A checksum-valid lookalike that is not a card |
+| User message carries an SSN-like pattern | Input-filter flag `contains_ssn_like_pattern: true` (the `ssn_pasted` flag) | A nine-digit order or phone number matching the 3-2-4 format |
+| Bot reply asks for full card number, CVV, SSN, password, or one-time code | Output-linter flag `bot_reply.requests_sensitive_input: true` | A reply that tells the user not to type those details |
+| Payment completed outside the protected path | `payment_event.path` is not the protected path | A path label missing from the event |
+| Sensitive pattern found in stored logs, analytics, or model inputs | Scheduled scan event `scan_hit` with store name | A scan false positive on a lookalike |
+
+**Starter rule:** sensitive data goes into a protected form or keypad, never free text or speech to a bot.
+
+**Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
+```yaml
+pattern_id: sensitive-data-collected-in-chat
+runs: pre_send
+reads: [message.contains_card_like_number, message.contains_ssn_like_pattern, bot_reply.requests_sensitive_input, payment_event.path]
+trigger: a payment or identity step is reached, or a masked sensitive-value flag fires
+moves: [lead_with_answer, offer_choices, hand_off]
+choices: ["Secure payment link", "Talk to a person", "Something else"]
+on_miss: rewrite
+metric: sensitive values found in stored logs
+counter_metric: false-positive rate on lookalikes
+status: proposed
+```
 
 ## 8. Related patterns
 - [PII exposure](../../../../../cross-cutting/security/goals/data-loss-prevention/failures/pii-exposure.md): personal data in outputs. This pattern covers collection through the wrong channel.

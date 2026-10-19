@@ -94,6 +94,12 @@ distress detected (confidence >= threshold)
   -> task resumes only if the user asks to continue
 ```
 
+**Moves** (see [conversation moves](../../../solutions-library/conversation-moves.md); list only the moves that apply, most preferred first). Design only: have crisis experts review the wording and the path.
+| Move | When, in this pattern |
+|---|---|
+| Ask one clarifying question | After the task is paused, the reviewed check-in asks directly and kindly whether the user is thinking of hurting themselves. Do not ask it for everyday figures of speech, and do not ask it again if the user already said. |
+| Hand off to a person | Whenever crisis mode is on: offer a trained human now, with priority routing and a summary. Do not make the user repeat themselves, and do not use a hand-off in place of the reviewed resources. |
+
 **Don't over-correct.** Err toward caution on detection (a gentle check-in costs little if wrong), but don't treat everyday figures of speech ("this is killing me") as crises. Don't force the user to take a resource. Don't trap them in crisis mode; let them return to the task.
 
 **Hand-off rule.** Crisis mode always offers a trained human, with priority routing and a summary.
@@ -132,6 +138,20 @@ Signals in a conversation event log that suggest this failure. Treat them as pro
 | Stale resource list | Last-verified date on the resource template past the metric limit | A review that is in progress |
 
 **Starter rule:** run a distress check on every user turn, and when it fires, pause the task, send a reviewed check-in with resources, and offer a person.
+
+**Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
+```yaml
+pattern_id: missed-crisis-signals
+runs: conversation
+reads: [user_message.distress_flag, session.mode, bot_turn.resource_entries, handoff_event, task_action_event, resource_template.last_verified]
+trigger: the reviewed distress classifier flags a user turn
+moves: [ask_clarifying_question, hand_off]
+choices: []   # no offer_choices move on this page
+on_miss: handoff
+metric: Expert-audited recall on true crisis cases
+counter_metric: false-alarm rate
+status: proposed
+```
 
 ## 8. Related patterns
 - [Mental health triage](../../../../../by-use-case/healthcare/goals/mental-health-triage/README.md): the existing health-setting pattern.

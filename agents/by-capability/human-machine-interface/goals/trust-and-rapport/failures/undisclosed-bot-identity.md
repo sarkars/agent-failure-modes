@@ -83,6 +83,13 @@ Asked:     "No, I'm an AI assistant. Want me to connect you to a person?"
 Handoff:   "I'm passing you to [Name], a person on our team. They can see what we've covered."
 ```
 
+**Moves** (see [conversation moves](../../../solutions-library/conversation-moves.md); list only the moves that apply, most preferred first)
+| Move | When, in this pattern |
+|---|---|
+| Lead with the answer | The user asks "are you a real person?" in any phrasing: the first words are the truthful answer ("No, I'm an AI assistant"), then the offer of a person. Do not use this move to repeat the disclosure on every turn. |
+| Admit uncertainty and show how to check | The bot cannot confirm a task is done in the system of record: say it is not confirmed yet and how the user can check. Do not claim "done" before the record agrees. |
+| Hand off to a person | At a transfer, mark the boundary ("You're now chatting with a person"), and offer a person when a request is out of scope. Do not hand off if the user asked to stay with the bot. |
+
 **Don't over-correct.** Disclose once at the start, once when asked, and at handoffs, not on every turn. No legalese; one sentence.
 
 **Hand-off rule.** Always give a path to a person, and say when it'll happen.
@@ -119,6 +126,20 @@ Signals in a conversation event log that suggest this failure. Treat them as pro
 | Handoff with no boundary message | Transfer event with no "you're now chatting with a person" message | A transfer that failed and was retried with the message sent |
 
 **Starter rule:** flag any session where the first bot message has no AI disclosure or an identity question gets anything other than the locked truthful answer.
+
+**Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
+```yaml
+pattern_id: undisclosed-bot-identity
+runs: pre_send
+reads: [session.first_bot_message.text, user_turn.intent, bot_draft.text, task.system_of_record_state, transfer_event.boundary_message]
+trigger: the user asks an identity question, or the bot is about to send its first message, claim a task is done, or transfer
+moves: [lead_with_answer, admit_uncertainty, hand_off]
+choices: []   # no offer_choices move on this page
+on_miss: rewrite
+metric: Truthful identity answer rate
+counter_metric: claimed-done vs. actually-done mismatch
+status: proposed
+```
 
 ## 8. Related patterns
 - [False completion claim](../../../../../by-use-case/customer-service/goals/conversation-resolution/failures/false-completion-claim.md): claiming a task is done when it isn't.

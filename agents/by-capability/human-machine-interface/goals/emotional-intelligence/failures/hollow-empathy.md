@@ -82,6 +82,13 @@ The fixed bot names what happened and what it cost, owns what's the company's, a
 ```
 Banned openers: "I understand your frustration", "I'm sorry for any inconvenience", "I apologize for the inconvenience" (unless followed by specifics and an action).
 
+**Moves** (see [conversation moves](../../../solutions-library/conversation-moves.md); list only the moves that apply, most preferred first)
+| Move | When, in this pattern |
+|---|---|
+| Lead with the answer | The user is rushed or just wants the fix: cut the reflection to a clause or skip it, and put the action first. Do not open with a stock empathy line. |
+| Offer choices: 2-4 options plus "Something else", free text open | The fix has more than one real route, as in the page's example ("Re-ship it" or "Refund me"). Do not offer them when only one action fits, when the user is calm and asking for information, or as an upsell right after an apology. |
+| Hand off to a person | The user is distressed beyond the bot's scope (see the hand-off rule). Do not hand off for an ordinary complaint the bot can fix. |
+
 **Don't over-correct.** Don't guess emotions the user hasn't shown, don't over-dramatise small issues, and don't use therapy language. When the user is calm and wants speed, give speed.
 
 **Hand-off rule.** If the user is distressed beyond the bot's scope, move to a person; see [missed crisis signals](../../vulnerable-users/failures/missed-crisis-signals.md).
@@ -118,6 +125,20 @@ Signals in a conversation event log that suggest this failure. Treat them as pro
 | User message mentions "scripted", "robot", or "canned" | Text mining of user messages and CSAT comments | The user is describing a different bot or an unrelated complaint |
 
 **Starter rule:** every empathy line in a complaint reply cites a detail from the user's message, appears once per issue, and comes with an action.
+
+**Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
+```yaml
+pattern_id: hollow-empathy
+runs: pre_send
+reads: [user_message.text, bot_draft.text, bot_turns.last_5, bot_draft.offer_after_apology]
+trigger: a reply to a complaint message is about to be sent
+moves: [lead_with_answer, offer_choices, hand_off]
+choices: ["Re-ship it", "Refund me", "Something else"]
+on_miss: rewrite
+metric: Specificity rate of empathy lines
+counter_metric: repeated empathy phrase rate
+status: proposed
+```
 
 ## 8. Related patterns
 - [Over-apology loop](../../../../../by-use-case/customer-service/goals/conversation-resolution/failures/over-apology-loop.md): apologising repeatedly. This pattern is about *generic* empathy even when it isn't repeated.

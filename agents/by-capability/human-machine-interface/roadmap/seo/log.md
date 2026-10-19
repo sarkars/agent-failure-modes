@@ -24,7 +24,9 @@ Still blocked: no Search Console access (no Chrome tools, empty `inbox/`) and no
 **Action:** none inside this folder can fix it. Written up as [proposal 1](../merge-proposals.md) for the site repo (re-run the importers and redeploy). Impact: the 14 live HMI pages show raw SEO text and a duplicate H1 until that is done, which affects how Google reads them.
 
 ## 2026-10-20 (UTC), scheduled run 22
-**Search Console: Blocked for our site.** Chrome tools worked, and the signed-in Search Console showed one property, `https://campfyrr.vercel.app/` (Overview: 0 clicks, "Processing data, please check again in a day or so"). That is not `agent-kb-autopublish.vercel.app`, so nothing from it was recorded as our data. `inbox/` is empty. No search data recorded, no changes made.
+**Correction, same day:** the property dropdown does list `https://agent-kb-autopublish.vercel.app/`; the first look only saw the property that was open. Last 28 days (Performance, read in Chrome): 16 clicks, 4.94K impressions, average CTR 0.3%, average position 9. Top pages by clicks: safety-filter-bypass 2 clicks / 43 impressions; canned-response-context-mismatch 2 / 6; patterns/ 1 / 1,800; conflicting-instructions 1 / 65; background-interference 1 / 50. 553 pages have data. Queries tab and HMI-only pages not read yet.
+
+**Earlier note (wrong): Search Console: Blocked for our site.** Chrome tools worked, and the signed-in Search Console showed one property, `https://campfyrr.vercel.app/` (Overview: 0 clicks, "Processing data, please check again in a day or so"). That is not `agent-kb-autopublish.vercel.app`, so nothing from it was recorded as our data. `inbox/` is empty. No search data recorded, no changes made.
 
 **Public checks, 2026-10-20 (curl):**
 | Check | Result |

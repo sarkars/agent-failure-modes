@@ -47,11 +47,11 @@ Ordered by how much distribution each asset earns relative to effort. Every asse
 | 1 | Evidence review | **Done (v0.2, ready for review)** 2026-10-19: [why people leave chatbots](evidence/why-people-leave-chatbots.md). Every cited study opened; Luo et al. and Xu et al. at abstract level only (paper bodies unread), labeled in the file |
 | 2 | Event schema and failure taxonomy | **Done (v0.1 / v1 draft, ready for review)** 2026-10-19: [event schema](specs/conversation-event-schema-v0.1.md), [taxonomy](specs/failure-taxonomy-v1.md) (46 entries, 22 families). Outside-framework mapping stays Needs review |
 | 3 | Scenario pack | Not started |
-| 4 | Incident teardowns | In progress: DPD done 2026-10-20 ([teardown](../incidents/dpd-chatbot-swears-and-criticizes-the-company-january-2024.md)); Klarna next |
+| 4 | Incident teardowns | In progress: DPD done 2026-10-20 ([teardown](../incidents/dpd-chatbot-swears-and-criticizes-the-company-january-2024.md)); Klarna done 2026-10-20 ([teardown](../incidents/klarna-ai-assistant-customer-service-reversal-2025.md)); next teardown not yet chosen |
 | 5 | Metrics hub | **Done (draft, ready for review)** 2026-10-20: [metrics](../reference/metrics.md). Four vendor definitions opened, no benchmarks |
 | 6-9 | Preregistrations, rules library, audit offer, glossary | Not started |
 
-**Retrofit progress (Pattern ID and detection signals):** done on 27 of the 46 written HMI patterns (19 earlier, plus the 8 of run 22: doesn-t-say-what-it-can-do, forces-a-fresh-login, missing-the-obvious-intent, help-that-becomes-a-sales-pitch, obstructing-cancellation-downgrade-or-refund, answers-withheld-behind-an-upgrade-unsaid, corrections-not-applied, no-reply-to-acknowledgments-and-closers; the 19 were the 13 earlier ones plus re-asks-for-known-information, generic-first-response, answer-buried, guessing-instead-of-asking, over-refusal-of-ordinary-requests, confident-wrong-answer-with-no-way-to-check). 19 pending (the two new run-22 pages were written with signals). Retrofit order: patterns whose pages get impressions first (no Search Console data yet, so by search interest).
+**Retrofit progress (Pattern ID and detection signals):** done on 31 of the 50 written HMI patterns (the 4 new HU patterns were written with them; 4 more retrofitted in run 23: child-user-treated-as-adult, stakes-blind-register, sensitive-data-collected-in-chat, complex-or-emotional-discussion-forced-into-chat; 19 earlier, plus the 8 of run 22: doesn-t-say-what-it-can-do, forces-a-fresh-login, missing-the-obvious-intent, help-that-becomes-a-sales-pitch, obstructing-cancellation-downgrade-or-refund, answers-withheld-behind-an-upgrade-unsaid, corrections-not-applied, no-reply-to-acknowledgments-and-closers; the 19 were the 13 earlier ones plus re-asks-for-known-information, generic-first-response, answer-buried, guessing-instead-of-asking, over-refusal-of-ordinary-requests, confident-wrong-answer-with-no-way-to-check). 19 pending (the two new run-22 pages were written with signals). Retrofit order: patterns whose pages get impressions first (no Search Console data yet, so by search interest).
 
 ### How the assets connect to the existing patterns
 The 27 written patterns are the backbone. Each pattern's file name is its **Pattern ID** and never changes, so every public URL stays as it is. Everything else keys off that ID:
@@ -77,7 +77,7 @@ Added 2026-10-19 at the owner's request; reshaped the same day by the approved [
 | # | Item | Status |
 |---|---|---|
 | E1 | Conversation moves page and template sections | **Done** 2026-10-19 |
-| E2 | Moves table and Guide spec on every written pattern (added with each retrofit; the patterns already retrofitted get them on their own) | In progress: 15 of 46 pages have a Moves table and Guide spec (8 retrofits and 5 Part E edits in run 22, plus the 2 new pages) |
+| E2 | Moves table and Guide spec on every written pattern (added with each retrofit; the patterns already retrofitted get them on their own) | In progress: 26 of 50 pages have a Moves table and Guide spec (8 retrofits and 5 Part E edits in run 22, plus the 2 new pages) |
 | E3 | Explainer: output guardrails vs. conversation guidance, in `reference/` | Not started |
 | E4 | Test conversations per pattern, in `tests/<pattern-id>.md` | Folded into asset 3 |
 | E5 | How this sits next to existing guardrail tools, in `reference/`, from their docs actually opened (Needs review) | Not started |

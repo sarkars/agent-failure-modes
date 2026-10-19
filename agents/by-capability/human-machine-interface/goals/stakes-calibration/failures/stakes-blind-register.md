@@ -24,6 +24,7 @@ search phrases:
 | **Stakes** | High (this is the failure of not noticing them) |
 | **Who is affected** | Users in grief, illness, money trouble, legal or immigration problems, safety situations |
 | **Frequency** | Common. Observed in practice; no study measures how often. |
+| **Pattern ID** | stakes-blind-register |
 | **Family** | [Stakes calibration](../README.md) |
 | **Goal** | The bot's tone, evidence standard, and use of humans match what is at stake for the user. |
 | **Primary metric** | High-stakes register compliance. Starting target: over 95%. |
@@ -80,6 +81,14 @@ The fixed bot changes register, quotes the source instead of improvising, and ro
 | Medium | Billing, delivery of something important, account changes | Clear, confirm details | Retrieve from policy; show details | Offer if unsure |
 | High | Bereavement, medical, legal, debt, immigration, safety | Calm, plain, no flourish | **Quote the source or don't answer**; state limits | Offer by default; confirm in writing |
 
+**Moves** (see [conversation moves](../../../solutions-library/conversation-moves.md); list only the moves that apply, most preferred first)
+| Move | When, in this pattern |
+|---|---|
+| Admit uncertainty and show how to check | A high-stakes policy question has no retrieved source: say you can't confirm it, link the policy if one exists, and say a specialist can confirm in writing. |
+| Offer choices: 2-4 options plus "Something else", free text open | At high stakes, after the sourced answer: "Connect me now", "Have them call me", "Send it in writing", "Something else". Do not offer them at low stakes, or when the user asked for the short answer. |
+| Hand off to a person | High stakes is the default case: offer a person and pass the summary. Do not hand off if the user asked to stay with the bot. |
+| Lead with the answer | Low or medium stakes, or when the user says "just give me the quick answer": give the answer first and keep accuracy intact. |
+
 **Don't over-correct.** Don't turn every chat into a funeral. Misclassifying low-stakes questions as serious makes the bot cold and slow. Keep the classifier conservative about *raising* stakes only on clear signals, and let users say "just give me the quick answer."
 
 **Hand-off rule.** At high stakes, the default move is an offer of a person, with the summary passed along.
@@ -104,6 +113,32 @@ Targets are starting points to tune on your own data, unless a source is given.
 | Human offered at high stakes | Over 90% | High-stakes threads where a person was offered, divided by all high-stakes threads | Under 75% |
 | Stakes-classifier recall on high-stakes cases | Over 90%, with false alarms under 10% | Labelled test set, rerun on each release | Under 85% recall |
 | Complaints or reversals on policy answers | Trend down | Support tickets referencing a bot answer | Any cluster |
+
+### Detection signals (proposed, not yet calibrated)
+Signals in a conversation event log that suggest this failure. Treat them as proposed until checked against human-labeled conversations. Chat is the written channel; no voice or web signal is used.
+| Signal | Where it shows | Counter-signal (what it could be instead) |
+|---|---|---|
+| Emoji, exclamation mark, joke, or promotion in a reply on a high-stakes thread (from the register compliance metric) | Reply text matched by the T2 regex, joined to the `stakes` level field | The user used the same style first and the thread is mislabeled high-stakes |
+| A factual policy claim with no retrieved citation at high stakes (from the sourced-claims metric) | Per-claim citation field empty on a turn with `stakes` = high | A claim that only repeats what the user just said |
+| High-stakes thread ends with no person offered (from the human-offered metric) | No handoff-offer event before the session-end event | The user said to stay with the bot, or declined a person earlier |
+| A high-stakes topic term in the user turn while `stakes` is logged low (from the classifier recall metric) | Topic label on the user turn versus the logged `stakes` level | The term was used in a low-stakes sense, for example a game or a figure of speech |
+| A support ticket or reversal that cites a bot answer (from the complaints metric) | Ticket record linked to the conversation ID | A ticket that is about something else in the same conversation |
+
+**Starter rule:** judge the stakes every turn, and let the stakes set the register, the evidence standard, and how quickly a person gets involved.
+
+**Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
+```yaml
+pattern_id: stakes-blind-register
+runs: pre_send
+reads: [state.stakes, turn.topic_label, reply.citations, session.handoff_offered]
+trigger: a reply is about to be sent on a turn classified high stakes
+moves: [admit_uncertainty, offer_choices, hand_off, lead_with_answer]
+choices: ["Connect me now", "Have them call me", "Send it in writing", "Something else"]
+on_miss: rewrite
+metric: high-stakes register compliance
+counter_metric: complaints or reversals on policy answers
+status: proposed
+```
 
 ## 8. Related patterns
 - [Tone mismatch](../../../../../by-use-case/customer-service/goals/conversation-resolution/failures/tone-mismatch.md): the general tone problem.
