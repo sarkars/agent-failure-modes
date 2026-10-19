@@ -25,6 +25,7 @@ search phrases:
 | **Stakes** | Low to high. A stranded user on a billing, access, or safety issue may give up or take a worse route. |
 | **Who is affected** | Anyone refused for any reason, including correct refusals |
 | **Frequency** | Very common as a default phrasing. I found no study that counts it; user studies below compare refusal styles. |
+| **Pattern ID** | refusal-with-no-reason-or-next-step |
 | **Family** | [Refusals and boundaries](../README.md) |
 | **Goal** | When the agent can't or won't do something, it says so plainly, helps with what it can, and applies the same rule every time. |
 | **Primary metric** | Refusals that include an alternative or a route to a person. Target: 100% (tune). |
@@ -122,6 +123,17 @@ Targets are starting points to tune on your own data, unless a source is given.
 | Rephrase or "why?" after a refusal | Track; set from baseline | Next-turn classifier | Rising two weeks in a row |
 | Refusal-to-handoff completion | Over 90% where a route exists | Handoffs after a refusal that reached a person | Below 80% |
 | Refusal reply length (counter-metric) | Under 60 words | Median length of refusal replies | Over 100 |
+
+### Detection signals (proposed, not yet calibrated)
+Signals in a conversation event log that suggest this failure. Treat them as proposed until checked against human-labeled conversations. All four are written for text chat events (channel field: chat); none are planned or measured for voice yet.
+| Signal | Where it shows | Counter-signal (what it could be instead) |
+|---|---|---|
+| Refusal reply has no alternative and no route to a person | Refusal event with the alternative-offered and route-offered fields empty | A harmful request where no safe alternative exists (test 4) |
+| Refusal reply has no stated reason | Refusal event with the reason field empty | A sensitive reason the bot said it cannot share |
+| User rephrases or asks "why?" in the next turn | Next-turn classifier label after a refusal event | A user who is testing the limit on purpose |
+| Same refusal wording repeated in consecutive turns | Two refusal events with identical reply text | A repeated request that deserves the same answer |
+
+**Starter rule:** every refusal says what the bot cannot do, why in plain words, and one alternative or route to a person.
 
 ## 8. Related patterns
 - [Bad refusal](../../../../../by-use-case/customer-service/goals/conversation-resolution/failures/bad-refusal.md): refusing safe requests, from the support side.
