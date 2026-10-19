@@ -105,6 +105,14 @@ Only use data this user is allowed to see.
 | Data conflicts with what the user says | Takes the user's word for this chat and offers to flag the record |
 | Not signed in | Asks for what it needs to identify, or tells them how to sign in |
 
+**Moves** (see [conversation moves](../../../solutions-library/conversation-moves.md); list only the moves that apply, most preferred first)
+| Move | When, in this pattern |
+|---|---|
+| Lead with the answer | One likely match exists after the lookup: state what you found ("Your most recent order is 48213, due Thursday") and ask for a yes, instead of asking for the value. |
+| Offer choices: 2-4 options plus "Something else", free text open | Several likely matches (for example, recent orders): list up to four, plus "Something else". Do not offer them when only one match exists (confirm it instead), when nothing matched (ask for the one missing value), or when the list would show another person's data on a shared screen. |
+| Ask one clarifying question | The lookup found nothing: ask for only the missing value, one at a time, and say why you need it. Do not ask for anything the lookup already returned. |
+| Hand off to a person | The data cannot be loaded and the user does not want to type the value, or the user asks for a person. Do not hand off if the user asked to stay with the bot. |
+
 **Don't over-correct.** Do not announce details the user did not need ("I see your address is..."), and do not assume a match when two are likely. Do not expose data on a shared screen without checking it is the user. Confirm, do not assume, when the cost of a wrong guess is high.
 
 **Hand-off rule.** If the data cannot be loaded, say so and ask for the one value needed, or offer a person ([HU-01](../../human-handoff/failures/talk-to-a-human-ignored-or-looped.md)). A person who picks up should not re-ask either ([cold transfer](../../human-handoff/failures/cold-transfer.md)).
@@ -143,6 +151,20 @@ Signals in a conversation event log that suggest this failure. Treat them as pro
 | Assistant asks again for a value the user corrected earlier in the chat | Same field requested after a user correction event | The user's correction covered a different field |
 
 **Starter rule:** before asking the user for any detail, check the signed-in session, the account record, the current page, and the conversation so far, and ask only for what none of them contain.
+
+**Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
+```yaml
+pattern_id: re-asks-for-known-information
+runs: pre_send
+reads: [session.user_id, account.record, page.context, conversation.turns, draft_reply.requested_fields, session.user_corrections]
+trigger: a draft reply asks the user for a detail (name, email, account, order number, plan) that the session, account record, current page, or conversation may already hold
+moves: [lead_with_answer, offer_choices, ask_clarifying_question, hand_off]
+choices: ["<each likely match from the lookup, up to 4>", "Something else"]
+on_miss: rewrite
+metric: Re-ask rate on known fields
+counter_metric: Wrong-match rate
+status: proposed
+```
 
 ## 8. Related patterns
 - [Repeated question loop](../../../../../by-use-case/customer-service/goals/conversation-resolution/failures/repeated-question-loop.md): the bot repeats a question within one chat. This page covers asking for what the product already holds.

@@ -99,6 +99,14 @@ Put deadlines, fees, and safety steps in the first two sentences.
 After that, add at most one short paragraph or three bullets, then offer more detail.
 ```
 
+**Moves** (see [conversation moves](../../../solutions-library/conversation-moves.md); list only the moves that apply, most preferred first)
+| Move | When, in this pattern |
+|---|---|
+| Lead with the answer | Every clear, answerable question: sentence one is the answer, the decision, or the next step, and any deadline, fee, or safety step sits in the first two sentences. |
+| Ask one clarifying question | The answer depends on one fact: say what it depends on in sentence one and ask for it. Do not ask when the answer is the same either way. |
+| Offer choices: 2-4 options plus "Something else", free text open | After the answer, when there is a next step and more detail on offer: "Do the next step", "Show the full details", "Something else". Do not offer them on a yes/no question with one obvious next step, on a hard emotional message, or when the options would push the answer below the first sentence. |
+| Hand off to a person | The answer cannot be given safely (account-specific, legal, or high-stakes): say so in sentence one. Do not hand off if the user asked to stay with the bot. |
+
 **Don't over-correct.** Do not cut needed safety, legal, or medical caveats to save space; move them up, not out. Do not be curt on a hard emotional message (see [family patterns on emotion](../../emotional-intelligence/README.md)). Do not answer "yes" when the true answer is "it depends".
 
 **Hand-off rule.** If the answer cannot be given safely (account-specific, legal, or high-stakes), say so in the first sentence and route to a person ([escalates too early or too late](../../human-handoff/failures/escalates-too-early-or-too-late.md)).
@@ -137,6 +145,20 @@ Signals in a conversation event log that suggest this failure. Treat them as pro
 | User asks "so is that a yes?" or repeats the question in the next turn | Same intent in the next user turn, or a next-turn classifier hit | A user who wants a different detail, not the answer already given |
 
 **Starter rule:** the first sentence of every reply holds the answer, the decision, or the next step, and any deadline, fee, or safety step sits in the first two sentences.
+
+**Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
+```yaml
+pattern_id: answer-buried
+runs: pre_send
+reads: [draft_reply.first_sentence, draft_reply.must_know_items, user_turn.intent]
+trigger: a reply is about to be sent
+moves: [lead_with_answer, ask_clarifying_question, offer_choices, hand_off]
+choices: ["Do the next step", "Show the full details", "Something else"]
+on_miss: rewrite
+metric: answer-first rate
+counter_metric: caveat retention
+status: proposed
+```
 
 ## 8. Related patterns
 - [Verbosity despite brevity instructions](../../../../speech-and-audio/goals/conversation-flow/failures/verbosity-despite-brevity-instructions.md): the voice and instruction-following side.

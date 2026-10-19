@@ -100,6 +100,14 @@ Use what you already know about the user and the page before asking.
 Ask at most one or two questions before helping.
 ```
 
+**Moves** (see [conversation moves](../../../solutions-library/conversation-moves.md); list only the moves that apply, most preferred first)
+| Move | When, in this pattern |
+|---|---|
+| Ask one clarifying question | The readings lead to different results and a wrong guess would be costly or hard to undo (cancel, delete, send, pay). One short question, asked before acting. No more than two before helping |
+| Offer choices: 2-4 options plus "Something else", free text open | The question is the readings themselves: "Stop it from renewing", "Close the account now", "Something else". Do NOT offer them when context already settles the reading, when a wrong guess is cheap, or when the request is clear; answer instead |
+| Lead with the answer | The readings differ but a wrong guess is cheap, or context settles it: answer the most likely reading and state the assumption ("I assumed you meant the Pro plan; say if not") |
+| Hand off to a person | Two clarifying questions have not resolved the request. Attach a summary of what was asked |
+
 **Don't over-correct.** Do not ask about things that are clear or cheap to fix, and do not open every reply with a question. Bad or irrelevant questions were harmful in the study I opened, so a question must be specific. Do not make the user answer something the product already knows.
 
 **Hand-off rule.** If two clarifying questions have not resolved the request, hand off with a summary of what was asked ([escalates too early or too late](../../human-handoff/failures/escalates-too-early-or-too-late.md)).
@@ -136,6 +144,20 @@ Signals in a conversation event log that suggest this failure. Treat them as pro
 | The bot answers an ambiguous request without stating its assumption | Reply to an ambiguous-intent turn with no assumption statement (for example "I assumed you meant the Pro plan") | Only one reading was plausible, or context settled it, so there was nothing to state |
 
 **Starter rule:** if a request has more than one plausible meaning and a wrong guess would be costly or hard to undo, ask one short question that lists the options before acting; if the guess is cheap, answer and state the assumption.
+
+**Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
+```yaml
+pattern_id: guessing-instead-of-asking
+runs: pre_send
+reads: [intent.ambiguous_flag, intent.readings, action.reversibility, draft_reply.text, session.clarifying_questions_asked]
+trigger: a request has more than one plausible reading and a reply or action is about to be sent
+moves: [ask_clarifying_question, offer_choices, lead_with_answer, hand_off]   # short names for the moves in the table
+choices: ["Stop it from renewing", "Close the account now", "Something else"]   # example only, built from the readings each turn
+on_miss: ask
+metric: wrong-guess rate on ambiguous test requests
+counter_metric: questions asked on clear requests
+status: proposed
+```
 
 ## 8. Related patterns
 - [Ambiguity mishandling](../../../../knowledge-retrieval/goals/query-understanding/failures/ambiguity-mishandling.md): the same failure in retrieval.
