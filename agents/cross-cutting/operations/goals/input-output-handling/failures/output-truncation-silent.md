@@ -69,3 +69,20 @@ truncated output as successfully generated and successfully parsed.
 - [Context Window Overflow with Silent Truncation](../../memory-safety/failures/context-window-overflow-silent-truncation.md) - the input-side counterpart, where incoming context (not generated output) is silently dropped
 - [Truncation Information Loss](../../context-lifecycle/failures/truncation-information-loss.md) - similar silent-loss mechanism applied to conversation history truncation rather than a single generation being cut off
 - [Output Format Not Validated](output-format-not-validated.md) - broader pattern of unchecked output structure, of which unvalidated truncation is one specific cause
+
+## Chat assistant examples
+
+### Cut-off replies
+Illustrative transcript (not a recorded session): a user asks ChatGPT on the web to draft a cover letter, and the reply hits the output limit.
+```
+User: Write a cover letter for the Staff Accountant job at Hartwell Dental Group.
+Bot:  Dear Hiring Manager, I am excited to apply for the Staff Accountant role. In my four years at
+      Brightline Payroll I reconciled over 40 client accounts each month, and I
+User: (no notice, no button; the reply simply ends)
+
+--- After ---
+Bot:  (same letter, last line) I led the move to automated bank feeds.
+      This reply reached my length limit and is not finished. [Continue] picks up at "Sincerely".
+```
+**What the user experiences:** a letter that stops mid-sentence, so they cannot tell whether the bot is done, broken, or waiting for them.
+**Fix:** when the completion status is a length stop, end the visible reply with a plain notice and a Continue action that resumes from the last full sentence. See the [silent failure and timeout pattern](../../../../../by-capability/human-machine-interface/goals/response-time/failures/silent-failure-and-timeout.md).
