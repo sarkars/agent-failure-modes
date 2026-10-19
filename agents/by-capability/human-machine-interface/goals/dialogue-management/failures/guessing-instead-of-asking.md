@@ -25,6 +25,7 @@ search phrases:
 | **Stakes** | Low for a wrong answer to read; medium to high when the guess triggers an action (a cancellation, a transfer, a booking). |
 | **Who is affected** | Anyone who writes a short or loose request, which is most users |
 | **Frequency** | Very common as a model default. The benchmark below measures how well models spot ambiguity; I found no study of how often live products guess wrong. |
+| **Pattern ID** | guessing-instead-of-asking |
 | **Family** | [Dialogue management](../README.md) |
 | **Goal** | The conversation follows what the person means: references, corrections, exceptions, and several requests at once, and asks and confirms only what matters. |
 | **Primary metric** | Wrong-guess rate on ambiguous test requests. Starting target: set from a baseline on your own test set (tune). |
@@ -125,6 +126,16 @@ Targets are starting points to tune on your own data, unless a source is given.
 | Questions asked on clear requests (counter-metric) | Under 5% | Labeled sample of clear requests where a question appeared | Over 10% |
 | Questions per conversation before help (counter-metric) | Under 2 | Log | Over 3 |
 | Reworks after a wrong guess ("no, I meant") | Track; set from baseline | Next-turn classifier | Rising two weeks in a row |
+
+### Detection signals (proposed, not yet calibrated)
+Signals in a conversation event log that suggest this failure. Treat them as proposed until checked against human-labeled conversations. All three are written for text chat; the same signals are PLANNED for voice, not detected there yet.
+| Signal | Where it shows | Counter-signal (what it could be instead) |
+|---|---|---|
+| An irreversible action (cancel, delete, send, pay) runs on a request flagged as ambiguous, with no question before it | Ambiguous-intent flag plus an executed action and no question in the same turn | The user already confirmed the action earlier, or account data and the open page settled the reading |
+| The next user turn is a correction such as "no, I meant" | Next-turn classifier label on the turn after a bot answer or action | The user changed their mind; the bot's reading was fine |
+| The bot answers an ambiguous request without stating its assumption | Reply to an ambiguous-intent turn with no assumption statement (for example "I assumed you meant the Pro plan") | Only one reading was plausible, or context settled it, so there was nothing to state |
+
+**Starter rule:** if a request has more than one plausible meaning and a wrong guess would be costly or hard to undo, ask one short question that lists the options before acting; if the guess is cheap, answer and state the assumption.
 
 ## 8. Related patterns
 - [Ambiguity mishandling](../../../../knowledge-retrieval/goals/query-understanding/failures/ambiguity-mishandling.md): the same failure in retrieval.

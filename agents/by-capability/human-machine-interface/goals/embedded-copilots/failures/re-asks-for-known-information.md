@@ -25,6 +25,7 @@ search phrases:
 | **Stakes** | Low to medium. It wastes time and signals the assistant is not connected to the product. It gets worse when the question is at the start of a stressful issue. |
 | **Who is affected** | Signed-in users, and anyone whose details are already in the product |
 | **Frequency** | Common. I found no study of how often it happens; the survey evidence below is about customers repeating themselves in general. |
+| **Pattern ID** | re-asks-for-known-information |
 | **Family** | [Embedded copilots](../README.md) |
 | **Goal** | An assistant built into a product helps the person do what they came to do, using what the product already knows, and never puts the vendor's interest ahead of theirs. |
 | **Primary metric** | Re-ask rate on known fields: the share of assistant questions that ask for a value the product already holds for this user. Starting target: near 0 (under 2%). |
@@ -130,6 +131,18 @@ Targets are starting points to tune on your own data, unless a source is given.
 | Wrong-match rate (counter-metric) | Under 2% | Confirmations the user rejects | Over 5% |
 | User corrections accepted | 100% | Corrections that the assistant uses in the rest of the chat | Any miss |
 | Context-load failures | Track | Conversations where lookup failed and the assistant said so | Rising |
+
+### Detection signals (proposed, not yet calibrated)
+Signals in a conversation event log that suggest this failure. Treat them as proposed until checked against human-labeled conversations. All signals below are written for text chat. Voice signals are PLANNED, not written.
+| Signal | Where it shows | Counter-signal (what it could be instead) |
+|---|---|---|
+| Assistant asks for a value the product already holds for this user (name, email, account, order number, plan) | Question field joined to the account record, as in the primary metric | The question is a step-up check before a sensitive action, which is not a re-ask |
+| Assistant asks an identity or account question before any session or account lookup | Question order in the log: no resolver call before the first identity question | The user is not signed in, so there is nothing to look up |
+| Assistant asks for two or more known fields in a row (for example email, then order number) | Consecutive assistant questions that each match a held field | Each field was truly missing, one at a time, with a reason given |
+| User answers with a note that the product already has it (like "it's on your site, I'm logged in" in the example) | User turn right after an assistant question for a held field | The product does not actually hold the value (for example the user is not signed in) |
+| Assistant asks again for a value the user corrected earlier in the chat | Same field requested after a user correction event | The user's correction covered a different field |
+
+**Starter rule:** before asking the user for any detail, check the signed-in session, the account record, the current page, and the conversation so far, and ask only for what none of them contain.
 
 ## 8. Related patterns
 - [Repeated question loop](../../../../../by-use-case/customer-service/goals/conversation-resolution/failures/repeated-question-loop.md): the bot repeats a question within one chat. This page covers asking for what the product already holds.

@@ -45,9 +45,10 @@ Ordered by how much distribution each asset earns relative to effort. Every asse
 | # | Asset | Status |
 |---|---|---|
 | 1 | Evidence review | **Done (v0.2, ready for review)** 2026-10-19: [why people leave chatbots](evidence/why-people-leave-chatbots.md). Every cited study opened; Luo et al. and Xu et al. at abstract level only (paper bodies unread), labeled in the file |
-| 2-9 | Schema and taxonomy, scenario pack, teardowns, metrics hub, preregistrations, rules library, audit offer, glossary | Not started |
+| 2 | Event schema and failure taxonomy | **Done (v0.1 / v1 draft, ready for review)** 2026-10-19: [event schema](specs/conversation-event-schema-v0.1.md), [taxonomy](specs/failure-taxonomy-v1.md) (44 entries, 22 families). Outside-framework mapping stays Needs review |
+| 3-9 | Scenario pack, teardowns, metrics hub, preregistrations, rules library, audit offer, glossary | Not started |
 
-**Retrofit progress (Pattern ID and detection signals):** done on 13 of the 30 written flagship patterns: generic-error-messages, silent-failure-and-timeout, cold-transfer, escalates-too-early-or-too-late, talk-to-a-human-ignored-or-looped, dead-end-i-don-t-understand-replies, answer-and-go-conversation, hollow-empathy, undisclosed-bot-identity, missed-crisis-signals, refusal-with-no-reason-or-next-step, and the new scam-victim-not-interrupted and romantic-or-parasocial-dependence. The other 17 are pending. Retrofit order: patterns whose pages get impressions first (no Search Console data yet, so by search interest).
+**Retrofit progress (Pattern ID and detection signals):** done on 19 of the 44 written HMI patterns (the 13 earlier ones plus re-asks-for-known-information, generic-first-response, answer-buried, guessing-instead-of-asking, over-refusal-of-ordinary-requests, confident-wrong-answer-with-no-way-to-check). 25 pending. Retrofit order: patterns whose pages get impressions first (no Search Console data yet, so by search interest).
 
 ### How the assets connect to the existing patterns
 The 27 written patterns are the backbone. Each pattern's file name is its **Pattern ID** and never changes, so every public URL stays as it is. Everything else keys off that ID:

@@ -862,6 +862,15 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 - **Tool fix:** `tools/check_links.py` now normalizes Windows path separators; on Windows it wrongly flagged 8 links in `incidents/` drafts that the checker is meant to skip. No content changed.
 - **Part C asset 2 (schema and taxonomy):** not started this run.
 - **Flagship patterns written so far: 30 of 30.** Retrofits done: 13 of 30.
+- **Deploy (run 20):** content repo merged to `main` as `286758e` (PR 15). **Part D stopped, site repo not touched:** the site checkout's `main` has a local commit not on `origin/main` that this run did not create (`f8455aac7`, "Trigger deploy under repo owner"), and `git fetch origin` there failed (credential prompt: no terminal). Per the local run notes it was not pushed. Waiting on the owner: push or discard that commit and fix the site repo's git credentials, then the next run publishes this run's pages as well. Not verified live.
+
+### Run 21 (scheduled): 2026-10-19 18:45 UTC onward
+- **Coordinator run:** seven subagents in parallel (6 retrofits, 1 spec); each result reviewed, checks run, committed separately. Step 0: `consumerfinance.gov` returned 200. All 30 flagships already Done, so Part A skipped.
+- **Part A2 retrofit: 6 patterns** (Pattern ID, detection signals with counter-signals, starter rule; voice marked PLANNED where the page covers it): re-asks-for-known-information, generic-first-response, answer-buried, guessing-instead-of-asking, over-refusal-of-ordinary-requests, confident-wrong-answer-with-no-way-to-check. Signals derived from each page's own metrics and fix. Review notes: weakest signals are the post-hoc "user says answer was wrong" and "user says you already have it" ones, kept with counter-signals. 19 of 44 patterns now have signals.
+- **Part B:** an entry for 2026-10-19 already exists in `seo/log.md`; skipped.
+- **Part C asset 2: Done (draft).** `specs/conversation-event-schema-v0.1.md` and `specs/failure-taxonomy-v1.md` (44 entries, 22 families; 9 carry the Read-this-first flag). Built from the pages; no outside data, no framework mapping (Needs review). Voice and web fields listed as PLANNED. License left for the owner. Searches: none needed (no new external claims).
+- **Claims left unverified:** none new.
+- **Deploy (run 21):** see Deploy line below.
 
 ## Backlog (not scheduled)
 Ideas from earlier lists that were never chosen. They stay out of the queue until someone adds them.
