@@ -361,7 +361,7 @@
 | XA-03 | No way to report bad behaviour | [agent-types.md](agent-types.md) | New | Business context | No |
 | DM-01 | Reference resolution failures | [conversation-design.md](conversation-design.md) | New | Model | Partly |
 | DM-02 | Tangents never closed | [conversation-design.md](conversation-design.md) | Extends | Reliability | Partly |
-| DM-03 | Corrections not applied | [conversation-design.md](conversation-design.md) | New | Reliability | Partly |
+| DM-03 | Corrections not applied | [conversation-design.md](conversation-design.md) | Written | Reliability | Partly |
 | DM-04 | Multi-intent messages answered in part | [conversation-design.md](conversation-design.md) | Extends | Model | Partly |
 | DM-05 | Negation and exceptions ignored | [conversation-design.md](conversation-design.md) | New | Model | Partly |
 | DM-06 | Questions asked one at a time when the user already gave everything | [conversation-design.md](conversation-design.md) | Extends | Business context | Partly |
