@@ -258,7 +258,7 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 16 | EM-11 | No warning of context loss | Extends | - | `goals/effort-and-memory/failures/no-warning-of-context-loss.md` | Done | 15 |
 | 17 | EM-01 | Lazy completion | New | V | `goals/effort-and-memory/failures/lazy-completion.md` | Done | 15 |
 | 18 | DM-03 | Corrections not applied | New | - | `goals/dialogue-management/failures/corrections-not-applied.md` | Done | 15 |
-| 19 | DM-09 | Guessing instead of asking | Extends | - | `goals/dialogue-management/failures/guessing-instead-of-asking.md` | Queued |  |
+| 19 | DM-09 | Guessing instead of asking | Extends | - | `goals/dialogue-management/failures/guessing-instead-of-asking.md` | Done | 16 |
 | 20 | RF-01 | Over-refusal of ordinary requests | Extends | V | `goals/refusals-and-boundaries/failures/over-refusal-of-ordinary-requests.md` | Queued |  |
 | 21 | RF-02 | Refusal with no reason or next step | Extends | - | `goals/refusals-and-boundaries/failures/refusal-with-no-reason-or-next-step.md` | Queued |  |
 | 22 | TE-01 | Generic error messages | New | - | `goals/errors-and-recovery/failures/generic-error-messages.md` | Queued |  |

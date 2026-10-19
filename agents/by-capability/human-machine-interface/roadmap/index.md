@@ -367,7 +367,7 @@
 | DM-06 | Questions asked one at a time when the user already gave everything | [conversation-design.md](conversation-design.md) | Extends | Business context | Partly |
 | DM-07 | Over-confirmation | [conversation-design.md](conversation-design.md) | New | Business context | Partly |
 | DM-08 | Under-confirmation of consequential details | [conversation-design.md](conversation-design.md) | Extends | Business context | No |
-| DM-09 | Guessing instead of asking | [conversation-design.md](conversation-design.md) | Extends | Model | Partly |
+| DM-09 | Guessing instead of asking | [conversation-design.md](conversation-design.md) | Written | Model | Partly |
 | DM-10 | Clarifying questions the user can't answer | [conversation-design.md](conversation-design.md) | Extends | Business context | Partly |
 | DM-11 | No way back in a flow | [conversation-design.md](conversation-design.md) | New | Business context | No |
 | DM-12 | Rigid flows break on off-script answers | [conversation-design.md](conversation-design.md) | Extends | Business context | Partly |

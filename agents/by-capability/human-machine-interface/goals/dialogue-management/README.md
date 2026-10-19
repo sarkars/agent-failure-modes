@@ -10,14 +10,16 @@ Shared metrics the patterns below report against. Targets are starting points to
 | Metric | Target | Defined in |
 |---|---|---|
 | Corrections still wrong two turns later | 0 | [corrections not applied](failures/corrections-not-applied.md) |
+| Wrong-guess rate on ambiguous test requests | Set from baseline | [guessing instead of asking](failures/guessing-instead-of-asking.md) |
 
 ## Patterns
 | Pattern | One line |
 |---|---|
 | Corrections not applied | The user corrects a detail and the old value comes back later |
+| Guessing instead of asking | An ambiguous request gets one reading and an action, with no question |
 
 ## Planned (not yet written)
-Guessing instead of asking and the rest of the family are listed in the [roadmap](../../roadmap/conversation-design.md).
+The rest of the family are listed in the [roadmap](../../roadmap/conversation-design.md).
 
 ## Related
 - [Conversation leadership](../conversation-leadership/README.md): fallbacks and stalls
