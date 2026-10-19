@@ -14,7 +14,7 @@ The first version of this roadmap did not check the library, and several rows tu
 | **New** | No matching pattern found by file-name and keyword search | Search again before writing. This is a name-and-keyword check, not a full read of every file |
 
 <!-- BEGIN:result -->
-**Result: 493 rows, of which 24 are Written, 217 are New, 191 Extend an existing pattern, and 61 are already Covered.**
+**Result: 493 rows, of which 27 are Written, 216 are New, 189 Extend an existing pattern, and 61 are already Covered.**
 <!-- END:result -->
 
 <!-- BEGIN:root-cause -->
@@ -54,11 +54,11 @@ If every "Partly" were solved, models would fix up to 40%. If none were, 1%. A o
 |---|---|---|---|---|---|---|
 | [chat-and-core.md](chat-and-core.md) | Remaining chat and core families, plus channel selection | 21 | 0 | 15 | 5 | 1 |
 | [embedded-copilots.md](embedded-copilots.md) | Embedded copilots: upselling, context, first response, obvious questions | 23 | 8 | 5 | 9 | 1 |
-| [response-time.md](response-time.md) | Speed, waiting, and pacing, all channels | 14 | 0 | 5 | 8 | 1 |
+| [response-time.md](response-time.md) | Speed, waiting, and pacing, all channels | 14 | 1 | 5 | 7 | 1 |
 | [response-structure-and-length.md](response-structure-and-length.md) | Reply structure, length, chunking, and closers such as 'ok' and 'bye' | 18 | 2 | 8 | 8 | 0 |
 | [language-and-locale.md](language-and-locale.md) | Language, reading level, and locale | 16 | 0 | 8 | 7 | 1 |
 | [conversation-frameworks.md](conversation-frameworks.md) | Sales, support, style matching, and other frameworks | 32 | 0 | 19 | 12 | 1 |
-| [voice.md](voice.md) | Voice agents: timing, speaking, safety, and bridging channels | 24 | 0 | 7 | 8 | 9 |
+| [voice.md](voice.md) | Voice agents: timing, speaking, safety, and bridging channels | 24 | 1 | 7 | 7 | 9 |
 | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Voice listening and transcription | 22 | 0 | 4 | 11 | 7 |
 | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Privacy, governance, ethics, access control, and external services | 42 | 0 | 6 | 13 | 23 |
 | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Effort, completeness, and memory | 25 | 3 | 3 | 9 | 10 |
@@ -68,8 +68,8 @@ If every "Partly" were solved, models would fix up to 40%. If none were, 1%. A o
 | [conversation-design.md](conversation-design.md) | Dialogue mechanics, refusals and boundaries, and error recovery | 33 | 6 | 12 | 15 | 0 |
 | [interface-and-persona.md](interface-and-persona.md) | Persona and tone, onboarding, chat interface, accessibility, and multimodal input | 41 | 0 | 30 | 11 | 0 |
 | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Human handoff, measurement, model changes, proactive agents, and group chats | 28 | 3 | 16 | 9 | 0 |
-| [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Drive-thru, in-car, government, travel, banking, insurance, health scheduling, real estate, and outbound rules | 36 | 1 | 29 | 6 | 0 |
-| | **Total** | **493** | **24** | **217** | **191** | **61** |
+| [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Drive-thru, in-car, government, travel, banking, insurance, health scheduling, real estate, and outbound rules | 36 | 2 | 28 | 6 | 0 |
+| | **Total** | **493** | **27** | **216** | **189** | **61** |
 <!-- END:catalog-table -->
 
 ## Suggested priority

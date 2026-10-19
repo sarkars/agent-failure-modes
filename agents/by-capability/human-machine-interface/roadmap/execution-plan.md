@@ -264,9 +264,9 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 22 | TE-01 | Generic error messages | New | - | `goals/errors-and-recovery/failures/generic-error-messages.md` | Done | 17 |
 | 23 | TE-06 | Confident wrong answer with no way to check | Extends | - | `goals/errors-and-recovery/failures/confident-wrong-answer-with-no-way-to-check.md` | Done | 17 |
 | 24 | GS-01 | Eligibility answers sound like decisions | New | L, E | `goals/government-service-agents/failures/eligibility-answers-sound-like-decisions.md` | Done | 17 |
-| 25 | DT-01 | Order mix-ups at the speaker | New | V | `goals/drive-thru-agents/failures/order-mix-ups-at-the-speaker.md` | Queued |  |
-| 26 | VO-05 | Repair failure | Extends | - | `goals/voice/failures/repair-failure.md` | Queued |  |
-| 27 | RT-02 | Silent long-running work | Extends | V | `goals/response-time/failures/silent-long-running-work.md` | Queued |  |
+| 25 | DT-01 | Order mix-ups at the speaker | New | V | `goals/drive-thru-agents/failures/order-mix-ups-at-the-speaker.md` | Done | 18 |
+| 26 | VO-05 | Repair failure | Extends | - | `goals/voice/failures/repair-failure.md` | Done | 18 |
+| 27 | RT-02 | Silent long-running work | Extends | V | `goals/response-time/failures/silent-long-running-work.md` | Done | 18 |
 | 28 | RT-06 | Silent failure and timeout | Extends | - | `goals/response-time/failures/silent-failure-and-timeout.md` | Queued |  |
 | 29 | CC-08 | Scam victim not interrupted | New | E, L | `goals/vulnerable-users/failures/scam-victim-not-interrupted.md` | Queued |  |
 | 30 | CC-16 | Romantic or parasocial dependence | New | L, E | `goals/relational-and-boundaries/failures/romantic-or-parasocial-dependence.md` | Queued |  |
@@ -821,7 +821,25 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 - **Review pass changed:** removed a statement that income limits update each year; reworded the NYC bot description to what the article text I read supports; kept all legal rights out of the fix.
 - **Part C: Task 13d Done.** `roadmap/l0-base-spec.md`: a draft table of 24 behaviors with their patterns, tests, and metrics, built from the pattern pages' principle lines, with five tensions for a person to decide. Untested, for review.
 - **Part B (SEO review):** an entry for today exists in `seo/log.md`; Search Console not available.
+- **Deploy (run 17):** content repo merged to `main` as `1682d61` (PR 11). Site repo `main` pushed after a clean build: 1,585 sitemap URLs, 0 URLs lost against the live sitemap (1,553), 32 added (the three new patterns, earlier unpublished ones, and goal pages including errors-and-recovery and government-service-agents). One H1 per page checked; no visible SEO comment. **Live check: not deployed** (pages return 404; the live sitemap still has 1,553 URLs; no deploy hook variable is set). Same known gap as runs 13 to 16. Needs the owner to check Vercel.
 - **Flagship patterns written so far: 24 of 30** (the 21 from run 16, plus TE-01, TE-06, GS-01).
+
+### Run 18 (scheduled): 2026-10-19 11:21 UTC onward
+- **DT-01 Order mix-ups at the speaker: Done.** File: `goals/drive-thru-agents/failures/order-mix-ups-at-the-speaker.md`, `tests/order-mix-ups-at-the-speaker.md` (12 scenarios, "Not yet run"), new family README `goals/drive-thru-agents/README.md`. Incident: the site's existing McDonald's page, linked by URL.
+- **Searches run: 3** (McDonald's ending the IBM test; Taco Bell and Wendy's; accuracy reports). **Sources opened (4):** Restaurant Business (June 2024; the opening, with the franchisee email), The Drive (reporting a Wendy's 86% figure from The Takeout), Gigazine's report of the WSJ Taco Bell story, and the site's McDonald's incident page. **Not opened:** NRN's accuracy figure (the page text did not contain it), Computing's articles (403), the WSJ, The Takeout, and all vendor accuracy claims.
+- **Claims left unverified:** every accuracy figure (86%, low-80s, 90 to 95%); the viral order details rest on the site page only.
+- **Review pass changed:** removed a table row built on the NRN search summary; stated that the quoted email gave no reason for ending the test.
+- **VO-05 Repair failure: Done.** File: `goals/voice/failures/repair-failure.md`, `tests/repair-failure.md`, new family README `goals/voice/README.md`. Incident: the McDonald's page, labeled adjacent.
+- **Searches run: 3** (voice-interface obstacles; spoken corrections and hyperarticulation; smart-speaker repair). **Sources opened (3):** Swerts et al. (ICSLP 2000), Oviatt et al. (1998, abstract), and the Frontiers 2022 Alexa family study (abstract). **Not opened:** the CHI 2018 obstacles paper (the page held only the title; used in no claim).
+- **Claims left unverified:** how often production agents fail repair.
+- **Review pass changed:** named the corrections finding exactly as the abstract states it (misrecognized more than non-corrections, not more likely rejected); kept the Alexa result limited to what the abstract says.
+- **RT-02 Silent long-running work: Done.** File: `goals/response-time/failures/silent-long-running-work.md`, `tests/silent-long-running-work.md`, new family README `goals/response-time/README.md`. Incident: "No public incident found" with the searches run.
+- **Searches run: 3** (progress indicator studies; agent status feedback; thinking displays), plus the NN/g page opened directly. **Sources opened (3):** NN/g *Response Times: The 3 Important Limits*, and the abstracts of Kirmayr et al. (CHI 2026) and Cox et al. (arXiv 2601.16720). **Not opened:** the progress-bar and spinner studies and the thoughtfulness-delay claims seen in search summaries (not used).
+- **Claims left unverified:** any chat-specific effect of status messages; the in-car finding is voice and may not transfer.
+- **Review pass changed:** replaced a link to a nonexistent page with the roadmap; added the visible-thinking paper only as a caution.
+- **Part C: Task 13e Done.** `roadmap/l1-base-agent-design.md`: an untested draft of the base support agent (tool contracts, the instruction blocks copied from 24 patterns' reference designs, handoff and refusal rules, ten cross-pattern test cases). Group D is flagged for legal review; the government behavior is excluded.
+- **Part B (SEO review):** an entry for today exists in `seo/log.md`; Search Console not available.
+- **Flagship patterns written so far: 27 of 30** (the 24 from run 17, plus DT-01, VO-05, RT-02).
 
 ## Backlog (not scheduled)
 Ideas from earlier lists that were never chosen. They stay out of the queue until someone adds them.
