@@ -927,6 +927,7 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 - **Part B:** Skipped. The 2026-10-20 entry already exists.
 - **Not started:** E5 guardrail-tool comparison (can reuse the three vendor pages opened for E3); E6 design note (needs at least 19 patterns with a Guide spec, which is met; deferred to the next run). Queue rows 68 and later stay Queued.
 - **Taxonomy:** 61 entries; signals 61 of 61; Moves 59 of 61.
+- **Deploy:** content PR #20 merged (merge commit d155436); the site repo had no foreign commits. Scratch build clean, 1622 pages; the live sitemap had 1592 URLs, none missing from the build (removed: 0; 29 added). The new page has exactly one `<h1>`; the `search phrases:` text matches existing pages (importer behavior). Pushed to site repo main as 78478ce42 (20 files, none deleted), not verified live (no Vercel access, no deploy hook). The Chevrolet teardown and the explainer are not published by this runbook.
 - **Waiting for the owner:** CP-21 redo or drop, the role-boundary pattern gap, Search Console access for the site, Vercel build-on-push confirmation.
 
 ## Backlog (not scheduled)
