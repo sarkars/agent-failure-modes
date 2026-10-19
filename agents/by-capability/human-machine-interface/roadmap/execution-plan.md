@@ -748,6 +748,9 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 - **Claims left unverified:** nothing is stated about what the law requires; the FTC material is about a different kind of steering and is cited only for its disclosure principle. No measurement of how common the failure is.
 - **Review pass changed:** reworded the comment-period statement to what the source says; replaced a link to an unwritten pattern with a roadmap reference.
 - **Flagship patterns written so far: 12 of 30** (HU-01 to HU-03, CP-14, CP-15, CP-20, CP-08, CP-12, XA-01, CP-01, CP-06, CP-03).
+- **Deploy (run 13):** content repo merged to `main` as `b12d203` (PR 7). Site repo `main` at `4084a40`, pushed after a clean build: 1,567 sitemap URLs, 0 URLs lost against the live sitemap, 3 added (the three patterns above), and 1 refreshed goal page. **Live check: not deployed.** `/talk-to-a-human-ignored-or-looped/` still returns 404 about 3 hours after the first publish (site commit `99d2fa6`) and 5 minutes after this one; the live sitemap still has 1,553 URLs. No deploy hook variable is set. Not pushed again beyond this commit, per deploy.md. Needs the owner to check Vercel (see the Known gap in deploy.md).
+- **Part B (SEO review):** an entry for today exists in `seo/log.md`; Search Console not available.
+- **Part C (content-program task):** not done in this run. Task 13 (redo the gap analysis) remains Queued; it has now been skipped in runs 10 to 13 because the pattern work used the time.
 
 ## Backlog (not scheduled)
 Ideas from earlier lists that were never chosen. They stay out of the queue until someone adds them.
