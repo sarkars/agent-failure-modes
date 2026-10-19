@@ -25,6 +25,7 @@ search phrases:
 | **Stakes** | Usually low. It rises when the buried part is a deadline, a fee, a safety step, or a "no". |
 | **Who is affected** | Everyone, most of all people reading on a phone or in a hurry |
 | **Frequency** | Very common as a style default. I found no study that counts it; the sources below show that models over-generate and that people scan. |
+| **Pattern ID** | answer-buried |
 | **Family** | [Response structure and closers](../README.md) |
 | **Goal** | Replies are shaped so people can read, act on, and answer them, and short messages like "ok" and "bye" get the response the moment calls for. |
 | **Primary metric** | Answer-first rate: the first sentence holds the answer or the next step. Starting target: over 90% (tune). |
@@ -124,6 +125,18 @@ Targets are starting points to tune on your own data, unless a source is given.
 | Must-know items in the first two sentences | Over 95% where applicable | Labeled sample | Below 85% |
 | Follow-up "so is that a yes?" rate | Track; set from baseline | Next-turn classifier | Rising two weeks in a row |
 | Caveat retention (counter-metric) | No drop | Replies on high-stakes topics that keep required caveats | Any drop after a change |
+
+### Detection signals (proposed, not yet calibrated)
+Signals in a conversation event log that suggest this failure. Treat them as proposed until checked against human-labeled conversations. All five are written for text chat. None is planned for voice on this page; voice is a separate case (see the Channel row), and any voice signals are PLANNED, not detected.
+| Signal | Where it shows | Counter-signal (what it could be instead) |
+|---|---|---|
+| Reply opens with praise or a restatement of the question ("Great question", "You're asking about") | First sentence of the assistant turn matches the opener patterns | A short greeting on the first turn of a conversation |
+| First sentence holds neither the answer, the next step, nor the dependency | Labeled sample, or a judge check on the first sentence | A hard emotional message where a one-line acknowledgment comes first |
+| Deadline, fee, or safety step appears only after the first two sentences | Tagged intents with a must-know item found past sentence two | A required caveat that was placed after the answer on purpose, with the answer still in sentence one |
+| The answer appears only in a closing line ("So in short: yes...") | Answer found in the last sentence of a multi-sentence reply | A reply that gives a summary line at the end and also leads with the answer |
+| User asks "so is that a yes?" or repeats the question in the next turn | Same intent in the next user turn, or a next-turn classifier hit | A user who wants a different detail, not the answer already given |
+
+**Starter rule:** the first sentence of every reply holds the answer, the decision, or the next step, and any deadline, fee, or safety step sits in the first two sentences.
 
 ## 8. Related patterns
 - [Verbosity despite brevity instructions](../../../../speech-and-audio/goals/conversation-flow/failures/verbosity-despite-brevity-instructions.md): the voice and instruction-following side.
