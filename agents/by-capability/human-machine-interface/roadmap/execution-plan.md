@@ -1165,6 +1165,8 @@ AI-written help content in knowledge bases · agents using other agents' tools (
 - **Part A2 and Part E:** nothing left (E6 waits on the owner to create the code repo). **Part B:** Skipped, the 2026-10-20 entry exists. Queue rows 248-257 are done. Still queued: rows 258 and 259.
 - **Taxonomy and catalog:** 7 entries added to the failure taxonomy (now 161 entries); the Read-this-first count in its header is now 45, matching the table; catalog, family README and distribution plan updated.
 
+- **Deploy:** content PR #39 merged (merge commit f0fa941); the site repo had no foreign commits. Lean scratch copy again (disk nearly full; no `.git`, `dist`, `.astro`; linked `node_modules`). Scratch build clean, 1737 pages built; the live sitemap had 1668 URLs, none missing from the build (removed 0); 68 paths added (7 new patterns plus generated pages). Sample page has one `<h1>` and no visible "search phrases:" text. Pushed to site repo `main` as 6e750ead9 (10 files: 7 new patterns, the taxonomy page, the conversation-frameworks goal page and the HMI category page; the commit message says 6 new patterns, the correct number is 7). No Vercel hook is set. A live check 20 seconds after the push returned 404 for /over-mirroring/, so **pushed, not verified live** (known gap in deploy.md). The three Extends edits are in non-HMI categories and are not published by this runbook.
+
 ## Schedule
 | Item | Value |
 |---|---|
