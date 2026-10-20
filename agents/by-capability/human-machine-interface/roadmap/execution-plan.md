@@ -953,7 +953,7 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 - **Part B:** Skipped. The 2026-10-20 entry already exists.
 - **Taxonomy:** 70 entries; signals 70 of 70; Moves 70 of 70; 15 entries carry the "Read this first" flag (the sentence said twelve before; I counted the table rows and corrected it).
 - **Unverified claims:** anything a subagent read only in search summaries is kept out of public text; mappings to outside frameworks remain Needs review. The five check scripts ran clean after the fix above (links 0 problems, site compat 0, public URLs 0, solutions 0).
-- **Deploy:** DEPLOY_PLACEHOLDER
+- **Deploy:** content PR #22 merged (merge commit b063bc3); the site repo had no foreign commits. Scratch build clean, 1632 pages built; the live sitemap had 1592 URLs, none missing from the build (removed: 0). Sample new pages have exactly one `<h1>` and no visible `search phrases:` text. The importer re-stamped dates on existing pages; I kept the live dates, so only real changes were copied. Pushed to site repo main as 311c617b8 (8 files, none deleted: 4 new patterns, the taxonomy page, 2 goal pages, 1 category page), not verified live (no Vercel token and no deploy hook set; the new page returned 404 right after the push).
 - **Waiting for the owner:** the code repo for E6, CP-21 redo or drop, the role-boundary pattern gap, Search Console access for the site, Vercel build-on-push confirmation.
 
 ## Backlog (not scheduled)
