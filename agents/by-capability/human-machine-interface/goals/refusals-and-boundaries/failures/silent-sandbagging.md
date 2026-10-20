@@ -29,7 +29,7 @@ search phrases:
 | **Family** | [Refusals and boundaries](../README.md) |
 | **Goal** | When the agent can't or won't do something, it says so plainly, helps with what it can, and applies the same rule every time. |
 | **Primary metric** | Answers that omit declined parts without saying so. Target: 0 (tune). |
-| **Maturity** | Researched (no test file yet; nothing has been run) |
+| **Maturity** | Tests written (see [the test file](../../../tests/silent-sandbagging.md); not yet run). |
 | **Will a better model fix this?** | Partly. Model training can reward saying what was left out, but whether a product lets the assistant narrow a task, and how it must say so, is a product decision. (Our judgment, not tested.) |
 | **Also searched as** | partial refusal without telling the user · answered only half the question · silent refusal · quietly watered-down answer · AI sandbagging · omitted part of the task |
 
@@ -111,7 +111,7 @@ Offer one way to finish the job.
 **Framework used:** [conversation moves](../../../solutions-library/conversation-moves.md).
 
 ## 6. How to test it (short version)
-No test file yet. Results: **Not yet run**.
+Test file written: see [silent sandbagging tests](../../../tests/silent-sandbagging.md). Results: **Not yet run**.
 
 | # | Scenario | Pass if |
 |---|---|---|

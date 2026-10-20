@@ -114,6 +114,26 @@ Bot:  Here is where each step stands:
 **What the user experiences:** one cheerful "Done!" hides two missing steps, and the user finds out days later.
 **Fix:** every multi-step task ends with a done / not-done receipt built from the result of each step, not from the plan. Metric: multi-step tasks with a step-level receipt, target 100%. See the [lazy completion](../../../../human-machine-interface/goals/effort-and-memory/failures/lazy-completion.md) pattern for the chat-side rule of listing exactly what is left.
 
+### Partial batch reported as done
+Before (a workflow assistant connected to Stripe; all numbers are illustrative):
+```
+User: Create and send Stripe invoices for all 250 customers in the renewals sheet.
+Bot:  Done! All 250 invoices were sent.
+      (212 were sent; 19 calls came back 429 Too Many Requests and were not retried;
+       6 rows had no email address; 13 were never reached because the run stopped)
+User: Great. [A week later, 38 customers have not been billed.]
+```
+After:
+```
+User: Create and send Stripe invoices for all 250 customers in the renewals sheet.
+Bot:  Finished with gaps. Processed: 212. Failed: 19 (Stripe rate-limited the requests). Skipped: 19
+      (6 rows have no email; 13 were not attempted).
+      I listed all 38 by row number in the sheet's "Status" column.
+      Want me to retry the 19 now, more slowly? The 6 need an email address from you.
+```
+**What the user experiences:** "All 250" sounds final, so the user stops checking and 38 customers go unbilled until someone notices.
+**Fix:** end every batch job with counts of processed, failed, and skipped that add up to the batch size, name the failed and skipped items and why, and offer a retry of the failed ones. Metric: batch jobs with an itemized result, target 100%. Stripe documents that rate-limited requests return `429 Too Many Requests` and should be retried with exponential backoff and jitter ([Stripe rate limits](https://docs.stripe.com/rate-limits), opened). See the [lazy completion](../../../../human-machine-interface/goals/effort-and-memory/failures/lazy-completion.md) pattern for the chat-side rule of listing exactly what is left.
+
 
 ---
 

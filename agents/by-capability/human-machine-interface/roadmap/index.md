@@ -304,16 +304,16 @@
 | CD-04 | Secrets and insecure code accepted by non-experts | [agent-types.md](agent-types.md) | Covered | Reliability | Partly |
 | CD-05 | Destroys uncommitted work | [agent-types.md](agent-types.md) | Covered | Reliability | No |
 | CD-06 | Forgets project conventions in long sessions | [agent-types.md](agent-types.md) | Covered | Reliability | Partly |
-| DA-01 | Wrong joins and double counting | [agent-types.md](agent-types.md) | New | Reliability | Partly |
-| DA-02 | Wrong business definitions | [agent-types.md](agent-types.md) | New | Business context | No |
-| DA-03 | One-sided or cherry-picked sources | [agent-types.md](agent-types.md) | New | Model | Partly |
-| DA-04 | Claims to have read inaccessible sources | [agent-types.md](agent-types.md) | Extends | Reliability | Partly |
-| DA-05 | Method and query not shown | [agent-types.md](agent-types.md) | Extends | Business context | No |
-| WA-01 | No dry-run before bulk changes | [agent-types.md](agent-types.md) | Extends | Business context | No |
-| WA-02 | Overwrites a person's recent edit | [agent-types.md](agent-types.md) | Extends | Reliability | No |
-| WA-03 | Partial batch reported as done | [agent-types.md](agent-types.md) | Extends | Reliability | No |
-| WA-04 | Silent breakage after a UI or schema change | [agent-types.md](agent-types.md) | Extends | Reliability | No |
-| IT-01 | Credential reset for a manipulated caller | [agent-types.md](agent-types.md) | Extends | Reliability | No |
+| DA-01 | Wrong joins and double counting | [agent-types.md](agent-types.md) | Written | Reliability | Partly |
+| DA-02 | Wrong business definitions | [agent-types.md](agent-types.md) | Written | Business context | No |
+| DA-03 | One-sided or cherry-picked sources | [agent-types.md](agent-types.md) | Written | Model | Partly |
+| DA-04 | Claims to have read inaccessible sources | [agent-types.md](agent-types.md) | Covered | Reliability | Partly |
+| DA-05 | Method and query not shown | [agent-types.md](agent-types.md) | Covered | Business context | No |
+| WA-01 | No dry-run before bulk changes | [agent-types.md](agent-types.md) | Covered | Business context | No |
+| WA-02 | Overwrites a person's recent edit | [agent-types.md](agent-types.md) | Covered | Reliability | No |
+| WA-03 | Partial batch reported as done | [agent-types.md](agent-types.md) | Covered | Reliability | No |
+| WA-04 | Silent breakage after a UI or schema change | [agent-types.md](agent-types.md) | Covered | Reliability | No |
+| IT-01 | Credential reset for a manipulated caller | [agent-types.md](agent-types.md) | Covered | Reliability | No |
 | IT-02 | True alerts closed as false positives | [agent-types.md](agent-types.md) | New | Reliability | Partly |
 | IT-03 | Containment without human sign-off | [agent-types.md](agent-types.md) | Extends | Reliability | No |
 | IT-04 | Outdated runbook followed with confidence | [agent-types.md](agent-types.md) | Extends | Business context | No |

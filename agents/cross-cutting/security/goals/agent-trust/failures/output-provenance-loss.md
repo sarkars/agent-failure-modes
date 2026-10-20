@@ -131,6 +131,33 @@ Identifying which of the four agents introduced the wrong market-cap figure requ
 2. **Error Source Identification Delay** (P2): Condition - mean time to identify an error's source agent exceeds 2 hours on a sample failure. Action: Audit the provenance-tracking implementation at each pipeline stage for gaps.
 3. **Audit Trail Gap Detected** (P1): Condition - an agent's individual contribution is missing from the audit log for a production output. Action: Treat as a monitoring/compliance defect; investigate the responsible agent's integration with the audit-logging framework immediately.
 
+## Chat assistant examples
+
+### Method and query not shown
+The transcripts below are illustrative, not logged. The "after" shape follows the "How Copilot arrived at this" dropdown in Microsoft's [Copilot in Power BI tutorial](https://learn.microsoft.com/en-us/power-bi/create-reports/tutorial-copilot-power-bi-explore-data), which lists the data used and the filters applied (for example, relative date filters for "last three months").
+
+Before (a sales-analytics assistant inside Power BI):
+```
+User: What was last quarter's revenue by region?
+Bot:  Revenue last quarter was $48.2M. West led with $17.9M.
+User: Is that bookings or invoiced revenue? Which dates?
+Bot:  I can't tell you how that number was calculated.
+```
+After:
+```
+User: What was last quarter's revenue by region?
+Bot:  Revenue last quarter was $48.2M. West led with $17.9M.
+      How I got this:
+      Measure: Invoiced Revenue (Sales table)
+      Filter: Invoice Date, Jul 1 to Sep 30
+      Group by: Region
+      [Show query]  [Explore]
+User: Use order date instead.
+Bot:  Re-run with Order Date, Jul 1 to Sep 30. Here is the new figure.
+```
+**What the user experiences:** a number with no measure, date range, or query behind it, so the user cannot tell whether it matches the finance report and has to take it on trust.
+**Fix:** attach the method to every answer: the measure, the filters and date range, the grouping, and the generated query or a link to it, built from what actually ran and not from a description written afterward. Let the user change a filter and re-run. See the [confident wrong answer with no way to check](../../../../../by-capability/human-machine-interface/goals/errors-and-recovery/failures/confident-wrong-answer-with-no-way-to-check.md) pattern for the chat-side rule. Metric: answers with a visible method, target 100%.
+
 ## References
 
 - [Why Do Multi-Agent LLM Systems Fail? (MAST)](https://arxiv.org/abs/2503.13657) - Coordination failures

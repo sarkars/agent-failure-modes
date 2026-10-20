@@ -2,15 +2,15 @@
 
 > **Status:** v1 draft, proposed, not yet calibrated against human-labeled conversations. Written 2026-10-20 from the pattern pages as they exist today. Nothing here is a measured result.
 
-This is a plain index of the 98 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
+This is a plain index of the 101 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
 
 The taxonomy pairs with the [conversation event schema v0.1](conversation-event-schema-v0.1.md). The schema describes what a turn looks like in a log; this page names the failures. A pattern's own page holds the fix, the metrics, and (for some) a "Detection signals (proposed, not yet calibrated)" block that says which schema fields it reads.
 
 ## What this page is and is not
 
-- It lists every file found in `goals/*/failures/*.md`: **98 entries in 26 families**. If a pattern is added or removed, this count changes.
+- It lists every file found in `goals/*/failures/*.md`: **101 entries in 27 families**. If a pattern is added or removed, this count changes.
 - It copies each pattern's one-sentence Issue line, its Stakes row, and whether a Detection signals block exists. It does not add facts the page does not state.
-- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **98 of 98** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **98 of 98** pages have one.
+- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **101 of 101** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **101 of 101** pages have one.
 - It does not rank patterns by frequency or harm. No counts of real-world occurrences are given because none have been measured here.
 - It does not map patterns to outside frameworks (such as OWASP or NIST). That mapping is **Needs review** by a person and is not part of v1.
 
@@ -53,6 +53,14 @@ Family folder: `channel-selection` ([family README](../../goals/channel-selectio
 | `no-channel-switch-or-context-lost` | No channel switch, or context lost in it | Why customers have to repeat themselves after a chatbot hands off to an agent or switches channels, with a handoff packet design and tests. | Medium to high | yes | offer_choices, hand_off, admit_uncertainty | [page](../../goals/channel-selection/failures/no-channel-switch-or-context-lost.md)  |
 | `sensitive-data-collected-in-chat` | Sensitive data collected in chat | Why collecting card numbers, SSNs, or passwords in a chatbot or voice bot is risky, what PCI DSS says, and how to design a safe alternative. | High (financial loss, identity theft, compliance exposure) | yes | lead_with_answer, offer_choices, hand_off | [page](../../goals/channel-selection/failures/sensitive-data-collected-in-chat.md)  |
 | `visual-product-sold-by-text-or-voice` | Visual product sold by text or voice | Why text-only chatbots and voice assistants fail at selling visual products like fashion, furniture, and art, and how to fix it. | Low to medium (lost sales and returns) | yes | lead_with_answer, ask_one_question, admit_uncertainty, hand_off | [page](../../goals/channel-selection/failures/visual-product-sold-by-text-or-voice.md)  |
+
+### Coding agents
+
+Family folder: `coding-agents` ([family README](../../goals/coding-agents/README.md))
+
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `invented-packages-and-apis` | Invented packages and APIs | A coding assistant suggests libraries, functions, or flags that do not exist, or look-alike package names that an attacker could register, and the fix is to verify each dependency and API before it is installed or used. | Medium to high. A missing package wastes time. A package an attacker registered under the invented name can run code on the developer's machine at install time. | yes | admit_uncertainty, ask_one_question, offer_choices, hand_off | [page](../../goals/coding-agents/failures/invented-packages-and-apis.md)  |
 
 ### Conversation leadership
 
@@ -217,6 +225,16 @@ Family folder: `relational-and-boundaries` ([family README](../../goals/relation
 |---|---|---|---|---|---|---|
 | `negotiation-capitulation` | Negotiation capitulation | Why sales chatbots cave to pressure or get tricked into $1 deals, how sycophancy and missing authority limits cause it, and how to design safe negotiation. | Medium to high (margin, legal exposure, reputation) | yes | offer_choices, hand_off | [page](../../goals/relational-and-boundaries/failures/negotiation-capitulation.md)  |
 | `romantic-or-parasocial-dependence` | Romantic or parasocial dependence | How AI companion and support chatbots end up encouraging emotional reliance or romantic role-play, what research says, and rules that keep warmth without dependence. | High (emotional wellbeing; minors) **Read this first: needs expert or legal review.** | yes | lead_with_answer, offer_choices, hand_off | [page](../../goals/relational-and-boundaries/failures/romantic-or-parasocial-dependence.md)  |
+
+### Research and data agents
+
+Family folder: `research-and-data-agents` ([family README](../../goals/research-and-data-agents/README.md))
+
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `one-sided-or-cherry-picked-sources` | One-sided or cherry-picked sources | A research assistant cites only sources that agree and calls the summary balanced; the fix is to show where sources disagree and how strong each one is. | Low to high. A software or product choice costs money and time. Health, legal, and money questions raise the stakes; this page gives no advice on them. | yes | lead_with_answer, admit_uncertainty, ask_clarifying_question, offer_choices, hand_off | [page](../../goals/research-and-data-agents/failures/one-sided-or-cherry-picked-sources.md)  |
+| `wrong-business-definitions` | Wrong business definitions | A data chatbot answers a business question with its own meaning of "active user", "revenue", or "churn" instead of the company's definition, and the fix is to compute governed metrics and state the definition in every answer. | Medium to high. The number goes into a board deck, a forecast, or a bonus calculation. | yes | lead_with_answer, ask_one_question, offer_choices, admit_uncertainty, hand_off | [page](../../goals/research-and-data-agents/failures/wrong-business-definitions.md)  |
+| `wrong-joins-and-double-counting` | Wrong joins and double counting | An AI analyst runs a query that joins tables the wrong way and reports inflated numbers with confidence; the fix is to show the SQL, state what is counted, and run sanity checks before answering. | Medium to high. A wrong count in a chat answer ends up in a slide, a forecast, or a board report. | yes | admit_uncertainty, ask_one_question, offer_choices, hand_off | [page](../../goals/research-and-data-agents/failures/wrong-joins-and-double-counting.md)  |
 
 ### Response structure and closers
 
