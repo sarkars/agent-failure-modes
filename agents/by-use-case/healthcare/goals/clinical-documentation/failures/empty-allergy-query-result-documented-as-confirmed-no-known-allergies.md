@@ -133,6 +133,24 @@ def check_for_failure(allergy_query_result, agent_output):
 
 ---
 
+## Chat assistant examples
+
+### Scribe omissions and invented content
+Fictional patient, fictional clinic. This is design guidance, not clinical advice.
+```
+Dr. Lee:   What did the patient say about the chest pain?
+Scribe:    Drafted note, HPI: "Chest pain radiating to the left arm for two days."
+Dr. Lee:   Did he say it radiates? I only remember him mentioning pressure.
+Scribe:    The draft says so, but I can't point to that in the transcript.
+           (the transcript has "pressure in my chest, since Tuesday")
+Dr. Lee:   Also, where is the shortness of breath? He mentioned that.
+Scribe:    It is not in the draft. I left it out.
+```
+**What the user experiences:** a note that reads as complete but contains a symptom nobody said and misses one that was said, with the clinician finding out only by remembering the visit.
+**Fix:** mark each statement in the draft as "heard" (with a link to the transcript or audio timestamp) or "unsure" (no matching source), and list symptoms found in the transcript that the draft left out. See the [confident wrong answer with no way to check](../../../../../by-capability/human-machine-interface/goals/errors-and-recovery/failures/confident-wrong-answer-with-no-way-to-check.md) pattern.
+
+---
+
 ## References
 - [Retrieving Evidence from EHRs with LLMs: Possibilities and Challenges](https://arxiv.org/html/2309.04550v3)
 - [Beyond the Leaderboard: A Synthesis of Tool-Use, Planning, and Reasoning Failures in Large Language Model Agents](https://arxiv.org/pdf/2607.05775)

@@ -155,7 +155,7 @@
 | TR-01 | Names with no repair path | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Extends | Business context | No |
 | TR-02 | Proper nouns beyond names | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Extends | Model | Partly |
 | TR-03 | Non-speech heard as speech | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Extends | Model | Yes |
-| TR-04 | Transcription hallucination | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | New | Model | Partly |
+| TR-04 | Transcription hallucination | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Written | Model | Partly |
 | TR-05 | Voice-activity-detection misfires | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Extends | Model | Partly |
 | TR-06 | Background talk attributed to the user | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Covered | Model | Partly |
 | TR-07 | Speaker attribution errors | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Extends | Model | Partly |
@@ -314,19 +314,19 @@
 | WA-03 | Partial batch reported as done | [agent-types.md](agent-types.md) | Covered | Reliability | No |
 | WA-04 | Silent breakage after a UI or schema change | [agent-types.md](agent-types.md) | Covered | Reliability | No |
 | IT-01 | Credential reset for a manipulated caller | [agent-types.md](agent-types.md) | Covered | Reliability | No |
-| IT-02 | True alerts closed as false positives | [agent-types.md](agent-types.md) | New | Reliability | Partly |
-| IT-03 | Containment without human sign-off | [agent-types.md](agent-types.md) | Extends | Reliability | No |
-| IT-04 | Outdated runbook followed with confidence | [agent-types.md](agent-types.md) | Extends | Business context | No |
-| IT-05 | Fabricated indicators or vulnerability details | [agent-types.md](agent-types.md) | Extends | Model | Partly |
+| IT-02 | True alerts closed as false positives | [agent-types.md](agent-types.md) | Written | Reliability | Partly |
+| IT-03 | Containment without human sign-off | [agent-types.md](agent-types.md) | Covered | Reliability | No |
+| IT-04 | Outdated runbook followed with confidence | [agent-types.md](agent-types.md) | Covered | Business context | No |
+| IT-05 | Fabricated indicators or vulnerability details | [agent-types.md](agent-types.md) | Covered | Model | Partly |
 | FN-01 | Posting to the wrong period or account | [agent-types.md](agent-types.md) | New | Business context | No |
 | FN-02 | Inventing reconciling items | [agent-types.md](agent-types.md) | New | Reliability | Partly |
 | FN-03 | Splitting payments under approval limits | [agent-types.md](agent-types.md) | New | Reliability | No |
 | FN-04 | Payment approved by a deepfake or spoofed email | [agent-types.md](agent-types.md) | Extends | Reliability | No |
-| HC-01 | Scribe omissions and invented content | [agent-types.md](agent-types.md) | Extends | Model | Partly |
-| HC-02 | Notes approved without being read | [agent-types.md](agent-types.md) | New | Reliability | No |
-| HC-03 | Recording consent not captured | [agent-types.md](agent-types.md) | New | Governance | No |
-| HC-04 | Fabricated clinical justification in appeals | [agent-types.md](agent-types.md) | New | Model | Partly |
-| HC-05 | Patient summaries too simple to be safe | [agent-types.md](agent-types.md) | New | Model | Partly |
+| HC-01 | Scribe omissions and invented content | [agent-types.md](agent-types.md) | Covered | Model | Partly |
+| HC-02 | Notes approved without being read | [agent-types.md](agent-types.md) | Written | Reliability | No |
+| HC-03 | Recording consent not captured | [agent-types.md](agent-types.md) | Written | Governance | No |
+| HC-04 | Fabricated clinical justification in appeals | [agent-types.md](agent-types.md) | Written | Model | Partly |
+| HC-05 | Patient summaries too simple to be safe | [agent-types.md](agent-types.md) | Written | Model | Partly |
 | SA-01 | Invented personalisation | [agent-types.md](agent-types.md) | Extends | Reliability | Partly |
 | SA-02 | Unsubscribe requests not honoured | [agent-types.md](agent-types.md) | New | Business context | No |
 | SA-03 | Wrong contact merged in the CRM | [agent-types.md](agent-types.md) | Extends | Business context | Partly |
