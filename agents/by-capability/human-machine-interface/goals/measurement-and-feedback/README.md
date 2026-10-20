@@ -10,17 +10,19 @@ Shared metrics the patterns below report against. Targets are starting points to
 | Metric | Target | Defined in |
 |---|---|---|
 | Reports per 1,000 conversations; time to triage | Set from your own baseline | [no way to report bad behaviour](failures/no-way-to-report-bad-behaviour.md) |
+| Survey response rate by outcome | Every outcome group reported; none far below the highest | [survey bias](failures/survey-bias.md) |
+| Share of reviewed conversations that are random samples | Starting point: at least 50% | [reviewing only failures](failures/reviewing-only-failures.md) |
+| Tone scores before and after each release | Starting point: mean drop of 0.2 or less on a 1-5 scale | [tone changes shipped with no regression test](failures/tone-changes-shipped-with-no-regression-test.md) |
+| Performance gap between lab and field inputs | Starting point: under 5 points of task success | [clean-lab testing](failures/clean-lab-testing.md) |
 
 ## Patterns
 | Pattern | One line |
 |---|---|
 | [No way to report bad behaviour](failures/no-way-to-report-bad-behaviour.md) | Users cannot flag a wrong or harmful reply, or the report goes nowhere |
-
-## Planned (not yet written)
-- Survey bias
-- Reviewing only failures
-- Tone changes shipped with no regression test
-- Clean-lab testing
+| [Survey bias](failures/survey-bias.md) | Satisfaction surveys reach only the angriest and the happiest, or only users who finished |
+| [Reviewing only failures](failures/reviewing-only-failures.md) | Quality review reads complaints and misses users who quietly give up |
+| [Tone changes shipped with no regression test](failures/tone-changes-shipped-with-no-regression-test.md) | A prompt edit makes the bot curt, and nobody notices |
+| [Clean-lab testing](failures/clean-lab-testing.md) | Tests use tidy input, so real typos and fragments fail in the field |
 
 ## Related
 - [Metrics hub](../../reference/metrics.md)

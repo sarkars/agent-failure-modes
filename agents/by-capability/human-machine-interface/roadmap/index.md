@@ -417,10 +417,10 @@
 | CM-08 | Crossed messages | [interface-and-persona.md](interface-and-persona.md) | New | Reliability | No |
 | CM-09 | Mobile keyboard or screen hides the reply | [interface-and-persona.md](interface-and-persona.md) | New | Reliability | No |
 | CM-10 | Shared devices show someone else's chat | [interface-and-persona.md](interface-and-persona.md) | Extends | Governance | No |
-| AX-01 | Streaming text read out token by token | [interface-and-persona.md](interface-and-persona.md) | New | Business context | No |
-| AX-02 | No accessible 'working' or 'done' signal | [interface-and-persona.md](interface-and-persona.md) | New | Business context | No |
-| AX-03 | Controls unreachable by keyboard | [interface-and-persona.md](interface-and-persona.md) | New | Business context | No |
-| AX-04 | Voice-only flows with no text alternative | [interface-and-persona.md](interface-and-persona.md) | New | Business context | No |
+| AX-01 | Streaming text read out token by token | [interface-and-persona.md](interface-and-persona.md) | Written | Business context | No |
+| AX-02 | No accessible 'working' or 'done' signal | [interface-and-persona.md](interface-and-persona.md) | Written | Business context | No |
+| AX-03 | Controls unreachable by keyboard | [interface-and-persona.md](interface-and-persona.md) | Written | Business context | No |
+| AX-04 | Voice-only flows with no text alternative | [interface-and-persona.md](interface-and-persona.md) | Written | Business context | No |
 | AX-05 | Timeouts too short for assistive technology | [interface-and-persona.md](interface-and-persona.md) | New | Business context | No |
 | AX-06 | Language that is hard for people with cognitive disabilities | [interface-and-persona.md](interface-and-persona.md) | New | Business context | Partly |
 | AX-07 | Identity checks that exclude disabled users | [interface-and-persona.md](interface-and-persona.md) | New | Business context | No |
@@ -441,12 +441,12 @@
 | HU-06 | Bot keeps replying after a person joins | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Written | Reliability | No |
 | HU-07 | Handoff outside staffed hours with no alternative | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Written | Business context | No |
 | ME-01 | Containment counted as success | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Covered | Business context | No |
-| ME-02 | Survey bias | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | New | Business context | No |
-| ME-03 | Reviewing only failures | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | New | Business context | No |
-| ME-04 | Tone changes shipped with no regression test | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | New | Reliability | No |
-| ME-05 | User simulators more cooperative than real people | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Extends | Reliability | No |
-| ME-06 | Clean-lab testing | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | New | Reliability | No |
-| ME-07 | Averages hide group gaps | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Extends | Business context | No |
+| ME-02 | Survey bias | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Written | Business context | No |
+| ME-03 | Reviewing only failures | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Written | Business context | No |
+| ME-04 | Tone changes shipped with no regression test | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Written | Reliability | No |
+| ME-05 | User simulators more cooperative than real people | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Covered | Reliability | No |
+| ME-06 | Clean-lab testing | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Written | Reliability | No |
+| ME-07 | Averages hide group gaps | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Covered | Business context | No |
 | MO-01 | A model change shifts personality, length, or refusals | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Extends | Reliability | No |
 | MO-02 | Fallback model gives a visibly different experience | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Extends | Reliability | No |
 | MO-03 | Prompt edits by non-engineers break other behavior | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | New | Business context | No |
