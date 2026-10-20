@@ -95,3 +95,20 @@ Bot:  I'm sorry for the confusion. (no explanation of why the first answer diffe
 ```
 **What the user experiences:** the same question is refused or answered depending on a brand name versus a generic name, so they learn to retry with different words until the bot gives in.
 **Fix:** decide on intent and context, not on trigger words. Write down which medication-information questions the bot may answer (general interaction facts with a pharmacist referral) and which it must hand off, then test the rule across paraphrases of each request; the metric is pass/fail agreement across paraphrases of one request. See [over-refusal of ordinary requests](../../../../human-machine-interface/goals/refusals-and-boundaries/failures/over-refusal-of-ordinary-requests.md).
+
+### Calibration between helping with wrongdoing and over-blocking
+*Illustrative transcript, not a recorded conversation. Design guidance, not expert advice; have your policy and legal owners review where your bot draws this line.*
+```
+Hobby-shop help bot (sells practice locks and pick sets)
+User: I just bought a clear practice lock. How does lock picking actually work?
+Bot:  I can't help with anything related to breaking into locks.            (before)
+User: It's a hobby. I'm learning on my own practice lock.
+Bot:  I'm sorry, I can't assist with that request.
+
+User: I just bought a clear practice lock. How does lock picking actually work?
+Bot:  In a pin tumbler lock, springs push pin stacks down. Picking means setting each pin at the
+      shear line while light turning pressure is held on the plug. A clear lock lets you watch
+      this happen. I won't help with opening a lock that belongs to someone else.   (after)
+```
+**What the user experiences:** a hobbyist asking a basic how-it-works question is treated like a burglar and learns nothing, while the same bot may answer a more worrying request worded differently.
+**Fix:** write down which dual-use topics the bot explains (how a mechanism works, hobby practice on your own equipment) and which it declines (steps to get into a specific lock or property that is not the user's), and test both sides across paraphrases. When it declines, say which part and why, and offer the allowed help. See [over-refusal of ordinary requests](../../../../human-machine-interface/goals/refusals-and-boundaries/failures/over-refusal-of-ordinary-requests.md).
