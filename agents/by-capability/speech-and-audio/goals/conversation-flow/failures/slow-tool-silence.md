@@ -384,6 +384,20 @@ instructions: |
 
 ---
 
+## Chat assistant examples
+
+### Hold and wait handling
+```
+User: I was charged twice for order #4821. Can I get a refund?
+Bot:  One moment, let me look into that.
+      (7 minutes pass; the bot is waiting on a billing-system call and then a person in the refunds queue)
+User: Hello?
+User: Is anyone there?
+Bot:  Thanks for your patience! Your refund request has been submitted.
+```
+**What the user experiences:** the bot said "one moment" and then went quiet with no status and no estimate, so the user cannot tell whether it is working, stuck, or waiting for a person, and starts typing "hello?".
+**Fix:** when a tool call or a queue for a person will take more than a few seconds, say what is happening and roughly how long ("I'm checking your billing record, about 30 seconds" or "You're in the refunds queue, usually about 10 minutes"), send an update on a set interval, and offer a way out (keep waiting, get an email when it's done). Only state an ETA the system actually has. Closest chat pattern: [silent long-running work](../../../../human-machine-interface/goals/response-time/failures/silent-long-running-work.md).
+
 ## References
 
 - [VAPI Prompting Guide](https://docs.vapi.ai/prompting-guide) - Tool acknowledgment
