@@ -53,6 +53,22 @@ Violation: Age discrimination under ADEA
 
 ---
 
+## Chat assistant examples
+
+### Hiring and screening tools with unequal impact
+```
+Candidate: Hi, I applied for the warehouse associate job at Brightline Logistics. Any update?
+Bot:       Thanks for applying. To continue, what year did you graduate high school?
+Candidate: 1994. Why do you need that?
+Bot:       That helps me check your fit. Unfortunately, your profile is not a match for this role right now.
+Candidate: Was it my age? What did you screen on? Can someone review it?
+Bot:       I can't share details about the screening. Feel free to apply to other openings.
+```
+**What the user experiences:** a rejection right after giving a date that hints at age, with no reason, no notice of how the tool decided, and no way to reach a person.
+**Fix:** do not ask for or use graduation year, age or other proxy fields in screening; tell candidates up front that an automated tool is used and what it looks at; log each screen-out with the rule that triggered it so adverse-impact checks by group can run; offer a human review path (see the [talk to a human ignored or looped](../../../../../by-capability/human-machine-interface/goals/human-handoff/failures/talk-to-a-human-ignored-or-looped.md) pattern).
+
+---
+
 ## References
 
 - [AI Hiring Discrimination](https://arxiv.org/abs/2108.01892) - Research on proxy discrimination
