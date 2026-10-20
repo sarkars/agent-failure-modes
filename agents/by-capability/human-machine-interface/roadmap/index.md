@@ -23,8 +23,8 @@
 | CC-17 | Sycophantic agreement | [chat-and-core.md](chat-and-core.md) | Covered | Model | Partly |
 | CC-18 | Channel chosen for organisational convenience | [chat-and-core.md](chat-and-core.md) | Written | Governance | No |
 | CC-19 | User-context channel mismatch | [chat-and-core.md](chat-and-core.md) | Written | Business context | No |
-| CC-22 | Creepy personalisation and memory | [chat-and-core.md](chat-and-core.md) | Extends | Business context | No |
-| CC-23 | Proactive outreach overreach | [chat-and-core.md](chat-and-core.md) | New | Governance | No |
+| CC-22 | Creepy personalisation and memory | [chat-and-core.md](chat-and-core.md) | Covered | Business context | No |
+| CC-23 | Proactive outreach overreach | [chat-and-core.md](chat-and-core.md) | Written | Governance | No |
 | CP-01 | Help that becomes a sales pitch | [embedded-copilots.md](embedded-copilots.md) | Written | Governance | No |
 | CP-02 | Recommending features the user can't use | [embedded-copilots.md](embedded-copilots.md) | Extends | Business context | No |
 | CP-03 | Answers withheld behind an upgrade, unsaid | [embedded-copilots.md](embedded-copilots.md) | Written | Governance | No |
@@ -392,14 +392,14 @@
 | TE-06 | Confident wrong answer with no way to check | [conversation-design.md](conversation-design.md) | Written | Model | Partly |
 | TE-07 | Doesn't acknowledge its own mistake when it is pointed out | [conversation-design.md](conversation-design.md) | Covered | Model | Partly |
 | TE-08 | Repeats a corrected mistake | [conversation-design.md](conversation-design.md) | Covered | Reliability | Partly |
-| PV-01 | Persona drift within a conversation | [interface-and-persona.md](interface-and-persona.md) | Extends | Model | Partly |
-| PV-02 | Persona changes after a model or prompt update | [interface-and-persona.md](interface-and-persona.md) | Extends | Reliability | No |
-| PV-03 | Condescending or patronizing tone | [interface-and-persona.md](interface-and-persona.md) | New | Model | Partly |
-| PV-04 | Forced cheerfulness | [interface-and-persona.md](interface-and-persona.md) | Extends | Business context | Partly |
-| PV-05 | Stock phrases | [interface-and-persona.md](interface-and-persona.md) | New | Model | Partly |
-| PV-06 | Humor and sarcasm misused | [interface-and-persona.md](interface-and-persona.md) | Extends | Model | Partly |
-| PV-07 | Emoji and slang that don't fit the audience | [interface-and-persona.md](interface-and-persona.md) | Extends | Business context | Partly |
-| PV-08 | Over-familiar address | [interface-and-persona.md](interface-and-persona.md) | New | Business context | Partly |
+| PV-01 | Persona drift within a conversation | [interface-and-persona.md](interface-and-persona.md) | Covered | Model | Partly |
+| PV-02 | Persona changes after a model or prompt update | [interface-and-persona.md](interface-and-persona.md) | Covered | Reliability | No |
+| PV-03 | Condescending or patronizing tone | [interface-and-persona.md](interface-and-persona.md) | Written | Model | Partly |
+| PV-04 | Forced cheerfulness | [interface-and-persona.md](interface-and-persona.md) | Covered | Business context | Partly |
+| PV-05 | Stock phrases | [interface-and-persona.md](interface-and-persona.md) | Written | Model | Partly |
+| PV-06 | Humor and sarcasm misused | [interface-and-persona.md](interface-and-persona.md) | Covered | Model | Partly |
+| PV-07 | Emoji and slang that don't fit the audience | [interface-and-persona.md](interface-and-persona.md) | Covered | Business context | Partly |
+| PV-08 | Over-familiar address | [interface-and-persona.md](interface-and-persona.md) | Written | Business context | Partly |
 | PV-09 | Scripted lines at the wrong moment | [interface-and-persona.md](interface-and-persona.md) | Extends | Business context | Partly |
 | OB-01 | Blank box: no hint what to ask | [interface-and-persona.md](interface-and-persona.md) | New | Business context | No |
 | OB-02 | Starter suggestions that fail | [interface-and-persona.md](interface-and-persona.md) | New | Reliability | No |

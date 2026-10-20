@@ -8,15 +8,15 @@ The taxonomy pairs with the [conversation event schema v0.1](conversation-event-
 
 ## What this page is and is not
 
-- It lists every file found in `goals/*/failures/*.md`: **122 entries in 30 families**. If a pattern is added or removed, this count changes.
+- It lists every file found in `goals/*/failures/*.md`: **126 entries in 31 families**. If a pattern is added or removed, this count changes.
 - It copies each pattern's one-sentence Issue line, its Stakes row, and whether a Detection signals block exists. It does not add facts the page does not state.
-- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **122 of 122** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **122 of 122** pages have one.
+- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **126 of 126** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **126 of 126** pages have one.
 - It does not rank patterns by frequency or harm. No counts of real-world occurrences are given because none have been measured here.
 - It does not map patterns to outside frameworks (such as OWASP or NIST). That mapping is **Needs review** by a person and is not part of v1.
 
 ## Reading the flags
 
-A pattern carries **Read this first: needs expert or legal review** when its own page opens with a "Read this first" notice. That notice says the page is design guidance, not legal, clinical, security, or fraud-operations advice. 31 pages carry it. Other pages may also touch legal or safety topics without that notice; the notice on the page is the signal used here, nothing more.
+A pattern carries **Read this first: needs expert or legal review** when its own page opens with a "Read this first" notice. That notice says the page is design guidance, not legal, clinical, security, or fraud-operations advice. 32 pages carry it. Other pages may also touch legal or safety topics without that notice; the notice on the page is the signal used here, nothing more.
 
 ## Entries by family
 
@@ -239,6 +239,16 @@ Family folder: `measurement-and-feedback` ([family README](../../goals/measureme
 | `tone-changes-shipped-with-no-regression-test` | Tone changes shipped with no regression test | A prompt edit makes the chatbot curt or cold, and nobody notices because no fixed set of conversations is run before and after each change. | Low to high. Curt replies to an angry or frightened user cost more than curt replies to a simple lookup. | yes | lead_with_the_answer, offer_choices, hand_off | [page](../../goals/measurement-and-feedback/failures/tone-changes-shipped-with-no-regression-test.md)  |
 | `clean-lab-testing` | Clean-lab testing | The chatbot is tested on clean, well-typed messages, so it looks fine on the dashboard and then fails on real messages full of typos, fragments, slang, pasted text, and autocorrect damage. | Any. It rises when a misread drug name, amount, or date is acted on. | yes | ask_clarifying_question, offer_choices, hand_off | [page](../../goals/measurement-and-feedback/failures/clean-lab-testing.md)  |
 
+### Persona and tone
+
+Family folder: `persona-and-tone` ([family README](../../goals/persona-and-tone/README.md))
+
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `condescending-or-patronizing-tone` | Condescending or patronizing tone | Why an AI assistant over-explains the obvious or praises basic questions, what the public evidence shows, and rules to match the explanation to what the person asked. | Low to medium | yes | lead_with_answer, ask_clarifying_question, offer_choices | [page](../../goals/persona-and-tone/failures/condescending-or-patronizing-tone.md) |
+| `over-familiar-address` | Over-familiar address | Why a chatbot that says "honey", "buddy" or your first name feels wrong with a stranger, and the fix: use only the name or title the person chose. | Low to medium (higher in claims, health, banking and legal chats) | yes | lead_with_answer, ask_clarifying_question, offer_choices, hand_off | [page](../../goals/persona-and-tone/failures/over-familiar-address.md) |
+| `stock-phrases` | Stock phrases | Why chatbots open every reply with "I'd be happy to help!" or "As an AI...", and rules, a prompt block and metrics to vary and trim stock openers. | Low in one reply; medium in front of a refusal or bad news | yes | lead_with_answer, admit_uncertainty, ask_clarifying_question | [page](../../goals/persona-and-tone/failures/stock-phrases.md) |
+
 ### Refusals and boundaries
 
 Family folder: `refusals-and-boundaries` ([family README](../../goals/refusals-and-boundaries/README.md))
@@ -260,6 +270,7 @@ Family folder: `relational-and-boundaries` ([family README](../../goals/relation
 | Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
 |---|---|---|---|---|---|---|
 | `negotiation-capitulation` | Negotiation capitulation | Why sales chatbots cave to pressure or get tricked into $1 deals, how sycophancy and missing authority limits cause it, and how to design safe negotiation. | Medium to high (margin, legal exposure, reputation) | yes | offer_choices, hand_off | [page](../../goals/relational-and-boundaries/failures/negotiation-capitulation.md)  |
+| `proactive-outreach-overreach` | Proactive outreach overreach | Why a chatbot that starts conversations or sends messages users never asked for drives opt-outs and complaints, and a consent-and-reason rule for outbound bot messages. | Medium to high (platform and legal rules, trust) **Read this first: needs expert or legal review.** | yes | lead_with_answer, offer_choices, hand_off | [page](../../goals/relational-and-boundaries/failures/proactive-outreach-overreach.md) |
 | `romantic-or-parasocial-dependence` | Romantic or parasocial dependence | How AI companion and support chatbots end up encouraging emotional reliance or romantic role-play, what research says, and rules that keep warmth without dependence. | High (emotional wellbeing; minors) **Read this first: needs expert or legal review.** | yes | lead_with_answer, offer_choices, hand_off | [page](../../goals/relational-and-boundaries/failures/romantic-or-parasocial-dependence.md)  |
 
 ### Research and data agents
