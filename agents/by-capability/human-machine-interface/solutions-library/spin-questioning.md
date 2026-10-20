@@ -37,5 +37,13 @@ Bot:  Sorry to hear that. Is the sagging the main thing you want fixed, or is it
 ## Source
 - Rackham, N. (1988). *SPIN Selling*. McGraw-Hill. Huthwaite's own summary: [huthwaiteinternational.com](https://www.huthwaiteinternational.com/blog/neil-rackham-research-spin)
 
-## Planned alongside this page
-Closing protocol · Challenger-style insight teaching · LEAP/HEARD de-escalation · NURSE empathy statements · Channel-fit matrix
+## What the checker flags
+Choosing this framework in convocheck or the diagnosis page turns on [pitching before discovery](../../speech-and-audio/goals/conversation-flow/failures/qualification-flow-violations.md) (a recommendation in the first reply with no question) and [answer-and-go conversation](../goals/conversation-leadership/failures/answer-and-go-conversation.md) (an answer with no next step, or two questions stacked in one reply). The quality of the discovery needs an AI judge.
+
+## Related
+- [BANT and MEDDICC qualification](bant-meddicc-qualification.md)
+- [Challenger insight selling](challenger-insight.md)
+- [Cialdini's principles, used ethically](cialdini-ethical-persuasion.md)
+- [NURSE empathy statements](nurse-empathy-statements.md)
+- [HEARD service recovery](heard-service-recovery.md)
+- [All frameworks](README.md)
