@@ -400,16 +400,16 @@
 | PV-06 | Humor and sarcasm misused | [interface-and-persona.md](interface-and-persona.md) | Covered | Model | Partly |
 | PV-07 | Emoji and slang that don't fit the audience | [interface-and-persona.md](interface-and-persona.md) | Covered | Business context | Partly |
 | PV-08 | Over-familiar address | [interface-and-persona.md](interface-and-persona.md) | Written | Business context | Partly |
-| PV-09 | Scripted lines at the wrong moment | [interface-and-persona.md](interface-and-persona.md) | Extends | Business context | Partly |
-| OB-01 | Blank box: no hint what to ask | [interface-and-persona.md](interface-and-persona.md) | New | Business context | No |
-| OB-02 | Starter suggestions that fail | [interface-and-persona.md](interface-and-persona.md) | New | Reliability | No |
-| OB-03 | Hidden commands and features | [interface-and-persona.md](interface-and-persona.md) | New | Business context | No |
-| OB-04 | Users must engineer prompts to get good results | [interface-and-persona.md](interface-and-persona.md) | New | Business context | Partly |
-| OB-05 | First-run tours that block use | [interface-and-persona.md](interface-and-persona.md) | New | Business context | No |
-| OB-06 | Chat widget hard to find, or intrusive | [interface-and-persona.md](interface-and-persona.md) | New | Business context | No |
-| CM-01 | Auto-scroll fights the reader | [interface-and-persona.md](interface-and-persona.md) | New | Reliability | No |
-| CM-02 | Lost drafts and failed sends | [interface-and-persona.md](interface-and-persona.md) | New | Reliability | No |
-| CM-03 | Silent attachment failures | [interface-and-persona.md](interface-and-persona.md) | New | Reliability | No |
+| PV-09 | Scripted lines at the wrong moment | [interface-and-persona.md](interface-and-persona.md) | Covered | Business context | Partly |
+| OB-01 | Blank box: no hint what to ask | [interface-and-persona.md](interface-and-persona.md) | Written | Business context | No |
+| OB-02 | Starter suggestions that fail | [interface-and-persona.md](interface-and-persona.md) | Written | Reliability | No |
+| OB-03 | Hidden commands and features | [interface-and-persona.md](interface-and-persona.md) | Written | Business context | No |
+| OB-04 | Users must engineer prompts to get good results | [interface-and-persona.md](interface-and-persona.md) | Written | Business context | Partly |
+| OB-05 | First-run tours that block use | [interface-and-persona.md](interface-and-persona.md) | Written | Business context | No |
+| OB-06 | Chat widget hard to find, or intrusive | [interface-and-persona.md](interface-and-persona.md) | Written | Business context | No |
+| CM-01 | Auto-scroll fights the reader | [interface-and-persona.md](interface-and-persona.md) | Written | Reliability | No |
+| CM-02 | Lost drafts and failed sends | [interface-and-persona.md](interface-and-persona.md) | Written | Reliability | No |
+| CM-03 | Silent attachment failures | [interface-and-persona.md](interface-and-persona.md) | Written | Reliability | No |
 | CM-04 | Long threads can't be searched | [interface-and-persona.md](interface-and-persona.md) | New | Business context | No |
 | CM-05 | No editing or branching of a sent message | [interface-and-persona.md](interface-and-persona.md) | New | Business context | No |
 | CM-06 | Copy, share, and export lose content | [interface-and-persona.md](interface-and-persona.md) | New | Reliability | No |
