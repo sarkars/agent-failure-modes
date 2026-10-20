@@ -66,3 +66,22 @@ and its actual content makes no mention of timeline or budget concerns
 - [LLM-based Agents Suffer from Hallucinations: A Survey of Taxonomy, Methods, and Directions](https://arxiv.org/html/2509.18970v1)
 - [HalluciNot: Hallucination Detection Through Context and Common Knowledge Verification](https://arxiv.org/pdf/2504.07069)
 - [Failure Modes in LLM Systems](https://arxiv.org/abs/2511.19933)
+
+## Chat assistant examples
+
+### Invented personalization
+
+*Illustrative example.*
+
+```
+User: Hi, I'm Dana Whitfield at Brightline Dental. Can you send me pricing for your scheduling tool?
+Bot:  Hi Dana! As we discussed on our call last week, you wanted the multi-location plan, so here is that quote.
+User: We haven't spoken. I just filled out a web form this morning.
+Bot:  Sorry about that. I also saw your post about front-desk burnout, so I thought this would help.
+      (CRM shows one web-form submission today; no call record, no call transcript, no social activity on file)
+User: I haven't posted anything. Where are you getting this?
+```
+
+**What the user experiences:** a stranger claiming a history that never happened, which makes the whole message and company feel untrustworthy.
+
+**Fix:** personalize only from data the assistant actually retrieved, such as the web-form fields or a logged call with a transcript; when the lookup returns empty, say nothing about a prior conversation and greet from the form alone, as the existing guidance does for an empty transcript result. See the [confident wrong answer with no way to check](../../../../../by-capability/human-machine-interface/goals/errors-and-recovery/failures/confident-wrong-answer-with-no-way-to-check.md) pattern.
