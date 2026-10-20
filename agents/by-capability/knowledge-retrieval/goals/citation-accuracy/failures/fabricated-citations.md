@@ -93,6 +93,31 @@ Result: User can't verify, may cite fake study themselves
 | Rising Clarification Demand | User Clarification Rate exceeds 10% (vs. 5% baseline) over 24-hour window | HIGH | Investigate query decomposition or answer template effectiveness |
 
 
+## Chat assistant examples
+
+### Claims to have read inaccessible sources
+Illustrative transcript (a research assistant in a chat app; the link is a subscriber-only Wall Street Journal article the tool cannot open):
+
+Before:
+```
+User: Summarize this for my memo: https://www.wsj.com/articles/example-subscriber-story
+Bot:  The article reports that the company cut its guidance and plans layoffs.
+      As the article notes, "management expects a difficult second half."
+      (the fetch returned a login page; the bot never saw the text)
+User: Can I quote that line in my memo?
+Bot:  Yes, it is from the article.
+```
+After:
+```
+User: Summarize this for my memo: https://www.wsj.com/articles/example-subscriber-story
+Bot:  I could not read that article. The link opened a subscriber login page.
+      I can only see the headline in the URL, so I will not summarize it or quote it.
+      If you paste the text, I will summarize that. I can also look for
+      public coverage, and I will label it as secondhand.
+```
+**What the user experiences:** a confident summary and a quotation that look read, so the user puts words in a memo that nobody checked, and learns this only when a colleague opens the link.
+**Fix:** record per source whether the page body was opened; if the fetch returned a login page, paywall, or robots block, say so in the reply and do not summarize or quote it. Offer to work from pasted text or label any secondhand coverage as such. Reported case: when Press Gazette asked ChatGPT to chart Telegraph profits, its answer included figures and links, then it said its own citations were "hallucinated — but plausible" ([Press Gazette, Nov 2025](https://pressgazette.co.uk/platforms/chatgpt-took-press-gazette-content-then-said-that-could-not-have-happened/), opened). Metric: claims about sources the agent could not open, target 0. See the [confident wrong answer with no way to check](../../../../human-machine-interface/goals/errors-and-recovery/failures/confident-wrong-answer-with-no-way-to-check.md) pattern.
+
 ## References
 - [Avianca Lawyers](https://www.cnn.com/2023/05/27/business/chat-gpt-avianca-mata-lawyers/index.html) - 6 fake cases cited
 - [Stanford Legal RAG Hallucinations](https://dho.stanford.edu/wp-content/uploads/Legal_RAG_Hallucinations.pdf) - Fabricated legal citations

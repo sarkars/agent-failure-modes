@@ -84,6 +84,31 @@ Result: Fails with "project_id required" - agent doesn't know about new param
 2. **Post-Deploy Failure Spike** (P1): Condition - missing_required_field_error_rate spikes > 5x baseline within 1 hour of a tool release. Action: correlate with the recent deploy, roll back or hotfix with a default value for the new field, notify agent-configuration owners.
 3. **Deprecation Window Closing with High Legacy Usage** (P3): Condition - deprecated_parameter_usage_rate remains > 10% within 3 days of the planned deprecation cutoff. Action: extend the dual-support window and directly notify remaining callers before removing the old parameter shape.
 
+## Chat assistant examples
+
+### Silent breakage after a UI or schema change
+
+Illustrative details. The portal and amounts are made up. Automation tools such as UiPath list "UI changes in target application" as a cause of broken selectors ([UiPath docs](https://docs.uipath.com/activities/other/latest/ui-automation/troubleshooting-selectors)); the failure below is the case where nothing raises that error.
+
+Before:
+```
+User: File my March expense reports in Concur.
+Bot:  Submitted 12 reports.
+      (Concur renamed the "Amount" field to "Total Amount"; the bot found no
+       field to fill, left each report at $0.00, and submitted anyway)
+User: [Two weeks later, Finance emails: 12 reports for $0.00.]
+```
+After:
+```
+User: File my March expense reports in Concur.
+Bot:  I stopped before submitting anything. The report form no longer has an
+      "Amount" field, so I can't tell where to enter the totals.
+      Submitted: 0 of 12. Nothing was changed in Concur.
+      Want me to send the 12 drafts to you to enter by hand, or try again later?
+```
+**What the user experiences:** a confident "Submitted 12 reports" turns into a Finance email two weeks later, and the user has to redo and explain every report.
+**Fix:** before each write, check that the expected fields and page markers exist, and after the write, read the saved value back. If either check fails, stop, say which field is missing, and list what was and was not submitted. Metric: drift detected before a wrong write. See the [lazy completion](../../../../../by-capability/human-machine-interface/goals/effort-and-memory/failures/lazy-completion.md) pattern for the chat-side rule of reporting exactly what is done and not done.
+
 ## References
 
 - [5 MCP Server Mistakes](https://dev.to/thedailyagent/5-mcp-server-mistakes-that-waste-your-ai-agents-time-and-how-to-fix-them-18m5) - How schema changes break MCP server integrations

@@ -134,6 +134,32 @@ Ticket #500 ends up in the "closed_duplicate" state with the specialist assignme
 | High Contention on Shared Object | write_conflict_rate_percent exceeds 8% for a specific object class over 1h | Warning |
 | Stuck Lock Blocking Writers | A lock is held past its TTL with pending waiters | Warning |
 
+## Chat assistant examples
+
+### Overwrites a person's recent edit
+Before (illustrative: a workflow assistant in a Jira Cloud project; names and times are made up):
+```
+User: Set the status of ticket PAY-212 to "Blocked: waiting on vendor".
+      (Two minutes earlier a teammate, Dana, changed the same field to "In Review" and added a comment.)
+Bot:  Done. PAY-212 is now "Blocked: waiting on vendor".
+      (the bot read the ticket before Dana's edit and wrote without checking)
+User: Why did my status flip? I just moved it to In Review.
+Dana: Someone overwrote my change.
+```
+After:
+```
+User: Set the status of ticket PAY-212 to "Blocked: waiting on vendor".
+Bot:  Before I change it: Dana Reyes set PAY-212 to "In Review" two minutes ago.
+      That is newer than the version I read.
+      Do you want me to:
+      1. Set it to "Blocked: waiting on vendor" anyway, and note Dana's change in a comment, or
+      2. Leave it as "In Review" and ask Dana?
+User: 2, I'll message her.
+Bot:  Left as is. PAY-212 is still "In Review".
+```
+**What the user experiences:** the bot reports success, and a teammate's work vanishes with no warning to either person.
+**Fix:** compare the version or timestamp read at the start with the version at write time; if they differ, do not write. Merge when the two edits touch different fields, and ask the person when they touch the same one. The same check exists in HTTP as the `If-Match` header, where a stale write gets `412 Precondition Failed` instead of replacing the newer change ([MDN: If-Match](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/If-Match)). Metric: overwrite incidents, target 0.
+
 ---
 
 ## References

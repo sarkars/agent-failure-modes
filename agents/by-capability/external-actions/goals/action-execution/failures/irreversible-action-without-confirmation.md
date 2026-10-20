@@ -115,6 +115,30 @@ PayBot: Sent $250.00 to Dana Lopez.
 
 **Fix:** before any send, charge, or booking, read back the amount, recipient, and date in one message and wait for a yes. Skip the read-back for undoable actions. See the [guessing instead of asking](../../../../human-machine-interface/goals/dialogue-management/failures/guessing-instead-of-asking.md) pattern.
 
+### No dry-run before bulk changes
+
+*Illustrative transcript, not a real product log. "CRM Assistant" is an invented chat assistant inside a CRM, and all numbers are illustrative.*
+
+```
+Before:
+User: Update all contacts in Texas to the new sales owner, Priya Nair.
+CRM Assistant: Done! I updated the owner on your Texas contacts to Priya Nair.
+               (4,012 records changed; 380 were Houston accounts that Marcus Bell still owns by contract)
+
+After:
+User: Update all contacts in Texas to the new sales owner, Priya Nair.
+CRM Assistant: Preview, nothing changed yet. Filter: State = TX. 4,012 contacts would change Contact Owner to Priya Nair.
+               Sample: Acme Supply (Marcus Bell -> Priya Nair), Lone Star Dental (Jo Park -> Priya Nair).
+               380 of them have a "Named account" flag. Not changed: email, phone, lifecycle stage, open deals.
+               Apply to all 4,012, skip the 380 flagged, or cancel?
+User: Skip the 380.
+CRM Assistant: Updated 3,632 contacts. Saved the old owners in a file so I can restore them if you ask.
+```
+
+**What the user experiences:** a bulk change lands on thousands of records at once, and they find out what was in the set only when a rep asks why an account moved.
+
+**Fix:** before any update that touches many records, show a preview with the count, a sample of before and after values, what will not change, and then ask whether to apply. Save the old values so the change can be undone if the product allows it. This is the same idea as a Terraform plan, which [proposes changes without carrying them out](https://developer.hashicorp.com/terraform/cli/commands/plan) (page opened). That page also warns that the system can change between plan and apply, so check the final change again just before applying. Keep the preview for bulk changes only, so small edits do not get extra prompts (see the [over-confirmation](../../../../human-machine-interface/goals/dialogue-management/failures/over-confirmation.md) pattern).
+
 ---
 
 ## References
