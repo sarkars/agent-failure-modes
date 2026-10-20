@@ -977,7 +977,7 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 - **Part B:** Skipped. The 2026-10-20 entry already exists.
 - **Taxonomy:** 75 entries; signals 75 of 75; Moves 75 of 75; fifteen flagged. Queue: rows 98 to 107 done; about 325 rows remain Queued.
 - **Unverified claims:** anything read only in search summaries is kept out of public text; outside-framework mappings remain Needs review.
-- **Deploy:** (filled in after Part D)
+- **Deploy:** content PR #24 merged (merge commit 3ed2d36); the site repo had no foreign commits. Scratch build clean, 1638 pages; the live sitemap had 1592 URLs, none missing from the build (removed: 0). New pages: scope-shrink-on-long-tasks and the S1 preregistration; changed: failure-taxonomy-v1, the effort-and-memory goal page, the HMI category page. Both new pages have exactly one `<h1>` and no visible `search phrases:` text. Importer re-dated pages were not copied. Extends sections and the sycophancy teardown are outside the runbook's publish scope. Pushed as site commit 074aec60e. No deploy hook set. Live check of the new page not yet done at the time of writing; Vercel build-on-push still unconfirmed.
 
 ## Backlog (not scheduled)
 Ideas from earlier lists that were never chosen. They stay out of the queue until someone adds them.
