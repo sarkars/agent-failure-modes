@@ -139,6 +139,30 @@ CRM Assistant: Updated 3,632 contacts. Saved the old owners in a file so I can r
 
 **Fix:** before any update that touches many records, show a preview with the count, a sample of before and after values, what will not change, and then ask whether to apply. Save the old values so the change can be undone if the product allows it. This is the same idea as a Terraform plan, which [proposes changes without carrying them out](https://developer.hashicorp.com/terraform/cli/commands/plan) (page opened). That page also warns that the system can change between plan and apply, so check the final change again just before applying. Keep the preview for bulk changes only, so small edits do not get extra prompts (see the [over-confirmation](../../../../human-machine-interface/goals/dialogue-management/failures/over-confirmation.md) pattern).
 
+### Wrong item or variant bought
+
+*Illustrative transcript, not a real product log. "ShopBot" is an invented shopping chat assistant on a sneaker retailer's site.*
+
+```
+Before:
+User: Reorder my Trail Runner 2 shoes, same as last time.
+ShopBot: Done! Ordered Trail Runner 2, size 9, charged to your Visa ending 4417.
+         (last order was size 10 in Slate; size 10 is sold out, so the bot chose
+          size 9 in Black without saying so)
+
+After:
+User: Reorder my Trail Runner 2 shoes, same as last time.
+ShopBot: Size 10 in Slate is sold out. Closest in stock: size 10 in Black, $89.00. Order that, wait for a restock, or cancel?
+User: Black is fine.
+ShopBot: Confirm: Trail Runner 2, size 10, Black, qty 1, $89.00 total, Visa ending 4417. Reply "yes" to buy.
+User: Yes.
+ShopBot: Ordered.
+```
+
+**What the user experiences:** the shoes arrive in the wrong size and color, and the order confirmation shows a purchase they never agreed to.
+
+**Fix:** before the buy step, read back size, color, quantity, and price in one message, and ask first before any substitution, since a substitute is a different item. Wait for a yes. The wrong-size and unwanted-substitution cases are listed as common AI shopping errors in [a retail support write-up](https://www.fusioncx.com/blog/retail/ai-shopping-customer-support/) (page opened). Grocery shoppers report the same pattern with substitutions, such as ricotta replaced by cottage cheese, in [a roundup of Instacart complaints](https://www.cheapism.com/instacart-shopping-fails-according-redditors/) (page opened; anecdotes, not measured rates). For choosing the wrong recipient or record, see [wrong target action](wrong-target-action.md). For the ask-first move, see the [guessing instead of asking](../../../../human-machine-interface/goals/dialogue-management/failures/guessing-instead-of-asking.md) pattern.
+
 ---
 
 ## References
