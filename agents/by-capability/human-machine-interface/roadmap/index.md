@@ -300,7 +300,7 @@
 | OV-12 | Confusion over who is acting | [visual-and-oversight.md](visual-and-oversight.md) | Extends | Business context | No |
 | CD-01 | Edits beyond the request | [agent-types.md](agent-types.md) | Covered | Reliability | Partly |
 | CD-02 | Claims tests pass without running them, or edits tests to pass | [agent-types.md](agent-types.md) | Covered | Reliability | Partly |
-| CD-03 | Invented packages and APIs | [agent-types.md](agent-types.md) | New | Model | Partly |
+| CD-03 | Invented packages and APIs | [agent-types.md](agent-types.md) | Written | Model | Partly |
 | CD-04 | Secrets and insecure code accepted by non-experts | [agent-types.md](agent-types.md) | Covered | Reliability | Partly |
 | CD-05 | Destroys uncommitted work | [agent-types.md](agent-types.md) | Covered | Reliability | No |
 | CD-06 | Forgets project conventions in long sessions | [agent-types.md](agent-types.md) | Covered | Reliability | Partly |
