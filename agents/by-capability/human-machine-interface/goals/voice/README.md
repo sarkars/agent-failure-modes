@@ -16,6 +16,9 @@ Shared metrics the patterns below report against. Targets are starting points to
 |---|---|
 | Repair failure | A spoken correction or "say that again" is not understood or applied |
 | [Transcription hallucination](failures/transcription-hallucination.md) | Speech-to-text turns silence, noise, or long pauses into invented phrases that the bot then shows or acts on |
+| [Word-error-rate-only evaluation](failures/word-error-rate-only-evaluation.md) | A good average word error rate hides wrong names, numbers, and dropped "not"s; report entity and critical-slot error rates next to it |
+| [Dropped negations and small words](failures/dropped-negations-and-small-words.md) | Speech-to-text drops "not" or turns "can't" into "can", and the agent acts on the opposite of what was said |
+| [Punctuation and segmentation errors](failures/punctuation-and-segmentation-errors.md) | Wrong sentence breaks or missing commas in a transcript change what an instruction covers |
 
 ## Planned (not yet written)
 The rest of the family is listed in the [roadmap](../../roadmap/voice.md).

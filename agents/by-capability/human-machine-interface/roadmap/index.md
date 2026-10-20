@@ -152,22 +152,22 @@
 | VO-22 | Emotion inferred from voice | [voice.md](voice.md) | New | Governance | No |
 | VO-23 | Voice-to-visual handoff failure | [voice.md](voice.md) | New | Business context | No |
 | VO-24 | Hold and wait handling | [voice.md](voice.md) | Extends | Business context | No |
-| TR-01 | Names with no repair path | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Extends | Business context | No |
-| TR-02 | Proper nouns beyond names | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Extends | Model | Partly |
-| TR-03 | Non-speech heard as speech | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Extends | Model | Yes |
+| TR-01 | Names with no repair path | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Covered | Business context | No |
+| TR-02 | Proper nouns beyond names | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Covered | Model | Partly |
+| TR-03 | Non-speech heard as speech | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Covered | Model | Yes |
 | TR-04 | Transcription hallucination | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Written | Model | Partly |
-| TR-05 | Voice-activity-detection misfires | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Extends | Model | Partly |
+| TR-05 | Voice-activity-detection misfires | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Covered | Model | Partly |
 | TR-06 | Background talk attributed to the user | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Covered | Model | Partly |
-| TR-07 | Speaker attribution errors | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Extends | Model | Partly |
-| TR-08 | Punctuation and segmentation errors | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | New | Model | Yes |
-| TR-09 | Dropped negations and small words | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | New | Model | Partly |
-| TR-10 | Spelled-out strings | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Extends | Model | Partly |
+| TR-07 | Speaker attribution errors | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Covered | Model | Partly |
+| TR-08 | Punctuation and segmentation errors | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Written | Model | Yes |
+| TR-09 | Dropped negations and small words | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Written | Model | Partly |
+| TR-10 | Spelled-out strings | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Covered | Model | Partly |
 | TR-11 | Numbers, dates, and amounts | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Covered | Model | Partly |
 | TR-12 | Domain vocabulary gaps | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Covered | Business context | Partly |
 | TR-13 | Low-confidence words acted on | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Covered | Reliability | No |
 | TR-14 | Partial transcripts acted on | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Covered | Reliability | No |
-| TR-15 | Transcript treated as ground truth | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Extends | Reliability | No |
-| TR-16 | Word-error-rate-only evaluation | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | New | Reliability | No |
+| TR-15 | Transcript treated as ground truth | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Covered | Reliability | No |
+| TR-16 | Word-error-rate-only evaluation | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Written | Reliability | No |
 | TR-17 | Spoken PII persists in transcripts and audio | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Extends | Reliability | No |
 | TR-18 | Children's and atypical speech | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Extends | Model | Partly |
 | TR-19 | Wrong recognition model for the speaker | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Extends | Business context | No |
