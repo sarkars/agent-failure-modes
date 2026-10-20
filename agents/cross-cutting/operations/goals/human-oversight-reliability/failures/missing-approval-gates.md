@@ -98,6 +98,28 @@ From Workflow Research (2026):
 2. **High-Impact Action Without Approval** (P1): Condition — an action affecting more than a defined volume/value threshold (e.g., >100K records or equivalent to the 2.3M-record archive) executes without a logged approval request. Action: treat as an incident; assess reversibility and customer impact immediately, and add the action to the approval matrix before it can run again.
 3. **Approval Gate Left Disabled** (P2): Condition — disabled_gate_duration exceeds 72 hours. Action: escalate to the gate owner to confirm whether disabling was intentional and permanent (requiring a formal policy change) or an oversight requiring immediate re-enablement.
 
+## Chat assistant examples
+
+### Containment without human sign-off
+
+```
+Security alert (Okta): 3 failed sign-ins for Dana Reyes (VP Sales), one from a new device.
+Bot:  I've disabled Dana Reyes's Okta account and signed her out of all sessions.
+Dana: (in #it-help, 9:02 AM) My login stopped working and I'm presenting to a customer at 9:30. What happened?
+Bot:  Your account was disabled after suspicious sign-ins. Please wait for the security team.
+Dana: Who approved this?
+Bot:  No one. I acted automatically.
+```
+
+After the fix:
+
+```
+Bot:  Dana Reyes's account (VP, high-impact tier) shows 3 failed sign-ins. Disabling needs analyst approval. I've sent @sec-oncall the details and forced a password reset prompt, which Dana can undo herself.
+```
+
+**What the user experiences:** a locked account minutes before a customer meeting, with nobody having decided it should happen and nobody to ask.
+**Fix:** define autonomy tiers by reversibility and asset criticality. The assistant may act alone on low-impact, undoable steps (revoke sessions, prompt for reauthentication) and must ask a named human before disabling an account, isolating a laptop, or cutting a network segment. One guide ([NHIMG, opened](https://nhimg.org/faq/what-breaks-when-soc-response-still-depends-on-human-approval-at-every-step/)) says approval tiers should follow risk, reversibility, and detection confidence, and that ambiguous detections on executive endpoints get human triage rather than automatic containment; it is an editorial guide, not a standard. Log each containment with who approved it. See [guessing instead of asking](../../../../../by-capability/human-machine-interface/goals/dialogue-management/failures/guessing-instead-of-asking.md). Metric (proposed): containment actions above tier taken without approval, target 0.
+
 ## References
 
 - [Microsoft: Failure Modes in Agentic AI](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/microsoft/final/en-us/microsoft-brand/documents/Taxonomy-of-Failure-Mode-in-Agentic-AI-Systems-Whitepaper.pdf) - Authorization gaps
