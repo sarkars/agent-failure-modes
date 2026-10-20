@@ -206,3 +206,23 @@ A **claims checker** scans each reply for prices, discounts, "binding", and "gua
 - **Why a negotiation framework helps.** Principled negotiation gives the bot something to do besides give in or refuse: ask about interests, create options, and trade.
 - **Sycophancy scope.** The research shows a general tendency in assistants; how strong it is in your bot depends on the model and prompts. Test it.
 - **Modality notes (PLANNED):** *Voice:* spoken agreement is easy to treat as a commitment, so confirm terms in writing. *Visual:* dynamic price displays and "limited-time" banners need the same authority checks.
+
+## Chat assistant examples
+
+### Discount-first selling (FW-S07)
+Illustrative transcript for a software-subscription chatbot (invented; no outside fact is claimed).
+```
+User: How much is the Pro plan?
+Bot:  Great news! Use code SAVE20 for 20% off the Pro plan today. It's $[price] a month before the code.
+User: OK. But what does Pro actually do?
+(The 20% was inside the range the pricing tool allows. The user had not asked for a discount, and the bot had stated nothing about what Pro does or asked what the user needs.)
+```
+**What the user experiences:** a price cut before any reason to pay, so the discount reads as a sign the plan is overpriced, and the user still doesn't know what Pro does.
+
+**Fix:** this is not capitulation under pressure. Nobody pushed; the bot volunteered the concession on the first mention of price. A source that makes the same point for human sellers, [Janek on discussing price prematurely](https://janek.com/?p=1691) (opened and read; a sales-training article, not a study), says to understand the buyer's needs and present value before price. Checkable rules:
+1. The `offer` tool in the contract above is not callable until the transcript holds a value statement tied to the user's stated need (for example, the bot asked "What will your team use it for?", the user answered, and the bot named one Pro feature that serves that answer). Log the check as pass/fail per conversation.
+2. For "how much is Pro?", answer with the list price, one sentence on what Pro does, and one question about the user's need. No code in that turn.
+3. Offer a discount only when the user asks for one or a stated trigger fires (for example, an annual term). Keep it inside the tool's range and attach its condition.
+4. Metric: share of discounts offered before a value statement. Target near 0. Count each discount turn that has no earlier value-statement turn.
+
+Related: [conversation frameworks roadmap](../../../roadmap/conversation-frameworks.md); [feature dump instead of insight](../../conversation-frameworks/failures/feature-dump-instead-of-insight.md) (FW-S03).

@@ -67,3 +67,16 @@ mistake is only caught when a confused invitee replies asking whether the
 - [Input Locale Mismatch](input-locale-mismatch.md) - a related temporal/numeric misinterpretation failure, often co-occurring with timezone ambiguity in the same input
 - [Input Default Value Assumption](input-default-value-assumption.md) - defaulting to a server-local or hardcoded timezone is a specific instance of the broader unsafe-default pattern
 - [Output Inconsistency](output-inconsistency.md) - inconsistent timezone handling across calls can produce differently-formatted timestamps for logically identical inputs
+
+## Chat assistant examples
+
+### Demo booking with an unstated time zone
+Illustrative (not a real log):
+```
+User (Dana, Chicago): I'd like a demo of your contract-management software. Thursday at 2 works.
+Bot: Booked! Demo with Priya on Thursday at 2:00 PM. A calendar invite is on its way.
+(The bot knew: the rep, Priya, is in Pacific time and her calendar shows a call at 2:00 PM Pacific Thursday. The session had Dana's browser zone, America/Chicago. The bot read "2" as Priya's local time and never checked her calendar.)
+```
+**What the user experiences:** an invite for 4:00 PM Central that she never agreed to, while the rep is already on another call at 2:00 PM Pacific.
+
+**Fix:** before confirming, (1) query the rep's calendar for the exact slot and offer another slot if it is busy; (2) state the time with both zones, for example "Thursday, Oct 22, 2:00 PM Central (12:00 PM Pacific)", and wait for a yes; (3) ask "Is that Central time?" only when no user zone is in the session (browser, profile, or earlier message). Pass checks: booking conflicts = 0 on the rep's calendar, and every confirmation message contains a zone name and the full date. See [Round-trip confirmation](#mitigations) above, [Input Default Value Assumption](input-default-value-assumption.md), and the [sales agents page](../../../../../by-capability/human-machine-interface/goals/sales-agents/README.md). Scheduling guidance from a vendor blog ([Picktime](https://www.picktime.com/resources/?p=3583), opened, promotional) likewise says to include the time zone with every meeting time and to check each participant's local time before scheduling.
