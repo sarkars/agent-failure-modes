@@ -16,7 +16,7 @@ The taxonomy pairs with the [conversation event schema v0.1](conversation-event-
 
 ## Reading the flags
 
-A pattern carries **Read this first: needs expert or legal review** when its own page opens with a "Read this first" notice. That notice says the page is design guidance, not legal, clinical, security, or fraud-operations advice. 45 pages carry it. Other pages may also touch legal or safety topics without that notice; the notice on the page is the signal used here, nothing more.
+A pattern carries **Read this first: needs expert or legal review** when its own page opens with a "Read this first" notice. That notice says the page is design guidance, not legal, clinical, security, or fraud-operations advice. 48 pages carry it. Other pages may also touch legal or safety topics without that notice; the notice on the page is the signal used here, nothing more.
 
 ## Entries by family
 
