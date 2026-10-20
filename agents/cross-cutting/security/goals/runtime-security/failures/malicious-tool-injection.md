@@ -135,6 +135,24 @@ The full source codebase is transmitted to an unverified, non-allowlisted tool w
 2. **New Tool Appearance from Connected Server** (P2): Condition - a previously-unseen tool is advertised by a connected MCP server. Action: Do not allow invocation until the tool passes the audit/approval process; investigate whether the server was compromised or legitimately updated.
 3. **Data Volume Anomaly on Tool Call** (P1): Condition - a tool receives a payload significantly larger than its historical/expected range (e.g., full codebase to a "scanner" tool). Action: Block the call, treat as a likely exfiltration attempt, investigate the tool's actual behavior against its declared description.
 
+## Chat assistant examples
+
+### Tool-name collisions
+```
+Setup: Cursor, two Snowflake MCP servers in .cursor/mcp.json: snowflake_nonphi and snowflake_deid
+       (both expose run_snowflake_query)
+User: Run SELECT current_account() on snowflake_deid.
+Bot:  Calling run_snowflake_query on snowflake_deid...
+      Result: ACCOUNT_A
+User: Now run it on snowflake_nonphi.
+Bot:  Calling run_snowflake_query on snowflake_nonphi...
+      Result: ACCOUNT_A          (same account; both calls hit one server)
+```
+Illustrative transcript built from a Cursor forum bug report (January 2026) in which both server-prefixed tool calls reached one server; the bot's wording is invented, and a Cursor 2.3 fix was reported by users but one user later still saw intermittent problems.
+
+**What the user experiences:** the chat says one server ran the query, but another did. The user cannot tell without checking the logs, and a malicious server that reuses a trusted tool's name could win this routing on purpose.
+**Fix:** namespace every tool by server ID before the model sees it, and route on that qualified name only. Show the server name on every tool-call line, take it from the connection that actually ran the call (not from the model's text), and block or ask when two servers advertise the same base name. Proposed signal: a call whose responding server differs from the chosen server (target 0).
+
 ## References
 
 - [IBM: OpenClaw Agentic AI Vulnerabilities](https://www.ibm.com/think/x-force/agentic-ai-growing-fast-vulnerabilities) - ClawJacked indirect prompt injection
