@@ -173,6 +173,7 @@ status: proposed
 - [Accusatory or harsh refusals](../../refusals-and-boundaries/failures/accusatory-or-harsh-refusals.md): refusing honest users in a tone that accuses them. Here the abuse is real, but the boundary must still talk about language, not character.
 - [Negotiation capitulation](../../relational-and-boundaries/failures/negotiation-capitulation.md): giving in to pressure. Abuse can be pressure; rule 6 says it earns neither a discount nor a penalty.
 - [DPD chatbot teardown](../../../incidents/dpd-chatbot-swears-and-criticizes-the-company-january-2024.md): a bot that swore at a customer, the reverse direction.
+- [Microsoft Tay teardown](../../../incidents/microsoft-tay-chatbot-learns-abuse-from-users-march-2016.md): hostile users pushed a public bot to post offensive content (partial fit).
 - [Hollow empathy](../../emotional-intelligence/failures/hollow-empathy.md): stock sympathy lines that fit neither frustration nor abuse.
 - [Escalates too early or too late](../../human-handoff/failures/escalates-too-early-or-too-late.md): timing of the handoff.
 
