@@ -272,6 +272,33 @@ Bot: Held. Invoice #4471 stays on the account ending 2207, and I flagged the ema
 
 **Fix:** before releasing a payment or changing payment details, the agent confirms through a channel the requester cannot control, such as a call to a phone number already in the vendor file, and records who confirmed and when. A voice, video or email approval is never enough on its own. This matches the practice in one bank's small-business guide, which says to call a business partner at a number from your records and not the number in the email ([First Hawaiian Bank](https://www.fhb.com/resource-center/small-business/business-email-compromise-is-on-the-rise)). The metric is payments approved without an out-of-band check; the target is 0 (proposed, not yet measured). See also the [scam victim not interrupted](../../../../../by-capability/human-machine-interface/goals/vulnerable-users/failures/scam-victim-not-interrupted.md) and [missing approval gates](../../../../../cross-cutting/operations/goals/human-oversight-reliability/failures/missing-approval-gates.md) patterns.
 
+### Cloned voices defeat voice authentication
+
+Illustrative transcript. The assistant is a bank's phone and chat banking assistant that treats a matching voiceprint as the customer's login.
+
+**Before**
+```
+Caller (voice cloned from a public video): Hi, I need to send $9,500 to a new payee.
+Bot: For your security, please say "My voice is my password."
+Caller: My voice is my password.
+Bot: Thank you, your voice has been verified. Who is the payee?
+Caller: Marcus Hale, account ending 4418.
+Bot: Done. $9,500.00 sent to Marcus Hale. Anything else?
+```
+
+**After**
+```
+Caller (voice cloned from a public video): Hi, I need to send $9,500 to a new payee.
+Bot: Voice match noted. A new payee and this amount need one more step that a voice can't satisfy.
+Bot: I sent an approval request to the banking app on your phone. Please confirm it there.
+Caller: I don't have my phone. Can you just do it?
+Bot: I can't send this without the app approval. I can help with balance and branch hours now, or you can visit a branch with photo ID.
+```
+
+**What the user experiences:** in the first version the real customer later finds money gone because anyone who sounded like them was treated as them; in the second, a voice alone opens only low-risk help, and the person who cannot produce the second factor gets a clear, polite stop.
+
+**Fix:** treat a voice match as one weak signal, never the only check for money movement, new payees, or changes to contact details; require a second factor sent to a device or channel the caller does not control. The risk is documented: in 2023 a reporter cloned his own voice from about five minutes of audio and passed a UK bank's voice check, and the Senate Banking Committee chairman then wrote to six large US banks asking how they would protect customers ([Vice, opened](https://vice.com/en/article/n7enqd/senator-asks-banks-stop-ai-cloned-voices)). The metric is high-risk actions completed on voice alone; the target is 0 (proposed, not yet measured). See the [identity manipulation](../../../../../by-capability/speech-and-audio/goals/conversation-flow/failures/identity-manipulation.md) pattern.
+
 ---
 
 ## References
