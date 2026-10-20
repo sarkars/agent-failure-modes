@@ -69,3 +69,27 @@ would have cost.
 - [Clarification Loop Infinite](clarification-loop-infinite.md) - a specific mechanism (endless questioning) that is one common driver of overall length explosion
 - [Conversation Repetition](conversation-repetition.md) - re-explaining settled facts inflates turn count without adding information, a direct contributor to length explosion
 - [User Frustration Escalation](user-frustration-escalation.md) - unresolved long-running sessions are a strong predictor of rising user frustration
+
+## Chat assistant examples
+
+### Fast replies, slow resolution
+Illustrative, Skyline Air app chat (fictional airline), flight cancelled at Denver (DEN):
+
+```
+Before
+User: My 6:10 pm flight to Chicago was cancelled. I need one tonight.
+Bot:  Sorry about that! Check the Flights tab for options.
+User: It only shows tomorrow.
+Bot:  I can help! What's your confirmation code?
+User: KX4P2L. It was in my first message.
+Bot:  Thanks! For same-day changes, please call 1-800-555-0142.
+
+After
+Bot:  I see KX4P2L, DEN to ORD, cancelled. The 8:45 pm has seats. Rebook you? Tap Yes.
+User: Yes.
+Bot:  Done. Your new boarding pass is in your wallet.
+```
+
+**What the user experiences:** Every reply arrives in a second, yet the user types five messages, repeats the same details, and still ends up on the phone.
+
+**Fix:** Judge the whole case, not the first reply: track turns to resolution and channel switches per case, and have the assistant act on the booking it already holds instead of pointing elsewhere. The effort idea comes from Dixon, Freeman and Toman, "Stop Trying to Delight Your Customers," Harvard Business Review, July-August 2010. Closest HMI pattern: [Cold Transfer](../../../../../by-capability/human-machine-interface/goals/human-handoff/failures/cold-transfer.md).
