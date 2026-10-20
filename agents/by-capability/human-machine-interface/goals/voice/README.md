@@ -15,6 +15,7 @@ Shared metrics the patterns below report against. Targets are starting points to
 | Pattern | One line |
 |---|---|
 | Repair failure | A spoken correction or "say that again" is not understood or applied |
+| [Transcription hallucination](failures/transcription-hallucination.md) | Speech-to-text turns silence, noise, or long pauses into invented phrases that the bot then shows or acts on |
 
 ## Planned (not yet written)
 The rest of the family is listed in the [roadmap](../../roadmap/voice.md).
