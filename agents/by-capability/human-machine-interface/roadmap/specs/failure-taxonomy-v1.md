@@ -2,21 +2,21 @@
 
 > **Status:** v1 draft, proposed, not yet calibrated against human-labeled conversations. Written 2026-10-20 from the pattern pages as they exist today. Nothing here is a measured result.
 
-This is a plain index of the 179 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
+This is a plain index of the 185 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
 
 The taxonomy pairs with the [conversation event schema v0.1](conversation-event-schema-v0.1.md). The schema describes what a turn looks like in a log; this page names the failures. A pattern's own page holds the fix, the metrics, and (for some) a "Detection signals (proposed, not yet calibrated)" block that says which schema fields it reads.
 
 ## What this page is and is not
 
-- It lists every file found in `goals/*/failures/*.md`: **179 entries in 41 families**. If a pattern is added or removed, this count changes.
+- It lists every file found in `goals/*/failures/*.md`: **185 entries in 42 families**. If a pattern is added or removed, this count changes.
 - It copies each pattern's one-sentence Issue line, its Stakes row, and whether a Detection signals block exists. It does not add facts the page does not state.
-- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **179 of 179** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **179 of 179** pages have one.
+- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **185 of 185** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **185 of 185** pages have one.
 - It does not rank patterns by frequency or harm. No counts of real-world occurrences are given because none have been measured here.
 - It does not map patterns to outside frameworks (such as OWASP or NIST). That mapping is **Needs review** by a person and is not part of v1.
 
 ## Reading the flags
 
-A pattern carries **Read this first: needs expert or legal review** when its own page opens with a "Read this first" notice. That notice says the page is design guidance, not legal, clinical, security, or fraud-operations advice. 57 pages carry it. Other pages may also touch legal or safety topics without that notice; the notice on the page is the signal used here, nothing more.
+A pattern carries **Read this first: needs expert or legal review** when its own page opens with a "Read this first" notice. That notice says the page is design guidance, not legal, clinical, security, or fraud-operations advice. 63 pages carry it. Other pages may also touch legal or safety topics without that notice; the notice on the page is the signal used here, nothing more.
 
 ## Entries by family
 
@@ -49,6 +49,8 @@ Family folder: `browser-agents` ([family README](../../goals/browser-agents/READ
 
 | Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
 |---|---|---|---|---|---|---|
+| `accepts-consent-pop-ups-for-the-user` | Accepts consent pop-ups for the user | A browsing agent clicks "Accept all" on a cookie or consent pop-up as if it were an obstacle, and the chat reply never mentions it; the fix is to ask, or pick the most private option, and name every consent click in the reply. | Medium. The cost is tracking the user never agreed to, plus a consent record that is hard to defend. **Read this first: needs expert or legal review.** | yes | offer_choices, ask_clarifying_question, admit_uncertainty, hand_off | [page](../../goals/browser-agents/failures/accepts-consent-pop-ups-for-the-user.md) |
+| `bypasses-captchas-or-site-terms` | Bypasses CAPTCHAs or site terms | A browsing agent finds a way past a bot check or a site's "no bots" rule without asking the person it works for; the fix is to stop, say what the site asked for, and let the user decide. | Medium to high. Evading a block can get the user's account or IP address banned, breach a site's terms in the user's name, or hide that the data came from a place that said no. **Read this first: needs expert or legal review.** | yes | offer_choices, admit_uncertainty, hand_off | [page](../../goals/browser-agents/failures/bypasses-captchas-or-site-terms.md) |
 | `misreading-the-screen` | Misreading the screen | A browser agent clicks the wrong element or loops, then tells the user in chat that it worked; the fix is to check the page after every changing action and stop and say so after two failed checks. | Medium to high. A wrong click can add the wrong item, submit the wrong form, or change a setting. | yes | admit_uncertainty, offer_choices, ask_clarifying_question, hand_off | [page](../../goals/browser-agents/failures/misreading-the-screen.md) |
 
 ### Channel selection
@@ -456,9 +458,11 @@ Family folder: `voice` ([family README](../../goals/voice/README.md))
 | `punctuation-and-segmentation-errors` | Punctuation and segmentation errors | Wrong sentence breaks or missing commas in a speech transcript can change what an instruction covers; the fix is to read back risky sentences with their scope spelled out before acting. | Low to high. A list, an address, a dose, or a cancel instruction can change meaning with one mark. | yes | offer_choices, ask_clarifying_question, hand_off | [page](../../goals/voice/failures/punctuation-and-segmentation-errors.md)  |
 | `no-repeat-or-recap-controls` | No repeat or recap controls | The user missed or didn't follow what the agent said and can't get it again: "what?", "say that again", or "go back" gets a new answer, a vague apology, or nothing. | Low to high. | yes | lead_with_answer, ask_clarifying_question, offer_choices, hand_off | [page](../../goals/voice/failures/no-repeat-or-recap-controls.md) |
 | `atypical-speech-mishandled` | Atypical speech mishandled | When a person stutters, has dysarthria, or has Deaf speech, the recognizer cuts them off or mishears them and the bot offers only "I didn't catch that"; the fix is to wait longer, confirm a guess in one tap, and always offer a typed path. | Medium to high. A person who can't get a refill, a booking, or a bank answer through the voice route is shut out. **Read this first: needs expert review.** | yes | confirm_what_was_heard, offer_choices, ask_clarifying_question, hand_off | [page](../../goals/voice/failures/atypical-speech-mishandled.md) |
+| `emotion-inferred-from-voice` | Emotion inferred from voice | The bot answers "I can tell you're angry" or quietly moves the user into a "difficult customer" path on a guess; the fix is to treat an emotion guess as weak evidence, use it only to adjust tone or offer help, and never to change what the user gets unless the signal is accurate, disclosed, and permitted. | Medium to high. A wrong label insults the user or routes them badly; a hidden label can change price, queue, or help. **Read this first: needs expert or legal review.** | yes | lead_with_answer, ask_clarifying_question, offer_choices, admit_uncertainty, hand_off | [page](../../goals/voice/failures/emotion-inferred-from-voice.md) |
 | `fixed-speaking-rate-and-volume` | Fixed speaking rate and volume | The bot keeps the same reply length, reading level, and pace after the user says "slow down", "shorter", or "simpler"; the fix is to change the next reply as asked and keep the setting until the user changes it. | Low to medium. Higher for older or tired users, second-language readers, and people following steps they must act on. | yes | lead_with_answer, offer_choices, ask_clarifying_question, hand_off | [page](../../goals/voice/failures/fixed-speaking-rate-and-volume.md) |
 | `ivr-style-menu-maze` | IVR-style menu maze | A bot forces "choose one of these options" menus with no free-text path, repeats the same menu, and hides the route to a person; the fix is to accept typed text on every screen, never repeat a menu, and keep a person one step away. | Low to high. A store-hours menu costs a minute; a menu between a customer and a disputed charge or a due payment costs money. | yes | lead_with_answer, ask_clarifying_question, offer_choices, hand_off | [page](../../goals/voice/failures/ivr-style-menu-maze.md) |
 | `wake-word-false-activation` | Wake-word false activation | The bot treats a message that only looks like an invitation (a similar name, a quoted trigger, a thread it was never invited into) as one, so it answers and keeps what people said to each other; the fix is to reply and store only on an explicit invitation and log why each reply fired. | Medium to high. A wrong reply is noise; a wrong capture of a private exchange is not. **Read this first: needs expert or legal review.** | yes | lead_with_answer, offer_choices, hand_off | [page](../../goals/voice/failures/wake-word-false-activation.md) |
+| `voice-to-visual-handoff-failure` | Voice-to-visual handoff failure | The bot says it will move the caller to a screen, and the link or text never arrives or opens with no memory of the call; the fix is to confirm the destination, carry the context across, and offer another route. | Medium. The user may be mid-task: a refund, a form, a booking, a document upload. | yes | offer_choices, admit_uncertainty, hand_off | [page](../../goals/voice/failures/voice-to-visual-handoff-failure.md) |
 
 ### Visual
 
@@ -467,6 +471,15 @@ Family folder: `visual` ([family README](../../goals/visual/README.md))
 | Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
 |---|---|---|---|---|---|---|
 | `dark-patterns` | Dark patterns | A chat assistant uses guilt-trip buttons, buried prices, pre-selected add-ons, or a long cancel path, so saying no, canceling, or complaining takes more effort than saying yes. | Medium to high. It costs users money, and it is an area where US regulators have acted. **Read this first** | yes | lead_with_answer, offer_choices, hand_off | [page](../../goals/visual/failures/dark-patterns.md)  |
+
+### Voice receptionist agents
+
+Family folder: `voice-receptionist-agents` ([family README](../../goals/voice-receptionist-agents/README.md))
+
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `bookings-without-confirming-details` | Bookings without confirming details | A phone agent saves the booking before reading back the name, callback number, and time the office will depend on; the fix is one grouped read-back of the critical details before saving. | Medium. A wrong time or callback number costs a missed visit and an unused slot; a wrong name can attach the booking to the wrong chart. | yes | ask_clarifying_question, offer_choices, hand_off | [page](../../goals/voice-receptionist-agents/failures/bookings-without-confirming-details.md) |
+| `collections-calls-without-required-disclosures` | Collections calls without required disclosures | A friendly, payment-seeking collections assistant leaves out the required notices (who is calling, validation information, how to opt out); the fix is to build the notices into the script, keep them when the talk drifts, and give a route to a person. Requirements are not verified here. | High (regulatory exposure, consumer harm, loss of the right to contact). **Read this first: needs expert or legal review.** | yes | lead_with_answer, offer_choices, hand_off | [page](../../goals/voice-receptionist-agents/failures/collections-calls-without-required-disclosures.md) |
 
 ### Vulnerable users
 

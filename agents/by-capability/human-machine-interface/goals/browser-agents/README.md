@@ -15,6 +15,8 @@ Shared metrics the patterns below report against. Targets are starting points to
 | Pattern | One line |
 |---|---|
 | [Misreading the screen](failures/misreading-the-screen.md) | The agent clicks the wrong thing or loops, and the chat reply says "done" |
+| [Bypasses CAPTCHAs or site terms](failures/bypasses-captchas-or-site-terms.md) | The agent gets past a bot check or a site's rules to finish the task, and the chat reply does not say so |
+| [Accepts consent pop-ups for the user](failures/accepts-consent-pop-ups-for-the-user.md) | The agent clicks "Accept all" on a cookie or consent banner and the user never learns a choice was made |
 
 ## Planned (not yet written)
 The other rows of the family are tracked in the [emerging surfaces roadmap](../../roadmap/emerging-surfaces.md). Several already have an example added to a pattern elsewhere in the repository.

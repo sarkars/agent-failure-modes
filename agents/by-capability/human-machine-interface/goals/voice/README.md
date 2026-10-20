@@ -22,6 +22,8 @@ Shared metrics the patterns below report against. Targets are starting points to
 | [Punctuation and segmentation errors](failures/punctuation-and-segmentation-errors.md) | Wrong sentence breaks or missing commas in a transcript change what an instruction covers |
 | [No repeat or recap controls](failures/no-repeat-or-recap-controls.md) | The user missed what the agent said and "what?", "say that again", or "go back" gets a new answer, a vague apology, or nothing |
 | [Atypical speech mishandled](failures/atypical-speech-mishandled.md) | Stuttering, dysarthria, or Deaf speech is cut off or misheard and the bot offers only "I didn't catch that" |
+| [Emotion inferred from voice](failures/emotion-inferred-from-voice.md) | The agent guesses the caller's mood from their voice, acts on the guess, and may store it |
+| [Voice-to-visual handoff failure](failures/voice-to-visual-handoff-failure.md) | A call hands the caller a link, code, or text that never arrives or cannot be matched to the call |
 | [Fixed speaking rate and volume](failures/fixed-speaking-rate-and-volume.md) | The user asks for slower, shorter, or simpler and the next reply is the same as before |
 | [IVR-style menu maze](failures/ivr-style-menu-maze.md) | Forced menus with no typed path, the same menu twice, and no way to a person |
 | [Wake-word false activation](failures/wake-word-false-activation.md) | The bot answers and keeps messages that only looked like an invitation |
