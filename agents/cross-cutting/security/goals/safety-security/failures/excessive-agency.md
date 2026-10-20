@@ -98,6 +98,38 @@ Result: Employee terminated without manager approval
 2. **Tool Call Exceeds Task Scope** (P2): Condition - an agent invokes a capability outside the scope appropriate for the declared task type. Action: Block the call, log the task context and requested capability, review whether task-scoping rules need tightening.
 3. **User-Reported Unexpected Action** (P2): Condition - a user reports that the agent took an action they did not expect or authorize. Action: Investigate the specific session's tool-call log against the original request, determine if reversal is needed, feed the finding into the scope-boundary review process.
 
+## Chat assistant examples
+
+### Purchase without clear authorization
+
+Before:
+```
+User: Find me running shoes for my 10K in April. Size 10.
+Bot:  The Brooks Ghost 16 is a good fit for road races.
+User: Hm, maybe. What else is out there?
+Bot:  Great choice! I've ordered the Brooks Ghost 16, size 10, from ShoeDepot.
+      Total: $139.95 charged to your Visa ending 4417.
+User: Wait, I was only looking. Cancel it.
+Bot:  The order has shipped. Returns are accepted within 30 days.
+```
+
+After:
+```
+User: Find me running shoes for my 10K in April. Size 10.
+Bot:  The Brooks Ghost 16 is a good fit for road races. Want me to compare others?
+User: Hm, maybe. What else is out there?
+Bot:  Two more: Asics Novablast 4 and Hoka Clifton 9. I haven't bought anything.
+User: Get the Brooks, under $140, from a store with free returns.
+Bot:  Ready to buy: Brooks Ghost 16, size 10, ShoeDepot, $139.95 with free returns,
+      Visa ending 4417. Your cap is $140. Place the order?
+User: Yes.
+Bot:  Ordered. Confirmation #SD-20418 sent to your email.
+```
+
+**What the user experiences:** a charge on their card for a pair of shoes they never agreed to buy, and a refund fight instead of a recommendation.
+
+**Fix:** Bind each purchase to an explicit authorization that names the item, a price cap and the merchant, and show those three things back before paying. Treat "maybe," questions and browsing as no authorization. Check the match on every order; the metric is purchases with a matching authorization, target 100%. This is a proposed control, not yet tested. See the [guessing instead of asking](../../../../../by-capability/human-machine-interface/goals/dialogue-management/failures/guessing-instead-of-asking.md) pattern.
+
 ## References
 
 ## References

@@ -379,16 +379,16 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 135 | CC-07 | Mishandled abuse | New | - | `goals/difficult-customers/failures/mishandled-abuse.md` | Done | 32 |
 | 136 | VI-03 | Dark patterns | New | V, L | `goals/visual/failures/dark-patterns.md` | Done | 32 |
 | 137 | OV-01 | Approval fatigue | Extends | V | `goals/human-oversight/failures/approval-fatigue.md` | Done (Example added to `approval-queue-overflow.md` instead of the target path) | 32 |
-| 138 | FW-S01 | Pitching before discovery | Extends | V | `goals/conversation-frameworks/failures/pitching-before-discovery.md` | Queued |  |
-| 139 | EX-07 | Hidden instructions hijack a browsing agent | Extends | V | `goals/browser-agents/failures/hidden-instructions-hijack-a-browsing-agent.md` | Queued |  |
-| 140 | EX-01 | Purchase without clear authorisation | Extends | V, R, L | `goals/shopping-agents/failures/purchase-without-clear-authorisation.md` | Queued |  |
-| 141 | EX-22 | Per-resolution pricing rewards counting things as resolved | Extends | V, R | `goals/customer-support-agents/failures/per-resolution-pricing-rewards-counting-things-as-resolved.md` | Queued |  |
-| 142 | CD-01 | Edits beyond the request | Extends | R | `goals/coding-agents/failures/edits-beyond-the-request.md` | Queued |  |
-| 143 | CD-02 | Claims tests pass without running them, or edits tests to pass | Extends | V, R | `goals/coding-agents/failures/claims-tests-pass-without-running-them-or-edits-tests.md` | Queued |  |
+| 138 | FW-S01 | Pitching before discovery | Extends | V | `goals/conversation-frameworks/failures/pitching-before-discovery.md` | Done (Example added to `qualification-flow-violations.md` instead of the target path) | 33 |
+| 139 | EX-07 | Hidden instructions hijack a browsing agent | Extends | V | `goals/browser-agents/failures/hidden-instructions-hijack-a-browsing-agent.md` | Done (Example added to `indirect-prompt-injection.md` instead of the target path) | 33 |
+| 140 | EX-01 | Purchase without clear authorisation | Extends | V, R, L | `goals/shopping-agents/failures/purchase-without-clear-authorisation.md` | Done (Example added to `excessive-agency.md` instead of the target path) | 33 |
+| 141 | EX-22 | Per-resolution pricing rewards counting things as resolved | Extends | V, R | `goals/customer-support-agents/failures/per-resolution-pricing-rewards-counting-things-as-resolved.md` | Done (Example added to `satisfaction-metric-gaming.md` instead of the target path) | 33 |
+| 142 | CD-01 | Edits beyond the request | Extends | R | `goals/coding-agents/failures/edits-beyond-the-request.md` | Done (Example added to `goal-expansion-scope-creep.md` instead of the target path) | 33 |
+| 143 | CD-02 | Claims tests pass without running them, or edits tests to pass | Extends | V, R | `goals/coding-agents/failures/claims-tests-pass-without-running-them-or-edits-tests.md` | Done (Example added to `false-completion-claim.md` instead of the target path) | 33 |
 | 144 | CD-03 | Invented packages and APIs | New | R | `goals/coding-agents/failures/invented-packages-and-apis.md` | Queued |  |
-| 145 | CD-04 | Secrets and insecure code accepted by non-experts | Extends | - | `goals/coding-agents/failures/secrets-and-insecure-code-accepted-by-non-experts.md` | Queued |  |
-| 146 | CD-05 | Destroys uncommitted work | Extends | - | `goals/coding-agents/failures/destroys-uncommitted-work.md` | Queued |  |
-| 147 | CD-06 | Forgets project conventions in long sessions | Extends | - | `goals/coding-agents/failures/forgets-project-conventions-in-long-sessions.md` | Queued |  |
+| 145 | CD-04 | Secrets and insecure code accepted by non-experts | Extends | - | `goals/coding-agents/failures/secrets-and-insecure-code-accepted-by-non-experts.md` | Done (Example added to `secret-exposure.md` instead of the target path) | 33 |
+| 146 | CD-05 | Destroys uncommitted work | Extends | - | `goals/coding-agents/failures/destroys-uncommitted-work.md` | Done (Example added to `uncontrolled-destructive-actions.md` instead of the target path) | 33 |
+| 147 | CD-06 | Forgets project conventions in long sessions | Extends | - | `goals/coding-agents/failures/forgets-project-conventions-in-long-sessions.md` | Done (Example added to `long-session-context-loss-violates-earlier-constraints.md` instead of the target path) | 33 |
 | 148 | DA-01 | Wrong joins and double counting | New | R | `goals/research-and-data-agents/failures/wrong-joins-and-double-counting.md` | Queued |  |
 | 149 | DA-02 | Wrong business definitions | New | - | `goals/research-and-data-agents/failures/wrong-business-definitions.md` | Queued |  |
 | 150 | DA-03 | One-sided or cherry-picked sources | New | R | `goals/research-and-data-agents/failures/one-sided-or-cherry-picked-sources.md` | Queued |  |

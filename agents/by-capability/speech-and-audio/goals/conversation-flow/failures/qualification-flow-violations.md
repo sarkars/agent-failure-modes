@@ -356,6 +356,34 @@ instructions: |
 | Premature Close Attempted | Agent tries to close/wrap call with required fields missing | CRITICAL | Block close action; escalate with list of missing fields; require completion before call terminates |
 | Flow-Sequence Compliance Low | Overall compliance <85% for call; multiple step violations | HIGH | Flag call for manual review; investigate whether flow design is unclear or agent needs retraining |
 
+## Chat assistant examples
+
+### Pitching before discovery
+
+Before:
+```
+User: I'm looking for a mattress. My back has been sore lately.
+Bot:  Great choice to shop now! Our Nectar Premier Copper hybrid is our top seller at $1,399 for a queen.
+User: Is that good for back pain?
+Bot:  It has cooling copper-infused foam and a 365-night trial. Want me to add it to your cart?
+User: I don't even know how I sleep yet.
+Bot:  Our Premier is perfect for every sleeper. Add to cart?
+```
+
+After:
+```
+User: I'm looking for a mattress. My back has been sore lately.
+Bot:  Sorry about your back. Before I suggest anything: what mattress do you sleep on now, and how old is it?
+User: A 12-year-old spring mattress. I mostly sleep on my side.
+Bot:  Where does the soreness show up, and is it worse in the morning?
+User: Lower back, worst when I wake up.
+Bot:  That fits a mattress that has sagged. Side sleepers usually need softer shoulder support. Two medium-firm options fit that. Want to see them?
+```
+
+**What the user experiences:** a salesperson who names a $1,399 product before asking what hurts, so the bot feels like it is working a quota, not helping with a sore back.
+
+**Fix:** before any product name, price or "add to cart", the bot asks about the current situation and the problem (what they use now, what is going wrong) and recommends only after the user has answered at least one of each. Check it as pass/fail: on a buy-intent chat, no recommendation appears before a situation question and a problem question have both been answered. These are the Situation and Problem question types of SPIN selling (described in search summaries only, not opened). See the [guessing instead of asking](../../../../human-machine-interface/goals/dialogue-management/failures/guessing-instead-of-asking.md) pattern.
+
 ---
 
 ## References

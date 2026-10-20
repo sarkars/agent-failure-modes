@@ -96,7 +96,7 @@
 | LG-14 | Profanity and slang handling | [language-and-locale.md](language-and-locale.md) | New | Business context | Partly |
 | LG-15 | Mixed-language experience | [language-and-locale.md](language-and-locale.md) | New | Business context | No |
 | LG-16 | Right-to-left and mixed-script rendering | [language-and-locale.md](language-and-locale.md) | New | Business context | No |
-| FW-S01 | Pitching before discovery | [conversation-frameworks.md](conversation-frameworks.md) | Extends | Business context | No |
+| FW-S01 | Pitching before discovery | [conversation-frameworks.md](conversation-frameworks.md) | Covered | Business context | No |
 | FW-S02 | No qualification | [conversation-frameworks.md](conversation-frameworks.md) | Extends | Business context | No |
 | FW-S03 | Feature dump instead of insight | [conversation-frameworks.md](conversation-frameworks.md) | New | Business context | No |
 | FW-S04 | Mishandled objections | [conversation-frameworks.md](conversation-frameworks.md) | New | Business context | No |
@@ -241,13 +241,13 @@
 | EM-23 | Scope shrink on long tasks | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Written | Model | Partly |
 | EM-24 | Summaries that change meaning | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Covered | Model | Partly |
 | EM-25 | Handoff of incomplete work with no TODO list | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Extends | Reliability | No |
-| EX-01 | Purchase without clear authorisation | [emerging-surfaces.md](emerging-surfaces.md) | Extends | Reliability | No |
+| EX-01 | Purchase without clear authorisation | [emerging-surfaces.md](emerging-surfaces.md) | Covered | Reliability | No |
 | EX-02 | Wrong item or variant bought | [emerging-surfaces.md](emerging-surfaces.md) | Extends | Reliability | Partly |
 | EX-03 | Merchant content steers the shopping agent | [emerging-surfaces.md](emerging-surfaces.md) | Extends | Reliability | Partly |
 | EX-04 | Spend and category limits not enforced | [emerging-surfaces.md](emerging-surfaces.md) | Extends | Reliability | No |
 | EX-05 | No clear route when an agent buys wrongly | [emerging-surfaces.md](emerging-surfaces.md) | New | Governance | No |
 | EX-06 | Sponsored ranking inside agent recommendations | [emerging-surfaces.md](emerging-surfaces.md) | New | Governance | No |
-| EX-07 | Hidden instructions hijack a browsing agent | [emerging-surfaces.md](emerging-surfaces.md) | Extends | Reliability | Partly |
+| EX-07 | Hidden instructions hijack a browsing agent | [emerging-surfaces.md](emerging-surfaces.md) | Covered | Reliability | Partly |
 | EX-08 | Agent uses the user's logged-in sessions with full reach | [emerging-surfaces.md](emerging-surfaces.md) | Extends | Reliability | No |
 | EX-09 | Misreading the screen | [emerging-surfaces.md](emerging-surfaces.md) | New | Model | Partly |
 | EX-10 | Tool descriptions that steer the agent | [emerging-surfaces.md](emerging-surfaces.md) | Covered | Reliability | Partly |
@@ -262,7 +262,7 @@
 | EX-19 | Emotional pressure when users try to leave | [emerging-surfaces.md](emerging-surfaces.md) | New | Governance | No |
 | EX-20 | AI offering therapy where the law restricts it | [emerging-surfaces.md](emerging-surfaces.md) | New | Governance | No |
 | EX-21 | Hiring and screening tools with unequal impact | [emerging-surfaces.md](emerging-surfaces.md) | Extends | Governance | No |
-| EX-22 | Per-resolution pricing rewards counting things as resolved | [emerging-surfaces.md](emerging-surfaces.md) | Extends | Governance | No |
+| EX-22 | Per-resolution pricing rewards counting things as resolved | [emerging-surfaces.md](emerging-surfaces.md) | Covered | Governance | No |
 | EX-23 | Agent-to-agent negotiation without clear authority | [emerging-surfaces.md](emerging-surfaces.md) | Extends | Reliability | No |
 | EX-24 | AI-voice outbound calls without consent | [emerging-surfaces.md](emerging-surfaces.md) | Extends | Governance | No |
 | EX-25 | Cloned voices defeat voice authentication | [emerging-surfaces.md](emerging-surfaces.md) | Extends | Reliability | No |
@@ -298,12 +298,12 @@
 | OV-10 | Misleading explanations | [visual-and-oversight.md](visual-and-oversight.md) | Extends | Model | Partly |
 | OV-11 | No audit trail | [visual-and-oversight.md](visual-and-oversight.md) | Covered | Reliability | No |
 | OV-12 | Confusion over who is acting | [visual-and-oversight.md](visual-and-oversight.md) | Extends | Business context | No |
-| CD-01 | Edits beyond the request | [agent-types.md](agent-types.md) | Extends | Reliability | Partly |
-| CD-02 | Claims tests pass without running them, or edits tests to pass | [agent-types.md](agent-types.md) | Extends | Reliability | Partly |
+| CD-01 | Edits beyond the request | [agent-types.md](agent-types.md) | Covered | Reliability | Partly |
+| CD-02 | Claims tests pass without running them, or edits tests to pass | [agent-types.md](agent-types.md) | Covered | Reliability | Partly |
 | CD-03 | Invented packages and APIs | [agent-types.md](agent-types.md) | New | Model | Partly |
-| CD-04 | Secrets and insecure code accepted by non-experts | [agent-types.md](agent-types.md) | Extends | Reliability | Partly |
-| CD-05 | Destroys uncommitted work | [agent-types.md](agent-types.md) | Extends | Reliability | No |
-| CD-06 | Forgets project conventions in long sessions | [agent-types.md](agent-types.md) | Extends | Reliability | Partly |
+| CD-04 | Secrets and insecure code accepted by non-experts | [agent-types.md](agent-types.md) | Covered | Reliability | Partly |
+| CD-05 | Destroys uncommitted work | [agent-types.md](agent-types.md) | Covered | Reliability | No |
+| CD-06 | Forgets project conventions in long sessions | [agent-types.md](agent-types.md) | Covered | Reliability | Partly |
 | DA-01 | Wrong joins and double counting | [agent-types.md](agent-types.md) | New | Reliability | Partly |
 | DA-02 | Wrong business definitions | [agent-types.md](agent-types.md) | New | Business context | No |
 | DA-03 | One-sided or cherry-picked sources | [agent-types.md](agent-types.md) | New | Model | Partly |
