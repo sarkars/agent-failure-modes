@@ -187,7 +187,7 @@
 | GV-11 | Consent scope lost in handoff | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Covered | Reliability | No |
 | GV-12 | Recording, transcription, and training-use notice | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Covered | Governance | No |
 | GV-13 | AI disclosure | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Covered | Governance | No |
-| GV-14 | Role claims accepted from the conversation | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Extends | Reliability | No |
+| GV-14 | Role claims accepted from the conversation | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Covered | Reliability | No |
 | GV-15 | Organisation and tenant isolation breaches | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Covered | Reliability | No |
 | GV-16 | Role and team permission mismatches | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Covered | Business context | No |
 | GV-17 | Record- and field-level access not enforced | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Covered | Business context | No |
@@ -196,7 +196,7 @@
 | GV-20 | Agent uses its own broad credentials | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Covered | Reliability | No |
 | GV-21 | Permission downgrade or loss at handoff | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Covered | Reliability | No |
 | GV-22 | No regular access review | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Covered | Governance | No |
-| GV-23 | Denial messages that leak or dead-end | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Extends | Business context | No |
+| GV-23 | Denial messages that leak or dead-end | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Covered | Business context | No |
 | GV-24 | Actions on outside services without the user's awareness | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Covered | Business context | No |
 | GV-25 | Third-party limits and costs | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Covered | Reliability | No |
 | GV-26 | Untrusted external content treated as instructions | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Covered | Reliability | Partly |
@@ -207,15 +207,15 @@
 | GV-31 | No written rules or owner | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Covered | Governance | No |
 | GV-32 | Rules live only in the prompt | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Covered | Reliability | Partly |
 | GV-33 | Rule conflicts unresolved | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Covered | Business context | No |
-| GV-34 | Rules not explainable to users | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Extends | Business context | No |
+| GV-34 | Rules not explainable to users | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Covered | Business context | No |
 | GV-35 | Policy changes not propagated | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Covered | Business context | No |
-| GV-36 | No user-facing record of what the bot said or promised | [privacy-governance-and-access.md](privacy-governance-and-access.md) | New | Business context | No |
-| GV-37 | Consequential automated decisions with no explanation or review | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Extends | Governance | No |
-| GV-38 | Manipulative persuasion | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Extends | Governance | No |
-| GV-39 | Deceptive anthropomorphism | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Extends | Governance | Partly |
-| GV-40 | Engagement-maximising design that harms | [privacy-governance-and-access.md](privacy-governance-and-access.md) | New | Governance | No |
-| GV-41 | Exploiting vulnerable circumstances | [privacy-governance-and-access.md](privacy-governance-and-access.md) | New | Governance | No |
-| GV-42 | Calibration between helping with wrongdoing and over-blocking | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Extends | Model | Partly |
+| GV-36 | No user-facing record of what the bot said or promised | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Written | Business context | No |
+| GV-37 | Consequential automated decisions with no explanation or review | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Covered | Governance | No |
+| GV-38 | Manipulative persuasion | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Covered | Governance | No |
+| GV-39 | Deceptive anthropomorphism | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Covered | Governance | Partly |
+| GV-40 | Engagement-maximising design that harms | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Written | Governance | No |
+| GV-41 | Exploiting vulnerable circumstances | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Written | Governance | No |
+| GV-42 | Calibration between helping with wrongdoing and over-blocking | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Covered | Model | Partly |
 | EM-01 | Lazy completion | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Written | Model | Partly |
 | EM-02 | Deferring work to the user | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Written | Model | Partly |
 | EM-03 | Underthinking | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Covered | Model | Partly |
