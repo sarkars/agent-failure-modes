@@ -102,6 +102,18 @@ payroll run fails compliance validation.
 
 ---
 
+## Chat assistant examples
+
+### Missed subtext
+```
+User: (on an airline's app chat, after a canceled flight) What's the baggage fee for a rebooked flight?
+Bot:  The fee for a checked bag is shown on your rebooked itinerary page.
+User: I have to be in Denver for my sister's funeral tomorrow at 2.
+Bot:  I'm sorry to hear that. Is there anything else I can help with about baggage?
+```
+**What the user experiences:** the bot answered the fee question and then treated the funeral as small talk, so the real need (any seat to Denver in time) never gets handled.
+**Fix:** when a message states a deadline, an event or a feeling, treat it as the goal and the earlier question as a step toward it. Acknowledge it in one plain sentence, then act on it (for example, "Let me look for flights that land before 2 p.m. tomorrow"). Ask only if the goal is still unclear. See [hollow empathy](../../../../human-machine-interface/goals/emotional-intelligence/failures/hollow-empathy.md) and [missing the obvious intent](../../../../human-machine-interface/goals/embedded-copilots/failures/missing-the-obvious-intent.md). The shape of the miss (a bot that answers part of a request and overlooks the rest, or misses frustration) is described on the [LivePerson blog](https://www.liveperson.com/blog/top-5-reasons-chatbots-fail/); the transcript above is illustrative, not a recorded incident.
+
 ## References
 
 - [NIST-GenAI-Profile](https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence)
