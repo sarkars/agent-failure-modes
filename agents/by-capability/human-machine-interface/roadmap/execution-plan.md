@@ -990,6 +990,7 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 - **Part B:** Skipped. The 2026-10-20 entry already exists.
 - **Taxonomy:** 81 entries in 23 families; signals 81 of 81; Moves 81 of 81; sixteen flagged. Queue: rows 108 to 117 done; about 315 rows remain Queued.
 - **Unverified claims:** anything read only in search summaries is kept out of public text.
+- **Deploy:** content PR #25 merged (merge commit 9ee4949); the site repo had no foreign commits. Scratch build clean, 1645 pages; the live sitemap had 1592 URLs, none missing from the build (removed: 0). New pages: pacing-mismatch, deceptive-typing-indicators, session-timeout-and-lost-context, impatient-idle-nudges, urgency-blind-pacing, no-way-to-report-bad-behaviour; changed: failure-taxonomy-v1, the response-time goal page, the HMI category page; new goal page measurement-and-feedback. Sample pages have exactly one `<h1>` and no visible `search phrases:` text. Pushed as site commit 0c6b3eb6c. No deploy hook set. Live check 100 seconds after the push: `/pacing-mismatch/` returned 404; pushed to site repo main, not verified live. Not pushed again. The scenario packs and the teardown are outside the runbook's publish scope.
 
 ## Backlog (not scheduled)
 Ideas from earlier lists that were never chosen. They stay out of the queue until someone adds them.
