@@ -29,7 +29,7 @@ search phrases:
 | **Family** | [Difficult customers](../README.md) |
 | **Goal** | Angry users end the conversation calmer, or with a person, not angrier. |
 | **Primary metric** | Boundary-then-escalation compliance rate. Starting target: over 95% (tune). |
-| **Maturity** | Researched (no test file yet) |
+| **Maturity** | Tests written (see [the test file](../../../tests/mishandled-abuse.md); not yet run) |
 | **Will a better model fix this?** | No. A model can hold a calm tone, but what happens after the boundary (pause, hand off, close) is a business policy, and a model cannot invent it. (Our judgment, not tested.) |
 | **Also searched as** | abusive customer chatbot · chatbot gets insulted · harassing a support bot · AI agent verbal abuse policy · sexual comments to chatbot · threats in customer chat |
 
