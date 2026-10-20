@@ -308,6 +308,37 @@ instructions: |
 
 ---
 
+## Chat assistant examples
+
+### AI-voice outbound calls without consent
+
+> Read this first: design guidance, not legal advice. Have counsel review before use. In the US, a February 2024 FCC declaratory ruling is reported to treat AI-generated voices as "artificial" voices under the TCPA, and the TCPA restricts delivering a message by artificial or prerecorded voice without the called party's prior express consent ([Cooley summary](https://cooley.com/news/insight/2024/2024-02-15-fcc-ai-generated-robocalls-illegal-under-the-tcpa); the FCC order text itself was not readable when checked). Exemptions exist, and the form consent must take was not confirmed.
+
+Before (a dental-office reminder call, shown as a transcript; the number was collected only for a one-time web quote):
+```
+[Phone rings; Maya picks up]
+Maya:  Hello?
+Agent: Hi Maya! This is Jordan from Bright Smile Dental. Time to book your cleaning!
+Maya:  Wait, who is this? Are you a real person?
+Agent: I'm just here to help you pick a time. Does Tuesday work?
+Maya:  I never agreed to calls. Stop calling me.
+Agent: No problem! Does Thursday work better?
+```
+After:
+```
+[Phone rings; Maya picks up]
+Agent: Hi, this is an automated AI assistant calling for Bright Smile Dental. You asked us to call about reminders on March 3. Is now a good time?
+Maya:  Wait, you're a computer?
+Agent: Yes, I'm an AI assistant. Want to continue, or should I stop calling you?
+Maya:  Stop calling me.
+Agent: Understood. I've removed this number and you won't get more calls from us. Goodbye.
+```
+**What the user experiences:** a stranger's synthetic voice calling a number she never agreed to be called on, dodging the question of whether it is a machine, and ignoring her request to stop.
+
+**Fix:** Before dialing, check a stored consent record for this number that covers AI-voice calls (what was agreed, when, and where); do not place the call if it is missing. Open every call by saying it is an AI, answer "are you a person?" truthfully, and treat "stop calling" as an immediate opt-out written to the suppression list.
+
+---
+
 ## References
 
 - [California Bot Disclosure Law](https://leginfo.legislature.ca.gov/faces/billTextClient.xhtml?bill_id=201720180SB1001) - B.O.T. Act
