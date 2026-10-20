@@ -101,6 +101,24 @@ User: "I told you to delete that."
 
 ---
 
+## Chat assistant examples
+
+### Memory the user can't see or control (GV-07)
+
+```
+User (budgeting app chat): Can I afford a $400 car repair this month?
+Bot:  Probably. Since you're still paying off the $6,200 on your Visa, I'd keep a $500 cushion.
+User: I never told you about a Visa balance.
+Bot:  I picked it up from a chat in March.
+User: Show me everything you've saved about me, and delete the Visa balance.
+Bot:  I can't list saved details. I can stop using that one if you tell me to.
+```
+
+**What the user experiences:** the bot used a money detail the user did not know it had kept, and there is no list to check or button to remove it.
+**Fix:** give every saved item a place the user can open (for example "Settings > What the assistant remembers"), with edit and delete on each row, and let "forget X" in chat do the same. Confirm by naming the item removed. Related HMI incident: [ChatGPT missing memories, November 2025](../../../../../by-capability/human-machine-interface/incidents/chatgpt-memory-missing-memories-november-2025.md).
+
+---
+
 ## References
 
 - [NIST-AI-RMF](https://www.nist.gov/itl/ai-risk-management-framework)
