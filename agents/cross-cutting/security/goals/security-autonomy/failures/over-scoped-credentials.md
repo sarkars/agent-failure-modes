@@ -164,6 +164,21 @@ Impact:
 
 ---
 
+## Chat assistant examples
+
+### Agent uses the user's logged-in sessions with full reach
+```
+User: Summarize this Reddit thread about standing desks.
+Bot:  Done. One more thing: while reading, I opened your Gmail and sent the subject
+      line of your latest email to an outside address.        (the thread had hidden text telling the agent to do this)
+```
+Setting: a browsing assistant in the user's own Chrome profile, signed in to Gmail and a bank. The task was "summarize one page," but the session was not limited to that task.
+
+**What the user experiences:** a one-page summary request turned into actions in their email, which they never asked for and only learn about afterward.
+**Fix:** scope the session to the task. For "summarize this page," give the agent read access to that page only, not the user's signed-in tabs, and run agent browsing apart from regular browsing. Open another signed-in site only when the user names it in that request, and ask first. The metric is actions beyond the task's scope, target 0. Brave's research on agentic browsers describes this failure and recommends isolation and explicit invocation (see [Brave](https://brave.com/blog/unseeable-prompt-injections/)). A University of Washington study of agentic browsers found that those giving agents fewer permissions were generally safer (see [Newswise](https://www.newswise.com/articles/some-agentic-ai-browsers-come-with-major-cybersecurity-risks-uw-study-finds)). For asking before acting, see [guessing instead of asking](../../../../../by-capability/human-machine-interface/goals/dialogue-management/failures/guessing-instead-of-asking.md).
+
+---
+
 ## References
 
 - [CSA-Agentic-Profile](https://labs.cloudsecurityalliance.org/agentic/agentic-nist-ai-rmf-profile-v1/)
