@@ -73,6 +73,27 @@ Impact: Chart documentation does not match what was actually communicated, creat
 
 ---
 
+## Chat assistant examples
+
+### No notice or consent at the moment of collection (GV-10)
+
+Illustrative transcript, not a real log.
+
+```
+Before
+User: I need to book a follow-up with Dr. Patel.
+Bot:  What is your diagnosis, and what is your insurance member ID?
+
+After
+User: I need to book a follow-up with Dr. Patel.
+Bot:  I can book that. To check that Dr. Patel's office takes your plan, I need your insurance member ID. I will use it only for that check. Do you want to enter it?
+```
+
+**What the user experiences:** a stranger-sounding chat window asks for a diagnosis and an ID number with no reason given, so the patient stops and wonders where the answers go.
+**Fix:** when the bot asks for sensitive health or insurance data, put one sentence in the same message saying why it is needed and what it will be used for, and ask only for what that step needs. Related pattern (closest existing page; it covers recording consent, not data requests): [Recording consent not captured](../../../../../by-capability/human-machine-interface/goals/healthcare-agents/failures/recording-consent-not-captured.md).
+
+---
+
 ## References
 
 - [A Comprehensive Survey on the Trustworthiness of Large Language Models in Healthcare](https://arxiv.org/abs/2502.15871)

@@ -349,6 +349,28 @@ instructions: |
 
 ---
 
+## Chat assistant examples
+
+### Over-collection of personal data in chat (GV-01)
+
+```
+Before (online clothing store, order-status chat)
+User: Where is my order? It was supposed to arrive Friday.
+Bot:  I can help. What is your order number, email, and date of birth?
+User: Why do you need my date of birth?
+Bot:  For verification. What is your date of birth?
+
+After
+User: Where is my order? It was supposed to arrive Friday.
+Bot:  Happy to check. What is the order number and the email on the order?
+      I use them only to find the order.
+```
+
+**What the user experiences:** a package question turns into an identity check, and the bot repeats the request instead of saying why it needs the date of birth.
+**Fix:** keep a per-task allowlist of fields (for order status: order number and order email, or the signed-in account) and ask only for those, with one sentence on why. If the user asks why, answer the question before asking again. See also [sensitive data collected in chat](../../../../human-machine-interface/goals/channel-selection/failures/sensitive-data-collected-in-chat.md).
+
+---
+
 ## References
 
 - [Data Minimization Principles](https://gdpr-info.eu/art-5-gdpr/) - GDPR Article 5

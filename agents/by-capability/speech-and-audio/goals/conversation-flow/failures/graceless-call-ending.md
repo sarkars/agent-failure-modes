@@ -351,6 +351,30 @@ instructions: |
 
 ---
 
+## Chat assistant examples
+
+### Bad endings (FW-O02)
+
+Illustrative transcript, not a real log. The setting is a card-replacement chat in a bank's mobile app.
+
+```
+User: My debit card was stolen. I need a new one before my trip on Friday.
+Bot:  I froze the card ending 4417 and ordered a replacement. Ship to 212 Elm St, Austin?
+User: Yes. Can it come by Thursday?
+Bot:  Yes, expedited shipping is selected. It should arrive by Thursday.
+
+Before:
+Bot:  Your request has been processed. Chat ended.
+
+After:
+Bot:  Done. The old card is frozen, and the new one ships expedited to 212 Elm St, arriving by Thursday. You can use Apple Pay today. Safe travels!
+```
+
+**What the user experiences:** a long, helpful chat that stops with a form-style line, so the user has to ask what was actually decided and whether anything is left to do.
+**Fix:** end every resolved chat with one closing message that names the outcome and the next step, then stops. The peak-end idea says a better ending raises satisfaction, but that is a research claim not verified here. See the row [FW-O02](../../../../human-machine-interface/roadmap/conversation-frameworks.md).
+
+---
+
 ## References
 
 - [Conversation Closing Research](https://arxiv.org/abs/2106.07837) - Closing rituals
