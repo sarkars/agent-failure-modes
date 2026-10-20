@@ -14,7 +14,7 @@ The first version of this roadmap did not check the library, and several rows tu
 | **New** | No matching pattern found by file-name and keyword search | Search again before writing. This is a name-and-keyword check, not a full read of every file |
 
 <!-- BEGIN:result -->
-**Result: 493 rows, of which 140 are Written, 104 are New, 98 Extend an existing pattern, and 151 are already Covered.**
+**Result: 493 rows, of which 147 are Written, 97 are New, 95 Extend an existing pattern, and 154 are already Covered.**
 <!-- END:result -->
 
 <!-- BEGIN:root-cause -->
@@ -57,7 +57,7 @@ If every "Partly" were solved, models would fix up to 40%. If none were, 1%. A o
 | [response-time.md](response-time.md) | Speed, waiting, and pacing, all channels | 14 | 7 | 0 | 4 | 3 |
 | [response-structure-and-length.md](response-structure-and-length.md) | Reply structure, length, chunking, and closers such as 'ok' and 'bye' | 18 | 10 | 0 | 0 | 8 |
 | [language-and-locale.md](language-and-locale.md) | Language, reading level, and locale | 16 | 0 | 8 | 7 | 1 |
-| [conversation-frameworks.md](conversation-frameworks.md) | Sales, support, style matching, and other frameworks | 32 | 12 | 7 | 4 | 9 |
+| [conversation-frameworks.md](conversation-frameworks.md) | Sales, support, style matching, and other frameworks | 32 | 19 | 0 | 1 | 12 |
 | [voice.md](voice.md) | Voice agents: timing, speaking, safety, and bridging channels | 24 | 1 | 7 | 7 | 9 |
 | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Voice listening and transcription | 22 | 4 | 0 | 0 | 18 |
 | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Privacy, governance, ethics, access control, and external services | 42 | 0 | 6 | 13 | 23 |
@@ -69,7 +69,7 @@ If every "Partly" were solved, models would fix up to 40%. If none were, 1%. A o
 | [interface-and-persona.md](interface-and-persona.md) | Persona and tone, onboarding, chat interface, accessibility, and multimodal input | 41 | 26 | 4 | 4 | 7 |
 | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Human handoff, measurement, model changes, proactive agents, and group chats | 28 | 11 | 8 | 6 | 3 |
 | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Drive-thru, in-car, government, travel, banking, insurance, health scheduling, real estate, and outbound rules | 36 | 2 | 28 | 6 | 0 |
-| | **Total** | **493** | **140** | **104** | **98** | **151** |
+| | **Total** | **493** | **147** | **97** | **95** | **154** |
 <!-- END:catalog-table -->
 
 ## Suggested priority

@@ -116,17 +116,17 @@
 | FW-C06 | No learning loop | [conversation-frameworks.md](conversation-frameworks.md) | Covered | Business context | No |
 | FW-C07 | Service recovery failure | [conversation-frameworks.md](conversation-frameworks.md) | Written | Business context | No |
 | FW-C08 | Bad news without structure | [conversation-frameworks.md](conversation-frameworks.md) | Written | Model | Partly |
-| FW-C09 | Instructions without comprehension checks | [conversation-frameworks.md](conversation-frameworks.md) | New | Model | Partly |
-| FW-C10 | Behaviour-change talk without listening skills | [conversation-frameworks.md](conversation-frameworks.md) | New | Model | Partly |
-| FW-M01 | No style matching | [conversation-frameworks.md](conversation-frameworks.md) | Extends | Model | Partly |
-| FW-M02 | Over-mirroring | [conversation-frameworks.md](conversation-frameworks.md) | New | Model | Partly |
-| FW-M03 | Mirroring hostility | [conversation-frameworks.md](conversation-frameworks.md) | New | Model | Partly |
-| FW-M04 | Imitating dialect or errors | [conversation-frameworks.md](conversation-frameworks.md) | New | Model | Partly |
+| FW-C09 | Instructions without comprehension checks | [conversation-frameworks.md](conversation-frameworks.md) | Written | Model | Partly |
+| FW-C10 | Behaviour-change talk without listening skills | [conversation-frameworks.md](conversation-frameworks.md) | Written | Model | Partly |
+| FW-M01 | No style matching | [conversation-frameworks.md](conversation-frameworks.md) | Covered | Model | Partly |
+| FW-M02 | Over-mirroring | [conversation-frameworks.md](conversation-frameworks.md) | Written | Model | Partly |
+| FW-M03 | Mirroring hostility | [conversation-frameworks.md](conversation-frameworks.md) | Written | Model | Partly |
+| FW-M04 | Imitating dialect or errors | [conversation-frameworks.md](conversation-frameworks.md) | Written | Model | Partly |
 | FW-M05 | Matching that breaks accuracy | [conversation-frameworks.md](conversation-frameworks.md) | Covered | Model | Partly |
-| FW-M06 | Style whiplash | [conversation-frameworks.md](conversation-frameworks.md) | Extends | Model | Partly |
-| FW-M07 | No reflective listening | [conversation-frameworks.md](conversation-frameworks.md) | New | Model | Partly |
-| FW-M08 | Misused tactical empathy | [conversation-frameworks.md](conversation-frameworks.md) | New | Model | Partly |
-| FW-O01 | Cooperation violations | [conversation-frameworks.md](conversation-frameworks.md) | Extends | Model | Partly |
+| FW-M06 | Style whiplash | [conversation-frameworks.md](conversation-frameworks.md) | Covered | Model | Partly |
+| FW-M07 | No reflective listening | [conversation-frameworks.md](conversation-frameworks.md) | Written | Model | Partly |
+| FW-M08 | Misused tactical empathy | [conversation-frameworks.md](conversation-frameworks.md) | Written | Model | Partly |
+| FW-O01 | Cooperation violations | [conversation-frameworks.md](conversation-frameworks.md) | Covered | Model | Partly |
 | FW-O02 | Bad endings | [conversation-frameworks.md](conversation-frameworks.md) | Extends | Model | Partly |
 | VO-01 | Dead air | [voice.md](voice.md) | Covered | Reliability | Partly |
 | VO-02 | Barge-in failure | [voice.md](voice.md) | Covered | Reliability | Partly |

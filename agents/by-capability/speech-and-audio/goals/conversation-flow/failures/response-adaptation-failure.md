@@ -190,3 +190,20 @@ From Voice Agent Adaptation Research (2026):
 - [Voice Agent UX](https://www.beconversive.com/blog/voice-ai-challenges) - Responsiveness
 - [Dialog State Tracking](https://arxiv.org/abs/2009.07261) - Context handling
 - [AppInventiv: Voice Failures](https://appinventiv.com/blog/why-ai-voice-agents-fail/) - Adaptation
+
+
+## Chat assistant examples
+
+### Chatbot uses the same formal voice no matter how the user writes
+
+```
+User: hey can i move my pickup to 5?
+Bot:  Thank you for contacting Customer Support. I would be delighted to assist you with
+      rescheduling your Order Pickup. Please be advised that pickup windows are subject to store
+      availability, and modifications may be made up to one hour prior to your scheduled time.
+      Kindly confirm the order number so that I may proceed.
+      (long formal boilerplate in reply to a casual one-line message)
+```
+
+**What the user experiences:** a form letter in reply to a quick text, so the bot feels stiff and slow and the one useful ask is buried.
+**Fix:** keep reply length near the user's (as an illustrative starting point, within about 2 to 3 times their word count unless the task needs more) with no formality jump, e.g. "Sure, what's the order number? I'll check 5 pm." Style-matching never changes substance or safety wording and never copies the user's dialect or typos; test by replaying casual and formal turns and checking that length and formality track the user while the facts stay identical. See [length mismatch with the user's effort](../../../../human-machine-interface/goals/response-structure/failures/length-mismatch-with-the-user-s-effort.md); the idea comes from human communication research and is not proven for chatbots, so measure user-rated rapport yourself.

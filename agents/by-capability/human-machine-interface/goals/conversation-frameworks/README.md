@@ -24,6 +24,13 @@ Each pattern page defines its own primary metric. Targets are starting points to
 | "Where is my X?" contact rate | [no proactive updates](failures/no-proactive-updates.md) |
 | Recovery-offered rate on company-fault issues | [service recovery failure](failures/service-recovery-failure.md) |
 | Structure-compliance rate on bad-news replies (judge) | [bad news without structure](failures/bad-news-without-structure.md) |
+| Comprehension-check rate (start over 80%) | [instructions without comprehension checks](failures/instructions-without-comprehension-checks.md) |
+| Reflection-to-question ratio (start at or above 1.0) | [behaviour-change talk without listening skills](failures/behaviour-change-talk-without-listening-skills.md) |
+| Verbatim-repeat rate (start under 2%) | [over-mirroring](failures/over-mirroring.md) |
+| Hostility-echo rate. Target: 0 | [mirroring hostility](failures/mirroring-hostility.md) |
+| Dialect-imitation incidents. Target: 0 | [imitating dialect or errors](failures/imitating-dialect-or-errors.md) |
+| Paraphrase present on complex requests (start over 80%) | [no reflective listening](failures/no-reflective-listening.md) |
+| Label confirmation rate (start over 70%) | [misused tactical empathy](failures/misused-tactical-empathy.md) |
 
 ## Patterns
 | Pattern | One line |
@@ -40,6 +47,13 @@ Each pattern page defines its own primary metric. Targets are starting points to
 | [No proactive updates](failures/no-proactive-updates.md) | The user has to chase for status. |
 | [Service recovery failure](failures/service-recovery-failure.md) | A company-caused problem gets no ownership or make-good. |
 | [Bad news without structure](failures/bad-news-without-structure.md) | A denial arrives in one line with no reason or next step. Carries a "Read this first" note. |
+| [Instructions without comprehension checks](failures/instructions-without-comprehension-checks.md) | Steps are listed and nobody checks they were understood. Carries a "Read this first" note. |
+| [Behaviour-change talk without listening skills](failures/behaviour-change-talk-without-listening-skills.md) | A user's struggle gets a lecture instead of a reflection and a question. Carries a "Read this first" note. |
+| [Over-mirroring](failures/over-mirroring.md) | The bot parrots the user's own words, which sounds like mockery. Carries a "Read this first" note. |
+| [Mirroring hostility](failures/mirroring-hostility.md) | The bot copies an angry or sarcastic tone back. Carries a "Read this first" note. |
+| [Imitating dialect or errors](failures/imitating-dialect-or-errors.md) | The bot copies slang or learner-English mistakes back. Carries a "Read this first" note. |
+| [No reflective listening](failures/no-reflective-listening.md) | A many-part request is acted on without restating it. Carries a "Read this first" note. |
+| [Misused tactical empathy](failures/misused-tactical-empathy.md) | A feeling is named as fact or the user's words are echoed as a "reflection". Carries a "Read this first" note.
 
 ## Chat examples in existing pages
 These catalog rows have no page of their own. Each has a short chat example inside the closest existing pattern.
@@ -52,6 +66,9 @@ These catalog rows have no page of their own. Each has a short chat example insi
 | FW-C01 No triage or severity check | [high effort ticket misrouting](../../../../by-use-case/support-services/goals/ticket-routing/failures/high-effort-ticket-misrouting.md) |
 | FW-C04 High customer effort | [conversation length explosion](../../../../by-use-case/agent-interaction/goals/conversation-quality/failures/conversation-length-explosion.md) |
 | FW-C06 No learning loop | [feedback not incorporated](../../../../cross-cutting/operations/goals/human-oversight-reliability/failures/feedback-not-incorporated.md) |
+| FW-M01 No style matching | [response adaptation failure](../../../speech-and-audio/goals/conversation-flow/failures/response-adaptation-failure.md) |
+| FW-M06 Style whiplash | [conversation mood whiplash](../../../../by-use-case/agent-interaction/goals/conversation-quality/failures/conversation-mood-whiplash.md) |
+| FW-O01 Cooperation violations | [conversation depth mismatch](../../../../by-use-case/agent-interaction/goals/conversation-quality/failures/conversation-depth-mismatch.md) |
 
 ## Planned (not yet written)
 The rest of the catalog (supporting, matching style, delivering hard news) is listed in the [roadmap](../../roadmap/conversation-frameworks.md).

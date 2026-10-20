@@ -69,3 +69,20 @@ erratic rather than responsive.
 - [Conversation Formality Mismatch](conversation-formality-mismatch.md) - a single miscalibrated response; repeated or extreme mismatches across turns produce whiplash
 - [Conversation Coherence Loss](conversation-coherence-loss.md) - both stem from insufficient cross-turn state tracking, one for facts and one for tone
 - [User Trust Degradation](user-trust-degradation.md) - erratic tone contributes to a sense of unreliability that compounds trust erosion over time
+
+## Chat assistant examples
+
+### Chatbot tone changes suddenly between messages
+```
+User: Hi, I need to dispute a charge on my Chase card.
+Bot:  Hey there! 😊 Happy to help with that!                  (turn 1: breezy, emoji)
+User: It's $84.20 from a gym I never joined.
+Bot:  Noted. Pursuant to the cardholder agreement, the      (turn 3: stiff legalese, no bridge)
+      cardholder shall submit written notice of the disputed
+      item prior to the stated deadline. Failure to do so may
+      result in forfeiture.
+User: ok so what do I do now?
+Bot:  No worries, just tap the button below and we're done! 🎉 (turn 5: casual again, as if turn 3 never happened)
+```
+**What the user experiences:** a chatbot that sounds like three different people, so the legal notice feels like a trap and the cheerful reply afterward feels like it isn't taking the dispute seriously.
+**Fix:** Keep one voice for the whole session (see the [Model Style Drift](../../../../../by-capability/reasoning-and-thought/goals/model-behavior-and-capabilities/failures/model-style-drift.md) pattern) and change register only in steps tied to a visible reason: the user changes their own style, or the stakes change (a payment, a dispute deadline, a legal notice). When the wording must be formal, introduce it with a short bridge sentence ("Here is the official notice about your deadline:") and return to the base voice right after. Test it by scoring each reply for formality and emoji use on a simple scale and checking that no two adjacent replies differ by more than a set step (for example 1 point on a 5-point scale, an illustrative starting point), except on turns flagged as a stakes change.
