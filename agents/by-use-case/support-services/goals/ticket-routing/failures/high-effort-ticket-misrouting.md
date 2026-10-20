@@ -55,3 +55,23 @@ Impact: Poor customer experience; inefficient labor
 
 - [Ticket Routing with ML](https://arxiv.org/abs/1912.08634)
 - [Complexity Prediction in Support](https://arxiv.org/abs/2008.02455)
+
+---
+
+## Chat assistant examples
+
+### Chat issue treated as routine with no severity check
+```
+Before:
+User: Our Gusto payroll run is due at 5 pm today and every employee login says "account locked." I can't submit it.
+Bot:  Sorry to hear that! Try resetting your password using the "Forgot password" link.
+User: It's the admin account, the reset email never arrives, and 40 people don't get paid if I miss 5 pm.
+Bot:  I've created ticket #48213. Our team replies within 2 business days.
+
+After:
+Bot:  A locked admin account with a payroll deadline today is urgent. I'm sending it to a specialist now and marking it high priority. Are you the account admin, and what time is the deadline?
+User: Yes, admin. 5 pm Eastern.
+Bot:  Done. I passed along the deadline, the locked admin account, and the missing reset email. A specialist will contact you at this chat or by phone within 15 minutes.
+```
+**What the user experiences:** a deadline that puts 40 paychecks at risk gets the same password-reset tip and 2-day queue as a routine question.
+**Fix:** before any self-service answer, classify impact (how many people are blocked) and urgency (is there a deadline today, is there a workaround). Route a blocked-with-deadline case straight to a person with the details attached, and ask only for what the specialist needs. See [escalates too early or too late](../../../../../by-capability/human-machine-interface/goals/human-handoff/failures/escalates-too-early-or-too-late.md).
