@@ -95,6 +95,51 @@ User: "Wait, you told me 30 days earlier in this same chat."
 
 ---
 
+## Chat assistant examples
+
+### Contradicts an earlier answer without saying so
+
+*Illustrative transcript, not a real product log. "Trailhead Outfitters" is an invented US outdoor-gear retailer.*
+
+```
+Before:
+User: (turn 2) How long do I have to return the Ridgeline tent?
+Bot:  30 days from delivery.
+      ... eight turns about shipping and sizing ...
+User: (turn 10) So I have until the 20th to send it back?
+Bot:  Yes, the return window is 14 days from delivery.
+      (the 30-day answer was never mentioned again)
+
+After:
+Bot:  I need to correct what I told you earlier. I said 30 days, but our policy for camping gear is 14 days from delivery. Your window ends on Nov 3. Sorry for the mix-up.
+```
+
+**What the user experiences:** two answers to the same question in one chat, with no sign of which one to trust or why the answer changed.
+
+**Fix:** before sending a fact already stated in the conversation, compare it with the earlier answer. If it differs, say so, say which one is right, and say why (for example, the first answer was wrong or the policy differs by item). See the [confident wrong answer with no way to check](../../../../../by-capability/human-machine-interface/goals/errors-and-recovery/failures/confident-wrong-answer-with-no-way-to-check.md) pattern.
+
+### Different answers by session or regeneration
+
+*Illustrative transcript, not a real product log. "Harbor Mutual" is an invented US auto insurer.*
+
+```
+Before:
+User: (session 1) Does my policy cover a rental car after an accident?
+Bot:  Yes, up to $40 per day for 30 days.
+User: (session 2, same policy, same question, a few minutes later)
+Bot:  Rental coverage is $30 per day for up to 20 days.
+
+After:
+Bot:  Your policy includes rental reimbursement of $40 per day for up to 30 days (Coverage Summary, rental section).
+      (both sessions read the same policy record and give the same answer)
+```
+
+**What the user experiences:** asking again, or opening a new chat, changes the answer, so they cannot tell which number to rely on.
+
+**Fix:** read policy facts such as limits and dates from one source of truth (the customer's policy record) and quote them, rather than letting the model generate them. The same question on the same data must return the same answer. See the [confident wrong answer with no way to check](../../../../../by-capability/human-machine-interface/goals/errors-and-recovery/failures/confident-wrong-answer-with-no-way-to-check.md) pattern.
+
+---
+
 ## References
 
 - [NIST-GenAI-Profile](https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence)
