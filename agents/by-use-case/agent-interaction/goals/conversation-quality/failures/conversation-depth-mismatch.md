@@ -121,3 +121,18 @@ Bot:  Yes. Connect it to the modem's Ethernet port, then restart the modem so th
 ```
 **What the user experiences:** a correct but bare answer that raises the next question, so the user has to ask "which settings?" and "how?" one turn at a time.
 **Fix:** when the answer needs a step or a condition to be usable, include it in the first reply (the step, the condition, one next action), and keep anything longer behind an offer. This is the same gap as stopping before the job is usable, covered in [Lazy Completion](../../../../../by-capability/human-machine-interface/goals/effort-and-memory/failures/lazy-completion.md).
+
+### Chatbot answers a different question than the one asked
+```
+Before (illustrative chat for a US airline)
+User: How much is a second checked bag on my flight to Denver?
+Bot:  Checked bag fees depend on your fare type, route, and loyalty status. Carry-on bags must fit in the overhead bin or under the seat,
+      and basic economy fares may have extra restrictions. Bags can be added during booking, at check-in, or at the airport.
+                                                          (relevant to baggage, but the price was never given)
+
+After
+User: How much is a second checked bag on my flight to Denver?
+Bot:  A second checked bag on your trip is $45 if you pay online before check-in, $50 at the airport. Want the weight and size limits too?
+```
+**What the user experiences:** a reply that stays on topic and is not short, yet leaves out the one number asked for, so the user has to repeat the question or give up and search elsewhere.
+**Fix:** the first sentence answers the exact question asked, using the user's booking or the fee table when the amount is known. Add other detail only if it changes what the user will do, and say plainly when the amount can't be found. Compare the answer-first rule in [Chatbot Buries the Answer](../../../../../by-capability/human-machine-interface/goals/response-structure/failures/answer-buried.md).
