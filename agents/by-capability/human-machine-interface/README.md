@@ -56,7 +56,7 @@
 A one-page [index of every catalogued failure](roadmap/index.md) shows its library status, root cause, and whether a better model alone would fix it.
 
 <!-- BEGIN:roadmap-count -->
-[493 catalogued patterns](roadmap/README.md) with goals and metrics, checked against the existing library (96 written, 148 new, 124 that extend an existing pattern, 125 already covered). The [execution plan](roadmap/execution-plan.md) orders the 368 to write.
+[493 catalogued patterns](roadmap/README.md) with goals and metrics, checked against the existing library (100 written, 144 new, 118 that extend an existing pattern, 131 already covered). The [execution plan](roadmap/execution-plan.md) orders the 362 to write.
 <!-- END:roadmap-count -->
 
 Catalog files: [conversation design, refusals, and errors](roadmap/conversation-design.md), [persona, onboarding, interface, accessibility, and multimodal input](roadmap/interface-and-persona.md), [handoff, measurement, and operations](roadmap/handoff-measurement-and-operations.md), [service verticals](roadmap/service-and-vertical-patterns.md), [agent types](roadmap/agent-types.md), [embedded copilots](roadmap/embedded-copilots.md), [emerging surfaces](roadmap/emerging-surfaces.md), chat and core, [response time](roadmap/response-time.md), [response structure and closers](roadmap/response-structure-and-length.md), [language and locale](roadmap/language-and-locale.md), [conversation frameworks](roadmap/conversation-frameworks.md) (sales, support, style matching), voice, voice listening and transcription, [privacy, governance, and access](roadmap/privacy-governance-and-access.md), [effort, completeness, and memory](roadmap/effort-completeness-and-memory.md), and visual and oversight.

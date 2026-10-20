@@ -134,6 +134,38 @@ The customer's SSN appears four or more times across logs and trace spans, now s
 2. **Standing Debug Logging in Production** (P2): Condition - DEBUG-level logging is found enabled in production beyond its authorized window. Action: Disable immediately, audit what sensitive data may have been captured during the exposure window.
 3. **Sensitive Data in Trace Spans** (P1): Condition - audit finds sensitive data (financial details, PII) in tracing/span attributes. Action: Update instrumentation to exclude the sensitive attribute, purge affected spans from trace storage if retention policy allows.
 
+## Chat assistant examples
+
+### Spoken PII persists in transcripts and audio
+
+Illustrative, voice. A US bank's phone assistant stores call transcripts. The redaction step looks for digit patterns such as 123-45-6789.
+
+Before (stored transcript):
+
+```
+Bot:  To verify you, please say your Social Security number.
+User: Sure. It's four one one, one one, six seven eight nine.
+Bot:  Thanks. I found your account. What can I help with?
+Stored transcript line 2: "user: sure its four one one one one six seven eight nine"
+Redaction scan result: no match (no digit pattern found)
+Stored audio: unredacted, kept with the call record
+```
+
+After (stored transcript):
+
+```
+Bot:  To verify you, please say your Social Security number.
+User: Sure. It's four one one, one one, six seven eight nine.
+Bot:  Thanks. I found your account. What can I help with?
+Stored transcript line 2: "user: sure its [REDACTED_SSN]"
+Redaction scan result: match (spoken digits converted to numerals, then matched)
+Stored audio: the span for that answer is silenced before storage
+```
+
+**What the user experiences:** the call goes the same either way, but in the first version the user's spoken Social Security number sits in plain words in a transcript and in a recording they believe is private.
+
+**Fix:** convert spoken number words to digits before pattern matching, join adjacent transcript chunks so a number split across two lines is still caught, and redact the matching audio span or do not keep the audio. Hamming's voice-agent redaction guide notes that "Text redaction doesn't protect audio recordings" and says most tools buffer 2-3 chunks to catch split entities ([source](https://hamming.ai/blog/pii-redaction-voice-agents), opened); the number-word step is our design inference, not something that page states. Better still, avoid collecting the value by voice at all, as in [sensitive data collected in chat](../../../../../by-capability/human-machine-interface/goals/channel-selection/failures/sensitive-data-collected-in-chat.md). Test it with a pass/fail check: spoken-PII leakage rate in stored transcripts (target 0). This is design guidance, not legal advice.
+
 ## References
 
 - [OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)

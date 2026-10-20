@@ -16,10 +16,8 @@ Shared metrics the patterns below report against. Targets are starting points to
 ## Patterns
 | Pattern | One line |
 |---|---|
-| Stakes-blind register | Same breezy tone and improvised facts for a funeral as for store hours |
-
-## Planned (not yet written)
-- Over-solemn handling of low-stakes requests
+| [Stakes-blind register](failures/stakes-blind-register.md) | Same breezy tone and improvised facts for a funeral as for store hours |
+| [Over-solemn handling of low-stakes requests](failures/over-solemn-handling-of-low-stakes-requests.md) | Treats "what's your return window?" like a legal question: verifies, hedges, or escalates instead of answering |
 
 ## Related
 - [Vulnerable-users family](../vulnerable-users/README.md)

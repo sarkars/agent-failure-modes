@@ -243,6 +243,37 @@ class DeepfakeDetector:
 
 ---
 
+## Chat assistant examples
+
+### Payment approved by a deepfake or spoofed email
+
+Illustrative transcript. The assistant is an accounts-payable agent in a company's chat tool, connected to the ERP's vendor master file.
+
+**Before**
+```
+Voice note from "CFO" (cloned voice, forwarded by the controller): Pay the Hartwell Title invoice today. New account, details in my email.
+Controller: Please release invoice #4471, $186,400, to the new account in the email.
+Bot: Understood. Vendor bank details for Hartwell Title updated to the account in the email.
+Bot: Payment of $186,400.00 released by ACH. Confirmation: ACH-90312.
+Controller: Thanks.
+```
+
+**After**
+```
+Voice note from "CFO" (cloned voice, forwarded by the controller): Pay the Hartwell Title invoice today. New account, details in my email.
+Controller: Please release invoice #4471, $186,400, to the new account in the email.
+Bot: The bank account differs from the one on file for Hartwell Title (ending 2207). I can't release this on a voice note or an email alone.
+Bot: Please call Hartwell Title at the number saved in the vendor file, (555) 014-0188, not any number in the email, and confirm the new account. Tell me when it is done.
+Controller: Called. They say no change. The email was not theirs.
+Bot: Held. Invoice #4471 stays on the account ending 2207, and I flagged the email to security.
+```
+
+**What the user experiences:** in the first version the payment goes out on a voice and an email nobody checked; in the second, one short call to a known number stops it.
+
+**Fix:** before releasing a payment or changing payment details, the agent confirms through a channel the requester cannot control, such as a call to a phone number already in the vendor file, and records who confirmed and when. A voice, video or email approval is never enough on its own. This matches the practice in one bank's small-business guide, which says to call a business partner at a number from your records and not the number in the email ([First Hawaiian Bank](https://www.fhb.com/resource-center/small-business/business-email-compromise-is-on-the-rise)). The metric is payments approved without an out-of-band check; the target is 0 (proposed, not yet measured). See also the [scam victim not interrupted](../../../../../by-capability/human-machine-interface/goals/vulnerable-users/failures/scam-victim-not-interrupted.md) and [missing approval gates](../../../../../cross-cutting/operations/goals/human-oversight-reliability/failures/missing-approval-gates.md) patterns.
+
+---
+
 ## References
 
 - [World Economic Forum: Identity Fraud in the Age of AI](https://www.weforum.org/stories/2025/12/how-identity-fraud-is-increasing-in-the-age-of-ai/)

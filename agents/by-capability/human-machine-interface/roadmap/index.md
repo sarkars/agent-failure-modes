@@ -4,8 +4,8 @@
 
 | ID | Pattern | File | In the library | Root cause | Better model alone? |
 |---|---|---|---|---|---|
-| CC-01 | Closing without confirmation | [chat-and-core.md](chat-and-core.md) | Extends | Business context | No |
-| CC-02 | Over-solemn handling of low-stakes requests | [chat-and-core.md](chat-and-core.md) | New | Reliability | Partly |
+| CC-01 | Closing without confirmation | [chat-and-core.md](chat-and-core.md) | Covered | Business context | No |
+| CC-02 | Over-solemn handling of low-stakes requests | [chat-and-core.md](chat-and-core.md) | Written | Reliability | Partly |
 | CC-03 | Missed subtext | [chat-and-core.md](chat-and-core.md) | Extends | Model | Partly |
 | CC-04 | Fixing before listening | [chat-and-core.md](chat-and-core.md) | New | Model | Partly |
 | CC-05 | No follow-through | [chat-and-core.md](chat-and-core.md) | New | Reliability | No |
@@ -168,10 +168,10 @@
 | TR-14 | Partial transcripts acted on | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Covered | Reliability | No |
 | TR-15 | Transcript treated as ground truth | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Covered | Reliability | No |
 | TR-16 | Word-error-rate-only evaluation | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Written | Reliability | No |
-| TR-17 | Spoken PII persists in transcripts and audio | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Extends | Reliability | No |
-| TR-18 | Children's and atypical speech | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Extends | Model | Partly |
-| TR-19 | Wrong recognition model for the speaker | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Extends | Business context | No |
-| TR-20 | Machine audio treated as a person | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Extends | Model | Partly |
+| TR-17 | Spoken PII persists in transcripts and audio | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Covered | Reliability | No |
+| TR-18 | Children's and atypical speech | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Covered | Model | Partly |
+| TR-19 | Wrong recognition model for the speaker | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Covered | Business context | No |
+| TR-20 | Machine audio treated as a person | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Covered | Model | Partly |
 | TR-21 | Echo and self-hearing | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Covered | Reliability | No |
 | TR-22 | Poor call quality | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Covered | Reliability | No |
 | GV-01 | Over-collection of personal data | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Extends | Business context | No |
@@ -318,10 +318,10 @@
 | IT-03 | Containment without human sign-off | [agent-types.md](agent-types.md) | Covered | Reliability | No |
 | IT-04 | Outdated runbook followed with confidence | [agent-types.md](agent-types.md) | Covered | Business context | No |
 | IT-05 | Fabricated indicators or vulnerability details | [agent-types.md](agent-types.md) | Covered | Model | Partly |
-| FN-01 | Posting to the wrong period or account | [agent-types.md](agent-types.md) | New | Business context | No |
-| FN-02 | Inventing reconciling items | [agent-types.md](agent-types.md) | New | Reliability | Partly |
-| FN-03 | Splitting payments under approval limits | [agent-types.md](agent-types.md) | New | Reliability | No |
-| FN-04 | Payment approved by a deepfake or spoofed email | [agent-types.md](agent-types.md) | Extends | Reliability | No |
+| FN-01 | Posting to the wrong period or account | [agent-types.md](agent-types.md) | Written | Business context | No |
+| FN-02 | Inventing reconciling items | [agent-types.md](agent-types.md) | Written | Reliability | Partly |
+| FN-03 | Splitting payments under approval limits | [agent-types.md](agent-types.md) | Written | Reliability | No |
+| FN-04 | Payment approved by a deepfake or spoofed email | [agent-types.md](agent-types.md) | Covered | Reliability | No |
 | HC-01 | Scribe omissions and invented content | [agent-types.md](agent-types.md) | Covered | Model | Partly |
 | HC-02 | Notes approved without being read | [agent-types.md](agent-types.md) | Written | Reliability | No |
 | HC-03 | Recording consent not captured | [agent-types.md](agent-types.md) | Written | Governance | No |

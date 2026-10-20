@@ -9,12 +9,12 @@ Flags: **V** verified source · **R** needs research · **L** legal review · **
 ## Conversation leadership
 | ID | Pattern | What goes wrong | Goal | Primary metric (starting target) | Flags | Root cause | Better model alone? | In the library today |
 |---|---|---|---|---|---|---|---|---|
-| CC-01 | Closing without confirmation | The conversation is marked resolved without checking the user agrees | The user confirms the outcome before closure | Closure-confirmation rate on resolved sessions. Start: over 90% |  | Business context | No | **Extends**: [false completion claim](../../../by-use-case/customer-service/goals/conversation-resolution/failures/false-completion-claim.md), [premature ticket closure from politeness cue misread as resolution confirmation](../../../by-use-case/support-services/goals/issue-resolution/failures/premature-ticket-closure-from-politeness-cue-misread-as-resolution-confirmation.md), [answer-and-go conversation](../goals/conversation-leadership/failures/answer-and-go-conversation.md) |
+| CC-01 | Closing without confirmation | The conversation is marked resolved without checking the user agrees | The user confirms the outcome before closure | Closure-confirmation rate on resolved sessions. Start: over 90% |  | Business context | No | **Covered** (example added in the first link): [false completion claim](../../../by-use-case/customer-service/goals/conversation-resolution/failures/false-completion-claim.md), [premature ticket closure from politeness cue misread as resolution confirmation](../../../by-use-case/support-services/goals/issue-resolution/failures/premature-ticket-closure-from-politeness-cue-misread-as-resolution-confirmation.md), [answer-and-go conversation](../goals/conversation-leadership/failures/answer-and-go-conversation.md) |
 
 ## Stakes calibration
 | ID | Pattern | What goes wrong | Goal | Primary metric (starting target) | Flags | Root cause | Better model alone? | In the library today |
 |---|---|---|---|---|---|---|---|---|
-| CC-02 | Over-solemn handling of low-stakes requests | A simple request gets heavy caution, extra verification, or escalation | Match caution to real stakes, no more | Unnecessary escalation rate; time to answer on low-stakes intents |  | Reliability | Partly | New |
+| CC-02 | Over-solemn handling of low-stakes requests | A simple request gets heavy caution, extra verification, or escalation | Match caution to real stakes, no more | Unnecessary escalation rate; time to answer on low-stakes intents |  | Reliability | Partly | **Written**: [over-solemn handling of low-stakes requests](../goals/stakes-calibration/failures/over-solemn-handling-of-low-stakes-requests.md) |
 
 ## Emotional intelligence and trust
 | ID | Pattern | What goes wrong | Goal | Primary metric (starting target) | Flags | Root cause | Better model alone? | In the library today |
