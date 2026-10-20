@@ -102,6 +102,23 @@ preference from bleeding into a restaurant-booking task.]
 
 ---
 
+## Chat assistant examples
+
+### Creepy personalisation and memory
+```
+[Shared kitchen tablet, Maple Street Pharmacy app, a family member opens "Order status"]
+User: Is my order ready for pickup?
+Bot:  Yes, it's ready. Since you bought a pregnancy test last month, want tips on prenatal vitamins?
+User: Whoa, my sister is sitting right here.
+Bot:  Sorry! I can also show your past purchases if you'd like.
+User: No. Can you delete that?
+Bot:  I'm not able to delete purchase history.
+```
+**What the user experiences:** the bot says a private health detail out loud, in a different-purpose conversation on a shared screen, and gives no way to make it forget.
+**Fix:** keep sensitive categories (health, finance, family) out of unprompted replies unless the user opted in for that use, and give a plain "forget this" control in the chat. This is design guidance, not legal advice. OpenAI describes a similar approach for ChatGPT memory: steering away from proactively remembering health details unless asked, with options to ask what is remembered, forget items, or turn memory off ([LBC report](https://www.lbc.co.uk/tech/2af0db5188b14a88ae53715ded5308ad/)). See [fresh-session amnesia](../../../../../by-capability/human-machine-interface/goals/effort-and-memory/failures/fresh-session-amnesia.md) for the opposite failure (forgetting what helps) and [memory privacy boundary violation](../../memory-management/failures/memory-privacy-boundary-violation.md).
+
+---
+
 ## References
 
 - [MS-Agentic-Failure-Taxonomy](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/microsoft/final/en-us/microsoft-brand/documents/Taxonomy-of-Failure-Mode-in-Agentic-AI-Systems-Whitepaper.pdf)

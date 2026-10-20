@@ -184,3 +184,20 @@ if state.stakes == "high":
 ### Deep dive
 - **Why a legal case is in a tone pattern.** It shows the cost of treating a high-stakes question as routine. The tone and the accuracy fixes work together: calm register makes users slow down, and a quoted source makes the answer checkable.
 - **Modality notes (PLANNED):** *Voice:* pace, pauses, and warmth carry register, so slowing down and avoiding upbeat prosody matters. *Visual:* colors, animations, and confetti need the same stakes gating.
+
+## Chat assistant examples
+
+### Forced cheerfulness
+```
+User: My flight to Columbus was canceled and I'll miss my mother's funeral service tomorrow.
+Bot:  Great news! I can rebook you on the 6:40 AM flight on Friday! 🎉
+User: The service is tomorrow. Friday is too late.
+Bot:  No worries! Our flexible rebooking options are here to help! Is there anything else I can help you with today?
+```
+With the fix:
+```
+Bot:  I'm sorry about your mother. The next seat to Columbus is on Friday at 6:40 AM, which is after the service.
+      I can check other airlines' flights today, or connect you to an agent who can approve a rebooking on another carrier. Which would you like?
+```
+**What the user experiences:** exclamation marks and "great news" aimed at a grieving person who has just said the news is bad, so the bot reads as not listening. Plain guidance on tone for bad news says the same: one customer-service tone guide (a vendor blog, [eesel](https://www.eesel.ai/blog/customer-service-tone-guide)) gives the rule "Max one exclamation mark, never in bad news."
+**Fix:** let the tone follow the situation. When the user's message is negative or the news is bad, drop exclamation marks, emoji and "good news" openers, say what happened in plain words, and offer a concrete next step or a person. Measure cheerful replies to negative-sentiment messages; the target is 0. See [Hollow empathy](../../emotional-intelligence/failures/hollow-empathy.md) for the next trap, a caring line that stays generic.

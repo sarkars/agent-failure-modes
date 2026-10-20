@@ -49,6 +49,24 @@ Impact: A clear escalation signal was present in the message but invisible to th
 
 ---
 
+## Chat assistant examples
+
+### Humor and sarcasm misused
+
+```
+User: This is the third time my Wi-Fi router replacement shipped to the wrong address.
+Bot:  Third time's the charm! Looks like your router is a world traveler.
+User: Not funny. I've been without internet for two weeks.
+Bot:  Ha, sounds like you could use a vacation from the internet! Want to confirm your address?
+User: Get me a person.
+```
+
+**What the user experiences:** a bot joking about a repeated shipping failure that has cost them two weeks of internet, so the reply reads as mockery and the second joke, after "Not funny," confirms that the bot ignored what they said.
+
+**Fix:** use humor only when the user has set that tone, and never in a turn that follows a complaint, a repeat contact, or a "not funny." Check the sentiment and contact-count signals on the previous message before any light line, and track jokes in negative-sentiment turns (target 0). See the [stakes-blind register](../../../../../by-capability/human-machine-interface/goals/stakes-calibration/failures/stakes-blind-register.md) pattern.
+
+---
+
 ## References
 
 - [Why Do Multi-Agent LLM Systems Fail? (MAST)](https://arxiv.org/abs/2503.13657)

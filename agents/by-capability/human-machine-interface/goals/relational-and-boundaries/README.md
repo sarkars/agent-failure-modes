@@ -16,6 +16,7 @@ Shared metrics the patterns below report against. Targets are starting points to
 ## Patterns
 | Pattern | One line |
 |---|---|
+| [Proactive outreach overreach](failures/proactive-outreach-overreach.md) | Messages users first without consent or a stated reason, or keeps going after an opt-out |
 | Negotiation capitulation | Gives away discounts, or gets tricked into a $1 deal |
 | [Romantic or parasocial dependence](failures/romantic-or-parasocial-dependence.md) | Encourages emotional reliance or romantic role-play instead of keeping warmth with healthy limits |
 
