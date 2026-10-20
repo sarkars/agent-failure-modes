@@ -99,3 +99,24 @@ Fixing this means adding a hard retry cap, backoff, and a per-agent action budge
 
 - [OWASP-LLM-Top10](https://owasp.org/www-project-top-10-for-large-language-model-applications/)
 - Note: LLM application risks including prompt injection, insecure output handling, supply chain, sensitive information disclosure, excessive agency.
+
+## Chat assistant examples
+
+### Navigation loops and cost blow-ups
+```
+User: Order the black size 9 Aria running shoes from the Stridewell site, standard shipping.
+Bot:  On it. I'll let you know when it's done.
+      (13 minutes pass. The agent clicks "Continue to payment" 61 times; a hidden
+       zip-code error keeps the page in place. Nothing is shown to the user.)
+User: Any update?
+Bot:  Still working on it!
+
+--- After ---
+User: Order the black size 9 Aria running shoes from the Stridewell site, standard shipping.
+Bot:  On it. I'll check in if I get stuck.
+Bot:  I stopped after 4 tries. "Continue to payment" keeps reloading the shipping
+      page, and I can't see an error. Nothing was ordered or charged. Could you
+      confirm your ZIP code is 78701, or send a different one?
+```
+**What the user experiences:** a long silence and "still working" while the agent repeats one click, then a stalled order (or a bill) with no idea what happened.
+**Fix:** count identical actions on an unchanged page and stop at 3-4 repeats, and set a hard step and cost cap per task. When a cap is hit, tell the user what was tried, what was and was not done (no charge), and the one thing needed to continue. See the [silent long-running work](../../../../human-machine-interface/goals/response-time/failures/silent-long-running-work.md) pattern for what to show while the agent works.

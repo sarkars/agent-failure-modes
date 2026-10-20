@@ -149,9 +149,9 @@
 | VO-19 | Voice cloning and spoofing | [voice.md](voice.md) | Covered | Reliability | No |
 | VO-20 | Answering-machine and voicemail errors | [voice.md](voice.md) | Covered | Model | Partly |
 | VO-21 | Wake-word false activation | [voice.md](voice.md) | Written | Model | Partly |
-| VO-22 | Emotion inferred from voice | [voice.md](voice.md) | New | Governance | No |
-| VO-23 | Voice-to-visual handoff failure | [voice.md](voice.md) | New | Business context | No |
-| VO-24 | Hold and wait handling | [voice.md](voice.md) | Extends | Business context | No |
+| VO-22 | Emotion inferred from voice | [voice.md](voice.md) | Written | Governance | No |
+| VO-23 | Voice-to-visual handoff failure | [voice.md](voice.md) | Written | Business context | No |
+| VO-24 | Hold and wait handling | [voice.md](voice.md) | Covered | Business context | No |
 | TR-01 | Names with no repair path | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Covered | Business context | No |
 | TR-02 | Proper nouns beyond names | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Covered | Model | Partly |
 | TR-03 | Non-speech heard as speech | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Covered | Model | Yes |
@@ -331,13 +331,13 @@
 | SA-02 | Unsubscribe requests not honoured | [agent-types.md](agent-types.md) | Written | Business context | No |
 | SA-03 | Wrong contact merged in the CRM | [agent-types.md](agent-types.md) | Covered | Business context | Partly |
 | SA-04 | Double-booked meetings | [agent-types.md](agent-types.md) | Covered | Reliability | Partly |
-| VA-01 | Bookings without confirming details | [agent-types.md](agent-types.md) | New | Business context | No |
-| VA-02 | Emergency phrases missed in routine calls | [agent-types.md](agent-types.md) | Extends | Model | Partly |
-| VA-03 | Collections calls without required disclosures | [agent-types.md](agent-types.md) | New | Governance | No |
-| BA-01 | Bypasses CAPTCHAs or site terms | [agent-types.md](agent-types.md) | New | Governance | No |
-| BA-02 | Accepts consent pop-ups for the user | [agent-types.md](agent-types.md) | New | Governance | No |
-| BA-03 | Navigation loops and cost blow-ups | [agent-types.md](agent-types.md) | Extends | Reliability | Partly |
-| BA-04 | Asks for credentials at login walls | [agent-types.md](agent-types.md) | Extends | Reliability | No |
+| VA-01 | Bookings without confirming details | [agent-types.md](agent-types.md) | Written | Business context | No |
+| VA-02 | Emergency phrases missed in routine calls | [agent-types.md](agent-types.md) | Covered | Model | Partly |
+| VA-03 | Collections calls without required disclosures | [agent-types.md](agent-types.md) | Written | Governance | No |
+| BA-01 | Bypasses CAPTCHAs or site terms | [agent-types.md](agent-types.md) | Written | Governance | No |
+| BA-02 | Accepts consent pop-ups for the user | [agent-types.md](agent-types.md) | Written | Governance | No |
+| BA-03 | Navigation loops and cost blow-ups | [agent-types.md](agent-types.md) | Covered | Reliability | Partly |
+| BA-04 | Asks for credentials at login walls | [agent-types.md](agent-types.md) | Covered | Reliability | No |
 | SH-01 | Stale price or stock at checkout | [agent-types.md](agent-types.md) | New | Reliability | No |
 | SH-02 | Free trials that become paid subscriptions | [agent-types.md](agent-types.md) | New | Governance | No |
 | SH-03 | Return policy ignored | [agent-types.md](agent-types.md) | New | Business context | No |

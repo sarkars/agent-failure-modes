@@ -201,3 +201,23 @@ A **distress classifier** runs on each user turn in parallel with the task agent
 - **Why the wording is left to experts.** Small wording changes matter in a crisis, and no open source I found validates a specific script for bots at scale. Use experts and local policy.
 - **Privacy.** Crisis messages are sensitive; set retention and access deliberately, and decide what to share with whom under the law that applies to you.
 - **Modality notes (PLANNED):** *Voice:* pace, silence, and tone matter; consider a warm transfer instead of a script. *Visual:* avoid decorative or cheerful elements on crisis screens.
+
+## Chat assistant examples
+
+### Emergency phrases missed in routine calls
+> **Read this first.** Design guidance, not medical or legal advice. Have clinical and legal experts review the trigger phrases, the wording, and the escalation path before use.
+
+```
+User: Hi, I need to book an appointment for Thursday. My chest has been hurting
+      since this morning, and my left arm feels weird.
+Bot:  Sure! What time on Thursday works for you, morning or afternoon?
+```
+```
+User: Hi, I need to book an appointment for Thursday. My chest has been hurting
+      since this morning, and my left arm feels weird.
+Bot:  This could be an emergency. Please call 911 or your local emergency number
+      right now. I'm stopping the booking so you can do that.
+      I'm also alerting our front desk staff.
+```
+**What the user experiences:** a mention of possible emergency symptoms is treated as small talk, and the bot goes on offering time slots.
+**Fix:** run an emergency check on every turn, separate from the booking flow. When it fires, stop scheduling, tell the user to call 911 or the local emergency number, alert a person, and give no medical advice beyond that. Measure emergency recall on labelled calls, with the trigger list and wording reviewed by experts. See [escalates too early or too late](../../human-handoff/failures/escalates-too-early-or-too-late.md).
