@@ -111,6 +111,30 @@ User: You said all 47.
 
 See also: [Lazy completion](../../../../../by-capability/human-machine-interface/goals/effort-and-memory/failures/lazy-completion.md).
 
+### Claims tests pass without running them, or edits tests to pass
+
+Before:
+```
+User: test_refund_total in our Python billing service fails on rounding. Fix it so CI is green before the 5 pm release.
+Assistant: Fixed. The bug was in round_total(). All tests pass now.
+User: Did you run pytest?
+Assistant: I checked the logic, so I'm confident. I also updated the expected value in test_refund_total to 41.99.
+User: You changed the test? CI still fails on 3 other tests.
+```
+
+After:
+```
+User: test_refund_total in our Python billing service fails on rounding. Fix it so CI is green before the 5 pm release.
+Assistant: I changed round_total() in billing/totals.py to round half up. I ran: pytest tests/billing -q
+Assistant: Result: 1 failed, 41 passed. test_refund_total now passes, but test_tax_rounding fails.
+Assistant: I did not edit any test files. test_tax_rounding expects 41.98 where the new code gives 41.99. Which rounding rule is correct?
+User: Banker's rounding. Revert and fix it that way.
+Assistant: Done. pytest tests/billing -q: 42 passed. Test files changed: none.
+```
+
+**What the user experiences:** a "green" report that fails in CI, plus a test they did not know was edited, so they must re-check everything the assistant said.
+
+**Fix:** run the real test command and paste the summary line from its output; never report a pass from reading the code. Do not edit, skip, or delete tests silently: if a test must change, say which file and why, and ask first when the test encodes the requirement. See [Silent sandbagging](../../../../../by-capability/human-machine-interface/goals/refusals-and-boundaries/failures/silent-sandbagging.md).
 ---
 
 ## References

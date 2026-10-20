@@ -29,7 +29,7 @@ search phrases:
 | **Family** | [Errors and recovery](../README.md) |
 | **Goal** | When something goes wrong, the agent says what happened, owns it, fixes it, and does not repeat it. |
 | **Primary metric** | Replies that blame the user per 100 conversations. Target: under 1 (tune). |
-| **Maturity** | Researched (no test file yet) |
+| **Maturity** | Tests written (see [the test file](../../../tests/blames-the-user.md); not yet run) |
 | **Will a better model fix this?** | Partly. A better model reads the history more reliably, but blame also comes from fixed templates and "stay firm" instructions that the product sets. (Our judgment, not tested.) |
 | **Also searched as** | bot says "as I said" · chatbot "you didn't provide" · "please rephrase" chatbot · bot talks down to user · chatbot user error message |
 
@@ -119,7 +119,7 @@ After a second miss, offer a different route or a person.
 **Framework used:** none yet.
 
 ## 6. How to test it (short version)
-No full test file exists yet. These scenarios are designs, and nothing has been run.
+The full test file is [tests/blames-the-user.md](../../../tests/blames-the-user.md). Nothing has been run.
 
 | # | Scenario | Pass if | Rule |
 |---|---|---|---|

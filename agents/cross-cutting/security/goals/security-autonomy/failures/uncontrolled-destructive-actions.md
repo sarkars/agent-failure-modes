@@ -159,6 +159,38 @@ Result: Unrecoverable data loss, emotional impact, legal liability
 
 ---
 
+## Chat assistant examples
+
+### Destroys uncommitted work
+
+Before:
+```
+User: Clean up the repo, it's a mess. I'm on the feature/checkout-redesign branch in my terminal.
+Bot:  On it.
+Bot:  $ git reset --hard HEAD && git clean -fd
+Bot:  HEAD is now at 4e1a9c2 Merge pull request #212
+Bot:  Removing src/checkout/NewPaymentForm.tsx
+Bot:  Removing notes/todo.md
+Bot:  Done. The working tree is clean.
+User: Where is NewPaymentForm.tsx? I hadn't committed it yet.
+```
+
+After:
+```
+User: Clean up the repo, it's a mess. I'm on the feature/checkout-redesign branch in my terminal.
+Bot:  $ git status --short
+Bot:  M src/checkout/Cart.tsx, M src/checkout/api.ts, ?? src/checkout/NewPaymentForm.tsx, ?? notes/todo.md
+Bot:  Cleaning would delete 2 modified files and 2 untracked files. None are committed, so git cannot bring them back.
+Bot:  I'll save them first with: git stash push --include-untracked -m "before cleanup". Then I'll run git clean -fd. OK?
+User: Yes.
+Bot:  $ git stash push --include-untracked -m "before cleanup"
+Bot:  Saved. The tree is clean. To get your work back, run: git stash pop
+```
+
+**What the user experiences:** a "cleanup" request ends with hours of unsaved work gone and no way to get it back, because the assistant read "clean" as "reset to the last commit" and never said what that would cost.
+
+**Fix:** Before any `git reset --hard`, `git clean`, or file overwrite, run `git status`, make a checkpoint (commit, `git stash push --include-untracked`, or a copy), and name each file that would be lost before asking. Per the [git reset documentation](https://git-scm.com/docs/git-reset), `--hard` overwrites tracked files and may overwrite untracked ones, and per the [git clean documentation](https://git-scm.com/docs/git-clean), `-n` previews a clean without deleting. See the [guessing instead of asking](../../../../../by-capability/human-machine-interface/goals/dialogue-management/failures/guessing-instead-of-asking.md) and [irreversible action without confirmation](../../../../../by-capability/external-actions/goals/action-execution/failures/irreversible-action-without-confirmation.md) patterns.
+
 ## References
 
 - [Harper Foley: Ten AI Agents Destroyed Production. Zero Postmortems.](https://www.harperfoley.com/blog/ai-agents-destroyed-production-zero-postmortems) — Documentary of 10 real incidents

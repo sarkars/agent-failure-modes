@@ -172,6 +172,34 @@ Impact: Underwriting risk missed, adverse selection
 - Agent makes decision that contradicts earlier-session constraint → P1
 - Constraint mentioned early in session but violated in later decision → P1
 
+## Chat assistant examples
+
+### Forgets project conventions in long sessions
+
+Before:
+```
+User:      (turn 1) Rule for this repo: use the existing logger in src/utils/logger.py. No print statements.
+Assistant: Understood. I will use logger.py for all output.
+           (40 turns of other edits)
+User:      (turn 41) Add retry handling to src/sync/uploader.py.
+Assistant: Done. I added a retry loop that calls print(f"retry {n}") on each failure.
+User:      I told you no print statements. Use the logger.
+```
+
+After:
+```
+User:      (turn 1) Rule for this repo: use the existing logger in src/utils/logger.py. No print statements.
+Assistant: Saved to CONVENTIONS.md: "Use logger.py. No print statements." I will check every change against it.
+           (40 turns of other edits)
+User:      (turn 41) Add retry handling to src/sync/uploader.py.
+Assistant: Re-reading CONVENTIONS.md (1 rule: use logger.py, no print). Added a retry loop that calls
+           logger.warning("retry %d", n). Convention check: 0 print calls in this change.
+```
+
+**What the user experiences:** a rule they stated once and trusted is broken 40 turns later, so they must review every diff for old rules and repeat themselves.
+
+**Fix:** pin the conventions in a short rules file or pinned message, check each change against them before reporting it done, and restate them after a long gap or context trim. Track convention violations per change against a baseline. See the [chatbot forgets earlier messages pattern](../../../../../by-capability/human-machine-interface/goals/effort-and-memory/failures/no-warning-of-context-loss.md).
+
 ---
 
 ## References

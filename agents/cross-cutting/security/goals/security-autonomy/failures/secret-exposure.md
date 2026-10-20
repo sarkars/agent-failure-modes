@@ -164,6 +164,37 @@ Impact:
 
 ---
 
+## Chat assistant examples
+
+### Secrets and insecure code accepted by non-experts
+
+Before:
+```
+User: Build me a page where customers type their email and I look them up in my shop database. Here's my key: sk-EXAMPLE-NOT-A-REAL-KEY
+Bot:  Done. app.py:
+      client = Client(api_key="sk-EXAMPLE-NOT-A-REAL-KEY")
+      db.execute("SELECT * FROM customers WHERE email = '" + email + "'")
+User: Great, I'll put it on GitHub so my friend can see it.
+Bot:  Sounds good!
+```
+
+After:
+```
+User: Build me a page where customers type their email and I look them up in my shop database. Here's my key: sk-EXAMPLE-NOT-A-REAL-KEY
+Bot:  Please don't paste keys into chat. Treat that one as exposed and make a new one in your provider's dashboard. I left the key out of the code.
+      client = Client(api_key=os.environ["SHOP_API_KEY"])   # key lives on your computer, not in the file
+      db.execute("SELECT * FROM customers WHERE email = ?", (email,))
+      Why: a key in the file goes public the moment you upload it. Building the query by gluing text together lets a visitor type commands into the email box. The "?" version treats what they type as plain text.
+User: Can I still put it on GitHub?
+Bot:  Yes. Add .env to .gitignore first, and I'll show you how to set SHOP_API_KEY.
+```
+
+**What the user experiences:** in the first version the app works and nothing looks wrong, so they publish a key and an open database door without knowing; in the second they get one plain-words reason and a working alternative.
+
+**Fix:** Scan pasted text and generated code for key-shaped strings, refuse to write them into files, and tell the user to rotate a key they pasted. Flag string-built SQL and unchecked input, say the risk in one plain sentence, and give the safe form (environment variable, parameterized query). OWASP's SQL Injection Prevention Cheat Sheet lists parameterized queries as a primary defense, and its Secrets Management Cheat Sheet advises against hard-coding secrets in source code (both pages opened). Related: [sensitive data collected in chat](../../../../../by-capability/human-machine-interface/goals/channel-selection/failures/sensitive-data-collected-in-chat.md).
+
+---
+
 ## References
 
 - [OWASP-LLM-Top10](https://owasp.org/www-project-top-10-for-large-language-model-applications/)

@@ -133,3 +133,21 @@ Real user: its on the bottle idk. just call me
 ```
 **What the user experiences:** a bot that works only for tidy, complete requests, so a terse or annoyed customer gets a loop where the test suite predicted a pass.
 **Fix:** calibrate simulators against real transcripts: give them the typos, one-word turns, missing details and irritation seen in logs, and track the gap between simulated and real task-success rates. The [HMI tests README](../../../../../by-capability/human-machine-interface/tests/README.md) sets the rule to keep user turns realistic.
+
+### Per-resolution pricing rewards counting things as resolved
+Illustrative transcript, not a real log. Setting: a US health insurer's member chat, where the vendor bills per AI "resolution". Some vendors count a conversation as resolved when the customer goes quiet; Intercom's [Fin resolutions page](https://fin.ai/help/en/articles/10772642-fin-ai-agent-resolutions) describes a confirmed resolution and an "assumed" one after the customer disengages for 24 hours (page opened through the fetch tool, which returns a model-written summary of the page, not the raw text).
+```
+User (member chat): My MRI was denied as "out of network" but Dr. Patel is in network. The appointment is Friday.
+Bot (before): Out-of-network services may not be covered. Check your plan documents under Coverage > Benefits.
+User: That doesn't answer it. Can someone look at the denial?
+Bot (before): For more information, please visit our help center.
+User: (closes the chat)
+Billing log: resolution, billable. (no reply after the last answer, counted as "assumed resolved")
+
+User (same request):
+Bot (after): I can't confirm the denial reason from here, so I'm sending it to a claims specialist now with your claim number and Friday's date. Does that cover what you needed, or should I keep this open?
+User: Keep it open.
+Billing log: not resolved, not billable. Reopen watch on.
+```
+**What the user experiences:** a denied scan three days before the appointment, two non-answers, and a chat that closes itself, while the vendor invoice counts it as a success.
+**Fix:** define a billable resolution by a confirmed user outcome (the user says yes, or the issue does not come back within a set window), never by silence alone, and report billed resolutions, confirmed resolutions and reopen rate side by side. Starting target, not a benchmark: the gap between billed and confirmed resolutions stays under 10 points. See [survey bias](../../../../../by-capability/human-machine-interface/goals/measurement-and-feedback/failures/survey-bias.md) and [deflection of unresolved issues](../../../../../by-use-case/support-services/goals/self-service-deflection/failures/deflection-of-unresolved-issues.md).

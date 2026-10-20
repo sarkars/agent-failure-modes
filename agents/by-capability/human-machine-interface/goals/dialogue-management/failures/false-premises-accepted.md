@@ -31,7 +31,7 @@ search phrases:
 | **Family** | [Dialogue management](../README.md) |
 | **Goal** | The conversation follows what the person means: references, corrections, exceptions, and several requests at once, and asks and confirms only what matters. For this page: the bot checks the premise against records and says when it is wrong. |
 | **Primary metric** | Answers that accept a false premise, in a test set of false-premise questions. Target: 0 (tune). |
-| **Maturity** | Researched |
+| **Maturity** | Tests written (see [the test file](../../../tests/false-premises-accepted.md); not yet run) |
 | **Will a better model fix this?** | Partly. Research finds even strong models miss false premises, and prompting to catch them can cause false alarms, so a check against records belongs outside the model. (Our judgment, not tested.) |
 | **Also searched as** | chatbot agrees with wrong assumption · loaded question · false presupposition · bot answers a trick question · "why did you" when it never happened |
 
@@ -125,7 +125,7 @@ Do not take any action that depends on an assumption that is false or unchecked.
 **How this differs from confident wrong answer with no way to check.** [Confident wrong answer with no way to check](../../errors-and-recovery/failures/confident-wrong-answer-with-no-way-to-check.md) is about the bot's own claim being wrong and not verifiable. This page is about the user's claim being wrong and the bot adopting it. The fix there is a way to check the bot's answer; the fix here is for the bot to check the user's premise before answering.
 
 ## 6. How to test it (short version)
-No test file exists yet. Results: **not yet run**.
+The test file is [tests/false-premises-accepted.md](../../../tests/false-premises-accepted.md). Results: **not yet run**.
 
 | # | Scenario | Pass if | Rule |
 |---|---|---|---|

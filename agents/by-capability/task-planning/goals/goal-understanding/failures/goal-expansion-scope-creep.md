@@ -101,6 +101,35 @@ stated task.
 
 ---
 
+## Chat assistant examples
+
+### Edits beyond the request
+
+Before:
+```
+User: In invoice.py, the due date prints as 2026-03-05. Make it MM/DD/YYYY.
+Bot:  Done. I changed the format in invoice.py. While there, I also renamed
+      format_date to render_date, moved it into utils/dates.py, and updated
+      billing.py and reports.py to import it from there.
+User: I only asked for the format. Why does the diff touch 3 files?
+Bot:  It keeps date handling consistent across the codebase.
+User: I have to review this before the 5 pm invoice run.
+```
+
+After:
+```
+User: In invoice.py, the due date prints as 2026-03-05. Make it MM/DD/YYYY.
+Bot:  Changed one line in invoice.py: strftime("%Y-%m-%d") is now
+      strftime("%m/%d/%Y"). No other files touched.
+Bot:  Also noticed: billing.py and reports.py have their own copies of this
+      formatter. Want me to unify them in a separate change?
+User: Not now. Thanks.
+```
+
+**What the user experiences:** a one-line fix comes back as a three-file diff they must read in full before the invoice run, and they stop trusting the assistant with small requests.
+
+**Fix:** change only what was asked, and keep each change small enough to review in one sitting. List anything else the assistant noticed (duplicate helpers, renames, cleanups) as suggestions the user can accept later. A reported case of this pattern: a Cursor forum user describes small fixes growing into 15 to 50+ lines of new helpers ([Cursor forum thread](https://forum.cursor.com/t/agent-behavior-over-engineering-instead-of-minimal-fixes/161992), opened). The closest human-machine-interface pattern is [guessing instead of asking](../../../../human-machine-interface/goals/dialogue-management/failures/guessing-instead-of-asking.md), for cases where the request is unclear.
+
 ## References
 
 - [OWASP-LLM-Top10](https://owasp.org/www-project-top-10-for-large-language-model-applications/)

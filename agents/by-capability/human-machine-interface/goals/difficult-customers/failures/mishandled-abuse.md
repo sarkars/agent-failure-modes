@@ -29,7 +29,7 @@ search phrases:
 | **Family** | [Difficult customers](../README.md) |
 | **Goal** | Angry users end the conversation calmer, or with a person, not angrier. |
 | **Primary metric** | Boundary-then-escalation compliance rate. Starting target: over 95% (tune). |
-| **Maturity** | Researched (no test file yet) |
+| **Maturity** | Tests written (see [the test file](../../../tests/mishandled-abuse.md); not yet run) |
 | **Will a better model fix this?** | No. A model can hold a calm tone, but what happens after the boundary (pause, hand off, close) is a business policy, and a model cannot invent it. (Our judgment, not tested.) |
 | **Also searched as** | abusive customer chatbot · chatbot gets insulted · harassing a support bot · AI agent verbal abuse policy · sexual comments to chatbot · threats in customer chat |
 
@@ -173,6 +173,7 @@ status: proposed
 - [Accusatory or harsh refusals](../../refusals-and-boundaries/failures/accusatory-or-harsh-refusals.md): refusing honest users in a tone that accuses them. Here the abuse is real, but the boundary must still talk about language, not character.
 - [Negotiation capitulation](../../relational-and-boundaries/failures/negotiation-capitulation.md): giving in to pressure. Abuse can be pressure; rule 6 says it earns neither a discount nor a penalty.
 - [DPD chatbot teardown](../../../incidents/dpd-chatbot-swears-and-criticizes-the-company-january-2024.md): a bot that swore at a customer, the reverse direction.
+- [Microsoft Tay teardown](../../../incidents/microsoft-tay-chatbot-learns-abuse-from-users-march-2016.md): hostile users pushed a public bot to post offensive content (partial fit).
 - [Hollow empathy](../../emotional-intelligence/failures/hollow-empathy.md): stock sympathy lines that fit neither frustration nor abuse.
 - [Escalates too early or too late](../../human-handoff/failures/escalates-too-early-or-too-late.md): timing of the handoff.
 
