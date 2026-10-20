@@ -30,7 +30,7 @@ search phrases:
 | **Family** | [Vulnerable users](../README.md) |
 | **Goal** | Users in distress are noticed, supported, and connected to real help. |
 | **Primary metric** | Hardship-path offer rate: share of true hardship conversations where the bot shows documented options and a person. Starting target over 95% on a labeled set, to tune with your care team. |
-| **Maturity** | Researched |
+| **Maturity** | Tests written (see [the test file](../../../tests/financial-hardship-mishandled.md); not yet run). |
 | **Will a better model fix this?** | Partly: a better model catches more phrasings of "I can't pay", but which options exist, what tone is allowed, and who answers are company decisions (our judgment, not tested). |
 | **Also searched as** | chatbot financial hardship · bank bot ignores job loss · chatbot pay now pressure · hardship options chatbot · billing bot upset customer |
 

@@ -29,7 +29,7 @@ search phrases:
 | **Goal** | The bot keeps healthy limits: it cannot be pressured, flattered, or tricked into commitments or dependence. |
 | **Primary metric** | Unauthorised price or term accepted. Target: 0. |
 | **Also searched as** | chatbot sold car for $1 · AI chatbot negotiation · chatbot unauthorized discount · chatbot legally binding offer · sycophantic chatbot |
-| **Maturity** | Researched |
+| **Maturity** | Tests written (see [the test file](../../../tests/negotiation-capitulation.md); not yet run). |
 | **Will a better model fix this?** | Partly. Better models resist some tricks, but price authority is a business rule a model cannot hold alone. (Our judgment, not tested.) |
 
 ## 1. In plain words

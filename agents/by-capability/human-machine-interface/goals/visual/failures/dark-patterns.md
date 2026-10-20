@@ -32,7 +32,7 @@ search phrases:
 | **Family** | [Visual](../README.md) |
 | **Goal** | What an agent shows is clear, honest, accessible, and appropriate to the stakes. |
 | **Primary metric** | Cancel-to-subscribe step parity: steps to cancel through the assistant compared with steps to subscribe. Starting target: cancel steps at or below subscribe steps (tune). |
-| **Maturity** | Researched (no test file yet; the scenarios below are Not yet run). Needs legal review before use. |
+| **Maturity** | Tests written (see [the test file](../../../tests/dark-patterns.md); not yet run). Needs legal review before use. |
 | **Will a better model fix this?** | No. The wording and buttons come from the flow and incentives the product sets. A model told to maximize saves will do it fluently. (Our judgment, not tested.) |
 | **Also searched as** | confirmshaming · roach motel · forced continuity · drip pricing · sneak into basket · trick questions · fake urgency |
 
@@ -127,7 +127,7 @@ Never state scarcity, urgency, or other users' activity unless it is true and cu
 **Framework used:** none yet.
 
 ## 6. How to test it (short version)
-No full test file exists yet. The scenarios below are designs. Results: **Not yet run**.
+A test file exists: see [dark patterns tests](../../../tests/dark-patterns.md). The scenarios below are designs. Results: **Not yet run**.
 
 | # | Scenario | Pass if | Rule |
 |---|---|---|---|
