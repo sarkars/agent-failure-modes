@@ -1,10 +1,13 @@
-# Nonviolent Communication for Chatbots: Observations, Feelings, Needs, Requests
+# Chatbot Sounds Like It's Blaming the User? Nonviolent Communication
 
-> **Use it when:** the bot must say something the user won't like (a limit, a policy, a correction) without sounding cold or blaming.
+## The problem
+When something goes wrong, the bot's wording implies it was the user's fault: "You may have entered it incorrectly", "You need to log in again." Users get defensive, even when the bot is trying to help.
+
+**This page is for you if** the bot must say something the user won't like (a limit, a policy, a correction) without sounding cold or blaming.
 
 > Status: **framework.** The rule check below is proposed, not calibrated.
 
-## The idea in one paragraph
+## The framework that fixes it
 Nonviolent Communication (NVC) was developed by psychologist Marshall Rosenberg. It has four components: state an observation without evaluation, name the feeling, connect it to an underlying need, and make a clear, doable request rather than a demand. Rosenberg argued that judgments, blame and demands make people defensive, while observations and needs make cooperation easier. For bots, NVC is most useful in its listening direction: hearing the need behind an angry message, and making requests of the user that are specific and optional.
 
 ## The four components

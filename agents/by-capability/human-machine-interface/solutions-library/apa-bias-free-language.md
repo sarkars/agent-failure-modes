@@ -1,10 +1,13 @@
-# APA Bias-Free Language for Chatbots: Specific, Respectful Terms for People
+# Chatbot Uses Outdated Words for People? Bias-Free Language (APA)
 
-> **Use it when:** the bot talks about or to people by age, disability, gender, race, sexuality or health, which is most bots, sooner or later.
+## The problem
+The bot says "guests who are wheelchair-bound" or "the elderly". It means well, but these labels reduce people to a condition or an age, and readers notice.
+
+**This page is for you if** the bot talks about or to people by age, disability, gender, race, sexuality or health, which is most bots, sooner or later.
 
 > Status: **framework.** The rule check below is proposed, not calibrated.
 
-## The idea in one paragraph
+## The framework that fixes it
 The American Psychological Association's *Publication Manual* (7th edition) includes bias-free language guidelines used widely beyond psychology. Two general principles run through them: describe people at the right level of specificity (only mention a characteristic when it is relevant, and then be precise), and be sensitive to labels (use the terms people use for themselves, and avoid terms that reduce people to a condition). They include specific guidance, for example "older adults" rather than "the elderly", and avoiding language that frames disability as suffering or confinement.
 
 ## The principles

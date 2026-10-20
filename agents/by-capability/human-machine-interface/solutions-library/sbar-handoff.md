@@ -1,10 +1,13 @@
-# SBAR Handoffs for Chatbots: Situation, Background, Assessment, Recommendation
+# Human Agent Has to Start Over After the Bot? Hand Off With SBAR
 
-> **Use it when:** the bot hands a conversation to a person (an agent, a nurse, an IT tech) and you want the person to start without re-asking.
+## The problem
+The bot hands the conversation to a person, and the person's first message is "How can I help you today?" The user has to explain everything again, which undoes all the work the bot did.
+
+**This page is for you if** the bot hands a conversation to a person (an agent, a nurse, an IT tech) and you want the person to start without re-asking.
 
 > Status: **framework.** No rule check yet; checking a handoff summary needs an AI judge.
 
-## The idea in one paragraph
+## The framework that fixes it
 SBAR is a structured way to hand over a case, developed for healthcare. The Institute for Healthcare Improvement credits Dr. Michael Leonard and colleagues at Kaiser Permanente in Colorado, who adapted it from military communication. It packs a handover into four parts: the situation (what is happening now), the background (the context that matters), the assessment (what the sender thinks is going on), and the recommendation (what the sender thinks should happen next). For a bot, SBAR is the shape of the note the human sees when they take over.
 
 ## The four parts

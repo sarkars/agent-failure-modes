@@ -1,10 +1,13 @@
-# Google's Inclusive Language Guide for Chatbots: Neutral, Precise, No Exclusionary Terms
+# Chatbot Assumes Gender or Uses Exclusionary Terms? Google's Inclusive Language Guide
 
-> **Use it when:** you need a practical, maintained word list for product and support text, including the bot's replies.
+## The problem
+A user asks about returns and the bot replies "It's 30 days, sir." Or it says "crazy fast" or "whitelist". Small word choices like these can make someone feel the product wasn't made for them.
+
+**This page is for you if** you need a practical, maintained word list for product and support text, including the bot's replies.
 
 > Status: **framework.** The rule check below is proposed, not calibrated.
 
-## The idea in one paragraph
+## The framework that fixes it
 Google's developer documentation style guide has a section, "Write inclusive documentation", that sets rules for its technical writing. It asks writers to avoid ableist language (such as "crazy", "dumb", "cripple"), to avoid unnecessarily gendered language and default to gender-neutral wording, to avoid violent language where it isn't needed, and to replace terms like "whitelist/blacklist" and "master/slave" with precise alternatives ("allowlist/blocklist", "primary/replica"). The guidance is practical: each term comes with a replacement, which makes it easy to turn into a bot rule.
 
 ## The rules

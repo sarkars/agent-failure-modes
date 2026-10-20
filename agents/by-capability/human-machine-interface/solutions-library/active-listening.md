@@ -1,10 +1,13 @@
-# Active Listening for Chatbots: Reflect the Facts and the Feelings
+# Users Feel Unheard by the Chatbot? Active Listening
 
-> **Use it when:** the bot answers fast but users feel unheard, or it fixes the wrong problem because it didn't check what was meant.
+## The problem
+The bot answers quickly, but with a generic guide that doesn't match what the user said, or it fixes the wrong problem because it never checked what was meant. Users repeat themselves, louder.
+
+**This page is for you if** the bot answers fast but users feel unheard, or it fixes the wrong problem because it didn't check what was meant.
 
 > Status: **framework.** The rule check below is proposed, not calibrated.
 
-## The idea in one paragraph
+## The framework that fixes it
 "Active listening" was named by psychologists Carl Rogers and Richard Farson in a 1957 pamphlet published by the Industrial Relations Center of the University of Chicago, written for managers. They described a listener who works to grasp both the facts and the feelings in what they hear, and reflects them back without judging, so the speaker can work through the problem. For bots, active listening means checking understanding before acting when the request is ambiguous or emotional, and showing in the reply that the specifics were heard.
 
 ## The core moves

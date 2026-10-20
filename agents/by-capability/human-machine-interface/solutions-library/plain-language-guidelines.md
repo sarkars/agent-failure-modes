@@ -1,10 +1,13 @@
-# Plain Language for Chatbots: The US Federal Plain Language Guidelines
+# Chatbot Sounds Like a Government Form? The US Plain Language Guidelines
 
-> **Use it when:** the bot serves the general public, explains rules, money or health, or its users read in a second language.
+## The problem
+Replies read like policy documents: long sentences, passive voice and words like "utilize", "prior to" and "eligibility determination". People with less time, less schooling or less English give up, or get it wrong.
+
+**This page is for you if** the bot serves the general public, explains rules, money or health, or its users read in a second language.
 
 > Status: **framework.** The reading-level threshold comes from WCAG 3.1.5, not from these guidelines, which give no number.
 
-## The idea in one paragraph
+## The framework that fixes it
 The Federal Plain Language Guidelines were written by PLAIN, a group of US federal employees, to support the Plain Writing Act of 2010. Their core advice is to write for your audience and the task they are trying to do: organize around the reader's questions, use "you" and active voice, prefer short sentences and common words, put the main point first, and test the text with real readers. A chatbot is a plain-language writer that never gets edited, so it needs these rules built in.
 
 ## The main rules

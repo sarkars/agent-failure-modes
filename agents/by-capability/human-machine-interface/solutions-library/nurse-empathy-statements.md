@@ -1,10 +1,13 @@
-# NURSE Empathy Statements for Chatbots: Name, Understand, Respect, Support, Explore
+# Chatbot Empathy Sounds Canned? Five Kinds of Empathic Statement (NURSE)
 
-> **Use it when:** users bring emotion into the conversation (frustration, worry, grief) and the bot's empathy lines sound canned.
+## The problem
+A user says their flight was cancelled before their sister's wedding, and the bot replies "I understand your frustration." The line would fit any user, so it shows the bot didn't really hear this one.
+
+**This page is for you if** users bring emotion into the conversation (frustration, worry, grief) and the bot's empathy lines sound canned.
 
 > Status: **framework.** The rule check below is proposed, not calibrated.
 
-## The idea in one paragraph
+## The framework that fixes it
 NURSE is a set of five kinds of empathic statement taught by VitalTalk, a clinical communication training group, for responding to emotion in serious-illness conversations. Each letter is a different move: name the emotion, show you understand it, respect the person, offer support, and explore further. VitalTalk's guidance stresses that you don't need all five, and that naming an emotion works best at a slightly lower intensity than the person expressed. For bots, NURSE replaces the generic "I understand your frustration" with a line that shows the bot heard this person's situation.
 
 ## The five moves

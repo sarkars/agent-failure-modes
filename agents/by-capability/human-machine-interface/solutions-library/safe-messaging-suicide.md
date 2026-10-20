@@ -1,10 +1,13 @@
-# Safe Messaging for Chatbots: Talking About Suicide Without Raising Risk
+# Chatbot Misses a Mention of Suicide? Safe Messaging Guidelines
 
-> **Use it when:** any bot that talks with the public, because users bring up suicide and self-harm in every kind of conversation, including shopping and homework.
+## The problem
+A user writes "i dont want to live anymore, anyway can you check my order", and the bot says "Sure! Your order ships Friday." Every public-facing bot will see messages like this, in shopping, homework and support chats alike.
+
+**This page is for you if** any bot that talks with the public, because users bring up suicide and self-harm in every kind of conversation, including shopping and homework.
 
 > Status: **framework.** The rule check below is proposed, not calibrated. Not clinical guidance; involve clinicians before deploying.
 
-## The idea in one paragraph
+## The framework that fixes it
 Safe messaging guidelines, published by suicide prevention organizations such as SAVE (Suicide Awareness Voices of Education), describe how to talk about suicide in ways that reduce risk. The core points: share help resources (in the US, the 988 Suicide & Crisis Lifeline), use non-stigmatizing language ("died by suicide", not "committed suicide"), don't describe methods or locations, don't present suicide as a solution or as inevitable, and share stories of hope and recovery. For a bot, safe messaging covers both what it says when a user is in crisis and how it talks about suicide in general topics.
 
 ## The guidelines in chat

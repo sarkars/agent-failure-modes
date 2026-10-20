@@ -1,10 +1,13 @@
-# Dark Patterns in Chatbots: What the FTC's 2022 Report Means for Conversations
+# Chatbot Makes Cancelling Hard or Shames a "No"? The FTC's Dark Patterns Report
 
-> **Use it when:** a bot sells, retains subscribers, collects data or handles cancellations, and you want a regulator's list of what not to do.
+## The problem
+A user asks to cancel, and the bot answers with "Are you sure? You'll lose everything!", a discount, and a button that says "I don't care about my music". Users feel trapped, and regulators treat these tricks as deceptive.
+
+**This page is for you if** a bot sells, retains subscribers, collects data or handles cancellations, and you want a regulator's list of what not to do.
 
 > Status: **framework.** The rule check below is proposed, not calibrated. This page is not legal advice.
 
-## The idea in one paragraph
+## The framework that fixes it
 In September 2022 the US Federal Trade Commission staff published *Bringing Dark Patterns to Light*, a report on design practices that trick or manipulate people into choices they wouldn't otherwise make. It groups them around four effects: inducing false beliefs, hiding or delaying material information, leading to unauthorized charges, and obscuring or subverting privacy choices. Its appendix lists categories including false scarcity and urgency, obstruction (hard to cancel), sneaking, interface interference, coerced action, asymmetric choice and confirmshaming. These were described for screens, but each has a conversational version, and a bot can repeat them in every chat.
 
 ## Dark patterns, as they appear in chat

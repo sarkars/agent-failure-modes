@@ -1,10 +1,13 @@
-# HEARD for Chatbots: Hear, Empathize, Apologize, Resolve, Diagnose
+# Chatbot Handles Complaints Badly? A Five-Step Recovery Order (HEARD)
 
-> **Use it when:** a support bot handles complaints and service failures, and you want a fixed order for the reply.
+## The problem
+A customer complains about a late, cold order, and the bot explains that delivery times vary. It defends instead of fixing, and the customer leaves angrier than they arrived.
+
+**This page is for you if** a support bot handles complaints and service failures, and you want a fixed order for the reply.
 
 > Status: **framework.** The rule check below is proposed, not calibrated.
 
-## The idea in one paragraph
+## The framework that fixes it
 HEARD is a service-recovery sequence used in hospitality and customer service: hear the customer out, empathize, apologize, resolve the problem, and diagnose why it happened so it doesn't happen again. It is widely credited to Disney, but no source opened for this page confirms that, so we don't. Its value for bots is the order: listening and acknowledgment come before the fix, the fix comes before the explanation, and the last step happens after the conversation, in the system.
 
 ## The five steps

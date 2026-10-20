@@ -1,10 +1,13 @@
-# Tactical Empathy for Chatbots: Labeling and Mirroring, Used Honestly
+# Tense Chats Get Worse? Labeling and Mirroring (Tactical Empathy)
 
-> **Use it when:** conversations get tense (complaints, negotiations, cancellations) and the bot needs to lower the temperature before solving.
+## The problem
+A user writes "you charged me twice and nobody cares", and the bot replies with policy: "Please allow 5-7 business days." The facts are right, but the tension goes up, not down.
+
+**This page is for you if** conversations get tense (complaints, negotiations, cancellations) and the bot needs to lower the temperature before solving.
 
 > Status: **framework.** The rule check below is proposed, not calibrated.
 
-## The idea in one paragraph
+## The framework that fixes it
 Chris Voss, a former FBI hostage negotiator, describes "tactical empathy" in *Never Split the Difference* (2016): understanding the other side's feelings and what's behind them, and saying that out loud. Two of its tools suit chat. **Labeling** names the emotion you hear ("It seems like..."), which can defuse it. **Mirroring** repeats a few of the person's key words, which encourages them to keep explaining. Voss frames these as negotiation tools, so they come with a risk: used to manipulate, or used mechanically, they feel fake. The library has a separate pattern for exactly that.
 
 ## The tools

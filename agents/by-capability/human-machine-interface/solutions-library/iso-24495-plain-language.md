@@ -1,10 +1,13 @@
-# ISO 24495-1 Plain Language for Chatbots: Relevant, Findable, Understandable, Usable
+# Users Can't Find or Use What the Bot Says? The ISO 24495-1 Plain Language Standard
 
-> **Use it when:** you need a standard to point to, for example in a public-sector or regulated deployment where "write clearly" is too vague for a contract or an audit.
+## The problem
+You know the bot's replies are hard to use, but "write more clearly" is too vague to put in a contract, a procurement spec or an audit. You need a standard that says what clear means.
+
+**This page is for you if** you need a standard to point to, for example in a public-sector or regulated deployment where "write clearly" is too vague for a contract or an audit.
 
 > Status: **framework.** The reading-level threshold is from WCAG 3.1.5; ISO 24495-1 sets no number.
 
-## The idea in one paragraph
+## The framework that fixes it
 ISO 24495-1:2023, *Plain language — Part 1: Governing principles and guidelines*, is the first international plain language standard, developed with the International Plain Language Federation. It defines a text as plain language when its intended readers can easily find what they need, understand what they find, and use that information. It sets four governing principles: the text is relevant, findable, understandable and usable. The standard deliberately does not rely on readability formulas; it judges a text by whether its readers can use it.
 
 ## The four principles

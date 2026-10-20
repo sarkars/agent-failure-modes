@@ -1,10 +1,13 @@
-# Google's Conversation Design Guidelines: Short Turns, One Question, Always a Way Forward
+# Chatbot Stacks Questions or Leaves Users Stuck? Google's Conversation Design Rules
 
-> **Use it when:** you are designing the turn-by-turn flow of an assistant: how long each turn is, when the bot asks, and what it does after a "no" or a misunderstanding.
+## The problem
+The bot fires three questions in one turn, re-asks something the user already said, or answers "no" and stops there. Users don't know what to say next, so they give up or start over.
+
+**This page is for you if** you are designing the turn-by-turn flow of an assistant: how long each turn is, when the bot asks, and what it does after a "no" or a misunderstanding.
 
 > Status: **framework.** The rule check below is proposed, not calibrated.
 
-## The idea in one paragraph
+## The framework that fixes it
 Google's conversation design guidance for the Assistant starts from Grice's cooperative principle and turns it into practical rules for bots. Its main points: keep turns brief and relevant from the user's point of view, because extra detail loads the user's short-term memory; accept the extra details cooperative users volunteer instead of making them repeat; signal clearly when it's the user's turn, usually with a question; ask one question at a time; when input isn't understood, reprompt lightly instead of with a long error; and after bad news, offer alternatives so the conversation moves forward instead of ending.
 
 ## The main rules

@@ -1,10 +1,13 @@
-# Cialdini's Persuasion Principles for Chatbots: Use Them Honestly, Flag Their Misuse
+# Sales Bot Sounds Pushy? Persuasion That Stays Honest (Cialdini's Principles)
 
-> **Use it when:** a sales or retention bot uses urgency, social proof or "only a few left", and you need to know where persuasion ends and manipulation starts.
+## The problem
+"Only 2 left at this price, so act now!" Persuasion lines like this may move a sale today, but users notice when urgency is fake, and trust drops for every reply after it.
+
+**This page is for you if** a sales or retention bot uses urgency, social proof or "only a few left", and you need to know where persuasion ends and manipulation starts.
 
 > Status: **framework.** The rule check below is proposed, not calibrated.
 
-## The idea in one paragraph
+## The framework that fixes it
 Psychologist Robert Cialdini described principles that make people more likely to say yes: reciprocity, scarcity, authority, consistency (commitment), liking and social proof, later adding unity. His own organization says they should be used ethically: real scarcity, real expertise, real social proof. A bot can apply them at scale and without judgment, so the line matters more. True scarcity ("2 left in your size") helps the user decide; invented scarcity or pressure ("act now!") is manipulation and, in many places, a consumer-protection problem (see [dark patterns](ftc-dark-patterns.md)).
 
 ## The principles, and how bots misuse them

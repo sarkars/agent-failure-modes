@@ -1,10 +1,13 @@
-# Structured Troubleshooting for Chatbots: One Step, Check, Next Step
+# Support Bot Dumps Every Fix at Once? One Step, One Check (Structured Troubleshooting)
 
-> **Use it when:** an IT help desk or product support bot walks users through fixing something.
+## The problem
+A user says their Wi-Fi keeps dropping, and the bot replies with a list of every fix from restarting the router to reinstalling the operating system. The user doesn't know which step worked, or whether any did.
+
+**This page is for you if** an IT help desk or product support bot walks users through fixing something.
 
 > Status: **framework.** Built from the library's own patterns, not an outside standard. The rule check below is proposed, not calibrated.
 
-## The idea in one paragraph
+## The framework that fixes it
 Good troubleshooting is a loop: gather the symptoms, try the most likely and least disruptive fix, check whether it worked, and only then move on, saying what has been ruled out. Bots tend to break the loop by sending every step at once, never checking the result, or restarting from step one when the user returns. This page collects the rules from the library's troubleshooting patterns into one framework, and pairs naturally with [teach-back](teach-back.md) for checking steps and [Five Whys](five-whys.md) for finding the cause.
 
 ## The loop

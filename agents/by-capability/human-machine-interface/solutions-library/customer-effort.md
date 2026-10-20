@@ -1,10 +1,13 @@
-# Customer Effort for Chatbots: Make It Easy Instead of Trying to Delight
+# Support Bot Makes Users Work Too Hard? The Customer Effort Research
 
-> **Use it when:** you run a support bot and need to decide what to measure and fix first.
+## The problem
+Users give their order number twice, get bounced to another queue, or are told to call during office hours for something chat could do. Each step adds effort, and effort, more than a lack of warmth, is what drives customers away.
+
+**This page is for you if** you run a support bot and need to decide what to measure and fix first.
 
 > Status: **framework.** No rule check yet; effort needs an AI judge or user survey.
 
-## The idea in one paragraph
+## The framework that fixes it
 In "Stop Trying to Delight Your Customers" (Harvard Business Review, July 2010), Matthew Dixon, Karen Freeman and Nicholas Toman of the Corporate Executive Board reported on a study of more than 75,000 customer interactions. Their finding: going above and beyond rarely pays off, while making customers work hard to get a problem solved strongly drives disloyalty. Customers mostly want a quick, simple fix. They proposed the Customer Effort Score as a better predictor of loyalty than satisfaction. For bots, effort shows up as repeating information, being transferred, switching channels, and coming back because the first answer didn't solve it.
 
 ## Where effort comes from in chat

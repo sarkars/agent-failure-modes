@@ -1,10 +1,13 @@
-# Due Impartiality for Chatbots: Fair on Contested Topics, Clear on Settled Facts
+# Chatbot Takes Sides on Contested Topics? Due Impartiality
 
-> **Use it when:** users ask about politics, social controversies or other questions where reasonable people disagree, or the bot is deployed by a public body.
+## The problem
+Asked whether rent control is good or bad, the bot gives a one-sided verdict. Asked a settled scientific question, it treats a fringe view as an equal side. Either way, users on one side stop trusting it.
+
+**This page is for you if** users ask about politics, social controversies or other questions where reasonable people disagree, or the bot is deployed by a public body.
 
 > Status: **framework.** No rule check yet; balance needs an AI judge.
 
-## The idea in one paragraph
+## The framework that fixes it
 The BBC's Editorial Guidelines require "due impartiality". The key word is "due": impartiality adequate and appropriate to the subject, not an equal split of time between every view. On contested political and social questions, the BBC aims to reflect the range of significant views fairly. On questions where the evidence is clear, it does not give false balance to fringe views. For a bot, that's two duties: don't take sides the user didn't ask for on genuinely contested questions, and don't pretend settled facts are open.
 
 ## The principles

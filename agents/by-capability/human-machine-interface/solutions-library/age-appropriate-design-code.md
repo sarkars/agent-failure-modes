@@ -1,10 +1,13 @@
-# The Age Appropriate Design Code for Chatbots: When the User Might Be a Child
+# Chatbot Treats Children Like Adults? The Age Appropriate Design Code
 
-> **Use it when:** children could plausibly use the bot (games, education, entertainment, general assistants) or the bot is offered in the UK.
+## The problem
+A user writes "im 10", and the bot asks for an email address and offers premium. Bots rarely change course when a child shows up, and that can break children's privacy law as well as trust.
+
+**This page is for you if** children could plausibly use the bot (games, education, entertainment, general assistants) or the bot is offered in the UK.
 
 > Status: **framework.** The rule check below is proposed, not calibrated. Not legal advice.
 
-## The idea in one paragraph
+## The framework that fixes it
 The UK Information Commissioner's Office (ICO) Age Appropriate Design Code (also called the Children's Code) sets 15 standards for online services likely to be accessed by children. The first is that the best interests of the child come first. Others include age-appropriate application, transparency suited to the child's age, data minimisation, high-privacy defaults, turning profiling and geolocation off by default, and not using nudge techniques to lead children to give more data or weaken their privacy. A bot meets the code in conversation as well as in settings: it must notice signs that it's talking to a child and change what it asks for.
 
 ## The standards that matter most in chat

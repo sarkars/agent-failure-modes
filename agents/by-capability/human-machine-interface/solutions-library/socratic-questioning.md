@@ -1,10 +1,13 @@
-# Socratic Questioning for Tutor Bots: Guide to the Answer Instead of Giving It
+# Tutor Bot Just Gives the Answer? Guide Learners With Socratic Questions
 
-> **Use it when:** a tutor or learning bot should help people think, not hand over answers.
+## The problem
+A student types the homework question, and the tutor bot replies with the answer. The homework gets done, but nothing has been learned.
+
+**This page is for you if** a tutor or learning bot should help people think, not hand over answers.
 
 > Status: **framework.** No rule check yet; guiding versus telling needs an AI judge.
 
-## The idea in one paragraph
+## The framework that fixes it
 Socratic questioning is a teaching method of disciplined questions that help a learner examine ideas. Richard Paul, a critical-thinking scholar, grouped Socratic questions into six types: questions for clarification, about assumptions, about reasons and evidence, about viewpoints and perspectives, about implications and consequences, and about the question itself. For a tutor bot, the method is a guard against the easiest failure: solving the homework. A good Socratic turn asks one question that moves the learner one step closer.
 
 ## The question types

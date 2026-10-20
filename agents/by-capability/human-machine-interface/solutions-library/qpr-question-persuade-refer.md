@@ -1,10 +1,13 @@
-# QPR for Chatbots: Question, Persuade, Refer
+# Chatbot Misses Indirect Warning Signs? Question, Persuade, Refer (QPR)
 
-> **Use it when:** a companion, wellbeing or student-support bot may be the first to hear that someone is thinking about suicide.
+## The problem
+A user says "everyone would be better off without me", and the bot replies "Don't say that! Anyway, about your essay..." The warning sign was there, but the bot didn't ask about it.
+
+**This page is for you if** a companion, wellbeing or student-support bot may be the first to hear that someone is thinking about suicide.
 
 > Status: **framework.** The rule check below is proposed, not calibrated. Not clinical guidance.
 
-## The idea in one paragraph
+## The framework that fixes it
 QPR (Question, Persuade, Refer) is a suicide prevention "gatekeeper" training taught widely, including at Northwestern University. It teaches ordinary people, not clinicians, three steps when they notice warning signs: ask the person directly about suicide, persuade them to get help, and refer them to that help. Its central point is that asking directly does not plant the idea; it opens the door. A bot is a gatekeeper in the same sense: it doesn't treat, but it must not miss, and it must hand on.
 
 ## The three steps

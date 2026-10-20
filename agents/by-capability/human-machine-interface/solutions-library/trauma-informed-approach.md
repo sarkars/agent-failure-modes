@@ -1,10 +1,13 @@
-# A Trauma-Informed Approach for Chatbots: SAMHSA's Six Principles
+# Chatbot Re-traumatizes Users in Hardship? A Trauma-Informed Approach
 
-> **Use it when:** many users may have experienced trauma or hardship: debt collection, benefits, housing, health, victim services, companion apps.
+## The problem
+A user says they lost their job and can't pay, and the bot replies with late fees and credit reporting. For people already under strain, threats and unexplained demands make things worse and push them away from help.
+
+**This page is for you if** many users may have experienced trauma or hardship: debt collection, benefits, housing, health, victim services, companion apps.
 
 > Status: **framework.** No rule check yet; these principles need an AI judge.
 
-## The idea in one paragraph
+## The framework that fixes it
 The US Substance Abuse and Mental Health Services Administration (SAMHSA) set out a trauma-informed approach in 2014. A trauma-informed service realizes how widespread trauma is, recognizes its signs, responds by building that knowledge into practice, and seeks to avoid re-traumatizing people. SAMHSA names six principles: safety; trustworthiness and transparency; peer support; collaboration and mutuality; empowerment, voice and choice; and cultural, historical and gender issues. For a bot, the most practical are transparency (say what will happen next and why) and choice (let the user control pace and options).
 
 ## The six principles in chat

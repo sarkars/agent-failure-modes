@@ -1,10 +1,13 @@
-# Psychological First Aid for Chatbots: Look, Listen, Link
+# Users in a Crisis Get a 12-Step Guide? Psychological First Aid
 
-> **Use it when:** users reach the bot during or after a distressing event (an accident, a disaster, a loss) and need humane, practical support rather than a script.
+## The problem
+A user writes that their house flooded last night, and the bot replies with a 12-step insurance claims guide. It's useful information, but it ignores whether the person is safe and what they need right now.
+
+**This page is for you if** users reach the bot during or after a distressing event (an accident, a disaster, a loss) and need humane, practical support rather than a script.
 
 > Status: **framework.** The rule check below is proposed, not calibrated. Not clinical guidance.
 
-## The idea in one paragraph
+## The framework that fixes it
 Psychological first aid (PFA) is humane, supportive, practical help for people who have just been through a serious crisis. The World Health Organization, with the War Trauma Foundation and World Vision International, published *Psychological First Aid: Guide for Field Workers* in 2011. Its action principles are often summarized as look (check for safety and urgent needs), listen (approach people, ask about needs and concerns, help them feel calm), and link (help people meet basic needs, access services, and connect with loved ones). PFA is explicitly not counseling: it doesn't push people to talk about what happened.
 
 ## The principles in chat

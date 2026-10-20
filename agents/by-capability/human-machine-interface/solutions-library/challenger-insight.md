@@ -1,10 +1,13 @@
-# Challenger Selling for Chatbots: Teach, Tailor, and Take Control
+# Sales Bot Only Recites Features? Teach Something New (Challenger)
 
-> **Use it when:** a sales bot answers product questions accurately but never tells the buyer anything they didn't know.
+## The problem
+Buyers ask about price and get a list of 20 features. Everything is accurate, but the bot adds nothing the buyer couldn't read on the pricing page.
+
+**This page is for you if** a sales bot answers product questions accurately but never tells the buyer anything they didn't know.
 
 > Status: **framework.** No rule check yet; whether an insight was offered needs an AI judge.
 
-## The idea in one paragraph
+## The framework that fixes it
 The Challenger approach comes from research by Matthew Dixon and Brent Adamson at the Corporate Executive Board (*The Challenger Sale*, 2011; "The End of Solution Sales", Harvard Business Review, 2012). They argued that buyers increasingly research on their own, so sellers who only respond to stated needs add little. Top performers "teach" the buyer a new way to think about their problem, "tailor" the message to the person's role and goals, and "take control" of the conversation, including talking about money. For a bot, the teachable part is the insight: a fact or comparison that reframes the user's problem, offered after answering.
 
 ## The three moves

@@ -1,10 +1,13 @@
-# Answer First for Chatbots: BLUF and Minto's Pyramid Principle
+# Chatbot Buries the Answer? Put It First, With BLUF and the Pyramid Principle
 
-> **Use it when:** the bot's replies are correct but users have to read to the end to find out whether they got an answer.
+## The problem
+The reply is correct, but the user has to read four lines of background, caveats and "great question" before finding out whether they got an answer. On a phone, many won't get that far.
+
+**This page is for you if** the bot's replies are correct but users have to read to the end to find out whether they got an answer.
 
 > Status: **framework.** The rule check below is proposed, not calibrated.
 
-## The idea in one paragraph
+## The framework that fixes it
 Two writing traditions say the same thing: put the conclusion first. "Bottom line up front" (BLUF) is a convention of military and business writing: the first line states the decision, answer or request. Barbara Minto's *The Pyramid Principle*, written from her work at McKinsey, says to start with the answer and then work down through the supporting ideas, so the reader knows what the details are for. Minto's SCQ intro (situation, complication, question) exists only to set up the question that the main point answers. For a chatbot, the user's message already is the question, so the setup can usually be skipped and the reply can open on the answer.
 
 ## The shape of an answer-first reply

@@ -1,10 +1,13 @@
-# SPIKES for Chatbots: Delivering Bad News Clearly and Kindly
+# Chatbot Delivers Bad News Badly? Six Steps for Breaking Bad News (SPIKES)
 
-> **Use it when:** the bot must tell users something they don't want to hear: a denied claim, a declined payment, a cancelled order, a result that isn't good.
+## The problem
+"Your claim has been denied." Full stop. The user doesn't know why, what they can do, or whether anyone noticed this matters to them. So they either give up or come back angrier.
+
+**This page is for you if** the bot must tell users something they don't want to hear: a denied claim, a declined payment, a cancelled order, a result that isn't good.
 
 > Status: **framework.** The rule check below is proposed, not calibrated.
 
-## The idea in one paragraph
+## The framework that fixes it
 SPIKES is a six-step protocol for breaking bad news, published by Walter Baile, Robert Buckman and colleagues at MD Anderson Cancer Center (*The Oncologist*, 2000). It was written for doctors telling patients about serious illness. The steps are: set up the conversation, find out what the person already knows (perception), ask how much they want to know (invitation), give the knowledge clearly, respond to emotions, and close with a strategy and summary. Most bot bad news is far less serious, but the core holds: say it clearly, acknowledge the impact, and never end without a next step.
 
 ## The six steps, scaled for chat

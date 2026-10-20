@@ -1,10 +1,13 @@
-# Teach-Back for Chatbots: Check Understanding Without Testing the User
+# Users Get Your Chatbot's Instructions Wrong? Check With Teach-Back
 
-> **Use it when:** the bot gives instructions people must follow correctly: medication, setup steps, forms, deadlines.
+## The problem
+The bot gives five steps and ends with "Does that make sense?" The user says yes, then gets step 3 wrong. Yes-or-no checks don't show whether someone understood.
+
+**This page is for you if** the bot gives instructions people must follow correctly: medication, setup steps, forms, deadlines.
 
 > Status: **framework.** The rule check below is proposed, not calibrated.
 
-## The idea in one paragraph
+## The framework that fixes it
 Teach-back is a health literacy method promoted by the US Agency for Healthcare Research and Quality (AHRQ). After explaining something, the clinician asks the patient to explain it back in their own words, framing it as a check on how well the clinician explained, not a test of the patient. AHRQ advises against yes-or-no questions like "Do you understand?", because people say yes when they don't. For bots, teach-back turns the end of a set of instructions into a short check: "What will you do first?" or "What color is the light now?"
 
 ## The method

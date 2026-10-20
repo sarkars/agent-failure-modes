@@ -1,10 +1,13 @@
-# Politeness Theory for Chatbots: Protect the User's Face When You Ask, Refuse or Correct
+# Chatbot Sounds Rude or Over-Apologetic? Politeness Theory
 
-> **Use it when:** the bot must ask users for things, refuse requests, or correct them, and it comes across as either rude or grovelling.
+## The problem
+The bot either commands ("Enter your account number.") or apologizes three times before a simple request. Both feel wrong, because the bot isn't matching its tone to how much it's asking of the user.
+
+**This page is for you if** the bot must ask users for things, refuse requests, or correct them, and it comes across as either rude or grovelling.
 
 > Status: **framework.** No rule check yet; politeness depends on context and needs an AI judge.
 
-## The idea in one paragraph
+## The framework that fixes it
 Penelope Brown and Stephen Levinson's politeness theory (*Politeness*, 1987) builds on the idea of "face": a person's public self-image. Everyone has positive face (wanting to be liked and approved of) and negative face (wanting to be free from imposition). Requests, refusals, corrections and criticism are "face-threatening acts". Speakers soften them with strategies: positive politeness (showing friendliness, common ground), negative politeness (hedging, apologizing for the imposition, giving options), or going off-record (hinting). How much softening fits depends on social distance, power and how big the imposition is. A bot calibrates badly in both directions: blunt commands, or three apologies before a simple request.
 
 ## Strategies for chat

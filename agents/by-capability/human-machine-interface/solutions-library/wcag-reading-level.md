@@ -1,10 +1,13 @@
-# WCAG 3.1.5 Reading Level for Chatbots: Simpler Text for Readers Who Need It
+# Chatbot Too Hard to Read? WCAG 3.1.5 Sets a Reading Level
 
-> **Use it when:** accessibility matters for the bot (public services, health, education), or you need a sourced number for "too hard to read".
+## The problem
+Some replies need college-level reading. That shuts out many readers with cognitive disabilities, people reading in a second language, and anyone tired or in a hurry. You need a number to aim for, and a way to measure it.
+
+**This page is for you if** accessibility matters for the bot (public services, health, education), or you need a sourced number for "too hard to read".
 
 > Status: **framework.** This is the one rule in the checker with a sourced threshold.
 
-## The idea in one paragraph
+## The framework that fixes it
 The Web Content Accessibility Guidelines (WCAG), from the W3C, include success criterion 3.1.5 Reading Level, at the strictest conformance level (AAA). It says that when text needs a reading ability more advanced than lower secondary education, after removing proper names and titles, supplemental content or a simpler version should be available. W3C's Understanding document defines lower secondary education as roughly 7 to 9 years of school, and lists readability formulas such as Flesch-Kincaid as one way to estimate the level. For a chatbot, the simplest "simpler version" is to write the reply simply in the first place.
 
 ## What the criterion asks

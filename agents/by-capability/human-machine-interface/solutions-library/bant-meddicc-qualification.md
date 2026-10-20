@@ -1,10 +1,13 @@
-# BANT and MEDDICC for Chatbots: Qualifying a Lead Without Interrogating
+# Sales Bot Sends Unqualified Leads? Qualifying Without Interrogating (BANT and MEDDICC)
 
-> **Use it when:** a sales or lead-capture bot decides who to route to a salesperson, and what to learn before it does.
+## The problem
+The bot passes every lead to sales, or it interrogates visitors with a form-like list of questions before helping. Either way, salespeople waste time and buyers leave.
+
+**This page is for you if** a sales or lead-capture bot decides who to route to a salesperson, and what to learn before it does.
 
 > Status: **framework.** No rule check yet; qualification quality needs an AI judge.
 
-## The idea in one paragraph
+## The framework that fixes it
 BANT and MEDDICC are sales qualification frameworks: checklists of what a seller must know before investing in a deal. BANT, the older and simpler, asks about budget, authority, need and timing. MEDDICC, used in complex B2B sales, asks about metrics (the measurable result the buyer wants), the economic buyer, decision criteria, the decision process, the pain to be solved, a champion inside the buyer's company, and the competition; MEDDPICC adds the paper process (contracts and procurement). For a bot, the risk is turning the checklist into an interrogation. The skill is to learn these things one natural question at a time, after helping.
 
 ## The parts

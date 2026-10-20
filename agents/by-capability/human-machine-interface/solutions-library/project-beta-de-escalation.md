@@ -1,10 +1,13 @@
-# Project BETA De-escalation for Chatbots: Ten Domains for Calming an Angry User
+# Angry Users Get Angrier With Your Chatbot? Ten Rules for Verbal De-escalation (Project BETA)
 
-> **Use it when:** users arrive angry, swear, or write in capitals, and the bot's replies make it worse.
+## The problem
+A user writes in capitals that this is the third time, and the bot replies "Please calm down." Provocative phrases, long explanations and no options turn frustration into anger.
+
+**This page is for you if** users arrive angry, swear, or write in capitals, and the bot's replies make it worse.
 
 > Status: **framework.** The rule check below is proposed, not calibrated.
 
-## The idea in one paragraph
+## The framework that fixes it
 Project BETA (Best practices in Evaluation and Treatment of Agitation) was a workgroup of the American Association for Emergency Psychiatry. Its consensus statement on verbal de-escalation (Richmond and colleagues, *Western Journal of Emergency Medicine*, 2012) sets out ten domains for calming an agitated patient. Many translate directly to chat: be concise, don't be provocative, identify what the person wants and feels, listen closely, agree or agree to disagree, set clear limits, and offer choices and optimism. The bot can't use body language or personal space, so its words carry everything.
 
 ## The domains that apply to chat

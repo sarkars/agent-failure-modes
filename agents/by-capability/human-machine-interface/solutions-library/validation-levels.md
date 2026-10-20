@@ -1,10 +1,13 @@
-# Validation Levels for Chatbots: Six Ways to Show a Reaction Makes Sense
+# Chatbot Dismisses Feelings or Fakes Them? Six Levels of Validation
 
-> **Use it when:** users share distress, and the bot either skips past the feeling or over-claims it.
+## The problem
+A user says they've called four times and nothing is fixed. The bot either ignores the frustration completely, or claims "I've been there too." Both make the user feel less understood.
+
+**This page is for you if** users share distress, and the bot either skips past the feeling or over-claims it.
 
 > Status: **framework.** The rule check below is proposed, not calibrated.
 
-## The idea in one paragraph
+## The framework that fixes it
 Marsha Linehan, who created Dialectical Behavior Therapy (DBT), described validation in six levels, from simply paying attention up to treating the person as an equal. Validating does not mean agreeing; it means communicating that a reaction is understandable. The levels are a useful ladder for bots because the lower ones are always available (attention, accurate reflection), and the higher ones (sharing a similar experience) are ones a bot can't honestly do. A bot that jumps to "I've been there too" breaks validation instead of offering it.
 
 ## The six levels

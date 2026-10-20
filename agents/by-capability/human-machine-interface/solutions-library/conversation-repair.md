@@ -1,10 +1,13 @@
-# Conversation Repair for Chatbots: How People Fix Misunderstandings, and How Bots Should
+# Chatbot Stuck Saying "I Didn't Get That"? How People Repair Misunderstandings
 
-> **Use it when:** the bot misunderstands users, or users have to say the same thing twice. Repair is what keeps a misunderstanding from becoming a dead end.
+## The problem
+When the bot doesn't understand, it says "Sorry, I didn't get that. Could you rephrase?", and then says it again. The user has no idea which part was the problem, so the conversation dead-ends.
+
+**This page is for you if** the bot misunderstands users, or users have to say the same thing twice. Repair is what keeps a misunderstanding from becoming a dead end.
 
 > Status: **framework.** The rule check below is proposed, not calibrated.
 
-## The idea in one paragraph
+## The framework that fixes it
 Conversation analysis studies how real talk is organized, turn by turn. In a 1977 paper, Emanuel Schegloff, Gail Jefferson and Harvey Sacks showed that people handle trouble in speaking, hearing or understanding through "repair", and that it follows a pattern: the speaker usually gets the first chance to fix their own trouble, and when the other person starts the repair, they usually do it with a targeted question ("Friday this week?") rather than a blanket "What?". Self-repair is strongly preferred. For a bot, that means two things: a good repair names what was missed, and the same blanket "I didn't get that" twice is not repair at all.
 
 ## Repair moves

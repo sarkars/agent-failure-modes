@@ -1,10 +1,13 @@
-# Five Whys for Chatbots: Fix the Cause, Not Only the Symptom
+# Same Problem Keeps Coming Back? Find the Cause With Five Whys
 
-> **Use it when:** users come back with the same problem because the bot fixed the symptom, or an internal help desk bot needs to log causes.
+## The problem
+The printer is offline again. The bot says to restart it, again. The fix works for today, so the ticket is closed, and the user is back tomorrow.
+
+**This page is for you if** users come back with the same problem because the bot fixed the symptom, or an internal help desk bot needs to log causes.
 
 > Status: **framework.** No rule check yet; finding the root cause needs an AI judge.
 
-## The idea in one paragraph
+## The framework that fixes it
 Five Whys is a questioning technique from Toyota. It is credited to Sakichi Toyoda, and Taiichi Ohno, architect of the Toyota Production System, described it as a basis of Toyota's scientific approach. You ask why a problem happened, then why that happened, and so on (about five times) until you reach a cause you can fix. It has well-known limits: people stop at symptoms, find only causes they already know, and pick one cause when there are several. For a bot, a light version helps: after fixing a problem, ask one or two "why" questions to see whether it will come back.
 
 ## How it runs

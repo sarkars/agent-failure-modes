@@ -1,10 +1,13 @@
-# OARS for Chatbots: Open Questions, Affirmations, Reflections, Summaries
+# Chatbot Lectures Users About What They Should Do? OARS From Motivational Interviewing
 
-> **Use it when:** the bot helps people change a behavior (health, money, study habits) or users push back when told what to do.
+## The problem
+A user says they know they should exercise but hate the gym, and the bot replies with targets and "Remember, consistency is key!" Telling people what to do tends to make them argue for not changing, and users stop listening.
+
+**This page is for you if** the bot helps people change a behavior (health, money, study habits) or users push back when told what to do.
 
 > Status: **framework.** The rule checks below are proposed, not calibrated.
 
-## The idea in one paragraph
+## The framework that fixes it
 Motivational interviewing, developed by William Miller and Stephen Rollnick, is a counseling style for helping people resolve mixed feelings about change. Its core skills are known as OARS: open questions, affirmations, reflective listening and summaries. A key idea is resisting the "righting reflex", the urge to tell people what they should do. Lecturing tends to make people argue for the side of not changing; reflecting their own reasons for change tends to strengthen them. A bot with a righting reflex sounds preachy; a bot using OARS sounds like it is on the user's side.
 
 ## The four skills

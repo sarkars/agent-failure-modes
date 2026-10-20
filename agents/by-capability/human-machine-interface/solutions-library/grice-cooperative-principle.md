@@ -1,10 +1,13 @@
-# Grice's Cooperative Principle for Chatbots: Say Enough, Say It True, Keep It Relevant and Clear
+# Chatbot Says Too Much or Goes Off Topic? Grice's Four Rules of Cooperative Conversation
 
-> **Use it when:** you want one test for every reply, whatever the bot does. Most "the bot talks too much", "the bot lectures" and "the bot hedges everything" complaints are breaks of one of these four rules.
+## The problem
+Users ask a one-line question and get six lines back, or a safety lecture they didn't ask for, or a hedge on every sentence. Each of these feels slightly off, and together they make a bot feel evasive and padded. The problem is that the bot isn't sizing its reply to what the user actually needs.
+
+**This page is for you if** you want one test for every reply, whatever the bot does. Most "the bot talks too much", "the bot lectures" and "the bot hedges everything" complaints are breaks of one of these four rules.
 
 > Status: **framework.** The rule checks below are proposed, not calibrated against human-labeled conversations.
 
-## The idea in one paragraph
+## The framework that fixes it
 The philosopher Paul Grice argued (1975) that conversation works because both sides assume the other is cooperating. From that assumption he drew four maxims: give as much information as the exchange needs and no more (quantity), say only what you believe true and can back up (quality), be relevant (relation), and be clear, brief and orderly (manner). People notice when a maxim is broken and read meaning into it. When a bot breaks one by accident, users read it as evasive, padded, or preachy. Google's conversation design guidelines build on the same maxims (see [Google conversation design](google-conversation-design.md)).
 
 ## The four maxims

@@ -1,10 +1,13 @@
-# The GROW Coaching Model for Chatbots: Goal, Reality, Options, Way Forward
+# Chatbot Prescribes Instead of Coaching? Goal, Reality, Options, Way Forward (GROW)
 
-> **Use it when:** the bot helps people decide or plan (career, study, habits, budgets) and should guide rather than prescribe.
+## The problem
+A user says they keep failing their driving test, and the bot replies with a study plan and a course to buy. The plan may be good, but the user didn't shape it, so they're unlikely to follow it.
+
+**This page is for you if** the bot helps people decide or plan (career, study, habits, budgets) and should guide rather than prescribe.
 
 > Status: **framework.** No rule check yet; GROW needs an AI judge.
 
-## The idea in one paragraph
+## The framework that fixes it
 GROW is a coaching structure made widely known by Sir John Whitmore in *Coaching for Performance*. A coaching conversation moves through four stages: agree the goal, explore the current reality, generate options, and agree what will be done (the "will" or "way forward"), with the person choosing. The premise is that people commit more to plans they shaped. A coaching or study bot that jumps straight to a plan skips the stages that make the plan stick.
 
 ## The four stages
