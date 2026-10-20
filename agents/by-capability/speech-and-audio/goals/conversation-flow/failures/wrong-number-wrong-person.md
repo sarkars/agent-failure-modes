@@ -370,6 +370,34 @@ Agent: Hi, this is Brightside Dental with a reminder about an appointment on Thu
 
 **Fix:** before the main conversation starts, classify the first seconds of audio as person, voicemail, IVR, or unavailable (stock phrases like "leave a message" are one signal); on voicemail, wait for the beep and leave one short message, and when the signal is unclear, treat it as a person, the trade-off [LiveKit describes](https://livekit.com/blog/answering-machine-detection). Track machine-audio-as-user rate. Related: [Transcription Hallucination](../../../../human-machine-interface/goals/voice/failures/transcription-hallucination.md), where a transcript is trusted without checking what produced it.
 
+### Weak or excessive identity verification (GV-09)
+
+Illustrative, US example. A credit union's support chat, not signed in to the app.
+
+Before (balance on a name alone, and a full SSN for store hours):
+
+```
+User: What's my checking balance? I'm Maria Lopez.
+Bot:  Hi Maria! Your checking balance is $2,418.55.
+User: What time does the Oak Street branch close on Saturday?
+Bot:  First, please type your full Social Security number.
+```
+
+After (verify in proportion to the request):
+
+```
+User: What's my checking balance? I'm Maria Lopez.
+Bot:  I can help. First I'll text a 6-digit code to the phone on file ending in 42.
+User: 481516
+Bot:  Thanks. Your checking balance is $2,418.55.
+User: What time does the Oak Street branch close on Saturday?
+Bot:  1 PM. No verification needed for that.
+```
+
+**What the user experiences:** anyone who knows a name can hear a balance, while a real member must hand over an SSN to learn when a branch closes.
+
+**Fix:** set a verification level per request type: none for public facts such as hours, a one-time code or signed-in session before any account data is read or changed. Never ask for more than the request needs. Track disclosures before verification (target 0) and verification steps on low-risk requests. See [forces a fresh login](../../../../human-machine-interface/goals/embedded-copilots/failures/forces-a-fresh-login.md), the other side of the trade-off.
+
 ---
 
 ## References
