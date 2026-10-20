@@ -80,6 +80,8 @@ Usually not. Context, handoffs, and policy decide most outcomes. The roadmap bre
 ## Goals and metrics
 Each family has a README that states its **goal** and the shared **metrics** its patterns report against. Each pattern repeats its goal and primary metric in its header and lists measurable signals in section 7 (`Metric | Target | How to measure | Alert at`).
 
+To see how often conversations work out across many chats (resolution, handover timing, missed queries, drop-offs, personal data leaks and more), read [outcome metrics](reference/conversation-outcome-metrics.md). The diagnosis page and `convocheck --outcomes` compute them.
+
 ## How a pattern reads
 Every pattern opens with a one-line summary and a before-and-after transcript, then the cause, the evidence, and **the fix**. Testing and monitoring come next. Patterns whose fix needs engineering end with a technical section (architecture, guardrails, evals, alerts). See the [pattern template](_templates/hmi-pattern.md).
 

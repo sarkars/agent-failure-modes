@@ -1,8 +1,11 @@
-# SPIN Questioning (discovery for chat)
+# Sales Bot Pitches Before It Understands the Need? Discovery Questions (SPIN)
 
-> **Use it when:** the user asks a surface question ("Do you ship to Austin?", "What's the price?") and the real goal is still unknown. It tells the bot what to ask next.
+## The problem
+A user says they're looking for a sofa, and the bot immediately recommends its most popular model. It knows nothing about the room, the budget or the problem, so the recommendation is a guess.
 
-## The idea in one paragraph
+**This page is for you if** the user asks a surface question ("Do you ship to Austin?", "What's the price?") and the real goal is still unknown.
+
+## The framework that fixes it
 SPIN is a question sequence from Neil Rackham's *SPIN Selling* (1988), based on research by Rackham's Huthwaite team into large, complex sales. The book argues that in bigger decisions, skilled sellers win by asking questions that surface the buyer's problem and its consequences, not by pushing closing techniques. Its tradeoff matters for bots: SPIN was built for high-consideration decisions. For simple, low-value requests, one question is plenty.
 
 ## The four question types
@@ -37,5 +40,13 @@ Bot:  Sorry to hear that. Is the sagging the main thing you want fixed, or is it
 ## Source
 - Rackham, N. (1988). *SPIN Selling*. McGraw-Hill. Huthwaite's own summary: [huthwaiteinternational.com](https://www.huthwaiteinternational.com/blog/neil-rackham-research-spin)
 
-## Planned alongside this page
-Closing protocol · Challenger-style insight teaching · LEAP/HEARD de-escalation · NURSE empathy statements · Channel-fit matrix
+## What the checker flags
+Choosing this framework in convocheck or the diagnosis page turns on [pitching before discovery](../../speech-and-audio/goals/conversation-flow/failures/qualification-flow-violations.md) (a recommendation in the first reply with no question) and [answer-and-go conversation](../goals/conversation-leadership/failures/answer-and-go-conversation.md) (an answer with no next step, or two questions stacked in one reply). The quality of the discovery needs an AI judge.
+
+## Related
+- [BANT and MEDDICC qualification](bant-meddicc-qualification.md)
+- [Challenger insight selling](challenger-insight.md)
+- [Cialdini's principles, used ethically](cialdini-ethical-persuasion.md)
+- [NURSE empathy statements](nurse-empathy-statements.md)
+- [HEARD service recovery](heard-service-recovery.md)
+- [All frameworks](README.md)
