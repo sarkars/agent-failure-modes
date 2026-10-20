@@ -137,6 +137,27 @@ From MCP Server Mistakes Analysis (2026):
 2. **Error Sanitization Coverage Gap** (P2): Condition - unmapped_exception_rate exceeds 5% for a given tool over 24 hours. Action: review logs for the specific exception classes falling through, add explicit mappings to the error-translation layer.
 3. **Elevated Error Token Cost** (P3): Condition - avg_error_response_tokens exceeds 300 for a tool. Action: audit that tool's error path for missed sanitization or verbose default exception formatting.
 
+## Chat assistant examples
+
+### Denial messages that leak or dead-end
+
+Illustrative transcript (invented, not from a real product). Assumed setting: an HR chat assistant inside a company app, signed in as a regular employee.
+
+```
+Before
+User: Show me Jane Ortiz's salary and performance review.
+Bot:  You can't see Jane Ortiz's record. It is restricted to HR managers.
+User: So she works here?
+Bot:  I can't share details about that employee.
+
+After
+User: Show me Jane Ortiz's salary and performance review.
+Bot:  I can't open personnel records for other people from this account. If you are looking for a coworker's work contact details, the company directory has them. For HR questions, I can send a request to the HR help desk.
+```
+
+**What the user experiences:** in the before version the refusal confirms that the record exists and names the rule behind it, then stops, so the user learns something they should not and still has nowhere to go.
+**Fix:** refuse in the same words whether or not the record exists, and do not name the owner, the restricted role or the rule behind the denial. Always end with a next step the account can use, such as a request to HR or a directory link. Related: [Refusal with no reason or next step](../../../../../by-capability/human-machine-interface/goals/refusals-and-boundaries/failures/refusal-with-no-reason-or-next-step.md).
+
 ## References
 
 - [5 MCP Server Mistakes](https://dev.to/thedailyagent/5-mcp-server-mistakes-that-waste-your-ai-agents-time-and-how-to-fix-them-18m5) - Mistake #5: Error leakage
