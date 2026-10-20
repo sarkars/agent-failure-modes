@@ -118,6 +118,26 @@ Bot:  I could not read that article. The link opened a subscriber login page.
 **What the user experiences:** a confident summary and a quotation that look read, so the user puts words in a memo that nobody checked, and learns this only when a colleague opens the link.
 **Fix:** record per source whether the page body was opened; if the fetch returned a login page, paywall, or robots block, say so in the reply and do not summarize or quote it. Offer to work from pasted text or label any secondhand coverage as such. Reported case: when Press Gazette asked ChatGPT to chart Telegraph profits, its answer included figures and links, then it said its own citations were "hallucinated — but plausible" ([Press Gazette, Nov 2025](https://pressgazette.co.uk/platforms/chatgpt-took-press-gazette-content-then-said-that-could-not-have-happened/), opened). Metric: claims about sources the agent could not open, target 0. See the [confident wrong answer with no way to check](../../../../human-machine-interface/goals/errors-and-recovery/failures/confident-wrong-answer-with-no-way-to-check.md) pattern.
 
+### Fabricated indicators or vulnerability details
+Illustrative transcript (a security assistant in a SOC chat tool; the CVE number and IP address are fictional, from a reserved documentation range):
+
+Before:
+```
+Analyst: What does CVE-2099-0000 affect, and is it being exploited?
+Bot:     It affects Acme VPN Gateway 4.1 through 4.6 and is fixed in 4.7. Attackers
+         are using 203.0.113.47 for command and control.
+         (no lookup ran; the versions and the IP came from the model alone)
+```
+After:
+```
+Analyst: What does CVE-2099-0000 affect, and is it being exploited?
+Bot:     I could not find CVE-2099-0000 in the NVD or CISA's Known Exploited
+         Vulnerabilities catalog, so I cannot give versions, a fix, or indicators.
+         Check the ID for a typo, or send the vendor advisory and I will summarize it.
+```
+**What the user experiences:** precise versions and an IP address that look looked up, so the analyst patches the wrong build and blocks an address with no link to the threat, and learns it only when the vendor advisory disagrees.
+**Fix:** before presenting any CVE number, affected or fixed version, hash, IP, or domain, look it up in an authoritative feed (NVD, the CISA KEV catalog, the vendor advisory) and show the source next to each item; if the lookup finds nothing, say so instead of filling in details. In a controlled test, ChatGPT wrote plausible advisories for 97% of fake CVE IDs ([arXiv 2506.13161](https://arxiv.org/html/2506.13161v1), abstract opened). Metric: unsupported indicators in reports, target 0. See the [confident wrong answer with no way to check](../../../../human-machine-interface/goals/errors-and-recovery/failures/confident-wrong-answer-with-no-way-to-check.md) pattern.
+
 ## References
 - [Avianca Lawyers](https://www.cnn.com/2023/05/27/business/chat-gpt-avianca-mata-lawyers/index.html) - 6 fake cases cited
 - [Stanford Legal RAG Hallucinations](https://dho.stanford.edu/wp-content/uploads/Legal_RAG_Hallucinations.pdf) - Fabricated legal citations
