@@ -96,6 +96,73 @@ From Accent Bias Research (2026):
 2. **Accent Disparity Detection** (P2): Condition - Retry rate ratio (max/min across accents) > 2.0 over 24-hour window. Action: Alert product/ML team, segment error analysis by accent, identify high-error phrases for targeted improvement, consider pausing deployment if ratio > 3.0.
 3. **Discriminatory User Experience** (P1): Condition - Abandonment rate gap between accent groups > 10% relative over 7-day window, AND average WER gap > 3 points. Action: Immediate escalation to executive team, freeze model deployments, initiate emergency retraining on balanced accent data, prepare customer communication plan.
 
+## Chat assistant examples
+
+### Children's and atypical speech
+
+Illustrative example: a US library's voice-enabled reading helper on a tablet. A child is searching for a book by voice. Lines marked (voice) are planned voice input; lines marked (tap) are text or touch.
+
+Before:
+
+```
+Bot:   Say the title of the book you want.
+Child: (voice) "The Very Hungry Cat-cat-caterpillar"
+Bot:   I heard "The Very Hungry Cat cat cat". I can't find that book.
+Child: (voice) "Caterpillar!"
+Bot:   Sorry, I didn't catch that.
+Child: (voice) "The Very Hungry Caterpillar!"
+Bot:   Sorry, I didn't catch that.
+Bot:   I can't help with that right now.
+```
+
+After:
+
+```
+Bot:   Say the title of the book you want, or tap Type It.
+Child: (voice) "The Very Hungry Cat-cat-caterpillar"
+Bot:   I think you want "The Very Hungry Caterpillar". Is that right?
+       [Yes] [No, let me type it]
+Child: (tap) Yes
+Bot:   Here it is. Want me to read it, or do you want to read it to me?
+```
+
+**What the user experiences:** a child (or an adult who stutters or has aphasia) says the title the way they naturally say it, is told "I didn't catch that" three times, and learns that the helper is not for them.
+
+**Fix:** do not treat a repeated sound or a pause as the end of the answer, and do not repeat the same failure prompt more than once. Offer a tap or typed path after the first miss, and offer a best guess for the person to confirm. Report word error rate by cohort (child, stutter, aphasia, Deaf speech) so the gap is visible. In research on people who stutter, systems often cut speakers off early, and technical changes to the recognizer reduced both early cutoffs and word error rate (["From User Perceptions to Technical Improvement"](https://arxiv.org/abs/2302.09044v3), abstract read). Related pattern: [voice repair failure](../../../../human-machine-interface/goals/voice/failures/repair-failure.md).
+
+This is design guidance, not clinical advice, and it needs expert review (for example, a speech-language pathologist and a child-safety reviewer) before use.
+
+### Wrong recognition model for the speaker
+
+Illustrative example: a US pharmacy refill phone line. The locale setting is a configuration value, not something the caller says. Here it was left at a non-US English variant after a test. We found no source showing that a locale mismatch alone causes these exact mishearings, so the errors below show the symptom, not a measured cause; check it on your own recordings.
+
+Before:
+
+```
+Config: recognition locale = en-IN   (caller is in Ohio and speaks US English)
+Bot:    Say your prescription number.
+Caller: (voice) "four seven two, nine zero one"
+Bot:    I heard "for seven to nine oh one". That is not a valid number.
+Caller: (voice) "four seven two nine zero one"
+Bot:    I heard "for seven too nine zero one". That is not a valid number.
+Bot:    Let me transfer you to an agent.
+```
+
+After:
+
+```
+Config: recognition locale = en-US   (set from the caller's number and account region, reviewed weekly)
+Bot:    Say your prescription number.
+Caller: (voice) "four seven two, nine zero one"
+Bot:    Four seven two, nine zero one. Is that right?
+Caller: (voice) "Yes"
+Bot:    Found it. Your refill is ready for pickup today.
+```
+
+**What the user experiences:** the caller speaks normally, the number is mis-heard twice, and they are sent to an agent for a task the bot should have finished.
+
+**Fix:** set the locale and model from what is known about the caller (account region, number, stated language) and keep a per-deployment locale check in the test plan. Report word error rate by locale setting, so a wrong setting shows up as one bad bucket instead of a general "voice is flaky". When the first attempt fails, ask the caller to confirm the language or region rather than retrying the same model; Google's Speech-to-Text docs show the primary language code is set on each request and that extra candidate languages can be listed, so a mismatch is a setting you can change ([Google Cloud docs](https://docs.cloud.google.com/speech-to-text/docs/enable-language-recognition-speech-to-text), page read). Related pattern: [voice repair failure](../../../../human-machine-interface/goals/voice/failures/repair-failure.md).
+
 ---
 
 ## References
