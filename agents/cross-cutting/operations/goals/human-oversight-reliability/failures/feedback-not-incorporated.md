@@ -93,6 +93,31 @@ From LLM Behavior Research (2026):
 2. **Repeated Correction Spike** (P2): Condition — repeated_correction_rate exceeds 40% for a topic/entity. Action: investigate whether the correction is being logged but not retrieved, or retrieved but not weighted correctly, and fix the specific failure point.
 3. **Feedback Retrieval Near-Zero** (P1): Condition — feedback_retrieval_rate falls below 50%. Action: treat the correction-indexing/retrieval pipeline as broken; escalate for immediate engineering review since corrections are effectively being silently discarded.
 
+## Chat assistant examples
+
+### Repeats a corrected mistake
+
+```
+Before:
+User: Draft the agenda for Thursday's Acme Corp renewal call.
+Acme Bot: Here's the agenda. Item 1: Review the 2025 contract with Rick Dunn.
+User: Rick left in June. Our contact is Priya Shah.
+Acme Bot: Sorry about that. Updated to Priya Shah.
+   (ten messages later)
+User: Now write the follow-up email.
+Acme Bot: Hi Rick, thanks for meeting with us today...
+
+After:
+Acme Bot: Hi Priya, thanks for meeting with us today...
+   (checked the pinned correction "Contact is Priya Shah, not Rick Dunn" before replying)
+```
+
+**What the user experiences:** they fix the same error twice in one conversation, so the apology after the first fix means nothing and they start re-reading every reply for old mistakes.
+
+**Fix:** when the user corrects something, pin it as a fact for the rest of the conversation and check the pinned list before each reply. Test it with a later request that touches the same fact. See the [corrections not applied](../../../../../by-capability/human-machine-interface/goals/dialogue-management/failures/corrections-not-applied.md) pattern. Users report this loop in practice, for example in an [OpenAI community thread](https://community.openai.com/t/assistant-ignores-latest-instructions-and-overrides-user-constraints-in-edits/1379048) about an assistant that "repeats previously corrected mistakes" in multi-turn chats.
+
+---
+
 ## References
 
 - [Anthropic: Constitutional AI](https://www.anthropic.com/research/constitutional-ai-harmlessness-from-ai-feedback) - Learning from feedback

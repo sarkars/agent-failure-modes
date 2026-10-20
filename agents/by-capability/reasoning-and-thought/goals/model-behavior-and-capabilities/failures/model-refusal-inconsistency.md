@@ -68,3 +68,17 @@ conversational framing differences the safety boundary wasn't robust to.
 - [Model Instruction Following Decay](model-instruction-following-decay.md) - conversational position effects that erode general instruction-following also erode refusal boundaries specifically
 - [Model Reasoning Inconsistency](model-reasoning-inconsistency.md) - refusal decisions are a safety-critical special case of the same surface-sensitivity affecting general model reasoning
 - [Model Uncertainty Unawareness](model-uncertainty-unawareness.md) - borderline refusal decisions near the model's decision threshold are resolved without any signal of that borderline uncertainty being surfaced
+
+## Chat assistant examples
+
+### Boundaries that change between turns or sessions
+```
+User: Can I return my Dyson vacuum? I bought it 45 days ago.
+Bot:  Yes, you can return it for a full refund.
+User: Great, how do I start the return?
+Bot:  I'm sorry, but our return window is 30 days, so I can't process a return for this order.
+User: You just told me yes.
+Bot:  I apologize for the confusion. Returns after 30 days aren't possible.      (no mention that the first answer was wrong)
+```
+**What the user experiences:** the same request gets a yes, then a no, so the user can't trust either answer and can't tell which one the company will honor.
+**Fix:** decide from the written return policy every time, not from how the question is worded, and look up the order date before answering. If an earlier answer was wrong, say so and why ("My first answer was wrong; the policy is 30 days, and this order is at 45"), then offer the next step, such as a human review. See [over-refusal of ordinary requests](../../../../human-machine-interface/goals/refusals-and-boundaries/failures/over-refusal-of-ordinary-requests.md).

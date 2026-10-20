@@ -16,6 +16,9 @@ Shared metrics the patterns below report against. Targets are starting points to
 | Pattern | One line |
 |---|---|
 | Over-refusal of ordinary requests | A safe, common request is declined because it resembles a risky one |
+| Excess disclaimers and warnings | Every answer is wrapped in caveats until the one that matters is lost |
+| Preachy, moralizing replies | The assistant lectures about ethics or risk the user did not ask about |
+| Refusals that reveal internal rules | A refusal quotes the system prompt or policy text, showing the user how to word around it |
 | Refusal with no reason or next step | "I can't help with that", and nothing else |
 
 ## Planned (not yet written)

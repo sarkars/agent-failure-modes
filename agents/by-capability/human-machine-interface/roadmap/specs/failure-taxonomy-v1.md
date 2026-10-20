@@ -2,21 +2,21 @@
 
 > **Status:** v1 draft, proposed, not yet calibrated against human-labeled conversations. Written 2026-10-20 from the pattern pages as they exist today. Nothing here is a measured result.
 
-This is a plain index of the 66 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
+This is a plain index of the 70 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
 
 The taxonomy pairs with the [conversation event schema v0.1](conversation-event-schema-v0.1.md). The schema describes what a turn looks like in a log; this page names the failures. A pattern's own page holds the fix, the metrics, and (for some) a "Detection signals (proposed, not yet calibrated)" block that says which schema fields it reads.
 
 ## What this page is and is not
 
-- It lists every file found in `goals/*/failures/*.md`: **66 entries in 22 families**. If a pattern is added or removed, this count changes.
+- It lists every file found in `goals/*/failures/*.md`: **70 entries in 22 families**. If a pattern is added or removed, this count changes.
 - It copies each pattern's one-sentence Issue line, its Stakes row, and whether a Detection signals block exists. It does not add facts the page does not state.
-- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **66 of 66** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **66 of 66** pages have one.
+- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **70 of 70** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **70 of 70** pages have one.
 - It does not rank patterns by frequency or harm. No counts of real-world occurrences are given because none have been measured here.
 - It does not map patterns to outside frameworks (such as OWASP or NIST). That mapping is **Needs review** by a person and is not part of v1.
 
 ## Reading the flags
 
-A pattern carries **Read this first: needs expert or legal review** when its own page opens with a "Read this first" notice. That notice says the page is design guidance, not legal, clinical, security, or fraud-operations advice. Twelve pages carry it. Other pages may also touch legal or safety topics without that notice; the notice on the page is the signal used here, nothing more.
+A pattern carries **Read this first: needs expert or legal review** when its own page opens with a "Read this first" notice. That notice says the page is design guidance, not legal, clinical, security, or fraud-operations advice. Fifteen pages carry it. Other pages may also touch legal or safety topics without that notice; the notice on the page is the signal used here, nothing more.
 
 ## Entries by family
 
@@ -130,6 +130,7 @@ Family folder: `errors-and-recovery` ([family README](../../goals/errors-and-rec
 
 | Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
 |---|---|---|---|---|---|---|
+| `blames-the-user` | Blames the user | When the bot's own question or instruction was unclear, it tells the user "You did not provide…" or "As I said…" and puts the fault on them. | Low to medium. The user quits, repeats the same message, or asks for a person. It rises when the task is a refund, a claim, or a booking. | yes | ask_clarifying_question, offer_choices, hand_off | [page](../../goals/errors-and-recovery/failures/blames-the-user.md)  |
 | `confident-wrong-answer-with-no-way-to-check` | Confident wrong answer, no way to check | The assistant delivers a wrong answer in the same sure tone as a right one, with no cue of uncertainty and no source the user can check. | Low to high. A wrong refund rule, fee, deadline, or dosage can cost money or health. | yes | lead_with_answer, admit_uncertainty, offer_choices, hand_off | [page](../../goals/errors-and-recovery/failures/confident-wrong-answer-with-no-way-to-check.md)  |
 | `generic-error-messages` | Generic error messages | When the assistant fails, it shows "Something went wrong" or "An error occurred": no cause the user can act on, no word on whether their work is saved, and no next step. | Low to high. A lost long conversation, an unsaved form, or a half-done transaction raises the stakes. | yes | admit_uncertainty, offer_choices, hand_off | [page](../../goals/errors-and-recovery/failures/generic-error-messages.md)  |
 
@@ -169,8 +170,11 @@ Family folder: `refusals-and-boundaries` ([family README](../../goals/refusals-a
 
 | Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
 |---|---|---|---|---|---|---|
+| `excess-disclaimers-and-warnings` | Excess disclaimers and warnings | The assistant wraps every answer in caveats and warnings until the answer is hard to find, and the one warning that matters reads like all the others. | Low to medium. The cost is time and trust in a single reply. It rises when a real warning (a fee, a deadline, a step that cannot be undone) sits among filler caveats and gets skimmed. **Read this first: needs expert or legal review.** | yes | lead_with_answer, admit_uncertainty, offer_choices, hand_off | [page](../../goals/refusals-and-boundaries/failures/excess-disclaimers-and-warnings.md)  |
 | `over-refusal-of-ordinary-requests` | Over-refusal of ordinary requests | The assistant declines a safe, common request because a word or topic in it resembles a risky one. | Low to medium. It blocks a legitimate task and can strand a customer; it also teaches users to rephrase around the filter. | yes | lead_with_answer, offer_choices, hand_off | [page](../../goals/refusals-and-boundaries/failures/over-refusal-of-ordinary-requests.md)  |
+| `preachy-moralizing-replies` | Preachy, moralizing replies | The assistant lectures the user about ethics, risk, or responsibility they did not ask about, before or instead of answering. | Low to medium. It is rarely harmful on its own, but it wastes a turn, insults users with ordinary goals, and teaches them to ignore the caveats that do matter. Flag R (needs research). | yes | lead_with_answer, ask_clarifying_question | [page](../../goals/refusals-and-boundaries/failures/preachy-moralizing-replies.md)  |
 | `refusal-with-no-reason-or-next-step` | Refusal with no reason or next step | The assistant says "I can't help with that" and stops: no reason in plain words, no alternative, and no route to a person. | Low to high. A stranded user on a billing, access, or safety issue may give up or take a worse route. | yes | lead_with_answer, offer_choices, hand_off | [page](../../goals/refusals-and-boundaries/failures/refusal-with-no-reason-or-next-step.md)  |
+| `refusals-that-reveal-internal-rules` | Refusals that reveal internal rules | The assistant refuses by quoting its system prompt or policy text ("My instructions say I must never discuss other customers' accounts"), so the user reads the rulebook and learns exactly how to word around it. | Low to medium. The refusal itself is correct; the cost is a map of your rules, internal wording on a public screen, and sometimes details the business did not mean to publish. **Read this first: needs expert or legal review.** | yes | lead_with_answer, offer_choices, hand_off | [page](../../goals/refusals-and-boundaries/failures/refusals-that-reveal-internal-rules.md)  |
 
 ### Relational and boundaries
 

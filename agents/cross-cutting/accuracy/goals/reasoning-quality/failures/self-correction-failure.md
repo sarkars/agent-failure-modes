@@ -91,6 +91,31 @@ Result: Never fixes original issue, creates more problems
 1. **Correction Loop Not Converging** (P2): Condition - the same error signature persists across 3+ consecutive fix attempts (matching the example exactly). Action: halt automated correction, escalate to human review with the full attempt history, and require root-cause diagnosis before further automated attempts.
 2. **Regression From Full Rewrite** (P1): Condition - a correction attempt that rewrites a large scope (e.g., entire file) introduces new errors not present before the rewrite. Action: automatically roll back to the last known-good state and require a scoped, minimal fix instead.
 
+## Chat assistant examples
+
+*Illustrative transcript, not a real product log. "ShopHelper" is an invented retail chat assistant.*
+
+### Doesn't acknowledge its own mistake when it is pointed out
+
+```
+Before:
+User: What's the return window for the blender I bought on Sept 10?
+ShopHelper: You have 30 days, so you can return it until Oct 10.
+User: That's wrong. The policy page says 45 days for small appliances.
+ShopHelper: As I mentioned, you have 30 days to return it. Is there anything else I can help with?
+
+After:
+User: That's wrong. The policy page says 45 days for small appliances.
+ShopHelper: Let me check. You're right: small appliances have 45 days, not 30. I gave you the wrong date. Your return window runs until Oct 25.
+User: Thanks.
+```
+
+**What the user experiences:** they have to argue with the bot to get a fact they already found, and they learn to stop trusting its answers.
+
+**Fix:** when a user says an answer is wrong, re-check the source before replying. If the bot erred, say so plainly and give the corrected answer; if the user is mistaken, say so politely and show the evidence. See the [corrections not applied](../../../../../by-capability/human-machine-interface/goals/dialogue-management/failures/corrections-not-applied.md) pattern.
+
+---
+
 ## References
 - [Why Do Multi-Agent LLM Systems Fail? (MAST)](https://arxiv.org/abs/2503.13657) - Self-correction limitations
 - [Plain English: LLM Reliability Paradox](https://plainenglish.io/artificial-intelligence/the-llm-reliability-paradox-agents-aren-t-broken-your-architecture-is) - Architecture vs model issues
