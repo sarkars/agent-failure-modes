@@ -70,3 +70,18 @@ proceed accordingly. Please advise if further assistance is required."
 - [Conversation Depth Mismatch](conversation-depth-mismatch.md) - both are context-calibration failures, one on register and one on length/detail
 - [Conversation Mood Whiplash](conversation-mood-whiplash.md) - formality mismatch on a single response can compound into mood whiplash when register swings across turns
 - [User Trust Degradation](user-trust-degradation.md) - a tone-deaf response on a sensitive topic can disproportionately damage trust relative to its apparent severity
+
+## Chat assistant examples
+
+### Emoji and slang that don't fit the audience
+```
+[Chat in the Harbor Federal Bank app, after a $412.80 card charge was flagged]
+User: I just got an alert about a charge at an electronics store in Ohio. I'm in Texas. Is my card compromised?
+Bot:  Yikes, that looks sus 😬 No worries, we've got your back! Wanna lock the card real quick? 🔒
+User: Is this message actually from the bank?
+
+[Fixed]
+Bot:  A $412.80 charge at an Ohio electronics store was flagged as unusual. If you did not make it, I can lock your card now. Locking takes effect immediately, and a replacement ships within 5 to 7 business days. Should I lock the card?
+```
+**What the user experiences:** a fraud alert that sounds like a text from a friend, so the user doubts the message is real and has to ask whether it came from the bank.
+**Fix:** put fraud, security and account-loss contexts on a formal-register list where emoji and slang are suppressed, and state the facts and the next step in plain, measured words. Keep the casual voice for low-stakes chats. See the [stakes-blind register](../../../../../by-capability/human-machine-interface/goals/stakes-calibration/failures/stakes-blind-register.md) pattern.

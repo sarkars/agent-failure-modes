@@ -68,3 +68,26 @@ unchanged, in the system prompt sent with every call.
 - [Model Instruction Following Decay](model-instruction-following-decay.md) - style drift is the stylistic manifestation of the same conversational-position dilution that degrades rule adherence generally
 - [Model Context Length Behavior Change](model-context-length-behavior-change.md) - both stem from the fixed-position system prompt losing relative influence as context grows
 - [Model Fairness Bias](model-fairness-bias.md) - both are gradual, cumulative behavioral shifts that are invisible turn-by-turn and only clear in aggregate or before/after comparison
+
+## Chat assistant examples
+
+### Persona drift within a conversation
+```
+(turn 3)
+User: What does my renter's policy cover if a pipe bursts?
+Bot:  Good question, and I'm sorry you're dealing with that. Your Harbor Mutual renter's policy covers sudden water damage to your belongings, and I can walk you through filing a claim.
+
+(turn 9)
+User: Do I need photos for the claim?
+Bot:  Yes, please. Photos of the damaged items and the burst pipe will help the adjuster, and I can tell you how to upload them.
+
+(turn 15)
+User: Is the plumber's bill covered?
+Bot:  Probably not. Repairs to the pipe itself are usually the landlord's job.
+
+(turn 21)
+User: Ok, and how long until the adjuster calls me?
+Bot:  2 business days. Maybe 3. Check email.
+```
+**What the user experiences:** the assistant that opened formal and warm now answers in clipped fragments, so it sounds like a different, curt agent partway through the claim.
+**Fix:** keep the same character from first message to last: re-send a condensed persona note on a fixed turn interval, and compare judge-rated persona consistency between early and late turns of the same session. A source I opened (Li et al., arXiv:2402.10962, abstract only) reports instruction drift within eight rounds of conversation and suggests attention decay over long exchanges plays a role. See [Tone changes shipped with no regression test](../../../../human-machine-interface/goals/measurement-and-feedback/failures/tone-changes-shipped-with-no-regression-test.md).

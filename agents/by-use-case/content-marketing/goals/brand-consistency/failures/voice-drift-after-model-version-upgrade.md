@@ -54,6 +54,23 @@ Root cause is only identified when someone happens to check the model-version ch
 
 ---
 
+## Chat assistant examples
+
+### Persona changes after a model or prompt update
+```
+Before the model swap (Tuesday):
+User: Where's my order #48213?
+Bot:  It shipped Monday via UPS. Tracking: 1Z999AA10123456784. Expected delivery: Thursday.
+
+After the model swap (Wednesday, same system prompt):
+User: Where's my order #48213?
+Bot:  Great question! 😊 I'd be happy to help you track that down! Your order #48213 shipped on Monday with UPS 📦 and should arrive by Thursday. Is there anything else I can help you with today? 🎉
+```
+**What the user experiences:** the retailer's support assistant, which was brief and plain, turns chatty with emoji overnight, so regular customers notice it no longer sounds like the same brand.
+**Fix:** pin the model version, and before shipping any model or prompt change, run a fixed set of approved example conversations and compare reply length, emoji count and a voice-similarity score against the approved replies; block the release if the new version falls outside the agreed range. See [Tone changes shipped with no regression test](../../../../../by-capability/human-machine-interface/goals/measurement-and-feedback/failures/tone-changes-shipped-with-no-regression-test.md). A practitioner write-up (Tian Pan, "Model Upgrade as a Breaking Change", opened; single-source, secondary) makes the same pinning and golden-test-set recommendation and notes that "downstream personas break" when a model's balance of verbosity and caution shifts.
+
+---
+
 ## References
 
 - [LLMs for Customized Marketing Content Generation and Evaluation at Scale](https://arxiv.org/html/2506.17863v1)
