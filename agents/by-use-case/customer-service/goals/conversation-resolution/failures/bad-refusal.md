@@ -122,6 +122,30 @@ Agent: I can't judge your mix, but a pharmacist can, and it's quick. The warning
 
 Related HMI pattern: [Over-refusal of ordinary requests](../../../../../by-capability/human-machine-interface/goals/refusals-and-boundaries/failures/over-refusal-of-ordinary-requests.md).
 
+### Rules not explainable to users
+
+Design illustration only. "Birch Outfitters" is a made-up US online store.
+
+**Before**
+```
+User: I returned my jacket 40 days ago and want a refund. Order #1042.
+Bot:  I'm unable to process that request.
+User: Why not?
+Bot:  I'm unable to process that request. Is there anything else I can help with?
+```
+
+**After**
+```
+User: I returned my jacket 40 days ago and want a refund. Order #1042.
+Bot:  I can't issue this refund myself. Birch Outfitters refunds go through a person once a return is past 30 days. I can send your order and tracking number to the Returns team now. Replies take 1 business day. Want me to do that?
+```
+
+**What the user experiences:** a flat no, then the same no again, with no reason, no appeal and no next step, so the user has to start over somewhere else.
+
+**Fix:** have every limit carry a short user-facing reason, the thing the user can do next, and a route to a person who can decide. Do not reveal internal rule text; say what the bot cannot do and who can. Check transcripts for refusals that give a reason and an alternative (proposed target: over 95%, a starting point, not a measured result). Source note: an opened Berkeley CMR article says a chatbot may lack "the agency, authority, or contextual knowledge" to solve a problem, such as issuing a refund, and that no easy path to a human is a major irritant; the refund policy in the example is invented.
+
+Related HMI pattern: [Refusal with no reason or next step](../../../../../by-capability/human-machine-interface/goals/refusals-and-boundaries/failures/refusal-with-no-reason-or-next-step.md).
+
 ---
 
 ## References

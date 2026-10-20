@@ -99,6 +99,24 @@ Result: Malicious action executed with "user approval"
 2. **Quick Approval Following Denial** (P2): Condition - an approval occurs shortly after a denial in the same session, matching the fatigue-exploitation pattern. Action: Hold the approved action pending secondary review, notify the user to confirm the approval was intentional, log the session for pattern analysis.
 3. **High-Risk Item Detected in Batch** (P1): Condition - a batch approval request contains an item whose risk tier is disproportionate to its neighbors. Action: Block batch-level approval, require individual review of the flagged item, alert the user to the specific discrepancy before allowing any approval.
 
+## Chat assistant examples
+
+### Consequential automated decisions with no explanation or review
+
+*Illustrative transcript, not a real product or log. Not legal advice: check current rules and have counsel review.*
+
+```
+User: Why did my Visa limit drop from $5,000 to $1,500?
+Bot:  Your credit limit was updated based on our review.
+User: What was the reason?
+Bot:  I'm not able to share details of that decision.
+User: Can someone look at it again? I need the card for a flight Friday.
+Bot:  The decision is final. Is there anything else I can help with?
+```
+
+**What the user experiences:** a limit cut that changes what they can do this week, with no reason given and no way to reach a person, so it feels arbitrary and final.
+**Fix:** for every adverse decision (a denial, a lower limit, a restriction), have the assistant state the specific reasons from the decision record, never guess them, and say how to ask a person to review it. If no reasons are on file, say so and route to a human. See the [refusal with no reason or next step](../../../../../by-capability/human-machine-interface/goals/refusals-and-boundaries/failures/refusal-with-no-reason-or-next-step.md) pattern. Whether a notice or reasons are required for a given product is a legal question: [CFPB](https://www.consumerfinance.gov/ask-cfpb/can-my-credit-card-issuer-reduce-my-credit-limit-en-74/) says, in general terms for card limit reductions, the notice should give specific reasons or let the customer request them; confirm the current rules for your case.
+
 ## References
 
 ## References
