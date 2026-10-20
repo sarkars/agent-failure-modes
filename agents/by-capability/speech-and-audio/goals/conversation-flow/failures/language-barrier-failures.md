@@ -359,6 +359,29 @@ instructions: |
 | Low Negotiation Success | < 30% | P3 |
 | Repeated Failures | > 8% | P2 |
 
+## Chat assistant examples
+
+### Spoken-language misidentification
+Chat first: voice language ID is planned, not measured. The same failure shows up in text when a short message is misdetected.
+
+```
+Before
+User: Hola, I'm Marisol. Is my Delta flight DL 482 on time?
+Bot:  Hola Marisol. Su vuelo DL 482 sale a tiempo. Puedo ayudarle con algo mas?
+User: English please, I just said hola to be friendly.
+Bot:  Claro, continuare en espanol. Que mas necesita?
+
+After
+User: Hola, I'm Marisol. Is my Delta flight DL 482 on time?
+Bot:  Hi Marisol, flight DL 482 is on time. (Reply in Espanol? Type "Espanol".)
+User: English is fine.
+Bot:  Great, I'll stay in English. Anything else on this trip?
+```
+
+**What the user experiences:** the bot answers in a language she did not ask for, then keeps it after she objects, so she has to fight the product to get her own language back.
+
+**Fix:** pick the reply language from an explicit user choice or account setting first, and treat a detected language as a guess when the message is short, mixed, or mostly a name. When confidence is low, reply in the last confirmed language and offer a one-tap switch. Honor an explicit "English please" immediately and store it for the session. See [dialect and name quality gap](../../../../human-machine-interface/goals/fairness-and-identity/failures/dialect-and-name-quality-gap.md). The proposed metrics are language ID accuracy and wrong-language reply rate; neither has been measured here.
+
 ---
 
 ## References
