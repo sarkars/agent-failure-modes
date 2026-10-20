@@ -336,6 +336,42 @@ instructions: |
 
 ---
 
+## Chat assistant examples
+
+### Machine audio treated as a person
+
+Illustrative, US example. This is a voice row: the transcript is what the speech-to-text step hands the agent on an outbound call from a dental office's appointment-reminder agent.
+
+Before (machine audio treated as the patient):
+
+```
+[Call connects. Recorded greeting plays.]
+Transcript: "You have reached the voicemail of Dana Whitfield. I can't take your call right now. Please leave a message after the tone."
+Agent: Hi Dana! This is the Brightside Dental reminder line. Is now a good time?
+[Beep. Silence. The agent waits 8 seconds.]
+Agent: Hello? Are you still there?
+[Silence.]
+Agent: I'll take that as a yes. Your cleaning is Thursday at 9 AM. Can you confirm?
+[Call times out. Logged as: patient reached, no answer to confirmation.]
+```
+
+After (machine audio detected and handled):
+
+```
+[Call connects. Recorded greeting plays.]
+Transcript: "You have reached the voicemail of Dana Whitfield. I can't take your call right now. Please leave a message after the tone."
+Detector: voicemail_greeting (stock phrase "leave a message after the tone"). Agent stays silent.
+[Beep.]
+Agent: Hi, this is Brightside Dental with a reminder about an appointment on Thursday at 9 AM. Please call us back at the number on your card. Thank you.
+[Call ends. Logged as: voicemail, message left, no confirmation.]
+```
+
+**What the user experiences:** a stranger's voicemail greeting is treated as the patient answering, so the agent greets "Dana" over it, never leaves a usable message, and the call is logged as "patient reached" when nobody was.
+
+**Fix:** before the main conversation starts, classify the first seconds of audio as person, voicemail, IVR, or unavailable (stock phrases like "leave a message" are one signal); on voicemail, wait for the beep and leave one short message, and when the signal is unclear, treat it as a person, the trade-off [LiveKit describes](https://livekit.com/blog/answering-machine-detection). Track machine-audio-as-user rate. Related: [Transcription Hallucination](../../../../human-machine-interface/goals/voice/failures/transcription-hallucination.md), where a transcript is trusted without checking what produced it.
+
+---
+
 ## References
 
 - [Outbound Call Quality](https://www.beconversive.com/blog/voice-ai-challenges) - Verification
