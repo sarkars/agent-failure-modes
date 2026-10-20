@@ -14,7 +14,7 @@ The first version of this roadmap did not check the library, and several rows tu
 | **New** | No matching pattern found by file-name and keyword search | Search again before writing. This is a name-and-keyword check, not a full read of every file |
 
 <!-- BEGIN:result -->
-**Result: 493 rows, of which 75 are Written, 169 are New, 153 Extend an existing pattern, and 96 are already Covered.**
+**Result: 493 rows, of which 83 are Written, 161 are New, 151 Extend an existing pattern, and 98 are already Covered.**
 <!-- END:result -->
 
 <!-- BEGIN:root-cause -->
@@ -52,7 +52,7 @@ If every "Partly" were solved, models would fix up to 40%. If none were, 1%. A o
 <!-- BEGIN:catalog-table -->
 | File | Area | Rows | Written | New | Extends | Covered |
 |---|---|---|---|---|---|---|
-| [chat-and-core.md](chat-and-core.md) | Remaining chat and core families, plus channel selection | 21 | 2 | 13 | 5 | 1 |
+| [chat-and-core.md](chat-and-core.md) | Remaining chat and core families, plus channel selection | 21 | 5 | 10 | 4 | 2 |
 | [embedded-copilots.md](embedded-copilots.md) | Embedded copilots: upselling, context, first response, obvious questions | 23 | 12 | 1 | 2 | 8 |
 | [response-time.md](response-time.md) | Speed, waiting, and pacing, all channels | 14 | 7 | 0 | 4 | 3 |
 | [response-structure-and-length.md](response-structure-and-length.md) | Reply structure, length, chunking, and closers such as 'ok' and 'bye' | 18 | 10 | 0 | 0 | 8 |
@@ -63,13 +63,13 @@ If every "Partly" were solved, models would fix up to 40%. If none were, 1%. A o
 | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Privacy, governance, ethics, access control, and external services | 42 | 0 | 6 | 13 | 23 |
 | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Effort, completeness, and memory | 25 | 6 | 0 | 5 | 14 |
 | [emerging-surfaces.md](emerging-surfaces.md) | Emerging surfaces: agentic commerce, browser agents, tool ecosystems, meetings, companions, hiring, pricing incentives | 25 | 0 | 7 | 15 | 3 |
-| [visual-and-oversight.md](visual-and-oversight.md) | Visual design and human-oversight UI for agents | 32 | 0 | 17 | 12 | 3 |
+| [visual-and-oversight.md](visual-and-oversight.md) | Visual design and human-oversight UI for agents | 32 | 1 | 16 | 11 | 4 |
 | [agent-types.md](agent-types.md) | Failures by agent type (coding, data, IT, finance, healthcare, and more) and cross-agent additions | 61 | 2 | 25 | 32 | 2 |
 | [conversation-design.md](conversation-design.md) | Dialogue mechanics, refusals and boundaries, and error recovery | 33 | 18 | 0 | 5 | 10 |
-| [interface-and-persona.md](interface-and-persona.md) | Persona and tone, onboarding, chat interface, accessibility, and multimodal input | 41 | 4 | 26 | 11 | 0 |
+| [interface-and-persona.md](interface-and-persona.md) | Persona and tone, onboarding, chat interface, accessibility, and multimodal input | 41 | 8 | 22 | 11 | 0 |
 | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Human handoff, measurement, model changes, proactive agents, and group chats | 28 | 11 | 8 | 6 | 3 |
 | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Drive-thru, in-car, government, travel, banking, insurance, health scheduling, real estate, and outbound rules | 36 | 2 | 28 | 6 | 0 |
-| | **Total** | **493** | **75** | **169** | **153** | **96** |
+| | **Total** | **493** | **83** | **161** | **151** | **98** |
 <!-- END:catalog-table -->
 
 ## Suggested priority

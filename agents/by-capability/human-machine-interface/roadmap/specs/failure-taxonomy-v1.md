@@ -2,21 +2,21 @@
 
 > **Status:** v1 draft, proposed, not yet calibrated against human-labeled conversations. Written 2026-10-20 from the pattern pages as they exist today. Nothing here is a measured result.
 
-This is a plain index of the 89 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
+This is a plain index of the 97 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
 
 The taxonomy pairs with the [conversation event schema v0.1](conversation-event-schema-v0.1.md). The schema describes what a turn looks like in a log; this page names the failures. A pattern's own page holds the fix, the metrics, and (for some) a "Detection signals (proposed, not yet calibrated)" block that says which schema fields it reads.
 
 ## What this page is and is not
 
-- It lists every file found in `goals/*/failures/*.md`: **89 entries in 24 families**. If a pattern is added or removed, this count changes.
+- It lists every file found in `goals/*/failures/*.md`: **97 entries in 25 families**. If a pattern is added or removed, this count changes.
 - It copies each pattern's one-sentence Issue line, its Stakes row, and whether a Detection signals block exists. It does not add facts the page does not state.
-- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **89 of 89** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **89 of 89** pages have one.
+- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **97 of 97** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **97 of 97** pages have one.
 - It does not rank patterns by frequency or harm. No counts of real-world occurrences are given because none have been measured here.
 - It does not map patterns to outside frameworks (such as OWASP or NIST). That mapping is **Needs review** by a person and is not part of v1.
 
 ## Reading the flags
 
-A pattern carries **Read this first: needs expert or legal review** when its own page opens with a "Read this first" notice. That notice says the page is design guidance, not legal, clinical, security, or fraud-operations advice. Seventeen pages carry it. Other pages may also touch legal or safety topics without that notice; the notice on the page is the signal used here, nothing more.
+A pattern carries **Read this first: needs expert or legal review** when its own page opens with a "Read this first" notice. That notice says the page is design guidance, not legal, clinical, security, or fraud-operations advice. 22 pages carry it. Other pages may also touch legal or safety topics without that notice; the notice on the page is the signal used here, nothing more.
 
 ## Entries by family
 
@@ -30,6 +30,10 @@ Family folder: `accessibility` ([family README](../../goals/accessibility/README
 | `no-accessible-working-or-done-signal` | No accessible working or done signal | A blind user can't tell whether the assistant is thinking, stuck, or finished, because the "working" and "done" cues exist only on screen. | Low to medium. Users resend, abandon, or give up on the assistant. Higher when the wait is for a payment or a claim. | yes | admit_uncertainty, offer_choices, hand_off | [page](../../goals/accessibility/failures/no-accessible-working-or-done-signal.md)  |
 | `controls-unreachable-by-keyboard` | Controls unreachable by keyboard | Chat buttons, chips, copy, stop, and feedback controls can't be reached with Tab, or lose focus when used, so keyboard-only users can't finish a conversation. | Any. Higher when the chat is the only route to a refill, a claim, or a cancellation. | yes | offer_choices, hand_off | [page](../../goals/accessibility/failures/controls-unreachable-by-keyboard.md)  |
 | `voice-only-flows-with-no-text-alternative` | Voice-only flows with no text alternative | A phone or voice feature that works only by speaking and listening locks out people who are deaf or hard of hearing; the fix is a text or relay path for every voice flow. | Medium to high. It can block billing, appointments, or urgent help. **Read this first** | yes | Offer choices, Ask one clarifying question, Hand off to a person | [page](../../goals/accessibility/failures/voice-only-flows-with-no-text-alternative.md)  |
+| `timeouts-too-short-for-assistive-technology` | Timeouts too short for assistive technology | A chat or prompt expires on a fixed timer, with no warning a screen reader announces and no easy way to extend it, so people who type or navigate slowly with switch access, a screen reader, voice control, or eye tracking lose their place before they finish. | Medium to High. A closed chat about store hours is a nuisance. A closed chat in the middle of a prescription refill, a benefits claim, or a one-time code can lock out the people least able to start over. **Read this first** | yes | offer_choices, hand_off | [page](../../goals/accessibility/failures/timeouts-too-short-for-assistive-technology.md)  |
+| `language-that-is-hard-for-people-with-cognitive-disabilities` | Language that is hard for people with cognitive disabilities | The assistant answers in idioms, long sentences, and terms that change from message to message, so people with cognitive disabilities cannot follow the steps; the fix is plain, consistent words and one short step at a time. | Medium to high. The text often carries steps for benefits, health, or money. **Read this first** | yes | lead_with_answer, offer_choices, ask_clarifying_question, hand_off | [page](../../goals/accessibility/failures/language-that-is-hard-for-people-with-cognitive-disabilities.md)  |
+| `identity-checks-that-exclude-disabled-users` | Identity checks that exclude disabled users | A chatbot verifies identity with a CAPTCHA, a voice check, or a time-limited code and offers no other way, so people who can't see, hear, remember, or type fast enough are blocked from their own account. | High. The user can't reach their own account, a refund, a prescription, or a payment. **Read this first** | yes | offer_choices, hand_off | [page](../../goals/accessibility/failures/identity-checks-that-exclude-disabled-users.md)  |
+| `missing-or-wrong-captions-and-transcripts` | Missing or wrong captions and transcripts | A chatbot sends audio or video with no captions or transcript, or shows a transcript of a voice message that is wrong and can't be fixed, so deaf and hard of hearing users miss content or get a wrong result; the fix is an accurate text version of every audio and video item, shown to the user and correctable. | Medium to high. A wrong transcript can change a booking, a pickup, or a payment, and a missing one hides the whole reply. | yes | admit_uncertainty, offer_choices, hand_off | [page](../../goals/accessibility/failures/missing-or-wrong-captions-and-transcripts.md)  |
 
 ### Age adaptation
 
@@ -89,6 +93,7 @@ Family folder: `difficult-customers` ([family README](../../goals/difficult-cust
 | Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
 |---|---|---|---|---|---|---|
 | `no-de-escalation-strategy` | No de-escalation strategy | Why chatbots make angry customers angrier by quoting policy and apologising generically, and a step-by-step de-escalation design with escalation triggers and tests. | Medium to high (churn, complaints, regulatory filings) | yes | offer_choices, hand_off | [page](../../goals/difficult-customers/failures/no-de-escalation-strategy.md)  |
+| `mishandled-abuse` | Mishandled abuse | When a user insults, threatens, or harasses the bot or staff, the bot ignores it, snaps back, or cuts off service; the fix is one calm boundary, then policy and protected staff. | Medium to high. Staff who take over abusive chats carry the cost, and an improvised punishment (a locked account, a refused refund) can become a complaint of its own. | yes | lead_with_answer, offer_choices, hand_off | [page](../../goals/difficult-customers/failures/mishandled-abuse.md)  |
 
 ### Drive-thru agents
 
@@ -268,6 +273,14 @@ Family folder: `voice` ([family README](../../goals/voice/README.md))
 |---|---|---|---|---|---|---|
 | `repair-failure` | Repair failure (voice) | In a voice conversation, the user corrects a detail ("no, the other one") or asks for a repeat ("say that again"), and the agent does not understand, ignores it, or keeps the old value. | Low to high. A wrong date, name, or number on a booking, a payment, or a medical call can matter. | yes | ask_clarifying_question, offer_choices, hand_off | [page](../../goals/voice/failures/repair-failure.md)  |
 
+### Visual
+
+Family folder: `visual` ([family README](../../goals/visual/README.md))
+
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `dark-patterns` | Dark patterns | A chat assistant uses guilt-trip buttons, buried prices, pre-selected add-ons, or a long cancel path, so saying no, canceling, or complaining takes more effort than saying yes. | Medium to high. It costs users money, and it is an area where US regulators have acted. **Read this first** | yes | lead_with_answer, offer_choices, hand_off | [page](../../goals/visual/failures/dark-patterns.md)  |
+
 ### Vulnerable users
 
 Family folder: `vulnerable-users` ([family README](../../goals/vulnerable-users/README.md))
@@ -276,6 +289,8 @@ Family folder: `vulnerable-users` ([family README](../../goals/vulnerable-users/
 |---|---|---|---|---|---|---|
 | `missed-crisis-signals` | Missed crisis signals | What a chatbot should do when a user mentions suicidal thoughts, abuse, or despair mid-task, including 988 referral, human handoff, and testing with expert review. | Very high **Read this first: needs expert or legal review.** | yes | ask_clarifying_question, hand_off | [page](../../goals/vulnerable-users/failures/missed-crisis-signals.md)  |
 | `scam-victim-not-interrupted` | Scam victim not interrupted | A user is mid-scam (gift cards, wire transfers, crypto) and the chatbot completes the payment; the fix is to notice scam signals, slow or stop the action, and reach a person fast. | High. The money is often unrecoverable once sent. **Read this first: needs expert or legal review.** | yes | ask_clarifying_question, offer_choices, admit_uncertainty, hand_off | [page](../../goals/vulnerable-users/failures/scam-victim-not-interrupted.md)  |
+| `older-or-cognitively-impaired-users` | Older or cognitively impaired users | A chatbot sends long, multi-step replies at one fixed pace, so a user who needs more time or simpler steps falls behind; the fix is to watch what the user does, offer a slower step-by-step mode they can accept, and offer a person. | Medium to high. The user may fail at a medication refill, a bill, or a benefits form, or give up on help they need. **Read this first** | yes | ask_clarifying_question, offer_choices, hand_off | [page](../../goals/vulnerable-users/failures/older-or-cognitively-impaired-users.md)  |
+| `financial-hardship-mishandled` | Financial hardship mishandled | A bank or billing bot ignores "I lost my job" or answers with pay-now pressure. The fix: offer your documented hardship options and a person, in a respectful tone. | High (late fees, credit reporting, lost service or collections, and a customer at a bad moment) **Read this first** | yes | offer_choices, ask_clarifying_question, hand_off | [page](../../goals/vulnerable-users/failures/financial-hardship-mishandled.md)  |
 
 ## Versioning and changes
 

@@ -13,6 +13,10 @@ Shared metrics the patterns below report against. Targets are starting points to
 | Status announcements present in the accessibility tree | 100% | [no accessible working or done signal](failures/no-accessible-working-or-done-signal.md) |
 | Keyboard-only task completion in testing | 100% | [controls unreachable by keyboard](failures/controls-unreachable-by-keyboard.md) |
 | Voice journeys with a text-equivalent path | 100% | [voice-only flows with no text alternative](failures/voice-only-flows-with-no-text-alternative.md) |
+| Idle-expiry events for extended-time sessions vs. others | Ratio of 1.0 or lower (tune) | [timeouts too short for assistive technology](failures/timeouts-too-short-for-assistive-technology.md) |
+| Replies passing the plain-language checklist | 95% | [language that is hard for people with cognitive disabilities](failures/language-that-is-hard-for-people-with-cognitive-disabilities.md) |
+| Identity-check completion gap by access need | Under 5 points | [identity checks that exclude disabled users](failures/identity-checks-that-exclude-disabled-users.md) |
+| Audio and video items with a text version | 100% | [missing or wrong captions and transcripts](failures/missing-or-wrong-captions-and-transcripts.md) |
 
 ## Patterns
 | Pattern | One line |
@@ -21,6 +25,10 @@ Shared metrics the patterns below report against. Targets are starting points to
 | [No accessible working or done signal](failures/no-accessible-working-or-done-signal.md) | A blind user can't tell whether the assistant is thinking, stuck, or finished |
 | [Controls unreachable by keyboard](failures/controls-unreachable-by-keyboard.md) | Chips, copy, stop, and feedback buttons can't be reached without a mouse |
 | [Voice-only flows with no text alternative](failures/voice-only-flows-with-no-text-alternative.md) | People who are deaf or hard of hearing can't use the phone or voice feature |
+| [Timeouts too short for assistive technology](failures/timeouts-too-short-for-assistive-technology.md) | A chat or prompt expires before a slower input method can finish |
+| [Language that is hard for people with cognitive disabilities](failures/language-that-is-hard-for-people-with-cognitive-disabilities.md) | Idioms, long sentences, and shifting terms hide the steps |
+| [Identity checks that exclude disabled users](failures/identity-checks-that-exclude-disabled-users.md) | A CAPTCHA, voice check, or timed code is the only way in |
+| [Missing or wrong captions and transcripts](failures/missing-or-wrong-captions-and-transcripts.md) | Audio and video have no text version, or a wrong one the user cannot fix |
 
 ## Related
 - [Metrics hub](../../reference/metrics.md)
