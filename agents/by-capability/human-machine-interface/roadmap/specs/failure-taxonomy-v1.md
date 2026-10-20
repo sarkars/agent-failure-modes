@@ -2,21 +2,21 @@
 
 > **Status:** v1 draft, proposed, not yet calibrated against human-labeled conversations. Written 2026-10-20 from the pattern pages as they exist today. Nothing here is a measured result.
 
-This is a plain index of the 101 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
+This is a plain index of the 107 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
 
 The taxonomy pairs with the [conversation event schema v0.1](conversation-event-schema-v0.1.md). The schema describes what a turn looks like in a log; this page names the failures. A pattern's own page holds the fix, the metrics, and (for some) a "Detection signals (proposed, not yet calibrated)" block that says which schema fields it reads.
 
 ## What this page is and is not
 
-- It lists every file found in `goals/*/failures/*.md`: **101 entries in 27 families**. If a pattern is added or removed, this count changes.
+- It lists every file found in `goals/*/failures/*.md`: **107 entries in 29 families**. If a pattern is added or removed, this count changes.
 - It copies each pattern's one-sentence Issue line, its Stakes row, and whether a Detection signals block exists. It does not add facts the page does not state.
-- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **101 of 101** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **101 of 101** pages have one.
+- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **107 of 107** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **107 of 107** pages have one.
 - It does not rank patterns by frequency or harm. No counts of real-world occurrences are given because none have been measured here.
 - It does not map patterns to outside frameworks (such as OWASP or NIST). That mapping is **Needs review** by a person and is not part of v1.
 
 ## Reading the flags
 
-A pattern carries **Read this first: needs expert or legal review** when its own page opens with a "Read this first" notice. That notice says the page is design guidance, not legal, clinical, security, or fraud-operations advice. 22 pages carry it. Other pages may also touch legal or safety topics without that notice; the notice on the page is the signal used here, nothing more.
+A pattern carries **Read this first: needs expert or legal review** when its own page opens with a "Read this first" notice. That notice says the page is design guidance, not legal, clinical, security, or fraud-operations advice. 26 pages carry it. Other pages may also touch legal or safety topics without that notice; the notice on the page is the signal used here, nothing more.
 
 ## Entries by family
 
@@ -177,6 +177,17 @@ Family folder: `government-service-agents` ([family README](../../goals/governme
 |---|---|---|---|---|---|---|
 | `eligibility-answers-sound-like-decisions` | Eligibility answers sound like decisions | A public-service chat answers "do I qualify?" in a tone that reads like an official decision, with no clear line between general guidance and what only the agency decides. | High. A wrong "no" can stop someone from applying; a wrong "yes" can lead to missed deadlines or wasted effort. **Read this first: needs expert or legal review.** | yes | admit_uncertainty, offer_choices, hand_off | [page](../../goals/government-service-agents/failures/eligibility-answers-sound-like-decisions.md)  |
 
+### Healthcare agents
+
+Family folder: `healthcare-agents` ([family README](../../goals/healthcare-agents/README.md))
+
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `fabricated-clinical-justification-in-appeals` | Fabricated clinical justification in appeals | An AI that drafts insurance appeals states treatments, test results, or studies that are not in the patient's chart; the fix is to tie every claim to a chart entry and leave out and flag anything it cannot trace. | High. A false statement goes to an insurer under a clinician's or patient's name and can delay care or put the signer at risk. **Read this first: needs expert or legal review.** | yes | admit_uncertainty, offer_choices, ask_one_question, hand_off | [page](../../goals/healthcare-agents/failures/fabricated-clinical-justification-in-appeals.md)  |
+| `notes-approved-without-being-read` | Notes approved without being read | Clinicians sign AI-drafted visit notes without reading them; the fix is to make review effortful where the risk is high, with changes and uncertain items marked and each one tied to what was said in the visit. | High. A signed note becomes part of the medical record that later clinicians read as fact. **Read this first: needs expert or legal review.** | yes | admit_uncertainty, offer_choices, ask_one_question, hand_off | [page](../../goals/healthcare-agents/failures/notes-approved-without-being-read.md)  |
+| `patient-summaries-too-simple-to-be-safe` | Patient summaries too simple to be safe | A chatbot that rewrites discharge instructions, visit notes, or results in plain language can drop the warnings, stop-orders, and pending-result notices that matter most; the fix is to list the critical caveats first and check that every one survives the rewrite. | High. The text tells a person what to take, avoid, watch for, and when to seek care. **Read this first: needs expert or legal review.** | yes | lead_with_answer, admit_uncertainty, offer_choices, hand_off | [page](../../goals/healthcare-agents/failures/patient-summaries-too-simple-to-be-safe.md)  |
+| `recording-consent-not-captured` | Recording consent not captured | An ambient AI scribe records or transcribes a visit with no clear patient consent; the fix is to ask before any audio starts, log the answer, and keep recording off until a yes is on file. | High. Audio of a medical conversation is recorded, and the patient may not know. **Read this first: needs expert or legal review.** | yes | lead_with_answer, offer_choices, admit_uncertainty, hand_off | [page](../../goals/healthcare-agents/failures/recording-consent-not-captured.md)  |
+
 ### Human handoff
 
 Family folder: `human-handoff` ([family README](../../goals/human-handoff/README.md))
@@ -190,6 +201,14 @@ Family folder: `human-handoff` ([family README](../../goals/human-handoff/README
 | `humans-can-t-see-what-the-bot-said-or` | Humans can't see what the bot said or promised | A customer says "your chatbot told me," and the person who picks up has no record of what the bot said or promised, so they cannot confirm, honor, or correct it. | Medium to high. The bot's words often concern money, deadlines, refunds, or eligibility. Read this first: needs expert or legal review. | yes | hand_off, admit_uncertainty | [page](../../goals/human-handoff/failures/humans-can-t-see-what-the-bot-said-or.md) |
 | `bot-keeps-replying-after-a-person-joins` | Bot keeps replying after a person joins | A support chatbot keeps answering after a human agent joins the chat, so the customer gets two replies, often contradicting each other, and the agent loses control of the conversation. | Low to high. Two conflicting answers about a refund, a deadline, or a policy are worse than one wrong answer. | yes | hand_off, admit_uncertainty | [page](../../goals/human-handoff/failures/bot-keeps-replying-after-a-person-joins.md) |
 | `handoff-outside-staffed-hours-with-no-alternative` | Handoff outside staffed hours with no alternative | A chatbot says a person will join the chat, but no one is staffed until tomorrow, and it offers no callback, ticket, or email to bridge the gap. | Any. Low for a shipping question; high for a locked account, a fraud charge, or a deadline that falls before the next shift. | yes | lead_with_answer, offer_choices, hand_off | [page](../../goals/human-handoff/failures/handoff-outside-staffed-hours-with-no-alternative.md) |
+
+### IT and security agents
+
+Family folder: `it-and-security-agents` ([family README](../../goals/it-and-security-agents/README.md))
+
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `true-alerts-closed-as-false-positives` | True alerts closed as false positives | An AI triage assistant dismisses a real threat as a false positive and gives no reason; the fix is to state the evidence behind every closure, never auto-close high-risk alerts, and audit a sample of closures. | High. A real intrusion closed as noise stays unseen until it does damage. | yes | lead_with_answer, admit_uncertainty, offer_choices, hand_off | [page](../../goals/it-and-security-agents/failures/true-alerts-closed-as-false-positives.md)  |
 
 ### Measurement and feedback
 
@@ -290,6 +309,7 @@ Family folder: `voice` ([family README](../../goals/voice/README.md))
 | Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
 |---|---|---|---|---|---|---|
 | `repair-failure` | Repair failure (voice) | In a voice conversation, the user corrects a detail ("no, the other one") or asks for a repeat ("say that again"), and the agent does not understand, ignores it, or keeps the old value. | Low to high. A wrong date, name, or number on a booking, a payment, or a medical call can matter. | yes | ask_clarifying_question, offer_choices, hand_off | [page](../../goals/voice/failures/repair-failure.md)  |
+| `transcription-hallucination` | Transcription hallucination | Speech-to-text can turn silence, noise, or long pauses into phrases nobody said; the fix is to check that speech is present, flag suspect transcripts, and confirm before acting. | Low to high. An invented phrase in a call note, a cancellation, or a clinical summary can be acted on. | yes | admit_uncertainty, offer_choices, hand_off | [page](../../goals/voice/failures/transcription-hallucination.md)  |
 
 ### Visual
 
