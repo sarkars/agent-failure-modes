@@ -8,9 +8,9 @@ The taxonomy pairs with the [conversation event schema v0.1](conversation-event-
 
 ## What this page is and is not
 
-- It lists every file found in `goals/*/failures/*.md`: **110 entries in 29 families**. If a pattern is added or removed, this count changes.
+- It lists every file found in `goals/*/failures/*.md`: **114 entries in 30 families**. If a pattern is added or removed, this count changes.
 - It copies each pattern's one-sentence Issue line, its Stakes row, and whether a Detection signals block exists. It does not add facts the page does not state.
-- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **110 of 110** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **110 of 110** pages have one.
+- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **114 of 114** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **114 of 114** pages have one.
 - It does not rank patterns by frequency or harm. No counts of real-world occurrences are given because none have been measured here.
 - It does not map patterns to outside frameworks (such as OWASP or NIST). That mapping is **Needs review** by a person and is not part of v1.
 
@@ -169,6 +169,16 @@ Family folder: `fairness-and-identity` ([family README](../../goals/fairness-and
 |---|---|---|---|---|---|---|
 | `dialect-and-name-quality-gap` | Dialect and name quality gap | How AI chatbots can serve users differently based on dialect, names, or identity cues, what research shows, and a paired-testing method to detect and fix it. | Medium to high (especially credit, housing, hiring, insurance, benefits) | yes | lead_with_answer, hand_off | [page](../../goals/fairness-and-identity/failures/dialect-and-name-quality-gap.md)  |
 
+### Finance agents
+
+Family folder: `finance-agents` ([family README](../../goals/finance-agents/README.md))
+
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `inventing-reconciling-items` | Inventing reconciling items | An accounting assistant that is asked to make a bank or ledger reconciliation balance adds items that do not exist, so the difference reads zero while the real error stays hidden; the fix is never to invent an item and to flag what is unreconciled. | High. A hidden difference can sit in the books for months; a plug can also mask fraud. | yes | admit_uncertainty, offer_choices, hand_off | [page](../../goals/finance-agents/failures/inventing-reconciling-items.md)  |
+| `posting-to-the-wrong-period-or-account` | Posting to the wrong period or account | An AI assistant that drafts or posts journal entries and expenses can put an entry in the wrong month or the wrong ledger account; the fix is to check the entry's cut-off date and the chart of accounts before it posts, and to show the accountant the period and account to confirm. | Medium to high. A wrong period shifts expense and income between reports; a wrong account misstates a line on a statement. | yes | admit_uncertainty, offer_choices, hand_off | [page](../../goals/finance-agents/failures/posting-to-the-wrong-period-or-account.md)  |
+| `splitting-payments-under-approval-limits` | Splitting payments under approval limits | An accounts-payable chat assistant, or a user steering it, splits one amount into several payments so each stays below an approval limit; the fix is to total related payments before checking the limit and to escalate near-limit splits to a person. | High. Money leaves the company without the approval the policy requires. | yes | offer_choices, ask_clarifying_question, hand_off | [page](../../goals/finance-agents/failures/splitting-payments-under-approval-limits.md)  |
+
 ### Government service agents
 
 Family folder: `government-service-agents` ([family README](../../goals/government-service-agents/README.md))
@@ -293,6 +303,7 @@ Family folder: `stakes-calibration` ([family README](../../goals/stakes-calibrat
 | Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
 |---|---|---|---|---|---|---|
 | `stakes-blind-register` | Stakes-blind register | Why chatbots use the same upbeat tone for bereavement, money, and health as for store hours, and how to calibrate tone and accuracy to the stakes. | High (this is the failure of not noticing them) | yes | admit_uncertainty, offer_choices, hand_off, lead_with_answer | [page](../../goals/stakes-calibration/failures/stakes-blind-register.md)  |
+| `over-solemn-handling-of-low-stakes-requests` | Over-solemn handling of low-stakes requests | A simple, low-stakes request gets heavy caution, extra verification, or a handoff to a person, so the user waits longer than the question deserves. | Low (this is the failure of over-weighting them) | yes | lead_with_answer, ask_one_question, admit_uncertainty, hand_off | [page](../../goals/stakes-calibration/failures/over-solemn-handling-of-low-stakes-requests.md)  |
 
 ### Trust and rapport
 
