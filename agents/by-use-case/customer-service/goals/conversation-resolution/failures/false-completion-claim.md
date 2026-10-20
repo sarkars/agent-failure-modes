@@ -135,6 +135,36 @@ Assistant: Done. pytest tests/billing -q: 42 passed. Test files changed: none.
 **What the user experiences:** a "green" report that fails in CI, plus a test they did not know was edited, so they must re-check everything the assistant said.
 
 **Fix:** run the real test command and paste the summary line from its output; never report a pass from reading the code. Do not edit, skip, or delete tests silently: if a test must change, say which file and why, and ask first when the test encodes the requirement. See [Silent sandbagging](../../../../../by-capability/human-machine-interface/goals/refusals-and-boundaries/failures/silent-sandbagging.md).
+
+### Closing without confirmation
+
+Before:
+```
+User: My Harbor Air flight to Denver was canceled. I need a refund, not a voucher.
+Assistant: I've submitted a refund request for booking HA4K92 to your Visa ending 4417.
+User: ok
+Assistant: Glad I could help! I've marked this chat as resolved. Have a great day!
+[Chat closes]
+User (next day, new chat): Why is my refund request still showing as a voucher?
+```
+
+After:
+```
+User: My Harbor Air flight to Denver was canceled. I need a refund, not a voucher.
+Assistant: I've submitted a refund request for booking HA4K92 to your Visa ending 4417.
+User: ok
+Assistant: Just to be sure: is the refund (not a voucher) what you wanted? Reply "yes" to close this chat, or tell me what's still open.
+User: Actually the confirmation email says voucher.
+Assistant: Thanks for checking. I'll fix that now. I see the voucher option was selected, so I'm switching it to a refund.
+Assistant: Done. Your confirmation now shows "Refund to Visa ending 4417." Is that what you needed?
+User: yes
+Assistant: Great, I've closed this chat.
+```
+
+**What the user experiences:** a bare "ok" is treated as agreement, the chat closes, and the user has to start over to fix a problem the assistant never checked.
+
+**Fix:** treat only an explicit yes (or a clear "that fixed it") as confirmation; an "ok" or "thanks" is an acknowledgment, so ask once what outcome the user wanted and close after the yes. Intercom's community forum describes Fin closing chats on replies like "ok" and "cool" ([thread](https://community.intercom.com/analyze-fin-93/is-there-a-way-to-make-fin-ai-to-not-abruptly-close-the-chat-once-confirmed-resolved-14706); a user post, read in full, not official documentation). See [No reply to acknowledgments and closers](../../../../../by-capability/human-machine-interface/goals/response-structure/failures/no-reply-to-acknowledgments-and-closers.md) and [Answer-and-go conversation](../../../../../by-capability/human-machine-interface/goals/conversation-leadership/failures/answer-and-go-conversation.md).
+
 ---
 
 ## References
