@@ -13,6 +13,8 @@ Shared metrics the patterns below report against. Targets are starting points to
 | Detection recall of conversations that outgrew chat | Over 85% | [complex or emotional discussion forced into chat](failures/complex-or-emotional-discussion-forced-into-chat.md) |
 | Re-ask rate after handoff | Under 5% | [no channel switch or context lost](failures/no-channel-switch-or-context-lost.md) |
 | Sensitive values in stored logs | 0 | [sensitive data collected in chat](failures/sensitive-data-collected-in-chat.md) |
+| Channel-fit rate from matrix-based audits | Over 90% (starting point) | [channel chosen for organisational convenience](failures/channel-chosen-for-organisational-convenience.md) |
+| Context-aware channel-offer rate | See page | [user context channel mismatch](failures/user-context-channel-mismatch.md) |
 
 ## Patterns
 | Pattern | One line |
@@ -21,10 +23,10 @@ Shared metrics the patterns below report against. Targets are starting points to
 | Complex or emotional discussion forced into chat | A hard conversation stuck in a chat window |
 | No channel switch, or context lost on switch | Customers repeat themselves after a handoff |
 | Sensitive data collected in chat | Card numbers and SSNs typed into a chat or spoken to a bot |
+| [Channel chosen for organisational convenience](failures/channel-chosen-for-organisational-convenience.md) | The cheapest channel is used, not the one that fits |
+| [User-context channel mismatch](failures/user-context-channel-mismatch.md) | A driver gets chat; a Deaf or hard-of-hearing user gets voice only |
 
 ## Planned (not yet written)
-- Channel chosen for organisational convenience
-- User-context mismatch (driving, Deaf or hard of hearing)
 - Dense information read aloud (voice phase)
 
 ## Related

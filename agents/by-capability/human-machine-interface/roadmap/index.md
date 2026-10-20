@@ -6,23 +6,23 @@
 |---|---|---|---|---|---|
 | CC-01 | Closing without confirmation | [chat-and-core.md](chat-and-core.md) | Covered | Business context | No |
 | CC-02 | Over-solemn handling of low-stakes requests | [chat-and-core.md](chat-and-core.md) | Written | Reliability | Partly |
-| CC-03 | Missed subtext | [chat-and-core.md](chat-and-core.md) | Extends | Model | Partly |
-| CC-04 | Fixing before listening | [chat-and-core.md](chat-and-core.md) | New | Model | Partly |
-| CC-05 | No follow-through | [chat-and-core.md](chat-and-core.md) | New | Reliability | No |
-| CC-06 | Over-hedging | [chat-and-core.md](chat-and-core.md) | Extends | Model | Partly |
+| CC-03 | Missed subtext | [chat-and-core.md](chat-and-core.md) | Covered | Model | Partly |
+| CC-04 | Fixing before listening | [chat-and-core.md](chat-and-core.md) | Written | Model | Partly |
+| CC-05 | No follow-through | [chat-and-core.md](chat-and-core.md) | Written | Reliability | No |
+| CC-06 | Over-hedging | [chat-and-core.md](chat-and-core.md) | Covered | Model | Partly |
 | CC-07 | Mishandled abuse | [chat-and-core.md](chat-and-core.md) | Written | Business context | No |
 | CC-08 | Scam victim not interrupted | [chat-and-core.md](chat-and-core.md) | Written | Business context | No |
 | CC-09 | Older or cognitively impaired users | [chat-and-core.md](chat-and-core.md) | Written | Business context | No |
 | CC-10 | Financial hardship mishandled | [chat-and-core.md](chat-and-core.md) | Written | Business context | No |
 | CC-11 | Teens: persuasion and dependence | [chat-and-core.md](chat-and-core.md) | Covered | Governance | No |
-| CC-12 | Technology-literacy mismatch | [chat-and-core.md](chat-and-core.md) | New | Model | Partly |
-| CC-13 | Regional and community styles | [chat-and-core.md](chat-and-core.md) | New | Model | Partly |
-| CC-14 | Accessibility in chat | [chat-and-core.md](chat-and-core.md) | New | Business context | No |
-| CC-15 | Over-correcting for identity | [chat-and-core.md](chat-and-core.md) | New | Model | Partly |
+| CC-12 | Technology-literacy mismatch | [chat-and-core.md](chat-and-core.md) | Written | Model | Partly |
+| CC-13 | Regional and community styles | [chat-and-core.md](chat-and-core.md) | Written | Model | Partly |
+| CC-14 | Accessibility in chat | [chat-and-core.md](chat-and-core.md) | Written | Business context | No |
+| CC-15 | Over-correcting for identity | [chat-and-core.md](chat-and-core.md) | Written | Model | Partly |
 | CC-16 | Romantic or parasocial dependence | [chat-and-core.md](chat-and-core.md) | Written | Governance | No |
 | CC-17 | Sycophantic agreement | [chat-and-core.md](chat-and-core.md) | Covered | Model | Partly |
-| CC-18 | Channel chosen for organisational convenience | [chat-and-core.md](chat-and-core.md) | New | Governance | No |
-| CC-19 | User-context channel mismatch | [chat-and-core.md](chat-and-core.md) | New | Business context | No |
+| CC-18 | Channel chosen for organisational convenience | [chat-and-core.md](chat-and-core.md) | Written | Governance | No |
+| CC-19 | User-context channel mismatch | [chat-and-core.md](chat-and-core.md) | Written | Business context | No |
 | CC-22 | Creepy personalisation and memory | [chat-and-core.md](chat-and-core.md) | Extends | Business context | No |
 | CC-23 | Proactive outreach overreach | [chat-and-core.md](chat-and-core.md) | New | Governance | No |
 | CP-01 | Help that becomes a sales pitch | [embedded-copilots.md](embedded-copilots.md) | Written | Governance | No |

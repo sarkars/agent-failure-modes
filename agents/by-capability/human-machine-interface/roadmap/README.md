@@ -14,7 +14,7 @@ The first version of this roadmap did not check the library, and several rows tu
 | **New** | No matching pattern found by file-name and keyword search | Search again before writing. This is a name-and-keyword check, not a full read of every file |
 
 <!-- BEGIN:result -->
-**Result: 493 rows, of which 100 are Written, 144 are New, 118 Extend an existing pattern, and 131 are already Covered.**
+**Result: 493 rows, of which 108 are Written, 136 are New, 116 Extend an existing pattern, and 133 are already Covered.**
 <!-- END:result -->
 
 <!-- BEGIN:root-cause -->
@@ -52,7 +52,7 @@ If every "Partly" were solved, models would fix up to 40%. If none were, 1%. A o
 <!-- BEGIN:catalog-table -->
 | File | Area | Rows | Written | New | Extends | Covered |
 |---|---|---|---|---|---|---|
-| [chat-and-core.md](chat-and-core.md) | Remaining chat and core families, plus channel selection | 21 | 6 | 9 | 3 | 3 |
+| [chat-and-core.md](chat-and-core.md) | Remaining chat and core families, plus channel selection | 21 | 14 | 1 | 1 | 5 |
 | [embedded-copilots.md](embedded-copilots.md) | Embedded copilots: upselling, context, first response, obvious questions | 23 | 12 | 1 | 2 | 8 |
 | [response-time.md](response-time.md) | Speed, waiting, and pacing, all channels | 14 | 7 | 0 | 4 | 3 |
 | [response-structure-and-length.md](response-structure-and-length.md) | Reply structure, length, chunking, and closers such as 'ok' and 'bye' | 18 | 10 | 0 | 0 | 8 |
@@ -69,7 +69,7 @@ If every "Partly" were solved, models would fix up to 40%. If none were, 1%. A o
 | [interface-and-persona.md](interface-and-persona.md) | Persona and tone, onboarding, chat interface, accessibility, and multimodal input | 41 | 8 | 22 | 11 | 0 |
 | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Human handoff, measurement, model changes, proactive agents, and group chats | 28 | 11 | 8 | 6 | 3 |
 | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Drive-thru, in-car, government, travel, banking, insurance, health scheduling, real estate, and outbound rules | 36 | 2 | 28 | 6 | 0 |
-| | **Total** | **493** | **100** | **144** | **118** | **131** |
+| | **Total** | **493** | **108** | **136** | **116** | **133** |
 <!-- END:catalog-table -->
 
 ## Suggested priority

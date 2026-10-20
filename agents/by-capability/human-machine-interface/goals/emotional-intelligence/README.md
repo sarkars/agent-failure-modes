@@ -11,15 +11,16 @@ Shared metrics the patterns below report against. Targets are starting points to
 |---|---|---|
 | Specificity rate of empathy lines | Over 90% on complaint messages | [hollow empathy](failures/hollow-empathy.md) |
 | Repeated empathy phrase rate | Under 2% | hollow empathy |
+| Acknowledgment-before-fix rate in emotional threads | Over 90% | [fixing before listening](failures/fixing-before-listening.md) |
 
 ## Patterns
 | Pattern | One line |
 |---|---|
 | Hollow empathy | 'I understand your frustration', on repeat, with no action |
+| [Fixing before listening](failures/fixing-before-listening.md) | Jumps to steps and links when the user is upset |
 
 ## Planned (not yet written)
-- Missed subtext
-- Fixing before listening
+- Missed subtext (a chat example sits in [hidden requirement miss](../../../task-planning/goals/goal-understanding/failures/hidden-requirement-miss.md))
 
 ## Related
 - [Difficult-customers family](../difficult-customers/README.md)

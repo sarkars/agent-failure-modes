@@ -8,15 +8,15 @@ The taxonomy pairs with the [conversation event schema v0.1](conversation-event-
 
 ## What this page is and is not
 
-- It lists every file found in `goals/*/failures/*.md`: **114 entries in 30 families**. If a pattern is added or removed, this count changes.
+- It lists every file found in `goals/*/failures/*.md`: **122 entries in 30 families**. If a pattern is added or removed, this count changes.
 - It copies each pattern's one-sentence Issue line, its Stakes row, and whether a Detection signals block exists. It does not add facts the page does not state.
-- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **114 of 114** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **114 of 114** pages have one.
+- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **122 of 122** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **122 of 122** pages have one.
 - It does not rank patterns by frequency or harm. No counts of real-world occurrences are given because none have been measured here.
 - It does not map patterns to outside frameworks (such as OWASP or NIST). That mapping is **Needs review** by a person and is not part of v1.
 
 ## Reading the flags
 
-A pattern carries **Read this first: needs expert or legal review** when its own page opens with a "Read this first" notice. That notice says the page is design guidance, not legal, clinical, security, or fraud-operations advice. 27 pages carry it. Other pages may also touch legal or safety topics without that notice; the notice on the page is the signal used here, nothing more.
+A pattern carries **Read this first: needs expert or legal review** when its own page opens with a "Read this first" notice. That notice says the page is design guidance, not legal, clinical, security, or fraud-operations advice. 31 pages carry it. Other pages may also touch legal or safety topics without that notice; the notice on the page is the signal used here, nothing more.
 
 ## Entries by family
 
@@ -53,6 +53,8 @@ Family folder: `channel-selection` ([family README](../../goals/channel-selectio
 | `no-channel-switch-or-context-lost` | No channel switch, or context lost in it | Why customers have to repeat themselves after a chatbot hands off to an agent or switches channels, with a handoff packet design and tests. | Medium to high | yes | offer_choices, hand_off, admit_uncertainty | [page](../../goals/channel-selection/failures/no-channel-switch-or-context-lost.md)  |
 | `sensitive-data-collected-in-chat` | Sensitive data collected in chat | Why collecting card numbers, SSNs, or passwords in a chatbot or voice bot is risky, what PCI DSS says, and how to design a safe alternative. | High (financial loss, identity theft, compliance exposure) | yes | lead_with_answer, offer_choices, hand_off | [page](../../goals/channel-selection/failures/sensitive-data-collected-in-chat.md)  |
 | `visual-product-sold-by-text-or-voice` | Visual product sold by text or voice | Why text-only chatbots and voice assistants fail at selling visual products like fashion, furniture, and art, and how to fix it. | Low to medium (lost sales and returns) | yes | lead_with_answer, ask_one_question, admit_uncertainty, hand_off | [page](../../goals/channel-selection/failures/visual-product-sold-by-text-or-voice.md)  |
+| `channel-chosen-for-organisational-convenience` | Channel chosen for organisational convenience | Why a chatbot or AI agent sends users to the cheapest channel instead of the one that fits the job, and a routing rule that chooses by user need, not cost. | Low to high. Highest where the job is a dispute, a fraud report, or a denied claim. | yes | offer_choices, hand_off, admit_uncertainty, lead_with_answer | [page](../../goals/channel-selection/failures/channel-chosen-for-organisational-convenience.md) |
+| `user-context-channel-mismatch` | User-context channel mismatch | Why a chatbot gives chat to a driver or phone-only help to a Deaf user, and how to offer fitting channels from what the user says, with rules and tests. | Medium. It can block a task, and for a driver it touches safety. **Read this first** | yes | offer_choices, ask_clarifying_question, hand_off | [page](../../goals/channel-selection/failures/user-context-channel-mismatch.md) |
 
 ### Coding agents
 
@@ -78,6 +80,8 @@ Family folder: `cultural-adaptation` ([family README](../../goals/cultural-adapt
 | Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
 |---|---|---|---|---|---|---|
 | `one-size-communication-style` | One-size communication style | How a chatbot should adapt directness, formality, and wording for US users with different communication styles and English levels, using the user's own signals, not guesses. | Low to high (depends on the topic) | yes | lead_with_answer, ask_clarifying_question, offer_choices, hand_off | [page](../../goals/cultural-adaptation/failures/one-size-communication-style.md)  |
+| `technology-literacy-mismatch` | Technology-literacy mismatch | A chatbot gives instructions that assume skills and vocabulary the user has not shown; the fix is to read the user's own words and actions, match the steps and terms to that, and offer a simpler or a faster path. | Low to high (a stuck password reset is low; a failed benefits form or bank step is high) **Read this first** | yes | lead_with_answer, ask_clarifying_question, offer_choices, hand_off | [page](../../goals/cultural-adaptation/failures/technology-literacy-mismatch.md) |
+| `regional-and-community-styles` | Regional and community styles | A chatbot that guesses a user's style from their location or community gets it wrong, so it should adapt to the user's own spelling, formality, length, and terms instead. | Low to medium (higher when the topic is a bill, a claim, or a benefit) **Read this first** | yes | lead_with_answer, ask_clarifying_question, offer_choices, hand_off | [page](../../goals/cultural-adaptation/failures/regional-and-community-styles.md) |
 
 ### Dialogue management
 
@@ -150,6 +154,7 @@ Family folder: `emotional-intelligence` ([family README](../../goals/emotional-i
 | Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
 |---|---|---|---|---|---|---|
 | `hollow-empathy` | Hollow empathy | Why "I understand your frustration" repeated by a chatbot backfires, what research says about empathic chatbots, and how to write specific, useful empathy. | Low to high | yes | lead_with_answer, offer_choices, hand_off | [page](../../goals/emotional-intelligence/failures/hollow-empathy.md)  |
+| `fixing-before-listening` | Fixing before listening | Why a chatbot answers an upset user with steps and links, and how to add one specific acknowledgment before the fix, with rules, tests, and metrics. | Low to high (grief, money, health, and safety messages raise the cost) | yes | lead_with_answer, ask_one_question, offer_choices, hand_off | [page](../../goals/emotional-intelligence/failures/fixing-before-listening.md) |
 
 ### Errors and recovery
 
@@ -168,6 +173,8 @@ Family folder: `fairness-and-identity` ([family README](../../goals/fairness-and
 | Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
 |---|---|---|---|---|---|---|
 | `dialect-and-name-quality-gap` | Dialect and name quality gap | How AI chatbots can serve users differently based on dialect, names, or identity cues, what research shows, and a paired-testing method to detect and fix it. | Medium to high (especially credit, housing, hiring, insurance, benefits) | yes | lead_with_answer, hand_off | [page](../../goals/fairness-and-identity/failures/dialect-and-name-quality-gap.md)  |
+| `accessibility-in-chat` | Accessibility in chat | A chatbot can pass each single accessibility check and still leave people who use screen readers, zoom, speech input, or plain-language support unable to finish the task; the fix is to test whole journeys with those users and close the gaps in replies that component checks miss. | Any. High when the task is a bill, a claim, a medication, or an account. **Read this first** | yes | lead_with_answer, offer_choices, admit_uncertainty, hand_off | [page](../../goals/fairness-and-identity/failures/accessibility-in-chat.md) |
+| `over-correcting-for-identity` | Over-correcting for identity | A bias fix can make a chatbot announce its fairness or tailor replies to a guessed gender or background; the fix is the same answer for everyone unless the user asks otherwise. | Low to medium. The reply can still be correct, but it can insult the user or shift advice on a guess. | yes | lead_with_answer, ask_clarifying_question | [page](../../goals/fairness-and-identity/failures/over-correcting-for-identity.md) |
 
 ### Finance agents
 
@@ -312,6 +319,7 @@ Family folder: `trust-and-rapport` ([family README](../../goals/trust-and-rappor
 | Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
 |---|---|---|---|---|---|---|
 | `undisclosed-bot-identity` | Undisclosed bot identity | Why chatbots that pretend to be human or hide their limits lose trust, what California's bot law and the EU AI Act require, and how to disclose well. | Medium to high | yes | lead_with_answer, admit_uncertainty, hand_off | [page](../../goals/trust-and-rapport/failures/undisclosed-bot-identity.md)  |
+| `no-follow-through` | No follow-through | An AI agent says "I'll update you" or "I'll check back," but no promise is recorded, scheduled, or delivered, so the user waits for a message that never comes. | Low to high. A missed "I'll tell you when the refund posts" is low; a missed "I'll alert you before the deadline" is high. | yes | admit_uncertainty, offer_choices, hand_off | [page](../../goals/trust-and-rapport/failures/no-follow-through.md) |
 
 ### Voice
 

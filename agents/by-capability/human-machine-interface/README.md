@@ -42,6 +42,8 @@
 | [Complex or emotional discussion forced into chat](goals/channel-selection/failures/complex-or-emotional-discussion-forced-into-chat.md) | A hard conversation stuck in a chat window |
 | [No channel switch, or context lost on switch](goals/channel-selection/failures/no-channel-switch-or-context-lost.md) | Customers repeat themselves after a handoff |
 | [Sensitive data collected in chat](goals/channel-selection/failures/sensitive-data-collected-in-chat.md) | Card numbers and SSNs typed into a chat or spoken to a bot |
+| [Channel chosen for organisational convenience](goals/channel-selection/failures/channel-chosen-for-organisational-convenience.md) | The cheapest channel is used, not the one that fits |
+| [User-context channel mismatch](goals/channel-selection/failures/user-context-channel-mismatch.md) | A driver gets chat; a Deaf or hard-of-hearing user gets voice only |
 
 ### Solutions library: reusable frameworks
 - [Channel-fit matrix](solutions-library/channel-fit-matrix.md): which channel for which job
@@ -56,7 +58,7 @@
 A one-page [index of every catalogued failure](roadmap/index.md) shows its library status, root cause, and whether a better model alone would fix it.
 
 <!-- BEGIN:roadmap-count -->
-[493 catalogued patterns](roadmap/README.md) with goals and metrics, checked against the existing library (100 written, 144 new, 118 that extend an existing pattern, 131 already covered). The [execution plan](roadmap/execution-plan.md) orders the 362 to write.
+[493 catalogued patterns](roadmap/README.md) with goals and metrics, checked against the existing library (108 written, 136 new, 116 that extend an existing pattern, 133 already covered). The [execution plan](roadmap/execution-plan.md) orders the 360 to write.
 <!-- END:roadmap-count -->
 
 Catalog files: [conversation design, refusals, and errors](roadmap/conversation-design.md), [persona, onboarding, interface, accessibility, and multimodal input](roadmap/interface-and-persona.md), [handoff, measurement, and operations](roadmap/handoff-measurement-and-operations.md), [service verticals](roadmap/service-and-vertical-patterns.md), [agent types](roadmap/agent-types.md), [embedded copilots](roadmap/embedded-copilots.md), [emerging surfaces](roadmap/emerging-surfaces.md), chat and core, [response time](roadmap/response-time.md), [response structure and closers](roadmap/response-structure-and-length.md), [language and locale](roadmap/language-and-locale.md), [conversation frameworks](roadmap/conversation-frameworks.md) (sales, support, style matching), voice, voice listening and transcription, [privacy, governance, and access](roadmap/privacy-governance-and-access.md), [effort, completeness, and memory](roadmap/effort-completeness-and-memory.md), and visual and oversight.

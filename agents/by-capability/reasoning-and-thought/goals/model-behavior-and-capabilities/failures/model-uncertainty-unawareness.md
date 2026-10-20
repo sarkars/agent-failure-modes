@@ -67,3 +67,17 @@ point the firm must explain the fabrication to the court.
 - [Model Knowledge Cutoff](model-knowledge-cutoff.md) - stale knowledge is one specific source of uncertainty presented with the same false confidence this pattern describes broadly
 - [Model Reasoning Inconsistency](model-reasoning-inconsistency.md) - borderline, inconsistent conclusions are delivered with no signal that the underlying reasoning was near a decision boundary
 - [Model Refusal Inconsistency](model-refusal-inconsistency.md) - borderline refusal decisions are resolved without surfacing the underlying uncertainty at the decision threshold
+
+## Chat assistant examples
+
+### Over-hedging
+```
+User:  Does my Chase checking account charge a fee if I send a Zelle payment to my landlord?
+Bot:   Fees can vary by account type, bank policy, and circumstances, and policies may change over time.
+       It may be worth checking, but I can't say for sure. Some accounts might not charge, while others
+       could. You may want to review your account agreement or contact the bank to confirm.
+User:  So is it free or not?
+Bot:   I can't be certain without seeing your account details. Please verify with Chase directly.
+```
+**What the user experiences:** a reply with no answer in it. The user has rent due and leaves the chat no better off than when they arrived.
+**Fix:** lead with the best answer, then add one short, specific uncertainty. For example: "No, personal Zelle payments are typically free. The one thing to check is whether your account type is covered; the fee schedule in the Chase app will show it." Hedge only the part that is actually uncertain, and say what would settle it. Research that scores how well wording matches a model's confidence penalizes both too much and too little hedging ([Yona et al., 2024, abstract opened](https://arxiv.org/abs/2405.16908)). For the same problem of caveats crowding out the answer, see [excess disclaimers and warnings](../../../../human-machine-interface/goals/refusals-and-boundaries/failures/excess-disclaimers-and-warnings.md) and [answer buried](../../../../human-machine-interface/goals/response-structure/failures/answer-buried.md).

@@ -11,15 +11,17 @@ Shared metrics the patterns below report against. Targets are starting points to
 |---|---|---|
 | Style-match rate | Over 90% (human-rated) | [one size communication style](failures/one-size-communication-style.md) |
 | Name-swap style consistency | 100% | one size communication style |
+| Task-completion parity by signalled skill level | Parity near 1 (starting point) | [technology literacy mismatch](failures/technology-literacy-mismatch.md) |
 
 ## Patterns
 | Pattern | One line |
 |---|---|
 | One-size communication style | Same directness, idioms, and formality for everyone |
+| [Technology-literacy mismatch](failures/technology-literacy-mismatch.md) | Steps assume skills the user has not shown |
+| [Regional and community styles](failures/regional-and-community-styles.md) | Guesses a style from location or community instead of the user's own signals |
 
 ## Planned (not yet written)
 - Language switching and English learners
-- Regional and community styles (needs verified sources)
 
 ## Related
 - [Fairness and identity](../fairness-and-identity/README.md)
