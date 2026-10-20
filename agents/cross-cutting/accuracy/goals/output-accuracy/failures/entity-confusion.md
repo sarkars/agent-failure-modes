@@ -90,3 +90,23 @@ Result: Completely wrong information about wrong person
 
 - [Atlan: LLM Hallucinations 2026](https://atlan.com/know/llm-hallucinations/) - Coverage of entity confusion patterns in LLM outputs
 - [Hallucination of Multimodal LLMs Survey](https://arxiv.org/html/2404.18930v2) - Academic survey on entity hallucinations in multimodal models
+
+---
+
+## Chat assistant examples
+
+Illustrative example (invented people and companies).
+
+### Wrong contact merged in the CRM
+
+```
+User: Merge the duplicate for Maria Lopez and update her title to VP of Finance.
+Bot:  Done. Merged and updated Maria Lopez at Harbor Freight Logistics.
+      (the CRM also has a Maria Lopez at Brightwell Dental, and the user meant that one)
+User: That's the wrong Maria. Can you undo it?
+Bot:  The merge can't be undone from here.
+```
+
+**What the user experiences:** a quiet change to the wrong person's record that she can't reverse, so she stops trusting the bot with any CRM edit.
+
+**Fix:** when two contacts share a name, company, or email domain, ask which one, offering the matches as choices (for example "Maria Lopez, Harbor Freight Logistics", "Maria Lopez, Brightwell Dental", "Something else"), treating the user's qualifiers as hard constraints, and resolve to a unique contact ID. Show both records and get an explicit yes before any merge that cannot be undone. See the [guessing instead of asking](../../../../../by-capability/human-machine-interface/goals/dialogue-management/failures/guessing-instead-of-asking.md) pattern.
