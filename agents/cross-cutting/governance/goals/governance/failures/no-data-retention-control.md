@@ -106,6 +106,29 @@ vector index has to be partially rebuilt to purge the embedded vectors.
 
 ---
 
+## Chat assistant examples
+
+### Recording, transcription, and training-use notice (GV-12)
+
+Illustrative transcript, not a real log.
+
+```
+Bot:   Hi, I'm the Brightline Health Plan assistant. How can I help?
+User:  Why was my physical therapy claim denied? I have a herniated disc and
+       I'm on disability, so I can't pay this out of pocket.
+Bot:   I can help. Can you share the claim number?
+User:  48213
+Bot:   The denial code means the claim needs a referral on file.
+       (no recording or training notice was shown at any point)
+```
+
+Two days later the user finds this line in the privacy policy: "Chat transcripts may be used to train our AI models." No opt-out was offered.
+
+**What the user experiences:** they typed a medical and financial detail into what looked like a private help chat, then learned by accident that it was kept and used for training, with no moment where they could say no.
+**Fix:** before the user types anything, show "This chat is recorded and may be used to train our AI models. [Opt out]", log that it was shown, and exclude opted-out transcripts from training data. Pass: the notice appears in 100% of recorded sessions and no opted-out transcript appears in a training export. See [recording consent not captured](../../../../../by-capability/human-machine-interface/goals/healthcare-agents/failures/recording-consent-not-captured.md) for the closest HMI pattern (healthcare scribes). Legal review needed (flag L): this page makes no statement about what the law requires.
+
+---
+
 ## References
 
 - [NIST-AI-RMF](https://www.nist.gov/itl/ai-risk-management-framework)
