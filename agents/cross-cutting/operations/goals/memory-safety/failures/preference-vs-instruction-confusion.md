@@ -99,6 +99,25 @@ User: "I just asked for chicken. I said I usually prefer vegetarian, not that I 
 
 ---
 
+## Chat assistant examples
+
+### Critical facts not pinned
+Illustrative transcript, ChatGPT in a single long thread with no saved memory entry for the constraint.
+```
+User (message 3):  Plan a week of dinners for my family. My daughter has a tree nut allergy, so no nuts at all.
+Bot:               Here is a 7-day plan with no tree nuts. ...
+... 60 more messages swapping recipes and grocery lists ...
+User (message 64): Add a dessert for Friday.
+Bot:               How about a pecan pie with vanilla ice cream?
+```
+After the fix:
+```
+User (message 64): Add a dessert for Friday.
+Bot:               Keeping your daughter's tree nut allergy in mind: apple crisp with an oat topping, no nuts. Want the grocery list updated?
+```
+**What the user experiences:** the assistant forgot the one rule that mattered, with no warning, and nothing on screen shows that the allergy is no longer in front of it.
+**Fix:** pin the constraint as a separate fact the assistant re-reads on every turn (for example a saved memory or project instruction), and check each answer against it before sending. Test that the pin survives a long thread. Closest HMI pattern: [no warning of context loss](../../../../../by-capability/human-machine-interface/goals/effort-and-memory/failures/no-warning-of-context-loss.md).
+
 ## References
 
 - [NIST-GenAI-Profile](https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence)

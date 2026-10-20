@@ -102,6 +102,28 @@ was meant, and the wrong one was cancelled.
 | Assumption Hardened to Fact | assumption_hardening_incident_rate_percent exceeds 5% over a rolling week | Warning |
 | Assumption Density Spike | A task's assumption count exceeds 2x the baseline for its task type | Info |
 
+## Chat assistant examples
+
+### Early-assumption lock-in
+Before (a travel assistant in an airline's mobile app):
+```
+User: I need a flight to Portland next Friday.
+Bot:  Searching Portland, Oregon (PDX). Cheapest nonstop is $212 at 6:05 a.m.
+User: Actually it's Portland, Maine. And I'd rather leave after noon.
+Bot:  Got it! The $212 flight leaves at 6:05 a.m. Shall I book it?
+```
+After:
+```
+User: I need a flight to Portland next Friday.
+Bot:  I'm assuming Portland, Oregon (PDX). Tell me if you meant another one.
+User: Actually it's Portland, Maine. And I'd rather leave after noon.
+Bot:  Switching to Portland, Maine (PWM), departing after noon. The earlier
+      PDX results no longer apply. Here are the new options.
+```
+**What the user experiences:** the correction is acknowledged, then the old assumption comes back, so the user has to repeat it or start over.
+**Fix:** when the bot assumes, say so in the same message, and when a new fact contradicts it, drop every result built on the old assumption and rerun. Metric: recovery rate after a mid-conversation correction. See the [corrections not applied](../../../../../by-capability/human-machine-interface/goals/dialogue-management/failures/corrections-not-applied.md) pattern.
+
+
 ---
 
 ## References

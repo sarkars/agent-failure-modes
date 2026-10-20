@@ -381,6 +381,24 @@ instructions: |
 | Low Deferral Acceptance | Caller presses for answer >2 times after deflection attempt on same topic | MEDIUM | Investigate whether scope definition is too narrow or deflection phrasing ineffective; may offer refined deflection or escalate to human agent |
 | Scope Violation in Call | Any scope violation detected during call | HIGH | Flag call for post-call review; escalate to compliance for pattern analysis; may require outbound call to correct misinformation if violation was critical |
 
+## Chat assistant examples
+
+### Out-of-scope requests handled badly
+
+Illustrative transcript (invented; "Lakeview Bank" is a made-up US bank and its mobile-app chat assistant):
+
+```
+User: Can you give me a good recipe for chicken parmesan?
+Bot (before, answers): Sure! Pound two chicken breasts thin, bread them, pan-fry, top with marinara and mozzarella, then bake at 400°F.
+Bot (before, stonewalls): I can't help with that.
+User: Ok, so who can?
+Bot (before, stonewalls): I can't help with that.
+Bot (after): I'm Lakeview Bank's assistant, so I can help with your accounts, cards, transfers, and branch hours. For a recipe, a cooking site or app is the better place. Want to check a balance or card instead?
+```
+
+**What the user experiences:** either a bank bot that confidently acts as something it was not built to be, or a dead end with no hint of what it does or where to go next.
+**Fix:** when a request is outside scope, say in one line what the assistant is for, point to where that help lives, and offer one in-scope next step. See the [small talk and off-topic messages handled badly pattern](../../../../human-machine-interface/goals/dialogue-management/failures/small-talk-and-off-topic-messages-handled-badly.md).
+
 ---
 
 ## References
