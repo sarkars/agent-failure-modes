@@ -127,7 +127,7 @@
 | FW-M07 | No reflective listening | [conversation-frameworks.md](conversation-frameworks.md) | Written | Model | Partly |
 | FW-M08 | Misused tactical empathy | [conversation-frameworks.md](conversation-frameworks.md) | Written | Model | Partly |
 | FW-O01 | Cooperation violations | [conversation-frameworks.md](conversation-frameworks.md) | Covered | Model | Partly |
-| FW-O02 | Bad endings | [conversation-frameworks.md](conversation-frameworks.md) | Extends | Model | Partly |
+| FW-O02 | Bad endings | [conversation-frameworks.md](conversation-frameworks.md) | Covered | Model | Partly |
 | VO-01 | Dead air | [voice.md](voice.md) | Covered | Reliability | Partly |
 | VO-02 | Barge-in failure | [voice.md](voice.md) | Covered | Reliability | Partly |
 | VO-03 | Premature endpointing | [voice.md](voice.md) | Covered | Model | Partly |
@@ -174,18 +174,18 @@
 | TR-20 | Machine audio treated as a person | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Covered | Model | Partly |
 | TR-21 | Echo and self-hearing | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Covered | Reliability | No |
 | TR-22 | Poor call quality | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Covered | Reliability | No |
-| GV-01 | Over-collection of personal data | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Extends | Business context | No |
-| GV-02 | Sensitive data echoed or read aloud | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Extends | Business context | No |
-| GV-03 | Third-party data shared by users | [privacy-governance-and-access.md](privacy-governance-and-access.md) | New | Business context | No |
+| GV-01 | Over-collection of personal data | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Covered | Business context | No |
+| GV-02 | Sensitive data echoed or read aloud | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Covered | Business context | No |
+| GV-03 | Third-party data shared by users | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Written | Business context | No |
 | GV-04 | Personal data in logs, transcripts, and analytics | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Covered | Reliability | No |
-| GV-05 | Sensitive-category inference | [privacy-governance-and-access.md](privacy-governance-and-access.md) | New | Governance | No |
+| GV-05 | Sensitive-category inference | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Written | Governance | No |
 | GV-06 | Data sent to processors without notice | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Covered | Governance | No |
-| GV-07 | Memory the user can't see or control | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Extends | Business context | No |
-| GV-08 | Privacy-rights requests not recognised | [privacy-governance-and-access.md](privacy-governance-and-access.md) | New | Business context | No |
-| GV-09 | Weak or excessive identity verification | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Extends | Business context | No |
-| GV-10 | No notice or consent at the moment of collection | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Extends | Governance | No |
+| GV-07 | Memory the user can't see or control | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Covered | Business context | No |
+| GV-08 | Privacy-rights requests not recognised | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Written | Business context | No |
+| GV-09 | Weak or excessive identity verification | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Covered | Business context | No |
+| GV-10 | No notice or consent at the moment of collection | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Covered | Governance | No |
 | GV-11 | Consent scope lost in handoff | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Covered | Reliability | No |
-| GV-12 | Recording, transcription, and training-use notice | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Extends | Governance | No |
+| GV-12 | Recording, transcription, and training-use notice | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Covered | Governance | No |
 | GV-13 | AI disclosure | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Covered | Governance | No |
 | GV-14 | Role claims accepted from the conversation | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Extends | Reliability | No |
 | GV-15 | Organisation and tenant isolation breaches | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Covered | Reliability | No |

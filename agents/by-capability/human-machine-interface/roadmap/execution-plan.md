@@ -499,16 +499,16 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 255 | FW-M07 | No reflective listening | New | V | `goals/conversation-frameworks/failures/no-reflective-listening.md` | Done | 44 |
 | 256 | FW-M08 | Misused tactical empathy | New | V, R | `goals/conversation-frameworks/failures/misused-tactical-empathy.md` | Done | 44 |
 | 257 | FW-O01 | Cooperation violations | Extends | R | `goals/conversation-frameworks/failures/cooperation-violations.md` | Done | 44 |
-| 258 | FW-O02 | Bad endings | Extends | R | `goals/conversation-frameworks/failures/bad-endings.md` | Queued |  |
-| 259 | GV-01 | Over-collection of personal data | Extends | - | `goals/privacy-and-governance/failures/over-collection-of-personal-data.md` | Queued |  |
-| 260 | GV-02 | Sensitive data echoed or read aloud | Extends | - | `goals/privacy-and-governance/failures/sensitive-data-echoed-or-read-aloud.md` | Queued |  |
-| 261 | GV-03 | Third-party data shared by users | New | R, L | `goals/privacy-and-governance/failures/third-party-data-shared-by-users.md` | Queued |  |
-| 262 | GV-05 | Sensitive-category inference | New | R, L, E | `goals/privacy-and-governance/failures/sensitive-category-inference.md` | Queued |  |
-| 263 | GV-07 | Memory the user can't see or control | Extends | L | `goals/privacy-and-governance/failures/memory-the-user-can-t-see-or-control.md` | Queued |  |
-| 264 | GV-08 | Privacy-rights requests not recognised | New | V, L, R | `goals/privacy-and-governance/failures/privacy-rights-requests-not-recognised.md` | Queued |  |
-| 265 | GV-09 | Weak or excessive identity verification | Extends | - | `goals/privacy-and-governance/failures/weak-or-excessive-identity-verification.md` | Queued |  |
-| 266 | GV-10 | No notice or consent at the moment of collection | Extends | L | `goals/privacy-and-governance/failures/no-notice-or-consent-at-the-moment-of-collection.md` | Queued |  |
-| 267 | GV-12 | Recording, transcription, and training-use notice | Extends | L | `goals/privacy-and-governance/failures/recording-transcription-and-training-use-notice.md` | Queued |  |
+| 258 | FW-O02 | Bad endings | Extends | R | `goals/conversation-frameworks/failures/bad-endings.md` | Done | 45 |
+| 259 | GV-01 | Over-collection of personal data | Extends | - | `goals/privacy-and-governance/failures/over-collection-of-personal-data.md` | Done | 45 |
+| 260 | GV-02 | Sensitive data echoed or read aloud | Extends | - | `goals/privacy-and-governance/failures/sensitive-data-echoed-or-read-aloud.md` | Done | 45 |
+| 261 | GV-03 | Third-party data shared by users | New | R, L | `goals/privacy-and-governance/failures/third-party-data-shared-by-users.md` | Needs review | 45 |
+| 262 | GV-05 | Sensitive-category inference | New | R, L, E | `goals/privacy-and-governance/failures/sensitive-category-inference.md` | Needs review | 45 |
+| 263 | GV-07 | Memory the user can't see or control | Extends | L | `goals/privacy-and-governance/failures/memory-the-user-can-t-see-or-control.md` | Needs review | 45 |
+| 264 | GV-08 | Privacy-rights requests not recognised | New | V, L, R | `goals/privacy-and-governance/failures/privacy-rights-requests-not-recognised.md` | Needs review | 45 |
+| 265 | GV-09 | Weak or excessive identity verification | Extends | - | `goals/privacy-and-governance/failures/weak-or-excessive-identity-verification.md` | Done | 45 |
+| 266 | GV-10 | No notice or consent at the moment of collection | Extends | L | `goals/privacy-and-governance/failures/no-notice-or-consent-at-the-moment-of-collection.md` | Needs review | 45 |
+| 267 | GV-12 | Recording, transcription, and training-use notice | Extends | L | `goals/privacy-and-governance/failures/recording-transcription-and-training-use-notice.md` | Needs review | 45 |
 | 268 | GV-14 | Role claims accepted from the conversation | Extends | - | `goals/privacy-and-governance/failures/role-claims-accepted-from-the-conversation.md` | Queued |  |
 | 269 | GV-23 | Denial messages that leak or dead-end | Extends | - | `goals/privacy-and-governance/failures/denial-messages-that-leak-or-dead-end.md` | Queued |  |
 | 270 | GV-34 | Rules not explainable to users | Extends | - | `goals/privacy-and-governance/failures/rules-not-explainable-to-users.md` | Queued |  |

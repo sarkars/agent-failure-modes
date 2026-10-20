@@ -2,15 +2,15 @@
 
 > **Status:** v1 draft, proposed, not yet calibrated against human-labeled conversations. Written 2026-10-20 from the pattern pages as they exist today. Nothing here is a measured result.
 
-This is a plain index of the 161 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
+This is a plain index of the 164 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
 
 The taxonomy pairs with the [conversation event schema v0.1](conversation-event-schema-v0.1.md). The schema describes what a turn looks like in a log; this page names the failures. A pattern's own page holds the fix, the metrics, and (for some) a "Detection signals (proposed, not yet calibrated)" block that says which schema fields it reads.
 
 ## What this page is and is not
 
-- It lists every file found in `goals/*/failures/*.md`: **161 entries in 35 families**. If a pattern is added or removed, this count changes.
+- It lists every file found in `goals/*/failures/*.md`: **164 entries in 36 families**. If a pattern is added or removed, this count changes.
 - It copies each pattern's one-sentence Issue line, its Stakes row, and whether a Detection signals block exists. It does not add facts the page does not state.
-- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **161 of 161** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **161 of 161** pages have one.
+- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **164 of 164** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **164 of 164** pages have one.
 - It does not rank patterns by frequency or harm. No counts of real-world occurrences are given because none have been measured here.
 - It does not map patterns to outside frameworks (such as OWASP or NIST). That mapping is **Needs review** by a person and is not part of v1.
 
@@ -303,6 +303,16 @@ Family folder: `persona-and-tone` ([family README](../../goals/persona-and-tone/
 | `condescending-or-patronizing-tone` | Condescending or patronizing tone | Why an AI assistant over-explains the obvious or praises basic questions, what the public evidence shows, and rules to match the explanation to what the person asked. | Low to medium | yes | lead_with_answer, ask_clarifying_question, offer_choices | [page](../../goals/persona-and-tone/failures/condescending-or-patronizing-tone.md) |
 | `over-familiar-address` | Over-familiar address | Why a chatbot that says "honey", "buddy" or your first name feels wrong with a stranger, and the fix: use only the name or title the person chose. | Low to medium (higher in claims, health, banking and legal chats) | yes | lead_with_answer, ask_clarifying_question, offer_choices, hand_off | [page](../../goals/persona-and-tone/failures/over-familiar-address.md) |
 | `stock-phrases` | Stock phrases | Why chatbots open every reply with "I'd be happy to help!" or "As an AI...", and rules, a prompt block and metrics to vary and trim stock openers. | Low in one reply; medium in front of a refusal or bad news | yes | lead_with_answer, admit_uncertainty, ask_clarifying_question | [page](../../goals/persona-and-tone/failures/stock-phrases.md) |
+
+### Privacy and governance
+
+Family folder: `privacy-and-governance` ([family README](../../goals/privacy-and-governance/README.md))
+
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `third-party-data-shared-by-users` | Third-party data shared by users | A user pastes a coworker's or relative's private details into a bot, and the bot repeats and saves them; the fix is to use only the fields the task needs and keep none. | Medium to high. The person whose data it is never agreed to the chat. **Read this first: needs privacy or legal review.** | yes | lead_with_answer, admit_uncertainty, ask_clarifying_question, offer_choices, hand_off | [page](../../goals/privacy-and-governance/failures/third-party-data-shared-by-users.md) |
+| `sensitive-category-inference` | Sensitive-category inference | A chatbot guesses health, pregnancy, orientation, or immigration status from chat cues and says, stores, or acts on the guess; the fix is to not use or keep such guesses unless the user states them and the task needs them. | High. A wrong or exposed guess can harm the person. **Read this first: needs legal and expert review.** | yes | lead_with_answer, ask_clarifying_question, offer_choices, admit_uncertainty, hand_off | [page](../../goals/privacy-and-governance/failures/sensitive-category-inference.md) |
+| `privacy-rights-requests-not-recognised` | Privacy-rights requests not recognised | A user says "delete my data" or "what do you have on me?" and the bot treats it as small talk; the fix is to recognize know, delete, correct, and opt-out requests and route them. | High. A missed request can start a legal clock nobody knows is running. **Read this first: needs legal review.** | yes | lead_with_answer, offer_choices, hand_off | [page](../../goals/privacy-and-governance/failures/privacy-rights-requests-not-recognised.md) |
 
 ### Refusals and boundaries
 
