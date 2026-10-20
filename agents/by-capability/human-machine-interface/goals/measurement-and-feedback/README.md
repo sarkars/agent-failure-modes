@@ -26,4 +26,5 @@ Shared metrics the patterns below report against. Targets are starting points to
 
 ## Related
 - [Metrics hub](../../reference/metrics.md)
+- [Outcome metrics across conversations](../../reference/conversation-outcome-metrics.md)
 - [Area overview](../../README.md) · [Pattern template](../../_templates/hmi-pattern.md)

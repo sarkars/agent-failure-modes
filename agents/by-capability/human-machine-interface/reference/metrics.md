@@ -4,6 +4,8 @@ This page is for developers and product owners who run a chatbot and read a dash
 
 > **Status: proposed, 2026-10-20.** Field names are from the [conversation event schema v0.1](../roadmap/specs/conversation-event-schema-v0.1.md), which is a draft not yet checked against labeled conversations. Every field name below is **proposed**. This page gives no "good" values for any metric, because no source we opened gives one that fits your bot. Compare each number with your own trend.
 
+For the 64 outcome measures the diagnosis page and `convocheck --outcomes` compute from transcripts, see [outcome metrics](conversation-outcome-metrics.md).
+
 ## How to read this page
 - **Definitions** come from vendor documentation and glossaries we opened (listed at the end). Vendors differ, so the page says which one it is quoting.
 - **Compute** lines name event fields. Replace them with your own log's names.
