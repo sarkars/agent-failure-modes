@@ -398,6 +398,31 @@ Bot:  1 PM. No verification needed for that.
 
 **Fix:** set a verification level per request type: none for public facts such as hours, a one-time code or signed-in session before any account data is read or changed. Never ask for more than the request needs. Track disclosures before verification (target 0) and verification steps on low-risk requests. See [forces a fresh login](../../../../human-machine-interface/goals/embedded-copilots/failures/forces-a-fresh-login.md), the other side of the trade-off.
 
+### Answering-machine and voicemail errors (VO-20)
+
+Illustrative, US example. A clinic's outbound appointment-reminder agent calls a patient's cell; the call is shown as a transcript. Voicemail detection is planned, not measured; nothing here reports a detection rate.
+
+Before (details spoken before anyone is verified):
+
+```
+[Call connects. Greeting plays: "You've reached 555-0142. Leave a message."]
+Agent: Hi, this is Lakeview Family Clinic for Maria Alvarez. Your follow-up on Tuesday at 2 PM is about your diabetes labs, and you have an $85 balance.
+[Beep. Message recorded on a box a family member also checks.]
+```
+
+After (neutral opening, callback-safe message):
+
+```
+[Call connects. Greeting plays: "You've reached 555-0142. Leave a message."]
+Detector (planned): machine_greeting. Agent skips all appointment, diagnosis and balance details.
+Agent: This is Lakeview Family Clinic with a message for Maria Alvarez. Please call us back at 555-0100. Thank you.
+[If a person answers instead: "Am I speaking with Maria Alvarez?" Details only after she confirms who she is.]
+```
+
+**What the user experiences:** a diagnosis and a balance sit on a voicemail box a spouse or roommate can play, so private details reach someone the patient never chose.
+
+**Fix:** treat every outbound answerer as unverified: open with only the clinic name and the person's name, and disclose appointment, health or balance details only after a live person confirms identity. If the audio looks like a machine, or the signal is unclear, leave a fixed template with name, clinic and callback number only. Track sensitive details left on voicemail (target 0). The same rule applies to texts sent to a number that may be shared. See the [healthcare agents family](../../../../human-machine-interface/goals/healthcare-agents/README.md) for the closest HMI patterns.
+
 ---
 
 ## References

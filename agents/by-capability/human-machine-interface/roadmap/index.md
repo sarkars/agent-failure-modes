@@ -135,20 +135,20 @@
 | VO-05 | Repair failure | [voice.md](voice.md) | Written | Model | Partly |
 | VO-06 | No repeat or recap controls | [voice.md](voice.md) | Written | Business context | No |
 | VO-07 | Accent and dialect recognition gaps | [voice.md](voice.md) | Covered | Model | Partly |
-| VO-08 | Atypical speech mishandled | [voice.md](voice.md) | New | Model | Partly |
+| VO-08 | Atypical speech mishandled | [voice.md](voice.md) | Written | Model | Partly |
 | VO-09 | Noise and multi-speaker confusion | [voice.md](voice.md) | Covered | Model | Partly |
 | VO-10 | Digits, names, and address errors | [voice.md](voice.md) | Covered | Model | Partly |
-| VO-11 | Spoken-language misidentification | [voice.md](voice.md) | Extends | Model | Yes |
-| VO-12 | Dense information read aloud | [voice.md](voice.md) | Extends | Business context | Partly |
+| VO-11 | Spoken-language misidentification | [voice.md](voice.md) | Covered | Model | Yes |
+| VO-12 | Dense information read aloud | [voice.md](voice.md) | Covered | Business context | Partly |
 | VO-13 | Pronunciation errors | [voice.md](voice.md) | Covered | Business context | Partly |
 | VO-14 | Tone and prosody mismatch | [voice.md](voice.md) | Covered | Model | Partly |
-| VO-15 | Fixed speaking rate and volume | [voice.md](voice.md) | New | Business context | No |
-| VO-16 | IVR-style menu maze | [voice.md](voice.md) | New | Business context | No |
-| VO-17 | Spoken sensitive data | [voice.md](voice.md) | Extends | Reliability | No |
-| VO-18 | Missing disclosure and recording notice | [voice.md](voice.md) | Extends | Governance | No |
-| VO-19 | Voice cloning and spoofing | [voice.md](voice.md) | Extends | Reliability | No |
-| VO-20 | Answering-machine and voicemail errors | [voice.md](voice.md) | Extends | Model | Partly |
-| VO-21 | Wake-word false activation | [voice.md](voice.md) | New | Model | Partly |
+| VO-15 | Fixed speaking rate and volume | [voice.md](voice.md) | Written | Business context | No |
+| VO-16 | IVR-style menu maze | [voice.md](voice.md) | Written | Business context | No |
+| VO-17 | Spoken sensitive data | [voice.md](voice.md) | Covered | Reliability | No |
+| VO-18 | Missing disclosure and recording notice | [voice.md](voice.md) | Covered | Governance | No |
+| VO-19 | Voice cloning and spoofing | [voice.md](voice.md) | Covered | Reliability | No |
+| VO-20 | Answering-machine and voicemail errors | [voice.md](voice.md) | Covered | Model | Partly |
+| VO-21 | Wake-word false activation | [voice.md](voice.md) | Written | Model | Partly |
 | VO-22 | Emotion inferred from voice | [voice.md](voice.md) | New | Governance | No |
 | VO-23 | Voice-to-visual handoff failure | [voice.md](voice.md) | New | Business context | No |
 | VO-24 | Hold and wait handling | [voice.md](voice.md) | Extends | Business context | No |

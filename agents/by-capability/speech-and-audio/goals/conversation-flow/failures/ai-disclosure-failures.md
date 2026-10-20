@@ -337,6 +337,31 @@ Agent: Understood. I've removed this number and you won't get more calls from us
 
 **Fix:** Before dialing, check a stored consent record for this number that covers AI-voice calls (what was agreed, when, and where); do not place the call if it is missing. Open every call by saying it is an AI, answer "are you a person?" truthfully, and treat "stop calling" as an immediate opt-out written to the suppression list.
 
+### Missing disclosure and recording notice
+
+Illustration only (a bank's website support chat; the setting is invented). The transcript is saved and analyzed, but nothing tells the customer.
+
+Before:
+```
+[Chat widget opens on a bank's "Help" page]
+Chat:  Hi Dana! How can I help today?
+Dana:  I think someone used my debit card. The last four are 4821.
+Chat:  Sorry to hear that. I can help. Can you confirm your date of birth?
+Dana:  Is this a real person? Is this chat saved anywhere?
+Chat:  I'm here to help with your card! What is your date of birth?
+Dana:  Never mind. I'll call instead.
+```
+After:
+```
+[Chat widget opens on a bank's "Help" page]
+Chat:  Hi, I'm an AI assistant for the bank. This chat is saved and reviewed to improve service. Continue, or would you rather talk to a person?  [Continue] [Talk to a person]
+Dana:  I think someone used my debit card. Is this saved anywhere?
+Chat:  Yes. This chat is saved, and I'm an AI. A person on our fraud team can take over now, and you can also call the number on your card. Which do you prefer?
+```
+**What the user experiences:** a sensitive conversation that may be recorded and run by a machine, with no way to find out, so she leaves the channel.
+
+**Fix:** Show the notice in the first message, before any personal detail is typed: it is an AI, the chat is saved and for what, and where to reach a person. Where consent is needed, capture it with a button and log the choice, and do not store the transcript until it is given. Answer "is this saved?" and "is this a person?" truthfully every time, using the same wording. Whether notice or consent is required varies by state and was not verified here; have counsel review before use. Voice call recording notice is planned for measurement, not measured. See the [undisclosed bot identity pattern](../../../../human-machine-interface/goals/trust-and-rapport/failures/undisclosed-bot-identity.md).
+
 ---
 
 ## References

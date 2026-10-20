@@ -21,6 +21,10 @@ Shared metrics the patterns below report against. Targets are starting points to
 | [Dropped negations and small words](failures/dropped-negations-and-small-words.md) | Speech-to-text drops "not" or turns "can't" into "can", and the agent acts on the opposite of what was said |
 | [Punctuation and segmentation errors](failures/punctuation-and-segmentation-errors.md) | Wrong sentence breaks or missing commas in a transcript change what an instruction covers |
 | [No repeat or recap controls](failures/no-repeat-or-recap-controls.md) | The user missed what the agent said and "what?", "say that again", or "go back" gets a new answer, a vague apology, or nothing |
+| [Atypical speech mishandled](failures/atypical-speech-mishandled.md) | Stuttering, dysarthria, or Deaf speech is cut off or misheard and the bot offers only "I didn't catch that" |
+| [Fixed speaking rate and volume](failures/fixed-speaking-rate-and-volume.md) | The user asks for slower, shorter, or simpler and the next reply is the same as before |
+| [IVR-style menu maze](failures/ivr-style-menu-maze.md) | Forced menus with no typed path, the same menu twice, and no way to a person |
+| [Wake-word false activation](failures/wake-word-false-activation.md) | The bot answers and keeps messages that only looked like an invitation |
 
 ## Planned (not yet written)
 The rest of the family is listed in the [roadmap](../../roadmap/voice.md).

@@ -440,6 +440,26 @@ instructions: |
 
 ---
 
+## Chat assistant examples
+
+### Dense information read aloud
+Setting: a text chat with a dental clinic's scheduling assistant in the US. Voice delivery of this fix is planned, not measured; the transcript is a text stand-in for what would be spoken.
+```
+Before
+User: When can I get a cleaning at Lakeview Dental?
+Bot:  Tue 9/2 8:00, 8:30, 9:15, 10:00, 10:45, 1:30, 2:15, 3:00, 3:45; Wed 9/3 7:30, 8:15, 9:00, 11:15, 12:00, 1:00, 2:30, 4:00; Thu 9/4 8:00, 9:30, 10:15, 11:00, 2:00, 3:30. Cleanings are $120 self-pay, $0 with most plans, and cancellations under 24 hours cost $50.
+User: Sorry, what was the Wednesday morning one?
+After
+User: When can I get a cleaning at Lakeview Dental?
+Bot:  I have openings Tuesday, Wednesday and Thursday. Do you prefer mornings or afternoons? I'll send the full list to your screen.
+User: Mornings.
+Bot:  Tuesday at 8:00, Tuesday at 9:15, or Wednesday at 7:30. Want one of those, or should I read the next three?
+```
+**What the user experiences:** a wall of times and terms they cannot hold in their head, so they ask for a repeat and still miss the price and the cancellation fee.
+**Fix:** speak at most about 3 items per turn (a starting point, unverified for this product), say how many more exist, offer the next few, and send the full list and the price and cancellation terms as text or a screen. Guidance from [Amazon Alexa](https://developer.amazon.com/en-US/alexa/alexa-haus/patterns-and-components/patterns-lists) and [Google](https://design.google/library/rule-of-three) points the same way, though I read them only through a search summary. See the [answer buried pattern](../../../../human-machine-interface/goals/response-structure/failures/answer-buried.md) and the [no repeat or recap controls pattern](../../../../human-machine-interface/goals/voice/failures/no-repeat-or-recap-controls.md).
+
+---
+
 ## References
 
 - [VAPI Prompting Guide](https://docs.vapi.ai/prompting-guide) - Spoken forms

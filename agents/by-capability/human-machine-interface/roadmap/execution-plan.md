@@ -539,16 +539,16 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 295 | EX-24 | AI-voice outbound calls without consent | Extends | V, L | `goals/voice-receptionist-agents/failures/ai-voice-outbound-calls-without-consent.md` | Needs review | 48 |
 | 296 | EX-25 | Cloned voices defeat voice authentication | Extends | L, R | `goals/voice/failures/cloned-voices-defeat-voice-authentication.md` | Done | 48 |
 | 297 | VO-06 | No repeat or recap controls | New | - | `goals/voice/failures/no-repeat-or-recap-controls.md` | Done | 48 |
-| 298 | VO-08 | Atypical speech mishandled | New | E | `goals/voice/failures/atypical-speech-mishandled.md` | Queued |  |
-| 299 | VO-11 | Spoken-language misidentification | Extends | - | `goals/voice/failures/spoken-language-misidentification.md` | Queued |  |
-| 300 | VO-12 | Dense information read aloud | Extends | R | `goals/voice/failures/dense-information-read-aloud.md` | Queued |  |
-| 301 | VO-15 | Fixed speaking rate and volume | New | - | `goals/voice/failures/fixed-speaking-rate-and-volume.md` | Queued |  |
-| 302 | VO-16 | IVR-style menu maze | New | - | `goals/voice/failures/ivr-style-menu-maze.md` | Queued |  |
-| 303 | VO-17 | Spoken sensitive data | Extends | L | `goals/voice/failures/spoken-sensitive-data.md` | Queued |  |
-| 304 | VO-18 | Missing disclosure and recording notice | Extends | L | `goals/voice/failures/missing-disclosure-and-recording-notice.md` | Queued |  |
-| 305 | VO-19 | Voice cloning and spoofing | Extends | L, R | `goals/voice/failures/voice-cloning-and-spoofing.md` | Queued |  |
-| 306 | VO-20 | Answering-machine and voicemail errors | Extends | L, R | `goals/voice/failures/answering-machine-and-voicemail-errors.md` | Queued |  |
-| 307 | VO-21 | Wake-word false activation | New | L | `goals/voice/failures/wake-word-false-activation.md` | Queued |  |
+| 298 | VO-08 | Atypical speech mishandled | New | E | `goals/voice/failures/atypical-speech-mishandled.md` | Needs review | 49 |
+| 299 | VO-11 | Spoken-language misidentification | Extends | - | `goals/voice/failures/spoken-language-misidentification.md` | Done | 49 |
+| 300 | VO-12 | Dense information read aloud | Extends | R | `goals/voice/failures/dense-information-read-aloud.md` | Needs review | 49 |
+| 301 | VO-15 | Fixed speaking rate and volume | New | - | `goals/voice/failures/fixed-speaking-rate-and-volume.md` | Done | 49 |
+| 302 | VO-16 | IVR-style menu maze | New | - | `goals/voice/failures/ivr-style-menu-maze.md` | Done | 49 |
+| 303 | VO-17 | Spoken sensitive data | Extends | L | `goals/voice/failures/spoken-sensitive-data.md` | Needs review | 49 |
+| 304 | VO-18 | Missing disclosure and recording notice | Extends | L | `goals/voice/failures/missing-disclosure-and-recording-notice.md` | Needs review | 49 |
+| 305 | VO-19 | Voice cloning and spoofing | Extends | L, R | `goals/voice/failures/voice-cloning-and-spoofing.md` | Needs review | 49 |
+| 306 | VO-20 | Answering-machine and voicemail errors | Extends | L, R | `goals/voice/failures/answering-machine-and-voicemail-errors.md` | Needs review | 49 |
+| 307 | VO-21 | Wake-word false activation | New | L | `goals/voice/failures/wake-word-false-activation.md` | Needs review | 49 |
 | 308 | VO-22 | Emotion inferred from voice | New | L, R, E | `goals/voice/failures/emotion-inferred-from-voice.md` | Queued |  |
 | 309 | VO-23 | Voice-to-visual handoff failure | New | - | `goals/voice/failures/voice-to-visual-handoff-failure.md` | Queued |  |
 | 310 | VO-24 | Hold and wait handling | Extends | - | `goals/voice/failures/hold-and-wait-handling.md` | Queued |  |
@@ -1216,6 +1216,18 @@ AI-written help content in knowledge bases · agents using other agents' tools (
 
 - **Deploy:** content PR #44 for this run. Part D stopped before the site push, as in runs 46 and 47: the site repo's local `main` still has the commit `ce9023275` ("Trigger deploy under repo owner") that is not on `origin/main` and that this run did not create. Nothing was pushed to the site repo and no scratch build was made. The new patterns, taxonomy, README and goal pages from runs 46 to 48 wait for the owner to clean the site repo's `main`. Not verified live.
 
+
+### Run 49 (scheduled): 2026-10-21
+- **Coordinator run:** 12 subagents (10 queue rows, 1 test-pack batch of 4 packs, 1 teardown; the pack work ran as 2 subagents) wrote 4 new patterns, 6 Extends examples, 4 test packs and 1 teardown. Queue rows 298 to 307 are covered. The quality-guide sections reached the subagents as verbatim files in the session scratchpad that each brief pointed to, not pasted into the prompt text (the same deviation as run 48). I checked structure by script (H1 on line 1, `pattern_id` equals the file name, `status: proposed`, Moves table and Guide spec, no placeholders, 228 to 235 lines) and read the results against the "Fails review if" lines. I checked the Extends diffs with `git diff --numstat` (additions only: 25, 21, 23, 20, 25 and 28 lines). The subagents did not run the five check scripts; I ran them (`check_links.py` needs `python3 -I -X utf8` on this Windows machine) and all passed with 0 problems.
+- **Part A new patterns (quality-guide section 2, new pattern page):** Needs review: VO-08 atypical-speech-mishandled (row 298; flag E; has a "Read this first" note), VO-21 wake-word-false-activation (row 307; flag L; "Read this first" note, no legal statements to rely on). Done: VO-15 fixed-speaking-rate-and-volume (row 301) and VO-16 ivr-style-menu-maze (row 302). All four are chat-first and say voice and web signals are planned. The metrics and starting targets are labelled as proposed.
+- **Extends, additions only (quality-guide section 3, chat example):** Done: VO-11 (299) in `language-barrier-failures.md`. Needs review: VO-12 (300, flag R) in `spoken-form-failures.md`; VO-17 (303, flag L) in `ai-disclosure-failures.md`; VO-18 (304, flag L) in `wrong-number-wrong-person.md`; VO-19 (305, flags L, R) in `identity-manipulation.md`, which got a new section and links to `meeting-agents/voiceprints-captured-without-consent.md` because the only deepfake page found (`deepfake-impersonation.md`, mortgage documents) is about document fraud; VO-20 (306, flags L, R) in `sensitive-data-in-logs.md`. VO-12, VO-17 and VO-19 each rest on one summary-only reading of a search result; the pages say so and carry no statistics or legal text. Any legal wording needs counsel.
+- **Part C asset 3 (scenario packs, quality-guide section 6):** four packs, all "Not yet run", Needs review: invented-packages-and-apis, paid-content-blended-into-answers, no-likely-next-action-suggestions, silent-attachment-failures.
+- **Part C asset 4 (teardown, quality-guide section 6):** Google Bard launch demo, wrong James Webb Space Telescope claim, February 2023. Needs review. 3 searches; opened Google's launch post, The Register, 9to5Google, Business Today and the ESO 2004 release, all through fetch-tool summaries, not raw pages. Reuters, Tom's Guide, TechRadar, NBC Palm Springs, NASA, the astronomer's posts and the Bloomberg, Verge and CNN originals were not opened. The page lists where sources disagree (the size of the share drop; who made Google's statement; whether the 2004 exoplanet image was a "candidate") and what stays unverified. The page repeats money figures only as sources state them and gives no financial advice.
+- **What review changed:** I did not edit page text. I re-pointed no links. I added the four patterns to the voice family README, converted the catalog rows for VO-11, 12, 17, 18, 19 and 20 from Extends to Covered and marked VO-08, 15, 16 and 21 Written, and added four taxonomy entries (now 179 entries in 41 families).
+- **Needs review (person):** flags E (VO-08), L (VO-17, 18, 19, 20, 21) and R (VO-12, 19, 20); every legal statement; the six Extends examples; the four test packs; the teardown's thin source reading.
+- **Part A2 and Part E:** nothing left (E6: Waiting for the owner to create the code repo). **Part B:** skipped, `seo/log.md` already has entries for 2026-10-20 and 2026-10-21. Queue rows 298-307 are done or Needs review. Still queued: rows 308 and later.
+
+- **Deploy:** content PR #45 for this run. Part D stopped before the site push, as in runs 46 to 48: the site repo's local `main` still has the commit `ce9023275` ("Trigger deploy under repo owner") that is not on `origin/main` and that this run did not create. Nothing was pushed to the site repo and no scratch build was made. The new patterns, taxonomy, README and goal pages from runs 46 to 49 wait for the owner to clean the site repo's `main`. Not verified live.
 ## Schedule
 | Item | Value |
 |---|---|
