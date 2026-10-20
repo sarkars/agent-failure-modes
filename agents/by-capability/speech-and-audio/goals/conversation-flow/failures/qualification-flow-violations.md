@@ -384,6 +384,21 @@ Bot:  That fits a mattress that has sagged. Side sleepers usually need softer sh
 
 **Fix:** before any product name, price or "add to cart", the bot asks about the current situation and the problem (what they use now, what is going wrong) and recommends only after the user has answered at least one of each. Check it as pass/fail: on a buy-intent chat, no recommendation appears before a situation question and a problem question have both been answered. These are the Situation and Problem question types of SPIN selling (described in search summaries only, not opened). See the [guessing instead of asking](../../../../human-machine-interface/goals/dialogue-management/failures/guessing-instead-of-asking.md) pattern.
 
+### No qualification before booking a sales meeting
+
+Illustrative (B2B software chatbot; no external fact used in the transcript):
+```
+User: Pricing for 200 seats?
+Bot:  Great news, we can help with that. Let me book you a demo with an account executive. Does Thursday at 2 PM work?
+User: Sure.
+Bot:  Booked. You'll get a calendar invite shortly.
+      (Not asked: what tool they use now, when they need to switch, who signs off on a 200-seat purchase.)
+```
+
+**What the user experiences:** a quick booking, then a sales call with a rep who has nothing but "200 seats", so the first 15 minutes go to questions the bot could have asked and the buyer's boss may not even know about the call.
+
+**Fix:** scale the questions to deal size. Check as pass/fail on a transcript: (1) a high-seat-count lead (set the threshold with sales, for example 100 or more seats) is not booked until the bot has captured at least need or current tool, timeline, and who decides; (2) a small self-serve lead gets at most one question before the pricing page; (3) the bot asks at most 2 fit questions per turn, for example "What do you use today, and when do you need to switch?" then "Who else signs off on this?"; (4) every fit question can be skipped ("Prefer not to say" is a button), and a skipped field is logged as skipped, not as empty; (5) a lead with no budget or no real need is routed to nurture with a reason code, not booked. Track qualification-field completeness (proposed start: over 80%, tuned by deal size) and the sales-accepted lead rate. Not yet run. BANT and MEDDIC come from human sales, and I found no independent test of them on chatbots. The one page I opened (a consultancy's framework library, [Starr Conspiracy](https://www.thestarrconspiracy.com/insights/frameworks/ai-chatbot-lead-qualification-frameworks)) is vendor material with no cited studies. It does support explicit disqualify and nurture exits, and it says visitors rarely surface budget in chat, so do not make budget a required field. See the [conversation frameworks catalog](../../../../human-machine-interface/roadmap/conversation-frameworks.md).
+
 ---
 
 ## References
