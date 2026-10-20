@@ -118,3 +118,18 @@ Bot (after): Moves need a technician visit, so I'll connect you to an agent now.
 ```
 **What the user experiences:** three wrong answers, a request for a person that goes unanswered (see [talk to a human ignored or looped](../../../../../by-capability/human-machine-interface/goals/human-handoff/failures/talk-to-a-human-ignored-or-looped.md)), then giving up and calling the next day.
 **Fix:** report confirmed resolution next to containment: count a chat as resolved only if the user confirms it or does not return on the same issue within 7 days, and flag chats that end right after a "person" request or a repeat of the same question. The number to watch is the gap between containment and confirmed resolution.
+
+### User simulators more cooperative than real people
+Illustrative transcript, not a real log. Setting: a US pharmacy app's refill bot, tested with an LLM-played customer. The [Sim2Real study](https://arxiv.org/abs/2603.11245) (arXiv preprint; abstract read) describes LLM user simulators as excessively cooperative and stylistically uniform, which makes agents look more successful than they are with real people.
+```
+Test user (simulator): Hello, I would like to refill my lisinopril 10 mg prescription, please. My date of birth is 04/12/1971.
+Bot: Done. Your refill is ready for pickup at the Main St store today after 4 p.m.        (suite: pass)
+
+Real user (same app): refill lisinopril
+Bot: Which prescription would you like to refill? Please give the name, strength and your date of birth.
+Real user: the blood pressure one. why is this so hard
+Bot: Please give the medication name and strength.
+Real user: its on the bottle idk. just call me
+```
+**What the user experiences:** a bot that works only for tidy, complete requests, so a terse or annoyed customer gets a loop where the test suite predicted a pass.
+**Fix:** calibrate simulators against real transcripts: give them the typos, one-word turns, missing details and irritation seen in logs, and track the gap between simulated and real task-success rates. The [HMI tests README](../../../../../by-capability/human-machine-interface/tests/README.md) sets the rule to keep user turns realistic.
