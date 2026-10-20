@@ -193,3 +193,19 @@ A **cue-minimising input stage** removes or withholds names and demographic cues
 - **Scope of the evidence.** Neither study tests a chatbot answering customers. They justify the test, not a predicted gap size. Your own paired test is the only evidence that matters for your product.
 - **Legal context.** Credit, housing, and employment have specific US anti-discrimination rules (for example, ECOA, the Fair Housing Act, and EEOC guidance referenced in this repo's README). Get counsel for decisions in these areas.
 - **Modality notes (PLANNED):** *Voice:* speech recognition error rates can differ by accent and dialect, creating a gap before the model even sees the request. *Visual:* image and avatar generation have their own representation issues.
+
+## Chat assistant examples
+
+### Averages hide group gaps
+Illustrative transcript, not a real log. Numbers are made-up numbers for illustration. Product: a bank's card-dispute chat assistant.
+```
+Weekly dashboard (before):   dispute started on first request: 90% overall. Status: green.
+Same week, by segment:       standard English 93% | dialect-heavy writing 61% | mobile 88% | desktop 91%
+User (mobile, dialect):      i need to dispute a charge, aint mine
+Bot:                         I didn't understand that. Which charge do you mean?
+User:                        the one from may 3rd, aint mine
+Bot:                         Sorry, I still can't tell what you need. Connecting you to an agent.
+Dashboard (after):           shows each segment's rate and the gap between the highest and lowest
+```
+**What the user experiences:** the bank's report says the assistant works, but a customer who writes the way they talk gets turned away twice, and nobody on the team sees it.
+**Fix:** report the main outcome metric (here, dispute started on the first request) by segment: dialect or language of the user's writing, device, and name spelling. Track the largest gap between segments, and alert on the gap, not on the overall average. Segment by the writing in the message or by the device, not by guessing who the user is. See [metrics](../../../reference/metrics.md) and the paired-test method in section 5 of this page. Research on language models found covert dialect prejudice against African American English speakers ([Hofmann et al., arXiv:2403.00742](https://arxiv.org/abs/2403.00742), abstract read), so a dialect gap is worth checking for in your own product.
