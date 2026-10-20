@@ -1177,6 +1177,8 @@ AI-written help content in knowledge bases · agents using other agents' tools (
 - **Part A2 and Part E:** nothing left (E6 waits on the owner to create the code repo). **Part B:** Done, Search Console read in Chrome (15 clicks, 4.98K impressions, CTR 0.3%, position 9.1); entry added to `seo/log.md`. Queue rows 258-267 are done or Needs review. Still queued: rows 268 and 269 and later.
 - **Taxonomy and catalog:** 3 entries added to the failure taxonomy (now 164 entries in 36 families, new family Privacy and governance); catalog rows GV-01, 02, 03, 05, 07, 08, 09, 10, 12 and FW-O02 updated; the Read-this-first count in its header is now 48, matching the table.
 
+- **Deploy:** content PR #41 merged (merge commit 157a3b3); the site repo had no foreign commits. Lean scratch copy again (disk at 1.2 GB free; no `.git`, `dist`, `.astro`; linked `node_modules`). Scratch build clean, 1741 pages built; the live sitemap had 1668 URLs, none missing from the build (removed 0). Pushed to site repo `main` as 45d099510 (6 files: 3 new patterns, the taxonomy page, the new privacy-and-governance goal page and the HMI category page). No `VERCEL_DEPLOY_HOOK_URL` set, so pushed, not verified live: the live site still returns 404 for the new pages and for run 44's `misused-tactical-empathy`, and its sitemap still has 1668 URLs, so the deploy gap in deploy.md is still open and waits on the owner.
+
 ## Schedule
 | Item | Value |
 |---|---|
