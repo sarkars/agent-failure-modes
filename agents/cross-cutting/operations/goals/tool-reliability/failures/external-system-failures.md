@@ -129,6 +129,27 @@ From Failure Modes in LLM Systems (arxiv:2511.19933):
 2. **Rate Limit Pressure** (P2): Condition - external_429_rate exceeds 5% over 15 minutes. Action: verify backoff logic is engaged, check for a recent traffic increase or quota change, consider request batching or caching.
 3. **Schema Drift Detected** (P2): Condition - schema_validation_failure_rate exceeds 1% for a given external API. Action: diff the current response schema against the last known-good version, update the tool's expected schema and notify agent-facing documentation of the change.
 
+## Chat assistant examples
+
+### Giving up too early on a tool error
+
+**Before**
+
+> **User:** Post the Q3 launch checklist in #product-launch on Slack.
+> **Assistant:** *(calls the Slack post tool, gets HTTP 429 Too Many Requests)* I couldn't post to Slack. Please try again later.
+> **User:** Try again now.
+> **Assistant:** I'm unable to post to Slack right now.
+
+**After**
+
+> **User:** Post the Q3 launch checklist in #product-launch on Slack.
+> **Assistant:** *(gets HTTP 429 with a Retry-After header, waits the stated seconds, retries once)* Posted in #product-launch. Slack asked me to slow down first, so it took a moment.
+> **User:** Great.
+
+**What the user experiences:** A short, temporary delay is reported as a dead end, and the user has to do the retrying that the assistant could have done.
+
+**Fix:** On a transient error such as a rate limit, retry sensibly: wait the interval the service gives, which for Slack is the `Retry-After` header on a 429 ([Slack rate limits](https://docs.slack.dev/apis/web-api/rate-limits)), and retry a bounded number of times. If it still fails, try an alternative route or report exactly what failed, what was tried, and what the user can do next. See [generic error messages](../../../../../by-capability/human-machine-interface/goals/errors-and-recovery/failures/generic-error-messages.md).
+
 ## References
 
 - [Failure Modes in LLM Systems](https://arxiv.org/abs/2511.19933) - External tool failure & runtime breakdowns

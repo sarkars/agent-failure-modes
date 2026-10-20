@@ -95,6 +95,37 @@ Root causes:
 
 ---
 
+## Chat assistant examples
+
+### Slow first response
+
+Before (Lakeview Credit Union web chat, "Ask Penny"):
+
+```
+User: Why was I charged a $35 overdraft fee on Tuesday?
+(14 s, nothing shown)
+User: hello?
+(9 s, nothing shown)
+User: Why was I charged a $35 overdraft fee on Tuesday?
+Penny: Your Tuesday balance was $12.40 when the $47.18 debit posted...
+Penny: Your Tuesday balance was $12.40 when the $47.18 debit posted...
+```
+
+After:
+
+```
+User: Why was I charged a $35 overdraft fee on Tuesday?
+Penny: (0.4 s) Looking at your Tuesday transactions now...
+(12 s, "Checking your account activity" shown)
+Penny: Your Tuesday balance was $12.40 when the $47.18 debit posted...
+```
+
+**What the user experiences:** The chat looks frozen, so the user repeats the question and gets the same answer twice.
+
+**Fix:** Send a visible acknowledgment the moment the user's message is sent, then show a status line for as long as work continues, so the user can tell the assistant is working. Track the time from send to first visible feedback, separately from total response time. See [Silent long-running work](../../../../../by-capability/human-machine-interface/goals/response-time/failures/silent-long-running-work.md).
+
+---
+
 ## References
 
 - [Google SRE: Latency SLOs](https://sre.google/sre-book/service-level-objectives/)

@@ -108,6 +108,30 @@ def predict_latency(request):
 
 ---
 
+## Chat assistant examples
+
+### Unpredictable latency
+
+**Before** (support chat on a US airline's mobile app, Friday evening):
+
+> **Maria:** Can I switch my Denver flight to Saturday morning? *(reply in 3 s)*
+> **Assistant:** Yes. Saturday has a 7:10 a.m. departure with seats open. *(3 s)*
+> **Maria:** What would the fare difference be? *(reply in 41 s, no status shown)*
+> **Maria:** hello?? *(she resends at 20 s)*
+> **Assistant:** The difference is $38. Say "confirm" to change. *(41 s, plus a duplicate answer to "hello??")*
+
+**After** (same chat, delay flagged and held in a stated range):
+
+> **Maria:** What would the fare difference be?
+> **Assistant:** Fare lookups can take up to 40 seconds right now. I'll show the price as soon as it comes back. *(2 s)*
+> **Assistant:** The difference is $38. Say "confirm" to change. *(38 s)*
+
+**What the user experiences:** The first answer took 3 seconds, so a 41-second silence looks like a crash, and Maria resends and gets a duplicate reply.
+
+**Fix:** When a reply is likely to take much longer than the usual one, say so within a couple of seconds and give a time range, so the wait is expected instead of mysterious. Details on status and ETA wording: [silent long-running work](../../../../../by-capability/human-machine-interface/goals/response-time/failures/silent-long-running-work.md).
+
+---
+
 ## References
 
 - [LLM Inference Optimization](https://arxiv.org/abs/2309.06180)

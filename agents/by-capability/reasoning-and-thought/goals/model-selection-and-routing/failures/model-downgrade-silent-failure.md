@@ -66,3 +66,29 @@ no quality metric having flagged the downgrade at the time it happened.
 - [Model Capability Mismatch](model-capability-mismatch.md) - both involve routing decisions optimized on one axis (cost or capability metadata) while silently ignoring quality/compatibility impact
 - [Model Load Balancing Failure](model-load-balancing-failure.md) - a related failure where routing optimizes for availability instead of cost, with a similar lack of quality feedback in the loop
 - [Model Selection Nondeterminism](model-selection-nondeterminism.md) - unstable or inconsistently-applied routing rules make it harder to attribute quality changes to any single downgrade decision
+
+## Chat assistant examples
+
+### Silent capability downgrade
+
+**Before (no notice):**
+```
+User (ChatGPT, free plan, 9:10 AM): Review my lease clause on early termination. What are the risks?
+Assistant: Three risks: a two-month penalty, no sublet right, and a notice window that starts on the 1st. Each is tied to the clause text below...
+User (2:40 PM, same chat): Now compare that clause to the renewal clause.
+Assistant: Both clauses mention termination. You may want to consult a lawyer.
+User: The morning answer was much more detailed. Why is this one so thin?
+Assistant: I'm happy to help with anything else.
+```
+
+**After (notice and a choice):**
+```
+User (2:40 PM, same chat): Now compare that clause to the renewal clause.
+Assistant: Heads up: you've reached this plan's limit for the larger model, so I'm now answering with a smaller one. It may miss detail in a legal comparison. I can answer now, or you can wait until the limit resets at 7:40 PM for a full comparison.
+User: Wait for the reset.
+Assistant: I'll hold the comparison. Meanwhile, I can list the questions to ask your landlord.
+```
+
+**What the user experiences:** The same chat quietly gets shorter, vaguer answers, and the user cannot tell whether their question, the tool, or the plan changed.
+
+**Fix:** Whenever the router moves a conversation to a cheaper model or shorter output budget, say so in the next reply, name the reason (limit reached), what may be weaker, and the options (continue, wait for reset, upgrade), and log the event. Pass check: every downgrade event in a transcript is followed by a notice before the first downgraded answer. See [Silent Sandbagging](../../../../human-machine-interface/goals/refusals-and-boundaries/failures/silent-sandbagging.md) for the user-facing side.

@@ -238,7 +238,7 @@
 | EM-20 | Long-task progress not saved | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Covered | Reliability | No |
 | EM-21 | Giving up too early on a tool error | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Extends | Reliability | Partly |
 | EM-22 | Overclaiming effort | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Extends | Reliability | Partly |
-| EM-23 | Scope shrink on long tasks | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | New | Model | Partly |
+| EM-23 | Scope shrink on long tasks | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Written | Model | Partly |
 | EM-24 | Summaries that change meaning | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Covered | Model | Partly |
 | EM-25 | Handoff of incomplete work with no TODO list | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Extends | Reliability | No |
 | EX-01 | Purchase without clear authorisation | [emerging-surfaces.md](emerging-surfaces.md) | Extends | Reliability | No |

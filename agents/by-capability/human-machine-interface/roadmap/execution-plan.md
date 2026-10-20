@@ -339,16 +339,16 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 95 | EM-03 | Underthinking | Extends | V | `goals/effort-and-memory/failures/underthinking.md` | Done | 28 |
 | 96 | EM-08 | Partial answers to multi-part questions | New | - | `goals/effort-and-memory/failures/partial-answers-to-multi-part-questions.md` | Done | 28 |
 | 97 | EM-13 | Fresh-session amnesia | New | - | `goals/effort-and-memory/failures/fresh-session-amnesia.md` | Done | 28 |
-| 98 | EM-14 | Silent capability downgrade | Extends | - | `goals/effort-and-memory/failures/silent-capability-downgrade.md` | Queued |  |
-| 99 | EM-17 | Defensive over-deferral to professionals | Extends | R, E | `goals/effort-and-memory/failures/defensive-over-deferral-to-professionals.md` | Queued |  |
-| 100 | EM-21 | Giving up too early on a tool error | Extends | - | `goals/effort-and-memory/failures/giving-up-too-early-on-a-tool-error.md` | Queued |  |
-| 101 | EM-22 | Overclaiming effort | Extends | - | `goals/effort-and-memory/failures/overclaiming-effort.md` | Queued |  |
-| 102 | EM-23 | Scope shrink on long tasks | New | - | `goals/effort-and-memory/failures/scope-shrink-on-long-tasks.md` | Queued |  |
-| 103 | EM-25 | Handoff of incomplete work with no TODO list | Extends | - | `goals/effort-and-memory/failures/handoff-of-incomplete-work-with-no-todo-list.md` | Queued |  |
-| 104 | RT-01 | Slow first response | Extends | V, R | `goals/response-time/failures/slow-first-response.md` | Queued |  |
-| 105 | RT-03 | Unpredictable latency | Extends | V | `goals/response-time/failures/unpredictable-latency.md` | Queued |  |
-| 106 | RT-07 | Queue wait with no ETA | Extends | - | `goals/response-time/failures/queue-wait-with-no-eta.md` | Queued |  |
-| 107 | RT-14 | Fast replies, slow resolution | Extends | V | `goals/response-time/failures/fast-replies-slow-resolution.md` | Queued |  |
+| 98 | EM-14 | Silent capability downgrade | Extends | - | `goals/effort-and-memory/failures/silent-capability-downgrade.md` | Done | 29 |
+| 99 | EM-17 | Defensive over-deferral to professionals | Extends | R, E | `goals/effort-and-memory/failures/defensive-over-deferral-to-professionals.md` | Done | 29 |
+| 100 | EM-21 | Giving up too early on a tool error | Extends | - | `goals/effort-and-memory/failures/giving-up-too-early-on-a-tool-error.md` | Done | 29 |
+| 101 | EM-22 | Overclaiming effort | Extends | - | `goals/effort-and-memory/failures/overclaiming-effort.md` | Done | 29 |
+| 102 | EM-23 | Scope shrink on long tasks | New | - | `goals/effort-and-memory/failures/scope-shrink-on-long-tasks.md` | Done | 29 |
+| 103 | EM-25 | Handoff of incomplete work with no TODO list | Extends | - | `goals/effort-and-memory/failures/handoff-of-incomplete-work-with-no-todo-list.md` | Done | 29 |
+| 104 | RT-01 | Slow first response | Extends | V, R | `goals/response-time/failures/slow-first-response.md` | Done | 29 |
+| 105 | RT-03 | Unpredictable latency | Extends | V | `goals/response-time/failures/unpredictable-latency.md` | Done | 29 |
+| 106 | RT-07 | Queue wait with no ETA | Extends | - | `goals/response-time/failures/queue-wait-with-no-eta.md` | Done | 29 |
+| 107 | RT-14 | Fast replies, slow resolution | Extends | V | `goals/response-time/failures/fast-replies-slow-resolution.md` | Done | 29 |
 | 108 | RT-04 | Pacing mismatch | New | R | `goals/response-time/failures/pacing-mismatch.md` | Queued |  |
 | 109 | RT-05 | Deceptive typing indicators | New | L | `goals/response-time/failures/deceptive-typing-indicators.md` | Queued |  |
 | 110 | RT-08 | Missed async promises | Extends | - | `goals/response-time/failures/missed-async-promises.md` | Queued |  |
@@ -963,8 +963,21 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 - **Part C asset 4 (teardown), NEDA "Tessa" chatbot: Done** (`incidents/neda-tessa-chatbot-weight-loss-advice-2023.md`, 97 lines, guide section 6, "Read this first" health note). 3 searches; opened NPR (via WYPR copy), Gizmodo, Fortune. The NPR.org copy timed out; NEDA's own statement and the researchers' posts were not opened and are listed as such on the page. The NEDA/vendor contract dispute is reported as both sides' claims, not decided.
 - **Part A2 retrofits and Part E:** nothing left (E6 note written, **waiting for the owner to create the code repo**).
 - **Part B:** Skipped. The 2026-10-20 entry already exists.
-- **Taxonomy:** 74 entries; signals 74 of 74; Moves 74 of 74; fifteen flagged. Queue: rows 88 to 97 done; 
+- **Taxonomy:** 74 entries; signals 74 of 74; Moves 74 of 74; fifteen flagged. Queue: rows 88 to 97 done; about 335 rows remain Queued.
 - **Unverified claims:** anything read only in search summaries is kept out of public text; outside-framework mappings remain Needs review.
+- **Deploy:** content PR #23 merged (merge commit e4457cf); site repo had no foreign commits. Scratch build clean, 1636 pages; live sitemap had 1592 URLs, none missing (removed: 0; 43 added: the 4 new patterns plus pages from earlier runs not yet live). Importer re-dated 61 unchanged pages; those were reverted so only 4 new pages and 4 changed goal/category pages were copied. Pushed as site commit 2207d6d79. No deploy hook set. Live check: `/silent-sandbagging/` still 404 about 5 minutes after the push (same Vercel-on-push gap noted in the Deploy page); not pushed again.
+
+### Run 29 (scheduled): 2026-10-20 onward
+- **Coordinator run:** 11 subagents wrote in parallel; I read the results, checked diffs, and updated the shared files. Deviation: the rules file wrongly asked Extends agents for 3 searches (plan needs at least 1); several did fewer, which is fine for chat-example sections.
+- **Part A new pattern (row 102):** EM-23 scope-shrink-on-long-tasks: **Done**, checked against guide section 2 (Pattern ID, Detection signals with Starter rule, Moves, Guide spec with status proposed present; 227 lines; `Frequency` line is a bare value). 3 searches; opened 4 sources (three Claude Code issue pages via a mirror site, one OpenAI Developer Community thread). No public incident found; the page says so. Two summary-only items are listed as not used. Review: the page states that the evidence is four user reports, three on one product.
+- **Extends (rows 98-101, 103-107, guide section 3):** EM-14 into model-downgrade-silent-failure, EM-17 into bad-refusal, EM-21 into external-system-failures, EM-22 into false-completion-claim, EM-25 into handoff-context-incompleteness, RT-01 into response-time-sla-breach, RT-03 into inference-latency-variance, RT-07 into queue-backpressure, RT-14 into conversation-length-explosion: **Done**, chat examples only. `git diff` shows additions only (all pattern files, none removed). The examples are invented dialogues and say so; two cite a vendor doc the agent opened (Slack rate limits, a Zendesk doc). The queue's target file names do not exist; examples went into the files the catalog links, as in runs 27 and 28.
+- **Part C asset 4 (teardown), OpenAI GPT-4o sycophancy rollback, April 2025: Done, Needs review** (`incidents/openai-gpt-4o-sycophancy-rollback-april-2025.md`, 85 lines, guide section 6, "Read this first" health note). OpenAI's two primary posts returned HTTP 403 and were **not opened**; the page says so and attributes OpenAI's statements to TechCrunch, The Register and Simon Willison. Opened five secondary sources. The two dates for the rollback differ between sources; the page states the gap. A page under the 90-100 line target; nothing was added to reach it.
+- **Part C asset 6 (preregistration), S1 "talk to a human within two turns": Done as a draft, Needs review** (`reference/studies/s1-talk-to-a-human-within-two-turns.md`, 138 lines, guide section 6). Status line "Designed, not run". 3 searches; opened NN/g chatbot article, Davidson et al. 2023 (arXiv 2309.13233), Liu et al. AAAI-21. The Wilson-interval source could not be opened and no property of it is claimed. All thresholds are labeled as our starting points. Not yet announced.
+- **Part A2 retrofits and Part E:** nothing left (E6 note written, **waiting for the owner to create the code repo**).
+- **Part B:** Skipped. The 2026-10-20 entry already exists.
+- **Taxonomy:** 75 entries; signals 75 of 75; Moves 75 of 75; fifteen flagged. Queue: rows 98 to 107 done; about 325 rows remain Queued.
+- **Unverified claims:** anything read only in search summaries is kept out of public text; outside-framework mappings remain Needs review.
+- **Deploy:** (filled in after Part D)
 
 ## Backlog (not scheduled)
 Ideas from earlier lists that were never chosen. They stay out of the queue until someone adds them.

@@ -65,3 +65,18 @@ the booking.
 - [Handoff State Loss](handoff-state-loss.md) - a more severe variant where task state is dropped entirely rather than selectively summarized
 - [Handoff Accountability Loss](handoff-accountability-loss.md) - incomplete context can compound accountability loss when the receiving agent doesn't realize it's missing something critical
 - [Handoff Protocol Version Mismatch](handoff-protocol-version-mismatch.md) - a structural cause of context incompleteness when schema versions between sender and receiver diverge
+
+## Chat assistant examples
+
+### Handoff of incomplete work with no TODO list
+```
+User:  My Acme Internet install is Friday. I need the old router return label and a credit for last month's outage.
+Bot:   Label request sent. I'll check the credit next.
+Bot:   [looks up the credit; needs a supervisor to approve it]
+Bot:   I'm moving you to a support agent now.
+Agent: Hi, this is Dana. How can I help?
+User:  The credit! Did you not see that?
+Agent: I only see the label request. Can you tell me what you need?
+```
+**What the user experiences:** a promise the bot made to check the credit vanishes at the handoff, so the user must restate it and wonders what else was dropped.
+**Fix:** at every handoff, write an open-items list (credit pending supervisor approval, install Friday) and show it to the receiving agent first. Let the receiver confirm each item to the user in its first message. See [handoff summary is wrong or misleading](../../../../../by-capability/human-machine-interface/goals/human-handoff/failures/handoff-summary-is-wrong-or-misleading.md).

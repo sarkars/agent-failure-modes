@@ -115,6 +115,29 @@ class BackpressureQueue:
 
 ---
 
+## Chat assistant examples
+
+### Queue wait with no ETA
+Before (Harbor Federal Credit Union app, live-chat handoff queue):
+```
+User: My debit card was declined at the pharmacy and I need it fixed today.
+Bot:  I'll connect you to a card specialist. Please hold.
+Bot:  Please hold.
+User: How long will this take?
+Bot:  Please hold.
+```
+After:
+```
+User: My debit card was declined at the pharmacy and I need it fixed today.
+Bot:  I'll connect you to a card specialist. You're 6th in line, about 8-12 minutes. I'll update you every 3 minutes.
+User: How long will this take?
+Bot:  Still 6th, about 8-12 minutes. Want a callback at (555) 010-0142 instead, or a text when a specialist is free?
+```
+**What the user experiences:** a bare "Please hold" with no place in line and no time, so they cannot tell whether to wait, leave, or call.
+**Fix:** when a handoff enters a queue, show position and a time range from recent wait data, refresh it on a set interval, and offer a callback or text alert. Do not show a number you cannot support; a range is better than a false exact time. Zendesk documents this kind of wait-range message for messaging queues ([Zendesk](https://support.zendesk.com/hc/en-us/articles/8009787999514-Displaying-estimated-wait-time-in-messaging-conversations)). See the [human handoff pattern](../../../../../by-capability/human-machine-interface/goals/human-handoff/README.md).
+
+---
+
 ## References
 
 - [Backpressure in Distributed Systems](https://mechanical-sympathy.blogspot.com/2012/05/apply-back-pressure-when-overloaded.html)

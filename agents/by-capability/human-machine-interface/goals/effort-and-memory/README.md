@@ -21,6 +21,7 @@ Shared metrics the patterns below report against. Targets are starting points to
 | No warning of context loss | Early messages or saved memories are dropped and the user is not told |
 | Partial answers to multi-part questions | The assistant answers some of several questions and writes the reply as if it were complete |
 | Fresh-session amnesia | A new session starts with nothing from the last one and no handover |
+| Scope shrink on long tasks | On a long job the assistant does the easy items, narrows the scope on its own, and reports as if all were done |
 
 ## Planned (not yet written)
 Partial work, skipped steps with no receipt, and the rest of the family are listed in the [roadmap](../../roadmap/effort-completeness-and-memory.md).
