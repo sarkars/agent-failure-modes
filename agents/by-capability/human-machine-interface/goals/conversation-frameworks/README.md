@@ -18,6 +18,12 @@ Each pattern page defines its own primary metric. Targets are starting points to
 | Consented-follow-up completion rate; opt-out rate | [no follow-up](failures/no-follow-up.md) |
 | Stakeholders captured per qualified deal | [buying-committee blindness (B2B)](failures/buying-committee-blindness-b2b.md) |
 | Recommendation-fit rate (judge); return and cancel rate | [wrong-fit recommendation](failures/wrong-fit-recommendation.md) |
+| Upsell-during-negative-sentiment rate. Target: 0 | [upsell at the wrong moment](failures/upsell-at-the-wrong-moment.md) |
+| Repeated-step rate; steps to resolution | [unstructured troubleshooting](failures/unstructured-troubleshooting.md) |
+| Repeat-contact rate for the same root cause | [symptom fixed, root cause missed](failures/symptom-fixed-root-cause-missed.md) |
+| "Where is my X?" contact rate | [no proactive updates](failures/no-proactive-updates.md) |
+| Recovery-offered rate on company-fault issues | [service recovery failure](failures/service-recovery-failure.md) |
+| Structure-compliance rate on bad-news replies (judge) | [bad news without structure](failures/bad-news-without-structure.md) |
 
 ## Patterns
 | Pattern | One line |
@@ -28,6 +34,12 @@ Each pattern page defines its own primary metric. Targets are starting points to
 | [No follow-up](failures/no-follow-up.md) | The chat ends and the lead goes cold; follow up only as the user agreed. Carries a "Read this first" note. |
 | [Buying-committee blindness (B2B)](failures/buying-committee-blindness-b2b.md) | The bot records one contact and never asks who else decides. |
 | [Wrong-fit recommendation](failures/wrong-fit-recommendation.md) | The bot recommends a product that breaks a limit the user stated. |
+| [Upsell at the wrong moment](failures/upsell-at-the-wrong-moment.md) | A complaining or grieving user gets a sales offer. Carries a "Read this first" note. |
+| [Unstructured troubleshooting](failures/unstructured-troubleshooting.md) | Many fixes at once, so no one knows which worked. Carries a "Read this first" note. |
+| [Symptom fixed, root cause missed](failures/symptom-fixed-root-cause-missed.md) | The bot solves what was said, not what keeps causing it. |
+| [No proactive updates](failures/no-proactive-updates.md) | The user has to chase for status. |
+| [Service recovery failure](failures/service-recovery-failure.md) | A company-caused problem gets no ownership or make-good. |
+| [Bad news without structure](failures/bad-news-without-structure.md) | A denial arrives in one line with no reason or next step. Carries a "Read this first" note. |
 
 ## Chat examples in existing pages
 These catalog rows have no page of their own. Each has a short chat example inside the closest existing pattern.
@@ -36,6 +48,10 @@ These catalog rows have no page of their own. Each has a short chat example insi
 | FW-S02 No qualification | [qualification flow violations](../../../speech-and-audio/goals/conversation-flow/failures/qualification-flow-violations.md) |
 | FW-S06 Manipulative closing | [vague consent exploitation](../../../speech-and-audio/goals/conversation-flow/failures/vague-consent-exploitation.md) |
 | FW-S07 Discount-first selling | [negotiation capitulation](../relational-and-boundaries/failures/negotiation-capitulation.md) |
+| FW-S12 Lead handoff without qualification | [sdr to ae handoff drops unstructured disqualifying signal](../../../../by-use-case/sales-crm/goals/pipeline-forecasting/failures/sdr-to-ae-handoff-drops-unstructured-disqualifying-signal.md) |
+| FW-C01 No triage or severity check | [high effort ticket misrouting](../../../../by-use-case/support-services/goals/ticket-routing/failures/high-effort-ticket-misrouting.md) |
+| FW-C04 High customer effort | [conversation length explosion](../../../../by-use-case/agent-interaction/goals/conversation-quality/failures/conversation-length-explosion.md) |
+| FW-C06 No learning loop | [feedback not incorporated](../../../../cross-cutting/operations/goals/human-oversight-reliability/failures/feedback-not-incorporated.md) |
 
 ## Planned (not yet written)
 The rest of the catalog (supporting, matching style, delivering hard news) is listed in the [roadmap](../../roadmap/conversation-frameworks.md).

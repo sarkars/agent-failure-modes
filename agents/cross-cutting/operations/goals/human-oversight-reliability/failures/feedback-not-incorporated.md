@@ -116,6 +116,25 @@ Acme Bot: Hi Priya, thanks for meeting with us today...
 
 **Fix:** when the user corrects something, pin it as a fact for the rest of the conversation and check the pinned list before each reply. Test it with a later request that touches the same fact. See the [corrections not applied](../../../../../by-capability/human-machine-interface/goals/dialogue-management/failures/corrections-not-applied.md) pattern. Users report this loop in practice, for example in an [OpenAI community thread](https://community.openai.com/t/assistant-ignores-latest-instructions-and-overrides-user-constraints-in-edits/1379048) about an assistant that "repeats previously corrected mistakes" in multi-turn chats.
 
+### Same question answered by agents again and again, never documented
+
+```
+Before:
+Customer (Monday, Zendesk web chat for a home internet provider): My router's light is blinking orange. What does that mean?
+Agent Dana: Orange means it can't reach the network. Unplug it for 30 seconds, then plug it back in.
+Customer (Thursday, different chat): Why is my router blinking orange?
+Agent Luis: Orange means no connection. Unplug it for 30 seconds, then plug it back in.
+   (both agents wrote the answer from memory; the help center has no article, and Luis found no note from Dana)
+
+After:
+Agent Luis: Orange means no connection. Here is our help article with the steps: help.example.com/router-orange-light
+   (after Dana's chat, the question was tagged "router orange light," and the article was drafted from her reply within the week)
+```
+
+**What the user experiences:** they get the right answer, but only after waiting in a chat queue, and the next customer waits in it for the same answer.
+
+**Fix:** when an agent answers a question that has no help article, tag it and send the reply to the knowledge owner as a draft article. Track how many days pass between the first chat on a topic and a published answer, and how often the same question comes back. See the [no way to report bad behaviour](../../../../../by-capability/human-machine-interface/goals/measurement-and-feedback/failures/no-way-to-report-bad-behaviour.md) pattern for a report path that reaches a person who fixes the cause.
+
 ---
 
 ## References

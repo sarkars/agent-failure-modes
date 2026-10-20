@@ -93,3 +93,23 @@ Bot:  Done. Your new boarding pass is in your wallet.
 **What the user experiences:** Every reply arrives in a second, yet the user types five messages, repeats the same details, and still ends up on the phone.
 
 **Fix:** Judge the whole case, not the first reply: track turns to resolution and channel switches per case, and have the assistant act on the booking it already holds instead of pointing elsewhere. The effort idea comes from Dixon, Freeman and Toman, "Stop Trying to Delight Your Customers," Harvard Business Review, July-August 2010. Closest HMI pattern: [Cold Transfer](../../../../../by-capability/human-machine-interface/goals/human-handoff/failures/cold-transfer.md).
+
+### High customer effort: repeated details across channels
+Illustrative, Harbor Fiber app chat (fictional home internet provider), outage at the user's home in Columbus, OH:
+
+```
+Before
+User: My internet has been down since 7 am. Account 5521-0087, 214 Elm St.
+Bot:  Sorry to hear that! Please fill out the outage form in the app.
+User: I did. It asked for my account number and address again.
+Bot:  Thanks. A technician can help. Please call 1-800-555-0177.
+Phone agent: Can I get your account number and address?
+
+After
+Bot:  I see account 5521-0087 at 214 Elm St. There is a local outage, fixed by about 1 pm. A credit is added to your bill. Text you when it's back?
+User: Yes.
+```
+
+**What the user experiences:** The same account number and address are typed three times, across a chat, a form, and a phone call, and the problem is still open.
+
+**Fix:** Treat details given once in a case as known across every channel: attach them to the case record, prefill forms from it, and pass the case to the phone agent. Resolve in the first channel when the data allows it, and track channel switches and repeated details per case. A trade-press article I opened (CX Today, on Five9 commentary) describes this repeating-yourself problem in AI-to-human handoffs. See [Re-Asks for Known Information](../../../../../by-capability/human-machine-interface/goals/embedded-copilots/failures/re-asks-for-known-information.md) and [No Channel Switch or Context Lost](../../../../../by-capability/human-machine-interface/goals/channel-selection/failures/no-channel-switch-or-context-lost.md).

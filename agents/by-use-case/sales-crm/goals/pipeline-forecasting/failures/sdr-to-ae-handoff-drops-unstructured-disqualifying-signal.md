@@ -55,6 +55,23 @@ Opportunity is marked Closed Lost two weeks later; post-mortem review of the ori
 
 ---
 
+## Chat assistant examples
+
+### Chat lead handed to a sales rep with nothing the visitor said
+```
+Visitor (on a help desk software company's pricing page): We have about 40 agents and we're moving off Freshdesk by March. Can someone call me?
+Bot:     I can set that up. Someone from sales will reach out.
+         (bot creates the lead: name, email, "Chat inquiry"; transcript not attached)
+Rep:     Hi Dana, thanks for your interest! How many agents do you have?
+Dana:    I just told the chat. 40.
+Rep:     And are you using a current system today?
+Dana:    Freshdesk. It was in the chat too.
+```
+**What the user experiences:** a person who just answered the bot's questions is asked the same ones again, so the company looks like it never listened.
+**Fix:** at handoff, write what the visitor said (team size, current tool, deadline, what they asked for) into the lead record and show it to the rep before the first message, with the transcript attached. The rep opens with the next question, not the first one. See the [cold transfer](../../../../../by-capability/human-machine-interface/goals/human-handoff/failures/cold-transfer.md) pattern.
+
+---
+
 ## References
 
 - [CRMArena-Pro: Holistic Assessment of LLM Agents Across Diverse Business Scenarios and Interactions](https://arxiv.org/abs/2505.18878)
