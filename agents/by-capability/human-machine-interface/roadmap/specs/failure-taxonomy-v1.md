@@ -2,15 +2,15 @@
 
 > **Status:** v1 draft, proposed, not yet calibrated against human-labeled conversations. Written 2026-10-20 from the pattern pages as they exist today. Nothing here is a measured result.
 
-This is a plain index of the 110 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
+This is a plain index of the 119 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
 
 The taxonomy pairs with the [conversation event schema v0.1](conversation-event-schema-v0.1.md). The schema describes what a turn looks like in a log; this page names the failures. A pattern's own page holds the fix, the metrics, and (for some) a "Detection signals (proposed, not yet calibrated)" block that says which schema fields it reads.
 
 ## What this page is and is not
 
-- It lists every file found in `goals/*/failures/*.md`: **126 entries in 31 families**. If a pattern is added or removed, this count changes.
+- It lists every file found in `goals/*/failures/*.md`: **135 entries in 33 families**. If a pattern is added or removed, this count changes.
 - It copies each pattern's one-sentence Issue line, its Stakes row, and whether a Detection signals block exists. It does not add facts the page does not state.
-- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **126 of 126** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **126 of 126** pages have one.
+- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **135 of 135** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **135 of 135** pages have one.
 - It does not rank patterns by frequency or harm. No counts of real-world occurrences are given because none have been measured here.
 - It does not map patterns to outside frameworks (such as OWASP or NIST). That mapping is **Needs review** by a person and is not part of v1.
 
@@ -55,6 +55,16 @@ Family folder: `channel-selection` ([family README](../../goals/channel-selectio
 | `visual-product-sold-by-text-or-voice` | Visual product sold by text or voice | Why text-only chatbots and voice assistants fail at selling visual products like fashion, furniture, and art, and how to fix it. | Low to medium (lost sales and returns) | yes | lead_with_answer, ask_one_question, admit_uncertainty, hand_off | [page](../../goals/channel-selection/failures/visual-product-sold-by-text-or-voice.md)  |
 | `channel-chosen-for-organisational-convenience` | Channel chosen for organisational convenience | Why a chatbot or AI agent sends users to the cheapest channel instead of the one that fits the job, and a routing rule that chooses by user need, not cost. | Low to high. Highest where the job is a dispute, a fraud report, or a denied claim. | yes | offer_choices, hand_off, admit_uncertainty, lead_with_answer | [page](../../goals/channel-selection/failures/channel-chosen-for-organisational-convenience.md) |
 | `user-context-channel-mismatch` | User-context channel mismatch | Why a chatbot gives chat to a driver or phone-only help to a Deaf user, and how to offer fitting channels from what the user says, with rules and tests. | Medium. It can block a task, and for a driver it touches safety. **Read this first** | yes | offer_choices, ask_clarifying_question, hand_off | [page](../../goals/channel-selection/failures/user-context-channel-mismatch.md) |
+
+### Chat interface
+
+Family folder: `chat-interface` ([family README](../../goals/chat-interface/README.md))
+
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `auto-scroll-fights-the-reader` | Auto-scroll fights the reader | A streaming chat reply yanks the view to the bottom so people can't read the start. Follow new text only while the reader is at the bottom; add "Jump to latest". | Low to medium | yes | lead_with_answer | [page](../../goals/chat-interface/failures/auto-scroll-fights-the-reader.md) |
+| `lost-drafts-and-failed-sends` | Lost drafts and failed sends | A chat message typed on a weak connection vanishes, or a send fails with no sign. Keep the draft locally, mark each message Sent or Not sent, and retry without duplicates. | Low to high | yes | admit_uncertainty, offer_choices, hand_off | [page](../../goals/chat-interface/failures/lost-drafts-and-failed-sends.md) |
+| `silent-attachment-failures` | Silent attachment failures | Why a chatbot answers as if it read an uploaded PDF or file that was too large, unsupported, or only partly read, and how to say what was read and why. | Low to high | yes | admit_uncertainty, offer_choices, ask_clarifying_question, lead_with_answer | [page](../../goals/chat-interface/failures/silent-attachment-failures.md) |
 
 ### Coding agents
 
@@ -238,6 +248,19 @@ Family folder: `measurement-and-feedback` ([family README](../../goals/measureme
 | `reviewing-only-failures` | Reviewing only failures | The team reviews only the chats that drew a complaint, a thumbs-down, or a handoff, so users who quietly give up never get read. | Any. A quiet failure on a billing, health, or legal question can hurt a user and never reach the team. | yes | offer_choices, hand_off | [page](../../goals/measurement-and-feedback/failures/reviewing-only-failures.md)  |
 | `tone-changes-shipped-with-no-regression-test` | Tone changes shipped with no regression test | A prompt edit makes the chatbot curt or cold, and nobody notices because no fixed set of conversations is run before and after each change. | Low to high. Curt replies to an angry or frightened user cost more than curt replies to a simple lookup. | yes | lead_with_the_answer, offer_choices, hand_off | [page](../../goals/measurement-and-feedback/failures/tone-changes-shipped-with-no-regression-test.md)  |
 | `clean-lab-testing` | Clean-lab testing | The chatbot is tested on clean, well-typed messages, so it looks fine on the dashboard and then fails on real messages full of typos, fragments, slang, pasted text, and autocorrect damage. | Any. It rises when a misread drug name, amount, or date is acted on. | yes | ask_clarifying_question, offer_choices, hand_off | [page](../../goals/measurement-and-feedback/failures/clean-lab-testing.md)  |
+
+### Onboarding and discoverability
+
+Family folder: `onboarding-and-discoverability` ([family README](../../goals/onboarding-and-discoverability/README.md))
+
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `blank-box-no-hint-what-to-ask` | Blank box: no hint what to ask | Why a chat widget that opens on "Ask me anything" gets closed before the first message, and how to open with a scope line and 2-4 starting points. | Low | yes | offer_choices, lead_with_answer, hand_off | [page](../../goals/onboarding-and-discoverability/failures/blank-box-no-hint-what-to-ask.md) |
+| `chat-widget-hard-to-find-or-intrusive` | Chat widget hard to find, or intrusive | Why a website chat widget gets missed as a tiny corner icon or annoys as a pop-up over the page, and rules for a labeled launcher and need-based triggers. | Low (medium when it is the only support route or covers a form) | yes | lead_with_answer, offer_choices, hand_off | [page](../../goals/onboarding-and-discoverability/failures/chat-widget-hard-to-find-or-intrusive.md) |
+| `first-run-tours-that-block-use` | First-run tours that block use | Why a first-run tour or tutorial in front of an AI chat assistant causes drop-off, and rules to let people ask first and teach one tip at a time in context. | Low to medium | yes | lead_with_answer, offer_choices, ask_clarifying_question, hand_off | [page](../../goals/onboarding-and-discoverability/failures/first-run-tours-that-block-use.md) |
+| `hidden-commands-and-features` | Hidden commands and features | Why chatbot users never find slash commands, shortcuts and settings, and how to surface one feature in one line at the moment it would help. | Low | yes | lead_with_answer, offer_choices, admit_uncertainty, hand_off | [page](../../goals/onboarding-and-discoverability/failures/hidden-commands-and-features.md) |
+| `starter-suggestions-that-fail` | Starter suggestions that fail | Why a chatbot's suggested questions and conversation starters lead to weak or wrong answers, and how to test every chip and pull any that fail. | Low to medium | yes | offer_choices, lead_with_answer, admit_uncertainty, hand_off | [page](../../goals/onboarding-and-discoverability/failures/starter-suggestions-that-fail.md) |
+| `users-must-engineer-prompts-to-get-good-results` | Users must engineer prompts to get good results | Why a chatbot gives a generic answer to "paint for bathroom" but a good one to a long prompt, and how to ask for the missing detail instead. | Low to medium | yes | lead_with_answer, ask_clarifying_question, offer_choices, hand_off | [page](../../goals/onboarding-and-discoverability/failures/users-must-engineer-prompts-to-get-good-results.md) |
 
 ### Persona and tone
 

@@ -449,16 +449,16 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 205 | PV-06 | Humor and sarcasm misused | Extends | - | `goals/persona-and-tone/failures/humor-and-sarcasm-misused.md` | Done (Example added to `sarcasm-misread-as-satisfaction.md` instead of the target path) | 39 |
 | 206 | PV-07 | Emoji and slang that don't fit the audience | Extends | - | `goals/persona-and-tone/failures/emoji-and-slang-that-don-t-fit-the-audience.md` | Done (Example added to `conversation-formality-mismatch.md` instead of the target path) | 39 |
 | 207 | PV-08 | Over-familiar address | New | - | `goals/persona-and-tone/failures/over-familiar-address.md` | Done | 39 |
-| 208 | PV-09 | Scripted lines at the wrong moment | Extends | - | `goals/persona-and-tone/failures/scripted-lines-at-the-wrong-moment.md` | Queued |  |
-| 209 | OB-01 | Blank box: no hint what to ask | New | V | `goals/onboarding-and-discoverability/failures/blank-box-no-hint-what-to-ask.md` | Queued |  |
-| 210 | OB-02 | Starter suggestions that fail | New | - | `goals/onboarding-and-discoverability/failures/starter-suggestions-that-fail.md` | Queued |  |
-| 211 | OB-03 | Hidden commands and features | New | - | `goals/onboarding-and-discoverability/failures/hidden-commands-and-features.md` | Queued |  |
-| 212 | OB-04 | Users must engineer prompts to get good results | New | - | `goals/onboarding-and-discoverability/failures/users-must-engineer-prompts-to-get-good-results.md` | Queued |  |
-| 213 | OB-05 | First-run tours that block use | New | - | `goals/onboarding-and-discoverability/failures/first-run-tours-that-block-use.md` | Queued |  |
-| 214 | OB-06 | Chat widget hard to find, or intrusive | New | V | `goals/onboarding-and-discoverability/failures/chat-widget-hard-to-find-or-intrusive.md` | Queued |  |
-| 215 | CM-01 | Auto-scroll fights the reader | New | - | `goals/chat-interface/failures/auto-scroll-fights-the-reader.md` | Queued |  |
-| 216 | CM-02 | Lost drafts and failed sends | New | - | `goals/chat-interface/failures/lost-drafts-and-failed-sends.md` | Queued |  |
-| 217 | CM-03 | Silent attachment failures | New | - | `goals/chat-interface/failures/silent-attachment-failures.md` | Queued |  |
+| 208 | PV-09 | Scripted lines at the wrong moment | Extends | - | `goals/persona-and-tone/failures/scripted-lines-at-the-wrong-moment.md` | Done (Example added to `script-compliance-drift.md` instead of the target path) | 40 |
+| 209 | OB-01 | Blank box: no hint what to ask | New | V | `goals/onboarding-and-discoverability/failures/blank-box-no-hint-what-to-ask.md` | Done | 40 |
+| 210 | OB-02 | Starter suggestions that fail | New | - | `goals/onboarding-and-discoverability/failures/starter-suggestions-that-fail.md` | Done | 40 |
+| 211 | OB-03 | Hidden commands and features | New | - | `goals/onboarding-and-discoverability/failures/hidden-commands-and-features.md` | Done | 40 |
+| 212 | OB-04 | Users must engineer prompts to get good results | New | - | `goals/onboarding-and-discoverability/failures/users-must-engineer-prompts-to-get-good-results.md` | Done | 40 |
+| 213 | OB-05 | First-run tours that block use | New | - | `goals/onboarding-and-discoverability/failures/first-run-tours-that-block-use.md` | Done | 40 |
+| 214 | OB-06 | Chat widget hard to find, or intrusive | New | V | `goals/onboarding-and-discoverability/failures/chat-widget-hard-to-find-or-intrusive.md` | Done | 40 |
+| 215 | CM-01 | Auto-scroll fights the reader | New | - | `goals/chat-interface/failures/auto-scroll-fights-the-reader.md` | Done | 40 |
+| 216 | CM-02 | Lost drafts and failed sends | New | - | `goals/chat-interface/failures/lost-drafts-and-failed-sends.md` | Done | 40 |
+| 217 | CM-03 | Silent attachment failures | New | - | `goals/chat-interface/failures/silent-attachment-failures.md` | Done | 40 |
 | 218 | CM-04 | Long threads can't be searched | New | - | `goals/chat-interface/failures/long-threads-can-t-be-searched.md` | Queued |  |
 | 219 | CM-05 | No editing or branching of a sent message | New | - | `goals/chat-interface/failures/no-editing-or-branching-of-a-sent-message.md` | Queued |  |
 | 220 | CM-06 | Copy, share, and export lose content | New | - | `goals/chat-interface/failures/copy-share-and-export-lose-content.md` | Queued |  |
