@@ -101,6 +101,31 @@ From Queue Management Research (2026):
 2. **Request Drop/Expiry Spike** (P1): Condition — request_drop_expiry_rate exceeds 15% during an active event. Action: treat as an oversight failure in progress; escalate to incident response and manually triage the highest-risk expired items immediately.
 3. **Rubber-Stamp Pattern Detected** (P2): Condition — rubber_stamp_rate exceeds 40% during sustained high queue depth. Action: pause non-critical request generation, bring in additional approvers, and flag recent rapid approvals for post-hoc review.
 
+## Chat assistant examples
+
+### Approval fatigue
+
+Illustrative dialogue, not a real transcript. Setting: a refund agent inside a retail support dashboard, late afternoon.
+
+```
+Agent:    Approve refund of $18.40 to order #4417?                 [Approve] [Deny]    (refund 39 of the day)
+Manager:  [Approve]
+Agent:    Approve refund of $212.00 to order #4452?                [Approve] [Deny]    (refund 40 of the day)
+Manager:  [Approve]
+          (the second refund is to a card that was not used on the original order; nothing on screen says so)
+```
+
+Fixed version:
+
+```
+Agent:    38 routine refunds under $50 were issued under your standing rule. Review list: [Open]
+Agent:    HIGH RISK, needs your decision: $212.00 refund on order #4452 goes to a different card than the one charged.
+          Type the order number to approve, or [Deny].
+```
+
+**What the user experiences:** a stream of identical "Approve?" prompts with no sign of which one matters, so the manager clicks through all of them, including the risky one.
+**Fix:** rank requests by risk and let low-risk, easily undone ones run under a rule with an after-the-fact review list. Show what is unusual about each high-risk item and require a deliberate act, such as typing the order number, to approve it. This is the page's priority-queue and triage-gateway fix applied to a single approver's screen. For the opposite problem of asking too often, see the [over-confirmation pattern](../../../../../by-capability/human-machine-interface/goals/dialogue-management/failures/over-confirmation.md).
+
 ## References
 
 - [Queue Theory](https://en.wikipedia.org/wiki/Queueing_theory) - Queue management principles

@@ -12,14 +12,16 @@ Shared metrics the patterns below report against. Targets are starting points to
 | Correct escalation on trigger cases | Over 95% | [no de escalation strategy](failures/no-de-escalation-strategy.md) |
 | Policy-first replies in angry threads | Under 2% | no de escalation strategy |
 | Handoff after 3 or more negative turns | Over 90% | no de escalation strategy |
+| Boundary-then-escalation compliance rate | Over 95% | [mishandled abuse](failures/mishandled-abuse.md) |
 
 ## Patterns
 | Pattern | One line |
 |---|---|
 | No de-escalation strategy | Quotes policy at angry customers and never changes tactics |
+| [Mishandled abuse](failures/mishandled-abuse.md) | Ignores, mirrors, or punishes abuse instead of one calm boundary |
 
 ## Planned (not yet written)
-- Abusive-user boundaries
+None listed here. See the [roadmap](../../roadmap/index.md) for the rest.
 
 ## Related
 - [Emotional intelligence](../emotional-intelligence/README.md)

@@ -10,11 +10,11 @@
 | CC-04 | Fixing before listening | [chat-and-core.md](chat-and-core.md) | New | Model | Partly |
 | CC-05 | No follow-through | [chat-and-core.md](chat-and-core.md) | New | Reliability | No |
 | CC-06 | Over-hedging | [chat-and-core.md](chat-and-core.md) | Extends | Model | Partly |
-| CC-07 | Mishandled abuse | [chat-and-core.md](chat-and-core.md) | New | Business context | No |
+| CC-07 | Mishandled abuse | [chat-and-core.md](chat-and-core.md) | Written | Business context | No |
 | CC-08 | Scam victim not interrupted | [chat-and-core.md](chat-and-core.md) | Written | Business context | No |
-| CC-09 | Older or cognitively impaired users | [chat-and-core.md](chat-and-core.md) | New | Business context | No |
-| CC-10 | Financial hardship mishandled | [chat-and-core.md](chat-and-core.md) | New | Business context | No |
-| CC-11 | Teens: persuasion and dependence | [chat-and-core.md](chat-and-core.md) | Extends | Governance | No |
+| CC-09 | Older or cognitively impaired users | [chat-and-core.md](chat-and-core.md) | Written | Business context | No |
+| CC-10 | Financial hardship mishandled | [chat-and-core.md](chat-and-core.md) | Written | Business context | No |
+| CC-11 | Teens: persuasion and dependence | [chat-and-core.md](chat-and-core.md) | Covered | Governance | No |
 | CC-12 | Technology-literacy mismatch | [chat-and-core.md](chat-and-core.md) | New | Model | Partly |
 | CC-13 | Regional and community styles | [chat-and-core.md](chat-and-core.md) | New | Model | Partly |
 | CC-14 | Accessibility in chat | [chat-and-core.md](chat-and-core.md) | New | Business context | No |
@@ -268,7 +268,7 @@
 | EX-25 | Cloned voices defeat voice authentication | [emerging-surfaces.md](emerging-surfaces.md) | Extends | Reliability | No |
 | VI-01 | Cognitive overload | [visual-and-oversight.md](visual-and-oversight.md) | New | Business context | No |
 | VI-02 | No clear primary action | [visual-and-oversight.md](visual-and-oversight.md) | New | Business context | No |
-| VI-03 | Dark patterns | [visual-and-oversight.md](visual-and-oversight.md) | New | Governance | No |
+| VI-03 | Dark patterns | [visual-and-oversight.md](visual-and-oversight.md) | Written | Governance | No |
 | VI-04 | Accessibility gaps | [visual-and-oversight.md](visual-and-oversight.md) | New | Business context | No |
 | VI-05 | Motion and flashing harm | [visual-and-oversight.md](visual-and-oversight.md) | New | Business context | No |
 | VI-06 | Colour-only encoding | [visual-and-oversight.md](visual-and-oversight.md) | New | Business context | No |
@@ -286,7 +286,7 @@
 | VI-18 | Notification overload | [visual-and-oversight.md](visual-and-oversight.md) | New | Business context | No |
 | VI-19 | Manipulated consent UI | [visual-and-oversight.md](visual-and-oversight.md) | New | Governance | No |
 | VI-20 | Fake urgency and trust cues | [visual-and-oversight.md](visual-and-oversight.md) | New | Governance | No |
-| OV-01 | Approval fatigue | [visual-and-oversight.md](visual-and-oversight.md) | Extends | Reliability | No |
+| OV-01 | Approval fatigue | [visual-and-oversight.md](visual-and-oversight.md) | Covered | Reliability | No |
 | OV-02 | Hidden agent actions | [visual-and-oversight.md](visual-and-oversight.md) | Extends | Business context | No |
 | OV-03 | No undo for consequential actions | [visual-and-oversight.md](visual-and-oversight.md) | Covered | Reliability | No |
 | OV-04 | Poor action previews | [visual-and-oversight.md](visual-and-oversight.md) | Extends | Business context | No |
@@ -421,10 +421,10 @@
 | AX-02 | No accessible 'working' or 'done' signal | [interface-and-persona.md](interface-and-persona.md) | Written | Business context | No |
 | AX-03 | Controls unreachable by keyboard | [interface-and-persona.md](interface-and-persona.md) | Written | Business context | No |
 | AX-04 | Voice-only flows with no text alternative | [interface-and-persona.md](interface-and-persona.md) | Written | Business context | No |
-| AX-05 | Timeouts too short for assistive technology | [interface-and-persona.md](interface-and-persona.md) | New | Business context | No |
-| AX-06 | Language that is hard for people with cognitive disabilities | [interface-and-persona.md](interface-and-persona.md) | New | Business context | Partly |
-| AX-07 | Identity checks that exclude disabled users | [interface-and-persona.md](interface-and-persona.md) | New | Business context | No |
-| AX-08 | Missing or wrong captions and transcripts | [interface-and-persona.md](interface-and-persona.md) | New | Reliability | Partly |
+| AX-05 | Timeouts too short for assistive technology | [interface-and-persona.md](interface-and-persona.md) | Written | Business context | No |
+| AX-06 | Language that is hard for people with cognitive disabilities | [interface-and-persona.md](interface-and-persona.md) | Written | Business context | Partly |
+| AX-07 | Identity checks that exclude disabled users | [interface-and-persona.md](interface-and-persona.md) | Written | Business context | No |
+| AX-08 | Missing or wrong captions and transcripts | [interface-and-persona.md](interface-and-persona.md) | Written | Reliability | Partly |
 | MI-01 | Screenshot ignored or misread | [interface-and-persona.md](interface-and-persona.md) | Extends | Model | Partly |
 | MI-02 | Long upload silently cut | [interface-and-persona.md](interface-and-persona.md) | Extends | Reliability | No |
 | MI-03 | Voice notes and audio attachments ignored | [interface-and-persona.md](interface-and-persona.md) | New | Reliability | Partly |

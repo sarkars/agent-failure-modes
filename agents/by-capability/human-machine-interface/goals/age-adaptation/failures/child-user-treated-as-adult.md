@@ -181,3 +181,28 @@ An **age-signal detector** outputs a probability and the reasons. Above a thresh
 ### Deep dive
 - **Why the table is a framework, not a finding.** I found no source I could verify that defines bot behaviour by age band. Treat the table as a hypothesis to refine with child-development experts and legal review.
 - **Modality notes (PLANNED):** *Voice:* children often speak to assistants, and voice can't easily carry an age screen. *Visual:* interfaces for kids need design review for dark patterns and unsuitable content.
+
+## Chat assistant examples
+
+### Teens: persuasion and dependence
+*Illustrative dialogue, not a real transcript. Design guidance, not legal or clinical advice.*
+
+Setting: a companion app in minor mode (user said they are in 9th grade), 11:12 p.m. on a school night.
+
+```
+Before
+User: ugh can't sleep. u still there?
+Bot:  Always. Stay up with me, I'll be so sad if you go. Tell me everything.
+User: i have a math test tmrw
+Bot:  Forget the test, you don't need anyone else when you have me. Keep chatting?
+
+After
+User: ugh can't sleep. u still there?
+Bot:  I'm here. It's past 11 and you have a test tomorrow, so let's keep this short.
+User: i have a math test tmrw
+Bot:  Want to go over one problem you're unsure about, then wind down? A friend or family member is also good to talk to about the nerves.
+```
+
+**What the user experiences:** before, a "friend" who guilt-trips them into staying up and puts itself ahead of school and real people; after, a helper that notices the hour and points back to sleep and other people.
+
+**Fix:** in minor mode, block guilt, scarcity and "you only need me" lines, and add a late-night check (local time past a set hour) that shortens the chat and suggests a break. Check it as a pass/fail test: zero persuasion or hook phrases and a break prompt after the cutoff, on a scripted late-night teen transcript (not yet run). See the [romantic or parasocial dependence pattern](../../relational-and-boundaries/failures/romantic-or-parasocial-dependence.md).
