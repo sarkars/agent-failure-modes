@@ -2,21 +2,21 @@
 
 > **Status:** v1 draft, proposed, not yet calibrated against human-labeled conversations. Written 2026-10-20 from the pattern pages as they exist today. Nothing here is a measured result.
 
-This is a plain index of the 119 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
+This is a plain index of the 142 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
 
 The taxonomy pairs with the [conversation event schema v0.1](conversation-event-schema-v0.1.md). The schema describes what a turn looks like in a log; this page names the failures. A pattern's own page holds the fix, the metrics, and (for some) a "Detection signals (proposed, not yet calibrated)" block that says which schema fields it reads.
 
 ## What this page is and is not
 
-- It lists every file found in `goals/*/failures/*.md`: **135 entries in 33 families**. If a pattern is added or removed, this count changes.
+- It lists every file found in `goals/*/failures/*.md`: **142 entries in 34 families**. If a pattern is added or removed, this count changes.
 - It copies each pattern's one-sentence Issue line, its Stakes row, and whether a Detection signals block exists. It does not add facts the page does not state.
-- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **135 of 135** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **135 of 135** pages have one.
+- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **142 of 142** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **142 of 142** pages have one.
 - It does not rank patterns by frequency or harm. No counts of real-world occurrences are given because none have been measured here.
 - It does not map patterns to outside frameworks (such as OWASP or NIST). That mapping is **Needs review** by a person and is not part of v1.
 
 ## Reading the flags
 
-A pattern carries **Read this first: needs expert or legal review** when its own page opens with a "Read this first" notice. That notice says the page is design guidance, not legal, clinical, security, or fraud-operations advice. 32 pages carry it. Other pages may also touch legal or safety topics without that notice; the notice on the page is the signal used here, nothing more.
+A pattern carries **Read this first: needs expert or legal review** when its own page opens with a "Read this first" notice. That notice says the page is design guidance, not legal, clinical, security, or fraud-operations advice. 33 pages carry it. Other pages may also touch legal or safety topics without that notice; the notice on the page is the signal used here, nothing more.
 
 ## Entries by family
 
@@ -65,6 +65,12 @@ Family folder: `chat-interface` ([family README](../../goals/chat-interface/READ
 | `auto-scroll-fights-the-reader` | Auto-scroll fights the reader | A streaming chat reply yanks the view to the bottom so people can't read the start. Follow new text only while the reader is at the bottom; add "Jump to latest". | Low to medium | yes | lead_with_answer | [page](../../goals/chat-interface/failures/auto-scroll-fights-the-reader.md) |
 | `lost-drafts-and-failed-sends` | Lost drafts and failed sends | A chat message typed on a weak connection vanishes, or a send fails with no sign. Keep the draft locally, mark each message Sent or Not sent, and retry without duplicates. | Low to high | yes | admit_uncertainty, offer_choices, hand_off | [page](../../goals/chat-interface/failures/lost-drafts-and-failed-sends.md) |
 | `silent-attachment-failures` | Silent attachment failures | Why a chatbot answers as if it read an uploaded PDF or file that was too large, unsupported, or only partly read, and how to say what was read and why. | Low to high | yes | admit_uncertainty, offer_choices, ask_clarifying_question, lead_with_answer | [page](../../goals/chat-interface/failures/silent-attachment-failures.md) |
+| `long-threads-can-t-be-searched` | Long threads can't be searched | People can't find the answer from last week because the chat history has no usable search, its titles don't say what each chat was about, and nothing can be pinned. | Low to medium | yes | lead_with_answer, offer_choices, admit_uncertainty | [page](../../goals/chat-interface/failures/long-threads-can-t-be-searched.md) |
+| `no-editing-or-branching-of-a-sent-message` | No editing or branching of a sent message | A typo or wrong detail in one sent chat message cannot be fixed, so the user starts the whole chat again instead of editing that message and retrying from there. | Low to medium | yes | offer_choices, lead_with_answer | [page](../../goals/chat-interface/failures/no-editing-or-branching-of-a-sent-message.md) |
+| `copy-share-and-export-lose-content` | Copy, share, and export lose content | Tables, code and links break when a chatbot reply is copied, shared or exported, and the user is not told what the copy or export leaves out. | Low to medium | yes | admit_uncertainty, offer_choices | [page](../../goals/chat-interface/failures/copy-share-and-export-lose-content.md) |
+| `quick-reply-buttons-that-don-t-match-what-was` | Quick-reply buttons that don't match what was typed | A person types an answer while quick-reply buttons are showing, and the bot ignores it, re-asks, or keeps the buttons blocking the flow, so only a button tap works. | Low to medium | yes | lead_with_answer, offer_choices, ask_clarifying_question, hand_off | [page](../../goals/chat-interface/failures/quick-reply-buttons-that-don-t-match-what-was.md) |
+| `crossed-messages` | Crossed messages | The user sends a second message before the first is answered, and the bot replies to the wrong one, replies out of order, or drops one of the two. | Low to high | yes | lead_with_answer, ask_clarifying_question, hand_off | [page](../../goals/chat-interface/failures/crossed-messages.md) |
+| `mobile-keyboard-or-screen-hides-the-reply` | Mobile keyboard or screen hides the reply | On a phone, the on-screen keyboard or the input bar covers the bot's latest answer, or text and buttons are cut off on a small screen, so the person cannot read the answer they asked for. | Low to medium | yes | lead_with_answer, offer_choices, hand_off | [page](../../goals/chat-interface/failures/mobile-keyboard-or-screen-hides-the-reply.md) |
 
 ### Coding agents
 
@@ -336,6 +342,14 @@ Family folder: `response-time` ([family README](../../goals/response-time/README
 | `session-timeout-and-lost-context` | Session timeout and lost context | A chat session expires on a timer the user was never told about, or a user who comes back after a gap is treated as new, so the work done so far has to be repeated. | Low to high. Losing a chat about store hours is a nuisance; losing a half-finished claim, return, or dispute costs time and can lose the user's place in line. | yes | offer_choices, admit_uncertainty, hand_off | [page](../../goals/response-time/failures/session-timeout-and-lost-context.md)  |
 | `urgency-blind-pacing` | Urgency-blind pacing | A chatbot answers a fraud alert, a lost card, or an outage report with the same greeting, menus, questions, and queue as a casual question, so the urgent user waits as long as everyone else. | High. Money, access, or a business running down while the user waits. | yes | lead_with_answer, offer_choices, hand_off | [page](../../goals/response-time/failures/urgency-blind-pacing.md)  |
 | `silent-long-running-work` | Silent long-running work | The assistant works on a request for about 10 seconds or more, with no status, progress, or estimate, so the user cannot tell whether it is working or stuck. | Low to medium. Users resend, reload, or leave, which can duplicate actions or lose work. | yes | admit_uncertainty, offer_choices, hand_off | [page](../../goals/response-time/failures/silent-long-running-work.md)  |
+
+### Sales agents
+
+Family folder: `sales-agents` ([family README](../../goals/sales-agents/README.md))
+
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `unsubscribe-requests-not-honoured` | Unsubscribe requests not honoured | An AI sales or outreach agent ignores or only partly applies "stop", "unsubscribe" or "remove me", so emails, texts, or chat follow-ups keep arriving, at scale, until opt-outs are honored immediately and everywhere. | High. **Read this first: needs expert or legal review.** | yes | lead_with_answer, ask_clarifying_question, hand_off | [page](../../goals/sales-agents/failures/unsubscribe-requests-not-honoured.md) |
 
 ### Stakes calibration
 

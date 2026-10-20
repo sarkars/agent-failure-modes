@@ -14,7 +14,7 @@ The first version of this roadmap did not check the library, and several rows tu
 | **New** | No matching pattern found by file-name and keyword search | Search again before writing. This is a name-and-keyword check, not a full read of every file |
 
 <!-- BEGIN:result -->
-**Result: 493 rows, of which 121 are Written, 123 are New, 109 Extend an existing pattern, and 140 are already Covered.**
+**Result: 493 rows, of which 128 are Written, 116 are New, 106 Extend an existing pattern, and 143 are already Covered.**
 <!-- END:result -->
 
 <!-- BEGIN:root-cause -->
@@ -64,12 +64,12 @@ If every "Partly" were solved, models would fix up to 40%. If none were, 1%. A o
 | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Effort, completeness, and memory | 25 | 6 | 0 | 5 | 14 |
 | [emerging-surfaces.md](emerging-surfaces.md) | Emerging surfaces: agentic commerce, browser agents, tool ecosystems, meetings, companions, hiring, pricing incentives | 25 | 0 | 7 | 12 | 6 |
 | [visual-and-oversight.md](visual-and-oversight.md) | Visual design and human-oversight UI for agents | 32 | 1 | 16 | 11 | 4 |
-| [agent-types.md](agent-types.md) | Failures by agent type (coding, data, IT, finance, healthcare, and more) and cross-agent additions | 61 | 14 | 13 | 15 | 19 |
+| [agent-types.md](agent-types.md) | Failures by agent type (coding, data, IT, finance, healthcare, and more) and cross-agent additions | 61 | 15 | 12 | 13 | 21 |
 | [conversation-design.md](conversation-design.md) | Dialogue mechanics, refusals and boundaries, and error recovery | 33 | 18 | 0 | 5 | 10 |
-| [interface-and-persona.md](interface-and-persona.md) | Persona and tone, onboarding, chat interface, accessibility, and multimodal input | 41 | 20 | 10 | 5 | 6 |
+| [interface-and-persona.md](interface-and-persona.md) | Persona and tone, onboarding, chat interface, accessibility, and multimodal input | 41 | 26 | 4 | 4 | 7 |
 | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Human handoff, measurement, model changes, proactive agents, and group chats | 28 | 11 | 8 | 6 | 3 |
 | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Drive-thru, in-car, government, travel, banking, insurance, health scheduling, real estate, and outbound rules | 36 | 2 | 28 | 6 | 0 |
-| | **Total** | **493** | **121** | **123** | **109** | **140** |
+| | **Total** | **493** | **128** | **116** | **106** | **143** |
 <!-- END:catalog-table -->
 
 ## Suggested priority

@@ -327,9 +327,9 @@
 | HC-03 | Recording consent not captured | [agent-types.md](agent-types.md) | Written | Governance | No |
 | HC-04 | Fabricated clinical justification in appeals | [agent-types.md](agent-types.md) | Written | Model | Partly |
 | HC-05 | Patient summaries too simple to be safe | [agent-types.md](agent-types.md) | Written | Model | Partly |
-| SA-01 | Invented personalisation | [agent-types.md](agent-types.md) | Extends | Reliability | Partly |
-| SA-02 | Unsubscribe requests not honoured | [agent-types.md](agent-types.md) | New | Business context | No |
-| SA-03 | Wrong contact merged in the CRM | [agent-types.md](agent-types.md) | Extends | Business context | Partly |
+| SA-01 | Invented personalisation | [agent-types.md](agent-types.md) | Covered | Reliability | Partly |
+| SA-02 | Unsubscribe requests not honoured | [agent-types.md](agent-types.md) | Written | Business context | No |
+| SA-03 | Wrong contact merged in the CRM | [agent-types.md](agent-types.md) | Covered | Business context | Partly |
 | SA-04 | Double-booked meetings | [agent-types.md](agent-types.md) | Extends | Reliability | Partly |
 | VA-01 | Bookings without confirming details | [agent-types.md](agent-types.md) | New | Business context | No |
 | VA-02 | Emergency phrases missed in routine calls | [agent-types.md](agent-types.md) | Extends | Model | Partly |
@@ -410,13 +410,13 @@
 | CM-01 | Auto-scroll fights the reader | [interface-and-persona.md](interface-and-persona.md) | Written | Reliability | No |
 | CM-02 | Lost drafts and failed sends | [interface-and-persona.md](interface-and-persona.md) | Written | Reliability | No |
 | CM-03 | Silent attachment failures | [interface-and-persona.md](interface-and-persona.md) | Written | Reliability | No |
-| CM-04 | Long threads can't be searched | [interface-and-persona.md](interface-and-persona.md) | New | Business context | No |
-| CM-05 | No editing or branching of a sent message | [interface-and-persona.md](interface-and-persona.md) | New | Business context | No |
-| CM-06 | Copy, share, and export lose content | [interface-and-persona.md](interface-and-persona.md) | New | Reliability | No |
-| CM-07 | Quick-reply buttons that don't match what was typed | [interface-and-persona.md](interface-and-persona.md) | New | Business context | No |
-| CM-08 | Crossed messages | [interface-and-persona.md](interface-and-persona.md) | New | Reliability | No |
-| CM-09 | Mobile keyboard or screen hides the reply | [interface-and-persona.md](interface-and-persona.md) | New | Reliability | No |
-| CM-10 | Shared devices show someone else's chat | [interface-and-persona.md](interface-and-persona.md) | Extends | Governance | No |
+| CM-04 | Long threads can't be searched | [interface-and-persona.md](interface-and-persona.md) | Written | Business context | No |
+| CM-05 | No editing or branching of a sent message | [interface-and-persona.md](interface-and-persona.md) | Written | Business context | No |
+| CM-06 | Copy, share, and export lose content | [interface-and-persona.md](interface-and-persona.md) | Written | Reliability | No |
+| CM-07 | Quick-reply buttons that don't match what was typed | [interface-and-persona.md](interface-and-persona.md) | Written | Business context | No |
+| CM-08 | Crossed messages | [interface-and-persona.md](interface-and-persona.md) | Written | Reliability | No |
+| CM-09 | Mobile keyboard or screen hides the reply | [interface-and-persona.md](interface-and-persona.md) | Written | Reliability | No |
+| CM-10 | Shared devices show someone else's chat | [interface-and-persona.md](interface-and-persona.md) | Covered | Governance | No |
 | AX-01 | Streaming text read out token by token | [interface-and-persona.md](interface-and-persona.md) | Written | Business context | No |
 | AX-02 | No accessible 'working' or 'done' signal | [interface-and-persona.md](interface-and-persona.md) | Written | Business context | No |
 | AX-03 | Controls unreachable by keyboard | [interface-and-persona.md](interface-and-persona.md) | Written | Business context | No |
