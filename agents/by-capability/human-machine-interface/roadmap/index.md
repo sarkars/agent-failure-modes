@@ -97,15 +97,15 @@
 | LG-15 | Mixed-language experience | [language-and-locale.md](language-and-locale.md) | New | Business context | No |
 | LG-16 | Right-to-left and mixed-script rendering | [language-and-locale.md](language-and-locale.md) | New | Business context | No |
 | FW-S01 | Pitching before discovery | [conversation-frameworks.md](conversation-frameworks.md) | Covered | Business context | No |
-| FW-S02 | No qualification | [conversation-frameworks.md](conversation-frameworks.md) | Extends | Business context | No |
-| FW-S03 | Feature dump instead of insight | [conversation-frameworks.md](conversation-frameworks.md) | New | Business context | No |
-| FW-S04 | Mishandled objections | [conversation-frameworks.md](conversation-frameworks.md) | New | Business context | No |
-| FW-S05 | No ask | [conversation-frameworks.md](conversation-frameworks.md) | New | Business context | No |
-| FW-S06 | Manipulative closing | [conversation-frameworks.md](conversation-frameworks.md) | Extends | Governance | No |
-| FW-S07 | Discount-first selling | [conversation-frameworks.md](conversation-frameworks.md) | Extends | Business context | No |
-| FW-S08 | No follow-up | [conversation-frameworks.md](conversation-frameworks.md) | New | Business context | No |
-| FW-S09 | Buying-committee blindness (B2B) | [conversation-frameworks.md](conversation-frameworks.md) | New | Business context | No |
-| FW-S10 | Wrong-fit recommendation | [conversation-frameworks.md](conversation-frameworks.md) | New | Business context | Partly |
+| FW-S02 | No qualification | [conversation-frameworks.md](conversation-frameworks.md) | Covered | Business context | No |
+| FW-S03 | Feature dump instead of insight | [conversation-frameworks.md](conversation-frameworks.md) | Written | Business context | No |
+| FW-S04 | Mishandled objections | [conversation-frameworks.md](conversation-frameworks.md) | Written | Business context | No |
+| FW-S05 | No ask | [conversation-frameworks.md](conversation-frameworks.md) | Written | Business context | No |
+| FW-S06 | Manipulative closing | [conversation-frameworks.md](conversation-frameworks.md) | Covered | Governance | No |
+| FW-S07 | Discount-first selling | [conversation-frameworks.md](conversation-frameworks.md) | Covered | Business context | No |
+| FW-S08 | No follow-up | [conversation-frameworks.md](conversation-frameworks.md) | Written | Business context | No |
+| FW-S09 | Buying-committee blindness (B2B) | [conversation-frameworks.md](conversation-frameworks.md) | Written | Business context | No |
+| FW-S10 | Wrong-fit recommendation | [conversation-frameworks.md](conversation-frameworks.md) | Written | Business context | Partly |
 | FW-S11 | Upsell at the wrong moment | [conversation-frameworks.md](conversation-frameworks.md) | New | Governance | No |
 | FW-S12 | Lead handoff without qualification | [conversation-frameworks.md](conversation-frameworks.md) | Extends | Business context | No |
 | FW-C01 | No triage or severity check | [conversation-frameworks.md](conversation-frameworks.md) | Extends | Business context | No |
@@ -330,7 +330,7 @@
 | SA-01 | Invented personalisation | [agent-types.md](agent-types.md) | Covered | Reliability | Partly |
 | SA-02 | Unsubscribe requests not honoured | [agent-types.md](agent-types.md) | Written | Business context | No |
 | SA-03 | Wrong contact merged in the CRM | [agent-types.md](agent-types.md) | Covered | Business context | Partly |
-| SA-04 | Double-booked meetings | [agent-types.md](agent-types.md) | Extends | Reliability | Partly |
+| SA-04 | Double-booked meetings | [agent-types.md](agent-types.md) | Covered | Reliability | Partly |
 | VA-01 | Bookings without confirming details | [agent-types.md](agent-types.md) | New | Business context | No |
 | VA-02 | Emergency phrases missed in routine calls | [agent-types.md](agent-types.md) | Extends | Model | Partly |
 | VA-03 | Collections calls without required disclosures | [agent-types.md](agent-types.md) | New | Governance | No |

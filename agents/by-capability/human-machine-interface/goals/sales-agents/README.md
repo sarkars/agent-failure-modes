@@ -22,9 +22,10 @@ These catalog rows have no page of their own. Each has a short chat example insi
 |---|---|
 | SA-01 Invented personalization | [agent fabricates stated objection when call transcript tool returns empty](../../../../by-use-case/sales-crm/goals/lead-scoring/failures/agent-fabricates-stated-objection-when-call-transcript-tool-returns-empty.md) |
 | SA-03 Wrong contact merged in the CRM | [entity confusion](../../../../cross-cutting/accuracy/goals/output-accuracy/failures/entity-confusion.md) |
+| SA-04 Double-booked meetings | [input timezone ambiguity](../../../../cross-cutting/operations/goals/input-output-handling/failures/input-timezone-ambiguity.md) |
 
 ## Planned (not yet written)
-SA-04 (double-booked meetings) and the rest of the catalog are listed in the [roadmap](../../roadmap/index.md).
+The rest of the catalog is listed in the [roadmap](../../roadmap/index.md).
 
 ## Related
 - [Area overview](../../README.md) · [Pattern template](../../_templates/hmi-pattern.md)

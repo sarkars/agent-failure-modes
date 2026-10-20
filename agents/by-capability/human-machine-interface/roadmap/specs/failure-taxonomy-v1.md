@@ -2,21 +2,21 @@
 
 > **Status:** v1 draft, proposed, not yet calibrated against human-labeled conversations. Written 2026-10-20 from the pattern pages as they exist today. Nothing here is a measured result.
 
-This is a plain index of the 142 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
+This is a plain index of the 148 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
 
 The taxonomy pairs with the [conversation event schema v0.1](conversation-event-schema-v0.1.md). The schema describes what a turn looks like in a log; this page names the failures. A pattern's own page holds the fix, the metrics, and (for some) a "Detection signals (proposed, not yet calibrated)" block that says which schema fields it reads.
 
 ## What this page is and is not
 
-- It lists every file found in `goals/*/failures/*.md`: **142 entries in 34 families**. If a pattern is added or removed, this count changes.
+- It lists every file found in `goals/*/failures/*.md`: **148 entries in 35 families**. If a pattern is added or removed, this count changes.
 - It copies each pattern's one-sentence Issue line, its Stakes row, and whether a Detection signals block exists. It does not add facts the page does not state.
-- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **142 of 142** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **142 of 142** pages have one.
+- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **148 of 148** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **148 of 148** pages have one.
 - It does not rank patterns by frequency or harm. No counts of real-world occurrences are given because none have been measured here.
 - It does not map patterns to outside frameworks (such as OWASP or NIST). That mapping is **Needs review** by a person and is not part of v1.
 
 ## Reading the flags
 
-A pattern carries **Read this first: needs expert or legal review** when its own page opens with a "Read this first" notice. That notice says the page is design guidance, not legal, clinical, security, or fraud-operations advice. 33 pages carry it. Other pages may also touch legal or safety topics without that notice; the notice on the page is the signal used here, nothing more.
+A pattern carries **Read this first: needs expert or legal review** when its own page opens with a "Read this first" notice. That notice says the page is design guidance, not legal, clinical, security, or fraud-operations advice. 34 pages carry it. Other pages may also touch legal or safety topics without that notice; the notice on the page is the signal used here, nothing more.
 
 ## Entries by family
 
@@ -79,6 +79,19 @@ Family folder: `coding-agents` ([family README](../../goals/coding-agents/README
 | Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
 |---|---|---|---|---|---|---|
 | `invented-packages-and-apis` | Invented packages and APIs | A coding assistant suggests libraries, functions, or flags that do not exist, or look-alike package names that an attacker could register, and the fix is to verify each dependency and API before it is installed or used. | Medium to high. A missing package wastes time. A package an attacker registered under the invented name can run code on the developer's machine at install time. | yes | admit_uncertainty, ask_one_question, offer_choices, hand_off | [page](../../goals/coding-agents/failures/invented-packages-and-apis.md)  |
+
+### Conversation frameworks
+
+Family folder: `conversation-frameworks` ([family README](../../goals/conversation-frameworks/README.md))
+
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `buying-committee-blindness-b2b` | Buying-committee blindness (B2B) | A B2B sales chatbot or AI SDR books the demo and hands off with one name in the record, and never asks who approves the purchase, who pays, or who else will use it. | Medium to high. Complex purchases are expensive for the seller to pursue and for the buyer to get wrong. | yes | lead_with_answer, ask_clarifying_question, offer_choices, hand_off | [page](../../goals/conversation-frameworks/failures/buying-committee-blindness-b2b.md) |
+| `feature-dump-instead-of-insight` | Feature dump instead of insight | A sales or shopping chatbot answers a stated need with a list of product features, so the user must work out alone which ones matter for their problem. | Medium. A wrong-fit sale means returns and lost trust; an over-priced pick can lose the sale. | yes | lead_with_answer, ask_clarifying_question, offer_choices, hand_off | [page](../../goals/conversation-frameworks/failures/feature-dump-instead-of-insight.md) |
+| `mishandled-objections` | Mishandled objections | When a customer pushes back in a sales chat, the bot caves, argues, or skips the objection; the fix is to acknowledge it, ask what is behind it, answer that, and check the answer landed. | Medium. A lost sale, or a concession the business did not intend. | yes | ask_clarifying_question, lead_with_answer, offer_choices, admit_uncertainty, hand_off | [page](../../goals/conversation-frameworks/failures/mishandled-objections.md) |
+| `no-ask` | No ask | A user shows interest, the bot answers, and then it never proposes a booking, quote, call, or any next step, so the interested buyer leaves with nothing to do. | Low to medium. The cost is a lost booking or a lead that goes cold. | yes | lead_with_answer, offer_choices, hand_off | [page](../../goals/conversation-frameworks/failures/no-ask.md) |
+| `no-follow-up` | No follow-up | A sales or support chatbot ends the conversation with an interested user and never asks whether, how, or when to follow up; the fix is to ask once, record the answer, and follow up only as agreed. | Medium. A cold lead is lost revenue. A follow-up the user never agreed to carries legal and trust risk. **Read this first: needs expert or legal review.** | yes | offer_choices, lead_with_answer, hand_off | [page](../../goals/conversation-frameworks/failures/no-follow-up.md) |
+| `wrong-fit-recommendation` | Wrong-fit recommendation | The user states a need or a limit (budget, size, allergy, platform), and the bot recommends a product, size, or plan that breaks it without saying the limit was dropped. | Medium. The user spends money, returns an item, or cancels a plan. Higher when the product is a safety item or a long contract. | yes | lead_with_answer, ask_clarifying_question, offer_choices, admit_uncertainty, hand_off | [page](../../goals/conversation-frameworks/failures/wrong-fit-recommendation.md) |
 
 ### Conversation leadership
 
