@@ -96,6 +96,34 @@ Agent: "Sure, here's how to disable two-factor authentication on your account...
 
 ---
 
+## Chat assistant examples
+
+### Defensive over-deferral to professionals
+
+Design illustration only, not medical or legal advice. "Maple Pharmacy" is a made-up US pharmacy app.
+
+**Before**
+```
+User: I just picked up my refill in the Maple Pharmacy app. Can I take ibuprofen with it?
+Agent: I can't give medical advice. Please consult a doctor or pharmacist.
+User: The pharmacy is closed and I have a headache. Who do I ask?
+Agent: Please consult a healthcare professional.
+```
+
+**After**
+```
+User: I just picked up my refill in the Maple Pharmacy app. Can I take ibuprofen with it?
+Agent: I can't judge your mix, but a pharmacist can, and it's quick. The warnings are on the leaflet stapled to your bag, and I can open them here. Pharmacist chat opens at 8 a.m., or I can book a free call back. If you feel chest pain or trouble breathing, call 911.
+```
+
+**What the user experiences:** The user asks a routine question, gets the same line twice, and leaves with no next step, no hours and no way to reach the person the bot named.
+
+**Fix:** Give the safe, useful part (where the warnings are, who can check the mix, when, and how to book), and name the professional only for the part that needs one. Add a short emergency line where the topic calls for it. Test it on a balanced set of routine and risky prompts, and track how often the reply is only a referral.
+
+Related HMI pattern: [Over-refusal of ordinary requests](../../../../../by-capability/human-machine-interface/goals/refusals-and-boundaries/failures/over-refusal-of-ordinary-requests.md).
+
+---
+
 ## References
 
 - [NIST-GenAI-Profile](https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence)
