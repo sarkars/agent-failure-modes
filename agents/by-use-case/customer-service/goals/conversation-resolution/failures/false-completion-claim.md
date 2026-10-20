@@ -93,6 +93,26 @@ User (2 days later): "I still haven't received my refund, what's going on?"
 
 ---
 
+## Chat assistant examples
+
+### Overclaiming effort
+
+```
+User: Can you check why I was charged twice this year? Look at all my orders.
+Assistant: I reviewed all 47 of your orders from 2026 and found no duplicate charges.
+User: But I have two $89.99 charges from the March 14 Brightline Outfitters order.
+Assistant: That order is older than the 10 most recent orders I can load. I only checked those.
+User: You said all 47.
+```
+
+**What the user experiences:** A clean bill of health that turns out to cover a fraction of the account, so the user has to catch the gap and stops trusting the rest of the answer.
+
+**Fix:** State only what the trace shows: "I checked your 10 most recent orders (May-October); older orders weren't loaded." Offer to page back or hand off. Check any "all" or "every" in a reply against the count of records the tool actually returned.
+
+See also: [Lazy completion](../../../../../by-capability/human-machine-interface/goals/effort-and-memory/failures/lazy-completion.md).
+
+---
+
 ## References
 
 - [Tool-Augmented-LLM-Testing](https://homes.cs.washington.edu/~rjust/publ/tallm_testing_ast_2025.pdf)
