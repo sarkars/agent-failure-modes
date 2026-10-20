@@ -48,18 +48,18 @@
 | CP-21 | Greeting-only first turn | [embedded-copilots.md](embedded-copilots.md) | New | Business context | No |
 | CP-22 | No likely-next-action suggestions | [embedded-copilots.md](embedded-copilots.md) | Written | Business context | No |
 | CP-23 | Boilerplate steps that don't match the user's setup | [embedded-copilots.md](embedded-copilots.md) | Covered | Business context | Partly |
-| RT-01 | Slow first response | [response-time.md](response-time.md) | Extends | Reliability | Partly |
+| RT-01 | Slow first response | [response-time.md](response-time.md) | Covered | Reliability | Partly |
 | RT-02 | Silent long-running work | [response-time.md](response-time.md) | Written | Business context | No |
 | RT-03 | Unpredictable latency | [response-time.md](response-time.md) | Extends | Reliability | Partly |
-| RT-04 | Pacing mismatch | [response-time.md](response-time.md) | New | Business context | No |
-| RT-05 | Deceptive typing indicators | [response-time.md](response-time.md) | New | Governance | No |
+| RT-04 | Pacing mismatch | [response-time.md](response-time.md) | Written | Business context | No |
+| RT-05 | Deceptive typing indicators | [response-time.md](response-time.md) | Written | Governance | No |
 | RT-06 | Silent failure and timeout | [response-time.md](response-time.md) | Written | Reliability | No |
 | RT-07 | Queue wait with no ETA | [response-time.md](response-time.md) | Extends | Business context | No |
 | RT-08 | Missed async promises | [response-time.md](response-time.md) | Extends | Business context | No |
-| RT-09 | Session timeout and lost context | [response-time.md](response-time.md) | New | Business context | No |
-| RT-10 | Impatient idle nudges | [response-time.md](response-time.md) | New | Business context | No |
-| RT-11 | Urgency-blind pacing | [response-time.md](response-time.md) | New | Business context | No |
-| RT-12 | Streaming that rewrites itself | [response-time.md](response-time.md) | Extends | Reliability | No |
+| RT-09 | Session timeout and lost context | [response-time.md](response-time.md) | Written | Business context | No |
+| RT-10 | Impatient idle nudges | [response-time.md](response-time.md) | Written | Business context | No |
+| RT-11 | Urgency-blind pacing | [response-time.md](response-time.md) | Written | Business context | No |
+| RT-12 | Streaming that rewrites itself | [response-time.md](response-time.md) | Covered | Reliability | No |
 | RT-13 | Guardrail and hop latency | [response-time.md](response-time.md) | Covered | Reliability | No |
 | RT-14 | Fast replies, slow resolution | [response-time.md](response-time.md) | Extends | Business context | No |
 | RS-01 | Answer buried | [response-structure-and-length.md](response-structure-and-length.md) | Written | Model | Partly |
@@ -357,8 +357,8 @@
 | MA-01 | Agents contradict each other | [agent-types.md](agent-types.md) | Extends | Reliability | No |
 | MA-02 | Internal coordination leaks into replies | [agent-types.md](agent-types.md) | Extends | Reliability | No |
 | XA-01 | Dead-end 'I don't understand' replies | [agent-types.md](agent-types.md) | Written | Business context | No |
-| XA-02 | Conversation-quality measurement gaps | [agent-types.md](agent-types.md) | Extends | Reliability | No |
-| XA-03 | No way to report bad behaviour | [agent-types.md](agent-types.md) | New | Business context | No |
+| XA-02 | Conversation-quality measurement gaps | [agent-types.md](agent-types.md) | Covered | Reliability | No |
+| XA-03 | No way to report bad behaviour | [agent-types.md](agent-types.md) | Written | Business context | No |
 | DM-01 | Reference resolution failures | [conversation-design.md](conversation-design.md) | Written | Model | Partly |
 | DM-02 | Tangents never closed | [conversation-design.md](conversation-design.md) | Extends | Reliability | Partly |
 | DM-03 | Corrections not applied | [conversation-design.md](conversation-design.md) | Written | Reliability | Partly |
@@ -440,7 +440,7 @@
 | HU-05 | Humans can't see what the bot said or promised | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Written | Business context | No |
 | HU-06 | Bot keeps replying after a person joins | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Written | Reliability | No |
 | HU-07 | Handoff outside staffed hours with no alternative | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Written | Business context | No |
-| ME-01 | Containment counted as success | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Extends | Business context | No |
+| ME-01 | Containment counted as success | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Covered | Business context | No |
 | ME-02 | Survey bias | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | New | Business context | No |
 | ME-03 | Reviewing only failures | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | New | Business context | No |
 | ME-04 | Tone changes shipped with no regression test | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | New | Reliability | No |
