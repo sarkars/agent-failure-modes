@@ -36,3 +36,14 @@ Still blocked: no Search Console access (no Chrome tools, empty `inbox/`) and no
 | `sitemap-0.xml` | 1,592 `<loc>` entries (1,553 on 2026-10-19) |
 
 **Action:** none. Not checked: titles, meta descriptions, and whether the home page's second H1 is intended.
+
+## 2026-10-21 (UTC), scheduled run 45
+**Source:** Search Console, read in Chrome (property `https://agent-kb-autopublish.vercel.app/`). Last 28 days (Sep 21 to Oct 18, 2026): 15 clicks, 4.98K impressions, average CTR 0.3%, average position 9.1. 131 queries and 567 pages with impressions. Top 10 only read (not the top 25).
+
+**Top queries (all 0 clicks; impressions):** a long "context failure detection strategy ... same query twice" question 75 (and 14 for the same without "?"); "what are the signs that an ai agent is following your style guide correctly vs. just pattern-matching your prompts?" 48; "de-identified patient samples" 18; "automated litigation support" 17; "factor crowding risk" 16; "deterministic tool calling with sql" 16; "semantic mismatch" 15; "what steps do agents take when an ai underwriting platform assigns the wrong business class code?" 10; one quoted query about "vpc seller timing bad-state handoff" 9.
+
+**Top pages (clicks / impressions):** canned-response-context-mismatch 2 / 6; patterns/ 1 / 1,792; conflicting-instructions 1 / 67; background-interference 1 / 52; safety-filter-bypass 1 / 39; memory-fragmentation-allocation-failure 1 / 20; perspective-distortion-misunderstanding 1 / 17; resource-exhaustion 1 / 8; apr-calculation-errors 1 / 8; ssml-markup-failures 1 / 8. No HMI chat pattern is in the top 10.
+
+**Opportunities:** none acted on. The top queries point at older pages outside the HMI folder (agent context, style-guide and underwriting topics), so any title change is a proposal for a person. Indexing report not read this run. Not checked: positions per query.
+
+**Action:** none. No changes made; no merge proposal added.
