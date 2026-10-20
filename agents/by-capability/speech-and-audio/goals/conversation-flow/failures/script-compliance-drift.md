@@ -314,6 +314,31 @@ instructions: |
 
 ---
 
+## Chat assistant examples
+
+### Scripted lines at the wrong moment
+*Illustrative dialogue, not a real transcript.*
+
+Setting: a US bank's text chat assistant, reporting a card charge the customer doesn't recognize.
+
+```
+Before
+User: There's a $480 charge I didn't make. I already froze my card in the app. I'm furious.
+Bot:  For your security, please freeze your card right away under Card Controls.
+User: I literally just told you I did that.
+Bot:  Is there anything else I can help you with today?
+
+After
+User: There's a $480 charge I didn't make. I already froze my card in the app. I'm furious.
+Bot:  Your card is frozen, so no new charges can go through. I can open a dispute for the $480 charge now. Want me to?
+```
+
+**What the user experiences:** an upset customer is told to do something they just said they did, then offered a cheerful sign-off with the problem still open, so the bot seems not to have read their message.
+
+**Fix:** before each scripted line, check the user's last message and the account state (here, the card's frozen status), and skip any line whose action is already done. Hold closing lines and surveys until the issue is resolved. If a line is required content, such as a mandated disclosure, keep the content and change its timing or condense the wording instead of dropping it. See the [stock phrases pattern](../../../../human-machine-interface/goals/persona-and-tone/failures/stock-phrases.md).
+
+---
+
 ## References
 
 - [Controllable Text Generation](https://arxiv.org/abs/2201.05337) - Constraint enforcement
