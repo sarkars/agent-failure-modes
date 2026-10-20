@@ -2,23 +2,34 @@
 
 > **Status:** v1 draft, proposed, not yet calibrated against human-labeled conversations. Written 2026-10-20 from the pattern pages as they exist today. Nothing here is a measured result.
 
-This is a plain index of the 81 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
+This is a plain index of the 89 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
 
 The taxonomy pairs with the [conversation event schema v0.1](conversation-event-schema-v0.1.md). The schema describes what a turn looks like in a log; this page names the failures. A pattern's own page holds the fix, the metrics, and (for some) a "Detection signals (proposed, not yet calibrated)" block that says which schema fields it reads.
 
 ## What this page is and is not
 
-- It lists every file found in `goals/*/failures/*.md`: **81 entries in 23 families**. If a pattern is added or removed, this count changes.
+- It lists every file found in `goals/*/failures/*.md`: **89 entries in 24 families**. If a pattern is added or removed, this count changes.
 - It copies each pattern's one-sentence Issue line, its Stakes row, and whether a Detection signals block exists. It does not add facts the page does not state.
-- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **81 of 81** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **81 of 81** pages have one.
+- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **89 of 89** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **89 of 89** pages have one.
 - It does not rank patterns by frequency or harm. No counts of real-world occurrences are given because none have been measured here.
 - It does not map patterns to outside frameworks (such as OWASP or NIST). That mapping is **Needs review** by a person and is not part of v1.
 
 ## Reading the flags
 
-A pattern carries **Read this first: needs expert or legal review** when its own page opens with a "Read this first" notice. That notice says the page is design guidance, not legal, clinical, security, or fraud-operations advice. Sixteen pages carry it. Other pages may also touch legal or safety topics without that notice; the notice on the page is the signal used here, nothing more.
+A pattern carries **Read this first: needs expert or legal review** when its own page opens with a "Read this first" notice. That notice says the page is design guidance, not legal, clinical, security, or fraud-operations advice. Seventeen pages carry it. Other pages may also touch legal or safety topics without that notice; the notice on the page is the signal used here, nothing more.
 
 ## Entries by family
+
+### Accessibility
+
+Family folder: `accessibility` ([family README](../../goals/accessibility/README.md))
+
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `streaming-text-read-out-token-by-token` | Streaming text read out token by token | A screen reader stutters through fragments as a chat reply streams in, so a blind user hears broken pieces instead of the answer. | Medium. The user can lose the answer; in a medical or money chat the stakes are higher. | yes | lead_with_answer, offer_choices, hand_off | [page](../../goals/accessibility/failures/streaming-text-read-out-token-by-token.md)  |
+| `no-accessible-working-or-done-signal` | No accessible working or done signal | A blind user can't tell whether the assistant is thinking, stuck, or finished, because the "working" and "done" cues exist only on screen. | Low to medium. Users resend, abandon, or give up on the assistant. Higher when the wait is for a payment or a claim. | yes | admit_uncertainty, offer_choices, hand_off | [page](../../goals/accessibility/failures/no-accessible-working-or-done-signal.md)  |
+| `controls-unreachable-by-keyboard` | Controls unreachable by keyboard | Chat buttons, chips, copy, stop, and feedback controls can't be reached with Tab, or lose focus when used, so keyboard-only users can't finish a conversation. | Any. Higher when the chat is the only route to a refill, a claim, or a cancellation. | yes | offer_choices, hand_off | [page](../../goals/accessibility/failures/controls-unreachable-by-keyboard.md)  |
+| `voice-only-flows-with-no-text-alternative` | Voice-only flows with no text alternative | A phone or voice feature that works only by speaking and listening locks out people who are deaf or hard of hearing; the fix is a text or relay path for every voice flow. | Medium to high. It can block billing, appointments, or urgent help. **Read this first** | yes | Offer choices, Ask one clarifying question, Hand off to a person | [page](../../goals/accessibility/failures/voice-only-flows-with-no-text-alternative.md)  |
 
 ### Age adaptation
 
@@ -174,6 +185,10 @@ Family folder: `measurement-and-feedback` ([family README](../../goals/measureme
 | Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
 |---|---|---|---|---|---|---|
 | `no-way-to-report-bad-behaviour` | No way to report bad behaviour | Users can't flag a wrong or harmful chatbot reply, or the thumbs-down they click says "Thanks for your feedback" and then goes to no one. | Any. At low stakes the team keeps repeating a mistake; with money, health, or legal advice a wrong reply keeps hurting people unseen. | yes | offer_choices, hand_off, admit_uncertainty | [page](../../goals/measurement-and-feedback/failures/no-way-to-report-bad-behaviour.md)  |
+| `survey-bias` | Survey bias | Satisfaction surveys reach only the angriest and the happiest, or only users who finished, so a chatbot's score can look healthy while many users fail. | Medium. Teams ship, cut staff, or stop fixing things based on the score. | yes | ask_one_clarifying_question, offer_choices, hand_off | [page](../../goals/measurement-and-feedback/failures/survey-bias.md)  |
+| `reviewing-only-failures` | Reviewing only failures | The team reviews only the chats that drew a complaint, a thumbs-down, or a handoff, so users who quietly give up never get read. | Any. A quiet failure on a billing, health, or legal question can hurt a user and never reach the team. | yes | offer_choices, hand_off | [page](../../goals/measurement-and-feedback/failures/reviewing-only-failures.md)  |
+| `tone-changes-shipped-with-no-regression-test` | Tone changes shipped with no regression test | A prompt edit makes the chatbot curt or cold, and nobody notices because no fixed set of conversations is run before and after each change. | Low to high. Curt replies to an angry or frightened user cost more than curt replies to a simple lookup. | yes | lead_with_the_answer, offer_choices, hand_off | [page](../../goals/measurement-and-feedback/failures/tone-changes-shipped-with-no-regression-test.md)  |
+| `clean-lab-testing` | Clean-lab testing | The chatbot is tested on clean, well-typed messages, so it looks fine on the dashboard and then fails on real messages full of typos, fragments, slang, pasted text, and autocorrect damage. | Any. It rises when a misread drug name, amount, or date is acted on. | yes | ask_clarifying_question, offer_choices, hand_off | [page](../../goals/measurement-and-feedback/failures/clean-lab-testing.md)  |
 
 ### Refusals and boundaries
 
