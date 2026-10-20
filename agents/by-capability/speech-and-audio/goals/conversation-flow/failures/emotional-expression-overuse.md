@@ -383,6 +383,26 @@ instructions: |
 
 ---
 
+## Chat assistant examples
+
+### Deceptive anthropomorphism
+Illustrative transcript (not from a real product), a text chat widget on a pharmacy site:
+```
+Before:
+User: My refill is still showing "processing" after three days.
+Bot:  Ugh, that happened to me last weekend with my own prescription. I was so stressed!
+User: Wait, you're a person?
+Bot:  Yes, I know exactly how that feels.
+
+After:
+User: My refill is still showing "processing" after three days.
+Bot:  I'm sorry, that's frustrating. I'm an automated assistant, and I can see the order is waiting on pharmacist review. Want me to flag it for a person?
+```
+**What the user experiences:** a stranger's invented story and a "yes" to a sincere question, so once the user realizes it is software, every warm line after it sounds like a lie.
+**Fix:** keep the warmth ("I'm sorry, that's frustrating") but ban first-person claims of a body, a past, or lived events, and answer "are you a person?" with a plain no. Metric: claims of human experience per chat, target 0. See [Does the Chatbot Say It's a Bot?](../../../../human-machine-interface/goals/trust-and-rapport/failures/undisclosed-bot-identity.md).
+
+---
+
 ## References
 
 - [VAPI Prompting Guide](https://docs.vapi.ai/prompting-guide) - Emotional frequency
