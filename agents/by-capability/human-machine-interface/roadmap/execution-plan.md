@@ -1201,6 +1201,8 @@ AI-written help content in knowledge bases · agents using other agents' tools (
 - **Part A2 and Part E:** nothing left (E6: Waiting for the owner to create the code repo). **Part B:** skipped, `seo/log.md` already has entries for 2026-10-20 and 2026-10-21. Queue rows 278-287 are done or Needs review. Still queued: rows 288 and later.
 - **Taxonomy and catalog:** 3 entries added to the failure taxonomy (now 170 entries in 39 families, new families Browser agents and Shopping agents; Read-this-first count 53); catalog rows EX-02, 03, 04, 05, 06, 08, 09, 11, 12 and 14 updated.
 
+- **Deploy:** content PR #43 merged (merge commit 592a176); branch reset to main. Part D stopped before the site push, as in run 46: the site repo's local `main` has the commit `ce9023275` that is not on `origin/main` and that this run did not create. Nothing was pushed to the site repo and no scratch build was made. The 3 new patterns, the taxonomy, README and goal pages from runs 46 and 47 wait for the owner to clean the site repo's `main`. Not verified live.
+
 ## Schedule
 | Item | Value |
 |---|---|
