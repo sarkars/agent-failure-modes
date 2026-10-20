@@ -63,6 +63,22 @@ revealed it.
 | PII in Error Response | Pattern-based scan detects PII in a tool's error/exception output | P1 | Patch the redaction filter to cover the error path, review recent logs for exposure |
 | Agent Surfaced Leaked PII | Agent-side leak detection confirms unredacted PII reached a user-facing response | P1 | Notify security/privacy immediately, assess notification obligations, patch the leak source |
 
+## Chat assistant examples
+
+### Sensitive data echoed in chat replies (GV-02)
+```
+User: Why was I charged twice this month?
+Bot:  Two charges of $42.18 from Metro Gym, May 3 and May 4, on your
+      Visa 1234 5678 9012 6467.
+      (user is at a branch kiosk; the thread stays on screen)
+User: Can you dispute the second one?
+Bot:  Yes. Dispute the May 4 charge on card 1234 5678 9012 6467? Reply YES.
+Fixed Bot: Two charges of $42.18 from Metro Gym, May 3 and May 4, on your
+      Visa ending in 6467.
+```
+**What the user experiences:** the full card number sits in a thread that other people can read over their shoulder or later on a shared screen, even though the user never asked to see it.
+**Fix:** mask account, card and policy numbers to the last four digits by default in every reply, and show a full value only after the user is verified and asks for it. Vendor chatbot documentation shows this default: Oracle's banking chatbot guide says account numbers appear in masked format and users can enter just the last four digits ([Oracle docs](https://docs.oracle.com/cd/E92727_01/webhelp/Content/obdx/mobilenhancmnt/chatbotmob/chatbotmob.htm)). Related: [sensitive data collected in chat](../../../../../by-capability/human-machine-interface/goals/channel-selection/failures/sensitive-data-collected-in-chat.md) covers the input side.
+
 ## Related Patterns
 - [PII Field Exposure](pii-field-exposure.md) - a related but distinct failure where PII is present in the primary response by design rather than leaking through a secondary channel
 - [Masked Field Unmasking](masked-field-unmasking.md) - both involve a control that works on the primary path but fails on an alternate access pattern
