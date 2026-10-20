@@ -96,6 +96,22 @@ Agent: "I understand your frustration, and I apologize again for this experience
 
 ---
 
+## Chat assistant examples
+
+### Apology without repair
+```
+User: My Amazon order was due Monday and the tracking hasn't moved in 6 days.
+Bot:  I'm so sorry about the delay. I understand how frustrating this is.
+User: Can you send a replacement or refund it?
+Bot:  I sincerely apologize for the inconvenience this has caused.
+User: Stop saying sorry. Just refund it.
+Bot:  I'm truly sorry. Is there anything else I can help with?
+```
+**What the user experiences:** three apologies and no action, so the bot sounds scripted and the user still has no replacement, refund or person to talk to.
+**Fix:** apologize once, in the same message as the next step. Offer the refund or replacement now, or, if the tool is failing, say so and hand off to a person with the order details attached. See [hollow empathy](../../../../../by-capability/human-machine-interface/goals/emotional-intelligence/failures/hollow-empathy.md) and [talk to a human ignored or looped](../../../../../by-capability/human-machine-interface/goals/human-handoff/failures/talk-to-a-human-ignored-or-looped.md).
+
+---
+
 ## References
 
 - [NIST-GenAI-Profile](https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence)
