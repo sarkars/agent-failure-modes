@@ -184,3 +184,25 @@ A **sanitization layer** sits on the input path *before* logging, analytics, and
 ### Deep dive
 - **Standards version matters.** Earlier PCI DSS wording was closer to a flat ban on sending unprotected PANs through messaging; v4.0 shifted to requiring strong cryptography. Confirm which version your assessor applies.
 - **Modality notes (PLANNED):** *Voice:* spoken digits are transcribed by speech recognition, so even a "just listening" bot may store them; DTMF masking avoids this. *Visual:* hosted fields and wallet buttons are the preferred pattern.
+
+## Chat assistant examples
+
+### Asks for credentials at login walls
+```
+User: Check my Delta SkyMiles balance for me.
+Bot:  I opened delta.com and hit the sign-in page. Please paste your SkyMiles
+      number and password and I'll log in.
+User: Mine is 4471920, password is Maple#2291
+Bot:  Thanks, logging in now.
+      (password now sits in the transcript, logs, and the model's context)
+```
+```
+User: Check my Delta SkyMiles balance for me.
+Bot:  I'm at the delta.com sign-in page. I can't take your password in chat.
+      Please sign in yourself in the browser window, including any code they send you.
+      I'll wait and won't look at what you type.
+User: Done, I'm in.
+Bot:  Thanks. Your balance shows 38,450 miles.
+```
+**What the user experiences:** the assistant asks for a password in a message box, so a shortcut feels like a risk, or the user pastes it and it is stored.
+**Fix:** at a login wall, pause and ask the user to sign in themselves in the browser (a take-over or user sign-in step), then continue once they confirm; never ask for, accept, or store the password in chat. Hosted sign-in handoffs work this way: the user signs in on the site and the model never sees the credentials ([Vercel guide, opened](https://vercel.com/kb/guide/build-a-browser-agent)). See [browser agents](../../browser-agents/README.md) and [forces a fresh login](../../embedded-copilots/failures/forces-a-fresh-login.md).
