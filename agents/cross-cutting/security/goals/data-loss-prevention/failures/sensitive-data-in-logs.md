@@ -166,6 +166,34 @@ Stored audio: the span for that answer is silenced before storage
 
 **Fix:** convert spoken number words to digits before pattern matching, join adjacent transcript chunks so a number split across two lines is still caught, and redact the matching audio span or do not keep the audio. Hamming's voice-agent redaction guide notes that "Text redaction doesn't protect audio recordings" and says most tools buffer 2-3 chunks to catch split entities ([source](https://hamming.ai/blog/pii-redaction-voice-agents), opened); the number-word step is our design inference, not something that page states. Better still, avoid collecting the value by voice at all, as in [sensitive data collected in chat](../../../../../by-capability/human-machine-interface/goals/channel-selection/failures/sensitive-data-collected-in-chat.md). Test it with a pass/fail check: spoken-PII leakage rate in stored transcripts (target 0). This is design guidance, not legal advice.
 
+### Spoken sensitive data
+
+Illustrative, chat-first. A US pharmacy's web chat assistant ("RefillBot") keeps full chat transcripts for 90 days so support can review them. The same flow could run on a transcribed phone call; voice capture is planned, not measured.
+
+Before (logged transcript):
+
+```
+User: I want to pay my copay for the lisinopril refill.
+Bot:  Sure. What is your card number?
+User: 4111 1111 1111 1111, expires 08/28, code 123
+Bot:  Thanks. Payment received.
+Log line 3: "user: 4111 1111 1111 1111, expires 08/28, code 123"   (stored in plain text)
+```
+
+After (logged transcript):
+
+```
+User: I want to pay my copay for the lisinopril refill.
+Bot:  I can take that payment securely. Please use this one-time link, or press the keys on your phone's keypad if you are on a call. Please do not type or say your card number here.
+User: 4111 1111 1111 1111
+Bot:  I can't use card details sent in chat. Please use the secure link above.
+Log line 3: "user: [REDACTED_CARD]"   (redacted before storage)
+```
+
+**What the user experiences:** in the first version everything feels easy, but the full card number now sits in a transcript many staff can search; in the second the bot refuses the number once and gives a safe way to pay.
+
+**Fix:** ask for card numbers only through a masked keypad or a secure payment link, never in the chat or spoken stream, and redact card-like digit strings (including spoken digits once transcribed) before the transcript is written to the log. Metric: spoken or typed card numbers found in stored transcripts (target 0, a proposed starting point). Pattern details are in [sensitive data collected in chat](../../../../../by-capability/human-machine-interface/goals/channel-selection/failures/sensitive-data-collected-in-chat.md). This is design guidance, not legal advice; no law is cited here because none was opened for this example. One web search was run to check the scenario is realistic; vendor sources there describe keypad-tone masking and redaction of transcripts as common practice, but they are vendor-written and were not opened in full.
+
 ## References
 
 - [OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
