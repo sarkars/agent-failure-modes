@@ -104,6 +104,30 @@ From Multi-Speaker Research (2026):
 2. **Diarization Service Degradation** (P1): Condition - diarization accuracy on eval set drops below 75%. Action: Roll back recent diarization model/config changes, escalate to speech team.
 3. **Enrollment Drift** (P3): Condition - enrolled-speaker match rate for a specific user drops below 70% over a week. Action: Prompt user for voice re-enrollment, check for device/mic changes.
 
+## Chat assistant examples
+
+### Speaker attribution errors
+Source: a recorded team call shown as text (this program is chat-first; no audio or voice data is used). Product: a meeting-notes assistant.
+
+```
+[Transcript, Tuesday budget call]
+Dana:  I can send the vendor quote by Friday.
+Marcus: Okay. Who is updating the budget sheet?
+Priya: I'll take the budget sheet.
+
+Notes assistant summary (before):
+- Action: Marcus to send the vendor quote by Friday.
+- Action: Dana to update the budget sheet.
+
+Notes assistant summary (after):
+- Action: Dana to send the vendor quote by Friday. (speaker label: Dana)
+- Action: Priya to update the budget sheet. (speaker label: Priya; low confidence on this line, check the recording at 14:32)
+```
+
+**What the user experiences:** Marcus is chased for a quote he never offered, and the summary reads so cleanly that nobody checks it.
+**Fix:** attach each action item to the speaker label of the exact segment it came from, and mark lines where the speaker label is uncertain (two voices overlapping, an unnamed speaker) instead of guessing a name. Score diarization error rate on your own recordings of calls; do not rely on a vendor's figure. Related: [transcription hallucination](../../../../human-machine-interface/goals/voice/failures/transcription-hallucination.md).
+Checked: one web search; opened [memx.app on meeting-note errors](https://memx.app/blog/why-ai-meeting-notes-get-details-wrong/), which says a wrong speaker label can hand an action item to someone who never agreed to it. The transcript above is an invented illustration, not a logged call.
+
 ## References
 
 - [BeConversive: Voice AI Challenges](https://www.beconversive.com/blog/voice-ai-challenges) - Multi-speaker

@@ -103,6 +103,29 @@ From Noise Research (2026):
 2. **High-Noise Task Failure Spike** (P1): Condition - task completion rate in high-noise segment drops below 50%. Action: Escalate to voice AI on-call, verify noise-suppression service health, consider temporary fallback to DTMF for affected channel.
 3. **Environment Misclassification** (P3): Condition - SNR estimation fails or defaults to "quiet" for > 10% of calls in a known noisy channel (e.g., drive-thru). Action: Investigate audio front-end pipeline, verify SNR estimator deployment.
 
+## Chat assistant examples
+
+### Non-speech heard as speech
+
+A voice call with a pharmacy refill bot, shown as text. The program is chat-first; voice signals are planned and no real call data is used here.
+
+```
+Before (TV on in the background; the caller coughs):
+Caller: (coughs)
+Bot:    "Thank you for watching." I didn't catch a refill number. Is that right?
+Caller: What? No. Refill my lisinopril.
+
+After (cough is gated out, no turn starts):
+Caller: (coughs)
+Bot:    (silent, keeps listening)
+Caller: Refill my lisinopril.
+Bot:    Sure. Is this for the lisinopril 10 mg you picked up last month?
+```
+
+**What the user experiences:** the bot answers a cough as if it were a sentence, so the caller loses a turn and starts to doubt it is listening.
+**Fix:** run voice activity detection before the recognizer and start a turn only on speech. Drop transcripts that match known boilerplate phrases (a "bag of hallucinations" list) and never act on a one-phrase transcript with no speech detected. See [Speech to Text Making Up Words](../../../../human-machine-interface/goals/voice/failures/transcription-hallucination.md).
+**Source note:** I opened the abstract of [Investigation of Whisper ASR Hallucinations Induced by Non-Speech Audio](https://arxiv.org/abs/2501.11378). It reports repeated hallucinated phrases from non-speech sounds and a post-recognition filter list. The "Thank you for watching" wording comes from search summaries only; I did not verify it in a source I read. The transcript is illustrative, not a recorded call.
+
 ## References
 
 - [McDonald's AI Drive-Thru](https://www.cnbc.com/2024/06/17/mcdonalds-to-end-ibm-ai-drive-thru-test.html) - Noise issues
