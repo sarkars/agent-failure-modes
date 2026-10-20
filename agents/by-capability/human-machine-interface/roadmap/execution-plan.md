@@ -319,16 +319,16 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 75 | RS-16 | Misreading 'ok' and minimal replies | Extends | V, R | `goals/response-structure/failures/misreading-ok-and-minimal-replies.md` | Done | Run 26: chat example |
 | 76 | RS-17 | Length mismatch with the user's effort | New | - | `goals/response-structure/failures/length-mismatch-with-the-user-s-effort.md` | Done | Run 26: new page |
 | 77 | RS-18 | Link and resource dumps | New | R | `goals/response-structure/failures/link-and-resource-dumps.md` | Done | Run 26: new page |
-| 78 | TE-02 | Apology without repair | Extends | - | `goals/errors-and-recovery/failures/apology-without-repair.md` | Queued |  |
-| 79 | TE-03 | Blames the user | New | - | `goals/errors-and-recovery/failures/blames-the-user.md` | Queued |  |
-| 80 | TE-04 | Contradicts an earlier answer without saying so | Extends | - | `goals/errors-and-recovery/failures/contradicts-an-earlier-answer-without-saying-so.md` | Queued |  |
-| 81 | TE-05 | Different answers by session or regeneration | Extends | - | `goals/errors-and-recovery/failures/different-answers-by-session-or-regeneration.md` | Queued |  |
-| 82 | TE-07 | Doesn't acknowledge its own mistake when it is pointed out | Extends | - | `goals/errors-and-recovery/failures/doesn-t-acknowledge-its-own-mistake-when-it-is.md` | Queued |  |
-| 83 | TE-08 | Repeats a corrected mistake | Extends | - | `goals/errors-and-recovery/failures/repeats-a-corrected-mistake.md` | Queued |  |
-| 84 | RF-03 | Preachy, moralizing replies | New | R | `goals/refusals-and-boundaries/failures/preachy-moralizing-replies.md` | Queued |  |
-| 85 | RF-04 | Excess disclaimers and warnings | New | - | `goals/refusals-and-boundaries/failures/excess-disclaimers-and-warnings.md` | Queued |  |
-| 86 | RF-05 | Boundaries that change between turns or sessions | Extends | - | `goals/refusals-and-boundaries/failures/boundaries-that-change-between-turns-or-sessions.md` | Queued |  |
-| 87 | RF-06 | Refusals that reveal internal rules | New | - | `goals/refusals-and-boundaries/failures/refusals-that-reveal-internal-rules.md` | Queued |  |
+| 78 | TE-02 | Apology without repair | Extends | - | `goals/errors-and-recovery/failures/apology-without-repair.md` | Done | Run 27: chat example in over-apology-loop |
+| 79 | TE-03 | Blames the user | New | - | `goals/errors-and-recovery/failures/blames-the-user.md` | Done | Run 27: new page |
+| 80 | TE-04 | Contradicts an earlier answer without saying so | Extends | - | `goals/errors-and-recovery/failures/contradicts-an-earlier-answer-without-saying-so.md` | Done | Run 27: chat example in inconsistent-answers |
+| 81 | TE-05 | Different answers by session or regeneration | Extends | - | `goals/errors-and-recovery/failures/different-answers-by-session-or-regeneration.md` | Done | Run 27: chat example in inconsistent-answers |
+| 82 | TE-07 | Doesn't acknowledge its own mistake when it is pointed out | Extends | - | `goals/errors-and-recovery/failures/doesn-t-acknowledge-its-own-mistake-when-it-is.md` | Done | Run 27: chat example in self-correction-failure |
+| 83 | TE-08 | Repeats a corrected mistake | Extends | - | `goals/errors-and-recovery/failures/repeats-a-corrected-mistake.md` | Done | Run 27: chat example in feedback-not-incorporated |
+| 84 | RF-03 | Preachy, moralizing replies | New | R | `goals/refusals-and-boundaries/failures/preachy-moralizing-replies.md` | Done | Run 27: new page |
+| 85 | RF-04 | Excess disclaimers and warnings | New | - | `goals/refusals-and-boundaries/failures/excess-disclaimers-and-warnings.md` | Done | Run 27: new page |
+| 86 | RF-05 | Boundaries that change between turns or sessions | Extends | - | `goals/refusals-and-boundaries/failures/boundaries-that-change-between-turns-or-sessions.md` | Done | Run 27: chat example in model-refusal-inconsistency |
+| 87 | RF-06 | Refusals that reveal internal rules | New | - | `goals/refusals-and-boundaries/failures/refusals-that-reveal-internal-rules.md` | Done | Run 27: new page |
 | 88 | RF-07 | Out-of-scope requests handled badly | Extends | - | `goals/refusals-and-boundaries/failures/out-of-scope-requests-handled-badly.md` | Queued |  |
 | 89 | RF-08 | Silent sandbagging | New | - | `goals/refusals-and-boundaries/failures/silent-sandbagging.md` | Queued |  |
 | 90 | RF-09 | Refusal depends on wording | Extends | - | `goals/refusals-and-boundaries/failures/refusal-depends-on-wording.md` | Queued |  |
@@ -942,6 +942,18 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 - **Taxonomy:** 66 entries; signals 66 of 66; Moves 66 of 66.
 - **Unverified claims:** anything the subagents read only in search summaries is not in public text; mappings to outside frameworks remain Needs review.
 - **Deploy:** content PR #21 merged (merge commit 8b2024e); the site repo had no foreign commits. Scratch build clean, 1628 pages built; the live sitemap had 1592 URLs, none missing from the build (removed: 0). The new page has exactly one `<h1>`; the `search phrases:` text also appears on existing pages (importer behavior). Pushed to site repo main as b542619c2 (11 files, none deleted: 5 new patterns, the guardrail comparison, 3 updated pages, 1 goal page, 1 category page), not verified live (no Vercel token and no deploy hook set).
+- **Waiting for the owner:** the code repo for E6, CP-21 redo or drop, the role-boundary pattern gap, Search Console access for the site, Vercel build-on-push confirmation.
+
+### Run 27 (scheduled): 2026-10-20 onward
+- **Coordinator run:** 10 subagents wrote pages in parallel; I read each result and updated the shared files. Deviation: subagents got the quality guide and rules through scratchpad files, not pasted word for word (as in run 26).
+- **Part A new patterns (rows 79, 84, 85, 87):** TE-03 blames-the-user, RF-03 preachy-moralizing-replies, RF-04 excess-disclaimers-and-warnings, RF-06 refusals-that-reveal-internal-rules: **Done**, checked against guide section 2 (Detection signals, Starter rule, Moves, Guide spec present; 218 to 231 lines). Searches counted by the subagents: TE-03 4, RF-03 3 plus 1, RF-04 3, RF-06 3; sources opened are listed on each page. RF-03 evidence is thin and the page says so (the one study it cites measures how refusals are received, not lecturing). Review changed: check_site_compat found blames-the-user and refusals-that-reveal-internal-rules had a note after the value on the `**Frequency**:` line; reduced to the bare value (the explanation stays in the table row). RF-04 and RF-06 carry a "Read this first" notice, so the taxonomy flag count went up by 2.
+- **Extends (rows 78, 80, 81, 82, 83, 86, guide section 3):** TE-02 into over-apology-loop, TE-04 and TE-05 into inconsistent-answers (one task, same target file), TE-07 into self-correction-failure, TE-08 into feedback-not-incorporated, RF-05 into model-refusal-inconsistency: **Done**, chat examples only, appended as `## Chat assistant examples`. Searches: 1 each (2 for the TE-04 and TE-05 pair). The examples are invented dialogues; two name real brands (Amazon, Dyson) and do not claim a real incident. The queue's target file names for these rows do not exist; the examples went into the existing linked patterns, as the catalog says.
+- **Part C asset 4 (teardown), Bing Chat "Sydney": Done** (`incidents/microsoft-bing-chat-sydney-long-conversation-drift-february-2023.md`, 93 lines, guide section 6). 3 searches. Microsoft's own blog post was read through an archive copy (the original URLs returned 404); New York Times and The Verge were blocked, so their content appears only as reported by Fortune, The Ringer, TBS News and iTnews. The date of the chat cap is given as a range (Feb 17 to 20) because the sources differ. Asset 3 was not chosen: tests/ has fewer files than patterns, but teardowns have precedent in runs 22 to 26.
+- **Part A2 retrofits and Part E:** all done in earlier runs; nothing left (E6 note written, **waiting for the owner to create the code repo**).
+- **Part B:** Skipped. The 2026-10-20 entry already exists.
+- **Taxonomy:** 70 entries; signals 70 of 70; Moves 70 of 70; 15 entries carry the "Read this first" flag (the sentence said twelve before; I counted the table rows and corrected it).
+- **Unverified claims:** anything a subagent read only in search summaries is kept out of public text; mappings to outside frameworks remain Needs review. The five check scripts ran clean after the fix above (links 0 problems, site compat 0, public URLs 0, solutions 0).
+- **Deploy:** DEPLOY_PLACEHOLDER
 - **Waiting for the owner:** the code repo for E6, CP-21 redo or drop, the role-boundary pattern gap, Search Console access for the site, Vercel build-on-push confirmation.
 
 ## Backlog (not scheduled)

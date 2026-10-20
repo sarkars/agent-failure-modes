@@ -16,6 +16,7 @@ Shared metrics the patterns below report against. Targets are starting points to
 | Pattern | One line |
 |---|---|
 | Confident wrong answer with no way to check | A mistake is delivered in a sure tone with no source or sign of doubt |
+| Blames the user | The bot was unclear, then says "You did not provide…" or "As I said" |
 | Generic error messages | "Something went wrong" with no cause, saved state, or next step |
 
 ## Planned (not yet written)

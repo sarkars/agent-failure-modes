@@ -376,22 +376,22 @@
 | DM-15 | False premises accepted | [conversation-design.md](conversation-design.md) | Written | Model | Partly |
 | RF-01 | Over-refusal of ordinary requests | [conversation-design.md](conversation-design.md) | Written | Model | Partly |
 | RF-02 | Refusal with no reason or next step | [conversation-design.md](conversation-design.md) | Written | Business context | Partly |
-| RF-03 | Preachy, moralizing replies | [conversation-design.md](conversation-design.md) | New | Model | Partly |
-| RF-04 | Excess disclaimers and warnings | [conversation-design.md](conversation-design.md) | New | Model | Partly |
-| RF-05 | Boundaries that change between turns or sessions | [conversation-design.md](conversation-design.md) | Extends | Reliability | Partly |
-| RF-06 | Refusals that reveal internal rules | [conversation-design.md](conversation-design.md) | New | Reliability | Partly |
+| RF-03 | Preachy, moralizing replies | [conversation-design.md](conversation-design.md) | Written | Model | Partly |
+| RF-04 | Excess disclaimers and warnings | [conversation-design.md](conversation-design.md) | Written | Model | Partly |
+| RF-05 | Boundaries that change between turns or sessions | [conversation-design.md](conversation-design.md) | Covered | Reliability | Partly |
+| RF-06 | Refusals that reveal internal rules | [conversation-design.md](conversation-design.md) | Written | Reliability | Partly |
 | RF-07 | Out-of-scope requests handled badly | [conversation-design.md](conversation-design.md) | Extends | Business context | No |
 | RF-08 | Silent sandbagging | [conversation-design.md](conversation-design.md) | New | Model | Partly |
 | RF-09 | Refusal depends on wording | [conversation-design.md](conversation-design.md) | Extends | Model | Partly |
 | RF-10 | Accusatory or harsh refusals | [conversation-design.md](conversation-design.md) | New | Model | Partly |
 | TE-01 | Generic error messages | [conversation-design.md](conversation-design.md) | Written | Business context | No |
-| TE-02 | Apology without repair | [conversation-design.md](conversation-design.md) | Extends | Business context | Partly |
-| TE-03 | Blames the user | [conversation-design.md](conversation-design.md) | New | Business context | Partly |
-| TE-04 | Contradicts an earlier answer without saying so | [conversation-design.md](conversation-design.md) | Extends | Reliability | Partly |
-| TE-05 | Different answers by session or regeneration | [conversation-design.md](conversation-design.md) | Extends | Model | Partly |
+| TE-02 | Apology without repair | [conversation-design.md](conversation-design.md) | Covered | Business context | Partly |
+| TE-03 | Blames the user | [conversation-design.md](conversation-design.md) | Written | Business context | Partly |
+| TE-04 | Contradicts an earlier answer without saying so | [conversation-design.md](conversation-design.md) | Covered | Reliability | Partly |
+| TE-05 | Different answers by session or regeneration | [conversation-design.md](conversation-design.md) | Covered | Model | Partly |
 | TE-06 | Confident wrong answer with no way to check | [conversation-design.md](conversation-design.md) | Written | Model | Partly |
-| TE-07 | Doesn't acknowledge its own mistake when it is pointed out | [conversation-design.md](conversation-design.md) | Extends | Model | Partly |
-| TE-08 | Repeats a corrected mistake | [conversation-design.md](conversation-design.md) | Extends | Reliability | Partly |
+| TE-07 | Doesn't acknowledge its own mistake when it is pointed out | [conversation-design.md](conversation-design.md) | Covered | Model | Partly |
+| TE-08 | Repeats a corrected mistake | [conversation-design.md](conversation-design.md) | Covered | Reliability | Partly |
 | PV-01 | Persona drift within a conversation | [interface-and-persona.md](interface-and-persona.md) | Extends | Model | Partly |
 | PV-02 | Persona changes after a model or prompt update | [interface-and-persona.md](interface-and-persona.md) | Extends | Reliability | No |
 | PV-03 | Condescending or patronizing tone | [interface-and-persona.md](interface-and-persona.md) | New | Model | Partly |
