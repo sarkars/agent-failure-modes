@@ -242,19 +242,19 @@
 | EM-24 | Summaries that change meaning | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Covered | Model | Partly |
 | EM-25 | Handoff of incomplete work with no TODO list | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Extends | Reliability | No |
 | EX-01 | Purchase without clear authorisation | [emerging-surfaces.md](emerging-surfaces.md) | Covered | Reliability | No |
-| EX-02 | Wrong item or variant bought | [emerging-surfaces.md](emerging-surfaces.md) | Extends | Reliability | Partly |
-| EX-03 | Merchant content steers the shopping agent | [emerging-surfaces.md](emerging-surfaces.md) | Extends | Reliability | Partly |
-| EX-04 | Spend and category limits not enforced | [emerging-surfaces.md](emerging-surfaces.md) | Extends | Reliability | No |
-| EX-05 | No clear route when an agent buys wrongly | [emerging-surfaces.md](emerging-surfaces.md) | New | Governance | No |
-| EX-06 | Sponsored ranking inside agent recommendations | [emerging-surfaces.md](emerging-surfaces.md) | New | Governance | No |
+| EX-02 | Wrong item or variant bought | [emerging-surfaces.md](emerging-surfaces.md) | Covered | Reliability | Partly |
+| EX-03 | Merchant content steers the shopping agent | [emerging-surfaces.md](emerging-surfaces.md) | Covered | Reliability | Partly |
+| EX-04 | Spend and category limits not enforced | [emerging-surfaces.md](emerging-surfaces.md) | Covered | Reliability | No |
+| EX-05 | No clear route when an agent buys wrongly | [emerging-surfaces.md](emerging-surfaces.md) | Written | Governance | No |
+| EX-06 | Sponsored ranking inside agent recommendations | [emerging-surfaces.md](emerging-surfaces.md) | Written | Governance | No |
 | EX-07 | Hidden instructions hijack a browsing agent | [emerging-surfaces.md](emerging-surfaces.md) | Covered | Reliability | Partly |
-| EX-08 | Agent uses the user's logged-in sessions with full reach | [emerging-surfaces.md](emerging-surfaces.md) | Extends | Reliability | No |
-| EX-09 | Misreading the screen | [emerging-surfaces.md](emerging-surfaces.md) | New | Model | Partly |
+| EX-08 | Agent uses the user's logged-in sessions with full reach | [emerging-surfaces.md](emerging-surfaces.md) | Covered | Reliability | No |
+| EX-09 | Misreading the screen | [emerging-surfaces.md](emerging-surfaces.md) | Written | Model | Partly |
 | EX-10 | Tool descriptions that steer the agent | [emerging-surfaces.md](emerging-surfaces.md) | Covered | Reliability | Partly |
-| EX-11 | Tool-name collisions | [emerging-surfaces.md](emerging-surfaces.md) | Extends | Reliability | No |
-| EX-12 | Unauthenticated tool servers | [emerging-surfaces.md](emerging-surfaces.md) | Extends | Reliability | No |
+| EX-11 | Tool-name collisions | [emerging-surfaces.md](emerging-surfaces.md) | Covered | Reliability | No |
+| EX-12 | Unauthenticated tool servers | [emerging-surfaces.md](emerging-surfaces.md) | Covered | Reliability | No |
 | EX-13 | Backdoored tool packages | [emerging-surfaces.md](emerging-surfaces.md) | Covered | Reliability | No |
-| EX-14 | Consent fatigue from tool sprawl | [emerging-surfaces.md](emerging-surfaces.md) | Extends | Business context | No |
+| EX-14 | Consent fatigue from tool sprawl | [emerging-surfaces.md](emerging-surfaces.md) | Covered | Business context | No |
 | EX-15 | Shadow agents | [emerging-surfaces.md](emerging-surfaces.md) | Covered | Governance | No |
 | EX-16 | Recorders that join without everyone's consent | [emerging-surfaces.md](emerging-surfaces.md) | New | Governance | No |
 | EX-17 | Summaries that misattribute or invent action items | [emerging-surfaces.md](emerging-surfaces.md) | Extends | Model | Partly |

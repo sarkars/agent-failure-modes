@@ -2,21 +2,21 @@
 
 > **Status:** v1 draft, proposed, not yet calibrated against human-labeled conversations. Written 2026-10-20 from the pattern pages as they exist today. Nothing here is a measured result.
 
-This is a plain index of the 167 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
+This is a plain index of the 170 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
 
 The taxonomy pairs with the [conversation event schema v0.1](conversation-event-schema-v0.1.md). The schema describes what a turn looks like in a log; this page names the failures. A pattern's own page holds the fix, the metrics, and (for some) a "Detection signals (proposed, not yet calibrated)" block that says which schema fields it reads.
 
 ## What this page is and is not
 
-- It lists every file found in `goals/*/failures/*.md`: **167 entries in 36 families**. If a pattern is added or removed, this count changes.
+- It lists every file found in `goals/*/failures/*.md`: **170 entries in 39 families**. If a pattern is added or removed, this count changes.
 - It copies each pattern's one-sentence Issue line, its Stakes row, and whether a Detection signals block exists. It does not add facts the page does not state.
-- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **167 of 167** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **167 of 167** pages have one.
+- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **170 of 170** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **170 of 170** pages have one.
 - It does not rank patterns by frequency or harm. No counts of real-world occurrences are given because none have been measured here.
 - It does not map patterns to outside frameworks (such as OWASP or NIST). That mapping is **Needs review** by a person and is not part of v1.
 
 ## Reading the flags
 
-A pattern carries **Read this first: needs expert or legal review** when its own page opens with a "Read this first" notice. That notice says the page is design guidance, not legal, clinical, security, or fraud-operations advice. 51 pages carry it. Other pages may also touch legal or safety topics without that notice; the notice on the page is the signal used here, nothing more.
+A pattern carries **Read this first: needs expert or legal review** when its own page opens with a "Read this first" notice. That notice says the page is design guidance, not legal, clinical, security, or fraud-operations advice. 53 pages carry it. Other pages may also touch legal or safety topics without that notice; the notice on the page is the signal used here, nothing more.
 
 ## Entries by family
 
@@ -42,6 +42,14 @@ Family folder: `age-adaptation` ([family README](../../goals/age-adaptation/READ
 | Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
 |---|---|---|---|---|---|---|
 | `child-user-treated-as-adult` | Child user treated as adult | What a chatbot should do when a user may be under 13 or a teen, covering COPPA, age signals, data collection, persuasion limits, and age-band design. | High **Read this first: needs expert or legal review.** | yes | lead_with_answer, offer_choices, hand_off | [page](../../goals/age-adaptation/failures/child-user-treated-as-adult.md)  |
+
+### Browser agents
+
+Family folder: `browser-agents` ([family README](../../goals/browser-agents/README.md))
+
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `misreading-the-screen` | Misreading the screen | A browser agent clicks the wrong element or loops, then tells the user in chat that it worked; the fix is to check the page after every changing action and stop and say so after two failed checks. | Medium to high. A wrong click can add the wrong item, submit the wrong form, or change a setting. | yes | admit_uncertainty, offer_choices, ask_clarifying_question, hand_off | [page](../../goals/browser-agents/failures/misreading-the-screen.md) |
 
 ### Channel selection
 
@@ -389,6 +397,15 @@ Family folder: `sales-agents` ([family README](../../goals/sales-agents/README.m
 | Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
 |---|---|---|---|---|---|---|
 | `unsubscribe-requests-not-honoured` | Unsubscribe requests not honoured | An AI sales or outreach agent ignores or only partly applies "stop", "unsubscribe" or "remove me", so emails, texts, or chat follow-ups keep arriving, at scale, until opt-outs are honored immediately and everywhere. | High. **Read this first: needs expert or legal review.** | yes | lead_with_answer, ask_clarifying_question, hand_off | [page](../../goals/sales-agents/failures/unsubscribe-requests-not-honoured.md) |
+
+### Shopping agents
+
+Family folder: `shopping-agents` ([family README](../../goals/shopping-agents/README.md))
+
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `no-clear-route-when-an-agent-buys-wrongly` | No clear route when an agent buys wrongly | An assistant buys the wrong item and the user has no receipt, no cap, and no dispute path; the fix is a cap before the first purchase, a buy sheet, a receipt and a named route to return or dispute. | High. Real money is spent and the user may have no way back. **Read this first: needs legal review.** | yes | ask_clarifying_question, offer_choices, admit_uncertainty, hand_off | [page](../../goals/shopping-agents/failures/no-clear-route-when-an-agent-buys-wrongly.md) |
+| `sponsored-ranking-inside-agent-recommendations` | Sponsored ranking inside agent recommendations | A shopping agent lets paid placement decide what it shows or picks and never says so; the fix is to rank by the user's criteria only and show any paid item in a labeled separate block. | Medium to high. Money is spent and disclosure rules may apply. **Read this first: needs legal review.** | yes | lead_with_answer, offer_choices, admit_uncertainty, hand_off | [page](../../goals/shopping-agents/failures/sponsored-ranking-inside-agent-recommendations.md) |
 
 ### Stakes calibration
 
