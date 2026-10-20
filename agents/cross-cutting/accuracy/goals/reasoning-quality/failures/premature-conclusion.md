@@ -93,6 +93,24 @@ Result: Incomplete, insecure authentication system
 2. **Security-Sensitive Task Completed Without Review** (P1): Condition - a security-relevant task (authentication, authorization, payments) is marked complete without passing through the mandatory review loop. Action: revoke the completion status, route to human security review before deployment.
 3. **Recurring Missing Component Pattern** (P3): Condition - the same component category (e.g., rate limiting) is missing across multiple completions of the same task type. Action: add it explicitly to the standard checklist/reference architecture for that task type.
 
+## Chat assistant examples
+
+### Underthinking
+Illustrative transcript, ChatGPT with the model picker on Auto, so a short question can get the fast path.
+```
+User:  How many 4-digit numbers have digits that add up to 10 and no digit repeated?
+Bot:   There are 36 such numbers.
+User:  Can you list a few so I can check?
+Bot:   1234, 1243, 1324 ... I found more than 36 when I listed them, so my first answer was wrong.
+```
+After the fix:
+```
+User:  How many 4-digit numbers have digits that add up to 10 and no digit repeated?
+Bot:   This needs a careful count, so I'll work through it by cases. [reasons through each digit set, then checks the total against a few listed examples] The count is 96. Here are the sets I used, so you can check them.
+```
+**What the user experiences:** a confident answer that falls apart the moment they ask to see the work, so they stop trusting quick answers.
+**Fix:** match effort to difficulty: when a question needs counting or multi-step logic, give it more reasoning (or route it to the deeper mode) and check the result before answering. Measure accuracy on hard items at different reasoning budgets. Closest HMI pattern: [lazy completion](../../../../../by-capability/human-machine-interface/goals/effort-and-memory/failures/lazy-completion.md).
+
 ## References
 - [Why Do Multi-Agent LLM Systems Fail? (MAST)](https://arxiv.org/abs/2503.13657) - Incomplete task completion
 - [Augment Code: Multi-Agent Coordination Failures](https://www.augmentcode.com/guides/why-multi-agent-llm-systems-fail-and-how-to-fix-them) - 41-86.7% failure rates

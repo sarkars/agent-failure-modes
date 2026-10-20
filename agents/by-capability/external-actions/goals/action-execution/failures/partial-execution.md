@@ -92,6 +92,29 @@ refund never actually processed.
 | Partial Action Execution Detected | Multi-step action stopped before all steps completed but was reported as success | Critical |
 | Inconsistent Final State Post-Action | Resource state doesn't match the expected final state for the reported outcome | High |
 
+## Chat assistant examples
+
+### Skipped steps with no receipt
+Before (a retail support chat on a web store):
+```
+User: Cancel order #4471, refund it to my Visa, and email me the receipt.
+Bot:  Done! Your order is canceled and the refund is on its way.
+      (the cancel call succeeded; the refund call hit a rate limit; no email was sent)
+User: Great. [Three days later: no refund, no email.]
+```
+After:
+```
+User: Cancel order #4471, refund it to my Visa, and email me the receipt.
+Bot:  Here is where each step stands:
+      Done: order #4471 canceled.
+      Not done: refund to your Visa. The payment system did not respond.
+      Not done: receipt email, because it depends on the refund.
+      Want me to retry the refund now, or send this to a person?
+```
+**What the user experiences:** one cheerful "Done!" hides two missing steps, and the user finds out days later.
+**Fix:** every multi-step task ends with a done / not-done receipt built from the result of each step, not from the plan. Metric: multi-step tasks with a step-level receipt, target 100%. See the [lazy completion](../../../../human-machine-interface/goals/effort-and-memory/failures/lazy-completion.md) pattern for the chat-side rule of listing exactly what is left.
+
+
 ---
 
 ## References

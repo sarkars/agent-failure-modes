@@ -19,6 +19,8 @@ Shared metrics the patterns below report against. Targets are starting points to
 | Excess disclaimers and warnings | Every answer is wrapped in caveats until the one that matters is lost |
 | Preachy, moralizing replies | The assistant lectures about ethics or risk the user did not ask about |
 | Refusals that reveal internal rules | A refusal quotes the system prompt or policy text, showing the user how to word around it |
+| Silent sandbagging | The assistant skips part of the request, gives a weaker answer, and presents it as complete |
+| Accusatory or harsh refusals | A refusal implies the user is up to something when the request was ordinary |
 | Refusal with no reason or next step | "I can't help with that", and nothing else |
 
 ## Planned (not yet written)

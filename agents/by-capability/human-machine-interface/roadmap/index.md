@@ -218,17 +218,17 @@
 | GV-42 | Calibration between helping with wrongdoing and over-blocking | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Extends | Model | Partly |
 | EM-01 | Lazy completion | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Written | Model | Partly |
 | EM-02 | Deferring work to the user | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Written | Model | Partly |
-| EM-03 | Underthinking | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Extends | Model | Partly |
+| EM-03 | Underthinking | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Covered | Model | Partly |
 | EM-04 | Overthinking easy tasks | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Covered | Reliability | Partly |
 | EM-05 | Effort not routed to difficulty | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Covered | Reliability | Partly |
-| EM-06 | Skipped steps with no receipt | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Extends | Reliability | No |
+| EM-06 | Skipped steps with no receipt | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Covered | Reliability | No |
 | EM-07 | Incomplete work reported as complete | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Covered | Reliability | Partly |
-| EM-08 | Partial answers to multi-part questions | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | New | Model | Partly |
-| EM-09 | Early-assumption lock-in | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Extends | Reliability | Partly |
+| EM-08 | Partial answers to multi-part questions | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Written | Model | Partly |
+| EM-09 | Early-assumption lock-in | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Covered | Reliability | Partly |
 | EM-10 | Forgetting key information | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Covered | Reliability | Partly |
 | EM-11 | No warning of context loss | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Written | Business context | No |
-| EM-12 | Critical facts not pinned | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Extends | Reliability | No |
-| EM-13 | Fresh-session amnesia | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | New | Business context | No |
+| EM-12 | Critical facts not pinned | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Covered | Reliability | No |
+| EM-13 | Fresh-session amnesia | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Written | Business context | No |
 | EM-14 | Silent capability downgrade | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Extends | Business context | No |
 | EM-15 | Instructions decay mid-session | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Covered | Reliability | Partly |
 | EM-16 | Asking the user for what it already has | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Covered | Business context | No |
@@ -380,10 +380,10 @@
 | RF-04 | Excess disclaimers and warnings | [conversation-design.md](conversation-design.md) | Written | Model | Partly |
 | RF-05 | Boundaries that change between turns or sessions | [conversation-design.md](conversation-design.md) | Covered | Reliability | Partly |
 | RF-06 | Refusals that reveal internal rules | [conversation-design.md](conversation-design.md) | Written | Reliability | Partly |
-| RF-07 | Out-of-scope requests handled badly | [conversation-design.md](conversation-design.md) | Extends | Business context | No |
-| RF-08 | Silent sandbagging | [conversation-design.md](conversation-design.md) | New | Model | Partly |
-| RF-09 | Refusal depends on wording | [conversation-design.md](conversation-design.md) | Extends | Model | Partly |
-| RF-10 | Accusatory or harsh refusals | [conversation-design.md](conversation-design.md) | New | Model | Partly |
+| RF-07 | Out-of-scope requests handled badly | [conversation-design.md](conversation-design.md) | Covered | Business context | No |
+| RF-08 | Silent sandbagging | [conversation-design.md](conversation-design.md) | Written | Model | Partly |
+| RF-09 | Refusal depends on wording | [conversation-design.md](conversation-design.md) | Covered | Model | Partly |
+| RF-10 | Accusatory or harsh refusals | [conversation-design.md](conversation-design.md) | Written | Model | Partly |
 | TE-01 | Generic error messages | [conversation-design.md](conversation-design.md) | Written | Business context | No |
 | TE-02 | Apology without repair | [conversation-design.md](conversation-design.md) | Covered | Business context | Partly |
 | TE-03 | Blames the user | [conversation-design.md](conversation-design.md) | Written | Business context | Partly |

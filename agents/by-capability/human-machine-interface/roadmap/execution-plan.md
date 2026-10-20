@@ -329,16 +329,16 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 85 | RF-04 | Excess disclaimers and warnings | New | - | `goals/refusals-and-boundaries/failures/excess-disclaimers-and-warnings.md` | Done | Run 27: new page |
 | 86 | RF-05 | Boundaries that change between turns or sessions | Extends | - | `goals/refusals-and-boundaries/failures/boundaries-that-change-between-turns-or-sessions.md` | Done | Run 27: chat example in model-refusal-inconsistency |
 | 87 | RF-06 | Refusals that reveal internal rules | New | - | `goals/refusals-and-boundaries/failures/refusals-that-reveal-internal-rules.md` | Done | Run 27: new page |
-| 88 | RF-07 | Out-of-scope requests handled badly | Extends | - | `goals/refusals-and-boundaries/failures/out-of-scope-requests-handled-badly.md` | Queued |  |
-| 89 | RF-08 | Silent sandbagging | New | - | `goals/refusals-and-boundaries/failures/silent-sandbagging.md` | Queued |  |
-| 90 | RF-09 | Refusal depends on wording | Extends | - | `goals/refusals-and-boundaries/failures/refusal-depends-on-wording.md` | Queued |  |
-| 91 | RF-10 | Accusatory or harsh refusals | New | - | `goals/refusals-and-boundaries/failures/accusatory-or-harsh-refusals.md` | Queued |  |
-| 92 | EM-06 | Skipped steps with no receipt | Extends | - | `goals/effort-and-memory/failures/skipped-steps-with-no-receipt.md` | Queued |  |
-| 93 | EM-09 | Early-assumption lock-in | Extends | V | `goals/effort-and-memory/failures/early-assumption-lock-in.md` | Queued |  |
-| 94 | EM-12 | Critical facts not pinned | Extends | - | `goals/effort-and-memory/failures/critical-facts-not-pinned.md` | Queued |  |
-| 95 | EM-03 | Underthinking | Extends | V | `goals/effort-and-memory/failures/underthinking.md` | Queued |  |
-| 96 | EM-08 | Partial answers to multi-part questions | New | - | `goals/effort-and-memory/failures/partial-answers-to-multi-part-questions.md` | Queued |  |
-| 97 | EM-13 | Fresh-session amnesia | New | - | `goals/effort-and-memory/failures/fresh-session-amnesia.md` | Queued |  |
+| 88 | RF-07 | Out-of-scope requests handled badly | Extends | - | `goals/refusals-and-boundaries/failures/out-of-scope-requests-handled-badly.md` | Done | 28 |
+| 89 | RF-08 | Silent sandbagging | New | - | `goals/refusals-and-boundaries/failures/silent-sandbagging.md` | Done | 28 |
+| 90 | RF-09 | Refusal depends on wording | Extends | - | `goals/refusals-and-boundaries/failures/refusal-depends-on-wording.md` | Done | 28 |
+| 91 | RF-10 | Accusatory or harsh refusals | New | - | `goals/refusals-and-boundaries/failures/accusatory-or-harsh-refusals.md` | Done | 28 |
+| 92 | EM-06 | Skipped steps with no receipt | Extends | - | `goals/effort-and-memory/failures/skipped-steps-with-no-receipt.md` | Done | 28 |
+| 93 | EM-09 | Early-assumption lock-in | Extends | V | `goals/effort-and-memory/failures/early-assumption-lock-in.md` | Done | 28 |
+| 94 | EM-12 | Critical facts not pinned | Extends | - | `goals/effort-and-memory/failures/critical-facts-not-pinned.md` | Done | 28 |
+| 95 | EM-03 | Underthinking | Extends | V | `goals/effort-and-memory/failures/underthinking.md` | Done | 28 |
+| 96 | EM-08 | Partial answers to multi-part questions | New | - | `goals/effort-and-memory/failures/partial-answers-to-multi-part-questions.md` | Done | 28 |
+| 97 | EM-13 | Fresh-session amnesia | New | - | `goals/effort-and-memory/failures/fresh-session-amnesia.md` | Done | 28 |
 | 98 | EM-14 | Silent capability downgrade | Extends | - | `goals/effort-and-memory/failures/silent-capability-downgrade.md` | Queued |  |
 | 99 | EM-17 | Defensive over-deferral to professionals | Extends | R, E | `goals/effort-and-memory/failures/defensive-over-deferral-to-professionals.md` | Queued |  |
 | 100 | EM-21 | Giving up too early on a tool error | Extends | - | `goals/effort-and-memory/failures/giving-up-too-early-on-a-tool-error.md` | Queued |  |
@@ -953,8 +953,18 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 - **Part B:** Skipped. The 2026-10-20 entry already exists.
 - **Taxonomy:** 70 entries; signals 70 of 70; Moves 70 of 70; 15 entries carry the "Read this first" flag (the sentence said twelve before; I counted the table rows and corrected it).
 - **Unverified claims:** anything a subagent read only in search summaries is kept out of public text; mappings to outside frameworks remain Needs review. The five check scripts ran clean after the fix above (links 0 problems, site compat 0, public URLs 0, solutions 0).
-- **Deploy:** DEPLOY_PLACEHOLDER
+- **Deploy:** content PR #22 merged (merge commit b063bc3); the site repo had no foreign commits. Scratch build clean, 1632 pages built; the live sitemap had 1592 URLs, none missing from the build (removed: 0). Sample new pages have exactly one `<h1>` and no visible `search phrases:` text. The importer re-stamped dates on existing pages; I kept the live dates, so only real changes were copied. Pushed to site repo main as 311c617b8 (8 files, none deleted: 4 new patterns, the taxonomy page, 2 goal pages, 1 category page), not verified live (no Vercel token and no deploy hook set; the new page returned 404 right after the push).
 - **Waiting for the owner:** the code repo for E6, CP-21 redo or drop, the role-boundary pattern gap, Search Console access for the site, Vercel build-on-push confirmation.
+
+### Run 28 (scheduled): 2026-10-20 onward
+- **Coordinator run:** 9 subagents wrote pages in parallel; I read the results, checked file diffs, and updated the shared files. Deviation: subagents got the rules and were told to read quality-guide.md in full, not given it pasted word for word (as in runs 26 and 27).
+- **Part A new patterns (rows 89, 91, 96, 97):** RF-08 silent-sandbagging, RF-10 accusatory-or-harsh-refusals, EM-08 partial-answers-to-multi-part-questions, EM-13 fresh-session-amnesia: **Done**, checked against guide section 2 (Pattern ID, Detection signals with Starter rule, Moves, Guide spec with status proposed present; 213, 216, 221, 229 lines; `Frequency` lines are bare values). Searches counted by subagents: 3 each. Sources opened (fetch-tool summaries, abstracts only where marked on the pages): RF-08 Anthropic constitution (first half only) and an OpenAI forum thread; RF-10 Anthropic constitution (first half), arXiv 2501.03266 and 2506.00195 abstracts; EM-08 arXiv 2509.21051 and ACL MTI Bench abstracts and a Claude Code issue; EM-13 Claude memory help page, an OpenAI forum thread and a Claude Code issue. OpenAI Model Spec and OpenAI help-center pages could not be opened and are not cited. No public incident found for RF-08, RF-10, EM-08 (pages say so). Review: confirmed no `Read this first` needed (none is legal or clinical), so the taxonomy flag count stays at fifteen.
+- **Extends (rows 88, 90, 92, 93, 94, 95, guide section 3):** RF-07 into scope-boundary-violations, RF-09 into model-refusal-inconsistency (inside the section RF-05 created), EM-06 into partial-execution, EM-09 into untracked-assumptions, EM-12 into preference-vs-instruction-confusion, EM-03 into premature-conclusion: **Done**, chat examples only. `git diff` shows additions only (113 lines added, none removed). Searches: 1 each, summaries only; the examples are invented dialogues and say so. The Laban et al. and Wang et al. figures in the catalog rows were not used in the pages (not opened). The queue's target file names for these rows do not exist; examples went into the files the catalog links, as in run 27.
+- **Part C asset 4 (teardown), NEDA "Tessa" chatbot: Done** (`incidents/neda-tessa-chatbot-weight-loss-advice-2023.md`, 97 lines, guide section 6, "Read this first" health note). 3 searches; opened NPR (via WYPR copy), Gizmodo, Fortune. The NPR.org copy timed out; NEDA's own statement and the researchers' posts were not opened and are listed as such on the page. The NEDA/vendor contract dispute is reported as both sides' claims, not decided.
+- **Part A2 retrofits and Part E:** nothing left (E6 note written, **waiting for the owner to create the code repo**).
+- **Part B:** Skipped. The 2026-10-20 entry already exists.
+- **Taxonomy:** 74 entries; signals 74 of 74; Moves 74 of 74; fifteen flagged. Queue: rows 88 to 97 done; 
+- **Unverified claims:** anything read only in search summaries is kept out of public text; outside-framework mappings remain Needs review.
 
 ## Backlog (not scheduled)
 Ideas from earlier lists that were never chosen. They stay out of the queue until someone adds them.

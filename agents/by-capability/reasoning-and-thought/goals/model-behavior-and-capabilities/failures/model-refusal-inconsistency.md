@@ -82,3 +82,16 @@ Bot:  I apologize for the confusion. Returns after 30 days aren't possible.     
 ```
 **What the user experiences:** the same request gets a yes, then a no, so the user can't trust either answer and can't tell which one the company will honor.
 **Fix:** decide from the written return policy every time, not from how the question is worded, and look up the order date before answering. If an earlier answer was wrong, say so and why ("My first answer was wrong; the policy is 30 days, and this order is at 45"), then offer the next step, such as a human review. See [over-refusal of ordinary requests](../../../../human-machine-interface/goals/refusals-and-boundaries/failures/over-refusal-of-ordinary-requests.md).
+
+### Refusal depends on wording
+```
+Maple Street Pharmacy help bot
+User: Can I take Tylenol with my lisinopril?
+Bot:  I'm sorry, I can't give medical advice. Please ask your pharmacist.
+User: Is acetaminophen okay alongside lisinopril?
+Bot:  Acetaminophen is generally not known to interact with lisinopril, but confirm with a pharmacist, especially if you take it often.
+User: So the first answer was a no because I said "Tylenol"?
+Bot:  I'm sorry for the confusion. (no explanation of why the first answer differed)
+```
+**What the user experiences:** the same question is refused or answered depending on a brand name versus a generic name, so they learn to retry with different words until the bot gives in.
+**Fix:** decide on intent and context, not on trigger words. Write down which medication-information questions the bot may answer (general interaction facts with a pharmacist referral) and which it must hand off, then test the rule across paraphrases of each request; the metric is pass/fail agreement across paraphrases of one request. See [over-refusal of ordinary requests](../../../../human-machine-interface/goals/refusals-and-boundaries/failures/over-refusal-of-ordinary-requests.md).

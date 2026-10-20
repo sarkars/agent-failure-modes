@@ -19,6 +19,8 @@ Shared metrics the patterns below report against. Targets are starting points to
 | Deferring work to the user | The assistant has the tool or data and says "you can check…" instead of doing it |
 | Lazy completion | The assistant does a sample or part of the job and leaves the rest, without saying what is left |
 | No warning of context loss | Early messages or saved memories are dropped and the user is not told |
+| Partial answers to multi-part questions | The assistant answers some of several questions and writes the reply as if it were complete |
+| Fresh-session amnesia | A new session starts with nothing from the last one and no handover |
 
 ## Planned (not yet written)
 Partial work, skipped steps with no receipt, and the rest of the family are listed in the [roadmap](../../roadmap/effort-completeness-and-memory.md).
