@@ -109,6 +109,27 @@ From Turn Detection Research (2026):
 2. **List-Handling Regression** (P2): Condition - error rate for list/compound utterances exceeds 35%. Action: Review endpointing model training data coverage for enumerations, adjust per-intent timeout for list-eliciting prompts.
 3. **User Continuation Surge** (P2): Condition - rate of users resuming speech immediately after an agent response exceeds 20%. Action: Audit affected intents, retune context-aware timeouts for those flows.
 
+## Chat assistant examples
+
+### Voice-activity-detection misfires
+
+This is a voice call shown as text. The program is chat-first and voice signals are planned, so no voice data is shown.
+
+```
+Pharmacy refill line, caller on a porch with a barking dog.
+Bot:  Say your prescription number.
+(dog barks)
+Bot:  Sorry, I didn't catch a number.       (bark accepted as a turn)
+User: (quietly) Four, seven, two, one, nine.
+Bot:  I'm still waiting for your answer.    (soft speech rejected)
+-- after the fix --
+User: (quietly) Four, seven, two, one, nine.
+Bot:  Got it: 47219. Is that right?
+```
+
+**What the user experiences:** the bot answers the dog and ignores the quiet caller, so the caller has to shout and start again.
+**Fix:** treat a sound as a turn only if it lasts long enough and the recognizer returns words, and set the speech threshold against the measured background level. Test with noisy and quiet clips and report false-accept and false-reject rates by environment and speaker. A Hamming AI [VAD glossary](https://hamming.ai/glossary/voice-activity-detection-vad) (opened) names the same two errors and recommends adaptive thresholds and noisy test recordings; the transcript itself is illustrative. See [transcription hallucination](../../../../human-machine-interface/goals/voice/failures/transcription-hallucination.md).
+
 ## References
 
 - [BeConversive: Voice AI Challenges](https://www.beconversive.com/blog/voice-ai-challenges) - Turn detection

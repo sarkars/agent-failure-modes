@@ -103,6 +103,34 @@ From Name Recognition Research (2026):
 2. **Ethnic Name Discrimination** (P1): Condition - Any ethnic name group has >20% error rate or error rate 3x+ higher than baseline ethnic group. Action: Immediate escalation to legal/compliance, pause deployment, initiate retraining on balanced ethnic data, prepare customer communication.
 3. **Fuzzy Matching Ineffective** (P2): Condition - >10% of failed exact-match lookups still not found with fuzzy phonetic matching, indicating phonetic model issues. Action: Audit fuzzy matching algorithm, review phonetic representations, consider retraining phonetic model, evaluate adding more name variants.
 
+## Chat assistant examples
+
+Both examples are a voice call shown as text. This program is chat-first and voice signals are planned, so no voice data or statistics are shown.
+
+### Names with no repair path
+```
+Caller: My last name is Nguyen.
+Bot:    Thanks, Mr. Win. I found no account under "Win".
+Caller: No, Nguyen. N-G-U-Y-E-N.
+Bot:    Thanks, Mr. Win. I found no account under "Win".
+Caller: It's Nguyen!
+Bot:    Sorry, I didn't catch that. What is your last name?
+```
+**What the user experiences:** the bot says the wrong name back, hears the spelling, and still says the same wrong name, so the caller cannot fix it.
+**Fix:** read the name back and ask "Is that right?" before any lookup. After a "no," switch to letter-by-letter capture and read the letters back with a fixed word list ("N as in November, G as in Golf, U as in Uniform"); a second try must differ from the first. If the account is still not found after two tries, search the directory by phone number or hand off to a person. See the [voice repair failure pattern](../../../../human-machine-interface/goals/voice/failures/repair-failure.md).
+
+### Proper nouns beyond names
+```
+Caller: I'm picking up a prescription at the Walgreens on Wisconsin Avenue.
+Bot:    Got it. Your pickup is at Wal-Mart on West Concord Avenue. Anything else?
+Caller: That's the wrong store.
+Bot:    Which store would you like?
+Caller: Walgreens, on Wisconsin.
+Bot:    Got it. Your pickup is at Wal-Mart on West Concord Avenue.
+```
+**What the user experiences:** the bot swaps in a store and street it knows better, then repeats the same swap after the correction.
+**Fix:** for critical slots (store, street, city, employer, drug name), check the heard value against the real list of stores and streets, and when the match is weak, ask "Did you say Walgreens on Wisconsin Avenue?" before saving. For a drug name, the bot spells it back and asks a person to check it; it gives no medical advice. See the [transcription hallucination pattern](../../../../human-machine-interface/goals/voice/failures/transcription-hallucination.md).
+
 ---
 
 ## References

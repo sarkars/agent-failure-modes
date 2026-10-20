@@ -97,6 +97,22 @@ From Voice Commerce Research (2026):
 2. **Digit Confusion Spike** (P2): Condition - Error rate for specific digit-pair (15/50, 13/30, etc.) increases 3+ points from baseline in 1-hour window. Action: Investigate ASR changes, check for acoustic degradation, consider reverting recent updates, enable confirmations for high-error pair.
 3. **Number Validation Bypass** (P2): Condition - >2% of transcribed numbers fail format validation, indicating format grammar not working or confused transcription. Action: Check format grammar configuration, audit recent ASR changes, review sample errors, consider requiring all number confirmations.
 
+## Chat assistant examples
+
+### Spelled-out strings
+This is a voice call shown as text. The product is a bank's phone assistant; the user is updating the email on file.
+```
+Bot:  What email address should I use?
+User: j-d-b-o-y-l-e-4-2 at gmail dot com
+Bot:  Got it. I saved jtpoyle42@gmail.com.
+User: No, it's D as in David, B as in boy.
+Bot:  Sorry. I saved jdpoyle42@gmail.com.
+User: There's no P. Boyle, B-O-Y-L-E.
+Bot:  Sorry about that. Please spell it again.
+```
+**What the user experiences:** three tries to fix one address, and no sign the bot ever checked its work, so they stop trusting it with an account email.
+**Fix:** read critical strings back slowly with a code word for each confusable letter ("J, D as in David, B as in boy, O, Y, L, E, 4, 2, at gmail dot com. Is that right?") and save only after a yes. Telephone audio drops high frequencies, so B, P, D and T sound alike, and a NATO-style code word is the usual remedy ([7ESL: spell on the phone](https://7esl.com/spell-on-the-phone/)). When the user corrects one letter, change only that letter. See the [voice repair failure pattern](../../../../human-machine-interface/goals/voice/failures/repair-failure.md).
+
 ---
 
 ## References

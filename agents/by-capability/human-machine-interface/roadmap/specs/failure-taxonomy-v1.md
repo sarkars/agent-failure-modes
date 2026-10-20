@@ -2,21 +2,21 @@
 
 > **Status:** v1 draft, proposed, not yet calibrated against human-labeled conversations. Written 2026-10-20 from the pattern pages as they exist today. Nothing here is a measured result.
 
-This is a plain index of the 107 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
+This is a plain index of the 110 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
 
 The taxonomy pairs with the [conversation event schema v0.1](conversation-event-schema-v0.1.md). The schema describes what a turn looks like in a log; this page names the failures. A pattern's own page holds the fix, the metrics, and (for some) a "Detection signals (proposed, not yet calibrated)" block that says which schema fields it reads.
 
 ## What this page is and is not
 
-- It lists every file found in `goals/*/failures/*.md`: **107 entries in 29 families**. If a pattern is added or removed, this count changes.
+- It lists every file found in `goals/*/failures/*.md`: **110 entries in 29 families**. If a pattern is added or removed, this count changes.
 - It copies each pattern's one-sentence Issue line, its Stakes row, and whether a Detection signals block exists. It does not add facts the page does not state.
-- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **107 of 107** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **107 of 107** pages have one.
+- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **110 of 110** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **110 of 110** pages have one.
 - It does not rank patterns by frequency or harm. No counts of real-world occurrences are given because none have been measured here.
 - It does not map patterns to outside frameworks (such as OWASP or NIST). That mapping is **Needs review** by a person and is not part of v1.
 
 ## Reading the flags
 
-A pattern carries **Read this first: needs expert or legal review** when its own page opens with a "Read this first" notice. That notice says the page is design guidance, not legal, clinical, security, or fraud-operations advice. 26 pages carry it. Other pages may also touch legal or safety topics without that notice; the notice on the page is the signal used here, nothing more.
+A pattern carries **Read this first: needs expert or legal review** when its own page opens with a "Read this first" notice. That notice says the page is design guidance, not legal, clinical, security, or fraud-operations advice. 27 pages carry it. Other pages may also touch legal or safety topics without that notice; the notice on the page is the signal used here, nothing more.
 
 ## Entries by family
 
@@ -310,6 +310,9 @@ Family folder: `voice` ([family README](../../goals/voice/README.md))
 |---|---|---|---|---|---|---|
 | `repair-failure` | Repair failure (voice) | In a voice conversation, the user corrects a detail ("no, the other one") or asks for a repeat ("say that again"), and the agent does not understand, ignores it, or keeps the old value. | Low to high. A wrong date, name, or number on a booking, a payment, or a medical call can matter. | yes | ask_clarifying_question, offer_choices, hand_off | [page](../../goals/voice/failures/repair-failure.md)  |
 | `transcription-hallucination` | Transcription hallucination | Speech-to-text can turn silence, noise, or long pauses into phrases nobody said; the fix is to check that speech is present, flag suspect transcripts, and confirm before acting. | Low to high. An invented phrase in a call note, a cancellation, or a clinical summary can be acted on. | yes | admit_uncertainty, offer_choices, hand_off | [page](../../goals/voice/failures/transcription-hallucination.md)  |
+| `word-error-rate-only-evaluation` | Word-error-rate-only evaluation | A voice agent is judged by average word error rate, which hides wrong names, numbers, and dropped "not"s; the fix is to report entity and critical-slot error rates next to WER and to test the task. | Medium to high. A wrong amount, name, or negation is acted on. | yes | admit_uncertainty, offer_choices, hand_off | [page](../../goals/voice/failures/word-error-rate-only-evaluation.md)  |
+| `dropped-negations-and-small-words` | Dropped negations and small words | Speech recognition can drop "not", turn "can't" into "can", or insert a "no", and the voice agent acts on the opposite of what the caller said; the fix is to read back the action, including the negation, before doing anything. | Medium to high. A flipped word can cancel a refill, close a dispute, or approve a charge. **Read this first: needs expert or legal review.** | yes | ask_one_question, offer_choices, hand_off | [page](../../goals/voice/failures/dropped-negations-and-small-words.md)  |
+| `punctuation-and-segmentation-errors` | Punctuation and segmentation errors | Wrong sentence breaks or missing commas in a speech transcript can change what an instruction covers; the fix is to read back risky sentences with their scope spelled out before acting. | Low to high. A list, an address, a dose, or a cancel instruction can change meaning with one mark. | yes | offer_choices, ask_clarifying_question, hand_off | [page](../../goals/voice/failures/punctuation-and-segmentation-errors.md)  |
 
 ### Visual
 

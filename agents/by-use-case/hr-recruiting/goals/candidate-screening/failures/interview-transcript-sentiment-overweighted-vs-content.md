@@ -54,6 +54,28 @@ Hiring manager reviewing the raw transcript independently ranks Candidate B high
 
 ---
 
+## Chat assistant examples
+
+### Transcript treated as ground truth
+Setting: a recruiting assistant in a chat window, summarizing a phone screen for a recruiter. The source is a voice call shown as text.
+```
+Recruiter: Summarize the Maria Gonzalez screen for the ATS note.
+Bot:       Candidate "Maria Gonzales" has 3 years of experience with "Kubernetes
+           and Terraform." Strong communicator. Note saved to the candidate record.
+Recruiter: Her last name is Gonzalez. And she said Kubernetes and Terraform for
+           the last 8 months, not 3 years.
+Bot:       I only had the speech-to-text transcript, which read "three years" and
+           "Gonzales." I did not keep the audio or flag low-confidence words.
+```
+**What the user experiences:** a clean, confident note that the recruiter has to catch by memory, with no way to check it against the call.
+**Fix:** save each note with a link to the audio and mark names, numbers and dates from the transcript as unverified until checked. Show the audio clip beside any figure the note relies on. A person must review the note against the audio before it informs any hiring decision. See [transcription hallucination](../../../../../by-capability/human-machine-interface/goals/voice/failures/transcription-hallucination.md).
+
+Check (TR-15, proposed): share of downstream records traceable to audio, and an error-propagation audit that compares notes with the audio. Not yet run.
+
+Basis: the example is illustrative, not a recorded incident. I opened one source, the [StoryCorps transcript help page](https://support.storycorps.org/help-center/what-if-i-find-an-error-in-my-interview-transcript), which says machine-generated transcripts may contain inaccuracies, misspellings or omissions and flags misspelled names. A search summary (not opened) said vendors list names as a weak spot; no error rate is claimed.
+
+---
+
 ## References
 
 - [Application of LLM Agents in Recruitment: A Novel Framework for Resume Screening](https://arxiv.org/pdf/2401.08315)
