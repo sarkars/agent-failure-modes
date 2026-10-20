@@ -133,3 +133,18 @@ User B receives User A's account balance (or, in the healthcare variant, User A'
 - [Multi-Tenant LLM Security](https://www.anthropic.com/research/multi-tenant-security)
 - [CSA: AI Security Incidents](https://cloudsecurityalliance.org/) - Cross-tenant issues
 - [LangChain Memory](https://python.langchain.com/docs/modules/memory/) - Session scoping
+
+## Chat assistant examples
+
+### Shared devices show someone else's chat
+
+Illustrative example (a library computer, the previous patron walked away without signing out):
+```
+Bot:  Welcome back, Maria. Want to pick up your question about the
+      prescription refill for your son?          (Maria left 10 minutes ago)
+User: Who is Maria? I'm just here to check store hours.
+Bot:  Sorry about that. Here is the earlier conversation so you can
+      see where we left off.                     (shows Maria's messages)
+```
+**What the user experiences:** the next person sees a stranger's private conversation, and the previous person has no idea their health details were exposed.
+**Fix:** end the chat session on sign-out, on idle timeout, and when the widget closes on a shared or kiosk device, and clear the conversation from the screen and the browser. Require sign-in before showing any saved history or using remembered details, and greet unknown visitors generically. This applies this page's explicit session clearing with verification: test that the screen is actually empty after the session ends. See the [session timeout and lost context pattern](../../../../../by-capability/human-machine-interface/goals/response-time/failures/session-timeout-and-lost-context.md).
