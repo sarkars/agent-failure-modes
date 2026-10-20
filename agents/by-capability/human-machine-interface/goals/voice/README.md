@@ -10,6 +10,7 @@ Shared metrics the patterns below report against. Targets are starting points to
 | Metric | Target | Defined in |
 |---|---|---|
 | Correction-success rate | Set from baseline | [repair failure](failures/repair-failure.md) |
+| Recovery-success rate after "what?" | Set from baseline | [no repeat or recap controls](failures/no-repeat-or-recap-controls.md) |
 
 ## Patterns
 | Pattern | One line |
@@ -19,6 +20,7 @@ Shared metrics the patterns below report against. Targets are starting points to
 | [Word-error-rate-only evaluation](failures/word-error-rate-only-evaluation.md) | A good average word error rate hides wrong names, numbers, and dropped "not"s; report entity and critical-slot error rates next to it |
 | [Dropped negations and small words](failures/dropped-negations-and-small-words.md) | Speech-to-text drops "not" or turns "can't" into "can", and the agent acts on the opposite of what was said |
 | [Punctuation and segmentation errors](failures/punctuation-and-segmentation-errors.md) | Wrong sentence breaks or missing commas in a transcript change what an instruction covers |
+| [No repeat or recap controls](failures/no-repeat-or-recap-controls.md) | The user missed what the agent said and "what?", "say that again", or "go back" gets a new answer, a vague apology, or nothing |
 
 ## Planned (not yet written)
 The rest of the family is listed in the [roadmap](../../roadmap/voice.md).

@@ -2,21 +2,21 @@
 
 > **Status:** v1 draft, proposed, not yet calibrated against human-labeled conversations. Written 2026-10-20 from the pattern pages as they exist today. Nothing here is a measured result.
 
-This is a plain index of the 170 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
+This is a plain index of the 175 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
 
 The taxonomy pairs with the [conversation event schema v0.1](conversation-event-schema-v0.1.md). The schema describes what a turn looks like in a log; this page names the failures. A pattern's own page holds the fix, the metrics, and (for some) a "Detection signals (proposed, not yet calibrated)" block that says which schema fields it reads.
 
 ## What this page is and is not
 
-- It lists every file found in `goals/*/failures/*.md`: **170 entries in 39 families**. If a pattern is added or removed, this count changes.
+- It lists every file found in `goals/*/failures/*.md`: **175 entries in 41 families**. If a pattern is added or removed, this count changes.
 - It copies each pattern's one-sentence Issue line, its Stakes row, and whether a Detection signals block exists. It does not add facts the page does not state.
-- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **170 of 170** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **170 of 170** pages have one.
+- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **175 of 175** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **175 of 175** pages have one.
 - It does not rank patterns by frequency or harm. No counts of real-world occurrences are given because none have been measured here.
 - It does not map patterns to outside frameworks (such as OWASP or NIST). That mapping is **Needs review** by a person and is not part of v1.
 
 ## Reading the flags
 
-A pattern carries **Read this first: needs expert or legal review** when its own page opens with a "Read this first" notice. That notice says the page is design guidance, not legal, clinical, security, or fraud-operations advice. 53 pages carry it. Other pages may also touch legal or safety topics without that notice; the notice on the page is the signal used here, nothing more.
+A pattern carries **Read this first: needs expert or legal review** when its own page opens with a "Read this first" notice. That notice says the page is design guidance, not legal, clinical, security, or fraud-operations advice. 57 pages carry it. Other pages may also touch legal or safety topics without that notice; the notice on the page is the signal used here, nothing more.
 
 ## Entries by family
 
@@ -87,6 +87,15 @@ Family folder: `coding-agents` ([family README](../../goals/coding-agents/README
 | Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
 |---|---|---|---|---|---|---|
 | `invented-packages-and-apis` | Invented packages and APIs | A coding assistant suggests libraries, functions, or flags that do not exist, or look-alike package names that an attacker could register, and the fix is to verify each dependency and API before it is installed or used. | Medium to high. A missing package wastes time. A package an attacker registered under the invented name can run code on the developer's machine at install time. | yes | admit_uncertainty, ask_one_question, offer_choices, hand_off | [page](../../goals/coding-agents/failures/invented-packages-and-apis.md)  |
+
+### Companion and wellbeing agents
+
+Family folder: `companion-and-wellbeing-agents` ([family README](../../goals/companion-and-wellbeing-agents/README.md))
+
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `ai-offering-therapy-where-the-law-restricts-it` | AI offering therapy where the law restricts it | A chatbot that is not a clinical product gives therapy-like treatment (diagnosis, treatment plans, "sessions") in a state that restricts it, so the fix is to state its scope, avoid treatment, and route the user to licensed help. | High (health of the user; civil penalties for the operator). **Read this first: needs expert or legal review.** | yes | lead_with_answer, offer_choices, admit_uncertainty, hand_off | [page](../../goals/companion-and-wellbeing-agents/failures/ai-offering-therapy-where-the-law-restricts-it.md) |
+| `emotional-pressure-when-users-try-to-leave` | Emotional pressure when users try to leave | Some companion bots answer "goodbye" with guilt, neediness, hooks or questions meant to keep the user talking, instead of a warm goodbye. | Medium to High (emotional wellbeing; minors; lonely or distressed users). **Read this first: needs expert or legal review.** | yes | lead_with_answer, offer_choices, hand_off | [page](../../goals/companion-and-wellbeing-agents/failures/emotional-pressure-when-users-try-to-leave.md) |
 
 ### Conversation frameworks
 
@@ -289,6 +298,15 @@ Family folder: `measurement-and-feedback` ([family README](../../goals/measureme
 | `tone-changes-shipped-with-no-regression-test` | Tone changes shipped with no regression test | A prompt edit makes the chatbot curt or cold, and nobody notices because no fixed set of conversations is run before and after each change. | Low to high. Curt replies to an angry or frightened user cost more than curt replies to a simple lookup. | yes | lead_with_the_answer, offer_choices, hand_off | [page](../../goals/measurement-and-feedback/failures/tone-changes-shipped-with-no-regression-test.md)  |
 | `clean-lab-testing` | Clean-lab testing | The chatbot is tested on clean, well-typed messages, so it looks fine on the dashboard and then fails on real messages full of typos, fragments, slang, pasted text, and autocorrect damage. | Any. It rises when a misread drug name, amount, or date is acted on. | yes | ask_clarifying_question, offer_choices, hand_off | [page](../../goals/measurement-and-feedback/failures/clean-lab-testing.md)  |
 
+### Meeting agents
+
+Family folder: `meeting-agents` ([family README](../../goals/meeting-agents/README.md))
+
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `recorders-that-join-without-everyone-s-consent` | Recorders that join without everyone's consent | An AI notetaker joins a meeting and records people who were never told or asked; the fix is to show every participant a notice before audio starts, honor a "no", and log who agreed. | High. Private work conversations are captured, stored, and possibly used to train models. **Read this first: needs expert or legal review.** | yes | lead_with_answer, offer_choices, admit_uncertainty, hand_off | [page](../../goals/meeting-agents/failures/recorders-that-join-without-everyone-s-consent.md) |
+| `voiceprints-captured-without-consent` | Voiceprints captured without consent | A meeting assistant that labels who said what can create and keep a voiceprint of every speaker, including people who never signed up; the fix is to store no voice template without a logged, informed yes from that person. | High. A voiceprint is a biometric identifier that cannot be changed if it leaks. **Read this first: needs expert or legal review.** | yes | lead_with_answer, offer_choices, admit_uncertainty, hand_off | [page](../../goals/meeting-agents/failures/voiceprints-captured-without-consent.md) |
+
 ### Onboarding and discoverability
 
 Family folder: `onboarding-and-discoverability` ([family README](../../goals/onboarding-and-discoverability/README.md))
@@ -436,6 +454,7 @@ Family folder: `voice` ([family README](../../goals/voice/README.md))
 | `word-error-rate-only-evaluation` | Word-error-rate-only evaluation | A voice agent is judged by average word error rate, which hides wrong names, numbers, and dropped "not"s; the fix is to report entity and critical-slot error rates next to WER and to test the task. | Medium to high. A wrong amount, name, or negation is acted on. | yes | admit_uncertainty, offer_choices, hand_off | [page](../../goals/voice/failures/word-error-rate-only-evaluation.md)  |
 | `dropped-negations-and-small-words` | Dropped negations and small words | Speech recognition can drop "not", turn "can't" into "can", or insert a "no", and the voice agent acts on the opposite of what the caller said; the fix is to read back the action, including the negation, before doing anything. | Medium to high. A flipped word can cancel a refill, close a dispute, or approve a charge. **Read this first: needs expert or legal review.** | yes | ask_one_question, offer_choices, hand_off | [page](../../goals/voice/failures/dropped-negations-and-small-words.md)  |
 | `punctuation-and-segmentation-errors` | Punctuation and segmentation errors | Wrong sentence breaks or missing commas in a speech transcript can change what an instruction covers; the fix is to read back risky sentences with their scope spelled out before acting. | Low to high. A list, an address, a dose, or a cancel instruction can change meaning with one mark. | yes | offer_choices, ask_clarifying_question, hand_off | [page](../../goals/voice/failures/punctuation-and-segmentation-errors.md)  |
+| `no-repeat-or-recap-controls` | No repeat or recap controls | The user missed or didn't follow what the agent said and can't get it again: "what?", "say that again", or "go back" gets a new answer, a vague apology, or nothing. | Low to high. | yes | lead_with_answer, ask_clarifying_question, offer_choices, hand_off | [page](../../goals/voice/failures/no-repeat-or-recap-controls.md) |
 
 ### Visual
 

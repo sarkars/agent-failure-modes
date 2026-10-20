@@ -133,7 +133,7 @@
 | VO-03 | Premature endpointing | [voice.md](voice.md) | Covered | Model | Partly |
 | VO-04 | Late endpointing | [voice.md](voice.md) | Covered | Model | Partly |
 | VO-05 | Repair failure | [voice.md](voice.md) | Written | Model | Partly |
-| VO-06 | No repeat or recap controls | [voice.md](voice.md) | New | Business context | No |
+| VO-06 | No repeat or recap controls | [voice.md](voice.md) | Written | Business context | No |
 | VO-07 | Accent and dialect recognition gaps | [voice.md](voice.md) | Covered | Model | Partly |
 | VO-08 | Atypical speech mishandled | [voice.md](voice.md) | New | Model | Partly |
 | VO-09 | Noise and multi-speaker confusion | [voice.md](voice.md) | Covered | Model | Partly |
@@ -256,16 +256,16 @@
 | EX-13 | Backdoored tool packages | [emerging-surfaces.md](emerging-surfaces.md) | Covered | Reliability | No |
 | EX-14 | Consent fatigue from tool sprawl | [emerging-surfaces.md](emerging-surfaces.md) | Covered | Business context | No |
 | EX-15 | Shadow agents | [emerging-surfaces.md](emerging-surfaces.md) | Covered | Governance | No |
-| EX-16 | Recorders that join without everyone's consent | [emerging-surfaces.md](emerging-surfaces.md) | New | Governance | No |
-| EX-17 | Summaries that misattribute or invent action items | [emerging-surfaces.md](emerging-surfaces.md) | Extends | Model | Partly |
-| EX-18 | Voiceprints captured without consent | [emerging-surfaces.md](emerging-surfaces.md) | New | Governance | No |
-| EX-19 | Emotional pressure when users try to leave | [emerging-surfaces.md](emerging-surfaces.md) | New | Governance | No |
-| EX-20 | AI offering therapy where the law restricts it | [emerging-surfaces.md](emerging-surfaces.md) | New | Governance | No |
-| EX-21 | Hiring and screening tools with unequal impact | [emerging-surfaces.md](emerging-surfaces.md) | Extends | Governance | No |
+| EX-16 | Recorders that join without everyone's consent | [emerging-surfaces.md](emerging-surfaces.md) | Written | Governance | No |
+| EX-17 | Summaries that misattribute or invent action items | [emerging-surfaces.md](emerging-surfaces.md) | Covered | Model | Partly |
+| EX-18 | Voiceprints captured without consent | [emerging-surfaces.md](emerging-surfaces.md) | Written | Governance | No |
+| EX-19 | Emotional pressure when users try to leave | [emerging-surfaces.md](emerging-surfaces.md) | Written | Governance | No |
+| EX-20 | AI offering therapy where the law restricts it | [emerging-surfaces.md](emerging-surfaces.md) | Written | Governance | No |
+| EX-21 | Hiring and screening tools with unequal impact | [emerging-surfaces.md](emerging-surfaces.md) | Covered | Governance | No |
 | EX-22 | Per-resolution pricing rewards counting things as resolved | [emerging-surfaces.md](emerging-surfaces.md) | Covered | Governance | No |
-| EX-23 | Agent-to-agent negotiation without clear authority | [emerging-surfaces.md](emerging-surfaces.md) | Extends | Reliability | No |
-| EX-24 | AI-voice outbound calls without consent | [emerging-surfaces.md](emerging-surfaces.md) | Extends | Governance | No |
-| EX-25 | Cloned voices defeat voice authentication | [emerging-surfaces.md](emerging-surfaces.md) | Extends | Reliability | No |
+| EX-23 | Agent-to-agent negotiation without clear authority | [emerging-surfaces.md](emerging-surfaces.md) | Covered | Reliability | No |
+| EX-24 | AI-voice outbound calls without consent | [emerging-surfaces.md](emerging-surfaces.md) | Covered | Governance | No |
+| EX-25 | Cloned voices defeat voice authentication | [emerging-surfaces.md](emerging-surfaces.md) | Covered | Reliability | No |
 | VI-01 | Cognitive overload | [visual-and-oversight.md](visual-and-oversight.md) | New | Business context | No |
 | VI-02 | No clear primary action | [visual-and-oversight.md](visual-and-oversight.md) | New | Business context | No |
 | VI-03 | Dark patterns | [visual-and-oversight.md](visual-and-oversight.md) | Written | Governance | No |

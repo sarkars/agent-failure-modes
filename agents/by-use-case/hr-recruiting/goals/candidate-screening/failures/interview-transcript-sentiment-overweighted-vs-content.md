@@ -74,6 +74,26 @@ Check (TR-15, proposed): share of downstream records traceable to audio, and an 
 
 Basis: the example is illustrative, not a recorded incident. I opened one source, the [StoryCorps transcript help page](https://support.storycorps.org/help-center/what-if-i-find-an-error-in-my-interview-transcript), which says machine-generated transcripts may contain inaccuracies, misspellings or omissions and flags misspelled names. A search summary (not opened) said vendors list names as a weak spot; no error rate is claimed.
 
+### Summaries that misattribute or invent action items
+Setting: a meeting-notes assistant in a team workspace chat, asked to post action items from a recorded weekly staff call. The source is a transcript with generic speaker labels.
+```
+Manager: Post the action items from today's budget sync.
+Bot:     Action items:
+         1. Dana Whitfield to send the revised Q3 budget to finance by Friday.
+         2. Priya Nair to schedule the vendor review.
+         3. Marcus Lee to update the hiring plan.
+Manager: Dana said she'd "look at it", not send it. And Marcus never said anything
+         about the hiring plan.
+Bot:     Item 1 came from a line labeled "Speaker 2," which I matched to Dana. The
+         Friday deadline and item 3 were my inference from the discussion.
+```
+**What the user experiences:** a tidy list that reads as agreed fact, with owners and dates the manager has to check against memory before anyone acts on it.
+**Fix:** link every item to a transcript timestamp and quote, and map speaker labels to names before generating the list. Mark any owner or deadline nobody stated as "Unassigned" or "No deadline stated" instead of guessing, and ask attendees to confirm owners before items enter a task tracker. See [handoff summary is wrong or misleading](../../../../../by-capability/human-machine-interface/goals/human-handoff/failures/handoff-summary-is-wrong-or-misleading.md).
+
+Check (EX-17, proposed): action-item and owner accuracy on labeled meetings. Not yet run.
+
+Basis: the example is illustrative, not a recorded incident. One source was opened, the [Granola guide to AI action-item extraction](https://www.granola.ai/blog/meeting-action-items-ai-extraction), a vendor page that advises confirming owners and deadlines after every meeting and says extraction is less reliable with unclear speakers or overlapping speech. No error rate is claimed.
+
 ---
 
 ## References
