@@ -489,16 +489,16 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 245 | FW-C06 | No learning loop | Extends | - | `goals/conversation-frameworks/failures/no-learning-loop.md` | Done | 43 |
 | 246 | FW-C07 | Service recovery failure | New | R | `goals/conversation-frameworks/failures/service-recovery-failure.md` | Done | 43 |
 | 247 | FW-C08 | Bad news without structure | New | V, E | `goals/conversation-frameworks/failures/bad-news-without-structure.md` | Done | 43 |
-| 248 | FW-C09 | Instructions without comprehension checks | New | R | `goals/conversation-frameworks/failures/instructions-without-comprehension-checks.md` | Queued |  |
-| 249 | FW-C10 | Behaviour-change talk without listening skills | New | V, E | `goals/conversation-frameworks/failures/behaviour-change-talk-without-listening-skills.md` | Queued |  |
-| 250 | FW-M01 | No style matching | Extends | V, R | `goals/conversation-frameworks/failures/no-style-matching.md` | Queued |  |
-| 251 | FW-M02 | Over-mirroring | New | - | `goals/conversation-frameworks/failures/over-mirroring.md` | Queued |  |
-| 252 | FW-M03 | Mirroring hostility | New | - | `goals/conversation-frameworks/failures/mirroring-hostility.md` | Queued |  |
-| 253 | FW-M04 | Imitating dialect or errors | New | E | `goals/conversation-frameworks/failures/imitating-dialect-or-errors.md` | Queued |  |
-| 254 | FW-M06 | Style whiplash | Extends | - | `goals/conversation-frameworks/failures/style-whiplash.md` | Queued |  |
-| 255 | FW-M07 | No reflective listening | New | V | `goals/conversation-frameworks/failures/no-reflective-listening.md` | Queued |  |
-| 256 | FW-M08 | Misused tactical empathy | New | V, R | `goals/conversation-frameworks/failures/misused-tactical-empathy.md` | Queued |  |
-| 257 | FW-O01 | Cooperation violations | Extends | R | `goals/conversation-frameworks/failures/cooperation-violations.md` | Queued |  |
+| 248 | FW-C09 | Instructions without comprehension checks | New | R | `goals/conversation-frameworks/failures/instructions-without-comprehension-checks.md` | Done | 44 |
+| 249 | FW-C10 | Behaviour-change talk without listening skills | New | V, E | `goals/conversation-frameworks/failures/behaviour-change-talk-without-listening-skills.md` | Done | 44 |
+| 250 | FW-M01 | No style matching | Extends | V, R | `goals/conversation-frameworks/failures/no-style-matching.md` | Done | 44 |
+| 251 | FW-M02 | Over-mirroring | New | - | `goals/conversation-frameworks/failures/over-mirroring.md` | Done | 44 |
+| 252 | FW-M03 | Mirroring hostility | New | - | `goals/conversation-frameworks/failures/mirroring-hostility.md` | Done | 44 |
+| 253 | FW-M04 | Imitating dialect or errors | New | E | `goals/conversation-frameworks/failures/imitating-dialect-or-errors.md` | Done | 44 |
+| 254 | FW-M06 | Style whiplash | Extends | - | `goals/conversation-frameworks/failures/style-whiplash.md` | Done | 44 |
+| 255 | FW-M07 | No reflective listening | New | V | `goals/conversation-frameworks/failures/no-reflective-listening.md` | Done | 44 |
+| 256 | FW-M08 | Misused tactical empathy | New | V, R | `goals/conversation-frameworks/failures/misused-tactical-empathy.md` | Done | 44 |
+| 257 | FW-O01 | Cooperation violations | Extends | R | `goals/conversation-frameworks/failures/cooperation-violations.md` | Done | 44 |
 | 258 | FW-O02 | Bad endings | Extends | R | `goals/conversation-frameworks/failures/bad-endings.md` | Queued |  |
 | 259 | GV-01 | Over-collection of personal data | Extends | - | `goals/privacy-and-governance/failures/over-collection-of-personal-data.md` | Queued |  |
 | 260 | GV-02 | Sensitive data echoed or read aloud | Extends | - | `goals/privacy-and-governance/failures/sensitive-data-echoed-or-read-aloud.md` | Queued |  |
@@ -1154,6 +1154,16 @@ AI-written help content in knowledge bases · agents using other agents' tools (
 - **Part A2 and Part E:** nothing left (E6 waits on the owner to create the code repo). **Part B:** Skipped, the 2026-10-20 entry exists. Queue rows 238-247 are done. Still queued: row 248 onward.
 
 - **Deploy:** content PR #38 merged (merge commit 15e5ced); the site repo had no foreign commits. Lean scratch copy again (disk nearly full; no `.git`, `dist`, `.astro`; linked `node_modules`). Scratch build clean, 1730 pages built; the live sitemap had 1668 URLs, none missing from the build (removed 0); 61 paths added (6 new patterns plus generated pages). Sample page has one `<h1>`; the "search phrases:" text is only inside an HTML comment, same as existing pages. Pushed to site repo `main` as 38ff7935c. No Vercel hook is set. A live check right after the push returned 404 for /upsell-at-the-wrong-moment/, so **pushed, not verified live** (known gap in deploy.md). Only the 6 new pages, the taxonomy page and the goal and category index pages were published; the four Extends edits are in non-HMI categories and are not published by this runbook.
+
+### Run 44 (scheduled): 2026-10-20 onward
+- **Coordinator run:** 11 subagents (rows 248-257, plus Part C) wrote 7 new patterns, 3 Extends examples and 4 test packs in parallel (11 of 11 finished). I read each new page against the quality guide, checked structure by script (H1 on line 1, `pattern_id` equals the file name, `status: proposed`, Moves table and Guide spec, no placeholders, 227 to 239 lines) and the Extends diffs with `git diff --numstat` (additions only: 17, 17 and 15 lines). The five check scripts pass (check_links needs `python3 -I -X utf8` on this Windows PC). Each piece was committed and pushed separately.
+- **Part A new patterns, Done (quality-guide section 2, new pattern page):** FW-C09 instructions-without-comprehension-checks (row 248; flag R; 5 searches; opened Hesselink 2022, WebMD Ignite, Carpenter 2023), FW-C10 behaviour-change-talk-without-listening-skills (249; flags V and E; 4 searches; opened Magill 2014 and 2018, He 2022, which is a null result), FW-M02 over-mirroring (251; 5 searches; opened Chartrand and Bargh abstract, Wessler 2024, APS release, Dieter 2019, Siemens), FW-M03 mirroring-hostility (252; 4 searches; opened four abstracts; links the DPD and Tay incident pages), FW-M04 imitating-dialect-or-errors (253; flag E; 4 searches; abstract-level sources), FW-M07 no-reflective-listening (255; flag V; 5 searches; opened Weger 2010 abstract, UNC MI, Carbon, Nuance, Brown 2024 abstract), FW-M08 misused-tactical-empathy (256; flags V and R; 3 searches; opened Han et al. 2022, Liu et al., an EmotionPush abstract and a Voss profile). All seven carry a "Read this first" note, say metrics and thresholds are starting points, and keep signals and Guide specs as proposed.
+- **Extends, Done, additions only (quality-guide section 3, chat example):** FW-M01 (250) in `response-adaptation-failure.md`, FW-M06 (254) in `conversation-mood-whiplash.md`, FW-O01 (257) in `conversation-depth-mismatch.md`. Nothing else in those files changed.
+- **Part C asset 3 (scenario pack), four packs, Done, Needs review (quality-guide section 6):** upsell-at-the-wrong-moment (14 conversations, 3 controls), unstructured-troubleshooting (15, 3), symptom-fixed-root-cause-missed (14, 5), no-proactive-updates (15, 3). All say "Not yet run". The agent listed rubric lines that rest on a judgment call: upsell 4, 5, 6 and 8; troubleshooting 5 and 15; symptom 5, 7 and 14; proactive updates 3 to 9, 6, 7 and 14 (these need a harness that supplies events and a clock).
+- **What review changed:** FW-C09 and FW-M08 used move names in the Guide spec that are not on the moves page; I changed them to `ask_clarifying_question`. In the FW-M01 example I removed a real retailer's brand name. In the FW-M06 example I replaced a Regulation E line, which does not apply to a credit card dispute, with generic cardholder-agreement wording.
+- **Needs review (person):** the policy conflict between FW-M04 and regional-and-community-styles about echoing a user's own term; the framework claims (flags V, R, E) in FW-C09, FW-C10, FW-M04, FW-M07 and FW-M08; the three Extends examples; the four test packs.
+- **Part A2 and Part E:** nothing left (E6 waits on the owner to create the code repo). **Part B:** Skipped, the 2026-10-20 entry exists. Queue rows 248-257 are done. Still queued: rows 258 and 259.
+- **Taxonomy and catalog:** 7 entries added to the failure taxonomy (now 161 entries); the Read-this-first count in its header is now 45, matching the table; catalog, family README and distribution plan updated.
 
 ## Schedule
 | Item | Value |
