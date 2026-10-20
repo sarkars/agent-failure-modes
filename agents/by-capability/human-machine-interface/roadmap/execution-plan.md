@@ -479,16 +479,16 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 235 | FW-S08 | No follow-up | New | L | `goals/conversation-frameworks/failures/no-follow-up.md` | Done | 42 |
 | 236 | FW-S09 | Buying-committee blindness (B2B) | New | R | `goals/conversation-frameworks/failures/buying-committee-blindness-b2b.md` | Done | 42 |
 | 237 | FW-S10 | Wrong-fit recommendation | New | - | `goals/conversation-frameworks/failures/wrong-fit-recommendation.md` | Done | 42 |
-| 238 | FW-S11 | Upsell at the wrong moment | New | - | `goals/conversation-frameworks/failures/upsell-at-the-wrong-moment.md` | Queued |  |
-| 239 | FW-S12 | Lead handoff without qualification | Extends | - | `goals/conversation-frameworks/failures/lead-handoff-without-qualification.md` | Queued |  |
-| 240 | FW-C01 | No triage or severity check | Extends | - | `goals/conversation-frameworks/failures/no-triage-or-severity-check.md` | Queued |  |
-| 241 | FW-C02 | Unstructured troubleshooting | New | - | `goals/conversation-frameworks/failures/unstructured-troubleshooting.md` | Queued |  |
-| 242 | FW-C03 | Symptom fixed, root cause missed | New | - | `goals/conversation-frameworks/failures/symptom-fixed-root-cause-missed.md` | Queued |  |
-| 243 | FW-C04 | High customer effort | Extends | V | `goals/conversation-frameworks/failures/high-customer-effort.md` | Queued |  |
-| 244 | FW-C05 | No proactive updates | New | - | `goals/conversation-frameworks/failures/no-proactive-updates.md` | Queued |  |
-| 245 | FW-C06 | No learning loop | Extends | - | `goals/conversation-frameworks/failures/no-learning-loop.md` | Queued |  |
-| 246 | FW-C07 | Service recovery failure | New | R | `goals/conversation-frameworks/failures/service-recovery-failure.md` | Queued |  |
-| 247 | FW-C08 | Bad news without structure | New | V, E | `goals/conversation-frameworks/failures/bad-news-without-structure.md` | Queued |  |
+| 238 | FW-S11 | Upsell at the wrong moment | New | - | `goals/conversation-frameworks/failures/upsell-at-the-wrong-moment.md` | Done | 43 |
+| 239 | FW-S12 | Lead handoff without qualification | Extends | - | `goals/conversation-frameworks/failures/lead-handoff-without-qualification.md` | Done | 43 |
+| 240 | FW-C01 | No triage or severity check | Extends | - | `goals/conversation-frameworks/failures/no-triage-or-severity-check.md` | Done | 43 |
+| 241 | FW-C02 | Unstructured troubleshooting | New | - | `goals/conversation-frameworks/failures/unstructured-troubleshooting.md` | Done | 43 |
+| 242 | FW-C03 | Symptom fixed, root cause missed | New | - | `goals/conversation-frameworks/failures/symptom-fixed-root-cause-missed.md` | Done | 43 |
+| 243 | FW-C04 | High customer effort | Extends | V | `goals/conversation-frameworks/failures/high-customer-effort.md` | Done | 43 |
+| 244 | FW-C05 | No proactive updates | New | - | `goals/conversation-frameworks/failures/no-proactive-updates.md` | Done | 43 |
+| 245 | FW-C06 | No learning loop | Extends | - | `goals/conversation-frameworks/failures/no-learning-loop.md` | Done | 43 |
+| 246 | FW-C07 | Service recovery failure | New | R | `goals/conversation-frameworks/failures/service-recovery-failure.md` | Done | 43 |
+| 247 | FW-C08 | Bad news without structure | New | V, E | `goals/conversation-frameworks/failures/bad-news-without-structure.md` | Done | 43 |
 | 248 | FW-C09 | Instructions without comprehension checks | New | R | `goals/conversation-frameworks/failures/instructions-without-comprehension-checks.md` | Queued |  |
 | 249 | FW-C10 | Behaviour-change talk without listening skills | New | V, E | `goals/conversation-frameworks/failures/behaviour-change-talk-without-listening-skills.md` | Queued |  |
 | 250 | FW-M01 | No style matching | Extends | V, R | `goals/conversation-frameworks/failures/no-style-matching.md` | Queued |  |
@@ -1143,6 +1143,15 @@ AI-written help content in knowledge bases · agents using other agents' tools (
 - **Review changed:** removed the phrase ", as in the clarification prompts above" from the FW-S06 example; changed "(FW-S03, draft)" to "(FW-S03)" in the FW-S07 example; wrote the new `goals/conversation-frameworks/README.md` (the six pages link `../README.md`) and linked the three FW Extends examples and SA-04 from the family and sales-agents READMEs; added 6 entries and 1 family to the taxonomy (148 entries, 35 families; "Read this first" count 34); updated catalog rows, agent-types row SA-04, queue rows 228-237, the distribution plan and the generated index.
 - **Part A2 and Part E:** nothing left (E6 waits on the owner to create the code repo). **Part B:** Skipped, the 2026-10-20 entry exists. Queue rows 228-237 are done. Still queued: row 238 (FW-S11) onward.
 - **Deploy:** content PR #37 merged (merge commit 6024196); the site repo had no foreign commits. The disk was nearly full, so the scratch copy left out `.git`, `dist` and `.astro` and used a link to the site checkout's existing `node_modules` instead of `npm install`. Scratch build clean, 1724 pages built; the live sitemap had 1668 URLs, none missing from the build (removed 0). The build adds 55 URLs against live, including the 6 new patterns (feature-dump-instead-of-insight, mishandled-objections, no-ask, no-follow-up, buying-committee-blindness-b2b, wrong-fit-recommendation) and the new conversation-frameworks goal page; the rest are earlier runs not yet live. Changed pages: taxonomy, negotiation-capitulation, sales-agents goal page, HMI category page. A sample new page has one `<h1>` and no visible `search phrases:` text. Pushed to site repo main as 2ba232645 (12 files under website-astro/src/content), not verified live: no Vercel deploy hook is set, and `/no-ask/` returned 404 right after the push. Not pushed again. The other three Extends examples, the Replika teardown and the test packs are outside the runbook's publish scope. The untracked `website-astro/live.xml` in the site checkout is not mine and was left alone.
+
+
+### Run 43 (scheduled): 2026-10-20 onward
+- **Coordinator run:** 11 subagents (rows 238-247, plus Part C) wrote 6 new patterns, 4 Extends examples and 4 test packs in parallel (11 of 11 finished). I checked structure by script (H1 on line 1, `pattern_id` equals the file name, `status: proposed`, Moves table and Guide spec, no placeholders, 214 to 226 lines) and the Extends diffs with `git diff --numstat` (additions only: 17, 20, 20 and 19 lines). The five check scripts pass. I did not re-read every page line by line.
+- **Part A new patterns, Done:** FW-S11 upsell-at-the-wrong-moment (row 238; flag note "Read this first"), FW-C02 unstructured-troubleshooting (241; "Read this first"), FW-C03 symptom-fixed-root-cause-missed (242), FW-C05 no-proactive-updates (244), FW-C07 service-recovery-failure (246; flag R), FW-C08 bad-news-without-structure (247; flags V and E, "Read this first", consumer-finance rules). All say metrics and thresholds are starting points and signals are proposed.
+- **Extends, Done, additions only:** FW-S12 (239) in `sdr-to-ae-handoff-drops-unstructured-disqualifying-signal.md`, FW-C01 (240) in `high-effort-ticket-misrouting.md`, FW-C04 (243) in `conversation-length-explosion.md`, FW-C06 (245) in `feedback-not-incorporated.md`.
+- **Part C asset 3 (scenario pack), four packs, Done, Needs review:** no-ask, no-follow-up, mishandled-objections, wrong-fit-recommendation. All say "Not yet run".
+- **Needs review (person):** legal and consumer-finance content in bad-news-without-structure; the framework claims (flags R, V) in service-recovery-failure and unstructured-troubleshooting; the four test packs; the four Extends examples. The FW-C05 agent skipped its own re-read pass, so that page had the least checking.
+- **Part A2 and Part E:** nothing left (E6 waits on the owner to create the code repo). **Part B:** Skipped, the 2026-10-20 entry exists. Queue rows 238-247 are done. Still queued: row 248 onward.
 
 ## Schedule
 | Item | Value |

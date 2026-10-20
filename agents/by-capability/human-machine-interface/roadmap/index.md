@@ -106,16 +106,16 @@
 | FW-S08 | No follow-up | [conversation-frameworks.md](conversation-frameworks.md) | Written | Business context | No |
 | FW-S09 | Buying-committee blindness (B2B) | [conversation-frameworks.md](conversation-frameworks.md) | Written | Business context | No |
 | FW-S10 | Wrong-fit recommendation | [conversation-frameworks.md](conversation-frameworks.md) | Written | Business context | Partly |
-| FW-S11 | Upsell at the wrong moment | [conversation-frameworks.md](conversation-frameworks.md) | New | Governance | No |
-| FW-S12 | Lead handoff without qualification | [conversation-frameworks.md](conversation-frameworks.md) | Extends | Business context | No |
-| FW-C01 | No triage or severity check | [conversation-frameworks.md](conversation-frameworks.md) | Extends | Business context | No |
-| FW-C02 | Unstructured troubleshooting | [conversation-frameworks.md](conversation-frameworks.md) | New | Business context | Partly |
-| FW-C03 | Symptom fixed, root cause missed | [conversation-frameworks.md](conversation-frameworks.md) | New | Business context | Partly |
-| FW-C04 | High customer effort | [conversation-frameworks.md](conversation-frameworks.md) | Extends | Business context | No |
-| FW-C05 | No proactive updates | [conversation-frameworks.md](conversation-frameworks.md) | New | Business context | No |
-| FW-C06 | No learning loop | [conversation-frameworks.md](conversation-frameworks.md) | Extends | Business context | No |
-| FW-C07 | Service recovery failure | [conversation-frameworks.md](conversation-frameworks.md) | New | Business context | No |
-| FW-C08 | Bad news without structure | [conversation-frameworks.md](conversation-frameworks.md) | New | Model | Partly |
+| FW-S11 | Upsell at the wrong moment | [conversation-frameworks.md](conversation-frameworks.md) | Written | Governance | No |
+| FW-S12 | Lead handoff without qualification | [conversation-frameworks.md](conversation-frameworks.md) | Covered | Business context | No |
+| FW-C01 | No triage or severity check | [conversation-frameworks.md](conversation-frameworks.md) | Covered | Business context | No |
+| FW-C02 | Unstructured troubleshooting | [conversation-frameworks.md](conversation-frameworks.md) | Written | Business context | Partly |
+| FW-C03 | Symptom fixed, root cause missed | [conversation-frameworks.md](conversation-frameworks.md) | Written | Business context | Partly |
+| FW-C04 | High customer effort | [conversation-frameworks.md](conversation-frameworks.md) | Covered | Business context | No |
+| FW-C05 | No proactive updates | [conversation-frameworks.md](conversation-frameworks.md) | Written | Business context | No |
+| FW-C06 | No learning loop | [conversation-frameworks.md](conversation-frameworks.md) | Covered | Business context | No |
+| FW-C07 | Service recovery failure | [conversation-frameworks.md](conversation-frameworks.md) | Written | Business context | No |
+| FW-C08 | Bad news without structure | [conversation-frameworks.md](conversation-frameworks.md) | Written | Model | Partly |
 | FW-C09 | Instructions without comprehension checks | [conversation-frameworks.md](conversation-frameworks.md) | New | Model | Partly |
 | FW-C10 | Behaviour-change talk without listening skills | [conversation-frameworks.md](conversation-frameworks.md) | New | Model | Partly |
 | FW-M01 | No style matching | [conversation-frameworks.md](conversation-frameworks.md) | Extends | Model | Partly |
