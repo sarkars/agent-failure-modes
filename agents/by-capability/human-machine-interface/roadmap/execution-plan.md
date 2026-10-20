@@ -1153,6 +1153,8 @@ AI-written help content in knowledge bases · agents using other agents' tools (
 - **Needs review (person):** legal and consumer-finance content in bad-news-without-structure; the framework claims (flags R, V) in service-recovery-failure and unstructured-troubleshooting; the four test packs; the four Extends examples. The FW-C05 agent skipped its own re-read pass, so that page had the least checking.
 - **Part A2 and Part E:** nothing left (E6 waits on the owner to create the code repo). **Part B:** Skipped, the 2026-10-20 entry exists. Queue rows 238-247 are done. Still queued: row 248 onward.
 
+- **Deploy:** content PR #38 merged (merge commit 15e5ced); the site repo had no foreign commits. Lean scratch copy again (disk nearly full; no `.git`, `dist`, `.astro`; linked `node_modules`). Scratch build clean, 1730 pages built; the live sitemap had 1668 URLs, none missing from the build (removed 0); 61 paths added (6 new patterns plus generated pages). Sample page has one `<h1>`; the "search phrases:" text is only inside an HTML comment, same as existing pages. Pushed to site repo `main` as 38ff7935c. No Vercel hook is set. A live check right after the push returned 404 for /upsell-at-the-wrong-moment/, so **pushed, not verified live** (known gap in deploy.md). Only the 6 new pages, the taxonomy page and the goal and category index pages were published; the four Extends edits are in non-HMI categories and are not published by this runbook.
+
 ## Schedule
 | Item | Value |
 |---|---|
