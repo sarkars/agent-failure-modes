@@ -963,8 +963,9 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 - **Part C asset 4 (teardown), NEDA "Tessa" chatbot: Done** (`incidents/neda-tessa-chatbot-weight-loss-advice-2023.md`, 97 lines, guide section 6, "Read this first" health note). 3 searches; opened NPR (via WYPR copy), Gizmodo, Fortune. The NPR.org copy timed out; NEDA's own statement and the researchers' posts were not opened and are listed as such on the page. The NEDA/vendor contract dispute is reported as both sides' claims, not decided.
 - **Part A2 retrofits and Part E:** nothing left (E6 note written, **waiting for the owner to create the code repo**).
 - **Part B:** Skipped. The 2026-10-20 entry already exists.
-- **Taxonomy:** 74 entries; signals 74 of 74; Moves 74 of 74; fifteen flagged. Queue: rows 88 to 97 done; 
+- **Taxonomy:** 74 entries; signals 74 of 74; Moves 74 of 74; fifteen flagged. Queue: rows 88 to 97 done; about 335 rows remain Queued.
 - **Unverified claims:** anything read only in search summaries is kept out of public text; outside-framework mappings remain Needs review.
+- **Deploy:** content PR #23 merged (merge commit e4457cf); site repo had no foreign commits. Scratch build clean, 1636 pages; live sitemap had 1592 URLs, none missing (removed: 0; 43 added: the 4 new patterns plus pages from earlier runs not yet live). Importer re-dated 61 unchanged pages; those were reverted so only 4 new pages and 4 changed goal/category pages were copied. Pushed as site commit 2207d6d79. No deploy hook set. Live check: `/silent-sandbagging/` still 404 about 5 minutes after the push (same Vercel-on-push gap noted in the Deploy page); not pushed again.
 
 ## Backlog (not scheduled)
 Ideas from earlier lists that were never chosen. They stay out of the queue until someone adds them.
