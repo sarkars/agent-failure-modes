@@ -124,6 +124,32 @@ Penny: Your Tuesday balance was $12.40 when the $47.18 debit posted...
 
 **Fix:** Send a visible acknowledgment the moment the user's message is sent, then show a status line for as long as work continues, so the user can tell the assistant is working. Track the time from send to first visible feedback, separately from total response time. See [Silent long-running work](../../../../../by-capability/human-machine-interface/goals/response-time/failures/silent-long-running-work.md).
 
+### Missed async promises
+
+*Illustrative dialogue, not a real transcript.*
+
+Without the fix (Harbor Home Services SMS thread, Monday 4:50 pm):
+
+```
+User: My water heater is leaking, can someone come tomorrow?
+Bot: Thanks! We'll reply within 24 hours.
+(Tuesday 4:50 pm: no message)
+User: Hello?? It's been a day.
+```
+
+With the fix:
+
+```
+User: My water heater is leaking, can someone come tomorrow?
+Bot: Got it. A dispatcher will text you a time slot by 10:00 am Tuesday.
+(Tuesday 8:30 am, 75% of the window: no slot booked, dispatcher queue full)
+Bot: Still working on your slot. I've moved your request to Dana, our on-call lead, and she will text you by 10:00 am.
+```
+
+**What the user experiences:** In the first thread the promise passes with no word, so the user has to chase a company that said it would reply.
+
+**Fix:** Promise only a time that a timer and a queue can enforce, such as "by 10:00 am Tuesday," and start the timer when the promise is sent. At 75% of the window, check the request's status and either send an update or reassign it to a named person, so the window never passes silently. Many help desks work the same way: Intercom lets teams set a lead time so a workflow can warn, reassign, or escalate before an SLA target is missed ([Intercom](https://www.intercom.com/changes/en/146362-act-on-sla-breaches-before-and-after-they-happen)). Track the promised-time-met rate (a starting target of over 95%, to be tuned to your own volume). See [Silent failure and timeout](../../../../../by-capability/human-machine-interface/goals/response-time/failures/silent-failure-and-timeout.md).
+
 ---
 
 ## References

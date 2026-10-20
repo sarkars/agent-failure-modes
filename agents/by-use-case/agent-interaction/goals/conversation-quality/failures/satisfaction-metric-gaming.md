@@ -84,3 +84,37 @@ Bot (after): There are 3 Boston flights today. The 4:10 p.m. has seats. Rebook y
 ```
 **What the user experiences:** a warm, busy bot that produces messages but no flight options, so the one thing they asked for stays undone.
 **Fix:** judge the bot by task outcomes, such as whether the rebooking was completed and how many messages and minutes it took, not by tone, message count, or time in chat. Put the result in the first reply and trim reassurance that carries no information. No closely matching HMI pattern page exists yet.
+
+### Conversation-quality measurement gaps
+*Illustrative dialogue, not a real transcript.* Setting: a US bank's mobile-app assistant, scored by an automated LLM judge on every chat. LangChain's [State of Agent Engineering](https://langchain.com/state-of-agent-engineering) survey reports that 32% of respondents named quality a top barrier to production, and that 53.3% use LLM-as-judge and 59.8% use human review for evaluation.
+```
+User (bank app): A $48.20 charge from "QWIK-MART 0417" is on my debit card. I didn't make it.
+Bot (before): I'm sorry about that! I've noted your concern about the charge. Is there anything else I can help with?
+User: Did you dispute it? I need the money back.
+Bot (before): Thanks for reaching out! Your concern has been recorded. Have a great day!
+User: So nothing was filed?
+Judge: empathy 5/5, politeness 5/5, "resolved" (user stopped replying).
+
+User (same request):
+Bot (after): I can file a dispute for the $48.20 QWIK-MART charge now. Your card ends in 4417. Should I also freeze it?
+```
+**What the user experiences:** a polite bot that never filed the dispute, and a last message ("So nothing was filed?") showing the problem still stands.
+**Fix:** score conversations on confirmed outcomes (a dispute case number exists, no repeat contact on the same charge within 7 days), not on tone or on the user going quiet. Have people review a weekly random sample, including conversations the judge scored 5/5, and recalibrate the judge until it agrees with them. Track judge-versus-human agreement and the correlation between the quality score and confirmed outcomes.
+
+### Containment counted as success
+*Illustrative dialogue, not a real transcript.* Setting: a US cable provider's website chat, where the dashboard counts any chat that ends without a person as "contained." Fin's [glossary](https://fin.ai/glossary/containment-rate) defines containment as the share of automated conversations that end without escalating to a human, and notes that a customer who gives up is also counted as contained. The [HMI metrics page](../../../../../by-capability/human-machine-interface/reference/metrics.md) covers how containment is computed and where it misleads.
+```
+User (provider website chat): I moved last week. Can you transfer my internet to 218 Oak St?
+Bot (before): You can manage your plan under Account > Billing. Is there anything else?
+User: That has no transfer option. I need to move service.
+Bot (before): For more information, please visit our help center.
+User: Can I talk to a person?
+Bot (before): I can help with plans, billing and outages. Which one is it?
+User: (closes the chat)
+Dashboard: contained, no handoff.
+
+User (same request):
+Bot (after): Moves need a technician visit, so I'll connect you to an agent now. I've passed along 218 Oak St and your move date.
+```
+**What the user experiences:** three wrong answers, a request for a person that goes unanswered (see [talk to a human ignored or looped](../../../../../by-capability/human-machine-interface/goals/human-handoff/failures/talk-to-a-human-ignored-or-looped.md)), then giving up and calling the next day.
+**Fix:** report confirmed resolution next to containment: count a chat as resolved only if the user confirms it or does not return on the same issue within 7 days, and flag chats that end right after a "person" request or a repeat of the same question. The number to watch is the gap between containment and confirmed resolution.

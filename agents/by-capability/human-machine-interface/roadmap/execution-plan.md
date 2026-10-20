@@ -349,16 +349,16 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 105 | RT-03 | Unpredictable latency | Extends | V | `goals/response-time/failures/unpredictable-latency.md` | Done | 29 |
 | 106 | RT-07 | Queue wait with no ETA | Extends | - | `goals/response-time/failures/queue-wait-with-no-eta.md` | Done | 29 |
 | 107 | RT-14 | Fast replies, slow resolution | Extends | V | `goals/response-time/failures/fast-replies-slow-resolution.md` | Done | 29 |
-| 108 | RT-04 | Pacing mismatch | New | R | `goals/response-time/failures/pacing-mismatch.md` | Queued |  |
-| 109 | RT-05 | Deceptive typing indicators | New | L | `goals/response-time/failures/deceptive-typing-indicators.md` | Queued |  |
-| 110 | RT-08 | Missed async promises | Extends | - | `goals/response-time/failures/missed-async-promises.md` | Queued |  |
-| 111 | RT-09 | Session timeout and lost context | New | - | `goals/response-time/failures/session-timeout-and-lost-context.md` | Queued |  |
-| 112 | RT-10 | Impatient idle nudges | New | - | `goals/response-time/failures/impatient-idle-nudges.md` | Queued |  |
-| 113 | RT-11 | Urgency-blind pacing | New | - | `goals/response-time/failures/urgency-blind-pacing.md` | Queued |  |
-| 114 | RT-12 | Streaming that rewrites itself | Extends | - | `goals/response-time/failures/streaming-that-rewrites-itself.md` | Queued |  |
-| 115 | XA-02 | Conversation-quality measurement gaps | Extends | V, R | `goals/measurement-and-feedback/failures/conversation-quality-measurement-gaps.md` | Queued |  |
-| 116 | XA-03 | No way to report bad behaviour | New | R | `goals/measurement-and-feedback/failures/no-way-to-report-bad-behaviour.md` | Queued |  |
-| 117 | ME-01 | Containment counted as success | Extends | - | `goals/measurement-and-feedback/failures/containment-counted-as-success.md` | Queued |  |
+| 108 | RT-04 | Pacing mismatch | New | R | `goals/response-time/failures/pacing-mismatch.md` | Done | 30 |
+| 109 | RT-05 | Deceptive typing indicators | New | L | `goals/response-time/failures/deceptive-typing-indicators.md` | Done, Needs review | 30 |
+| 110 | RT-08 | Missed async promises | Extends | - | `goals/response-time/failures/missed-async-promises.md` | Done | 30 |
+| 111 | RT-09 | Session timeout and lost context | New | - | `goals/response-time/failures/session-timeout-and-lost-context.md` | Done | 30 |
+| 112 | RT-10 | Impatient idle nudges | New | - | `goals/response-time/failures/impatient-idle-nudges.md` | Done | 30 |
+| 113 | RT-11 | Urgency-blind pacing | New | - | `goals/response-time/failures/urgency-blind-pacing.md` | Done | 30 |
+| 114 | RT-12 | Streaming that rewrites itself | Extends | - | `goals/response-time/failures/streaming-that-rewrites-itself.md` | Done | 30 |
+| 115 | XA-02 | Conversation-quality measurement gaps | Extends | V, R | `goals/measurement-and-feedback/failures/conversation-quality-measurement-gaps.md` | Done | 30 |
+| 116 | XA-03 | No way to report bad behaviour | New | R | `goals/measurement-and-feedback/failures/no-way-to-report-bad-behaviour.md` | Done | 30 |
+| 117 | ME-01 | Containment counted as success | Extends | - | `goals/measurement-and-feedback/failures/containment-counted-as-success.md` | Done | 30 |
 | 118 | ME-02 | Survey bias | New | - | `goals/measurement-and-feedback/failures/survey-bias.md` | Queued |  |
 | 119 | ME-03 | Reviewing only failures | New | - | `goals/measurement-and-feedback/failures/reviewing-only-failures.md` | Queued |  |
 | 120 | ME-04 | Tone changes shipped with no regression test | New | - | `goals/measurement-and-feedback/failures/tone-changes-shipped-with-no-regression-test.md` | Queued |  |
@@ -977,7 +977,19 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 - **Part B:** Skipped. The 2026-10-20 entry already exists.
 - **Taxonomy:** 75 entries; signals 75 of 75; Moves 75 of 75; fifteen flagged. Queue: rows 98 to 107 done; about 325 rows remain Queued.
 - **Unverified claims:** anything read only in search summaries is kept out of public text; outside-framework mappings remain Needs review.
-- **Deploy:** (filled in after Part D)
+- **Deploy:** content PR #24 merged (merge commit 3ed2d36); the site repo had no foreign commits. Scratch build clean, 1638 pages; the live sitemap had 1592 URLs, none missing from the build (removed: 0). New pages: scope-shrink-on-long-tasks and the S1 preregistration; changed: failure-taxonomy-v1, the effort-and-memory goal page, the HMI category page. Both new pages have exactly one `<h1>` and no visible `search phrases:` text. Importer re-dated pages were not copied. Extends sections and the sycophancy teardown are outside the runbook's publish scope. Pushed as site commit 074aec60e. No deploy hook set. Live check of the new page not yet done at the time of writing; Vercel build-on-push still unconfirmed.
+
+### Run 30 (scheduled): 2026-10-20 onward
+- **Coordinator run:** 10 subagents wrote in parallel; I read the results, checked headers, specs and placeholders, and updated the shared files. Deviation: the Goal row of two pages combines the family README goal with the catalog goal, since the two differ.
+- **Part A new patterns (rows 108, 109, 111, 112, 113, 116, guide section 2):** RT-04 pacing-mismatch (181 lines, 3 searches; NN/g opened, Gnewuch ECIS 2018 and BISE 2022 abstract-only, the NYU news piece on Tan and Nov CHI'26 press-level only), RT-09 session-timeout-and-lost-context (235 lines, 5 searches; opened the Dialogflow CX session doc, two Zendesk articles and WCAG 2.2.1 re-authenticating), RT-10 impatient-idle-nudges (194 lines, 4 searches; ServiceNow, Genesys, AWS Connect, WCAG 2.2.1), RT-11 urgency-blind-pacing (231 lines, 4 searches; CFPB June 2023 report, Reg E 1005.6(b), Zendesk SLA doc, OpenCX), XA-03 no-way-to-report-bad-behaviour (203 lines, 6 searches; CFPB spotlight, Intercom Fin FAQ, Microsoft Copilot feedback, Claude Console feedback): **Done**. Also created the family README `goals/measurement-and-feedback/README.md`. No public incident found for any of them; each page says so. Summary-only items stay out of the fixes and are listed as unverified in each Deep dive (OpenAI sycophancy posts returned 403, so the thumbs-as-reward claim is unverified).
+- **RT-05 deceptive-typing-indicators (row 109): Done, Needs review** (240 lines, 4 searches, flag L, "Read this first" note present). Opened NICE CXone, Chatfuel, Twilio, a WhatsApp presence module and California B&P 17940 and 17941 on a mirror (the legislature site returned 403). Statute effective date, penalties and the reading of "intent to mislead" are unverified; the page says no source ties a typing indicator alone to a legal breach. Needs a legal reader.
+- **Extends (rows 110, 114, 115, 117, guide section 3):** RT-08 into response-time-sla-breach, RT-12 into streaming-stalls, XA-02 and ME-01 into satisfaction-metric-gaming: **Done**, chat examples only. `git diff` shows additions only. The examples are invented dialogues and say so. Review: one new heading says "Illustrative dialogue, not a real transcript" while an older one says "Illustrative transcript, not a real log"; both are valid. Catalog cells for the four now read **Covered**: example in the target page.
+- **Part C asset 3 (scenario pack), first four packs: Done, Needs review** (`tests/over-confirmation.md`, `hollow-empathy.md`, `message-bursts.md`, `key-details-buried.md`, 88 to 97 lines each, guide section 6). Every Results table says "Not yet run". Names and orders are invented and labeled fake. No thresholds were invented for message bursts; the file tells the tester to record the product's own settings. Two tests cannot be judged from a transcript alone and the files say so.
+- **Part C asset 4 (teardown), Taco Bell voice AI drive-thru, 2025: Done, Needs review** (`incidents/taco-bell-drive-thru-ai-order-failures-2025.md`, 82 lines, below the 85 to 110 target; nothing added to reach it). 3 searches; opened Fortune (2025-03-19), Restaurant Technology News (2025-08-30), Gigazine (2025-08-31), Cyber Daily (2025-09-02) and the AI Incident Database. **Not opened:** WSJ, BBC (blocked), Computing (403), any Taco Bell or Yum! statement. The page states where sources disagree (rollout start, the crash claim, order counts). It links order-mix-ups-at-the-speaker as a partial fit.
+- **Part A2 retrofits and Part E:** nothing left.
+- **Part B:** Skipped. The 2026-10-20 entry already exists.
+- **Taxonomy:** 81 entries in 23 families; signals 81 of 81; Moves 81 of 81; sixteen flagged. Queue: rows 108 to 117 done; about 315 rows remain Queued.
+- **Unverified claims:** anything read only in search summaries is kept out of public text.
 
 ## Backlog (not scheduled)
 Ideas from earlier lists that were never chosen. They stay out of the queue until someone adds them.

@@ -2,21 +2,21 @@
 
 > **Status:** v1 draft, proposed, not yet calibrated against human-labeled conversations. Written 2026-10-20 from the pattern pages as they exist today. Nothing here is a measured result.
 
-This is a plain index of the 75 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
+This is a plain index of the 81 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
 
 The taxonomy pairs with the [conversation event schema v0.1](conversation-event-schema-v0.1.md). The schema describes what a turn looks like in a log; this page names the failures. A pattern's own page holds the fix, the metrics, and (for some) a "Detection signals (proposed, not yet calibrated)" block that says which schema fields it reads.
 
 ## What this page is and is not
 
-- It lists every file found in `goals/*/failures/*.md`: **75 entries in 22 families**. If a pattern is added or removed, this count changes.
+- It lists every file found in `goals/*/failures/*.md`: **81 entries in 23 families**. If a pattern is added or removed, this count changes.
 - It copies each pattern's one-sentence Issue line, its Stakes row, and whether a Detection signals block exists. It does not add facts the page does not state.
-- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **75 of 75** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **75 of 75** pages have one.
+- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **81 of 81** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **81 of 81** pages have one.
 - It does not rank patterns by frequency or harm. No counts of real-world occurrences are given because none have been measured here.
 - It does not map patterns to outside frameworks (such as OWASP or NIST). That mapping is **Needs review** by a person and is not part of v1.
 
 ## Reading the flags
 
-A pattern carries **Read this first: needs expert or legal review** when its own page opens with a "Read this first" notice. That notice says the page is design guidance, not legal, clinical, security, or fraud-operations advice. Fifteen pages carry it. Other pages may also touch legal or safety topics without that notice; the notice on the page is the signal used here, nothing more.
+A pattern carries **Read this first: needs expert or legal review** when its own page opens with a "Read this first" notice. That notice says the page is design guidance, not legal, clinical, security, or fraud-operations advice. Sixteen pages carry it. Other pages may also touch legal or safety topics without that notice; the notice on the page is the signal used here, nothing more.
 
 ## Entries by family
 
@@ -167,6 +167,14 @@ Family folder: `human-handoff` ([family README](../../goals/human-handoff/README
 | `bot-keeps-replying-after-a-person-joins` | Bot keeps replying after a person joins | A support chatbot keeps answering after a human agent joins the chat, so the customer gets two replies, often contradicting each other, and the agent loses control of the conversation. | Low to high. Two conflicting answers about a refund, a deadline, or a policy are worse than one wrong answer. | yes | hand_off, admit_uncertainty | [page](../../goals/human-handoff/failures/bot-keeps-replying-after-a-person-joins.md) |
 | `handoff-outside-staffed-hours-with-no-alternative` | Handoff outside staffed hours with no alternative | A chatbot says a person will join the chat, but no one is staffed until tomorrow, and it offers no callback, ticket, or email to bridge the gap. | Any. Low for a shipping question; high for a locked account, a fraud charge, or a deadline that falls before the next shift. | yes | lead_with_answer, offer_choices, hand_off | [page](../../goals/human-handoff/failures/handoff-outside-staffed-hours-with-no-alternative.md) |
 
+### Measurement and feedback
+
+Family folder: `measurement-and-feedback` ([family README](../../goals/measurement-and-feedback/README.md))
+
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `no-way-to-report-bad-behaviour` | No way to report bad behaviour | Users can't flag a wrong or harmful chatbot reply, or the thumbs-down they click says "Thanks for your feedback" and then goes to no one. | Any. At low stakes the team keeps repeating a mistake; with money, health, or legal advice a wrong reply keeps hurting people unseen. | yes | offer_choices, hand_off, admit_uncertainty | [page](../../goals/measurement-and-feedback/failures/no-way-to-report-bad-behaviour.md)  |
+
 ### Refusals and boundaries
 
 Family folder: `refusals-and-boundaries` ([family README](../../goals/refusals-and-boundaries/README.md))
@@ -213,7 +221,12 @@ Family folder: `response-time` ([family README](../../goals/response-time/README
 
 | Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
 |---|---|---|---|---|---|---|
+| `deceptive-typing-indicators` | Deceptive typing indicators | A chatbot shows typing dots to look human or while nothing is running, so users think a person is writing; show them only during real work. | Medium. Higher in sales, health, banking, and support, where a user decides based on who they think they are talking to. **Read this first: needs expert or legal review.** | yes | lead_with_answer, offer_choices, hand_off | [page](../../goals/response-time/failures/deceptive-typing-indicators.md)  |
+| `impatient-idle-nudges` | Impatient idle nudges | The assistant asks "Are you still there?" or closes the chat after a short silence, even when the user is finding a document, reading, or typing, so the user feels rushed and may leave. | Low to high. A closed claim, application, or payment chat costs the user their progress. | yes | offer_choices, hand_off | [page](../../goals/response-time/failures/impatient-idle-nudges.md)  |
+| `pacing-mismatch` | Pacing mismatch | A long reply lands all at once as one block, or a ready reply is held back behind fake typing dots, so the pace fits neither the user's reading nor their urgency. | Low to medium. It rises when the user is stranded, in a hurry, or the delay hides the one fact they need. | yes | lead_with_answer, offer_choices | [page](../../goals/response-time/failures/pacing-mismatch.md)  |
 | `silent-failure-and-timeout` | Silent failure and timeout | A request times out or a streamed answer is cut off and the user sees no error: a spinner that never ends, or partial text that looks finished. | Medium. Users resend, which can duplicate actions, or act on a partial answer. | yes | admit_uncertainty, offer_choices, hand_off | [page](../../goals/response-time/failures/silent-failure-and-timeout.md)  |
+| `session-timeout-and-lost-context` | Session timeout and lost context | A chat session expires on a timer the user was never told about, or a user who comes back after a gap is treated as new, so the work done so far has to be repeated. | Low to high. Losing a chat about store hours is a nuisance; losing a half-finished claim, return, or dispute costs time and can lose the user's place in line. | yes | offer_choices, admit_uncertainty, hand_off | [page](../../goals/response-time/failures/session-timeout-and-lost-context.md)  |
+| `urgency-blind-pacing` | Urgency-blind pacing | A chatbot answers a fraud alert, a lost card, or an outage report with the same greeting, menus, questions, and queue as a casual question, so the urgent user waits as long as everyone else. | High. Money, access, or a business running down while the user waits. | yes | lead_with_answer, offer_choices, hand_off | [page](../../goals/response-time/failures/urgency-blind-pacing.md)  |
 | `silent-long-running-work` | Silent long-running work | The assistant works on a request for about 10 seconds or more, with no status, progress, or estimate, so the user cannot tell whether it is working or stuck. | Low to medium. Users resend, reload, or leave, which can duplicate actions or lose work. | yes | admit_uncertainty, offer_choices, hand_off | [page](../../goals/response-time/failures/silent-long-running-work.md)  |
 
 ### Stakes calibration
