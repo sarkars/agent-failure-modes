@@ -11,15 +11,16 @@ Shared metrics the patterns below report against. Targets are starting points to
 |---|---|---|
 | Truthful identity answer rate | 100% | [undisclosed bot identity](failures/undisclosed-bot-identity.md) |
 | Claimed-done vs. actually-done mismatch | About 0 | undisclosed bot identity |
+| Promise-kept rate | 98% (starting point) | [no follow through](failures/no-follow-through.md) |
 
 ## Patterns
 | Pattern | One line |
 |---|---|
 | Undisclosed bot identity | Hides that it is an AI, or what it cannot do |
+| [No follow-through](failures/no-follow-through.md) | "I'll update you" is never recorded or kept |
 
 ## Planned (not yet written)
-- No follow-through
-- Over-hedging
+- Over-hedging (a chat example sits in [model uncertainty unawareness](../../../reasoning-and-thought/goals/model-behavior-and-capabilities/failures/model-uncertainty-unawareness.md))
 
 ## Related
 - [Age adaptation](../age-adaptation/README.md)

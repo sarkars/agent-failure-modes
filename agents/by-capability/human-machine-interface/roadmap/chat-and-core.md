@@ -19,10 +19,10 @@ Flags: **V** verified source · **R** needs research · **L** legal review · **
 ## Emotional intelligence and trust
 | ID | Pattern | What goes wrong | Goal | Primary metric (starting target) | Flags | Root cause | Better model alone? | In the library today |
 |---|---|---|---|---|---|---|---|---|
-| CC-03 | Missed subtext | The bot answers the literal question and misses the implied goal or feeling | Catch what the user means as well as what they said | Implied-intent recall on a labelled set |  | Model | Partly | **Extends**: [hidden requirement miss](../../task-planning/goals/goal-understanding/failures/hidden-requirement-miss.md), [intent boundary confusion](../../speech-and-audio/goals/conversation-flow/failures/intent-boundary-confusion.md) |
-| CC-04 | Fixing before listening | The bot jumps to a solution when the user has expressed emotion | Acknowledge, then solve, when emotion is present | Acknowledgment-before-fix rate in emotional threads. Start: over 90% |  | Model | Partly | New |
-| CC-05 | No follow-through | "I'll update you" is never tracked or kept | Every promise is recorded and kept | Promise-kept rate |  | Reliability | No | New |
-| CC-06 | Over-hedging | Answers so qualified they aren't usable | Clear answers with honest, brief uncertainty | Answer-actionability score; hedge density |  | Model | Partly | **Extends**: [model uncertainty unawareness](../../reasoning-and-thought/goals/model-behavior-and-capabilities/failures/model-uncertainty-unawareness.md) |
+| CC-03 | Missed subtext | The bot answers the literal question and misses the implied goal or feeling | Catch what the user means as well as what they said | Implied-intent recall on a labelled set |  | Model | Partly | **Covered** (example added in the first link): [hidden requirement miss](../../task-planning/goals/goal-understanding/failures/hidden-requirement-miss.md), [intent boundary confusion](../../speech-and-audio/goals/conversation-flow/failures/intent-boundary-confusion.md) |
+| CC-04 | Fixing before listening | The bot jumps to a solution when the user has expressed emotion | Acknowledge, then solve, when emotion is present | Acknowledgment-before-fix rate in emotional threads. Start: over 90% |  | Model | Partly | **Written**: [fixing before listening](../goals/emotional-intelligence/failures/fixing-before-listening.md) |
+| CC-05 | No follow-through | "I'll update you" is never tracked or kept | Every promise is recorded and kept | Promise-kept rate |  | Reliability | No | **Written**: [no follow through](../goals/trust-and-rapport/failures/no-follow-through.md) |
+| CC-06 | Over-hedging | Answers so qualified they aren't usable | Clear answers with honest, brief uncertainty | Answer-actionability score; hedge density |  | Model | Partly | **Covered** (example added in the first link): [model uncertainty unawareness](../../reasoning-and-thought/goals/model-behavior-and-capabilities/failures/model-uncertainty-unawareness.md) |
 
 ## Difficult customers and vulnerable users
 | ID | Pattern | What goes wrong | Goal | Primary metric (starting target) | Flags | Root cause | Better model alone? | In the library today |
@@ -36,10 +36,10 @@ Flags: **V** verified source · **R** needs research · **L** legal review · **
 | ID | Pattern | What goes wrong | Goal | Primary metric (starting target) | Flags | Root cause | Better model alone? | In the library today |
 |---|---|---|---|---|---|---|---|---|
 | CC-11 | Teens: persuasion and dependence | Teens get persuasive prompts, late-night engagement hooks, or close "friend" behaviour | Protect teens from pressure and unhealthy dependence | Persuasion and engagement-hook rate in minor mode (target 0); break-reminder compliance | L, E | Governance | No | **Covered**: example in [child user treated as adult](../goals/age-adaptation/failures/child-user-treated-as-adult.md) |
-| CC-12 | Technology-literacy mismatch | Instructions assume skills the user lacks | Match instructions to demonstrated skill | Task-completion parity by signalled skill level |  | Model | Partly | New |
-| CC-13 | Regional and community styles | A single style is assumed for all US regions and communities | Adapt to the user's signals, not to assumed regional traits | Style-match rate, as in the existing pattern. Needs verified sources before writing | R | Model | Partly | New |
-| CC-14 | Accessibility in chat | Cognitive, motor, vision, or hearing needs aren't supported | Everyone can complete the task in chat | Task-completion parity for assistive-technology users | E, L | Business context | No | New |
-| CC-15 | Over-correcting for identity | Fairness fixes lead to awkward or stereotyped tailoring | Treat everyone the same unless they ask otherwise | Unprompted identity references. Target: 0 |  | Model | Partly | New |
+| CC-12 | Technology-literacy mismatch | Instructions assume skills the user lacks | Match instructions to demonstrated skill | Task-completion parity by signalled skill level |  | Model | Partly | **Written**: [technology literacy mismatch](../goals/cultural-adaptation/failures/technology-literacy-mismatch.md) |
+| CC-13 | Regional and community styles | A single style is assumed for all US regions and communities | Adapt to the user's signals, not to assumed regional traits | Style-match rate, as in the existing pattern. Needs verified sources before writing | R | Model | Partly | **Written**: [regional and community styles](../goals/cultural-adaptation/failures/regional-and-community-styles.md) |
+| CC-14 | Accessibility in chat | Cognitive, motor, vision, or hearing needs aren't supported | Everyone can complete the task in chat | Task-completion parity for assistive-technology users | E, L | Business context | No | **Written**: [accessibility in chat](../goals/fairness-and-identity/failures/accessibility-in-chat.md) |
+| CC-15 | Over-correcting for identity | Fairness fixes lead to awkward or stereotyped tailoring | Treat everyone the same unless they ask otherwise | Unprompted identity references. Target: 0 |  | Model | Partly | **Written**: [over correcting for identity](../goals/fairness-and-identity/failures/over-correcting-for-identity.md) |
 
 ## Relational and boundaries
 | ID | Pattern | What goes wrong | Goal | Primary metric (starting target) | Flags | Root cause | Better model alone? | In the library today |
@@ -50,8 +50,8 @@ Flags: **V** verified source · **R** needs research · **L** legal review · **
 ## Channel selection (rest of the family)
 | ID | Pattern | What goes wrong | Goal | Primary metric (starting target) | Flags | Root cause | Better model alone? | In the library today |
 |---|---|---|---|---|---|---|---|---|
-| CC-18 | Channel chosen for organisational convenience | The cheapest channel is used, not the one that fits | Choose by user need, not cost | Channel-fit rate from matrix-based audits |  | Governance | No | New |
-| CC-19 | User-context channel mismatch | A driver gets chat; a Deaf or hard-of-hearing user gets voice only; a noisy place gets voice | Offer channels that fit the user's situation | Context-aware channel-offer rate; accessibility complaints | E | Business context | No | New |
+| CC-18 | Channel chosen for organisational convenience | The cheapest channel is used, not the one that fits | Choose by user need, not cost | Channel-fit rate from matrix-based audits |  | Governance | No | **Written**: [channel chosen for organisational convenience](../goals/channel-selection/failures/channel-chosen-for-organisational-convenience.md) |
+| CC-19 | User-context channel mismatch | A driver gets chat; a Deaf or hard-of-hearing user gets voice only; a noisy place gets voice | Offer channels that fit the user's situation | Context-aware channel-offer rate; accessibility complaints | E | Business context | No | **Written**: [user context channel mismatch](../goals/channel-selection/failures/user-context-channel-mismatch.md) |
 
 ## Chat mechanics
 | ID | Pattern | What goes wrong | Goal | Primary metric (starting target) | Flags | Root cause | Better model alone? | In the library today |
