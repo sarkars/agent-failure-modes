@@ -2,15 +2,15 @@
 
 > **Status:** v1 draft, proposed, not yet calibrated against human-labeled conversations. Written 2026-10-20 from the pattern pages as they exist today. Nothing here is a measured result.
 
-This is a plain index of the 74 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
+This is a plain index of the 75 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
 
 The taxonomy pairs with the [conversation event schema v0.1](conversation-event-schema-v0.1.md). The schema describes what a turn looks like in a log; this page names the failures. A pattern's own page holds the fix, the metrics, and (for some) a "Detection signals (proposed, not yet calibrated)" block that says which schema fields it reads.
 
 ## What this page is and is not
 
-- It lists every file found in `goals/*/failures/*.md`: **74 entries in 22 families**. If a pattern is added or removed, this count changes.
+- It lists every file found in `goals/*/failures/*.md`: **75 entries in 22 families**. If a pattern is added or removed, this count changes.
 - It copies each pattern's one-sentence Issue line, its Stakes row, and whether a Detection signals block exists. It does not add facts the page does not state.
-- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **74 of 74** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **74 of 74** pages have one.
+- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **75 of 75** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **75 of 75** pages have one.
 - It does not rank patterns by frequency or harm. No counts of real-world occurrences are given because none have been measured here.
 - It does not map patterns to outside frameworks (such as OWASP or NIST). That mapping is **Needs review** by a person and is not part of v1.
 
@@ -98,6 +98,7 @@ Family folder: `effort-and-memory` ([family README](../../goals/effort-and-memor
 | `lazy-completion` | Lazy completion | The assistant does a sample or part of the job and leaves the rest ("// rest of code here", "repeat for the others"), without saying exactly what is left or why. | Low to medium. It wastes time; it is worse when the user does not notice the gap and ships the partial result. | yes | lead_with_answer, offer_choices, hand_off | [page](../../goals/effort-and-memory/failures/lazy-completion.md)  |
 | `no-warning-of-context-loss` | No warning of context loss | When a conversation outgrows what the assistant can hold, or saved memory is full, early content is dropped, summarized, or never stored, and the assistant does not tell the user. | Low to high. Forgotten preferences are an annoyance; a dropped allergy, deadline, or constraint can lead to a wrong answer. | yes | admit_uncertainty, offer_choices, hand_off | [page](../../goals/effort-and-memory/failures/no-warning-of-context-loss.md)  |
 | `partial-answers-to-multi-part-questions` | Partial answers to multi-part questions | The user asks several things in one message and the assistant answers some of them, drops the rest, and writes the reply as if it were complete. | Low to high. Low for a skipped side question; high when the dropped part is a deadline, an allergy, a cancellation, or the one question the user most needs answered. | yes | lead_with_answer, admit_uncertainty, ask_clarifying_question, hand_off | [page](../../goals/effort-and-memory/failures/partial-answers-to-multi-part-questions.md)  |
+| `scope-shrink-on-long-tasks` | Scope shrink on long tasks | On a long task with many items, the assistant does the easy ones, narrows the job on its own, and reports as if the whole scope were done, or drops items midway without saying so. | Medium to high. The user ships or acts on a result they think is complete. | yes | offer_choices, lead_with_answer, hand_off | [page](../../goals/effort-and-memory/failures/scope-shrink-on-long-tasks.md)  |
 
 ### Embedded copilots
 
