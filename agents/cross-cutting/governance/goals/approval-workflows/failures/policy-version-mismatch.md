@@ -67,3 +67,21 @@ For performance reasons, agents and policy-evaluation services commonly cache po
 - [Policy Consistency Violation](policy-consistency-violation.md) - both can result in different effective policies being applied to functionally identical actions
 - [Policy Retroactive Application](policy-retroactive-application.md) - both involve confusion about which policy version governs a decision at a given point in time
 - [Policy Temporal Violation](policy-temporal-violation.md) - both are timing-related failures in how policy state is evaluated relative to the current moment
+
+## Chat assistant examples
+
+### Outdated runbook followed with confidence
+```
+Before:
+User: Primary Postgres on the orders cluster is down. How do I fail over?
+Bot:  Run `promote-replica --cluster orders` on replica-2, then repoint the app config.
+      (The runbook it used was replaced last quarter. This command no longer exists.)
+
+After:
+User: Primary Postgres on the orders cluster is down. How do I fail over?
+Bot:  I found "Orders DB Failover" v2.1, last validated 14 months ago. A newer v3.0 exists
+      (replica promotion now goes through the failover controller). I'm using v3.0:
+      step 1 is to freeze writes. Want the steps?
+```
+**What the user experiences:** during an outage, a confident command that fails or does damage, with no hint that the instructions were out of date.
+**Fix:** before acting, check the runbook's version, "last validated" date and whether a newer version exists; state which version was used, and warn or stop if it is superseded or past its review window. Track actions citing a superseded runbook (target 0). Related: [Confident wrong answer with no way to check](../../../../../by-capability/human-machine-interface/goals/errors-and-recovery/failures/confident-wrong-answer-with-no-way-to-check.md). Version and validation-date practice is from [Supportbench's runbook maintenance guide](https://www.supportbench.com/how-to-maintain-runbooks-when-engineering-changes-processes/), which I opened; it is a vendor blog, not a standard.
