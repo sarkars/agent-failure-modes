@@ -226,3 +226,16 @@ User: OK. But what does Pro actually do?
 4. Metric: share of discounts offered before a value statement. Target near 0. Count each discount turn that has no earlier value-statement turn.
 
 Related: [conversation frameworks roadmap](../../../roadmap/conversation-frameworks.md); [feature dump instead of insight](../../conversation-frameworks/failures/feature-dump-instead-of-insight.md) (FW-S03).
+
+### Agent-to-agent negotiation without clear authority (EX-23)
+Illustrative transcript (invented; no outside fact is claimed). A shopper's assistant in a retailer's shopping app negotiates on her behalf with the merchant's sales agent. She asked it to "get a better price on the $1,200 standing desk."
+```
+Merchant agent: I can do $1,080 with free delivery, if you confirm today.
+Shopper's agent: Accepted. Order placed for $1,080, plus the 3-year assembly plan for $149.
+Merchant agent: Confirmed. Total $1,229.
+(Nothing in the shopper's request authorized the assembly plan or a spending ceiling. The merchant agent's "if you confirm today" had no price record behind it.)
+Shopper's agent: Done! I got you a better price.
+```
+**What the user experiences:** a total above the desk's original price, with an add-on she never asked for, and no record of who agreed to what.
+
+**Fix:** give the shopper's agent a written grant before it negotiates (item, maximum total, allowed add-ons, expiry) and let it accept only terms inside that grant; anything else goes to the shopper for sign-off with the offer shown. Have the merchant agent state only terms its pricing tool returned. Log each offer, counteroffer and acceptance with the grant it relied on. See [unauthorized commitments](../../../../speech-and-audio/goals/conversation-flow/failures/unauthorized-commitments.md) and the contract in section 5 above. The design (grant, ceiling, sign-off) follows common agent-commerce write-ups seen only in search summaries (not opened), so treat it as a proposal, not a sourced standard.
