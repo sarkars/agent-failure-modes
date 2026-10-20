@@ -62,3 +62,21 @@ Sensitive-operation classification is often decided and documented at a policy o
 - [Approval Signature Verification](approval-signature-verification.md) - covers the case where the approval gate exists but its verification is weak, versus missing entirely here
 - [Admin Operation Called By Non-Admin](admin-operation-called-by-non-admin.md) - both involve a documented restriction that isn't backed by a runtime enforcement mechanism
 - [Owner Verification Not Enforced](owner-verification-not-enforced.md) - both are missing pre-execution checks on a mutating, consequential action
+
+## Chat assistant examples
+
+### Consent fatigue from tool sprawl
+```
+User: Get me ready for my 2 pm call with Acme.
+Bot:  To start, connect Google Calendar. Allow? [Allow] [Deny]
+User: Allow.
+Bot:  Connect Google Drive (read, edit, delete, share all files). Allow? [Allow] [Deny]
+User: Allow.
+Bot:  Connect Gmail (read, send, delete mail). Allow? [Allow] [Deny]
+User: Allow. Ugh, fine.
+Bot:  Connect Slack (read all channels, post as you). Allow? [Allow] [Deny]
+User: Allow.
+Bot:  Done. Your 2 pm is "Acme sync" with 3 attendees.   (the task needed calendar read and one Drive doc)
+```
+**What the user experiences:** four prompts in a row before any help, each with broad scopes the task did not need, so the user clicks Allow without reading. The one prompt that guards a risky scope (send, delete, post as you) looks the same as the harmless ones.
+**Fix:** request only the scopes the current task needs (calendar read, Drive read) and show them as one grouped prompt. Ask again, later and separately, when a step needs a wider scope such as sending mail, and name the action in that prompt. Keep read-only prompts rare so the risky ones stand out; Claude Code's security documentation lists "allowlisting frequently used safe commands" as its prompt fatigue mitigation (https://code.claude.com/docs/en/security, opened). Track prompts per session and scopes granted but never used. Related HMI pattern: [over-confirmation](../../../../../by-capability/human-machine-interface/goals/dialogue-management/failures/over-confirmation.md).

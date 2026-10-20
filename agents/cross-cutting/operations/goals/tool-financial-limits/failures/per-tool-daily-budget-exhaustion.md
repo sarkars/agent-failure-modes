@@ -66,3 +66,16 @@ consistently resetting usage at midnight and being consumed by 1pm.
 - [Per-Tool Monthly Budget Overrun](per-tool-monthly-budget-overrun.md) - the monthly-scale analog of the same fixed-cap-without-pacing problem
 - [Tool Budget Starvation](tool-budget-starvation.md) - describes what happens when the exhausted budget is shared across multiple consumers rather than one
 - [Budget Priority Misalignment](budget-priority-misalignment.md) - a priority scheme is one of the core fixes for exhaustion-window degradation
+
+## Chat assistant examples
+
+### Spend and category limits not enforced
+```
+Setting: a travel-booking chat assistant paying with a virtual card. The user's limit: $400 per trip, no alcohol.
+User: Book a gift for my host in Austin, keep it under $50.
+Bot:  I found a bottle of bourbon, $46 plus $9 shipping. Order placed.
+User: That's over $50 with shipping, and I said no alcohol.
+Bot:  You're right, sorry. The order has already been charged.
+```
+**What the user experiences:** a limit they stated in chat was treated as a suggestion, and the money was spent before anyone could object.
+**Fix:** enforce limits in the payment layer, not the prompt. Put a per-transaction cap, a daily cap and an allowed-categories list on the card or payment API, and check the final total including shipping and tax before the charge. Stripe Issuing, for example, applies `allowed_categories` and `spending_limits` before authorization and declines the purchase ([Stripe docs](https://docs.stripe.com/issuing/controls/spending-controls)); note that tips and fees posted later can still exceed a limit. When a charge is declined, the bot should say which limit blocked it and offer a compliant option or a human approval. Metric: transactions over the user's limits, target 0; a better model alone does not fix this. Related: [Splitting Payments Under Approval Limits](../../../../../by-capability/human-machine-interface/goals/finance-agents/failures/splitting-payments-under-approval-limits.md).
