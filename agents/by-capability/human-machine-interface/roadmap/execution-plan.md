@@ -1189,6 +1189,8 @@ AI-written help content in knowledge bases · agents using other agents' tools (
 - **Part A2 and Part E:** nothing left (E6: Waiting for the owner to create the code repo). **Part B:** skipped, `seo/log.md` already has an entry for 2026-10-20 UTC. Queue rows 268-277 are done or Needs review. Still queued: rows 278 and later (165 rows).
 - **Taxonomy and catalog:** 3 entries added to the failure taxonomy (now 167 entries in 36 families; Read-this-first count 51); catalog rows GV-14, 23, 34, 36, 37, 38, 39, 40, 41, 42 updated; family README gained 3 rows and 3 metrics.
 
+- **Deploy:** content PR #42 merged (merge commit a9af67e); branch reset to main. Part D stopped before the site push: the site repo's local `main` has one commit that is not on `origin/main` and that this run did not create (`ce9023275`, "Trigger deploy under repo owner", author mobilemag, 2026-10-21), and `origin/main` also moved (PR #2 "Check your bot" page). Nothing was pushed to the site repo and no scratch build was made. The 3 new patterns, the taxonomy, README and goal pages from runs 46 wait for the next run or the owner to publish once the site repo's `main` is clean. Not verified live.
+
 ## Schedule
 | Item | Value |
 |---|---|
