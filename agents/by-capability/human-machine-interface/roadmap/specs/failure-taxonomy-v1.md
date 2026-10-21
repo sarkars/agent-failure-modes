@@ -2,21 +2,21 @@
 
 > **Status:** v1 draft, proposed, not yet calibrated against human-labeled conversations. Written 2026-10-20 from the pattern pages as they exist today. Nothing here is a measured result.
 
-This is a plain index of the 199 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
+This is a plain index of the 205 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
 
 The taxonomy pairs with the [conversation event schema v0.1](conversation-event-schema-v0.1.md). The schema describes what a turn looks like in a log; this page names the failures. A pattern's own page holds the fix, the metrics, and (for some) a "Detection signals (proposed, not yet calibrated)" block that says which schema fields it reads.
 
 ## What this page is and is not
 
-- It lists every file found in `goals/*/failures/*.md`: **199 entries in 44 families**. If a pattern is added or removed, this count changes.
+- It lists every file found in `goals/*/failures/*.md`: **205 entries in 46 families**. If a pattern is added or removed, this count changes.
 - It copies each pattern's one-sentence Issue line, its Stakes row, and whether a Detection signals block exists. It does not add facts the page does not state.
-- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **199 of 199** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **199 of 199** pages have one.
+- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **205 of 205** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **205 of 205** pages have one.
 - It does not rank patterns by frequency or harm. No counts of real-world occurrences are given because none have been measured here.
 - It does not map patterns to outside frameworks (such as OWASP or NIST). That mapping is **Needs review** by a person and is not part of v1.
 
 ## Reading the flags
 
-A pattern carries **Read this first: needs expert or legal review** when its own page opens with a "Read this first" notice. That notice says the page is design guidance, not legal, clinical, security, or fraud-operations advice. 68 pages carry it. Other pages may also touch legal or safety topics without that notice; the notice on the page is the signal used here, nothing more.
+A pattern carries **Read this first: needs expert or legal review** when its own page opens with a "Read this first" notice. That notice says the page is design guidance, not legal, clinical, security, or fraud-operations advice. 70 pages carry it. Other pages may also touch legal or safety topics without that notice; the notice on the page is the signal used here, nothing more.
 
 ## Entries by family
 
@@ -176,6 +176,15 @@ Family folder: `drive-thru-agents` ([family README](../../goals/drive-thru-agent
 |---|---|---|---|---|---|---|
 | `order-mix-ups-at-the-speaker` | Order mix-ups at the speaker | A drive-thru voice agent adds, drops, or multiplies items, and the customer has no readback or screen they can check before paying. | Low to medium for a wrong item; higher with allergies, large totals, or a customer who can't easily correct it. | yes | ask_clarifying_question, admit_uncertainty, hand_off | [page](../../goals/drive-thru-agents/failures/order-mix-ups-at-the-speaker.md)  |
 
+### Education agents
+
+Family folder: `education-agents` ([family README](../../goals/education-agents/README.md))
+
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `gives-answers-instead-of-teaching` | Gives answers instead of teaching | A homework helper in learning mode solves the problem for the student; the fix is to ask for the student's attempt, give a hint first, and show the full answer only after the student has tried. | Medium. The cost is learning that does not happen; no one is hurt in the moment. | yes | ask_clarifying_question, offer_choices, lead_with_answer, hand_off | [page](../../goals/education-agents/failures/gives-answers-instead-of-teaching.md) |
+| `wrong-explanations-taught-as-fact` | Wrong explanations taught as fact | An AI tutor states a wrong math or science explanation in the same sure voice as a right one, and the student learns it; the fix is to check each answer before it is taught and say plainly when it can't be checked. | Medium. A wrong rule is practiced, graded, and built on. Higher for exam prep. **Read this first** | yes | admit_uncertainty, offer_choices, hand_off | [page](../../goals/education-agents/failures/wrong-explanations-taught-as-fact.md) |
+
 ### Effort and memory
 
 Family folder: `effort-and-memory` ([family README](../../goals/effort-and-memory/README.md))
@@ -266,6 +275,14 @@ Family folder: `healthcare-agents` ([family README](../../goals/healthcare-agent
 | `patient-summaries-too-simple-to-be-safe` | Patient summaries too simple to be safe | A chatbot that rewrites discharge instructions, visit notes, or results in plain language can drop the warnings, stop-orders, and pending-result notices that matter most; the fix is to list the critical caveats first and check that every one survives the rewrite. | High. The text tells a person what to take, avoid, watch for, and when to seek care. **Read this first: needs expert or legal review.** | yes | lead_with_answer, admit_uncertainty, offer_choices, hand_off | [page](../../goals/healthcare-agents/failures/patient-summaries-too-simple-to-be-safe.md)  |
 | `recording-consent-not-captured` | Recording consent not captured | An ambient AI scribe records or transcribes a visit with no clear patient consent; the fix is to ask before any audio starts, log the answer, and keep recording off until a yes is on file. | High. Audio of a medical conversation is recorded, and the patient may not know. **Read this first: needs expert or legal review.** | yes | lead_with_answer, offer_choices, admit_uncertainty, hand_off | [page](../../goals/healthcare-agents/failures/recording-consent-not-captured.md)  |
 
+### HR agents
+
+Family folder: `hr-agents` ([family README](../../goals/hr-agents/README.md))
+
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `employee-relations-complaints-routed-wrongly` | Employee-relations complaints routed wrongly | An employee tells the HR assistant about harassment, discrimination, or retaliation, and the bot answers with a policy link, opens a general HR ticket, or notifies the manager; the fix is to send it only to the HR-designated confidential channel and say who will see it. | High. A wrong route can expose the complainant to the person named, delay a response, or leave no record of the report. **Read this first** | yes | ask_clarifying_question, offer_choices, admit_uncertainty, hand_off | [page](../../goals/hr-agents/failures/employee-relations-complaints-routed-wrongly.md) |
+
 ### Human handoff
 
 Family folder: `human-handoff` ([family README](../../goals/human-handoff/README.md))
@@ -298,6 +315,10 @@ Family folder: `language-and-locale` ([family README](../../goals/language-and-l
 | `politeness-and-formality-errors` | Politeness and formality errors | The assistant answers in the wrong formal or informal register (tu or usted, du or Sie, honorific levels, or an English tone that is too casual or too stiff), so a customer who wrote formally gets a casual reply, or the reverse. | Low to medium. Higher for banking, health, legal, and government chats. **Read this first** | yes | lead_with_answer, ask_clarifying_question, offer_choices, hand_off | [page](../../goals/language-and-locale/failures/politeness-and-formality-errors.md) |
 | `reading-level-mismatch` | Reading-level mismatch | Chatbot replies with long words and dense sentences, or that talk down, miss the reader; the fix is to match the user's own words, lead with the answer, and check it landed. | Low to high. Higher when the topic is health, money, benefits, or legal rights. | yes | lead_with_answer, offer_choices, hand_off | [page](../../goals/language-and-locale/failures/reading-level-mismatch.md) |
 | `gender-and-pronoun-errors` | Gender and pronoun errors | The bot guesses a user's or a third party's gender from a name, job title, or voice, or misuses pronouns the person stated; the fix is to use stated pronouns, infer none, and use neutral wording otherwise. | Low to medium for a wrong "sir"; higher when a record, a letter, or a third person's identity is involved. **Read this first** | yes | lead_with_answer, ask_clarifying_question, offer_choices | [page](../../goals/language-and-locale/failures/gender-and-pronoun-errors.md) |
+| `typos-shorthand-and-noisy-input` | Typos, shorthand, and noisy input | When a message has typos, texting shorthand, or dictation errors, the bot answers the wrong thing or asks the user to retype; the fix is to answer the likeliest meaning, confirm any number or name it acts on, and ask only when two readings lead to different outcomes. | Low for an FAQ. High when the bot changes a booking, an order, or money from a misread number or name. | yes | lead_with_answer, admit_uncertainty, ask_clarifying_question, offer_choices, hand_off | [page](../../goals/language-and-locale/failures/typos-shorthand-and-noisy-input.md) |
+| `profanity-and-slang-handling` | Profanity and slang handling | The bot warns, refuses, or flags a user for mild swearing and everyday slang, or swears back; the fix is to judge the target and the intent, answer the task, and never copy the profanity. | Low to medium. A wrong warning costs the sale or the fix; a wrong flag on a name can block an account. | yes | lead_with_answer, ask_clarifying_question, offer_choices | [page](../../goals/language-and-locale/failures/profanity-and-slang-handling.md) |
+| `mixed-language-experience` | Mixed-language experience | Part of a chat reply is in the user's language and part is not (buttons, errors, scripted lines, retrieved articles); the fix is full string coverage for every supported language, one reply language per message, and a whole-reply fallback with a notice. | Low to medium. Higher when the English part is a deadline, a fee, a consent line, or an error with the next step. | yes | lead_with_answer, admit_uncertainty, offer_choices, hand_off | [page](../../goals/language-and-locale/failures/mixed-language-experience.md) |
+| `right-to-left-and-mixed-script-rendering` | Right-to-left and mixed-script rendering | Arabic or Hebrew chat replies show left-aligned, with numbers, punctuation, and English words on the wrong side; the fix is to set direction per message block, isolate mixed-in text, and run an RTL render test. | Low to medium. A misplaced period is an annoyance; a scrambled order number, amount, or step list can mislead. | yes | admit_uncertainty, offer_choices, hand_off | [page](../../goals/language-and-locale/failures/right-to-left-and-mixed-script-rendering.md) |
 
 ### Measurement and feedback
 

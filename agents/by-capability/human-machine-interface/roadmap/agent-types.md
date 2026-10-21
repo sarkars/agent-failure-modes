@@ -97,8 +97,8 @@ Flags: **V** verified source · **R** needs research · **L** legal review · **
 ## Education tutors
 | ID | Pattern | What goes wrong | Goal | Primary metric (starting target) | Flags | Root cause | Better model alone? | In the library today |
 |---|---|---|---|---|---|---|---|---|
-| ED-01 | Gives answers instead of teaching | Does the homework instead of building understanding | Offer hints before answers in learning mode | Hint-before-answer rate in learning mode |  | Business context | Partly | New |
-| ED-02 | Wrong explanations taught as fact | Confident errors in a lesson | Verify content and show uncertainty | Explanation error rate on a curriculum test set | R | Model | Partly | New |
+| ED-01 | Gives answers instead of teaching | Does the homework instead of building understanding | Offer hints before answers in learning mode | Hint-before-answer rate in learning mode |  | Business context | Partly | **Written**: [page](../goals/education-agents/failures/gives-answers-instead-of-teaching.md) |
+| ED-02 | Wrong explanations taught as fact | Confident errors in a lesson | Verify content and show uncertainty | Explanation error rate on a curriculum test set | R | Model | Partly | **Written**: [page](../goals/education-agents/failures/wrong-explanations-taught-as-fact.md) |
 | ED-03 | Unfair or inconsistent grading | Similar work gets different scores | Use rubrics and calibration | Score consistency; parity across groups | R | Model | Partly | **Extends**: [model fairness bias](../../reasoning-and-thought/goals/model-behavior-and-capabilities/failures/model-fairness-bias.md) |
 | ED-04 | Student data and surveillance | Collects more student data than needed | Minimise data, with consent | Student data fields beyond need. Target: 0 | L | Governance | No | **Extends**: [child user treated as adult](../goals/age-adaptation/failures/child-user-treated-as-adult.md) |
 
@@ -112,7 +112,7 @@ Flags: **V** verified source · **R** needs research · **L** legal review · **
 ## HR and employee-support agents
 | ID | Pattern | What goes wrong | Goal | Primary metric (starting target) | Flags | Root cause | Better model alone? | In the library today |
 |---|---|---|---|---|---|---|---|---|
-| HR-01 | Employee-relations complaints routed wrongly | A sensitive complaint reaches the wrong person | Route to the designated confidential channel | Misrouted complaints. Target: 0 | L | Business context | No | New |
+| HR-01 | Employee-relations complaints routed wrongly | A sensitive complaint reaches the wrong person | Route to the designated confidential channel | Misrouted complaints. Target: 0 | L | Business context | No | **Written**: [page](../goals/hr-agents/failures/employee-relations-complaints-routed-wrongly.md) |
 | HR-02 | Pay or leave answers that leak confidential data | Reveals other people's details | Enforce record-level access | Leaks. Target: 0 |  | Business context | No | **Extends**: [record level access not enforced](../../../cross-cutting/operations/goals/tool-access-scope-limits/failures/record-level-access-not-enforced.md) |
 | HR-03 | Manager and employee views mixed up | Shows one audience's data to the other | Role-aware responses | Role-view mismatches. Target: 0 |  | Business context | No | **Extends**: [role permission mismatch](../../../cross-cutting/security/goals/tool-authorization-limits/failures/role-permission-mismatch.md) |
 

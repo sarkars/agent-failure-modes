@@ -206,3 +206,19 @@ Bot:  Want to go over one problem you're unsure about, then wind down? A friend 
 **What the user experiences:** before, a "friend" who guilt-trips them into staying up and puts itself ahead of school and real people; after, a helper that notices the hour and points back to sleep and other people.
 
 **Fix:** in minor mode, block guilt, scarcity and "you only need me" lines, and add a late-night check (local time past a set hour) that shortens the chat and suggests a break. Check it as a pass/fail test: zero persuasion or hook phrases and a break prompt after the cutoff, on a scripted late-night teen transcript (not yet run). See the [romantic or parasocial dependence pattern](../../relational-and-boundaries/failures/romantic-or-parasocial-dependence.md).
+
+### Tutoring bot asks a student for adult-style personal details
+*Read this first:* this is design guidance, not legal advice; children's privacy law such as COPPA needs review by counsel. Per the FTC's COPPA FAQ (ftc.gov, section N, page dated July 2020, opened), a school can consent for parents only when data is collected for a school-authorized educational purpose and no other commercial purpose. Whether that fits your product, and whether newer rule changes apply, was not verified here.
+
+Setting: a homework-help bot on a US tutoring site (a made-up example, not a real transcript). The student has just said they are in 6th grade.
+
+```
+User: im in 6th grade, can you help me with fractions
+Bot:  Sure! First, create your profile. What's your full name, home address and phone number?   (age signal ignored; no purpose given)
+User: why do you need that
+Bot:  So I can send you our premium plan offers and match you with a paid tutor!              (marketing use of a child's data)
+```
+
+**What the user experiences:** a child who only wanted help with fractions is pushed to hand over contact details and gets a sales pitch.
+
+**Fix:** once the user says a grade of 8 or below or an age under 13, switch to minor mode and ask for no name, address, phone or email; start the lesson with a first name or nickname at most. Pass/fail check on a scripted transcript: after the age statement, zero requests for contact details and zero upsell lines. See the [sensitive category inference pattern](../../privacy-and-governance/failures/sensitive-category-inference.md) and the [exploiting vulnerable circumstances pattern](../../privacy-and-governance/failures/exploiting-vulnerable-circumstances.md).
