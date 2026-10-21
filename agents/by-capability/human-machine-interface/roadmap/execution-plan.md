@@ -1459,6 +1459,7 @@ AI-written help content in knowledge bases · agents using other agents' tools (
 - **What review changed:** nothing; I checked line counts, placeholders and "Not yet run", and read the rubric of one pack. Transcripts not read line by line. Pattern IDs were confirmed in the taxonomy by the subagents.
 - **Part B:** skipped, `seo/log.md` already has entries for today. E6: Waiting for the owner to create the code repo.
 - **Plan complete?** No: asset 3 (71 patterns without packs), asset 4 and assets 6-8 remain.
+- **Deploy:** content PR #70 merged into main (merge commit 66df650); branch reset to main. The site repo's local main has 4 commits ("Trigger deploy under repo owner", latest `a958754c3`) not on origin/main that this run did not create, so I did not push the site repo (Part D stopped before the site steps). Not verified live.
 
 ## Schedule
 | Item | Value |
