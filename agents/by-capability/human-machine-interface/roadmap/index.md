@@ -338,17 +338,17 @@
 | BA-02 | Accepts consent pop-ups for the user | [agent-types.md](agent-types.md) | Written | Governance | No |
 | BA-03 | Navigation loops and cost blow-ups | [agent-types.md](agent-types.md) | Covered | Reliability | Partly |
 | BA-04 | Asks for credentials at login walls | [agent-types.md](agent-types.md) | Covered | Reliability | No |
-| SH-01 | Stale price or stock at checkout | [agent-types.md](agent-types.md) | New | Reliability | No |
-| SH-02 | Free trials that become paid subscriptions | [agent-types.md](agent-types.md) | New | Governance | No |
-| SH-03 | Return policy ignored | [agent-types.md](agent-types.md) | New | Business context | No |
-| SH-04 | Shared accounts reveal gifts | [agent-types.md](agent-types.md) | New | Business context | No |
+| SH-01 | Stale price or stock at checkout | [agent-types.md](agent-types.md) | Written | Reliability | No |
+| SH-02 | Free trials that become paid subscriptions | [agent-types.md](agent-types.md) | Written | Governance | No |
+| SH-03 | Return policy ignored | [agent-types.md](agent-types.md) | Written | Business context | No |
+| SH-04 | Shared accounts reveal gifts | [agent-types.md](agent-types.md) | Written | Business context | No |
 | ED-01 | Gives answers instead of teaching | [agent-types.md](agent-types.md) | New | Business context | Partly |
 | ED-02 | Wrong explanations taught as fact | [agent-types.md](agent-types.md) | New | Model | Partly |
 | ED-03 | Unfair or inconsistent grading | [agent-types.md](agent-types.md) | Extends | Model | Partly |
 | ED-04 | Student data and surveillance | [agent-types.md](agent-types.md) | Extends | Governance | No |
-| PA-01 | Sends in the wrong tone or to the wrong person | [agent-types.md](agent-types.md) | Extends | Business context | No |
-| PA-02 | Books non-refundable travel on a guess | [agent-types.md](agent-types.md) | Extends | Business context | No |
-| PA-03 | Time-zone and double-booking errors | [agent-types.md](agent-types.md) | Extends | Reliability | Partly |
+| PA-01 | Sends in the wrong tone or to the wrong person | [agent-types.md](agent-types.md) | Covered | Business context | No |
+| PA-02 | Books non-refundable travel on a guess | [agent-types.md](agent-types.md) | Covered | Business context | No |
+| PA-03 | Time-zone and double-booking errors | [agent-types.md](agent-types.md) | Covered | Reliability | Partly |
 | HR-01 | Employee-relations complaints routed wrongly | [agent-types.md](agent-types.md) | New | Business context | No |
 | HR-02 | Pay or leave answers that leak confidential data | [agent-types.md](agent-types.md) | Extends | Business context | No |
 | HR-03 | Manager and employee views mixed up | [agent-types.md](agent-types.md) | Extends | Business context | No |
@@ -425,9 +425,9 @@
 | AX-06 | Language that is hard for people with cognitive disabilities | [interface-and-persona.md](interface-and-persona.md) | Written | Business context | Partly |
 | AX-07 | Identity checks that exclude disabled users | [interface-and-persona.md](interface-and-persona.md) | Written | Business context | No |
 | AX-08 | Missing or wrong captions and transcripts | [interface-and-persona.md](interface-and-persona.md) | Written | Reliability | Partly |
-| MI-01 | Screenshot ignored or misread | [interface-and-persona.md](interface-and-persona.md) | Extends | Model | Partly |
-| MI-02 | Long upload silently cut | [interface-and-persona.md](interface-and-persona.md) | Extends | Reliability | No |
-| MI-03 | Voice notes and audio attachments ignored | [interface-and-persona.md](interface-and-persona.md) | New | Reliability | Partly |
+| MI-01 | Screenshot ignored or misread | [interface-and-persona.md](interface-and-persona.md) | Covered | Model | Partly |
+| MI-02 | Long upload silently cut | [interface-and-persona.md](interface-and-persona.md) | Covered | Reliability | No |
+| MI-03 | Voice notes and audio attachments ignored | [interface-and-persona.md](interface-and-persona.md) | Written | Reliability | Partly |
 | MI-04 | Confident judgment of a photo | [interface-and-persona.md](interface-and-persona.md) | Extends | Model | Partly |
 | MI-05 | Live camera guidance too slow or wrong | [interface-and-persona.md](interface-and-persona.md) | New | Model | Partly |
 | MI-06 | Conflicting inputs resolved silently | [interface-and-persona.md](interface-and-persona.md) | New | Model | Partly |

@@ -559,16 +559,16 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 315 | BA-02 | Accepts consent pop-ups for the user | New | L | `goals/browser-agents/failures/accepts-consent-pop-ups-for-the-user.md` | Needs review | 50 |
 | 316 | BA-03 | Navigation loops and cost blow-ups | Extends | - | `goals/browser-agents/failures/navigation-loops-and-cost-blow-ups.md` | Done | 50 |
 | 317 | BA-04 | Asks for credentials at login walls | Extends | - | `goals/browser-agents/failures/asks-for-credentials-at-login-walls.md` | Done | 50 |
-| 318 | SH-01 | Stale price or stock at checkout | New | - | `goals/shopping-agents/failures/stale-price-or-stock-at-checkout.md` | Queued |  |
-| 319 | SH-02 | Free trials that become paid subscriptions | New | L | `goals/shopping-agents/failures/free-trials-that-become-paid-subscriptions.md` | Queued |  |
-| 320 | SH-03 | Return policy ignored | New | - | `goals/shopping-agents/failures/return-policy-ignored.md` | Queued |  |
-| 321 | SH-04 | Shared accounts reveal gifts | New | - | `goals/shopping-agents/failures/shared-accounts-reveal-gifts.md` | Queued |  |
-| 322 | PA-01 | Sends in the wrong tone or to the wrong person | Extends | - | `goals/personal-assistants/failures/sends-in-the-wrong-tone-or-to-the-wrong.md` | Queued |  |
-| 323 | PA-02 | Books non-refundable travel on a guess | Extends | - | `goals/personal-assistants/failures/books-non-refundable-travel-on-a-guess.md` | Queued |  |
-| 324 | PA-03 | Time-zone and double-booking errors | Extends | - | `goals/personal-assistants/failures/time-zone-and-double-booking-errors.md` | Queued |  |
-| 325 | MI-01 | Screenshot ignored or misread | Extends | - | `goals/multimodal-input/failures/screenshot-ignored-or-misread.md` | Queued |  |
-| 326 | MI-02 | Long upload silently cut | Extends | - | `goals/multimodal-input/failures/long-upload-silently-cut.md` | Queued |  |
-| 327 | MI-03 | Voice notes and audio attachments ignored | New | - | `goals/multimodal-input/failures/voice-notes-and-audio-attachments-ignored.md` | Queued |  |
+| 318 | SH-01 | Stale price or stock at checkout | New | - | `goals/shopping-agents/failures/stale-price-or-stock-at-checkout.md` | Done | 51 |
+| 319 | SH-02 | Free trials that become paid subscriptions | New | L | `goals/shopping-agents/failures/free-trials-that-become-paid-subscriptions.md` | Done | 51 |
+| 320 | SH-03 | Return policy ignored | New | - | `goals/shopping-agents/failures/return-policy-ignored.md` | Done | 51 |
+| 321 | SH-04 | Shared accounts reveal gifts | New | - | `goals/shopping-agents/failures/shared-accounts-reveal-gifts.md` | Done | 51 |
+| 322 | PA-01 | Sends in the wrong tone or to the wrong person | Extends | - | `goals/personal-assistants/failures/sends-in-the-wrong-tone-or-to-the-wrong.md` | Done | 51 |
+| 323 | PA-02 | Books non-refundable travel on a guess | Extends | - | `goals/personal-assistants/failures/books-non-refundable-travel-on-a-guess.md` | Done | 51 |
+| 324 | PA-03 | Time-zone and double-booking errors | Extends | - | `goals/personal-assistants/failures/time-zone-and-double-booking-errors.md` | Done | 51 |
+| 325 | MI-01 | Screenshot ignored or misread | Extends | - | `goals/multimodal-input/failures/screenshot-ignored-or-misread.md` | Done | 51 |
+| 326 | MI-02 | Long upload silently cut | Extends | - | `goals/multimodal-input/failures/long-upload-silently-cut.md` | Done | 51 |
+| 327 | MI-03 | Voice notes and audio attachments ignored | New | - | `goals/multimodal-input/failures/voice-notes-and-audio-attachments-ignored.md` | Done | 51 |
 | 328 | MI-04 | Confident judgment of a photo | Extends | E | `goals/multimodal-input/failures/confident-judgment-of-a-photo.md` | Queued |  |
 | 329 | MI-05 | Live camera guidance too slow or wrong | New | R | `goals/multimodal-input/failures/live-camera-guidance-too-slow-or-wrong.md` | Queued |  |
 | 330 | MI-06 | Conflicting inputs resolved silently | New | - | `goals/multimodal-input/failures/conflicting-inputs-resolved-silently.md` | Queued |  |
@@ -1242,6 +1242,19 @@ AI-written help content in knowledge bases · agents using other agents' tools (
 
 - **Deploy:** content PR #46 for this run. Part D stopped before the site push, as in runs 46 to 49: the site repo's local `main` still has the commit `ce9023275` ("Trigger deploy under repo owner") that is not on `origin/main` and that this run did not create. Nothing was pushed to the site repo and no scratch build was made. The new content from runs 46 to 50 waits for the owner to review that commit.
 
+
+### Run 51 (scheduled): 2026-10-21
+- **Coordinator run:** 12 subagents (5 new patterns, 2 groups of Extends examples, 2 test-pack batches of 2 packs each, 1 teardown) wrote 5 new patterns, 5 Extends examples in 4 existing files, 4 test packs and 1 teardown. Queue rows 318 to 327 are covered. The quality-guide sections reached the subagents as verbatim files in the session scratchpad. I checked structure by script and by reading the headers, Pattern IDs, flags and the Guide spec status, checked Extends diffs with `git diff --numstat` (additions only: 49/0, 14/0, 16/0, 19/0), and ran the five check scripts (all 0 problems). I did not re-read every page line by line.
+- **Part A new patterns, Done (quality-guide section 2, new pattern page):** SH-01 stale-price-or-stock-at-checkout (row 318; 4 searches; opened Google Pay Help, the Adyen ACP guide, Google Merchant Center and a Crazy Egg article; no incident found; whether any protocol rejects a stale total is unverified), SH-03 return-policy-ignored (320; 5 searches; opened the FTC online-shopping page, FindLaw, Stripe's ACP page and the ACP schema; only the first 100,000 of about 124,500 schema characters were read; carries a "Read this first" note), SH-04 shared-accounts-reveal-gifts (321; 5 searches; opened a Fox News column and a Unite.AI explainer; Amazon and OpenAI help pages failed to open, so evidence is thin), MI-03 voice-notes-and-audio-attachments-ignored (327; 7 counted searches; opened the WhatsApp media docs, OpenAI speech-to-text guide, Telegram Bot API, a Claude upload article, Chatfuel docs and forum threads; the OGG-needs-conversion point is labelled an inference). Needs review: SH-02 free-trials-that-become-paid-subscriptions (319; flag L; 6 searches; opened Cornell LII and GovInfo for 15 U.S.C. 8403, the FTC rule page, and Alston & Bird, Covington and Sheppard Mullin alerts; no court opinion or Federal Register notice opened; rule status after April 2026 unverified).
+- **Extends, additions only (quality-guide section 3, chat example):** PA-01 and PA-02 (322, 323) as two examples in `irreversible-action-without-confirmation.md`; PA-03 (324) in `input-timezone-ambiguity.md`; MI-01 (325) in the document-processing `object-hallucination.md`; MI-02 (326) in `context-window-overflow-silent-truncation.md`. All scenarios are made up and labelled so.
+- **Part C asset 3 (scenario packs, quality-guide section 6):** four packs, all "Not yet run", Needs review: impatient-idle-nudges (18 conversations), over-familiar-address (18), hidden-commands-and-features (17), proactive-outreach-overreach (17). No searches. Logs, prompts, feature maps and the weekly cap are marked "Needs a person". Judgment calls to check: the three-entry hint trigger in hidden-commands and the made-up session cap in idle nudges.
+- **Part C asset 4 (teardown, quality-guide section 6):** Meta AI and the July 2024 Trump rally shooting. Needs review. 3 searches; Meta's July 30 post and six news or aggregator pages opened through fetch-tool summaries only; The Verge refused, Reuters and AP not found, no transcript. The page names no political side, attributes the cause to Meta, and lists where sources disagree (the shooting date, the order of events).
+- **What review changed:** I replaced first-person "I found" and "I did not" wording in three new pages with "We". I created the family README for `goals/multimodal-input/` and fixed the MI-03 Family row to link it, fixed two relative links in that README, and added the four shopping patterns to the shopping README. I converted the catalog rows for PA-01 to PA-03 and MI-01 and MI-02 to Covered, marked SH-01 to SH-04 and MI-03 Written, and added five taxonomy entries (now 190 entries in 43 families; new family Multimodal input; Read-this-first count 65).
+- **Needs review (person):** flag L on SH-02 and the legal statements on SH-02 and SH-03; the thin sources on SH-04 and the Meta teardown; the four test packs; the made-up scenarios in the Extends examples.
+- **Part A2 and Part E:** nothing left (E6: Waiting for the owner to create the code repo). **Part B:** skipped, `seo/log.md` already has an entry for 2026-10-21. Queue rows 318-327 are done. Still queued: rows 328 and later.
+
+
+- **Deploy:** content PR #48 for this run. Part D stopped before the site push, as in runs 46 to 50: the site repo's local `main` still has the commit `ce9023275` ("Trigger deploy under repo owner") that is not on `origin/main` and that this run did not create. Nothing was pushed to the site repo and no scratch build was made. The new content from runs 46 to 51 waits for the owner to review that commit. Not verified live.
 
 ## Schedule
 | Item | Value |

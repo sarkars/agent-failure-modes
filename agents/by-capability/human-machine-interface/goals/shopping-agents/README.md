@@ -11,12 +11,20 @@ Shared metrics the patterns below report against. Targets are starting points to
 |---|---|---|
 | Agent purchases that have a receipt and a spending cap | Start: 100% | [no clear route when an agent buys wrongly](failures/no-clear-route-when-an-agent-buys-wrongly.md) |
 | Paid placements labelled | Start: 100% | [sponsored ranking inside agent recommendations](failures/sponsored-ranking-inside-agent-recommendations.md) |
+| Price or stock mismatches at purchase the user was not told about | Start: 0 | [stale price or stock at checkout](failures/stale-price-or-stock-at-checkout.md) |
+| Auto-renewing purchases made with explicit consent | Start: 100% | [free trials that become paid subscriptions](failures/free-trials-that-become-paid-subscriptions.md) |
+| Purchases that show return terms before payment | Start: 100% | [return policy ignored](failures/return-policy-ignored.md) |
+| Gift purchases exposed to other account users | Start: 0 | [shared accounts reveal gifts](failures/shared-accounts-reveal-gifts.md) |
 
 ## Patterns
 | Pattern | One line |
 |---|---|
 | [No clear route when an agent buys wrongly](failures/no-clear-route-when-an-agent-buys-wrongly.md) | The agent buys the wrong thing and the user has no receipt, no cap, and no dispute path |
 | [Sponsored ranking inside agent recommendations](failures/sponsored-ranking-inside-agent-recommendations.md) | Paid placement decides what the agent suggests, and nobody says so |
+| [Stale price or stock at checkout](failures/stale-price-or-stock-at-checkout.md) | The agent quotes an earlier price or stock status and the cart differs at purchase |
+| [Free trials that become paid subscriptions](failures/free-trials-that-become-paid-subscriptions.md) | The agent starts a trial that renews at full price without telling the user |
+| [Return policy ignored](failures/return-policy-ignored.md) | The agent buys an item that cannot be returned and does not say so before payment |
+| [Shared accounts reveal gifts](failures/shared-accounts-reveal-gifts.md) | A gift purchase shows up in shared recommendations, history or memory |
 
 ## Planned (not yet written)
 The other rows of the family are tracked in the [emerging surfaces roadmap](../../roadmap/emerging-surfaces.md). Several already have an example added to a pattern elsewhere in the repository.

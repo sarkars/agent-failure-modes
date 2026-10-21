@@ -2,21 +2,21 @@
 
 > **Status:** v1 draft, proposed, not yet calibrated against human-labeled conversations. Written 2026-10-20 from the pattern pages as they exist today. Nothing here is a measured result.
 
-This is a plain index of the 185 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
+This is a plain index of the 190 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
 
 The taxonomy pairs with the [conversation event schema v0.1](conversation-event-schema-v0.1.md). The schema describes what a turn looks like in a log; this page names the failures. A pattern's own page holds the fix, the metrics, and (for some) a "Detection signals (proposed, not yet calibrated)" block that says which schema fields it reads.
 
 ## What this page is and is not
 
-- It lists every file found in `goals/*/failures/*.md`: **185 entries in 42 families**. If a pattern is added or removed, this count changes.
+- It lists every file found in `goals/*/failures/*.md`: **190 entries in 43 families**. If a pattern is added or removed, this count changes.
 - It copies each pattern's one-sentence Issue line, its Stakes row, and whether a Detection signals block exists. It does not add facts the page does not state.
-- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **185 of 185** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **185 of 185** pages have one.
+- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **190 of 190** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **190 of 190** pages have one.
 - It does not rank patterns by frequency or harm. No counts of real-world occurrences are given because none have been measured here.
 - It does not map patterns to outside frameworks (such as OWASP or NIST). That mapping is **Needs review** by a person and is not part of v1.
 
 ## Reading the flags
 
-A pattern carries **Read this first: needs expert or legal review** when its own page opens with a "Read this first" notice. That notice says the page is design guidance, not legal, clinical, security, or fraud-operations advice. 63 pages carry it. Other pages may also touch legal or safety topics without that notice; the notice on the page is the signal used here, nothing more.
+A pattern carries **Read this first: needs expert or legal review** when its own page opens with a "Read this first" notice. That notice says the page is design guidance, not legal, clinical, security, or fraud-operations advice. 65 pages carry it. Other pages may also touch legal or safety topics without that notice; the notice on the page is the signal used here, nothing more.
 
 ## Entries by family
 
@@ -309,6 +309,14 @@ Family folder: `meeting-agents` ([family README](../../goals/meeting-agents/READ
 | `recorders-that-join-without-everyone-s-consent` | Recorders that join without everyone's consent | An AI notetaker joins a meeting and records people who were never told or asked; the fix is to show every participant a notice before audio starts, honor a "no", and log who agreed. | High. Private work conversations are captured, stored, and possibly used to train models. **Read this first: needs expert or legal review.** | yes | lead_with_answer, offer_choices, admit_uncertainty, hand_off | [page](../../goals/meeting-agents/failures/recorders-that-join-without-everyone-s-consent.md) |
 | `voiceprints-captured-without-consent` | Voiceprints captured without consent | A meeting assistant that labels who said what can create and keep a voiceprint of every speaker, including people who never signed up; the fix is to store no voice template without a logged, informed yes from that person. | High. A voiceprint is a biometric identifier that cannot be changed if it leaks. **Read this first: needs expert or legal review.** | yes | lead_with_answer, offer_choices, admit_uncertainty, hand_off | [page](../../goals/meeting-agents/failures/voiceprints-captured-without-consent.md) |
 
+### Multimodal input
+
+Family folder: `multimodal-input` ([family README](../../goals/multimodal-input/README.md))
+
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `voice-notes-and-audio-attachments-ignored` | Voice notes and audio attachments ignored | A user sends a voice note or audio file in a text chat and the assistant drops it, answers as if nothing was attached, or transcribes it badly without saying so; the fix is to transcribe it, show the transcript and let the person correct it. | Low to high. A dropped note costs a retype; a mis-transcribed account number, dose or address can cost money or time. | yes | admit_uncertainty, offer_choices, ask_clarifying_question, lead_with_answer, hand_off | [page](../../goals/multimodal-input/failures/voice-notes-and-audio-attachments-ignored.md) |
+
 ### Onboarding and discoverability
 
 Family folder: `onboarding-and-discoverability` ([family README](../../goals/onboarding-and-discoverability/README.md))
@@ -426,6 +434,10 @@ Family folder: `shopping-agents` ([family README](../../goals/shopping-agents/RE
 |---|---|---|---|---|---|---|
 | `no-clear-route-when-an-agent-buys-wrongly` | No clear route when an agent buys wrongly | An assistant buys the wrong item and the user has no receipt, no cap, and no dispute path; the fix is a cap before the first purchase, a buy sheet, a receipt and a named route to return or dispute. | High. Real money is spent and the user may have no way back. **Read this first: needs legal review.** | yes | ask_clarifying_question, offer_choices, admit_uncertainty, hand_off | [page](../../goals/shopping-agents/failures/no-clear-route-when-an-agent-buys-wrongly.md) |
 | `sponsored-ranking-inside-agent-recommendations` | Sponsored ranking inside agent recommendations | A shopping agent lets paid placement decide what it shows or picks and never says so; the fix is to rank by the user's criteria only and show any paid item in a labeled separate block. | Medium to high. Money is spent and disclosure rules may apply. **Read this first: needs legal review.** | yes | lead_with_answer, offer_choices, admit_uncertainty, hand_off | [page](../../goals/shopping-agents/failures/sponsored-ranking-inside-agent-recommendations.md) |
+| `stale-price-or-stock-at-checkout` | Stale price or stock at checkout | A shopping agent quotes a price or "in stock" status it looked up earlier, and at purchase the total is higher or the item is gone; the fix is to re-check before charging and say what changed. | Medium to high. Real money is charged at a number the user did not approve, or the order cannot be filled. | yes | lead_with_answer, offer_choices, admit_uncertainty, hand_off | [page](../../goals/shopping-agents/failures/stale-price-or-stock-at-checkout.md) |
+| `free-trials-that-become-paid-subscriptions` | Free trials that become paid subscriptions | A shopping agent starts a free trial that renews at full price without telling the user; the fix is a consent-and-reminder step before the trial starts. | Medium. Each charge is small but repeats until the user notices. **Read this first: needs expert or legal review.** | yes | offer_choices, admit_uncertainty, ask_clarifying_question, hand_off | [page](../../goals/shopping-agents/failures/free-trials-that-become-paid-subscriptions.md) |
+| `return-policy-ignored` | Return policy ignored | An AI shopping agent buys an item that cannot be returned (final sale, a restocking fee, or a short window) and never says so before payment; the fix is to show the return terms first. | Medium. The loss is the item price plus return shipping or a fee. **Read this first: needs expert or legal review.** | yes | lead_with_answer, offer_choices, admit_uncertainty, hand_off | [page](../../goals/shopping-agents/failures/return-policy-ignored.md) |
+| `shared-accounts-reveal-gifts` | Shared accounts reveal gifts | A shopping assistant lets a gift purchase show up in shared recommendations, history, notifications or its own memory, so another person on the account sees the surprise; the fix is to keep gift context separate. | Low to medium. No money is lost, but a surprise cannot be taken back. | yes | ask_clarifying_question, offer_choices, admit_uncertainty | [page](../../goals/shopping-agents/failures/shared-accounts-reveal-gifts.md) |
 
 ### Stakes calibration
 
