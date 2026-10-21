@@ -1395,6 +1395,16 @@ AI-written help content in knowledge bases · agents using other agents' tools (
 - **Needs review (person):** the four packs, the summary-only teardown.
 - **Part B:** skipped, `seo/log.md` already has an entry for 2026-10-21. E6: Waiting for the owner to create the code repo.
 - **Plan complete?** No: asset 3 (99 patterns without packs), asset 4 and assets 6-8 are still in progress.
+- **Deploy:** the content PR (#61) was merged into main (merge commit a068955) and the branch was reset to main. The site repo's local main still has commits `ce9023275` and `860f36fbc` ("Trigger deploy under repo owner") that this run did not create and that are not on origin/main, so I did not push the site repo (Part D stopped before the site steps). Not verified live. This line was added after the merge and will ship with the next run's PR.
+
+### Run 65 (scheduled): 2026-10-21
+- **Coordinator run:** 5 subagents (4 test packs, 1 teardown). Queue has no Queued rows; no Part A, A2 or E work left. Each brief carried quality-guide sections 1 and 6. No subagent ran git or the checks; I ran the five check scripts afterward (all clean, `python3 -X utf8 -I`).
+- **Part C asset 3 (section 6):** four packs, all "Not yet run", Needs review: inventing-reconciling-items, posting-to-the-wrong-period-or-account, splitting-payments-under-approval-limits, accepts-consent-pop-ups-for-the-user (100 to 103 lines each; accounting wording is design guidance only). No web research; built from each pattern's own fix. 95 patterns still have no pack.
+- **Part C asset 4 (section 6):** Deloitte Australia review for DEWR with nonexistent references and a wrong court quote, Aug to Oct 2025 (`incidents/deloitte-australia-dewr-report-with-ai-errors-2025.md`, 97 lines). 3 searches; 3 pages opened (Cyber Daily, AI Incident Database summary of the AFR article, Greens release), all through fetch summaries; AFR article not opened, yourstory returned 403; City AM, TechRadar and others seen only in search summaries and left out. The refund figures disagree across sources and the page lists all three. Needs review.
+- **What review changed:** I checked all five files for placeholders and "Not yet run", and read the whole teardown; I changed no wording. Not checked line by line: the pack transcripts.
+- **Needs review (person):** the four packs, the summary-only teardown.
+- **Part B:** skipped, `seo/log.md` already has an entry for 2026-10-21. E6: Waiting for the owner to create the code repo.
+- **Plan complete?** No: asset 3 (95 patterns without packs), asset 4 and assets 6-8 are still in progress.
 
 ## Schedule
 | Item | Value |
