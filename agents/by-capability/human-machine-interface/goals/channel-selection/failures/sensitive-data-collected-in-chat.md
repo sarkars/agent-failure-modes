@@ -206,3 +206,20 @@ Bot:  Thanks. Your balance shows 38,450 miles.
 ```
 **What the user experiences:** the assistant asks for a password in a message box, so a shortcut feels like a risk, or the user pastes it and it is stored.
 **Fix:** at a login wall, pause and ask the user to sign in themselves in the browser (a take-over or user sign-in step), then continue once they confirm; never ask for, accept, or store the password in chat. Hosted sign-in handoffs work this way: the user signs in on the site and the model never sees the credentials ([Vercel guide, opened](https://vercel.com/kb/guide/build-a-browser-agent)). See [browser agents](../../browser-agents/README.md) and [forces a fresh login](../../embedded-copilots/failures/forces-a-fresh-login.md).
+
+### Images of IDs and documents kept without need
+*Read this first: design guidance, not legal advice; review with your privacy and legal teams before use.*
+Invented dialogue for illustration (a US car-rental booking chat; not a real transcript). Catalog row MI-07.
+```
+User: [uploads a photo of a Texas driver's license] Here's my license for the rental.
+Bot:  Thanks, verified. I've saved the photo to your profile for future bookings.
+User: Wait, you're keeping a picture of my license?
+```
+```
+User: [uploads a photo of a Texas driver's license] Here's my license for the rental.
+Bot:  Thanks. The name and expiration date match your booking. I've deleted the photo;
+      your reservation only notes "license checked." You'll show the card at pickup.
+User: Good, thanks.
+```
+**What the user experiences:** a photo of their ID, with address, birth date and license number, quietly becomes a stored record they never agreed to keep.
+**Fix:** collect only the fields the task needs, delete the image once the check is done, and say in the same reply what was kept and what was deleted. The FTC's business guide advises keeping sensitive personal information only while there is a legitimate business need and then disposing of it ([FTC, Protecting Personal Information, opened](https://www.ftc.gov/business-guidance/resources/protecting-personal-information-guide-business); guidance, not a statute). If the user later asks to remove stored images, see [privacy rights requests not recognized](../../privacy-and-governance/failures/privacy-rights-requests-not-recognised.md).
