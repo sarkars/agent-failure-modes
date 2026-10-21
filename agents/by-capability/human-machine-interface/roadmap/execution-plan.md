@@ -1364,7 +1364,7 @@ AI-written help content in knowledge bases · agents using other agents' tools (
 - **What review changed:** I added 7 taxonomy entries (now 256 entries in 56 families; Moves 256 of 256), marked VI-15 to VI-20 Needs review (flags V, R or L, or summary-only sources) and VI-14 Done, OV-02, OV-04, OV-05 Covered, and updated the visual README, catalog, index and distribution plan. Not checked line by line: the before/after transcripts on the new pages.
 - **Needs review (person):** legal wording on VI-18 to VI-20, research-gap pages VI-16 and VI-17, the made-up Extends and page transcripts, the four packs and the teardown.
 - **Part A2 and Part E:** nothing left (E6: Waiting for the owner to create the code repo). **Part B:** skipped, `seo/log.md` already has an entry for 2026-10-21. Queue rows 418-427 covered; still queued: row 428 onward.
-- **Deploy:** (added after the merge)
+- **Deploy:** the content PR (#58) was merged into main (merge commit 91da46b) and the branch was reset to main. The site repo's local main still has commits `ce9023275` and `860f36fbc` ("Trigger deploy under repo owner") that this run did not create and that are not on origin/main, so I did not push the site repo (Part D stopped before the site steps). Not verified live. This line was added after the merge and will ship with the next run's PR.
 
 ## Schedule
 | Item | Value |
