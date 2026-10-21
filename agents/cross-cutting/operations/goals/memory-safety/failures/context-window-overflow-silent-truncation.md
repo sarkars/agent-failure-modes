@@ -113,6 +113,25 @@ Other context management patterns:
 
 ---
 
+## Chat assistant examples
+
+### Long upload silently cut
+Invented dialogue for illustration; the product and file are made up.
+```
+[Document Q&A chat. File: Maple_Street_Lease.pdf, 120 pages]
+User: Here's my lease. What does it say about early termination?
+Bot:  Section 14 says you may end the lease early with 60 days' written notice
+      and a fee of two months' rent.
+User: Is there anything about a military clause or subletting instead?
+Bot:  No. The lease doesn't mention either.
+(Both clauses are on pages 71 and 96. The bot only received pages 1-38 and never said so.)
+```
+**What the user experiences:** a confident "no" that sounds like the whole lease was checked, so the user may sign or skip a clause that does exist.
+**Fix:** say how much was read ("I read pages 1-38 of 120"), offer to continue in parts ("Want me to go through 39-76 next?"), and never answer about unread parts as if they were read. Pair it with a log of every answer given after truncation without a stated cutoff. Related: [No warning of context loss](../../../../../by-capability/human-machine-interface/goals/effort-and-memory/failures/no-warning-of-context-loss.md).
+**Metric:** answers that don't state truncation when it happened. Target 0 (starting point, tune on your own data).
+
+---
+
 ## References
 
 - [Transformer Attention Is All You Need](https://arxiv.org/abs/1706.03762) — Context window fundamentals

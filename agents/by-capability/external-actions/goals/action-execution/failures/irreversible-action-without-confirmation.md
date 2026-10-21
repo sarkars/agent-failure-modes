@@ -163,6 +163,55 @@ ShopBot: Ordered.
 
 **Fix:** before the buy step, read back size, color, quantity, and price in one message, and ask first before any substitution, since a substitute is a different item. Wait for a yes. The wrong-size and unwanted-substitution cases are listed as common AI shopping errors in [a retail support write-up](https://www.fusioncx.com/blog/retail/ai-shopping-customer-support/) (page opened). Grocery shoppers report the same pattern with substitutions, such as ricotta replaced by cottage cheese, in [a roundup of Instacart complaints](https://www.cheapism.com/instacart-shopping-fails-according-redditors/) (page opened; anecdotes, not measured rates). For choosing the wrong recipient or record, see [wrong target action](wrong-target-action.md). For the ask-first move, see the [guessing instead of asking](../../../../human-machine-interface/goals/dialogue-management/failures/guessing-instead-of-asking.md) pattern.
 
+### Sends in the wrong tone or to the wrong person
+
+*Illustrative transcript, not a real product log. "MailPal" is an invented personal assistant inside an email app.*
+
+```
+Before:
+User: Tell Sam I can't make Thursday's review, and keep it short.
+MailPal: Done! Sent your message to Sam.
+         (contacts: Sam Ortiz, a teammate, and Sam Reyes, a client; the bot picked Sam Reyes
+          and wrote "Hey Sam, can't make it, sorry!")
+
+After:
+User: Tell Sam I can't make Thursday's review, and keep it short.
+MailPal: Draft, not sent. To: Sam Ortiz <sam.ortiz@acmesupply.com> (teammate). Tone: casual.
+         "Hi Sam, I can't make Thursday's review. Can you send me the notes? Thanks."
+         You also have Sam Reyes (client). Send to Sam Ortiz, switch recipient, or change the tone?
+User: Send to Sam Ortiz.
+MailPal: Sent to Sam Ortiz.
+```
+
+**What the user experiences:** a client receives a breezy "can't make it, sorry!" meant for a teammate, and the user finds out from the reply.
+
+**Fix:** before any send, show a preview with the recipient's full name and address, a tone label, and the full text, and send only after the user confirms. When two contacts share a name, ask which one instead of picking. A starting point, tune on your own data: 100% of sent messages have a matching confirmation record. See the [guessing instead of asking](../../../../human-machine-interface/goals/dialogue-management/failures/guessing-instead-of-asking.md) pattern.
+
+### Books non-refundable travel on a guess
+
+*Illustrative transcript, not a real product log. "TripPal" is an invented personal assistant in a travel app, and the fare is illustrative.*
+
+```
+Before:
+User: Get me a flight to Denver for the conference next week.
+TripPal: Booked! United UA 482, Mon Oct 27, Seattle to Denver, $412.00, Basic Economy.
+         (conference runs Tue Oct 28 to Thu Oct 30; the fare is non-refundable; the bot assumed
+          Monday travel and never asked)
+
+After:
+User: Get me a flight to Denver for the conference next week.
+TripPal: Nothing booked yet. Which dates? The conference page says Oct 28-30. I can book Mon Oct 27 out and Fri Oct 31 back.
+User: Tue the 28th out, Thu the 30th back.
+TripPal: Confirm: Jordan Lee, SEA to DEN Tue Oct 28, DEN to SEA Thu Oct 30. $412.00 total, non-refundable.
+         A refundable fare is $538.00. Book non-refundable, book refundable, or change something?
+User: Refundable.
+TripPal: Booked the refundable fare, $538.00.
+```
+
+**What the user experiences:** the flight lands a day early, and changing it means paying most of the $412 again or losing it.
+
+**Fix:** before booking, confirm the dates, the traveler's name as on their ID, whether the fare is refundable, and the total in one message, and offer a refundable option next to the cheaper one. Wait for a yes. See the [bookings without confirming details](../../../../human-machine-interface/goals/voice-receptionist-agents/failures/bookings-without-confirming-details.md) pattern (written for voice receptionists, same read-back idea) and the earlier [wrong item or variant bought](#wrong-item-or-variant-bought) example.
+
 ---
 
 ## References

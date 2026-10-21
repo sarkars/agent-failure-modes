@@ -66,6 +66,22 @@ The universal pattern covers why models hallucinate objects/fields. This variant
 
 ---
 
+## Chat assistant examples
+
+### Screenshot ignored or misread
+Invented dialogue for illustration (a Windows support chat widget; not a real transcript). Catalog row MI-01.
+```
+User: [attaches screenshot of a Windows Settings > Activation page] Why does it say this?
+Bot:  Windows may show activation messages when updates are pending. Try restarting your PC.
+User: It says "Your device is not activated" and error 0xC004F074.
+Bot:  I can't view images, but a restart usually fixes activation issues.
+User: Then why did you answer as if you saw it?
+```
+**What the user experiences:** a bot that answers a generic guess and never acknowledges the screenshot, so the user must retype what the image already showed.
+**Fix:** read the image before replying and quote back what was seen ("The screenshot shows 'Your device is not activated' and error 0xC004F074"). Say what is unreadable ("the second line is cut off"). Ask before guessing. Metric (proposed): share of answers that cite a detail visible only in the image. Related HMI pattern: [Silent attachment failures](../../../../human-machine-interface/goals/chat-interface/failures/silent-attachment-failures.md).
+
+---
+
 ## References
 
 - [Hallucination of Multimodal LLMs Survey](https://arxiv.org/html/2404.18930v2) - Object hallucination taxonomy

@@ -80,3 +80,17 @@ Bot: Booked! Demo with Priya on Thursday at 2:00 PM. A calendar invite is on its
 **What the user experiences:** an invite for 4:00 PM Central that she never agreed to, while the rep is already on another call at 2:00 PM Pacific.
 
 **Fix:** before confirming, (1) query the rep's calendar for the exact slot and offer another slot if it is busy; (2) state the time with both zones, for example "Thursday, Oct 22, 2:00 PM Central (12:00 PM Pacific)", and wait for a yes; (3) ask "Is that Central time?" only when no user zone is in the session (browser, profile, or earlier message). Pass checks: booking conflicts = 0 on the rep's calendar, and every confirmation message contains a zone name and the full date. See [Round-trip confirmation](#mitigations) above, [Input Default Value Assumption](input-default-value-assumption.md), and the [sales agents page](../../../../../by-capability/human-machine-interface/goals/sales-agents/README.md). Scheduling guidance from a vendor blog ([Picktime](https://www.picktime.com/resources/?p=3583), opened, promotional) likewise says to include the time zone with every meeting time and to check each participant's local time before scheduling.
+
+### Time-zone and double-booking errors
+Invented dialogue (not a real log), personal assistant app with calendar access:
+```
+User (Chicago):  Set up a call with Marcus Thursday at 3pm.
+Assistant:       Done. "Call with Marcus" is on your calendar for Thursday at 3:00 PM and the invite is sent.
+(The assistant knew: Marcus is in New York, so the invite was created in his zone, 3:00 PM Eastern = 2:00 PM Central.
+ The user's calendar already had "Budget review" Thursday 2:00-3:00 PM Central. No conflict check ran, no zone was shown.)
+User:            Wait, my budget review is at 2.
+Assistant:       I see, both events are on your calendar now.
+```
+**What the user experiences:** a call booked an hour earlier than she meant, on top of an existing meeting, and Marcus has an invite for the wrong hour.
+
+**Fix:** before creating the event, (1) ask or read which zone each person is in and use explicit names ("3:00 PM Central" for you, "4:00 PM Eastern" for Marcus); (2) check the calendar for conflicts in that slot and offer another time if it is busy; (3) show the converted time in both zones and wait for a yes. Target for wrong-time and double-booked events: 0 (starting point, tune on your own data). See [Bookings without confirming details](../../../../../by-capability/human-machine-interface/goals/voice-receptionist-agents/failures/bookings-without-confirming-details.md) for the read-back step. A search for this check turned up only vendor blogs, which recommend labeling every confirmation with its time zone (unverified, search summary only; not used for any number here).
