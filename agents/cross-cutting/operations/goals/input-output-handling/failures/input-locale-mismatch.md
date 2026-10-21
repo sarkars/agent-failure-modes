@@ -68,3 +68,22 @@ hasn't left the port yet.
 - [Input Timezone Ambiguity](input-timezone-ambiguity.md) - a related temporal-interpretation failure, often co-occurring with date locale mismatches in the same payload
 - [Input Encoding Mismatch](input-encoding-mismatch.md) - both are silent misinterpretation failures where a value "successfully" parses under the wrong assumption
 - [Output Precision Loss](output-precision-loss.md) - a related numeric-fidelity failure that can compound with decimal-separator misparsing
+
+## Chat assistant examples
+
+### Locale format errors
+Made-up example: a Chicago dental office uses the "BrightSmile" booking chat. The patient is visiting from the UK and writes dates day-first.
+```
+Before:
+User: Can I come in on 04/05?
+Bot:  Sure! Your appointment is confirmed for 04/05 at 3:00.
+      (The bot booked April 5. The user meant 4 May. The time has no a.m./p.m. and no time zone.)
+
+After:
+User: Can I come in on 04/05?
+Bot:  Do you mean April 5 or May 4?
+User: May 4.
+Bot:  Confirmed: Monday, May 4, 2026 at 3:00 p.m. Central Time (Chicago).
+```
+**What the user experiences:** a confirmation that looks right but is a month off, which they find out only when they arrive on the wrong day or call to check.
+**Fix:** when a numeric date has both parts 12 or lower, ask which one is the month. Write dates back with the month spelled out and the weekday, and state currency and time zone (for example "$45 USD", "3:00 p.m. Central"). The W3C advises spelled-out months with four-digit years as "completely unambiguous" ([W3C, opened](https://www.w3.org/International/questions/qa-date-format)). Proposed metric (not measured): locale-format correctness on a test set, target 100%; ambiguous dates shown to the user: 0. Closest HMI page: [Cultural adaptation](../../../../../by-capability/human-machine-interface/goals/cultural-adaptation/README.md).

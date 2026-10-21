@@ -131,6 +131,19 @@ Bot:    Got it. Your pickup is at Wal-Mart on West Concord Avenue.
 **What the user experiences:** the bot swaps in a store and street it knows better, then repeats the same swap after the correction.
 **Fix:** for critical slots (store, street, city, employer, drug name), check the heard value against the real list of stores and streets, and when the match is weak, ask "Did you say Walgreens on Wisconsin Avenue?" before saving. For a drug name, the bot spells it back and asks a person to check it; it gives no medical advice. See the [transcription hallucination pattern](../../../../human-machine-interface/goals/voice/failures/transcription-hallucination.md).
 
+### Name and transliteration errors
+Made-up example, in text chat (not voice): a rebooking chat on a US airline's website. The people are invented.
+```
+User: Rebook the flight for Nguyễn Thị Lan, confirmation K7QX2P.
+Bot:  Done. Rebooked Lan Nguyen on flight 482 to Houston.
+User: Her family name is Nguyễn, and it comes first on her passport.
+Bot:  Sorry for the mix-up. Rebooked Nguyen Lan on flight 482 to Houston.
+User: That's still not what I typed.
+Bot:  Your booking is updated for Lan Nguyen.
+```
+**What the user experiences:** the bot drops the diacritics, swaps the name order, and then flips it again, so the user cannot tell which version will be on the ticket.
+**Fix:** echo the name exactly as typed, with diacritics and order unchanged, and store the given name and family name as the user supplied them; if unsure which order, ask "Which is the family name?" rather than guess. If the booking system cannot hold a character, say so ("The system will print Nguyen without the accent; is that OK?") instead of silently changing it. This follows [W3C guidance](https://www.w3.org/International/questions/qa-personal-names) (opened) to avoid "first name" and "last name" labels, not assume an order, and keep users' casing and punctuation. Proposed metric (not measured): name-preservation rate, target 100%. Airline rules on accents differ, and a search summary (not opened) says one airline tells passengers to omit them, so check the carrier's own rule. See the [dialect and name quality gap pattern](../../../../human-machine-interface/goals/fairness-and-identity/failures/dialect-and-name-quality-gap.md).
+
 ---
 
 ## References
