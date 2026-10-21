@@ -207,3 +207,18 @@ Bot:  Thank you for contacting Customer Support. I would be delighted to assist 
 
 **What the user experiences:** a form letter in reply to a quick text, so the bot feels stiff and slow and the one useful ask is buried.
 **Fix:** keep reply length near the user's (as an illustrative starting point, within about 2 to 3 times their word count unless the task needs more) with no formality jump, e.g. "Sure, what's the order number? I'll check 5 pm." Style-matching never changes substance or safety wording and never copies the user's dialect or typos; test by replaying casual and formal turns and checking that length and formality track the user while the facts stay identical. See [length mismatch with the user's effort](../../../../human-machine-interface/goals/response-structure/failures/length-mismatch-with-the-user-s-effort.md); the idea comes from human communication research and is not proven for chatbots, so measure user-rated rapport yourself.
+
+### Jargon, acronyms, and idioms
+
+Made-up example (Northwind Health member chat):
+
+```
+User: Why did I get a bill for $240 after my visit?
+Bot:  Your EOB shows the deductible hasn't been met, so the claim applied to your OOP max. We'll circle back once adjudication wraps up.
+(before: undefined acronyms and a figure of speech)
+Bot:  Your plan has a yearly amount you pay before it starts sharing costs (the deductible). You haven't reached it yet, so the $240 is yours to pay. I'll message you here by Friday if the claim changes.
+(after)
+```
+
+**What the user experiences:** a reply full of insurance shorthand and "circle back", so they cannot tell whether they owe the money or what happens next. In one 2014 KFF Health News article, USC researchers reported that more than 40 percent of Americans could not explain a deductible ([source, opened](https://kffhealthnews.org/insurance/many-patients-struggling-to-learn-the-foreign-language-of-health-insurance/)); that figure is old and not about chatbots.
+**Fix:** default to plain words, define any term the user must learn the first time it appears, and replace idioms with a concrete action and time. Proposed starting points, not measured benchmarks: undefined-acronym rate under 2% and idiom rate under 1% of bot turns. See the [technology literacy mismatch](../../../../human-machine-interface/goals/cultural-adaptation/failures/technology-literacy-mismatch.md) pattern.

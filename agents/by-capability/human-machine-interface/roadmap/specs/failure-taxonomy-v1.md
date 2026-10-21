@@ -2,21 +2,21 @@
 
 > **Status:** v1 draft, proposed, not yet calibrated against human-labeled conversations. Written 2026-10-20 from the pattern pages as they exist today. Nothing here is a measured result.
 
-This is a plain index of the 195 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
+This is a plain index of the 199 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
 
 The taxonomy pairs with the [conversation event schema v0.1](conversation-event-schema-v0.1.md). The schema describes what a turn looks like in a log; this page names the failures. A pattern's own page holds the fix, the metrics, and (for some) a "Detection signals (proposed, not yet calibrated)" block that says which schema fields it reads.
 
 ## What this page is and is not
 
-- It lists every file found in `goals/*/failures/*.md`: **195 entries in 43 families**. If a pattern is added or removed, this count changes.
+- It lists every file found in `goals/*/failures/*.md`: **199 entries in 44 families**. If a pattern is added or removed, this count changes.
 - It copies each pattern's one-sentence Issue line, its Stakes row, and whether a Detection signals block exists. It does not add facts the page does not state.
-- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **195 of 195** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **195 of 195** pages have one.
+- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **199 of 199** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **199 of 199** pages have one.
 - It does not rank patterns by frequency or harm. No counts of real-world occurrences are given because none have been measured here.
 - It does not map patterns to outside frameworks (such as OWASP or NIST). That mapping is **Needs review** by a person and is not part of v1.
 
 ## Reading the flags
 
-A pattern carries **Read this first: needs expert or legal review** when its own page opens with a "Read this first" notice. That notice says the page is design guidance, not legal, clinical, security, or fraud-operations advice. 65 pages carry it. Other pages may also touch legal or safety topics without that notice; the notice on the page is the signal used here, nothing more.
+A pattern carries **Read this first: needs expert or legal review** when its own page opens with a "Read this first" notice. That notice says the page is design guidance, not legal, clinical, security, or fraud-operations advice. 68 pages carry it. Other pages may also touch legal or safety topics without that notice; the notice on the page is the signal used here, nothing more.
 
 ## Entries by family
 
@@ -287,6 +287,17 @@ Family folder: `it-and-security-agents` ([family README](../../goals/it-and-secu
 | Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
 |---|---|---|---|---|---|---|
 | `true-alerts-closed-as-false-positives` | True alerts closed as false positives | An AI triage assistant dismisses a real threat as a false positive and gives no reason; the fix is to state the evidence behind every closure, never auto-close high-risk alerts, and audit a sample of closures. | High. A real intrusion closed as noise stays unseen until it does damage. | yes | lead_with_answer, admit_uncertainty, offer_choices, hand_off | [page](../../goals/it-and-security-agents/failures/true-alerts-closed-as-false-positives.md)  |
+
+### Language and locale
+
+Family folder: `language-and-locale` ([family README](../../goals/language-and-locale/README.md))
+
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `unchecked-translation-in-high-stakes-text` | Unchecked translation in high-stakes text | A chatbot machine-translates billing, legal or medical text into the user's language with no check, so a deadline, a dose or a fee can change meaning and nobody knows the text is unverified. | High. Errors can mean a missed payment, a signed term the user misread, or a wrong medicine instruction. **Read this first** | yes | admit_uncertainty, offer_choices, hand_off | [page](../../goals/language-and-locale/failures/unchecked-translation-in-high-stakes-text.md) |
+| `politeness-and-formality-errors` | Politeness and formality errors | The assistant answers in the wrong formal or informal register (tu or usted, du or Sie, honorific levels, or an English tone that is too casual or too stiff), so a customer who wrote formally gets a casual reply, or the reverse. | Low to medium. Higher for banking, health, legal, and government chats. **Read this first** | yes | lead_with_answer, ask_clarifying_question, offer_choices, hand_off | [page](../../goals/language-and-locale/failures/politeness-and-formality-errors.md) |
+| `reading-level-mismatch` | Reading-level mismatch | Chatbot replies with long words and dense sentences, or that talk down, miss the reader; the fix is to match the user's own words, lead with the answer, and check it landed. | Low to high. Higher when the topic is health, money, benefits, or legal rights. | yes | lead_with_answer, offer_choices, hand_off | [page](../../goals/language-and-locale/failures/reading-level-mismatch.md) |
+| `gender-and-pronoun-errors` | Gender and pronoun errors | The bot guesses a user's or a third party's gender from a name, job title, or voice, or misuses pronouns the person stated; the fix is to use stated pronouns, infer none, and use neutral wording otherwise. | Low to medium for a wrong "sir"; higher when a record, a letter, or a third person's identity is involved. **Read this first** | yes | lead_with_answer, ask_clarifying_question, offer_choices | [page](../../goals/language-and-locale/failures/gender-and-pronoun-errors.md) |
 
 ### Measurement and feedback
 

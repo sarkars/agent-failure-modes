@@ -163,6 +163,32 @@ Bot:    Found it. Your refill is ready for pickup today.
 
 **Fix:** set the locale and model from what is known about the caller (account region, number, stated language) and keep a per-deployment locale check in the test plan. Report word error rate by locale setting, so a wrong setting shows up as one bad bucket instead of a general "voice is flaky". When the first attempt fails, ask the caller to confirm the language or region rather than retrying the same model; Google's Speech-to-Text docs show the primary language code is set on each request and that extra candidate languages can be listed, so a mismatch is a setting you can change ([Google Cloud docs](https://docs.cloud.google.com/speech-to-text/docs/enable-language-recognition-speech-to-text), page read). Related pattern: [voice repair failure](../../../../human-machine-interface/goals/voice/failures/repair-failure.md).
 
+### Dialect and slang misreading
+
+Made-up example: a text chat on a US bank's mobile app (a fictional "Harbor Federal" app). The user types in everyday Southern US English. This is a plain, realistic phrase, not a claim about how any group writes.
+
+Before:
+
+```
+User: I'm fixin' to travel Friday, can y'all lock my debit card till I'm back?
+Bot:  Sorry, I didn't understand "fixin'". Did you mean "fixing"? Please rephrase using complete words.
+User: Lock my card.
+Bot:  Which card would you like to lock?
+```
+
+After:
+
+```
+User: I'm fixin' to travel Friday, can y'all lock my debit card till I'm back?
+Bot:  Yes. I can lock your debit card ending 4821 now and you can unlock it in the app when you're back. Lock it now?
+User: Yes
+Bot:  Done. Your debit card ending 4821 is locked.
+```
+
+**What the user experiences:** a normal sentence is treated as an error and "corrected", so the user has to strip their own wording down before the bot will act.
+
+**Fix:** accept the user's phrasing as valid input and answer the intent (lock the card). Never rewrite or correct their words; ask a neutral question ("Which card?") only when the intent is truly unclear. Proposed metric, not measured: intent accuracy parity across dialect test sets, with a starting target of within 3 points. Research has found that language identification tools can misclassify African-American English tweets as non-English more often ([Blodgett and O'Connor, 2017](https://arxiv.org/abs/1707.00061), abstract read). Related pattern: [dialect and name quality gap](../../../../human-machine-interface/goals/fairness-and-identity/failures/dialect-and-name-quality-gap.md).
+
 ---
 
 ## References

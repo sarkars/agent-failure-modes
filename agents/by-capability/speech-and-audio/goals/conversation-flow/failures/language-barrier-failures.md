@@ -382,6 +382,44 @@ Bot:  Great, I'll stay in English. Anything else on this trip?
 
 **Fix:** pick the reply language from an explicit user choice or account setting first, and treat a detected language as a guess when the message is short, mixed, or mostly a name. When confidence is low, reply in the last confirmed language and offer a one-tap switch. Honor an explicit "English please" immediately and store it for the session. See [dialect and name quality gap](../../../../human-machine-interface/goals/fairness-and-identity/failures/dialect-and-name-quality-gap.md). The proposed metrics are language ID accuracy and wrong-language reply rate; neither has been measured here.
 
+### Wrong-language reply
+Made-up example: a US pharmacy refill chat ("Riverside Pharmacy"). The failure matches developer reports of bots that answer in a language the user did not use ([OpenAI developer forum thread](https://community.openai.com/t/my-rag-chatbot-does-not-reply-in-same-language-as-query/732204), opened and read; it describes one developer's bot, not a measured rate).
+
+```
+Before
+User: Necesito renovar mi receta de lisinopril.
+Bot:  Sure! Please enter your prescription number to request a refill.
+
+After
+User: Necesito renovar mi receta de lisinopril.
+Bot:  Claro. Escriba el numero de su receta para pedir la renovacion.
+```
+
+**What the user experiences:** she wrote in Spanish and gets English back, so she must guess at instructions about her medicine or give up on the chat.
+
+**Fix:** reply in the language of the user's latest message unless the user or their account settings say otherwise, and pass that language to the model on every turn instead of leaving it to the prompt. The proposed metric is language-match rate, with a starting target over 98%; that target is a proposed starting point, not a measured benchmark. See [dialect and name quality gap](../../../../human-machine-interface/goals/fairness-and-identity/failures/dialect-and-name-quality-gap.md).
+
+### Language switch ignored
+Made-up example: a US electric utility bill chat ("Lakeshore Power").
+
+```
+Before
+User: Can we do this in Spanish? I want to check my bill.
+Bot:  Claro, continuamos en espanol. Su saldo es $84.20.
+User: Y cuando vence?
+Bot:  Your payment is due on March 14.
+
+After
+User: Can we do this in Spanish? I want to check my bill.
+Bot:  Claro, continuamos en espanol. Su saldo es $84.20.
+User: Y cuando vence?
+Bot:  Vence el 14 de marzo.
+```
+
+**What the user experiences:** the bot agrees to switch and then drops back to English a turn later, so he has to ask again or stop trusting it.
+
+**Fix:** store a requested language as a session setting the moment the user asks, and use it for every later reply until the user asks for a different one. A short English-looking reply such as "ok" or an account number must not reset it. The proposed metric is switch-persistence rate, with a starting target over 95%; that target is proposed, not measured.
+
 ---
 
 ## References

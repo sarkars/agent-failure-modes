@@ -80,17 +80,17 @@
 | RS-16 | Misreading 'ok' and minimal replies | [response-structure-and-length.md](response-structure-and-length.md) | Covered | Model | Partly |
 | RS-17 | Length mismatch with the user's effort | [response-structure-and-length.md](response-structure-and-length.md) | Written | Model | Partly |
 | RS-18 | Link and resource dumps | [response-structure-and-length.md](response-structure-and-length.md) | Written | Model | Partly |
-| LG-01 | Wrong-language reply | [language-and-locale.md](language-and-locale.md) | Extends | Model | Yes |
+| LG-01 | Wrong-language reply | [language-and-locale.md](language-and-locale.md) | Covered | Model | Yes |
 | LG-02 | Code-switching breakage | [language-and-locale.md](language-and-locale.md) | Covered | Model | Yes |
-| LG-03 | Language switch ignored | [language-and-locale.md](language-and-locale.md) | Extends | Reliability | Partly |
-| LG-04 | Unchecked translation in high-stakes text | [language-and-locale.md](language-and-locale.md) | New | Model | Partly |
-| LG-05 | Politeness and formality errors | [language-and-locale.md](language-and-locale.md) | New | Model | Partly |
-| LG-06 | Reading-level mismatch | [language-and-locale.md](language-and-locale.md) | New | Model | Partly |
-| LG-07 | Jargon, acronyms, and idioms | [language-and-locale.md](language-and-locale.md) | Extends | Model | Partly |
-| LG-08 | Locale format errors | [language-and-locale.md](language-and-locale.md) | Extends | Business context | Partly |
-| LG-09 | Name and transliteration errors | [language-and-locale.md](language-and-locale.md) | Extends | Model | Partly |
-| LG-10 | Gender and pronoun errors | [language-and-locale.md](language-and-locale.md) | New | Model | Partly |
-| LG-11 | Dialect and slang misreading | [language-and-locale.md](language-and-locale.md) | Extends | Model | Partly |
+| LG-03 | Language switch ignored | [language-and-locale.md](language-and-locale.md) | Covered | Reliability | Partly |
+| LG-04 | Unchecked translation in high-stakes text | [language-and-locale.md](language-and-locale.md) | Written | Model | Partly |
+| LG-05 | Politeness and formality errors | [language-and-locale.md](language-and-locale.md) | Written | Model | Partly |
+| LG-06 | Reading-level mismatch | [language-and-locale.md](language-and-locale.md) | Written | Model | Partly |
+| LG-07 | Jargon, acronyms, and idioms | [language-and-locale.md](language-and-locale.md) | Covered | Model | Partly |
+| LG-08 | Locale format errors | [language-and-locale.md](language-and-locale.md) | Covered | Business context | Partly |
+| LG-09 | Name and transliteration errors | [language-and-locale.md](language-and-locale.md) | Covered | Model | Partly |
+| LG-10 | Gender and pronoun errors | [language-and-locale.md](language-and-locale.md) | Written | Model | Partly |
+| LG-11 | Dialect and slang misreading | [language-and-locale.md](language-and-locale.md) | Covered | Model | Partly |
 | LG-12 | Typos, shorthand, and noisy input | [language-and-locale.md](language-and-locale.md) | New | Model | Yes |
 | LG-13 | Emoji and punctuation tone misreads | [language-and-locale.md](language-and-locale.md) | Extends | Model | Partly |
 | LG-14 | Profanity and slang handling | [language-and-locale.md](language-and-locale.md) | New | Business context | Partly |
