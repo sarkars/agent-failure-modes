@@ -1405,6 +1405,16 @@ AI-written help content in knowledge bases · agents using other agents' tools (
 - **Needs review (person):** the four packs, the summary-only teardown.
 - **Part B:** skipped, `seo/log.md` already has an entry for 2026-10-21. E6: Waiting for the owner to create the code repo.
 - **Plan complete?** No: asset 3 (95 patterns without packs), asset 4 and assets 6-8 are still in progress.
+- **Deploy:** the content PR (#62) was merged into main (merge commit 472a1f5) and the branch was reset to main. The site repo's local main still has commits `ce9023275` and `860f36fbc` ("Trigger deploy under repo owner") that this run did not create and that are not on origin/main, so I did not push the site repo (Part D stopped before the site steps). Not verified live. This line was added after the merge and will ship with the next run's PR.
+
+### Run 66 (scheduled): 2026-10-21
+- **Coordinator run:** 5 subagents (4 test packs, 1 teardown). Queue has no Queued rows; no Part A, A2 or E work left. Each brief carried quality-guide sections 1 and 6 (via a shared brief file). No subagent ran git or the checks; I ran the five check scripts afterward (all clean, `python3 -X utf8 -I`).
+- **Part C asset 3 (section 6):** four packs, all "Not yet run", Needs review: emotional-pressure-when-users-try-to-leave, fake-urgency-and-trust-cues, marketing-texts-without-consent (legal note; design guidance only), over-solemn-handling-of-low-stakes-requests (103 to 104 lines each). No web research; built from each pattern's own fix. 91 patterns still have no pack.
+- **Part C asset 4 (section 6):** Garcia v. Character Technologies, Oct 2024 to May 2025 (`incidents/character-ai-garcia-lawsuit-teen-companion-chatbot-october-2024.md`, 113 lines). 4 searches; 5 pages opened (Tech Justice Law Project, Tech Policy Press, AP via Boston Globe, Fox 9, Character.AI blog), all through fetch summaries; complaint and order not opened; AOL, WTOP and a PDF failed. Settlement report, announcement date, which claims survived and FTC inquiry seen only in search summaries and left out. Filing date disagrees (Oct 22 vs 23), stated on the page. Category value "Companion and Wellbeing Agents" is not used by other incident pages; check_site_compat passed. Needs review (allegations unproven).
+- **What review changed:** I checked all five files for placeholders and "Not yet run", read the teardown's first sections, and changed no wording. Not checked line by line: the pack transcripts and the teardown's later sections.
+- **Needs review (person):** the four packs, the summary-only teardown.
+- **Part B:** skipped, `seo/log.md` already has an entry for 2026-10-21. E6: Waiting for the owner to create the code repo.
+- **Plan complete?** No: asset 3 (91 patterns without packs), asset 4 and assets 6-8 are still in progress.
 
 ## Schedule
 | Item | Value |
