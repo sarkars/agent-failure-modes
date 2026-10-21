@@ -138,6 +138,27 @@ Bot:  Your policy includes rental reimbursement of $40 per day for up to 30 days
 
 **Fix:** read policy facts such as limits and dates from one source of truth (the customer's policy record) and quote them, rather than letting the model generate them. The same question on the same data must return the same answer. See the [confident wrong answer with no way to check](../../../../../by-capability/human-machine-interface/goals/errors-and-recovery/failures/confident-wrong-answer-with-no-way-to-check.md) pattern.
 
+### Agents contradict each other
+
+*Illustrative transcript, not a real product log. "Pinecrest Home" is an invented US online furniture store whose assistant routes questions to a billing agent and a shipping agent.*
+
+```
+Before:
+User: Where's my order and when will I be charged?
+Bot (billing agent):  Your card was charged $412.60 on Oct 14.
+User: So when does it arrive?
+Bot (shipping agent): Your order hasn't shipped yet. You'll be charged when it ships.
+User: But you just said I was already charged?
+
+After:
+Bot:  Your card was charged $412.60 on Oct 14, and the order is waiting to ship. The charge happened at checkout, not at shipping, so the shipping note was wrong. Expected ship date: Oct 22.
+      (one reply, built after the two agents' answers were compared)
+```
+
+**What the user experiences:** one chat gives two incompatible answers about the same order, with no sign of which one to believe.
+
+**Fix:** have one coordinating step collect the agents' answers and check them against the same order record before anything is sent; if they disagree, resolve it (or say what is uncertain) and reply once, in one voice. One vendor article describes this pattern as passing agents' outputs through a final step that settles disagreements before the reply goes out ([Cobbai](https://cobbai.com/blog/agent-orchestration-customer-service), opened; vendor source). See the [confident wrong answer with no way to check](../../../../../by-capability/human-machine-interface/goals/errors-and-recovery/failures/confident-wrong-answer-with-no-way-to-check.md) pattern.
+
 ---
 
 ## References

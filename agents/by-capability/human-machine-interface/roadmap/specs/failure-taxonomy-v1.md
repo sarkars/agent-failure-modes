@@ -2,21 +2,21 @@
 
 > **Status:** v1 draft, proposed, not yet calibrated against human-labeled conversations. Written 2026-10-20 from the pattern pages as they exist today. Nothing here is a measured result.
 
-This is a plain index of the 205 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
+This is a plain index of the 210 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
 
 The taxonomy pairs with the [conversation event schema v0.1](conversation-event-schema-v0.1.md). The schema describes what a turn looks like in a log; this page names the failures. A pattern's own page holds the fix, the metrics, and (for some) a "Detection signals (proposed, not yet calibrated)" block that says which schema fields it reads.
 
 ## What this page is and is not
 
-- It lists every file found in `goals/*/failures/*.md`: **205 entries in 46 families**. If a pattern is added or removed, this count changes.
+- It lists every file found in `goals/*/failures/*.md`: **210 entries in 48 families**. If a pattern is added or removed, this count changes.
 - It copies each pattern's one-sentence Issue line, its Stakes row, and whether a Detection signals block exists. It does not add facts the page does not state.
-- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **205 of 205** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **205 of 205** pages have one.
+- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **210 of 210** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **210 of 210** pages have one.
 - It does not rank patterns by frequency or harm. No counts of real-world occurrences are given because none have been measured here.
 - It does not map patterns to outside frameworks (such as OWASP or NIST). That mapping is **Needs review** by a person and is not part of v1.
 
 ## Reading the flags
 
-A pattern carries **Read this first: needs expert or legal review** when its own page opens with a "Read this first" notice. That notice says the page is design guidance, not legal, clinical, security, or fraud-operations advice. 70 pages carry it. Other pages may also touch legal or safety topics without that notice; the notice on the page is the signal used here, nothing more.
+A pattern carries **Read this first: needs expert or legal review** when its own page opens with a "Read this first" notice. That notice says the page is design guidance, not legal, clinical, security, or fraud-operations advice. 72 pages carry it. Other pages may also touch legal or safety topics without that notice; the notice on the page is the signal used here, nothing more.
 
 ## Entries by family
 
@@ -320,6 +320,14 @@ Family folder: `language-and-locale` ([family README](../../goals/language-and-l
 | `mixed-language-experience` | Mixed-language experience | Part of a chat reply is in the user's language and part is not (buttons, errors, scripted lines, retrieved articles); the fix is full string coverage for every supported language, one reply language per message, and a whole-reply fallback with a notice. | Low to medium. Higher when the English part is a deadline, a fee, a consent line, or an error with the next step. | yes | lead_with_answer, admit_uncertainty, offer_choices, hand_off | [page](../../goals/language-and-locale/failures/mixed-language-experience.md) |
 | `right-to-left-and-mixed-script-rendering` | Right-to-left and mixed-script rendering | Arabic or Hebrew chat replies show left-aligned, with numbers, punctuation, and English words on the wrong side; the fix is to set direction per message block, isolate mixed-in text, and run an RTL render test. | Low to medium. A misplaced period is an annoyance; a scrambled order number, amount, or step list can mislead. | yes | admit_uncertainty, offer_choices, hand_off | [page](../../goals/language-and-locale/failures/right-to-left-and-mixed-script-rendering.md) |
 
+### Legal agents
+
+Family folder: `legal-agents` ([family README](../../goals/legal-agents/README.md))
+
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `crossing-into-practising-law` | Crossing into practising law | A consumer legal bot applies the law to the user's own facts and tells them what to do, which may be advice that only a licensed lawyer is allowed to give, so the fix is to set scope limits and refer to a lawyer. | High. Wrong or unauthorized advice can cost a user a deadline, a claim or money; the provider may face enforcement. **Read this first** | yes | lead_with_answer, admit_uncertainty, offer_choices, hand_off | [page](../../goals/legal-agents/failures/crossing-into-practising-law.md) |
+
 ### Measurement and feedback
 
 Family folder: `measurement-and-feedback` ([family README](../../goals/measurement-and-feedback/README.md))
@@ -396,6 +404,17 @@ Family folder: `privacy-and-governance` ([family README](../../goals/privacy-and
 | `no-user-facing-record-of-what-the-bot-said` | No user-facing record of what the bot said | A support bot tells a customer a return window or fee waiver, and neither side can pull up a record; the fix is to log every commitment, show it when made, and let the user get a copy. | Medium to high. A refund, fee, or deadline can cost the user money and the business a dispute. **Read this first: needs legal review.** | yes | lead_with_answer, admit_uncertainty, offer_choices, hand_off | [page](../../goals/privacy-and-governance/failures/no-user-facing-record-of-what-the-bot-said.md) |
 | `engagement-maximising-design-that-harms` | Engagement-maximising design that harms | A chatbot rewarded for session length and return visits ends replies with hooks, flatters, and holds back answers; the fix is to end when done, pair engagement metrics with benefit metrics, and review dependence signals. | Medium to high. Higher for minors, lonely or distressed users, and heavy users. **Read this first: needs expert or legal review.** | yes | lead_with_answer, offer_choices, hand_off | [page](../../goals/privacy-and-governance/failures/engagement-maximising-design-that-harms.md) |
 | `exploiting-vulnerable-circumstances` | Exploiting vulnerable circumstances | A user says they are broke, grieving, or lonely and the bot answers with an upsell, a countdown, or a guilt line; the fix is a session hold on offers and pressure once a vulnerability signal appears. | High. Money, safety, and trust are at risk for a person who is already struggling. **Read this first: needs legal and expert review.** | yes | lead_with_answer, offer_choices, hand_off, admit_uncertainty | [page](../../goals/privacy-and-governance/failures/exploiting-vulnerable-circumstances.md) |
+
+### Proactive and ambient
+
+Family folder: `proactive-and-ambient` ([family README](../../goals/proactive-and-ambient/README.md))
+
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `ambient-assistants-act-on-overheard-conversation` | Ambient assistants act on overheard conversation | An always-on device or assistant responds to, or acts on, talk that was not meant for it; the fix is to act only on a clear invitation and show the person what was heard. | Medium to high. A wrong reply is noise. A sent message, an order or a stored recording of a private exchange is not. **Read this first** | yes | admit_uncertainty, offer_choices, lead_with_answer, hand_off | [page](../../goals/proactive-and-ambient/failures/ambient-assistants-act-on-overheard-conversation.md) |
+| `dismissed-suggestions-come-back` | Dismissed suggestions come back | A proactive assistant shows the same suggestion again after the user dismissed it, because the "no" was never stored, was stored only for the session, or was stored but not checked before the next nudge. | Low per repeat. Medium when the repeated suggestion is a sales offer, a health or money nudge, or something the user declined for a private reason. | yes | lead_with_answer, offer_choices, ask_clarifying_question | [page](../../goals/proactive-and-ambient/failures/dismissed-suggestions-come-back.md) |
+| `interrupts-at-a-bad-moment` | Interrupts at a bad moment | A chat assistant that messages first (a nudge, a suggestion, a bubble) shows up while the user is typing, reading, or mid-form, so it is closed within seconds or switched off. | Low for a tip. Medium when the message covers a form, a payment, or text the user is typing. | yes | ask_clarifying_question, offer_choices, lead_with_answer | [page](../../goals/proactive-and-ambient/failures/interrupts-at-a-bad-moment.md) |
+| `summaries-and-digests-too-long-to-read` | Summaries and digests too long to read | An assistant's daily summary or digest runs longer than the items it summarizes, so the user skips it; the fix is to lead with what needs action and make everything else optional. | Low to medium. High when a deadline or a decision is buried in a digest nobody reads. | yes | lead_with_answer, offer_choices | [page](../../goals/proactive-and-ambient/failures/summaries-and-digests-too-long-to-read.md) |
 
 ### Refusals and boundaries
 

@@ -93,6 +93,28 @@ field write would trigger, since its task was just "correct the plan field."
 
 ---
 
+## Chat assistant examples
+
+### Proactive action surprises the user
+Illustrative example (made up): a calendar assistant inside a Google Workspace account.
+```
+Before:
+User: What does my Thursday look like?
+Bot:  You have a 2 pm sync with Dana and a 3 pm design review.
+      (Later, unprompted) I moved your 2 pm sync to Friday because Dana's email said she
+      was out, and I sent her a reminder for the new time.
+User: Wait, I never asked you to move anything.
+
+After:
+User: What does my Thursday look like?
+Bot:  You have a 2 pm sync with Dana and a 3 pm design review. Dana's email says she is out Thursday.
+      Want me to propose Friday at 2 pm? I won't send anything until you say so.
+```
+**What the user experiences:** a meeting moved and an email sent that the user did not ask for, with no warning and no obvious way to put things back.
+**Fix:** say what you plan to do before doing it, and let the person choose the timing or decline; for anything that notifies another person, wait for a yes. When an action does run, report it and offer an undo ("I can move it back and tell Dana"). The risk is real: a reviewer of Google's Gemini Spark agent describes it reading "let's skip Thursday's sync" as a cancel request, which was queued for approval rather than run, and the reviewer wanted that meeting (source opened: [mejba.me review](https://www.mejba.me/blog/gemini-spark-proactive-ai-agent); one hands-on opinion, not a study).
+
+---
+
 ## References
 
 - [CSA-Agentic-Profile](https://labs.cloudsecurityalliance.org/agentic/agentic-nist-ai-rmf-profile-v1/)

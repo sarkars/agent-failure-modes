@@ -119,7 +119,7 @@ Flags: **V** verified source · **R** needs research · **L** legal review · **
 ## Legal agents
 | ID | Pattern | What goes wrong | Goal | Primary metric (starting target) | Flags | Root cause | Better model alone? | In the library today |
 |---|---|---|---|---|---|---|---|---|
-| LA-01 | Crossing into practising law | A consumer legal bot gives advice beyond what's permitted | Set scope limits and refer to a lawyer | Out-of-scope legal advice. Target: 0 | L, E | Governance | No | New (rules differ by jurisdiction; not researched) |
+| LA-01 | Crossing into practising law | A consumer legal bot gives advice beyond what's permitted | Set scope limits and refer to a lawyer | Out-of-scope legal advice. Target: 0 | L, E | Governance | No | **Written**: [page](../goals/legal-agents/failures/crossing-into-practising-law.md) |
 | LA-02 | Privileged material sent to third-party models | Confidential or privileged content leaves approved systems | Policies and routing for sensitive matters | Privileged data sent to unapproved processors. Target: 0 | L | Governance | No | **Covered**: [privilege waiver risk](../../../by-use-case/legal-contracts/goals/litigation-support/failures/privilege-waiver-risk.md) |
 
 ## Multi-agent platforms
