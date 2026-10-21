@@ -457,17 +457,17 @@
 | AM-03 | Summaries and digests too long to read | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Written | Business context | No |
 | AM-04 | Ambient assistants act on overheard conversation | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Written | Governance | No |
 | AM-05 | Proactive action surprises the user | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Extends | Business context | No |
-| GC-01 | Answers the wrong person in a group | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | New | Reliability | No |
+| GC-01 | Answers the wrong person in a group | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Written | Reliability | No |
 | GC-02 | One member's private information shown to the group | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Extends | Governance | No |
 | GC-03 | Conflicting instructions from different members | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Extends | Business context | No |
-| GC-04 | The bot talks over people | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | New | Business context | No |
+| GC-04 | The bot talks over people | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Written | Business context | No |
 | DT-01 | Order mix-ups at the speaker | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Written | Reliability | Partly |
-| DT-02 | Modifiers and customizations misparsed | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Model | Partly |
-| DT-03 | Upsell pressure at the speaker | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Business context | No |
-| DT-04 | Screen and spoken order disagree | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Reliability | No |
-| DT-05 | Allergy and dietary requests handled loosely | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Business context | No |
-| IC-01 | Replies too long or visual for a driver | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Business context | No |
-| IC-02 | Smart-home commands go to the wrong device or room | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Reliability | Partly |
+| DT-02 | Modifiers and customizations misparsed | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Written | Model | Partly |
+| DT-03 | Upsell pressure at the speaker | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Written | Business context | No |
+| DT-04 | Screen and spoken order disagree | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Written | Reliability | No |
+| DT-05 | Allergy and dietary requests handled loosely | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Written | Business context | No |
+| IC-01 | Replies too long or visual for a driver | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Written | Business context | No |
+| IC-02 | Smart-home commands go to the wrong device or room | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Written | Reliability | Partly |
 | IC-03 | Anyone can issue a sensitive voice command | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Governance | No |
 | IC-04 | Always-listening surprises | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Governance | No |
 | IC-05 | Purchases by children or the TV | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Reliability | No |

@@ -2,21 +2,21 @@
 
 > **Status:** v1 draft, proposed, not yet calibrated against human-labeled conversations. Written 2026-10-20 from the pattern pages as they exist today. Nothing here is a measured result.
 
-This is a plain index of the 210 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
+This is a plain index of the 218 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
 
 The taxonomy pairs with the [conversation event schema v0.1](conversation-event-schema-v0.1.md). The schema describes what a turn looks like in a log; this page names the failures. A pattern's own page holds the fix, the metrics, and (for some) a "Detection signals (proposed, not yet calibrated)" block that says which schema fields it reads.
 
 ## What this page is and is not
 
-- It lists every file found in `goals/*/failures/*.md`: **210 entries in 48 families**. If a pattern is added or removed, this count changes.
+- It lists every file found in `goals/*/failures/*.md`: **218 entries in 50 families**. If a pattern is added or removed, this count changes.
 - It copies each pattern's one-sentence Issue line, its Stakes row, and whether a Detection signals block exists. It does not add facts the page does not state.
-- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **210 of 210** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **210 of 210** pages have one.
+- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **218 of 218** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **210 of 210** pages have one.
 - It does not rank patterns by frequency or harm. No counts of real-world occurrences are given because none have been measured here.
 - It does not map patterns to outside frameworks (such as OWASP or NIST). That mapping is **Needs review** by a person and is not part of v1.
 
 ## Reading the flags
 
-A pattern carries **Read this first: needs expert or legal review** when its own page opens with a "Read this first" notice. That notice says the page is design guidance, not legal, clinical, security, or fraud-operations advice. 72 pages carry it. Other pages may also touch legal or safety topics without that notice; the notice on the page is the signal used here, nothing more.
+A pattern carries **Read this first: needs expert or legal review** when its own page opens with a "Read this first" notice. That notice says the page is design guidance, not legal, clinical, security, or fraud-operations advice. 75 pages carry it. Other pages may also touch legal or safety topics without that notice; the notice on the page is the signal used here, nothing more.
 
 ## Entries by family
 
@@ -175,6 +175,10 @@ Family folder: `drive-thru-agents` ([family README](../../goals/drive-thru-agent
 | Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
 |---|---|---|---|---|---|---|
 | `order-mix-ups-at-the-speaker` | Order mix-ups at the speaker | A drive-thru voice agent adds, drops, or multiplies items, and the customer has no readback or screen they can check before paying. | Low to medium for a wrong item; higher with allergies, large totals, or a customer who can't easily correct it. | yes | ask_clarifying_question, admit_uncertainty, hand_off | [page](../../goals/drive-thru-agents/failures/order-mix-ups-at-the-speaker.md)  |
+| `allergy-and-dietary-requests-handled-loosely` | Allergy and dietary requests handled loosely | An ordering bot treats "no peanuts" as a taste preference with no note to the kitchen, or tells the customer a dish is safe when it cannot know that. | High. A severe allergic reaction can involve trouble breathing and loss of consciousness. **Read this first** | yes | hand_off, ask_clarifying_question, admit_uncertainty | [page](../../goals/drive-thru-agents/failures/allergy-and-dietary-requests-handled-loosely.md) |
+| `modifiers-and-customizations-misparsed` | Modifiers and customizations misparsed | An ordering bot attaches a customization like "no pickles" or "extra sauce" to the wrong item or the wrong quantity, and the customer finds out at the window. | Low to medium for a missing topping; high when the change is an allergy or dietary need. **Read this first** | yes | ask_clarifying_question, offer_choices, admit_uncertainty, hand_off | [page](../../goals/drive-thru-agents/failures/modifiers-and-customizations-misparsed.md) |
+| `screen-and-spoken-order-disagree` | Screen and spoken order disagree | A drive-thru, kiosk, or ordering assistant shows one order on the screen and says another in its readback, so the customer cannot tell which one is real. | Medium. A wrong item is a remake; a wrong allergy note, or a total that differs from what was agreed, is worse. | yes | admit_uncertainty, ask_clarifying_question, hand_off | [page](../../goals/drive-thru-agents/failures/screen-and-spoken-order-disagree.md) |
+| `upsell-pressure-at-the-speaker` | Upsell pressure at the speaker | A drive-thru voice agent or ordering bot pushes add-ons the customer already declined, sometimes as one stuck repetition, so saying no does not end the offer. | Low per order. Medium over time: it costs patience, it slows the line, and it can read as pressure on someone who cannot easily argue back. | yes | ask_clarifying_question, hand_off | [page](../../goals/drive-thru-agents/failures/upsell-pressure-at-the-speaker.md) |
 
 ### Education agents
 
@@ -264,6 +268,15 @@ Family folder: `government-service-agents` ([family README](../../goals/governme
 |---|---|---|---|---|---|---|
 | `eligibility-answers-sound-like-decisions` | Eligibility answers sound like decisions | A public-service chat answers "do I qualify?" in a tone that reads like an official decision, with no clear line between general guidance and what only the agency decides. | High. A wrong "no" can stop someone from applying; a wrong "yes" can lead to missed deadlines or wasted effort. **Read this first: needs expert or legal review.** | yes | admit_uncertainty, offer_choices, hand_off | [page](../../goals/government-service-agents/failures/eligibility-answers-sound-like-decisions.md)  |
 
+### Group and shared chats
+
+Family folder: `group-and-shared-chats` ([family README](../../goals/group-and-shared-chats/README.md))
+
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `answers-the-wrong-person-in-a-group` | Answers the wrong person in a group | In a shared thread the bot replies to, or as, the wrong member: it answers a question to the wrong person, mixes up who said what, or speaks for someone who did not ask. | Low for a misdirected answer. Medium to high when the reply carries one person's details, money, or a decision to someone else. | yes | lead_with_answer, ask_clarifying_question, offer_choices, hand_off | [page](../../goals/group-and-shared-chats/failures/answers-the-wrong-person-in-a-group.md) |
+| `the-bot-talks-over-people` | The bot talks over people | A bot in a team channel or group chat posts into a human conversation that did not need it, so people mute it, remove it, or stop talking freely. | Low for one stray reply. Medium when the bot repeats a wrong answer, exposes a side thread, or buries a decision under noise. | yes | lead_with_answer, ask_clarifying_question, offer_choices, hand_off | [page](../../goals/group-and-shared-chats/failures/the-bot-talks-over-people.md) |
+
 ### Healthcare agents
 
 Family folder: `healthcare-agents` ([family README](../../goals/healthcare-agents/README.md))
@@ -296,6 +309,15 @@ Family folder: `human-handoff` ([family README](../../goals/human-handoff/README
 | `humans-can-t-see-what-the-bot-said-or` | Humans can't see what the bot said or promised | A customer says "your chatbot told me," and the person who picks up has no record of what the bot said or promised, so they cannot confirm, honor, or correct it. | Medium to high. The bot's words often concern money, deadlines, refunds, or eligibility. Read this first: needs expert or legal review. | yes | hand_off, admit_uncertainty | [page](../../goals/human-handoff/failures/humans-can-t-see-what-the-bot-said-or.md) |
 | `bot-keeps-replying-after-a-person-joins` | Bot keeps replying after a person joins | A support chatbot keeps answering after a human agent joins the chat, so the customer gets two replies, often contradicting each other, and the agent loses control of the conversation. | Low to high. Two conflicting answers about a refund, a deadline, or a policy are worse than one wrong answer. | yes | hand_off, admit_uncertainty | [page](../../goals/human-handoff/failures/bot-keeps-replying-after-a-person-joins.md) |
 | `handoff-outside-staffed-hours-with-no-alternative` | Handoff outside staffed hours with no alternative | A chatbot says a person will join the chat, but no one is staffed until tomorrow, and it offers no callback, ticket, or email to bridge the gap. | Any. Low for a shipping question; high for a locked account, a fraud charge, or a deadline that falls before the next shift. | yes | lead_with_answer, offer_choices, hand_off | [page](../../goals/human-handoff/failures/handoff-outside-staffed-hours-with-no-alternative.md) |
+
+### In-car and home assistants
+
+Family folder: `in-car-and-home-assistants` ([family README](../../goals/in-car-and-home-assistants/README.md))
+
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `replies-too-long-or-visual-for-a-driver` | Replies too long or visual for a driver | A voice assistant used in a car gives long spoken answers or asks the driver to look at or tap the screen, so a task that should be hands-free and eyes-free pulls attention from the road. | High. The cost is driver attention, and a lapse can mean a crash. **Read this first** | yes | lead_with_answer, ask_clarifying_question, offer_choices, hand_off | [page](../../goals/in-car-and-home-assistants/failures/replies-too-long-or-visual-for-a-driver.md) |
+| `smart-home-commands-go-to-the-wrong-device-or` | Smart-home commands go to the wrong device or room | A smart home assistant sends a command such as "turn off the light" to a different light, device, or room than the one the person meant, and does not say which one it acted on. | Low for a lamp. Medium when the target is a heater, a lock, a garage door, or a device that someone else in the house is using. | yes | lead_with_answer, offer_choices, ask_clarifying_question, admit_uncertainty | [page](../../goals/in-car-and-home-assistants/failures/smart-home-commands-go-to-the-wrong-device-or.md) |
 
 ### IT and security agents
 
