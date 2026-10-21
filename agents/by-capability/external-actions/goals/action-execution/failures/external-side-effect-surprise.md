@@ -113,6 +113,22 @@ Bot:  You have a 2 pm sync with Dana and a 3 pm design review. Dana's email says
 **What the user experiences:** a meeting moved and an email sent that the user did not ask for, with no warning and no obvious way to put things back.
 **Fix:** say what you plan to do before doing it, and let the person choose the timing or decline; for anything that notifies another person, wait for a yes. When an action does run, report it and offer an undo ("I can move it back and tell Dana"). The risk is real: a reviewer of Google's Gemini Spark agent describes it reading "let's skip Thursday's sync" as a cancel request, which was queued for approval rather than run, and the reviewer wanted that meeting (source opened: [mejba.me review](https://www.mejba.me/blog/gemini-spark-proactive-ai-agent); one hands-on opinion, not a study).
 
+### Hidden agent actions
+Illustrative, made up: "Ledgerly" is an invented bookkeeping assistant in a small-business accounting app.
+```
+Before:
+User: Why is my invoice to Brightside Dental showing as sent?
+Bot:  I can't find a record of sending anything. Maybe you sent it yourself?
+      (the agent emailed it Tuesday as part of "tidy up my overdue invoices"; no log entry shown)
+
+After:
+User: Why is my invoice to Brightside Dental showing as sent?
+Bot:  I sent it. Tue Oct 14, 9:12 am, to billing@brightsidedental.example, during "tidy up my overdue invoices."
+      Open the Activity tab for everything I did that day. Want me to send a correction?
+```
+**What the user experiences:** a customer-facing action happened and the assistant cannot say who did it or when, so the user doubts everything else it reports.
+**Fix:** log every action the agent takes (what, to whom, when, which request triggered it) in a list the user can open and search, and have the bot answer "what did you do?" from that log, never from guesses. Closest HMI pattern: [no user-facing record of what the bot said](../../../../human-machine-interface/goals/privacy-and-governance/failures/no-user-facing-record-of-what-the-bot-said.md). Search and vendor blogs describe the wider problem of agent actions that logs do not capture, but I found no independent study, so no figure is given here.
+
 ---
 
 ## References
