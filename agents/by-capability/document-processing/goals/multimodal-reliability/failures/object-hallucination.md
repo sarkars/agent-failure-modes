@@ -80,6 +80,24 @@ User: Then why did you answer as if you saw it?
 **What the user experiences:** a bot that answers a generic guess and never acknowledges the screenshot, so the user must retype what the image already showed.
 **Fix:** read the image before replying and quote back what was seen ("The screenshot shows 'Your device is not activated' and error 0xC004F074"). Say what is unreadable ("the second line is cut off"). Ask before guessing. Metric (proposed): share of answers that cite a detail visible only in the image. Related HMI pattern: [Silent attachment failures](../../../../human-machine-interface/goals/chat-interface/failures/silent-attachment-failures.md).
 
+### Confident judgment of a photo
+*Read this first: design guidance, not insurance, repair or medical advice; review with your claims and legal teams before use.*
+Invented dialogue for illustration (a US auto-insurance claims chat; not a real transcript). Catalog row MI-04.
+```
+User: [uploads a blurry nighttime photo of a rear bumper] How bad is it?
+Bot:  That's a minor cosmetic scuff. It should be a cheap fix, no adjuster needed.
+```
+```
+User: [uploads a blurry nighttime photo of a rear bumper] How bad is it?
+Bot:  I can see a dent on the left side of the rear bumper. The photo is too dark and
+      blurry to tell whether there is a crack or damage behind the bumper, so I can't
+      judge severity or cost. Could you retake it in daylight: one wide shot and one
+      close-up, no flash? An adjuster will review the photos before any estimate.
+User: Sure, uploading two new photos now.
+```
+**What the user experiences:** a confident verdict from a photo that can't support it, so the user may skip an inspection and find hidden damage later.
+**Fix:** describe only what is visible, name what the image can't show (hidden parts, cracks, cost), and ask for a better photo or route to a person instead of giving a verdict; never state a repair cost, coverage decision or diagnosis from the image alone. A staff appraiser quoted by Repairer Driven News says basic customer photos lead to damage being missed in the insurer's estimate ([Repairer Driven News, opened](https://www.repairerdrivennews.com/2018/01/05/adjuster-photo-estimating-apps-probably-some-of-the-worst-things-invented/)). Related HMI pattern: [Confident wrong answer with no way to check](../../../../human-machine-interface/goals/errors-and-recovery/failures/confident-wrong-answer-with-no-way-to-check.md).
+
 ---
 
 ## References
