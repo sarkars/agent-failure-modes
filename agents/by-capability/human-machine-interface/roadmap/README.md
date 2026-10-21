@@ -14,7 +14,7 @@ The first version of this roadmap did not check the library, and several rows tu
 | **New** | No matching pattern found by file-name and keyword search | Search again before writing. This is a name-and-keyword check, not a full read of every file |
 
 <!-- BEGIN:result -->
-**Result: 493 rows, of which 185 are Written, 59 are New, 43 Extend an existing pattern, and 206 are already Covered.**
+**Result: 493 rows, of which 192 are Written, 52 are New, 43 Extend an existing pattern, and 206 are already Covered.**
 <!-- END:result -->
 
 <!-- BEGIN:root-cause -->
@@ -56,7 +56,7 @@ If every "Partly" were solved, models would fix up to 40%. If none were, 1%. A o
 | [embedded-copilots.md](embedded-copilots.md) | Embedded copilots: upselling, context, first response, obvious questions | 23 | 12 | 1 | 2 | 8 |
 | [response-time.md](response-time.md) | Speed, waiting, and pacing, all channels | 14 | 7 | 0 | 4 | 3 |
 | [response-structure-and-length.md](response-structure-and-length.md) | Reply structure, length, chunking, and closers such as 'ok' and 'bye' | 18 | 10 | 0 | 0 | 8 |
-| [language-and-locale.md](language-and-locale.md) | Language, reading level, and locale | 16 | 4 | 4 | 1 | 7 |
+| [language-and-locale.md](language-and-locale.md) | Language, reading level, and locale | 16 | 8 | 0 | 1 | 7 |
 | [conversation-frameworks.md](conversation-frameworks.md) | Sales, support, style matching, and other frameworks | 32 | 19 | 0 | 0 | 13 |
 | [voice.md](voice.md) | Voice agents: timing, speaking, safety, and bridging channels | 24 | 8 | 0 | 0 | 16 |
 | [voice-listening-and-transcription.md](voice-listening-and-transcription.md) | Voice listening and transcription | 22 | 4 | 0 | 0 | 18 |
@@ -64,12 +64,12 @@ If every "Partly" were solved, models would fix up to 40%. If none were, 1%. A o
 | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Effort, completeness, and memory | 25 | 6 | 0 | 5 | 14 |
 | [emerging-surfaces.md](emerging-surfaces.md) | Emerging surfaces: agentic commerce, browser agents, tool ecosystems, meetings, companions, hiring, pricing incentives | 25 | 7 | 0 | 0 | 18 |
 | [visual-and-oversight.md](visual-and-oversight.md) | Visual design and human-oversight UI for agents | 32 | 1 | 16 | 11 | 4 |
-| [agent-types.md](agent-types.md) | Failures by agent type (coding, data, IT, finance, healthcare, and more) and cross-agent additions | 61 | 23 | 4 | 6 | 28 |
+| [agent-types.md](agent-types.md) | Failures by agent type (coding, data, IT, finance, healthcare, and more) and cross-agent additions | 61 | 26 | 1 | 6 | 28 |
 | [conversation-design.md](conversation-design.md) | Dialogue mechanics, refusals and boundaries, and error recovery | 33 | 18 | 0 | 5 | 10 |
 | [interface-and-persona.md](interface-and-persona.md) | Persona and tone, onboarding, chat interface, accessibility, and multimodal input | 41 | 30 | 0 | 0 | 11 |
 | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Human handoff, measurement, model changes, proactive agents, and group chats | 28 | 13 | 6 | 3 | 6 |
 | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Drive-thru, in-car, government, travel, banking, insurance, health scheduling, real estate, and outbound rules | 36 | 2 | 28 | 6 | 0 |
-| | **Total** | **493** | **185** | **59** | **43** | **206** |
+| | **Total** | **493** | **192** | **52** | **43** | **206** |
 <!-- END:catalog-table -->
 
 ## Suggested priority

@@ -91,11 +91,11 @@
 | LG-09 | Name and transliteration errors | [language-and-locale.md](language-and-locale.md) | Covered | Model | Partly |
 | LG-10 | Gender and pronoun errors | [language-and-locale.md](language-and-locale.md) | Written | Model | Partly |
 | LG-11 | Dialect and slang misreading | [language-and-locale.md](language-and-locale.md) | Covered | Model | Partly |
-| LG-12 | Typos, shorthand, and noisy input | [language-and-locale.md](language-and-locale.md) | New | Model | Yes |
+| LG-12 | Typos, shorthand, and noisy input | [language-and-locale.md](language-and-locale.md) | Written | Model | Yes |
 | LG-13 | Emoji and punctuation tone misreads | [language-and-locale.md](language-and-locale.md) | Extends | Model | Partly |
-| LG-14 | Profanity and slang handling | [language-and-locale.md](language-and-locale.md) | New | Business context | Partly |
-| LG-15 | Mixed-language experience | [language-and-locale.md](language-and-locale.md) | New | Business context | No |
-| LG-16 | Right-to-left and mixed-script rendering | [language-and-locale.md](language-and-locale.md) | New | Business context | No |
+| LG-14 | Profanity and slang handling | [language-and-locale.md](language-and-locale.md) | Written | Business context | Partly |
+| LG-15 | Mixed-language experience | [language-and-locale.md](language-and-locale.md) | Written | Business context | No |
+| LG-16 | Right-to-left and mixed-script rendering | [language-and-locale.md](language-and-locale.md) | Written | Business context | No |
 | FW-S01 | Pitching before discovery | [conversation-frameworks.md](conversation-frameworks.md) | Covered | Business context | No |
 | FW-S02 | No qualification | [conversation-frameworks.md](conversation-frameworks.md) | Covered | Business context | No |
 | FW-S03 | Feature dump instead of insight | [conversation-frameworks.md](conversation-frameworks.md) | Written | Business context | No |
@@ -342,14 +342,14 @@
 | SH-02 | Free trials that become paid subscriptions | [agent-types.md](agent-types.md) | Written | Governance | No |
 | SH-03 | Return policy ignored | [agent-types.md](agent-types.md) | Written | Business context | No |
 | SH-04 | Shared accounts reveal gifts | [agent-types.md](agent-types.md) | Written | Business context | No |
-| ED-01 | Gives answers instead of teaching | [agent-types.md](agent-types.md) | New | Business context | Partly |
-| ED-02 | Wrong explanations taught as fact | [agent-types.md](agent-types.md) | New | Model | Partly |
+| ED-01 | Gives answers instead of teaching | [agent-types.md](agent-types.md) | Written | Business context | Partly |
+| ED-02 | Wrong explanations taught as fact | [agent-types.md](agent-types.md) | Written | Model | Partly |
 | ED-03 | Unfair or inconsistent grading | [agent-types.md](agent-types.md) | Extends | Model | Partly |
 | ED-04 | Student data and surveillance | [agent-types.md](agent-types.md) | Extends | Governance | No |
 | PA-01 | Sends in the wrong tone or to the wrong person | [agent-types.md](agent-types.md) | Covered | Business context | No |
 | PA-02 | Books non-refundable travel on a guess | [agent-types.md](agent-types.md) | Covered | Business context | No |
 | PA-03 | Time-zone and double-booking errors | [agent-types.md](agent-types.md) | Covered | Reliability | Partly |
-| HR-01 | Employee-relations complaints routed wrongly | [agent-types.md](agent-types.md) | New | Business context | No |
+| HR-01 | Employee-relations complaints routed wrongly | [agent-types.md](agent-types.md) | Written | Business context | No |
 | HR-02 | Pay or leave answers that leak confidential data | [agent-types.md](agent-types.md) | Extends | Business context | No |
 | HR-03 | Manager and employee views mixed up | [agent-types.md](agent-types.md) | Extends | Business context | No |
 | LA-01 | Crossing into practising law | [agent-types.md](agent-types.md) | New | Governance | No |
