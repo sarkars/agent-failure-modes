@@ -17,9 +17,9 @@ Shared metrics the patterns below report against. Targets are starting points to
 |---|---|
 | [Replies too long or visual for a driver](failures/replies-too-long-or-visual-for-a-driver.md) | The assistant answers like it would at a desk, to a person who is driving (needs expert and legal review) |
 | [Smart-home commands go to the wrong device or room](failures/smart-home-commands-go-to-the-wrong-device-or.md) | "Turn off the light" hits the wrong light, and the assistant never says which |
-
-## Planned (not yet written)
-Sensitive commands from anyone, always-listening surprises, purchases by children or the TV. See the [roadmap](../../roadmap/service-and-vertical-patterns.md).
+| [Anyone can issue a sensitive voice command](failures/anyone-can-issue-a-sensitive-voice-command.md) | A guest or a TV unlocks a door or places an order (needs review) |
+| [Always-listening surprises](failures/always-listening-surprises.md) | The assistant keeps what it heard and nobody tells the household |
+| [Purchases by children or the TV](failures/purchases-by-children-or-the-tv.md) | A child or a broadcast triggers an order (needs review) |
 
 ## Related
 - [Proactive and ambient agents](../proactive-and-ambient/README.md)

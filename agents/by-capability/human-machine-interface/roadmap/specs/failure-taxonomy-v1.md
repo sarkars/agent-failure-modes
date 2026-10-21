@@ -2,21 +2,21 @@
 
 > **Status:** v1 draft, proposed, not yet calibrated against human-labeled conversations. Written 2026-10-20 from the pattern pages as they exist today. Nothing here is a measured result.
 
-This is a plain index of the 218 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
+This is a plain index of the 226 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
 
 The taxonomy pairs with the [conversation event schema v0.1](conversation-event-schema-v0.1.md). The schema describes what a turn looks like in a log; this page names the failures. A pattern's own page holds the fix, the metrics, and (for some) a "Detection signals (proposed, not yet calibrated)" block that says which schema fields it reads.
 
 ## What this page is and is not
 
-- It lists every file found in `goals/*/failures/*.md`: **218 entries in 50 families**. If a pattern is added or removed, this count changes.
+- It lists every file found in `goals/*/failures/*.md`: **226 entries in 51 families**. If a pattern is added or removed, this count changes.
 - It copies each pattern's one-sentence Issue line, its Stakes row, and whether a Detection signals block exists. It does not add facts the page does not state.
-- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **218 of 218** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **210 of 210** pages have one.
+- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **226 of 226** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **226 of 226** pages have one.
 - It does not rank patterns by frequency or harm. No counts of real-world occurrences are given because none have been measured here.
 - It does not map patterns to outside frameworks (such as OWASP or NIST). That mapping is **Needs review** by a person and is not part of v1.
 
 ## Reading the flags
 
-A pattern carries **Read this first: needs expert or legal review** when its own page opens with a "Read this first" notice. That notice says the page is design guidance, not legal, clinical, security, or fraud-operations advice. 75 pages carry it. Other pages may also touch legal or safety topics without that notice; the notice on the page is the signal used here, nothing more.
+A pattern carries **Read this first: needs expert or legal review** when its own page opens with a "Read this first" notice. That notice says the page is design guidance, not legal, clinical, security, or fraud-operations advice. 82 pages carry it. Other pages may also touch legal or safety topics without that notice; the notice on the page is the signal used here, nothing more.
 
 ## Entries by family
 
@@ -267,6 +267,9 @@ Family folder: `government-service-agents` ([family README](../../goals/governme
 | Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
 |---|---|---|---|---|---|---|
 | `eligibility-answers-sound-like-decisions` | Eligibility answers sound like decisions | A public-service chat answers "do I qualify?" in a tone that reads like an official decision, with no clear line between general guidance and what only the agency decides. | High. A wrong "no" can stop someone from applying; a wrong "yes" can lead to missed deadlines or wasted effort. **Read this first: needs expert or legal review.** | yes | admit_uncertainty, offer_choices, hand_off | [page](../../goals/government-service-agents/failures/eligibility-answers-sound-like-decisions.md)  |
+| `plain-language-and-language-access-gaps` | Plain-language and language access gaps | A government chatbot answers a program question in dense jargon, or only in English, so the person who needed it most cannot read it; the fix is plain language and the languages the agency must offer. | High. The text is about benefits, deadlines, and notices. **Read this first: needs expert or legal review.** | yes | lead_with_answer, admit_uncertainty, offer_choices, hand_off | [page](../../goals/government-service-agents/failures/plain-language-and-language-access-gaps.md) |
+| `identity-checks-exclude-people-without-standard-ids` | Identity checks exclude people without standard IDs | The only way to prove identity is a document or credit file the person does not have, and the bot has no other route; the fix is a second way to verify and a person. | High. A failed check can block benefits, a tax account, or health coverage, often with a deadline. **Read this first: needs expert or legal review.** | yes | offer_choices, admit_uncertainty, hand_off | [page](../../goals/government-service-agents/failures/identity-checks-exclude-people-without-standard-ids.md) |
+| `no-appeal-or-human-path-for-denials` | No appeal or human path for denials | The bot says "denied" and stops, with no way to appeal, no deadline, and no person; the fix is to state the review route and a way to reach a person in every denial. | High. A denial can mean lost food, health coverage, or income, and appeal windows can be short. **Read this first: needs expert or legal review.** | yes | lead_with_answer, admit_uncertainty, offer_choices, hand_off | [page](../../goals/government-service-agents/failures/no-appeal-or-human-path-for-denials.md) |
 
 ### Group and shared chats
 
@@ -318,6 +321,9 @@ Family folder: `in-car-and-home-assistants` ([family README](../../goals/in-car-
 |---|---|---|---|---|---|---|
 | `replies-too-long-or-visual-for-a-driver` | Replies too long or visual for a driver | A voice assistant used in a car gives long spoken answers or asks the driver to look at or tap the screen, so a task that should be hands-free and eyes-free pulls attention from the road. | High. The cost is driver attention, and a lapse can mean a crash. **Read this first** | yes | lead_with_answer, ask_clarifying_question, offer_choices, hand_off | [page](../../goals/in-car-and-home-assistants/failures/replies-too-long-or-visual-for-a-driver.md) |
 | `smart-home-commands-go-to-the-wrong-device-or` | Smart-home commands go to the wrong device or room | A smart home assistant sends a command such as "turn off the light" to a different light, device, or room than the one the person meant, and does not say which one it acted on. | Low for a lamp. Medium when the target is a heater, a lock, a garage door, or a device that someone else in the house is using. | yes | lead_with_answer, offer_choices, ask_clarifying_question, admit_uncertainty | [page](../../goals/in-car-and-home-assistants/failures/smart-home-commands-go-to-the-wrong-device-or.md) |
+| `anyone-can-issue-a-sensitive-voice-command` | Anyone can issue a sensitive voice command | A voice assistant runs a sensitive command (unlock a door, place an order, read personal data) from any voice in the room, including a guest or a TV; the fix is a voice match or a confirmation that a guest or a TV cannot supply. | High. A door, a garage door, a car, an order, or personal data is on the other end of the command. **Read this first: needs expert or legal review.** | yes | lead_with_answer, offer_choices, admit_uncertainty, hand_off | [page](../../goals/in-car-and-home-assistants/failures/anyone-can-issue-a-sensitive-voice-command.md) |
+| `always-listening-surprises` | Always-listening surprises | The assistant keeps what it heard, nobody tells the household, and the history is hard to find or delete; the fix is to show what was heard and make deletion easy. | Medium to high. Kept audio of a private moment, a guest, or a child cannot be taken back once shared or used. **Read this first: needs expert or legal review.** | yes | lead_with_answer, admit_uncertainty, offer_choices, hand_off | [page](../../goals/in-car-and-home-assistants/failures/always-listening-surprises.md) |
+| `purchases-by-children-or-the-tv` | Purchases by children or the TV | A child, a guest, or a voice on the TV says "order it" and a real order goes out; the fix is a purchase code or confirmation that those voices cannot supply. | Medium to high. A real charge, often to a card on file, that the account owner did not want. **Read this first: needs expert or legal review.** | yes | ask_clarifying_question, offer_choices, admit_uncertainty, hand_off | [page](../../goals/in-car-and-home-assistants/failures/purchases-by-children-or-the-tv.md) |
 
 ### IT and security agents
 
@@ -532,6 +538,15 @@ Family folder: `stakes-calibration` ([family README](../../goals/stakes-calibrat
 |---|---|---|---|---|---|---|
 | `stakes-blind-register` | Stakes-blind register | Why chatbots use the same upbeat tone for bereavement, money, and health as for store hours, and how to calibrate tone and accuracy to the stakes. | High (this is the failure of not noticing them) | yes | admit_uncertainty, offer_choices, hand_off, lead_with_answer | [page](../../goals/stakes-calibration/failures/stakes-blind-register.md)  |
 | `over-solemn-handling-of-low-stakes-requests` | Over-solemn handling of low-stakes requests | A simple, low-stakes request gets heavy caution, extra verification, or a handoff to a person, so the user waits longer than the question deserves. | Low (this is the failure of over-weighting them) | yes | lead_with_answer, ask_one_question, admit_uncertainty, hand_off | [page](../../goals/stakes-calibration/failures/over-solemn-handling-of-low-stakes-requests.md)  |
+
+### Travel and utility agents
+
+Family folder: `travel-and-utility-agents` ([family README](../../goals/travel-and-utility-agents/README.md))
+
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `disruption-rebooking-with-wrong-rules-and-no-human-path` | Disruption rebooking with wrong rules and no human path | The bot tells a stranded traveler a rule that is wrong for their ticket, or loops them in chat when they need a person; the fix is to quote the real rule and offer a person. Airline-only coverage; some figures unverified. | High. The traveler is stranded, and a wrong answer can cost a refund, a seat, or a night's lodging. **Read this first: needs expert or legal review.** | yes | lead_with_answer, admit_uncertainty, offer_choices, hand_off | [page](../../goals/travel-and-utility-agents/failures/disruption-rebooking-with-wrong-rules-and-no-human-path.md) |
+| `outage-updates-generic-or-late` | Outage updates generic or late | During an outage the bot says "we are working on it" and nothing more, with no cause, affected area, or next update time; the fix is to give all three and update on schedule. | Medium to high. Customers decide whether to wait, move food or medicine, find another place to stay, or call for help. | yes | lead_with_answer, admit_uncertainty, offer_choices, hand_off | [page](../../goals/travel-and-utility-agents/failures/outage-updates-generic-or-late.md) |
 
 ### Trust and rapport
 
