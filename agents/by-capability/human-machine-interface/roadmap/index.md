@@ -428,11 +428,11 @@
 | MI-01 | Screenshot ignored or misread | [interface-and-persona.md](interface-and-persona.md) | Covered | Model | Partly |
 | MI-02 | Long upload silently cut | [interface-and-persona.md](interface-and-persona.md) | Covered | Reliability | No |
 | MI-03 | Voice notes and audio attachments ignored | [interface-and-persona.md](interface-and-persona.md) | Written | Reliability | Partly |
-| MI-04 | Confident judgment of a photo | [interface-and-persona.md](interface-and-persona.md) | Extends | Model | Partly |
-| MI-05 | Live camera guidance too slow or wrong | [interface-and-persona.md](interface-and-persona.md) | New | Model | Partly |
-| MI-06 | Conflicting inputs resolved silently | [interface-and-persona.md](interface-and-persona.md) | New | Model | Partly |
-| MI-07 | Images of IDs and documents kept without need | [interface-and-persona.md](interface-and-persona.md) | Extends | Governance | No |
-| MI-08 | No warning about input limits | [interface-and-persona.md](interface-and-persona.md) | New | Business context | No |
+| MI-04 | Confident judgment of a photo | [interface-and-persona.md](interface-and-persona.md) | Covered | Model | Partly |
+| MI-05 | Live camera guidance too slow or wrong | [interface-and-persona.md](interface-and-persona.md) | Written | Model | Partly |
+| MI-06 | Conflicting inputs resolved silently | [interface-and-persona.md](interface-and-persona.md) | Written | Model | Partly |
+| MI-07 | Images of IDs and documents kept without need | [interface-and-persona.md](interface-and-persona.md) | Covered | Governance | No |
+| MI-08 | No warning about input limits | [interface-and-persona.md](interface-and-persona.md) | Written | Business context | No |
 | HU-01 | 'Talk to a human' ignored or looped | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Written | Business context | No |
 | HU-02 | Escalates too early, or too late | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Written | Business context | Partly |
 | HU-03 | Cold transfer | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Written | Business context | No |
@@ -447,11 +447,11 @@
 | ME-05 | User simulators more cooperative than real people | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Covered | Reliability | No |
 | ME-06 | Clean-lab testing | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Written | Reliability | No |
 | ME-07 | Averages hide group gaps | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Covered | Business context | No |
-| MO-01 | A model change shifts personality, length, or refusals | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Extends | Reliability | No |
-| MO-02 | Fallback model gives a visibly different experience | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Extends | Reliability | No |
-| MO-03 | Prompt edits by non-engineers break other behavior | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | New | Business context | No |
-| MO-04 | Quiet degradation under peak load | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Extends | Reliability | No |
-| MO-05 | Memory contaminates conversation experiments | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | New | Reliability | No |
+| MO-01 | A model change shifts personality, length, or refusals | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Covered | Reliability | No |
+| MO-02 | Fallback model gives a visibly different experience | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Covered | Reliability | No |
+| MO-03 | Prompt edits by non-engineers break other behavior | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Written | Business context | No |
+| MO-04 | Quiet degradation under peak load | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Covered | Reliability | No |
+| MO-05 | Memory contaminates conversation experiments | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Written | Reliability | No |
 | AM-01 | Interrupts at a bad moment | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | New | Business context | No |
 | AM-02 | Dismissed suggestions come back | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | New | Business context | No |
 | AM-03 | Summaries and digests too long to read | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | New | Business context | No |

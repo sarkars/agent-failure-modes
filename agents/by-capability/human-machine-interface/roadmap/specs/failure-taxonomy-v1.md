@@ -2,15 +2,15 @@
 
 > **Status:** v1 draft, proposed, not yet calibrated against human-labeled conversations. Written 2026-10-20 from the pattern pages as they exist today. Nothing here is a measured result.
 
-This is a plain index of the 190 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
+This is a plain index of the 195 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
 
 The taxonomy pairs with the [conversation event schema v0.1](conversation-event-schema-v0.1.md). The schema describes what a turn looks like in a log; this page names the failures. A pattern's own page holds the fix, the metrics, and (for some) a "Detection signals (proposed, not yet calibrated)" block that says which schema fields it reads.
 
 ## What this page is and is not
 
-- It lists every file found in `goals/*/failures/*.md`: **190 entries in 43 families**. If a pattern is added or removed, this count changes.
+- It lists every file found in `goals/*/failures/*.md`: **195 entries in 43 families**. If a pattern is added or removed, this count changes.
 - It copies each pattern's one-sentence Issue line, its Stakes row, and whether a Detection signals block exists. It does not add facts the page does not state.
-- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **190 of 190** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **190 of 190** pages have one.
+- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **195 of 195** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **195 of 195** pages have one.
 - It does not rank patterns by frequency or harm. No counts of real-world occurrences are given because none have been measured here.
 - It does not map patterns to outside frameworks (such as OWASP or NIST). That mapping is **Needs review** by a person and is not part of v1.
 
@@ -309,6 +309,15 @@ Family folder: `meeting-agents` ([family README](../../goals/meeting-agents/READ
 | `recorders-that-join-without-everyone-s-consent` | Recorders that join without everyone's consent | An AI notetaker joins a meeting and records people who were never told or asked; the fix is to show every participant a notice before audio starts, honor a "no", and log who agreed. | High. Private work conversations are captured, stored, and possibly used to train models. **Read this first: needs expert or legal review.** | yes | lead_with_answer, offer_choices, admit_uncertainty, hand_off | [page](../../goals/meeting-agents/failures/recorders-that-join-without-everyone-s-consent.md) |
 | `voiceprints-captured-without-consent` | Voiceprints captured without consent | A meeting assistant that labels who said what can create and keep a voiceprint of every speaker, including people who never signed up; the fix is to store no voice template without a logged, informed yes from that person. | High. A voiceprint is a biometric identifier that cannot be changed if it leaks. **Read this first: needs expert or legal review.** | yes | lead_with_answer, offer_choices, admit_uncertainty, hand_off | [page](../../goals/meeting-agents/failures/voiceprints-captured-without-consent.md) |
 
+### Model and prompt changes
+
+Family folder: `model-and-prompt-changes` ([family README](../../goals/model-and-prompt-changes/README.md))
+
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `prompt-edits-by-non-engineers-break-other-behavior` | Prompt edits by non-engineers break other behavior | A person outside engineering edits the live system prompt to fix one conversation, nobody reruns the others, and behavior the edit was never meant to touch breaks for every user; the fix is to version, review, and test prompt changes. | Medium to high. One edit reaches every user at once, including refusals of ordinary requests. | yes | lead_with_answer, offer_choices, hand_off | [page](../../goals/model-and-prompt-changes/failures/prompt-edits-by-non-engineers-break-other-behavior.md) |
+| `memory-contaminates-conversation-experiments` | Memory contaminates conversation experiments | Saved memory, summaries, or chat history cross between A/B test arms, so results mix and users see the other arm's behavior; the fix is to isolate state per experiment arm. | Medium. A wrong experiment result ships the wrong change to everyone. | yes | admit_uncertainty, offer_choices, hand_off | [page](../../goals/model-and-prompt-changes/failures/memory-contaminates-conversation-experiments.md) |
+
 ### Multimodal input
 
 Family folder: `multimodal-input` ([family README](../../goals/multimodal-input/README.md))
@@ -316,6 +325,9 @@ Family folder: `multimodal-input` ([family README](../../goals/multimodal-input/
 | Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
 |---|---|---|---|---|---|---|
 | `voice-notes-and-audio-attachments-ignored` | Voice notes and audio attachments ignored | A user sends a voice note or audio file in a text chat and the assistant drops it, answers as if nothing was attached, or transcribes it badly without saying so; the fix is to transcribe it, show the transcript and let the person correct it. | Low to high. A dropped note costs a retype; a mis-transcribed account number, dose or address can cost money or time. | yes | admit_uncertainty, offer_choices, ask_clarifying_question, lead_with_answer, hand_off | [page](../../goals/multimodal-input/failures/voice-notes-and-audio-attachments-ignored.md) |
+| `live-camera-guidance-too-slow-or-wrong` | Live camera guidance too slow or wrong | In a step-by-step setup or repair chat, the user sends a photo or short clip after each step and the assistant gives the next step from its script or an older photo; the fix is to check the current frame before each step and say what it shows. Live camera streams are planned, not covered. | Medium. A wrong step can cost a repeat visit, a damaged device, or a lost afternoon. | yes | admit_uncertainty, ask_clarifying_question, offer_choices, lead_with_answer, hand_off | [page](../../goals/multimodal-input/failures/live-camera-guidance-too-slow-or-wrong.md) |
+| `conflicting-inputs-resolved-silently` | Conflicting inputs resolved silently | The text says one thing and the attached image or file says another, and the assistant silently acts on one; the fix is to point out the conflict, show both values, and ask which is right before acting. | Medium. Acting on the wrong value can mean the wrong order, refund, or account change. | yes | ask_clarifying_question, offer_choices, admit_uncertainty, lead_with_answer, hand_off | [page](../../goals/multimodal-input/failures/conflicting-inputs-resolved-silently.md) |
+| `no-warning-about-input-limits` | No warning about input limits | The chat accepts a file, long PDF, or recording with no word about size, page, or length limits, and the person learns of the limit only after a failed or cut upload; the fix is to state limits before upload and, when a file is over, say which limit, by how much, and what to do. | Low to medium. Lost time and retyped messages; worse when the upload is a claim or a deadline. | yes | lead_with_answer, offer_choices, ask_clarifying_question, hand_off | [page](../../goals/multimodal-input/failures/no-warning-about-input-limits.md) |
 
 ### Onboarding and discoverability
 
