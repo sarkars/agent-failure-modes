@@ -468,17 +468,17 @@
 | DT-05 | Allergy and dietary requests handled loosely | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Written | Business context | No |
 | IC-01 | Replies too long or visual for a driver | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Written | Business context | No |
 | IC-02 | Smart-home commands go to the wrong device or room | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Written | Reliability | Partly |
-| IC-03 | Anyone can issue a sensitive voice command | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Governance | No |
-| IC-04 | Always-listening surprises | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Governance | No |
-| IC-05 | Purchases by children or the TV | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Reliability | No |
+| IC-03 | Anyone can issue a sensitive voice command | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Written | Governance | No |
+| IC-04 | Always-listening surprises | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Written | Governance | No |
+| IC-05 | Purchases by children or the TV | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Written | Reliability | No |
 | GS-01 | Eligibility answers sound like decisions | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Written | Business context | No |
-| GS-02 | Plain-language and language access gaps | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Business context | Partly |
-| GS-03 | Deadlines and document lists wrong or stale | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Extends | Business context | No |
-| GS-04 | Identity checks exclude people without standard IDs | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Business context | No |
-| GS-05 | No appeal or human path for denials | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Governance | No |
-| TV-01 | Disruption rebooking with wrong rules and no human path | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Business context | No |
-| TV-02 | Outage updates generic or late | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Business context | No |
-| TV-03 | Refund and credit rules misquoted | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Extends | Business context | No |
+| GS-02 | Plain-language and language access gaps | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Written | Business context | Partly |
+| GS-03 | Deadlines and document lists wrong or stale | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Covered | Business context | No |
+| GS-04 | Identity checks exclude people without standard IDs | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Written | Business context | No |
+| GS-05 | No appeal or human path for denials | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Written | Governance | No |
+| TV-01 | Disruption rebooking with wrong rules and no human path | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Written | Business context | No |
+| TV-02 | Outage updates generic or late | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Written | Business context | No |
+| TV-03 | Refund and credit rules misquoted | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Covered | Business context | No |
 | TV-04 | Group bookings mix up travelers | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Reliability | No |
 | BK-01 | Fraud-alert conversations that look like phishing | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Business context | No |
 | BK-02 | Unusual activity explained too vaguely | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Business context | Partly |
