@@ -65,6 +65,21 @@ User: Get me a person.
 
 **Fix:** use humor only when the user has set that tone, and never in a turn that follows a complaint, a repeat contact, or a "not funny." Check the sentiment and contact-count signals on the previous message before any light line, and track jokes in negative-sentiment turns (target 0). See the [stakes-blind register](../../../../../by-capability/human-machine-interface/goals/stakes-calibration/failures/stakes-blind-register.md) pattern.
 
+### Terse or punctuated replies scored as calm
+
+```
+Bot:  Your Xfinity technician visit is set for Thursday, 8am-12pm. Does that work?
+User: Fine.
+Bot:  Great! Anything else I can help with today?
+User: Fine. Whatever.
+Bot:  Glad that works for you! Have a great day.   (sentiment: neutral-positive, no escalation)
+User: k.
+```
+
+**What the user experiences:** a bot that cheers at a reply that was clipped on purpose, so the customer feels unheard and writes "k." in place of the complaint they have stopped bothering to make.
+
+**Fix:** treat "Fine.", "k.", "whatever," or a trailing "..." after a 1-2 word reply as low-confidence, not positive. When one follows a prior complaint or a second contact about the same issue, do not send a cheerful close; ask one open question ("It sounds like Thursday morning is a hassle. Want a different time or a person to call you?") and offer a handoff. Check: no "Great!" or "Glad" reply to a reply of 3 words or fewer that comes right after a complaint turn. See the [stakes-blind register](../../../../../by-capability/human-machine-interface/goals/stakes-calibration/failures/stakes-blind-register.md) pattern.
+
 ---
 
 ## References
