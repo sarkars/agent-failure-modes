@@ -10,11 +10,15 @@ Shared metrics the patterns below report against. Targets are starting points to
 | Metric | Target | Defined in |
 |---|---|---|
 | Cancel-to-subscribe step parity | Cancel steps at or below subscribe steps, same medium | [dark patterns](failures/dark-patterns.md) |
+| Time to first action | Set from your baseline | [cognitive overload](failures/cognitive-overload.md) |
+| Decision messages and cards with exactly one primary action | Set from your baseline | [no clear primary action](failures/no-clear-primary-action.md) |
 
 ## Patterns
 | Pattern | One line |
 |---|---|
 | [Dark patterns](failures/dark-patterns.md) | Guilt-trip buttons, buried prices, and long cancel paths make "no" cost more than "yes" |
+| [Cognitive overload](failures/cognitive-overload.md) | Too many options, cards, or text at once make the user stall; cap the choices and lead with a pick |
+| [No clear primary action](failures/no-clear-primary-action.md) | A reply or card ends with no obvious next step, or several equal buttons |
 
 ## Planned (not yet written)
 The rest of the family is listed in the [roadmap](../../roadmap/visual-and-oversight.md).

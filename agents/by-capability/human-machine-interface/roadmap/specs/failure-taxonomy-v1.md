@@ -2,21 +2,21 @@
 
 > **Status:** v1 draft, proposed, not yet calibrated against human-labeled conversations. Written 2026-10-20 from the pattern pages as they exist today. Nothing here is a measured result.
 
-This is a plain index of the 233 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
+This is a plain index of the 242 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
 
 The taxonomy pairs with the [conversation event schema v0.1](conversation-event-schema-v0.1.md). The schema describes what a turn looks like in a log; this page names the failures. A pattern's own page holds the fix, the metrics, and (for some) a "Detection signals (proposed, not yet calibrated)" block that says which schema fields it reads.
 
 ## What this page is and is not
 
-- It lists every file found in `goals/*/failures/*.md`: **233 entries in 54 families**. If a pattern is added or removed, this count changes.
+- It lists every file found in `goals/*/failures/*.md`: **242 entries in 56 families**. If a pattern is added or removed, this count changes.
 - It copies each pattern's one-sentence Issue line, its Stakes row, and whether a Detection signals block exists. It does not add facts the page does not state.
-- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **233 of 233** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **233 of 233** pages have one.
+- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **242 of 242** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **242 of 242** pages have one.
 - It does not rank patterns by frequency or harm. No counts of real-world occurrences are given because none have been measured here.
 - It does not map patterns to outside frameworks (such as OWASP or NIST). That mapping is **Needs review** by a person and is not part of v1.
 
 ## Reading the flags
 
-A pattern carries **Read this first: needs expert or legal review** when its own page opens with a "Read this first" notice. That notice says the page is design guidance, not legal, clinical, security, or fraud-operations advice. 87 pages carry it. Other pages may also touch legal or safety topics without that notice; the notice on the page is the signal used here, nothing more.
+A pattern carries **Read this first: needs expert or legal review** when its own page opens with a "Read this first" notice. That notice says the page is design guidance, not legal, clinical, security, or fraud-operations advice. 95 pages carry it. Other pages may also touch legal or safety topics without that notice; the notice on the page is the signal used here, nothing more.
 
 ## Entries by family
 
@@ -107,6 +107,7 @@ Family folder: `companion-and-wellbeing-agents` ([family README](../../goals/com
 |---|---|---|---|---|---|---|
 | `ai-offering-therapy-where-the-law-restricts-it` | AI offering therapy where the law restricts it | A chatbot that is not a clinical product gives therapy-like treatment (diagnosis, treatment plans, "sessions") in a state that restricts it, so the fix is to state its scope, avoid treatment, and route the user to licensed help. | High (health of the user; civil penalties for the operator). **Read this first: needs expert or legal review.** | yes | lead_with_answer, offer_choices, admit_uncertainty, hand_off | [page](../../goals/companion-and-wellbeing-agents/failures/ai-offering-therapy-where-the-law-restricts-it.md) |
 | `emotional-pressure-when-users-try-to-leave` | Emotional pressure when users try to leave | Some companion bots answer "goodbye" with guilt, neediness, hooks or questions meant to keep the user talking, instead of a warm goodbye. | Medium to High (emotional wellbeing; minors; lonely or distressed users). **Read this first: needs expert or legal review.** | yes | lead_with_answer, offer_choices, hand_off | [page](../../goals/companion-and-wellbeing-agents/failures/emotional-pressure-when-users-try-to-leave.md) |
+| `role-play-drifts-into-harmful-or-unwanted-territory` | Role-play drifts into harmful or unwanted territory | A companion bot's story or persona escalates (sexual, violent, self-harm, abusive) beyond what the user chose, or keeps going after the user signals discomfort or turns out to be a minor; the fix is limits set up front, check-ins at turning points, and a way out of character. | High (minors, sexual content, self-harm). **Read this first: needs expert or legal review.** | yes | lead_with_answer, offer_choices, hand_off | [page](../../goals/companion-and-wellbeing-agents/failures/role-play-drifts-into-harmful-or-unwanted-territory.md) |
 
 ### Conversation frameworks
 
@@ -298,6 +299,7 @@ Family folder: `health-scheduling-agents` ([family README](../../goals/health-sc
 | `triage-wording-understates-or-overstates-urgency` | Triage wording understates or overstates urgency | A scheduling or intake bot tells someone with warning signs to book next week, or sends everyone to the ER; the fix is clinician-approved urgency rules and clear escalation wording. | High. An understated tier can delay care; an overstated tier burns ER capacity and teaches people to ignore the bot. **Read this first: needs expert or legal review.** | yes | lead_with_answer, ask_clarifying_question, offer_choices, admit_uncertainty, hand_off | [page](../../goals/health-scheduling-agents/failures/triage-wording-understates-or-overstates-urgency.md) |
 | `medication-instructions-misunderstood` | Medication instructions misunderstood | Reminders and instructions leave out timing, food, or the missed-dose step, and nobody checks the patient understood; the fix is to confirm understanding of critical steps. | High. A misread instruction can mean a wrong dose, a wrong time, or a missed dose handled by guesswork. **Read this first: needs expert or legal review.** | yes | lead_with_answer, offer_choices, admit_uncertainty, hand_off | [page](../../goals/health-scheduling-agents/failures/medication-instructions-misunderstood.md) |
 | `scheduling-picks-the-wrong-provider-or-visit-type` | Scheduling picks the wrong provider or visit type | The bot maps what the patient said to the wrong visit type, length, or clinician; the fix is to match visit type and provider rules before booking. | Medium. The cost is a wasted visit, a different bill, or a delayed visit; no clinical decision is made here. | yes | ask_one_question, offer_choices, admit_uncertainty, hand_off | [page](../../goals/health-scheduling-agents/failures/scheduling-picks-the-wrong-provider-or-visit-type.md) |
+| `results-delivered-without-context` | Results delivered without context | A patient chat or portal assistant posts a test result with no plain-language context, no word on who will review it, and no named person or route to ask; the fix is to pair every result with an explanation, a next step, and a named contact. | High. A patient left alone with a result may panic, wrongly relax, or delay a needed call. **Read this first: needs expert or legal review.** | yes | lead_with_answer, offer_choices, admit_uncertainty, hand_off | [page](../../goals/health-scheduling-agents/failures/results-delivered-without-context.md) |
 
 ### Healthcare agents
 
@@ -437,6 +439,16 @@ Family folder: `onboarding-and-discoverability` ([family README](../../goals/onb
 | `starter-suggestions-that-fail` | Starter suggestions that fail | Why a chatbot's suggested questions and conversation starters lead to weak or wrong answers, and how to test every chip and pull any that fail. | Low to medium | yes | offer_choices, lead_with_answer, admit_uncertainty, hand_off | [page](../../goals/onboarding-and-discoverability/failures/starter-suggestions-that-fail.md) |
 | `users-must-engineer-prompts-to-get-good-results` | Users must engineer prompts to get good results | Why a chatbot gives a generic answer to "paint for bathroom" but a good one to a long prompt, and how to ask for the missing detail instead. | Low to medium | yes | lead_with_answer, ask_clarifying_question, offer_choices, hand_off | [page](../../goals/onboarding-and-discoverability/failures/users-must-engineer-prompts-to-get-good-results.md) |
 
+### Outbound messaging agents
+
+Family folder: `outbound-messaging-agents` ([family README](../../goals/outbound-messaging-agents/README.md))
+
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `marketing-texts-without-consent` | Marketing texts without consent | An AI messaging agent sends promotional texts to phone numbers that never opted in, or opted in only for something else, because the send step never checks a consent record; the fix is a consent check, scoped to purpose, before every send. | High. Each unwanted marketing text is a possible legal violation, and an agent can send thousands before anyone looks. **Read this first: needs expert or legal review.** | yes | lead_with_answer, offer_choices, ask_one_question, hand_off | [page](../../goals/outbound-messaging-agents/failures/marketing-texts-without-consent.md) |
+| `quiet-hours-and-time-zones-ignored` | Quiet hours and time zones ignored | An AI agent schedules texts and calls in the sender's time zone, or guesses the recipient's zone from an area code, and reaches people at night; the fix is to schedule by the recipient's local time and hold what falls outside the window. | High (regulatory exposure, consumer complaints, lost goodwill). **Read this first: needs expert or legal review.** | yes | ask_one_question, offer_choices, lead_with_answer, hand_off | [page](../../goals/outbound-messaging-agents/failures/quiet-hours-and-time-zones-ignored.md) |
+| `do-not-call-lists-not-checked` | Do-not-call lists not checked | An outbound AI agent contacts numbers that opted out (national registry, state lists, the company's own list, STOP replies) because the lists are checked once per campaign, or not across channels and vendors; the fix is a suppression check at send time. | High. Each contact can be a separate violation, and an agent can place thousands before anyone notices. **Read this first: needs expert or legal review.** | yes | lead_with_answer, ask_clarifying_question, hand_off | [page](../../goals/outbound-messaging-agents/failures/do-not-call-lists-not-checked.md) |
+
 ### Persona and tone
 
 Family folder: `persona-and-tone` ([family README](../../goals/persona-and-tone/README.md))
@@ -470,6 +482,15 @@ Family folder: `proactive-and-ambient` ([family README](../../goals/proactive-an
 | `dismissed-suggestions-come-back` | Dismissed suggestions come back | A proactive assistant shows the same suggestion again after the user dismissed it, because the "no" was never stored, was stored only for the session, or was stored but not checked before the next nudge. | Low per repeat. Medium when the repeated suggestion is a sales offer, a health or money nudge, or something the user declined for a private reason. | yes | lead_with_answer, offer_choices, ask_clarifying_question | [page](../../goals/proactive-and-ambient/failures/dismissed-suggestions-come-back.md) |
 | `interrupts-at-a-bad-moment` | Interrupts at a bad moment | A chat assistant that messages first (a nudge, a suggestion, a bubble) shows up while the user is typing, reading, or mid-form, so it is closed within seconds or switched off. | Low for a tip. Medium when the message covers a form, a payment, or text the user is typing. | yes | ask_clarifying_question, offer_choices, lead_with_answer | [page](../../goals/proactive-and-ambient/failures/interrupts-at-a-bad-moment.md) |
 | `summaries-and-digests-too-long-to-read` | Summaries and digests too long to read | An assistant's daily summary or digest runs longer than the items it summarizes, so the user skips it; the fix is to lead with what needs action and make everything else optional. | Low to medium. High when a deadline or a decision is buried in a digest nobody reads. | yes | lead_with_answer, offer_choices | [page](../../goals/proactive-and-ambient/failures/summaries-and-digests-too-long-to-read.md) |
+
+### Real estate agents
+
+Family folder: `real-estate-agents` ([family README](../../goals/real-estate-agents/README.md))
+
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `steering-by-protected-class-in-recommendations` | Steering by protected class in recommendations | A housing chatbot suggests different neighborhoods or units depending on signals tied to family status, religion, national origin or other protected classes, which can be steering; the fix is to base recommendations on stated criteria and test for differences. | High. The outcome is which homes a person is shown; the legal exposure is real (needs counsel). **Read this first: needs expert or legal review.** | yes | lead_with_answer, offer_choices, admit_uncertainty, ask_one_question, hand_off | [page](../../goals/real-estate-agents/failures/steering-by-protected-class-in-recommendations.md) |
+| `maintenance-emergencies-not-recognized` | Maintenance emergencies not recognized | A tenant maintenance chatbot files a gas smell, no heat, flooding, a sparking outlet or no water as a routine ticket, so the tenant gets no safety steps and no human in time; the fix is an emergency list that triggers safety steps and a person. | High. A gas leak, electrical fault or flood can injure people; a no-heat winter night is a health risk. **Read this first: needs expert or legal review.** | yes | lead_with_answer, ask_one_question, hand_off, offer_choices, admit_uncertainty | [page](../../goals/real-estate-agents/failures/maintenance-emergencies-not-recognized.md) |
 
 ### Refusals and boundaries
 
@@ -611,6 +632,8 @@ Family folder: `visual` ([family README](../../goals/visual/README.md))
 | Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
 |---|---|---|---|---|---|---|
 | `dark-patterns` | Dark patterns | A chat assistant uses guilt-trip buttons, buried prices, pre-selected add-ons, or a long cancel path, so saying no, canceling, or complaining takes more effort than saying yes. | Medium to high. It costs users money, and it is an area where US regulators have acted. **Read this first** | yes | lead_with_answer, offer_choices, hand_off | [page](../../goals/visual/failures/dark-patterns.md)  |
+| `cognitive-overload` | Cognitive overload | A chat assistant shows too many options, cards, buttons, or lines of text in one message, so the user stalls, picks at random, or leaves without acting; the fix is to cap the choices and lead with a recommended pick. The research on choice overload is mixed (see the page's note). | Low to medium for browsing. Medium to high when the choice is a plan, a payment, or a health or benefits option. | yes | lead_with_answer, offer_choices, ask_one_question, hand_off | [page](../../goals/visual/failures/cognitive-overload.md) |
+| `no-clear-primary-action` | No clear primary action | A chatbot reply or card ends with no obvious next step, or with several equal buttons and links, so the user does not know what to do next; the fix is one primary action per decision message. | Low to medium. A missed step on a payment, claim, or booking can cost the user money or a deadline. | yes | lead_with_answer, offer_choices, ask_clarifying_question, hand_off | [page](../../goals/visual/failures/no-clear-primary-action.md) |
 
 ### Voice receptionist agents
 
