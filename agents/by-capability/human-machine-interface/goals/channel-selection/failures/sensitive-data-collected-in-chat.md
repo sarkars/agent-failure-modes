@@ -223,3 +223,19 @@ User: Good, thanks.
 ```
 **What the user experiences:** a photo of their ID, with address, birth date and license number, quietly becomes a stored record they never agreed to keep.
 **Fix:** collect only the fields the task needs, delete the image once the check is done, and say in the same reply what was kept and what was deleted. The FTC's business guide advises keeping sensitive personal information only while there is a legitimate business need and then disposing of it ([FTC, Protecting Personal Information, opened](https://www.ftc.gov/business-guidance/resources/protecting-personal-information-guide-business); guidance, not a statute). If the user later asks to remove stored images, see [privacy rights requests not recognized](../../privacy-and-governance/failures/privacy-rights-requests-not-recognised.md).
+
+### Sensitive-data forms
+Illustrative example (made up; a US ticket seller, "Northline Tickets"; catalog row VI-12). The bot shows an in-chat form with a plain text box for the card number.
+```
+[Form card in chat: "Card number" - plain text, digits visible]
+User: 4111 1111 1111 111
+Bot:  Error: "4111 1111 1111 111" is not a valid card number.
+      (digits now sit in the visible chat history, logs and error text)
+```
+With the fix:
+```
+[Secure payment button opens the payment provider's hosted fields; the chat gets only a token]
+Bot:  Your card wasn't accepted. Please check the number and try again in the secure form. I never see your card details.
+```
+**What the user experiences:** a card number typed into a box that looks like chat, then repeated back in an error for anyone nearby to read.
+**Fix:** collect card numbers, SSNs and passwords only in the payment provider's hosted fields or a masked input, so the chat receives a token and a status, never the raw value. Error messages describe the problem without quoting the input. Vendor documentation describes chat masking as best effort, so do not rely on it alone; ask your assessor how PCI scope applies. See [generic error messages](../../errors-and-recovery/failures/generic-error-messages.md) for what a good error contains.
