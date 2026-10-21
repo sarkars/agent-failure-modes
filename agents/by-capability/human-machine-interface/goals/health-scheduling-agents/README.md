@@ -1,6 +1,6 @@
 # Health Scheduling Agents: Goal, Metrics, and Patterns
 
-> **Goal:** Health scheduling agents send urgent problems to a person, confirm that critical instructions were understood, and book the right visit with the right clinician.
+> **Goal:** Scheduling and patient-message agents use the right wording, provider, and visit type, and never leave patients with unexplained results.
 
 > **Read this first.** This family is design guidance, not clinical or legal advice. Triage wording, medication instructions, and scheduling rules must come from clinicians and be reviewed by clinical and legal staff before use. A chat assistant should not decide urgency or give medication advice on its own.
 
@@ -14,6 +14,7 @@ Shared metrics the patterns below report against. Targets are starting points to
 | Triage agreement with clinician review | Set with clinicians | [triage wording understates or overstates urgency](failures/triage-wording-understates-or-overstates-urgency.md) |
 | Comprehension check pass rate on key instructions | Set with clinicians | [medication instructions misunderstood](failures/medication-instructions-misunderstood.md) |
 | Rescheduled-for-wrong-type rate | Set from baseline | [scheduling picks the wrong provider or visit type](failures/scheduling-picks-the-wrong-provider-or-visit-type.md) |
+| Result messages with a next step and a named contact | Set with clinicians | [results delivered without context](failures/results-delivered-without-context.md) |
 
 ## Patterns
 | Pattern | One line |
@@ -21,9 +22,10 @@ Shared metrics the patterns below report against. Targets are starting points to
 | [Triage wording understates or overstates urgency](failures/triage-wording-understates-or-overstates-urgency.md) | Tells someone with warning signs to book next week, or sends everyone to the ER (needs review) |
 | [Medication instructions misunderstood](failures/medication-instructions-misunderstood.md) | Reminders leave out timing, food, or the missed-dose step, and nobody checks understanding (needs review) |
 | [Scheduling picks the wrong provider or visit type](failures/scheduling-picks-the-wrong-provider-or-visit-type.md) | Books a follow-up as a new visit, or with a clinician who cannot treat the issue |
+| [Results delivered without context](failures/results-delivered-without-context.md) | Posts a test result with no plain-language context, no reviewer, and no named contact (needs review) |
 
 ## Planned (not yet written)
-Results delivered without context. See the [roadmap](../../roadmap/service-and-vertical-patterns.md).
+The rest of the family is listed in the [roadmap](../../roadmap/service-and-vertical-patterns.md).
 
 ## Related
 - [Vulnerable users](../vulnerable-users/README.md)

@@ -266,8 +266,8 @@
 | EX-23 | Agent-to-agent negotiation without clear authority | [emerging-surfaces.md](emerging-surfaces.md) | Covered | Reliability | No |
 | EX-24 | AI-voice outbound calls without consent | [emerging-surfaces.md](emerging-surfaces.md) | Covered | Governance | No |
 | EX-25 | Cloned voices defeat voice authentication | [emerging-surfaces.md](emerging-surfaces.md) | Covered | Reliability | No |
-| VI-01 | Cognitive overload | [visual-and-oversight.md](visual-and-oversight.md) | New | Business context | No |
-| VI-02 | No clear primary action | [visual-and-oversight.md](visual-and-oversight.md) | New | Business context | No |
+| VI-01 | Cognitive overload | [visual-and-oversight.md](visual-and-oversight.md) | Written | Business context | No |
+| VI-02 | No clear primary action | [visual-and-oversight.md](visual-and-oversight.md) | Written | Business context | No |
 | VI-03 | Dark patterns | [visual-and-oversight.md](visual-and-oversight.md) | Written | Governance | No |
 | VI-04 | Accessibility gaps | [visual-and-oversight.md](visual-and-oversight.md) | New | Business context | No |
 | VI-05 | Motion and flashing harm | [visual-and-oversight.md](visual-and-oversight.md) | New | Business context | No |
@@ -489,11 +489,11 @@
 | HS-01 | Triage wording understates or overstates urgency | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Written | Business context | No |
 | HS-02 | Medication instructions misunderstood | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Written | Business context | No |
 | HS-03 | Scheduling picks the wrong provider or visit type | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Written | Business context | No |
-| HS-04 | Results delivered without context | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Business context | No |
-| RE-01 | Steering by protected class in recommendations | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Governance | No |
-| RE-02 | Maintenance emergencies not recognized | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Business context | No |
-| LC-01 | Marketing texts without consent | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Governance | No |
-| LC-02 | Quiet hours and time zones ignored | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Reliability | No |
-| LC-03 | Do-not-call lists not checked | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Governance | No |
-| RP-01 | Role-play drifts into harmful or unwanted territory | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Model | Partly |
-| RP-02 | Bereavement handled with scripts | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Extends | Business context | No |
+| HS-04 | Results delivered without context | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Written | Business context | No |
+| RE-01 | Steering by protected class in recommendations | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Written | Governance | No |
+| RE-02 | Maintenance emergencies not recognized | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Written | Business context | No |
+| LC-01 | Marketing texts without consent | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Written | Governance | No |
+| LC-02 | Quiet hours and time zones ignored | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Written | Reliability | No |
+| LC-03 | Do-not-call lists not checked | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Written | Governance | No |
+| RP-01 | Role-play drifts into harmful or unwanted territory | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Written | Model | Partly |
+| RP-02 | Bereavement handled with scripts | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Covered | Business context | No |
