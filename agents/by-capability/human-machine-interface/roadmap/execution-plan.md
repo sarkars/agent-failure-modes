@@ -1254,6 +1254,8 @@ AI-written help content in knowledge bases · agents using other agents' tools (
 - **Part A2 and Part E:** nothing left (E6: Waiting for the owner to create the code repo). **Part B:** skipped, `seo/log.md` already has an entry for 2026-10-21. Queue rows 318-327 are done. Still queued: rows 328 and later.
 
 
+- **Deploy:** content PR #48 for this run. Part D stopped before the site push, as in runs 46 to 50: the site repo's local `main` still has the commit `ce9023275` ("Trigger deploy under repo owner") that is not on `origin/main` and that this run did not create. Nothing was pushed to the site repo and no scratch build was made. The new content from runs 46 to 51 waits for the owner to review that commit. Not verified live.
+
 ## Schedule
 | Item | Value |
 |---|---|
