@@ -92,3 +92,25 @@ Assistant: I'll hold the comparison. Meanwhile, I can list the questions to ask 
 **What the user experiences:** The same chat quietly gets shorter, vaguer answers, and the user cannot tell whether their question, the tool, or the plan changed.
 
 **Fix:** Whenever the router moves a conversation to a cheaper model or shorter output budget, say so in the next reply, name the reason (limit reached), what may be weaker, and the options (continue, wait for reset, upgrade), and log the event. Pass check: every downgrade event in a transcript is followed by a notice before the first downgraded answer. See [Silent Sandbagging](../../../../human-machine-interface/goals/refusals-and-boundaries/failures/silent-sandbagging.md) for the user-facing side.
+
+### Fallback model gives a visibly different experience
+Invented dialogue for illustration (a US internet provider's support chat while its primary model provider is down and traffic goes to a backup model; not a real transcript). Catalog row MO-02.
+
+**Before (fallback, no notice):**
+```
+User: My Wi-Fi drops every evening around 8 PM. I already restarted the router.
+Assistant: Try restarting your router.
+User: I just said I did that.
+Assistant: Restarting your router often fixes connection issues.
+```
+
+**After (fallback announced, tested flows only):**
+```
+User: My Wi-Fi drops every evening around 8 PM. I already restarted the router.
+Assistant: Heads up: our main assistant is down, so a backup is answering. It may miss detail on troubleshooting. Since a restart didn't help, I can run a line test now or connect you to a technician chat. Which do you want?
+User: Technician chat.
+```
+
+**What the user experiences:** the bot suddenly ignores what they just said and repeats generic advice, with no hint that anything on the company's side changed.
+
+**Fix:** When traffic moves to a fallback model, say so in the next reply (what changed, what may be weaker, and the option to wait or reach a person), and log which model answered each turn. Test the fallback as a product before you need it: run it on the same conversation set the primary passes, and route to it only the flows it handles. See [Silent Sandbagging](../../../../human-machine-interface/goals/refusals-and-boundaries/failures/silent-sandbagging.md) for the user-facing side.
