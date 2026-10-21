@@ -1377,6 +1377,15 @@ AI-written help content in knowledge bases · agents using other agents' tools (
 - **Plan complete?** No: asset 4 (teardowns), asset 3 and assets 6-8 are still marked In progress, so the schedule stays on. New patterns now need new Queue rows from the owner.
 - **Deploy:** the content PR (#59) was merged into main (merge commit 0bbf339) and the branch was reset to main. The site repo's local main still has commits `ce9023275` and `860f36fbc` ("Trigger deploy under repo owner") that this run did not create and that are not on origin/main, so I did not push the site repo (Part D stopped before the site steps). Not verified live. This line was added after the merge and will ship with the next run's PR.
 
+### Run 63 (scheduled): 2026-10-21
+- **Coordinator run:** 5 subagents (4 test packs, 1 teardown). Queue has no Queued rows ("Queue complete"); no Part A, A2 or E work left. Each brief carried quality-guide sections 1 and 6 (the first agent got the text by follow-up message). No subagent ran git or the checks.
+- **Part C asset 3 (section 6):** four packs, all "Not yet run", Needs review: no-appeal-or-human-path-for-denials, unsubscribe-requests-not-honoured, stale-price-or-stock-at-checkout, coverage-answers-sound-like-guarantees (legal wording is design guidance only; needs expert review). No web research; built from each pattern's own fix. 103 patterns still have no pack.
+- **Part C asset 4 (section 6):** Microsoft Copilot (Bing Chat) wrong Swiss and German election answers, Oct to Dec 2023 (`incidents/microsoft-copilot-wrong-election-answers-december-2023.md`). 3 searches; 4 pages opened, all read through fetch summaries; the full AI Forensics PDF returned 404; Microsoft's response is only as relayed by AlgorithmWatch; the "nearly 30%" vs "one third" discrepancy and a date mismatch are stated on the page; figures seen only in search summaries were left out. Needs review.
+- **What review changed:** I checked all four packs for placeholders, "Not yet run" and links (none found) and read the teardown's opening sections; I changed no wording. Not checked line by line: the pack transcripts and the teardown's later sections.
+- **Needs review (person):** the four packs, the summary-only teardown.
+- **Part B:** skipped, `seo/log.md` already has an entry for 2026-10-21. E6: Waiting for the owner to create the code repo.
+- **Plan complete?** No: asset 3 (103 patterns without packs), asset 4 and assets 6-8 are still in progress.
+
 ## Schedule
 | Item | Value |
 |---|---|
