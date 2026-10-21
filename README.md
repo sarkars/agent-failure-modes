@@ -1,6 +1,8 @@
-# AI Agent Reliability Playbook
+# Good Agent Lab: AI Agent Reliability Playbook
 
-> Failure patterns, eval recipes, mitigation strategies, and production signals for real-world AI agents.
+> **Good Agent Lab** helps every AI agent earn people's trust. We show what good looks like for each kind of agent, the proven way to get there, and the checks that prove it before launch. *Build agents people can rely on.*
+>
+> This playbook is the lab's open library: failure patterns, eval recipes, mitigation strategies, and production signals for real-world AI agents.
 
 ⭐ Star this repo if you are building production AI agents.
 🤝 PRs welcome: contribute failures from your domain.
@@ -10,7 +12,7 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
 <p align="center">
-  <strong>🌐 Browse the published knowledge base: <a href="https://agent-kb-autopublish.vercel.app/">agent-kb-autopublish.vercel.app</a></strong>
+  <strong>🌐 Browse the Good Agent Lab library: <a href="https://agent-kb-autopublish.vercel.app/">agent-kb-autopublish.vercel.app</a></strong>
 </p>
 
 ---
