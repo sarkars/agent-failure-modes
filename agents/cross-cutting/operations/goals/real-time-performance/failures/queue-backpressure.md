@@ -136,6 +136,23 @@ Bot:  Still 6th, about 8-12 minutes. Want a callback at (555) 010-0142 instead, 
 **What the user experiences:** a bare "Please hold" with no place in line and no time, so they cannot tell whether to wait, leave, or call.
 **Fix:** when a handoff enters a queue, show position and a time range from recent wait data, refresh it on a set interval, and offer a callback or text alert. Do not show a number you cannot support; a range is better than a false exact time. Zendesk documents this kind of wait-range message for messaging queues ([Zendesk](https://support.zendesk.com/hc/en-us/articles/8009787999514-Displaying-estimated-wait-time-in-messaging-conversations)). See the [human handoff pattern](../../../../../by-capability/human-machine-interface/goals/human-handoff/README.md).
 
+### Quiet degradation under peak load
+Invented dialogue for illustration (a US retailer's shopping assistant on Black Friday evening, when the system drops the order-tracking tool and shortens answers to cope with traffic; not a real transcript). Catalog row MO-04.
+Before (tool dropped silently):
+```
+User: Where is my order #48213? It was supposed to arrive today.
+Bot:  Orders usually arrive in 3-7 business days.
+User: Can you just check the tracking?
+Bot:  Orders usually arrive in 3-7 business days.
+```
+After (degraded by design, and said so):
+```
+User: Where is my order #48213? It was supposed to arrive today.
+Bot:  We're very busy right now, so live order tracking is paused in this chat. You can see tracking under Orders in the app, or I can text you an update when tracking is back. Which do you want?
+```
+**What the user experiences:** the bot repeats a stock line instead of checking the order, so it looks broken or evasive, and the user has no way to know it is a traffic problem.
+**Fix:** decide in advance what the bot gives up first under load (for example, long answers before tools, and tools before sign-in), and when a step kicks in, tell the user what is off and where to get it instead. Log every degraded reply with its reason so the team can see how often users hit it. Related HMI pattern: [Silent Sandbagging](../../../../../by-capability/human-machine-interface/goals/refusals-and-boundaries/failures/silent-sandbagging.md).
+
 ---
 
 ## References
