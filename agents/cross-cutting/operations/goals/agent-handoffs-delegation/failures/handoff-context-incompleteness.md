@@ -80,3 +80,19 @@ Agent: I only see the label request. Can you tell me what you need?
 ```
 **What the user experiences:** a promise the bot made to check the credit vanishes at the handoff, so the user must restate it and wonders what else was dropped.
 **Fix:** at every handoff, write an open-items list (credit pending supervisor approval, install Friday) and show it to the receiving agent first. Let the receiver confirm each item to the user in its first message. See [handoff summary is wrong or misleading](../../../../../by-capability/human-machine-interface/goals/human-handoff/failures/handoff-summary-is-wrong-or-misleading.md).
+
+### BK-03 Disputed-transaction intake loses details
+Illustrative example (made up):
+```
+User:  I want to dispute a charge. $212.40 at Lakeside Electronics on March 3. My card is in my wallet. I never bought anything there.
+Bot:   Thanks. I'm moving you to a disputes agent.
+Agent: Hi, this is Marcus. Which charge are you disputing?
+User:  I just told the other chat. Lakeside, $212.40...
+```
+With the fix:
+```
+Bot:   I have: Lakeside Electronics, $212.40, March 3, card in your hand, charge not made by you. I'm sending that to a disputes agent now.
+Agent: Hi, this is Marcus. I have your Lakeside Electronics dispute for $212.40. Has anyone else used your card?
+```
+**What the user experiences:** the details they typed are gone at the handoff, so they repeat them to a person and wonder whether the dispute was started at all.
+**Fix:** capture the required dispute fields once (merchant, amount, date, card in hand or not, what happened), pass them to the agent as a structured summary, and tell the customer what was captured before the handoff. See [handoff summary is wrong or misleading](../../../../../by-capability/human-machine-interface/goals/human-handoff/failures/handoff-summary-is-wrong-or-misleading.md).

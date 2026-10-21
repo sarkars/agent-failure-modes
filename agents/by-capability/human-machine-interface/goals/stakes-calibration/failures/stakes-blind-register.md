@@ -201,3 +201,17 @@ Bot:  I'm sorry about your mother. The next seat to Columbus is on Friday at 6:4
 ```
 **What the user experiences:** exclamation marks and "great news" aimed at a grieving person who has just said the news is bad, so the bot reads as not listening. Plain guidance on tone for bad news says the same: one customer-service tone guide (a vendor blog, [eesel](https://www.eesel.ai/blog/customer-service-tone-guide)) gives the rule "Max one exclamation mark, never in bad news."
 **Fix:** let the tone follow the situation. When the user's message is negative or the news is bad, drop exclamation marks, emoji and "good news" openers, say what happened in plain words, and offer a concrete next step or a person. Measure cheerful replies to negative-sentiment messages; the target is 0. See [Hollow empathy](../../emotional-intelligence/failures/hollow-empathy.md) for the next trap, a caring line that stays generic.
+
+### CI-01 Cold handling of a loss
+Illustrative example (made up):
+```
+User: Our house burned down last night. I need to file a claim.
+Bot:  Please provide your policy number to proceed.
+```
+With the fix:
+```
+Bot:  I'm so sorry about your house. I'll make this as easy as I can. To start the claim, I need your policy number. If you don't have it, your name and the address are enough.
+      I can also connect you to a claims specialist now. Would you like that?
+```
+**What the user experiences:** a form-filling demand right after the worst day of their life, so the company feels like it doesn't care.
+**Fix:** acknowledge the loss once, in plain words, then make the next step easy (say what is needed and what can stand in for it) and offer a person. Do not repeat the sympathy in every message. See [Hollow empathy](../../emotional-intelligence/failures/hollow-empathy.md) for the trap of a caring line that stays generic.
