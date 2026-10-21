@@ -649,16 +649,16 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 405 | RP-02 | Bereavement handled with scripts | Extends | E | `goals/companion-and-wellbeing-agents/failures/bereavement-handled-with-scripts.md` | Done (Example added to `stakes-blind-register.md` instead of the target path) | 59 |
 | 406 | VI-01 | Cognitive overload | New | R | `goals/visual/failures/cognitive-overload.md` | Done | 59 |
 | 407 | VI-02 | No clear primary action | New | - | `goals/visual/failures/no-clear-primary-action.md` | Done | 59 |
-| 408 | VI-04 | Accessibility gaps | New | V, L, E | `goals/visual/failures/accessibility-gaps.md` | Queued |  |
-| 409 | VI-05 | Motion and flashing harm | New | E, R | `goals/visual/failures/motion-and-flashing-harm.md` | Queued |  |
-| 410 | VI-06 | Colour-only encoding | New | E | `goals/visual/failures/colour-only-encoding.md` | Queued |  |
-| 411 | VI-07 | Small targets and small screens | New | V | `goals/visual/failures/small-targets-and-small-screens.md` | Queued |  |
-| 412 | VI-08 | Misleading generated visuals | New | L | `goals/visual/failures/misleading-generated-visuals.md` | Queued |  |
-| 413 | VI-09 | Unlabelled synthetic faces and avatars | Extends | L | `goals/visual/failures/unlabelled-synthetic-faces-and-avatars.md` | Queued |  |
-| 414 | VI-10 | Avatar overpromising | New | R | `goals/visual/failures/avatar-overpromising.md` | Queued |  |
-| 415 | VI-11 | Rich-card misuse | New | - | `goals/visual/failures/rich-card-misuse.md` | Queued |  |
-| 416 | VI-12 | Sensitive-data forms | Extends | L | `goals/visual/failures/sensitive-data-forms.md` | Queued |  |
-| 417 | VI-13 | Stakes-blind visual style | Extends | - | `goals/visual/failures/stakes-blind-visual-style.md` | Queued |  |
+| 408 | VI-04 | Accessibility gaps | New | V, L, E | `goals/visual/failures/accessibility-gaps.md` | Needs review | 60 |
+| 409 | VI-05 | Motion and flashing harm | New | E, R | `goals/visual/failures/motion-and-flashing-harm.md` | Needs review | 60 |
+| 410 | VI-06 | Colour-only encoding | New | E | `goals/visual/failures/colour-only-encoding.md` | Needs review | 60 |
+| 411 | VI-07 | Small targets and small screens | New | V | `goals/visual/failures/small-targets-and-small-screens.md` | Needs review | 60 |
+| 412 | VI-08 | Misleading generated visuals | New | L | `goals/visual/failures/misleading-generated-visuals.md` | Needs review | 60 |
+| 413 | VI-09 | Unlabelled synthetic faces and avatars | Extends | L | `goals/visual/failures/unlabelled-synthetic-faces-and-avatars.md` | Done | 60 |
+| 414 | VI-10 | Avatar overpromising | New | R | `goals/visual/failures/avatar-overpromising.md` | Done | 60 |
+| 415 | VI-11 | Rich-card misuse | New | - | `goals/visual/failures/rich-card-misuse.md` | Done | 60 |
+| 416 | VI-12 | Sensitive-data forms | Extends | L | `goals/visual/failures/sensitive-data-forms.md` | Done | 60 |
+| 417 | VI-13 | Stakes-blind visual style | Extends | - | `goals/visual/failures/stakes-blind-visual-style.md` | Done | 60 |
 | 418 | VI-14 | Misleading charts | New | - | `goals/visual/failures/misleading-charts.md` | Queued |  |
 | 419 | VI-15 | Missing loading, empty, and error states | New | V | `goals/visual/failures/missing-loading-empty-and-error-states.md` | Queued |  |
 | 420 | VI-16 | Generative UI instability | New | R | `goals/visual/failures/generative-ui-instability.md` | Queued |  |
@@ -1341,7 +1341,19 @@ AI-written help content in knowledge bases · agents using other agents' tools (
 - **Part C asset 4 (teardown, quality-guide section 6):** McHire and Paradox.ai, July 2025 (`mchire-paradox-ai-hiring-chatbot-exposes-applicant-records-july-2025.md`, about 125 lines). Three sources were opened through fetch summaries (the researchers' write-up, Paradox.ai's security update, BleepingComputer); the other coverage was seen only in search summaries and is not used as fact. No attack detail is given. Needs review.
 - **What review changed:** I created the two new family READMEs (`real-estate-agents`, `outbound-messaging-agents`), which fixes the sibling and README links the pages already pointed at, and updated the `health-scheduling-agents`, `companion-and-wellbeing-agents` and `visual` READMEs (new rows, new metrics, and the health README goal reworded to match the page goals). I changed LC-02's `on_miss: hold` to `rewrite`, because `hold` is not a template value (the held message is rescheduled, so the page now sits on the nearest allowed value). I marked the 9 new rows Written and RP-02 Covered in the catalog and index, added 9 taxonomy entries (now 242 entries in 56 families; Read-this-first count 87 to 95; Moves 242 of 242), and added the packs and the teardown to the distribution plan. I left rows 398-404 as Needs review (flags L or E, a person must read the legal and clinical wording) and marked VI-01, VI-02 and RP-02 Done. The LC-01 link to the EX-24 voice-consent example goes to `ai-disclosure-failures.md` and was not re-opened; check it before relying on it. RE-02 section 8 names VA-02 as planned and unlinked, on purpose.
 - **Needs review (person):** the L and E notes on HS-04, RE-01, RE-02, LC-01, LC-02, LC-03 and RP-01 (counsel, clinical and safety staff), the made-up RP-02 transcript, the four test packs, and the summary-only McHire teardown.
+- **Deploy:** the content PR (#56) was merged into main (merge commit f8bab5c) and the branch was reset to main. The site repo's local main again has commits `ce9023275` and `860f36fbc` ("Trigger deploy under repo owner") that this run did not create and that are not on origin/main, so I did not push the site repo (Part D stopped before the site steps). Not verified live. This line was added after the merge and will ship with the next run's PR.
 - **Part A2 and Part E:** nothing left (E6: Waiting for the owner to create the code repo). **Part B:** skipped, `seo/log.md` already has an entry for 2026-10-21. Queue rows 398-407 are covered. Still queued: row 408 onward.
+
+### Run 60 (scheduled): 2026-10-21
+- **Coordinator run:** 10 subagents (7 pattern pages, 1 Extends batch, 1 test-pack batch, 1 teardown). Queue rows 408 to 417 are covered. Each brief carried the shared rules and quality-guide sections 1, 2, 3 and 6. No subagent ran git or the checks; I ran the five check scripts after all pieces were in.
+- **Part A new patterns (quality-guide section 2):** VI-04 accessibility-gaps (row 408), VI-05 motion-and-flashing-harm (409), VI-06 colour-only-encoding (410), VI-07 small-targets-and-small-screens (411), VI-08 misleading-generated-visuals (412), VI-10 avatar-overpromising (414), VI-11 rich-card-misuse (415). Each has the Pattern ID row, Detection signals with a Starter rule, a Moves table and a Guide spec with status proposed.
+- **Extends, additions only (quality-guide section 3):** VI-09 (in `ai-disclosure-failures.md`), VI-12 (`sensitive-data-collected-in-chat.md`), VI-13 (`stakes-blind-register.md`): one made-up, labeled chat example each under `## Chat assistant examples`, nothing else changed.
+- **Part C asset 3 (section 6):** four accessibility packs, all "Not yet run", Needs review. **Asset 4 (section 6):** ChatGPT false claims about a person and the noyb complaint, March 2025; noyb and EDPB pages could not be read, so the teardown is limited to opened sources. Needs review.
+- **Research gaps left labeled on the pages:** OpenAI and Google Merchant Center pages returned 403/404 for VI-08; Apple HIG and Material target-size numbers not cited on VI-07; Nass and Moon seen only as a summary for VI-10.
+- **What review changed:** I added 7 taxonomy entries (now 249 entries in 56 families; Moves 249 of 249), marked VI-04 to VI-08 Needs review (flags L or E, or summary-only sources) and VI-10, VI-11 Done, VI-09, VI-12, VI-13 Covered, and updated the visual README, catalog, index and distribution plan.
+- **Needs review (person):** accessibility, legal and expert wording on VI-04 to VI-08, the made-up Extends transcripts, the four packs and the teardown.
+- **Part A2 and Part E:** nothing left (E6: Waiting for the owner to create the code repo). **Part B:** skipped, `seo/log.md` already has an entry for 2026-10-21. Queue rows 408-417 covered; still queued: row 418 onward.
+- **Deploy:** (filled in after Part D)
 
 ## Schedule
 | Item | Value |

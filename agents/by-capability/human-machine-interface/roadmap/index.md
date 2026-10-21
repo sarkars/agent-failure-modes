@@ -269,16 +269,16 @@
 | VI-01 | Cognitive overload | [visual-and-oversight.md](visual-and-oversight.md) | Written | Business context | No |
 | VI-02 | No clear primary action | [visual-and-oversight.md](visual-and-oversight.md) | Written | Business context | No |
 | VI-03 | Dark patterns | [visual-and-oversight.md](visual-and-oversight.md) | Written | Governance | No |
-| VI-04 | Accessibility gaps | [visual-and-oversight.md](visual-and-oversight.md) | New | Business context | No |
-| VI-05 | Motion and flashing harm | [visual-and-oversight.md](visual-and-oversight.md) | New | Business context | No |
-| VI-06 | Colour-only encoding | [visual-and-oversight.md](visual-and-oversight.md) | New | Business context | No |
-| VI-07 | Small targets and small screens | [visual-and-oversight.md](visual-and-oversight.md) | New | Business context | No |
-| VI-08 | Misleading generated visuals | [visual-and-oversight.md](visual-and-oversight.md) | New | Model | Partly |
-| VI-09 | Unlabelled synthetic faces and avatars | [visual-and-oversight.md](visual-and-oversight.md) | Extends | Governance | No |
-| VI-10 | Avatar overpromising | [visual-and-oversight.md](visual-and-oversight.md) | New | Business context | No |
-| VI-11 | Rich-card misuse | [visual-and-oversight.md](visual-and-oversight.md) | New | Business context | No |
-| VI-12 | Sensitive-data forms | [visual-and-oversight.md](visual-and-oversight.md) | Extends | Business context | No |
-| VI-13 | Stakes-blind visual style | [visual-and-oversight.md](visual-and-oversight.md) | Extends | Business context | No |
+| VI-04 | Accessibility gaps | [visual-and-oversight.md](visual-and-oversight.md) | Written | Business context | No |
+| VI-05 | Motion and flashing harm | [visual-and-oversight.md](visual-and-oversight.md) | Written | Business context | No |
+| VI-06 | Colour-only encoding | [visual-and-oversight.md](visual-and-oversight.md) | Written | Business context | No |
+| VI-07 | Small targets and small screens | [visual-and-oversight.md](visual-and-oversight.md) | Written | Business context | No |
+| VI-08 | Misleading generated visuals | [visual-and-oversight.md](visual-and-oversight.md) | Written | Model | Partly |
+| VI-09 | Unlabelled synthetic faces and avatars | [visual-and-oversight.md](visual-and-oversight.md) | Covered | Governance | No |
+| VI-10 | Avatar overpromising | [visual-and-oversight.md](visual-and-oversight.md) | Written | Business context | No |
+| VI-11 | Rich-card misuse | [visual-and-oversight.md](visual-and-oversight.md) | Written | Business context | No |
+| VI-12 | Sensitive-data forms | [visual-and-oversight.md](visual-and-oversight.md) | Covered | Business context | No |
+| VI-13 | Stakes-blind visual style | [visual-and-oversight.md](visual-and-oversight.md) | Covered | Business context | No |
 | VI-14 | Misleading charts | [visual-and-oversight.md](visual-and-oversight.md) | New | Model | Partly |
 | VI-15 | Missing loading, empty, and error states | [visual-and-oversight.md](visual-and-oversight.md) | New | Business context | No |
 | VI-16 | Generative UI instability | [visual-and-oversight.md](visual-and-oversight.md) | New | Model | Partly |
