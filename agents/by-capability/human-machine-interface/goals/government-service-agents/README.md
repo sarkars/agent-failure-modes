@@ -17,6 +17,11 @@ Shared metrics the patterns below report against. Targets are starting points to
 | Pattern | One line |
 |---|---|
 | Eligibility answers sound like decisions | A chat says "you qualify" or "you don't" as if the agency had decided |
+| [Plain-language and language access gaps](failures/plain-language-and-language-access-gaps.md) | The bot answers in dense jargon, or only in English, and the person who needed it most cannot read it |
+| [Identity checks exclude people without standard IDs](failures/identity-checks-exclude-people-without-standard-ids.md) | The only way to prove identity is a document or credit file the person does not have |
+| [No appeal or human path for denials](failures/no-appeal-or-human-path-for-denials.md) | The bot says "denied" and stops: no appeal route, no deadline, no person |
+
+Deadlines and document lists wrong or stale is covered as a chat example in [knowledgebase staleness](../../../../by-use-case/support-services/goals/issue-resolution/failures/knowledgebase-staleness.md).
 
 ## Planned (not yet written)
 The rest of the family is listed in the [roadmap](../../roadmap/service-and-vertical-patterns.md).
