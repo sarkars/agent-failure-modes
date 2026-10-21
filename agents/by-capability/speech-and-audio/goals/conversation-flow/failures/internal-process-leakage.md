@@ -302,6 +302,26 @@ instructions: |
 
 ---
 
+## Chat assistant examples
+
+### Internal coordination leaks into replies
+Illustrative example (made up): a text chat with a retailer's multi-agent support assistant on a "Northline Outfitters" order-help page.
+```
+Before:
+User: I was charged twice for order 48213. Can I get a refund?
+Bot:  [router] Handing off to the billing agent: user wants refund, check policy tool.
+      [billing_agent] Calling refund_policy_lookup(order=48213)...
+      I can see the duplicate charge. I've started your refund of $64.00.
+
+After:
+User: I was charged twice for order 48213. Can I get a refund?
+Bot:  I can see the duplicate charge on order 48213. I've started a refund of $64.00 to your original card.
+```
+**What the user experiences:** a reply that starts with bracketed routing notes and tool calls, so the assistant sounds like a log file and the user wonders what else is visible.
+**Fix:** keep agent-to-agent messages and planning text in a separate channel, and send the user only one final user-facing message. Add a test that fails when a reply contains internal markers such as agent names, bracketed role tags, "handing off" or tool-call names. A related published finding: the AgentLeak benchmark paper reports that inter-agent messages leaked sensitive data more often than final outputs (68.8% of traces versus 27.2%), so check the internal channel too, not only the reply (source opened: [arXiv 2602.11510](https://arxiv.org/html/2602.11510v1); that is a privacy benchmark, not a measure of text shown to users). See also the related chat pattern [Refusals that reveal internal rules](../../../../human-machine-interface/goals/refusals-and-boundaries/failures/refusals-that-reveal-internal-rules.md).
+
+---
+
 ## References
 
 - [Voice Agent Privacy](https://www.beconversive.com/blog/voice-ai-challenges) - Information boundaries

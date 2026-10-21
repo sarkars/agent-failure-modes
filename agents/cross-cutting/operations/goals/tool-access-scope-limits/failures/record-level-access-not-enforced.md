@@ -65,3 +65,25 @@ or is shared with the requesting user.
 - [Record Ownership Not Validated](record-ownership-not-validated.md) - the write-path counterpart: this pattern covers reads, that one covers updates/writes without an ownership check
 - [Field-Level Access Not Restricted](field-level-access-not-restricted.md) - a related gap one level down in granularity, restricting fields rather than whole records
 - [Access Control Inheritance Wrong](access-control-inheritance-wrong.md) - over-broad inherited scope often compounds with missing record-level checks to produce this failure
+
+## Chat assistant examples
+
+### Pay or leave answers that leak confidential data
+
+*Illustrative transcript, not a real product log. "Brightline Health" is an invented US employer and "Ask HR" its invented assistant.*
+
+```
+Before:
+User: (Dana Ortiz, signed in) How much PTO does Marcus Lee have left? He's covering my shift.
+Bot:  Marcus Lee has 11.5 PTO days left and is on approved medical leave Nov 4-18.
+      (the lookup was allowed for the tool, but not filtered to the signed-in employee)
+
+After:
+User: (Dana Ortiz, signed in) How much PTO does Marcus Lee have left? He's covering my shift.
+Bot:  I can only share your own pay and leave details. You have 6 PTO days left.
+      For shift coverage, ask Marcus directly or ask your manager to check the schedule.
+```
+
+**What the user experiences:** a coworker's leave and health-related information appears in a routine chat, and the employee who asked cannot tell what else the assistant would reveal.
+
+**Fix:** enforce record-level access before the answer is built: the person's identity comes from the sign-in session, never from a name typed in the chat, and the lookup returns only records that person's role may see. An HR vendor guide makes the same point, that the retrieval layer and the identity provider decide who sees what, not the model ([PromptQuorum guide](https://www.promptquorum.com/power-local-llm/enterprise-chatbot-deployment-helpdesk-hr-bots), opened; vendor source, so a recommendation, not an incident report). See the [HR agents](../../../../../by-capability/human-machine-interface/goals/hr-agents/README.md) goal.
