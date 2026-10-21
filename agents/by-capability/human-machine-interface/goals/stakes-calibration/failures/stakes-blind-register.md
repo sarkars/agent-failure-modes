@@ -235,3 +235,16 @@ Bot:  I'm so sorry about your husband. To close the account I need three things:
 ```
 **What the user experiences:** a widow is told to verify a dead man's identity and asked for the same proof twice, so closing one account feels like a second loss.
 **Fix:** detect a death notice and switch to a dedicated bereavement path: one acknowledgment, no identity checks aimed at the account holder, and one request for documents (confirm what that company needs; a funeral-planning guide, [funeral.com](https://funeral.com/blogs/the-journal/how-to-close-utility-accounts-after-a-death-phone-scripts-for-electric-gas-companies), says to ask each provider, and lists account name, service address, date of death and relationship as the basics), stored on the case so no later chat asks again. Pass the case with its summary to a person (see [Handoff summary is wrong or misleading](../../human-handoff/failures/handoff-summary-is-wrong-or-misleading.md)); measure contacts needed to complete a bereavement closure.
+
+### Stakes-blind visual style
+Illustrative example (made up; a US auto insurer, "Harbor Mutual"; catalog row VI-13). The claim card in the chat widget uses a celebration animation for every status change.
+```
+User: What's the status of my claim for the accident on Route 9?
+Bot:  [green card with confetti animation] Update! Your claim was denied. Tap to explore your options! 🎉
+```
+With the fix:
+```
+Bot:  [plain card, no animation] I'm sorry: your claim was denied because the policy lapsed before the accident date. You can appeal within the window shown in your letter. Want to start an appeal, or talk to a claims specialist?
+```
+**What the user experiences:** confetti and a party emoji on news that costs them money, so the product seems to mock them.
+**Fix:** choose card color, animation and emoji from the stakes of the message, not from the template. Denials, losses and bereavement get a plain card, no celebration effects, and a person offered. Use celebratory styling only for outcomes users welcome. See [bad news without structure](../../conversation-frameworks/failures/bad-news-without-structure.md).
