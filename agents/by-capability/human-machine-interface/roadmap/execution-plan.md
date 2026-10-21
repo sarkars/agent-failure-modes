@@ -1415,6 +1415,7 @@ AI-written help content in knowledge bases · agents using other agents' tools (
 - **Needs review (person):** the four packs, the summary-only teardown.
 - **Part B:** skipped, `seo/log.md` already has an entry for 2026-10-21. E6: Waiting for the owner to create the code repo.
 - **Plan complete?** No: asset 3 (91 patterns without packs), asset 4 and assets 6-8 are still in progress.
+- **Deploy:** the content PR (#63) was merged into main (merge commit 82c58f8) and the branch was reset to main. The site repo's local main still has commits `ce9023275` and `860f36fbc` ("Trigger deploy under repo owner") that this run did not create and that are not on origin/main, so I did not push the site repo (Part D stopped before the site steps). Not verified live. This line was added after the merge and will ship with the next run's PR.
 
 ## Schedule
 | Item | Value |
