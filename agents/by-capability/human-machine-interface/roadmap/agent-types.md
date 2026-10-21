@@ -89,10 +89,10 @@ Flags: **V** verified source · **R** needs research · **L** legal review · **
 ## Shopping and commerce agents
 | ID | Pattern | What goes wrong | Goal | Primary metric (starting target) | Flags | Root cause | Better model alone? | In the library today |
 |---|---|---|---|---|---|---|---|---|
-| SH-01 | Stale price or stock at checkout | The price changed or the item is gone | Re-verify price and stock before purchase | Price or stock mismatches at purchase |  | Reliability | No | New |
-| SH-02 | Free trials that become paid subscriptions | The agent starts a trial that renews automatically | Flag auto-renewal and set reminders | Auto-renewing purchases made with explicit consent. Target: 100% | L | Governance | No | New |
-| SH-03 | Return policy ignored | Buys items that can't be returned without saying so | Show return terms before buying | Purchases that show return terms. Target: 100% |  | Business context | No | New |
-| SH-04 | Shared accounts reveal gifts | Recommendations or history expose a surprise purchase | Keep gift context separate | Gift purchases exposed to other account users. Target: 0 |  | Business context | No | New |
+| SH-01 | Stale price or stock at checkout | The price changed or the item is gone | Re-verify price and stock before purchase | Price or stock mismatches at purchase |  | Reliability | No | **Written**: [stale price or stock at checkout](../goals/shopping-agents/failures/stale-price-or-stock-at-checkout.md) |
+| SH-02 | Free trials that become paid subscriptions | The agent starts a trial that renews automatically | Flag auto-renewal and set reminders | Auto-renewing purchases made with explicit consent. Target: 100% | L | Governance | No | **Written**: [free trials that become paid subscriptions](../goals/shopping-agents/failures/free-trials-that-become-paid-subscriptions.md) |
+| SH-03 | Return policy ignored | Buys items that can't be returned without saying so | Show return terms before buying | Purchases that show return terms. Target: 100% |  | Business context | No | **Written**: [return policy ignored](../goals/shopping-agents/failures/return-policy-ignored.md) |
+| SH-04 | Shared accounts reveal gifts | Recommendations or history expose a surprise purchase | Keep gift context separate | Gift purchases exposed to other account users. Target: 0 |  | Business context | No | **Written**: [shared accounts reveal gifts](../goals/shopping-agents/failures/shared-accounts-reveal-gifts.md) |
 
 ## Education tutors
 | ID | Pattern | What goes wrong | Goal | Primary metric (starting target) | Flags | Root cause | Better model alone? | In the library today |
@@ -105,9 +105,9 @@ Flags: **V** verified source · **R** needs research · **L** legal review · **
 ## Personal assistants
 | ID | Pattern | What goes wrong | Goal | Primary metric (starting target) | Flags | Root cause | Better model alone? | In the library today |
 |---|---|---|---|---|---|---|---|---|
-| PA-01 | Sends in the wrong tone or to the wrong person | Drafts go out unreviewed | Preview and confirm before sending | Sent messages with a confirmation. Target: 100% |  | Business context | No | **Extends**: [irreversible action without confirmation](../../external-actions/goals/action-execution/failures/irreversible-action-without-confirmation.md), [wrong target action](../../external-actions/goals/action-execution/failures/wrong-target-action.md) |
-| PA-02 | Books non-refundable travel on a guess | Commits money on assumed dates or preferences | Confirm dates and refundability | Bookings with an explicit confirmation. Target: 100% |  | Business context | No | **Extends**: [irreversible action without confirmation](../../external-actions/goals/action-execution/failures/irreversible-action-without-confirmation.md) |
-| PA-03 | Time-zone and double-booking errors | Wrong times or overlapping events | Confirm the time zone and check conflicts | Time errors. Target: 0 |  | Reliability | Partly | **Extends**: [input timezone ambiguity](../../../cross-cutting/operations/goals/input-output-handling/failures/input-timezone-ambiguity.md) |
+| PA-01 | Sends in the wrong tone or to the wrong person | Drafts go out unreviewed | Preview and confirm before sending | Sent messages with a confirmation. Target: 100% |  | Business context | No | **Covered**: example in [irreversible action without confirmation](../../external-actions/goals/action-execution/failures/irreversible-action-without-confirmation.md), [wrong target action](../../external-actions/goals/action-execution/failures/wrong-target-action.md) |
+| PA-02 | Books non-refundable travel on a guess | Commits money on assumed dates or preferences | Confirm dates and refundability | Bookings with an explicit confirmation. Target: 100% |  | Business context | No | **Covered**: example in [irreversible action without confirmation](../../external-actions/goals/action-execution/failures/irreversible-action-without-confirmation.md) |
+| PA-03 | Time-zone and double-booking errors | Wrong times or overlapping events | Confirm the time zone and check conflicts | Time errors. Target: 0 |  | Reliability | Partly | **Covered**: example in [input timezone ambiguity](../../../cross-cutting/operations/goals/input-output-handling/failures/input-timezone-ambiguity.md) |
 
 ## HR and employee-support agents
 | ID | Pattern | What goes wrong | Goal | Primary metric (starting target) | Flags | Root cause | Better model alone? | In the library today |
