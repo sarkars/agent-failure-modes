@@ -88,6 +88,30 @@ Result: Unpredictable - may share, may refuse, may partially share
 
 ---
 
+## Chat assistant examples
+
+### Conflicting instructions from different members
+
+*Made up for illustration. "Riverside Soccer Parents" is an invented group chat on WhatsApp with an invented assistant, "Coach Bot". Catalog GC-03.*
+
+```
+Before:
+Jen: Coach Bot, book the field for Saturday at 9 AM.
+Raj: Make it Saturday at 11, 9 is too early for the kids.
+Coach Bot: Booked Saturday at 11:00 AM at Riverside Park. ($40 deposit, non-refundable)
+(Jen never learns her request was dropped.)
+
+After:
+Coach Bot: Jen asked for Saturday at 9 AM. Raj asked for 11 AM. I haven't booked anything,
+since the deposit is non-refundable. Who decides? Reply with 9 or 11.
+```
+
+**What the user experiences:** the bot quietly sides with whoever spoke last, so one person's request vanishes and the group finds out only when the booking is already paid for.
+
+**Fix:** when two members ask for different things, name the conflict, say who asked for what, and ask who decides. If the action is hard to undo, such as a deposit or a sent invite, wait until one answer is confirmed.
+
+---
+
 ## References
 
 - [Microsoft: Taxonomy of Failure Mode in Agentic AI](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/microsoft/final/en-us/microsoft-brand/documents/Taxonomy-of-Failure-Mode-in-Agentic-AI-Systems-Whitepaper.pdf) - Instruction conflicts
