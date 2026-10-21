@@ -73,3 +73,25 @@ alias itself and confirming the provider silently rolled it over.
 - [Model Version Pinning Expiration](model-version-pinning-expiration.md) - the inverse failure: pinning avoids this pattern but introduces a deferred expiration risk of its own
 - [Model Behavior Change Detection Failure](model-behavior-change-detection-failure.md) - once a version change (silent or deliberate) has occurred, this sibling pattern covers why evaluation may still fail to catch the resulting regression
 - [Model AB Test Interference](model-ab-test-interference.md) - both describe behavior changes that existing monitoring isn't structured to attribute correctly, one from concurrent experiments and one from an invisible provider-side swap
+
+---
+
+## Chat assistant examples
+
+### A model change shifts personality, length, or refusals
+Invented dialogue for illustration (a US meal-kit company's order chat the morning after the vendor moved the bot to a new model version; not a real transcript). Catalog row MO-01.
+Before (model swapped overnight, no test, no notice):
+```
+User: Swap the shrimp in Thursday's box for chicken.
+Bot:  What a fantastic choice! Chicken is a wonderful, versatile protein that... (four more paragraphs, no swap made)
+User: Last week you just did it in one line. Also skip the peanut sauce.
+Bot:  I'm sorry, I can't help with allergy-related requests. Please consult a medical professional.
+```
+After (swap tested on saved conversations and announced):
+```
+App banner: Our assistant was updated on May 6. Tell us if anything feels different.
+User: Swap the shrimp in Thursday's box for chicken. Also skip the peanut sauce.
+Bot:  Done: Thursday's shrimp is now chicken, and the peanut sauce is removed. Anything else for that box?
+```
+**What the user experiences:** the same bot suddenly gushes, rambles and refuses a request it handled last week, so it "feels different" and the user stops trusting it.
+**Fix:** treat a model swap as a release: replay a fixed set of real conversations on the old and new model and compare answer length, tone and refusals before switching. Announce the change in the app, and keep the old model ready so you can roll back if complaints rise. Related HMI pattern: [Tone changes shipped with no regression test](../../../../human-machine-interface/goals/measurement-and-feedback/failures/tone-changes-shipped-with-no-regression-test.md).
