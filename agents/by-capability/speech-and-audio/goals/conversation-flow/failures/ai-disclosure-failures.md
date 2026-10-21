@@ -362,6 +362,21 @@ Chat:  Yes. This chat is saved, and I'm an AI. A person on our fraud team can ta
 
 **Fix:** Show the notice in the first message, before any personal detail is typed: it is an AI, the chat is saved and for what, and where to reach a person. Where consent is needed, capture it with a button and log the choice, and do not store the transcript until it is given. Answer "is this saved?" and "is this a person?" truthfully every time, using the same wording. Whether notice or consent is required varies by state and was not verified here; have counsel review before use. Voice call recording notice is planned for measurement, not measured. See the [undisclosed bot identity pattern](../../../../human-machine-interface/goals/trust-and-rapport/failures/undisclosed-bot-identity.md).
 
+### Unlabelled synthetic faces and avatars
+Illustrative example (made up; a US online pharmacy, "Greenleaf Pharmacy"; catalog row VI-09). The chat widget shows a realistic video-style face with a human name.
+```
+[Widget header: photo-real face, "Emily, Pharmacy Advisor"]
+User: Emily, are you a real pharmacist? I want to ask about mixing two medicines.
+Bot:  I'm here to help! Those two are usually fine together.
+```
+With the fix:
+```
+[Widget header: face with an "AI assistant" badge that stays visible, "Emily (AI)"]
+Bot:  Hi, I'm Emily, an AI assistant for Greenleaf Pharmacy. I can't give medical advice. I can connect you to a pharmacist. Want that?
+```
+**What the user experiences:** a human-looking face and name that never says it is generated, so she treats the answer as a pharmacist's.
+**Fix:** mark any synthetic face, avatar or generated image as AI in the widget itself (a persistent badge, not only the first message), give the avatar an identity that does not claim a human role, and answer "are you real?" truthfully. See the [undisclosed bot identity pattern](../../../../human-machine-interface/goals/trust-and-rapport/failures/undisclosed-bot-identity.md). Research on whether disclosure changes satisfaction is mixed and was read only through a search summary, so it is not used here.
+
 ---
 
 ## References
