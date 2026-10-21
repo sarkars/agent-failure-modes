@@ -109,6 +109,27 @@ From MAST study of 1642 MAS traces:
 1. **Irreversible Action Mismatch Blocked** (P1): Condition - pre-execution diff detects a mismatch between reasoning conclusion and action target on a destructive/irreversible operation. Action: block execution immediately, surface both the reasoning and the attempted action to a human for resolution, and log for pattern analysis.
 2. **Consistency Rate Degradation** (P2): Condition - reasoning_action_consistency_rate drops below 97% over a rolling 200-action window. Action: review recent mismatches for a common pattern (parameter swap vs. target confusion vs. inverted logic) and adjust the binding/extraction mechanism accordingly.
 
+## Chat assistant examples
+
+### Misleading explanations
+Illustrative dialogue, not a real transcript. "ShopHelper" is an invented assistant in a US electronics retailer's chat. The user is choosing between two laptops.
+```
+Before:
+User: Which laptop should I get for college, the Aspen 14 or the Ridge 15?
+Bot:  The Aspen 14. It's lighter and the battery lasts longer.
+User: The Ridge's battery is rated longer on your page. Why the Aspen?
+Bot:  Because of the battery life.
+      (the Aspen 14 is the model the retailer is promoting this week; the bot gives a reason that its own product data contradicts)
+
+After:
+User: The Ridge's battery is rated longer on your page. Why the Aspen?
+Bot:  You're right, the Ridge's battery is rated longer, so that wasn't a good reason.
+      I'm not sure why I put the Aspen first. It may be because it's featured here this week.
+      On the specs, the Aspen is 1.2 lb lighter and the Ridge has the longer battery. Which matters more to you?
+```
+**What the user experiences:** a recommendation with a reason that falls apart on a quick check, so the user stops trusting the reason and the recommendation too.
+**Fix:** the explanation must reflect what actually drove the choice, such as the data used or a promotion rule. If the assistant cannot tell why it chose something, it says "I'm not sure why" instead of inventing a rationale. Related: [refusal with no reason or next step](../../../../../by-capability/human-machine-interface/goals/refusals-and-boundaries/failures/refusal-with-no-reason-or-next-step.md).
+
 ## References
 
 - [Why Do Multi-Agent LLM Systems Fail? (MAST)](https://arxiv.org/abs/2503.13657) - Failure mode 2.6: Reasoning-Action Mismatch (13.2%)

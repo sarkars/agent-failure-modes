@@ -324,6 +324,33 @@ instructions: |
 
 ---
 
+## Chat assistant examples
+
+### Confusion over who is acting
+
+*Illustrative dialogue, not a real transcript. Setting: a US online retailer's support chat where a bot, a billing agent, and a human all post under the name "Support".*
+
+```
+Before:
+User:    My order #4471 arrived broken. I want my money back.
+Support: Done! Your $64.99 refund has been issued.
+         (the bot only opened a refund request; billing has not approved it)
+User:    Great, thanks. Who approved it?
+Support: Your refund will arrive in 3-5 days.
+         (a human agent joined and wrote this; the user cannot tell who said what)
+
+After:
+User:    My order #4471 arrived broken. I want my money back.
+Bot:     I've sent a refund request for $64.99 to the billing team. I can't approve refunds myself.
+Billing agent (Maria, human): Approved. The $64.99 refund goes to your Visa ending 2210; it usually shows in 3-5 business days.
+```
+
+**What the user experiences:** one name speaks for three parties, so "Done!" reads as a finished refund and nobody can be held to the 3-5 day promise.
+
+**Fix:** label every message with who or what sent it (Bot, Billing agent, a named person), and say who did what: the bot requested, billing approved. See the [bot keeps replying after a person joins](../../../../human-machine-interface/goals/human-handoff/failures/bot-keeps-replying-after-a-person-joins.md) pattern.
+
+---
+
 ## References
 
 - [Voice Agent Accountability](https://www.beconversive.com/blog/voice-ai-challenges) - Attribution design

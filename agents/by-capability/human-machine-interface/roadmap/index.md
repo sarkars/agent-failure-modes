@@ -292,12 +292,12 @@
 | OV-04 | Poor action previews | [visual-and-oversight.md](visual-and-oversight.md) | Covered | Business context | No |
 | OV-05 | Miscalibrated confidence display | [visual-and-oversight.md](visual-and-oversight.md) | Covered | Model | Partly |
 | OV-06 | No provenance | [visual-and-oversight.md](visual-and-oversight.md) | Covered | Reliability | No |
-| OV-07 | Invisible long-running status | [visual-and-oversight.md](visual-and-oversight.md) | Extends | Business context | No |
-| OV-08 | No stop or takeover | [visual-and-oversight.md](visual-and-oversight.md) | Extends | Reliability | No |
-| OV-09 | Permission fatigue or under-asking | [visual-and-oversight.md](visual-and-oversight.md) | Extends | Business context | No |
-| OV-10 | Misleading explanations | [visual-and-oversight.md](visual-and-oversight.md) | Extends | Model | Partly |
+| OV-07 | Invisible long-running status | [visual-and-oversight.md](visual-and-oversight.md) | Covered | Business context | No |
+| OV-08 | No stop or takeover | [visual-and-oversight.md](visual-and-oversight.md) | Covered | Reliability | No |
+| OV-09 | Permission fatigue or under-asking | [visual-and-oversight.md](visual-and-oversight.md) | Covered | Business context | No |
+| OV-10 | Misleading explanations | [visual-and-oversight.md](visual-and-oversight.md) | Covered | Model | Partly |
 | OV-11 | No audit trail | [visual-and-oversight.md](visual-and-oversight.md) | Covered | Reliability | No |
-| OV-12 | Confusion over who is acting | [visual-and-oversight.md](visual-and-oversight.md) | Extends | Business context | No |
+| OV-12 | Confusion over who is acting | [visual-and-oversight.md](visual-and-oversight.md) | Covered | Business context | No |
 | CD-01 | Edits beyond the request | [agent-types.md](agent-types.md) | Covered | Reliability | Partly |
 | CD-02 | Claims tests pass without running them, or edits tests to pass | [agent-types.md](agent-types.md) | Covered | Reliability | Partly |
 | CD-03 | Invented packages and APIs | [agent-types.md](agent-types.md) | Written | Model | Partly |

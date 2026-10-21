@@ -398,6 +398,20 @@ Bot:  Thanks for your patience! Your refund request has been submitted.
 **What the user experiences:** the bot said "one moment" and then went quiet with no status and no estimate, so the user cannot tell whether it is working, stuck, or waiting for a person, and starts typing "hello?".
 **Fix:** when a tool call or a queue for a person will take more than a few seconds, say what is happening and roughly how long ("I'm checking your billing record, about 30 seconds" or "You're in the refunds queue, usually about 10 minutes"), send an update on a set interval, and offer a way out (keep waiting, get an email when it's done). Only state an ETA the system actually has. Closest chat pattern: [silent long-running work](../../../../human-machine-interface/goals/response-time/failures/silent-long-running-work.md).
 
+### Invisible long-running status
+Illustrative dialogue, not a real transcript. Setting: an online tax-prep assistant on a US filing site, 8:40 p.m. on April 14.
+```
+User: Import my W-2 and 1099 files and check my return for errors.
+Bot:  Sure, I'll start on that now.
+      (4 minutes pass; the bot is parsing the files and running its checks, and nothing appears on screen)
+User: Is this working?
+User: Should I refresh the page?
+      (the tool run stalled at minute 2 and nothing flagged it)
+Bot:  Done! I found 3 possible errors.
+```
+**What the user experiences:** four minutes with no status, so they cannot tell a slow job from a stalled one and are tempted to refresh, which could lose the work, with the filing deadline close.
+**Fix:** for any task expected to take more than about 10 seconds, show progress in the chat ("Reading your W-2... done. Checking deductions, step 2 of 3") and update it on a set interval. Detect stalls (no step change within a set time) and tell the user, with the option to retry or wait. See [silent long-running work](../../../../human-machine-interface/goals/response-time/failures/silent-long-running-work.md).
+
 ## References
 
 - [VAPI Prompting Guide](https://docs.vapi.ai/prompting-guide) - Tool acknowledgment
