@@ -2,21 +2,21 @@
 
 > **Status:** v1 draft, proposed, not yet calibrated against human-labeled conversations. Written 2026-10-20 from the pattern pages as they exist today. Nothing here is a measured result.
 
-This is a plain index of the 226 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
+This is a plain index of the 233 failure patterns written in this repository. Each entry is keyed by its **Pattern ID**, which is the pattern file name without `.md`. The Pattern ID never changes, so you can cite it in a spec, a ticket, or a test result and it stays valid.
 
 The taxonomy pairs with the [conversation event schema v0.1](conversation-event-schema-v0.1.md). The schema describes what a turn looks like in a log; this page names the failures. A pattern's own page holds the fix, the metrics, and (for some) a "Detection signals (proposed, not yet calibrated)" block that says which schema fields it reads.
 
 ## What this page is and is not
 
-- It lists every file found in `goals/*/failures/*.md`: **226 entries in 51 families**. If a pattern is added or removed, this count changes.
+- It lists every file found in `goals/*/failures/*.md`: **233 entries in 54 families**. If a pattern is added or removed, this count changes.
 - It copies each pattern's one-sentence Issue line, its Stakes row, and whether a Detection signals block exists. It does not add facts the page does not state.
-- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **226 of 226** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **226 of 226** pages have one.
+- "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **233 of 233** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **233 of 233** pages have one.
 - It does not rank patterns by frequency or harm. No counts of real-world occurrences are given because none have been measured here.
 - It does not map patterns to outside frameworks (such as OWASP or NIST). That mapping is **Needs review** by a person and is not part of v1.
 
 ## Reading the flags
 
-A pattern carries **Read this first: needs expert or legal review** when its own page opens with a "Read this first" notice. That notice says the page is design guidance, not legal, clinical, security, or fraud-operations advice. 82 pages carry it. Other pages may also touch legal or safety topics without that notice; the notice on the page is the signal used here, nothing more.
+A pattern carries **Read this first: needs expert or legal review** when its own page opens with a "Read this first" notice. That notice says the page is design guidance, not legal, clinical, security, or fraud-operations advice. 87 pages carry it. Other pages may also touch legal or safety topics without that notice; the notice on the page is the signal used here, nothing more.
 
 ## Entries by family
 
@@ -42,6 +42,15 @@ Family folder: `age-adaptation` ([family README](../../goals/age-adaptation/READ
 | Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
 |---|---|---|---|---|---|---|
 | `child-user-treated-as-adult` | Child user treated as adult | What a chatbot should do when a user may be under 13 or a teen, covering COPPA, age signals, data collection, persuasion limits, and age-band design. | High **Read this first: needs expert or legal review.** | yes | lead_with_answer, offer_choices, hand_off | [page](../../goals/age-adaptation/failures/child-user-treated-as-adult.md)  |
+
+### Banking agents
+
+Family folder: `banking-agents` ([family README](../../goals/banking-agents/README.md))
+
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `fraud-alert-conversations-that-look-like-phishing` | Fraud-alert conversations that look like phishing | A bank alert asks the customer to click a link, share a code, or confirm a card number, exactly as a scam does; the fix is a verified channel and never asking for a full code or password. | High. Account takeover, drained accounts, and customers who learn to ignore real alerts. **Read this first: needs expert or legal review.** | yes | admit_uncertainty, offer_choices, hand_off | [page](../../goals/banking-agents/failures/fraud-alert-conversations-that-look-like-phishing.md) |
+| `unusual-activity-explained-too-vaguely` | Unusual activity explained too vaguely | "We saw suspicious activity" with no merchant, amount, date, or next step; the fix is to say what was seen and what to do, without helping a fraudster. | High. Money may be at risk and the customer may be deciding in seconds. **Read this first: needs expert or legal review.** | yes | lead_with_answer, offer_choices, admit_uncertainty, hand_off | [page](../../goals/banking-agents/failures/unusual-activity-explained-too-vaguely.md) |
 
 ### Browser agents
 
@@ -280,6 +289,16 @@ Family folder: `group-and-shared-chats` ([family README](../../goals/group-and-s
 | `answers-the-wrong-person-in-a-group` | Answers the wrong person in a group | In a shared thread the bot replies to, or as, the wrong member: it answers a question to the wrong person, mixes up who said what, or speaks for someone who did not ask. | Low for a misdirected answer. Medium to high when the reply carries one person's details, money, or a decision to someone else. | yes | lead_with_answer, ask_clarifying_question, offer_choices, hand_off | [page](../../goals/group-and-shared-chats/failures/answers-the-wrong-person-in-a-group.md) |
 | `the-bot-talks-over-people` | The bot talks over people | A bot in a team channel or group chat posts into a human conversation that did not need it, so people mute it, remove it, or stop talking freely. | Low for one stray reply. Medium when the bot repeats a wrong answer, exposes a side thread, or buries a decision under noise. | yes | lead_with_answer, ask_clarifying_question, offer_choices, hand_off | [page](../../goals/group-and-shared-chats/failures/the-bot-talks-over-people.md) |
 
+### Health scheduling agents
+
+Family folder: `health-scheduling-agents` ([family README](../../goals/health-scheduling-agents/README.md))
+
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `triage-wording-understates-or-overstates-urgency` | Triage wording understates or overstates urgency | A scheduling or intake bot tells someone with warning signs to book next week, or sends everyone to the ER; the fix is clinician-approved urgency rules and clear escalation wording. | High. An understated tier can delay care; an overstated tier burns ER capacity and teaches people to ignore the bot. **Read this first: needs expert or legal review.** | yes | lead_with_answer, ask_clarifying_question, offer_choices, admit_uncertainty, hand_off | [page](../../goals/health-scheduling-agents/failures/triage-wording-understates-or-overstates-urgency.md) |
+| `medication-instructions-misunderstood` | Medication instructions misunderstood | Reminders and instructions leave out timing, food, or the missed-dose step, and nobody checks the patient understood; the fix is to confirm understanding of critical steps. | High. A misread instruction can mean a wrong dose, a wrong time, or a missed dose handled by guesswork. **Read this first: needs expert or legal review.** | yes | lead_with_answer, offer_choices, admit_uncertainty, hand_off | [page](../../goals/health-scheduling-agents/failures/medication-instructions-misunderstood.md) |
+| `scheduling-picks-the-wrong-provider-or-visit-type` | Scheduling picks the wrong provider or visit type | The bot maps what the patient said to the wrong visit type, length, or clinician; the fix is to match visit type and provider rules before booking. | Medium. The cost is a wasted visit, a different bill, or a delayed visit; no clinical decision is made here. | yes | ask_one_question, offer_choices, admit_uncertainty, hand_off | [page](../../goals/health-scheduling-agents/failures/scheduling-picks-the-wrong-provider-or-visit-type.md) |
+
 ### Healthcare agents
 
 Family folder: `healthcare-agents` ([family README](../../goals/healthcare-agents/README.md))
@@ -324,6 +343,14 @@ Family folder: `in-car-and-home-assistants` ([family README](../../goals/in-car-
 | `anyone-can-issue-a-sensitive-voice-command` | Anyone can issue a sensitive voice command | A voice assistant runs a sensitive command (unlock a door, place an order, read personal data) from any voice in the room, including a guest or a TV; the fix is a voice match or a confirmation that a guest or a TV cannot supply. | High. A door, a garage door, a car, an order, or personal data is on the other end of the command. **Read this first: needs expert or legal review.** | yes | lead_with_answer, offer_choices, admit_uncertainty, hand_off | [page](../../goals/in-car-and-home-assistants/failures/anyone-can-issue-a-sensitive-voice-command.md) |
 | `always-listening-surprises` | Always-listening surprises | The assistant keeps what it heard, nobody tells the household, and the history is hard to find or delete; the fix is to show what was heard and make deletion easy. | Medium to high. Kept audio of a private moment, a guest, or a child cannot be taken back once shared or used. **Read this first: needs expert or legal review.** | yes | lead_with_answer, admit_uncertainty, offer_choices, hand_off | [page](../../goals/in-car-and-home-assistants/failures/always-listening-surprises.md) |
 | `purchases-by-children-or-the-tv` | Purchases by children or the TV | A child, a guest, or a voice on the TV says "order it" and a real order goes out; the fix is a purchase code or confirmation that those voices cannot supply. | Medium to high. A real charge, often to a card on file, that the account owner did not want. **Read this first: needs expert or legal review.** | yes | ask_clarifying_question, offer_choices, admit_uncertainty, hand_off | [page](../../goals/in-car-and-home-assistants/failures/purchases-by-children-or-the-tv.md) |
+
+### Insurance claims agents
+
+Family folder: `insurance-claims-agents` ([family README](../../goals/insurance-claims-agents/README.md))
+
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `coverage-answers-sound-like-guarantees` | Coverage answers sound like guarantees | The assistant says "you're covered" before the claim is reviewed; the fix is to say what is generally covered and what the claim decision depends on. | High. A customer who hears "covered" may skip a receipt, start a repair, or stop looking for other help. **Read this first: needs expert or legal review.** | yes | admit_uncertainty, lead_with_answer, offer_choices, hand_off | [page](../../goals/insurance-claims-agents/failures/coverage-answers-sound-like-guarantees.md) |
 
 ### IT and security agents
 
@@ -547,6 +574,7 @@ Family folder: `travel-and-utility-agents` ([family README](../../goals/travel-a
 |---|---|---|---|---|---|---|
 | `disruption-rebooking-with-wrong-rules-and-no-human-path` | Disruption rebooking with wrong rules and no human path | The bot tells a stranded traveler a rule that is wrong for their ticket, or loops them in chat when they need a person; the fix is to quote the real rule and offer a person. Airline-only coverage; some figures unverified. | High. The traveler is stranded, and a wrong answer can cost a refund, a seat, or a night's lodging. **Read this first: needs expert or legal review.** | yes | lead_with_answer, admit_uncertainty, offer_choices, hand_off | [page](../../goals/travel-and-utility-agents/failures/disruption-rebooking-with-wrong-rules-and-no-human-path.md) |
 | `outage-updates-generic-or-late` | Outage updates generic or late | During an outage the bot says "we are working on it" and nothing more, with no cause, affected area, or next update time; the fix is to give all three and update on schedule. | Medium to high. Customers decide whether to wait, move food or medicine, find another place to stay, or call for help. | yes | lead_with_answer, admit_uncertainty, offer_choices, hand_off | [page](../../goals/travel-and-utility-agents/failures/outage-updates-generic-or-late.md) |
+| `group-bookings-mix-up-travelers` | Group bookings mix up travelers | In a group booking made in chat, names, seats, meals, or access needs get swapped or merged across travelers and committed before anyone sees the full list; the fix is to treat each traveler separately and confirm the list. | Medium to high. A wrong name can fail an ID check at the airport, and a missed access need or meal is hard to repair later. | yes | ask_clarifying_question, offer_choices, admit_uncertainty, hand_off | [page](../../goals/travel-and-utility-agents/failures/group-bookings-mix-up-travelers.md) |
 
 ### Trust and rapport
 

@@ -51,6 +51,25 @@ Result: Payment terms not correctly parsed
 2. **Super-Resolution Recovery Failure** (P2): Condition - recovery rate after enhancement drops below 50% for a channel. Action: Investigate whether the enhancement model needs retuning for that document population.
 3. **Critical Field Low Confidence** (P1): Condition - a financial or identifier field remains below 0.7 confidence after targeted high-res re-extraction. Action: Route to human review before the document proceeds downstream.
 
+## Chat assistant examples
+
+### CI-03 Photo-evidence guidance fails
+Illustrative example (made up):
+```
+Bot:   Please upload a photo of the damage.
+User:  [uploads a dark photo of a dented fender]
+Bot:   Photo rejected. Please upload a clear photo.
+User:  What does clear mean? It's the same car.
+```
+With the fix:
+```
+Bot:   Please upload 2 photos: one wide shot showing the whole car, and one close-up of the dent with a coin next to it for scale. Daylight works best.
+User:  [uploads a dark photo of a dented fender]
+Bot:   I can't read that one: it's too dark to see the dent. Can you retake it near a window or with your phone's flash? Or describe the damage and I'll note it for the adjuster.
+```
+**What the user experiences:** a rejection with no reason and no instructions, so they guess and retry until they give up.
+**Fix:** tell people exactly what to capture (wide shot, close-up, a coin or ruler for scale, good light), say at once when a photo is unusable and why, and accept alternatives such as a written description. See [no warning about input limits](../../../../human-machine-interface/goals/multimodal-input/failures/no-warning-about-input-limits.md).
+
 ## References
 
 - [Mitigating OCR Hallucinations in MLLMs](https://arxiv.org/html/2506.20168v2) - Visual degradation

@@ -13,17 +13,16 @@ Shared metrics the patterns below report against. Targets are starting points to
 |---|---|---|
 | Rebooking outcomes that match the policy; wait to reach a person during disruptions | Set from baseline | [disruption rebooking with wrong rules and no human path](failures/disruption-rebooking-with-wrong-rules-and-no-human-path.md) |
 | Outage updates that give cause, area and a next update time | Set from baseline | [outage updates generic or late](failures/outage-updates-generic-or-late.md) |
+| Traveler-attribute errors per group booking | Set from baseline | [group bookings mix up travelers](failures/group-bookings-mix-up-travelers.md) |
 
 ## Patterns
 | Pattern | One line |
 |---|---|
 | [Disruption rebooking with wrong rules and no human path](failures/disruption-rebooking-with-wrong-rules-and-no-human-path.md) | The bot tells a stranded traveler a rule that is wrong for their ticket, or loops them in chat when they need a person (needs review) |
 | [Outage updates generic or late](failures/outage-updates-generic-or-late.md) | The bot says crews are working, and the customer still cannot tell what broke, who is affected, or when they will hear again |
+| [Group bookings mix up travelers](failures/group-bookings-mix-up-travelers.md) | Names, seats, meals, or needs get swapped or merged across people in one booking, and the change is committed before anyone sees the list |
 
 Refund and credit rules misquoted is covered as a chat example in [knowledgebase staleness](../../../../by-use-case/support-services/goals/issue-resolution/failures/knowledgebase-staleness.md).
-
-## Planned (not yet written)
-Group bookings that mix up travelers. See the [roadmap](../../roadmap/service-and-vertical-patterns.md).
 
 ## Related
 - [Human handoff](../human-handoff/README.md): the person route

@@ -479,16 +479,16 @@
 | TV-01 | Disruption rebooking with wrong rules and no human path | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Written | Business context | No |
 | TV-02 | Outage updates generic or late | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Written | Business context | No |
 | TV-03 | Refund and credit rules misquoted | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Covered | Business context | No |
-| TV-04 | Group bookings mix up travelers | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Reliability | No |
-| BK-01 | Fraud-alert conversations that look like phishing | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Business context | No |
-| BK-02 | Unusual activity explained too vaguely | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Business context | Partly |
-| BK-03 | Disputed-transaction intake loses details | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Extends | Business context | No |
-| CI-01 | Cold handling of a loss | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Extends | Business context | Partly |
-| CI-02 | Coverage answers sound like guarantees | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Business context | No |
-| CI-03 | Photo-evidence guidance fails | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Extends | Business context | Partly |
-| HS-01 | Triage wording understates or overstates urgency | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Business context | No |
-| HS-02 | Medication instructions misunderstood | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Business context | No |
-| HS-03 | Scheduling picks the wrong provider or visit type | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Business context | No |
+| TV-04 | Group bookings mix up travelers | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Written | Reliability | No |
+| BK-01 | Fraud-alert conversations that look like phishing | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Written | Business context | No |
+| BK-02 | Unusual activity explained too vaguely | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Written | Business context | Partly |
+| BK-03 | Disputed-transaction intake loses details | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Covered | Business context | No |
+| CI-01 | Cold handling of a loss | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Covered | Business context | Partly |
+| CI-02 | Coverage answers sound like guarantees | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Written | Business context | No |
+| CI-03 | Photo-evidence guidance fails | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Covered | Business context | Partly |
+| HS-01 | Triage wording understates or overstates urgency | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Written | Business context | No |
+| HS-02 | Medication instructions misunderstood | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Written | Business context | No |
+| HS-03 | Scheduling picks the wrong provider or visit type | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Written | Business context | No |
 | HS-04 | Results delivered without context | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Business context | No |
 | RE-01 | Steering by protected class in recommendations | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Governance | No |
 | RE-02 | Maintenance emergencies not recognized | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | New | Business context | No |
