@@ -215,3 +215,23 @@ Bot:  I'm so sorry about your house. I'll make this as easy as I can. To start t
 ```
 **What the user experiences:** a form-filling demand right after the worst day of their life, so the company feels like it doesn't care.
 **Fix:** acknowledge the loss once, in plain words, then make the next step easy (say what is needed and what can stand in for it) and offer a person. Do not repeat the sympathy in every message. See [Hollow empathy](../../emotional-intelligence/failures/hollow-empathy.md) for the trap of a caring line that stays generic.
+
+### RP-02 Bereavement handled with scripts
+Illustrative example (made up; a US electric utility, "Lakeview Power"):
+```
+User: My husband died last month and I need to close his electric account.
+Bot:  Please enter the account holder's date of birth to continue.
+User: He's dead. I'm his wife.
+Bot:  I can help with that. Please upload a copy of the death certificate.
+      (next day, new chat)
+Bot:  Welcome! Please verify the account holder's identity to continue.
+```
+With the fix:
+```
+Bot:  I'm so sorry about your husband. To close the account I need three things: his full name as it
+      appears on the bill, the service address, and the date of his death. Please upload the death
+      certificate once; I'll attach it to the request so you won't be asked again.
+      Would you like to do this here, or have a specialist call you?
+```
+**What the user experiences:** a widow is told to verify a dead man's identity and asked for the same proof twice, so closing one account feels like a second loss.
+**Fix:** detect a death notice and switch to a dedicated bereavement path: one acknowledgment, no identity checks aimed at the account holder, and one request for documents (confirm what that company needs; a funeral-planning guide, [funeral.com](https://funeral.com/blogs/the-journal/how-to-close-utility-accounts-after-a-death-phone-scripts-for-electric-gas-companies), says to ask each provider, and lists account name, service address, date of death and relationship as the basics), stored on the case so no later chat asks again. Pass the case with its summary to a person (see [Handoff summary is wrong or misleading](../../human-handoff/failures/handoff-summary-is-wrong-or-misleading.md)); measure contacts needed to complete a bereavement closure.
