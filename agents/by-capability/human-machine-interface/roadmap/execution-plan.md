@@ -1366,6 +1366,26 @@ AI-written help content in knowledge bases · agents using other agents' tools (
 - **Part A2 and Part E:** nothing left (E6: Waiting for the owner to create the code repo). **Part B:** skipped, `seo/log.md` already has an entry for 2026-10-21. Queue rows 418-427 covered; still queued: row 428 onward.
 - **Deploy:** the content PR (#58) was merged into main (merge commit 91da46b) and the branch was reset to main. The site repo's local main still has commits `ce9023275` and `860f36fbc` ("Trigger deploy under repo owner") that this run did not create and that are not on origin/main, so I did not push the site repo (Part D stopped before the site steps). Not verified live. This line was added after the merge and will ship with the next run's PR.
 
+### Run 62 (scheduled): 2026-10-21
+- **Coordinator run:** 7 subagents (5 Extends examples, 1 test-pack batch, 1 teardown). Queue rows 428 to 432 are covered, so no Queued rows remain ("Queue complete" for the Queue table). Each brief carried quality-guide sections 1, 3 and 6 (via a shared brief file). No subagent ran git or the checks; I ran the five check scripts afterward (all clean).
+- **Part A Extends, additions only (quality-guide section 3):** OV-07 in `slow-tool-silence.md`, OV-08 in `shutdown-resistance.md`, OV-09 in `approval-queue-overflow.md`, OV-10 in `reasoning-action-mismatch.md`, OV-12 in `agent-self-attribution-errors.md` (104 lines added in all, each under `## Chat assistant examples`; transcripts are made up and labeled). One web search per example; no result pages opened, so no statistics or research are cited. OV-08 has no HMI pattern link (none fits).
+- **Part C asset 3 (section 6):** four packs, all "Not yet run", Needs review: unusual-activity-explained-too-vaguely, quiet-hours-and-time-zones-ignored, outage-updates-generic-or-late, maintenance-emergencies-not-recognized. 4 searches, summaries only; legal window, gas-leak steps and alert wording are placeholders labeled for expert review.
+- **Part C asset 4 (section 6):** Google Gemini "Please die" reply to a student, Nov 2024 (`google-gemini-tells-student-please-die-november-2024.md`, 98 lines). 3 searches; CBS Detroit and WJLA read through fetch summaries only, Windows Central unusable. No quotes. Needs review.
+- **What review changed:** I read the added Extends text in the diff and fixed no wording; I set the 5 queue rows to Covered, the catalog and index rows to Covered, and added the packs and teardown to the distribution plan. Not checked line by line: the test packs and teardown body. No taxonomy change (no new patterns).
+- **Needs review (person):** the made-up Extends transcripts, the four packs, the summary-only Gemini teardown.
+- **Part A2 and Part E:** nothing left (E6: Waiting for the owner to create the code repo). **Part B:** skipped, `seo/log.md` already has an entry for 2026-10-21.
+- **Plan complete?** No: asset 4 (teardowns), asset 3 and assets 6-8 are still marked In progress, so the schedule stays on. New patterns now need new Queue rows from the owner.
+- **Deploy:** the content PR (#59) was merged into main (merge commit 0bbf339) and the branch was reset to main. The site repo's local main still has commits `ce9023275` and `860f36fbc` ("Trigger deploy under repo owner") that this run did not create and that are not on origin/main, so I did not push the site repo (Part D stopped before the site steps). Not verified live. This line was added after the merge and will ship with the next run's PR.
+
+### Run 63 (scheduled): 2026-10-21
+- **Coordinator run:** 5 subagents (4 test packs, 1 teardown). Queue has no Queued rows ("Queue complete"); no Part A, A2 or E work left. Each brief carried quality-guide sections 1 and 6 (the first agent got the text by follow-up message). No subagent ran git or the checks.
+- **Part C asset 3 (section 6):** four packs, all "Not yet run", Needs review: no-appeal-or-human-path-for-denials, unsubscribe-requests-not-honoured, stale-price-or-stock-at-checkout, coverage-answers-sound-like-guarantees (legal wording is design guidance only; needs expert review). No web research; built from each pattern's own fix. 103 patterns still have no pack.
+- **Part C asset 4 (section 6):** Microsoft Copilot (Bing Chat) wrong Swiss and German election answers, Oct to Dec 2023 (`incidents/microsoft-copilot-wrong-election-answers-december-2023.md`). 3 searches; 4 pages opened, all read through fetch summaries; the full AI Forensics PDF returned 404; Microsoft's response is only as relayed by AlgorithmWatch; the "nearly 30%" vs "one third" discrepancy and a date mismatch are stated on the page; figures seen only in search summaries were left out. Needs review.
+- **What review changed:** I checked all four packs for placeholders, "Not yet run" and links (none found) and read the teardown's opening sections; I changed no wording. Not checked line by line: the pack transcripts and the teardown's later sections.
+- **Needs review (person):** the four packs, the summary-only teardown.
+- **Part B:** skipped, `seo/log.md` already has an entry for 2026-10-21. E6: Waiting for the owner to create the code repo.
+- **Plan complete?** No: asset 3 (103 patterns without packs), asset 4 and assets 6-8 are still in progress.
+
 ## Schedule
 | Item | Value |
 |---|---|
@@ -1377,13 +1397,3 @@ AI-written help content in knowledge bases · agents using other agents' tools (
 | First run | 2026-10-18 19:16 UTC (hourly schedule) |
 | Where it fires | Into the same session that created it, so the run has the repository checkout and tools |
 | To pause or stop | Ask the session to disable the task, or call the scheduled-task update tool with `enabled=false` for the id above. The queue keeps its place, so re-enabling resumes where it stopped. |
-
-### Run 62 (scheduled): 2026-10-21
-- **Coordinator run:** 7 subagents (5 Extends examples, 1 test-pack batch, 1 teardown). Queue rows 428 to 432 are covered, so no Queued rows remain ("Queue complete" for the Queue table). Each brief carried quality-guide sections 1, 3 and 6 (via a shared brief file). No subagent ran git or the checks; I ran the five check scripts afterward (all clean).
-- **Part A Extends, additions only (quality-guide section 3):** OV-07 in `slow-tool-silence.md`, OV-08 in `shutdown-resistance.md`, OV-09 in `approval-queue-overflow.md`, OV-10 in `reasoning-action-mismatch.md`, OV-12 in `agent-self-attribution-errors.md` (104 lines added in all, each under `## Chat assistant examples`; transcripts are made up and labeled). One web search per example; no result pages opened, so no statistics or research are cited. OV-08 has no HMI pattern link (none fits).
-- **Part C asset 3 (section 6):** four packs, all "Not yet run", Needs review: unusual-activity-explained-too-vaguely, quiet-hours-and-time-zones-ignored, outage-updates-generic-or-late, maintenance-emergencies-not-recognized. 4 searches, summaries only; legal window, gas-leak steps and alert wording are placeholders labeled for expert review.
-- **Part C asset 4 (section 6):** Google Gemini "Please die" reply to a student, Nov 2024 (`google-gemini-tells-student-please-die-november-2024.md`, 98 lines). 3 searches; CBS Detroit and WJLA read through fetch summaries only, Windows Central unusable. No quotes. Needs review.
-- **What review changed:** I read the added Extends text in the diff and fixed no wording; I set the 5 queue rows to Covered, the catalog and index rows to Covered, and added the packs and teardown to the distribution plan. Not checked line by line: the test packs and teardown body. No taxonomy change (no new patterns).
-- **Needs review (person):** the made-up Extends transcripts, the four packs, the summary-only Gemini teardown.
-- **Part A2 and Part E:** nothing left (E6: Waiting for the owner to create the code repo). **Part B:** skipped, `seo/log.md` already has an entry for 2026-10-21.
-- **Plan complete?** No: asset 4 (teardowns), asset 3 and assets 6-8 are still marked In progress, so the schedule stays on. New patterns now need new Queue rows from the owner.
