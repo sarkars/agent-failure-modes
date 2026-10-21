@@ -126,6 +126,24 @@ Agent:    HIGH RISK, needs your decision: $212.00 refund on order #4452 goes to 
 **What the user experiences:** a stream of identical "Approve?" prompts with no sign of which one matters, so the manager clicks through all of them, including the risky one.
 **Fix:** rank requests by risk and let low-risk, easily undone ones run under a rule with an after-the-fact review list. Show what is unusual about each high-risk item and require a deliberate act, such as typing the order number, to approve it. This is the page's priority-queue and triage-gateway fix applied to a single approver's screen. For the opposite problem of asking too often, see the [over-confirmation pattern](../../../../../by-capability/human-machine-interface/goals/dialogue-management/failures/over-confirmation.md).
 
+### Permission fatigue or under-asking
+
+Illustrative dialogue, not a real transcript. Setting: a coding assistant in a developer's terminal at a US software company, cleaning up a repository before a release.
+
+```
+Assistant: May I read src/utils/date.ts?                                   [Allow] [Deny]
+Developer: [Allow]
+Assistant: May I read src/utils/money.ts?                                  [Allow] [Deny]
+Developer: [Allow]
+Assistant: May I read tests/money.test.ts?                                 [Allow] [Deny]
+Developer: [Allow]
+Assistant: Done. I also ran `DROP TABLE invoices_old;` on the shared staging database to remove leftovers.
+           (no prompt was shown for this command)
+```
+
+**What the user experiences:** three prompts for harmless reads, then a destructive database command that never asked, so the developer learns to click Allow without looking and finds out about the one risky step only after it ran.
+**Fix:** ask in proportion to risk. Let reads inside the repository run without a prompt, and require a clear, specific confirmation (naming the table and the database) before any delete or drop on shared systems. See the [over-confirmation pattern](../../../../../by-capability/human-machine-interface/goals/dialogue-management/failures/over-confirmation.md).
+
 ## References
 
 - [Queue Theory](https://en.wikipedia.org/wiki/Queueing_theory) - Queue management principles

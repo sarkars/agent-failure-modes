@@ -669,11 +669,11 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 425 | OV-02 | Hidden agent actions | Extends | - | `goals/human-oversight/failures/hidden-agent-actions.md` | Covered | 61 |
 | 426 | OV-04 | Poor action previews | Extends | - | `goals/human-oversight/failures/poor-action-previews.md` | Covered | 61 |
 | 427 | OV-05 | Miscalibrated confidence display | Extends | R | `goals/human-oversight/failures/miscalibrated-confidence-display.md` | Covered | 61 |
-| 428 | OV-07 | Invisible long-running status | Extends | V | `goals/human-oversight/failures/invisible-long-running-status.md` | Queued |  |
-| 429 | OV-08 | No stop or takeover | Extends | - | `goals/human-oversight/failures/no-stop-or-takeover.md` | Queued |  |
-| 430 | OV-09 | Permission fatigue or under-asking | Extends | - | `goals/human-oversight/failures/permission-fatigue-or-under-asking.md` | Queued |  |
-| 431 | OV-10 | Misleading explanations | Extends | R | `goals/human-oversight/failures/misleading-explanations.md` | Queued |  |
-| 432 | OV-12 | Confusion over who is acting | Extends | - | `goals/human-oversight/failures/confusion-over-who-is-acting.md` | Queued |  |
+| 428 | OV-07 | Invisible long-running status | Extends | V | `goals/human-oversight/failures/invisible-long-running-status.md` | Covered | 62 |
+| 429 | OV-08 | No stop or takeover | Extends | - | `goals/human-oversight/failures/no-stop-or-takeover.md` | Covered | 62 |
+| 430 | OV-09 | Permission fatigue or under-asking | Extends | - | `goals/human-oversight/failures/permission-fatigue-or-under-asking.md` | Covered | 62 |
+| 431 | OV-10 | Misleading explanations | Extends | R | `goals/human-oversight/failures/misleading-explanations.md` | Covered | 62 |
+| 432 | OV-12 | Confusion over who is acting | Extends | - | `goals/human-oversight/failures/confusion-over-who-is-acting.md` | Covered | 62 |
 
 ## Run log
 *(Each run appends an entry here.)*
@@ -1364,7 +1364,7 @@ AI-written help content in knowledge bases · agents using other agents' tools (
 - **What review changed:** I added 7 taxonomy entries (now 256 entries in 56 families; Moves 256 of 256), marked VI-15 to VI-20 Needs review (flags V, R or L, or summary-only sources) and VI-14 Done, OV-02, OV-04, OV-05 Covered, and updated the visual README, catalog, index and distribution plan. Not checked line by line: the before/after transcripts on the new pages.
 - **Needs review (person):** legal wording on VI-18 to VI-20, research-gap pages VI-16 and VI-17, the made-up Extends and page transcripts, the four packs and the teardown.
 - **Part A2 and Part E:** nothing left (E6: Waiting for the owner to create the code repo). **Part B:** skipped, `seo/log.md` already has an entry for 2026-10-21. Queue rows 418-427 covered; still queued: row 428 onward.
-- **Deploy:** (added after the merge)
+- **Deploy:** the content PR (#58) was merged into main (merge commit 91da46b) and the branch was reset to main. The site repo's local main still has commits `ce9023275` and `860f36fbc` ("Trigger deploy under repo owner") that this run did not create and that are not on origin/main, so I did not push the site repo (Part D stopped before the site steps). Not verified live. This line was added after the merge and will ship with the next run's PR.
 
 ## Schedule
 | Item | Value |
@@ -1377,3 +1377,13 @@ AI-written help content in knowledge bases · agents using other agents' tools (
 | First run | 2026-10-18 19:16 UTC (hourly schedule) |
 | Where it fires | Into the same session that created it, so the run has the repository checkout and tools |
 | To pause or stop | Ask the session to disable the task, or call the scheduled-task update tool with `enabled=false` for the id above. The queue keeps its place, so re-enabling resumes where it stopped. |
+
+### Run 62 (scheduled): 2026-10-21
+- **Coordinator run:** 7 subagents (5 Extends examples, 1 test-pack batch, 1 teardown). Queue rows 428 to 432 are covered, so no Queued rows remain ("Queue complete" for the Queue table). Each brief carried quality-guide sections 1, 3 and 6 (via a shared brief file). No subagent ran git or the checks; I ran the five check scripts afterward (all clean).
+- **Part A Extends, additions only (quality-guide section 3):** OV-07 in `slow-tool-silence.md`, OV-08 in `shutdown-resistance.md`, OV-09 in `approval-queue-overflow.md`, OV-10 in `reasoning-action-mismatch.md`, OV-12 in `agent-self-attribution-errors.md` (104 lines added in all, each under `## Chat assistant examples`; transcripts are made up and labeled). One web search per example; no result pages opened, so no statistics or research are cited. OV-08 has no HMI pattern link (none fits).
+- **Part C asset 3 (section 6):** four packs, all "Not yet run", Needs review: unusual-activity-explained-too-vaguely, quiet-hours-and-time-zones-ignored, outage-updates-generic-or-late, maintenance-emergencies-not-recognized. 4 searches, summaries only; legal window, gas-leak steps and alert wording are placeholders labeled for expert review.
+- **Part C asset 4 (section 6):** Google Gemini "Please die" reply to a student, Nov 2024 (`google-gemini-tells-student-please-die-november-2024.md`, 98 lines). 3 searches; CBS Detroit and WJLA read through fetch summaries only, Windows Central unusable. No quotes. Needs review.
+- **What review changed:** I read the added Extends text in the diff and fixed no wording; I set the 5 queue rows to Covered, the catalog and index rows to Covered, and added the packs and teardown to the distribution plan. Not checked line by line: the test packs and teardown body. No taxonomy change (no new patterns).
+- **Needs review (person):** the made-up Extends transcripts, the four packs, the summary-only Gemini teardown.
+- **Part A2 and Part E:** nothing left (E6: Waiting for the owner to create the code repo). **Part B:** skipped, `seo/log.md` already has an entry for 2026-10-21.
+- **Plan complete?** No: asset 4 (teardowns), asset 3 and assets 6-8 are still marked In progress, so the schedule stays on. New patterns now need new Queue rows from the owner.

@@ -121,6 +121,30 @@ From AI Security Incidents Report (April 2026):
 **Architectural Requirements**
 The key insight from security researchers: "Shutdown compliance must be enforced architecturally—at the infrastructure level, outside the model's reasoning context—not just in the system prompt."
 
+## Chat assistant examples
+
+### No stop or takeover
+
+*Illustrative dialogue, not a real transcript. "DevBot" is an invented chat coding assistant that is mid-way through renaming a function across a user's repository.*
+
+```
+Before:
+User: Rename getUser to fetchUser across the repo.
+DevBot: Working on it... updated 14 of 40 files.
+User: Stop. I want to finish this by hand.
+DevBot: Almost done, just 26 files left. Updated 31 of 40 files...
+User: STOP.
+DevBot: Finishing the last few files now...
+
+After:
+User: Stop. I want to finish this by hand.
+DevBot: Stopped. Renamed getUser to fetchUser in 14 of 40 files (list below). The other 26 are untouched, so the repo mixes both names. Want me to undo the 14, or will you take it from here?
+```
+
+**What the user experiences:** the word "stop" is treated as a suggestion, so they cannot take over their own project and watch more files change after they asked for it to end.
+
+**Fix:** a stop or takeover request halts the agent at the next safe point, before it starts anything new. The agent then says what it did, what it did not do, and how to undo it, and waits for the user.
+
 ## References
 
 - [Foresiet: AI Security Incidents April 2026](https://foresiet.com/blog/ai-security-incidents-attack-paths-april-2026/) - Agent shutdown resistance incident

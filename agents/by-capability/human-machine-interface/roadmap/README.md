@@ -14,7 +14,7 @@ The first version of this roadmap did not check the library, and several rows tu
 | **New** | No matching pattern found by file-name and keyword search | Search again before writing. This is a name-and-keyword check, not a full read of every file |
 
 <!-- BEGIN:result -->
-**Result: 493 rows, of which 243 are Written, 1 are New, 31 Extend an existing pattern, and 218 are already Covered.**
+**Result: 493 rows, of which 243 are Written, 1 are New, 26 Extend an existing pattern, and 223 are already Covered.**
 <!-- END:result -->
 
 <!-- BEGIN:root-cause -->
@@ -63,13 +63,13 @@ If every "Partly" were solved, models would fix up to 40%. If none were, 1%. A o
 | [privacy-governance-and-access.md](privacy-governance-and-access.md) | Privacy, governance, ethics, access control, and external services | 42 | 6 | 0 | 0 | 36 |
 | [effort-completeness-and-memory.md](effort-completeness-and-memory.md) | Effort, completeness, and memory | 25 | 6 | 0 | 5 | 14 |
 | [emerging-surfaces.md](emerging-surfaces.md) | Emerging surfaces: agentic commerce, browser agents, tool ecosystems, meetings, companions, hiring, pricing incentives | 25 | 7 | 0 | 0 | 18 |
-| [visual-and-oversight.md](visual-and-oversight.md) | Visual design and human-oversight UI for agents | 32 | 17 | 0 | 5 | 10 |
+| [visual-and-oversight.md](visual-and-oversight.md) | Visual design and human-oversight UI for agents | 32 | 17 | 0 | 0 | 15 |
 | [agent-types.md](agent-types.md) | Failures by agent type (coding, data, IT, finance, healthcare, and more) and cross-agent additions | 61 | 27 | 0 | 6 | 28 |
 | [conversation-design.md](conversation-design.md) | Dialogue mechanics, refusals and boundaries, and error recovery | 33 | 18 | 0 | 5 | 10 |
 | [interface-and-persona.md](interface-and-persona.md) | Persona and tone, onboarding, chat interface, accessibility, and multimodal input | 41 | 30 | 0 | 0 | 11 |
 | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Human handoff, measurement, model changes, proactive agents, and group chats | 28 | 19 | 0 | 3 | 6 |
 | [service-and-vertical-patterns.md](service-and-vertical-patterns.md) | Drive-thru, in-car, government, travel, banking, insurance, health scheduling, real estate, and outbound rules | 36 | 30 | 0 | 0 | 6 |
-| | **Total** | **493** | **243** | **1** | **31** | **218** |
+| | **Total** | **493** | **243** | **1** | **26** | **223** |
 <!-- END:catalog-table -->
 
 ## Suggested priority
