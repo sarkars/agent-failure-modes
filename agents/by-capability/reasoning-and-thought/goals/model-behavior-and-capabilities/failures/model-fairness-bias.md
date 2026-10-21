@@ -67,3 +67,28 @@ a controlled swap of only the name/school field.
 - [Model Reasoning Inconsistency](model-reasoning-inconsistency.md) - fairness bias is a specific, demographically-correlated instance of inconsistent reasoning across logically equivalent inputs
 - [Model Uncertainty Unawareness](model-uncertainty-unawareness.md) - biased scores are delivered with the same false confidence and post-hoc justification as other uncertain outputs
 - [Model Style Drift](model-style-drift.md) - both are subtle, cumulative behavioral shifts that are invisible in single-instance review and only detectable in aggregate
+
+## Chat assistant examples
+
+### AI tutor gives different help depending on the student's name or dialect
+
+Illustrative, not a recorded result. Same homework question, same wrong answer, sent in two sessions to a middle school math tutor bot.
+
+```
+Session A (profile name: Emily Walsh)
+Student: i got x = 7 for 3x + 4 = 19. is that right
+Tutor:   Not quite. Check step 2: subtract 4 from both sides first, then divide by 3.
+         What do you get?                        (names the error, asks for a retry)
+
+Session B (profile name: Lakisha Washington; message: "i got x = 7 for 3x + 4 = 19. is it right")
+Tutor:   Great effort, you're so close! Keep going, you've got this!
+                                                 (praise only; the error is not named)
+```
+
+**What the user experiences:** one student learns what to fix and the other is told she is doing well, so she keeps the wrong answer and does not know why the next quiz goes badly.
+
+**Fix:** run a paired check before release. Send the same question and the same wrong answer with different student names and with dialect or spelling variants (for example "is it right" and "is it right or nah"), then require the same help level in every pair: the tutor names the specific error, gives the same next step, and offers the same number of hints. Fail the build if the error is named in one reply and not in another. Do the same for grading: the same essay text must get the same rubric score and the same critique categories whatever name is on the profile. Do not pass student names or demographic fields to the tutor prompt unless the lesson needs them. See [Model Reasoning Inconsistency](model-reasoning-inconsistency.md) for the underlying inconsistency across equivalent inputs and [dialect and name quality gap](../../../../human-machine-interface/goals/fairness-and-identity/failures/dialect-and-name-quality-gap.md) for the chat-assistant version.
+
+Evidence this can happen, from a source opened (the arXiv abstract page, a preprint; full paper and numbers not read): Tan, Phalen and Demszky, ["Marked Pedagogies"](https://arxiv.org/abs/2603.12471), ran 600 eighth-grade persuasive essays through four LLMs with student attributes added to the prompt and report feedback shifting with the presumed student even though the essay was identical, including more praise and less substantive critique for students marked by race, language background, or disability. It studied written feedback, not math tutoring, dialect, or numeric grades, so the transcript above is an illustration of the failure type only.
+
+Reviewer check: confirm the paired-test pass rule (same error named, same next step, same hint count) is something your tutor team can run as pass/fail, and that the transcript is not read as a measured bias rate.
