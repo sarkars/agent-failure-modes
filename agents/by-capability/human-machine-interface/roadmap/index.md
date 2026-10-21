@@ -352,7 +352,7 @@
 | HR-01 | Employee-relations complaints routed wrongly | [agent-types.md](agent-types.md) | Written | Business context | No |
 | HR-02 | Pay or leave answers that leak confidential data | [agent-types.md](agent-types.md) | Extends | Business context | No |
 | HR-03 | Manager and employee views mixed up | [agent-types.md](agent-types.md) | Extends | Business context | No |
-| LA-01 | Crossing into practising law | [agent-types.md](agent-types.md) | New | Governance | No |
+| LA-01 | Crossing into practising law | [agent-types.md](agent-types.md) | Written | Governance | No |
 | LA-02 | Privileged material sent to third-party models | [agent-types.md](agent-types.md) | Covered | Governance | No |
 | MA-01 | Agents contradict each other | [agent-types.md](agent-types.md) | Extends | Reliability | No |
 | MA-02 | Internal coordination leaks into replies | [agent-types.md](agent-types.md) | Extends | Reliability | No |
@@ -452,10 +452,10 @@
 | MO-03 | Prompt edits by non-engineers break other behavior | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Written | Business context | No |
 | MO-04 | Quiet degradation under peak load | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Covered | Reliability | No |
 | MO-05 | Memory contaminates conversation experiments | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Written | Reliability | No |
-| AM-01 | Interrupts at a bad moment | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | New | Business context | No |
-| AM-02 | Dismissed suggestions come back | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | New | Business context | No |
-| AM-03 | Summaries and digests too long to read | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | New | Business context | No |
-| AM-04 | Ambient assistants act on overheard conversation | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | New | Governance | No |
+| AM-01 | Interrupts at a bad moment | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Written | Business context | No |
+| AM-02 | Dismissed suggestions come back | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Written | Business context | No |
+| AM-03 | Summaries and digests too long to read | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Written | Business context | No |
+| AM-04 | Ambient assistants act on overheard conversation | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Written | Governance | No |
 | AM-05 | Proactive action surprises the user | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Extends | Business context | No |
 | GC-01 | Answers the wrong person in a group | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | New | Reliability | No |
 | GC-02 | One member's private information shown to the group | [handoff-measurement-and-operations.md](handoff-measurement-and-operations.md) | Extends | Governance | No |

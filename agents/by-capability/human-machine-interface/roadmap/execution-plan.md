@@ -599,16 +599,16 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 355 | ED-03 | Unfair or inconsistent grading | Extends | R | `goals/education-agents/failures/unfair-or-inconsistent-grading.md` | Needs review | 54 |
 | 356 | ED-04 | Student data and surveillance | Extends | L | `goals/education-agents/failures/student-data-and-surveillance.md` | Needs review | 54 |
 | 357 | HR-01 | Employee-relations complaints routed wrongly | New | L | `goals/hr-agents/failures/employee-relations-complaints-routed-wrongly.md` | Needs review | 54 |
-| 358 | HR-02 | Pay or leave answers that leak confidential data | Extends | - | `goals/hr-agents/failures/pay-or-leave-answers-that-leak-confidential-data.md` | Queued |  |
-| 359 | HR-03 | Manager and employee views mixed up | Extends | - | `goals/hr-agents/failures/manager-and-employee-views-mixed-up.md` | Queued |  |
-| 360 | LA-01 | Crossing into practising law | New | L, E | `goals/legal-agents/failures/crossing-into-practising-law.md` | Queued |  |
-| 361 | MA-01 | Agents contradict each other | Extends | - | `goals/multi-agent-platforms/failures/agents-contradict-each-other.md` | Queued |  |
-| 362 | MA-02 | Internal coordination leaks into replies | Extends | - | `goals/multi-agent-platforms/failures/internal-coordination-leaks-into-replies.md` | Queued |  |
-| 363 | AM-01 | Interrupts at a bad moment | New | - | `goals/proactive-and-ambient/failures/interrupts-at-a-bad-moment.md` | Queued |  |
-| 364 | AM-02 | Dismissed suggestions come back | New | - | `goals/proactive-and-ambient/failures/dismissed-suggestions-come-back.md` | Queued |  |
-| 365 | AM-03 | Summaries and digests too long to read | New | - | `goals/proactive-and-ambient/failures/summaries-and-digests-too-long-to-read.md` | Queued |  |
-| 366 | AM-04 | Ambient assistants act on overheard conversation | New | L | `goals/proactive-and-ambient/failures/ambient-assistants-act-on-overheard-conversation.md` | Queued |  |
-| 367 | AM-05 | Proactive action surprises the user | Extends | - | `goals/proactive-and-ambient/failures/proactive-action-surprises-the-user.md` | Queued |  |
+| 358 | HR-02 | Pay or leave answers that leak confidential data | Extends | - | `goals/hr-agents/failures/pay-or-leave-answers-that-leak-confidential-data.md` | Done | 55 |
+| 359 | HR-03 | Manager and employee views mixed up | Extends | - | `goals/hr-agents/failures/manager-and-employee-views-mixed-up.md` | Done | 55 |
+| 360 | LA-01 | Crossing into practising law | New | L, E | `goals/legal-agents/failures/crossing-into-practising-law.md` | Needs review | 55 |
+| 361 | MA-01 | Agents contradict each other | Extends | - | `goals/multi-agent-platforms/failures/agents-contradict-each-other.md` | Done | 55 |
+| 362 | MA-02 | Internal coordination leaks into replies | Extends | - | `goals/multi-agent-platforms/failures/internal-coordination-leaks-into-replies.md` | Done | 55 |
+| 363 | AM-01 | Interrupts at a bad moment | New | - | `goals/proactive-and-ambient/failures/interrupts-at-a-bad-moment.md` | Done | 55 |
+| 364 | AM-02 | Dismissed suggestions come back | New | - | `goals/proactive-and-ambient/failures/dismissed-suggestions-come-back.md` | Needs review | 55 |
+| 365 | AM-03 | Summaries and digests too long to read | New | - | `goals/proactive-and-ambient/failures/summaries-and-digests-too-long-to-read.md` | Done | 55 |
+| 366 | AM-04 | Ambient assistants act on overheard conversation | New | L | `goals/proactive-and-ambient/failures/ambient-assistants-act-on-overheard-conversation.md` | Needs review | 55 |
+| 367 | AM-05 | Proactive action surprises the user | Extends | - | `goals/proactive-and-ambient/failures/proactive-action-surprises-the-user.md` | Done | 55 |
 | 368 | GC-01 | Answers the wrong person in a group | New | - | `goals/group-and-shared-chats/failures/answers-the-wrong-person-in-a-group.md` | Queued |  |
 | 369 | GC-02 | One member's private information shown to the group | Extends | L | `goals/group-and-shared-chats/failures/one-member-s-private-information-shown-to-the-group.md` | Queued |  |
 | 370 | GC-03 | Conflicting instructions from different members | Extends | - | `goals/group-and-shared-chats/failures/conflicting-instructions-from-different-members.md` | Queued |  |
@@ -1288,6 +1288,17 @@ AI-written help content in knowledge bases · agents using other agents' tools (
 - **Needs review (person):** the flag R notes on ED-02, ED-03 and LG-13 (subject-matter or expert review); the flag L notes on HR-01 and ED-04 (counsel; the EEOC status); the summary-only teardown; the four test packs; the made-up transcripts in the Extends examples; LG-14's evidence fit.
 - **Deploy:** the content PR (#51) was merged into main and the branch was reset to main. The site repo's local main has commit `ce9023275` ("Trigger deploy under repo owner") that this run did not create and that is not on origin/main, so I did not push the site repo. Not verified live. This line was added after the merge and will ship with the next run's PR.
 - **Part A2 and Part E:** nothing left (E6: Waiting for the owner to create the code repo). **Part B:** skipped, `seo/log.md` already has an entry for 2026-10-21. Queue rows 348-357 are done. Still queued: row 358 and later.
+
+### Run 55 (scheduled): 2026-10-21
+- **Coordinator run:** 10 subagents (5 new patterns, 2 Extends groups, 2 test-pack batches, 1 teardown) wrote 5 new patterns, 5 chat examples in 5 existing files, 4 test packs and 1 teardown. Queue rows 358 to 367 are covered. Each brief carried the shared rules and the quality-guide sections for its kind. No subagent ran git or the check scripts; I ran the five check scripts after all pieces were in and checked the Extends diffs with `git diff --numstat` (additions only: +22, +20, +21, +22, +24).
+- **Part A new patterns (quality-guide section 2):** LA-01 crossing-into-practising-law (row 360; 216 lines; flags L and E, "Read this first" note; Needs review), AM-01 interrupts-at-a-bad-moment (363; 187), AM-02 dismissed-suggestions-come-back (364; 243; 3 searches; opened the CHI 2019 human-AI guidelines paper and Smashing Magazine's notifications guidelines; the FTC dark-patterns report was not read, and the nagging, Clippy and 2024-sweep claims were read only in search summaries and are kept out of the fix; the event field names are proposals; Needs review), AM-03 summaries-and-digests-too-long-to-read (365; 189), AM-04 ambient-assistants-act-on-overheard-conversation (366; 228; flag L, "Read this first" note; Needs review). Several source pages were blocked (OpenAI, ABA, NH and MLAUS pages returned 403 or 404; some PDFs unreadable); the pages label what was and was not opened.
+- **Extends, additions only (quality-guide section 3):** AM-05 (367) as `### Proactive action surprises the user` in `external-side-effect-surprise.md`; MA-02 (362) in `internal-process-leakage.md`; MA-01 (361) in `inconsistent-answers.md` (appended inside the existing examples section); HR-02 (358) in `record-level-access-not-enforced.md`; HR-03 (359) in `role-permission-mismatch.md`. The transcripts are made up and labeled.
+- **Part C asset 3 (scenario packs, quality-guide section 6):** four packs, all "Not yet run", Needs review: typos-shorthand-and-noisy-input, politeness-and-formality-errors, reading-level-mismatch, no-warning-about-input-limits. No searches.
+- **Part C asset 4 (teardown, quality-guide section 6):** ChatGPT bug showing other users' chat titles, March 2023 (`openai-chatgpt-bug-exposes-other-users-chat-titles-march-2023.md`, 93 lines). OpenAI's own post returned 403 and was read through a proxy copy; The Register, a Business and Human Rights Resource Centre copy and the AI Incident Database report were read through fetch summaries; only the Garante press release was opened, not the order. Needs review.
+- **What review changed:** I created the family READMEs for `goals/legal-agents/` and `goals/proactive-and-ambient/`, marked LA-01 and AM-01 to AM-04 as Written in the catalogs, added five taxonomy entries (now 210 entries in 48 families; new families Legal agents and Proactive and ambient; Read-this-first count 70 to 72) and added the new packs and the teardown to the distribution plan.
+- **Needs review (person):** the L and E notes on LA-01 (a lawyer must check scope, wording and tests) and the L note on AM-04 (counsel); AM-02's unread FTC source and invented event names; the summary-only teardown; the four test packs; the made-up transcripts in the five Extends examples.
+- **Deploy:** see the Deploy line added after the merge.
+- **Part A2 and Part E:** nothing left (E6: Waiting for the owner to create the code repo). **Part B:** skipped, `seo/log.md` already has an entry for 2026-10-21. Queue rows 358-367 are done. Still queued: row 368 and later.
 
 ## Schedule
 | Item | Value |
