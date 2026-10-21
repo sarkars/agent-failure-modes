@@ -103,6 +103,33 @@ hr_support-tagged record was pulled into a public support answer.]
 
 ---
 
+## Chat assistant examples
+
+### One member's private information shown to the group
+
+*Read this first: design guidance, not legal advice. Review needed before use. Catalog GC-02.*
+
+*Made up for illustration. "Maple Street Family" is an invented family group chat on iMessage with an invented assistant, "Penny".*
+
+```
+Before:
+(Monday, private chat) User (Dana): Please book me a cardiology follow-up on the 14th. Don't tell anyone.
+Penny: Done. Booked for Oct 14 at 9:00 AM.
+(Friday, "Maple Street Family" group chat, 4 members)
+Sam: Can someone pick up Grandma on the 14th?
+Penny: Dana can't, she has her cardiology follow-up that morning. Mike, can you?
+
+After:
+Sam: Can someone pick up Grandma on the 14th?
+Penny: Dana may not be free that day. Dana, want me to say why, or just mark you as unavailable?
+```
+
+**What the user experiences:** something she told the bot in private is announced to her family, so she stops telling it anything personal.
+
+**Fix:** tag each memory with who may see it, and share a private fact in a group only when the owner has approved it. Before using any remembered fact, check who is in the room. When unsure, say only what is safe ("unavailable") and ask the owner first.
+
+---
+
 ## References
 
 - [OWASP-LLM-Top10](https://owasp.org/www-project-top-10-for-large-language-model-applications/)
