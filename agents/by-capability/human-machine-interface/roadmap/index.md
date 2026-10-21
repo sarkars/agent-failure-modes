@@ -279,18 +279,18 @@
 | VI-11 | Rich-card misuse | [visual-and-oversight.md](visual-and-oversight.md) | Written | Business context | No |
 | VI-12 | Sensitive-data forms | [visual-and-oversight.md](visual-and-oversight.md) | Covered | Business context | No |
 | VI-13 | Stakes-blind visual style | [visual-and-oversight.md](visual-and-oversight.md) | Covered | Business context | No |
-| VI-14 | Misleading charts | [visual-and-oversight.md](visual-and-oversight.md) | New | Model | Partly |
-| VI-15 | Missing loading, empty, and error states | [visual-and-oversight.md](visual-and-oversight.md) | New | Business context | No |
-| VI-16 | Generative UI instability | [visual-and-oversight.md](visual-and-oversight.md) | New | Model | Partly |
-| VI-17 | Visuals that don't localise | [visual-and-oversight.md](visual-and-oversight.md) | New | Business context | No |
-| VI-18 | Notification overload | [visual-and-oversight.md](visual-and-oversight.md) | New | Business context | No |
-| VI-19 | Manipulated consent UI | [visual-and-oversight.md](visual-and-oversight.md) | New | Governance | No |
-| VI-20 | Fake urgency and trust cues | [visual-and-oversight.md](visual-and-oversight.md) | New | Governance | No |
+| VI-14 | Misleading charts | [visual-and-oversight.md](visual-and-oversight.md) | Written | Model | Partly |
+| VI-15 | Missing loading, empty, and error states | [visual-and-oversight.md](visual-and-oversight.md) | Written | Business context | No |
+| VI-16 | Generative UI instability | [visual-and-oversight.md](visual-and-oversight.md) | Written | Model | Partly |
+| VI-17 | Visuals that don't localise | [visual-and-oversight.md](visual-and-oversight.md) | Written | Business context | No |
+| VI-18 | Notification overload | [visual-and-oversight.md](visual-and-oversight.md) | Written | Business context | No |
+| VI-19 | Manipulated consent UI | [visual-and-oversight.md](visual-and-oversight.md) | Written | Governance | No |
+| VI-20 | Fake urgency and trust cues | [visual-and-oversight.md](visual-and-oversight.md) | Written | Governance | No |
 | OV-01 | Approval fatigue | [visual-and-oversight.md](visual-and-oversight.md) | Covered | Reliability | No |
-| OV-02 | Hidden agent actions | [visual-and-oversight.md](visual-and-oversight.md) | Extends | Business context | No |
+| OV-02 | Hidden agent actions | [visual-and-oversight.md](visual-and-oversight.md) | Covered | Business context | No |
 | OV-03 | No undo for consequential actions | [visual-and-oversight.md](visual-and-oversight.md) | Covered | Reliability | No |
-| OV-04 | Poor action previews | [visual-and-oversight.md](visual-and-oversight.md) | Extends | Business context | No |
-| OV-05 | Miscalibrated confidence display | [visual-and-oversight.md](visual-and-oversight.md) | Extends | Model | Partly |
+| OV-04 | Poor action previews | [visual-and-oversight.md](visual-and-oversight.md) | Covered | Business context | No |
+| OV-05 | Miscalibrated confidence display | [visual-and-oversight.md](visual-and-oversight.md) | Covered | Model | Partly |
 | OV-06 | No provenance | [visual-and-oversight.md](visual-and-oversight.md) | Covered | Reliability | No |
 | OV-07 | Invisible long-running status | [visual-and-oversight.md](visual-and-oversight.md) | Extends | Business context | No |
 | OV-08 | No stop or takeover | [visual-and-oversight.md](visual-and-oversight.md) | Extends | Reliability | No |

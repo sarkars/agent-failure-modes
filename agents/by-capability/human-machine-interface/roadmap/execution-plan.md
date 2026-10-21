@@ -659,16 +659,16 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 415 | VI-11 | Rich-card misuse | New | - | `goals/visual/failures/rich-card-misuse.md` | Done | 60 |
 | 416 | VI-12 | Sensitive-data forms | Extends | L | `goals/visual/failures/sensitive-data-forms.md` | Done | 60 |
 | 417 | VI-13 | Stakes-blind visual style | Extends | - | `goals/visual/failures/stakes-blind-visual-style.md` | Done | 60 |
-| 418 | VI-14 | Misleading charts | New | - | `goals/visual/failures/misleading-charts.md` | Queued |  |
-| 419 | VI-15 | Missing loading, empty, and error states | New | V | `goals/visual/failures/missing-loading-empty-and-error-states.md` | Queued |  |
-| 420 | VI-16 | Generative UI instability | New | R | `goals/visual/failures/generative-ui-instability.md` | Queued |  |
-| 421 | VI-17 | Visuals that don't localise | New | R | `goals/visual/failures/visuals-that-don-t-localise.md` | Queued |  |
-| 422 | VI-18 | Notification overload | New | L | `goals/visual/failures/notification-overload.md` | Queued |  |
-| 423 | VI-19 | Manipulated consent UI | New | L | `goals/visual/failures/manipulated-consent-ui.md` | Queued |  |
-| 424 | VI-20 | Fake urgency and trust cues | New | L | `goals/visual/failures/fake-urgency-and-trust-cues.md` | Queued |  |
-| 425 | OV-02 | Hidden agent actions | Extends | - | `goals/human-oversight/failures/hidden-agent-actions.md` | Queued |  |
-| 426 | OV-04 | Poor action previews | Extends | - | `goals/human-oversight/failures/poor-action-previews.md` | Queued |  |
-| 427 | OV-05 | Miscalibrated confidence display | Extends | R | `goals/human-oversight/failures/miscalibrated-confidence-display.md` | Queued |  |
+| 418 | VI-14 | Misleading charts | New | - | `goals/visual/failures/misleading-charts.md` | Done | 61 |
+| 419 | VI-15 | Missing loading, empty, and error states | New | V | `goals/visual/failures/missing-loading-empty-and-error-states.md` | Needs review | 61 |
+| 420 | VI-16 | Generative UI instability | New | R | `goals/visual/failures/generative-ui-instability.md` | Needs review | 61 |
+| 421 | VI-17 | Visuals that don't localise | New | R | `goals/visual/failures/visuals-that-don-t-localise.md` | Needs review | 61 |
+| 422 | VI-18 | Notification overload | New | L | `goals/visual/failures/notification-overload.md` | Needs review | 61 |
+| 423 | VI-19 | Manipulated consent UI | New | L | `goals/visual/failures/manipulated-consent-ui.md` | Needs review | 61 |
+| 424 | VI-20 | Fake urgency and trust cues | New | L | `goals/visual/failures/fake-urgency-and-trust-cues.md` | Needs review | 61 |
+| 425 | OV-02 | Hidden agent actions | Extends | - | `goals/human-oversight/failures/hidden-agent-actions.md` | Covered | 61 |
+| 426 | OV-04 | Poor action previews | Extends | - | `goals/human-oversight/failures/poor-action-previews.md` | Covered | 61 |
+| 427 | OV-05 | Miscalibrated confidence display | Extends | R | `goals/human-oversight/failures/miscalibrated-confidence-display.md` | Covered | 61 |
 | 428 | OV-07 | Invisible long-running status | Extends | V | `goals/human-oversight/failures/invisible-long-running-status.md` | Queued |  |
 | 429 | OV-08 | No stop or takeover | Extends | - | `goals/human-oversight/failures/no-stop-or-takeover.md` | Queued |  |
 | 430 | OV-09 | Permission fatigue or under-asking | Extends | - | `goals/human-oversight/failures/permission-fatigue-or-under-asking.md` | Queued |  |
@@ -1354,6 +1354,17 @@ AI-written help content in knowledge bases · agents using other agents' tools (
 - **Needs review (person):** accessibility, legal and expert wording on VI-04 to VI-08, the made-up Extends transcripts, the four packs and the teardown.
 - **Part A2 and Part E:** nothing left (E6: Waiting for the owner to create the code repo). **Part B:** skipped, `seo/log.md` already has an entry for 2026-10-21. Queue rows 408-417 covered; still queued: row 418 onward.
 - **Deploy:** the content PR (#57) was merged into main (merge commit 751e130) and the branch was reset to main. The site repo's local main still has commits `ce9023275` and `860f36fbc` ("Trigger deploy under repo owner") that this run did not create and that are not on origin/main, so I did not push the site repo (Part D stopped before the site steps). Not verified live. This line was added after the merge and will ship with the next run's PR.
+
+### Run 61 (scheduled): 2026-10-21
+- **Coordinator run:** 10 subagents (7 pattern pages, 1 Extends batch, 1 test-pack batch, 1 teardown). Queue rows 418 to 427 are covered. Each brief carried the shared rules and quality-guide sections 1, 2, 3 and 6. No subagent ran git or the checks; I ran the five check scripts after all pieces were in.
+- **Part A new patterns (quality-guide section 2):** VI-14 misleading-charts (row 418, Done), VI-15 missing-loading-empty-and-error-states (419), VI-16 generative-ui-instability (420), VI-17 visuals-that-don-t-localise (421), VI-18 notification-overload (422), VI-19 manipulated-consent-ui (423), VI-20 fake-urgency-and-trust-cues (424). Each has the Pattern ID row, Detection signals with a Starter rule, a Moves table and a Guide spec with status proposed. Pages are 192 to 240 lines. VI-19 says how it differs from dark-patterns.
+- **Extends, additions only (quality-guide section 3):** OV-02 (in `external-side-effect-surprise.md`), OV-04 (`irreversible-action-without-confirmation.md`), OV-05 (`confidence-calibration-failure.md`): one made-up, labeled chat example each. OV-05 first went into the wrong file (`confidence-miscalibration.md`); I reverted that and put it in the right one.
+- **Part C asset 3 (section 6):** four packs (misleading generated visuals, colour-only encoding, small targets and small screens, rich-card misuse), all "Not yet run", Needs review. **Asset 4 (section 6):** Meta AI Discover feed shows private chats, June 2025; sources read through fetch summaries; I removed two quoted user prompts and describe them instead. Needs review.
+- **Research gaps left labeled on the pages:** no source measures how often charts, generated UI or notification cues fail in chat products (frequency is our judgment); CNIL and EDPB pages returned 503/403 or unreadable PDFs for VI-19; Honda order and CNIL fines read through secondary summaries; FTC reviews rule and eCFR read through summaries for VI-20; Apple HIG RTL page not readable for VI-17; no source for notification caps.
+- **What review changed:** I added 7 taxonomy entries (now 256 entries in 56 families; Moves 256 of 256), marked VI-15 to VI-20 Needs review (flags V, R or L, or summary-only sources) and VI-14 Done, OV-02, OV-04, OV-05 Covered, and updated the visual README, catalog, index and distribution plan. Not checked line by line: the before/after transcripts on the new pages.
+- **Needs review (person):** legal wording on VI-18 to VI-20, research-gap pages VI-16 and VI-17, the made-up Extends and page transcripts, the four packs and the teardown.
+- **Part A2 and Part E:** nothing left (E6: Waiting for the owner to create the code repo). **Part B:** skipped, `seo/log.md` already has an entry for 2026-10-21. Queue rows 418-427 covered; still queued: row 428 onward.
+- **Deploy:** (added after the merge)
 
 ## Schedule
 | Item | Value |
