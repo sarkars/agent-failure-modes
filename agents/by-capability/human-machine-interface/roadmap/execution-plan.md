@@ -1415,6 +1415,16 @@ AI-written help content in knowledge bases · agents using other agents' tools (
 - **Needs review (person):** the four packs, the summary-only teardown.
 - **Part B:** skipped, `seo/log.md` already has an entry for 2026-10-21. E6: Waiting for the owner to create the code repo.
 - **Plan complete?** No: asset 3 (91 patterns without packs), asset 4 and assets 6-8 are still in progress.
+- **Deploy:** the content PR (#63) was merged into main (merge commit 82c58f8) and the branch was reset to main. The site repo's local main still has commits `ce9023275` and `860f36fbc` ("Trigger deploy under repo owner") that this run did not create and that are not on origin/main, so I did not push the site repo (Part D stopped before the site steps). Not verified live. This line was added after the merge and will ship with the next run's PR.
+
+### Run 67 (scheduled): 2026-10-21
+- **Coordinator run:** 5 subagents (4 test packs, 1 teardown). Queue has no Queued rows; no Part A, A2 or E work left. Each brief carried quality-guide sections 1 and 6, word for word. No subagent ran git or the checks; I ran the five check scripts afterward (all clean, `python3 -X utf8 -I`).
+- **Part C asset 3 (section 6):** four packs, all "Not yet run", Needs review: accessibility-in-chat (medicine note), ai-offering-therapy-where-the-law-restricts-it (design guidance only; needs counsel and clinician review), behaviour-change-talk-without-listening-skills, buying-committee-blindness-b2b (103 to 105 lines each). No web research; built from each pattern's own fix. 87 patterns still have no pack.
+- **Part C asset 4 (section 6):** xAI Grok "white genocide" replies and the claimed unauthorized prompt change, May 2025 (`incidents/xai-grok-white-genocide-replies-unauthorized-prompt-change-may-2025.md`, 114 lines). 3 searches; 5 pages opened, all through fetch summaries (AP via KSAT, CNN via KEYT, Bloomberg Law excerpt, Reuters via Tuoi Tre, The Batch); xAI's own post returned 402; Rolling Stone, Heise, Business Insider seen only in search summaries and left out. The cause rests on xAI's own account; source disagreements (statement day, "rogue employee", Holocaust remarks) are stated on the page. Needs review.
+- **What review changed:** I checked all five files for placeholders and "Not yet run" and read the teardown's first sections; I changed no wording. Not checked line by line: the pack transcripts and the teardown's later sections.
+- **Needs review (person):** the four packs, the summary-only teardown.
+- **Part B:** skipped, `seo/log.md` already has an entry for 2026-10-21. E6: Waiting for the owner to create the code repo.
+- **Plan complete?** No: asset 3 (87 patterns without packs), asset 4 and assets 6-8 are still in progress.
 
 ## Schedule
 | Item | Value |
