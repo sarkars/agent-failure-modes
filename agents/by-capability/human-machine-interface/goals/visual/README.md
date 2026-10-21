@@ -19,6 +19,13 @@ Shared metrics the patterns below report against. Targets are starting points to
 | Generated visuals labeled AI-generated | 100% (starting point) | [misleading generated visuals](failures/misleading-generated-visuals.md) |
 | Capability-expectation mismatch in user tests | under 10% (starting point) | [avatar overpromising](failures/avatar-overpromising.md) |
 | Format-fit rate on audited turns | 95% (starting point) | [rich-card misuse](failures/rich-card-misuse.md) |
+| Chart-lint pass rate | 100% (starting point) | [misleading charts](failures/misleading-charts.md) |
+| States defined on async views | 100% of async views; blank-screen rate 0 | [missing loading, empty and error states](failures/missing-loading-empty-and-error-states.md) |
+| Rendered components passing schema; layout-shift score | 100%; 0.1 or less (starting point) | [generative UI instability](failures/generative-ui-instability.md) |
+| RTL render pass | 100% (starting point) | [visuals that don't localise](failures/visuals-that-don-t-localise.md) |
+| Notifications per user per week; opt-out rate | Cap per type from baseline (starting point) | [notification overload](failures/notification-overload.md) |
+| Prominence parity | 100% of consent prompts (starting point) | [manipulated consent UI](failures/manipulated-consent-ui.md) |
+| Fabricated urgency or trust elements | 0 | [fake urgency and trust cues](failures/fake-urgency-and-trust-cues.md) |
 
 ## Patterns
 | Pattern | One line |
@@ -33,6 +40,13 @@ Shared metrics the patterns below report against. Targets are starting points to
 | [Misleading generated visuals](failures/misleading-generated-visuals.md) | An AI-generated render, diagram or chart looks like the real product or data and the user acts on it |
 | [Avatar overpromising](failures/avatar-overpromising.md) | A human photo, title or emotive persona makes users expect understanding or authority the assistant lacks |
 | [Rich-card misuse](failures/rich-card-misuse.md) | Cards, carousels or buttons where a plain sentence is faster, or buttons that miss the user's need |
+| [Misleading charts](failures/misleading-charts.md) | Charts that start above zero, stretched scales and mismatched axes make a small gap look large; start bars at zero, label any cut, print the values |
+| [Missing loading, empty and error states](failures/missing-loading-empty-and-error-states.md) | A card, list or widget shows a blank box or endless spinner, so the user cannot tell if it is loading, empty or failed |
+| [Generative UI instability](failures/generative-ui-instability.md) | Model-chosen cards that shift layout, vary between identical requests or arrive broken; closed component list, schema check, text fallback |
+| [Visuals that don't localise](failures/visuals-that-don-t-localise.md) | Icons, arrows, colors and layouts built for one locale confuse users in others; mirror only direction icons, label every icon, test each locale |
+| [Notification overload](failures/notification-overload.md) | Too many pushes, badges and digests get the assistant muted; cap the weekly volume, ask first, label urgency honestly, one switch per type |
+| [Manipulated consent UI](failures/manipulated-consent-ui.md) | Accept is large and one tap while Reject is small, buried or missing, so consent is not a real choice |
+| [Fake urgency and trust cues](failures/fake-urgency-and-trust-cues.md) | Countdown timers that reset, made-up viewer or stock counts and badges nobody awarded; show a cue only when a logged source proves it true now |
 
 ## Planned (not yet written)
 The rest of the family is listed in the [roadmap](../../roadmap/visual-and-oversight.md).

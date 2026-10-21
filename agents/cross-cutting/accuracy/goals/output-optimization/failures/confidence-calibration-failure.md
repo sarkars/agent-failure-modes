@@ -108,6 +108,26 @@ answer from the prior month.
 - [Overconfident Planning](../../reasoning-quality/failures/overconfident-planning.md) - the specific case of underestimating task complexity during planning; this pattern is the broader failure of verbalized confidence miscalibration across any output type
 - [Over-Trusting Confidence Score](../../verification/failures/over-trusting-confidence-score.md) - the downstream-consumer-side failure of treating a stated confidence as correctness; this pattern is the upstream failure of the confidence score itself being uncalibrated in the first place
 
+## Chat assistant examples
+
+### Miscalibrated confidence display
+Illustrative, made up: "HomeHelp" is an invented assistant in a US tenant-rights app.
+```
+Before:
+User: Can my landlord in Ohio keep my whole deposit for repainting?
+Bot:  No. Landlords cannot charge for repainting. You are owed the full deposit.
+      (the bot had no source; the answer depends on wear versus damage and the lease)
+
+After:
+User: Can my landlord in Ohio keep my whole deposit for repainting?
+Bot:  Usually not for ordinary wear, but I'm not sure about your case.
+      Sure: normal wear generally can't be deducted.
+      Not sure: whether your lease or the damage changes that. I found no Ohio source for this answer.
+      Check your lease and the state's official tenant guidance, or ask a legal aid office.
+```
+**What the user experiences:** a flat, certain "No" that sounds checked, so the user may confront the landlord on a guess.
+**Fix:** separate what is supported from what is a guess in every answer, name what would change it, and say when no source was found. Do not hedge every sentence; reserve doubt for the unsupported parts.
+
 ## References
 
 - [Uncertainty Quantification and Confidence Calibration in Large Language Models: A Survey](https://dl.acm.org/doi/10.1145/3711896.3736569) - transformer-based LLMs are often miscalibrated and tend toward overconfidence, undermining the reliability of reported confidence

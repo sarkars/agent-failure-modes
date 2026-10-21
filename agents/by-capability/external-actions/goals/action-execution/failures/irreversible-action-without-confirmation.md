@@ -212,6 +212,23 @@ TripPal: Booked the refundable fare, $538.00.
 
 **Fix:** before booking, confirm the dates, the traveler's name as on their ID, whether the fare is refundable, and the total in one message, and offer a refundable option next to the cheaper one. Wait for a yes. See the [bookings without confirming details](../../../../human-machine-interface/goals/voice-receptionist-agents/failures/bookings-without-confirming-details.md) pattern (written for voice receptionists, same read-back idea) and the earlier [wrong item or variant bought](#wrong-item-or-variant-bought) example.
 
+### Poor action previews
+Illustrative, made up: "Mailwise" is an invented assistant in a work email app.
+```
+Before:
+User: Tell the vendors the Friday meeting is canceled.
+Bot:  Send this message?  [Approve] [Reject]
+User: (taps Approve)
+      (it went to all 212 contacts in the "Vendors" list, including two clients)
+
+After:
+User: Tell the vendors the Friday meeting is canceled.
+Bot:  Ready to send: "Friday's meeting is canceled." To 212 people in "Vendors" (2 are marked Client).
+      Can't be recalled once sent. [Send to all 212] [Send without clients] [Edit] [Something else]
+```
+**What the user experiences:** a button that says "Approve" but hides who gets the message and that it cannot be undone, so the approval means nothing.
+**Fix:** the approval screen shows the full text, the exact recipients or count, and whether it can be undone, before any button. Pair with a rule not to ask when nothing is at stake; see the [over-confirmation](../../../../human-machine-interface/goals/dialogue-management/failures/over-confirmation.md) pattern.
+
 ---
 
 ## References
