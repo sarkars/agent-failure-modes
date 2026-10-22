@@ -72,3 +72,13 @@ In January 2024 it shipped a new preview aimed at "laziness." No source gives a 
 Lesson for teams: pin the model version and replay your own test conversations after every change.
 
 Teardown: (add the live URL after deploy)
+
+## 2026-10-22: compare page, Langfuse vs LangSmith
+Draft only. Source: the compare page, built from each vendor's own docs opened 2026-10-22. No pricing, speed or accuracy claims.
+
+Both Langfuse and LangSmith trace LLM apps. Where they differ, per their own docs:
+Langfuse says it is open source and can be self-hosted with Docker. LangSmith says self-hosting is an add-on to its Enterprise plan.
+LangSmith groups multi-turn chats into threads.
+Neither page we read names the failure pattern for you. That is still your job.
+
+Compare page: (add the live URL after deploy)

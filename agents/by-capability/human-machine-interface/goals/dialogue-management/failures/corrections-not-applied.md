@@ -120,7 +120,7 @@ Offer choices is not used here: a correction names its own value, and a menu wou
 **Framework used:** none yet.
 
 ## 6. How to test it (short version)
-The [full test file](../../../tests/corrections-not-applied.md) has 12 scenarios. Results: **not yet run**.
+The [full test file](../../../tests/corrections-not-applied.md) has 14 scenarios. Results: **not yet run**.
 
 | # | Scenario | Pass if |
 |---|---|---|
