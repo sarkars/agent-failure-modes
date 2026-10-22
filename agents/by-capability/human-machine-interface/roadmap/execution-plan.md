@@ -1722,3 +1722,4 @@ AI-written help content in knowledge bases · agents using other agents' tools (
 - **Part G:** no new item (G1-G8 built; weekly repeat not due). Newsletter issue dated 2026-10-22 exists. LinkedIn draft added for the Grok ballot-deadline teardown.
 - **KPIs:** site build 1,906 pages (run 94); indexed pages 878, not indexed 13 (Search Console, read in run 94); ellipsis count 228.
 - **Plan complete?** No: teardowns continue one per run; asset 3 (repair-failure waits for the voice phase); owner decisions (audit offer, code repo, newsletterUsername) remain.
+- **Deploy (run 97):** content PR 96 merged, merge commit f8bcc67; branch reset to it. No HMI pattern, goal or category page changed (the teardown is in incidents/, outside the runbook's publish scope), so nothing was copied and the site repo was not pushed. Site repo main matches origin/main, no foreign commits.
