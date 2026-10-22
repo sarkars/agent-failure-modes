@@ -1537,6 +1537,9 @@ AI-written help content in knowledge bases · agents using other agents' tools (
 - **Part C asset 3 (quality-guide section 6):** four old 39-line test files rewritten in place as packs, "Not yet run", Needs review: deferring-work-to-the-user, doesn-t-say-what-it-can-do, forces-a-fresh-login (security review flagged), generic-first-response (116-122 lines, 14 conversations each). 0 web searches; built from each pattern's own fix. About 31 patterns still have no pack.
 - **What review changed:** nothing; I measured line counts, checked Pattern ID and "Not yet run" lines, and checked the "..." hits are quoted example replies. Transcripts not read line by line. Subagents did not all re-read their files after writing.
 - **Part B:** skipped, `seo/log.md` already has an entry for 2026-10-22 UTC. E6: Waiting for the owner to create the code repo.
+- **Part F:** no template changes this run; F1 checks not re-run in full; ellipsis count not re-measured.
+- **Part G (site commit ac4640127, mobilemag):** G2 built: /guides/ index and /guides/detect-ai-agent-failures-in-production/ (TechArticle with AUTHOR_LD/PUBLISHER_LD; 1 H1; title 45 chars, description 148; about 1,600 words incl. page chrome; 14 in-body links to patterns, incidents and compare pages, plus /check/). Library's own pages only as sources, no external statistics; signals labeled proposed. Build 1,897 pages. Newsletter for 2026-10-22 already exists. LinkedIn draft added. Spoke links from patterns back to the guide not added yet.
+- **KPIs:** site build 1,897 pages; indexed pages unknown (no Search Console access); ellipsis count not re-measured.
 - **Plan complete?** No: asset 3, more teardowns and assets 6-8 remain.
 
 ## Schedule

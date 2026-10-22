@@ -1,5 +1,16 @@
 # LinkedIn drafts (the owner posts; nothing is published automatically)
 
+## 2026-10-22: Guide, how to detect AI agent failures in production
+Draft only. Source: the guide at https://agent-kb-autopublish.vercel.app/guides/detect-ai-agent-failures-in-production/ (built from our own library; no detection rate is claimed).
+
+A chatbot can fail 500 times today and your error dashboard stays green.
+
+Every request returned a normal response. The user just asked for a person three times.
+Log whole sessions, score them against named signals, trace each hit to the turn that caused it.
+Signals in the guide are proposed, not measured.
+
+Guide: (add the live URL after deploy)
+
 ## 2026-10-22: AP report on Whisper inventing text
 Draft only. Source: the [teardown](../../incidents/openai-whisper-invents-text-in-hospital-transcription-ap-investigation-october-2024.md); the AP original was not opened by us.
 
