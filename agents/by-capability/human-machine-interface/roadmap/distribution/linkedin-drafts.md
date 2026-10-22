@@ -21,3 +21,14 @@ No source we read names a harmed patient. The risk: nothing left to check the no
 Cheap test before release: feed it silence and long pauses.
 
 Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-22: CFPB report on bank chatbot "doom loops"
+Draft only. Source: the [teardown](../../incidents/cfpb-bank-chatbot-doom-loops.md), built from the CFPB report and press release we opened.
+
+Your chatbot has no exit. A regulator noticed.
+
+In June 2023 the CFPB published "Chatbots in consumer finance". It quotes customers sent "in circles" by bank bots, with no way to reach a person, and warns this can lead to law violations.
+It names no bank and counts no complaints, so it is not a rate.
+Cheap test: ask for a person three ways and check each one gets a route.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
