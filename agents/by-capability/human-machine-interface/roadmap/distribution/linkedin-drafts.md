@@ -62,3 +62,13 @@ Braintrust's docs suggest scoring only 1-10% of traffic when volume is high.
 Both vendors describe the same loop: turn each production failure into a new test case.
 
 Guide: (add the live URL after deploy)
+
+## 2026-10-22: incident teardown, GPT-4 Turbo "laziness" reports
+Draft only. Source: the teardown in the content repo, built from CIO Dive, Semafor, Gigazine and The Decoder pages opened 2026-10-22 (read through fetch summaries). No cause is claimed.
+
+In late 2023 users said GPT-4 stopped finishing jobs: a few sample lines instead of the code, a pointer to another tool instead of the list.
+OpenAI said it had not updated the model since Nov 11 and that behavior "can be unpredictable."
+In January 2024 it shipped a new preview aimed at "laziness." No source gives a cause.
+Lesson for teams: pin the model version and replay your own test conversations after every change.
+
+Teardown: (add the live URL after deploy)
