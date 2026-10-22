@@ -1541,6 +1541,7 @@ AI-written help content in knowledge bases · agents using other agents' tools (
 - **Part G (site commit ac4640127, mobilemag):** G2 built: /guides/ index and /guides/detect-ai-agent-failures-in-production/ (TechArticle with AUTHOR_LD/PUBLISHER_LD; 1 H1; title 45 chars, description 148; about 1,600 words incl. page chrome; 14 in-body links to patterns, incidents and compare pages, plus /check/). Library's own pages only as sources, no external statistics; signals labeled proposed. Build 1,897 pages. Newsletter for 2026-10-22 already exists. LinkedIn draft added. Spoke links from patterns back to the guide not added yet.
 - **KPIs:** site build 1,897 pages; indexed pages unknown (no Search Console access); ellipsis count not re-measured.
 - **Plan complete?** No: asset 3, more teardowns and assets 6-8 remain.
+- **Deploy:** content PR 80 merged, merge commit 59ae52f. No HMI pattern pages changed, so no pattern files copied. Site repo pushed to main: ac4640127 (only commit this run; no foreign commits). Live sitemap check: 1,891 live URLs, 0 missing from the new build (1,897 pages). Live check of /guides/detect-ai-agent-failures-in-production/ returned 404 90 seconds after push; pushed to site repo main, not verified live. No Vercel hook set.
 
 ## Schedule
 | Item | Value |
