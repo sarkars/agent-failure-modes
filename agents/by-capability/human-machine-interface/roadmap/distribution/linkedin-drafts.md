@@ -82,3 +82,13 @@ LangSmith groups multi-turn chats into threads.
 Neither page we read names the failure pattern for you. That is still your job.
 
 Compare page: (add the live URL after deploy)
+
+## Draft 2026-10-22 (run 88): Braintrust vs Langfuse
+Draft only. Source: the compare page, built from each vendor's own docs opened 2026-10-22. No pricing, speed or accuracy claims.
+
+Braintrust and Langfuse both score LLM output, offline and on live traces. Where they differ, per their own docs:
+Braintrust says self-hosting is only on its Enterprise plan. Langfuse says it is open source and self-hostable with Docker.
+Both describe LLM-as-a-judge scoring of production traffic.
+Neither page we read names the conversation failure for you. That is still your job.
+
+Compare page: (add the live URL after deploy)
