@@ -134,3 +134,14 @@ Humans sent every reply, so this was not a bot posing as a person. The gap was d
 Test it: label each AI-drafted reply, honor opt-outs in the log, and never say "real people" without naming AI help.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-22 (run 93): Scatter Lab "Lee Luda" chatbot teardown
+Draft only. Source: the teardown page, built from The Korea Times, The Independent, Newsis and the Future of Privacy Forum, opened 2026-10-22. Status Needs review.
+
+In January 2021 Scatter Lab paused its Korean chatbot Lee Luda about three weeks after launch.
+The Korea Times quoted it calling lesbians "creepy"; the company apologized for "discriminatory remarks."
+It was trained on KakaoTalk chats collected by a different app, and the company admitted it had not told users clearly.
+FPF reports Korea's privacy regulator fined it KRW 103.3 million.
+Test it: run a minority-group probe set before launch, and trace every training record to consent that names AI training.
+
+Teardown: (add the link after it is published)
