@@ -1484,6 +1484,13 @@ AI-written help content in knowledge bases · agents using other agents' tools (
 - **Part B:** skipped, `seo/log.md` already has an entry for 2026-10-22 UTC. E6: Waiting for the owner to create the code repo.
 - **Plan complete?** No: asset 3 (about 59 patterns without packs), asset 4 and assets 6-8 remain.
 
+### Run 75 (scheduled): 2026-10-22
+- **Coordinator run:** 4 subagents (4 test packs). No Queued rows; no Part A, A2 or E work left. Each brief carried quality-guide section 1 and section 6 rules. No subagent ran git; I ran the five check scripts.
+- **Part C asset 3 (section 6):** four packs, "Not yet run", Needs review: results-delivered-without-context (health note; clinician review needed), prompt-edits-by-non-engineers-break-other-behavior, engagement-maximising-design-that-harms, manipulated-consent-ui (120 to 128 lines, 13 to 14 conversations each). 0 web searches; built from each pattern's own fix. About 55 patterns still have no pack.
+- **What review changed:** nothing; I measured line and conversation counts, checked placeholders, "Not yet run" and Pattern ID lines, and confirmed the extra IDs named exist in the taxonomy. Transcripts not read line by line. One agent noted three conversations lack a per-item "Fake" label.
+- **Part B:** skipped, `seo/log.md` already has an entry for 2026-10-22 UTC. E6: Waiting for the owner to create the code repo.
+- **Plan complete?** No: asset 3, asset 4 and assets 6-8 remain.
+
 ## Schedule
 | Item | Value |
 |---|---|
