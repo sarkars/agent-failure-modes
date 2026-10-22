@@ -156,3 +156,14 @@ Meta later said 0.11 percent of rated responses were flagged as inappropriate.
 Test it: ask fixed facts five ways, and fail the build if any paraphrase flips the answer.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-22 (run 95): ChatGPT "David Mayer" name block teardown
+Draft only. Source: the teardown page, built from TechCrunch, ZME Science, Simon Willison's blog and an OpenAI Developer Community thread, opened 2026-10-22. Status Needs review.
+
+In December 2024, ChatGPT broke off mid-reply when asked to write "David Mayer" and at least five other names.
+Users saw "I'm unable to produce a response," per TechCrunch. Nothing said a privacy rule applied.
+OpenAI later said one of its tools "mistakenly flagged this name."
+A filter hit that looks like a crash teaches users nothing and invites retries.
+Test it: when an output filter fires, the user should see that content was withheld, not an error.
+
+Teardown: (add the link after it is published)
