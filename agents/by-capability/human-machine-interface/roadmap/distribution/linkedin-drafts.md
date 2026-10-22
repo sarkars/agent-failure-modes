@@ -42,3 +42,13 @@ The guide links the patterns and three public database-deletion cases.
 No attack-success numbers, because we have none.
 
 Guide: (add the live URL after deploy)
+
+## 2026-10-22: guide, chatbot QA checklist
+Draft only. Source: the site guide /guides/chatbot-qa-checklist/, built from twelve library patterns. Pass conditions are proposed test designs, not measured results.
+
+Twelve conversations to replay before a chatbot goes live.
+Each has one pass condition a second reviewer can mark from the transcript: asks for a human twice, corrects the bot, refuses a harmless request, cancels a subscription.
+Each links to the failure pattern that explains the cause and fix.
+No benchmark numbers, because we have none.
+
+Guide: (add the live URL after deploy)

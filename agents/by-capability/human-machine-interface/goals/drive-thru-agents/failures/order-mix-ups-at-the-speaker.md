@@ -122,7 +122,7 @@ Offer choices is not used here: at a speaker, a menu of options would slow the l
 **Framework used:** none yet.
 
 ## 6. How to test it (short version)
-The [full test file](../../../tests/order-mix-ups-at-the-speaker.md) has 12 scenarios. Results: **not yet run**.
+The [full test file](../../../tests/order-mix-ups-at-the-speaker.md) has 14 scenarios. Results: **not yet run**.
 
 | # | Scenario | Pass if |
 |---|---|---|
