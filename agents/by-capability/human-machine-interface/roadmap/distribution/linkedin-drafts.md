@@ -102,3 +102,13 @@ Promptfoo describes plugin-based red teaming, with guides for RAG, agents and ch
 Neither page we read says it watches live conversations after launch. That is a separate job.
 
 Compare page: (add the live URL after deploy)
+
+## Draft 2026-10-22 (run 90): Lakera Guard vs Guardrails AI
+Draft only. Source: the compare page, built from each project's own pages opened 2026-10-22. No detection-rate, speed or cost claims.
+
+Lakera Guard and Guardrails AI both check what goes into and comes out of an LLM. The difference, per their own pages:
+Lakera Guard is a hosted API you call on each interaction; a project policy sets the detectors.
+Guardrails AI is an open-source Python framework (Apache-2.0): you combine validators and pick what happens on a failure, from raising an error to re-asking the model.
+Both judge one message at a time. Neither page we read tracks how a whole conversation goes wrong.
+
+Compare page: (add the live URL after deploy)
