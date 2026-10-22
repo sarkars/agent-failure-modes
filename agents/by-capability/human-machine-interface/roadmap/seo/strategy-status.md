@@ -9,6 +9,6 @@ Tracks the items in the site repo's SEO-STRATEGY.md. One item per run; Done only
 | G3 /security/ hub | Built 2026-10-22 (run 82, site commit 0db04e683): /security/ with grouped pattern links, 4 incident links and a 7-line checklist; live check pending deploy |
 | G4 Pillar guide: AI agent security failures | Built 2026-10-22 (run 83, site commit 1b0483a6b): /guides/ai-agent-security-failures/, sources OWASP LLM01 and LLM06 opened; live check pending deploy |
 | G5 Pillar guide: chatbot QA checklist | Built 2026-10-22 (run 84): /guides/chatbot-qa-checklist/, 12 checks each linked to a pattern, pass conditions labeled proposed; live check pending deploy |
-| G6 Pillar guide: evals vs production monitoring | Not started |
+| G6 Pillar guide: evals vs production monitoring | Built 2026-10-22 (run 85, site commit 27bcd9e81): /guides/evals-vs-production-monitoring/, LangSmith, Langfuse and Braintrust docs opened via fetch summaries 2026-10-22; live check pending deploy |
 | G7 Original data post (counts from this library) | Not started |
 | G8 Compare pages (Langfuse, LangSmith, Braintrust, Promptfoo/Garak, Lakera/Guardrails AI) | Not started |

@@ -52,3 +52,13 @@ Each links to the failure pattern that explains the cause and fix.
 No benchmark numbers, because we have none.
 
 Guide: (add the live URL after deploy)
+
+## 2026-10-22: guide, evals vs production monitoring
+Draft only. Source: the site guide /guides/evals-vs-production-monitoring/, built from the LangSmith, Langfuse and Braintrust docs (opened 2026-10-22). No detection rates are claimed.
+
+Offline evals test the cases you wrote down. Production monitoring scores the chats that really happened.
+Per LangSmith's docs, live runs have no reference answers, so a check can judge tone and safety but not always correctness.
+Braintrust's docs suggest scoring only 1-10% of traffic when volume is high.
+Both vendors describe the same loop: turn each production failure into a new test case.
+
+Guide: (add the live URL after deploy)
