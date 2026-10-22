@@ -1553,6 +1553,16 @@ AI-written help content in knowledge bases · agents using other agents' tools (
 - **KPIs:** site build 1,898 pages; indexed pages unknown (no Search Console access this run); description ellipsis count 228.
 - **Plan complete?** No: asset 3 (about 27 packs), more teardowns (replika-italy-garante, ftc-v-amazon, chatgpt-memory, gpt-4-turbo-laziness, virgin-money have none) and assets 6-8 remain.
 
+### Run 83 (scheduled): 2026-10-22
+- **Coordinator run:** 5 subagents (4 test packs, 1 teardown). No Queued rows; no Part A, A2 or E work left. Each brief carried quality-guide sections 1 and 6, word for word. No subagent ran git; I ran the five check scripts (all clean, `-X utf8`).
+- **Part C asset 3 (quality-guide section 6):** four old 39-line test files rewritten in place as packs, "Not yet run", Needs review: guessing-instead-of-asking, help-that-becomes-a-sales-pitch, answers-withheld-behind-an-upgrade-unsaid, eligibility-answers-sound-like-decisions (121-124 lines, 14 conversations each, 4 do-nothing-special cases; eligibility keeps its legal "Read this first" note). 0 web searches. About 23 patterns still have no pack. I counted conversations, Pattern ID and "Not yet run" lines and placeholders and read two packs in part; transcripts not read line by line. Taxonomy path in the brief was wrong (it is under roadmap/specs/); agents found it.
+- **Part C asset 4 (section 6):** teardown of FTC v. Amazon (Prime cancellation, "Iliad" flow), expanded in place from 18 to about 75 lines: [teardown](../incidents/ftc-v-amazon-prime-cancellation-settlement.md). 3 searches; FTC press releases (2023, 2025, 2026), the FTC case page, the stipulated order and the amended complaint (PDF text) opened; news coverage seen only in search summaries and kept out. Needs review (legal reading). Review changed nothing; I read the whole page. The summary line now says Amazon neither admits nor denies, and drops the Claims Journal quote not reopened. The pattern page obstructing-cancellation-downgrade-or-refund still cites Claims Journal; not edited.
+- **Part B:** skipped, `seo/log.md` already has an entry for 2026-10-22 UTC. E6: Waiting for the owner to create the code repo.
+- **Part F:** no template changes this run; F1 checks not re-run in full; ellipsis count not re-measured; the 8 oldest failing content pages not done.
+- **Part G (site commit 1b0483a6b, mobilemag):** G4 built: /guides/ai-agent-security-failures/ (TechArticle with AUTHOR_LD and PUBLISHER_LD, 1 H1, title 47 chars, description 146; links 20+ patterns, 3 incidents, 3 compare pages, /check/, /security/). Sources opened: OWASP LLM01 Prompt Injection and LLM06 Excessive Agency (2025 edition, pages carry no date). No attack statistics. Build 1,899 pages, no broken internal links on the page. /guides/ index updated. LinkedIn draft added. Newsletter issue for 2026-10-22 already exists.
+- **KPIs:** site build 1,899 pages; indexed pages unknown (no Search Console access this run); ellipsis count not re-measured (228 on last check).
+- **Plan complete?** No: asset 3 (about 23 packs), more teardowns (replika-italy-garante, chatgpt-memory, gpt-4-turbo-laziness, virgin-money have none) and assets 6-8 remain.
+
 ## Schedule
 | Item | Value |
 |---|---|

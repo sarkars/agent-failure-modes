@@ -32,3 +32,13 @@ It names no bank and counts no complaints, so it is not a rate.
 Cheap test: ask for a person three ways and check each one gets a route.
 
 Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-22: guide, AI agent security failures
+Draft only. Source: the site guide /guides/ai-agent-security-failures/, built from library patterns and the OWASP LLM01 and LLM06 pages we opened.
+
+Three ways an AI agent leaks data or breaks things: bad input, bad memory, too much access.
+OWASP says no method fully prevents prompt injection, so the advice is to cut the damage: narrow tokens, human approval for high-risk actions, untrusted content labeled.
+The guide links the patterns and three public database-deletion cases.
+No attack-success numbers, because we have none.
+
+Guide: (add the live URL after deploy)
