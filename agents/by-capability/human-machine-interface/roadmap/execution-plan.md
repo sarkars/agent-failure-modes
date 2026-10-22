@@ -1532,6 +1532,13 @@ AI-written help content in knowledge bases · agents using other agents' tools (
 - **Deploy:** content PR 79 merged, merge commit 88a78ea. The importer found no HMI page content changes (only date re-stamps on 291 pages, discarded so lastmod stays honest; the packs and teardown are not published pages), so no pattern files were copied. Site repo pushed to main: 19b016091 (also carries e52d26ba5 and 1b42915b3, all authored as mobilemag; no foreign commits on main). Build 1,895 pages; 1,891 live sitemap URLs all present, removed 0; added /waitlist/, /methodology/, 1 newsletter issue. No deploy hook set. Live check right after push: /waitlist/ returned 404 on three tries (not deployed yet; the known gap above; not pushed again). Pre-existing, not from this run: /wrong-fit-recommendation/ shows a visible `search phrases:` block on the live site. Needs owner: confirm Vercel builds on push; About, Privacy, Contact page facts.
 - **Plan complete?** No: asset 3 packs, more teardowns and assets 6-8 remain.
 
+### Run 81 (scheduled): 2026-10-22
+- **Coordinator run:** 4 subagents (4 test packs; one extra empty-prompt subagent was started by mistake and did nothing). No Queued rows; no Part A, A2 or E work left. Each brief carried quality-guide section 1 and section 6 rules. No subagent ran git; I ran the five check scripts (all clean, `-X utf8`).
+- **Part C asset 3 (quality-guide section 6):** four old 39-line test files rewritten in place as packs, "Not yet run", Needs review: deferring-work-to-the-user, doesn-t-say-what-it-can-do, forces-a-fresh-login (security review flagged), generic-first-response (116-122 lines, 14 conversations each). 0 web searches; built from each pattern's own fix. About 31 patterns still have no pack.
+- **What review changed:** nothing; I measured line counts, checked Pattern ID and "Not yet run" lines, and checked the "..." hits are quoted example replies. Transcripts not read line by line. Subagents did not all re-read their files after writing.
+- **Part B:** skipped, `seo/log.md` already has an entry for 2026-10-22 UTC. E6: Waiting for the owner to create the code repo.
+- **Plan complete?** No: asset 3, more teardowns and assets 6-8 remain.
+
 ## Schedule
 | Item | Value |
 |---|---|
