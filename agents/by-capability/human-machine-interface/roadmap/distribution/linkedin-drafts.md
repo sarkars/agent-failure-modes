@@ -123,3 +123,14 @@ Two failures a test set can catch: a false premise accepted as fact, and a perso
 Keep the persona prompts users share in a replay set and rerun it on every release.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-22 (run 92): Koko GPT-3-assisted support replies teardown
+Draft only. Source: the teardown page, built from NBC News, Vice and Popular Science, opened 2026-10-22. Status Needs review.
+
+In January 2023 Koko's co-founder said about 4,000 people on its peer-support service got replies written with help from GPT-3.
+The notice said only "written in collaboration with Koko Bot."
+NBC News reported no way to opt out except not reading the reply; Morris said the feature was opt-in.
+Humans sent every reply, so this was not a bot posing as a person. The gap was disclosure.
+Test it: label each AI-drafted reply, honor opt-outs in the log, and never say "real people" without naming AI help.
+
+Teardown: (add the link after it is published)
