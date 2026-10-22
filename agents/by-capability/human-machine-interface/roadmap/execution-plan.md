@@ -1511,6 +1511,7 @@ AI-written help content in knowledge bases · agents using other agents' tools (
 - **What review changed:** nothing; I measured line and conversation counts, checked placeholders, "Not yet run" and Pattern ID lines. Transcripts not read line by line. Taxonomy IDs confirmed by the subagents' grep only.
 - **Part B:** skipped, `seo/log.md` already has an entry for 2026-10-22 UTC. E6: Waiting for the owner to create the code repo.
 - **Plan complete?** No: asset 3, asset 4 and assets 6-8 remain.
+- **Deploy:** content PR #77 merged (merge commit 92f94e9). Site publish NOT done: the site checkout's main has 4 local commits not on origin/main that this run did not create (a958754c3 and three earlier "Trigger deploy under repo owner"), so nothing was pushed. Waiting for the owner. Test packs are not published by the site import anyway; no new pattern pages this run.
 
 ## Schedule
 | Item | Value |
