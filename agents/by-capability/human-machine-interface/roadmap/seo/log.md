@@ -56,3 +56,14 @@ Still blocked: no Search Console access (no Chrome tools, empty `inbox/`) and no
 **Opportunities:** none acted on. Every top query points at older pages outside the HMI folder, so any title change is a proposal for a person. No HMI chat pattern appears in the top 10. Not checked: positions per query, indexing report.
 
 **Action:** none. No changes made; no merge proposal added.
+
+## 2026-10-23 (UTC), scheduled run 94
+**Source:** Search Console, read in Chrome (property `https://agent-kb-autopublish.vercel.app/`). Last 28 days (Sep 23 to Oct 20, 2026): 15 clicks, 5.07K impressions, average CTR 0.3%, average position 9.3. 131 queries with impressions. Top 10 queries read; the Pages tab was not opened. Page indexing report also read: 878 indexed, 13 not indexed, all for one reason, "Not found (404)", first detected 8/18/26.
+
+**Top queries (all 0 clicks; impressions):** the long "context failure detection strategy ... same query twice" question 88 (17 more without "?"); "what are the signs that an ai agent is following your style guide correctly vs. just pattern-matching your prompts?" 48; "semantic mismatch" 18; "de-identified patient samples" 18; "automated litigation support" 17; "factor crowding risk" 16; "deterministic tool calling with sql" 15; an underwriting business-class-code question 9; an AI bot scraping runbook query 8.
+
+**Opportunities:**
+- **Not indexed (acted on):** the 10 example 404 URLs shown are all of the form `/<page>/<sibling>.md`, for example `/policy-consistency-violation/policy-version-mismatch.md` (last crawled Sep 27, 2026). Pattern sources link siblings as `./slug.md`, and the site served those links unchanged, so they resolved under the current page and 404ed. Every target checked (six) exists as a page at `/<slug>/`. Part F fix in the site repo: a remark plugin rewrites `./slug.md` links to `/slug/` (or `/incidents/slug/`) when the page exists. After the build, 6 such links remain because their targets have no page; those are left for a person. After deploy, a person can press "Validate fix" on the 404 report.
+- Queries: none acted on. Every top query points at older pages outside the HMI folder, so any title change is a proposal for a person. No HMI chat pattern appears in the top 10.
+
+**Action:** site repo commit a7938e13b (Part F). No content page changed; no merge proposal added.
