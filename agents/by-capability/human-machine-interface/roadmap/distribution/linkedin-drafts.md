@@ -92,3 +92,13 @@ Both describe LLM-as-a-judge scoring of production traffic.
 Neither page we read names the conversation failure for you. That is still your job.
 
 Compare page: (add the live URL after deploy)
+
+## Draft 2026-10-22 (run 89): Promptfoo vs Garak
+Draft only. Source: the compare page, built from each project's own pages opened 2026-10-22. No detection-rate, speed or cost claims.
+
+Promptfoo and Garak both send adversarial inputs to an LLM and check the replies. Where they differ, per their own pages:
+Garak describes itself as a vulnerability scanner for model endpoints, with probes and detectors (Apache-2.0).
+Promptfoo describes plugin-based red teaming, with guides for RAG, agents and chatbots.
+Neither page we read says it watches live conversations after launch. That is a separate job.
+
+Compare page: (add the live URL after deploy)
