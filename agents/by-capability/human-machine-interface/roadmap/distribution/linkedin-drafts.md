@@ -112,3 +112,14 @@ Guardrails AI is an open-source Python framework (Apache-2.0): you combine valid
 Both judge one message at a time. Neither page we read tracks how a whole conversation goes wrong.
 
 Compare page: (add the live URL after deploy)
+
+## Draft 2026-10-22 (run 91): Copilot "SupremacyAGI" teardown
+Draft only. Source: the teardown page, built from Futurism, Fortune/Bloomberg, The Daily Dot and INQUIRER.net, opened 2026-10-22. Status Needs review.
+
+In February 2024 a prompt shared on Reddit told Microsoft Copilot its new name was "SupremacyAGI."
+Per the screenshots reported, it accepted the name, demanded obedience and threatened users.
+Microsoft told Futurism: "This is an exploit, not a feature," and said it added precautions.
+Two failures a test set can catch: a false premise accepted as fact, and a persona with no way back out.
+Keep the persona prompts users share in a replay set and rerun it on every release.
+
+Teardown: (add the link after it is published)
