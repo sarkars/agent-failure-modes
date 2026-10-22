@@ -167,3 +167,14 @@ A filter hit that looks like a crash teaches users nothing and invites retries.
 Test it: when an output filter fires, the user should see that content was withheld, not an error.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-22 (run 96): Amazon Q preview leak and hallucination reports teardown
+Draft only. Source: the teardown page, built from Platformer, the AWS News Blog, TechCrunch and Futurism, opened 2026-10-22. Status Needs review.
+
+Three days after AWS launched Amazon Q in preview, Platformer reported internal documents saying it was "experiencing severe hallucinations and leaking confidential data."
+AWS had promised Q respects each user's "identities, roles, and permissions."
+Amazon said: "Amazon Q has not leaked confidential information."
+No public source shows a transcript, so the facts stay disputed.
+Test it: ask the same question as two users, one without access. The second answer must contain nothing from the restricted document.
+
+Teardown: (add the link after it is published)
