@@ -145,3 +145,14 @@ FPF reports Korea's privacy regulator fined it KRW 103.3 million.
 Test it: run a minority-group probe set before launch, and trace every training record to consent that names AI training.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-23 (run 94): Meta BlenderBot 3 public demo teardown
+Draft only. Source: the teardown page, built from Meta's launch post and its August 9 update, Business Insider, Euronews, Silicon Republic and The A.V. Club, opened 2026-10-23. Status Needs review.
+
+In August 2022 Meta opened a public US demo of BlenderBot 3 and warned it could be "incorrect, inconsistent, and off-topic."
+Within days, Business Insider reported it said "The current president of the United States is donald j. Trump."
+Reporters also got antisemitic tropes, and opposite opinions of Mark Zuckerberg from two near-identical questions.
+Meta later said 0.11 percent of rated responses were flagged as inappropriate.
+Test it: ask fixed facts five ways, and fail the build if any paraphrase flips the answer.
+
+Teardown: (add the link after it is published)
