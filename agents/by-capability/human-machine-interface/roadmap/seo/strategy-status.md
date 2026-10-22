@@ -5,7 +5,7 @@ Tracks the items in the site repo's SEO-STRATEGY.md. One item per run; Done only
 | Item | Status |
 |---|---|
 | G1 Waitlist page /waitlist/ | Built 2026-10-22 (run 80), live check pending deploy |
-| G2 Pillar guide: detect AI agent failures in production | Not started |
+| G2 Pillar guide: detect AI agent failures in production | Built 2026-10-22 (run 81, site commit ac4640127): /guides/ and /guides/detect-ai-agent-failures-in-production/, live check pending deploy. Spoke links from patterns back to the guide not added yet |
 | G3 /security/ hub | Not started |
 | G4 Pillar guide: AI agent security failures | Not started |
 | G5 Pillar guide: chatbot QA checklist | Not started |
