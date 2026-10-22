@@ -1519,6 +1519,7 @@ AI-written help content in knowledge bases · agents using other agents' tools (
 - **What review changed:** nothing; I measured line and conversation counts, checked placeholders, "Not yet run" and Pattern ID lines. Transcripts not read line by line. Pattern pages still say "12 scenarios" in section 6 where the packs hold 14 (not edited; out of scope).
 - **Part B:** skipped, `seo/log.md` already has an entry for 2026-10-22 UTC. E6: Waiting for the owner to create the code repo.
 - **Plan complete?** No: asset 3, asset 4 and assets 6-8 remain.
+- **Deploy:** content PR #78 merged (merge commit 71700d9). Site publish NOT done: the site checkout's main has 4 local commits not on origin/main that this run did not create (a958754c3, 7f686aa07, 6094d093c, e1a3fc66b, all "Trigger deploy under repo owner"), and origin/main is 1 ahead of it, so nothing was pushed. Waiting for the owner. Test packs are not published by the site import; no new pattern pages this run.
 
 ## Schedule
 | Item | Value |
