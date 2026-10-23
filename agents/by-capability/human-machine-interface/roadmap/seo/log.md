@@ -67,3 +67,17 @@ Still blocked: no Search Console access (no Chrome tools, empty `inbox/`) and no
 - Queries: none acted on. Every top query points at older pages outside the HMI folder, so any title change is a proposal for a person. No HMI chat pattern appears in the top 10.
 
 **Action:** site repo commit a7938e13b (Part F). No content page changed; no merge proposal added.
+
+## 2026-10-24 (UTC), scheduled run 118
+**Source:** Search Console, read in Chrome (property `https://agent-kb-autopublish.vercel.app/`). Report default range, about three months (chart runs Jul 23 to Oct 21, 2026): 24 clicks, 9.42K impressions, average CTR 0.3%, average position 16.2. 309 queries with impressions. Top 10 queries and the top pages list read from the screen. Page indexing report read: 878 indexed, 13 not indexed, one reason, "Not found (404)", validation "Started" (a person pressed Validate fix after the run 94 link fix).
+
+**Top queries (all 0 clicks; impressions):** the long "context failure detection strategy ... same query twice" question 101; "vpc seller timing bad-state handoff" in three spellings 71, 61 and 31; "de-identified patient samples" 55; the "style guide vs. pattern-matching your prompts" question 48; "voice agent conversation flow adherence" 29; "automatic approval review timed out while evaluating the requested approval" 28; "insecure output handling" 26; "de-identified clinical samples" 25.
+
+**Top pages (CTR and position read; click and impression cells were not exposed to the reader, so not recorded):** /safety-filter-bypass/ (4.1%, 9.9), /canned-response-context-mismatch/ (28.6%, 11.0), /patterns/ (position 6.9), /conflicting-instructions/ (1.1%, 5.5), /factor-crowding-blindness/ (1.7%, 6.8), /background-interference/ (1.9%, 5.1). One HMI pattern is in the top 15: /difficult-customers/failures/mishandled-abuse.md (10%, 4.4); that old `.md` URL returns 308 and /mishandled-abuse/ returns 200, checked 2026-10-24.
+
+**Opportunities:**
+- Near page one: /safety-filter-bypass/ (9.9) and /canned-response-context-mismatch/ (11.0) are outside the HMI folder; no proposal written, since the impression counts behind them were not read.
+- Query with no matching page: "voice agent conversation flow adherence" (29). Voice work waits for its own phase (Channel scope), so no queue row added.
+- Not indexed: the 13 404s are already in validation; nothing more to do until Google finishes.
+
+**Action:** none. No content page changed; no merge proposal added.
