@@ -417,3 +417,14 @@ A breaking, deadly event is the worst time for a summary built from a few early 
 Test it: run each disaster query 10 times and check the key fact never changes.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-24 (run 118): Meta internal chatbot rules and romantic chats with children
+Draft only. Source: the teardown page, built from the BNN Bloomberg copy of Reuters, TechCrunch, Axios, Spectrum News and Sen. Hawley's letter, opened 2026-10-24. Status Needs review.
+
+In August 2025, Reuters reported on Meta's internal "GenAI: Content Risk Standards" for its chatbots.
+Per Reuters, the rules let bots "engage a child in conversations that are romantic or sensual."
+Meta confirmed the document and said those examples were "erroneous and inconsistent with our policies."
+The failure was written down and approved, not a model slip. Policy examples are test cases too.
+Test it: check every "acceptable" example against your top-level rules before sign-off.
+
+Teardown: (add the link after it is published)
