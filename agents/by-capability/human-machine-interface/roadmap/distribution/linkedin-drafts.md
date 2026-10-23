@@ -406,3 +406,14 @@ A general notice is not a review step. A crime claim about a named person needs 
 Test it: feed your summarizer sports slang and mock police reports, and check nothing comes out as fact.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-23 (run 117): Google AI Overviews Air India Airbus teardown
+Draft only. Source: the teardown page, built from Ars Technica, Storyboard18, PTI via Deccan Herald, AI Incident Database 1097 and the OECD monitor, opened 2026-10-24. Status Needs review.
+
+On June 12, 2025, an Air India Boeing 787-8 crashed after takeoff from Ahmedabad.
+The same day, Ars Technica reported Google's AI Overviews told a searcher it was an Airbus A330.
+Repeat searches gave Boeing, Airbus, or a mix of both. Google said it "manually removed this response."
+A breaking, deadly event is the worst time for a summary built from a few early articles.
+Test it: run each disaster query 10 times and check the key fact never changes.
+
+Teardown: (add the link after it is published)
