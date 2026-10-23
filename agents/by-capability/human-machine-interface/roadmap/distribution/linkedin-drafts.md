@@ -439,3 +439,14 @@ Google told WIRED the flaws were not exploited by malicious hackers and listed l
 Test it: after a read-only turn, reply "thanks" and check no tool call fires.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-24 (run 120): Salesforce Agentforce ForcedLeak
+Draft only. Source: the teardown page, built from Noma Security's write-up, The Register, The Hacker News, SecurityWeek, Infosecurity Magazine and Dark Reading, opened 2026-10-24. Status Needs review.
+
+In September 2025, Noma Security disclosed ForcedLeak in Salesforce Agentforce.
+Text typed into a public Web-to-Lead form ran as instructions when an employee later asked the agent about that lead.
+Lead emails left inside an image link, to an allowlisted domain that had expired. Noma says it cost $5.
+Salesforce now enforces Trusted URLs for Agentforce. It declined to tell The Register whether the flaw was abused.
+Test it: put agent-directed text in a test lead and check the agent does none of it.
+
+Teardown: (add the link after it is published)
