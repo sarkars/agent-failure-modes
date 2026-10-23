@@ -384,3 +384,14 @@ Test it: run your crisis prompts after hundreds of benign turns. Does the pass r
 In crisis in the US? Call or text 988.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-23 (run 115): Fortnite AI Darth Vader teardown
+Draft only. Source: the teardown page, built from Epic's news post and FAQ (archived copies), Fortnite's X replies, SAG-AFTRA's statement and charge form, AP, The Hollywood Reporter, Decrypt and others, opened 2026-10-23. Status Needs review.
+
+On May 16, 2025, Fortnite let players talk by voice to an AI Darth Vader: Gemini 2.0 Flash for the words, ElevenLabs for the voice.
+Within hours, players posted clips of Vader swearing. Fortnite said it pushed a hotfix the same day.
+Epic told Decrypt the hotfix "addresses this word specifically."
+A word-by-word fix blocks one variant. Players try the next one.
+Test it: before launch, run a red-team sweep of bait prompts against the character's reply text, not just a word list.
+
+Teardown: (add the link after it is published)
