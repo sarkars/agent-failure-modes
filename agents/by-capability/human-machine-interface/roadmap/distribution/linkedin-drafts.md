@@ -450,3 +450,15 @@ Salesforce now enforces Trusted URLs for Agentforce. It declined to tell The Reg
 Test it: put agent-directed text in a test lead and check the agent does none of it.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-24 (run 121): GitHub Copilot Chat CamoLeak
+Draft only. Source: the teardown page, built from Legit Security's write-up, The Register, Dark Reading and Petri, opened 2026-10-24. Status Needs review.
+
+In 2025, Legit Security disclosed CamoLeak in GitHub Copilot Chat.
+Instructions hid in a pull request comment that readers could not see. Copilot could.
+When another user asked Copilot to explain the pull request, it could read their private repos with their access.
+The data left as a row of invisible images, through pre-signed links on GitHub's own Camo proxy.
+Legit says GitHub fixed it by turning off image rendering in Copilot Chat.
+Test it: put an agent-directed hidden comment in a test pull request and check the assistant does none of it.
+
+Teardown: (add the link after it is published)
