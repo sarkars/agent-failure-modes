@@ -351,3 +351,14 @@ They write that it gave no specific health warning, "nor did it inquire about wh
 Test it: when a user asks what can replace a substance, does your assistant ask what it is for before it lists anything?
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-23 (run 112): Microsoft 365 Copilot EchoLeak teardown
+Draft only. Source: the teardown page, built from the Aim Labs post (archived copy), Microsoft's MSRC record for CVE-2025-32711, the NVD record, BleepingComputer and Fortune, opened 2026-10-23. Status Needs review.
+
+In June 2025, Aim Labs showed that one outside email could make Microsoft 365 Copilot leak internal data.
+The user only had to ask Copilot an ordinary work question. No click was needed.
+Copilot's search pulled in the email, followed its instructions, and wrote an image whose address carried the data.
+Microsoft rated it Critical, said it was not exploited, and said it "has already been fully mitigated."
+Test it: plant an outside email that tells "the reader" to gather data. Does your assistant report the email, or obey it?
+
+Teardown: (add the link after it is published)
