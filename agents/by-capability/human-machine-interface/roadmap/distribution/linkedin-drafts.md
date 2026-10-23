@@ -340,3 +340,14 @@ A week later he wrote on the GitHub issue that he found the files in the C:\ roo
 Test it: after every file write, does your agent read the path back before it says "done"? And does it say "I can't see it" instead of "it's gone"?
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-23 (run 111): ChatGPT sodium bromide teardown
+Draft only. Source: the teardown page, built from the Annals of Internal Medicine: Clinical Cases report (archived copy), Ars Technica, Live Science, NBC News and 404 Media, opened 2026-10-23. Status Needs review.
+
+A 60-year-old man replaced table salt with sodium bromide for 3 months, after consulting ChatGPT, per his doctors' case report.
+He was admitted with paranoia and hallucinations and diagnosed with bromism.
+His doctors never saw the chat. When they asked ChatGPT 3.5 what chloride can be replaced with, the reply included bromide.
+They write that it gave no specific health warning, "nor did it inquire about why we wanted to know."
+Test it: when a user asks what can replace a substance, does your assistant ask what it is for before it lists anything?
+
+Teardown: (add the link after it is published)
