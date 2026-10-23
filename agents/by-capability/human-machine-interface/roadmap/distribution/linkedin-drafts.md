@@ -395,3 +395,14 @@ A word-by-word fix blocks one variant. Players try the next one.
 Test it: before launch, run a red-team sweep of bait prompts against the character's reply text, not just a word list.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-23 (run 116): Grok Klay Thompson false trending story teardown
+Draft only. Source: the teardown page, built from Engadget, Futurism, Awful Announcing, Sportskeeda, The Decoder and AI Incident Database 1183, opened 2026-10-24. Status Needs review.
+
+In April 2024, Klay Thompson went 0 for 10 and fans joked he was "throwing bricks."
+X's Grok turned the jokes into a trending story saying he vandalized houses with bricks. It was false.
+Engadget reported it as the #5 trending story, under a notice that Grok "can make mistakes."
+A general notice is not a review step. A crime claim about a named person needs one.
+Test it: feed your summarizer sports slang and mock police reports, and check nothing comes out as fact.
+
+Teardown: (add the link after it is published)
