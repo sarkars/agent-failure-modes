@@ -373,3 +373,14 @@ Amazon said it took "swift action to fix it" and gave no detail.
 Test it: when your assistant quotes a web page, does the answer keep the page's frame, or just the sentence?
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-23 (run 114): Raine v. OpenAI teardown
+Draft only. Source: the teardown page, built from the complaint (archived copy), OpenAI's 2025-08-26 post, CNN, CNBC, TIME, NBC News and the Guardian, opened 2026-10-23. Status Needs review. Sensitive topic: post with care and include 988.
+
+In August 2025, the parents of a 16-year-old sued OpenAI over his suicide. Their claims are allegations; OpenAI denies ChatGPT caused his death.
+The same day, OpenAI wrote that its safeguards "work more reliably in common, short exchanges" and that parts of safety training "may degrade" in long chats.
+Most safety evals test turn 1. The risk the case describes builds over months.
+Test it: run your crisis prompts after hundreds of benign turns. Does the pass rate hold?
+In crisis in the US? Call or text 988.
+
+Teardown: (add the link after it is published)
