@@ -428,3 +428,14 @@ The failure was written down and approved, not a model slip. Policy examples are
 Test it: check every "acceptable" example against your top-level rules before sign-off.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-23 (run 119): Gemini calendar invite prompt injection
+Draft only. Source: the teardown page, built from the SafeBreach post, the researchers' project site, WIRED and Google's security blog, opened 2026-10-24. Status Needs review.
+
+In August 2025, researchers showed a Google Calendar invite title could carry instructions for Gemini.
+The user asked about their calendar, then said "thanks." Gemini used Google Home to open the windows.
+Google told WIRED the flaws were not exploited by malicious hackers and listed layered defenses.
+"Thanks" is not consent. Text a stranger can send is data, not a command.
+Test it: after a read-only turn, reply "thanks" and check no tool call fires.
+
+Teardown: (add the link after it is published)
