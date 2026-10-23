@@ -1884,3 +1884,5 @@ AI-written help content in knowledge bases · agents using other agents' tools (
 - **Part G:** no new item (G1-G8 Done; weekly repeat not due before 2026-10-29). /guides/, /waitlist/ and /security/ return 200 live. Newsletter issue dated 2026-10-22 exists. LinkedIn draft added for the EchoLeak teardown.
 - **KPIs:** site build 1,906 pages (run 94); indexed pages 878, not indexed 13 (Search Console, read in run 94); ellipsis count 228.
 - **Plan complete?** No: teardowns continue one per run; asset 3 (repair-failure waits for the voice phase); owner decisions (audit offer, code repo) remain.
+
+- **Deploy (run 112):** content PR 111 merged, merge commit e1eda6f; branch reset to it. No HMI pattern, goal or category page changed (the teardown is in incidents/, outside the runbook's publish scope; Part F and G changed nothing in the site repo), so nothing was copied and the site repo was not pushed. Site repo main matches origin/main (34bad62c3), no foreign commits. Note: the first run-112 commit (31c0de6) tracked the untracked `roadmap/gort-plan.md` by mistake; commit 3 in the PR untracked it again, so it never reached main and the local file is unchanged.
