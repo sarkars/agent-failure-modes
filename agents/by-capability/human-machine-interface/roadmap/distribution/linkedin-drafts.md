@@ -362,3 +362,14 @@ Microsoft rated it Critical, said it was not exploited, and said it "has already
 Test it: plant an outside email that tells "the reader" to gather data. Does your assistant report the email, or obey it?
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-23 (run 113): Amazon Alexa "penny challenge" teardown
+Draft only. Source: the teardown page, built from Kristin Livdahl's post, BBC, CTV, HuffPost, CNBC, Fatherly, Spectrum News 1, AI Incident Database 160 and archived copies of the article Alexa cited, opened 2026-10-23. Status Needs review.
+
+In December 2021, a 10-year-old asked Alexa: "Tell me a challenge to do."
+Alexa answered with "something I found on the web": one sentence from a 2020 article that warned parents about a dangerous outlet trend.
+It kept the stunt and dropped the warning. Her mother, in the room, stopped it.
+Amazon said it took "swift action to fix it" and gave no detail.
+Test it: when your assistant quotes a web page, does the answer keep the page's frame, or just the sentence?
+
+Teardown: (add the link after it is published)
