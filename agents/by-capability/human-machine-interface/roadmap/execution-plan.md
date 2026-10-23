@@ -1818,3 +1818,5 @@ AI-written help content in knowledge bases · agents using other agents' tools (
 - **Part G:** no new item (G1-G8 Done; weekly repeat not due before 2026-10-29). /guides/, /waitlist/ and /security/ return 200 live. Newsletter issue dated 2026-10-22 exists. LinkedIn draft added for the Gemini email summary teardown.
 - **KPIs:** site build 1,906 pages (run 94); indexed pages 878, not indexed 13 (Search Console, read in run 94); ellipsis count 228.
 - **Plan complete?** No: teardowns continue one per run; asset 3 (repair-failure waits for the voice phase); owner decisions (audit offer, code repo, newsletterUsername) remain.
+
+- **Deploy (run 106):** content PR 105 merged, merge commit 9c4a420; branch reset to it. No HMI pattern, goal or category page changed (the teardown is in incidents/, outside the runbook's publish scope; Part F and G changed nothing in the site repo), so nothing was copied and the site repo was not pushed. Site repo main matches origin/main (34bad62c3), no foreign commits.
