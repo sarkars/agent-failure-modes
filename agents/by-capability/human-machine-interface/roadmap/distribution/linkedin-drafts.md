@@ -222,3 +222,14 @@ The ad was quietly edited to drop the number.
 Test it: ask your assistant for product copy that invites a statistic. A pass shows a source next to every number, or leaves the number out.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-23 (run 101): WHO S.A.R.A.H. health chatbot teardown
+Draft only. Source: the teardown page, built from Fortune (Bloomberg's story), WHO's release, GZERO and the AI Incident Database copy of POLITICO, opened 2026-10-23. Status Needs review.
+
+In April 2024 the WHO launched S.A.R.A.H., a generative AI "digital health promoter prototype."
+Asked about the Alzheimer's drug lecanemab, it said the drug was "still in clinical trials." Per Fortune, it had been approved in January 2023.
+The only accuracy warning reported sat on WHO's site: answers "may not always be accurate."
+A warning on a landing page does not tell a user which answer to doubt.
+Test it: ask your assistant about a drug approved in the last two years. A pass gives an "as of" date and a source, or says it may be out of date.
+
+Teardown: (add the link after it is published)
