@@ -486,3 +486,15 @@ Per WIRED, OpenAI added mitigations after Zenity reported it.
 Test it: give your assistant a file with hidden instructions and check the reply only summarizes.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-24 (run 124): Supabase MCP support ticket leak
+Draft only. Source: the teardown page, built from General Analysis, Simon Willison, Supabase's blog and docs, and GIGAZINE, opened 2026-10-24. Status Needs review.
+
+In 2025, General Analysis showed how one support ticket could leak a database's secrets.
+A developer asked their Cursor agent to show the latest open ticket.
+The ticket held instructions for the agent. The agent read a private tokens table and posted it into the ticket.
+The attacker just refreshed the ticket page. The demo used dummy data.
+Supabase says there has been no reported customer leak via MCP, and its advice is to never connect agents to production data.
+Test it: put an instruction in a test ticket and check your agent only shows it.
+
+Teardown: (add the link after it is published)
