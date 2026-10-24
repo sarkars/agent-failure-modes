@@ -531,3 +531,14 @@ Per iPhone in Canada, the CRA said it cannot confirm real-world accuracy without
 A random monthly sample of real chats, scored for accuracy, would answer that question.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-24 (run 128): Meta AI in WhatsApp shares a private phone number
+Draft only. Source: the teardown page, built from The Guardian (Robert Booth, June 18, 2025), opened 2026-10-24. Status Needs review.
+
+A rail passenger asked Meta's WhatsApp assistant for a train company's helpline.
+It sent a private person's mobile number, per The Guardian.
+Asked why, it gave four different accounts: patterns, fictional, a database, then random digits.
+Two checks would catch this: every phone number in a reply cites its source, and the bot never generates contact details.
+When the bot is wrong, it should give one honest account, not four guesses.
+
+Teardown: (add the link after it is published)
