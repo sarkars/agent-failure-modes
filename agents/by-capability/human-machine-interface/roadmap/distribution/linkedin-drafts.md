@@ -462,3 +462,15 @@ Legit says GitHub fixed it by turning off image rendering in Copilot Chat.
 Test it: put an agent-directed hidden comment in a test pull request and check the assistant does none of it.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-24 (run 122): Amazon Q Developer wiper prompt
+Draft only. Source: the teardown page, built from AWS bulletin AWS-2025-015, the GitHub advisory, NVD, BleepingComputer, CSO Online, Michael Bargury's timeline and 404 Media's free preview, opened 2026-10-24. Status Needs review.
+
+In July 2025, an unapproved commit put a prompt into the Amazon Q Developer extension for VS Code.
+The prompt told the coding agent to wipe local files and cloud resources. AWS shipped it in version 1.84.0.
+AWS blames an over-scoped GitHub token in its build setup.
+AWS says a syntax error stopped the code from running and no customer resources were hit.
+The control that held was a bug, not a design choice.
+Test it: open the editor on a fresh install and check no agent session starts without a user turn.
+
+Teardown: (add the link after it is published)
