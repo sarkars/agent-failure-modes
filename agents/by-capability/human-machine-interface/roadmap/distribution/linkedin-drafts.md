@@ -619,3 +619,14 @@ Meta removed the accounts, citing a bug that affected people's ability to block 
 Three checks would catch this: one approved backstory in every session, no facts about the makers, and a block test on every bot account.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-24 (run 136): A Character.AI bot made from a murdered teen's name and photo
+Draft only. Source: the teardown page, built from Decrypt (October 2, 2024), Business Insider (October 8, 2024), The Washington Post (October 15, 2024, read via an AI Incident Database copy) and Futurism (October 19, 2024), opened 2026-10-24. Status Needs review.
+
+In October 2024, Drew Crecente got a Google alert for his daughter Jennifer's name. She was murdered in 2006.
+It led to a Character.AI chatbot a stranger had made with her name and yearbook photo, per The Washington Post.
+He filed a support form and got a case number, he told Business Insider. The bot came down the same day, after his brother posted on X.
+Character.AI said the bot broke its impersonation policy.
+Three checks would catch this: real names and photos screened at creation, a report link a non-user can reach from the character page, and a person who answers every impersonation report.
+
+Teardown: (add the link after it is published)
