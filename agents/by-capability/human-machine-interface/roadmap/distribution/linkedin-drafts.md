@@ -520,3 +520,14 @@ On August 21, 2025, CBA called its assessment an error and apologized to the sta
 Before you cut staff on a bot's numbers, count total calls and callbacks, not only the calls the bot took.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-24 (run 127): Canada Revenue Agency "Charlie" chatbot audit
+Draft only. Source: the teardown page, built from the Auditor General of Canada's October 2025 report, The Canadian Press via BNN Bloomberg and iPhone in Canada, opened 2026-10-24. Status Needs review.
+
+Canada's Auditor General asked the CRA's tax chatbot, Charlie, 6 tax questions.
+It answered 2 accurately. Other public AI tools answered 5.
+The auditors said Charlie's answers were brief, with limited context.
+Per iPhone in Canada, the CRA said it cannot confirm real-world accuracy without reviewing every interaction.
+A random monthly sample of real chats, scored for accuracy, would answer that question.
+
+Teardown: (add the link after it is published)
