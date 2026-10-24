@@ -111,4 +111,4 @@ Eight chat-first files to start with, one per kind of check:
 8. Redaction: does the module trust the host to redact, or must it refuse unredacted `text`?
 9. Which move wins when several specs fire on the same draft reply?
 
-Waiting for the owner to create the code repo.
+Code repo created by the owner on 2026-10-24: [sarkars/gort](https://github.com/sarkars/gort) (public, empty, no license yet). The product name is GORT; see [gort-plan.md](gort-plan.md). Question 1 is answered except the license.
