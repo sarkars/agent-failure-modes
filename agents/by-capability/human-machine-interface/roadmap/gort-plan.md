@@ -13,7 +13,7 @@
 
 **Order of work.** Prevention first, using predefined best practice and failure fixes. Then failure analytics on real runs. Then learning from what was found. Then the customer's own business. Each stage is useful on its own: a team can stop after any stage and keep what it got.
 
-**Every stage covers every type of agent.** A stage is not done when it works for chat agents only. Section 3 lists the agent types, and every stage below says what it gives each type.
+**Chat layer first (owner, 2026-10-24).** Steps 1 to 24 are built first for conversational agents in text chat, plus the base pack. The other agent types in section 3 (action, document, knowledge, operations, coding, multi-agent) and voice come later, after the chat layer works; every stage keeps a place for them. Where a step below names more agent types, the first build covers the conversational chat agent only.
 
 **First focus: Human-AI interaction.** The first packs, evals, detectors and tags cover the failures that happen between the agent and the person using it: wrong assumptions, ignored requests for a person, "done" said when nothing was done, wrong tone, missing AI disclosure, dead ends, over-trust. They come from the internal Human-AI interaction library first, checked against outside failure libraries (section 5, "Failure sources"). Failures with no person in the loop (operations, coding, multi-agent) follow in wave C.
 
@@ -370,7 +370,7 @@ The steps below are done in this order. **Gate** marks a step that waits for the
 | 16 | **Gate.** Design partner installs `0.1` in log-only mode | Partner's guardrail hit rates and eval pass rates, before and after | Numbers reported as log-only; no real-world effect claimed |
 | 17 | Wave B (document, knowledge): steps 13 to 15 for these types | Release `0.2` | Stage 1 done-when holds for wave B |
 
-Wave C (operations, coding, multi-agent) follows the same steps and can run alongside section D; Stage 2's done-when needs four agent types, which waves A and B give.
+Wave C (operations, coding, multi-agent) follows the same steps later. Chat layer first (owner, 2026-10-24): steps 13 to 24 run first on the conversational chat reference agent only; the action agent, wave B, wave C and the four-type Stage 2 done-when come after the chat layer works.
 
 **D. Stage 2 build**
 
