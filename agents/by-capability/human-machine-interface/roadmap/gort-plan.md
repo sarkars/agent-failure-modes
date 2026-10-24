@@ -2,6 +2,8 @@
 
 *Agent reliability, grounded in your business.*
 
+> **This is the only product and code plan.** It supersedes [chat-analytics-plan.md](chat-analytics-plan.md), [code-module-design.md](code-module-design.md) and [learning-agent.md](learning-agent.md); those stay as background input only. Code lives in [sarkars/gort](https://github.com/sarkars/gort) (public, MIT). The hourly run builds it one step at a time from the implementation sequence in section 6 (Part H of its prompt).
+
 > **Status: proposed plan, revised 2026-10-23 (third version).** Asked for by the owner. It replaces the earlier "controls library first" version, which drifted into a tool-call guardrail that existing products already provide. Nothing here is built or run. No accuracy, savings, conversion or compliance claim is made. Facts about outside tools come from search summaries opened 2026-10-22 and 2026-10-23 (section 10); each is checked again on its primary page before it is used.
 
 ## 1. The product in one sentence
@@ -333,15 +335,15 @@ gort report report/ --group-by agent_type,pattern,agent_version --since 30d
 
 ### Implementation sequence through Stage 2
 
-The steps below are done in this order. **Gate** marks a step that waits for the owner; nothing after a gate starts until the owner says yes. Each step ends with a check, and a step is not done until its check passes. Code is built in working sessions, not by the hourly run, unless decision 5 (section 9) changes the "no code" rule.
+The steps below are done in this order. **Gate** marks a step that waits for the owner; nothing after a gate starts until the owner says yes. Each step ends with a check, and a step is not done until its check passes. Since 2026-10-24 (decision 5) the hourly run builds code in [sarkars/gort](https://github.com/sarkars/gort): one step per run, the first step whose status is not Done, one pull request per step. It stops at a Gate until the owner answers, and records each step's status in the Implementation status table below.
 
 **A. Decisions and setup**
 
 | # | Step | Output | Check |
 |---|---|---|---|
-| 1 | **Gate.** Owner decides repo name, public or private, licence (decision 1); frameworks for the first coverage pages (decision 2); reviewer for mappings (decision 4); model API key in an environment variable and a spend limit (decision 6) | Decisions written in section 9 | All four answered |
-| 2 | **Gate.** Create the `gortguard` repo under the owner's account, only after an explicit yes: Python package, licence, CI that runs lint, unit tests and the pack checker | Empty package that installs with `pip install -e .` | CI passes on an empty package |
-| 3 | Open each chosen framework's primary page; record its version and items. Open each outside failure library (section 5, "Failure sources"); record version, licence and fields | `frameworks/*.yaml` and `sources/*.yaml`, with the date opened | Every item has a source link; every source has a licence or "not yet read" |
+| 1 | **Gate.** Owner decides repo name, public or private, licence (decision 1) and whether the hourly run writes code (decision 5). Decisions 2, 4 and 6 are gates on the steps that need them (3, 14 and 11) | Decisions written in section 9 | Done 2026-10-24: sarkars/gort, public, MIT; the hourly run may write code |
+| 2 | Set up the `gortguard` Python package in the existing [sarkars/gort](https://github.com/sarkars/gort) repo (created by the owner 2026-10-24, MIT licence already on main): `pyproject.toml`, `src/gortguard/`, a `gort` command stub, CI that runs lint and unit tests (the pack checker joins CI at step 9) | Empty package that installs with `pip install -e .` | CI passes on an empty package |
+| 3 | **Gate: decision 2 (frameworks).** Open each chosen framework's primary page; record its version and items. Open each outside failure library (section 5, "Failure sources"); record version, licence and fields | `frameworks/*.yaml` and `sources/*.yaml`, with the date opened | Every item has a source link; every source has a licence or "not yet read" |
 | 3a | Coverage check: map taxonomy v1 to the AI Incident Database cases and to the MIT repository's risks about people and AI; list patterns with no real case and risks with no pattern | `coverage/human-ai.md` | Every taxonomy entry has a case link or "no public case found" |
 
 **B. Formats, defined before any content or code**
@@ -360,10 +362,10 @@ The steps below are done in this order. **Gate** marks a step that waits for the
 |---|---|---|---|
 | 9 | Pack checker | `gort check` | Fails on a pack entry with a missing part or an eval without a pass and a fail; passes on the pilot packs |
 | 10 | Core package: `pack()`, `prompt()` with size budget and conflict check, reply check (including streaming), retrieval, memory, tool (`@p.guard`), handoff and run guardrails; time budget and fail-through or hold policy; log-only mode; redaction. Every guardrail verdict is written as a Step with its Guard tags | `gortguard` core | One unit test per guardrail; a timing test per check point; redaction test with planted personal data |
-| 11 | `gort init`: reads or imports `agent.yaml`, ranks failures, asks setup questions, leaves limits blank, generates eval cases from templates for a person to review, saves cases in the team's repo | `gort init` | On the example refund agent: top failures listed, prompt text within budget, cases generated and saved only after review |
+| 11 | **Gate: decision 6 (model API key and spend limit).** `gort init`: reads or imports `agent.yaml`, ranks failures, asks setup questions, leaves limits blank, generates eval cases from templates for a person to review, saves cases in the team's repo | `gort init` | On the example refund agent: top failures listed, prompt text within budget, cases generated and saved only after review |
 | 12 | `gort test`: runs cases on the chosen runner, per model, with a cost cap, simulated user for multi-turn cases, CI exit code, HTML report | `gort test` | Fails CI on a planted failure; stops at the cost cap |
 | 13 | Reference agents for wave A: one conversational, one action, each with switches that plant known failures; at least ten switches replay incident pages (for example a binding price offer, an invented refund policy, a request for a person ignored) | Two small agents in the repo | Each runs with switches on and off |
-| 14 | Wave A packs: base, conversational, action, with framework mappings reviewed by the second person and a coverage page per pack | Pack files, coverage pages | `gort check` passes; reviewer signs off the mappings |
+| 14 | **Gate: decision 4 (mapping reviewer).** Wave A packs: base, conversational, action, with framework mappings reviewed by the second person and a coverage page per pack | Pack files, coverage pages | `gort check` passes; reviewer signs off the mappings |
 | 15 | Wave A verification against the Stage 1 done-when; then review queue, alert webhook, `gort evidence`, pack versions and signatures, exporters | Release `0.1` | Stage 1 done-when holds for wave A |
 | 16 | **Gate.** Design partner installs `0.1` in log-only mode | Partner's guardrail hit rates and eval pass rates, before and after | Numbers reported as log-only; no real-world effect claimed |
 | 17 | Wave B (document, knowledge): steps 13 to 15 for these types | Release `0.2` | Stage 1 done-when holds for wave B |
@@ -383,6 +385,38 @@ Wave C (operations, coding, multi-agent) follows the same steps and can run alon
 | 24 | **Gate.** If the design partner shares logs, run `gort observe` on them | Partner report | Without partner logs, every report says it is on reference agents only |
 
 **Stop after step 24.** Stage 3 starts only when the owner says so and there is someone to label findings.
+
+### Implementation status
+
+The hourly run updates the row of the step it works on. Status is `Not started`, `In progress (PR link)`, `Waiting for the owner: <gate>`, or `Done (PR link, date)`.
+
+| Step | Status |
+|---|---|
+| 1 | Done (owner, 2026-10-24) |
+| 2 | Not started |
+| 3 | Not started |
+| 3a | Not started |
+| 4 | Not started |
+| 5 | Not started |
+| 6 | Not started |
+| 7 | Not started |
+| 8 | Not started |
+| 9 | Not started |
+| 10 | Not started |
+| 11 | Not started |
+| 12 | Not started |
+| 13 | Not started |
+| 14 | Not started |
+| 15 | Not started |
+| 16 | Not started |
+| 17 | Not started |
+| 18 | Not started |
+| 19 | Not started |
+| 20 | Not started |
+| 21 | Not started |
+| 22 | Not started |
+| 23 | Not started |
+| 24 | Not started |
 
 ## 7. Stage 3: Learning (GORT: Repair)
 **Useful on its own:** the team's checks get sharper every week, and it knows which fixes worked.
@@ -437,11 +471,11 @@ gort learn report/                 # turns confirmed findings into eval cases an
 **Done when:** a reference company's sources become an approved `facts.yaml`, and one planted policy breach is caught by a Stage 1 eval case and by a Stage 2 detector, for at least two agent types.
 
 ## 9. Decisions needed from the owner
-1. Repo for packs and tools: name, public or private, and licence. The coverage pages can live in this library.
+1. Repo for packs and tools: name, public or private, and licence. The coverage pages can live in this library. **Answered 2026-10-24:** [sarkars/gort](https://github.com/sarkars/gort), public, MIT. Package `gortguard`, command `gort`.
 2. Which frameworks are in the first coverage pages. Recommended: OWASP LLM 2025, OWASP Agentic 2026, NIST AI 600-1.
 3. Approve a short comparison of eval runners, simulated-user tools and rule engines before any is picked (section 5, Formats).
 4. Who reviews the framework mappings (a second person, ideally with security or compliance background).
-5. Whether the hourly run may write pack content (content, allowed today) and, later, the checker and exporters (needs a change to the "no code" rule in `C:\Users\saura\.hmi-runner\prompt.md`).
+5. Whether the hourly run may write pack content (content, allowed today) and, later, the checker and exporters (needs a change to the "no code" rule in `C:\Users\saura\.hmi-runner\prompt.md`). **Answered 2026-10-24:** yes. The hourly run writes code in sarkars/gort only, one step per run (prompt Part H). It never writes code in this library.
 6. Model API access and a spend limit, as environment variables, for model-graded eval cases.
 7. Trademark check for "GORT" and "gortguard" before a public launch.
 
@@ -495,4 +529,5 @@ Opened through search summaries 2026-10-22 and 2026-10-23. Each is checked on it
 | [Trafilatura](https://github.com/adbar/trafilatura), [Docling](https://github.com/docling-project/docling) | Stage 4 | Apache 2.0; MIT |
 
 ## Related
-- [Chat analytics plan](chat-analytics-plan.md) · [Code module design](code-module-design.md) · [Event schema](specs/conversation-event-schema-v0.1.md) · [Failure taxonomy](specs/failure-taxonomy-v1.md) · [Distribution plan](distribution-plan.md) · [Agents by business goal](../../../by-agent/README.md)
+- Superseded, background only: [Chat analytics plan](chat-analytics-plan.md) · [Code module design](code-module-design.md) · [Learning agent](learning-agent.md)
+- [Code repo: sarkars/gort](https://github.com/sarkars/gort) · [Event schema](specs/conversation-event-schema-v0.1.md) · [Failure taxonomy](specs/failure-taxonomy-v1.md) · [Distribution plan](distribution-plan.md) · [Agents by business goal](../../../by-agent/README.md)
