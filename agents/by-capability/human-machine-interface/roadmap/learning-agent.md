@@ -1,5 +1,7 @@
 # End State: A Self-Correcting Agent, and the Base Level to Start From
 
+> **Superseded 2026-10-24 by [gort-plan.md](gort-plan.md), the only product and code plan.** Kept as background: its learning loop is Stages 3 and 4 of GORT. Do not plan or build from this page.
+
 > **Goal.** An agent that keeps learning and improves, built on today's knowledge. The first deliverable is a **base level** that applies what this library already knows, so the learning loop has something to learn from. Read the [gap analysis](gap-analysis.md) first: the loop itself is published by others, so the aim here is a base agent and a gated policy tied to named failure patterns.
 
 ## Levels

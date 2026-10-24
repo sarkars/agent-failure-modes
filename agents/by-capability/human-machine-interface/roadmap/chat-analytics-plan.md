@@ -1,5 +1,7 @@
 # Plan: Failure Discovery and Analytics for Chatbots
 
+> **Superseded 2026-10-24 by [gort-plan.md](gort-plan.md), the only product and code plan.** Kept as background: its direction (failure discovery and analytics for chat) is Stage 2 of GORT. Do not plan or build from this page.
+
 > **Status: proposed plan, 2026-10-19.** Direction set by the owner: become the failure-discovery and analytics layer for chat. Developers integrate it into their chatbot and find failure points and drop-offs; we publish studies, some run on simulations we build; and we give a starting set of rules and frameworks to choose from. This is a plan, not a result: nothing here has been built or run, no claim is made that it improves conversion, and every external fact below is from a search summary unless marked opened. It changes an earlier rule: this layer is **code**, not Markdown only. Pattern writing stays paused.
 
 ## 1. The one-sentence product

@@ -1,5 +1,7 @@
 # Code Module Design: A Guide-Spec Checker for Chat (Design Note, No Code)
 
+> **Superseded 2026-10-24 by [gort-plan.md](gort-plan.md), the only product and code plan.** Kept as background: its Guide spec format notes, test pass condition and open questions feed GORT steps 4, 9 and 20. Do not plan or build from this page.
+
 > **Status:** proposed design note. It describes a module that does not exist and that this repository will not contain. Written 2026-10-20. No code, no results, no measured claims.
 
 This note is for the repository owner and for whoever builds the later code. It says what a separate code module would read, where it would run, what it must never do, and which test conversations it must pass.
@@ -111,4 +113,4 @@ Eight chat-first files to start with, one per kind of check:
 8. Redaction: does the module trust the host to redact, or must it refuse unredacted `text`?
 9. Which move wins when several specs fire on the same draft reply?
 
-Waiting for the owner to create the code repo.
+Code repo created by the owner on 2026-10-24: [sarkars/gort](https://github.com/sarkars/gort) (public, MIT). The product name is GORT; see [gort-plan.md](gort-plan.md). Question 1 is answered.

@@ -81,3 +81,19 @@ Still blocked: no Search Console access (no Chrome tools, empty `inbox/`) and no
 - Not indexed: the 13 404s are already in validation; nothing more to do until Google finishes.
 
 **Action:** none. No content page changed; no merge proposal added.
+
+## 2026-10-24 (UTC), on request in a working session
+**Source:** Search Console, read in Chrome (property `https://agent-kb-autopublish.vercel.app/`). Last 28 days (Sep 25 to Oct 22, 2026): 18 clicks, 5.61K impressions, average CTR 0.3%, average position 9.2. 200 queries and 677 pages with impressions. Top 26 queries and top 18 pages by impressions read from the table, with CTR and position. Page indexing: 878 indexed, 13 not indexed, "Not found (404)", validation still "Started".
+
+**Top queries (all 0 clicks; impressions, position):** the "context failure detection strategy ... same query twice" question 99 (9.4), plus 16 without "?" (9.5); the "style guide vs. pattern-matching your prompts" question 48 (10.0); "semantic mismatch" 18 (7.8); "de-identified patient samples" 18 (64.9); "automated litigation support" 18 (74.4); "factor crowding risk" 16 (6.5); "deterministic tool calling with sql" 15 (43.5); the underwriting business-class-code question 10 (6.2); "ai documentation completeness" 10 (85.0); "automatic approval review timed out while evaluating the requested approval" 7 (6.7) and 7 with a period (7.9); "stale state" 4 (1.0).
+
+**Top pages by impressions (clicks, impressions, CTR, position):** /patterns/ 1, 1,718, 0.1%, 6.9; /difficult-customers/failures/mishandled-abuse.md 1, 158, 0.6%, 5.0; /approval-timeout-mishandling/ 0, 97, 0%, 7.0; /mishandled-abuse/ 0, 95, 0%, 4.9; /stale-state-use/ 0, 77, 0%, 7.9; /chunk-boundary/ 0, 65, 0%, 6.9; /semantic-mismatch/ 0, 65, 0%, 9.6; /goals/voice-synthesis/ 0, 57, 0%, 9.6; /conflicting-instructions/ 1, 56, 1.8%, 5.3; /multi-agent-false-consensus-risk/ 0, 56, 0%, 6.9.
+
+**Opportunities:**
+- **Low click-through:** /patterns/ has 1,718 impressions at position 6.9 but CTR 0.1% (site 0.3%). Its title is "Agent Failure Patterns | Good Agent Lab" and its description is 84 characters. Site repo page, so proposal 5 in merge-proposals.md.
+- **Near page one:** /semantic-mismatch/ (position 9.6; query "semantic mismatch" at 7.8) has a generic title. Older pattern outside the HMI folder, so proposal 6.
+- **HMI page:** mishandled-abuse gets 253 impressions across its old `.md` URL (308 to the new one, checked today) and /mishandled-abuse/ at position about 5, with 1 click. Its title and description were already rewritten for search; no change. Google should merge the old URL over time.
+- **Not indexed:** the 13 404s are still in validation. Nothing to do.
+- **Query with no matching page:** none new that fits the chat-first scope.
+
+**Action:** proposals 5 and 6 added to merge-proposals.md. No page changed.
