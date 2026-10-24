@@ -498,3 +498,14 @@ Supabase says there has been no reported customer leak via MCP, and its advice i
 Test it: put an instruction in a test ticket and check your agent only shows it.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-24 (run 125): LA Times Insights "different views" on the KKK
+Draft only. Source: the teardown page, built from the LA Times letter to readers and Gustavo Arellano's column, TheWrap, The Daily Beast, GIGAZINE and B&T, opened 2026-10-24. Status Needs review.
+
+On March 3, 2025, the Los Angeles Times launched Insights, an AI feature that adds "different views" to opinion pieces.
+The paper said the text is not created by its editorial staff.
+On a column about Anaheim's 1925 recall of Klan council members, Insights added a bullet that framed the 1920s Klan as less than a hate-driven movement.
+Per TheWrap and The Daily Beast, the paper removed Insights from that column within about a day.
+If your feature must always produce a counterpoint, test what it says on topics where there is no fair other side.
+
+Teardown: (add the link after it is published)
