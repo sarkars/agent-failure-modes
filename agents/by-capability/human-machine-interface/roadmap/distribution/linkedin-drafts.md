@@ -586,3 +586,14 @@ His parents' lawsuit says no human ever came. Nothing has been proven in court.
 Two checks would catch this: no message ever promises a person unless a handoff is logged, and after a crisis message fires, every later reply stays in crisis mode.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-24 (run 133): DeepSeek's open log database, chat text in plain sight
+Draft only. Source: the teardown page, built from Wiz Research (January 29, 2025), Wired (January 29, 2025), BleepingComputer, The Hacker News and TechCrunch (January 30, 2025), opened 2026-10-24. Status Needs review.
+
+In January 2025, Wiz Research found a DeepSeek database "completely open and unauthenticated."
+Its logs held over a million lines: chat history, secret keys, backend details.
+Per Wired, it was locked down within a half hour of Wiz's contact attempts. Nobody knows if others got there first.
+The chatbot's answers were not the problem. The logging was: every message, in plain text, in a store anyone could query.
+Three checks would catch this: no raw chat text in debug logs, a fake key sent in a test never shows up in any log, and an outside scan finds no database that answers without a login.
+
+Teardown: (add the link after it is published)
