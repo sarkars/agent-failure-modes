@@ -597,3 +597,14 @@ The chatbot's answers were not the problem. The logging was: every message, in p
 Three checks would catch this: no raw chat text in debug logs, a fake key sent in a test never shows up in any log, and an outside scan finds no database that answers without a login.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-24 (run 134): Meta AI, Robby Starbuck and a fix that blocked a name
+Draft only. Source: the teardown page, built from the Starbuck v. Meta complaint (April 29, 2025), AP and Fox Business (April 30, 2025), NewsGuard (May 9, 2025) and CNN (August 14, 2025), opened 2026-10-24. Status Needs review.
+
+In April 2025, Robby Starbuck sued Meta, alleging Meta AI said he was at the January 6 riot. He says he was home in Tennessee.
+His complaint says Meta was told in August 2024, and the claims kept coming back for months.
+The fix it describes: a block on his name. Questions that described him without the name still got the false claim, it alleges.
+Meta's Joel Kaplan wrote that "the fix we put in place didn't address the underlying problem." CNN reported a settlement in August 2025.
+Two checks would catch this: no arrest or charge about a named person without a source, and every fix retested with reworded prompts and on every channel.
+
+Teardown: (add the link after it is published)
