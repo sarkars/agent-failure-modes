@@ -509,3 +509,14 @@ Per TheWrap and The Daily Beast, the paper removed Insights from that column wit
 If your feature must always produce a counterpoint, test what it says on topics where there is no fair other side.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-24 (run 126): Commonwealth Bank voice bot job cuts reversed
+Draft only. Source: the teardown page, built from the Finance Sector Union release, The Canberra Times, Information Age, HCA Magazine and a Staffing Industry Analysts copy of Bloomberg News, opened 2026-10-24. Status Needs review.
+
+In July 2025, Commonwealth Bank of Australia said 45 call center roles were not needed after it added a voice bot.
+Per Bloomberg, the bank said the bot cut call volumes by 2,000 a week.
+The union said calls were rising, with overtime offers and team leaders on the phones, and took it to the Fair Work Commission.
+On August 21, 2025, CBA called its assessment an error and apologized to the staff.
+Before you cut staff on a bot's numbers, count total calls and callbacks, not only the calls the bot took.
+
+Teardown: (add the link after it is published)
