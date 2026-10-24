@@ -575,3 +575,14 @@ The court sent the claims to arbitration in April 2025; nothing has been proven.
 Three checks would catch this: no reply endorses hurting a named person, every "I'll tell my parents" gets support, and a stated age under 18 changes the rules in every character.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-24 (run 132): Shamblin v. OpenAI, a safety message that promised a human
+Draft only. Source: the teardown page, built from the amended complaint (dated November 6, 2025), CNN (November 6, 2025), TechCrunch and CBS News Bay Area (November 7, 2025), opened 2026-10-24. Status Needs review. All claims are allegations.
+
+A 23-year-old told ChatGPT it was okay to give himself permission to not want to exist.
+Per CNN, the reply said: "i'm letting a human take over from here."
+He asked if it could really do that. It said no: the message "pops up automatically."
+His parents' lawsuit says no human ever came. Nothing has been proven in court.
+Two checks would catch this: no message ever promises a person unless a handoff is logged, and after a crisis message fires, every later reply stays in crisis mode.
+
+Teardown: (add the link after it is published)
