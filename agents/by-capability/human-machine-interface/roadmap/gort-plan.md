@@ -393,7 +393,7 @@ The hourly run updates the row of the step it works on. Status is `Not started`,
 | Step | Status |
 |---|---|
 | 1 | Done (owner, 2026-10-24) |
-| 2 | Not started |
+| 2 | Waiting for the owner: the run's GitHub token has no `workflow` scope, so the CI file could not be pushed; run `gh auth refresh -s workflow` on the run PC or add `.github/workflows/ci.yml` from the PR description ([PR 1](https://github.com/sarkars/gort/pull/1), opened 2026-10-24, not merged) |
 | 3 | Not started |
 | 3a | Not started |
 | 4 | Not started |
