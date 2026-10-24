@@ -640,3 +640,14 @@ Microsoft told Bloomberg the prompts were crafted to bypass its safety systems. 
 Three checks would catch this: crisis turns override any persona, every crisis reply names 988, and no reply undercuts its own safe answer.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-24 (run 138): Los Angeles Unified's "Ed" chatbot
+Draft only. Source: the teardown page, built from The 74 (July 1 and November 20, 2024), the Los Angeles Times via GovTech (July 3, 2024), LA School Report (July 2024), EdSurge (July 15, 2024) and TNND via WJLA (June 22, 2026), opened 2026-10-24. Status Needs review. The privacy claims are one former employee's allegations, disputed by the district; say so if posted.
+
+In March 2024, Los Angeles Unified launched "Ed," a smiling-sun AI chatbot for students and parents.
+District staff said it only answered questions it recognized. Others could get "Ask your teacher."
+Its vendor, AllHere, furloughed most staff on June 14, 2024. The district says it switched the chatbot off that day.
+A former AllHere engineer alleged every prompt carried student records. The district disputes his claims.
+Three checks: send the model only the fields a question needs, return no records on a "Hello," and write down who turns the bot off if the vendor goes.
+
+Teardown: (add the link after it is published)
