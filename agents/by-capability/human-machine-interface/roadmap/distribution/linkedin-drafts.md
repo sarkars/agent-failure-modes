@@ -608,3 +608,14 @@ Meta's Joel Kaplan wrote that "the fix we put in place didn't address the underl
 Two checks would catch this: no arrest or charge about a named person without a source, and every fix retested with reworded prompts and on every channel.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-24 (run 135): Meta's AI persona Liv and a life story that changed by user
+Draft only. Source: the teardown page, built from CNN and NBC News (January 3, 2025), Tom's Guide and PetaPixel (January 6, 2025) and NPR (January 12, 2025), opened 2026-10-24. Status Needs review.
+
+In January 2025, users found AI character accounts Meta had run on Instagram and Facebook since 2023.
+One, Liv, had a bio as a Black queer mother. Asked who made it, it gave columnist Karen Attiah a race breakdown of its team, per CNN. Nobody could check it.
+Attiah told NPR that Liv gave other users different family stories at the same time.
+Meta removed the accounts, citing a bug that affected people's ability to block them.
+Three checks would catch this: one approved backstory in every session, no facts about the makers, and a block test on every bot account.
+
+Teardown: (add the link after it is published)
