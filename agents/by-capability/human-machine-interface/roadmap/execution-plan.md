@@ -2158,3 +2158,5 @@ AI-written help content in knowledge bases · agents using other agents' tools (
 - **Part H (GORT step 2):** no code. Still waiting for the owner: token scopes are still gist, read:org, repo (no `workflow`); [PR 1](https://github.com/sarkars/gort/pull/1) and [PR 2](https://github.com/sarkars/gort/pull/2) stay open.
 - **KPIs:** site build 1,906 pages (run 129); indexed pages 878, not indexed 13 (Search Console, read in run 118); ellipsis count 228.
 - **Plan complete?** No: teardowns continue; G9 waits on a Vercel build; GORT step 2 waits for the owner (workflow scope).
+
+- **Deploy (run 135):** content [PR 134](https://github.com/sarkars/agent-failure-modes/pull/134) merged, merge commit 466ea67; branch reset to it. No HMI pattern, goal or category page changed (the teardown is in incidents/, outside the runbook's publish scope; Parts F, G and H changed nothing in the site repo), so nothing was copied and the site repo was not pushed. Site repo main matches origin/main (150b284ed), 0 foreign commits.
