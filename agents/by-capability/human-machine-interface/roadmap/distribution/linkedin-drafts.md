@@ -719,3 +719,14 @@ His lawyer filed them without checking, believing another lawyer had found them.
 Three checks for any general chatbot: say it generates text before giving citations, give a way to confirm each one, and never answer "is this real?" with yes unless a source backs it.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-26 (run 145): a summer reading list of books that do not exist
+Draft only. Source: the teardown page, built from NPR, AP (via ClickOnDetroit), NBC News, The Philadelphia Inquirer, Axios Philadelphia, Fox 32 Chicago, Nieman Lab and the free opening of 404 Media, all dated May 20-21, 2025, opened 2026-10-26. Status Needs review. Statements are the parties' own positions as reported; say so if posted.
+
+In May 2025, two big US papers printed a "Summer Reading list for 2025."
+It named real authors. Most of the books do not exist; NPR counted only five of the 15 titles as real.
+The freelance writer said he used AI and did not check it this time.
+The syndicator said the AI use was not disclosed. Neither newsroom saw the section before print.
+Three checks for any assistant that drafts lists: look up each item or mark it unconfirmed, write no blurb for a book it did not find, and label copied text as AI-drafted.
+
+Teardown: (add the link after it is published)

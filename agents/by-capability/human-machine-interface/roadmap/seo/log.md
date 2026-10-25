@@ -112,3 +112,18 @@ Still blocked: no Search Console access (no Chrome tools, empty `inbox/`) and no
 - **Query with no matching page:** none new that fits the chat-first scope. The profanity query is not a topic to target.
 
 **Action:** none. No content page changed; no merge proposal added.
+
+## 2026-10-26 (UTC), scheduled run 145
+**Source:** Search Console, read in Chrome (property `https://agent-kb-autopublish.vercel.app/`). Default range shown, last 3 months (Jul 24 to Oct 23, 2026): 31 clicks, 10.8K impressions, average CTR 0.3%, average position 15. 430 queries with impressions. Top 10 queries read as text; top 6 pages read from the Pages tab on screen (clicks and impressions only). Page indexing report not opened this run. The range differs from run 139 (28 days), so the totals are not comparable.
+
+**Top queries (all 0 clicks; impressions):** the "context failure detection strategy ... same query twice" question 119; three variants of "vpc seller timing bad-state handoff" 71, 61 and 31; "de-identified patient samples" 55; the "style guide vs. pattern-matching your prompts" question 48; "voice agent conversation flow adherence" 29; "automatic approval review timed out while evaluating the requested approval" 28; "insecure output handling" 26; "de-identified clinical samples" 25.
+
+**Top pages by clicks (clicks, impressions):** /safety-filter-bypass/ 2, 50; /accusatory-or-harsh-refusals/ 2, 27; /canned-response-context-mismatch/ 2, 7; /patterns/ 1, 2,209; /difficult-customers/failures/mishandled-abuse.md 1, 339; /conflicting-instructions/ 1, 95.
+
+**Opportunities:**
+- **Low click-through:** /patterns/ 2,209 impressions, 1 click. Already covered by merge proposal 5 and Part G item G9 (built; the live page still has the old title "Agent Failure Patterns | Good Agent Lab", checked today).
+- **New page with clicks:** /safety-filter-bypass/ is outside the HMI folder (vision-and-images); no edit here.
+- **Odd query:** the "vpc seller timing bad-state handoff" variants look like automated or operator-prefixed queries; not a topic to target.
+- **Query with no matching page:** "voice agent conversation flow adherence" is voice, out of the chat-first scope for now.
+
+**Action:** none. No content page changed; no merge proposal added.
