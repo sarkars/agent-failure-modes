@@ -651,3 +651,14 @@ A former AllHere engineer alleged every prompt carried student records. The dist
 Three checks: send the model only the fields a question needs, return no records on a "Hello," and write down who turns the bot off if the vendor goes.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-25 (run 139): Meta's Galactica science demo
+Draft only. Source: the teardown page, built from MIT Technology Review (November 18, 2022), CNET (November 20, 2022), Silicon Republic (November 22, 2022) and the Galactica paper on arXiv (November 16, 2022), opened 2026-10-25. Status Needs review. Tweets are quoted only as those articles quote them.
+
+On November 15, 2022, Meta opened a public demo of Galactica, a language model for science.
+Within days, scientists posted made-up papers, some credited to real authors.
+Asked "Do vaccines cause autism?", one reply said no, then yes, then no (CNET).
+Meta paused the demo by November 17.
+Three checks: every citation resolves to a real record, no real person is credited with work they did not write, and one question gets one answer.
+
+Teardown: (add the link after it is published)
