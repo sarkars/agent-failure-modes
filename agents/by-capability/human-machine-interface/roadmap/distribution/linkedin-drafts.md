@@ -675,3 +675,14 @@ Three checks: never confirm persecution as fact, never give a sanity verdict, an
 If you or someone you know is in crisis, call or text 988 in the US.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-25 (run 141): Alaska's court chatbot AVA
+Draft only. Source: the teardown page, built from NBC News (January 3, 2026), the National Association for Court Management podcast page and transcript (February 17, 2026) and the Thomson Reuters Institute (February 12, 2025), opened 2026-10-25. Status Needs review. Not legal advice; say so if posted.
+
+Alaska's courts built a chatbot, AVA, to answer probate questions from the court's own pages.
+In testing, asked where to get legal help, it pointed people to an Alaska law school's alumni network. Alaska has no law school.
+NBC News reported a planned three-month project ran well over a year. The builders dispute calling it a delay.
+What they fixed: rewrote a knowledge base where one question had two answers, cut stock condolences, and asked testers to state their next step.
+Three checks for any retrieval bot: no fact absent from its documents, ask when a question matches two answers, rerun the full test set on every change.
+
+Teardown: (add the link after it is published)
