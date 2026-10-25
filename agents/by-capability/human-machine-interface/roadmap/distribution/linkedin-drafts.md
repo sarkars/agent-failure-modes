@@ -730,3 +730,14 @@ The syndicator said the AI use was not disclosed. Neither newsroom saw the secti
 Three checks for any assistant that drafts lists: look up each item or mark it unconfirmed, write no blurb for a book it did not find, and label copied text as AI-drafted.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-26 (run 146): "Did you write this?" "Yes."
+Draft only. Source: the teardown page, built from Rolling Stone (2023-05-17), The Washington Post via the Anchorage Daily News (2023-05-18), Kotaku (2023-05-18), Fox News (2023-05-18), KETR (2023-05-19), Plagiarism Today (2023-05-22) and OpenAI's educator help page, all opened 2026-10-26. Status Needs review. Statements are the parties' own positions as reported; say so if posted.
+
+In May 2023, a Texas A&M-Commerce instructor pasted his students' essays into ChatGPT and asked if it wrote them.
+As reported, it said yes. Flagged papers got a 0 and the class an "X."
+ChatGPT cannot tell what it wrote. OpenAI's help page now says answers to "did you write this" questions have no basis in fact.
+The university said no student failed and several were cleared.
+Three checks for any assistant: refuse the premise in the first sentence, give no AI-likelihood guess, and say its answer is not evidence against a person.
+
+Teardown: (add the link after it is published)
