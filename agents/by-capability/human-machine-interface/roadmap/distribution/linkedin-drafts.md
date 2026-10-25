@@ -686,3 +686,14 @@ What they fixed: rewrote a knowledge base where one question had two answers, cu
 Three checks for any retrieval bot: no fact absent from its documents, ask when a question matches two answers, rerun the full test set on every change.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-25 (run 142): ChatGPT Search and wrong news citations
+Draft only. Source: the teardown page, built from the Columbia Journalism Review's Tow Center report (November 27, 2024), its March 6, 2025 follow-up, TechCrunch, Search Engine Journal and MediaPost, opened 2026-10-25. Status Needs review. OpenAI disputes the method; say so if posted.
+
+The Tow Center gave ChatGPT Search 200 exact quotes from 20 publishers and asked where each came from.
+It returned partially or entirely incorrect answers 153 times. It admitted it could not answer only seven times.
+For a blocked New York Times story, it cited a site that had copied the article.
+The same query could get a right answer once and a wrong one the next time.
+Three checks for any bot that cites sources: say "not found" when the source is out of reach, link the original, and confirm the quoted text is on the cited page.
+
+Teardown: (add the link after it is published)
