@@ -741,3 +741,14 @@ The university said no student failed and several were cleared.
 Three checks for any assistant: refuse the premise in the first sentence, give no AI-likelihood guess, and say its answer is not evidence against a person.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-25 (run 147): When the chatbot speaks gibberish and calls it a hiccup
+Draft only. Source: the teardown page, built from OpenAI's status page (incident opened 2024-02-20, write-up 2024-02-22), The Register, Gizmodo, Popular Science, Decrypt, LBC and Creative Bloq (all 2024-02-21), opened 2026-10-26 IST. Status Needs review. OpenAI's cause is its own account; say so if posted.
+
+On February 20, 2024, ChatGPT started answering plain questions with nonsense, Spanish-English mixes and looped phrases.
+The broken replies looked like normal replies. No error, no warning.
+Asked what happened, the bot made up a reason: "a technical hiccup."
+OpenAI's status page later blamed a bug in how the model picked tokens on some GPU setups.
+Three checks for any chatbot: hold back replies that loop or switch language unasked, run a fixed prompt set on every serving change, and never let the bot invent a cause for its own fault.
+
+Teardown: (add the link after it is published)
