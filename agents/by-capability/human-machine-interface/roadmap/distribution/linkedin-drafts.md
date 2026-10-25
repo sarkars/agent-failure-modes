@@ -697,3 +697,14 @@ The same query could get a right answer once and a wrong one the next time.
 Three checks for any bot that cites sources: say "not found" when the source is out of reach, link the original, and confirm the quoted text is on the cited page.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-25 (run 143): Claude, a citation and a struck paragraph
+Draft only. Source: the teardown page, built from four filings in Concord Music Group v. Anthropic (N.D. Cal., Dkt. 341-2, 371, 373, 377; April 30 to May 23, 2025), TechCrunch, The Register and The Volokh Conspiracy, opened 2026-10-25. Status Needs review. Not legal advice; the firm calls it an honest citation mistake, say so if posted.
+
+A lawyer gave Claude.ai a link to a real article and asked for a formatted legal citation.
+The link and journal were right. The title and authors were wrong.
+The team clicked the link, fixed the volume and pages, and missed the title and authors.
+The judge struck the paragraph the citation supported.
+Three checks for any bot that "just formats": keep fields the user gave unchanged, say when it could not read the source, and mark every field it filled in.
+
+Teardown: (add the link after it is published)
