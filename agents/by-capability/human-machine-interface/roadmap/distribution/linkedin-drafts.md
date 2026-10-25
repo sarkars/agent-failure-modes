@@ -708,3 +708,14 @@ The judge struck the paragraph the citation supported.
 Three checks for any bot that "just formats": keep fields the user gave unchanged, say when it could not read the source, and mark every field it filled in.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-25 (run 144): Michael Cohen, Google Bard and three cases that do not exist
+Draft only. Source: the teardown page, built from United States v. Cohen (S.D.N.Y., No. 1:18-cr-00602, Dkt. 95, 96, 103, 104, 108; December 2023 to March 20, 2024), NPR (AP), Malay Mail (Reuters) and The Verge, opened 2026-10-25. Status Needs review. Not legal advice; the court found negligence, not bad faith, and sanctioned no one, say so if posted.
+
+Michael Cohen needed a few cases for a court motion. He asked Google Bard.
+He said he thought it was a "super-charged search engine."
+Bard gave him three Second Circuit cases. None of them exist.
+His lawyer filed them without checking, believing another lawyer had found them.
+Three checks for any general chatbot: say it generates text before giving citations, give a way to confirm each one, and never answer "is this real?" with yes unless a source backs it.
+
+Teardown: (add the link after it is published)
