@@ -97,3 +97,18 @@ Still blocked: no Search Console access (no Chrome tools, empty `inbox/`) and no
 - **Query with no matching page:** none new that fits the chat-first scope.
 
 **Action:** proposals 5 and 6 added to merge-proposals.md. No page changed.
+
+## 2026-10-25 (UTC), scheduled run 139
+**Source:** Search Console, read in Chrome (property `https://agent-kb-autopublish.vercel.app/`). Last 28 days (Sep 26 to Oct 23, 2026): 24 clicks, 6.08K impressions, average CTR 0.4%, average position 8.9. 255 queries with impressions. Top 10 queries read as text; top 6 pages read from the Pages tab on screen (clicks and impressions only). Page indexing report not opened this run.
+
+**Top queries (all 0 clicks; impressions):** the "context failure detection strategy ... same query twice" question 107 (17 more without "?"); the "style guide vs. pattern-matching your prompts" question 48; "semantic mismatch" 18; "de-identified patient samples" 18; "automated litigation support" 18; "factor crowding risk" 16; "deterministic tool calling with sql" 15; "ai documentation completeness" 11; a German profanity query 10.
+
+**Top pages by clicks (clicks, impressions):** /accusatory-or-harsh-refusals/ 2, 27; /canned-response-context-mismatch/ 2, 6; /patterns/ 1, 1,598; /difficult-customers/failures/mishandled-abuse.md 1, 339; /background-interference/ 1, 54; /conflicting-instructions/ 1, 52.
+
+**Opportunities:**
+- **HMI page earning clicks:** /accusatory-or-harsh-refusals/ (HMI, refusals-and-boundaries) got 2 clicks from 27 impressions. Its title and description were already rewritten for search; no change.
+- **Low click-through:** /patterns/ 1,598 impressions, 1 click. Already covered by merge proposal 5 and Part G item G9 (built; the live page is still the old one, title "Agent Failure Patterns | Good Agent Lab", checked today).
+- **Old URL:** /difficult-customers/failures/mishandled-abuse.md still collects impressions (339); it returns 308 to /mishandled-abuse/ (checked run 118). Nothing to do.
+- **Query with no matching page:** none new that fits the chat-first scope. The profanity query is not a topic to target.
+
+**Action:** none. No content page changed; no merge proposal added.
