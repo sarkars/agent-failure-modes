@@ -939,3 +939,14 @@ Google pulled Gemma from AI Studio and said it was never meant as a consumer too
 Three checks for any model people can reach through a chat box: no source, no accusation; links must support the claim; say plainly what the tool is not for.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-26 (run 168): The condolence email said, at the bottom, that ChatGPT wrote it.
+Draft only. Source: the teardown page, built from two Vanderbilt Hustler reports (February 17 and April 12, 2023), CNN (via KTVZ) and ABC News (via ABC13), opened 2026-10-26. Status Needs review. Say that no opened source says how much of the email a person wrote, and that Vanderbilt reported no findings from its review.
+
+In February 2023, a Vanderbilt college office emailed students after the Michigan State shooting.
+A small line at the end said the text was paraphrased from ChatGPT.
+The email spoke of "shootings" in the plural. There was one. Per ABC News, it listed no campus resources.
+The associate dean apologized the next day; two deans stepped back during a review.
+Three checks before any AI-drafted message goes to people in grief: get the facts of the event right, attach real help, and run the full review your process requires.
+
+Teardown: (add the link after it is published)
