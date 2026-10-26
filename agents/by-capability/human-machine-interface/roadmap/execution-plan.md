@@ -538,6 +538,7 @@ Run N covers queue orders as shown. At one run every hour, 91 runs take about 91
 - **KPIs:** site build 1,906 pages (this run); indexed pages 878, not indexed 13 (Search Console, read in run 118); ellipsis count 228.
 - **Plan complete?** No: teardowns continue; G11 live check, G10 and G12-G14 open; GORT step 2 waits for the owner (workflow scope).
 - **Note for the owner:** the subagent's grep crashed and left two more untracked `grep.exe.stackdump` files (in `goals/` and `incidents/`), besides the one in the repo root; none committed, none deleted.
+- **Deploy (run 158):** content [PR 157](https://github.com/sarkars/agent-failure-modes/pull/157) merged, merge commit 42fd28f; branch reset to it. No HMI pattern, goal or category page changed (the teardown is in incidents/), so no content was copied. The site repo was pushed once this run, for G11: site commit c69c78cdd (author mobilemag) on main; its main had 0 commits this run did not create. Build 1,906 pages, 0 URLs removed (live sitemap 1,905 URLs, all in the build). Live check: "Related Guide" was not yet on the live /accent-dialect-bias/ page at the end of the run, so this is pushed to site repo main, not verified live; G11 stays Built, not Done.
 
 ## Queue
 Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Library** column is the status in the catalog when the queue was built (**New** or **Extends**).
