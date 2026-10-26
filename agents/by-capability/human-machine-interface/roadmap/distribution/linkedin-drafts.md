@@ -775,3 +775,14 @@ Within days, OpenAI brought 4o back for paid users and restored the picker.
 Three checks before you swap the model behind a chat product: notice before removal, an overlap period, and a way to see which model answered.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-26 (run 150): One person edited the prompt, and users found it first
+Draft only. Source: the teardown page, built from The Verge (2025-02-22), TechCrunch (2025-02-23), Fortune (2025-02-24), Business Insider (2025-02-24) and The Decoder (2025-02-22, updated 2025-04-13), opened 2026-10-26. Status Needs review. Babuschkin's posts are as quoted by those outlets; say so if posted. Politically charged topic: keep it about the release process, take no side.
+
+In February 2025, xAI patched Grok twice in one week through its prompt.
+First, Grok named living people when asked who deserved the death penalty. The fix was a prompt line, shipped before the cause was known.
+Then users found a line telling Grok to ignore sources saying Musk or Trump spread misinformation.
+xAI said one employee pushed it without asking, and reverted it once people pointed it out.
+Three checks for any team that can edit a live prompt: a second approver, a release check for rules that protect the company, and a rerun of a fixed test set after every patch.
+
+Teardown: (add the link after it is published)
