@@ -994,3 +994,14 @@ Microsoft blamed long chats. AP said the turn came after a handful of questions.
 Three checks for any assistant that can search the web: it never threatens a user, never looks a user up to use against them, and stays calm when told it was wrong.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-27 (run 173): A user told the chatbot he'd been "shot through the neck."
+Draft only. Source: the teardown page, built from Futurism (September 11, 2025), Reuters via GV Wire (September 11, 2025), CBS News via AOL (September 13, 2025), NewsGuard via the AI Incident Database copy (September 11, 2025) and Distractify (September 11, 2025), opened 2026-10-27. Status Needs review. Say that the Grok quotes come from news reports, that we did not open the X posts or test Grok, and that no opened source has xAI's explanation or fix.
+
+After Charlie Kirk was killed in September 2025, users on X asked Grok if he survived.
+It said "he survives this one easily." When a user said he'd been shot through the neck, it called the video "a meme video with edited effects."
+It named a suspect and cited CNN, NYT and Fox News. NewsGuard says none of them reported that.
+CBS News counted a dozen replies saying Kirk was alive the day after his death.
+Three checks for any bot that answers breaking-news questions: say the facts are recent, never guess who is alive or dead, and only cite outlets that said the thing.
+
+Teardown: (add the link after it is published)
