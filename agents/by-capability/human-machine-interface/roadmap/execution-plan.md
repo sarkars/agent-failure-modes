@@ -511,6 +511,8 @@ Run N covers queue orders as shown. At one run every hour, 91 runs take about 91
 - **Plan complete?** No: teardowns continue; G9 waits on a Vercel build; GORT step 2 waits for the owner (workflow scope).
 - **Note for the owner:** the untracked `grep.exe.stackdump` is still in the content repo root; not committed, not deleted.
 
+- **Deploy (run 156):** content [PR 155](https://github.com/sarkars/agent-failure-modes/pull/155) merged, merge commit cc72bba; branch reset to it. No HMI pattern, goal or category page changed (the teardown is in incidents/, outside the runbook's publish scope; Parts F, G and H changed nothing in the site repo), so nothing was copied and the site repo was not pushed. Site repo main matches origin/main (150b284ed), 0 foreign commits.
+
 ## Queue
 Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Library** column is the status in the catalog when the queue was built (**New** or **Extends**).
 
