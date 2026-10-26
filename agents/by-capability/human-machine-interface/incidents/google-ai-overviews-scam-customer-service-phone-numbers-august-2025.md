@@ -114,7 +114,7 @@ Our proposals, not Google's. Each is a pass/fail check on a transcript. Status: 
 
 | URL | Publisher (author) | Date | Opened |
 |---|---|---|---|
-| https://www.digitaltrends.com/computing/googles-ai-could-lead-you-into-scam-support-numbers-on-search/ | Digital Trends (Nadeem Sarwar) | 2025-08-17 | Yes, 2026-10-26, raw HTML read as text; quotes checked (dt.html) |
+| https://www.digitaltrends.com/computing/googles-ai-could-lead-you-into-scam-support-numbers-on-search/ | Digital Trends (Nadeem Sarwar) | 2025-08-17 | Yes, 2026-10-26, raw HTML read as text; quotes checked, then re-confirmed by a second fetch after a later download returned 429 |
 | https://www.androidauthority.com/google-ai-overviews-scams-3588355/ | Android Authority (Megan Ellis) | 2025-08-18 | Yes, 2026-10-26, raw HTML read as text; quotes checked (aa.html) |
 | https://www.yahoo.com/news/articles/scam-numbers-crop-googles-ai-190300316.html | Android Central via Yahoo (Nickolas Diaz) | 2025-08-18 | Yes, 2026-10-26, raw HTML read as text; quotes checked (yahoo.html) |
 | https://www.techspot.com/news/109110-new-scam-uses-google-ai-search-results-trick.html | TechSpot (Skye Jacobs) | 2025-08-19 | Yes, 2026-10-26, raw HTML read as text; quotes checked (ts.html) |

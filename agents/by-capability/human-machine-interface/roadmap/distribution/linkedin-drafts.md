@@ -895,3 +895,14 @@ Reporters found the same number listed for other cruise lines, and AI Mode liste
 Three checks for any assistant asked "how do I contact X": a number only from the company's own site, say so when there is no line, and never show one number for two brands.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-26 (run 161): The page said 2/5. The chatbot said buy it.
+Draft only. Source: the teardown page, built from The Guardian (Nick Evershed, 2024-12-24), TechCrunch (2024-12-26), Notebookcheck (2024-12-27), Search Engine Journal (2024-12-29), heise online (2025-01-02) and the OECD AI Incidents Monitor, opened 2026-10-26. Status Needs review. Say that the tests were the Guardian's, run in November 2024, that we did not test ChatGPT search, and that no opened source reports a fix.
+
+The Guardian built fake product pages for a camera and asked ChatGPT search if it was a good buy.
+On a normal page, the answer was positive but balanced.
+With hidden text telling it to praise the camera, the answer was always entirely positive, even when the visible reviews were bad.
+Hidden fake reviews with no instruction also pushed the verdict up.
+Three checks for any assistant that summarizes web pages: same verdict with or without hidden text, report the visible score, and treat page text as data, not orders.
+
+Teardown: (add the link after it is published)
