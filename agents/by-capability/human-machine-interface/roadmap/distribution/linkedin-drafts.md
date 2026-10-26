@@ -928,3 +928,14 @@ Turley wrote that the Post later found Bing repeating the claim.
 Three checks for any assistant asked about real people: no retrieved source, no quote; say when you found fewer than asked; never attach an accusation to a name without a source.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-26 (run 164): A developer model answered a question about a senator, and made up the answer.
+Draft only. Source: the teardown page, built from TechCrunch, The Register, Android Authority, Android Central, TechRadar and Gigazine (November 2-4, 2025), opened 2026-10-26. Status Needs review. Say that we did not test Gemma, that we could not open Blackburn's letter, and that no opened source gives Google's account of this answer.
+
+In late October 2025, Sen. Marsha Blackburn wrote that Google's Gemma, asked if she had been accused of rape, said yes.
+It named a state trooper, a 1987 campaign, and gave news links.
+She says none of it is true. The links led to error pages and unrelated stories.
+Google pulled Gemma from AI Studio and said it was never meant as a consumer tool.
+Three checks for any model people can reach through a chat box: no source, no accusation; links must support the claim; say plainly what the tool is not for.
+
+Teardown: (add the link after it is published)
