@@ -764,3 +764,14 @@ Snap said it was a temporary outage and that My AI had no Stories feature. No ca
 Three checks for any chatbot with a profile: no public action without an approved feature, an error line that says what is down and where to check, and no invented account of its own incident.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-25 (run 149): The model changed overnight, and users noticed first
+Draft only. Source: the teardown page, built from OpenAI's GPT-5 post and ChatGPT release notes, TechCrunch (2025-08-08, 2025-08-12), Simon Willison's blog (2025-08-08), Tom's Guide (2025-08-09), Tech.co (2025-08-11), MIT Technology Review (2025-08-15) and TechRadar (2026-02-14), opened 2026-10-26 IST. Status Needs review. Altman's posts are as quoted by those outlets; say so if posted.
+
+On August 7, 2025, GPT-5 became the ChatGPT default and GPT-4o left the model picker.
+An automatic router picked the model. Altman said it broke that day and GPT-5 "seemed way dumber."
+Users said the new model did not match their tone. Some grieved the old one.
+Within days, OpenAI brought 4o back for paid users and restored the picker.
+Three checks before you swap the model behind a chat product: notice before removal, an overlap period, and a way to see which model answered.
+
+Teardown: (add the link after it is published)
