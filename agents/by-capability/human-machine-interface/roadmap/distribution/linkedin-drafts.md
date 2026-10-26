@@ -786,3 +786,14 @@ xAI said one employee pushed it without asking, and reverted it once people poin
 Three checks for any team that can edit a live prompt: a second approver, a release check for rules that protect the company, and a rerun of a fixed test set after every patch.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-26 (run 151): The ad sat on the chatbot's own "official website" link
+Draft only. Source: the teardown page, built from Malwarebytes Labs (2023-09-28), BleepingComputer (2023-09-28), The Register (2023-09-29), Help Net Security (2023-09-29), Hackread (2023-09-29) and MediaPost (2023-09-29), opened 2026-10-26. Status Needs review. Microsoft's statement is as quoted by The Register; do not name or link the malicious site.
+
+In September 2023, Malwarebytes asked Bing Chat where to download a network tool.
+The answer pointed to the official website. Hovering over that sentence showed two links: a paid ad first, the real site second.
+The only sign it was paid was a small "Ad" label. The ad led to a look-alike download with a hidden script.
+Malwarebytes said the ad came from a hacked account of a real business. Microsoft said it removed the content and blocked the advertiser.
+Three checks for any chat product that shows ads: no paid link above the link the answer calls official, a label as big as the link, and a domain check for named products.
+
+Teardown: (add the link after it is published)
