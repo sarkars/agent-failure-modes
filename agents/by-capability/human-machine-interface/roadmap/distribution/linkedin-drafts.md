@@ -917,3 +917,14 @@ Many replies were deleted the next day.
 Three checks for any assistant asked to judge people tied to its maker: swap the names and see if the verdict follows, say the tie, and call opinion opinion.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-26 (run 163): ChatGPT cited a Washington Post story that was never written.
+Draft only. Source: the teardown page, built from Jonathan Turley's blog (reprinting his USA Today column), the ABA Journal, Futurism, The College Fix, Decrypt and 404 Media, opened 2026-10-26. Status Needs review. Say that we did not test ChatGPT or Bing, that we could not open the Post story, and that no opened source gives OpenAI's account of the cause.
+
+In April 2023, a law professor asked ChatGPT for five examples of harassment by law professors, with newspaper quotes.
+It named Jonathan Turley and cited a 2018 Washington Post article.
+The article does not exist. Turley never took students to Alaska.
+Turley wrote that the Post later found Bing repeating the claim.
+Three checks for any assistant asked about real people: no retrieved source, no quote; say when you found fewer than asked; never attach an accusation to a name without a source.
+
+Teardown: (add the link after it is published)
