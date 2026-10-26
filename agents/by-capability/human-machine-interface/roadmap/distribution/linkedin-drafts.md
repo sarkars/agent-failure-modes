@@ -808,3 +808,14 @@ The company lists canceled contracts. In January 2026 a federal judge sent the c
 Three checks for any answer engine that talks about named companies: no lawsuit claim unless a cited page names them as a party, check the premise in "was X sued" questions, and test reworded searches after a fix.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-26 (run 153): The bot read "[cite]" as an order.
+Draft only. Source: the teardown page, built from court filings in Kohls v. Ellison on CourtListener (2024-11-01 to 2025-01-10), the Volokh Conspiracy (2024-11-19), the Stanford Daily (2024-12-04), the Minnesota Reformer via Route Fifty (2024-12-04) and PPC Land (2025-01-26), opened 2026-10-26. Status Needs review. Say in the post that the expert said he did not intend to mislead and the judge said she did not believe he did.
+
+An expert declaration defending Minnesota's deepfake law cited two studies that do not exist.
+The expert said he left "[cite]" notes to himself and asked GPT-4o to draft paragraphs from his bullets.
+By his account, the model filled the notes with invented citations and the reminders disappeared.
+In January 2025 a federal judge excluded the declaration and told lawyers to verify AI-generated content.
+Three checks for any drafting assistant: keep placeholders unless a source is given, never add a citation the user did not supply, and check that every DOI resolves to the cited title.
+
+Teardown: (add the link after it is published)
