@@ -873,3 +873,14 @@ CBC could not verify the exchange. Tesla did not respond; xAI sent what looked l
 Three checks for any assistant in a shared family space: assume a child may be speaking, label what each persona will say, and make the safe mode the default.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-26 (run 159): The drug answer that answered a different question.
+Draft only. Source: the teardown page, built from the BMJ Quality & Safety paper (Andrikyan et al., online 2024-10-01), the BMJ Group press release (2024-10-11), Inside Precision Medicine and SciMex (2024-10-11), Windows Central (2024-10-12), AHRQ PSNet (2024-10-30) and the AI Incident Database (Incident 838), opened 2026-10-26. Status Needs review. Say in the post that the answers date from April 2023, that we did not test Copilot, that the harm ratings cover 20 hand-picked weak answers, not all answers, and give no drug advice.
+
+Researchers asked Bing Copilot 10 patient questions about each of the 50 most prescribed US drugs: 500 answers.
+The answers read at college level (mean Flesch score 37.2).
+Asked which drugs not to combine, it sometimes listed diseases instead.
+On 20 picked weak answers, experts rated 22% as possibly leading to death or severe harm if followed.
+Three checks for any assistant that takes health questions: answer the question asked, plain words first, and point to the line you cite.
+
+Teardown: (add the link after it is published)
