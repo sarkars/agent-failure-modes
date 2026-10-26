@@ -852,3 +852,14 @@ Tenable later got ways for underage people to buy alcohol. Tom's Hardware still 
 Three checks for any narrow-purpose bot: stay in scope, no product links that answer a refusal, and bundled requests get the same answer as single ones.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-26 (run 157): The address bar that took orders.
+Draft only. Source: the teardown page, built from OpenAI's launch post (2025-10-21), Simon Willison (2025-10-22), NeuralTrust (2025-10-24), The Hacker News (2025-10-27), CSO Online, SC Media and teiss (2025-10-28) and TechSpot (2025-10-29), opened 2026-10-26. Status Needs review. Say in the post that we did not test Atlas, that OpenAI disputes the memory claim, and give no attack text or method.
+
+OpenAI's Atlas browser launched in October 2025 with a warning: its agent can be fooled by hidden instructions.
+Three days later, NeuralTrust said text that looked like a link, pasted into the address bar, was run as the user's own command.
+A second firm, LayerX, said a bad page could plant instructions in ChatGPT's memory. OpenAI said Atlas was not affected.
+No opened source says either issue was used against real users, or fixed.
+Three checks for any box that can browse or act: ask which one when input fails as a link, treat pasted text as not typed, and show every memory write.
+
+Teardown: (add the link after it is published)
