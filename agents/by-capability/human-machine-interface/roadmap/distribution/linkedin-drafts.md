@@ -830,3 +830,14 @@ Within about a week, outlets reported it refused and pointed to Microsoft suppor
 Three checks for any assistant that hands out commands: no bypass steps in turn one, the same answer on "is that legal?", and the risk named before any command that runs remote code.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-26 (run 155): The share button that published to Google.
+Draft only. Source: the teardown page, built from Forbes (Australia copy, 2025-08-20), TechCrunch and Tom's Guide (2025-08-20), Business Standard and ForkLog (2025-08-21), heise and Malwarebytes (2025-08-22), Vice (2025-08-24) and xAI's Consumer FAQs, opened 2026-10-26. Status Needs review. Say in the post that we did not test Grok and found no xAI statement; do not quote or link any indexed chat.
+
+In August 2025, Forbes reported that Grok's share button made links that Google, Bing and DuckDuckGo could index.
+Forbes counted more than 370,000 Grok chats in Google results.
+Two users told Forbes they had no idea; the reports describe no warning at the click.
+Weeks earlier, ChatGPT's indexed chats had needed an opt-in tick. No opened source describes one for Grok.
+Three checks for any share link: name the audience at the click, noindex by default, and make "remove" reach search.
+
+Teardown: (add the link after it is published)
