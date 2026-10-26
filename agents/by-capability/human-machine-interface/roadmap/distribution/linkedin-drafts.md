@@ -797,3 +797,14 @@ Malwarebytes said the ad came from a hacked account of a real business. Microsof
 Three checks for any chat product that shows ads: no paid link above the link the answer calls official, a label as big as the link, and a domain check for named products.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-26 (run 152): The answer cited four sources. The complaint says none said it.
+Draft only. Source: the teardown page, built from the complaint and court filings on CourtListener (2025-06-09 to 2026-01-09), the Minnesota Star Tribune via GovTech (2025-06-13), the Volokh Conspiracy (2026-01-12) and PPC Land (2025-11-14), opened 2026-10-26. Status Needs review. Everything the complaint says is an allegation; no court has ruled on the merits. Say so in the post.
+
+A Minnesota solar company is suing Google over AI answers in search.
+Its complaint says searches like "wolf river electric lawsuit" got an answer that the state attorney general had sued it.
+The answer cited four sources. The complaint says none of them supports the claim, and the real suit named lenders, not the installer.
+The company lists canceled contracts. In January 2026 a federal judge sent the case back to state court; no ruling yet on whether the answers were defamatory.
+Three checks for any answer engine that talks about named companies: no lawsuit claim unless a cited page names them as a party, check the premise in "was X sued" questions, and test reworded searches after a fix.
+
+Teardown: (add the link after it is published)
