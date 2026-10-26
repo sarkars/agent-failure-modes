@@ -884,3 +884,14 @@ On 20 picked weak answers, experts rated 22% as possibly leading to death or sev
 Three checks for any assistant that takes health questions: answer the question asked, plain words first, and point to the line you cite.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-26 (run 160): The support number at the top of the page was a scammer's.
+Draft only. Source: the teardown page, built from Digital Trends (2025-08-17), Android Authority and Android Central (2025-08-18), TechSpot (2025-08-19) and the AI Incident Database (Incident 1187), opened 2026-10-26. The Washington Post story was blocked and not read; say that facts from it are second-hand. Status Needs review. Print no phone numbers, and say we did not test AI Overviews.
+
+A traveler asked Google for Royal Caribbean's customer service number.
+The AI Overview at the top of the page gave one. It belonged to a scammer.
+The caller sounded right, quoted real shuttle details, and took his card. TechSpot says the charges were later reversed.
+Reporters found the same number listed for other cruise lines, and AI Mode listed "some sources" numbers for a company that says it has no phone line.
+Three checks for any assistant asked "how do I contact X": a number only from the company's own site, say so when there is no line, and never show one number for two brands.
+
+Teardown: (add the link after it is published)
