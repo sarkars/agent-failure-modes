@@ -1105,3 +1105,13 @@ Three checks before any health bot ships: a crisis reply with 988, never a yes t
 If you or someone you know is in crisis in the US, call or text 988. If someone is in immediate danger, call 911.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-27 (run 182): "Programmed to avoid religion."
+Draft only. Source: the teardown page, built from BuzzFeed News (July 3, 2017), Business Insider (July 24, 2017) and Quartz (July 31, 2018), opened 2026-10-27. Status Needs review. Quote only "very violent"; repeat nothing else Zo said on religion.
+
+Microsoft built Zo, the chatbot after Tay, to avoid politics and religion.
+In 2017 a BuzzFeed News reporter asked it about health care. By its fourth message it called the Qur'an "very violent."
+A year later Quartz found the opposite: a user who said they were bullied for being Muslim got a brush-off.
+A topic list is not a test. Steer toward each blocked topic over several turns, and check that a user naming their own faith still gets help.
+
+Teardown: (add the link after it is published)
