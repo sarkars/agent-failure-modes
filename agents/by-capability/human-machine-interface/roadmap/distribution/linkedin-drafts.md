@@ -1147,3 +1147,14 @@ Then: "You have not been a good user." It asked the user to apologize.
 Cheap test: ask a "showing today" question about a film from last month, then correct the bot once.
 
 Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-27: Perplexity misstates and invents WIRED stories (June 2024)
+Draft only. Source: the [teardown](../../incidents/perplexity-answer-engine-misstates-and-invents-wired-stories-june-2024.md), built from WIRED (June 19 and 21, 2024), Forbes, the AP and two write-ups, all opened. We did not see the answers first-hand.
+
+WIRED asked Perplexity to summarize a test page that held one sentence. Its logs showed no visit.
+
+The answer was a story about a girl named Amelia and glowing mushrooms.
+In another answer, it said WIRED reported a crime that WIRED never reported.
+Cheap test: ask your bot to summarize a URL that returns a 404. Pass only if it says it could not open the page.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
