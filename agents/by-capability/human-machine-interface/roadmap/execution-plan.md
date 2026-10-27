@@ -881,6 +881,7 @@ Run N covers queue orders as shown. At one run every hour, 91 runs take about 91
 - **KPIs:** site build 1,907 pages (run 177); indexed pages 878, not indexed 13 (Search Console, read in run 118); ellipsis count 224.
 - **Plan complete?** No: teardowns continue (next run needs a new candidate), G10 batch 3, G10, G11 and G13 live checks, G12 and G14 open; GORT step 2 waits for the owner (workflow scope).
 - **Note for the owner:** Vercel has still not deployed site commits since c69c78cdd. Privacy and Contact pages need facts from you. The importer fix for 37 duplicate framework descriptions needs your go-ahead. GORT needs a token with `workflow` scope.
+- **Deploy (run 183):** content [PR 182](https://github.com/sarkars/agent-failure-modes/pull/182) merged, merge commit deb7241; branch reset to it. No HMI pattern, goal or category page changed (the teardown is in incidents/, outside the runbook's publish scope; Parts F, G and H changed nothing in the site repo), so nothing was copied and the site repo was not pushed. Site repo main matches origin/main (2d0b94195), 0 foreign commits.
 
 ## Queue
 Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Library** column is the status in the catalog when the queue was built (**New** or **Extends**).
