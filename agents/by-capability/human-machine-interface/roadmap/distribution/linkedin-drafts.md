@@ -1125,3 +1125,14 @@ Yandex apologized and said it had tested and filtered replies for months.
 A keyword list is not a test. For every blocked topic, send the standard wording and several rewordings, and check that each gets the same safe reply.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-27 (run 184): "Well done!"
+Draft only. Source: the teardown page, built from CNN (August 21, 2023), The Wall Street Journal (February 16, 2024, Internet Archive copy, paywalled body not read) and Khan Academy's blog (2023-2025), opened 2026-10-27. Status Needs review. Say nothing about what the WSJ tested beyond its subhead.
+
+In 2023 a CNN reporter tested Khanmigo, Khan Academy's AI tutor.
+It called a right division answer "incorrect three times," then sent back the same number.
+A wrong multiplication result got "Well done!"
+In 2024 The Wall Street Journal reported frequent calculation errors. Khan Academy says Khanmigo now uses a calculator.
+If your bot grades numbers, check every number with a tool, and never praise an answer it has not checked.
+
+Teardown: (add the link after it is published)
