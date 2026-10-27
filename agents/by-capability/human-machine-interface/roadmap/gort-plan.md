@@ -398,8 +398,8 @@ The hourly run updates the row of the step it works on. Status is `Not started`,
 | Step | Status |
 |---|---|
 | 1 | Done (owner, 2026-10-24) |
-| 2 | Waiting for the owner: the run's GitHub token has no `workflow` scope, so the CI file could not be pushed; run `gh auth refresh -s workflow` on the run PC or add `.github/workflows/ci.yml` from the PR description ([PR 1](https://github.com/sarkars/gort/pull/1), opened 2026-10-24, not merged) |
-| 2a | Built 2026-10-24 in [sarkars/gort PR 2](https://github.com/sarkars/gort/pull/2), stacked on step 2; Check passes locally (10 tests): policy, checklist by place, and `gort-evals.jsonl` with 3,310 cases for all 257 patterns (from 214 test files and 43 page designs); lite and deep depths and `--focus` (support-bot: 252 lite cases, 2,052 deep); evals not yet run; not merged until CI can run (step 2 workflow scope) |
+| 2 | Done 2026-10-27: [PR 1](https://github.com/sarkars/gort/pull/1) squash-merged (d113637) after the owner added the `workflow` scope; CI file added, CI passed on Python 3.10 and 3.12 (ruff, pytest, `gort --version`) |
+| 2a | Built 2026-10-24 in [sarkars/gort PR 2](https://github.com/sarkars/gort/pull/2), stacked on step 2; Check passes locally (10 tests): policy, checklist by place, and `gort-evals.jsonl` with 3,310 cases for all 257 patterns (from 214 test files and 43 page designs); lite and deep depths and `--focus` (support-bot: 252 lite cases, 2,052 deep); evals not yet run; step 2 merged 2026-10-27 and PR 2 retargeted to main; next run checks CI and merges |
 | 3 | Not started |
 | 3a | Not started |
 | 4 | Not started |
