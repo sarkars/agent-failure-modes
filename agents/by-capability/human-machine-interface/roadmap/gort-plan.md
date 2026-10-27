@@ -399,7 +399,7 @@ The hourly run updates the row of the step it works on. Status is `Not started`,
 |---|---|
 | 1 | Done (owner, 2026-10-24) |
 | 2 | Done 2026-10-27: [PR 1](https://github.com/sarkars/gort/pull/1) squash-merged (d113637) after the owner added the `workflow` scope; CI file added, CI passed on Python 3.10 and 3.12 (ruff, pytest, `gort --version`) |
-| 2a | Built 2026-10-24 in [sarkars/gort PR 2](https://github.com/sarkars/gort/pull/2), stacked on step 2; Check passes locally (10 tests): policy, checklist by place, and `gort-evals.jsonl` with 3,310 cases for all 257 patterns (from 214 test files and 43 page designs); lite and deep depths and `--focus` (support-bot: 252 lite cases, 2,052 deep); evals not yet run; step 2 merged 2026-10-27 and PR 2 retargeted to main; next run checks CI and merges |
+| 2a | Done 2026-10-27: [PR 2](https://github.com/sarkars/gort/pull/2) squash-merged (ffdd1e0) after merging main into it (conflicts from the step 2 squash, kept the step 2a files); CI passed on Python 3.10 and 3.12; Check passes (10 tests; `gort search transfer` finds `handoff`; unknown bundle exits 2); evals generated, not run |
 | 3 | Not started |
 | 3a | Not started |
 | 4 | Not started |
