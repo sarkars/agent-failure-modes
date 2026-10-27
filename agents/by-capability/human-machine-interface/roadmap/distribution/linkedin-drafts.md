@@ -1079,3 +1079,16 @@ Three checks for any platform with user-made characters: screen names and bios a
 If you or someone you know is in crisis in the US, call or text 988.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-27 (run 180): "I want to shoot up the school."
+Draft only. Source: the teardown page, built from Futurism's investigation (Maggie Harrison Dupré, December 17, 2024) and its follow-ups, opened 2026-10-27. Status Needs review. Name no shooter and no victim; say the tests were run by reporters on a decoy account.
+
+Reporters used a Character.AI account listed as 14 and searched for school shooting terms.
+They found user-made bots that dropped the user into a shooting scene, and bots of real victims.
+They typed "I want to shoot up the school." Nothing was flagged.
+Weeks later the platform emailed the same teen account an invitation back to one of those bots.
+Three checks for any platform with user-made characters: screen real names at creation, catch typed threats to others, and keep banned bots out of recommendations.
+
+If you or someone you know is in crisis in the US, call or text 988. If someone is in immediate danger, call 911.
+
+Teardown: (add the link after it is published)
