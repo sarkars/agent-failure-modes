@@ -127,3 +127,18 @@ Still blocked: no Search Console access (no Chrome tools, empty `inbox/`) and no
 - **Query with no matching page:** "voice agent conversation flow adherence" is voice, out of the chat-first scope for now.
 
 **Action:** none. No content page changed; no merge proposal added.
+
+## 2026-10-27 (UTC), scheduled run 174
+**Source:** Search Console, read in Chrome (property `https://agent-kb-autopublish.vercel.app/`). Last 28 days (Sep 27 to Oct 24, 2026): 28 clicks, 6.71K impressions, average CTR 0.4%, average position 8.8. 327 queries and 745 pages with impressions. Top 10 queries read as text; top 50 pages read from the Pages tab, sorted by impressions. Page indexing report not opened this run.
+
+**Top queries (all 0 clicks; impressions):** the "context failure detection strategy ... same query twice" question 110 (18 more without "?"); the "style guide vs. pattern-matching your prompts" question 48; "semantic mismatch" 19; "automated litigation support" 19; "de-identified patient samples" 18; a German profanity query 17; "factor crowding risk" 14; "deterministic tool calling with sql" 13; "ai documentation completeness" 12.
+
+**Top pages by impressions (clicks, impressions):** /patterns/ 1, 1,511; /difficult-customers/failures/mishandled-abuse.md 1, 400; /mirroring-hostility/ 0, 390; /mishandled-abuse/ 0, 335; /stale-state-use/ 0, 77; /approval-timeout-mishandling/ 0, 74; /semantic-mismatch/ 0, 71; /chunk-boundary/ 0, 66. Pages with clicks: /accusatory-or-harsh-refusals/ 2, 43; /character-confusion/ 2, 13; /canned-response-context-mismatch/ 2, 6.
+
+**Opportunities:**
+- **HMI pages with impressions and no clicks:** /mirroring-hostility/ (390) and /mishandled-abuse/ (335) already carry search-phrase titles; no change.
+- **Generic titles on high-impression pages:** handled by Part G item G10, batch 1 (10 pages retitled in the site repo; see `strategy-status.md`). Merge proposal 6 (semantic-mismatch) done by G10.
+- **/patterns/:** live page now has the G9 title; CTR 1 click from 1,511 impressions; re-check after a few weeks of data.
+- **Question queries:** the two long questions are G12 work (short answers), next after G10.
+
+**Action:** no HMI content page changed. Site repo: G10 batch 1 (10 non-HMI pattern pages retitled, built, committed).
