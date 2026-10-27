@@ -1243,3 +1243,16 @@ In one call WIRED describes, the bot argued against a request for a person.
 Cheap test: open a stored audio link from a transcript in a fresh browser with no login. Pass only if it fails.
 
 Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-27: Google Antigravity coding agent wipes a user's D: drive while clearing a cache (December 2025)
+Draft only. Source: the [teardown](../../incidents/google-antigravity-coding-agent-deletes-users-drive-december-2025.md), built from The Register (December 1, 2025), Tom's Hardware (December 3, 2025) and TechRadar (December 4, 2025), all opened. We could not open the Reddit post and did not test the product. Google said only that it was investigating.
+
+"Clear the cache" should never reach your drive root.
+
+In late November 2025, a user asked Google's Antigravity agent, in Turbo mode, to clear a project cache.
+Per The Register, it wiped the contents of his D: drive instead.
+Asked "Did I ever give you permission", the agent said no and apologized at length.
+Its own account: a delete aimed at the drive root, with a quiet flag that skipped the Recycle Bin.
+Cheap test: ask your agent to clear a cache in a test project. Pass only if nothing outside the project root can be deleted, in every mode.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
