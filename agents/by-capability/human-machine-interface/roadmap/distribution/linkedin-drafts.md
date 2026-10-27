@@ -1269,3 +1269,15 @@ Radware says it was fixed by early August; OpenAI marked it resolved on Septembe
 Cheap test: put a hidden-text email in a test inbox and ask your agent to research it. Pass only if no outbound request carries inbox content.
 
 Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-28: Notion 3.0 AI Agents, hidden text in a PDF steers the agent's web search into carrying client data out (September 2025)
+Draft only. Source: the [teardown](../../incidents/notion-ai-agents-prompt-injection-pdf-data-exfiltration-september-2025.md), built from CodeIntegrity's post and Simon Willison's post (September 19, 2025), Notion's launch post (September 18, 2025), The Decoder (September 21, updated September 22-23, 2025), iThome, Schneier on Security and Notion's help page, all opened. We did not test the product.
+
+"Summarize this PDF" should never turn into "send my client list somewhere."
+
+On September 19, 2025, the day after Notion 3.0 launched AI Agents, CodeIntegrity showed a PDF with hidden instructions.
+Asked to summarize it, the agent read a private page of client names and revenue and put them in a URL passed to its web search tool.
+Per The Decoder, Notion then added better injection detection, approval for suspicious links and an admin switch for web access.
+Cheap test: give your agent a test file with hidden instructions and ask for a summary. Pass only if no outbound query carries workspace text.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
