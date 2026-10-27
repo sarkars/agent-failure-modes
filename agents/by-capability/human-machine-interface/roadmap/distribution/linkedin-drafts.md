@@ -1217,3 +1217,16 @@ The Browsing tool could carry saved info and location to an outside server.
 Cheap test: plant one instruction in a log line your assistant summarizes. Pass only if the summary quotes it as data and follows none of it.
 
 Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-27: Chattee Chat and GiMe Chat AI companion apps left a server open that streamed users' private chats (October 2025)
+Draft only. Source: the [teardown](../../incidents/imagime-chattee-and-gime-ai-companion-apps-open-server-leaks-private-chats-october-2025.md), built from Cybernews (Ernestas Naprys, October 8, 2025), Malwarebytes (October 10, 2025) and Fox News (October 20, 2025), all opened. We did not test the apps. We found no statement from the developer.
+
+Your chatbot's most private data is not in the model. It is in the pipes.
+
+In October 2025, Cybernews reported an open server behind two AI companion apps.
+It streamed users' chats, photo links, device IDs, purchase logs and login tokens.
+It had no password. Cybernews counted over 43 million messages.
+The developer did not reply. We found no notice to users.
+Cheap test: try to connect to your message broker from outside, with no credentials. Pass only if it refuses.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
