@@ -1071,6 +1071,7 @@ Run N covers queue orders as shown. At one run every hour, 91 runs take about 91
 - **KPIs:** site build 1,907 pages (run 191); indexed pages 878, not indexed 13 (Search Console, read in run 118); ellipsis count 224 (not re-scanned).
 - **Plan complete?** No: teardowns continue (next run needs a new candidate), G10 batch 2, G10, G11 and G13 live checks, G12 and G14 open; GORT step 3 waits on decision 2.
 - **Note for the owner:** GORT step 3 needs your answer to decision 2. Vercel has still not deployed site commits since c69c78cdd, so G10, G11, G13 and the .md link fixes are not live. Privacy and Contact pages need facts from you. The importer fix for 37 duplicate framework descriptions needs your go-ahead.
+- **Deploy:** content PR [sarkars/agent-failure-modes#195](https://github.com/sarkars/agent-failure-modes/pull/195) merged into `main` as 925689d (merge commit, head SHA 753d3cf checked); branch reset to `origin/main`. No site-repo commit: only `incidents/` and `roadmap/` changed, which this runbook does not publish. Site build not rerun (1,907 pages, run 191); URLs added 0, removed 0; no live check needed.
 
 ## Queue
 Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Library** column is the status in the catalog when the queue was built (**New** or **Extends**).
