@@ -797,6 +797,7 @@ Run N covers queue orders as shown. At one run every hour, 91 runs take about 91
 - **KPIs:** site build 1,907 pages (this run); indexed pages 878, not indexed 13 (Search Console, read in run 118); ellipsis count 224.
 - **Plan complete?** No: teardowns continue, G10 batch 3, G10, G11 and G13 live checks, G12 and G14 open; GORT step 2 waits for the owner (workflow scope).
 - **Note for the owner:** Vercel has still not deployed site commits since c69c78cdd (G11, G10, Part F 71aef4b43, now G13 2d0b94195). Privacy and Contact pages need facts from you. The importer fix for 37 duplicate framework descriptions needs your go-ahead. GORT needs a token with `workflow` scope.
+- **Deploy (run 177):** content [PR 176](https://github.com/sarkars/agent-failure-modes/pull/176) merged, merge commit fe243be; branch reset to it. No HMI pattern, goal or category page changed (the teardown is in incidents/), so nothing was copied. Site repo: origin/main had no commits this run did not create; clean `npx astro build` built 1,907 pages, all 1,905 live sitemap URLs exist in dist/, URLs added 1 (/about/), removed 0; pushed Part G commit 2d0b94195 (author mobilemag) to site repo main, not verified live.
 
 ## Queue
 Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Library** column is the status in the catalog when the queue was built (**New** or **Extends**).
