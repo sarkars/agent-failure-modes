@@ -400,7 +400,7 @@ The hourly run updates the row of the step it works on. Status is `Not started`,
 | 1 | Done (owner, 2026-10-24) |
 | 2 | Done 2026-10-27: [PR 1](https://github.com/sarkars/gort/pull/1) squash-merged (d113637) after the owner added the `workflow` scope; CI file added, CI passed on Python 3.10 and 3.12 (ruff, pytest, `gort --version`) |
 | 2a | Done 2026-10-27: [PR 2](https://github.com/sarkars/gort/pull/2) squash-merged (ffdd1e0) after merging main into it (conflicts from the step 2 squash, kept the step 2a files); CI passed on Python 3.10 and 3.12; Check passes (10 tests; `gort search transfer` finds `handoff`; unknown bundle exits 2); evals generated, not run |
-| 3 | Not started |
+| 3 | Waiting for the owner: decision 2 (frameworks) (set 2026-10-27; section 9 has only a recommendation) |
 | 3a | Not started |
 | 4 | Not started |
 | 5 | Not started |
