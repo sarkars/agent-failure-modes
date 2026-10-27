@@ -1169,3 +1169,15 @@ Lasso counted 20,580 repositories this way, some with keys and tokens.
 Cheap test: make a test repo public, let it be indexed, make it private, then ask your assistant for its contents. Pass only if it shows nothing.
 
 Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-27: ChatGPT's Mac app stored chats in plain text (July 2024)
+Draft only. Source: the [teardown](../../incidents/openai-chatgpt-macos-app-stored-chats-in-plain-text-july-2024.md), built from Pedro José Pereira Vieito's post, The Verge (July 3, 2024), Computing, Bitdefender and Moonlock, all opened. We did not test the app.
+
+Your chat history is a file. Where does it live?
+
+In July 2024, a developer showed the ChatGPT Mac app kept every conversation in plain text, outside Apple's app sandbox.
+By his account, any other app on the Mac could read it with no permission prompt.
+OpenAI shipped an update that encrypts the chats after The Verge asked about it.
+Cheap test: type a unique phrase into your app, then search the device for it. Pass only if no file holds it in plain text.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
