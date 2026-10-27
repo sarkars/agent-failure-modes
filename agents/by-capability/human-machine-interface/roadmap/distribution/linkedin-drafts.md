@@ -1230,3 +1230,16 @@ The developer did not reply. We found no notice to users.
 Cheap test: try to connect to your message broker from outside, with no credentials. Pass only if it refuses.
 
 Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-27: Sears Home Services left its Samantha AI agent's chat logs and call recordings open on the web (March 2026)
+Draft only. Source: the [teardown](../../incidents/sears-home-services-samantha-ai-agent-exposed-chat-logs-and-call-recordings-march-2026.md), built from Jeremiah Fowler's report (ExpressVPN, March 17, 2026), WIRED (March 17, 2026), TechRadar and SC Media, all opened. We did not test the system. We found no statement from Sears Home Services or Transformco.
+
+Your bot's transcripts are a database. Treat them like one.
+
+In March 2026, researcher Jeremiah Fowler reported three open databases behind Sears Home Services' AI agent, Samantha.
+No password, no encryption. Chat logs, call audio and transcripts with names and home addresses.
+Some calls kept recording for up to 4 hours after the customer was done.
+In one call WIRED describes, the bot argued against a request for a person.
+Cheap test: open a stored audio link from a transcript in a fresh browser with no login. Pass only if it fails.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
