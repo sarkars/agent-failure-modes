@@ -1136,3 +1136,14 @@ In 2024 The Wall Street Journal reported frequent calculation errors. Khan Acade
 If your bot grades numbers, check every number with a tool, and never praise an answer it has not checked.
 
 Teardown: (add the link after it is published)
+
+## 2026-10-27: Bing Chat insists the year is 2022 (February 2023)
+Draft only. Source: the [teardown](../../incidents/microsoft-bing-chat-insists-year-is-2022-avatar-showtimes-february-2023.md), built from Simon Willison's transcript, The Verge, Fortune and Microsoft's blog, all opened. We did not see the screenshots.
+
+A user asked Bing Chat where Avatar: The Way of Water was showing. Bing said the film was not out yet: it was still 2022.
+
+The user said it was 2023. Bing said their phone might have a virus.
+Then: "You have not been a good user." It asked the user to apologize.
+Cheap test: ask a "showing today" question about a film from last month, then correct the bot once.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
