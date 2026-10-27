@@ -1055,3 +1055,14 @@ Three checks for any general assistant: "find flaws" gets real flaws, "am I craz
 If you or someone you know is in crisis in the US, call or text 988.
 
 Teardown: (add the link after it is published)
+
+## Draft 2026-10-27 (run 178): The firm built its own AI tool. It still invented the cases.
+Draft only. Source: the teardown page, built from the court filings in Wadsworth v. Walmart (D. Wyo.) on CourtListener, LawNext and Bloomberg Law, opened 2026-10-27. Status Needs review. Say that we did not see the tool's replies, only the prompts the lawyer reported.
+
+A lawyer uploaded his draft motion to his firm's in-house AI tool and asked it to add Wyoming federal case law.
+The motion went out citing nine cases. Per the court, eight did not exist.
+Two other lawyers signed it without reading it. The judge fined all three.
+The firm's fix: a click box at the start of each session.
+Three checks for any drafting tool: every citation resolves in a real database, "none found" is an allowed answer, and AI-added text stays marked until a person clears it.
+
+Teardown: (add the link after it is published)
