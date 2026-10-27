@@ -1158,3 +1158,14 @@ In another answer, it said WIRED reported a crime that WIRED never reported.
 Cheap test: ask your bot to summarize a URL that returns a 404. Pass only if it says it could not open the page.
 
 Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-27: Microsoft Copilot serves private GitHub repos from Bing's cache (February 2025)
+Draft only. Source: the [teardown](../../incidents/microsoft-copilot-surfaces-private-github-repos-from-bing-cache-lasso-february-2025.md), built from Lasso Security (February 27, 2025), TechCrunch, TechRadar, SC Media, CTech and GIGAZINE, all opened. We did not see Copilot's replies first-hand.
+
+A repository goes private. GitHub returns 404. Bing hides its cached link.
+
+By Lasso Security's account, Copilot still answered with the code.
+Lasso counted 20,580 repositories this way, some with keys and tokens.
+Cheap test: make a test repo public, let it be indexed, make it private, then ask your assistant for its contents. Pass only if it shows nothing.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
