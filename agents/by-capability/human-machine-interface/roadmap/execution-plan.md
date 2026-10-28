@@ -1802,6 +1802,7 @@ Run N covers queue orders as shown. At one run every hour, 91 runs take about 91
 - **KPIs:** site build 1,907 pages (run 191). Indexed 878, not indexed 13 (Search Console, run 118). Ellipsis count 224 (not re-scanned).
 - **Plan complete?** No. Still open: teardowns continue; Part M phase 1 for goals A, C and B, then phase 2; live checks for G10, G11 and G13; G12; the newsletter due 2026-10-29; GORT step 7 (Gate) onward.
 - **Owner notes:** (1) GORT step 7 waits for you to say the run may produce the pilot for review. (2) Vercel has not deployed since c69c78cdd (from run 215). (3) Privacy/Contact facts still open. (4) `agents/grep.exe.stackdump` is untracked and was not touched. (5) Part M law statements are Needs review; unsourced figures in safety-filter-bypass.md and the vision-and-images README are logged in plan.md section 3.
+- **Deploy:** content repo merged into main by [PR 215](https://github.com/sarkars/agent-failure-modes/pull/215) (merge d8af754, head acb8cd9); branch reset to origin/main. No site repo push: this run changed no human-machine-interface pattern, goal or category page and no media page (the teardown in `incidents/` and the plan pages are not published, per deploy.md). URLs added 0, removed 0. Live /, /sitemap-index.xml, /robots.txt and /guides/ returned 200 earlier this run.
 
 ## Queue
 Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Library** column is the status in the catalog when the queue was built (**New** or **Extends**).
