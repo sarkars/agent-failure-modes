@@ -27,10 +27,15 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | [Emoji as icons and decorative bullets](failures/ui-emoji-as-icons.md) | Rockets and sparkles on headings, bullets and buttons; screen readers read their names |
 | [Placeholder data left in](failures/ui-placeholder-data-left-in.md) | Lorem ipsum, John Doe, 555 numbers and TODO text ship to production |
 | [Fabricated social proof](failures/ui-fabricated-social-proof.md) | Invented testimonials, logos and user counts shipped as real. **Read this first: needs legal review.** |
+| [Stock phrases in AI-written text ("delve")](failures/text-stock-phrases.md) | Words readers now read as AI-written, caught by a phrase-list scan before publishing |
+| [Em dashes, lists of three and "not X, it's Y"](failures/text-rhythm-tells.md) | Sentence-shape tells, checked in combination, never one sign alone |
+| ["It depends" answers that never pick](failures/text-balanced-non-answers.md) | Hedged, balanced text that leaves the reader to decide |
+| [Headings, bold and bullets on everything](failures/text-uniform-structure.md) | Every genre gets the same report shape |
+| [AI made-up citations and fake quotes](failures/text-invented-citations.md) | Cases, papers and quotes that do not exist, blocked at a citation gate. **Read this first: needs legal review.** |
+| [Over-commented code and tutorial-style comments](failures/code-over-commented.md) | Comments that restate the code or talk to the chat |
 
 ## Planned (not yet written)
-- Writing tells: stock phrases, rhythm tells, balanced non-answers, uniform structure, invented citations
-- Code tells: over-commented code and more
+- Code tells: calls to APIs that don't exist, needless abstraction and more
 - Image and data tells
 
 ## Related

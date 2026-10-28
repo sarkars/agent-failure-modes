@@ -252,7 +252,7 @@ Folder layout is the one vision-and-images already uses, so the site importer pi
 | Phase | Work | Done when | Status |
 |---|---|---|---|
 | 1 | Search for sources for each pattern in section 3; drop patterns with none; list kept patterns with their sources in this plan | Every kept pattern has at least one opened source | Done: all nine goals sourced (run 216: E, G, H, I, D and F, 52 kept; run 217: A, C and B, 13 kept; 0 dropped) |
-| 2 | Write pages, highest-harm first (E, then G, H, I, D, F, A, C, B), into vision-and-images; a goal README for each new goal; update the vision-and-images README goal table and counts | Pages pass the five check scripts | Next: start with goal E |
+| 2 | Write pages, highest-harm first (E, then G, H, I, D, F, A, C, B), into vision-and-images; a goal README for each new goal; update the vision-and-images README goal table and counts | Pages pass the five check scripts | In progress: run 218 wrote goal E pages E1-E6 with tests and the goal README, all Needs review (law and consent). Next: E7-E9, then goal G |
 | 3 | Incident pages for the candidates in section 5 that check out | Each incident links to its patterns | Not started |
 | 4 | Publish: the site importer picks up the new pages in the existing category; check the build and that no live URL is lost | New pages live; public URL list updated | Not started |
 | 5 | Layer 1 check page (section 7) | Page live and tested on files with and without Content Credentials | Not started |
