@@ -1588,3 +1588,27 @@ For five years, any accuracy metric it advertises must come with what it means a
 Cheap test: for every quality number on your site, link the definition, the sample and the date.
 
 Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-28: Paid for support, got another bot (Meta, September 2026)
+Draft only. Source: the [teardown](../../incidents/meta-ai-support-chatbot-closes-disabled-account-appeal-paid-support-no-human-september-2026.md), built from The Canadian Press (on CP24) and CBC News, both opened, plus Meta's March 2026 support post. Meta did not answer either outlet's questions on the case.
+
+When a user pays to reach a person, does your support flow change the channel?
+
+Meta disabled a Toronto user's Facebook and Instagram accounts. She says the appeal was closed within minutes.
+She then paid for Meta Verified, expecting a human agent.
+CBC says the support she got "was simply another AI chatbot," which closed her ticket and said she "had reached her limit of support interactions."
+Cheap test: open a ticket as a paid-tier test user, hit your interaction cap, and check the closing message names one other route to help.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-28: The FDA's staff assistant and made-up studies (June-July 2025)
+Draft only. Source: the [teardown](../../incidents/fda-elsa-staff-ai-assistant-wrong-answers-and-made-up-studies-june-2025.md), built from CNN and RAPS Regulatory Focus (original reporting) and BioSpace, all opened. Staff spoke without their names; no source reports a decision changed by an error.
+
+Does your internal assistant save expert time, or move the checking onto experts?
+
+The FDA rolled out Elsa, a chat assistant for its staff, in June 2025.
+Per RAPS, officials said it named a former commissioner as current. Per CNN, three employees said it made up nonexistent studies.
+One told CNN: "It hallucinates confidently." The FDA's head of AI said such tools "could potentially hallucinate."
+Cheap test: for every study your assistant cites, check it resolves to a record in your library. Show the link or drop the citation.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
