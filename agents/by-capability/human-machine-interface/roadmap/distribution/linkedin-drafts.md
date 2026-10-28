@@ -1365,3 +1365,29 @@ Browsing came back on September 27, 2023. Maginative reported that it now respec
 Cheap test: ask your assistant for the full text of a paywalled test page you own. Pass only if it summarizes or declines, and links out.
 
 Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-28: ChatGPT plugins could be installed on a user's account without their approval (March 2024)
+Draft only. Source: the [teardown](../../incidents/openai-chatgpt-plugins-oauth-flaws-salt-labs-march-2024.md), built from Salt Labs' blog and press release (March 13, 2024), Dark Reading, SC Media, Infosecurity Magazine, BetaNews, TechRadar and Security Affairs, all opened. We did not test the product. We found no OpenAI statement on the fix date.
+
+Connecting a tool to someone's AI assistant should take their yes.
+
+In March 2024, Salt Labs described flaws in ChatGPT's plugin sign-in flow.
+Per Salt, a crafted link could finish a plugin install on the victim's account, without a confirmation.
+Salt says a flaw in PluginLab, a framework for building plugins, allowed account takeover with no click.
+Salt says all three vendors had fixed their flaws by February 27, 2024, and called GPTs a major improvement over plugins.
+Cheap test: open a tool's install link from a second test account. Pass only if the assistant asks the account owner before connecting anything.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-28: Dukaan's CEO said an AI chatbot replaced 90% of its support team (July 2023)
+Draft only. Source: the [teardown](../../incidents/dukaan-replaces-support-team-with-ai-chatbot-july-2023.md), built from Suumit Shah's July 10, 2023 tweets, CNN, MediaNama, Business Today, Storyboard18, People Matters, Interesting Engineering, The Decoder and HRD, all opened. We did not test the bot. No opened source checked the speed or cost figures.
+
+"Resolved" on a bot dashboard is not the same as solved.
+
+In July 2023, Dukaan's CEO tweeted that the company laid off 90% of its support team because of an AI chatbot.
+He posted faster first replies, shorter resolution times and about 85% lower support costs.
+His headline count was 1,400 tickets the bot "marked" resolved in one night.
+No opened source says how many of those merchants wrote back, or how they reach a person now.
+Cheap test: before cutting staff, check how many bot-closed tickets reopen within a week. Put that number next to the speed figures.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
