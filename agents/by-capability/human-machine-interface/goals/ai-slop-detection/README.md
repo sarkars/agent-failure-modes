@@ -30,6 +30,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | [Stock phrases in AI-written text ("delve")](failures/text-stock-phrases.md) | Words readers now read as AI-written, caught by a phrase-list scan before publishing |
 | [Em dashes, lists of three and "not X, it's Y"](failures/text-rhythm-tells.md) | Sentence-shape tells, checked in combination, never one sign alone |
 | ["It depends" answers that never pick](failures/text-balanced-non-answers.md) | Hedged, balanced text that leaves the reader to decide |
+| [Headings, bold and bullets on everything](failures/text-uniform-structure.md) | Every genre gets the same report shape |
 
 ## Planned (not yet written)
 - Writing tells: stock phrases, rhythm tells, balanced non-answers, uniform structure, invented citations

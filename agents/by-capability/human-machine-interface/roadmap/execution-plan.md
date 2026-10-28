@@ -2278,7 +2278,7 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 439 | SL-07 | Stock AI phrases and filler openers | New | - | `goals/ai-slop-detection/failures/text-stock-phrases.md` | Done | 218 |
 | 440 | SL-08 | Em-dash, triplet and 'not X but Y' rhythm | New | - | `goals/ai-slop-detection/failures/text-rhythm-tells.md` | Done | 218 |
 | 441 | SL-09 | Hedged, balanced non-answers | New | - | `goals/ai-slop-detection/failures/text-balanced-non-answers.md` | Done | 218 |
-| 442 | SL-10 | Uniform structure: headings and bullets on everything | New | - | `goals/ai-slop-detection/failures/text-uniform-structure.md` | Queued | - |
+| 442 | SL-10 | Uniform structure: headings and bullets on everything | New | - | `goals/ai-slop-detection/failures/text-uniform-structure.md` | Done | 218 |
 | 443 | SL-11 | Invented citations and quotes | New | - | `goals/ai-slop-detection/failures/text-invented-citations.md` | Queued | - |
 | 444 | SL-12 | Over-commented code and tutorial-style comments | New | - | `goals/ai-slop-detection/failures/code-over-commented.md` | Queued | - |
 | 445 | SL-13 | Plausible but nonexistent APIs and options | New | - | `goals/ai-slop-detection/failures/code-nonexistent-apis.md` | Queued | - |
