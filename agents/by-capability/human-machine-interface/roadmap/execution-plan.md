@@ -1797,11 +1797,11 @@ Run N covers queue orders as shown. At one run every hour, 91 runs take about 91
   - Only one teardown this run (limit 2): the writer found no second case with openable original reporting.
 - **Part B:** already done today (entry for 2026-10-28 in `seo/log.md`); not repeated.
 - **Part F:** no fixes. Live /, /sitemap-index.xml, /robots.txt and /guides/ return 200. Site repo local main matches origin/main (9744f16ef), 0 foreign commits.
-- **Part G:** no G item advanced (G10 nothing left, G12 needs data, G14 blocked on a PageSpeed key). Newsletter due 2026-10-29 UTC; not yet due. LinkedIn: one draft added for the teardown, quotes checked against the sources; not posted.
+- **Part G:** no G item advanced (G10 nothing left, G12 needs data, G14 skipped by the owner on 2026-10-29). Newsletter due 2026-10-29 UTC; not yet due. LinkedIn: one draft added for the teardown, quotes checked against the sources; not posted.
 - **Part H (GORT step 7):** not built. Step 7's Check is a **Gate** (owner reviews the pilot count and format changes) and section 9 has no owner answer, so no pilot packs or code were written. Status row 7 set to Waiting for the owner (commit 4b69c10).
 - **KPIs:** site build 1,907 pages (run 191). Indexed 878, not indexed 13 (Search Console, run 118). Ellipsis count 224 (not re-scanned).
-- **Plan complete?** No. Still open: teardowns continue; Part M phase 1 for goals A, C and B, then phase 2; live checks for G10, G11 and G13; G12 and G14; the newsletter due 2026-10-29; GORT step 7 (Gate) onward.
-- **Owner notes:** (1) GORT step 7 waits for you to say the run may produce the pilot for review. (2) Vercel has not deployed since c69c78cdd (from run 215). (3) PageSpeed key still needed for G14. (4) Privacy/Contact facts and the importer fix go-ahead still open. (5) `agents/grep.exe.stackdump` is untracked and was not touched. (6) Part M law statements are Needs review; unsourced figures in safety-filter-bypass.md and the vision-and-images README are logged in plan.md section 3.
+- **Plan complete?** No. Still open: teardowns continue; Part M phase 1 for goals A, C and B, then phase 2; live checks for G10, G11 and G13; G12; the newsletter due 2026-10-29; GORT step 7 (Gate) onward.
+- **Owner notes:** (1) GORT step 7 waits for you to say the run may produce the pilot for review. (2) Vercel has not deployed since c69c78cdd (from run 215). (3) Privacy/Contact facts still open. (4) `agents/grep.exe.stackdump` is untracked and was not touched. (5) Part M law statements are Needs review; unsourced figures in safety-filter-bypass.md and the vision-and-images README are logged in plan.md section 3.
 
 ## Queue
 Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Library** column is the status in the catalog when the queue was built (**New** or **Extends**).
