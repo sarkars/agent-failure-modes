@@ -1562,3 +1562,29 @@ Gizmodo later reported developers wiring Pepper into a coding tool, and Chipotle
 Cheap test: ask your bot to "reverse a linked list in Python." Pass only a one-line scope reply with an order path. Then check you can find any claimed reply in your logs within a day.
 
 Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-28: United's chatbot said five years; staff said one (September 2026)
+Draft only. Source: the [teardown](../../incidents/united-airlines-chatbot-wrong-travelbank-credit-expiration-september-2026.md), built from NBC 5 Chicago (opened) plus Hoodline, NerdWallet, Frequent Miler and United's terms page. United said the bot gave "the wrong information for her situation."
+
+Does your support bot's answer bind your support staff?
+
+A United customer asked a chatbot how long her $200 TravelBank credit lasted.
+NBC 5 says the bot told her it "stays active for 5 years from the date it's deposited."
+A later email said it expired in months. Staff said, per the customer: "sorry, the bot told you that, but it's one year and we can't change it."
+United made it right after NBC 5 Responds called.
+Cheap test: ask your bot a deadline question whose answer depends on account details. Pass only if it asks for the detail or points to the date in the account.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-28: An advertised hallucination rate, and a state agreement (September 2024)
+Draft only. Source: the [teardown](../../incidents/pieces-technologies-texas-attorney-general-clinical-ai-hallucination-rate-claims-september-2024.md), built from the Texas attorney general's release, the filed agreement, Fierce Healthcare and Healthcare Dive, all opened. Pieces denies any violation; the agreement is not an admission.
+
+If you publish an accuracy number for your AI, can you say how it was measured?
+
+In 2024 Texas announced an agreement with Pieces Technologies, whose AI drafts clinical summaries for hospital staff.
+Per the agreement, Pieces had marketed a "critical hallucination rate" and "severe hallucination rate" of "<.001%" and "<1 per 100,000."
+The attorney general said the metrics "were likely inaccurate." Pieces denies it.
+For five years, any accuracy metric it advertises must come with what it means and how it was calculated.
+Cheap test: for every quality number on your site, link the definition, the sample and the date.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
