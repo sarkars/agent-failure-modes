@@ -142,3 +142,18 @@ Still blocked: no Search Console access (no Chrome tools, empty `inbox/`) and no
 - **Question queries:** the two long questions are G12 work (short answers), next after G10.
 
 **Action:** no HMI content page changed. Site repo: G10 batch 1 (10 non-HMI pattern pages retitled, built, committed).
+
+## 2026-10-28 (UTC), scheduled run 198
+**Source:** Search Console, read in Chrome (property `https://agent-kb-autopublish.vercel.app/`). Last 28 days (Sep 28 to Oct 25, 2026): 32 clicks, 7.37K impressions, average CTR 0.4%, average position 8.7. 393 queries and 775 pages with impressions. Top 10 queries read as text; top 100 pages read from the Pages tab, sorted by impressions (clicks and impressions only; position per page not read). Page indexing report not opened this run.
+
+**Top queries (all 0 clicks; impressions):** the "context failure detection strategy ... same query twice" question 112 (17 more without "?"); the "style guide vs. pattern-matching your prompts" question 48; "semantic mismatch" 21; "automated litigation support" 21; "de-identified patient samples" 18; "factor crowding risk" 14; "deterministic tool calling with sql" 14; two profanity queries (German 21, Arabic 14).
+
+**Top pages by impressions (clicks, impressions):** /patterns/ 1, 1,447; /mirroring-hostility/ 0, 607; /mishandled-abuse/ 1, 537; /difficult-customers/failures/mishandled-abuse.md 1, 400; /profanity-and-slang-handling/ 0, 86; /stale-state-use/ 0, 78; /approval-timeout-mishandling/ 0, 73; /semantic-mismatch/ 0, 71; /chunk-boundary/ 0, 68; /silent-failure-and-timeout/ 1, 64. Pages with 2 clicks: /accusatory-or-harsh-refusals/ (56 impressions), /character-confusion/ (14), /canned-response-context-mismatch/ (6).
+
+**Opportunities:**
+- **HMI pages with impressions and few clicks:** /mirroring-hostility/ (607, up from 390 on 2026-10-27's read) and /mishandled-abuse/ (537, 1 click). Both already carry search-phrase titles; their queries were not read per page, so no rewrite without the query data.
+- **Generic titles in the top 30 by impressions:** none left. Every top-30 pattern page now has a search-phrase title in the site source (G10 batches 1 and 2 plus earlier pattern titles); the batch 1 and 2 titles are not live yet (Vercel has not built since c69c78cdd).
+- **Question queries:** the two long questions stay G12 work (short answers).
+- **Profanity queries:** they land on /profanity-and-slang-handling/ and /mirroring-hostility/, which match the topic; no action.
+
+**Action:** none. No content page changed; no merge proposal added.
