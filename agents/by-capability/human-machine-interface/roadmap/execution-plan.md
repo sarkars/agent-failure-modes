@@ -1805,6 +1805,32 @@ Run N covers queue orders as shown. At one run every hour, 91 runs take about 91
 - **Owner notes:** (1) GORT step 7 waits for you to say the run may produce the pilot for review. (2) Vercel has not deployed since c69c78cdd (from run 215). (3) Privacy/Contact facts still open. (4) `agents/grep.exe.stackdump` is untracked and was not touched. (5) Part M law statements are Needs review; unsourced figures in safety-filter-bypass.md and the vision-and-images README are logged in plan.md section 3.
 - **Deploy:** content repo merged into main by [PR 215](https://github.com/sarkars/agent-failure-modes/pull/215) (merge d8af754, head acb8cd9); branch reset to origin/main. No site repo push: this run changed no human-machine-interface pattern, goal or category page and no media page (the teardown in `incidents/` and the plan pages are not published, per deploy.md). URLs added 0, removed 0. Live /, /sitemap-index.xml, /robots.txt and /guides/ returned 200 earlier this run.
 
+### Run 217 (scheduled): 2026-10-28 (UTC)
+- **Coordinator run:** 9 subagents ran in parallel: six Part A writers (SL-01 to SL-06), each writing only its own target page, and three Part M phase 1 searchers (goals A, C, B), each writing only its own scratch file and source folder. Part A briefs carried quality-guide sections 1 and 2 and the Definition of done word for word; Part M briefs carried section 1. All report running no git and no repo scripts. I ran the five check scripts (`python -X utf8 -I`) before each commit. Last check: 9,250 links, 263 patterns, 1,267 public pattern URLs, 0 problems.
+- **Sync:** the branch held the owner's four queue commits for the new AI slop detection family (rows 433 on), so it was kept, not reset.
+- **Part A (sections 1 and 2, Definition of done), new family [AI slop detection](../goals/ai-slop-detection/README.md):** six pages, rows 433-438. Family README written; taxonomy section "AI slop detection" added with six rows; queue rows set Done (SL-01 to SL-05) and Needs review (SL-06), run 217.
+  - [SL-01 default gradient look](../goals/ai-slop-detection/failures/ui-default-gradient-look.md): 194 lines, 3 searches, 7 sources saved and opened. Commit 5777c45.
+  - [SL-02 template card grids](../goals/ai-slop-detection/failures/ui-template-card-grids.md): 202 lines, 5 searches, 6 opened. Commit a2d8fc7.
+  - [SL-03 generic hero layout](../goals/ai-slop-detection/failures/ui-generic-hero-layout.md): 206 lines, 4 searches, 8 opened. Commit 79baf6f.
+  - [SL-04 emoji as icons](../goals/ai-slop-detection/failures/ui-emoji-as-icons.md): 200 lines, 5 searches, 9 opened. Commit e5a9325.
+  - [SL-05 placeholder data left in](../goals/ai-slop-detection/failures/ui-placeholder-data-left-in.md): 202 lines, 6 searches, 8 opened. Commit 7a3e466.
+  - [SL-06 fabricated social proof](../goals/ai-slop-detection/failures/ui-fabricated-social-proof.md), **Needs review, L flag**: 196 lines, 5 searches, 4 opened (16 CFR 465 and 255 on eCFR, the FTC Rytr release from an archived copy). The later "Reopened and Set Aside" status of the Rytr order was seen only as a link title and is labeled so; every law statement stays Needs review. Commit 60f6f30.
+  - Unverified claims: anything seen only in search summaries is kept out of public text; each page's caveat names what could not be opened.
+  - Review changed: Guide spec move IDs normalized to `ask_clarifying_question` (two pages used other spellings); SL-03's link to the unwritten SL-07 page replaced with plain text; my quote check matched the pages' quotes against the saved texts (one SL-04 W3C quote differed only by a space before a period). README and taxonomy commit aea15c9.
+- **Part A2, E:** nothing queued.
+- **Part M phase 1 (section 1), goals A, C, B:** 13 patterns kept (A 6, C 4, B 3), 0 dropped, listed with their opened sources in [plan.md section 3](../../image-and-video-generation/plan.md); section 6 phase 1 is now Done (all nine goals sourced) and phase 2 is next, starting with goal E. Commit 59697cf.
+  - Searches and sources: A 18 searches, 25 opened; C 14, 19; B 11, 18.
+  - Quote check: my script matched every quote against the saved texts: A 52, C 28, B 28; 0 missing (A's file had escaped quote marks, unescaped before the check).
+  - Review changed: A3 and A5 narrowed (sourced examples only; "no people" and the hat example marked illustrative), B1 teeth marked weak, all B keeps narrowed, C3 marked weak, C4 may need narrowing.
+  - Overlaps for a person (Needs review): C1 and C4 with consistency-failure; B3 and C3 near quality-drift and artifact-accumulation. Unsourced percentages found in five existing vision-and-images pages (quality-drift, consistency-failure, artifact-accumulation, semantic-shift, token-limit-artifacts) are logged in plan.md section 3 and not used.
+- **Part B:** already done today (entry for 2026-10-28 in `seo/log.md`); not repeated.
+- **Part F:** no fixes. Live /, /sitemap-index.xml, /robots.txt and /guides/ return 200. Site repo local main matches origin/main (9744f16ef), 0 foreign commits.
+- **Part G:** no G item advanced (G10 nothing left, G12 needs data, G14 skipped by the owner). Newsletter due 2026-10-29 UTC; not yet due. LinkedIn: no new incident or guide this run, so no new draft.
+- **Part H (GORT step 7):** not built; step 7 is a Gate and still waits for the owner.
+- **KPIs:** catalog rows 493; written patterns 263 (check_site_compat). Site build page count in the Deploy line. Ellipsis count 224 (not re-scanned).
+- **Plan complete?** No. Still open: queue rows SL-07 onward; Part M phase 2; live checks for G10, G11 and G13; G12; the newsletter due 2026-10-29; GORT step 7 (Gate) onward.
+- **Owner notes:** (1) GORT step 7 waits for you. (2) Vercel has not deployed since c69c78cdd. (3) Privacy/Contact facts still open. (4) `agents/grep.exe.stackdump` is untracked and was not touched. (5) SL-06 states FTC rules; please have someone check it before it is marked Done. (6) Unsourced percentages in five vision-and-images pages are listed in plan.md section 3. (7) The area README's "44 patterns are written" line and goal table do not list the new family; not changed this run.
+
 ## Queue
 Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Library** column is the status in the catalog when the queue was built (**New** or **Extends**).
 
