@@ -108,4 +108,4 @@ A free page on the site where a reader drops an image or video and sees which si
 Paid detection APIs (Layer 2) are not planned.
 
 ## 8. Owner decisions
-1. Who writes the pages. The hourly run edits only the chat library today (its prompt lives outside this repo); writing these pages needs a change to its scope, or a separate run.
+1. Who writes the pages. **Answered (owner, 2026-10-29): the hourly run, as its Part M, doing as much per run as the rules allow** (all six goals sourced in parallel in phase 1, up to 6 pages per run in phase 2, up to 2 incidents per run in phase 3). Part D publishes only media pages the run added or changed (deploy.md step 5b). Phase 5 is not in the hourly run; it waits for the owner. Status per phase is tracked in section 6.
