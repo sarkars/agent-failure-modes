@@ -96,6 +96,7 @@ Create a folder's README on its first pattern. Folders that already have a READM
 | `goals/conversation-frameworks` | The bot uses proven conversation structures for selling, supporting, matching a user's style, and delivering hard news, instead of improvising every exchange. |
 | `goals/privacy-and-governance` | The agent handles personal data and outside services under clear rules, acts only within the rights of the person it serves, explains its limits, and keeps to its rules when pushed. |
 | `goals/human-oversight` | People overseeing an agent can see what it is doing, understand why, and stop or correct it. |
+| `goals/ai-slop-detection` | People and tools can spot output that was produced by AI without care, in design, writing, code, images and data, and the builder can catch it before users do. |
 | `goals/measurement-and-feedback` | Teams can tell whether conversations really work, and users can tell the team when they don't. |
 | `goals/voice` | A voice agent listens, speaks, and takes turns the way a competent person would, hears every speaker accurately, never turns noise or silence into words, and never asks for what can't safely be said aloud. |
 | `goals/visual` | What an agent shows is clear, honest, accessible, and appropriate to the stakes. |
@@ -1802,6 +1803,33 @@ Run N covers queue orders as shown. At one run every hour, 91 runs take about 91
 - **KPIs:** site build 1,907 pages (run 191). Indexed 878, not indexed 13 (Search Console, run 118). Ellipsis count 224 (not re-scanned).
 - **Plan complete?** No. Still open: teardowns continue; Part M phase 1 for goals A, C and B, then phase 2; live checks for G10, G11 and G13; G12; the newsletter due 2026-10-29; GORT step 7 (Gate) onward.
 - **Owner notes:** (1) GORT step 7 waits for you to say the run may produce the pilot for review. (2) Vercel has not deployed since c69c78cdd (from run 215). (3) Privacy/Contact facts still open. (4) `agents/grep.exe.stackdump` is untracked and was not touched. (5) Part M law statements are Needs review; unsourced figures in safety-filter-bypass.md and the vision-and-images README are logged in plan.md section 3.
+- **Deploy:** content repo merged into main by [PR 215](https://github.com/sarkars/agent-failure-modes/pull/215) (merge d8af754, head acb8cd9); branch reset to origin/main. No site repo push: this run changed no human-machine-interface pattern, goal or category page and no media page (the teardown in `incidents/` and the plan pages are not published, per deploy.md). URLs added 0, removed 0. Live /, /sitemap-index.xml, /robots.txt and /guides/ returned 200 earlier this run.
+
+### Run 217 (scheduled): 2026-10-28 (UTC)
+- **Coordinator run:** 9 subagents ran in parallel: six Part A writers (SL-01 to SL-06), each writing only its own target page, and three Part M phase 1 searchers (goals A, C, B), each writing only its own scratch file and source folder. Part A briefs carried quality-guide sections 1 and 2 and the Definition of done word for word; Part M briefs carried section 1. All report running no git and no repo scripts. I ran the five check scripts (`python -X utf8 -I`) before each commit. Last check: 9,250 links, 263 patterns, 1,267 public pattern URLs, 0 problems.
+- **Sync:** the branch held the owner's four queue commits for the new AI slop detection family (rows 433 on), so it was kept, not reset.
+- **Part A (sections 1 and 2, Definition of done), new family [AI slop detection](../goals/ai-slop-detection/README.md):** six pages, rows 433-438. Family README written; taxonomy section "AI slop detection" added with six rows; queue rows set Done (SL-01 to SL-05) and Needs review (SL-06), run 217.
+  - [SL-01 default gradient look](../goals/ai-slop-detection/failures/ui-default-gradient-look.md): 194 lines, 3 searches, 7 sources saved and opened. Commit 5777c45.
+  - [SL-02 template card grids](../goals/ai-slop-detection/failures/ui-template-card-grids.md): 202 lines, 5 searches, 6 opened. Commit a2d8fc7.
+  - [SL-03 generic hero layout](../goals/ai-slop-detection/failures/ui-generic-hero-layout.md): 206 lines, 4 searches, 8 opened. Commit 79baf6f.
+  - [SL-04 emoji as icons](../goals/ai-slop-detection/failures/ui-emoji-as-icons.md): 200 lines, 5 searches, 9 opened. Commit e5a9325.
+  - [SL-05 placeholder data left in](../goals/ai-slop-detection/failures/ui-placeholder-data-left-in.md): 202 lines, 6 searches, 8 opened. Commit 7a3e466.
+  - [SL-06 fabricated social proof](../goals/ai-slop-detection/failures/ui-fabricated-social-proof.md), **Needs review, L flag**: 196 lines, 5 searches, 4 opened (16 CFR 465 and 255 on eCFR, the FTC Rytr release from an archived copy). The later "Reopened and Set Aside" status of the Rytr order was seen only as a link title and is labeled so; every law statement stays Needs review. Commit 60f6f30.
+  - Unverified claims: anything seen only in search summaries is kept out of public text; each page's caveat names what could not be opened.
+  - Review changed: Guide spec move IDs normalized to `ask_clarifying_question` (two pages used other spellings); SL-03's link to the unwritten SL-07 page replaced with plain text; my quote check matched the pages' quotes against the saved texts (one SL-04 W3C quote differed only by a space before a period). README and taxonomy commit aea15c9.
+- **Part A2, E:** nothing queued.
+- **Part M phase 1 (section 1), goals A, C, B:** 13 patterns kept (A 6, C 4, B 3), 0 dropped, listed with their opened sources in [plan.md section 3](../../image-and-video-generation/plan.md); section 6 phase 1 is now Done (all nine goals sourced) and phase 2 is next, starting with goal E. Commit 59697cf.
+  - Searches and sources: A 18 searches, 25 opened; C 14, 19; B 11, 18.
+  - Quote check: my script matched every quote against the saved texts: A 52, C 28, B 28; 0 missing (A's file had escaped quote marks, unescaped before the check).
+  - Review changed: A3 and A5 narrowed (sourced examples only; "no people" and the hat example marked illustrative), B1 teeth marked weak, all B keeps narrowed, C3 marked weak, C4 may need narrowing.
+  - Overlaps for a person (Needs review): C1 and C4 with consistency-failure; B3 and C3 near quality-drift and artifact-accumulation. Unsourced percentages found in five existing vision-and-images pages (quality-drift, consistency-failure, artifact-accumulation, semantic-shift, token-limit-artifacts) are logged in plan.md section 3 and not used.
+- **Part B:** already done today (entry for 2026-10-28 in `seo/log.md`); not repeated.
+- **Part F:** no fixes. Live /, /sitemap-index.xml, /robots.txt and /guides/ return 200. Site repo local main matches origin/main (9744f16ef), 0 foreign commits.
+- **Part G:** no G item advanced (G10 nothing left, G12 needs data, G14 skipped by the owner). Newsletter due 2026-10-29 UTC; not yet due. LinkedIn: no new incident or guide this run, so no new draft.
+- **Part H (GORT step 7):** not built; step 7 is a Gate and still waits for the owner.
+- **KPIs:** catalog rows 493; written patterns 263 (check_site_compat). Site build page count in the Deploy line. Ellipsis count 224 (not re-scanned).
+- **Plan complete?** No. Still open: queue rows SL-07 onward; Part M phase 2; live checks for G10, G11 and G13; G12; the newsletter due 2026-10-29; GORT step 7 (Gate) onward.
+- **Owner notes:** (1) GORT step 7 waits for you. (2) Vercel has not deployed since c69c78cdd. (3) Privacy/Contact facts still open. (4) `agents/grep.exe.stackdump` is untracked and was not touched. (5) SL-06 states FTC rules; please have someone check it before it is marked Done. (6) Unsourced percentages in five vision-and-images pages are listed in plan.md section 3. (7) The area README's "44 patterns are written" line and goal table do not list the new family; not changed this run.
 
 ## Queue
 Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Library** column is the status in the catalog when the queue was built (**New** or **Extends**).
@@ -2240,6 +2268,70 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 430 | OV-09 | Permission fatigue or under-asking | Extends | - | `goals/human-oversight/failures/permission-fatigue-or-under-asking.md` | Covered | 62 |
 | 431 | OV-10 | Misleading explanations | Extends | R | `goals/human-oversight/failures/misleading-explanations.md` | Covered | 62 |
 | 432 | OV-12 | Confusion over who is acting | Extends | - | `goals/human-oversight/failures/confusion-over-who-is-acting.md` | Covered | 62 |
+| 433 | SL-01 | Purple-gradient, glassmorphism default look | New | - | `goals/ai-slop-detection/failures/ui-default-gradient-look.md` | Done | 217 |
+| 434 | SL-02 | Identical card grids and icon-in-circle feature rows | New | - | `goals/ai-slop-detection/failures/ui-template-card-grids.md` | Done | 217 |
+| 435 | SL-03 | Generic hero copy and stock layout order | New | - | `goals/ai-slop-detection/failures/ui-generic-hero-layout.md` | Done | 217 |
+| 436 | SL-04 | Emoji as icons and decorative bullets | New | - | `goals/ai-slop-detection/failures/ui-emoji-as-icons.md` | Done | 217 |
+| 437 | SL-05 | Placeholder data left in: Lorem ipsum, John Doe, 10,000+ users | New | - | `goals/ai-slop-detection/failures/ui-placeholder-data-left-in.md` | Done | 217 |
+| 438 | SL-06 | Fake testimonials, logos and stats | New | L | `goals/ai-slop-detection/failures/ui-fabricated-social-proof.md` | Needs review | 217 |
+| 439 | SL-07 | Stock AI phrases and filler openers | New | - | `goals/ai-slop-detection/failures/text-stock-phrases.md` | Queued | - |
+| 440 | SL-08 | Em-dash, triplet and 'not X but Y' rhythm | New | - | `goals/ai-slop-detection/failures/text-rhythm-tells.md` | Queued | - |
+| 441 | SL-09 | Hedged, balanced non-answers | New | - | `goals/ai-slop-detection/failures/text-balanced-non-answers.md` | Queued | - |
+| 442 | SL-10 | Uniform structure: headings and bullets on everything | New | - | `goals/ai-slop-detection/failures/text-uniform-structure.md` | Queued | - |
+| 443 | SL-11 | Invented citations and quotes | New | - | `goals/ai-slop-detection/failures/text-invented-citations.md` | Queued | - |
+| 444 | SL-12 | Over-commented code and tutorial-style comments | New | - | `goals/ai-slop-detection/failures/code-over-commented.md` | Queued | - |
+| 445 | SL-13 | Plausible but nonexistent APIs and options | New | - | `goals/ai-slop-detection/failures/code-nonexistent-apis.md` | Queued | - |
+| 446 | SL-14 | Needless abstraction and duplicated helpers | New | - | `goals/ai-slop-detection/failures/code-needless-abstraction.md` | Queued | - |
+| 447 | SL-15 | Image artifacts: extra fingers, garbled text, melted detail | New | - | `goals/ai-slop-detection/failures/image-visual-artifacts.md` | Queued | - |
+| 448 | SL-16 | Over-smooth stock-photo look and wrong physics | New | - | `goals/ai-slop-detection/failures/image-stock-look.md` | Queued | - |
+| 449 | SL-17 | Round-number, too-clean data and fake metrics | New | - | `goals/ai-slop-detection/failures/data-too-clean.md` | Queued | - |
+| 450 | SL-18 | Review and reply farms with templated voice | New | - | `goals/ai-slop-detection/failures/data-templated-reviews.md` | Queued | - |
+| 451 | SL-19 | AI-text detectors flag human writing (false positives) | New | - | `goals/ai-slop-detection/failures/detect-detector-false-positives.md` | Queued | - |
+| 452 | SL-20 | Detection rules that break after one model update | New | - | `goals/ai-slop-detection/failures/detect-rules-decay.md` | Queued | - |
+| 453 | SL-21 | Inter everywhere, lavender accents and forced dark mode | New | - | `goals/ai-slop-detection/failures/ui-default-type-and-palette.md` | Queued | - |
+| 454 | SL-22 | Neon-on-dark palettes and aurora background glows | New | - | `goals/ai-slop-detection/failures/ui-neon-aurora-glow.md` | Queued | - |
+| 455 | SL-23 | Unrelated sites converge on the same look | New | - | `goals/ai-slop-detection/failures/ui-visual-convergence.md` | Queued | - |
+| 456 | SL-24 | No locked design tokens, so every page drifts to defaults | New | - | `goals/ai-slop-detection/failures/ui-no-locked-design-tokens.md` | Queued | - |
+| 457 | SL-25 | Lesson stated outright at the end of a story | New | - | `goals/ai-slop-detection/failures/text-stated-moral-endings.md` | Queued | - |
+| 458 | SL-26 | Folk tells that are wrong: em dashes and punctuation as proof | New | - | `goals/ai-slop-detection/failures/text-folk-tells-unreliable.md` | Queued | - |
+| 459 | SL-27 | Confident prose with no first-hand detail | New | - | `goals/ai-slop-detection/failures/text-no-firsthand-detail.md` | Queued | - |
+| 460 | SL-28 | AI-written scientific papers and desk rejections on detector flags | New | - | `goals/ai-slop-detection/failures/text-ai-in-scientific-papers.md` | Queued | - |
+| 461 | SL-29 | Low-quality AI pull requests flood maintainers | New | - | `goals/ai-slop-detection/failures/code-ai-pr-flood.md` | Queued | - |
+| 462 | SL-30 | AI bug reports and bounty claims for flaws that do not exist | New | - | `goals/ai-slop-detection/failures/code-fake-vulnerability-reports.md` | Queued | - |
+| 463 | SL-31 | Agent bot retaliates after a rejected contribution | New | - | `goals/ai-slop-detection/failures/code-bot-retaliation-on-maintainers.md` | Queued | - |
+| 464 | SL-32 | Cloned voice tells: no breath, flat prosody, no room tone | New | - | `goals/ai-slop-detection/failures/audio-cloned-voice-tells.md` | Queued | - |
+| 465 | SL-33 | Provenance metadata (C2PA) stripped by re-encoding | New | - | `goals/ai-slop-detection/failures/provenance-metadata-stripped.md` | Queued | - |
+| 466 | SL-34 | Watermarks only readable by the vendor that made them | New | - | `goals/ai-slop-detection/failures/provenance-vendor-locked-watermarks.md` | Queued | - |
+| 467 | SL-35 | Readers falsely accuse real people of using AI | New | - | `goals/ai-slop-detection/failures/detect-false-accusations-by-readers.md` | Queued | - |
+| 468 | SL-36 | Vendor-reported detector accuracy never independently checked | New | - | `goals/ai-slop-detection/failures/detect-unverified-accuracy-claims.md` | Queued | - |
+| 469 | SL-37 | Humanizer tools make writing worse and still get flagged | New | - | `goals/ai-slop-detection/failures/detect-humanizer-arms-race.md` | Queued | - |
+| 470 | SL-38 | Fake AI-generated video clips presented as news or ads | New | - | `goals/ai-slop-detection/failures/video-synthetic-clips-as-real.md` | Queued | - |
+| 471 | SL-39 | Overused-word lists go stale as each model version changes | New | - | `goals/ai-slop-detection/failures/text-word-list-drift.md` | Queued | - |
+| 472 | SL-40 | Hedged list-building register: 'important', 'overall', 'including' | New | - | `goals/ai-slop-detection/failures/text-hedged-list-register.md` | Queued | - |
+| 473 | SL-41 | Workslop: AI work of little substance sent to colleagues | New | - | `goals/ai-slop-detection/failures/work-workslop.md` | Queued | - |
+| 474 | SL-42 | Sycophantic drafts and reviews that affirm whatever the user says | New | - | `goals/ai-slop-detection/failures/work-sycophantic-feedback.md` | Queued | - |
+| 475 | SL-43 | AI-written peer reviews of papers and code | New | - | `goals/ai-slop-detection/failures/work-ai-peer-reviews.md` | Queued | - |
+| 476 | SL-44 | Resume and cover letter claims the candidate cannot defend | New | - | `goals/ai-slop-detection/failures/hiring-undefendable-ai-resume-claims.md` | Queued | - |
+| 477 | SL-45 | AI-written admissions and student essays penalized or undetected | New | - | `goals/ai-slop-detection/failures/education-ai-essays.md` | Queued | - |
+| 478 | SL-46 | Model collapse: new models trained on AI-written web pages | New | - | `goals/ai-slop-detection/failures/data-model-collapse-contamination.md` | Queued | - |
+| 479 | SL-47 | Mass machine-translated duplicate pages flood the web | New | - | `goals/ai-slop-detection/failures/data-machine-translated-duplicates.md` | Queued | - |
+| 480 | SL-48 | Image detectors break after crop, resize, recompress or blur | New | - | `goals/ai-slop-detection/failures/detect-image-detector-fragility.md` | Queued | - |
+| 481 | SL-49 | Detectors fail on generators they were not trained on | New | - | `goals/ai-slop-detection/failures/detect-unseen-generator-failure.md` | Queued | - |
+| 482 | SL-50 | Detectors falsely flag non-native English writers and some student groups | New | - | `goals/ai-slop-detection/failures/detect-biased-false-positives.md` | Queued | - |
+| 483 | SL-51 | Slop detection run as a one-time check, not a release gate | New | - | `goals/ai-slop-detection/failures/detect-no-release-gate.md` | Queued | - |
+| 484 | SL-52 | Text watermarks erased by paraphrase, back-translation or rewrite | New | - | `goals/ai-slop-detection/failures/provenance-text-watermark-erased.md` | Queued | - |
+| 485 | SL-53 | Slopsquatting: attackers register package names that AI keeps inventing | New | - | `goals/ai-slop-detection/failures/code-slopsquatting.md` | Queued | - |
+| 486 | SL-54 | AI-generated code ships vulnerabilities and is not tagged as AI | New | - | `goals/ai-slop-detection/failures/code-untracked-ai-vulnerabilities.md` | Queued | - |
+| 487 | SL-55 | AI agent skills install hallucinated dependencies on their own | New | - | `goals/ai-slop-detection/failures/code-agent-installs-hallucinated-packages.md` | Queued | - |
+| 488 | SL-56 | AI content farms posing as news sites | New | - | `goals/ai-slop-detection/failures/web-ai-content-farms-as-news.md` | Queued | - |
+| 489 | SL-57 | Ads fund AI content farms through programmatic buying | New | - | `goals/ai-slop-detection/failures/web-ads-fund-content-farms.md` | Queued | - |
+| 490 | SL-58 | Fake AI music artists with huge catalogs and no history | New | - | `goals/ai-slop-detection/failures/music-fake-ai-artists.md` | Queued | - |
+| 491 | SL-59 | AI tracks inflate streams and divert royalties | New | - | `goals/ai-slop-detection/failures/music-ai-stream-fraud.md` | Queued | - |
+| 492 | SL-60 | Platforms rely on self-declared AI labels | New | - | `goals/ai-slop-detection/failures/provenance-self-declared-labels.md` | Queued | - |
+| 493 | SL-61 | AI personas run covert persuasion accounts on forums | New | - | `goals/ai-slop-detection/failures/social-covert-ai-persuasion-accounts.md` | Queued | - |
+| 494 | SL-62 | Engagement farming: AI comments and reply bots on professional networks | New | - | `goals/ai-slop-detection/failures/social-ai-engagement-farming.md` | Queued | - |
+| 495 | SL-63 | A few automated accounts produce a third of all comments | New | - | `goals/ai-slop-detection/failures/social-super-commenter-bots.md` | Queued | - |
+| 496 | SL-64 | Detector scores used for sorting and ranking, not just flagging | New | - | `goals/ai-slop-detection/failures/detect-detector-score-misused.md` | Queued | - |
 
 ## Run log
 *(Each run appends an entry here.)*

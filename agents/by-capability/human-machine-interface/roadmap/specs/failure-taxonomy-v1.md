@@ -43,6 +43,19 @@ Family folder: `age-adaptation` ([family README](../../goals/age-adaptation/READ
 |---|---|---|---|---|---|---|
 | `child-user-treated-as-adult` | Child user treated as adult | What a chatbot should do when a user may be under 13 or a teen, covering COPPA, age signals, data collection, persuasion limits, and age-band design. | High **Read this first: needs expert or legal review.** | yes | lead_with_answer, offer_choices, hand_off | [page](../../goals/age-adaptation/failures/child-user-treated-as-adult.md)  |
 
+### AI slop detection
+
+Family folder: `ai-slop-detection` ([family README](../../goals/ai-slop-detection/README.md))
+
+| Pattern ID | Short name | Issue | Stakes and flags | Detection signals written | Moves | Page |
+|---|---|---|---|---|---|---|
+| `ui-default-gradient-look` | Default gradient look | AI-built web pages default to purple gradients and frosted-glass cards. Give the tool brand tokens and check every generated screen before you ship. | Low to medium | yes | ask_clarifying_question, offer_choices, admit_uncertainty, hand_off | [page](../../goals/ai-slop-detection/failures/ui-default-gradient-look.md) |
+| `ui-template-card-grids` | Template card grids | AI site builders fill feature sections with identical rows of cards, each an icon in a tinted circle, a two-word title and one equal-length line. | Low to medium | yes | ask_clarifying_question, offer_choices, lead_with_answer, admit_uncertainty, hand_off | [page](../../goals/ai-slop-detection/failures/ui-template-card-grids.md) |
+| `ui-generic-hero-layout` | Generic hero layout | An AI-built landing page opens with a headline any company could use and stacks sections in template order, so visitors can't tell who it is for. | Low to medium | yes | ask_clarifying_question, lead_with_answer, offer_choices, admit_uncertainty | [page](../../goals/ai-slop-detection/failures/ui-generic-hero-layout.md) |
+| `ui-emoji-as-icons` | Emoji as icons | AI tools put emoji on headings, bullets and buttons in UIs, READMEs and commits; screen readers read their names, and the output looks unreviewed. | Low to medium | yes | lead_with_answer, offer_choices, ask_clarifying_question, hand_off | [page](../../goals/ai-slop-detection/failures/ui-emoji-as-icons.md) |
+| `ui-placeholder-data-left-in` | Placeholder data left in | An AI-built page ships with filler nobody replaced: Lorem ipsum, "John Doe", example.com links, 555 phone numbers, "$XX" prices or TODO text. | Low to high | yes | ask_clarifying_question, offer_choices, admit_uncertainty | [page](../../goals/ai-slop-detection/failures/ui-placeholder-data-left-in.md) |
+| `ui-fabricated-social-proof` | Fabricated social proof | AI site builders invent named testimonials, real company logos, user counts and star ratings, and builders ship them as if they were real. | High **Read this first: needs expert or legal review.** | yes | admit_uncertainty, ask_clarifying_question, offer_choices, hand_off | [page](../../goals/ai-slop-detection/failures/ui-fabricated-social-proof.md) |
+
 ### Banking agents
 
 Family folder: `banking-agents` ([family README](../../goals/banking-agents/README.md))
