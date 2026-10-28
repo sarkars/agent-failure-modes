@@ -29,9 +29,9 @@ Other existing goals reused: [Multi-Image Understanding](../vision-and-images/go
 Rules: never move, rename or delete these pages (their URLs are live). New pages link to them instead of repeating them. Where a new page and an old one cover the same failure, the overlap goes to a person as a merge proposal, marked Needs review. The [vision-and-images README](../vision-and-images/README.md) states figures with no source (for example a 20 to 40 point calibration gap); that is logged for a person to check, not copied here.
 
 ## 3. Goals and first patterns
-Eight groups. Pattern names are working titles; each becomes a page only after a source is found (section 5). A pattern with no public source is dropped, not written from general knowledge.
+Nine groups. Pattern names are working titles; each becomes a page only after a source is found (section 5). A pattern with no public source is dropped, not written from general knowledge.
 
-Placement in vision-and-images: A, B and C go into the existing `generation-artifacts` goal. D to H are new goal folders under `vision-and-images/goals/` (working names `generation-representation`, `generation-likeness-and-harm`, `generation-provenance`, `generation-copyright`, `generation-business-use`), because the category has no goal for them.
+Placement in vision-and-images: A, B and C go into the existing `generation-artifacts` goal. D to I are new goal folders under `vision-and-images/goals/` (working names `generation-representation`, `generation-likeness-and-harm`, `generation-provenance`, `generation-copyright`, `generation-business-use`, `generation-brand`), because the category has no goal for them.
 
 **A. The output does not match the request (prompt adherence)**
 - Wrong count of objects
@@ -78,7 +78,6 @@ Placement in vision-and-images: A, B and C go into the existing `generation-arti
 - Vendor terms or indemnity that do not cover how the business uses the output
 
 **H. Business use (corporate failures)**
-- Off-brand output: wrong logo, colors, fonts or product design in marketing
 - Product shown with features, sizes or results it does not have (false advertising risk)
 - AI images in ads, listings or reports published without review or disclosure
 - Public backlash when a brand replaces artists, models or photographers with AI images
@@ -86,13 +85,38 @@ Placement in vision-and-images: A, B and C go into the existing `generation-arti
 - Cultural, religious or local errors in images made for other markets
 - Employees' or models' likeness reused beyond what they agreed to
 - Fake receipts, IDs, damage photos or documents made with generators to defraud a business (insurance, refunds, expenses, account checks)
+- Regulated claims in images: health, finance or food results, before-and-after shots
+- Required disclaimers missing or unreadable in the image
+- Age-restricted products (alcohol, gambling) shown with people who look underage
+- AI disclosure rules of each market not met
+- Ad platforms rejecting AI-made creative or requiring a label
+- No model release or likeness rights for generated people who resemble real people
+- Text baked into images with no alt text (accessibility)
+- An approved image cannot be made again: same prompt, different output
+- The vendor updates its model and the approved style changes
+- No record of the prompt, model, settings and approver behind a published asset
+- No approval step: anyone who generates an image can publish it
+- Uploaded brand assets used to train the vendor's model
+- Employees using image tools the company has not approved
+- Vendor terms, prices or model retirement changing under a live campaign
+- Regenerations and video runs costing far more than budgeted
+- Text in images not translated, in the wrong script, or laid out wrong for right-to-left languages
+- A visible AI mistake in an ad spreading widely (extra fingers on a model)
+
+**I. Brand guidelines**
+- Brand rules broken: logo distorted, recolored or crowded, wrong fonts, colors, tone or photo style
+- Competitor logos, products or look appearing in the output
+- Brand shown next to unsafe content (sexual, violent, political)
+- Garbled text on packaging, labels or signs in product shots
+- Brand reference images or style guides ignored by the generator
+- A campaign where the product looks different from image to image (links to goal C)
 
 **F. The output cannot be traced (provenance and labeling)**
 - No AI label, watermark or Content Credentials on the output
 - Credentials or metadata stripped when the file is edited, resized or uploaded
 - A label that misleads: real photos flagged as AI, or AI images that pass as real
 
-Links out: E links to `cross-cutting/security` and `cross-cutting/governance`; F and G link to `cross-cutting/governance`; H links to `by-use-case/content-marketing` and, for document fraud, to `by-use-case/insurance` and `by-use-case/financial-services`; voice cloning stays in `speech-and-audio` and is linked from E and F.
+Links out: E links to `cross-cutting/security` and `cross-cutting/governance`; F and G link to `cross-cutting/governance`; H and I link to `by-use-case/content-marketing` and, for document fraud, to `by-use-case/insurance` and `by-use-case/financial-services`; voice cloning stays in `speech-and-audio` and is linked from E and F.
 
 Statements about law in goals E, F, G and H (consent, likeness rights, copyright, trademark, advertising, election rules, labeling duties) stay **Needs review** by a qualified person.
 
@@ -119,7 +143,7 @@ Folder layout is the one vision-and-images already uses, so the site importer pi
 | Phase | Work | Done when |
 |---|---|---|
 | 1 | Search for sources for each pattern in section 3; drop patterns with none; list kept patterns with their sources in this plan | Every kept pattern has at least one opened source |
-| 2 | Write pages, highest-harm first (E, then G, H, D, F, A, C, B), into vision-and-images; new goal READMEs for D to H; update the vision-and-images README goal table and counts | Pages pass the five check scripts |
+| 2 | Write pages, highest-harm first (E, then G, H, I, D, F, A, C, B), into vision-and-images; new goal READMEs for D to I; update the vision-and-images README goal table and counts | Pages pass the five check scripts |
 | 3 | Incident pages for the candidates in section 5 that check out | Each incident links to its patterns |
 | 4 | Publish: the site importer picks up the new pages in the existing category; check the build and that no live URL is lost | New pages live; public URL list updated |
 | 5 | Layer 1 check page (section 7) | Page live and tested on files with and without Content Credentials |
