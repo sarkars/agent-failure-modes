@@ -1275,6 +1275,38 @@ Run N covers queue orders as shown. At one run every hour, 91 runs take about 91
 - **Note for the owner:** same as run 199: GORT decision 2; Vercel has not deployed site commits since c69c78cdd; G14 needs a PageSpeed key or a local Lighthouse run; Privacy and Contact pages need your facts; the importer fix for 37 duplicate framework descriptions needs your go-ahead.
 - **Deploy:** content [PR 199](https://github.com/sarkars/agent-failure-modes/pull/199) merged into `main` with a merge commit (2144494, expected head a23606d); branch reset to `origin/main`. Site repo not touched: only `incidents/` and `roadmap/` changed, and they are not published.
 
+### Run 201 (scheduled): 2026-10-28 (UTC)
+- **Coordinator run:** 2 subagents ran in parallel, one teardown each, each writing only its own new file. Each brief carried quality-guide sections 1 and 6 word for word and asked for no body H1. No Queued rows and no Part A, A2 or E work left. No subagent ran git. I ran the five check scripts (`python -X utf8 -I`) before each commit; all clean. Last check: 8,752 links, 257 patterns, 1,267 public pattern URLs, 0 problems.
+- **Step 0:** wikipedia.org returned 301 and arxiv.org 200. UTC was about 2026-10-28 03:50 at the start.
+- **Sync:** the branch held one commit not in `main`, 924c391 (the run 200 Deploy line); kept.
+- **Part C asset 4 (sections 1 and 6), teardown 1, Needs review:** [OpenAI ChatGPT plugins: one link could install a plugin without the user's approval, and plugin sign-in flaws risked account takeover, March 2024](../incidents/openai-chatgpt-plugins-oauth-flaws-salt-labs-march-2024.md). 124 lines; description 156 characters.
+  - Why chosen: a grep of `agents/` for "Salt Labs" found nothing.
+  - Searches: 4.
+  - Opened (downloaded as raw HTML and read as text on 2026-10-28): Salt Security blog (Aviad Carmel, 2024-03-13) and press release, Dark Reading (Nathan Eddy), SC Media (Laura French), Infosecurity Magazine (Alessandro Mascellino), BetaNews (Ian Barker), all 2024-03-13; TechRadar (Lewis Maddison) and Security Affairs (Pierluigi Paganini), 2024-03-14.
+  - Blocked: BankInfoSecurity (403). Other coverage seen only in search summaries and not used.
+  - Unverified, and listed on the page: any OpenAI statement or single fix date, plugin counts, claims that no user was harmed, a Salt follow-up post, a PluginLab notice.
+  - Pattern IDs (all in the taxonomy): `manipulated-consent-ui` (partial), `over-confirmation` (weak), `forces-a-fresh-login` (weak). Four others rejected. A possible gap flagged for a person (a tool connected to a user's account without the user's confirmation).
+- **Review of teardown 1 (sections 1 and 6):** I read the page in full as a skeptical reader. I re-downloaded the Salt blog and matched six quotes ("indeed started the plugin installation", "This is a zero-click attack", "affected dozens of other plugins", "without a confirmation", "a major improvement over Plugins", "July 10"); all matched. The page gives no exploit steps beyond what Salt published. The review changed nothing.
+- **Part C asset 4 (sections 1 and 6), teardown 2, Needs review:** [Dukaan: CEO says an AI chatbot let the e-commerce platform lay off 90% of its support team, and posts speed figures that draw backlash, July 2023](../incidents/dukaan-replaces-support-team-with-ai-chatbot-july-2023.md). 127 lines; description 151 characters.
+  - Why chosen: a grep of `agents/` for "Dukaan" found nothing.
+  - Searches: 5.
+  - Opened (downloaded and read as text on 2026-10-28): three of Suumit Shah's July 10, 2023 tweets (through Twitter's public oEmbed service), CNN (Anna Cooban, 2023-07-12), MediaNama (Kamya Pandey, 2023-07-12), Business Today (Tarun Mishra, 2023-07-11), Storyboard18 (2023-07-11), People Matters (Samriddhi Srivastava, 2023-07-12), Interesting Engineering (Sejal Sharma, 2023-07-14), The Decoder (Matthias Bastian, 2023-07-15), HRD (Dexter Tilo, 2023-10-04); the OECD.AI incident page was opened but not used for any fact.
+  - Seen only in search summaries or as quoted by others, named on the page as unverified and not used for facts: Business Insider ("23 of 26"), The Washington Post (read only as quoted by HRD), The Economic Times and VCCircle, Shah's LinkedIn post, a StartupItalia follow-up, and about a dozen other outlets. India Retailing downloaded without article text; not used.
+  - Unverified, and listed on the page: whether the speed and cost figures are accurate and how "resolution time" was measured, when the layoffs happened (CNN, Interesting Engineering and HRD differ), the team's full size, any later outcome.
+  - Pattern IDs (all in the taxonomy): `answer-and-go-conversation` (partial), `escalates-too-early-or-too-late` (partial), `talk-to-a-human-ignored-or-looped` (weak). Five others considered and rejected. A possible gap flagged for a person (sizing a support team from the bot's own speed and "resolved" figures).
+- **Review of teardown 2 (sections 1 and 6):** I read the page in full. It names no laid-off worker or customer, and the Read this first note says it is not legal or employment advice. Every figure is tied to the CEO's tweets or an opened source and labeled as his claim. I re-downloaded CNN and MediaNama and matched five quotes ("the 23 layoffs were made in September", "built by one of the firm", "each doing what they do best", "1400 support tickets", "needed it to"); all matched. The review changed nothing.
+- **Part B:** already done today (run 198 entry in `seo/log.md`); not repeated.
+- **Part E:** no Moves or Guide spec work left.
+- **Part F:** no fixes. Live /, /sitemap-index.xml, /robots.txt and /guides/ return 200. Site repo local main matches origin/main, 0 foreign commits.
+- **Part G:**
+  - No G item advanced: G10 has nothing left to retitle, G12 needs question-query data, G14 is blocked on PageSpeed quota/key.
+  - Newsletter: the issue dated 2026-10-22 exists; the next is due 2026-10-29 and was not written this run (it is not yet due).
+  - LinkedIn: two drafts added, for the two teardowns. Drafts only; not posted. In review I rewrote one plugins draft line that implied more than one zero-click flaw; Salt calls only the PluginLab flaw zero-click.
+- **Part H (GORT step 3):** no code written. Still waiting for the owner: decision 2 (frameworks) in section 9 of gort-plan.md.
+- **KPIs:** site build 1,907 pages (run 191). Indexed 878, not indexed 13 (Search Console, run 118). Ellipsis count 224 (not re-scanned).
+- **Plan complete?** No. Still open: teardowns continue; live checks for G10, G11 and G13; G12 and G14; the newsletter due 2026-10-29; GORT step 3 (waits on decision 2).
+- **Note for the owner:** same as run 200: GORT decision 2; Vercel has not deployed site commits since c69c78cdd; G14 needs a PageSpeed key or a local Lighthouse run; Privacy and Contact pages need your facts; the importer fix for 37 duplicate framework descriptions needs your go-ahead.
+
 ## Queue
 Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Library** column is the status in the catalog when the queue was built (**New** or **Extends**).
 
