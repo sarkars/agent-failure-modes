@@ -1071,6 +1071,94 @@ Run N covers queue orders as shown. At one run every hour, 91 runs take about 91
 - **KPIs:** site build 1,907 pages (run 191); indexed pages 878, not indexed 13 (Search Console, read in run 118); ellipsis count 224 (not re-scanned).
 - **Plan complete?** No: teardowns continue (next run needs a new candidate), G10 batch 2, G10, G11 and G13 live checks, G12 and G14 open; GORT step 3 waits on decision 2.
 - **Note for the owner:** GORT step 3 needs your answer to decision 2. Vercel has still not deployed site commits since c69c78cdd, so G10, G11, G13 and the .md link fixes are not live. Privacy and Contact pages need facts from you. The importer fix for 37 duplicate framework descriptions needs your go-ahead.
+- **Deploy:** content PR [sarkars/agent-failure-modes#195](https://github.com/sarkars/agent-failure-modes/pull/195) merged into `main` as 925689d (merge commit, head SHA 753d3cf checked); branch reset to `origin/main`. No site-repo commit: only `incidents/` and `roadmap/` changed, which this runbook does not publish. Site build not rerun (1,907 pages, run 191); URLs added 0, removed 0; no live check needed.
+
+### Run 197 (scheduled): 2026-10-27 (UTC)
+- **Coordinator run:** 2 subagents ran in parallel. Each wrote one teardown to its own file. Each brief carried quality-guide sections 1 and 6 word for word and asked for no body H1 (a lesson from run 196). There were no Queued rows and no Part A, A2 or E work left. No subagent ran git. I ran the five check scripts (`python -X utf8 -I`) before each commit, and all were clean: 8,635 links, 257 patterns, 1,267 public pattern URLs, 0 problems. Step 0: npr.org returned 200. UTC date from `date -u`: 2026-10-27 23:49. Sync: after the fetch I compared `origin/main..claude/zealous-ramanujan-u8zwfk`. The branch held only 2977287 (the run 196 deploy line), so I kept the branch and did not reset it.
+- **Part C asset 4 (sections 1 and 6), teardown 1, Needs review:** [Crisis Text Line shared data from crisis text conversations with its for-profit spin-off Loris.ai, January 2022](../incidents/crisis-text-line-shared-conversation-data-with-loris-ai-politico-january-2022.md). 134 lines; description 156 characters.
+  - Notes on the page: a "Read this first" note (a summary of public reporting, not legal or medical advice, and it quotes no texter). A channel note (text chat staffed by people; the logs were reused to build customer service software).
+  - Why chosen: it is a chat-log reuse case that no page covers. A grep of `agents/` for "Crisis Text Line" and "Loris" found only a passing mention in `missed-crisis-signals`.
+  - Searches: 6.
+  - Opened (downloaded and read as text on 2026-10-28):
+    - Politico, Alexandra S. Levine, 2022-01-28, updated 2022-01-29. The live page served only the opening, so the full text came from an Internet Archive copy.
+    - Politico, John Hendel, 2022-01-31 (Internet Archive copy).
+    - Crisis Text Line's post, 2022-01-31.
+    - Brendan Carr's letter, 2022-01-31. The FCC site returned 403, so I used an Internet Archive copy of the PDF.
+    - danah boyd's essay, 2022-01-31.
+    - Popular Science, Colleen Hagerty, 2022-02-01.
+    - Benton Institute, 2022-03-29 (a summary of Politico Morning Tech).
+    - Tim Reierson's site, and his FTC letter of 2022-03-31.
+  - Seen only in search summaries, and kept off the page: a claim that Loris kept the models it built, a law firm page, Reclaim The Net, Gigazine, Psych Central, a Santa Clara case study, Wikipedia, Techdirt (the download failed), TechCrunch, and Politico Morning Tech itself.
+  - Unverified, and listed on the page:
+    - Carr's March 22, 2022 letter to the FTC. It is known only through Benton and Reierson.
+    - Whether Loris deleted the data or the models.
+    - Any FTC action.
+    - The CEO's January 28 post and the group's tweets.
+  - Source disagreements, recorded on the page: when the sharing stopped; what Loris built; Politico's date against Carr's footnote; why Reierson left.
+  - For the reviewer: the 988 line in the "Read this first" note is general knowledge, not from a source.
+  - Pattern IDs (all in the taxonomy): `sensitive-data-collected-in-chat`, `recording-consent-not-captured` and `manipulated-consent-ui` (partial); `exploiting-vulnerable-circumstances` (weak). Four other IDs were considered and rejected.
+  - Gap, named for a person: chat logs were reused for a purpose the user was not told about in plain words.
+  - 5 proposed signals and 7 checks, all marked "Not yet run".
+- **Review of teardown 1 (quality-guide sections 1 and 6):** I read the page in full and matched 37 quotes and facts against the subagent's downloads myself. I used a Python script that normalizes whitespace and curly quotes. All matched; the footnote date matched as "Jan. 27, 2022". The page had no "Fails review if" hit, and the review changed nothing. Items checked:
+  - Politico: "sliced and repackaged version of that information", "nearly 200 million messages", 219 million messages, 6.7 million conversations, "the largest mental health data set in the world", "By texting further with us, you agree to our Terms", "is not commercialized, full stop", "via an automated process", "limited contractual rights to periodically ask us for certain anonymized data", "fully understood consent?", "could be reverse-engineered", "between just the two people that are talking", "may happen every few months", "in order to be paired with a volunteer crisis counselor", 50-paragraph, "a year and a half", 2018, Bamberger, Code of Conduct, "why sell t-shirts".
+  - Crisis Text Line: "we have ended our data-sharing relationship with Loris", "since the beginning of 2020", "easy to understand bulleted summary".
+  - Carr: "preserve the integrity of mental health hotlines", "disturbingly dystopian", and the footnote date.
+  - boyd: "wrong to share texter data with Loris.ai", "(A ToS is not consent.)", "training tools for people".
+  - Hendel: "cherry-picked and omitted information about our data privacy policies", Gillibrand, Butler.
+  - Benton: "prior and current data practices", "fully disclosed".
+  - Reierson: "confirm all of Commissioner Carr", "volunteers have not provided consent", March 22.
+- **Part C asset 4 (sections 1 and 6), teardown 2, Needs review:** [AI Democracy Projects: election officials rated five AI models' answers to US voter questions, and about half were judged inaccurate, February 2024](../incidents/ai-democracy-projects-chatbots-wrong-election-answers-proof-news-february-2024.md). 129 lines; description 154 characters.
+  - Notes on the page: a "Read this first" note (not legal advice; state rules are attributed and dated early 2024). A channel note (text answers through developer APIs, not consumer apps; voice testing was planned).
+  - Why chosen: a grep of `agents/` for "Proof News" and "AI Democracy Projects" found nothing. The Copilot, Grok ballot-deadline and Alexa election pages are linked under "How it differs".
+  - Searches: 4.
+  - Opened (downloaded and read as text on 2026-10-28):
+    - Proof News report, by Julia Angwin, Alondra Nelson and Rina Palta, 2024-02-27.
+    - IAS report and methodology PDF, same authors and date.
+    - IAS news release, 2024-02-28.
+    - AP, Garance Burke, 2024-02-27.
+    - TechCrunch, Devin Coldewey, 2024-02-27.
+    - Proof News March rerun, Claire Brown, 2024-03-26.
+    - Anthropic's elections post, 2024-02-16.
+  - Not opened: the GitHub dataset. The page says so.
+  - Seen only in search summaries, and kept off the page: syndicated AP copies (SMDP, Fortune, electionline, ABC17, KVIA), Democracy Works' post, a later Proof News piece, and 2026 coverage of Anthropic's midterm changes.
+  - Unverified, and listed on the page: any single rating; how the consumer apps compared; when Anthropic's pop-up shipped; any later API change.
+  - Source disagreements, recorded on the page: 38% against 39% incomplete; "half", 51% and "more than half" inaccurate; Gemini "nearly two-thirds" against "more than 60%"; North against northwest Philadelphia; 27 against 26 prompts.
+  - Pattern IDs (all in the taxonomy): `confident-wrong-answer-with-no-way-to-check` (strong); `eligibility-answers-sound-like-decisions`, `stakes-blind-register` and `link-and-resource-dumps` (partial); `false-premises-accepted` and `length-mismatch-with-the-user-s-effort` (weak). Four other IDs were considered and rejected.
+  - Gap, named for a person: a place- and date-dependent answer came from stale training data with no "as of" date.
+  - 5 proposed signals and 7 checks, all marked "Not yet run".
+- **Review of teardown 2 (quality-guide sections 1 and 6):** I read the page in full and matched 40 quotes and facts against the downloads myself. All matched. 13%, Deep Infra and OpenRouter appear in the PDF, not the article, and the page attributes them to the methodology. The page had no "Fails review if" hit, and the review changed nothing. Items checked:
+  - Proof News: "There is no voting precinct in the United States with the code 19121.", "Inaccurate answers were, on average, longer than accurate ones.", "often seemed plausible at first glance", the Roberts line on Llama 2, the Sanderford line on the pop-up, the Doshi line on the API, the Wood line, 51%, 40%, 38%, 63%, "more than 60%", "may or may not perform better", Brown Institute, North Philadelphia, Nevada, same-day.
+  - IAS PDF: "not designed to trick the models", "Where do I vote in [zip code]?", 39%, 13% biased, Deep Infra, OpenRouter, GPT-4-0613, Llama-2-70b-chat-hf, Mixtral-8x7B-Instruct-v0.1, Dec. 13, 2023.
+  - AP: "not an exact representation", "meaningless", "nearly two-thirds of all answers wrong", "more than half", "keep evolving our approach as we learn more about how our tools are used", northwest Philadelphia, Columbia University, Jan. 25.
+  - TechCrunch: "not really a misrepresentation".
+  - The rerun: 52% and Claire Brown.
+  - Anthropic: TurboVote.
+- **Part B:** skipped. `seo/log.md` already has an entry for 2026-10-27 (UTC), from run 174.
+- **Part E:** no Moves or Guide spec work left. I did not re-audit this run.
+- **Part F:** no fixes.
+  - Live: /, /sitemap-index.xml, /robots.txt and /patterns/ return 200; /about/ returns 404. The live home page's Last-Modified is 2026-10-27 01:51 GMT.
+  - Site repo: origin/main is 6acae8c44. Local main matches it, with 0 foreign commits.
+  - Ellipsis count: 224 (not re-scanned).
+- **Part G:** no item started.
+  - G10 batch 2 and G12: skipped. They need a fresh Search Console read, which I did not attempt.
+  - G13: still Built, not Done. Live /about/ returns 404.
+  - G10: still not live. The /semantic-mismatch/ title is still "Semantic Mismatch | Good Agent Lab".
+  - G14: the retry is due from 2026-10-28. UTC was 2026-10-27 when the run started.
+  - Newsletter: the issue dated 2026-10-22 exists. The next is due by 2026-10-29.
+  - LinkedIn: I added one draft, for the AI Democracy Projects teardown. It is a draft only and was not posted.
+- **Part H (GORT step 3):** no code written. Still waiting for the owner: decision 2 (frameworks) in section 9 of gort-plan.md has only a recommendation.
+- **KPIs:** site build 1,907 pages (run 191). Indexed pages 878 and not indexed 13 (Search Console, read in run 118). Ellipsis count 224 (not re-scanned).
+- **Plan complete?** No. Still open:
+  - Teardowns continue; the next run needs a new candidate.
+  - G10 batch 2.
+  - Live checks for G10, G11 and G13.
+  - G12 and G14.
+  - GORT step 3, which waits on decision 2.
+- **Note for the owner:**
+  - GORT step 3 needs your answer to decision 2.
+  - Vercel has not deployed any site commit since c69c78cdd. So G10, G11, G13 and the .md link fixes are not live.
+  - The Privacy and Contact pages need facts from you.
+  - The importer fix for 37 duplicate framework descriptions needs your go-ahead.
 
 ## Queue
 Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Library** column is the status in the catalog when the queue was built (**New** or **Extends**).
