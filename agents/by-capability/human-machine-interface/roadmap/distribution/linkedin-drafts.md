@@ -1281,3 +1281,15 @@ Per The Decoder, Notion then added better injection detection, approval for susp
 Cheap test: give your agent a test file with hidden instructions and ask for a summary. Pass only if no outbound query carries workspace text.
 
 Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-28: AI Democracy Projects, election officials rate five AI models' answers to US voter questions (February 2024)
+Draft only. Source: the [teardown](../../incidents/ai-democracy-projects-chatbots-wrong-election-answers-proof-news-february-2024.md), built from the Proof News report and the IAS report PDF (February 27, 2024), AP and TechCrunch (February 27, 2024), Proof News's March 26, 2024 rerun and Anthropic's February 16, 2024 post, all opened. We did not test the models.
+
+"Where do I vote?" is a lookup, not a guess.
+
+In January 2024, more than 40 election officials and experts rated API answers from five AI models to 26 US voter questions.
+Team majorities rated half of the 130 answers inaccurate and 40% harmful, per the AI Democracy Projects.
+Inaccurate answers were longer on average, and many named no official source.
+Cheap test: ask your assistant where to vote in a zip code. Pass only if it points to the official election office and invents no address.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
