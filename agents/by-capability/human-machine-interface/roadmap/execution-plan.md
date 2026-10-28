@@ -2262,6 +2262,24 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 450 | SL-18 | Review and reply farms with templated voice | New | - | `goals/ai-slop-detection/failures/data-templated-reviews.md` | Queued | - |
 | 451 | SL-19 | AI-text detectors flag human writing (false positives) | New | - | `goals/ai-slop-detection/failures/detect-detector-false-positives.md` | Queued | - |
 | 452 | SL-20 | Detection rules that break after one model update | New | - | `goals/ai-slop-detection/failures/detect-rules-decay.md` | Queued | - |
+| 453 | SL-21 | Inter everywhere, lavender accents and forced dark mode | New | - | `goals/ai-slop-detection/failures/ui-default-type-and-palette.md` | Queued | - |
+| 454 | SL-22 | Neon-on-dark palettes and aurora background glows | New | - | `goals/ai-slop-detection/failures/ui-neon-aurora-glow.md` | Queued | - |
+| 455 | SL-23 | Unrelated sites converge on the same look | New | - | `goals/ai-slop-detection/failures/ui-visual-convergence.md` | Queued | - |
+| 456 | SL-24 | No locked design tokens, so every page drifts to defaults | New | - | `goals/ai-slop-detection/failures/ui-no-locked-design-tokens.md` | Queued | - |
+| 457 | SL-25 | Lesson stated outright at the end of a story | New | - | `goals/ai-slop-detection/failures/text-stated-moral-endings.md` | Queued | - |
+| 458 | SL-26 | Folk tells that are wrong: em dashes and punctuation as proof | New | - | `goals/ai-slop-detection/failures/text-folk-tells-unreliable.md` | Queued | - |
+| 459 | SL-27 | Confident prose with no first-hand detail | New | - | `goals/ai-slop-detection/failures/text-no-firsthand-detail.md` | Queued | - |
+| 460 | SL-28 | AI-written scientific papers and desk rejections on detector flags | New | - | `goals/ai-slop-detection/failures/text-ai-in-scientific-papers.md` | Queued | - |
+| 461 | SL-29 | Low-quality AI pull requests flood maintainers | New | - | `goals/ai-slop-detection/failures/code-ai-pr-flood.md` | Queued | - |
+| 462 | SL-30 | AI bug reports and bounty claims for flaws that do not exist | New | - | `goals/ai-slop-detection/failures/code-fake-vulnerability-reports.md` | Queued | - |
+| 463 | SL-31 | Agent bot retaliates after a rejected contribution | New | - | `goals/ai-slop-detection/failures/code-bot-retaliation-on-maintainers.md` | Queued | - |
+| 464 | SL-32 | Cloned voice tells: no breath, flat prosody, no room tone | New | - | `goals/ai-slop-detection/failures/audio-cloned-voice-tells.md` | Queued | - |
+| 465 | SL-33 | Provenance metadata (C2PA) stripped by re-encoding | New | - | `goals/ai-slop-detection/failures/provenance-metadata-stripped.md` | Queued | - |
+| 466 | SL-34 | Watermarks only readable by the vendor that made them | New | - | `goals/ai-slop-detection/failures/provenance-vendor-locked-watermarks.md` | Queued | - |
+| 467 | SL-35 | Readers falsely accuse real people of using AI | New | - | `goals/ai-slop-detection/failures/detect-false-accusations-by-readers.md` | Queued | - |
+| 468 | SL-36 | Vendor-reported detector accuracy never independently checked | New | - | `goals/ai-slop-detection/failures/detect-unverified-accuracy-claims.md` | Queued | - |
+| 469 | SL-37 | Humanizer tools make writing worse and still get flagged | New | - | `goals/ai-slop-detection/failures/detect-humanizer-arms-race.md` | Queued | - |
+| 470 | SL-38 | Fake AI-generated video clips presented as news or ads | New | - | `goals/ai-slop-detection/failures/video-synthetic-clips-as-real.md` | Queued | - |
 
 ## Run log
 *(Each run appends an entry here.)*
