@@ -1159,6 +1159,54 @@ Run N covers queue orders as shown. At one run every hour, 91 runs take about 91
   - Vercel has not deployed any site commit since c69c78cdd. So G10, G11, G13 and the .md link fixes are not live.
   - The Privacy and Contact pages need facts from you.
   - The importer fix for 37 duplicate framework descriptions needs your go-ahead.
+- **Deploy:** content [PR 196](https://github.com/sarkars/agent-failure-modes/pull/196) merged into `main` with a merge commit (8f1cb14, expected head 4227ff5); branch reset to `origin/main`. Site repo not touched: only `incidents/` and `roadmap/` changed, and they are not published.
+
+### Run 198 (scheduled): 2026-10-28 (UTC)
+- **Coordinator run:** 2 subagents ran in parallel. Each wrote one teardown to its own file. Each brief carried quality-guide sections 1 and 6 word for word and asked for no body H1. There were no Queued rows and no Part A, A2 or E work left. No subagent ran git. I ran the five check scripts (`python -X utf8 -I`) before each commit, and all were clean; the last check found 8,682 links, 257 patterns, 1,267 public pattern URLs and 0 problems.
+- **Step 0:** npr.org returned 200. UTC was 2026-10-28 00:49 at the start.
+- **Sync:** the branch held one commit not in `main`, fa66694 (the run 197 Deploy line). I kept it and built on it.
+- **Part C asset 4 (sections 1 and 6), teardown 1, Needs review:** [ChatGPT memory: text in a document or web page could write lasting memories, and the SpAIware demo made the Mac app leak every later chat, September 2024](../incidents/openai-chatgpt-memory-prompt-injection-spaiware-rehberger-september-2024.md). 131 lines; description 153 characters.
+  - Why chosen: a grep of `agents/` for "SpAIware" found nothing. Rehberger appears only on the Gemini calendar page.
+  - Searches: 3.
+  - Opened (downloaded and read as text on 2026-10-28): Embrace The Red, Johann Rehberger, 2024-05-22 and 2024-09-20; Ars Technica, Dan Goodin, 2024-09-24 (Wayback copy; the live page returned 403 and 405); The Hacker News, Ravie Lakshmanan, 2024-09-25; TechRadar Pro, Ellen Jennings-Trace, 2024-09-26.
+  - Seen only in search summaries, and named on the page only as unverified: SC Media, ChannelE2E, Gigazine, Le Monde Informatique, Anvilogic, Adversa AI, a forum comment, and Tenable's separate advisory.
+  - Unverified, and listed on the page: any OpenAI statement; the ship date of version 1.2024.247; a dated retest; the Ars "102 years old" example; whether any real user was affected.
+  - Pattern IDs (all in the taxonomy): `conflicting-inputs-resolved-silently` (partial); `confident-wrong-answer-with-no-way-to-check`, `ambient-assistants-act-on-overheard-conversation` and `over-confirmation` (weak). Five other IDs were considered and rejected.
+- **Review of teardown 1 (quality-guide sections 1 and 6):** I read the page and matched its quotes against the downloads with a script that normalizes whitespace and curly quotes. All matched. One fact needed a second look: "December 2023" for the url_safe fix. It is in Rehberger's September timeline ("December, 2023: Partial fix via url_safe"). The claim that the attack did not work in the web interface matches Ars. The review changed nothing.
+- **Part C asset 4 (sections 1 and 6), teardown 2, Needs review:** [Optum left an internal AI chatbot for claims procedures reachable from the internet with no password, December 2024](../incidents/optum-internal-ai-sop-chatbot-exposed-to-internet-december-2024.md). 121 lines; description 146 characters.
+  - Why chosen: a grep of `agents/` for "Optum" found no page.
+  - Searches: 3.
+  - Opened (downloaded and read as text on 2026-10-28): TechCrunch, Zack Whittaker, 2024-12-13; Becker's Hospital Review, Naomi Diaz, 2024-12-16 (Internet Archive copy; the live page was blocked); Futurism, Noor Al-Sibai, 2024-12-16; Slashdot, 2024-12-13 (an excerpt of TechCrunch). beyondtmrw.org was opened but not used.
+  - Seen only in search summaries, and kept off the page as facts: This Week Health, PointGuard AI, getcoai.com, technetbooks.com.
+  - Unverified, and listed on the page: how Hussein found the bot; how long it was reachable; who else reached it; whether the chat log held personal data or was deleted; the Optum Rx detail; what the bot answered on a claim's determination.
+  - Pattern IDs (all in the taxonomy): `eligibility-answers-sound-like-decisions` (partial); `small-talk-and-off-topic-messages-handled-badly` and `sensitive-data-collected-in-chat` (weak). Five other IDs were considered and rejected.
+- **Review of teardown 2 (quality-guide sections 1 and 6):** I read the page in full and matched its 20 quoted strings against the downloads with the same script. 17 matched; the other 3 are a case variant of a matched Optum quote and two example phrasings of ours, not quotes. Review changed two things:
+  - The brief named the bot "SOP Jarvis", and no opened source uses that name. I removed every mention of it from the page, so the unverified name is not in public text.
+  - The file was uncommitted, so I renamed it before its first commit to `optum-internal-ai-sop-chatbot-exposed-to-internet-december-2024.md`. No file linked to the old name.
+- **Part B:** done. Search Console, last 28 days (Sep 28 to Oct 25): 32 clicks, 7.37K impressions, CTR 0.4%, position 8.7. No action. Entry in `seo/log.md`.
+- **Part E:** no Moves or Guide spec work left.
+- **Part F:** no fixes.
+  - Live /about/ returns 404.
+  - Site repo: origin/main is 6acae8c44. Local main matches it, with 0 foreign commits.
+- **Part G:**
+  - G10 batch 3: nothing to retitle. Every top-30 page by impressions already has a search-phrase title. G10 is still not live.
+  - G14: one PageSpeed call (home, mobile) returned HTTP 429 (daily quota). No numbers recorded.
+  - Newsletter: the issue dated 2026-10-22 exists. The next is due by 2026-10-29; not written this run.
+  - LinkedIn: I added two drafts, for the two teardowns. They are drafts only and were not posted.
+- **Part H (GORT step 3):** no code written. Still waiting for the owner: decision 2 (frameworks) in section 9 of gort-plan.md has only a recommendation.
+- **KPIs:** site build 1,907 pages (run 191). Indexed pages 878 and not indexed 13 (Search Console, read in run 118). Ellipsis count 224 (not re-scanned).
+- **Plan complete?** No. Still open:
+  - Teardowns continue; the next run needs a new candidate.
+  - Live checks for G10, G11 and G13.
+  - G12 and G14.
+  - The newsletter issue due 2026-10-29.
+  - GORT step 3, which waits on decision 2.
+- **Note for the owner:**
+  - GORT step 3 needs your answer to decision 2.
+  - Vercel has not deployed any site commit since c69c78cdd. So G10, G11, G13 and the .md link fixes are not live.
+  - G14 needs a PageSpeed API key from you, or a local Lighthouse run.
+  - The Privacy and Contact pages need facts from you.
+  - The importer fix for 37 duplicate framework descriptions needs your go-ahead.
 
 ## Queue
 Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Library** column is the status in the catalog when the queue was built (**New** or **Extends**).
