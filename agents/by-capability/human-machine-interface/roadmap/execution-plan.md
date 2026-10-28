@@ -1209,6 +1209,38 @@ Run N covers queue orders as shown. At one run every hour, 91 runs take about 91
   - The importer fix for 37 duplicate framework descriptions needs your go-ahead.
 - **Deploy:** content [PR 197](https://github.com/sarkars/agent-failure-modes/pull/197) merged into `main` with a merge commit (903e0d9, expected head 7fbb485); branch reset to `origin/main`. Site repo not touched: only `incidents/` and `roadmap/` changed, and they are not published.
 
+### Run 199 (scheduled): 2026-10-28 (UTC)
+- **Coordinator run:** 2 subagents ran in parallel, one teardown each, each writing only its own new file. Each brief carried quality-guide sections 1 and 6 word for word and asked for no body H1. No Queued rows and no Part A, A2 or E work left. No subagent ran git. I ran the five check scripts (`python -X utf8 -I`) before each commit; all clean. Last check: 8,703 links, 257 patterns, 1,267 public pattern URLs, 0 problems.
+- **Step 0:** npr.org returned 200. UTC was 2026-10-28 01:49 at the start.
+- **Sync:** the branch held one commit not in `main`, 61b72c4 (the run 198 Deploy line). Correction: I first reset the branch to origin/main by mistake, then reset it back to 61b72c4 before any new work; nothing was lost.
+- **Part C asset 4 (sections 1 and 6), teardown 1, Needs review:** [Humane's AI Pin launch video gave wrong eclipse places and an overstated almond protein figure, November 2023](../incidents/humane-ai-pin-launch-video-wrong-answers-november-2023.md). 119 lines; description 146 characters.
+  - Why chosen: a grep of `agents/` for "Humane AI" and "AI Pin" found nothing.
+  - Searches: 4.
+  - Opened (downloaded as raw HTML and read as text on 2026-10-28): Shacknews (Asif Khan, 2023-11-13), Futurism (Maggie Harrison Dupré, 2023-11-15), 512 Pixels (Stephen Hackett, 2023-11-09, quoting Nick Heer), Hackster.io (Gareth Halfacree, 2023-11-10), Cult of Mac (D. Griffin Jones, 2023-11-11, paraphrased only).
+  - Seen only in search summaries, named on the page as unverified and not used for facts: AIPressRoom, Yahoo UK, WinFuture.de, ACS Information Age, a Substack post, a digitalpress blog. Business Insider not opened (seen only through Futurism).
+  - Unverified, and listed on the page: the video itself; Humane's Discord post (read only as Shacknews reproduces it); the reshoot report; whether the video was updated; the real almond count; which model the Pin used.
+  - Pattern IDs (all in the taxonomy): `confident-wrong-answer-with-no-way-to-check` (core); `guessing-instead-of-asking` (partial, almonds only). Six other IDs considered and rejected. A possible gap (one answer mixing facts from different events) is flagged for a person.
+- **Review of teardown 1 (sections 1 and 6):** I read the page in full as a skeptical reader. The lead names product, user and moment; every number (April 8, 2024; 15 grams; $699 and $24) is tied to an opened source; the subagent had already removed two example almond counts it first drafted. Voice-first channel note says voice signals are planned. The review changed nothing.
+- **Part C asset 4 (sections 1 and 6), teardown 2, Needs review:** [OpenAI custom GPTs: plain chat requests made many reveal their builders' instructions and hand over uploaded files, November 2023](../incidents/openai-custom-gpts-leak-instructions-and-uploaded-files-november-2023.md). 125 lines; description 154 characters.
+  - Why chosen: a grep of `agents/` for "custom GPT" found only a passing mention in one pattern page; no incident page.
+  - Searches: 4.
+  - Opened (downloaded as raw HTML and read as text on 2026-10-28): OpenAI "Introducing GPTs" (2023-11-06); Adversa AI blog (2023-11-15); arXiv 2311.11538 abstract and HTML full text v2 (Yu et al., Northwestern); WIRED (Matt Burgess, 2023-11-29); Decrypt (Jose Antonio Lanz, 2023-12-12); InfoQ (Andrew Hoblitzell, 2024-01-14).
+  - Seen only in search summaries, not used: Tech Xplore (HTTP 403), Gizmodo, Baldur Bjarnason's notes, AIPressRoom, an Adversa weekly roundup, a second Decrypt piece, a promptfoo entry, Natural News.
+  - Unverified, and listed on the page: any OpenAI advisory or dated fix (InfoQ's "patched" claim not found in an opened OpenAI source); whether the routes still work; harm to any builder; the GitHub list of leaked prompts; Adversa's cited X posts; the GPT Store launch date.
+  - Pattern IDs (all in the taxonomy): `refusals-that-reveal-internal-rules` (partial); `third-party-data-shared-by-users` (weak). Five other IDs considered and rejected. Cross-cutting security pages linked, not used as Pattern IDs; a possible gap flagged for a person.
+- **Review of teardown 2 (sections 1 and 6):** I read the page in full. I checked the arithmetic: 210 of 216 is 97.2%, and the file figure is stated as 24 of 24, not all 216, matching the paper's Table 1 as the subagent reported; the page notes WIRED's "100 percent" covers only GPTs with files. The page reproduces no attack prompts, extracted prompts or files and names no probed third-party GPT. The review changed nothing on the page. In my LinkedIn draft I replaced a quoted "do not share" with a paraphrase, since the page does not quote those words.
+- **Part B:** already done today (run 198 entry in `seo/log.md`); not repeated.
+- **Part E:** no Moves or Guide spec work left.
+- **Part F:** no fixes. Site repo local main matches origin/main, 0 foreign commits.
+- **Part G:**
+  - No G item advanced: G10 has nothing left to retitle, G12 needs question-query data, G14 is blocked on PageSpeed quota/key.
+  - Newsletter: the issue dated 2026-10-22 exists; the next is due 2026-10-29 and was not written this run (it is not yet due).
+  - LinkedIn: two drafts added, for the two teardowns. Drafts only; not posted.
+- **Part H (GORT step 3):** no code written. Still waiting for the owner: decision 2 (frameworks) in section 9 of gort-plan.md.
+- **KPIs:** site build 1,907 pages (run 191). Indexed 878, not indexed 13 (Search Console, run 118). Ellipsis count 224 (not re-scanned).
+- **Plan complete?** No. Still open: teardowns continue; live checks for G10, G11 and G13; G12 and G14; the newsletter due 2026-10-29; GORT step 3 (waits on decision 2).
+- **Note for the owner:** same as run 198: GORT decision 2; Vercel has not deployed site commits since c69c78cdd; G14 needs a PageSpeed key or a local Lighthouse run; Privacy and Contact pages need your facts; the importer fix for 37 duplicate framework descriptions needs your go-ahead.
+
 ## Queue
 Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Library** column is the status in the catalog when the queue was built (**New** or **Extends**).
 
