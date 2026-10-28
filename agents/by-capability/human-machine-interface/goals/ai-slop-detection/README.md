@@ -36,10 +36,11 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | [AI code calls functions that don't exist](failures/code-nonexistent-apis.md) | Invented methods, keyword arguments, flags, config keys and packages, caught by resolving every new name before merge |
 | [AI images with extra fingers and garbled text](failures/image-visual-artifacts.md) | Six fingers, misspelled signs and melted background detail posted by mistake, caught by a pre-publish checklist |
 | [AI code duplication and over-engineering](failures/code-needless-abstraction.md) | Wrappers, one-implementation interfaces and re-written helpers, caught by a search-before-write rule and a duplication check |
+| [Why AI images look fake: waxy skin and wrong shadows](failures/image-stock-look.md) | Over-smooth, glossy stock-photo images with impossible light, caught by art direction and a lighting check before publishing |
 
 ## Planned (not yet written)
-- Image and data tells: still being written
-- Image and data tells
+- Data tells: made-up metrics, templated reviews
+- Detector limits and false positives, more UI tells
 
 ## Related
 - [Conversation moves](../../solutions-library/conversation-moves.md)
