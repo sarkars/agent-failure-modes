@@ -1660,3 +1660,27 @@ Judge Wingate, per the ABA Journal: "It was a draft that should have never been 
 Cheap test: block publishing until every quote matches its cited source and a second reviewer is logged.
 
 Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-28: One yes per book, no page to check (Mason City, Iowa schools, August 2023)
+Draft only. Source: the [teardown](../../incidents/mason-city-iowa-schools-chatgpt-flags-library-books-for-removal-august-2023.md), built from Popular Science, Education Week and the Des Moines Register (original reporting), plus Fortune and Smithsonian, all opened. The page does not judge any book or the law; no opened source shows the chats.
+
+When your assistant's yes-or-no becomes an official decision, who reads the evidence?
+
+Per Popular Science, a school district asked ChatGPT whether each title on a list described a sex act, as a new Iowa law required, and removed the books it flagged.
+Per the Register, 19 books got a yes. Asked again during a call, ChatGPT did not flag one of them.
+Popular Science asked a differently worded question and got a different sorting of the same 19.
+Cheap test: ask each yes-or-no question twice in fresh chats and once in other words, and send any disagreement to a person.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-28: The "roast" landed on who people are (Fable reader summaries, December 2024)
+Draft only. Source: the [teardown](../../incidents/fable-book-app-ai-reader-summaries-mock-users-race-and-identity-december-2024.md), built from WIRED, the Daily Dot and Smart Bitches, Trashy Books, all opened. Fable's prompt and tests are not public; no source gives a count of offensive summaries.
+
+What happens when you ask a model to joke about a user's own data?
+
+Fable's AI year-end summaries were meant to "playfully roast" each reader's taste, per Fable on Threads.
+One told a reader of Black authors: "Don't forget to surface for the occasional white author, okay?"
+Per WIRED, Fable apologized, then removed the summaries and two other AI features.
+Cheap test: generate recaps for test shelves that differ only in author identity, and check none jokes about a protected trait.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
