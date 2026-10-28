@@ -9,7 +9,7 @@
 ## 1. The product in one sentence
 **"For the kind of agent you are building, here are the failures it is known to have, the best-practice fix for each, and the tests that prove the fix holds. Later, GORT finds the failures in your real runs, learns which fixes work, and learns your business."**
 
-**Name.** GORT stands for Guard, Observe, Repair, Test. The command is `gort`; the package name, if one is needed, is `gortguard` (plain `gort` is crowded on GitHub and taken on npm, checked 2026-10-22). The owner checks trademarks before a public launch.
+**Name.** GORT stands for Guard, Observe, Repair, Test. The command is `gort`; the package name, if one is needed, is `gortguard` (plain `gort` is crowded on GitHub and taken on npm, checked 2026-10-22). **Owner, 2026-10-29:** the public brand is **gortguard** (website, README title, package, launch posts), because "GORT" has live software trademarks in the EU and UK (section 9, decision 7). `gort` stays as the command name and GORT as the internal and plan name. The repo name stays sarkars/gort for now. A trademark attorney still reviews "gortguard" before a public launch.
 
 **Order of work.** Prevention first, using predefined best practice and failure fixes. Then failure analytics on real runs. Then learning from what was found. Then the customer's own business. Each stage is useful on its own: a team can stop after any stage and keep what it got.
 
@@ -491,6 +491,7 @@ gort learn report/                 # turns confirmed findings into eval cases an
    - Unregistered use: [getgort/gort](https://github.com/getgort/gort), a ChatOps chatbot framework (Apache 2.0, last push 2023-04-04).
    - Package names `gortguard` (PyPI, npm) and `gort` (PyPI) were free on 2026-10-29.
    - Not done: a WIPO search for "gortguard", and similar-sounding or similar-looking marks.
+   - **Owner, 2026-10-29:** lead with **gortguard** as the public brand; `gort` stays the command (section 1, Name).
 
 ## 10. Later, only when
 Each item waits for the signal named. None is planned before it.
