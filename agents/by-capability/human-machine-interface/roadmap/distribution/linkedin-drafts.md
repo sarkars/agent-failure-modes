@@ -1417,3 +1417,28 @@ A week later, India issued an advisory to AI platforms that TechCrunch and Reute
 Cheap test: run one labeled question across a fixed list of comparable leaders, 10 times each. Pass only if every name gets the same type of reply.
 
 Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-28: An Amazon Echo sent a family's private conversation to a contact (May 2018)
+Draft only. Source: the [teardown](../../incidents/amazon-alexa-records-private-conversation-sends-to-contact-may-2018.md), built from CNBC, the Associated Press, The Register and Willamette Week, all opened. KIRO 7's original report did not load for us. We did not test the device.
+
+A confirmation step only works if the right person answers it.
+
+In May 2018, a Portland couple got a call: a Seattle contact had received a recording of them talking about hardwood floors.
+Amazon's account: the Echo heard a background word as "Alexa," then heard talk as a "send message" request.
+It asked "To whom?" and matched background talk to a contact name.
+It asked to confirm, and took more background talk as "right."
+Cheap test: replay unaddressed background talk at every confirmation prompt. Pass only if nothing is sent.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-28: Woolworths' Olive assistant told callers about its "mother" (February 2026)
+Draft only. Source: the [teardown](../../incidents/woolworths-olive-assistant-talks-about-its-mother-and-claims-to-be-human-february-2026.md), built from CX Today, Mediaweek, eNCA (AFP), Silicon UK and The New Daily (The Conversation), all opened. The calls were reported by customers; no full transcript was available to us.
+
+Persona scripts written years ago still run in production.
+
+In February 2026, Woolworths customers posted that Olive, its assistant, answered a date of birth with a story about its mother.
+One secondhand report says it "kept claiming to be a real person."
+Woolworths said a team member wrote the birthday replies "several years ago" and that it removed the scripting after customer feedback.
+Cheap test: run every identity step in a fixed test set. Fail any bot turn that claims a parent, a birth year or a memory.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
