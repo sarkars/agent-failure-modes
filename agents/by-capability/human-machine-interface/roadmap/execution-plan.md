@@ -2314,7 +2314,7 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 446 | SL-14 | Needless abstraction and duplicated helpers | New | - | `goals/ai-slop-detection/failures/code-needless-abstraction.md` | Done | 219 |
 | 447 | SL-15 | Image artifacts: extra fingers, garbled text, melted detail | New | - | `goals/ai-slop-detection/failures/image-visual-artifacts.md` | Done | 219 |
 | 448 | SL-16 | Over-smooth stock-photo look and wrong physics | New | - | `goals/ai-slop-detection/failures/image-stock-look.md` | Done | 219 |
-| 449 | SL-17 | Round-number, too-clean data and fake metrics | New | - | `goals/ai-slop-detection/failures/data-too-clean.md` | Queued | - |
+| 449 | SL-17 | Round-number, too-clean data and fake metrics | New | - | `goals/ai-slop-detection/failures/data-too-clean.md` | Done | 219 |
 | 450 | SL-18 | Review and reply farms with templated voice | New | - | `goals/ai-slop-detection/failures/data-templated-reviews.md` | Queued | - |
 | 451 | SL-19 | AI-text detectors flag human writing (false positives) | New | - | `goals/ai-slop-detection/failures/detect-detector-false-positives.md` | Queued | - |
 | 452 | SL-20 | Detection rules that break after one model update | New | - | `goals/ai-slop-detection/failures/detect-rules-decay.md` | Queued | - |
