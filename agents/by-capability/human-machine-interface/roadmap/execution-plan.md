@@ -1406,6 +1406,8 @@ Run N covers queue orders as shown. At one run every hour, 91 runs take about 91
 - **Plan complete?** No. Still open: teardowns continue; live checks for G10, G11 and G13; G12 and G14; the newsletter due 2026-10-29; GORT step 3 (waits on decision 2).
 - **Note for the owner:** same as run 203: GORT decision 2; Vercel has not deployed site commits since c69c78cdd; G14 needs a PageSpeed key or a local Lighthouse run; Privacy and Contact pages need your facts; the importer fix for 37 duplicate framework descriptions needs your go-ahead.
 
+- **Deploy (run 204):** content [PR 203](https://github.com/sarkars/agent-failure-modes/pull/203) merged, merge commit 8d504de; branch reset to it. No HMI pattern, goal or category page changed (both teardowns are in incidents/, outside the runbook's publish scope; Parts F, G and H changed nothing in the site repo), so nothing was copied and the site repo was not pushed. Site repo main matches origin/main (6acae8c44), 0 foreign commits.
+
 ## Queue
 Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Library** column is the status in the catalog when the queue was built (**New** or **Extends**).
 
