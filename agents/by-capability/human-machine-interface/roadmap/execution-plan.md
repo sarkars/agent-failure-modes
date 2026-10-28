@@ -2275,7 +2275,7 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 436 | SL-04 | Emoji as icons and decorative bullets | New | - | `goals/ai-slop-detection/failures/ui-emoji-as-icons.md` | Done | 217 |
 | 437 | SL-05 | Placeholder data left in: Lorem ipsum, John Doe, 10,000+ users | New | - | `goals/ai-slop-detection/failures/ui-placeholder-data-left-in.md` | Done | 217 |
 | 438 | SL-06 | Fake testimonials, logos and stats | New | L | `goals/ai-slop-detection/failures/ui-fabricated-social-proof.md` | Needs review | 217 |
-| 439 | SL-07 | Stock AI phrases and filler openers | New | - | `goals/ai-slop-detection/failures/text-stock-phrases.md` | Queued | - |
+| 439 | SL-07 | Stock AI phrases and filler openers | New | - | `goals/ai-slop-detection/failures/text-stock-phrases.md` | Done | 218 |
 | 440 | SL-08 | Em-dash, triplet and 'not X but Y' rhythm | New | - | `goals/ai-slop-detection/failures/text-rhythm-tells.md` | Queued | - |
 | 441 | SL-09 | Hedged, balanced non-answers | New | - | `goals/ai-slop-detection/failures/text-balanced-non-answers.md` | Queued | - |
 | 442 | SL-10 | Uniform structure: headings and bullets on everything | New | - | `goals/ai-slop-detection/failures/text-uniform-structure.md` | Queued | - |
