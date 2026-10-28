@@ -406,7 +406,7 @@ The hourly run updates the row of the step it works on. Status is `Not started`,
 | 5 | Done 2026-10-28: [PR 4](https://github.com/sarkars/gort/pull/4) squash-merged (023d9a0); `agent-schema.json`, `gortguard.agentformat.load_agent` and `examples/agents/refund-agent.yaml`; Check passes (example loads; 7 new tests, 24 total); CI passed on Python 3.10 and 3.12; no new dependency (agent.yaml read as JSON syntax, valid YAML 1.2; block YAML only if PyYAML is already installed) |
 | 6 | Not started |
 | 7 | Not started |
-| 8 | Not started |
+| 8 | Done (owner, 2026-10-29, decision 3): DeepEval chosen as default runner and simulated-user tool; no comparison page |
 | 9 | Not started |
 | 10 | Not started |
 | 11 | Not started |
@@ -479,7 +479,7 @@ gort learn report/                 # turns confirmed findings into eval cases an
 ## 9. Decisions needed from the owner
 1. Repo for packs and tools: name, public or private, and licence. The coverage pages can live in this library. **Answered 2026-10-24:** [sarkars/gort](https://github.com/sarkars/gort), public, MIT. Package `gortguard`, command `gort`.
 2. Which frameworks are in the first coverage pages. Recommended: OWASP LLM 2025, OWASP Agentic 2026, NIST AI 600-1. **Answered 2026-10-28:** chatbot failures only, and only the failures documented in this library ([failure taxonomy v1](specs/failure-taxonomy-v1.md), the failure pages, incidents and tests). No outside frameworks for now, so step 3 is skipped and packs carry no `maps_to` to outside frameworks. **Owner, 2026-10-28:** public failure lists (for example the AI Incident Database, the MIT AI Risk Repository, AIAAIC) go into the failure taxonomy first, as new or extended library pages marked Needs review; only then do they become part of the code. GORT code reads only the taxonomy, never a public list directly.
-3. Approve a short comparison of eval runners, simulated-user tools and rule engines before any is picked (section 5, Formats).
+3. Approve a short comparison of eval runners, simulated-user tools and rule engines before any is picked (section 5, Formats). **Answered 2026-10-29:** DeepEval is the default eval runner and simulated-user tool (Python, pytest-style, Apache 2.0, conversation simulator built in). Eval cases stay in GORT's own runner-neutral format (input, expected behaviour, pass and fail lines, Pattern ID); a small adapter turns them into DeepEval tests, so the default can change without converting saved cases. Exporters to other runners and rule engines are added only when a customer asks. DeepEval's hosted dashboard stays optional and off by default, so chats stay in the team's environment. No comparison page is needed.
 4. Who reviews the framework mappings (a second person, ideally with security or compliance background).
 5. Whether the hourly run may write pack content (content, allowed today) and, later, the checker and exporters (needs a change to the "no code" rule in `C:\Users\saura\.hmi-runner\prompt.md`). **Answered 2026-10-24:** yes. The hourly run writes code in sarkars/gort only, one step per run (prompt Part H). It never writes code in this library.
 6. Model API access and a spend limit, as environment variables, for model-graded eval cases.
