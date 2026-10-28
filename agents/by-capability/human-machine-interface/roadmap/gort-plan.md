@@ -482,8 +482,15 @@ gort learn report/                 # turns confirmed findings into eval cases an
 3. Approve a short comparison of eval runners, simulated-user tools and rule engines before any is picked (section 5, Formats). **Answered 2026-10-29:** DeepEval is the default eval runner and simulated-user tool (Python, pytest-style, Apache 2.0, conversation simulator built in). Eval cases stay in GORT's own runner-neutral format (input, expected behaviour, pass and fail lines, Pattern ID); a small adapter turns them into DeepEval tests, so the default can change without converting saved cases. Exporters to other runners and rule engines are added only when a customer asks. DeepEval's hosted dashboard stays optional and off by default, so chats stay in the team's environment. No comparison page is needed.
 4. Who reviews the framework mappings (a second person, ideally with security or compliance background).
 5. Whether the hourly run may write pack content (content, allowed today) and, later, the checker and exporters (needs a change to the "no code" rule in `C:\Users\saura\.hmi-runner\prompt.md`). **Answered 2026-10-24:** yes. The hourly run writes code in sarkars/gort only, one step per run (prompt Part H). It never writes code in this library.
-6. Model API access and a spend limit, as environment variables, for model-graded eval cases.
-7. Trademark check for "GORT" and "gortguard" before a public launch.
+6. Model API access and a spend limit, as environment variables, for model-graded eval cases. **Owner, 2026-10-29:** no key for now; step 11 waits.
+7. Trademark check for "GORT" and "gortguard" before a public launch. **Preliminary search, 2026-10-29, Needs review by a qualified trademark attorney (not legal advice):**
+   - USPTO, "GORT": 9 records. All GORT word marks are dead, including Twentieth Century Fox's toy robot mark (75861873, cancelled) and a software mark by Churchill Technologies (98259872, dead). GORTTOP is live but covers clothing and sports goods. "GORTGUARD": no records.
+   - EU: [EUIPO 019028394](https://euipo.europa.eu/eSearch/#details/trademarks/019028394) "GORT", TG Holding B.V. (Netherlands), registered 2025-01-18, live. Classes 35, 41, 42, 44 (coaching and HR focus), but class 42 lists platform as a service, software as a service and software development. This overlaps GORT's field.
+   - UK: [UK00003981318](https://trademarks.ipo.gov.uk/ipo-tmcase/page/Results/1/UK00003981318) "Gort", Churchill Technologies Limited, registered 2024-04-19, live. Classes 9, 35, 38, 42, including artificial intelligence software and AI software as a service, with the carve-out "none of the abovementioned being for use in the fields of IT, cybersecurity, security testing, telecommunications or communications sectors". Whether a guardrail and test tool falls inside that carve-out is a question for the attorney.
+   - Other live "GORT" marks found in WIPO's Global Brand Database are in unrelated classes (clothing, heating, retail).
+   - Unregistered use: [getgort/gort](https://github.com/getgort/gort), a ChatOps chatbot framework (Apache 2.0, last push 2023-04-04).
+   - Package names `gortguard` (PyPI, npm) and `gort` (PyPI) were free on 2026-10-29.
+   - Not done: a WIPO search for "gortguard", and similar-sounding or similar-looking marks.
 
 ## 10. Later, only when
 Each item waits for the signal named. None is planned before it.
