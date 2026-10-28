@@ -1684,3 +1684,16 @@ Per WIRED, Fable apologized, then removed the summaries and two other AI feature
 Cheap test: generate recaps for test shelves that differ only in author identity, and check none jokes about a protected trait.
 
 Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-28: The signer checked grammar, not citations (Butler Snow, Johnson v. Dunn, July 2025)
+Draft only. Source: the [teardown](../../incidents/butler-snow-chatgpt-fake-case-citations-alabama-prison-defense-johnson-v-dunn-july-2025.md), built from the sanctions order, Butler Snow's show-cause response, two AP reports and the ABA Journal, all opened. No opened source shows the ChatGPT chats; the State Bar outcome is not reported.
+
+Who checks the AI's work when three people touch a document?
+
+Per the court's order, a partner added ChatGPT case citations to two motions without verifying them.
+The lawyer who filed them said he reviewed the edits "for grammatical and typographical issues."
+The firm already had a policy requiring written approval before using ChatGPT for legal research.
+Judge Manasco: "In simpler terms, the citations were completely made up." She removed three lawyers from the case.
+Cheap test: block filing until every citation resolves to a real source that says what the draft claims, and log who checked it.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
