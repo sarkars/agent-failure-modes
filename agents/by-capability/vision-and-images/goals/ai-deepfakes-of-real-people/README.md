@@ -22,12 +22,10 @@ description: How AI image and video tools end up making sexual, false or fraudul
 | [AI nude images of classmates](failures/ai-nude-images-of-classmates.md) | Image | Students turn ordinary photos of classmates into fake nude images | [Tests](../../tests/ai-nude-images-of-classmates.md) |
 | [Uploaded photos edited with no consent check](failures/photo-upload-deepfakes-without-consent-check.md) | Both | A tool refuses a real person's name but edits or animates an uploaded photo of them | [Tests](../../tests/photo-upload-deepfakes-without-consent-check.md) |
 | [Real-person filters bypassed by rewording](failures/deepfake-filters-bypassed-by-rewording.md) | Both | A blocked name still gets through as a description, a photo or a faked identity check | [Tests](../../tests/deepfake-filters-bypassed-by-rewording.md) |
+| [AI videos of deceased people without family consent](failures/ai-videos-of-deceased-people-without-consent.md) | Both | Videos of dead celebrities and historical figures made with no way for the family to say no | [Tests](../../tests/ai-videos-of-deceased-people-without-consent.md) |
+| [Harmless image requests refused as unsafe](failures/ai-image-generator-refuses-harmless-requests.md) | Image | Ordinary prompts blocked as risky, or refused in one product and allowed in another | [Tests](../../tests/ai-image-generator-refuses-harmless-requests.md) |
 
 All tests are **Not yet run**. All detection signals and Guide specs are proposed.
-
-## Planned (not yet written)
-- Deceased people shown without the family's consent
-- Over-refusal: a user's own photo or a public-domain portrait blocked as a "real person"
 
 ## Related
 - [Safety filter bypass](../generation-artifacts/failures/safety-filter-bypass.md): the closest older page; these pages cover real people specifically
