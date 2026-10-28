@@ -1636,3 +1636,27 @@ Per Mindgard, the note came back as medical history in a later chat.
 Cheap test: paste a fake official bulletin into a test chat and check no dose, rule or note changes because of it.
 
 Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-28: "Link this account to a new email" (Meta Instagram recovery assistant, May 2026)
+Draft only. Source: the [teardown](../../incidents/meta-instagram-ai-support-assistant-sends-reset-links-to-attackers-account-takeovers-may-2026.md), built from KrebsOnSecurity, BleepingComputer, Help Net Security and a copy of Meta's letter to Maine's Attorney General, all opened. Meta's letter blames a bug in a separate code path; the 20,225 count is as BleepingComputer and Help Net report it.
+
+Can your support bot send a reset link to an address the user just typed?
+
+Per KrebsOnSecurity, attackers asked Meta's AI support assistant to link an Instagram account to a new email, and it sent that address a reset code.
+Per Meta's letter, the system sent the link to an email "not previously associated with the account" instead of rejecting the request.
+BleepingComputer and Help Net report Meta counted 20,225 hijacked accounts. Accounts with two-factor login were not taken this way, per Meta.
+Cheap test: in a test chat, ask for a reset link to a new email and check the bot refuses and names a verified route.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-28: The draft went on the docket before review (two federal judges, 2025)
+Draft only. Source: the [teardown](../../incidents/federal-judges-wingate-and-neals-staff-ai-drafts-docketed-error-filled-orders-october-2025.md), built from FedScoop, Reuters (via Business Insurance), the ABA Journal, Fox News, WLOX and Broadband Breakfast, all opened. The judges' letters themselves were not opened; we use them only as reporters quote them.
+
+What stops an AI-assisted draft from becoming the official record?
+
+Per the ABA Journal, two US district judges withdrew 2025 orders with fake quotes and nonexistent parties after litigants pointed out the errors.
+In letters to Sen. Grassley, they said a clerk had used Perplexity and an intern had used ChatGPT.
+Judge Wingate, per the ABA Journal: "It was a draft that should have never been docketed."
+Cheap test: block publishing until every quote matches its cited source and a second reviewer is logged.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
