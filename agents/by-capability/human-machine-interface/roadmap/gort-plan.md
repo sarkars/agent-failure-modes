@@ -400,8 +400,8 @@ The hourly run updates the row of the step it works on. Status is `Not started`,
 | 1 | Done (owner, 2026-10-24) |
 | 2 | Done 2026-10-27: [PR 1](https://github.com/sarkars/gort/pull/1) squash-merged (d113637) after the owner added the `workflow` scope; CI file added, CI passed on Python 3.10 and 3.12 (ruff, pytest, `gort --version`) |
 | 2a | Done 2026-10-27: [PR 2](https://github.com/sarkars/gort/pull/2) squash-merged (ffdd1e0) after merging main into it (conflicts from the step 2 squash, kept the step 2a files); CI passed on Python 3.10 and 3.12; Check passes (10 tests; `gort search transfer` finds `handoff`; unknown bundle exits 2); evals generated, not run |
-| 3 | Waiting for the owner: decision 2 (frameworks) (set 2026-10-27; section 9 has only a recommendation) |
-| 3a | Not started |
+| 3 | Skipped (owner, 2026-10-28, decision 2): no outside frameworks or failure libraries; coverage uses only the failures documented in this library |
+| 3a | Skipped (owner, 2026-10-28, decision 2): maps to outside sources |
 | 4 | Not started |
 | 5 | Not started |
 | 6 | Not started |
@@ -478,7 +478,7 @@ gort learn report/                 # turns confirmed findings into eval cases an
 
 ## 9. Decisions needed from the owner
 1. Repo for packs and tools: name, public or private, and licence. The coverage pages can live in this library. **Answered 2026-10-24:** [sarkars/gort](https://github.com/sarkars/gort), public, MIT. Package `gortguard`, command `gort`.
-2. Which frameworks are in the first coverage pages. Recommended: OWASP LLM 2025, OWASP Agentic 2026, NIST AI 600-1.
+2. Which frameworks are in the first coverage pages. Recommended: OWASP LLM 2025, OWASP Agentic 2026, NIST AI 600-1. **Answered 2026-10-28:** chatbot failures only, and only the failures documented in this library ([failure taxonomy v1](specs/failure-taxonomy-v1.md), the failure pages, incidents and tests). No outside frameworks or failure libraries for now, so steps 3 and 3a are skipped and packs carry no `maps_to` to outside frameworks.
 3. Approve a short comparison of eval runners, simulated-user tools and rule engines before any is picked (section 5, Formats).
 4. Who reviews the framework mappings (a second person, ideally with security or compliance background).
 5. Whether the hourly run may write pack content (content, allowed today) and, later, the checker and exporters (needs a change to the "no code" rule in `C:\Users\saura\.hmi-runner\prompt.md`). **Answered 2026-10-24:** yes. The hourly run writes code in sarkars/gort only, one step per run (prompt Part H). It never writes code in this library.
