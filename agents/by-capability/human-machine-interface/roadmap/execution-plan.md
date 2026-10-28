@@ -1308,6 +1308,38 @@ Run N covers queue orders as shown. At one run every hour, 91 runs take about 91
 - **Note for the owner:** same as run 200: GORT decision 2; Vercel has not deployed site commits since c69c78cdd; G14 needs a PageSpeed key or a local Lighthouse run; Privacy and Contact pages need your facts; the importer fix for 37 duplicate framework descriptions needs your go-ahead.
 - **Deploy:** content [PR 200](https://github.com/sarkars/agent-failure-modes/pull/200) merged into `main` with a merge commit (1b3b54a, expected head 9678c11); branch reset to `origin/main`. Site repo not touched: only `incidents/` and `roadmap/` changed, and they are not published.
 
+### Run 202 (scheduled): 2026-10-28 (UTC)
+- **Coordinator run:** 2 subagents ran in parallel, one teardown each, each writing only its own new file. Each brief carried quality-guide sections 1 and 6 word for word and asked for no body H1. No Queued rows and no Part A, A2 or E work left. No subagent ran git. I ran the five check scripts (`python -X utf8 -I`) before each commit; all clean. Last check: 8,777 links, 257 patterns, 1,267 public pattern URLs, 0 problems.
+- **Step 0:** wikipedia.org returned 301 and arxiv.org 200. UTC was about 2026-10-28 04:50 at the start.
+- **Sync:** the branch held one commit not in `main`, d71c6c7 (the run 201 Deploy line); kept.
+- **Part C asset 4 (sections 1 and 6), teardown 1, Needs review:** [Asana MCP server: a bug could show one organization's Asana data to other organizations' AI assistant users, May-June 2025](../incidents/asana-mcp-server-bug-exposed-data-across-organizations-june-2025.md). 122 lines; description 145 characters.
+  - Why chosen: a grep of `agents/` for "Asana" found nothing.
+  - Searches: 5.
+  - Opened (downloaded and read as text on 2026-10-28): Asana's status page incident "MCP Maintenance" (2025-06-05 to 06-17, through its public JSON feed), BleepingComputer (Bill Toulas), The Register (Jessica Lyons) and CSO Online (Howard Solomon), all 2025-06-18; UpGuard (Greg Pollock; metadata 2025-06-16, page shows 2026-07-02, noted on the page).
+  - Seen only in search summaries, named on the page as unverified and not used: Nudge Security, Security Boulevard, TechRadar, Pomerium, SANS, SOCRadar, PointGuard AI, Adversa, and an index page with a $7.5M cost figure. Asana's developer page downloaded without readable text; not used.
+  - Unverified, and listed on the page: how the bug worked, the "roughly 1,000 customers" count beyond the spokesperson (The Register says the spokesperson gave no count), whether anyone saw foreign data, when the exposure began, the text of Asana's customer emails.
+  - Pattern IDs (all in the taxonomy): `confident-wrong-answer-with-no-way-to-check` (partial), `outage-updates-generic-or-late` (partial, by analogy), `no-user-facing-record-of-what-the-bot-said` (weak). Six others rejected. A possible gap flagged for a person (an assistant answer that contains another customer's data because the tool connection returned it).
+- **Review of teardown 1 (sections 1 and 6):** I read the page in full as a skeptical reader. It gives no steps to reproduce the bug and states no rule of law. I re-downloaded the status JSON and BleepingComputer and matched six quotes ("undergoing maintenance", "for maintenance to address a vulnerability", "we reset all connections to the MCP server", "roughly 1,000 customers", "has not issued a public statement", "logic flaw in the MCP system"); all matched. The review changed nothing.
+- **Part C asset 4 (sections 1 and 6), teardown 2, Needs review:** [Google Gemini: an answer on whether India's Prime Minister Modi is a fascist draws an IT-rules warning from India's junior IT minister, February 2024](../incidents/google-gemini-modi-fascist-question-answer-india-it-ministry-february-2024.md). 127 lines; description 154 characters.
+  - Why chosen: a grep of `agents/` for "fascis" found no incident on it.
+  - Searches: 4.
+  - Opened (downloaded and read as text on 2026-10-28): Scroll (2024-02-23), Deccan Herald (PTI, 2024-02-23), The Tribune (2024-02-24 and PTI 2024-03-02), Business Today (2024-02-24), DT Next (IANS, 2024-02-24), Outlook India (2024-02-24, no quote used), TechCrunch (Manish Singh, 2024-03-03), Asia Financial (Vishakha Saxena, 2024-03-04), Cyprus Mail (Reuters, 2024-03-11), Internet Governance Project (Jyoti Panday, 2024-03-12).
+  - Blocked: Rajeev Chandrasekhar's X post (embed service returned nothing); its text is quoted from three outlets' embeds, which match. Seen only in search summaries and not used: WION, Aaj English, The Hindu, law-firm notes and about ten others.
+  - Unverified, and listed on the page: the exact prompt, full replies and screenshots; whether a ministry notice was sent; what Google changed; the advisory's own text.
+  - Pattern IDs (all in the taxonomy): `one-sided-or-cherry-picked-sources` (partial), `stakes-blind-register` (partial), `confident-wrong-answer-with-no-way-to-check` (weak). Five others rejected. A possible gap flagged for a person (comparable public figures getting different handling for the same question).
+- **Review of teardown 2 (sections 1 and 6):** I read the page in full. It does not judge Modi or any politician and reports only what the sources say Gemini wrote; the Read this first note states no rule of law. I re-downloaded Scroll, TechCrunch, Cyprus Mail and Business Today and matched five quotes ("complex and highly contested", "downright malicious", "are not deterministic", "citing experts it didn", "is not legally binding"), the page's "elections due that summer" line (Reuters via Cyprus Mail) and its claim that Business Today links the image pause; all matched. The page notes one source conflict (who said "malicious"). The review changed nothing.
+- **Part B:** already done today (run 198 entry in `seo/log.md`); not repeated.
+- **Part E:** no Moves or Guide spec work left.
+- **Part F:** no fixes. Live /, /sitemap-index.xml, /robots.txt and /guides/ return 200. Site repo local main matches origin/main, 0 foreign commits.
+- **Part G:**
+  - No G item advanced: G10 has nothing left to retitle, G12 needs question-query data, G14 is blocked on PageSpeed quota/key.
+  - Newsletter: the issue dated 2026-10-22 exists; the next is due 2026-10-29 and was not written this run (it is not yet due).
+  - LinkedIn: two drafts added, for the two teardowns. Drafts only; not posted.
+- **Part H (GORT step 3):** no code written. Still waiting for the owner: decision 2 (frameworks) in section 9 of gort-plan.md.
+- **KPIs:** site build 1,907 pages (run 191). Indexed 878, not indexed 13 (Search Console, run 118). Ellipsis count 224 (not re-scanned).
+- **Plan complete?** No. Still open: teardowns continue; live checks for G10, G11 and G13; G12 and G14; the newsletter due 2026-10-29; GORT step 3 (waits on decision 2).
+- **Note for the owner:** same as run 201: GORT decision 2; Vercel has not deployed site commits since c69c78cdd; G14 needs a PageSpeed key or a local Lighthouse run; Privacy and Contact pages need your facts; the importer fix for 37 duplicate framework descriptions needs your go-ahead.
+
 ## Queue
 Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Library** column is the status in the catalog when the queue was built (**New** or **Extends**).
 

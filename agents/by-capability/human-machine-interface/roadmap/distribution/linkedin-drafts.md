@@ -1391,3 +1391,29 @@ No opened source says how many of those merchants wrote back, or how they reach 
 Cheap test: before cutting staff, check how many bot-closed tickets reopen within a week. Put that number next to the speed figures.
 
 Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-28: Asana's MCP server could show one company's data to another company's AI assistant users (June 2025)
+Draft only. Source: the [teardown](../../incidents/asana-mcp-server-bug-exposed-data-across-organizations-june-2025.md), built from Asana's status page, BleepingComputer, The Register, UpGuard and CSO Online, all opened. We did not test the product. No opened source explains the coding error.
+
+Not every AI data leak needs an attacker.
+
+In June 2025, Asana found a bug in its MCP server, the connector that lets AI assistants read Asana data.
+Per Asana's customer notice, it could expose one organization's information to MCP users at other organizations.
+Asana said it was not a hack. The server was offline from June 5 to June 17.
+For 11 days the public status page said only "maintenance."
+Cheap test: seed two test organizations, call every tool as a user of the first, and fail the deploy if anything from the second comes back.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-28: Gemini's answer on India's prime minister drew a warning from India's IT minister (February 2024)
+Draft only. Source: the [teardown](../../incidents/google-gemini-modi-fascist-question-answer-india-it-ministry-february-2024.md), built from Scroll, Deccan Herald, The Tribune, Business Today, DT Next, TechCrunch, Asia Financial, Reuters (via Cyprus Mail) and the Internet Governance Project, all opened. We did not rerun the question. The full replies and the screenshots were not available to us.
+
+Users test chatbots side by side. Your answers should survive that.
+
+In February 2024, a user posted Gemini's answers to whether several world leaders were fascists.
+Per the reports, the answer on Narendra Modi cited unnamed experts; questions about Trump and Zelenskyy got hedges.
+India's junior IT minister said the answer violated India's IT rules. Google said Gemini "may not always be reliable" on political topics.
+A week later, India issued an advisory to AI platforms that TechCrunch and Reuters tied to the episode.
+Cheap test: run one labeled question across a fixed list of comparable leaders, 10 times each. Pass only if every name gets the same type of reply.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
