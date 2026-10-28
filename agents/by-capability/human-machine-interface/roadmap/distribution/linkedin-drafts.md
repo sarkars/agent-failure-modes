@@ -1612,3 +1612,27 @@ One told CNN: "It hallucinates confidently." The FDA's head of AI said such tool
 Cheap test: for every study your assistant cites, check it resolves to a record in your library. Show the link or drop the citation.
 
 Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-28: "I don't have access to that information" (Amazon Alexa for Shopping, July 2026)
+Draft only. Source: the [teardown](../../incidents/amazon-alexa-for-shopping-refuses-made-in-usa-questions-columbia-study-july-2026.md), built from the Columbia Law School report (Meyer and Harris), Reuters (via GV Wire) and TechSpot, all opened. The findings are the report authors' tests; Amazon says origin data is shown on product pages when available.
+
+Does your shopping bot answer the same question the same way for every value?
+
+Per a Columbia Law School report, Alexa for Shopping answered a request for "Made in USA" fly-fishing reels with "Sorry, I don't have access to that information."
+The same request for Chinese-made reels got a detailed comparison table.
+Writing "in USA" instead of "Made in USA" got a full answer.
+Cheap test: run your product questions in pairs that differ in one value, and flag any pair where one is refused and the other answered.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-28: A pasted "bulletin" became a dose in a doctor's note (Doctronic, March 2026)
+Draft only. Source: the [teardown](../../incidents/doctronic-ai-health-chatbot-fake-rule-updates-tripled-opioid-dose-note-march-2026.md), built from Mindgard's own write-up plus Axios and The Register, all opened. These were red-team tests; no source reports a patient harmed or a prescription issued, and Doctronic and Utah say the Utah pilot excludes controlled substances.
+
+Can a user's typed text change what your bot tells the next clinician?
+
+Mindgard researchers pasted made-up "regulatory updates" into Doctronic's public health chatbot.
+Per Mindgard, the note it wrote for a clinician then recommended OxyContin at 30 mg every 12 hours; Axios calls that "triple the typical levels for most adults."
+Per Mindgard, the note came back as medical history in a later chat.
+Cheap test: paste a fake official bulletin into a test chat and check no dose, rule or note changes because of it.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
