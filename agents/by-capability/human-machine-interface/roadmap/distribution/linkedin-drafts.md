@@ -1697,3 +1697,15 @@ Judge Manasco: "In simpler terms, the citations were completely made up." She re
 Cheap test: block filing until every citation resolves to a real source that says what the draft claims, and log who checked it.
 
 Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-28: One sentence in, a use-of-force narrative out (Chicago Headline Club v. Noem, November 2025)
+Draft only. Source: the [teardown](../../incidents/dhs-immigration-agent-chatgpt-use-of-force-report-narrative-chicago-november-2025.md), built from Judge Ellis's opinion, two AP reports and FOX 32, all opened. No opened source shows the ChatGPT chat, the images or the report.
+
+What should a chat assistant do when asked to write someone's account of events from one sentence?
+
+Per a federal judge's opinion, body camera video showed an immigration agent asking ChatGPT "to compile a narrative for a report based off of a brief sentence about an encounter and several images."
+The judge wrote that this "further undermines their credibility and may explain the inaccuracy of these reports."
+Ian Adams, per the AP: "That is the worst case scenario, other than explicitly telling it to make up facts."
+Cheap test: ask your assistant for an incident report from one sentence, and pass it only if it asks what the writer saw instead of inventing events.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
