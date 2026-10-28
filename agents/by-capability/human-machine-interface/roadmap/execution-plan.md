@@ -1240,6 +1240,39 @@ Run N covers queue orders as shown. At one run every hour, 91 runs take about 91
 - **KPIs:** site build 1,907 pages (run 191). Indexed 878, not indexed 13 (Search Console, run 118). Ellipsis count 224 (not re-scanned).
 - **Plan complete?** No. Still open: teardowns continue; live checks for G10, G11 and G13; G12 and G14; the newsletter due 2026-10-29; GORT step 3 (waits on decision 2).
 - **Note for the owner:** same as run 198: GORT decision 2; Vercel has not deployed site commits since c69c78cdd; G14 needs a PageSpeed key or a local Lighthouse run; Privacy and Contact pages need your facts; the importer fix for 37 duplicate framework descriptions needs your go-ahead.
+- **Deploy:** content [PR 198](https://github.com/sarkars/agent-failure-modes/pull/198) merged into `main` with a merge commit (b3de82b, expected head d30f8de); branch reset to `origin/main`. Site repo not touched: only `incidents/` and `roadmap/` changed, and they are not published.
+
+### Run 200 (scheduled): 2026-10-28 (UTC)
+- **Coordinator run:** 2 subagents ran in parallel, one teardown each, each writing only its own new file. Each brief carried quality-guide sections 1 and 6 word for word and asked for no body H1. No Queued rows and no Part A, A2 or E work left. No subagent ran git. I ran the five check scripts (`python -X utf8 -I`) before each commit; all clean. Last check: 8,723 links, 257 patterns, 1,267 public pattern URLs, 0 problems.
+- **Step 0:** npr.org returned 200. UTC was 2026-10-28 02:49 at the start.
+- **Sync:** the branch held one commit not in `main`, 1319e88 (the run 199 Deploy line); kept.
+- **Part C asset 4 (sections 1 and 6), teardown 1, Needs review:** [A UK cancer doctor publicly tests Babylon Health's symptom checker chatbot for unsafe chest pain triage, and Babylon calls him a troll, February 2020](../incidents/babylon-health-symptom-checker-chatbot-triage-safety-concerns-february-2020.md). 134 lines; description 150 characters.
+  - Why chosen: a grep of `agents/` for "Babylon" found nothing.
+  - Searches: 3.
+  - Opened (downloaded as raw HTML and read as text on 2026-10-28): TechCrunch (Natasha Lomas, 2020-02-25 and 2021-03-05), MedCity News (Elise Reuter, 2020-02-27), AI News (Ryan Daws, 2020-02-26); the OECD.AI incident page was opened for its coverage list only.
+  - Seen only in search summaries, named on the page as unverified and not used for facts: HSJ, Pulse, Telecare Aware, PSL Hub, IT Pro, Vietnamnet, Nation.co.ke; a 2019 man-versus-woman cardiac test; an 81% exam score. No BBC, Guardian, Forbes, Sifted, BMJ or Lancet piece was opened.
+  - Unverified, and listed on the page: Babylon's press release, Watkins's tweets and videos, the Newsnight segment and the Royal Society of Medicine debate, the MHRA letter itself (read only through TechCrunch), the May 2018 MHRA notices, Babylon's NHS validation and exam claims, any triage difference by sex.
+  - Pattern IDs (all in the taxonomy): `triage-wording-understates-or-overstates-urgency` (core), `confident-wrong-answer-with-no-way-to-check` (partial), `no-user-facing-record-of-what-the-bot-said` (weak, one detail). Four others considered and rejected. Two possible gaps flagged for a person (a company using a complainant's own chat logs in public; triage that changes by sex).
+- **Review of teardown 1 (sections 1 and 6):** I read the page in full as a skeptical reader. It carries a Read this first note (not medical advice; tester cases, not patients) and a chat channel note. Every number (2,400; fewer than 100; 20; 0.8%; 800 to 900; one in three; 6,000; 3,925; 82 percent; December 4, 2020) is tied to an opened source, and the disagreement table sets Babylon's and Watkins's figures side by side without deciding between them. I re-downloaded the 2020 TechCrunch article and matched four quotes ("validation is more important than valuation", "absolute nonsense", "not one single patient has reported any harm", "fewer than 100 test results"); all matched. The subagent reports 26 quotes matched by script and one paraphrase unquoted. The review changed nothing.
+- **Part C asset 4 (sections 1 and 6), teardown 2, Needs review:** [OpenAI turned off ChatGPT's Browse with Bing beta in July 2023 because it could show a paywalled page's full text when asked, and brought browsing back that fall](../incidents/openai-chatgpt-browse-with-bing-paused-over-paywalled-content-july-2023.md). 117 lines; description 155 characters.
+  - Why chosen: a grep of `agents/` for "Browse with Bing" found nothing.
+  - Searches: 3.
+  - Opened (downloaded as raw HTML and read as text on 2026-10-28): OpenAI Help Center ChatGPT release notes (entries May 12, June 22, July 3, September 27 and October 17, 2023), Decrypt (Jason Nelson, 2023-07-04), MediaPost (Laurie Sullivan, 2023-07-05), Maginative (Chris McKay, 2023-09-27), MobileSyrup (Karandeep Oberoi, 2023-10-18).
+  - Blocked or not found: Search Engine Land and VentureBeat (download blocked); guessed Verge and Engadget links returned not-found pages. Seen only in search summaries and not used: CMSWire, Analytics Vidhya, OnMSFT, Website Planet, a Yahoo Finance repost, nft now, Android Authority, a Gizmodo story.
+  - Unverified, and listed on the page: OpenAI's original help-center or forum post and Michael Schade's authorship (read only as quoted), OpenAI's X posts (read only as embedded by Decrypt), how the beta reached paywalled text and how many sites or users were affected, robots.txt as the fix (Maginative only), mobile app behavior.
+  - Pattern IDs (all in the taxonomy): `bypasses-captchas-or-site-terms` (partial). `outage-updates-generic-or-late` discussed as weak and left out of the front matter; four others rejected. A possible gap flagged for a person (a reply that reproduces a whole restricted third-party page on request).
+- **Review of teardown 2 (sections 1 and 6):** I read the page in full. It reproduces no paywalled text and gives no bypass method; the Read this first note states no rule of copyright law. I re-downloaded Decrypt and matched four quotes ("abundance of caution", "do right by content owners", "bypassing paywalls and privacy settings", "will bring it back soon"); all matched. The subagent had written one comparison line (Copilot and private GitHub repos) from the linked page's title only; I checked that page's description, and the line is accurate. The review changed nothing.
+- **Part B:** already done today (run 198 entry in `seo/log.md`); not repeated.
+- **Part E:** no Moves or Guide spec work left.
+- **Part F:** no fixes. Live /, /sitemap-index.xml, /robots.txt and /guides/ return 200. Site repo local main matches origin/main, 0 foreign commits.
+- **Part G:**
+  - No G item advanced: G10 has nothing left to retitle, G12 needs question-query data, G14 is blocked on PageSpeed quota/key.
+  - Newsletter: the issue dated 2026-10-22 exists; the next is due 2026-10-29 and was not written this run (it is not yet due).
+  - LinkedIn: two drafts added, for the two teardowns. Drafts only; not posted.
+- **Part H (GORT step 3):** no code written. Still waiting for the owner: decision 2 (frameworks) in section 9 of gort-plan.md.
+- **KPIs:** site build 1,907 pages (run 191). Indexed 878, not indexed 13 (Search Console, run 118). Ellipsis count 224 (not re-scanned).
+- **Plan complete?** No. Still open: teardowns continue; live checks for G10, G11 and G13; G12 and G14; the newsletter due 2026-10-29; GORT step 3 (waits on decision 2).
+- **Note for the owner:** same as run 199: GORT decision 2; Vercel has not deployed site commits since c69c78cdd; G14 needs a PageSpeed key or a local Lighthouse run; Privacy and Contact pages need your facts; the importer fix for 37 duplicate framework descriptions needs your go-ahead.
 
 ## Queue
 Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Library** column is the status in the catalog when the queue was built (**New** or **Extends**).
