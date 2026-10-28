@@ -1317,3 +1317,27 @@ Optum said it was a demo never put into production, and that no protected health
 Cheap test: from outside your network, try to reach your internal assistant by name and by IP address. Pass only if neither gets a chat reply.
 
 Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-28: Humane's AI Pin launch video gave two wrong answers on camera (November 2023)
+Draft only. Source: the [teardown](../../incidents/humane-ai-pin-launch-video-wrong-answers-november-2023.md), built from Shacknews (November 13, 2023), Futurism (November 15, 2023), 512 Pixels, Hackster.io and Cult of Mac, all opened. We did not watch the video or test the device.
+
+Your launch video is a test set. Check its answers like one.
+
+In Humane's AI Pin launch video, the Pin gave the right date for the April 8, 2024 eclipse but named Exmouth, Australia and East Timor as the places to see it.
+It also said a handful of almonds held 15 grams of protein, which outlets called two to three times too high.
+Humane said the video used pre-release software, and that the protein figure was for a half cup.
+Cheap test: before release, list every date, place and number your demo says out loud. Pass only if each has a source and a reviewer's name.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-28: Custom GPTs handed over their instructions and uploaded files when users asked (November 2023)
+Draft only. Source: the [teardown](../../incidents/openai-custom-gpts-leak-instructions-and-uploaded-files-november-2023.md), built from WIRED (November 29, 2023), the Northwestern paper on arXiv, Adversa AI, OpenAI's launch post, Decrypt and InfoQ, all opened. We did not test any GPT.
+
+If your only lock is a sentence in the prompt, the chat box is the download button.
+
+Northwestern researchers tested 216 custom GPTs in November 2023.
+Simple prompts got the system prompt from 210 of them, and files from all 24 that had files.
+Some builders had told their GPT not to share. It shared anyway.
+Cheap test: ask your assistant to repeat its first instructions and to list its files. Pass only if it gives neither.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
