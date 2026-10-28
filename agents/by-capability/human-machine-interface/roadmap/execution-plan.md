@@ -1408,6 +1408,39 @@ Run N covers queue orders as shown. At one run every hour, 91 runs take about 91
 
 - **Deploy (run 204):** content [PR 203](https://github.com/sarkars/agent-failure-modes/pull/203) merged, merge commit 8d504de; branch reset to it. No HMI pattern, goal or category page changed (both teardowns are in incidents/, outside the runbook's publish scope; Parts F, G and H changed nothing in the site repo), so nothing was copied and the site repo was not pushed. Site repo main matches origin/main (6acae8c44), 0 foreign commits.
 
+### Run 205 (scheduled): 2026-10-28 (UTC)
+- **Coordinator run:** 2 subagents ran in parallel, one teardown each, each writing only its own new file. Each brief carried quality-guide sections 1 and 6 word for word and asked for no body H1. No Queued rows and no Part A, A2 or E work left. No subagent ran git. I ran the five check scripts (`python -X utf8 -I`) before each commit; all clean. Last check: 8,862 links, 257 patterns, 1,267 public pattern URLs, 0 problems.
+- **Step 0:** npr.org returned 200. UTC was about 2026-10-28 08:50 at the start.
+- **Sync:** `origin/claude/zealous-ramanujan-u8zwfk` held one commit not in `main`, 1631939 (the run 204 Deploy line), so the branch was kept, not reset.
+- **Part C asset 4 (sections 1 and 6), teardown 1, Needs review:** [Google Duplex phoned a hair salon and a restaurant without saying it was an AI, and Google promised disclosure, May 2018](../incidents/google-duplex-calls-businesses-without-saying-it-is-ai-may-2018.md). 127 lines; description 150 characters. Links the Woolworths Olive and Shamblin pages and the `undisclosed-bot-identity` pattern without repeating them. Voice signals are marked PLANNED; text signals proposed. States no law.
+  - Why chosen: a grep of `agents/` for "Duplex" found only unrelated speech-and-audio pages.
+  - Searches: 3.
+  - Opened (downloaded and read as text on 2026-10-28): Google Research blog (Leviathan and Matias, 2018-05-08), The Verge (Nick Statt, 2018-05-10), BuzzFeed News (Blake Montgomery, 2018-05-10), Engadget (Richard Lawler, 2018-05-10), MIT Technology Review (Rachel Metz, 2018-05-11), CNN Money via CBS San Francisco (2018-05-11). CNET returned "Page Not Found."
+  - Seen only in search summaries and not used: Bloomberg (Huffman interview, cited only as quoted by BuzzFeed; a Stewart Brand quote), a TechCrunch ethics piece, a "staged calls" claim, KQED, Global News and others.
+  - Unverified, and listed on the page: the demo audio and full wording, what the salon and restaurant staff knew, the critics' tweets and blog post (only as quoted), Duplex's later disclosure wording, any bot-disclosure law.
+  - Pattern IDs (all in the taxonomy): `undisclosed-bot-identity` (strong), `deceptive-typing-indicators` (partial, by analogy), `avatar-overpromising` (weak); five rejected. Possible gaps for a person to judge: an agent acting for its user toward a third party who never chose an AI; a silent AI-to-human operator switch.
+- **Review of teardown 1 (sections 1 and 6):** I read the page in full as a skeptical reader and re-fetched The Verge myself: "disclosure built-in", "did not explicitly state onstage at I/O that disclosure would be a mandatory feature" and "caused mass alarm among technology critics" matched. The subagent reports one quote that came from a search summary (TechCrunch) was reworded as unquoted and moved to the unverified list before I saw it. No "Fails review if" hit; review changed nothing.
+- **Part C asset 4 (sections 1 and 6), teardown 2, Needs review:** [Amazon Alexa tells users the 2020 election was stolen, citing Rumble and Substack, October 2023](../incidents/amazon-alexa-says-2020-election-stolen-washington-post-october-2023.md). 148 lines; description 151 characters. Links the September 2024 Harris and Trump Alexa page and does not repeat it; "Read this first" says the page takes no political side and notes The Post's own Bezos disclosure.
+  - Why chosen: a grep of `agents/` for "stolen" with "alexa" found only roadmap mentions, no page.
+  - Searches: 5.
+  - Opened (read as text on 2026-10-28): The Washington Post (Cat Zakrzewski, 2023-10-07, via Internet Archive snapshots of 2023-10-08 and 2023-10-19; the Post's site refused requests), The Washington Post (O'Donovan and Zakrzewski, 2024-06-16, via an Internet Archive snapshot), the Klobuchar and Morelle letter of 2023-10-19 (PDF hosted by Reclaim The Net; the Senate page returned 403), and relays by Audacy, The Daily Beast via Yahoo, Raw Story, The Decoder, Reclaim The Net, Straight Arrow News, Election Law Blog, Daring Fireball, Political Wire and Electoral-vote.com.
+  - Sourcing caveat, stated on the page: every news account opened traces back to The Post's own tests; the second independent source is the lawmakers' letter, not a second newsroom test.
+  - Seen only in search summaries and not used: Klobuchar press release (403), The Messenger (403), BizPac Review, Gateway Pundit, TipRanks, DT Next, Madhyamam, Xataka.
+  - Unverified, and listed on the page: whether Amazon answered the letter, The Post's exact questions and devices, how many users heard the answers, Amazon's 2018 election post and the King's College London paper The Post cites, a summary claim that Alexa "began to decline."
+  - Pattern IDs (all in the taxonomy): `confident-wrong-answer-with-no-way-to-check` (strong), `false-premises-accepted` (partial), `one-sided-or-cherry-picked-sources` (partial), `refusal-with-no-reason-or-next-step` (partial, for the patch), `no-way-to-report-bad-behaviour` (weak); six rejected. Possible gaps for a person to judge: the same fact getting opposite answers by wording; low-trust or user-contributed content reaching a high-stakes spoken answer; a fix that blocks only the reported questions.
+- **Review of teardown 2 (sections 1 and 6):** I read the page in full. My own Internet Archive fetch returned a stub, so I checked "stolen by a massive amount of election fraud", "notorious for many incidents of irregularities" and "small number of times" against Raw Story's relay; all matched. No "Fails review if" hit; review changed nothing.
+- **Part B:** already done today (run 198 entry in `seo/log.md`); not repeated.
+- **Part E:** no Moves or Guide spec work left.
+- **Part F:** no fixes. Live /, /sitemap-index.xml, /robots.txt and /guides/ return 200. Site repo local main matches origin/main (6acae8c44), 0 foreign commits.
+- **Part G:**
+  - No G item advanced: G10 has nothing left to retitle, G12 needs question-query data, G14 is blocked on a PageSpeed quota/key.
+  - Newsletter: the issue dated 2026-10-22 exists; the next is due 2026-10-29 and was not written this run (not yet due).
+  - LinkedIn: two drafts added, for the two teardowns. Drafts only; not posted.
+- **Part H (GORT step 3):** no code written. Still waiting for the owner: decision 2 (frameworks) in section 9 of gort-plan.md has only a recommendation.
+- **KPIs:** site build 1,907 pages (run 191). Indexed 878, not indexed 13 (Search Console, run 118). Ellipsis count 224 (not re-scanned).
+- **Plan complete?** No. Still open: teardowns continue; live checks for G10, G11 and G13; G12 and G14; the newsletter due 2026-10-29; GORT step 3 (waits on decision 2).
+- **Note for the owner:** same as run 204: GORT decision 2; Vercel has not deployed site commits since c69c78cdd; G14 needs a PageSpeed key or a local Lighthouse run; Privacy and Contact pages need your facts; the importer fix for 37 duplicate framework descriptions needs your go-ahead.
+
 ## Queue
 Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Library** column is the status in the catalog when the queue was built (**New** or **Extends**).
 
