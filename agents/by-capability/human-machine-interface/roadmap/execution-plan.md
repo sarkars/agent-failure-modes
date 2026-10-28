@@ -1276,7 +1276,7 @@ Run N covers queue orders as shown. At one run every hour, 91 runs take about 91
 - **Deploy:** content [PR 199](https://github.com/sarkars/agent-failure-modes/pull/199) merged into `main` with a merge commit (2144494, expected head a23606d); branch reset to `origin/main`. Site repo not touched: only `incidents/` and `roadmap/` changed, and they are not published.
 
 ### Run 201 (scheduled): 2026-10-28 (UTC)
-- **Coordinator run:** 2 subagents ran in parallel, one teardown each, each writing only its own new file. Each brief carried quality-guide sections 1 and 6 word for word and asked for no body H1. No Queued rows and no Part A, A2 or E work left. No subagent ran git. I ran the five check scripts (`python -X utf8 -I`) before each commit; all clean. Last check: 8,752 links, 257 patterns, 1,267 public pattern URLs, 0 problems.
+- **Coordinator run:** 2 subagents ran in parallel, one teardown each, each writing only its own new file. Each brief carried quality-guide sections 1 and 6 word for word and asked for no body H1. No Queued rows and no Part A, A2 or E work left. No subagent ran git. I ran the five check scripts (`python -X utf8 -I`) before each commit; all clean. Last check: 8,754 links, 257 patterns, 1,267 public pattern URLs, 0 problems.
 - **Step 0:** wikipedia.org returned 301 and arxiv.org 200. UTC was about 2026-10-28 03:50 at the start.
 - **Sync:** the branch held one commit not in `main`, 924c391 (the run 200 Deploy line); kept.
 - **Part C asset 4 (sections 1 and 6), teardown 1, Needs review:** [OpenAI ChatGPT plugins: one link could install a plugin without the user's approval, and plugin sign-in flaws risked account takeover, March 2024](../incidents/openai-chatgpt-plugins-oauth-flaws-salt-labs-march-2024.md). 124 lines; description 156 characters.
@@ -1306,6 +1306,7 @@ Run N covers queue orders as shown. At one run every hour, 91 runs take about 91
 - **KPIs:** site build 1,907 pages (run 191). Indexed 878, not indexed 13 (Search Console, run 118). Ellipsis count 224 (not re-scanned).
 - **Plan complete?** No. Still open: teardowns continue; live checks for G10, G11 and G13; G12 and G14; the newsletter due 2026-10-29; GORT step 3 (waits on decision 2).
 - **Note for the owner:** same as run 200: GORT decision 2; Vercel has not deployed site commits since c69c78cdd; G14 needs a PageSpeed key or a local Lighthouse run; Privacy and Contact pages need your facts; the importer fix for 37 duplicate framework descriptions needs your go-ahead.
+- **Deploy:** content [PR 200](https://github.com/sarkars/agent-failure-modes/pull/200) merged into `main` with a merge commit (1b3b54a, expected head 9678c11); branch reset to `origin/main`. Site repo not touched: only `incidents/` and `roadmap/` changed, and they are not published.
 
 ## Queue
 Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Library** column is the status in the catalog when the queue was built (**New** or **Extends**).
