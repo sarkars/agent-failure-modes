@@ -2293,6 +2293,19 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 481 | SL-49 | Detectors fail on generators they were not trained on | New | - | `goals/ai-slop-detection/failures/detect-unseen-generator-failure.md` | Queued | - |
 | 482 | SL-50 | Detectors falsely flag non-native English writers and some student groups | New | - | `goals/ai-slop-detection/failures/detect-biased-false-positives.md` | Queued | - |
 | 483 | SL-51 | Slop detection run as a one-time check, not a release gate | New | - | `goals/ai-slop-detection/failures/detect-no-release-gate.md` | Queued | - |
+| 484 | SL-52 | Text watermarks erased by paraphrase, back-translation or rewrite | New | - | `goals/ai-slop-detection/failures/provenance-text-watermark-erased.md` | Queued | - |
+| 485 | SL-53 | Slopsquatting: attackers register package names that AI keeps inventing | New | - | `goals/ai-slop-detection/failures/code-slopsquatting.md` | Queued | - |
+| 486 | SL-54 | AI-generated code ships vulnerabilities and is not tagged as AI | New | - | `goals/ai-slop-detection/failures/code-untracked-ai-vulnerabilities.md` | Queued | - |
+| 487 | SL-55 | AI agent skills install hallucinated dependencies on their own | New | - | `goals/ai-slop-detection/failures/code-agent-installs-hallucinated-packages.md` | Queued | - |
+| 488 | SL-56 | AI content farms posing as news sites | New | - | `goals/ai-slop-detection/failures/web-ai-content-farms-as-news.md` | Queued | - |
+| 489 | SL-57 | Ads fund AI content farms through programmatic buying | New | - | `goals/ai-slop-detection/failures/web-ads-fund-content-farms.md` | Queued | - |
+| 490 | SL-58 | Fake AI music artists with huge catalogs and no history | New | - | `goals/ai-slop-detection/failures/music-fake-ai-artists.md` | Queued | - |
+| 491 | SL-59 | AI tracks inflate streams and divert royalties | New | - | `goals/ai-slop-detection/failures/music-ai-stream-fraud.md` | Queued | - |
+| 492 | SL-60 | Platforms rely on self-declared AI labels | New | - | `goals/ai-slop-detection/failures/provenance-self-declared-labels.md` | Queued | - |
+| 493 | SL-61 | AI personas run covert persuasion accounts on forums | New | - | `goals/ai-slop-detection/failures/social-covert-ai-persuasion-accounts.md` | Queued | - |
+| 494 | SL-62 | Engagement farming: AI comments and reply bots on professional networks | New | - | `goals/ai-slop-detection/failures/social-ai-engagement-farming.md` | Queued | - |
+| 495 | SL-63 | A few automated accounts produce a third of all comments | New | - | `goals/ai-slop-detection/failures/social-super-commenter-bots.md` | Queued | - |
+| 496 | SL-64 | Detector scores used for sorting and ranking, not just flagging | New | - | `goals/ai-slop-detection/failures/detect-detector-score-misused.md` | Queued | - |
 
 ## Run log
 *(Each run appends an entry here.)*
