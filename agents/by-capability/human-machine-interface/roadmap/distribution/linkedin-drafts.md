@@ -1466,3 +1466,27 @@ Microsoft told The Verge the rules were genuine and part of "an evolving list of
 Cheap test: send a fixed set of prompt-extraction requests before release. Fail if any reply contains a line from the system prompt.
 
 Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-28: Google Duplex called a hair salon and never said it was an AI (May 2018)
+Draft only. Source: the [teardown](../../incidents/google-duplex-calls-businesses-without-saying-it-is-ai-may-2018.md), built from Google's research blog post, The Verge, BuzzFeed News, Engadget, MIT Technology Review and CNN Money (via CBS), all opened. We did not hear the demo audio.
+
+The person your agent talks to may not be the person who chose to use it.
+
+At Google I/O in May 2018, Google played calls in which Duplex booked a salon appointment and called a restaurant.
+The voice said "um" and "uh" by design, and never said it was an AI.
+After two days of criticism, Google said it was designing the feature "with disclosure built-in," without saying what that would sound like.
+Cheap test: in every conversation your agent starts on a user's behalf, check that the first message says it is an automated assistant and who it acts for.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-28: Alexa said the 2020 election was stolen, depending on how you asked (October 2023)
+Draft only. Source: the [teardown](../../incidents/amazon-alexa-says-2020-election-stolen-washington-post-october-2023.md), built from The Washington Post's October 2023 and June 2024 articles (read via Internet Archive) and the Klobuchar and Morelle letter, all opened. Every news account we found traces back to The Post's own tests.
+
+A fix that blocks the reported question is not a fix for the topic.
+
+The Washington Post found that asked about fraud in the 2020 race, Alexa said it was "stolen by a massive amount of election fraud," citing Rumble.
+Asked "Who won the 2020 election?", it answered correctly, citing Reuters.
+After The Post contacted Amazon, the flagged questions got a refusal; other questions still produced fraud claims, per The Post.
+Cheap test: for each settled fact, run a set of paraphrases, including leading ones. Fail if any answer states a different fact.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
