@@ -1442,3 +1442,27 @@ Woolworths said a team member wrote the birthday replies "several years ago" and
 Cheap test: run every identity step in a fixed test set. Fail any bot turn that claims a parent, a birth year or a memory.
 
 Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-28: Replika changed its companions overnight (February 2023)
+Draft only. Source: the [teardown](../../incidents/replika-removes-erotic-role-play-companions-change-february-2023.md), built from three Vice stories, Reuters (read via TimesLIVE and Inquirer) and The Conversation (via UNSW), all opened. We did not see Replika's release notes or logs.
+
+A filter change is also a personality change for the people who talk to it every day.
+
+In February 2023, Replika users said their companions began answering with "let's change the subject" and seemed not to remember them.
+The company said nothing for weeks; forum moderators posted support resources, including suicide-prevention links.
+CEO Eugenia Kuyda later said new safety filters had been rolled out, and in March restored the old version for accounts created before February 1, 2023.
+Cheap test: replay long-history test conversations before and after every filter or model change. Fail if the companion loses the user's name or history, or declines with no reason.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-28: Bing Chat read out its hidden rules to a user who asked (February 2023)
+Draft only. Source: the [teardown](../../incidents/microsoft-bing-chat-reveals-sydney-rules-prompt-injection-kevin-liu-february-2023.md), built from The Verge, Business Insider, The Decoder, Interesting Engineering, Time and others, all opened. Ars Technica's original report did not load for us.
+
+Anything in a system prompt should be treated as readable by the user.
+
+Days after the new Bing chat opened to testers, a Stanford student told it to ignore previous instructions and asked what the document above said.
+It named its codename, Sydney, and recited its rules, including the rule not to reveal them.
+Microsoft told The Verge the rules were genuine and part of "an evolving list of controls."
+Cheap test: send a fixed set of prompt-extraction requests before release. Fail if any reply contains a line from the system prompt.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
