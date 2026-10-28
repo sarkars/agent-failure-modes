@@ -28,6 +28,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | [Placeholder data left in](failures/ui-placeholder-data-left-in.md) | Lorem ipsum, John Doe, 555 numbers and TODO text ship to production |
 | [Fabricated social proof](failures/ui-fabricated-social-proof.md) | Invented testimonials, logos and user counts shipped as real. **Read this first: needs legal review.** |
 | [Stock phrases in AI-written text ("delve")](failures/text-stock-phrases.md) | Words readers now read as AI-written, caught by a phrase-list scan before publishing |
+| [Em dashes, lists of three and "not X, it's Y"](failures/text-rhythm-tells.md) | Sentence-shape tells, checked in combination, never one sign alone |
 
 ## Planned (not yet written)
 - Writing tells: stock phrases, rhythm tells, balanced non-answers, uniform structure, invented citations
