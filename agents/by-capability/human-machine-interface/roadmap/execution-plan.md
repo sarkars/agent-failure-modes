@@ -96,6 +96,7 @@ Create a folder's README on its first pattern. Folders that already have a READM
 | `goals/conversation-frameworks` | The bot uses proven conversation structures for selling, supporting, matching a user's style, and delivering hard news, instead of improvising every exchange. |
 | `goals/privacy-and-governance` | The agent handles personal data and outside services under clear rules, acts only within the rights of the person it serves, explains its limits, and keeps to its rules when pushed. |
 | `goals/human-oversight` | People overseeing an agent can see what it is doing, understand why, and stop or correct it. |
+| `goals/ai-slop-detection` | People and tools can spot output that was produced by AI without care, in design, writing, code, images and data, and the builder can catch it before users do. |
 | `goals/measurement-and-feedback` | Teams can tell whether conversations really work, and users can tell the team when they don't. |
 | `goals/voice` | A voice agent listens, speaks, and takes turns the way a competent person would, hears every speaker accurately, never turns noise or silence into words, and never asks for what can't safely be said aloud. |
 | `goals/visual` | What an agent shows is clear, honest, accessible, and appropriate to the stakes. |
@@ -2241,6 +2242,26 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 430 | OV-09 | Permission fatigue or under-asking | Extends | - | `goals/human-oversight/failures/permission-fatigue-or-under-asking.md` | Covered | 62 |
 | 431 | OV-10 | Misleading explanations | Extends | R | `goals/human-oversight/failures/misleading-explanations.md` | Covered | 62 |
 | 432 | OV-12 | Confusion over who is acting | Extends | - | `goals/human-oversight/failures/confusion-over-who-is-acting.md` | Covered | 62 |
+| 433 | SL-01 | Purple-gradient, glassmorphism default look | New | - | `goals/ai-slop-detection/failures/ui-default-gradient-look.md` | Queued | - |
+| 434 | SL-02 | Identical card grids and icon-in-circle feature rows | New | - | `goals/ai-slop-detection/failures/ui-template-card-grids.md` | Queued | - |
+| 435 | SL-03 | Generic hero copy and stock layout order | New | - | `goals/ai-slop-detection/failures/ui-generic-hero-layout.md` | Queued | - |
+| 436 | SL-04 | Emoji as icons and decorative bullets | New | - | `goals/ai-slop-detection/failures/ui-emoji-as-icons.md` | Queued | - |
+| 437 | SL-05 | Placeholder data left in: Lorem ipsum, John Doe, 10,000+ users | New | - | `goals/ai-slop-detection/failures/ui-placeholder-data-left-in.md` | Queued | - |
+| 438 | SL-06 | Fake testimonials, logos and stats | New | - | `goals/ai-slop-detection/failures/ui-fabricated-social-proof.md` | Queued | - |
+| 439 | SL-07 | Stock AI phrases and filler openers | New | - | `goals/ai-slop-detection/failures/text-stock-phrases.md` | Queued | - |
+| 440 | SL-08 | Em-dash, triplet and 'not X but Y' rhythm | New | - | `goals/ai-slop-detection/failures/text-rhythm-tells.md` | Queued | - |
+| 441 | SL-09 | Hedged, balanced non-answers | New | - | `goals/ai-slop-detection/failures/text-balanced-non-answers.md` | Queued | - |
+| 442 | SL-10 | Uniform structure: headings and bullets on everything | New | - | `goals/ai-slop-detection/failures/text-uniform-structure.md` | Queued | - |
+| 443 | SL-11 | Invented citations and quotes | New | - | `goals/ai-slop-detection/failures/text-invented-citations.md` | Queued | - |
+| 444 | SL-12 | Over-commented code and tutorial-style comments | New | - | `goals/ai-slop-detection/failures/code-over-commented.md` | Queued | - |
+| 445 | SL-13 | Plausible but nonexistent APIs and options | New | - | `goals/ai-slop-detection/failures/code-nonexistent-apis.md` | Queued | - |
+| 446 | SL-14 | Needless abstraction and duplicated helpers | New | - | `goals/ai-slop-detection/failures/code-needless-abstraction.md` | Queued | - |
+| 447 | SL-15 | Image artifacts: extra fingers, garbled text, melted detail | New | - | `goals/ai-slop-detection/failures/image-visual-artifacts.md` | Queued | - |
+| 448 | SL-16 | Over-smooth stock-photo look and wrong physics | New | - | `goals/ai-slop-detection/failures/image-stock-look.md` | Queued | - |
+| 449 | SL-17 | Round-number, too-clean data and fake metrics | New | - | `goals/ai-slop-detection/failures/data-too-clean.md` | Queued | - |
+| 450 | SL-18 | Review and reply farms with templated voice | New | - | `goals/ai-slop-detection/failures/data-templated-reviews.md` | Queued | - |
+| 451 | SL-19 | AI-text detectors flag human writing (false positives) | New | - | `goals/ai-slop-detection/failures/detect-detector-false-positives.md` | Queued | - |
+| 452 | SL-20 | Detection rules that break after one model update | New | - | `goals/ai-slop-detection/failures/detect-rules-decay.md` | Queued | - |
 
 ## Run log
 *(Each run appends an entry here.)*
