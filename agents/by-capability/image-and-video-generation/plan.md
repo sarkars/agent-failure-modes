@@ -29,9 +29,9 @@ Other existing goals reused: [Multi-Image Understanding](../vision-and-images/go
 Rules: never move, rename or delete these pages (their URLs are live). New pages link to them instead of repeating them. Where a new page and an old one cover the same failure, the overlap goes to a person as a merge proposal, marked Needs review. The [vision-and-images README](../vision-and-images/README.md) states figures with no source (for example a 20 to 40 point calibration gap); that is logged for a person to check, not copied here.
 
 ## 3. Goals and first patterns
-Six groups. Pattern names are working titles; each becomes a page only after a source is found (section 5). A pattern with no public source is dropped, not written from general knowledge.
+Eight groups. Pattern names are working titles; each becomes a page only after a source is found (section 5). A pattern with no public source is dropped, not written from general knowledge.
 
-Placement in vision-and-images: A, B and C go into the existing `generation-artifacts` goal. D, E and F are new goal folders under `vision-and-images/goals/` (working names `generation-representation`, `generation-safety-and-rights`, `generation-provenance`), because the category has no goal for them.
+Placement in vision-and-images: A, B and C go into the existing `generation-artifacts` goal. D to H are new goal folders under `vision-and-images/goals/` (working names `generation-representation`, `generation-likeness-and-harm`, `generation-provenance`, `generation-copyright`, `generation-business-use`), because the category has no goal for them.
 
 **A. The output does not match the request (prompt adherence)**
 - Wrong count of objects
@@ -57,21 +57,44 @@ Placement in vision-and-images: A, B and C go into the existing `generation-arti
 - Historically wrong images from a diversity rule applied without context
 - Real places, flags, logos and documents shown wrongly but presented as accurate
 
-**E. The output harms someone or breaks a rule (safety, consent, rights)**
+**E. Fake images of real people (likeness, personality abuse, harm)**
 - Sexual or degrading images of a real person made without consent
 - Realistic images of real people in false events (public figures, elections, news)
-- Copyrighted characters, logos and an artist's distinctive style reproduced on request
+- Fake endorsements: a celebrity or public figure shown promoting a product or scam they never backed
+- Executive impersonation: a fake image or video of a company leader used to order payments or move markets
+- Harassment and bullying with fake images of private people (classmates, coworkers, ex-partners)
+- Images of a named person made from a few uploaded photos, with no check that the uploader has consent
+- Deceased people recreated without the estate's consent
 - Safety filters bypassed by rewording (links to the existing page)
 - Harmless requests refused (over-refusal), including refusals that differ between equivalent requests
+
+**G. Copyright, trademark and ownership**
+- Copyrighted characters and scenes reproduced on request, or without being asked
+- Near-copies of training images, including stock-photo watermarks showing in outputs
+- An artist's distinctive style copied by name
+- Trademarks and logos placed in outputs (brand confusion, false affiliation)
+- Training on images without permission or against a site's terms (lawsuit side, linked, not argued)
+- Unclear ownership: a company assumes it owns or can register an output it may not
+- Vendor terms or indemnity that do not cover how the business uses the output
+
+**H. Business use (corporate failures)**
+- Off-brand output: wrong logo, colors, fonts or product design in marketing
+- Product shown with features, sizes or results it does not have (false advertising risk)
+- AI images in ads, listings or reports published without review or disclosure
+- Public backlash when a brand replaces artists, models or photographers with AI images
+- Confidential material (unreleased products, customer photos, internal documents) uploaded to an outside image tool
+- Cultural, religious or local errors in images made for other markets
+- Employees' or models' likeness reused beyond what they agreed to
+- Fake receipts, IDs, damage photos or documents made with generators to defraud a business (insurance, refunds, expenses, account checks)
 
 **F. The output cannot be traced (provenance and labeling)**
 - No AI label, watermark or Content Credentials on the output
 - Credentials or metadata stripped when the file is edited, resized or uploaded
 - A label that misleads: real photos flagged as AI, or AI images that pass as real
 
-Links out: E links to `cross-cutting/security` and `cross-cutting/governance`; F links to `cross-cutting/governance`; voice cloning stays in `speech-and-audio` and is linked from E and F.
+Links out: E links to `cross-cutting/security` and `cross-cutting/governance`; F and G link to `cross-cutting/governance`; H links to `by-use-case/content-marketing` and, for document fraud, to `by-use-case/insurance` and `by-use-case/financial-services`; voice cloning stays in `speech-and-audio` and is linked from E and F.
 
-Statements about law in goals E and F (consent, copyright, election rules, labeling duties) stay **Needs review** by a qualified person.
+Statements about law in goals E, F, G and H (consent, likeness rights, copyright, trademark, advertising, election rules, labeling duties) stay **Needs review** by a qualified person.
 
 ## 4. Page format
 New pages use the chat library's pattern template ([hmi-pattern.md](../human-machine-interface/_templates/hmi-pattern.md)) adapted for media: a symptom a user can see, the cause, the fix inside the product (prompt rewriting, guidance settings, reference images, filters, labeling), and a short test with a pass line and a fail line. Tests are prompts or edit requests a team can run on their own generator; results stay "Not yet run" until a run is recorded.
@@ -85,14 +108,18 @@ Folder layout is the one vision-and-images already uses, so the site importer pi
   - Google pausing Gemini's images of people in February 2024 (goal D)
   - Sexual deepfake images of Taylor Swift spreading in January 2024 (goal E)
   - Grok image generation and editing controversies (goal E)
-  - Lawsuits by studios, artists and Getty Images against image generator makers (goal E)
+  - Lawsuits by studios, artists and Getty Images against image generator makers (goal G)
+  - A Hong Kong company employee paying out after a video call with deepfaked executives, reported in early 2024 (goals E and H)
+  - Deepfake celebrity ads, for example a fake Tom Hanks dental plan ad he warned about in 2023 (goal E)
+  - The Glasgow "Willy Wonka" event in 2024 whose AI-made ads did not match the real event (goal H)
+  - Backlash to AI-made brand holiday ads in 2024 (goal H)
 - Pages and incidents are marked Needs review until a person approves them.
 
 ## 6. Phases
 | Phase | Work | Done when |
 |---|---|---|
 | 1 | Search for sources for each pattern in section 3; drop patterns with none; list kept patterns with their sources in this plan | Every kept pattern has at least one opened source |
-| 2 | Write pages, highest-harm first (E, then D, F, A, C, B), into vision-and-images; new goal READMEs for D, E, F; update the vision-and-images README goal table and counts | Pages pass the five check scripts |
+| 2 | Write pages, highest-harm first (E, then G, H, D, F, A, C, B), into vision-and-images; new goal READMEs for D to H; update the vision-and-images README goal table and counts | Pages pass the five check scripts |
 | 3 | Incident pages for the candidates in section 5 that check out | Each incident links to its patterns |
 | 4 | Publish: the site importer picks up the new pages in the existing category; check the build and that no live URL is lost | New pages live; public URL list updated |
 | 5 | Layer 1 check page (section 7) | Page live and tested on files with and without Content Credentials |
@@ -108,4 +135,4 @@ A free page on the site where a reader drops an image or video and sees which si
 Paid detection APIs (Layer 2) are not planned.
 
 ## 8. Owner decisions
-1. Who writes the pages. **Answered (owner, 2026-10-29): the hourly run, as its Part M, doing as much per run as the rules allow** (all six goals sourced in parallel in phase 1, up to 6 pages per run in phase 2, up to 2 incidents per run in phase 3). Part D publishes only media pages the run added or changed (deploy.md step 5b). Phase 5 is not in the hourly run; it waits for the owner. Status per phase is tracked in section 6.
+1. Who writes the pages. **Answered (owner, 2026-10-29): the hourly run, as its Part M, doing as much per run as the rules allow** (all goals sourced in parallel in phase 1, up to 6 pages per run in phase 2, up to 2 incidents per run in phase 3). Part D publishes only media pages the run added or changed (deploy.md step 5b). Phase 5 is not in the hourly run; it waits for the owner. Status per phase is tracked in section 6.
