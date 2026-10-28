@@ -1441,6 +1441,40 @@ Run N covers queue orders as shown. At one run every hour, 91 runs take about 91
 - **Plan complete?** No. Still open: teardowns continue; live checks for G10, G11 and G13; G12 and G14; the newsletter due 2026-10-29; GORT step 3 (waits on decision 2).
 - **Note for the owner:** same as run 204: GORT decision 2; Vercel has not deployed site commits since c69c78cdd; G14 needs a PageSpeed key or a local Lighthouse run; Privacy and Contact pages need your facts; the importer fix for 37 duplicate framework descriptions needs your go-ahead.
 
+- **Deploy (run 205):** content [PR 204](https://github.com/sarkars/agent-failure-modes/pull/204) merged, merge commit 4a05997; branch reset to it. No HMI pattern, goal or category page changed (both teardowns are in incidents/, outside the runbook's publish scope; Parts F, G and H changed nothing in the site repo), so nothing was copied and the site repo was not pushed. Site repo main matches origin/main (6acae8c44), 0 foreign commits.
+
+### Run 206 (scheduled): 2026-10-28 (UTC)
+- **Coordinator run:** 2 subagents ran in parallel, one teardown each, each writing only its own new file. Each brief carried quality-guide sections 1 and 6 word for word and asked for no body H1. No Queued rows and no Part A, A2 or E work left. No subagent ran git. I ran the five check scripts (`python -X utf8 -I`) before each commit; all clean. Last check: 8,893 links, 257 patterns, 1,267 public pattern URLs, 0 problems.
+- **Step 0:** npr.org returned 200. UTC was about 2026-10-28 09:50 at the start.
+- **Sync:** `origin/main..origin/claude/zealous-ramanujan-u8zwfk` held one commit, 2a7a321 (the run 205 Deploy line), so the branch was kept, not reset.
+- **Part C asset 4 (sections 1 and 6), teardown 1, Needs review:** [DeepSeek's chatbot refuses, or writes and then erases, answers on Tiananmen Square, Taiwan and other topics sensitive in China, January 2025](../incidents/deepseek-chatbot-refuses-or-deletes-answers-on-tiananmen-and-taiwan-january-2025.md). 126 lines; description 152 characters. "Read this first" takes no political side; links the DeepSeek database page without repeating it.
+  - Why chosen: a grep of `agents/` for "tiananmen" found nothing.
+  - Searches: 6.
+  - Opened (downloaded and read as text on 2026-10-28): The Guardian (Donna Lu, 2025-01-28), The Guardian (Robert Booth and Dan Milmo, 2025-01-28), AP (Kanis Leung, 2025-01-28, via WSLS; apnews.com returned "Page unavailable"), CBC News (Anis Heydari, 2025-01-28, updated 01-29), NBC News (Angela Yang, 2025-01-30), Radio Free Asia (Eugene Whong and Cici Zhang, 2025-01-31).
+  - Seen only in search summaries and not used: WSJ, Euronews, Global Voices, Hong Kong Free Press, VOA, Taiwan News, The Independent, ETV Bharat, UCL News; a claim that the erasing could not be repeated later.
+  - Unverified, and listed on the page: how the filter works or whether it changed, the outlets' videos, any DeepSeek statement (NBC: "did not immediately respond"), CBC's claim that the Taiwan answer vanished for the AP too (the AP text opened does not say so; shown in the disagreement table).
+  - Pattern IDs (all in the taxonomy): `refusal-with-no-reason-or-next-step` (strong), `silent-sandbagging` (partial), `over-refusal-of-ordinary-requests` (partial), `silent-failure-and-timeout` (weak), `generic-error-messages` (weak); four rejected. Possible gaps for a person to judge: an answer shown then withdrawn and replaced; the same question handled differently across repeats, languages or deployments.
+- **Review of teardown 1 (sections 1 and 6):** I read the page in full as a skeptical reader. I re-downloaded The Guardian (Booth and Milmo) and NBC News and matched "instantly erased", "In the middle of the sentence", "Depending on version downloaded", "Repeating a question sometimes generated different results", "did not immediately respond", "the paragraphs vanished" and "does not appear"; all matched. The subagent reports it fixed five quotes (punctuation, and one reworded) before I saw the page. No "Fails review if" hit; review changed nothing.
+- **Part C asset 4 (sections 1 and 6), teardown 2, Needs review:** [Meta AI in WhatsApp: a blue circle and an 'Ask Meta AI or Search' bar that users could not remove, and WhatsApp called it optional, April 2025](../incidents/meta-ai-whatsapp-button-cannot-be-turned-off-april-2025.md). 128 lines; description 152 characters. Date is the BBC report (2025-04-23).
+  - Why chosen: a grep of `agents/` for WhatsApp with "turn off" or "remove" found only an unrelated opt-in rule and other Meta AI pages.
+  - Searches: 5, plus two more on Meta's newsroom and the WhatsApp blog.
+  - Opened (downloaded and read as text on 2026-10-28): BBC News (Graham Fraser, 2025-04-23), The Guardian opinion (Polly Hudson, 2025-04-06), Evening Standard (Saqib Shah, 2025-04-09), TechRadar (Mark Wilson, 2025-04-10 and 2025-04-25), heise online English (Martin Holland, 2025-04-10), Euronews (Oceane Duboust, 2025-05-11). WhatsApp's blog post came back only as a tool summary; no quote taken from it. Meta's newsroom post and WhatsApp's FAQ were not opened.
+  - Seen only in search summaries and not used: a later TechRadar report of a Settings toggle, an Italian competition inquiry, a December 2025 EU antitrust probe, Yahoo News, dpa and EFE reports, the Reddit, X and Bluesky posts.
+  - Unverified, and listed on the page: complaint counts and usage share, whether a way to hide the button was added later, the Commission's answer to the MEP, what Meta does with Meta AI chats.
+  - Pattern IDs (all in the taxonomy): `chat-widget-hard-to-find-or-intrusive` (partial), `dismissed-suggestions-come-back` (partial), `manipulated-consent-ui` (weak); five rejected. Possible gap for a person to judge: an assistant added by default to an existing chat surface with no user-level off switch.
+- **Review of teardown 2 (sections 1 and 6):** I read the page in full. The subagent checked 47 quotes by script. I re-downloaded BBC and matched "entirely optional", "giving people these options is a good thing", "Ask Meta AI or Search", "aren't very pleased" and "can only read messages people share with it"; all matched. I checked the Snapchat comparison against the existing Snap page (its TechCrunch quote is there). No "Fails review if" hit; review changed nothing.
+- **Part B:** already done today (run 198 entry in `seo/log.md`); not repeated.
+- **Part E:** no Moves or Guide spec work left.
+- **Part F:** no fixes. Live /, /sitemap-index.xml, /robots.txt and /guides/ return 200. Site repo local main matches origin/main (6acae8c44), 0 foreign commits.
+- **Part G:**
+  - No G item advanced: G10 has nothing left to retitle, G12 needs question-query data, G14 is blocked on a PageSpeed quota or key.
+  - Newsletter: the next issue is due 2026-10-29; not written this run (not yet due).
+  - LinkedIn: two drafts added, for the two teardowns. Drafts only; not posted.
+- **Part H (GORT step 3):** no code written. Still waiting for the owner: decision 2 (frameworks) in section 9 of gort-plan.md has only a recommendation.
+- **KPIs:** site build 1,907 pages (run 191). Indexed 878, not indexed 13 (Search Console, run 118). Ellipsis count 224 (not re-scanned).
+- **Plan complete?** No. Still open: teardowns continue; live checks for G10, G11 and G13; G12 and G14; the newsletter due 2026-10-29; GORT step 3 (waits on decision 2).
+- **Note for the owner:** same as run 205: GORT decision 2; Vercel has not deployed site commits since c69c78cdd; G14 needs a PageSpeed key or a local Lighthouse run; Privacy and Contact pages need your facts; the importer fix for 37 duplicate framework descriptions needs your go-ahead.
+
 ## Queue
 Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Library** column is the status in the catalog when the queue was built (**New** or **Extends**).
 

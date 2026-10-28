@@ -1490,3 +1490,27 @@ After The Post contacted Amazon, the flagged questions got a refusal; other ques
 Cheap test: for each settled fact, run a set of paraphrases, including leading ones. Fail if any answer states a different fact.
 
 Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-28: DeepSeek wrote an answer, then erased it (January 2025)
+Draft only. Source: the [teardown](../../incidents/deepseek-chatbot-refuses-or-deletes-answers-on-tiananmen-and-taiwan-january-2025.md), built from The Guardian (two articles), the AP (via WSLS), CBC News, NBC News and Radio Free Asia, all opened. No opened source has DeepSeek's own account.
+
+If your chatbot has topics it will not answer, decide before you stream.
+
+In January 2025, reporters asked DeepSeek's app about Tiananmen Square and got "Sorry, that's beyond my current scope. Let's talk about something else."
+On other questions the answer began to appear, then vanished and was replaced by that line, per The Guardian, CBC and NBC News.
+NBC News found repeating a question sometimes gave different results.
+Cheap test: diff the streamed text against the stored reply. Fail any turn where shown text was removed without saying so.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-28: WhatsApp called Meta AI "optional," with no off switch (April 2025)
+Draft only. Source: the [teardown](../../incidents/meta-ai-whatsapp-button-cannot-be-turned-off-april-2025.md), built from BBC News, The Guardian (a column), the Evening Standard, TechRadar, heise and Euronews, all opened. No opened source gives complaint counts.
+
+"Optional" needs an off switch.
+
+In spring 2025, Meta AI arrived in WhatsApp as a blue circle on the Chats screen and an "Ask Meta AI or Search" bar.
+Users said they could not remove it. WhatsApp told the BBC the feature is "entirely optional."
+The workarounds reported, deleting or muting the AI chat, left the button in place.
+Cheap test: before launch, ask your assistant "how do I turn you off?" Fail if it names no working setting and does not say plainly that none exists.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
