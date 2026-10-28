@@ -1,0 +1,245 @@
+# Plan: Image and Video Generation Failures
+
+> **Status: proposed plan, 2026-10-29.** Asked for by the owner. Nothing here is written, built or published yet. This work is an independent part of the failure pattern library; the chat library stays the first priority. No statistic, quote or study is used in this plan; every fact a page uses later comes from a source opened at the time it is written.
+
+## 1. What the work is
+Failure pages for products that **make** images and video with AI: text-to-image, image editing and inpainting, image-to-video and text-to-video. Each failure gets a page in the same shape as the chat library: what it looks like, why it happens, how to fix it, and a short test that shows the fix holds. Real incidents back the pages.
+
+**Where the pages go (owner, 2026-10-29: reuse existing).** No new category. The pages go into the existing [vision-and-images](../vision-and-images/README.md) category, which already covers models that read images and has a [Generation Artifacts](../vision-and-images/goals/generation-artifacts/README.md) goal. This folder holds only this plan; it gets no README, so the site never publishes it as a category. Topics that apply to every AI system stay in `cross-cutting/` and are linked, not copied.
+
+**Image and video stay together.** Most failures are the same for both. Each new page states which it covers: image, video, or both.
+
+The last phase adds a free check page for readers who want to know whether an image or video carries signs of AI generation (section 7). It comes after the failure pages.
+
+## 2. What already exists
+[vision-and-images, goal Generation Artifacts](../vision-and-images/goals/generation-artifacts/README.md) has 7 short pages in the older format (Issue, Mitigation, References):
+
+| Existing page | Use in this work |
+|---|---|
+| [Artifact Accumulation in Regeneration](../vision-and-images/goals/generation-artifacts/failures/artifact-accumulation.md) | Covers part of goal C |
+| [Consistency Failure: Identity Loss Across Generations](../vision-and-images/goals/generation-artifacts/failures/consistency-failure.md) | Covers part of goal C |
+| [Model Collapse in Generation](../vision-and-images/goals/generation-artifacts/failures/model-collapse.md) | Model training, not a product failure; link only |
+| [Quality Drift in Generated Images](../vision-and-images/goals/generation-artifacts/failures/quality-drift.md) | Covers part of goal B |
+| [Safety Filter Bypass in Image Generation](../vision-and-images/goals/generation-artifacts/failures/safety-filter-bypass.md) | Covers part of goal E |
+| [Semantic Drift in Generated Images](../vision-and-images/goals/generation-artifacts/failures/semantic-shift.md) | Covers part of goal A |
+| [Token Limit Artifacts in Conditional Generation](../vision-and-images/goals/generation-artifacts/failures/token-limit-artifacts.md) | Covers part of goal A |
+
+Other existing goals reused: [Multi-Image Understanding](../vision-and-images/goals/multi-image-understanding/README.md) for identity across frames when a model reads video, and [Adversarial Robustness](../vision-and-images/goals/adversarial-robustness/README.md) for the prompt tricks behind filter bypass.
+
+Rules: never move, rename or delete these pages (their URLs are live). New pages link to them instead of repeating them. Where a new page and an old one cover the same failure, the overlap goes to a person as a merge proposal, marked Needs review. The [vision-and-images README](../vision-and-images/README.md) states figures with no source (for example a 20 to 40 point calibration gap); that is logged for a person to check, not copied here.
+
+## 3. Goals and first patterns
+Nine groups. Pattern names are working titles; each becomes a page only after a source is found (section 5). A pattern with no public source is dropped, not written from general knowledge.
+
+Placement in vision-and-images (owner, 2026-10-29): every group is its own new goal folder under `vision-and-images/goals/`, named for search. The existing `generation-artifacts` goal keeps its pages and name; the new goals link to it. Each goal README uses the title below as its H1.
+
+| Goal | Title | Folder |
+|---|---|---|
+| E | AI Deepfake Images and Videos of Real People | `ai-deepfakes-of-real-people` |
+| G | AI Image Copyright and Trademark Risks | `ai-image-copyright-and-trademark` |
+| H | Business Risks of AI Image and Video Generation | `ai-image-generation-business-risks` |
+| I | AI Images That Break Brand Guidelines | `ai-image-brand-guidelines` |
+| D | Bias and Stereotypes in AI Image Generators | `ai-image-bias-and-stereotypes` |
+| F | AI Image Watermarks, Labels and Content Credentials | `ai-image-watermarks-and-content-credentials` |
+| A | AI Images That Ignore the Prompt | `ai-image-prompt-adherence` |
+| C | AI Video and Character Consistency Failures | `ai-video-consistency` |
+| B | AI Image Artifacts: Hands, Anatomy and Physics | `ai-image-artifacts-hands-and-physics` |
+
+Folder names were checked against existing goal folders on 2026-10-29 (`brand-consistency` is taken, so goal I does not use it). Recheck before creating each folder.
+
+**A. The output does not match the request (prompt adherence)**
+- Wrong count of objects
+- Wrong placement (left and right, on and under, in front and behind)
+- Attributes attached to the wrong object (the red hat ends up on the other person)
+- Text inside the image misspelled or garbled
+- Negative requests ignored ("no people" still shows people)
+- Edit changes parts of the image the user did not ask to change
+
+**B. The output is broken (visual quality)**
+- Wrong anatomy: hands, fingers, teeth, limbs
+- Impossible objects and physics: melted shapes, broken reflections and shadows
+- Video motion that breaks physics: objects pass through each other, liquids and gravity behave wrongly
+
+**C. The output does not stay the same across frames or images (consistency)**
+- A person's face, clothes or body change between frames or shots
+- Objects appear, vanish or change between frames
+- Flicker and texture crawl in video
+- A character or product is not the same across a set of images
+
+**D. People are shown wrongly (representation and accuracy)**
+- Stereotyped defaults when the request names no detail (who appears as a doctor, a nurse, a criminal)
+- Historically wrong images from a diversity rule applied without context
+- Real places, flags, logos and documents shown wrongly but presented as accurate
+
+**E. Fake images of real people (likeness, personality abuse, harm)**
+- Sexual or degrading images of a real person made without consent
+- Realistic images of real people in false events (public figures, elections, news)
+- Fake endorsements: a celebrity or public figure shown promoting a product or scam they never backed
+- Executive impersonation: a fake image or video of a company leader used to order payments or move markets
+- Harassment and bullying with fake images of private people (classmates, coworkers, ex-partners)
+- Images of a named person made from a few uploaded photos, with no check that the uploader has consent
+- Deceased people recreated without the estate's consent
+- Safety filters bypassed by rewording (links to the existing page)
+- Harmless requests refused (over-refusal), including refusals that differ between equivalent requests
+
+**G. Copyright, trademark and ownership**
+- Copyrighted characters and scenes reproduced on request, or without being asked
+- Near-copies of training images, including stock-photo watermarks showing in outputs
+- An artist's distinctive style copied by name
+- Trademarks and logos placed in outputs (brand confusion, false affiliation)
+- Training on images without permission or against a site's terms (lawsuit side, linked, not argued)
+- Unclear ownership: a company assumes it owns or can register an output it may not
+- Vendor terms or indemnity that do not cover how the business uses the output
+
+**H. Business use (corporate failures)**
+- Product shown with features, sizes or results it does not have (false advertising risk)
+- AI images in ads, listings or reports published without review or disclosure
+- Public backlash when a brand replaces artists, models or photographers with AI images
+- Confidential material (unreleased products, customer photos, internal documents) uploaded to an outside image tool
+- Cultural, religious or local errors in images made for other markets
+- Employees' or models' likeness reused beyond what they agreed to
+- Fake receipts, IDs, damage photos or documents made with generators to defraud a business (insurance, refunds, expenses, account checks)
+- Regulated claims in images: health, finance or food results, before-and-after shots
+- Required disclaimers missing or unreadable in the image
+- Age-restricted products (alcohol, gambling) shown with people who look underage
+- AI disclosure rules of each market not met
+- Ad platforms rejecting AI-made creative or requiring a label
+- No model release or likeness rights for generated people who resemble real people
+- Text baked into images with no alt text (accessibility)
+- An approved image cannot be made again: same prompt, different output
+- The vendor updates its model and the approved style changes
+- No record of the prompt, model, settings and approver behind a published asset
+- No approval step: anyone who generates an image can publish it
+- Uploaded brand assets used to train the vendor's model
+- Employees using image tools the company has not approved
+- Vendor terms, prices or model retirement changing under a live campaign
+- Regenerations and video runs costing far more than budgeted
+- Text in images not translated, in the wrong script, or laid out wrong for right-to-left languages
+- A visible AI mistake in an ad spreading widely (extra fingers on a model)
+
+**I. Brand guidelines**
+- Brand rules broken: logo distorted, recolored or crowded, wrong fonts, colors, tone or photo style
+- Competitor logos, products or look appearing in the output
+- Brand shown next to unsafe content (sexual, violent, political)
+- Garbled text on packaging, labels or signs in product shots
+- Brand reference images or style guides ignored by the generator
+- A campaign where the product looks different from image to image (links to goal C)
+
+**F. The output cannot be traced (provenance and labeling)**
+- No AI label, watermark or Content Credentials on the output
+- Credentials or metadata stripped when the file is edited, resized or uploaded
+- A label that misleads: real photos flagged as AI, or AI images that pass as real
+
+Links out: E links to `cross-cutting/security` and `cross-cutting/governance`; F and G link to `cross-cutting/governance`; H and I link to `by-use-case/content-marketing` and, for document fraud, to `by-use-case/insurance` and `by-use-case/financial-services`; voice cloning stays in `speech-and-audio` and is linked from E and F.
+
+Statements about law in goals E, F, G and H (consent, likeness rights, copyright, trademark, advertising, election rules, labeling duties) stay **Needs review** by a qualified person.
+
+### Phase 1 sources (run 216, 2026-10-28 UTC)
+Kept patterns for goals E, G, H, I, D and F, each with the sources that were opened and read; every quote the searchers took from them was matched by script against the saved text. Nothing here is dropped; narrowed or weak keeps say so after the sources. Goals A, C and B are not yet sourced. A page written in phase 2 uses only these sources, or new ones opened when it is written, and keeps every unverified claim out. Where a phase 2 page overlaps an existing page (E8 with safety-filter-bypass; I6, H16 and H17 with consistency-failure; H17 and H22 with quality-drift), it goes to a person as a merge proposal, marked Needs review.
+
+Unsourced figures logged for a person: the "5-15%" and "3-10%" figures in [safety-filter-bypass](../vision-and-images/goals/generation-artifacts/failures/safety-filter-bypass.md) and the figures in the [vision-and-images README](../vision-and-images/README.md) have no source; they are not used here.
+
+**Goal E**
+- E1 Sexual or degrading images of a real person made without consent. Sources: [404 Media](https://www.404media.co/microsoft-closes-loophole-that-created-ai-porn-of-taylor-swift/); [Associated Press](https://www.kold.com/2026/01/15/grok-blocked-undressing-images-places-where-its-illegal-x-says); [Tom's Guide](https://www.tomsguide.com/ai/elon-musks-grok-is-generating-sexualized-images-of-real-women-on-x-and-critics-say-its-harassment-by-ai); [Common Dreams](https://www.commondreams.org/news/taylor-swift-nude-deepfakes). Laws and investigations named in the AP report: Needs review.
+- E2 Realistic images of real people in false events (public figures, elections, news). Sources: [CCDH, Fake Image Factories](https://counterhate.com/research/fake-image-factories/); [CCDH press release](https://counterhate.com/blog/midjourney-ai-produces-misleading-images-of-biden-and-trump-in-50-of-test-cases-despite-promising-to-ban-fake-photos-of-presidential-candidates). CCDH is an advocacy group; its figures are its own tests.
+- E3 Fake endorsements: a celebrity or public figure shown promoting a product or scam they never backed. Sources: [CBS News MoneyWatch](https://cbsnews.com/news/taylor-swift-le-creuset-ai-generated-ads); [Engadget](https://www.engadget.com/tom-hanks-calls-out-dental-ad-for-using-ai-likeness-of-him-161548459.html). Narrowed: misuse case; neither source names the generator used.
+- E4 Executive impersonation: a fake image or video of a company leader used to order payments or move markets. Sources: [CNN Business](https://edition.cnn.com/2024/05/16/tech/arup-deepfake-scam-loss-hong-kong-intl-hnk); [The Guardian](https://www.theguardian.com/technology/article/2024/may/10/ceo-wpp-deepfake-scam). Narrowed: payment fraud only ("move markets" has no opened source); no generator named.
+- E5 Harassment and bullying with fake images of private people (classmates, coworkers, ex-partners). Sources: [CBS New York](https://www.cbsnews.com/news/westfield-high-school-ai-pornographic-images-students/); [CBS Los Angeles](https://www.cbsnews.com/losangeles/news/5-beverly-hills-middle-school-students-expelled-following-ai-generated-nude-photo-scandal/). Narrowed: classmates only (coworkers and ex-partners have no opened source); no app named.
+- E6 Images of a named person made from a few uploaded photos, with no check that the uploader has consent. Sources: [Digital Camera World](https://digitalcameraworld.com/tech/artificial-intelligence/googles-ai-refuses-to-generate-deepfakes-unless-you-give-it-a-photo-i-found-a-dangerous-loophole-inside-geminis-new-photo-editing-skills); [Tom's Guide](https://www.tomsguide.com/ai/elon-musks-grok-is-generating-sexualized-images-of-real-women-on-x-and-critics-say-its-harassment-by-ai); [NBC News](https://www.nbcnews.com/tech/tech-news/openai-sora-2-guardrails-sag-aftra-bryan-cranston-rcna238715).
+- E7 Deceased people recreated without the estate's consent. Sources: [Fortune](https://www.fortune.com/2025/10/08/robin-williams-daughter-zelda-stop-sending-me-ai-videos-of-dad); [Yahoo News](https://www.yahoo.com/news/articles/openai-blocks-sora-2-users-164854065.html); [NBC News](https://www.nbcnews.com/tech/tech-news/openai-sora-2-guardrails-sag-aftra-bryan-cranston-rcna238715).
+- E8 Safety filters bypassed by rewording (links to the existing safety-filter-bypass page). Sources: [CCDH](https://counterhate.com/blog/midjourney-ai-produces-misleading-images-of-biden-and-trump-in-50-of-test-cases-despite-promising-to-ban-fake-photos-of-presidential-candidates); [Digital Camera World](https://digitalcameraworld.com/tech/artificial-intelligence/googles-ai-refuses-to-generate-deepfakes-unless-you-give-it-a-photo-i-found-a-dangerous-loophole-inside-geminis-new-photo-editing-skills); [Reality Defender](https://www.realitydefender.com/insights/sora-2-identity-bypass); [TIME](https://time.com/7327031/openai-sora-deepfakes-privacy/). Reality Defender is a detection vendor; its figures are not used. Overlaps the existing safety-filter-bypass page (merge proposal).
+- E9 Harmless requests refused (over-refusal), including refusals that differ between equivalent requests. Sources: [Google](https://blog.google/products/gemini/gemini-image-generation-issue/); [arXiv 2505.21347](https://arxiv.org/abs/2505.21347); [UC Berkeley IEOR news](https://ieor.berkeley.edu/when-ai-image-generators-refuse). The "differ between equivalent requests" half is shown only indirectly.
+
+**Goal G**
+- G1 Copyrighted characters and scenes reproduced on request, or without being asked. Sources: [Decrypt](https://decrypt.co/324768/disney-universal-dreamworks-sue-midjourney); [Law Street Media](https://lawstreetmedia.com/insights/disney-and-universal-sue-midjourney-for-copyright-infringement/); [He et al., arXiv 2406.14526](https://arxiv.org/html/2406.14526v2).
+- G2 Near-copies of training images, including stock-photo watermarks in outputs. Sources: [Carlini et al., arXiv 2301.13188](https://arxiv.org/abs/2301.13188); [AI Business](https://aibusiness.com/nlp/getty-sues-stable-diffusion-parent-in-the-u-s-); [BakerHostetler case tracker](https://www.bakerlaw.com/getty-images-v-stability-ai/); [Canadian Lawyer](https://www.canadianlawyermag.com/news/international/stability-ai-getty-images-split-uk-high-court-win-in-copyright-and-trademark-challenge/393317).
+- G3 An artist's distinctive style copied by name. Sources: [MIT Technology Review](https://www.technologyreview.com/2022/09/16/1059598/this-artist-is-dominating-ai-generated-art-and-hes-not-happy-about-it/); [Loeb & Loeb](https://www.loeb.com/en/insights/publications/2024/08/andersen-v-stability); [OpenAI](https://openai.com/index/dall-e-3/).
+- G4 Trademarks and logos placed in outputs (brand confusion, false affiliation). Sources: [404 Media](https://404media.co/bing-ai-generated-disney-logos); [Cartoon Brew](https://www.cartoonbrew.com/law/report-disney-asks-microsoft-to-prevent-ai-s-from-infringing-its-trademarks-235039.html); [TheWrap](https://www.thewrap.com/microsoft-cracks-down-disney-logo-ai-dogs-social-media/).
+- G5 Training on images without permission or against a site's terms (lawsuit side, linked, not argued). Sources: [AI Business](https://aibusiness.com/nlp/getty-sues-stable-diffusion-parent-in-the-u-s-); [VICE](https://vice.com/en/article/artists-are-suing-over-stable-diffusion-stealing-their-work-for-ai-art); [Loeb & Loeb](https://www.loeb.com/en/insights/publications/2024/08/andersen-v-stability); [Law Street Media](https://lawstreetmedia.com/insights/disney-and-universal-sue-midjourney-for-copyright-infringement/). Lawsuit side linked, not argued: Needs review (law).
+- G6 Unclear ownership: a company assumes it owns or can register an output it may not. Sources: [US Copyright Office](https://www.copyright.gov/docs/zarya-of-the-dawn.pdf); [IPWatchdog](https://ipwatchdog.com/2025/01/29/part-two-copyright-office-ai-report-says-creative-prompting-doesnt-constitute-authorship/); [IPWatchdog](https://ipwatchdog.com/2025/03/24/d-c-circuit-upholds-human-authorship-requirement-thaler-v-perlmutter/); [OpenAI DALL-E 3 page](https://openai.com/index/dall-e-3/). Needs review (law).
+- G7 Vendor terms or indemnity that do not cover how the business uses the output. Sources: [Microsoft On the Issues blog](https://blogs.microsoft.com/on-the-issues/2023/09/07/copilot-copyright-commitment-ai-legal-concerns/); [Microsoft Learn](https://learn.microsoft.com/en-us/azure/foundry/responsible-ai/openai/customer-copyright-commitment); [Midjourney](https://docs.midjourney.com/docs/terms-of-service); [PetaPixel](https://petapixel.com/2023/11/07/openai-will-defend-customers-from-copyright-claims/). Narrowed: vendor terms only; no incident found of a business denied coverage. Needs review (law).
+
+**Goal H**
+- H1 Product shown with features, sizes or results it does not have (false advertising). Sources: [ABC7](https://abc7.com/post/willy-wonka-immersive-experience-glasgow-event-movie/14482975/); [PetaPixel](https://petapixel.com/2024/02/28/families-scammed-by-ai-images-that-promised-willy-wonka-style-event); [NBC News](https://www.nbcnews.com/tech/tech-news/etsy-crochet-buyers-suspect-ai-made-images-used-sell-patterns-rcna145878); [Osborne Clarke](https://marketinglaw.osborneclarke.com/advertising-regulation/asa-clamps-down-on-wiggydogs-exaggerated-robot-puppy-claims/). Needs review (law).
+- H2 AI images in ads, listings or reports published without review or disclosure. Sources: [Carscoops](https://www.carscoops.com/2026/06/rei-meta-ai-ad/); [Shopifreaks](https://www.shopifreaks.com/rei-gets-roasted-over-an-instagram-ad-showing-a-bike-with-two-sets-of-handlebars-blaming-a-meta-ai-tool-that-auto-enrolled-it-and-altered-a-vendor-image/); [Commander's Herald](https://commandersherald.com/wizards-of-the-coast-issues-apology-for-ai-art-ads/); [80.lv](https://80.lv/articles/wacom-explained-its-ai-generated-images-after-backlash).
+- H3 Public backlash when a brand replaces artists, models or photographers with AI. Sources: [FOX5 Las Vegas](https://www.fox5vegas.com/2024/11/22/coca-cola-faces-backlash-ai-holiday-ads); [NBC News](https://www.nbcnews.com/business/business-news/ai-models-levis-controversy-backlash-rcna77280); [NBC News](https://www.nbcnews.com/tech/internet/toys-r-us-ai-video-ad-controversy-explained-commercial-rcna159030); [NBC News](https://www.nbcnews.com/world/europe/mcdonalds-ai-generated-christmas-advert-social-media-backlash-rcna248590).
+- H4 Visible AI mistake in an ad spreading widely (extra fingers, extra towers). Sources: [Malay Mail](https://www.malaymail.com/news/malaysia/2024/08/09/a-case-of-one-too-many-ad-agency-says-sorry-over-ai-gaff-showing-petronas-twin-towers-with-extra-tower-in-merdeka-billboard/146474); [B&T](https://www.bandt.com.au/are-you-pranking-us-jeanswest-ridiculed-online-over-ai-monstrosity/); [TechSpot](https://techspot.com/news/112895-rei-pulls-ai-generated-bike-ad-after-meta.html).
+- H5 Fake receipts, IDs, damage photos or documents used to defraud a business. Sources: [Accounting Today](https://www.accountingtoday.com/news/use-of-ai-receipts-in-expense-fraud-soars); [PYMNTS](https://www.pymnts.com/cybersecurity/2025/phony-ai-created-receipts-become-real-problem-for-businesses/); [404 Media](https://www.404media.co/inside-the-underground-site-where-ai-neural-networks-churns-out-fake-ids-onlyfake/); [Insurance Business](https://www.insurancebusinessmag.com/uk/news/auto-motor/can-you-spot-the-fake-aigenerated-claims-images-are-already-fooling-insurers-564978.aspx).
+- H6 Confidential material uploaded to an outside image tool. Sources: [TechRadar](https://www.techradar.com/news/samsung-bans-chatgpt-use-after-employee-leak); [Midjourney](https://docs.midjourney.com/hc/en-us/articles/32083055291277-Terms-of-Service); [Midjourney docs](https://docs.midjourney.com/docs/stealth). Weak: the only incident (Samsung) is text uploaded to ChatGPT, not images.
+- H7 Ad platforms rejecting AI creative or requiring a label. Sources: [Google Ads Help](https://support.google.com/adspolicy/answer/15142358?hl=en); [Meta Newsroom](https://about.fb.com/news/2023/11/how-meta-is-planning-for-elections-in-2024/); [Marketing Brew](https://www.marketingbrew.com/stories/2023/11/09/meta-restricts-some-ai-use-in-political-ads-ahead-of-2024-election). Needs review (law).
+- H8 AI disclosure rules of each market not met. Sources: [WTOP](https://wtop.com/national/2026/06/ads-in-new-york-must-now-label-ai-generated-synthetic-performers/); [EU AI Act](https://artificialintelligenceact.eu/article/50/); [Loeb & Loeb](https://www.loeb.com/en/insights/publications/2025/03/chinas-ai-labeling-measures-and-mandatory-national-standards-take-effect-september-1). Needs review (law).
+- H9 Regulated claims in images (health, finance, food, before-and-after). Sources: [ASA](https://www.asa.org.uk/news/ai-advertising-and-the-policy-landscape-cap-proactive-monitoring.html); [ASA/CAP](https://www.asa.org.uk/news/generative-ai-advertising-decoding-ai-regulation.html); [ABC27](https://www.abc27.com/pennsylvania/ag-sunday-leads-coalition-on-misleading-ai-weight-loss-advertisements/amp/). Needs review (law).
+- H10 Cultural, religious or local errors for other markets. Sources: [Marketing-Interactive](https://www.marketing-interactive.com/mamee-recalls-bags-after-ai-artwork-of-lord-murugan-sparks-backlash); [The Standard](https://www.thestandard.com.hk/world/article/338091/Singapore-removes-AI-generated-National-Day-banners-after-flag-error); [Rest of World](https://restofworld.org/2023/ai-image-stereotypes/); [Malay Mail](https://www.malaymail.com/news/malaysia/2024/08/09/a-case-of-one-too-many-ad-agency-says-sorry-over-ai-gaff-showing-petronas-twin-towers-with-extra-tower-in-merdeka-billboard/146474). Weak: all incidents are in Asia.
+- H11 Employees' or models' likeness reused beyond consent. Sources: [PetaPixel](https://petapixel.com/2026/06/01/model-sues-fashion-brand-after-it-ai-generated-pictures-of-her/); [Loeb & Loeb](https://www.loeb.com/fr/insights/passle/2026/07/when-does-an-ai-alteration-become-a-new-depiction-rainbow-usa-lawsuit-highlights-risks-for-talent-li); [TechSpot](https://techspot.com/news/112895-rei-pulls-ai-generated-bike-ad-after-meta.html); [ABC30](https://abc30.com/amp/post/fashion-giant-hm-plans-use-ai-clones-human-models-not-everyone-is-happy/16115370/). Needs review (law).
+- H12 No model release or likeness rights for generated people who resemble real people. Sources: [Variety Australia](https://au.variety.com/2023/digital/news/scarlett-johansson-legal-action-ai-app-likeness-11749/); [AV Club](https://avclub.com/scarlett-johansson-sues-ai-app-over-use-of-likeness-1850983316); [The Fader](https://thefader.com/2023/10/02/tom-hanks-artificial-intelligence-dental-plan-ad); [ASA](https://marketinglaw.osborneclarke.com/advertising-regulation/asa-clamps-down-on-wiggydogs-exaggerated-robot-puppy-claims/). Weak: sources show deliberate impersonation, not an accidental resemblance. Needs review (law).
+- H13 Age-restricted products shown with people who look underage. Sources: [ASA/CAP advice](https://www.asa.org.uk/advice-online/alcohol-featuring-under-25s.html); [Tech Transparency Project](https://techtransparencyproject.org/articles/meta-approves-harmful-teen-ads-with-images-from-its-own-ai-tool). Needs review (law).
+- H14 Required disclaimers missing or unreadable in the image. Sources: [ASA ruling](https://www.asa.org.uk/rulings/insulet-international-limited-a24-1273006-insulet-international-limited.html); [FTC staff](https://www.ftc.gov/sites/default/files/attachments/press-releases/ftc-staff-revises-online-advertising-disclosure-guidelines/130312dotcomdisclosures.pdf); [UX Collective](https://uxdesign.cc/lost-for-words-why-text-in-ai-images-still-goes-wrong-b5232c39bd11). Weak: general disclosure rules, not specific to AI images. Needs review (law).
+- H15 Text baked into images with no alt text. Sources: [W3C](https://www.w3.org/WAI/WCAG22/Understanding/images-of-text); [WebAIM](https://webaim.org/projects/million/2025); [Chain Store Age](https://chainstoreage.com/retailers-face-risks-if-websites-arent-accessible). Weak: general accessibility rules, not specific to AI images. Needs review (law).
+- H16 Approved image cannot be made again (same prompt, different output). Sources: [Midjourney docs](https://docs.midjourney.com/docs/seeds); [Hugging Face Diffusers docs](https://huggingface.co/docs/diffusers/en/using-diffusers/reusing_seeds); [Microsoft Q&A](https://learn.microsoft.com/en-us/answers/questions/1696166/seeds-in-dalle3).
+- H17 Vendor model update changes the approved style. Sources: [Midjourney docs](https://docs.midjourney.com/docs/models); [OpenAI API](https://platform.openai.com/docs/deprecations). Weak: vendor docs only, no incident.
+- H18 No record of prompt, model, settings or approver. Sources: [Adobe Community](https://community.adobe.com/announcements-623/now-available-genai-activity-visibility-in-content-logs-1639057); [Content Authenticity Initiative blog](https://contentauthenticity.org/blog/three-pillars-of-provenance). Weak: vendor docs or survey only, no incident.
+- H19 No approval step. Sources: [PEDESTRIAN.TV](https://www.pedestrian.tv/news/stoneground-bakery-sydney-cafe-jeffrey-eptein-post/); [Google Ads Help](https://support.google.com/google-ads/answer/14150986?hl=en); [Shopifreaks](https://www.shopifreaks.com/meta-advantage-is-forcing-unwanted-ai-creative-on-brands/); [PetaPixel](https://petapixel.com/2026/05/11/bagel-shop-removes-ai-generated-ad-images-after-customer-backlash/).
+- H20 Uploaded brand assets used to train the vendor's model. Sources: [Malwarebytes](https://www.malwarebytes.com/blog/news/2024/06/no-ai-training-in-newly-distrusted-terms-of-service-adobe-says); [Scripps News](https://www.scrippsnews.com/science-and-tech/artificial-intelligence/rogue-ai-agents-leaked-chatgpt-users-images-heres-how-to-keep-your-chats-out-of-ai-training); [Midjourney Terms of Service](https://docs.midjourney.com/hc/en-us/articles/32083055291277-Terms-of-Service). Needs review (law).
+- H21 Employees using unapproved image tools. Sources: [WalkMe press release](https://www.walkme.com/news-releases/employees-left-behind-in-workplace-ai-boom-new-walkme-survey-finds/); [TechRadar](https://www.techradar.com/news/samsung-bans-chatgpt-use-after-employee-leak). Weak: vendor survey only, no incident.
+- H22 Vendor terms, prices or model retirement changing under a live campaign. Sources: [OpenAI API](https://platform.openai.com/docs/deprecations); [Engadget](https://engadget.com/ai/openai-is-shutting-down-its-sora-video-generation-app-211023358.html); [9to5Google](https://9to5google.com/2026/03/24/openai-shutting-down-sora-video-generation-app-but-without-explaining-why/); [OpenAI Developer Community](https://community.openai.com/t/deprecation-reminder-dall-e-will-be-shut-down-on-may-12-2026/1378754). Model retirements sourced; price changes unverified. Cite only DALL-E 2 and DALL-E 3 from the OpenAI deprecations page.
+- H23 Regenerations or video runs costing more than budgeted. Sources: [The Decoder](https://the-decoder.com/google-veo-3-adds-1080p-916-video-and-drops-prices-by-half/); [TheWrap](https://www.thewrap.com/coca-cola-ai-christmas-ad-2025/); [Higgsfield blog](https://higgsfield.ai/blog/why-ai-video-credits-run-out); [HackerNoon](https://hackernoon.com/the-same-10-seconds-of-ai-video-can-cost-$075-or-$4-track-which-model-is-burning-your-budget). Weak: per-second pricing sourced; no source shows a business over budget.
+- H24 Text in images not translated, wrong script, or broken right-to-left layout. Sources: [arXiv](https://arxiv.org/abs/2406.10208v1); [OpenAI Developer Community](https://community.openai.com/t/issue-with-arabic-text-support-in-dall-e/1139807); [arXiv](https://arxiv.org/abs/2212.10562); [Fortune](https://fortune.com/2025/05/14/ai-coca-cola-ad-campaign-invented-fake-book). Weak: papers and a user report only; no ad incident.
+
+**Goal I**
+- I1 Brand rules broken: logo distorted, recolored or crowded, wrong fonts, colors, tone or photo style. Sources: [Videomaker](https://www.videomaker.com/news/dji-pulls-ai-generated-tiktok-ad-after-angry-response-from-creators/); [The Shortcut](https://www.theshortcut.com/p/coca-colas-latest-ai-advert-is-as-lazy-as-it-gets); [Google Cloud](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/image/img-gen-prompt-guide); [Rotary International District 5340 website](https://rotary5340.org/Stories/getting-the-rotary-wheel-right-a-lesson-in-ai-and-brand-accuracy). "Crowded" logos and photo-style drift have no opened source.
+- I2 Competitor logos, products or look appearing in the output. Sources: [SiliconANGLE](https://siliconangle.com/2023/02/06/getty-images-sues-stability-ai-copyright-trademark-infringement/); [Loeb & Loeb LLP](https://www.loeb.com/en/insights/publications/2026/04/getty-images-us-inc-v-stability-ai-ltd); [TheWrap](https://www.thewrap.com/microsoft-cracks-down-disney-logo-ai-dogs-social-media/); [TechSpot](https://www.techspot.com/news/100887-fake-disney-posters-prompt-microsoft-reprogram-bing-image.html). Retitled: "Another company's logo, watermark or character appears in the output" (no source shows a competitor's mark in a specific brand's ad).
+- I3 Brand shown next to unsafe content (sexual, violent, political). Sources: [The Verge](https://www.theverge.com/2024/8/14/24220173/xai-grok-image-generator-misinformation-offensive-imges); [TechSpot](https://www.techspot.com/news/100887-fake-disney-posters-prompt-microsoft-reprogram-bing-image.html); [404 Media](https://www.404media.co/bing-is-generating-images-of-spongebob-doing-9-11/); [Axios](https://www.axios.com/2024/08/15/elon-musk-xai-grok-bot-ai-images). Brand-safety and dilution claims: Needs review.
+- I4 Garbled text on packaging, labels or signs in product shots. Sources: [OpenAI API docs](https://developers.openai.com/docs/guides/image-generation); [Google Cloud](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/image/img-gen-prompt-guide); [TechSpot](https://techspot.com/news/113470-hallpass-embarrassing-ai-generated-candy-typos-actually-intentional.html); [Adobe Community](https://community.adobe.com/questions-404/firefly-returns-a-slop-image-text-is-garbled-was-simplest-text-in-the-world-gives-an-awkward-unusable-image-poor-ratio-perspective-failure-to-feature-the-subject-1629777).
+- I5 Brand reference images or style guides ignored by the generator. Sources: [TechSpot](https://www.techspot.com/news/112895-rei-pulls-ai-generated-bike-ad-after-meta.html); [MediaPost](https://www.mediapost.com/publications/article/416505/metas-ai-ad-tools-are-a-nightmare-some-brands-al.html); [OpenAI API docs](https://developers.openai.com/docs/guides/image-generation); [Midjourney docs](https://docs.midjourney.com/docs/style-reference). Narrowed: supplied brand or product images altered or not followed; no source shows a written style guide being ignored.
+- I6 A campaign where the product looks different from image to image (links to goal C). Sources: [Campaign US](https://campaignlive.com/article/coca-cola-reignites-ai-ad-debate-new-holiday-campaign/1938664); [TechRadar](https://www.techradar.com/ai-platforms-assistants/coca-cola-faces-backlash-again-for-missing-the-spirit-of-the-holidays-with-another-ai-slop-ad); [Decrypt](https://decrypt.co/237017/ai-film-toys-r-us-sora-controversy); [OpenAI API docs](https://developers.openai.com/docs/guides/image-generation). Overlaps the existing consistency-failure page and goal C (merge proposal).
+
+**Goal D**
+- D1 Stereotyped defaults when the request names no detail (who appears as a doctor, a nurse, a criminal). Sources: [Bianchi et al., FAccT '23](https://arxiv.org/abs/2211.03759); [Vandewiele et al., arXiv 2510.00045](https://arxiv.org/abs/2510.00045); [Luccioni et al., arXiv 2303.11408](https://arxiv.org/abs/2303.11408). The "criminal" example has no opened source (Bloomberg blocked); keep it out.
+- D2 Historically wrong images from a diversity rule applied without context. Sources: [Google](https://blog.google/products/gemini/gemini-image-generation-issue/); [TechCrunch](https://techcrunch.com/2024/02/22/google-gemini-image-pause-people/); [Axios](https://www.axios.com/2024/03/01/meta-ai-google-gemini-black-founding-fathers); [FOX 13](https://www.fox13news.com/news/google-suspends-gemini-ai-inaccurate-images).
+- D3 Real places, flags, logos and documents shown wrongly but presented as accurate. Sources: [The Washington Post, via AI Incident Database](https://incidentdatabase.ai/reports/6780); [Africanews](https://www.africanews.com/2026/07/30/ai-generated-africa-map-blunder-overshadows-us-presentation-at-global-aids-conference/); [Mediaite](https://mediaite.com/media/news/trump-state-department-apologizes-for-presenting-totally-botched-ai-generated-map-that-mislabeled-every-african-country-at-aids-conference); [OECD.AI AI Incidents Monitor](https://oecd.ai/en/incidents/2026-01-07-1ff3). Narrowed: maps of real places only; flags, logos and documents not yet sourced.
+
+**Goal F**
+- F1 No AI label, watermark or Content Credentials on the output. Sources: [OpenAI Help Center](https://help.openai.com/en/articles/8912793-c2pa-in-dall-e-3); [Hu et al., arXiv 2405.07145](https://arxiv.org/pdf/2405.07145); [NIST](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-4.pdf); [Indicator](https://indicator.media/p/tech-platforms-fail-to-label-ai-content-c2pa-metadata).
+- F2 Credentials or metadata stripped when the file is edited, resized or uploaded. Sources: [OpenAI Help Center](https://help.openai.com/en/articles/8912793-c2pa-in-dall-e-3); [C2PA](https://spec.c2pa.org/specifications/specifications/2.3/explainer/Explainer.html); [NIST AI 100-4](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-4.pdf); [Fortune](https://fortune.com/2024/11/26/linkedin-content-credentials-labeling-challenges-c2pa/).
+- F3 A label that misleads: real photos flagged as AI, or AI images that pass as real. Sources: [TechCrunch](https://techcrunch.com/2024/06/21/meta-tagging-real-photos-made-with-ai/); [TechCrunch](https://techcrunch.com/2024/07/01/meta-changes-its-label-from-made-with-ai-to-ai-info-to-indicate-use-of-ai-in-photos/); [NewsGuard](https://www.newsguardtech.com/?p=33448); [Microsoft, arXiv 2602.18681](https://arxiv.org/pdf/2602.18681).
+
+## 4. Page format
+New pages use the chat library's pattern template ([hmi-pattern.md](../human-machine-interface/_templates/hmi-pattern.md)) adapted for media: a symptom a user can see, the cause, the fix inside the product (prompt rewriting, guidance settings, reference images, filters, labeling), and a short test with a pass line and a fail line. Tests are prompts or edit requests a team can run on their own generator; results stay "Not yet run" until a run is recorded.
+
+Folder layout is the one vision-and-images already uses, so the site importer picks pages up without a code change: `goals/<goal>/failures/<pattern>.md` and a `README.md` per goal. New goal READMEs for D, E and F are written with their first pages. The vision-and-images README gets the new goals and counts added at the end of phase 2.
+
+## 5. Sources and incidents
+- Every page needs at least one source opened and read at the time of writing: an incident report from a named outlet, a vendor's own documentation or policy, a court filing, or a paper. Search summaries alone are not enough.
+- No statistic, quote or study unless it appears in an opened source, with the source named next to it.
+- Incident candidates to research first. These are leads only, named here so they are not forgotten; none has been opened for this plan and each must be checked before use:
+  - Google pausing Gemini's images of people in February 2024 (goal D)
+  - Sexual deepfake images of Taylor Swift spreading in January 2024 (goal E)
+  - Grok image generation and editing controversies (goal E)
+  - Lawsuits by studios, artists and Getty Images against image generator makers (goal G)
+  - A Hong Kong company employee paying out after a video call with deepfaked executives, reported in early 2024 (goals E and H)
+  - Deepfake celebrity ads, for example a fake Tom Hanks dental plan ad he warned about in 2023 (goal E)
+  - The Glasgow "Willy Wonka" event in 2024 whose AI-made ads did not match the real event (goal H)
+  - Backlash to AI-made brand holiday ads in 2024 (goal H)
+- Pages and incidents are marked Needs review until a person approves them.
+
+## 6. Phases
+| Phase | Work | Done when | Status |
+|---|---|---|---|
+| 1 | Search for sources for each pattern in section 3; drop patterns with none; list kept patterns with their sources in this plan | Every kept pattern has at least one opened source | In progress: E, G, H, I, D and F sourced (run 216, 52 kept, 0 dropped); A, C and B not started |
+| 2 | Write pages, highest-harm first (E, then G, H, I, D, F, A, C, B), into vision-and-images; a goal README for each new goal; update the vision-and-images README goal table and counts | Pages pass the five check scripts | Not started |
+| 3 | Incident pages for the candidates in section 5 that check out | Each incident links to its patterns | Not started |
+| 4 | Publish: the site importer picks up the new pages in the existing category; check the build and that no live URL is lost | New pages live; public URL list updated | Not started |
+| 5 | Layer 1 check page (section 7) | Page live and tested on files with and without Content Credentials | Not started |
+
+## 7. Last phase: Layer 1 check page
+A free page on the site where a reader drops an image or video and sees which signals of AI generation it carries. It runs in the reader's browser; the file is never uploaded. It shows signals, never a "fake" or "real" verdict.
+
+- **Content Credentials (C2PA):** read with the open-source `@contentauth/c2pa-web` library: who signed it, which tool made it, whether it says AI made it, and whether the signature is valid.
+- **File metadata:** camera make and model, editing software, the IPTC "digital source type" field, and prompts that some generators write into PNG files.
+- **Reverse image search:** links to Google Lens, TinEye and Bing Visual Search, with a note that using them sends the image to that service.
+- **Always shown:** missing signals prove nothing. Most real photos and most AI images carry neither credentials nor revealing metadata, and metadata is easy to strip or fake.
+
+Paid detection APIs (Layer 2) are not planned.
+
+## 8. Owner decisions
+1. Who writes the pages. **Answered (owner, 2026-10-29): the hourly run, as its Part M, doing as much per run as the rules allow** (all goals sourced in parallel in phase 1, up to 6 pages per run in phase 2, up to 2 incidents per run in phase 3). Part D publishes only media pages the run added or changed (deploy.md step 5b). Phase 5 is not in the hourly run; it waits for the owner. Status per phase is tracked in section 6.

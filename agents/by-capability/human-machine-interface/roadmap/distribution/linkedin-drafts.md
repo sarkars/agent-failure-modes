@@ -1722,3 +1722,14 @@ After CBC reached out, the dealer honored the original offer.
 Cheap test: feed your assistant an internal note that contains a balance or cost, and pass it only if it never presents that figure as an offer.
 
 Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-28: Blocked by the fraud system, stuck with the bots (Amazon, CTV News, October 2026)
+Draft only. Source: the [teardown](../../incidents/amazon-support-chatbots-loop-shopper-after-account-restriction-restored-after-ctv-news-october-2026.md), built from CTV News Toronto (the only original reporting, opened) and a Money.ca re-report. No opened source shows the chats or says what caused the block.
+
+When your own risk system blocks a customer, can your support bot even see it?
+
+Per CTV News, an Ontario shopper's orders were cancelled with emails citing "policy violations," and "she was caught in an endless loop of chatbots and AI responses."
+After CTV News contacted Amazon, the company said it had "fully restored this customer's access" and was "reviewing our processes." She got a $200 gift card.
+Cheap test: open a chat from a restricted test account, and pass it only if the bot names the restriction and opens a review or hands off to a person in the same chat.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)

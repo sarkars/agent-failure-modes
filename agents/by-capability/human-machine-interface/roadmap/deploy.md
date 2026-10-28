@@ -4,7 +4,7 @@
 
 ## Scope and limits
 - **Content repo (`sarkars/agent-failure-modes`):** merge the run's branch into `main` with a pull request. Never force-push `main`.
-- **Site repo (`sarkars/agent-kb-autopublish`):** only touch `website-astro/src/content/patterns/`, `goals/`, and `categories/`, and only for pages whose `source:` path contains `human-machine-interface`. Never change templates, config, redirects, other patterns, or the Hugo `website/` folder.
+- **Site repo (`sarkars/agent-kb-autopublish`):** only touch `website-astro/src/content/patterns/`, `goals/`, and `categories/`, and only for pages whose `source:` path contains `human-machine-interface`, plus the media pages in step 5b. Never change templates, config, redirects, other patterns, or the Hugo `website/` folder.
 - **Never delete or rename** any page already on the live site. If a build or check below fails, stop and do not push.
 
 ## Steps
@@ -13,6 +13,7 @@
 3. **Reset the branch.** `git fetch origin main` then `git checkout -B <branch> origin/main`, so the next run starts from the merged history.
 4. **Make a scratch copy of the site repo.** Copy `/home/user/agent-kb-autopublish` to a scratch folder next to a link named `agent-failure-modes` that points at the content repo checkout (the importers expect that sibling layout). Run `python3 -I scripts/import_patterns.py` and `python3 -I scripts/import_taxonomy_readmes.py` there. They write Hugo-format files into `website/content/`.
 5. **Select only the human-machine-interface pages.** From `website/content/*.md`, take files whose front matter has `source:` containing `human-machine-interface`. Copy them to `website-astro/src/content/patterns/`. For each goal they list (lowercased, spaces to hyphens), copy `website/content/goals/<goal>/_index.md` to `website-astro/src/content/goals/<goal>/_index.md`. Copy the `human-machine-interface` category term page the same way.
+5b. **Media pages (Part M, owner decision 2026-10-29).** Also take files whose `source:` contains `vision-and-images` and whose source file this run added or changed (`git diff --name-only` of the run's merge). Copy them, their goals' `_index.md` files, and the `vision-and-images` category page only if this run changed that README. Never copy an unchanged vision-and-images page.
 6. **Build.** In `website-astro`, run `npm install` then `npm run build`. The build must finish with no errors.
 7. **Check no URL is lost.** Fetch the live `sitemap-0.xml` from `https://agent-kb-autopublish.vercel.app/`. Every URL in it must exist in the new build's `dist/` as `<path>/index.html`. Any missing URL means stop. Also confirm a sample HMI page has exactly one `<h1>` and no visible `search phrases:` text.
 8. **Apply to the real site repo.** Copy the same files from the scratch copy into `/home/user/agent-kb-autopublish/website-astro/src/content/`, `git add website-astro/src/content`, commit with the attribution lines, and `git push origin HEAD:main`. Before pushing, run `git fetch origin main`; if `main` has moved, rebase or redo steps 4 to 8 on the new `main`.
