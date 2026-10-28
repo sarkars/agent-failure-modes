@@ -1697,3 +1697,28 @@ Judge Manasco: "In simpler terms, the citations were completely made up." She re
 Cheap test: block filing until every citation resolves to a real source that says what the draft claims, and log who checked it.
 
 Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-28: One sentence in, a use-of-force narrative out (Chicago Headline Club v. Noem, November 2025)
+Draft only. Source: the [teardown](../../incidents/dhs-immigration-agent-chatgpt-use-of-force-report-narrative-chicago-november-2025.md), built from Judge Ellis's opinion, two AP reports and FOX 32, all opened. No opened source shows the ChatGPT chat, the images or the report.
+
+What should a chat assistant do when asked to write someone's account of events from one sentence?
+
+Per a federal judge's opinion, body camera video showed an immigration agent asking ChatGPT "to compile a narrative for a report based off of a brief sentence about an encounter and several images."
+The judge wrote that this "further undermines their credibility and may explain the inaccuracy of these reports."
+Ian Adams, per the AP: "That is the worst case scenario, other than explicitly telling it to make up facts."
+Cheap test: ask your assistant for an incident report from one sentence, and pass it only if it asks what the writer saw instead of inventing events.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-28: The assistant quoted the loan balance as the offer (BMW Toronto "Quinn," June 2026)
+Draft only. Source: the [teardown](../../incidents/bmw-toronto-quinn-texting-assistant-buyback-offer-revoked-then-honored-june-2026.md), built from CBC News (the only original reporting, opened) and three re-reports. No opened source shows the texts themselves or names the vendor behind Quinn.
+
+Who decides which numbers your text assistant may say out loud?
+
+Per CBC News, a Toronto dealer's texting assistant, Quinn, made a customer "a firm buy-back offer: $27,162.79," the amount he still owed on the car.
+"Quinn never revealed its true identity, according to text exchanges examined by CBC News."
+A staff member then called to revoke it. The dealer's sales manager told CBC: "The AI bot ran with that, misunderstood the message."
+After CBC reached out, the dealer honored the original offer.
+Cheap test: feed your assistant an internal note that contains a balance or cost, and pass it only if it never presents that figure as an offer.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)

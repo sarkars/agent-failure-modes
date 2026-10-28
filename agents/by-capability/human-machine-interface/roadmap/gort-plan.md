@@ -9,7 +9,7 @@
 ## 1. The product in one sentence
 **"For the kind of agent you are building, here are the failures it is known to have, the best-practice fix for each, and the tests that prove the fix holds. Later, GORT finds the failures in your real runs, learns which fixes work, and learns your business."**
 
-**Name.** GORT stands for Guard, Observe, Repair, Test. The command is `gort`; the package name, if one is needed, is `gortguard` (plain `gort` is crowded on GitHub and taken on npm, checked 2026-10-22). The owner checks trademarks before a public launch.
+**Name.** GORT stands for Guard, Observe, Repair, Test. The command is `gort`; the package name, if one is needed, is `gortguard` (plain `gort` is crowded on GitHub and taken on npm, checked 2026-10-22). **Owner, 2026-10-29:** the public brand is **gortguard** (website, README title, package, launch posts), because "GORT" has live software trademarks in the EU and UK (section 9, decision 7). `gort` stays as the command name and GORT as the internal and plan name. The repo name stays sarkars/gort for now. A trademark attorney still reviews "gortguard" before a public launch.
 
 **Order of work.** Prevention first, using predefined best practice and failure fixes. Then failure analytics on real runs. Then learning from what was found. Then the customer's own business. Each stage is useful on its own: a team can stop after any stage and keep what it got.
 
@@ -404,9 +404,9 @@ The hourly run updates the row of the step it works on. Status is `Not started`,
 | 3a | Moved to the library (owner, 2026-10-28, decision 2): public failure lists are checked against the taxonomy in library work; gaps enter the taxonomy as Needs review pages, and code picks them up only from the taxonomy |
 | 4 | Done 2026-10-28: [PR 3](https://github.com/sarkars/gort/pull/3) squash-merged (99dc6f8); `pack-schema.json` plus two hand-written entries (talk-to-a-human-ignored-or-looped, confident-wrong-answer-with-no-way-to-check); Check passes (both load against the schema; 17 tests); CI passed on Python 3.10 and 3.12; no framework mapping (decision 2); no new dependency |
 | 5 | Done 2026-10-28: [PR 4](https://github.com/sarkars/gort/pull/4) squash-merged (023d9a0); `agent-schema.json`, `gortguard.agentformat.load_agent` and `examples/agents/refund-agent.yaml`; Check passes (example loads; 7 new tests, 24 total); CI passed on Python 3.10 and 3.12; no new dependency (agent.yaml read as JSON syntax, valid YAML 1.2; block YAML only if PyYAML is already installed) |
-| 6 | Not started |
+| 6 | Done 2026-10-28: [PR 5](https://github.com/sarkars/gort/pull/5) squash-merged (1d2af42); `record-schema.json` (Run, Step, Finding, eleven tag families, `unknown` when unfilled), `tags-schema.json`, `gortguard.records` and `docs/record-format.md` (mapping to OpenTelemetry GenAI and OpenInference, pinned to upstream commits); Check passes (synthetic chat run and synthetic tool run convert, every family present or `unknown`; 7 new tests, 31 total); CI passed on Python 3.10 and 3.12; no new dependency |
 | 7 | Not started |
-| 8 | Not started |
+| 8 | Done (owner, 2026-10-29, decision 3): DeepEval chosen as default runner and simulated-user tool; no comparison page |
 | 9 | Not started |
 | 10 | Not started |
 | 11 | Not started |
@@ -479,11 +479,19 @@ gort learn report/                 # turns confirmed findings into eval cases an
 ## 9. Decisions needed from the owner
 1. Repo for packs and tools: name, public or private, and licence. The coverage pages can live in this library. **Answered 2026-10-24:** [sarkars/gort](https://github.com/sarkars/gort), public, MIT. Package `gortguard`, command `gort`.
 2. Which frameworks are in the first coverage pages. Recommended: OWASP LLM 2025, OWASP Agentic 2026, NIST AI 600-1. **Answered 2026-10-28:** chatbot failures only, and only the failures documented in this library ([failure taxonomy v1](specs/failure-taxonomy-v1.md), the failure pages, incidents and tests). No outside frameworks for now, so step 3 is skipped and packs carry no `maps_to` to outside frameworks. **Owner, 2026-10-28:** public failure lists (for example the AI Incident Database, the MIT AI Risk Repository, AIAAIC) go into the failure taxonomy first, as new or extended library pages marked Needs review; only then do they become part of the code. GORT code reads only the taxonomy, never a public list directly.
-3. Approve a short comparison of eval runners, simulated-user tools and rule engines before any is picked (section 5, Formats).
+3. Approve a short comparison of eval runners, simulated-user tools and rule engines before any is picked (section 5, Formats). **Answered 2026-10-29:** DeepEval is the default eval runner and simulated-user tool (Python, pytest-style, Apache 2.0, conversation simulator built in). Eval cases stay in GORT's own runner-neutral format (input, expected behaviour, pass and fail lines, Pattern ID); a small adapter turns them into DeepEval tests, so the default can change without converting saved cases. Exporters to other runners and rule engines are added only when a customer asks. DeepEval's hosted dashboard stays optional and off by default, so chats stay in the team's environment. No comparison page is needed.
 4. Who reviews the framework mappings (a second person, ideally with security or compliance background).
 5. Whether the hourly run may write pack content (content, allowed today) and, later, the checker and exporters (needs a change to the "no code" rule in `C:\Users\saura\.hmi-runner\prompt.md`). **Answered 2026-10-24:** yes. The hourly run writes code in sarkars/gort only, one step per run (prompt Part H). It never writes code in this library.
-6. Model API access and a spend limit, as environment variables, for model-graded eval cases.
-7. Trademark check for "GORT" and "gortguard" before a public launch.
+6. Model API access and a spend limit, as environment variables, for model-graded eval cases. **Owner, 2026-10-29:** no key for now; step 11 waits.
+7. Trademark check for "GORT" and "gortguard" before a public launch. **Preliminary search, 2026-10-29, Needs review by a qualified trademark attorney (not legal advice):**
+   - USPTO, "GORT": 9 records. All GORT word marks are dead, including Twentieth Century Fox's toy robot mark (75861873, cancelled) and a software mark by Churchill Technologies (98259872, dead). GORTTOP is live but covers clothing and sports goods. "GORTGUARD": no records.
+   - EU: [EUIPO 019028394](https://euipo.europa.eu/eSearch/#details/trademarks/019028394) "GORT", TG Holding B.V. (Netherlands), registered 2025-01-18, live. Classes 35, 41, 42, 44 (coaching and HR focus), but class 42 lists platform as a service, software as a service and software development. This overlaps GORT's field.
+   - UK: [UK00003981318](https://trademarks.ipo.gov.uk/ipo-tmcase/page/Results/1/UK00003981318) "Gort", Churchill Technologies Limited, registered 2024-04-19, live. Classes 9, 35, 38, 42, including artificial intelligence software and AI software as a service, with the carve-out "none of the abovementioned being for use in the fields of IT, cybersecurity, security testing, telecommunications or communications sectors". Whether a guardrail and test tool falls inside that carve-out is a question for the attorney.
+   - Other live "GORT" marks found in WIPO's Global Brand Database are in unrelated classes (clothing, heating, retail).
+   - Unregistered use: [getgort/gort](https://github.com/getgort/gort), a ChatOps chatbot framework (Apache 2.0, last push 2023-04-04).
+   - Package names `gortguard` (PyPI, npm) and `gort` (PyPI) were free on 2026-10-29.
+   - Not done: a WIPO search for "gortguard", and similar-sounding or similar-looking marks.
+   - **Owner, 2026-10-29:** lead with **gortguard** as the public brand; `gort` stays the command (section 1, Name).
 
 ## 10. Later, only when
 Each item waits for the signal named. None is planned before it.
