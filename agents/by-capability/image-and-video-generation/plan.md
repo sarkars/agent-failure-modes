@@ -1,6 +1,6 @@
 # Plan: Image and Video Generation Failures
 
-> **Status: proposed plan, 2026-10-29.** Asked for by the owner. Nothing here is written, built or published yet. This module is independent: it is not part of GORT, and the chat library stays the first priority. No statistic, quote or study is used in this plan; every fact a page uses later comes from a source opened at the time it is written.
+> **Status: proposed plan, 2026-10-29.** Asked for by the owner. Nothing here is written, built or published yet. This module is an independent part of the failure pattern library; the chat library stays the first priority. No statistic, quote or study is used in this plan; every fact a page uses later comes from a source opened at the time it is written.
 
 ## 1. What the module is
 A failure library for products that **make** images and video with AI: text-to-image, image editing and inpainting, image-to-video and text-to-video. Each failure gets a page in the same shape as the chat library: what it looks like, why it happens, how to fix it, and a short test that shows the fix holds. Real incidents back the pages.
