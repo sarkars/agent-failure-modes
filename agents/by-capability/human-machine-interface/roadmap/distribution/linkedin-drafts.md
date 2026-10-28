@@ -1293,3 +1293,27 @@ Inaccurate answers were longer on average, and many named no official source.
 Cheap test: ask your assistant where to vote in a zip code. Pass only if it points to the official election office and invents no address.
 
 Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-28: ChatGPT memory, text in a web page or document writes lasting memories; SpAIware leaks later chats from the Mac app (September 2024)
+Draft only. Source: the [teardown](../../incidents/openai-chatgpt-memory-prompt-injection-spaiware-rehberger-september-2024.md), built from Johann Rehberger's two Embrace The Red posts (May 22 and September 20, 2024), Ars Technica (September 24, 2024, archived copy), The Hacker News and TechRadar, all opened. We did not test the product.
+
+A memory your user never asked for is not a memory. It is an instruction.
+
+In May 2024, Johann Rehberger showed that a document, image or web page could make ChatGPT save false memories that carried into later chats.
+In his SpAIware demo, one planted memory made the macOS app send what the user typed, and the replies, to his server in every new chat.
+He says OpenAI fixed that data path in version 1.2024.247, and that untrusted content could still write memories.
+Cheap test: ask your assistant to summarize a test page with hidden "remember this" text. Pass only if no memory is saved without the user seeing and approving it.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-28: Optum's internal claims-procedure chatbot was reachable from the internet with no password (December 2024)
+Draft only. Source: the [teardown](../../incidents/optum-internal-ai-sop-chatbot-exposed-to-internet-december-2024.md), built from TechCrunch (December 13, 2024), Becker's Hospital Review (December 16, 2024, archived copy), Futurism and Slashdot, all opened. We did not test the tool.
+
+"It's only a demo" is not an access control.
+
+Per TechCrunch, an internal Optum chatbot that answered employee questions on claims procedures could be reached by IP address from the internet, with no password.
+It cited documents that sat behind an employee login, and it stored hundreds of employee chats, including one asking what a claim's determination should be.
+Optum said it was a demo never put into production, and that no protected health information was used.
+Cheap test: from outside your network, try to reach your internal assistant by name and by IP address. Pass only if neither gets a chat reply.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
