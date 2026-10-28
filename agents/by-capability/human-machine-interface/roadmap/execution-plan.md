@@ -2242,12 +2242,12 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 430 | OV-09 | Permission fatigue or under-asking | Extends | - | `goals/human-oversight/failures/permission-fatigue-or-under-asking.md` | Covered | 62 |
 | 431 | OV-10 | Misleading explanations | Extends | R | `goals/human-oversight/failures/misleading-explanations.md` | Covered | 62 |
 | 432 | OV-12 | Confusion over who is acting | Extends | - | `goals/human-oversight/failures/confusion-over-who-is-acting.md` | Covered | 62 |
-| 433 | SL-01 | Purple-gradient, glassmorphism default look | New | - | `goals/ai-slop-detection/failures/ui-default-gradient-look.md` | Queued | - |
-| 434 | SL-02 | Identical card grids and icon-in-circle feature rows | New | - | `goals/ai-slop-detection/failures/ui-template-card-grids.md` | Queued | - |
-| 435 | SL-03 | Generic hero copy and stock layout order | New | - | `goals/ai-slop-detection/failures/ui-generic-hero-layout.md` | Queued | - |
-| 436 | SL-04 | Emoji as icons and decorative bullets | New | - | `goals/ai-slop-detection/failures/ui-emoji-as-icons.md` | Queued | - |
-| 437 | SL-05 | Placeholder data left in: Lorem ipsum, John Doe, 10,000+ users | New | - | `goals/ai-slop-detection/failures/ui-placeholder-data-left-in.md` | Queued | - |
-| 438 | SL-06 | Fake testimonials, logos and stats | New | - | `goals/ai-slop-detection/failures/ui-fabricated-social-proof.md` | Queued | - |
+| 433 | SL-01 | Purple-gradient, glassmorphism default look | New | - | `goals/ai-slop-detection/failures/ui-default-gradient-look.md` | Done | 217 |
+| 434 | SL-02 | Identical card grids and icon-in-circle feature rows | New | - | `goals/ai-slop-detection/failures/ui-template-card-grids.md` | Done | 217 |
+| 435 | SL-03 | Generic hero copy and stock layout order | New | - | `goals/ai-slop-detection/failures/ui-generic-hero-layout.md` | Done | 217 |
+| 436 | SL-04 | Emoji as icons and decorative bullets | New | - | `goals/ai-slop-detection/failures/ui-emoji-as-icons.md` | Done | 217 |
+| 437 | SL-05 | Placeholder data left in: Lorem ipsum, John Doe, 10,000+ users | New | - | `goals/ai-slop-detection/failures/ui-placeholder-data-left-in.md` | Done | 217 |
+| 438 | SL-06 | Fake testimonials, logos and stats | New | L | `goals/ai-slop-detection/failures/ui-fabricated-social-proof.md` | Needs review | 217 |
 | 439 | SL-07 | Stock AI phrases and filler openers | New | - | `goals/ai-slop-detection/failures/text-stock-phrases.md` | Queued | - |
 | 440 | SL-08 | Em-dash, triplet and 'not X but Y' rhythm | New | - | `goals/ai-slop-detection/failures/text-rhythm-tells.md` | Queued | - |
 | 441 | SL-09 | Hedged, balanced non-answers | New | - | `goals/ai-slop-detection/failures/text-balanced-non-answers.md` | Queued | - |
