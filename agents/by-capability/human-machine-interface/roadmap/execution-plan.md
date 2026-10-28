@@ -2280,6 +2280,19 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 468 | SL-36 | Vendor-reported detector accuracy never independently checked | New | - | `goals/ai-slop-detection/failures/detect-unverified-accuracy-claims.md` | Queued | - |
 | 469 | SL-37 | Humanizer tools make writing worse and still get flagged | New | - | `goals/ai-slop-detection/failures/detect-humanizer-arms-race.md` | Queued | - |
 | 470 | SL-38 | Fake AI-generated video clips presented as news or ads | New | - | `goals/ai-slop-detection/failures/video-synthetic-clips-as-real.md` | Queued | - |
+| 471 | SL-39 | Overused-word lists go stale as each model version changes | New | - | `goals/ai-slop-detection/failures/text-word-list-drift.md` | Queued | - |
+| 472 | SL-40 | Hedged list-building register: 'important', 'overall', 'including' | New | - | `goals/ai-slop-detection/failures/text-hedged-list-register.md` | Queued | - |
+| 473 | SL-41 | Workslop: AI work of little substance sent to colleagues | New | - | `goals/ai-slop-detection/failures/work-workslop.md` | Queued | - |
+| 474 | SL-42 | Sycophantic drafts and reviews that affirm whatever the user says | New | - | `goals/ai-slop-detection/failures/work-sycophantic-feedback.md` | Queued | - |
+| 475 | SL-43 | AI-written peer reviews of papers and code | New | - | `goals/ai-slop-detection/failures/work-ai-peer-reviews.md` | Queued | - |
+| 476 | SL-44 | Resume and cover letter claims the candidate cannot defend | New | - | `goals/ai-slop-detection/failures/hiring-undefendable-ai-resume-claims.md` | Queued | - |
+| 477 | SL-45 | AI-written admissions and student essays penalized or undetected | New | - | `goals/ai-slop-detection/failures/education-ai-essays.md` | Queued | - |
+| 478 | SL-46 | Model collapse: new models trained on AI-written web pages | New | - | `goals/ai-slop-detection/failures/data-model-collapse-contamination.md` | Queued | - |
+| 479 | SL-47 | Mass machine-translated duplicate pages flood the web | New | - | `goals/ai-slop-detection/failures/data-machine-translated-duplicates.md` | Queued | - |
+| 480 | SL-48 | Image detectors break after crop, resize, recompress or blur | New | - | `goals/ai-slop-detection/failures/detect-image-detector-fragility.md` | Queued | - |
+| 481 | SL-49 | Detectors fail on generators they were not trained on | New | - | `goals/ai-slop-detection/failures/detect-unseen-generator-failure.md` | Queued | - |
+| 482 | SL-50 | Detectors falsely flag non-native English writers and some student groups | New | - | `goals/ai-slop-detection/failures/detect-biased-false-positives.md` | Queued | - |
+| 483 | SL-51 | Slop detection run as a one-time check, not a release gate | New | - | `goals/ai-slop-detection/failures/detect-no-release-gate.md` | Queued | - |
 
 ## Run log
 *(Each run appends an entry here.)*
