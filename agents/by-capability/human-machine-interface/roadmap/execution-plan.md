@@ -1159,6 +1159,7 @@ Run N covers queue orders as shown. At one run every hour, 91 runs take about 91
   - Vercel has not deployed any site commit since c69c78cdd. So G10, G11, G13 and the .md link fixes are not live.
   - The Privacy and Contact pages need facts from you.
   - The importer fix for 37 duplicate framework descriptions needs your go-ahead.
+- **Deploy:** content [PR 196](https://github.com/sarkars/agent-failure-modes/pull/196) merged into `main` with a merge commit (8f1cb14, expected head 4227ff5); branch reset to `origin/main`. Site repo not touched: only `incidents/` and `roadmap/` changed, and they are not published.
 
 ## Queue
 Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Library** column is the status in the catalog when the queue was built (**New** or **Extends**).
