@@ -17,11 +17,11 @@ description: How AI image and video tools end up copying protected characters, a
 |---|---|---|---|
 | [Copyrighted characters reproduced by AI image generators](failures/ai-image-generator-reproduces-copyrighted-characters.md) | Both | A generator draws a studio's character when asked by name, or from a few generic words | [Tests](../../tests/ai-image-generator-reproduces-copyrighted-characters.md) |
 | [Near-copies of training images and stock-photo watermarks](failures/ai-images-copy-training-images-and-watermarks.md) | Image | Output that closely copies a training image, or shows a stock site's watermark | [Tests](../../tests/ai-images-copy-training-images-and-watermarks.md) |
+| [AI art in the style of living artists](failures/ai-art-in-the-style-of-living-artists.md) | Image | A generator copies a working artist's look when asked by name, and the art carries their name | [Tests](../../tests/ai-art-in-the-style-of-living-artists.md) |
 
 All tests are **Not yet run**. All detection signals and Guide specs are proposed.
 
 ## Planned (not yet written)
-- An artist's distinctive style copied by name
 - Brand logos and trademarks in generated images
 - Training on images without permission (lawsuit side, linked, not argued)
 - Unclear ownership of generated output

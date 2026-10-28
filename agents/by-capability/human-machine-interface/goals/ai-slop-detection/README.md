@@ -41,7 +41,6 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | [AI generated reviews and replies that all sound the same](failures/data-templated-reviews.md) | Review farms and reply bots in one templated voice, caught by near-duplicate checks. **Read this first: needs legal review.** |
 
 ## Planned (not yet written)
-- Data tells: made-up metrics, templated reviews
 - Detector limits and false positives, more UI tells
 
 ## Related
