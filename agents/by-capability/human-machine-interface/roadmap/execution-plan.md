@@ -1207,6 +1207,7 @@ Run N covers queue orders as shown. At one run every hour, 91 runs take about 91
   - G14 needs a PageSpeed API key from you, or a local Lighthouse run.
   - The Privacy and Contact pages need facts from you.
   - The importer fix for 37 duplicate framework descriptions needs your go-ahead.
+- **Deploy:** content [PR 197](https://github.com/sarkars/agent-failure-modes/pull/197) merged into `main` with a merge commit (903e0d9, expected head 7fbb485); branch reset to `origin/main`. Site repo not touched: only `incidents/` and `roadmap/` changed, and they are not published.
 
 ## Queue
 Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Library** column is the status in the catalog when the queue was built (**New** or **Extends**).
