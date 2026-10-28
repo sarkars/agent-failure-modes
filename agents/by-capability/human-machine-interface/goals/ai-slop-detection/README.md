@@ -32,10 +32,10 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | ["It depends" answers that never pick](failures/text-balanced-non-answers.md) | Hedged, balanced text that leaves the reader to decide |
 | [Headings, bold and bullets on everything](failures/text-uniform-structure.md) | Every genre gets the same report shape |
 | [AI made-up citations and fake quotes](failures/text-invented-citations.md) | Cases, papers and quotes that do not exist, blocked at a citation gate. **Read this first: needs legal review.** |
+| [Over-commented code and tutorial-style comments](failures/code-over-commented.md) | Comments that restate the code or talk to the chat |
 
 ## Planned (not yet written)
-- Writing tells: stock phrases, rhythm tells, balanced non-answers, uniform structure, invented citations
-- Code tells: over-commented code and more
+- Code tells: calls to APIs that don't exist, needless abstraction and more
 - Image and data tells
 
 ## Related
