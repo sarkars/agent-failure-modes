@@ -33,10 +33,15 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | [Headings, bold and bullets on everything](failures/text-uniform-structure.md) | Every genre gets the same report shape |
 | [AI made-up citations and fake quotes](failures/text-invented-citations.md) | Cases, papers and quotes that do not exist, blocked at a citation gate. **Read this first: needs legal review.** |
 | [Over-commented code and tutorial-style comments](failures/code-over-commented.md) | Comments that restate the code or talk to the chat |
+| [AI code calls functions that don't exist](failures/code-nonexistent-apis.md) | Invented methods, keyword arguments, flags, config keys and packages, caught by resolving every new name before merge |
+| [AI images with extra fingers and garbled text](failures/image-visual-artifacts.md) | Six fingers, misspelled signs and melted background detail posted by mistake, caught by a pre-publish checklist |
+| [AI code duplication and over-engineering](failures/code-needless-abstraction.md) | Wrappers, one-implementation interfaces and re-written helpers, caught by a search-before-write rule and a duplication check |
+| [Why AI images look fake: waxy skin and wrong shadows](failures/image-stock-look.md) | Over-smooth, glossy stock-photo images with impossible light, caught by art direction and a lighting check before publishing |
+| [AI made-up numbers in reports and dashboards](failures/data-too-clean.md) | Round, too-clean figures with no source, caught by tracing every number to a query or citation |
+| [AI generated reviews and replies that all sound the same](failures/data-templated-reviews.md) | Review farms and reply bots in one templated voice, caught by near-duplicate checks. **Read this first: needs legal review.** |
 
 ## Planned (not yet written)
-- Code tells: calls to APIs that don't exist, needless abstraction and more
-- Image and data tells
+- Detector limits and false positives, more UI tells
 
 ## Related
 - [Conversation moves](../../solutions-library/conversation-moves.md)
