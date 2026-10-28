@@ -35,9 +35,10 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | [Over-commented code and tutorial-style comments](failures/code-over-commented.md) | Comments that restate the code or talk to the chat |
 | [AI code calls functions that don't exist](failures/code-nonexistent-apis.md) | Invented methods, keyword arguments, flags, config keys and packages, caught by resolving every new name before merge |
 | [AI images with extra fingers and garbled text](failures/image-visual-artifacts.md) | Six fingers, misspelled signs and melted background detail posted by mistake, caught by a pre-publish checklist |
+| [AI code duplication and over-engineering](failures/code-needless-abstraction.md) | Wrappers, one-implementation interfaces and re-written helpers, caught by a search-before-write rule and a duplication check |
 
 ## Planned (not yet written)
-- Code tells: needless abstraction and more
+- Image and data tells: still being written
 - Image and data tells
 
 ## Related

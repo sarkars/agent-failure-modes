@@ -2311,7 +2311,7 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 443 | SL-11 | Invented citations and quotes | New | L | `goals/ai-slop-detection/failures/text-invented-citations.md` | Needs review | 218 |
 | 444 | SL-12 | Over-commented code and tutorial-style comments | New | - | `goals/ai-slop-detection/failures/code-over-commented.md` | Done | 218 |
 | 445 | SL-13 | Plausible but nonexistent APIs and options | New | - | `goals/ai-slop-detection/failures/code-nonexistent-apis.md` | Done | 219 |
-| 446 | SL-14 | Needless abstraction and duplicated helpers | New | - | `goals/ai-slop-detection/failures/code-needless-abstraction.md` | Queued | - |
+| 446 | SL-14 | Needless abstraction and duplicated helpers | New | - | `goals/ai-slop-detection/failures/code-needless-abstraction.md` | Done | 219 |
 | 447 | SL-15 | Image artifacts: extra fingers, garbled text, melted detail | New | - | `goals/ai-slop-detection/failures/image-visual-artifacts.md` | Done | 219 |
 | 448 | SL-16 | Over-smooth stock-photo look and wrong physics | New | - | `goals/ai-slop-detection/failures/image-stock-look.md` | Queued | - |
 | 449 | SL-17 | Round-number, too-clean data and fake metrics | New | - | `goals/ai-slop-detection/failures/data-too-clean.md` | Queued | - |
