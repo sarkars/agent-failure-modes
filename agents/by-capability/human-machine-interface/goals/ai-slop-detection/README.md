@@ -33,9 +33,10 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | [Headings, bold and bullets on everything](failures/text-uniform-structure.md) | Every genre gets the same report shape |
 | [AI made-up citations and fake quotes](failures/text-invented-citations.md) | Cases, papers and quotes that do not exist, blocked at a citation gate. **Read this first: needs legal review.** |
 | [Over-commented code and tutorial-style comments](failures/code-over-commented.md) | Comments that restate the code or talk to the chat |
+| [AI code calls functions that don't exist](failures/code-nonexistent-apis.md) | Invented methods, keyword arguments, flags, config keys and packages, caught by resolving every new name before merge |
 
 ## Planned (not yet written)
-- Code tells: calls to APIs that don't exist, needless abstraction and more
+- Code tells: needless abstraction and more
 - Image and data tells
 
 ## Related
