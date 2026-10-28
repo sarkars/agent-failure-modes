@@ -38,6 +38,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | [AI code duplication and over-engineering](failures/code-needless-abstraction.md) | Wrappers, one-implementation interfaces and re-written helpers, caught by a search-before-write rule and a duplication check |
 | [Why AI images look fake: waxy skin and wrong shadows](failures/image-stock-look.md) | Over-smooth, glossy stock-photo images with impossible light, caught by art direction and a lighting check before publishing |
 | [AI made-up numbers in reports and dashboards](failures/data-too-clean.md) | Round, too-clean figures with no source, caught by tracing every number to a query or citation |
+| [AI generated reviews and replies that all sound the same](failures/data-templated-reviews.md) | Review farms and reply bots in one templated voice, caught by near-duplicate checks. **Read this first: needs legal review.** |
 
 ## Planned (not yet written)
 - Data tells: made-up metrics, templated reviews
