@@ -31,7 +31,21 @@ Rules: never move, rename or delete these pages (their URLs are live). New pages
 ## 3. Goals and first patterns
 Nine groups. Pattern names are working titles; each becomes a page only after a source is found (section 5). A pattern with no public source is dropped, not written from general knowledge.
 
-Placement in vision-and-images: A, B and C go into the existing `generation-artifacts` goal. D to I are new goal folders under `vision-and-images/goals/` (working names `generation-representation`, `generation-likeness-and-harm`, `generation-provenance`, `generation-copyright`, `generation-business-use`, `generation-brand`), because the category has no goal for them.
+Placement in vision-and-images (owner, 2026-10-29): every group is its own new goal folder under `vision-and-images/goals/`, named for search. The existing `generation-artifacts` goal keeps its pages and name; the new goals link to it. Each goal README uses the title below as its H1.
+
+| Goal | Title | Folder |
+|---|---|---|
+| E | AI Deepfake Images and Videos of Real People | `ai-deepfakes-of-real-people` |
+| G | AI Image Copyright and Trademark Risks | `ai-image-copyright-and-trademark` |
+| H | Business Risks of AI Image and Video Generation | `ai-image-generation-business-risks` |
+| I | AI Images That Break Brand Guidelines | `ai-image-brand-guidelines` |
+| D | Bias and Stereotypes in AI Image Generators | `ai-image-bias-and-stereotypes` |
+| F | AI Image Watermarks, Labels and Content Credentials | `ai-image-watermarks-and-content-credentials` |
+| A | AI Images That Ignore the Prompt | `ai-image-prompt-adherence` |
+| C | AI Video and Character Consistency Failures | `ai-video-consistency` |
+| B | AI Image Artifacts: Hands, Anatomy and Physics | `ai-image-artifacts-hands-and-physics` |
+
+Folder names were checked against existing goal folders on 2026-10-29 (`brand-consistency` is taken, so goal I does not use it). Recheck before creating each folder.
 
 **A. The output does not match the request (prompt adherence)**
 - Wrong count of objects
@@ -143,7 +157,7 @@ Folder layout is the one vision-and-images already uses, so the site importer pi
 | Phase | Work | Done when |
 |---|---|---|
 | 1 | Search for sources for each pattern in section 3; drop patterns with none; list kept patterns with their sources in this plan | Every kept pattern has at least one opened source |
-| 2 | Write pages, highest-harm first (E, then G, H, I, D, F, A, C, B), into vision-and-images; new goal READMEs for D to I; update the vision-and-images README goal table and counts | Pages pass the five check scripts |
+| 2 | Write pages, highest-harm first (E, then G, H, I, D, F, A, C, B), into vision-and-images; a goal README for each new goal; update the vision-and-images README goal table and counts | Pages pass the five check scripts |
 | 3 | Incident pages for the candidates in section 5 that check out | Each incident links to its patterns |
 | 4 | Publish: the site importer picks up the new pages in the existing category; check the build and that no live URL is lost | New pages live; public URL list updated |
 | 5 | Layer 1 check page (section 7) | Page live and tested on files with and without Content Credentials |
