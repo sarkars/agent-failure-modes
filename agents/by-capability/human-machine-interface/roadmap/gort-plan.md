@@ -403,7 +403,7 @@ The hourly run updates the row of the step it works on. Status is `Not started`,
 | 3 | Skipped (owner, 2026-10-28, decision 2): no outside frameworks or failure libraries; coverage uses only the failures documented in this library |
 | 3a | Moved to the library (owner, 2026-10-28, decision 2): public failure lists are checked against the taxonomy in library work; gaps enter the taxonomy as Needs review pages, and code picks them up only from the taxonomy |
 | 4 | Done 2026-10-28: [PR 3](https://github.com/sarkars/gort/pull/3) squash-merged (99dc6f8); `pack-schema.json` plus two hand-written entries (talk-to-a-human-ignored-or-looped, confident-wrong-answer-with-no-way-to-check); Check passes (both load against the schema; 17 tests); CI passed on Python 3.10 and 3.12; no framework mapping (decision 2); no new dependency |
-| 5 | Not started |
+| 5 | Done 2026-10-28: [PR 4](https://github.com/sarkars/gort/pull/4) squash-merged (023d9a0); `agent-schema.json`, `gortguard.agentformat.load_agent` and `examples/agents/refund-agent.yaml`; Check passes (example loads; 7 new tests, 24 total); CI passed on Python 3.10 and 3.12; no new dependency (agent.yaml read as JSON syntax, valid YAML 1.2; block YAML only if PyYAML is already installed) |
 | 6 | Not started |
 | 7 | Not started |
 | 8 | Not started |
