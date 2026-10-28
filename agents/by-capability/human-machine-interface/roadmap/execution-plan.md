@@ -1510,6 +1510,38 @@ Run N covers queue orders as shown. At one run every hour, 91 runs take about 91
 - **Note for the owner:** same as run 206: GORT decision 2; Vercel has not deployed site commits since c69c78cdd; G14 needs a PageSpeed key or a local Lighthouse run; Privacy and Contact pages need your facts; the importer fix for 37 duplicate framework descriptions needs your go-ahead.
 - **Deploy (run 207):** content repo [PR 206](https://github.com/sarkars/agent-failure-modes/pull/206) merged into main with a merge commit (c40c3da, head 1226353 matched). Branch reset to origin/main. Site repo: no push; this run changed only incident drafts in `incidents/` and roadmap files, which deploy.md leaves out of the publish scope. No site build run; URLs added 0, removed 0. Live / last checked 200 in Part F.
 
+### Run 208 (scheduled): 2026-10-28 (UTC)
+- **Coordinator run:** 2 subagents ran in parallel, one teardown each, each writing only its own new file. Each brief carried quality-guide sections 1 and 6 word for word, gave each agent a separate domain so they could not pick the same incident, and asked for no body H1. No Queued rows and no Part A, A2 or E work left. No subagent ran git. I ran the five check scripts (`python -X utf8 -I`) before each commit; all clean. Last check: 8,945 links, 257 patterns, 1,267 public pattern URLs, 0 problems.
+- **Step 0:** npr.org returned 200. UTC was about 2026-10-28 11:50 at the start.
+- **Sync:** `origin/main..claude/zealous-ramanujan-u8zwfk` held one commit, fd5472d (the run 207 Deploy line), so the branch was kept, not reset.
+- **Part C asset 4 (sections 1 and 6), teardown 1, Needs review:** [Google AI Overviews gave misleading health answers on liver tests and cancer, and Google pulled only the exact queries flagged: Guardian investigation, January 2026](../incidents/google-ai-overviews-misleading-health-answers-liver-tests-guardian-january-2026.md). 124 lines; description 153 characters. UK source (allowed when well sourced); "Read this first" says it gives no medical advice.
+  - Why chosen: the four existing AI Overviews pages cover glue and rocks, Air India, Wolf River and scam phone numbers; a grep of `agents/` for "Pancreatic Cancer UK", "British Liver Trust", "Eve Appeal" and "lft reference" found nothing.
+  - Searches: 3.
+  - Opened (downloaded and read as text on 2026-10-28): The Guardian (Andrew Gregory, 2026-01-02 and 2026-01-11), TechCrunch (Anthony Ha, 2026-01-11), Android Authority (Jay Bonggolto, 2026-01-12). Gizmodo was downloaded but its text did not extract; not used.
+  - Seen only in search summaries and not used: Tom's Guide, eMarketer, Storyboard18, ETV Bharat, a diabetes charity page; a claim about a Pap test "over 21" answer.
+  - Unverified, and listed on the page: the full text of any Overview, how many queries were tested, whether the cancer and mental health Overviews were later removed.
+  - Pattern IDs (all in the taxonomy): `confident-wrong-answer-with-no-way-to-check` (strong), `results-delivered-without-context` (partial), `patient-summaries-too-simple-to-be-safe` (weak); one rejected. Possible gaps for a person to judge: the same query giving a different answer each time; a fix made only for the flagged wording while rewordings still fail.
+- **Review of teardown 1 (sections 1 and 6):** I read the page in full as a skeptical reader and matched eight quotes myself against the downloaded Guardian and TechCrunch text ("wrongly advised people with pancreatic cancer", "not bother to attend a follow-up", "coming up with a different response each time", "lft reference range", "We do not comment on individual removals", "the information was not inaccurate", "several hours after The Guardian published", "fail to warn that someone can get normal results"); all matched. The subagent reports a script check of 31 quotes. No "Fails review if" hit; review changed nothing.
+- **Part C asset 4 (sections 1 and 6), teardown 2, Needs review:** [Chipotle's Pepper ordering bot shown writing Python code, then rewired into a free coding agent, while Chipotle called the viral post Photoshopped, 2026](../incidents/chipotle-pepper-ordering-bot-shown-writing-python-code-june-2026.md). 125 lines; description 147 characters. The page reports both sides and does not decide whether Pepper ever wrote code.
+  - Why chosen: a grep of `agents/` for "chipotle", "pepper bot", "chipotlai", "free inference" and related words found no incident page.
+  - Searches: 4.
+  - Opened (downloaded and read as text on 2026-10-28): CIO (Evan Schuman, 2026-04-09, with Chipotle's denial), Gizmodo (Webb Wright, 2026-06-04), Mark Wunsch on Substack (2026-06-05, labeled as opinion).
+  - Seen only in search summaries and not used: the original poster's name, the March dates and like count, the screenshot text, later GitHub star counts, reports that later attempts were redirected, three translated reports.
+  - Unverified, and listed on the page: whether Pepper ever wrote code, what Pepper runs on, what Chipotle changed and when.
+  - Pattern IDs (all in the taxonomy): `small-talk-and-off-topic-messages-handled-badly` (strong for the reported behavior, which Chipotle disputes), `doesn-t-say-what-it-can-do` (weak), `over-refusal-of-ordinary-requests` (weak, as a risk of the fix); four rejected. Possible gaps for a person to judge: a customer bot used as free general-purpose compute; checking a viral screenshot the company calls fake against its own logs.
+- **Review of teardown 2 (sections 1 and 6):** I read the page in full and matched eleven quotes and the 824-star figure against the downloaded CIO, Gizmodo and Substack text; all matched (three needed curly-apostrophe handling). Review changed one thing: the unverified list named the original poster from a search summary only; I removed the name, since the page names only people quoted in opened sources. No other "Fails review if" hit.
+- **Part B:** already done today (run 198 entry in `seo/log.md`); not repeated.
+- **Part E:** no Moves or Guide spec work left.
+- **Part F:** no fixes. Live /, /sitemap-index.xml, /robots.txt and /guides/ return 200. Site repo local main matches origin/main (6acae8c44), 0 foreign commits.
+- **Part G:**
+  - No G item advanced: G10 has nothing left to retitle, G12 needs question-query data, G14 is blocked on a PageSpeed quota or key.
+  - Newsletter: the next issue is due 2026-10-29; not written this run (not yet due).
+  - LinkedIn: two drafts added, for the two teardowns. Drafts only; not posted.
+- **Part H (GORT step 3):** no code written. Still waiting for the owner: decision 2 (frameworks) in section 9 of gort-plan.md has only a recommendation.
+- **KPIs:** site build 1,907 pages (run 191). Indexed 878, not indexed 13 (Search Console, run 118). Ellipsis count 224 (not re-scanned).
+- **Plan complete?** No. Still open: teardowns continue; live checks for G10, G11 and G13; G12 and G14; the newsletter due 2026-10-29; GORT step 3 (waits on decision 2).
+- **Note for the owner:** same as run 207: GORT decision 2; Vercel has not deployed site commits since c69c78cdd; G14 needs a PageSpeed key or a local Lighthouse run; Privacy and Contact pages need your facts; the importer fix for 37 duplicate framework descriptions needs your go-ahead.
+
 ## Queue
 Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Library** column is the status in the catalog when the queue was built (**New** or **Extends**).
 
