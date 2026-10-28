@@ -1476,6 +1476,39 @@ Run N covers queue orders as shown. At one run every hour, 91 runs take about 91
 - **Note for the owner:** same as run 205: GORT decision 2; Vercel has not deployed site commits since c69c78cdd; G14 needs a PageSpeed key or a local Lighthouse run; Privacy and Contact pages need your facts; the importer fix for 37 duplicate framework descriptions needs your go-ahead.
 - **Deploy (run 206):** content repo PR 205 merged into main with a merge commit (49896be, head 98399b4 matched). Branch reset to origin/main. Site repo: no push; this run changed only incident drafts in `incidents/` and roadmap files, which deploy.md leaves out of the publish scope. No site build run; URLs added 0, removed 0. Live / last checked 200 in Part F.
 
+### Run 207 (scheduled): 2026-10-28 (UTC)
+- **Coordinator run:** 2 subagents ran in parallel, one teardown each, each writing only its own new file. Each brief carried quality-guide sections 1 and 6 word for word and asked for no body H1. No Queued rows and no Part A, A2 or E work left. No subagent ran git. I ran the five check scripts (`python -X utf8 -I`) before each commit; all clean. Last check: 8,920 links, 257 patterns, 1,267 public pattern URLs, 0 problems.
+- **Step 0:** npr.org returned 200. UTC was about 2026-10-28 10:50 at the start.
+- **Sync:** `origin/main..claude/zealous-ramanujan-u8zwfk` held one commit, 3d05639 (the run 206 Deploy line), so the branch was kept, not reset.
+- **Part C asset 4 (sections 1 and 6), teardown 1, Needs review:** [ChatGPT gave fake 404 links to famous stories by its own news-licensing partners: Nieman Lab tests, June 2024](../incidents/chatgpt-hallucinates-fake-links-to-news-partners-stories-nieman-lab-june-2024.md). 136 lines; description 156 characters.
+  - Why chosen: a grep of `agents/` for "nieman", "fake links" and "404" found only unrelated mentions; the Tow Center page is a different, later study and is linked as a close case.
+  - Searches: 4.
+  - Opened (downloaded and read as text on 2026-10-28): Nieman Lab (Andrew Deck, 2024-06-13 and 2024-06-27), The Atlantic (Matteo Wong, 2024-06-26), Engadget (Pranav Dixit, 2024-06-28), MediaNama (July 2024, no byline in the text), The Publisher Newsletter (2024-07-01, a summary of Nieman Lab).
+  - Seen only in search summaries or not used: beSpacific, Poder360, a March 2025 Nieman Lab piece, Adweek's leaked-deck report, Bloomberg's deal figure; the Insider Union letter and the deal announcements appear only as Nieman Lab quotes them.
+  - Unverified, and listed on the page: prompt counts and failure rate, whether OpenAI later fixed the links, the union letter's full text, the MediaNama byline.
+  - Pattern IDs (all in the taxonomy): `confident-wrong-answer-with-no-way-to-check` (strong), `invented-packages-and-apis` (partial), `one-sided-or-cherry-picked-sources` (weak); three rejected. Possible gaps for a person to judge: a made-up or unchecked URL or citation in a chat reply; a reply that says it cannot browse and then gives a link.
+- **Review of teardown 1 (sections 1 and 6):** I read the page in full as a skeptical reader. I re-downloaded the June 27 Nieman Lab report and matched "close enough doesn't", "declined to answer questions on the hallucinations", "at least 10 other publications", "not a full audit", "most likely version of the URL" and "still in development and not yet available in ChatGPT"; all matched. The subagent reports a script check of 40 quotes. No "Fails review if" hit; review changed nothing.
+- **Part C asset 4 (sections 1 and 6), teardown 2, Needs review:** [Amazon Alexa reads a student paramedic a Wikipedia-sourced passage telling her to stab herself in the heart, December 2019](../incidents/amazon-alexa-reads-vandalized-wikipedia-text-telling-user-to-stab-herself-december-2019.md). 130 lines; description 152 characters. Voice incident: text signals proposed, voice signals PLANNED only. Carries the 988 line, as sibling self-harm pages do. The user is named because she spoke to the press under her own name; a personal health detail one outlet reported is left out.
+  - Why chosen: a grep of `agents/` for "morritt", "stab yourself" and "cardiac cycle" found nothing.
+  - Searches: 7.
+  - Opened (downloaded and read as text on 2026-10-28): GearBrain (Alistair Charlton, 2019-12-20), IBTimes Singapore (Manthan C., 2019-12-21), Inquisitr (Anna Harnes, 2019-12-22), Newsweek (James Crowley, 2019-12-24, with Amazon's statement), Beebom (Subin B, 2019-12-28, only for its Daily Mail attribution); Wikipedia's "Cardiac cycle" revision history through the MediaWiki API.
+  - Not opened: The Sun (bot-check page), the Daily Mail, the Manchester Evening News, the YouTube clip, Outer Places. Seen only in search summaries and not used: AOL, Albawaba, Asianet, OrissaPOST, NewsBytes, Digit, Le Tribunal du Net.
+  - Finding: the June 18-19, 2019 edits to the Wikipedia article have hidden text; one edit summary says it removed text urging suicide, and a June 30 edit reverted the page. The page does not claim this was Alexa's source; Amazon has not said.
+  - Unverified, and listed on the page: the hidden edits' words, the audio, how Alexa got the text, what the fix changed.
+  - Pattern IDs (all in the taxonomy): `stakes-blind-register` (partial), `confident-wrong-answer-with-no-way-to-check` (partial), `wrong-explanations-taught-as-fact` (weak); four rejected. Possible gaps for a person to judge: poisoned or vandalized retrieved text read as the answer; a stale cached copy of a credited source; screening the "continue" chunks of a long answer.
+- **Review of teardown 2 (sections 1 and 6):** I read the page in full. I re-downloaded Newsweek, Inquisitr, GearBrain and IBTimes and matched "We have investigated this error and it is now fixed", "cardiac cycle of the heart", "a few months ago, the page did contain", "29-year-old" and "Doncaster, England". Review changed one thing: the description said the passage was read "six months after vandal edits were removed", which is an inference the body only offers as an "if"; I replaced it with a hedged description (152 characters). No other "Fails review if" hit.
+- **Part B:** already done today (run 198 entry in `seo/log.md`); not repeated.
+- **Part E:** no Moves or Guide spec work left.
+- **Part F:** no fixes. Live /, /sitemap-index.xml, /robots.txt and /guides/ return 200. Site repo local main matches origin/main (6acae8c44), 0 foreign commits.
+- **Part G:**
+  - No G item advanced: G10 has nothing left to retitle, G12 needs question-query data, G14 is blocked on a PageSpeed quota or key.
+  - Newsletter: the next issue is due 2026-10-29; not written this run (not yet due).
+  - LinkedIn: two drafts added, for the two teardowns. Drafts only; not posted.
+- **Part H (GORT step 3):** no code written. Still waiting for the owner: decision 2 (frameworks) in section 9 of gort-plan.md has only a recommendation.
+- **KPIs:** site build 1,907 pages (run 191). Indexed 878, not indexed 13 (Search Console, run 118). Ellipsis count 224 (not re-scanned).
+- **Plan complete?** No. Still open: teardowns continue; live checks for G10, G11 and G13; G12 and G14; the newsletter due 2026-10-29; GORT step 3 (waits on decision 2).
+- **Note for the owner:** same as run 206: GORT decision 2; Vercel has not deployed site commits since c69c78cdd; G14 needs a PageSpeed key or a local Lighthouse run; Privacy and Contact pages need your facts; the importer fix for 37 duplicate framework descriptions needs your go-ahead.
+
 ## Queue
 Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Library** column is the status in the catalog when the queue was built (**New** or **Extends**).
 
