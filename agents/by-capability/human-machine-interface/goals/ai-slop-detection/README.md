@@ -34,6 +34,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | [AI made-up citations and fake quotes](failures/text-invented-citations.md) | Cases, papers and quotes that do not exist, blocked at a citation gate. **Read this first: needs legal review.** |
 | [Over-commented code and tutorial-style comments](failures/code-over-commented.md) | Comments that restate the code or talk to the chat |
 | [AI code calls functions that don't exist](failures/code-nonexistent-apis.md) | Invented methods, keyword arguments, flags, config keys and packages, caught by resolving every new name before merge |
+| [AI images with extra fingers and garbled text](failures/image-visual-artifacts.md) | Six fingers, misspelled signs and melted background detail posted by mistake, caught by a pre-publish checklist |
 
 ## Planned (not yet written)
 - Code tells: needless abstraction and more
