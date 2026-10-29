@@ -23,6 +23,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | Flagged neon-and-glow screens shipped with no recorded reason | Under 10% (proposed) | [neon and aurora glow](failures/ui-neon-aurora-glow.md) |
 | Distinctiveness check pass rate at launch | 100% (proposed) | [visual convergence](failures/ui-visual-convergence.md) |
 | Merged UI pull requests adding raw values outside the token file | 0%, alert above 2% (proposed) | [no locked design tokens](failures/ui-no-locked-design-tokens.md) |
+| Clean-ending rate | 95% (proposed) | [stated-moral endings](failures/text-stated-moral-endings.md) |
 
 ## Patterns
 | Pattern | One line |
@@ -51,6 +52,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | [Neon glow on dark backgrounds and aurora blobs](failures/ui-neon-aurora-glow.md) | Neon text and borders on near-black over blurred blobs, checked for contrast, blur cost and motion |
 | [Why all AI websites look the same](failures/ui-visual-convergence.md) | Unrelated sites built with the same tools and kits converge on one look; a pre-launch distinctiveness check catches it |
 | [AI ignores my design system: no locked tokens](failures/ui-no-locked-design-tokens.md) | With no locked token file, AI tools invent colors, spacing and radius per page; lint catches raw values |
+| [Why AI always ends with a summary or a moral](failures/text-stated-moral-endings.md) | Posts, emails and stories end on "Ultimately" or a stated lesson; end on the last fact instead |
 
 ## Planned (not yet written)
 - More text, code, voice, video and provenance tells; detector accuracy, humanizers and false accusations
