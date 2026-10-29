@@ -1823,3 +1823,16 @@ The lesson: check eligibility before you name an amount, and send the transcript
 Cheap test: make a refund fail after the bot offers it, and pass only if the next message gives a person or a ticket.
 
 Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-29: A government chatbot answered a question on day one, then refused it on day two (America.gov, September 2026)
+Draft only. Source: the [teardown](../../incidents/america-gov-federal-chatbot-answers-then-refuses-2020-election-question-september-2026.md), built from CNN, Axios (two stories), Rolling Stone and AFP on RTÉ, all opened.
+
+On launch day, the America.gov chatbot told CNN that Joseph R. Biden Jr. won the 2020 election.
+
+The next morning, an Axios reporter asked the same question and got: "I do not provide political commentary, including election results."
+A colleague in another state got an answer the same day.
+No source we opened says what changed, or who changed it.
+The lesson: run a fixed test set on every config change, and log a version on every reply.
+Cheap test: ask the same factual question every day and flag any answer that flips to a refusal with no logged change.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
