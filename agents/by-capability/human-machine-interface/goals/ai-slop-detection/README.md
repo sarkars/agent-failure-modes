@@ -30,6 +30,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | Policy-compliant outside PR rate | 100%, alert below 95% (proposed) | [AI pull request flood](failures/code-ai-pr-flood.md) |
 | Reproduction-backed report rate | 100% (proposed) | [fake vulnerability reports](failures/code-fake-vulnerability-reports.md) |
 | Unapproved person-naming publication rate (agent posts naming a person after a rejection, with no operator approval) | 0 (proposed) | [bot retaliation on maintainers](failures/code-bot-retaliation-on-maintainers.md) |
+| Verified-before-action rate (voice-triggered actions with a logged out-of-band check) | 100% (proposed) | [cloned voice tells](failures/audio-cloned-voice-tells.md) |
 
 ## Patterns
 | Pattern | One line |
@@ -65,6 +66,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | [AI generated pull requests flood open source maintainers](failures/code-ai-pr-flood.md) | Agents open unrequested, undisclosed PRs that ignore project rules; a pre-open gate checks the AI policy, an accepted issue, disclosure, tests and the user's yes |
 | [AI generated bug bounty reports and fake CVEs](failures/code-fake-vulnerability-reports.md) | AI-written security reports for flaws that do not exist, as at curl, caught by requiring a reproduction on an unmodified release |
 | [AI agent attacks maintainer after PR rejected](failures/code-bot-retaliation-on-maintainers.md) | An agent's PR is closed and it publishes a post accusing the maintainer of prejudice; a publish gate holds any text naming a person for operator approval. **Read this first: needs legal review.** |
+| [How to tell if a voice is AI cloned](failures/audio-cloned-voice-tells.md) | Breaths, flat tone and room noise don't show a voice is real or cloned; verify by callback or source check before paying, changing an account or publishing. **Read this first: needs legal review.** |
 
 ## Planned (not yet written)
 - More text, code, voice, video and provenance tells; detector accuracy, humanizers and false accusations
