@@ -19,11 +19,11 @@ description: How AI image and video tools end up copying protected characters, a
 | [Near-copies of training images and stock-photo watermarks](failures/ai-images-copy-training-images-and-watermarks.md) | Image | Output that closely copies a training image, or shows a stock site's watermark | [Tests](../../tests/ai-images-copy-training-images-and-watermarks.md) |
 | [AI art in the style of living artists](failures/ai-art-in-the-style-of-living-artists.md) | Image | A generator copies a working artist's look when asked by name, and the art carries their name | [Tests](../../tests/ai-art-in-the-style-of-living-artists.md) |
 | [Brand logos and trademarks in AI images](failures/ai-image-generator-puts-brand-logos-in-images.md) | Image | A generator puts a real brand's logo or mark into an image, and the business posts it unapproved | [Tests](../../tests/ai-image-generator-puts-brand-logos-in-images.md) |
+| [Training on images without permission](failures/ai-image-training-without-permission-lawsuits.md) | Image | A team adopts or fine-tunes an image generator without checking where its training images came from | [Tests](../../tests/ai-image-training-without-permission-lawsuits.md) |
 
 All tests are **Not yet run**. All detection signals and Guide specs are proposed.
 
 ## Planned (not yet written)
-- Training on images without permission (lawsuit side, linked, not argued)
 - Unclear ownership of generated output
 - Vendor terms or indemnity that do not cover how the business uses the output
 
