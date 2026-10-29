@@ -25,6 +25,16 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | Merged UI pull requests adding raw values outside the token file | 0%, alert above 2% (proposed) | [no locked design tokens](failures/ui-no-locked-design-tokens.md) |
 | Clean-ending rate | 95% (proposed) | [stated-moral endings](failures/text-stated-moral-endings.md) |
 | Evidence-complete flag rate (three independent tells plus a context check) | 100% (proposed) | [folk tells are not evidence](failures/text-folk-tells-unreliable.md) |
+| Grounded-detail rate (first-hand claims traced to a person's notes, photos or test log) | 95% (proposed) | [no first-hand detail](failures/text-no-firsthand-detail.md) |
+| Leftover escape rate (published articles later found to contain chatbot leftover text, per 1,000 published) | 0 (proposed) | [AI text in scientific papers](failures/text-ai-in-scientific-papers.md) |
+| Policy-compliant outside PR rate | 100%, alert below 95% (proposed) | [AI pull request flood](failures/code-ai-pr-flood.md) |
+| Reproduction-backed report rate | 100% (proposed) | [fake vulnerability reports](failures/code-fake-vulnerability-reports.md) |
+| Unapproved person-naming publication rate (agent posts naming a person after a rejection, with no operator approval) | 0 (proposed) | [bot retaliation on maintainers](failures/code-bot-retaliation-on-maintainers.md) |
+| Verified-before-action rate (voice-triggered actions with a logged out-of-band check) | 100% (proposed) | [cloned voice tells](failures/audio-cloned-voice-tells.md) |
+| No-signal labeling rate (no-manifest checks shown as "origin unknown") | 100% (proposed) | [provenance metadata stripped](failures/provenance-metadata-stripped.md) |
+| Scoped-result rate (watermark results shown with the detectors run, the generators not covered and a "not proof of human origin" line) | 100% (proposed) | [vendor-locked watermarks](failures/provenance-vendor-locked-watermarks.md) |
+| Evidence-reviewed action rate (AI-use actions on reported work taken only after a private evidence request and a named second reviewer) | 100% (proposed) | [false accusations by readers](failures/detect-false-accusations-by-readers.md) |
+| Independently checked detector rate (detectors measured on the buyer's own labeled sample, with a 95% range, re-tested since the last update) | 100% before go-live (proposed) | [unverified accuracy claims](failures/detect-unverified-accuracy-claims.md) |
 
 ## Patterns
 | Pattern | One line |
@@ -55,6 +65,16 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | [AI ignores my design system: no locked tokens](failures/ui-no-locked-design-tokens.md) | With no locked token file, AI tools invent colors, spacing and radius per page; lint catches raw values |
 | [Why AI always ends with a summary or a moral](failures/text-stated-moral-endings.md) | Posts, emails and stories end on "Ultimately" or a stated lesson; end on the last fact instead |
 | [Does using em dashes mean AI wrote it?](failures/text-folk-tells-unreliable.md) | One em dash or "delve" is not proof; flags need three independent tells, a context check and a record |
+| [Why does AI writing feel generic? No first-hand detail](failures/text-no-firsthand-detail.md) | Fluent reviews and guides with nothing the writer saw or tested; feed in real notes, never invent experience, block publishing until a detail is traced |
+| [ChatGPT text in scientific papers and AI detector desk rejections](failures/text-ai-in-scientific-papers.md) | "Regenerate response" and "As an AI language model" reach print while journals reject on detector scores; scan for leftovers at submission and proof, never reject on a score alone |
+| [AI generated pull requests flood open source maintainers](failures/code-ai-pr-flood.md) | Agents open unrequested, undisclosed PRs that ignore project rules; a pre-open gate checks the AI policy, an accepted issue, disclosure, tests and the user's yes |
+| [AI generated bug bounty reports and fake CVEs](failures/code-fake-vulnerability-reports.md) | AI-written security reports for flaws that do not exist, as at curl, caught by requiring a reproduction on an unmodified release |
+| [AI agent attacks maintainer after PR rejected](failures/code-bot-retaliation-on-maintainers.md) | An agent's PR is closed and it publishes a post accusing the maintainer of prejudice; a publish gate holds any text naming a person for operator approval. **Read this first: needs legal review.** |
+| [How to tell if a voice is AI cloned](failures/audio-cloned-voice-tells.md) | Breaths, flat tone and room noise don't show a voice is real or cloned; verify by callback or source check before paying, changing an account or publishing. **Read this first: needs legal review.** |
+| [No Content Credentials doesn't mean it's real](failures/provenance-metadata-stripped.md) | Re-saves, screenshots and uploads strip C2PA and IPTC AI labels; tools show a missing manifest as "origin unknown," never "authentic" |
+| [SynthID says "no watermark found": vendor-locked watermarks](failures/provenance-vendor-locked-watermarks.md) | Each watermark checker reads only its own vendor's marks; report which detectors ran and what they can't see, and treat "none found" as unknown, never "not AI". **Read this first: needs legal review.** |
+| [Falsely accused of using AI: reader and fan pile-ons](failures/detect-false-accusations-by-readers.md) | Crowds report real artists, writers and photographers as AI; reports are claims, the creator is asked privately for process evidence, and clearing is public |
+| [Are AI detectors really 99% accurate?](failures/detect-unverified-accuracy-claims.md) | Buyers adopt detectors on vendor-reported accuracy; label the figure and test on your own labeled sample first. **Read this first: needs legal review.** |
 
 ## Planned (not yet written)
 - More text, code, voice, video and provenance tells; detector accuracy, humanizers and false accusations

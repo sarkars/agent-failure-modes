@@ -17,16 +17,16 @@ description: How businesses get hurt when they publish AI-made images and video:
 |---|---|---|---|
 | [AI product images that show features it does not have](failures/ai-product-images-show-features-it-does-not-have.md) | Both | An AI product shot or event ad shows features the real thing lacks, and buyers pay for the picture | [Tests](../../tests/ai-product-images-show-features-it-does-not-have.md) |
 | [AI images in ads published without review](failures/ai-images-in-ads-published-without-review.md) | Image | Brand ads run AI-altered images nobody approved; require sign-off on the live version and keep platform AI edits off | [Tests](../../tests/ai-images-in-ads-published-without-review.md) |
+| [AI ads backlash for replacing artists with AI](failures/ai-ads-backlash-for-replacing-artists-with-ai.md) | Both | A brand runs AI ads or AI models where people expect artists, actors or models, and the backlash is about who lost the work; review the roles AI replaced, credit the humans, label it and name an owner before launch | [Tests](../../tests/ai-ads-backlash-for-replacing-artists-with-ai.md) |
+| [AI image mistakes in ads that go viral](failures/ai-image-mistakes-in-ads-go-viral.md) | Both | An ad shows an extra tower, a backward foot or a two-handled bike and the public finds it first; check real things against a reference and pull and correct every copy the same day | [Tests](../../tests/ai-image-mistakes-in-ads-go-viral.md) |
+| [AI fake receipts and claim photos used to defraud a business](failures/ai-fake-receipts-and-claim-photos-fraud.md) | Image | Expense, refund, claims and KYC teams pay on AI-made receipts, damage photos or IDs; check outside data, ask for originals, never accuse on image tells | [Tests](../../tests/ai-fake-receipts-and-claim-photos-fraud.md) |
+| [Confidential files uploaded to AI image tools](failures/confidential-files-uploaded-to-ai-image-tools.md) | Both | Staff upload unreleased renders, client photos or floor plans to consumer image tools that are public or train by default; classify files and allow each class only on approved tools and tiers | [Tests](../../tests/confidential-files-uploaded-to-ai-image-tools.md) |
+| [Ad platforms that reject or label AI-generated ads](failures/ad-platforms-reject-or-label-ai-generated-ads.md) | Both | AI-made ads go live without the disclosure each platform asks for, or get rejected; check each platform's current rule before launch and after every duplicate | [Tests](../../tests/ad-platforms-reject-or-label-ai-generated-ads.md) |
+| [AI-generated ad disclosure rules not met](failures/ai-generated-ad-disclosure-rules-not-met.md) | Both | One AI-made creative runs in several markets and misses one market's AI labeling law; match every market to a counsel-kept register before launch | [Tests](../../tests/ai-generated-ad-disclosure-rules-not-met.md) |
 
 All tests are **Not yet run**. All detection signals and Guide specs are proposed.
 
 ## Planned (not yet written)
-- Public backlash when a brand replaces artists, models or photographers with AI
-- A visible AI mistake in an ad spreading widely
-- Fake receipts, IDs, damage photos or documents used to defraud a business
-- Confidential material uploaded to an outside image tool
-- Ad platforms rejecting AI creative or requiring a label
-- AI disclosure rules of each market not met
 - Regulated claims in images: health, finance, food, before-and-after
 - Cultural, religious or local errors in images made for other markets
 - Employees' or models' likeness reused beyond what they agreed to
