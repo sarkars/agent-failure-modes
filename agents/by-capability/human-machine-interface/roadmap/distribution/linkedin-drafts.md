@@ -1860,3 +1860,15 @@ The lesson: a bot should never show a ticket number that no system created.
 Cheap test: join every case number in bot replies to the ticket system and flag any with no match.
 
 Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-29: The IRS chatbot said it was collecting feedback. No one was (TIGTA audit, June 2026)
+Draft only. Source: the [teardown](../../incidents/irs-automated-collection-chatbot-unrecognized-keywords-broken-links-tigta-audit-june-2026.md), built from the TIGTA report (2026-308-029) and FedScoop, both opened.
+
+The IRS tax-collection chatbot told users it was "collecting the information to help improve our service."
+IRS officials told auditors they do not collect or review those survey answers.
+A June 2026 TIGTA audit found the bot did not recognize or answered poorly 44 of 53 keywords it tested.
+Unrecognized terms such as "Debit Card" just brought back the opening menu; some replies pointed to broken links.
+The Spanish version had no search box, only preset menus.
+Cheap test: type 50 plain words your users use, in every language you offer, and open every link the bot returns.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
