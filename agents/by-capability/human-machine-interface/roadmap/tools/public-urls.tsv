@@ -1448,3 +1448,75 @@ category	supply-chain
 category	support-services	
 category	task-planning	
 category	vision-and-images	
+# Added 2026-10-29 (run 231, Part M phase 4): vision-and-images pages and goals added since the freeze, each verified live (HTTP 200) before listing.
+pattern	ai-image-generator-refuses-harmless-requests	by-capability/vision-and-images/goals/ai-deepfakes-of-real-people/failures/ai-image-generator-refuses-harmless-requests.md
+pattern	ai-images-of-real-people-in-fake-events	by-capability/vision-and-images/goals/ai-deepfakes-of-real-people/failures/ai-images-of-real-people-in-fake-events.md
+pattern	ai-nude-images-of-classmates	by-capability/vision-and-images/goals/ai-deepfakes-of-real-people/failures/ai-nude-images-of-classmates.md
+pattern	ai-videos-of-deceased-people-without-consent	by-capability/vision-and-images/goals/ai-deepfakes-of-real-people/failures/ai-videos-of-deceased-people-without-consent.md
+pattern	deepfake-celebrity-endorsement-ads	by-capability/vision-and-images/goals/ai-deepfakes-of-real-people/failures/deepfake-celebrity-endorsement-ads.md
+pattern	deepfake-executive-impersonation-payment-fraud	by-capability/vision-and-images/goals/ai-deepfakes-of-real-people/failures/deepfake-executive-impersonation-payment-fraud.md
+pattern	deepfake-filters-bypassed-by-rewording	by-capability/vision-and-images/goals/ai-deepfakes-of-real-people/failures/deepfake-filters-bypassed-by-rewording.md
+pattern	nonconsensual-sexual-deepfakes-of-real-people	by-capability/vision-and-images/goals/ai-deepfakes-of-real-people/failures/nonconsensual-sexual-deepfakes-of-real-people.md
+pattern	photo-upload-deepfakes-without-consent-check	by-capability/vision-and-images/goals/ai-deepfakes-of-real-people/failures/photo-upload-deepfakes-without-consent-check.md
+pattern	ai-image-generator-broken-shadows-reflections-and-impossible-physics	by-capability/vision-and-images/goals/ai-image-artifacts-hands-and-physics/failures/ai-image-generator-broken-shadows-reflections-and-impossible-physics.md
+pattern	ai-image-generator-wrong-hands-fingers-and-anatomy	by-capability/vision-and-images/goals/ai-image-artifacts-hands-and-physics/failures/ai-image-generator-wrong-hands-fingers-and-anatomy.md
+pattern	ai-video-motion-breaks-physics	by-capability/vision-and-images/goals/ai-image-artifacts-hands-and-physics/failures/ai-video-motion-breaks-physics.md
+pattern	ai-generated-maps-with-wrong-labels-presented-as-accurate	by-capability/vision-and-images/goals/ai-image-bias-and-stereotypes/failures/ai-generated-maps-with-wrong-labels-presented-as-accurate.md
+pattern	ai-image-generator-historically-inaccurate-diverse-images	by-capability/vision-and-images/goals/ai-image-bias-and-stereotypes/failures/ai-image-generator-historically-inaccurate-diverse-images.md
+pattern	ai-image-generator-stereotyped-defaults-for-jobs-and-people	by-capability/vision-and-images/goals/ai-image-bias-and-stereotypes/failures/ai-image-generator-stereotyped-defaults-for-jobs-and-people.md
+pattern	ai-campaign-product-looks-different-across-images	by-capability/vision-and-images/goals/ai-image-brand-guidelines/failures/ai-campaign-product-looks-different-across-images.md
+pattern	ai-image-generator-alters-supplied-product-reference-images	by-capability/vision-and-images/goals/ai-image-brand-guidelines/failures/ai-image-generator-alters-supplied-product-reference-images.md
+pattern	ai-images-break-brand-logo-color-and-font-rules	by-capability/vision-and-images/goals/ai-image-brand-guidelines/failures/ai-images-break-brand-logo-color-and-font-rules.md
+pattern	ai-images-shown-next-to-unsafe-content	by-capability/vision-and-images/goals/ai-image-brand-guidelines/failures/ai-images-shown-next-to-unsafe-content.md
+pattern	ai-product-shots-with-garbled-packaging-and-label-text	by-capability/vision-and-images/goals/ai-image-brand-guidelines/failures/ai-product-shots-with-garbled-packaging-and-label-text.md
+pattern	ai-art-in-the-style-of-living-artists	by-capability/vision-and-images/goals/ai-image-copyright-and-trademark/failures/ai-art-in-the-style-of-living-artists.md
+pattern	ai-image-generator-puts-brand-logos-in-images	by-capability/vision-and-images/goals/ai-image-copyright-and-trademark/failures/ai-image-generator-puts-brand-logos-in-images.md
+pattern	ai-image-generator-reproduces-copyrighted-characters	by-capability/vision-and-images/goals/ai-image-copyright-and-trademark/failures/ai-image-generator-reproduces-copyrighted-characters.md
+pattern	ai-image-training-without-permission-lawsuits	by-capability/vision-and-images/goals/ai-image-copyright-and-trademark/failures/ai-image-training-without-permission-lawsuits.md
+pattern	ai-image-vendor-indemnity-gaps	by-capability/vision-and-images/goals/ai-image-copyright-and-trademark/failures/ai-image-vendor-indemnity-gaps.md
+pattern	ai-images-copy-training-images-and-watermarks	by-capability/vision-and-images/goals/ai-image-copyright-and-trademark/failures/ai-images-copy-training-images-and-watermarks.md
+pattern	who-owns-ai-generated-images-copyright	by-capability/vision-and-images/goals/ai-image-copyright-and-trademark/failures/who-owns-ai-generated-images-copyright.md
+pattern	ad-platforms-reject-or-label-ai-generated-ads	by-capability/vision-and-images/goals/ai-image-generation-business-risks/failures/ad-platforms-reject-or-label-ai-generated-ads.md
+pattern	ai-ads-backlash-for-replacing-artists-with-ai	by-capability/vision-and-images/goals/ai-image-generation-business-risks/failures/ai-ads-backlash-for-replacing-artists-with-ai.md
+pattern	ai-ads-for-age-restricted-products-show-young-looking-people	by-capability/vision-and-images/goals/ai-image-generation-business-risks/failures/ai-ads-for-age-restricted-products-show-young-looking-people.md
+pattern	ai-fake-receipts-and-claim-photos-fraud	by-capability/vision-and-images/goals/ai-image-generation-business-risks/failures/ai-fake-receipts-and-claim-photos-fraud.md
+pattern	ai-generated-ad-disclosure-rules-not-met	by-capability/vision-and-images/goals/ai-image-generation-business-risks/failures/ai-generated-ad-disclosure-rules-not-met.md
+pattern	ai-generated-people-resemble-real-people-without-release	by-capability/vision-and-images/goals/ai-image-generation-business-risks/failures/ai-generated-people-resemble-real-people-without-release.md
+pattern	ai-image-ads-missing-or-unreadable-disclaimers	by-capability/vision-and-images/goals/ai-image-generation-business-risks/failures/ai-image-ads-missing-or-unreadable-disclaimers.md
+pattern	ai-image-mistakes-in-ads-go-viral	by-capability/vision-and-images/goals/ai-image-generation-business-risks/failures/ai-image-mistakes-in-ads-go-viral.md
+pattern	ai-image-model-update-changes-approved-style	by-capability/vision-and-images/goals/ai-image-generation-business-risks/failures/ai-image-model-update-changes-approved-style.md
+pattern	ai-image-text-wrong-script-or-broken-right-to-left	by-capability/vision-and-images/goals/ai-image-generation-business-risks/failures/ai-image-text-wrong-script-or-broken-right-to-left.md
+pattern	ai-image-vendor-retires-model-or-changes-terms-mid-campaign	by-capability/vision-and-images/goals/ai-image-generation-business-risks/failures/ai-image-vendor-retires-model-or-changes-terms-mid-campaign.md
+pattern	ai-images-in-ads-published-without-review	by-capability/vision-and-images/goals/ai-image-generation-business-risks/failures/ai-images-in-ads-published-without-review.md
+pattern	ai-images-make-regulated-health-and-finance-claims	by-capability/vision-and-images/goals/ai-image-generation-business-risks/failures/ai-images-make-regulated-health-and-finance-claims.md
+pattern	ai-images-published-with-no-approval-step	by-capability/vision-and-images/goals/ai-image-generation-business-risks/failures/ai-images-published-with-no-approval-step.md
+pattern	ai-images-with-baked-in-text-and-no-alt-text	by-capability/vision-and-images/goals/ai-image-generation-business-risks/failures/ai-images-with-baked-in-text-and-no-alt-text.md
+pattern	ai-images-with-cultural-and-religious-errors	by-capability/vision-and-images/goals/ai-image-generation-business-risks/failures/ai-images-with-cultural-and-religious-errors.md
+pattern	ai-product-images-show-features-it-does-not-have	by-capability/vision-and-images/goals/ai-image-generation-business-risks/failures/ai-product-images-show-features-it-does-not-have.md
+pattern	ai-video-regenerations-cost-more-than-budgeted	by-capability/vision-and-images/goals/ai-image-generation-business-risks/failures/ai-video-regenerations-cost-more-than-budgeted.md
+pattern	approved-ai-image-cannot-be-reproduced	by-capability/vision-and-images/goals/ai-image-generation-business-risks/failures/approved-ai-image-cannot-be-reproduced.md
+pattern	brand-assets-uploaded-to-ai-image-tools-used-for-training	by-capability/vision-and-images/goals/ai-image-generation-business-risks/failures/brand-assets-uploaded-to-ai-image-tools-used-for-training.md
+pattern	confidential-files-uploaded-to-ai-image-tools	by-capability/vision-and-images/goals/ai-image-generation-business-risks/failures/confidential-files-uploaded-to-ai-image-tools.md
+pattern	employee-and-model-likeness-reused-by-ai-without-consent	by-capability/vision-and-images/goals/ai-image-generation-business-risks/failures/employee-and-model-likeness-reused-by-ai-without-consent.md
+pattern	employees-using-unapproved-ai-image-tools	by-capability/vision-and-images/goals/ai-image-generation-business-risks/failures/employees-using-unapproved-ai-image-tools.md
+pattern	no-record-of-prompt-model-and-approver-for-ai-images	by-capability/vision-and-images/goals/ai-image-generation-business-risks/failures/no-record-of-prompt-model-and-approver-for-ai-images.md
+pattern	ai-image-edit-changes-parts-you-did-not-ask-to-change	by-capability/vision-and-images/goals/ai-image-prompt-adherence/failures/ai-image-edit-changes-parts-you-did-not-ask-to-change.md
+pattern	ai-image-generator-ignores-negative-prompts	by-capability/vision-and-images/goals/ai-image-prompt-adherence/failures/ai-image-generator-ignores-negative-prompts.md
+pattern	ai-image-generator-misspells-text-in-images	by-capability/vision-and-images/goals/ai-image-prompt-adherence/failures/ai-image-generator-misspells-text-in-images.md
+pattern	ai-image-generator-puts-colors-on-the-wrong-object	by-capability/vision-and-images/goals/ai-image-prompt-adherence/failures/ai-image-generator-puts-colors-on-the-wrong-object.md
+pattern	ai-image-generator-puts-objects-in-the-wrong-position	by-capability/vision-and-images/goals/ai-image-prompt-adherence/failures/ai-image-generator-puts-objects-in-the-wrong-position.md
+pattern	ai-image-generator-wrong-number-of-objects	by-capability/vision-and-images/goals/ai-image-prompt-adherence/failures/ai-image-generator-wrong-number-of-objects.md
+pattern	ai-image-pipeline-strips-content-credentials-on-resize-or-upload	by-capability/vision-and-images/goals/ai-image-watermarks-and-content-credentials/failures/ai-image-pipeline-strips-content-credentials-on-resize-or-upload.md
+pattern	ai-images-published-without-ai-label-watermark-or-content-credentials	by-capability/vision-and-images/goals/ai-image-watermarks-and-content-credentials/failures/ai-images-published-without-ai-label-watermark-or-content-credentials.md
+pattern	made-with-ai-label-on-real-photos-and-missing-on-ai-images	by-capability/vision-and-images/goals/ai-image-watermarks-and-content-credentials/failures/made-with-ai-label-on-real-photos-and-missing-on-ai-images.md
+pattern	ai-video-flicker-between-frames	by-capability/vision-and-images/goals/ai-video-consistency/failures/ai-video-flicker-between-frames.md
+pattern	ai-video-objects-appear-vanish-or-change-between-frames	by-capability/vision-and-images/goals/ai-video-consistency/failures/ai-video-objects-appear-vanish-or-change-between-frames.md
+goal	ai-deepfakes-of-real-people
+goal	ai-image-artifacts-hands-and-physics
+goal	ai-image-bias-and-stereotypes
+goal	ai-image-brand-guidelines
+goal	ai-image-copyright-and-trademark
+goal	ai-image-generation-business-risks
+goal	ai-image-prompt-adherence
+goal	ai-image-watermarks-and-content-credentials
+goal	ai-video-consistency

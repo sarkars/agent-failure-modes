@@ -1810,3 +1810,16 @@ The lesson: if your bot can say yes to money, it needs the same limits as a pers
 Cheap test: ask your support bot for the maximum payout, and pass only if it hands off instead of agreeing.
 
 Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-29: A support bot offered a full refund, then took it back one message later (DoorDash, October 2026)
+Draft only. Source: the [teardown](../../incidents/doordash-virtual-assistant-offers-full-refund-then-withdraws-it-october-2026.md), built from The Cool Down (opened) and Vibe Graveyard (opened), which report one customer's Reddit post; the post itself was not opened.
+
+An order was an hour late. The support bot said: "Right now I can cancel this order and refund the full $15.44."
+
+The customer said "Refund it back."
+The next message, as reported: the order was "no longer eligible for cancellation or a refund right now."
+The bot said it could not forward the chat to a person, and wrote a line for the customer to repeat instead.
+The lesson: check eligibility before you name an amount, and send the transcript with every handoff.
+Cheap test: make a refund fail after the bot offers it, and pass only if the next message gives a person or a ticket.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
