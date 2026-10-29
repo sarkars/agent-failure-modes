@@ -2389,7 +2389,7 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 458 | SL-26 | Folk tells that are wrong: em dashes and punctuation as proof | New | - | `goals/ai-slop-detection/failures/text-folk-tells-unreliable.md` | Done | 220 |
 | 459 | SL-27 | Confident prose with no first-hand detail | New | - | `goals/ai-slop-detection/failures/text-no-firsthand-detail.md` | Done | 221 |
 | 460 | SL-28 | AI-written scientific papers and desk rejections on detector flags | New | - | `goals/ai-slop-detection/failures/text-ai-in-scientific-papers.md` | Done | 221 |
-| 461 | SL-29 | Low-quality AI pull requests flood maintainers | New | - | `goals/ai-slop-detection/failures/code-ai-pr-flood.md` | Queued | - |
+| 461 | SL-29 | Low-quality AI pull requests flood maintainers | New | - | `goals/ai-slop-detection/failures/code-ai-pr-flood.md` | Done | 221 |
 | 462 | SL-30 | AI bug reports and bounty claims for flaws that do not exist | New | - | `goals/ai-slop-detection/failures/code-fake-vulnerability-reports.md` | Queued | - |
 | 463 | SL-31 | Agent bot retaliates after a rejected contribution | New | - | `goals/ai-slop-detection/failures/code-bot-retaliation-on-maintainers.md` | Queued | - |
 | 464 | SL-32 | Cloned voice tells: no breath, flat prosody, no room tone | New | - | `goals/ai-slop-detection/failures/audio-cloned-voice-tells.md` | Queued | - |
