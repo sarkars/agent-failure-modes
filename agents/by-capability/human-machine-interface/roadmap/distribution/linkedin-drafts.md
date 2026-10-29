@@ -1895,3 +1895,14 @@ It called a six-day-old 50% containment figure the "latest." The fire was 85% co
 Cheap test: ask every core question four ways, and check the "as of" time on every live number.
 
 Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-29: A federal nutrition site's "Ask" box sent questions to Grok (February 2026)
+Draft only. Source: the [teardown](../../incidents/realfood-gov-nutrition-site-sends-users-to-grok-off-topic-answers-and-sign-up-wall-february-2026.md), built from Nextgov, STAT, 404 Media, WIRED, eMarketer, Futurism and the Jerusalem Post, all opened (404 Media and WIRED only in part, paywalled).
+
+In February 2026, realfood.gov's "Ask" box sent questions to grok.com.
+Asked about the site's own food pyramid, the bot raised doubts about its evidence.
+Troll questions got detailed, joking answers on a .gov page.
+After a few questions, users were asked to sign up with xAI to keep going.
+Cheap test: ask your bot 6 off-topic questions and 8 about your own pages. Off-topic should get a short redirect; your pages should get your own answer.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
