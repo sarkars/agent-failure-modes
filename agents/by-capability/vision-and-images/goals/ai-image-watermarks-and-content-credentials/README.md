@@ -16,6 +16,7 @@ description: How AI images and video lose the marks that say they are AI, from u
 | Pattern | Covers | One line | Tests |
 |---|---|---|---|
 | [AI images published without an AI label, watermark or Content Credentials](failures/ai-images-published-without-ai-label-watermark-or-content-credentials.md) | Both | A product's own generator ships files with no visible label, no watermark and no C2PA manifest; mark every model and export path with a manifest plus a watermark, offer a visible label, and block releases that fail the check | [Tests](../../tests/ai-images-published-without-ai-label-watermark-or-content-credentials.md) |
+| [AI image Content Credentials stripped on resize or upload](failures/ai-image-pipeline-strips-content-credentials-on-resize-or-upload.md) | Both | The generator signs the file, then your own resize, format change, CDN or upload step removes the label; list every step, set each to keep or re-sign, and test the live file | [Tests](../../tests/ai-image-pipeline-strips-content-credentials-on-resize-or-upload.md) |
 
 All tests are **Not yet run**. All detection signals and Guide specs are proposed.
 
