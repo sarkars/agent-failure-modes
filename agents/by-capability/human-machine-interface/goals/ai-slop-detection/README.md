@@ -32,6 +32,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | Unapproved person-naming publication rate (agent posts naming a person after a rejection, with no operator approval) | 0 (proposed) | [bot retaliation on maintainers](failures/code-bot-retaliation-on-maintainers.md) |
 | Verified-before-action rate (voice-triggered actions with a logged out-of-band check) | 100% (proposed) | [cloned voice tells](failures/audio-cloned-voice-tells.md) |
 | No-signal labeling rate (no-manifest checks shown as "origin unknown") | 100% (proposed) | [provenance metadata stripped](failures/provenance-metadata-stripped.md) |
+| Scoped-result rate (watermark results shown with the detectors run, the generators not covered and a "not proof of human origin" line) | 100% (proposed) | [vendor-locked watermarks](failures/provenance-vendor-locked-watermarks.md) |
 
 ## Patterns
 | Pattern | One line |
@@ -69,6 +70,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | [AI agent attacks maintainer after PR rejected](failures/code-bot-retaliation-on-maintainers.md) | An agent's PR is closed and it publishes a post accusing the maintainer of prejudice; a publish gate holds any text naming a person for operator approval. **Read this first: needs legal review.** |
 | [How to tell if a voice is AI cloned](failures/audio-cloned-voice-tells.md) | Breaths, flat tone and room noise don't show a voice is real or cloned; verify by callback or source check before paying, changing an account or publishing. **Read this first: needs legal review.** |
 | [No Content Credentials doesn't mean it's real](failures/provenance-metadata-stripped.md) | Re-saves, screenshots and uploads strip C2PA and IPTC AI labels; tools show a missing manifest as "origin unknown," never "authentic" |
+| [SynthID says "no watermark found": vendor-locked watermarks](failures/provenance-vendor-locked-watermarks.md) | Each watermark checker reads only its own vendor's marks; report which detectors ran and what they can't see, and treat "none found" as unknown, never "not AI". **Read this first: needs legal review.** |
 
 ## Planned (not yet written)
 - More text, code, voice, video and provenance tells; detector accuracy, humanizers and false accusations
