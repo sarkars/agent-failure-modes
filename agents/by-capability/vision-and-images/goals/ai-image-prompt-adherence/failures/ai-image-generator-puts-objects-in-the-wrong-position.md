@@ -179,7 +179,7 @@ status: proposed
 - [Spatial reasoning goal](../../spatial-reasoning/README.md) and [relative position confusion](../../spatial-reasoning/failures/relative-position-confusion.md) - the same left-right and on-under errors when a model reads an image. This page is about a model drawing one; the reading failure matters here because a vision model used as a checker can make it.
 - [AI product images that show features it does not have](../../ai-image-generation-business-risks/failures/ai-product-images-show-features-it-does-not-have.md) - wrong content in a product image; this page is wrong arrangement.
 - [AI images published with no approval step](../../ai-image-generation-business-risks/failures/ai-images-published-with-no-approval-step.md) - the missing sign-off that lets a wrong placement ship.
-- Attributes attached to the wrong object (a planned page in this goal) - the same scenes, but colors or materials land on the wrong object instead of objects landing in the wrong place.
+- [AI image generator mixes up colors](ai-image-generator-puts-colors-on-the-wrong-object.md) - the same scenes, but colors or materials land on the wrong object instead of objects landing in the wrong place.
 
 ## 9. Common questions
 ### Why does AI ignore "left of" in my prompt?
