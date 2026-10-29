@@ -17,12 +17,13 @@ description: How AI images and video go off brand, from a redrawn logo, off-pale
 |---|---|---|---|
 | [AI images break brand logo, color and font rules](failures/ai-images-break-brand-logo-color-and-font-rules.md) | Both | The generator redraws the brand's own logo, drifts off the palette and invents a font; generate only the scene, place the official logo file and brand-font text afterward, measure colors against the hex values and get a brand reviewer's sign-off | [Tests](../../tests/ai-images-break-brand-logo-color-and-font-rules.md) |
 | [AI images put a brand next to unsafe content](failures/ai-images-shown-next-to-unsafe-content.md) | Image | Generators put a brand's logo, mascot or characters into sexual, violent or political scenes; block those prompts and check the scene before and after brand assets are added | [Tests](../../tests/ai-images-shown-next-to-unsafe-content.md) |
+| [AI product shots with garbled packaging and label text](failures/ai-product-shots-with-garbled-packaging-and-label-text.md) | Image | The generator redraws the product's packaging so the name, claims and label panels come out misspelled or as gibberish; place and lock the real label art, OCR every word against approved copy and get a zoomed sign-off | [Tests](../../tests/ai-product-shots-with-garbled-packaging-and-label-text.md) |
+| [AI image tools alter the supplied product reference image](failures/ai-image-generator-alters-supplied-product-reference-images.md) | Image | The team supplies the real product photo and the generator or ad platform changes its parts, colors or label; composite the real product, check a locked list against the supplied file, and check platform variants and the live ad before it runs | [Tests](../../tests/ai-image-generator-alters-supplied-product-reference-images.md) |
+| [Product looks different across a campaign](failures/ai-campaign-product-looks-different-across-images.md) | Both | An AI campaign's product changes from image to image or shot to shot; build every asset from one product reference and approve the set side by side | [Tests](../../tests/ai-campaign-product-looks-different-across-images.md) |
 
 Another company's logo or character appearing in output is covered by [brand logos in AI images](../ai-image-copyright-and-trademark/failures/ai-image-generator-puts-brand-logos-in-images.md) in the copyright and trademark goal; this goal links to it instead of repeating it.
 
 All tests are **Not yet run**. All detection signals and Guide specs are proposed.
-
-## Planned (not yet written)
 
 ## Related
 - [Generation artifacts](../generation-artifacts/README.md): the older goal on image generation failures, including [consistency failure](../generation-artifacts/failures/consistency-failure.md)
