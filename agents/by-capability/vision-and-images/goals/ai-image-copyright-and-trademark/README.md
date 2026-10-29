@@ -20,11 +20,11 @@ description: How AI image and video tools end up copying protected characters, a
 | [AI art in the style of living artists](failures/ai-art-in-the-style-of-living-artists.md) | Image | A generator copies a working artist's look when asked by name, and the art carries their name | [Tests](../../tests/ai-art-in-the-style-of-living-artists.md) |
 | [Brand logos and trademarks in AI images](failures/ai-image-generator-puts-brand-logos-in-images.md) | Image | A generator puts a real brand's logo or mark into an image, and the business posts it unapproved | [Tests](../../tests/ai-image-generator-puts-brand-logos-in-images.md) |
 | [Training on images without permission](failures/ai-image-training-without-permission-lawsuits.md) | Image | A team adopts or fine-tunes an image generator without checking where its training images came from | [Tests](../../tests/ai-image-training-without-permission-lawsuits.md) |
+| [Who owns AI-generated images](failures/who-owns-ai-generated-images-copyright.md) | Both | A tool tells a business it owns a generated logo or cover; it registers or promises rights it may lack | [Tests](../../tests/who-owns-ai-generated-images-copyright.md) |
 
 All tests are **Not yet run**. All detection signals and Guide specs are proposed.
 
 ## Planned (not yet written)
-- Unclear ownership of generated output
 - Vendor terms or indemnity that do not cover how the business uses the output
 
 ## Related
