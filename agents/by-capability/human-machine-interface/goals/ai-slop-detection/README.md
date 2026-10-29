@@ -26,6 +26,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | Clean-ending rate | 95% (proposed) | [stated-moral endings](failures/text-stated-moral-endings.md) |
 | Evidence-complete flag rate (three independent tells plus a context check) | 100% (proposed) | [folk tells are not evidence](failures/text-folk-tells-unreliable.md) |
 | Grounded-detail rate (first-hand claims traced to a person's notes, photos or test log) | 95% (proposed) | [no first-hand detail](failures/text-no-firsthand-detail.md) |
+| Leftover escape rate (published articles later found to contain chatbot leftover text, per 1,000 published) | 0 (proposed) | [AI text in scientific papers](failures/text-ai-in-scientific-papers.md) |
 
 ## Patterns
 | Pattern | One line |
@@ -57,6 +58,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | [Why AI always ends with a summary or a moral](failures/text-stated-moral-endings.md) | Posts, emails and stories end on "Ultimately" or a stated lesson; end on the last fact instead |
 | [Does using em dashes mean AI wrote it?](failures/text-folk-tells-unreliable.md) | One em dash or "delve" is not proof; flags need three independent tells, a context check and a record |
 | [Why does AI writing feel generic? No first-hand detail](failures/text-no-firsthand-detail.md) | Fluent reviews and guides with nothing the writer saw or tested; feed in real notes, never invent experience, block publishing until a detail is traced |
+| [ChatGPT text in scientific papers and AI detector desk rejections](failures/text-ai-in-scientific-papers.md) | "Regenerate response" and "As an AI language model" reach print while journals reject on detector scores; scan for leftovers at submission and proof, never reject on a score alone |
 
 ## Planned (not yet written)
 - More text, code, voice, video and provenance tells; detector accuracy, humanizers and false accusations
