@@ -2199,6 +2199,7 @@ Run N covers queue orders as shown. At one run every hour, 91 runs take about 91
 - **KPIs:** written patterns 321 (check_site_compat, HMI only); catalog rows 493 (rebuild_summary); descriptions ending in an ellipsis: 0 (run 229 figure; no site change this run). Site build: 2,044 pages (run 229; no site change this run).
 - **Plan complete?** No. Still open: Part M phase 4 (incident pages are not published by the importer; needs a decision) and phase 5 (owner); G10 batch 3; G12 batches; GORT step 7 (Gate) onward.
 - **Owner notes:** (1) GORT step 7 waits for you. (2) Privacy/Contact facts still open. (3) The `grep.exe.stackdump` files are untracked and were not touched. (4) Merge proposals 7 to 19 wait for you. (5) Phase 4: the importer does not publish incident pages; needs a decision. (6) Media Pattern IDs on the six vision-and-images incident pages are still not in failure-taxonomy-v1.md. (7) Getty and Coca-Cola law/labor statements need a person's review. (8) The Choice Home Warranty teardown rests on one original report.
+- **Deploy:** content PR [#230](https://github.com/sarkars/agent-failure-modes/pull/230) merged into main (merge 8b64da5e). Site: nothing in publish scope (no `failures/` page changed; incident pages are not imported); no site commit, no Vercel deploy needed.
 
 ## Queue
 Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Library** column is the status in the catalog when the queue was built (**New** or **Extends**).
