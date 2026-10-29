@@ -34,6 +34,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | No-signal labeling rate (no-manifest checks shown as "origin unknown") | 100% (proposed) | [provenance metadata stripped](failures/provenance-metadata-stripped.md) |
 | Scoped-result rate (watermark results shown with the detectors run, the generators not covered and a "not proof of human origin" line) | 100% (proposed) | [vendor-locked watermarks](failures/provenance-vendor-locked-watermarks.md) |
 | Evidence-reviewed action rate (AI-use actions on reported work taken only after a private evidence request and a named second reviewer) | 100% (proposed) | [false accusations by readers](failures/detect-false-accusations-by-readers.md) |
+| Independently checked detector rate (detectors measured on the buyer's own labeled sample, with a 95% range, re-tested since the last update) | 100% before go-live (proposed) | [unverified accuracy claims](failures/detect-unverified-accuracy-claims.md) |
 
 ## Patterns
 | Pattern | One line |
@@ -73,6 +74,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | [No Content Credentials doesn't mean it's real](failures/provenance-metadata-stripped.md) | Re-saves, screenshots and uploads strip C2PA and IPTC AI labels; tools show a missing manifest as "origin unknown," never "authentic" |
 | [SynthID says "no watermark found": vendor-locked watermarks](failures/provenance-vendor-locked-watermarks.md) | Each watermark checker reads only its own vendor's marks; report which detectors ran and what they can't see, and treat "none found" as unknown, never "not AI". **Read this first: needs legal review.** |
 | [Falsely accused of using AI: reader and fan pile-ons](failures/detect-false-accusations-by-readers.md) | Crowds report real artists, writers and photographers as AI; reports are claims, the creator is asked privately for process evidence, and clearing is public |
+| [Are AI detectors really 99% accurate?](failures/detect-unverified-accuracy-claims.md) | Buyers adopt detectors on vendor-reported accuracy; label the figure and test on your own labeled sample first. **Read this first: needs legal review.** |
 
 ## Planned (not yet written)
 - More text, code, voice, video and provenance tells; detector accuracy, humanizers and false accusations
