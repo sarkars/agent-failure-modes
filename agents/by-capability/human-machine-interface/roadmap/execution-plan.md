@@ -2481,7 +2481,7 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 481 | SL-49 | Detectors fail on generators they were not trained on | New | - | `goals/ai-slop-detection/failures/detect-unseen-generator-failure.md` | Done | 223 |
 | 482 | SL-50 | Detectors falsely flag non-native English writers and some student groups | New | - | `goals/ai-slop-detection/failures/detect-biased-false-positives.md` | Done | 223 |
 | 483 | SL-51 | Slop detection run as a one-time check, not a release gate | New | - | `goals/ai-slop-detection/failures/detect-no-release-gate.md` | Done | 223 |
-| 484 | SL-52 | Text watermarks erased by paraphrase, back-translation or rewrite | New | - | `goals/ai-slop-detection/failures/provenance-text-watermark-erased.md` | Queued | - |
+| 484 | SL-52 | Text watermarks erased by paraphrase, back-translation or rewrite | New | - | `goals/ai-slop-detection/failures/provenance-text-watermark-erased.md` | Done | 223 |
 | 485 | SL-53 | Slopsquatting: attackers register package names that AI keeps inventing | New | - | `goals/ai-slop-detection/failures/code-slopsquatting.md` | Queued | - |
 | 486 | SL-54 | AI-generated code ships vulnerabilities and is not tagged as AI | New | - | `goals/ai-slop-detection/failures/code-untracked-ai-vulnerabilities.md` | Queued | - |
 | 487 | SL-55 | AI agent skills install hallucinated dependencies on their own | New | - | `goals/ai-slop-detection/failures/code-agent-installs-hallucinated-packages.md` | Queued | - |
