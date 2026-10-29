@@ -21,6 +21,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | Re-tested rule rate (rules re-tested against the current model version) | 100% within 7 days of a model change (proposed) | [detection rules decay](failures/detect-rules-decay.md) |
 | Flagged default-type or forced-dark screens shipped with no recorded reason | Under 10% (proposed) | [default type and palette](failures/ui-default-type-and-palette.md) |
 | Flagged neon-and-glow screens shipped with no recorded reason | Under 10% (proposed) | [neon and aurora glow](failures/ui-neon-aurora-glow.md) |
+| Distinctiveness check pass rate at launch | 100% (proposed) | [visual convergence](failures/ui-visual-convergence.md) |
 
 ## Patterns
 | Pattern | One line |
@@ -47,6 +48,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | [AI detection rules stop working after a model update](failures/detect-rules-decay.md) | Phrase lists, regex and classifiers quietly stop catching anything after the generating model changes |
 | [Inter font, indigo accents and forced dark mode](failures/ui-default-type-and-palette.md) | Default font, off-token accent and dark mode that ignores the user's setting |
 | [Neon glow on dark backgrounds and aurora blobs](failures/ui-neon-aurora-glow.md) | Neon text and borders on near-black over blurred blobs, checked for contrast, blur cost and motion |
+| [Why all AI websites look the same](failures/ui-visual-convergence.md) | Unrelated sites built with the same tools and kits converge on one look; a pre-launch distinctiveness check catches it |
 
 ## Planned (not yet written)
 - More text, code, voice, video and provenance tells; detector accuracy, humanizers and false accusations
