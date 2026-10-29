@@ -51,6 +51,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | Group-audited detector rate (detectors in use with a current per-group, per-length false-positive audit on local known-human writing) | 100% before go-live (proposed) | [biased false positives](failures/detect-biased-false-positives.md) |
 | Gated release rate (releases and publishes that passed the full slop gate or carry a recorded override) | 100% (proposed) | [no release gate](failures/detect-no-release-gate.md) |
 | Scoped text-watermark result rate (results shown with state, length and edit caveat, never an authorship verdict) | 100% (proposed) | [text watermark erased](failures/provenance-text-watermark-erased.md) |
+| Unreviewed young-or-unlisted dependency rate (new dependencies that are young, from a single-package publisher or off the allowlist, merged with no review) | 0 (proposed) | [slopsquatting](failures/code-slopsquatting.md) |
 
 ## Patterns
 | Pattern | One line |
@@ -107,6 +108,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | [AI detectors biased against English learners and Black students](failures/detect-biased-false-positives.md) | Detectors and teachers falsely flag English learners, Black students and short texts more often than others; audit false flags per group and length on local human writing. **Read this first: needs legal review.** |
 | [AI slop checks run once, not on every release](failures/detect-no-release-gate.md) | Slop checks run once at launch or only warn in CI, so placeholders, chatbot leftovers and fake citations come back; run one suite on every path, block on errors, record every override |
 | [Can a text watermark survive paraphrasing? Text watermarks erased by rewrites](failures/provenance-text-watermark-erased.md) | Paraphrase, translation or rewording erases text watermarks and marks can be forged; show state and length, never "human-written," decide nothing on the mark alone. **Read this first: needs legal review.** |
+| [Slopsquatting: attackers register package names AI keeps inventing](failures/code-slopsquatting.md) | Attackers register package names AI tools keep inventing, so "exists on npm" passes; a gate holds young, unlisted packages and a scan cleans invented install commands from docs and skills |
 
 ## Planned (not yet written)
 - More text, code, voice, video and provenance tells; detector accuracy, humanizers and false accusations
