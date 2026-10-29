@@ -46,6 +46,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | Process-evidence decision rate (AI-use findings on student or applicant essays recording a notice, the student's response and a decider other than the accuser) | 100% (proposed) | [AI essays](failures/education-ai-essays.md) |
 | Provenance-tagged record rate (records with source, collection date and origin label / all records in a training run) | 100% (proposed) | [model collapse](failures/data-model-collapse-contamination.md) |
 | Reviewed-before-index rate (translated pages published or indexed only after a fluent review of that language) | 100% (proposed) | [machine-translated duplicates](failures/data-machine-translated-duplicates.md) |
+| Condition-labeled result rate (detector results shown with the input's size, re-compression and crop/screenshot condition; degraded low scores shown as "inconclusive") | 100% (proposed) | [image detector fragility](failures/detect-image-detector-fragility.md) |
 
 ## Patterns
 | Pattern | One line |
@@ -97,6 +98,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | [AI-written student and admissions essays: penalized or missed](failures/education-ai-essays.md) | Schools act on a score or a hunch, penalizing honest students while lightly edited AI essays pass; use drafts, version history and an oral follow-up, and keep accuser and decider apart. **Read this first: needs legal review.** |
 | [Model collapse: training on AI-generated data](failures/data-model-collapse-contamination.md) | Retraining on scraped or user data that is increasingly AI-written loses rare cases; tag provenance and keep a human reference set |
 | [Machine-translated duplicate pages: sites auto-translated with no fluent review](failures/data-machine-translated-duplicates.md) | AI agents mass-translate sites into many languages with no fluent review; publish only reviewed languages and filter text found in many MT languages from datasets |
+| [AI image detector says "real" after a screenshot: detectors break after crop, resize or recompress](failures/detect-image-detector-fragility.md) | Screenshots, crops, resizes and re-saves wipe the traces detectors read; results name the copy's condition and a low score on a degraded copy is "inconclusive" |
 
 ## Planned (not yet written)
 - More text, code, voice, video and provenance tells; detector accuracy, humanizers and false accusations
