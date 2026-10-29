@@ -25,6 +25,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | Merged UI pull requests adding raw values outside the token file | 0%, alert above 2% (proposed) | [no locked design tokens](failures/ui-no-locked-design-tokens.md) |
 | Clean-ending rate | 95% (proposed) | [stated-moral endings](failures/text-stated-moral-endings.md) |
 | Evidence-complete flag rate (three independent tells plus a context check) | 100% (proposed) | [folk tells are not evidence](failures/text-folk-tells-unreliable.md) |
+| Grounded-detail rate (first-hand claims traced to a person's notes, photos or test log) | 95% (proposed) | [no first-hand detail](failures/text-no-firsthand-detail.md) |
 
 ## Patterns
 | Pattern | One line |
@@ -55,6 +56,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | [AI ignores my design system: no locked tokens](failures/ui-no-locked-design-tokens.md) | With no locked token file, AI tools invent colors, spacing and radius per page; lint catches raw values |
 | [Why AI always ends with a summary or a moral](failures/text-stated-moral-endings.md) | Posts, emails and stories end on "Ultimately" or a stated lesson; end on the last fact instead |
 | [Does using em dashes mean AI wrote it?](failures/text-folk-tells-unreliable.md) | One em dash or "delve" is not proof; flags need three independent tells, a context check and a record |
+| [Why does AI writing feel generic? No first-hand detail](failures/text-no-firsthand-detail.md) | Fluent reviews and guides with nothing the writer saw or tested; feed in real notes, never invent experience, block publishing until a detail is traced |
 
 ## Planned (not yet written)
 - More text, code, voice, video and provenance tells; detector accuracy, humanizers and false accusations
