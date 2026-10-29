@@ -2254,6 +2254,7 @@ Run N covers queue orders as shown. At one run every hour, 91 runs take about 91
 - **KPIs:** written patterns 321 (check_site_compat); catalog rows 493; HMI incident pages 201; ellipsis count 0 (run 229 figure); site build 2,044 pages (run 229).
 - **Plan complete?** No. Open: Part M phase 4 incident pages and phase 5 (owner); G12 batches; GORT step 7 (Gate) onward.
 - **Owner notes:** (1) GORT step 7 Gate waits for you. (2) The Meta page rests on one original report (KIRO 7), read from an archived copy. (3) Possible new pattern: fabricated action confirmations (fake ticket numbers); flagged here and on the Shamblin page. (4) Importer and incident pages, Privacy/Contact facts, merge proposals 7 to 19 still wait for you. (5) Untracked `grep.exe.stackdump` files left untouched.
+- **Deploy:** content PR [#234](https://github.com/sarkars/agent-failure-modes/pull/234) merged into main (merge 1ace4bdb); branch reset to it. Site: nothing in publish scope (the teardown is in incidents/, which the importer does not publish; Parts F, G and H changed nothing in the site repo); no site commit, no Vercel deploy needed. Site repo main matches origin/main (b320eed9d).
 
 ## Queue
 Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Library** column is the status in the catalog when the queue was built (**New** or **Extends**).
