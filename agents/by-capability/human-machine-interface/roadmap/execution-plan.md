@@ -2436,7 +2436,7 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 471 | SL-39 | Overused-word lists go stale as each model version changes | New | - | `goals/ai-slop-detection/failures/text-word-list-drift.md` | Done | 222 |
 | 472 | SL-40 | Hedged list-building register: 'important', 'overall', 'including' | New | - | `goals/ai-slop-detection/failures/text-hedged-list-register.md` | Done | 222 |
 | 473 | SL-41 | Workslop: AI work of little substance sent to colleagues | New | - | `goals/ai-slop-detection/failures/work-workslop.md` | Done | 222 |
-| 474 | SL-42 | Sycophantic drafts and reviews that affirm whatever the user says | New | - | `goals/ai-slop-detection/failures/work-sycophantic-feedback.md` | Queued | - |
+| 474 | SL-42 | Sycophantic drafts and reviews that affirm whatever the user says | New | - | `goals/ai-slop-detection/failures/work-sycophantic-feedback.md` | Done | 222 |
 | 475 | SL-43 | AI-written peer reviews of papers and code | New | - | `goals/ai-slop-detection/failures/work-ai-peer-reviews.md` | Queued | - |
 | 476 | SL-44 | Resume and cover letter claims the candidate cannot defend | New | - | `goals/ai-slop-detection/failures/hiring-undefendable-ai-resume-claims.md` | Queued | - |
 | 477 | SL-45 | AI-written admissions and student essays penalized or undetected | New | - | `goals/ai-slop-detection/failures/education-ai-essays.md` | Queued | - |

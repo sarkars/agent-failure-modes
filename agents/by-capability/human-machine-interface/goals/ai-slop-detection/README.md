@@ -40,6 +40,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | Measured-word rate (active list words with an excess ratio measured on the current drafting model) | 100% within 7 days of a model change (proposed) | [word list drift](failures/text-word-list-drift.md) |
 | Register-match rate (published AI-drafted pieces with no unreviewed register flag against the writer's own baseline) | 95% (proposed) | [hedged list register](failures/text-hedged-list-register.md) |
 | Receiver-ready rate (AI-assisted work products shared with colleagues that pass the 4-item send check) | 90%, alert below 80% (proposed) | [workslop](failures/work-workslop.md) |
+| Anchored-critique rate (sampled AI-written reviews naming at least one issue tied to a line, section or number, or listing what was checked and found clean) | 95% (proposed) | [sycophantic feedback](failures/work-sycophantic-feedback.md) |
 
 ## Patterns
 | Pattern | One line |
@@ -85,6 +86,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | ["Delve" frequency over time: AI word lists go stale](failures/text-word-list-drift.md) | Each model version overuses different words and people adopt the old ones, so a word list is measured per model and re-measured, human baseline included |
 | [AI writing style: "-ing" clauses, abstract nouns and "including" lists](failures/text-hedged-list-register.md) | AI drafts slip into a dense report voice even when told to match a style; compare grammar rates with your own baseline before publishing |
 | [Workslop: AI work that looks finished but makes more work](failures/work-workslop.md) | Memos, decks and summaries with no ask, no conclusion and unsourced numbers push the real work onto the receiver; a 4-item send check stops them |
+| [Sycophantic AI feedback: reviews that only agree](failures/work-sycophantic-feedback.md) | AI reviews of plans, code and drafts echo what the author signals they like and get forwarded as sign-off; every review names an anchored issue or says what was checked |
 
 ## Planned (not yet written)
 - More text, code, voice, video and provenance tells; detector accuracy, humanizers and false accusations
