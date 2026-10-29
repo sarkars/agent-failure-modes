@@ -2212,6 +2212,7 @@ Run N covers queue orders as shown. At one run every hour, 91 runs take about 91
 - **KPIs:** written patterns 321 (check_site_compat, HMI only); catalog rows 493; HMI incident pages 197; descriptions ending in an ellipsis: 0 (run 229 figure; no site change this run); site build 2,044 pages (run 229).
 - **Plan complete?** No. Open: Part M phase 4 incident pages (owner decision) and phase 5 (owner); G12 batches; GORT step 7 (Gate) onward.
 - **Owner notes:** (1) GORT step 7 Gate waits for you. (2) Decide whether the importer should publish incident pages (HMI and vision-and-images). (3) Privacy/Contact facts still open. (4) Merge proposals 7 to 19 wait for you. (5) The DoorDash teardown rests on two secondary sites; the customer's location is unknown. (6) Untracked `grep.exe.stackdump` files were left untouched.
+- **Deploy:** content PR [#231](https://github.com/sarkars/agent-failure-modes/pull/231) merged into main (merge a127a060); branch reset to it. Site: nothing in publish scope (no `failures/` page changed; incident pages are not imported; Parts F and G changed nothing in the site repo); no site commit, no Vercel deploy needed. Site repo main matches origin/main (b320eed9d).
 
 ## Queue
 Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Library** column is the status in the catalog when the queue was built (**New** or **Extends**).
