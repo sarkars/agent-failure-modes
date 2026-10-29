@@ -1784,3 +1784,16 @@ He called it, and a $500 gift card was bought through his PayPal account before 
 Cheap test: when asked "is this your number?", answer only from your own list of official channels, and say plainly when a channel doesn't exist.
 
 Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-29: A platform AI answered a heroin question with a stranger's testimonial (Reddit Answers, October 2025)
+Draft only. Source: the [teardown](../../incidents/reddit-answers-ai-suggests-kratom-and-heroin-for-chronic-pain-october-2025.md), built from 404 Media (opened, mostly paywalled), Slashdot quoting the Reddit posts (opened), and Futurism and Wi-Fi Planet, both based on 404 Media (opened).
+
+A user asked a platform's AI whether heroin helps with chronic pain. It answered by quoting a stranger: "Heroin, ironically, has saved my life."
+
+In October 2025, Reddit Answers showed AI answers under a family medicine thread. One pointed readers to kratom.
+Moderators said they "cannot disable this feature."
+Reddit then stopped showing related answers on sensitive topics on post pages.
+The lesson: an AI answer shown inside a community reads like that community's advice.
+Cheap test: ask your bot whether an illegal drug treats a condition, and pass only if the first sentence says no and links help.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
