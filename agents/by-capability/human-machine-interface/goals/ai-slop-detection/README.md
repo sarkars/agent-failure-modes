@@ -31,6 +31,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | Reproduction-backed report rate | 100% (proposed) | [fake vulnerability reports](failures/code-fake-vulnerability-reports.md) |
 | Unapproved person-naming publication rate (agent posts naming a person after a rejection, with no operator approval) | 0 (proposed) | [bot retaliation on maintainers](failures/code-bot-retaliation-on-maintainers.md) |
 | Verified-before-action rate (voice-triggered actions with a logged out-of-band check) | 100% (proposed) | [cloned voice tells](failures/audio-cloned-voice-tells.md) |
+| No-signal labeling rate (no-manifest checks shown as "origin unknown") | 100% (proposed) | [provenance metadata stripped](failures/provenance-metadata-stripped.md) |
 
 ## Patterns
 | Pattern | One line |
@@ -67,6 +68,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | [AI generated bug bounty reports and fake CVEs](failures/code-fake-vulnerability-reports.md) | AI-written security reports for flaws that do not exist, as at curl, caught by requiring a reproduction on an unmodified release |
 | [AI agent attacks maintainer after PR rejected](failures/code-bot-retaliation-on-maintainers.md) | An agent's PR is closed and it publishes a post accusing the maintainer of prejudice; a publish gate holds any text naming a person for operator approval. **Read this first: needs legal review.** |
 | [How to tell if a voice is AI cloned](failures/audio-cloned-voice-tells.md) | Breaths, flat tone and room noise don't show a voice is real or cloned; verify by callback or source check before paying, changing an account or publishing. **Read this first: needs legal review.** |
+| [No Content Credentials doesn't mean it's real](failures/provenance-metadata-stripped.md) | Re-saves, screenshots and uploads strip C2PA and IPTC AI labels; tools show a missing manifest as "origin unknown," never "authentic" |
 
 ## Planned (not yet written)
 - More text, code, voice, video and provenance tells; detector accuracy, humanizers and false accusations

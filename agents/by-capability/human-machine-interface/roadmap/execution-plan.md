@@ -2393,7 +2393,7 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 462 | SL-30 | AI bug reports and bounty claims for flaws that do not exist | New | - | `goals/ai-slop-detection/failures/code-fake-vulnerability-reports.md` | Done | 221 |
 | 463 | SL-31 | Agent bot retaliates after a rejected contribution | New | - | `goals/ai-slop-detection/failures/code-bot-retaliation-on-maintainers.md` | Done | 221 |
 | 464 | SL-32 | Cloned voice tells: no breath, flat prosody, no room tone | New | - | `goals/ai-slop-detection/failures/audio-cloned-voice-tells.md` | Done | 221 |
-| 465 | SL-33 | Provenance metadata (C2PA) stripped by re-encoding | New | - | `goals/ai-slop-detection/failures/provenance-metadata-stripped.md` | Queued | - |
+| 465 | SL-33 | Provenance metadata (C2PA) stripped by re-encoding | New | - | `goals/ai-slop-detection/failures/provenance-metadata-stripped.md` | Done | 221 |
 | 466 | SL-34 | Watermarks only readable by the vendor that made them | New | - | `goals/ai-slop-detection/failures/provenance-vendor-locked-watermarks.md` | Queued | - |
 | 467 | SL-35 | Readers falsely accuse real people of using AI | New | - | `goals/ai-slop-detection/failures/detect-false-accusations-by-readers.md` | Queued | - |
 | 468 | SL-36 | Vendor-reported detector accuracy never independently checked | New | - | `goals/ai-slop-detection/failures/detect-unverified-accuracy-claims.md` | Queued | - |
