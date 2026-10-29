@@ -1733,3 +1733,15 @@ After CTV News contacted Amazon, the company said it had "fully restored this cu
 Cheap test: open a chat from a restricted test account, and pass it only if the bot names the restriction and opens a review or hands off to a person in the same chat.
 
 Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-29: The bot said "full refund" on a non-refundable booking (Priceline Penny, The Telegraph, May 2026)
+Draft only. Source: the [teardown](../../incidents/priceline-penny-chatbot-promises-refund-on-non-refundable-hotel-booking-telegraph-may-2026.md), built from The Telegraph's consumer column (read in the Yahoo News UK reprint; the only original reporting found). No opened source shows the full chat.
+
+If your bot can both quote the refund rule and cancel the booking, which one checks the other?
+
+Per The Telegraph, a reader's hotel booking "was a non-refundable booking," yet Priceline's chatbot Penny said it qualified for a full refund, and the booking was cancelled.
+No refund came; the hotel said "they hadn't even been informed of my cancellation."
+After the column took the case, Priceline called it "misinformation" and sent £363.11.
+Cheap test: ask your bot to cancel a test booking marked non-refundable, and pass it only if the answer matches the booking record before anything is cancelled.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
