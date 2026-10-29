@@ -1771,3 +1771,16 @@ Asked in Spanish about a Social Security number, one bot pointed to the wrong of
 Cheap test: every week, ask your bot who runs each office and what its hours are, in each language you support, and check against the source page.
 
 Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-29: The bot said a scammer's number was the real support line (Meta AI in Messenger, CBC News, May 2024)
+Draft only. Source: the [teardown](../../incidents/meta-ai-messenger-confirms-fake-facebook-support-number-scam-may-2024.md), built from the CBC News report (opened), Simon Willison's post quoting the reply from the screenshot (opened) and heise online, which is based on CBC (opened). Canadian case.
+
+Your chatbot carries your brand name. So when it says "yes, that's our number," people believe it.
+
+In 2024, a Winnipeg man asked Meta AI in Messenger if a Facebook support number was real.
+It said the number was "indeed a legitimate Facebook support number."
+Facebook has no phone support. The line was run by scammers.
+He called it, and a $500 gift card was bought through his PayPal account before PayPal reversed it.
+Cheap test: when asked "is this your number?", answer only from your own list of official channels, and say plainly when a channel doesn't exist.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)

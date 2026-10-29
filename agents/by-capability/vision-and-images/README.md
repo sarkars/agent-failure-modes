@@ -4,9 +4,9 @@
 
 ## Key Takeaways
 
-- The category spans 5 goals and 43 failure patterns, ranging from single-image hallucination to multi-image consistency to generative-model degradation to robustness against corrupted or adversarial input.
+- The category spans 14 goals and 106 failure patterns, ranging from single-image hallucination to multi-image consistency to generative-model degradation to robustness against corrupted or adversarial input.
 - Confidence is an unreliable failure signal throughout the category: vision models are typically miscalibrated by 20-40 percentage points, and high-confidence wrong answers appear in every one of the five goals — hallucinated objects, hallucinated depth, hallucinated occluded structure, and adversarially-flipped classifications alike.
-- Spatial Reasoning is the largest goal by far (14 of 43 patterns), reflecting that 2D-to-3D inference is the single hardest and most failure-prone capability a vision model attempts — depth, scale, occlusion, and viewpoint each introduce their own ambiguity that statistical priors resolve incorrectly.
+- Spatial Reasoning is the largest of the five vision-understanding goals (14 of their 43 patterns); among the generation goals the largest is Business Risks of AI Image and Video Generation (24), reflecting that 2D-to-3D inference is the single hardest and most failure-prone capability a vision model attempts — depth, scale, occlusion, and viewpoint each introduce their own ambiguity that statistical priors resolve incorrectly.
 - Architectural limits (patch tokenization boundaries) and statistical limits (rare-class imbalance, salience shortcuts, training-data memorization) are mechanistically distinct root causes that happen to produce the same symptom — a confidently wrong output — so the fix differs by pattern even when the symptom looks identical.
 
 ## Vision & Images Goals
@@ -18,8 +18,17 @@
 | [Multi-Image Understanding](goals/multi-image-understanding/) | Contradiction detection, identity/tracking across frames, and evidence fusion across multiple images | 6 |
 | [Generation Artifacts](goals/generation-artifacts/) | Quality drift, semantic drift, identity/consistency loss, model collapse, and safety-filter bypass in generated images | 7 |
 | [Adversarial Robustness](goals/adversarial-robustness/) | Adversarial perturbations, compression, lighting shift, low resolution, rotation, and out-of-distribution blindness | 6 |
+| [AI Deepfake Images and Videos of Real People](goals/ai-deepfakes-of-real-people/) | Sexual deepfakes, fake events, fake endorsements, executive impersonation fraud, consent checks on uploaded photos and filters bypassed by rewording | 9 |
+| [AI Image Artifacts: Hands, Anatomy and Physics](goals/ai-image-artifacts-hands-and-physics/) | Wrong hands and anatomy, broken shadows and reflections, and video motion that breaks physics | 4 |
+| [Bias and Stereotypes in AI Image Generators](goals/ai-image-bias-and-stereotypes/) | Stereotyped defaults, context-blind diversity rules and wrong maps | 3 |
+| [AI Images That Break Brand Guidelines](goals/ai-image-brand-guidelines/) | Logo, color and font rules broken, unsafe placement, garbled packaging and products that change | 5 |
+| [AI Image Copyright and Trademark Risks](goals/ai-image-copyright-and-trademark/) | Brand logos, copyrighted characters, living artists' styles, copied training images, training lawsuits, vendor indemnity and who owns the output | 7 |
+| [Business Risks of AI Image and Video Generation](goals/ai-image-generation-business-risks/) | Ads, approvals, records, vendor terms, costs and other risks of using AI images and video at work | 24 |
+| [AI Images That Ignore the Prompt](goals/ai-image-prompt-adherence/) | Wrong counts, placement and colors, misspelled text, ignored negative prompts and unwanted edits | 6 |
+| [AI Image Watermarks, Labels and Content Credentials](goals/ai-image-watermarks-and-content-credentials/) | Missing labels, stripped Content Credentials and labels that flag the wrong images | 3 |
+| [AI Video and Character Consistency Failures](goals/ai-video-consistency/) | Objects that appear, vanish or change between frames, and flicker | 2 |
 
-**Total: 43 patterns**
+**Total: 106 patterns**
 
 ## How the Goals Relate
 
@@ -32,10 +41,10 @@ To localize an incident by symptom: a detected object/attribute/scene that isn't
 ### What's the difference between visual hallucination and spatial reasoning failures?
 Visual Hallucination is about content that doesn't exist at all — a fabricated object, attribute, or scene. Spatial Reasoning is about real content whose position, depth, scale, or occlusion state is misjudged. The two overlap where a model hallucinates hidden structure behind an occluder (a Spatial Reasoning pattern that explicitly borrows the confident-fabrication mechanism from Visual Hallucination) — see Spatial Reasoning and Visual Hallucination.
 
-### What makes Spatial Reasoning have more than twice as many patterns as any other goal?
+### What makes Spatial Reasoning have more than twice as many patterns as any other vision-understanding goal?
 Because 2D-to-3D inference is underdetermined at every stage — precise localization, depth, 3D shape, occlusion, viewpoint correction, absolute/relative scale, and multi-view consistency are each separately failure-prone, and each requires a distinct mitigation (stereo confirmation, occlusion-aware confidence, perspective correction, reference-object scale cues). See Spatial Reasoning for the full 14-pattern breakdown into four mechanism clusters.
 
-### Can a single model fix all 43 patterns in vision-and-images?
+### Can a single model fix all 106 patterns in vision-and-images?
 No. The patterns split between input-robustness problems (Adversarial Robustness) that require augmentation and detection layers around the model, and reasoning-accuracy problems (the other four goals) that require architectural changes — multi-view fusion, confidence-per-claim tracking, and explicit consistency constraints — none of which are solved simply by scaling up or fine-tuning a single vision-language model.
 
 ### Which goal should a developer check first when a vision-based agent misbehaves?
