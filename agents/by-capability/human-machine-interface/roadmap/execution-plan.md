@@ -2431,7 +2431,7 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 466 | SL-34 | Watermarks only readable by the vendor that made them | New | - | `goals/ai-slop-detection/failures/provenance-vendor-locked-watermarks.md` | Done | 221 |
 | 467 | SL-35 | Readers falsely accuse real people of using AI | New | - | `goals/ai-slop-detection/failures/detect-false-accusations-by-readers.md` | Done | 221 |
 | 468 | SL-36 | Vendor-reported detector accuracy never independently checked | New | - | `goals/ai-slop-detection/failures/detect-unverified-accuracy-claims.md` | Done | 221 |
-| 469 | SL-37 | Humanizer tools make writing worse and still get flagged | New | - | `goals/ai-slop-detection/failures/detect-humanizer-arms-race.md` | Queued | - |
+| 469 | SL-37 | Humanizer tools make writing worse and still get flagged | New | - | `goals/ai-slop-detection/failures/detect-humanizer-arms-race.md` | Done | 222 |
 | 470 | SL-38 | Fake AI-generated video clips presented as news or ads | New | - | `goals/ai-slop-detection/failures/video-synthetic-clips-as-real.md` | Queued | - |
 | 471 | SL-39 | Overused-word lists go stale as each model version changes | New | - | `goals/ai-slop-detection/failures/text-word-list-drift.md` | Queued | - |
 | 472 | SL-40 | Hedged list-building register: 'important', 'overall', 'including' | New | - | `goals/ai-slop-detection/failures/text-hedged-list-register.md` | Queued | - |
