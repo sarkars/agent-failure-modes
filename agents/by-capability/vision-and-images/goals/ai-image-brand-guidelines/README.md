@@ -2,7 +2,7 @@
 
 <!-- SEO
 title: AI Images That Break Brand Guidelines: Failures and Fixes
-description: How AI images and video go off brand, from a redrawn logo, off-palette colors and made-up fonts to a brand next to unsafe content, and the rules that stop it.
+description: How AI images and video go off brand, from a redrawn logo, off-palette colors and made-up fonts to a brand next to unsafe content, and rules that stop it.
 -->
 
 **AI-made images and video redraw a brand's logo, drift off its colors and fonts, or put its name next to content it would never approve.** Each page below names one way this happens, the reports behind it, and the rule inside the workflow that stops it, with a test file you can run.
