@@ -57,6 +57,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | Flagged-source-only fact rate (news claims stated as fact when every cited source is unrated or flagged) | 0 (proposed) | [AI content farms posing as news](failures/web-ai-content-farms-as-news.md) |
 | Unreviewed flagged-domain spend share (open-web spend on flagged domains with no reviewed decision / all open-web spend, weekly) | Under 1% (proposed) | [ads fund content farms](failures/web-ads-fund-content-farms.md) |
 | Labeled-or-held rate (recommended artists failing the profile check shown with a plain-words label or held back) | 100% (proposed) | [fake AI artists](failures/music-fake-ai-artists.md) |
+| Reviewed-before-payout rate (flagged tracks whose royalties were held and decided by a named human before the payout run) | 100% (proposed) | [AI music stream fraud](failures/music-ai-stream-fraud.md) |
 
 ## Patterns
 | Pattern | One line |
@@ -119,6 +120,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | [AI content farms posing as local news sites](failures/web-ai-content-farms-as-news.md) | Chatbots, aggregators and RAG pipelines cite AI content farms posing as local papers; check domain history, leftovers and bylines, and never state a claim as fact from unverified sites alone. **Read this first: needs legal review.** |
 | [Brand ads on AI-generated sites: programmatic buying funds content farms](failures/web-ads-fund-content-farms.md) | Open-exchange buys pay AI content farms the advertiser never picked; buy from an inclusion list, check the seller path, review placements weekly, and lead every campaign summary with flagged spend. **Read this first: needs legal review.** |
 | [Is this band AI? Fake AI music artists with huge catalogs and no history](failures/music-fake-ai-artists.md) | Recommenders and music assistants surface AI-made "artists" with dozens of tracks in weeks, no members and no shows as real bands; check the profile and catalog, then label in plain words or hold them back. **Read this first: needs legal review.** |
+| [AI music streaming fraud: bots play mass-uploaded AI tracks for royalties](failures/music-ai-stream-fraud.md) | Bot accounts spread plays across thousands of AI tracks to drain the royalty pool; flag on upload, play and account behavior, hold the payout for a named reviewer, and never word a flag as an accusation. **Read this first: needs legal review.** |
 
 ## Planned (not yet written)
 - More text, code, voice, video and provenance tells; detector accuracy, humanizers and false accusations
