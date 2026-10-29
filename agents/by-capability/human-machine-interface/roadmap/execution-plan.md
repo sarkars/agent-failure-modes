@@ -2366,6 +2366,7 @@ Run N covers queue orders as shown. At one run every hour, 91 runs take about 91
 - **KPIs:** written patterns 321 (check_site_compat); catalog rows 493; HMI incident pages 210; Search Console 42 clicks, 8.13K impressions (28 days, read in run 239); indexed-page count not read; ellipsis count 0 (run 229 figure).
 - **Plan complete?** No. Open: Part M phase 4 incident pages and phase 5 (owner); G12 batches; GORT step 7 (Gate) onward.
 - **Owner notes:** (1) GORT step 7 Gate waits for you. (2) Two proposed taxonomy gaps from the Claude page and four from the EBU page wait for your call. (3) Importer and incident pages, Privacy/Contact facts, merge proposals 7 to 19 still wait for you. (4) Untracked `grep.exe.stackdump` files left untouched.
+- **Deploy:** [PR #242](https://github.com/sarkars/agent-failure-modes/pull/242) merged (merge commit d4112903, head 3bc5d824); branch reset to origin/main. Site: no change; the only new pages are under incidents/, which the importer does not publish, so no site commit.
 
 ## Queue
 Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Library** column is the status in the catalog when the queue was built (**New** or **Extends**).
