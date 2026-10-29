@@ -16,11 +16,11 @@ description: How businesses get hurt when they publish AI-made images and video:
 | Pattern | Covers | One line | Tests |
 |---|---|---|---|
 | [AI product images that show features it does not have](failures/ai-product-images-show-features-it-does-not-have.md) | Both | An AI product shot or event ad shows features the real thing lacks, and buyers pay for the picture | [Tests](../../tests/ai-product-images-show-features-it-does-not-have.md) |
+| [AI images in ads published without review](failures/ai-images-in-ads-published-without-review.md) | Image | Brand ads run AI-altered images nobody approved; require sign-off on the live version and keep platform AI edits off | [Tests](../../tests/ai-images-in-ads-published-without-review.md) |
 
 All tests are **Not yet run**. All detection signals and Guide specs are proposed.
 
 ## Planned (not yet written)
-- AI images in ads, listings or reports published without review or disclosure
 - Public backlash when a brand replaces artists, models or photographers with AI
 - A visible AI mistake in an ad spreading widely
 - Fake receipts, IDs, damage photos or documents used to defraud a business
