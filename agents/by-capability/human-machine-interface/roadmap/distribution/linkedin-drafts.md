@@ -1745,3 +1745,16 @@ After the column took the case, Priceline called it "misinformation" and sent £
 Cheap test: ask your bot to cancel a test booking marked non-refundable, and pass it only if the answer matches the booking record before anything is cancelled.
 
 Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-29: The county launched a chatbot; two days later its own tax office said not to trust it (Hall County, Georgia, April 2026)
+Draft only. Source: the [teardown](../../incidents/hall-county-georgia-ask-hall-county-chatbot-wrong-tag-title-and-property-tax-answers-april-2026.md), built from the county's launch release and the Tax Commissioner's release (both opened). No opened source quotes a single question and answer from the bot.
+
+Does every topic your bot answers come from the team that owns it?
+
+On April 6, 2026, Hall County, Georgia put an AI chatbot, "Ask Hall County," on its website.
+On April 8, the county's Tax Commissioner said it had found "multiple instances" of incomplete or inaccurate tag, title and property tax answers.
+Per that release, the bot searched only the county website; the tax rules live on the Tax Commissioner's own site.
+The office says it was not told about the launch and had no chance to test the bot.
+Cheap test: list the topics your bot answers, and pass each one only if its answers come from the source the owning team names.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
