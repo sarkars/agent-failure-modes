@@ -2351,7 +2351,7 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 453 | SL-21 | Inter everywhere, lavender accents and forced dark mode | New | - | `goals/ai-slop-detection/failures/ui-default-type-and-palette.md` | Done | 220 |
 | 454 | SL-22 | Neon-on-dark palettes and aurora background glows | New | - | `goals/ai-slop-detection/failures/ui-neon-aurora-glow.md` | Done | 220 |
 | 455 | SL-23 | Unrelated sites converge on the same look | New | - | `goals/ai-slop-detection/failures/ui-visual-convergence.md` | Done | 220 |
-| 456 | SL-24 | No locked design tokens, so every page drifts to defaults | New | - | `goals/ai-slop-detection/failures/ui-no-locked-design-tokens.md` | Queued | - |
+| 456 | SL-24 | No locked design tokens, so every page drifts to defaults | New | - | `goals/ai-slop-detection/failures/ui-no-locked-design-tokens.md` | Done | 220 |
 | 457 | SL-25 | Lesson stated outright at the end of a story | New | - | `goals/ai-slop-detection/failures/text-stated-moral-endings.md` | Queued | - |
 | 458 | SL-26 | Folk tells that are wrong: em dashes and punctuation as proof | New | - | `goals/ai-slop-detection/failures/text-folk-tells-unreliable.md` | Queued | - |
 | 459 | SL-27 | Confident prose with no first-hand detail | New | - | `goals/ai-slop-detection/failures/text-no-firsthand-detail.md` | Queued | - |
