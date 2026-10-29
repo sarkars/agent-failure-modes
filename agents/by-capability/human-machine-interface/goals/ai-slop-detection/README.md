@@ -48,6 +48,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | Reviewed-before-index rate (translated pages published or indexed only after a fluent review of that language) | 100% (proposed) | [machine-translated duplicates](failures/data-machine-translated-duplicates.md) |
 | Condition-labeled result rate (detector results shown with the input's size, re-compression and crop/screenshot condition; degraded low scores shown as "inconclusive") | 100% (proposed) | [image detector fragility](failures/detect-image-detector-fragility.md) |
 | Scoped-negative rate (negative detector results shown with tested-generator list, last test date and "origin unknown, not proof of human origin" line) | 100% (proposed) | [unseen generators](failures/detect-unseen-generator-failure.md) |
+| Group-audited detector rate (detectors in use with a current per-group, per-length false-positive audit on local known-human writing) | 100% before go-live (proposed) | [biased false positives](failures/detect-biased-false-positives.md) |
 
 ## Patterns
 | Pattern | One line |
@@ -101,6 +102,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | [Machine-translated duplicate pages: sites auto-translated with no fluent review](failures/data-machine-translated-duplicates.md) | AI agents mass-translate sites into many languages with no fluent review; publish only reviewed languages and filter text found in many MT languages from datasets |
 | [AI image detector says "real" after a screenshot: detectors break after crop, resize or recompress](failures/detect-image-detector-fragility.md) | Screenshots, crops, resizes and re-saves wipe the traces detectors read; results name the copy's condition and a low score on a degraded copy is "inconclusive" |
 | [AI detector says "human" on new AI models: unseen generators](failures/detect-unseen-generator-failure.md) | Detectors trained on older generators score new-model images and text as human; show the tested generators and date, word low scores "not detected", and check the source |
+| [AI detectors biased against English learners and Black students](failures/detect-biased-false-positives.md) | Detectors and teachers falsely flag English learners, Black students and short texts more often than others; audit false flags per group and length on local human writing. **Read this first: needs legal review.** |
 
 ## Planned (not yet written)
 - More text, code, voice, video and provenance tells; detector accuracy, humanizers and false accusations

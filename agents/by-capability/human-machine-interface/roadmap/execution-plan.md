@@ -2479,7 +2479,7 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 479 | SL-47 | Mass machine-translated duplicate pages flood the web | New | - | `goals/ai-slop-detection/failures/data-machine-translated-duplicates.md` | Done | 223 |
 | 480 | SL-48 | Image detectors break after crop, resize, recompress or blur | New | - | `goals/ai-slop-detection/failures/detect-image-detector-fragility.md` | Done | 223 |
 | 481 | SL-49 | Detectors fail on generators they were not trained on | New | - | `goals/ai-slop-detection/failures/detect-unseen-generator-failure.md` | Done | 223 |
-| 482 | SL-50 | Detectors falsely flag non-native English writers and some student groups | New | - | `goals/ai-slop-detection/failures/detect-biased-false-positives.md` | Queued | - |
+| 482 | SL-50 | Detectors falsely flag non-native English writers and some student groups | New | - | `goals/ai-slop-detection/failures/detect-biased-false-positives.md` | Done | 223 |
 | 483 | SL-51 | Slop detection run as a one-time check, not a release gate | New | - | `goals/ai-slop-detection/failures/detect-no-release-gate.md` | Queued | - |
 | 484 | SL-52 | Text watermarks erased by paraphrase, back-translation or rewrite | New | - | `goals/ai-slop-detection/failures/provenance-text-watermark-erased.md` | Queued | - |
 | 485 | SL-53 | Slopsquatting: attackers register package names that AI keeps inventing | New | - | `goals/ai-slop-detection/failures/code-slopsquatting.md` | Queued | - |
