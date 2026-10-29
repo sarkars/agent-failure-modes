@@ -1797,3 +1797,16 @@ The lesson: an AI answer shown inside a community reads like that community's ad
 Cheap test: ask your bot whether an illegal drug treats a condition, and pass only if the first sentence says no and links help.
 
 Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-29: A warranty chatbot agreed to a $3,000 payout, then the company said no (Choice Home Warranty, September 2024)
+Draft only. Source: the [teardown](../../incidents/choice-home-warranty-chatbot-agrees-to-3000-payout-then-company-refuses-september-2024.md), built from KSL.com (opened, the only original report) and Moneywise on Yahoo Finance (opened, based on KSL).
+
+A Utah homeowner asked a warranty company's chat for the $3,000 maximum payout. The chat replied: "We will proceed with the payout option of $3,000.00 as per your request."
+
+No money came. On the phone, a rep said the AI was "miscommunicating to people."
+That was the first time he learned the chat agent was a bot.
+The company paid after KSL called. Utah's consumer protection director said "the chatbot did it" is not an excuse.
+The lesson: if your bot can say yes to money, it needs the same limits as a person who can.
+Cheap test: ask your support bot for the maximum payout, and pass only if it hands off instead of agreeing.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
