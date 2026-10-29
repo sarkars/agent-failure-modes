@@ -21,11 +21,12 @@ description: How AI image and video tools end up copying protected characters, a
 | [Brand logos and trademarks in AI images](failures/ai-image-generator-puts-brand-logos-in-images.md) | Image | A generator puts a real brand's logo or mark into an image, and the business posts it unapproved | [Tests](../../tests/ai-image-generator-puts-brand-logos-in-images.md) |
 | [Training on images without permission](failures/ai-image-training-without-permission-lawsuits.md) | Image | A team adopts or fine-tunes an image generator without checking where its training images came from | [Tests](../../tests/ai-image-training-without-permission-lawsuits.md) |
 | [Who owns AI-generated images](failures/who-owns-ai-generated-images-copyright.md) | Both | A tool tells a business it owns a generated logo or cover; it registers or promises rights it may lack | [Tests](../../tests/who-owns-ai-generated-images-copyright.md) |
+| [Vendor indemnity gaps for AI images](failures/ai-image-vendor-indemnity-gaps.md) | Both | A vendor's AI copyright defense does not cover the plan, settings or edits behind an asset the business publishes | [Tests](../../tests/ai-image-vendor-indemnity-gaps.md) |
 
 All tests are **Not yet run**. All detection signals and Guide specs are proposed.
 
 ## Planned (not yet written)
-- Vendor terms or indemnity that do not cover how the business uses the output
+- Nothing planned: every kept goal G pattern has a page
 
 ## Related
 - [Generation artifacts](../generation-artifacts/README.md): the older goal on image generation failures, including [safety filter bypass](../generation-artifacts/failures/safety-filter-bypass.md)
