@@ -1,0 +1,23 @@
+# AI Images That Ignore the Prompt
+
+<!-- SEO
+title: AI Images That Ignore the Prompt: Failures and Fixes
+description: How AI images miss what the prompt asked for, from the wrong number of objects to wrong placement, with checks inside the workflow that catch it.
+-->
+
+**AI image tools often return a picture that looks right but does not match the request: the wrong number of items, things in the wrong place, colors on the wrong object or misspelled text.** Each page below names one way this happens, the research behind it, and the check inside the workflow that stops it, with a test file you can run.
+
+**Goal:** AI images and video show what the prompt asked for: the right number of objects, in the right places, with the right attributes and readable text.
+
+## Patterns
+
+| Pattern | Covers | One line | Tests |
+|---|---|---|---|
+| [AI image generator wrong number of objects](failures/ai-image-generator-wrong-number-of-objects.md) | Image | Ask for four stools or three apples and get a different number; flag prompts where the count matters, count every image before publish, and composite exact counts when regeneration keeps missing | [Tests](../../tests/ai-image-generator-wrong-number-of-objects.md) |
+
+All tests are **Not yet run**. All detection signals and Guide specs are proposed.
+
+## Related
+- [Generation artifacts](../generation-artifacts/README.md): the older goal on image generation failures, including [semantic drift](../generation-artifacts/failures/semantic-shift.md) and [token limit artifacts](../generation-artifacts/failures/token-limit-artifacts.md)
+- [Business risks of AI image and video generation](../ai-image-generation-business-risks/README.md): what the published image claims and how it is approved
+- [Vision and images goals](../README.md)
