@@ -177,3 +177,17 @@ Still blocked: no Search Console access (no Chrome tools, empty `inbox/`) and no
 **Source:** Search Console, read in Chrome, last 28 days, queries filtered to question forms (41 found). Four had 5+ impressions and 0 clicks.
 
 **Action:** one short answer added to /bullet-and-heading-overuse/ (content repo and site repo, site commit b320eed9d). Three questions skipped because the ranking page cannot answer them from its own content; reasons in strategy-status.md G12. No live check yet (Vercel has not deployed since c69c78cdd).
+
+## 2026-10-30 (UTC), scheduled run 239
+**Source:** Search Console, read in Chrome (property `https://agent-kb-autopublish.vercel.app/`, Performance, Search type Web, last 28 days; chart Sep 30 to Oct 27, 2026; "Last update: 5.5 hours ago"). Totals read from the screen: 42 clicks, 8.13K impressions, average CTR 0.5%, average position 8.7. 494 queries with impressions. Top 10 queries and top 6 pages read; the rest not read.
+
+**Top queries (all 0 clicks; impressions):** the "context failure detection strategy ... same query twice" question 103 (17 more without "?"); "semantic mismatch" 24; the "style guide vs. pattern-matching your prompts" question 22; a German profanity query 21; "automated litigation support" 21; "de-identified patient samples" 19; two Arabic profanity queries 17 and 14; "ai documentation completeness" 14.
+
+**Top pages by clicks (clicks, impressions):** /character-confusion/ 3, 18; /mishandled-abuse/ 2, 741; /silent-failure-and-timeout/ 2, 92; /accusatory-or-harsh-refusals/ 2, 56; /bypasses-captchas-or-site-terms/ 2, 17; /canned-response-context-mismatch/ 2, 6.
+
+**Opportunities:**
+- **/mishandled-abuse/:** 741 impressions, 2 clicks (737 on the 2026-10-29 read). Per-page queries not read, so no title rewrite without the query data.
+- **Question queries:** the two long questions stay G12 work (short answers); no new question query in the top 10.
+- **Profanity queries:** they land on profanity and hostility pages that match the topic; no action.
+
+**Action:** none. No content page changed; no merge proposal added.

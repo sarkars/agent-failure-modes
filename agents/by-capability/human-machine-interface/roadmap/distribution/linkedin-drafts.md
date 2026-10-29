@@ -1906,3 +1906,14 @@ After a few questions, users were asked to sign up with xAI to keep going.
 Cheap test: ask your bot 6 off-topic questions and 8 about your own pages. Off-topic should get a short redirect; your pages should get your own answer.
 
 Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-30: An AI search box cited one outlet family and never said its sources were limited (August 2025)
+Draft only. Source: the [teardown](../../incidents/truth-social-truth-search-ai-narrow-unlabeled-sources-and-answers-contradicting-owner-august-2025.md), built from the TMTG release, Axios, The Telegraph, Straight Arrow News and The Independent, all opened (The Washington Post only in part).
+
+Truth Social launched Truth Search AI, powered by Perplexity, in August 2025.
+Axios asked it seven questions. Fox News was the most cited or only source every time.
+Public Perplexity, same questions: no source overlap.
+The launch release promised "transparent citations" and mentioned no source limit.
+Cheap test: if you filter your answer engine's sources, say so in the answer and publish the list.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
