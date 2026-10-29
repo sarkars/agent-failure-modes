@@ -49,6 +49,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | Condition-labeled result rate (detector results shown with the input's size, re-compression and crop/screenshot condition; degraded low scores shown as "inconclusive") | 100% (proposed) | [image detector fragility](failures/detect-image-detector-fragility.md) |
 | Scoped-negative rate (negative detector results shown with tested-generator list, last test date and "origin unknown, not proof of human origin" line) | 100% (proposed) | [unseen generators](failures/detect-unseen-generator-failure.md) |
 | Group-audited detector rate (detectors in use with a current per-group, per-length false-positive audit on local known-human writing) | 100% before go-live (proposed) | [biased false positives](failures/detect-biased-false-positives.md) |
+| Gated release rate (releases and publishes that passed the full slop gate or carry a recorded override) | 100% (proposed) | [no release gate](failures/detect-no-release-gate.md) |
 
 ## Patterns
 | Pattern | One line |
@@ -103,6 +104,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | [AI image detector says "real" after a screenshot: detectors break after crop, resize or recompress](failures/detect-image-detector-fragility.md) | Screenshots, crops, resizes and re-saves wipe the traces detectors read; results name the copy's condition and a low score on a degraded copy is "inconclusive" |
 | [AI detector says "human" on new AI models: unseen generators](failures/detect-unseen-generator-failure.md) | Detectors trained on older generators score new-model images and text as human; show the tested generators and date, word low scores "not detected", and check the source |
 | [AI detectors biased against English learners and Black students](failures/detect-biased-false-positives.md) | Detectors and teachers falsely flag English learners, Black students and short texts more often than others; audit false flags per group and length on local human writing. **Read this first: needs legal review.** |
+| [AI slop checks run once, not on every release](failures/detect-no-release-gate.md) | Slop checks run once at launch or only warn in CI, so placeholders, chatbot leftovers and fake citations come back; run one suite on every path, block on errors, record every override |
 
 ## Planned (not yet written)
 - More text, code, voice, video and provenance tells; detector accuracy, humanizers and false accusations
