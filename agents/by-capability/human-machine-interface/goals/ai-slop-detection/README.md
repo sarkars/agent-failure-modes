@@ -44,6 +44,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | Anchored-and-verified review rate (sampled reviews where every criticism names a location in the work and none is contradicted or cites a nonexistent source) | 95%, alert below 90% (proposed) | [AI peer reviews](failures/work-ai-peer-reviews.md) |
 | Confirmed-claim rate (exported resume and cover-letter drafts where every skill, tool, number and title traces to candidate input the candidate confirmed) | 100% (proposed) | [undefendable resume claims](failures/hiring-undefendable-ai-resume-claims.md) |
 | Process-evidence decision rate (AI-use findings on student or applicant essays recording a notice, the student's response and a decider other than the accuser) | 100% (proposed) | [AI essays](failures/education-ai-essays.md) |
+| Provenance-tagged record rate (records with source, collection date and origin label / all records in a training run) | 100% (proposed) | [model collapse](failures/data-model-collapse-contamination.md) |
 
 ## Patterns
 | Pattern | One line |
@@ -93,6 +94,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | [AI-written peer reviews of papers and code](failures/work-ai-peer-reviews.md) | Fluent AI reviews miss the paper or the diff; anchor every point to the work, check it there, and keep the verdict with a named human |
 | [AI resume claims candidates can't defend in the interview](failures/hiring-undefendable-ai-resume-claims.md) | AI tools add skills, numbers and titles the candidate never gave; write only confirmed claims, and employers check claims by asking, not by detector score. **Read this first: needs legal review.** |
 | [AI-written student and admissions essays: penalized or missed](failures/education-ai-essays.md) | Schools act on a score or a hunch, penalizing honest students while lightly edited AI essays pass; use drafts, version history and an oral follow-up, and keep accuser and decider apart. **Read this first: needs legal review.** |
+| [Model collapse: training on AI-generated data](failures/data-model-collapse-contamination.md) | Retraining on scraped or user data that is increasingly AI-written loses rare cases; tag provenance and keep a human reference set |
 
 ## Planned (not yet written)
 - More text, code, voice, video and provenance tells; detector accuracy, humanizers and false accusations
