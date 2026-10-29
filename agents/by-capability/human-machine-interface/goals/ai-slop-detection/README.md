@@ -17,6 +17,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | Emoji-clean file rate | 100% (proposed) | [emoji as icons](failures/ui-emoji-as-icons.md) |
 | Placeholder-free deploy rate | 100% (proposed) | [placeholder data left in](failures/ui-placeholder-data-left-in.md) |
 | Unbacked social-proof elements at deploy | 0 (proposed) | [fabricated social proof](failures/ui-fabricated-social-proof.md) |
+| Caveated-flag rate (detector results shown with error rate, "not proof" note and human review) | 100% (proposed) | [detector false positives](failures/detect-detector-false-positives.md) |
 
 ## Patterns
 | Pattern | One line |
@@ -39,9 +40,10 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | [Why AI images look fake: waxy skin and wrong shadows](failures/image-stock-look.md) | Over-smooth, glossy stock-photo images with impossible light, caught by art direction and a lighting check before publishing |
 | [AI made-up numbers in reports and dashboards](failures/data-too-clean.md) | Round, too-clean figures with no source, caught by tracing every number to a query or citation |
 | [AI generated reviews and replies that all sound the same](failures/data-templated-reviews.md) | Review farms and reply bots in one templated voice, caught by near-duplicate checks. **Read this first: needs legal review.** |
+| [AI detector false positives (Turnitin, GPTZero)](failures/detect-detector-false-positives.md) | Detector scores flag real human writing, often English learners'; scores show their error rate and a person decides |
 
 ## Planned (not yet written)
-- Detector limits and false positives, more UI tells
+- More text, code, voice, video and provenance tells; detector accuracy, humanizers and false accusations
 
 ## Related
 - [Conversation moves](../../solutions-library/conversation-moves.md)
