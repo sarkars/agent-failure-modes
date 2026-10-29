@@ -1,0 +1,41 @@
+# Business Risks of AI Image and Video Generation
+
+<!-- SEO
+title: Business Risks of AI Image and Video Generation: Failures and Fixes
+description: How businesses get hurt when they publish AI-made images and video: misleading product shots, missing review, backlash and legal exposure, and the workflow rules that prevent it.
+-->
+
+**Businesses publish AI-made images and video that misstate their products, skip review or disclosure, and expose them to refunds, backlash and regulators.** Each page below names one way this happens, the reports behind it, and the rule inside the workflow that stops it, with a test file you can run.
+
+> **Read this first:** Every page in this goal is **Needs review**. Statements about advertising law, regulators, rulings and disclosure rules summarize the cited news reports, regulator pages and law-firm summaries. Several incidents are outside the US and are marked as such. None of this is legal advice, and it needs review by a qualified person before anyone relies on it.
+
+**Goal:** AI images and video a business publishes show only what its real products, events and results deliver, carry the labels and records the business needs, and do not expose the business to legal or reputational harm.
+
+## Patterns
+
+| Pattern | Covers | One line | Tests |
+|---|---|---|---|
+| [AI product images that show features it does not have](failures/ai-product-images-show-features-it-does-not-have.md) | Both | An AI product shot or event ad shows features the real thing lacks, and buyers pay for the picture | [Tests](../../tests/ai-product-images-show-features-it-does-not-have.md) |
+| [AI images in ads published without review](failures/ai-images-in-ads-published-without-review.md) | Image | Brand ads run AI-altered images nobody approved; require sign-off on the live version and keep platform AI edits off | [Tests](../../tests/ai-images-in-ads-published-without-review.md) |
+
+All tests are **Not yet run**. All detection signals and Guide specs are proposed.
+
+## Planned (not yet written)
+- Public backlash when a brand replaces artists, models or photographers with AI
+- A visible AI mistake in an ad spreading widely
+- Fake receipts, IDs, damage photos or documents used to defraud a business
+- Confidential material uploaded to an outside image tool
+- Ad platforms rejecting AI creative or requiring a label
+- AI disclosure rules of each market not met
+- Regulated claims in images: health, finance, food, before-and-after
+- Cultural, religious or local errors in images made for other markets
+- Employees' or models' likeness reused beyond what they agreed to
+- No model release or likeness rights for generated people who resemble real people
+
+## Related
+- [Generation artifacts](../generation-artifacts/README.md): the older goal on image generation failures, including [semantic drift](../generation-artifacts/failures/semantic-shift.md) and [consistency failure](../generation-artifacts/failures/consistency-failure.md)
+- [Misleading generated visuals](../../../human-machine-interface/goals/visual/failures/misleading-generated-visuals.md): a chat assistant showing a render as the real product; this goal covers what the business itself publishes
+- [AI image copyright and trademark risks](../ai-image-copyright-and-trademark/README.md): who owns the output; this goal covers what the output claims
+- [Content marketing](../../../../by-use-case/content-marketing/README.md)
+- [Governance](../../../../cross-cutting/governance/goals/governance/README.md)
+- [Vision and images goals](../README.md)

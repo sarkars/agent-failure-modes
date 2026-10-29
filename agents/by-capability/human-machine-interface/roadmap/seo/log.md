@@ -157,3 +157,17 @@ Still blocked: no Search Console access (no Chrome tools, empty `inbox/`) and no
 - **Profanity queries:** they land on /profanity-and-slang-handling/ and /mirroring-hostility/, which match the topic; no action.
 
 **Action:** none. No content page changed; no merge proposal added.
+
+## 2026-10-29 (UTC), scheduled run 220
+**Source:** Search Console, read in Chrome (property `https://agent-kb-autopublish.vercel.app/`). Last 28 days (chart Sep 29 to Oct 26, 2026): 38 clicks, 7.92K impressions, average CTR 0.5%, average position 8.6. 455 queries and 813 pages with impressions. Top 10 queries and top 10 pages read as text, in the report's default order (sorted by clicks); pages sorted by impressions were not read this run. Page indexing report not opened.
+
+**Top queries (all 0 clicks; impressions):** the "context failure detection strategy ... same query twice" question 103 (17 more without "?"); the "style guide vs. pattern-matching your prompts" question 26; "semantic mismatch" 24; "automated litigation support" 21; "de-identified patient samples" 19; "factor crowding risk" 14; "deterministic tool calling with sql" 14; two profanity queries (German 21, Arabic 15).
+
+**Top pages by clicks (clicks, impressions):** /character-confusion/ 3, 17; /mishandled-abuse/ 2, 737; /silent-failure-and-timeout/ 2, 78; /accusatory-or-harsh-refusals/ 2, 56; /canned-response-context-mismatch/ 2, 6; /difficult-customers/failures/mishandled-abuse.md 1, 400; /silent-sandbagging/ 1, 63; /background-interference/ 1, 51; /conflicting-instructions/ 1, 48; /safety-filter-bypass/ 1, 35.
+
+**Opportunities:**
+- **/mishandled-abuse/:** 737 impressions (537 on 2026-10-28's read) and 2 clicks; the .md copy of the same page adds 400. Its queries were not read per page, so no title rewrite without the query data.
+- **Question queries:** the two long questions stay G12 work (short answers).
+- **Profanity queries:** no action (they land on matching pages).
+
+**Action:** none. No content page changed; no merge proposal added.

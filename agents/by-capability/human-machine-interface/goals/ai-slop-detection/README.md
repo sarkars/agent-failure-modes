@@ -17,6 +17,14 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | Emoji-clean file rate | 100% (proposed) | [emoji as icons](failures/ui-emoji-as-icons.md) |
 | Placeholder-free deploy rate | 100% (proposed) | [placeholder data left in](failures/ui-placeholder-data-left-in.md) |
 | Unbacked social-proof elements at deploy | 0 (proposed) | [fabricated social proof](failures/ui-fabricated-social-proof.md) |
+| Caveated-flag rate (detector results shown with error rate, "not proof" note and human review) | 100% (proposed) | [detector false positives](failures/detect-detector-false-positives.md) |
+| Re-tested rule rate (rules re-tested against the current model version) | 100% within 7 days of a model change (proposed) | [detection rules decay](failures/detect-rules-decay.md) |
+| Flagged default-type or forced-dark screens shipped with no recorded reason | Under 10% (proposed) | [default type and palette](failures/ui-default-type-and-palette.md) |
+| Flagged neon-and-glow screens shipped with no recorded reason | Under 10% (proposed) | [neon and aurora glow](failures/ui-neon-aurora-glow.md) |
+| Distinctiveness check pass rate at launch | 100% (proposed) | [visual convergence](failures/ui-visual-convergence.md) |
+| Merged UI pull requests adding raw values outside the token file | 0%, alert above 2% (proposed) | [no locked design tokens](failures/ui-no-locked-design-tokens.md) |
+| Clean-ending rate | 95% (proposed) | [stated-moral endings](failures/text-stated-moral-endings.md) |
+| Evidence-complete flag rate (three independent tells plus a context check) | 100% (proposed) | [folk tells are not evidence](failures/text-folk-tells-unreliable.md) |
 
 ## Patterns
 | Pattern | One line |
@@ -39,9 +47,17 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | [Why AI images look fake: waxy skin and wrong shadows](failures/image-stock-look.md) | Over-smooth, glossy stock-photo images with impossible light, caught by art direction and a lighting check before publishing |
 | [AI made-up numbers in reports and dashboards](failures/data-too-clean.md) | Round, too-clean figures with no source, caught by tracing every number to a query or citation |
 | [AI generated reviews and replies that all sound the same](failures/data-templated-reviews.md) | Review farms and reply bots in one templated voice, caught by near-duplicate checks. **Read this first: needs legal review.** |
+| [AI detector false positives (Turnitin, GPTZero)](failures/detect-detector-false-positives.md) | Detector scores flag real human writing, often English learners'; scores show their error rate and a person decides |
+| [AI detection rules stop working after a model update](failures/detect-rules-decay.md) | Phrase lists, regex and classifiers quietly stop catching anything after the generating model changes |
+| [Inter font, indigo accents and forced dark mode](failures/ui-default-type-and-palette.md) | Default font, off-token accent and dark mode that ignores the user's setting |
+| [Neon glow on dark backgrounds and aurora blobs](failures/ui-neon-aurora-glow.md) | Neon text and borders on near-black over blurred blobs, checked for contrast, blur cost and motion |
+| [Why all AI websites look the same](failures/ui-visual-convergence.md) | Unrelated sites built with the same tools and kits converge on one look; a pre-launch distinctiveness check catches it |
+| [AI ignores my design system: no locked tokens](failures/ui-no-locked-design-tokens.md) | With no locked token file, AI tools invent colors, spacing and radius per page; lint catches raw values |
+| [Why AI always ends with a summary or a moral](failures/text-stated-moral-endings.md) | Posts, emails and stories end on "Ultimately" or a stated lesson; end on the last fact instead |
+| [Does using em dashes mean AI wrote it?](failures/text-folk-tells-unreliable.md) | One em dash or "delve" is not proof; flags need three independent tells, a context check and a record |
 
 ## Planned (not yet written)
-- Detector limits and false positives, more UI tells
+- More text, code, voice, video and provenance tells; detector accuracy, humanizers and false accusations
 
 ## Related
 - [Conversation moves](../../solutions-library/conversation-moves.md)
