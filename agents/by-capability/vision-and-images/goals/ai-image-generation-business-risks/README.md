@@ -26,11 +26,11 @@ description: How businesses get hurt when they publish AI-made images and video:
 | [AI images that make health and earnings claims](failures/ai-images-make-regulated-health-and-finance-claims.md) | Both | An ad's AI before-and-after, AI nurse or yacht scene claims a health or money result nobody proved; never generate results as real, require typical-results proof and a named reviewer | [Tests](../../tests/ai-images-make-regulated-health-and-finance-claims.md) |
 | [AI images with cultural and religious errors](failures/ai-images-with-cultural-and-religious-errors.md) | Image | AI art for a holiday, faith or market gets a sacred figure, flag or custom wrong and the community finds it after printing; list every culture-specific element, place flags from the official file and get a named community reviewer's sign-off | [Tests](../../tests/ai-images-with-cultural-and-religious-errors.md) |
 | [AI images of models and employees without consent](failures/employee-and-model-likeness-reused-by-ai-without-consent.md) | Both | A brand runs its own models' or staff photos through AI and publishes poses, scenes or faces they never agreed to, often after the term ends; record each person's scope, classify every AI edit, block beyond scope and pull on term end | [Tests](../../tests/employee-and-model-likeness-reused-by-ai-without-consent.md) |
+| [AI-generated people that resemble real people](failures/ai-generated-people-resemble-real-people-without-release.md) | Both | A brand runs an AI-made person believing no release is needed, and the face looks like a real person; save the prompt and inputs, run a blind resemblance review, hold any named match and take down fast on a "that's me" complaint | [Tests](../../tests/ai-generated-people-resemble-real-people-without-release.md) |
 
 All tests are **Not yet run**. All detection signals and Guide specs are proposed.
 
 ## Planned (not yet written)
-- No model release or likeness rights for generated people who resemble real people
 
 ## Related
 - [Generation artifacts](../generation-artifacts/README.md): the older goal on image generation failures, including [semantic drift](../generation-artifacts/failures/semantic-shift.md) and [consistency failure](../generation-artifacts/failures/consistency-failure.md)
