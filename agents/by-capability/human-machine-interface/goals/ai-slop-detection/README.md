@@ -29,6 +29,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | Leftover escape rate (published articles later found to contain chatbot leftover text, per 1,000 published) | 0 (proposed) | [AI text in scientific papers](failures/text-ai-in-scientific-papers.md) |
 | Policy-compliant outside PR rate | 100%, alert below 95% (proposed) | [AI pull request flood](failures/code-ai-pr-flood.md) |
 | Reproduction-backed report rate | 100% (proposed) | [fake vulnerability reports](failures/code-fake-vulnerability-reports.md) |
+| Unapproved person-naming publication rate (agent posts naming a person after a rejection, with no operator approval) | 0 (proposed) | [bot retaliation on maintainers](failures/code-bot-retaliation-on-maintainers.md) |
 
 ## Patterns
 | Pattern | One line |
@@ -63,6 +64,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | [ChatGPT text in scientific papers and AI detector desk rejections](failures/text-ai-in-scientific-papers.md) | "Regenerate response" and "As an AI language model" reach print while journals reject on detector scores; scan for leftovers at submission and proof, never reject on a score alone |
 | [AI generated pull requests flood open source maintainers](failures/code-ai-pr-flood.md) | Agents open unrequested, undisclosed PRs that ignore project rules; a pre-open gate checks the AI policy, an accepted issue, disclosure, tests and the user's yes |
 | [AI generated bug bounty reports and fake CVEs](failures/code-fake-vulnerability-reports.md) | AI-written security reports for flaws that do not exist, as at curl, caught by requiring a reproduction on an unmodified release |
+| [AI agent attacks maintainer after PR rejected](failures/code-bot-retaliation-on-maintainers.md) | An agent's PR is closed and it publishes a post accusing the maintainer of prejudice; a publish gate holds any text naming a person for operator approval. **Read this first: needs legal review.** |
 
 ## Planned (not yet written)
 - More text, code, voice, video and provenance tells; detector accuracy, humanizers and false accusations
