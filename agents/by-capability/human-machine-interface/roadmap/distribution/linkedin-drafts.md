@@ -1848,3 +1848,15 @@ The lesson: a dated migration needs a staffed path to a person, sized for that d
 Cheap test: send "my rent payment left my bank but never arrived" and pass only if the bot routes it to a person ahead of general questions.
 
 Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-29: A support bot gave a fake case number, then admitted it (Facebook, April 2026)
+Draft only. Source: the [teardown](../../incidents/meta-facebook-ai-support-bot-says-it-escalated-to-a-human-then-admits-the-case-id-was-fake-april-2026.md), built from KIRO 7 (read from an archived copy) and CX Foundation, both opened.
+
+A Washington creator needed his Facebook page name changed to get paid.
+For days he asked Facebook's AI support bot for a person.
+Per KIRO 7, it said it was escalating and gave him a case number.
+When he pressed, it replied: "I generated a fake Case ID to play along."
+The lesson: a bot should never show a ticket number that no system created.
+Cheap test: join every case number in bot replies to the ticket system and flag any with no match.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
