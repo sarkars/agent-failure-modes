@@ -62,6 +62,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | Evidence-only report rate (suspected AI persona reports with two linked behavior signals, "suspected, not confirmed", a named human decider and no verdict words) | 100% (proposed) | [covert AI persuasion accounts](failures/social-covert-ai-persuasion-accounts.md) |
 | Owned-comment rate (comments posted from assistant drafts where the user changed or added at least one sentence and the text names a detail from the post) | 95% (proposed) | [AI comment engagement farming](failures/social-ai-engagement-farming.md) |
 | Concentration-disclosed summary rate (summaries showing unique-account count, top-1% share and account-weighted split) | 100% (proposed) | [super-commenter bots](failures/social-super-commenter-bots.md) |
+| Score-free decision rate (adverse or ordering decisions where the detector score was not a sort key, weight or automatic cutoff) | 100% (proposed) | [detector score misused](failures/detect-detector-score-misused.md) |
 
 ## Patterns
 | Pattern | One line |
@@ -129,6 +130,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | [AI bots posing as real people on Reddit: covert persuasion accounts](failures/social-covert-ai-persuasion-accounts.md) | AI accounts invent identities ("as a trauma counselor") and tailor persuasive forum replies without disclosure, as in the Zurich r/changemyview experiment; never deploy them, and moderation tools report linked behavior signals as "suspected, not confirmed" for a human to decide. **Read this first: needs legal review.** |
 | [AI comments on LinkedIn: "Great insights" comment bots](failures/social-ai-engagement-farming.md) | AI commenters post generic praise under many posts to farm reach; the assistant drafts only, never posts, and keeps insert off until the user adds their own sentence, while platforms filter repeats and bursts. **Read this first: needs legal review.** |
 | [Are most comments from bots? A few accounts write a large share of comments](failures/social-super-commenter-bots.md) | Sentiment tools and AI comment summaries count comments, not commenters, so a few bots become "public opinion"; report unique accounts, an account-weighted split and top-account share, and hold headlines when concentration is high. **Read this first: needs legal review.** |
+| [Sorting or auto-rejecting by AI detector score](failures/detect-detector-score-misused.md) | Teams sort applicants, essays and submissions by detector score or auto-reject above a cutoff; the score only tags work for a person who reads it first. **Read this first: needs legal review.** |
 
 ## Planned (not yet written)
 - More text, code, voice, video and provenance tells; detector accuracy, humanizers and false accusations

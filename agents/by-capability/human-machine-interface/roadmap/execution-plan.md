@@ -2527,7 +2527,7 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 493 | SL-61 | AI personas run covert persuasion accounts on forums | New | - | `goals/ai-slop-detection/failures/social-covert-ai-persuasion-accounts.md` | Done | 224 |
 | 494 | SL-62 | Engagement farming: AI comments and reply bots on professional networks | New | - | `goals/ai-slop-detection/failures/social-ai-engagement-farming.md` | Done | 224 |
 | 495 | SL-63 | A few automated accounts produce a third of all comments | New | - | `goals/ai-slop-detection/failures/social-super-commenter-bots.md` | Done | 224 |
-| 496 | SL-64 | Detector scores used for sorting and ranking, not just flagging | New | - | `goals/ai-slop-detection/failures/detect-detector-score-misused.md` | Queued | - |
+| 496 | SL-64 | Detector scores used for sorting and ranking, not just flagging | New | - | `goals/ai-slop-detection/failures/detect-detector-score-misused.md` | Done | 224 |
 
 ## Run log
 *(Each run appends an entry here.)*

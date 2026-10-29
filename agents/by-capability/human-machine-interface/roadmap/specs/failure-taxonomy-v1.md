@@ -8,7 +8,7 @@ The taxonomy pairs with the [conversation event schema v0.1](conversation-event-
 
 ## What this page is and is not
 
-- It lists every file found in `goals/*/failures/*.md`: **263 entries in 56 families**. If a pattern is added or removed, this count changes.
+- It lists every file found in `goals/*/failures/*.md`: **264 entries in 56 families**. If a pattern is added or removed, this count changes.
 - It copies each pattern's one-sentence Issue line, its Stakes row, and whether a Detection signals block exists. It does not add facts the page does not state.
 - "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **256 of 256** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **256 of 256** pages have one.
 - It does not rank patterns by frequency or harm. No counts of real-world occurrences are given because none have been measured here.
@@ -112,6 +112,7 @@ Family folder: `ai-slop-detection` ([family README](../../goals/ai-slop-detectio
 | `social-covert-ai-persuasion-accounts` | Covert AI persuasion accounts | AI-run accounts with invented first-hand personas post tailored persuasive replies in forums without disclosure, and moderation tools answer "bot or not" with a verdict instead of evidence. | High **Read this first: needs expert or legal review.** | yes | admit_uncertainty, offer_choices, hand_off | [page](../../goals/ai-slop-detection/failures/social-covert-ai-persuasion-accounts.md) |
 | `social-ai-engagement-farming` | AI comment engagement farming | AI comment tools post generic "Great insights!" comments on professional networks to farm reach, burying real replies and risking account restrictions. | Medium **Read this first: needs expert or legal review.** | yes | offer_choices, ask_clarifying_question, admit_uncertainty, hand_off | [page](../../goals/ai-slop-detection/failures/social-ai-engagement-farming.md) |
 | `social-super-commenter-bots` | Super-commenter bots | A few automated accounts write a large share of comments, and summaries that count comments instead of commenters report bot volume as public opinion. | High **Read this first: needs expert or legal review.** | yes | lead_with_answer, admit_uncertainty, offer_choices, hand_off | [page](../../goals/ai-slop-detection/failures/social-super-commenter-bots.md) |
+| `detect-detector-score-misused` | Detector score used to sort or cut | Teams use an AI-likelihood score as a sort key, weight or automatic cutoff for applicants, essays, search results or submissions instead of a prompt for human review. | High **Read this first: needs expert or legal review.** | yes | offer_choices, admit_uncertainty, ask_clarifying_question, hand_off | [page](../../goals/ai-slop-detection/failures/detect-detector-score-misused.md) |
 
 ### Banking agents
 
