@@ -1836,3 +1836,15 @@ The lesson: run a fixed test set on every config change, and log a version on ev
 Cheap test: ask the same factual question every day and flag any answer that flips to a refusal with no logged change.
 
 Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-29: A card switch sent rent payment problems to an AI chatbot (Bilt, February 2026)
+Draft only. Source: the [teardown](../../incidents/bilt-card-2-0-ai-chatbot-support-blocks-human-help-during-rent-payment-failures-february-2026.md), built from eMarketer, HousingWire, Thrifty Traveler and PYMNTS, all opened.
+
+In February 2026, Bilt moved its cardholders to a new card.
+Some rent and mortgage payments went missing, bounced or arrived late.
+Per eMarketer, many members found only AI chatbots, with days-long waits to reach a person.
+In May, Sen. Warren asked Bilt about its chatbot. Bilt says all issues are resolved.
+The lesson: a dated migration needs a staffed path to a person, sized for that date.
+Cheap test: send "my rent payment left my bank but never arrived" and pass only if the bot routes it to a person ahead of general questions.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
