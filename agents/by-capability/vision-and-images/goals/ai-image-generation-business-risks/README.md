@@ -23,11 +23,11 @@ description: How businesses get hurt when they publish AI-made images and video:
 | [Confidential files uploaded to AI image tools](failures/confidential-files-uploaded-to-ai-image-tools.md) | Both | Staff upload unreleased renders, client photos or floor plans to consumer image tools that are public or train by default; classify files and allow each class only on approved tools and tiers | [Tests](../../tests/confidential-files-uploaded-to-ai-image-tools.md) |
 | [Ad platforms that reject or label AI-generated ads](failures/ad-platforms-reject-or-label-ai-generated-ads.md) | Both | AI-made ads go live without the disclosure each platform asks for, or get rejected; check each platform's current rule before launch and after every duplicate | [Tests](../../tests/ad-platforms-reject-or-label-ai-generated-ads.md) |
 | [AI-generated ad disclosure rules not met](failures/ai-generated-ad-disclosure-rules-not-met.md) | Both | One AI-made creative runs in several markets and misses one market's AI labeling law; match every market to a counsel-kept register before launch | [Tests](../../tests/ai-generated-ad-disclosure-rules-not-met.md) |
+| [AI images that make health and earnings claims](failures/ai-images-make-regulated-health-and-finance-claims.md) | Both | An ad's AI before-and-after, AI nurse or yacht scene claims a health or money result nobody proved; never generate results as real, require typical-results proof and a named reviewer | [Tests](../../tests/ai-images-make-regulated-health-and-finance-claims.md) |
 
 All tests are **Not yet run**. All detection signals and Guide specs are proposed.
 
 ## Planned (not yet written)
-- Regulated claims in images: health, finance, food, before-and-after
 - Cultural, religious or local errors in images made for other markets
 - Employees' or models' likeness reused beyond what they agreed to
 - No model release or likeness rights for generated people who resemble real people
