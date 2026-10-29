@@ -14,6 +14,8 @@ search phrases:
 - ai assistant over-formatting responses
 -->
 
+**Short answer:** Match the shape of the reply to the shape of the content. Explain reasoning, trade-offs and advice in connected sentences. Use a bullet list only for three or more parallel, independent items, after a one-sentence answer. Use headers only in replies over 250 words that cover several distinct topics, and no formatting in casual or emotional chats.
+
 **Frequency**: Common
 
 ## Issue: The assistant answers a question that needs connected reasoning with headers and short bullets, so the "because" and "but" between the ideas are lost and the user must rebuild the argument.
