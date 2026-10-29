@@ -2484,7 +2484,7 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 484 | SL-52 | Text watermarks erased by paraphrase, back-translation or rewrite | New | - | `goals/ai-slop-detection/failures/provenance-text-watermark-erased.md` | Done | 223 |
 | 485 | SL-53 | Slopsquatting: attackers register package names that AI keeps inventing | New | - | `goals/ai-slop-detection/failures/code-slopsquatting.md` | Done | 223 |
 | 486 | SL-54 | AI-generated code ships vulnerabilities and is not tagged as AI | New | - | `goals/ai-slop-detection/failures/code-untracked-ai-vulnerabilities.md` | Done | 223 |
-| 487 | SL-55 | AI agent skills install hallucinated dependencies on their own | New | - | `goals/ai-slop-detection/failures/code-agent-installs-hallucinated-packages.md` | Queued | - |
+| 487 | SL-55 | AI agent skills install hallucinated dependencies on their own | New | - | `goals/ai-slop-detection/failures/code-agent-installs-hallucinated-packages.md` | Done | 223 |
 | 488 | SL-56 | AI content farms posing as news sites | New | - | `goals/ai-slop-detection/failures/web-ai-content-farms-as-news.md` | Queued | - |
 | 489 | SL-57 | Ads fund AI content farms through programmatic buying | New | - | `goals/ai-slop-detection/failures/web-ads-fund-content-farms.md` | Queued | - |
 | 490 | SL-58 | Fake AI music artists with huge catalogs and no history | New | - | `goals/ai-slop-detection/failures/music-fake-ai-artists.md` | Queued | - |

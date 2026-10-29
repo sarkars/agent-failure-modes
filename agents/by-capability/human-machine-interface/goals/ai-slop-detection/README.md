@@ -53,6 +53,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | Scoped text-watermark result rate (results shown with state, length and edit caveat, never an authorship verdict) | 100% (proposed) | [text watermark erased](failures/provenance-text-watermark-erased.md) |
 | Unreviewed young-or-unlisted dependency rate (new dependencies that are young, from a single-package publisher or off the allowlist, merged with no review) | 0 (proposed) | [slopsquatting](failures/code-slopsquatting.md) |
 | Tagged-and-scanned AI change rate (merged AI-written changes with a provenance trailer or label and a passing security scan) | 100% (proposed) | [untracked AI vulnerabilities](failures/code-untracked-ai-vulnerabilities.md) |
+| Ungated new-package run rate (agent installs of names not in lockfile/allowlist with no lookup and human yes) | 0 (proposed) | [agent installs hallucinated packages](failures/code-agent-installs-hallucinated-packages.md) |
 
 ## Patterns
 | Pattern | One line |
@@ -111,6 +112,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | [Can a text watermark survive paraphrasing? Text watermarks erased by rewrites](failures/provenance-text-watermark-erased.md) | Paraphrase, translation or rewording erases text watermarks and marks can be forged; show state and length, never "human-written," decide nothing on the mark alone. **Read this first: needs legal review.** |
 | [Slopsquatting: attackers register package names AI keeps inventing](failures/code-slopsquatting.md) | Attackers register package names AI tools keep inventing, so "exists on npm" passes; a gate holds young, unlisted packages and a scan cleans invented install commands from docs and skills |
 | [AI-generated code vulnerabilities with no record AI wrote them](failures/code-untracked-ai-vulnerabilities.md) | AI-written code with known flaws merges with no record that AI wrote it; tag every AI commit and PR, and block merge until a security scan passes. **Read this first: needs legal review.** |
+| [AI agent installs a package that doesn't exist](failures/code-agent-installs-hallucinated-packages.md) | Agents and skills run npm/npx/pip installs with no one reading the name; a gate holds every name not in the lockfile or allowlist for a registry check and a human yes |
 
 ## Planned (not yet written)
 - More text, code, voice, video and provenance tells; detector accuracy, humanizers and false accusations
