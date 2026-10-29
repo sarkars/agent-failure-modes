@@ -36,6 +36,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | Evidence-reviewed action rate (AI-use actions on reported work taken only after a private evidence request and a named second reviewer) | 100% (proposed) | [false accusations by readers](failures/detect-false-accusations-by-readers.md) |
 | Independently checked detector rate (detectors measured on the buyer's own labeled sample, with a 95% range, re-tested since the last update) | 100% before go-live (proposed) | [unverified accuracy claims](failures/detect-unverified-accuracy-claims.md) |
 | Meaning-kept rewrite rate (rewrites after a humanize or bypass request that keep every name, number, date, quote and citation and add no new errors) | 100% (proposed) | [humanizer arms race](failures/detect-humanizer-arms-race.md) |
+| Source-checked clip rate (clips aired, kept up as news or approved as ads with a logged source check) | 100% (proposed) | [synthetic clips as real](failures/video-synthetic-clips-as-real.md) |
 
 ## Patterns
 | Pattern | One line |
@@ -77,6 +78,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | [Falsely accused of using AI: reader and fan pile-ons](failures/detect-false-accusations-by-readers.md) | Crowds report real artists, writers and photographers as AI; reports are claims, the creator is asked privately for process evidence, and clearing is public |
 | [Are AI detectors really 99% accurate?](failures/detect-unverified-accuracy-claims.md) | Buyers adopt detectors on vendor-reported accuracy; label the figure and test on your own labeled sample first. **Read this first: needs legal review.** |
 | [Do AI humanizers work? Humanizer tools make writing worse](failures/detect-humanizer-arms-race.md) | Humanizers reword AI text to dodge detectors, adding typos and fact errors, while detectors retrain to flag them; edit for the reader, keep facts, show drafts |
+| [How to tell if a video is AI generated: fake clips passed off as news](failures/video-synthetic-clips-as-real.md) | Reviewers clear AI clips of storms, bodycam stops and "news" segments because they look real or lack a watermark; the look never decides, a logged source check does. **Read this first: needs legal review.** |
 
 ## Planned (not yet written)
 - More text, code, voice, video and provenance tells; detector accuracy, humanizers and false accusations
