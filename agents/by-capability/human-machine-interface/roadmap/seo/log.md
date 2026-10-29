@@ -171,3 +171,9 @@ Still blocked: no Search Console access (no Chrome tools, empty `inbox/`) and no
 - **Profanity queries:** no action (they land on matching pages).
 
 **Action:** none. No content page changed; no merge proposal added.
+
+## 2026-10-29 (run 229): G12 batch 1
+
+**Source:** Search Console, read in Chrome, last 28 days, queries filtered to question forms (41 found). Four had 5+ impressions and 0 clicks.
+
+**Action:** one short answer added to /bullet-and-heading-overuse/ (content repo and site repo, site commit b320eed9d). Three questions skipped because the ranking page cannot answer them from its own content; reasons in strategy-status.md G12. No live check yet (Vercel has not deployed since c69c78cdd).
