@@ -18,6 +18,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | Placeholder-free deploy rate | 100% (proposed) | [placeholder data left in](failures/ui-placeholder-data-left-in.md) |
 | Unbacked social-proof elements at deploy | 0 (proposed) | [fabricated social proof](failures/ui-fabricated-social-proof.md) |
 | Caveated-flag rate (detector results shown with error rate, "not proof" note and human review) | 100% (proposed) | [detector false positives](failures/detect-detector-false-positives.md) |
+| Re-tested rule rate (rules re-tested against the current model version) | 100% within 7 days of a model change (proposed) | [detection rules decay](failures/detect-rules-decay.md) |
 
 ## Patterns
 | Pattern | One line |
@@ -41,6 +42,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | [AI made-up numbers in reports and dashboards](failures/data-too-clean.md) | Round, too-clean figures with no source, caught by tracing every number to a query or citation |
 | [AI generated reviews and replies that all sound the same](failures/data-templated-reviews.md) | Review farms and reply bots in one templated voice, caught by near-duplicate checks. **Read this first: needs legal review.** |
 | [AI detector false positives (Turnitin, GPTZero)](failures/detect-detector-false-positives.md) | Detector scores flag real human writing, often English learners'; scores show their error rate and a person decides |
+| [AI detection rules stop working after a model update](failures/detect-rules-decay.md) | Phrase lists, regex and classifiers quietly stop catching anything after the generating model changes |
 
 ## Planned (not yet written)
 - More text, code, voice, video and provenance tells; detector accuracy, humanizers and false accusations
