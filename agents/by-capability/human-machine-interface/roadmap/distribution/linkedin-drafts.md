@@ -1758,3 +1758,16 @@ The office says it was not told about the launch and had no chance to test the b
 Cheap test: list the topics your bot answers, and pass each one only if its answers come from the source the owning team names.
 
 Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-29: A college chatbot named a president who had left the job (California community colleges, March 2026)
+Draft only. Source: the [teardown](../../incidents/california-community-college-chatbots-wrong-answers-calmatters-test-march-2026.md), built from the CalMatters report (opened) and two Los Angeles Community College District posts that confirm only the leadership change. CalMatters describes the bots' replies but does not print them.
+
+Does your FAQ bot know who works there now?
+
+CalMatters tested California community college chatbots and reported the results on March 6, 2026.
+One bot named a college president who had left the job more than a year earlier.
+The same bot gave wrong financial aid hours and dates, per the report.
+Asked in Spanish about a Social Security number, one bot pointed to the wrong office.
+Cheap test: every week, ask your bot who runs each office and what its hours are, in each language you support, and check against the source page.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
