@@ -8,7 +8,7 @@ The taxonomy pairs with the [conversation event schema v0.1](conversation-event-
 
 ## What this page is and is not
 
-- It lists every file found in `goals/*/failures/*.md`: **259 entries in 56 families**. If a pattern is added or removed, this count changes.
+- It lists every file found in `goals/*/failures/*.md`: **260 entries in 56 families**. If a pattern is added or removed, this count changes.
 - It copies each pattern's one-sentence Issue line, its Stakes row, and whether a Detection signals block exists. It does not add facts the page does not state.
 - "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **256 of 256** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **256 of 256** pages have one.
 - It does not rank patterns by frequency or harm. No counts of real-world occurrences are given because none have been measured here.
@@ -108,6 +108,7 @@ Family folder: `ai-slop-detection` ([family README](../../goals/ai-slop-detectio
 | `web-ads-fund-content-farms` | Ads fund AI content farms | Programmatic buys place brand ads on AI content farms the advertiser never chose, and campaign summaries praise the low CPM instead of reporting where the money went. | Medium **Read this first: needs expert or legal review.** | yes | lead_with_answer, admit_uncertainty, offer_choices, hand_off | [page](../../goals/ai-slop-detection/failures/web-ads-fund-content-farms.md) |
 | `music-fake-ai-artists` | Fake AI music artists presented as real | Streaming recommenders, playlist curators and music assistants present AI-made artists with large, fast-posted catalogs and no verifiable people or history as real bands, with no label. | Medium **Read this first: needs expert or legal review.** | yes | lead_with_answer, admit_uncertainty, offer_choices, hand_off | [page](../../goals/ai-slop-detection/failures/music-fake-ai-artists.md) |
 | `music-ai-stream-fraud` | AI music stream fraud | Bots stream mass-uploaded AI tracks to pull royalty money, and flags get worded as fraud verdicts that hit real artists. | High **Read this first: needs expert or legal review.** | yes | admit_uncertainty, offer_choices, ask_clarifying_question, hand_off | [page](../../goals/ai-slop-detection/failures/music-ai-stream-fraud.md) |
+| `provenance-self-declared-labels` | Self-declared AI labels | Platforms show an AI label mainly when the uploader declares it, so undeclared AI posts go out unlabeled and viewers read the missing label as "real." | High **Read this first: needs expert or legal review.** | yes | admit_uncertainty, offer_choices, ask_clarifying_question, hand_off | [page](../../goals/ai-slop-detection/failures/provenance-self-declared-labels.md) |
 
 ### Banking agents
 

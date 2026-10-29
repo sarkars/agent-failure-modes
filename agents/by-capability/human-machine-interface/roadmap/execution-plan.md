@@ -2523,7 +2523,7 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 489 | SL-57 | Ads fund AI content farms through programmatic buying | New | - | `goals/ai-slop-detection/failures/web-ads-fund-content-farms.md` | Done | 224 |
 | 490 | SL-58 | Fake AI music artists with huge catalogs and no history | New | - | `goals/ai-slop-detection/failures/music-fake-ai-artists.md` | Done | 224 |
 | 491 | SL-59 | AI tracks inflate streams and divert royalties | New | - | `goals/ai-slop-detection/failures/music-ai-stream-fraud.md` | Done | 224 |
-| 492 | SL-60 | Platforms rely on self-declared AI labels | New | - | `goals/ai-slop-detection/failures/provenance-self-declared-labels.md` | Queued | - |
+| 492 | SL-60 | Platforms rely on self-declared AI labels | New | - | `goals/ai-slop-detection/failures/provenance-self-declared-labels.md` | Done | 224 |
 | 493 | SL-61 | AI personas run covert persuasion accounts on forums | New | - | `goals/ai-slop-detection/failures/social-covert-ai-persuasion-accounts.md` | Queued | - |
 | 494 | SL-62 | Engagement farming: AI comments and reply bots on professional networks | New | - | `goals/ai-slop-detection/failures/social-ai-engagement-farming.md` | Queued | - |
 | 495 | SL-63 | A few automated accounts produce a third of all comments | New | - | `goals/ai-slop-detection/failures/social-super-commenter-bots.md` | Queued | - |
