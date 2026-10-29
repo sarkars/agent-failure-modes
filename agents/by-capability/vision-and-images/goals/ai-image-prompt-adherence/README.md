@@ -14,6 +14,7 @@ description: How AI images miss what the prompt asked for, from the wrong number
 | Pattern | Covers | One line | Tests |
 |---|---|---|---|
 | [AI image generator wrong number of objects](failures/ai-image-generator-wrong-number-of-objects.md) | Image | Ask for four stools or three apples and get a different number; flag prompts where the count matters, count every image before publish, and composite exact counts when regeneration keeps missing | [Tests](../../tests/ai-image-generator-wrong-number-of-objects.md) |
+| [AI image generator puts objects in the wrong position](failures/ai-image-generator-puts-objects-in-the-wrong-position.md) | Image | Ask for a lamp left of a chair or a rug under a table and get it elsewhere; check each requested placement, name the ones that failed, and fix by flip, edit or layout-first rebuild | [Tests](../../tests/ai-image-generator-puts-objects-in-the-wrong-position.md) |
 
 All tests are **Not yet run**. All detection signals and Guide specs are proposed.
 
