@@ -24,11 +24,11 @@ description: How businesses get hurt when they publish AI-made images and video:
 | [Ad platforms that reject or label AI-generated ads](failures/ad-platforms-reject-or-label-ai-generated-ads.md) | Both | AI-made ads go live without the disclosure each platform asks for, or get rejected; check each platform's current rule before launch and after every duplicate | [Tests](../../tests/ad-platforms-reject-or-label-ai-generated-ads.md) |
 | [AI-generated ad disclosure rules not met](failures/ai-generated-ad-disclosure-rules-not-met.md) | Both | One AI-made creative runs in several markets and misses one market's AI labeling law; match every market to a counsel-kept register before launch | [Tests](../../tests/ai-generated-ad-disclosure-rules-not-met.md) |
 | [AI images that make health and earnings claims](failures/ai-images-make-regulated-health-and-finance-claims.md) | Both | An ad's AI before-and-after, AI nurse or yacht scene claims a health or money result nobody proved; never generate results as real, require typical-results proof and a named reviewer | [Tests](../../tests/ai-images-make-regulated-health-and-finance-claims.md) |
+| [AI images with cultural and religious errors](failures/ai-images-with-cultural-and-religious-errors.md) | Image | AI art for a holiday, faith or market gets a sacred figure, flag or custom wrong and the community finds it after printing; list every culture-specific element, place flags from the official file and get a named community reviewer's sign-off | [Tests](../../tests/ai-images-with-cultural-and-religious-errors.md) |
 
 All tests are **Not yet run**. All detection signals and Guide specs are proposed.
 
 ## Planned (not yet written)
-- Cultural, religious or local errors in images made for other markets
 - Employees' or models' likeness reused beyond what they agreed to
 - No model release or likeness rights for generated people who resemble real people
 
