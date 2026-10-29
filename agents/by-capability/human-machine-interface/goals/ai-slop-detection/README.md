@@ -55,6 +55,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | Tagged-and-scanned AI change rate (merged AI-written changes with a provenance trailer or label and a passing security scan) | 100% (proposed) | [untracked AI vulnerabilities](failures/code-untracked-ai-vulnerabilities.md) |
 | Ungated new-package run rate (agent installs of names not in lockfile/allowlist with no lookup and human yes) | 0 (proposed) | [agent installs hallucinated packages](failures/code-agent-installs-hallucinated-packages.md) |
 | Flagged-source-only fact rate (news claims stated as fact when every cited source is unrated or flagged) | 0 (proposed) | [AI content farms posing as news](failures/web-ai-content-farms-as-news.md) |
+| Unreviewed flagged-domain spend share (open-web spend on flagged domains with no reviewed decision / all open-web spend, weekly) | Under 1% (proposed) | [ads fund content farms](failures/web-ads-fund-content-farms.md) |
 
 ## Patterns
 | Pattern | One line |
@@ -115,6 +116,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | [AI-generated code vulnerabilities with no record AI wrote them](failures/code-untracked-ai-vulnerabilities.md) | AI-written code with known flaws merges with no record that AI wrote it; tag every AI commit and PR, and block merge until a security scan passes. **Read this first: needs legal review.** |
 | [AI agent installs a package that doesn't exist](failures/code-agent-installs-hallucinated-packages.md) | Agents and skills run npm/npx/pip installs with no one reading the name; a gate holds every name not in the lockfile or allowlist for a registry check and a human yes |
 | [AI content farms posing as local news sites](failures/web-ai-content-farms-as-news.md) | Chatbots, aggregators and RAG pipelines cite AI content farms posing as local papers; check domain history, leftovers and bylines, and never state a claim as fact from unverified sites alone. **Read this first: needs legal review.** |
+| [Brand ads on AI-generated sites: programmatic buying funds content farms](failures/web-ads-fund-content-farms.md) | Open-exchange buys pay AI content farms the advertiser never picked; buy from an inclusion list, check the seller path, review placements weekly, and lead every campaign summary with flagged spend. **Read this first: needs legal review.** |
 
 ## Planned (not yet written)
 - More text, code, voice, video and provenance tells; detector accuracy, humanizers and false accusations

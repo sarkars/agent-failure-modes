@@ -2520,7 +2520,7 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 486 | SL-54 | AI-generated code ships vulnerabilities and is not tagged as AI | New | - | `goals/ai-slop-detection/failures/code-untracked-ai-vulnerabilities.md` | Done | 223 |
 | 487 | SL-55 | AI agent skills install hallucinated dependencies on their own | New | - | `goals/ai-slop-detection/failures/code-agent-installs-hallucinated-packages.md` | Done | 223 |
 | 488 | SL-56 | AI content farms posing as news sites | New | - | `goals/ai-slop-detection/failures/web-ai-content-farms-as-news.md` | Done | 223 |
-| 489 | SL-57 | Ads fund AI content farms through programmatic buying | New | - | `goals/ai-slop-detection/failures/web-ads-fund-content-farms.md` | Queued | - |
+| 489 | SL-57 | Ads fund AI content farms through programmatic buying | New | - | `goals/ai-slop-detection/failures/web-ads-fund-content-farms.md` | Done | 224 |
 | 490 | SL-58 | Fake AI music artists with huge catalogs and no history | New | - | `goals/ai-slop-detection/failures/music-fake-ai-artists.md` | Queued | - |
 | 491 | SL-59 | AI tracks inflate streams and divert royalties | New | - | `goals/ai-slop-detection/failures/music-ai-stream-fraud.md` | Queued | - |
 | 492 | SL-60 | Platforms rely on self-declared AI labels | New | - | `goals/ai-slop-detection/failures/provenance-self-declared-labels.md` | Queued | - |

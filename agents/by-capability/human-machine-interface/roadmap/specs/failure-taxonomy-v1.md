@@ -8,7 +8,7 @@ The taxonomy pairs with the [conversation event schema v0.1](conversation-event-
 
 ## What this page is and is not
 
-- It lists every file found in `goals/*/failures/*.md`: **256 entries in 56 families**. If a pattern is added or removed, this count changes.
+- It lists every file found in `goals/*/failures/*.md`: **257 entries in 56 families**. If a pattern is added or removed, this count changes.
 - It copies each pattern's one-sentence Issue line, its Stakes row, and whether a Detection signals block exists. It does not add facts the page does not state.
 - "Detection signals written: yes" means the page has a proposed-signals block. It does not mean the failure is detected, measured, or reliable. Currently **256 of 256** pages have such a block. A "Moves" column lists the conversation moves in the page's Guide spec (proposed); "none yet" means the page has no Moves table. Currently **256 of 256** pages have one.
 - It does not rank patterns by frequency or harm. No counts of real-world occurrences are given because none have been measured here.
@@ -105,6 +105,7 @@ Family folder: `ai-slop-detection` ([family README](../../goals/ai-slop-detectio
 | `code-untracked-ai-vulnerabilities` | AI-generated code ships vulnerabilities and is not tagged as AI | Coding agents write exploitable code into commits that carry no AI tag, so security review and incident triage cannot find what else the AI wrote. | High | yes | lead_with_answer, admit_uncertainty, offer_choices, hand_off | [page](../../goals/ai-slop-detection/failures/code-untracked-ai-vulnerabilities.md) |
 | `code-agent-installs-hallucinated-packages` | AI agent installs hallucinated packages | A coding agent or agent skill runs an install or npx command for an invented package name without any human seeing the name. | High | no | lead_with_answer, offer_choices, admit_uncertainty, ask_clarifying_question, hand_off | [page](../../goals/ai-slop-detection/failures/code-agent-installs-hallucinated-packages.md) |
 | `web-ai-content-farms-as-news` | AI content farms posing as news sites | A search tool, aggregator or chatbot cites an AI content farm dressed as a newspaper and passes its claim on as news. | High | yes | admit_uncertainty, offer_choices, lead_with_answer, hand_off | [page](../../goals/ai-slop-detection/failures/web-ai-content-farms-as-news.md) |
+| `web-ads-fund-content-farms` | Ads fund AI content farms | Programmatic buys place brand ads on AI content farms the advertiser never chose, and campaign summaries praise the low CPM instead of reporting where the money went. | Medium **Read this first: needs expert or legal review.** | yes | lead_with_answer, admit_uncertainty, offer_choices, hand_off | [page](../../goals/ai-slop-detection/failures/web-ads-fund-content-farms.md) |
 
 ### Banking agents
 
