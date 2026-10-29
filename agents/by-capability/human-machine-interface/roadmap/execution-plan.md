@@ -2348,7 +2348,7 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 450 | SL-18 | Review and reply farms with templated voice | New | L | `goals/ai-slop-detection/failures/data-templated-reviews.md` | Needs review | 219 |
 | 451 | SL-19 | AI-text detectors flag human writing (false positives) | New | - | `goals/ai-slop-detection/failures/detect-detector-false-positives.md` | Done | 220 |
 | 452 | SL-20 | Detection rules that break after one model update | New | - | `goals/ai-slop-detection/failures/detect-rules-decay.md` | Done | 220 |
-| 453 | SL-21 | Inter everywhere, lavender accents and forced dark mode | New | - | `goals/ai-slop-detection/failures/ui-default-type-and-palette.md` | Queued | - |
+| 453 | SL-21 | Inter everywhere, lavender accents and forced dark mode | New | - | `goals/ai-slop-detection/failures/ui-default-type-and-palette.md` | Done | 220 |
 | 454 | SL-22 | Neon-on-dark palettes and aurora background glows | New | - | `goals/ai-slop-detection/failures/ui-neon-aurora-glow.md` | Queued | - |
 | 455 | SL-23 | Unrelated sites converge on the same look | New | - | `goals/ai-slop-detection/failures/ui-visual-convergence.md` | Queued | - |
 | 456 | SL-24 | No locked design tokens, so every page drifts to defaults | New | - | `goals/ai-slop-detection/failures/ui-no-locked-design-tokens.md` | Queued | - |

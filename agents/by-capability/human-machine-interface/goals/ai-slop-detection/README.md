@@ -19,6 +19,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | Unbacked social-proof elements at deploy | 0 (proposed) | [fabricated social proof](failures/ui-fabricated-social-proof.md) |
 | Caveated-flag rate (detector results shown with error rate, "not proof" note and human review) | 100% (proposed) | [detector false positives](failures/detect-detector-false-positives.md) |
 | Re-tested rule rate (rules re-tested against the current model version) | 100% within 7 days of a model change (proposed) | [detection rules decay](failures/detect-rules-decay.md) |
+| Flagged default-type or forced-dark screens shipped with no recorded reason | Under 10% (proposed) | [default type and palette](failures/ui-default-type-and-palette.md) |
 
 ## Patterns
 | Pattern | One line |
@@ -43,6 +44,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | [AI generated reviews and replies that all sound the same](failures/data-templated-reviews.md) | Review farms and reply bots in one templated voice, caught by near-duplicate checks. **Read this first: needs legal review.** |
 | [AI detector false positives (Turnitin, GPTZero)](failures/detect-detector-false-positives.md) | Detector scores flag real human writing, often English learners'; scores show their error rate and a person decides |
 | [AI detection rules stop working after a model update](failures/detect-rules-decay.md) | Phrase lists, regex and classifiers quietly stop catching anything after the generating model changes |
+| [Inter font, indigo accents and forced dark mode](failures/ui-default-type-and-palette.md) | Default font, off-token accent and dark mode that ignores the user's setting |
 
 ## Planned (not yet written)
 - More text, code, voice, video and provenance tells; detector accuracy, humanizers and false accusations
