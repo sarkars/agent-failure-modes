@@ -1884,3 +1884,14 @@ In October 2026 the City Council voted 9-3 against a $3.9 million contract exten
 Cheap test: ask your bot about local names shared with famous places, and check the date on every page it links.
 
 Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-29: California's wildfire chatbot answered "evacuation kit" but not "go bag" (CalMatters test, July 2025)
+Draft only. Source: the [teardown](../../incidents/cal-fire-ask-cal-fire-chatbot-cannot-answer-evacuation-orders-stale-containment-july-2025.md), built from CalMatters, The Markup, KFI, Planetizen, the governor's release and CBS News, all opened.
+
+CalMatters tested Cal Fire's "Ask CAL FIRE" chatbot in 2025.
+"What should I have in my evacuation kit?" got a list. "Go bag" got a link or "I'm not sure."
+It could not answer questions about evacuation orders.
+It called a six-day-old 50% containment figure the "latest." The fire was 85% contained.
+Cheap test: ask every core question four ways, and check the "as of" time on every live number.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
