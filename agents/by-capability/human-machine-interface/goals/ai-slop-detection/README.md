@@ -45,6 +45,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | Confirmed-claim rate (exported resume and cover-letter drafts where every skill, tool, number and title traces to candidate input the candidate confirmed) | 100% (proposed) | [undefendable resume claims](failures/hiring-undefendable-ai-resume-claims.md) |
 | Process-evidence decision rate (AI-use findings on student or applicant essays recording a notice, the student's response and a decider other than the accuser) | 100% (proposed) | [AI essays](failures/education-ai-essays.md) |
 | Provenance-tagged record rate (records with source, collection date and origin label / all records in a training run) | 100% (proposed) | [model collapse](failures/data-model-collapse-contamination.md) |
+| Reviewed-before-index rate (translated pages published or indexed only after a fluent review of that language) | 100% (proposed) | [machine-translated duplicates](failures/data-machine-translated-duplicates.md) |
 
 ## Patterns
 | Pattern | One line |
@@ -95,6 +96,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | [AI resume claims candidates can't defend in the interview](failures/hiring-undefendable-ai-resume-claims.md) | AI tools add skills, numbers and titles the candidate never gave; write only confirmed claims, and employers check claims by asking, not by detector score. **Read this first: needs legal review.** |
 | [AI-written student and admissions essays: penalized or missed](failures/education-ai-essays.md) | Schools act on a score or a hunch, penalizing honest students while lightly edited AI essays pass; use drafts, version history and an oral follow-up, and keep accuser and decider apart. **Read this first: needs legal review.** |
 | [Model collapse: training on AI-generated data](failures/data-model-collapse-contamination.md) | Retraining on scraped or user data that is increasingly AI-written loses rare cases; tag provenance and keep a human reference set |
+| [Machine-translated duplicate pages: sites auto-translated with no fluent review](failures/data-machine-translated-duplicates.md) | AI agents mass-translate sites into many languages with no fluent review; publish only reviewed languages and filter text found in many MT languages from datasets |
 
 ## Planned (not yet written)
 - More text, code, voice, video and provenance tells; detector accuracy, humanizers and false accusations
