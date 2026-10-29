@@ -2438,7 +2438,7 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 473 | SL-41 | Workslop: AI work of little substance sent to colleagues | New | - | `goals/ai-slop-detection/failures/work-workslop.md` | Done | 222 |
 | 474 | SL-42 | Sycophantic drafts and reviews that affirm whatever the user says | New | - | `goals/ai-slop-detection/failures/work-sycophantic-feedback.md` | Done | 222 |
 | 475 | SL-43 | AI-written peer reviews of papers and code | New | - | `goals/ai-slop-detection/failures/work-ai-peer-reviews.md` | Done | 222 |
-| 476 | SL-44 | Resume and cover letter claims the candidate cannot defend | New | - | `goals/ai-slop-detection/failures/hiring-undefendable-ai-resume-claims.md` | Queued | - |
+| 476 | SL-44 | Resume and cover letter claims the candidate cannot defend | New | - | `goals/ai-slop-detection/failures/hiring-undefendable-ai-resume-claims.md` | Done | 222 |
 | 477 | SL-45 | AI-written admissions and student essays penalized or undetected | New | - | `goals/ai-slop-detection/failures/education-ai-essays.md` | Queued | - |
 | 478 | SL-46 | Model collapse: new models trained on AI-written web pages | New | - | `goals/ai-slop-detection/failures/data-model-collapse-contamination.md` | Queued | - |
 | 479 | SL-47 | Mass machine-translated duplicate pages flood the web | New | - | `goals/ai-slop-detection/failures/data-machine-translated-duplicates.md` | Queued | - |
