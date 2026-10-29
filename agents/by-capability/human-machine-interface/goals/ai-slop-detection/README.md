@@ -59,6 +59,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | Labeled-or-held rate (recommended artists failing the profile check shown with a plain-words label or held back) | 100% (proposed) | [fake AI artists](failures/music-fake-ai-artists.md) |
 | Reviewed-before-payout rate (flagged tracks whose royalties were held and decided by a named human before the payout run) | 100% (proposed) | [AI music stream fraud](failures/music-ai-stream-fraud.md) |
 | Undeclared-AI catch rate (sampled posts judged AI-made that carry an AI label from any source) | 90% (proposed) | [self-declared labels](failures/provenance-self-declared-labels.md) |
+| Evidence-only report rate (suspected AI persona reports with two linked behavior signals, "suspected, not confirmed", a named human decider and no verdict words) | 100% (proposed) | [covert AI persuasion accounts](failures/social-covert-ai-persuasion-accounts.md) |
 
 ## Patterns
 | Pattern | One line |
@@ -123,6 +124,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | [Is this band AI? Fake AI music artists with huge catalogs and no history](failures/music-fake-ai-artists.md) | Recommenders and music assistants surface AI-made "artists" with dozens of tracks in weeks, no members and no shows as real bands; check the profile and catalog, then label in plain words or hold them back. **Read this first: needs legal review.** |
 | [AI music streaming fraud: bots play mass-uploaded AI tracks for royalties](failures/music-ai-stream-fraud.md) | Bot accounts spread plays across thousands of AI tracks to drain the royalty pool; flag on upload, play and account behavior, hold the payout for a named reviewer, and never word a flag as an accusation. **Read this first: needs legal review.** |
 | [Why isn't this AI video labeled? Platforms rely on self-declared AI labels](failures/provenance-self-declared-labels.md) | Platforms label AI mostly when the uploader ticks a box, so undeclared AI posts look real; combine the box with provenance, detectors and review, and word "no label" as "not declared," never "human-made." **Read this first: needs legal review.** |
+| [AI bots posing as real people on Reddit: covert persuasion accounts](failures/social-covert-ai-persuasion-accounts.md) | AI accounts invent identities ("as a trauma counselor") and tailor persuasive forum replies without disclosure, as in the Zurich r/changemyview experiment; never deploy them, and moderation tools report linked behavior signals as "suspected, not confirmed" for a human to decide. **Read this first: needs legal review.** |
 
 ## Planned (not yet written)
 - More text, code, voice, video and provenance tells; detector accuracy, humanizers and false accusations
