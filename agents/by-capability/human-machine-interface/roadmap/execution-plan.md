@@ -2395,7 +2395,7 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 464 | SL-32 | Cloned voice tells: no breath, flat prosody, no room tone | New | - | `goals/ai-slop-detection/failures/audio-cloned-voice-tells.md` | Done | 221 |
 | 465 | SL-33 | Provenance metadata (C2PA) stripped by re-encoding | New | - | `goals/ai-slop-detection/failures/provenance-metadata-stripped.md` | Done | 221 |
 | 466 | SL-34 | Watermarks only readable by the vendor that made them | New | - | `goals/ai-slop-detection/failures/provenance-vendor-locked-watermarks.md` | Done | 221 |
-| 467 | SL-35 | Readers falsely accuse real people of using AI | New | - | `goals/ai-slop-detection/failures/detect-false-accusations-by-readers.md` | Queued | - |
+| 467 | SL-35 | Readers falsely accuse real people of using AI | New | - | `goals/ai-slop-detection/failures/detect-false-accusations-by-readers.md` | Done | 221 |
 | 468 | SL-36 | Vendor-reported detector accuracy never independently checked | New | - | `goals/ai-slop-detection/failures/detect-unverified-accuracy-claims.md` | Queued | - |
 | 469 | SL-37 | Humanizer tools make writing worse and still get flagged | New | - | `goals/ai-slop-detection/failures/detect-humanizer-arms-race.md` | Queued | - |
 | 470 | SL-38 | Fake AI-generated video clips presented as news or ads | New | - | `goals/ai-slop-detection/failures/video-synthetic-clips-as-real.md` | Queued | - |
