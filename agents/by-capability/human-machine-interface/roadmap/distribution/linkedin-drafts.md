@@ -1872,3 +1872,15 @@ The Spanish version had no search box, only preset menus.
 Cheap test: type 50 plain words your users use, in every language you offer, and open every link the bot returns.
 
 Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-29: Denver's 311 chatbot thought "Broadway" meant New York (council vote, October 2026)
+Draft only. Source: the [teardown](../../incidents/denver-sunny-311-chatbot-outdated-links-misread-questions-council-rejects-contract-october-2026.md), built from Westword, The Denver Post via GovTech, Denver7, Colorado Politics and CBS Colorado, all opened.
+
+A reporter asked Denver's 311 chatbot about construction on Broadway.
+It replied that it could only answer questions about Denver. It had read Broadway as New York.
+In the same 2024 test it linked a 2021 MLB All-Star game page and a symposium last held in 2019.
+In 2025 the city cut 311 phone hours and pointed residents to the bot 24/7.
+In October 2026 the City Council voted 9-3 against a $3.9 million contract extension.
+Cheap test: ask your bot about local names shared with famous places, and check the date on every page it links.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
