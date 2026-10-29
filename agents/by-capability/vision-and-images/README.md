@@ -6,7 +6,7 @@
 
 - The category spans 14 goals and 106 failure patterns, ranging from single-image hallucination to multi-image consistency to generative-model degradation to robustness against corrupted or adversarial input.
 - Confidence is an unreliable failure signal throughout the category: vision models are typically miscalibrated by 20-40 percentage points, and high-confidence wrong answers appear in every one of the five goals — hallucinated objects, hallucinated depth, hallucinated occluded structure, and adversarially-flipped classifications alike.
-- Spatial Reasoning is the largest of the five vision-understanding goals (14 of their 43 patterns); among the generation goals the largest is Business Risks of AI Image and Video Generation (24), reflecting that 2D-to-3D inference is the single hardest and most failure-prone capability a vision model attempts — depth, scale, occlusion, and viewpoint each introduce their own ambiguity that statistical priors resolve incorrectly.
+- Spatial Reasoning is the largest of the five vision-understanding goals (14 of their 43 patterns), reflecting that 2D-to-3D inference is the single hardest and most failure-prone capability a vision model attempts — depth, scale, occlusion, and viewpoint each introduce their own ambiguity that statistical priors resolve incorrectly. Among the generation goals the largest is Business Risks of AI Image and Video Generation (24).
 - Architectural limits (patch tokenization boundaries) and statistical limits (rare-class imbalance, salience shortcuts, training-data memorization) are mechanistically distinct root causes that happen to produce the same symptom — a confidently wrong output — so the fix differs by pattern even when the symptom looks identical.
 
 ## Vision & Images Goals
