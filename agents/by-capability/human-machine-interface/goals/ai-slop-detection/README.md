@@ -39,6 +39,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | Source-checked clip rate (clips aired, kept up as news or approved as ads with a logged source check) | 100% (proposed) | [synthetic clips as real](failures/video-synthetic-clips-as-real.md) |
 | Measured-word rate (active list words with an excess ratio measured on the current drafting model) | 100% within 7 days of a model change (proposed) | [word list drift](failures/text-word-list-drift.md) |
 | Register-match rate (published AI-drafted pieces with no unreviewed register flag against the writer's own baseline) | 95% (proposed) | [hedged list register](failures/text-hedged-list-register.md) |
+| Receiver-ready rate (AI-assisted work products shared with colleagues that pass the 4-item send check) | 90%, alert below 80% (proposed) | [workslop](failures/work-workslop.md) |
 
 ## Patterns
 | Pattern | One line |
@@ -83,6 +84,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | [How to tell if a video is AI generated: fake clips passed off as news](failures/video-synthetic-clips-as-real.md) | Reviewers clear AI clips of storms, bodycam stops and "news" segments because they look real or lack a watermark; the look never decides, a logged source check does. **Read this first: needs legal review.** |
 | ["Delve" frequency over time: AI word lists go stale](failures/text-word-list-drift.md) | Each model version overuses different words and people adopt the old ones, so a word list is measured per model and re-measured, human baseline included |
 | [AI writing style: "-ing" clauses, abstract nouns and "including" lists](failures/text-hedged-list-register.md) | AI drafts slip into a dense report voice even when told to match a style; compare grammar rates with your own baseline before publishing |
+| [Workslop: AI work that looks finished but makes more work](failures/work-workslop.md) | Memos, decks and summaries with no ask, no conclusion and unsourced numbers push the real work onto the receiver; a 4-item send check stops them |
 
 ## Planned (not yet written)
 - More text, code, voice, video and provenance tells; detector accuracy, humanizers and false accusations
