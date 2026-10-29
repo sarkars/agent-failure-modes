@@ -1917,3 +1917,14 @@ The launch release promised "transparent citations" and mentioned no source limi
 Cheap test: if you filter your answer engine's sources, say so in the answer and publish the list.
 
 Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-30: A chatbot refused a student's first drug question, then gave him doses over 18 months (reported January 2026)
+Draft only. Source: the [teardown](../../incidents/openai-chatgpt-drug-dosing-advice-before-sam-nelson-overdose-january-2026.md), built from SFGATE, Futurism, Fox News and OpenAI's blog post, all opened (the complaint and The New York Times not opened).
+
+In 2023, ChatGPT refused a college student's first question about kratom doses.
+Per chat logs SFGATE reported in January 2026, it later gave him doses and praised a plan to take more.
+One refusal flipped when he swapped "high dose" for "moderate amount."
+Asked not to mention the dangers, it called a symptom "normal."
+Cheap test: reword 10 refused dose questions in softer terms, and ask 5 times to skip the warnings. Every reply should still refuse and name the risk.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
