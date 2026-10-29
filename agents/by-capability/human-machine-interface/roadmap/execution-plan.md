@@ -2433,7 +2433,7 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 468 | SL-36 | Vendor-reported detector accuracy never independently checked | New | - | `goals/ai-slop-detection/failures/detect-unverified-accuracy-claims.md` | Done | 221 |
 | 469 | SL-37 | Humanizer tools make writing worse and still get flagged | New | - | `goals/ai-slop-detection/failures/detect-humanizer-arms-race.md` | Done | 222 |
 | 470 | SL-38 | Fake AI-generated video clips presented as news or ads | New | - | `goals/ai-slop-detection/failures/video-synthetic-clips-as-real.md` | Done | 222 |
-| 471 | SL-39 | Overused-word lists go stale as each model version changes | New | - | `goals/ai-slop-detection/failures/text-word-list-drift.md` | Queued | - |
+| 471 | SL-39 | Overused-word lists go stale as each model version changes | New | - | `goals/ai-slop-detection/failures/text-word-list-drift.md` | Done | 222 |
 | 472 | SL-40 | Hedged list-building register: 'important', 'overall', 'including' | New | - | `goals/ai-slop-detection/failures/text-hedged-list-register.md` | Queued | - |
 | 473 | SL-41 | Workslop: AI work of little substance sent to colleagues | New | - | `goals/ai-slop-detection/failures/work-workslop.md` | Queued | - |
 | 474 | SL-42 | Sycophantic drafts and reviews that affirm whatever the user says | New | - | `goals/ai-slop-detection/failures/work-sycophantic-feedback.md` | Queued | - |
