@@ -2485,7 +2485,7 @@ Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Lib
 | 485 | SL-53 | Slopsquatting: attackers register package names that AI keeps inventing | New | - | `goals/ai-slop-detection/failures/code-slopsquatting.md` | Done | 223 |
 | 486 | SL-54 | AI-generated code ships vulnerabilities and is not tagged as AI | New | - | `goals/ai-slop-detection/failures/code-untracked-ai-vulnerabilities.md` | Done | 223 |
 | 487 | SL-55 | AI agent skills install hallucinated dependencies on their own | New | - | `goals/ai-slop-detection/failures/code-agent-installs-hallucinated-packages.md` | Done | 223 |
-| 488 | SL-56 | AI content farms posing as news sites | New | - | `goals/ai-slop-detection/failures/web-ai-content-farms-as-news.md` | Queued | - |
+| 488 | SL-56 | AI content farms posing as news sites | New | - | `goals/ai-slop-detection/failures/web-ai-content-farms-as-news.md` | Done | 223 |
 | 489 | SL-57 | Ads fund AI content farms through programmatic buying | New | - | `goals/ai-slop-detection/failures/web-ads-fund-content-farms.md` | Queued | - |
 | 490 | SL-58 | Fake AI music artists with huge catalogs and no history | New | - | `goals/ai-slop-detection/failures/music-fake-ai-artists.md` | Queued | - |
 | 491 | SL-59 | AI tracks inflate streams and divert royalties | New | - | `goals/ai-slop-detection/failures/music-ai-stream-fraud.md` | Queued | - |

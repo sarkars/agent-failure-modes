@@ -54,6 +54,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | Unreviewed young-or-unlisted dependency rate (new dependencies that are young, from a single-package publisher or off the allowlist, merged with no review) | 0 (proposed) | [slopsquatting](failures/code-slopsquatting.md) |
 | Tagged-and-scanned AI change rate (merged AI-written changes with a provenance trailer or label and a passing security scan) | 100% (proposed) | [untracked AI vulnerabilities](failures/code-untracked-ai-vulnerabilities.md) |
 | Ungated new-package run rate (agent installs of names not in lockfile/allowlist with no lookup and human yes) | 0 (proposed) | [agent installs hallucinated packages](failures/code-agent-installs-hallucinated-packages.md) |
+| Flagged-source-only fact rate (news claims stated as fact when every cited source is unrated or flagged) | 0 (proposed) | [AI content farms posing as news](failures/web-ai-content-farms-as-news.md) |
 
 ## Patterns
 | Pattern | One line |
@@ -113,6 +114,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | [Slopsquatting: attackers register package names AI keeps inventing](failures/code-slopsquatting.md) | Attackers register package names AI tools keep inventing, so "exists on npm" passes; a gate holds young, unlisted packages and a scan cleans invented install commands from docs and skills |
 | [AI-generated code vulnerabilities with no record AI wrote them](failures/code-untracked-ai-vulnerabilities.md) | AI-written code with known flaws merges with no record that AI wrote it; tag every AI commit and PR, and block merge until a security scan passes. **Read this first: needs legal review.** |
 | [AI agent installs a package that doesn't exist](failures/code-agent-installs-hallucinated-packages.md) | Agents and skills run npm/npx/pip installs with no one reading the name; a gate holds every name not in the lockfile or allowlist for a registry check and a human yes |
+| [AI content farms posing as local news sites](failures/web-ai-content-farms-as-news.md) | Chatbots, aggregators and RAG pipelines cite AI content farms posing as local papers; check domain history, leftovers and bylines, and never state a claim as fact from unverified sites alone. **Read this first: needs legal review.** |
 
 ## Planned (not yet written)
 - More text, code, voice, video and provenance tells; detector accuracy, humanizers and false accusations
