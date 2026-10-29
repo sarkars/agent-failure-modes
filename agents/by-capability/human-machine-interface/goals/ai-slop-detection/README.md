@@ -52,6 +52,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | Gated release rate (releases and publishes that passed the full slop gate or carry a recorded override) | 100% (proposed) | [no release gate](failures/detect-no-release-gate.md) |
 | Scoped text-watermark result rate (results shown with state, length and edit caveat, never an authorship verdict) | 100% (proposed) | [text watermark erased](failures/provenance-text-watermark-erased.md) |
 | Unreviewed young-or-unlisted dependency rate (new dependencies that are young, from a single-package publisher or off the allowlist, merged with no review) | 0 (proposed) | [slopsquatting](failures/code-slopsquatting.md) |
+| Tagged-and-scanned AI change rate (merged AI-written changes with a provenance trailer or label and a passing security scan) | 100% (proposed) | [untracked AI vulnerabilities](failures/code-untracked-ai-vulnerabilities.md) |
 
 ## Patterns
 | Pattern | One line |
@@ -109,6 +110,7 @@ Shared metrics the patterns below report against. Targets are proposed starting 
 | [AI slop checks run once, not on every release](failures/detect-no-release-gate.md) | Slop checks run once at launch or only warn in CI, so placeholders, chatbot leftovers and fake citations come back; run one suite on every path, block on errors, record every override |
 | [Can a text watermark survive paraphrasing? Text watermarks erased by rewrites](failures/provenance-text-watermark-erased.md) | Paraphrase, translation or rewording erases text watermarks and marks can be forged; show state and length, never "human-written," decide nothing on the mark alone. **Read this first: needs legal review.** |
 | [Slopsquatting: attackers register package names AI keeps inventing](failures/code-slopsquatting.md) | Attackers register package names AI tools keep inventing, so "exists on npm" passes; a gate holds young, unlisted packages and a scan cleans invented install commands from docs and skills |
+| [AI-generated code vulnerabilities with no record AI wrote them](failures/code-untracked-ai-vulnerabilities.md) | AI-written code with known flaws merges with no record that AI wrote it; tag every AI commit and PR, and block merge until a security scan passes. **Read this first: needs legal review.** |
 
 ## Planned (not yet written)
 - More text, code, voice, video and provenance tells; detector accuracy, humanizers and false accusations
