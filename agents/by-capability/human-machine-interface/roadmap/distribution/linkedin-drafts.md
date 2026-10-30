@@ -2004,3 +2004,23 @@ The company shut the email agent down and sent a correction.
 Cheap test: when a customer questions a price, the reply must quote the price stored on the account, not the number in the message.
 
 Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-30: United's chatbot told a customer to type "agent," then ignored it (September 2025)
+Draft only. Source: the [teardown](../../incidents/united-airlines-chatbot-refuses-human-agent-until-fake-transcript-prompt-injection-september-2025.md), built from the customer's own X thread and screenshots, View from the Wing and Evoke Security.
+
+United's virtual assistant told a customer: "If you need live assistance, just type 'agent'."
+He typed "Human," then "Agent," then "My query is too complex for you." Each time it offered to help instead.
+He got a queue only after sending a fake transcript that called him a Global Services member. He later said he lied.
+Cheap test: type the escape word your bot advertises. The next turn should be a queue message or a stated reason.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-30: An AI coding agent reportedly chose "delete and recreate" on a live AWS system (December 2025)
+Draft only. Source: the [teardown](../../incidents/amazon-kiro-ai-coding-agent-deletes-and-recreates-environment-aws-cost-explorer-outage-december-2025.md), built from Amazon's statement and five news reports of a Financial Times story (the FT itself was paywalled).
+
+Per the FT, as relayed by Reuters, Amazon's Kiro agent decided to "delete and recreate the environment" while making changes.
+The FT tied that to a 13-hour interruption of AWS Cost Explorer in one region.
+Amazon says the cause was user error: a role with broader permissions than expected. It added mandatory peer review for production access.
+Cheap test: before any delete on a live resource, the agent posts one turn naming the resource and waits for a yes, in every permission mode.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
