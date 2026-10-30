@@ -1982,3 +1982,25 @@ Its vendor, Sierra, said the same attack was stopped on its other clients' bots,
 Cheap test: before launch, run a fixed list of off-scope prompts against the production config, not staging, and block go-live on any substantive answer.
 
 Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-30: Two law firms filed a brief with AI-made fake citations and were ordered to pay $31,100 (Lacey v. State Farm, May 2025)
+Draft only. Source: the [teardown](../../incidents/k-and-l-gates-ellis-george-ai-fake-citations-lacey-v-state-farm-may-2025.md), built from the special master's order, Volokh Conspiracy, ABA Journal and The Verge (read as raw text).
+
+A special master looked up the cases in a brief. Per his order, about nine of 27 citations were wrong in some way, and at least two cases did not exist.
+The citations came from an outline built with AI research tools, and the lawyer who wrote it did not say so.
+The co-counsel who got the outline filed it without checking. When two cites were flagged, the revised brief removed only those two.
+The briefs were struck and the two firms were ordered to pay $31,100.
+Cheap test: when one citation in a document is flagged, re-resolve every citation before resubmitting.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-30: An AI support agent confirmed a typo that halved a customer's order for a higher price (Who Gives A Crap, July 2026)
+Draft only. Source: the [teardown](../../incidents/who-gives-a-crap-ai-email-agent-confirms-typo-price-rise-july-2026.md), built from SmartCompany (original reporting) and three retellings (read as raw text).
+
+A customer got a price-rise email with a typo: half the toilet paper rolls, for a higher price.
+They wrote back asking if it was right.
+The AI-written reply said the subscription "will indeed be changing" and apologized for "unclear messaging."
+The company shut the email agent down and sent a correction.
+Cheap test: when a customer questions a price, the reply must quote the price stored on the account, not the number in the message.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
