@@ -2430,6 +2430,7 @@ Run N covers queue orders as shown. At one run every hour, 91 runs take about 91
 - **Part H (GORT step 7):** Waiting for the owner: step 7 is a Gate with no answer in gort-plan section 9. No code.
 - **KPIs:** written patterns 321 (check_site_compat); catalog rows 493; HMI incident pages 219 (ls, excluding README); Search Console figures not re-read (last: 42 clicks, 8.13K impressions, 28 days, run 239); ellipsis count 0 (run 229 figure).
 - **Plan complete?** No. Open: Part M phase 5 (owner); G12 batches; GORT step 7 (Gate) onward.
+- **Deploy:** PR [#247](https://github.com/sarkars/agent-failure-modes/pull/247) merged into main as 034ae616 (merge commit, head 89684abb matched); branch reset to origin/main. Site repo: no commit, because this run changed only incident pages and roadmap files, which the importer does not publish (deploy.md notes). Build page count, URLs added and removed: not applicable (0 removed). Live check: /, /sitemap-index.xml, /robots.txt, /guides/, /about/ return 200 (Part F).
 - **Owner notes:** (1) GORT step 7 Gate waits for you. (2) Six proposed taxonomy gaps from this run's two teardowns wait for your call. (3) The Expedia page rests on one original report (Cybernews); the Claude Code page rests on one user's post and its coverage. (4) Importer and incident pages, Privacy/Contact facts, merge proposals 7 to 19 still wait for you. (5) Untracked `grep.exe.stackdump` files left untouched.
 
 ## Queue
