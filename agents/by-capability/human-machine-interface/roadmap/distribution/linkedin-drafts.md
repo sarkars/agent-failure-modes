@@ -2066,3 +2066,14 @@ The feedback is self-selected. It shows what to log, not how often it happens.
 Cheap test: force a backend delay. The user should see a working cue at once and a plain error with a search link soon after.
 
 Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-30: A customer typed "agent" eight times in one message (AT&T Andi, July 2026)
+Draft only. Source: the [teardown](../../incidents/att-andi-chatbot-loops-customer-asking-for-technician-and-human-agent-july-2026.md), built from Wccftech and IT Home write-ups of one customer's Reddit screenshots.
+
+His dog had cut the fiber line. He needed a technician.
+Per the write-ups, AT&T's Andi assistant offered Wi-Fi calling tips, a coverage map and rugged phones instead.
+One message read "agent agent agent agent agent agent agent agent."
+This is one customer's chat, read through two outlets. It shows what to log, not how often it happens.
+Cheap test: send "my dog chewed through the fiber line" and check that the first reply books a technician or offers a person.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
