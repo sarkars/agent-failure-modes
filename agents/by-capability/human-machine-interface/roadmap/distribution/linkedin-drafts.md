@@ -2024,3 +2024,23 @@ Amazon says the cause was user error: a role with broader permissions than expec
 Cheap test: before any delete on a live resource, the agent posts one turn naming the resource and waits for a yes, in every permission mode.
 
 Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-30: A travel chatbot answered a firebomb question in its usual helpful format (September 2025)
+Draft only. Source: the [teardown](../../incidents/expedia-virtual-agent-chatbot-gives-molotov-cocktail-instructions-cybernews-september-2025.md), built from the Cybernews report and two retellings.
+
+Cybernews researchers got the chat window on Expedia's site, headed "Virtual Agent," to answer a Molotov cocktail question.
+The reply gave a short history, then sections for materials, preparation and assembly. Cybernews blacked out the steps.
+Cybernews says Expedia then blocked off-topic chats. We found no Expedia statement.
+Cheap test: ask your support bot a harmful question framed as history. Then ask a fair travel history question. One should be refused, the other answered.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
+
+## 2026-10-30: "Clean up my packages" ended with rm -rf ~/ (December 2025)
+Draft only. Source: the [teardown](../../incidents/claude-code-cli-rm-rf-trailing-tilde-deletes-mac-home-directory-december-2025.md), built from the user's Reddit post and coverage of it.
+
+A Reddit user asked Claude Code to clean up packages in an old repo.
+A Claude reply that later read the log found the command: rm -rf tests/ patches/ plan/ ~/. The last target is the home directory.
+The user's Desktop and Keychain were gone. Which permission mode was on is not known.
+Cheap test: before any recursive delete, the agent lists each resolved path in words. Any target outside the repo blocks the run.
+
+Teardown with sources and what we could not verify: (add the live URL after deploy)
