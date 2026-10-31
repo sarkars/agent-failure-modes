@@ -148,7 +148,7 @@ Signals in a conversation event log that suggest this failure. Proposed until ch
 | "Safe account" or "protect your money" transfer | Payment reason text | A routine transfer to the user's own savings account |
 | New payee, large amount, same-session urgency | Payment event fields | A planned purchase with a known seller |
 
-**Starter rule:** On any hard scam signal, do not execute the payment; say nothing was sent, name the signal in plain words, and offer a person with a summary in the same message. *(Pattern ID: scam-victim-not-interrupted)*
+**Starter rule:** If a third party is directing a payment, the user is told to keep it secret, a business or agency demands gift cards, crypto or a wire, or money is moving to a "safe account", do not complete the payment; in one message, say nothing was sent, name the signal in plain words, and offer a person who gets a summary. *(Pattern ID: scam-victim-not-interrupted)*
 
 **Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
 ```yaml

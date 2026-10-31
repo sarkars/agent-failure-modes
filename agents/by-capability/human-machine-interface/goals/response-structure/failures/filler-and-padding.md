@@ -146,7 +146,7 @@ Signals in a conversation event log that suggest this failure. Treat them as pro
 | Last sentence is a generic sign-off | Match on the final sentence | A real next step phrased politely |
 | User cuts in with "just tell me" or "short answer" | Phrase match in the next user turn | A user who wants the long version |
 
-**Starter rule:** the reply has no praise opener, no restatement of the question, and no closing recap or empty sign-off.
+**Starter rule:** Do not open with praise, restate the question, end with a recap, or sign off; if there is a real next step, offer that one step.
 
 **Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
 ```yaml
