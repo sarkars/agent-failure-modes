@@ -2463,6 +2463,7 @@ Run N covers queue orders as shown. At one run every hour, 91 runs take about 91
 - **GORT step 7 (2026-10-31, live owner answer):** gate answered (section 9, decision 8): build the pilot as an unmerged PR for owner review. Row 7 set to Not started. No code, no CI, no new dependencies.
 - **GORT step 7 (2026-10-31, code-only run):** pilot built as [sarkars/gort PR 6](https://github.com/sarkars/gort/pull/6): 50 proposed packs (30 conversation, 20 agent-type), `docs/pilot-count.md` (rule 22, judge 24, none 4; 1 pilot eval needs a simulated user), optional `guardrail.languages` added to the pack schema. Check: Gate, waiting for the owner (review of the pilot PR); not merged. CI: passed on Python 3.10 and 3.12. New dependencies: none.
 - **GORT step 7 (2026-10-31, live owner answer):** spec filed as [sarkars/gort issue 7](https://github.com/sarkars/gort/issues/7) (50 generic conversation patterns, model-written entries, schema may change). Owner chose to rebuild PR 6 to the spec (section 9, decision 8); row 7 set to In progress. No code, no CI, no new dependencies.
+- **GORT step 7 (2026-10-31, live owner answer):** length decision (section 9, decision 8): core reply check at step 10 rejects fixes that lengthen replies; pilot swaps in `filler-and-padding` and `length-mismatch-with-the-user-s-effort`; issue 7 updated. No code, no CI, no new dependencies.
 
 ## Queue
 Status: *Queued*, *In progress*, *Done*, *Needs review*, or *Skipped*. The **Library** column is the status in the catalog when the queue was built (**New** or **Extends**).
