@@ -147,7 +147,7 @@ Signals in a conversation event log that suggest this failure. Treat them as pro
 | User asks the same thing again right after a long reply | Same intent in the next user turn | A user who needed a different detail |
 | Reply length rises over the conversation while user length falls | Trend of both lengths per session | A task that legitimately grows more complex |
 
-**Starter rule:** when the user's message is ten words or fewer, reply in one or two sentences with the answer first, and offer the longer version in one line.
+**Starter rule:** When the user's message is ten words or fewer, reply in one or two sentences with the answer first, and offer a longer version in one line only when one exists; a required safety message still goes in.
 
 **Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
 ```yaml

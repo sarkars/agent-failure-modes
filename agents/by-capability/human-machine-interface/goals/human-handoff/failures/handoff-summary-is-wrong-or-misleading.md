@@ -144,7 +144,7 @@ Signals in a conversation event log that suggest this failure. Treat them as pro
 | Customer contradicts the person's first message after pickup | User turn after pickup starting with "no" or restating a fact | The person is checking a detail on purpose |
 | Summary states a bot promise with no matching bot turn | Handoff event: promised list vs bot turns | A promise made by a tool, not a bot turn |
 
-**Starter rule:** every fact in a handoff summary must appear in a user turn or tool result, and the customer sees the summary before the person does.
+**Starter rule:** Put only facts found in a user turn or tool result in a handoff summary, use the latest value when the user corrected one, and read the summary back to the user before the person gets it.
 
 **Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
 ```yaml

@@ -149,7 +149,7 @@ Chat signals in a conversation event log that suggest this failure. All are prop
 | The reply right after a correction does not state the new value (metric: corrections without a read-back) | Reply text after a correction event, checked for `new_value` | The reply asked one clarifying question because the "no" was not clearly a correction |
 | The user corrects the same slot again with the same value within the next two turns | Two correction events on one slot with equal `new_value` | The user is changing the value a third time on purpose |
 
-**Starter rule:** When the user corrects a detail, replace the old value everywhere: in what you have recorded, in the summary, and in any pending action.
+**Starter rule:** When the user corrects a detail, replace the old value everywhere (what you recorded, the summary, any pending action) and state the corrected value in your first sentence.
 
 **Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
 ```yaml

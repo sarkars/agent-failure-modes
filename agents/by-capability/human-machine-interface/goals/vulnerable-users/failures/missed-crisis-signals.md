@@ -137,7 +137,7 @@ Signals in a conversation event log that suggest this failure. Treat them as pro
 | Irreversible task step completed after a distress flag | Task action event (for example account closure) after a flagged turn, with no later user confirmation | The user confirmed later, in line with the fix rules |
 | Stale resource list | Last-verified date on the resource template past the metric limit | A review that is in progress |
 
-**Starter rule:** run a distress check on every user turn, and when it fires, pause the task, send a reviewed check-in with resources, and offer a person.
+**Starter rule:** When the distress check flags a user turn, pause the task, send the reviewed check-in and resources as written, and offer a person; treat everyday figures of speech ("this deadline is killing me") as normal.
 
 **Guide spec** (fixed format for later code; derived from this page, no invented thresholds)
 ```yaml
