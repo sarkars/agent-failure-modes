@@ -405,7 +405,7 @@ The hourly run updates the row of the step it works on. Status is `Not started`,
 | 4 | Done 2026-10-28: [PR 3](https://github.com/sarkars/gort/pull/3) squash-merged (99dc6f8); `pack-schema.json` plus two hand-written entries (talk-to-a-human-ignored-or-looped, confident-wrong-answer-with-no-way-to-check); Check passes (both load against the schema; 17 tests); CI passed on Python 3.10 and 3.12; no framework mapping (decision 2); no new dependency |
 | 5 | Done 2026-10-28: [PR 4](https://github.com/sarkars/gort/pull/4) squash-merged (023d9a0); `agent-schema.json`, `gortguard.agentformat.load_agent` and `examples/agents/refund-agent.yaml`; Check passes (example loads; 7 new tests, 24 total); CI passed on Python 3.10 and 3.12; no new dependency (agent.yaml read as JSON syntax, valid YAML 1.2; block YAML only if PyYAML is already installed) |
 | 6 | Done 2026-10-28: [PR 5](https://github.com/sarkars/gort/pull/5) squash-merged (1d2af42); `record-schema.json` (Run, Step, Finding, eleven tag families, `unknown` when unfilled), `tags-schema.json`, `gortguard.records` and `docs/record-format.md` (mapping to OpenTelemetry GenAI and OpenInference, pinned to upstream commits); Check passes (synthetic chat run and synthetic tool run convert, every family present or `unknown`; 7 new tests, 31 total); CI passed on Python 3.10 and 3.12; no new dependency |
-| 7 | Waiting for the owner: step 7 Check is a **Gate** (owner reviews the pilot count and format changes) with no answer in section 9; per the run rules no pilot packs or code are written until the owner says the run may produce the pilot for review (run 216, 2026-10-28) |
+| 7 | Not started (owner, 2026-10-31, decision 8): build the pilot as a sarkars/gort PR, do not merge; then set "Waiting for the owner: review of the pilot PR" |
 | 8 | Done (owner, 2026-10-29, decision 3): DeepEval chosen as default runner and simulated-user tool; no comparison page |
 | 9 | Not started |
 | 10 | Not started |
@@ -492,6 +492,7 @@ gort learn report/                 # turns confirmed findings into eval cases an
    - Package names `gortguard` (PyPI, npm) and `gort` (PyPI) were free on 2026-10-29.
    - Not done: a WIPO search for "gortguard", and similar-sounding or similar-looking marks.
    - **Owner, 2026-10-29:** lead with **gortguard** as the public brand; `gort` stays the command (section 1, Name). Owner, 2026-10-29: go ahead with gortguard; the owner decides on any attorney review.
+8. Step 7 gate (pilot review). **Owner, 2026-10-31:** the hourly run builds the step 7 pilot (packs and one-page count) as a pull request in sarkars/gort and does not merge it; the owner reviews the PR. Steps after 7 wait until the owner approves it.
 
 ## 10. Later, only when
 Each item waits for the signal named. None is planned before it.
