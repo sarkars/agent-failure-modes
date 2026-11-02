@@ -409,7 +409,7 @@ The hourly run updates the row of the step it works on. Status is `Not started`,
 | 8 | Done (owner, 2026-10-29, decision 3): DeepEval chosen as default runner and simulated-user tool; no comparison page |
 | 9 | Done 2026-11-03: [PR 9](https://github.com/sarkars/gort/pull/9) squash-merged (87b6016); `gort check <files or folders>` reuses the pack loader, lists every problem, exits 1 on any failure; CI runs it on `packs/pilot` and `examples/packs`; Check passes (52 pass, 0 fail; missing part, missing `fail_if` and empty `pass_if` each exit 1; 3 new tests, 67 total); CI passed on Python 3.10 and 3.12; no new dependency |
 | 10 | Done 2026-11-03: [PR 10](https://github.com/sarkars/gort/pull/10) squash-merged (f8c0e8b); `gortguard.guard` runner with 10 built-in guardrails across 7 check points, `@p.guard`, streaming reply check, time budget, fail-through or hold, log-only default, redacted guardrail Steps; `prompt()` size budget and `conflicts()`; Check passes (one test per guardrail, timing test per check point, redaction test; 26 new tests, 93 total); CI passed on Python 3.10 and 3.12; no new dependency |
-| 11 | Not started |
+| 11 | Waiting for the owner: decision 6 (model API key and spend limit). Section 9 says "no key for now; step 11 waits" (owner, 2026-10-29); no code written |
 | 12 | Not started |
 | 13 | Not started |
 | 14 | Not started |
